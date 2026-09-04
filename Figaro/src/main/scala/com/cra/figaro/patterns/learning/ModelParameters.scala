@@ -192,8 +192,8 @@ object ModelParameters {
    * Decode JSON into a parameter element
    */
   implicit val decodeJson: DecodeJson[Parameter[_]] = DecodeJson { c =>
-    c.downField("Beta").as[AtomicBeta] |||
-    c.downField("Dirichlet").as[Parameter[_]]
+    c.downField("Beta").as[AtomicBeta].map(parameter => parameter: Parameter[_]) |||
+    c.downField("Dirichlet").as[AtomicDirichlet].map(parameter => parameter: Parameter[_])
   }
   
   /**
