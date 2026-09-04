@@ -14,11 +14,6 @@
 package com.cra.figaro.algorithm
 
 import com.cra.figaro.language._
-import java.util.concurrent.TimeUnit
-import akka.util.Timeout
-import akka.pattern.{ask}
-import scala.concurrent.duration
-import scala.concurrent.Await
 
 /**
  * Anytime algorithms that compute conditional probability of query elements.
@@ -72,28 +67,28 @@ trait AnytimeProbQuery extends ProbQueryAlgorithm with Anytime {
     }
   
   protected def doDistribution[T](target: Element[T]): Stream[(Double, T)] = {
-    awaitResponse(runner ? Handle(ComputeDistribution(target)), messageTimeout.duration) match {
+    request(ComputeDistribution(target)) match {
       case Distribution(result) => result.asInstanceOf[Stream[(Double, T)]]
       case _ => Stream()
     } 
   }
 
   protected def doExpectation[T](target: Element[T], function: T => Double): Double = {
-    awaitResponse(runner ? Handle(ComputeExpectation(target, function)), messageTimeout.duration) match {
+    request(ComputeExpectation(target, function)) match {
       case Expectation(result) => result
       case _ => 0.0
     }     
   }
 
   protected override def doProbability[T](target: Element[T], predicate: T => Boolean): Double = {
-    awaitResponse(runner ? Handle(ComputeProbability(target, predicate)), messageTimeout.duration) match {
+    request(ComputeProbability(target, predicate)) match {
       case Probability(result) => result
       case _ => 0.0
     }     
   }
   
   protected override def doProjection[T](target: Element[T]): List[(T, Double)] = {
-    awaitResponse(runner ? Handle(ComputeProjection(target)), messageTimeout.duration) match {
+    request(ComputeProjection(target)) match {
       case Projection(result) => result.asInstanceOf[List[(T, Double)]]
       case _ => List()
     }     

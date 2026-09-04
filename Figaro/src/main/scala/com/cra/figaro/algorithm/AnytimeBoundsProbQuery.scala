@@ -13,7 +13,6 @@
 package com.cra.figaro.algorithm
 
 import com.cra.figaro.language._
-import akka.pattern.ask
 
 /**
  * One-time algorithms that compute bounds on conditional probabilities of query elements. A class that implements this
@@ -69,21 +68,21 @@ trait AnytimeBoundsProbQuery extends BoundsProbQueryAlgorithm with AnytimeProbQu
     }
 
   protected def doAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)] = {
-    awaitResponse(runner ? Handle(ComputeAllProbabilityBounds(target)), messageTimeout.duration) match {
+    request(ComputeAllProbabilityBounds(target)) match {
       case AllProbabilityBounds(result) => result.asInstanceOf[Stream[(Double, Double, T)]]
       case _ => Stream()
     }
   }
 
   protected def doExpectationBounds[T](target: Element[T], function: T => Double, bounds: Option[(Double, Double)]): (Double, Double) = {
-    awaitResponse(runner ? Handle(ComputeExpectationBounds(target, function, bounds)), messageTimeout.duration) match {
+    request(ComputeExpectationBounds(target, function, bounds)) match {
       case ExpectationBounds(result) => result
       case _ => bounds.getOrElse((Double.NegativeInfinity, Double.PositiveInfinity))
     }
   }
 
   protected def doProbabilityBounds[T](target: Element[T], predicate: T => Boolean): (Double, Double) = {
-    awaitResponse(runner ? Handle(ComputeProbabilityBounds(target, predicate)), messageTimeout.duration) match {
+    request(ComputeProbabilityBounds(target, predicate)) match {
       case ProbabilityBounds(result) => result
       case _ => (0.0, 1.0)
     }

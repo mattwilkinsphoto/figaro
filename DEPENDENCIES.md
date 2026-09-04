@@ -5,7 +5,7 @@ This inventory separates build-tool migration from runtime dependency changes. V
 | Dependency | Legacy version | Observed source surface | Initial remediation decision |
 | --- | ---: | --- | --- |
 | JSci | 1.2 | Special functions and factorial/binomial helpers in main code; statistical distribution oracles in legacy tests; pulls very old XML and lpsolve transitive artifacts | Removed completely. Main code uses a narrow Commons Math boundary with fixed numerical regressions; test-only adapters preserve legacy variance/rate/support conventions on Commons Math. |
-| Akka actor | 2.4.18 | Concentrated in the `Anytime` actor runner plus six ask/timeout wrappers; one test import | Preserve behavior during the build migration. Then replace the limited actor/ask lifecycle with JDK concurrency or isolate it behind an optional module before considering any Akka upgrade. |
+| Akka actor | 2.4.18 | Concentrated in the `Anytime` actor runner plus six ask/timeout wrappers; one test timeout import | Removed. A dedicated JDK queue/worker preserves serialized steps, blocking lifecycle/query calls, timeout handling, and the existing response protocol without an actor runtime. |
 | Breeze | 0.13.1 | One unused import in experimental particle belief propagation; no call sites | Removed. This also eliminates the old netlib, ARPACK, Spire, Shapeless, JTransforms, OpenCSV, and SLF4J transitive graph from the runtime artifact. |
 | Argonaut | 6.2 | Model-parameter JSON codecs in three main files and one serialization test | Freeze JSON round-trip and compatibility fixtures before upgrading or replacing. |
 | Prefuse | beta-20071021 | No direct Scala, Java, resource, or reflection references found | Removed after complete source search and Java 17 compile/regression validation. |
@@ -36,3 +36,5 @@ This inventory separates build-tool migration from runtime dependency changes. V
 The first dependency-only checkpoint removes ASM 3.3.1, Prefuse beta-20071021, and Breeze 0.13.1. No implementation replacement was required: ASM and Prefuse had no references, while the sole Breeze occurrence was an unused import. The checkpoint is accepted only if all source sets compile and the deterministic probability/serialization gate remains green.
 
 The second checkpoint upgrades Apache Commons Math from 3.3 to 3.6.1 and routes all production special-function/combinatorics calls through `com.cra.figaro.util.SpecialFunctions`. Test-only distribution adapters preserve the legacy tests' parameter conventions. JSci and its obsolete XML and native-solver transitives are absent from compile, test, the published POM, and the assembled runtime.
+
+The third checkpoint replaces Akka 2.4.18 with a JDK `LinkedBlockingQueue`, `CompletableFuture`, and one daemon worker thread per active anytime algorithm. `messageTimeout` is now a standard Scala `FiniteDuration`; callers use values such as `5.seconds`. The service/response types and serialized query behavior remain intact.

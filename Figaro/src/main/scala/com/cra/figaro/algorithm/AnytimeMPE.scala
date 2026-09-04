@@ -14,7 +14,6 @@
 package com.cra.figaro.algorithm
 
 import com.cra.figaro.language._
-import akka.pattern.{ask}
 
 /**
  * Anytime algorithms that compute most likely values of elements.
@@ -39,7 +38,7 @@ trait AnytimeMPE extends MPEAlgorithm with Anytime {
     }
   
   protected def doMostLikelyValue[T](target: Element[T]): T = {
-    awaitResponse(runner ? Handle(ComputeMostLikelyValue(target)), messageTimeout.duration) match {
+    request(ComputeMostLikelyValue(target)) match {
       case MostLikelyValue(result) => result.asInstanceOf[T]
       case _ => {
         println("Error: Response not recognized from algorithm")

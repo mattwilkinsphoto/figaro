@@ -13,11 +13,6 @@
 
 package com.cra.figaro.algorithm
 
-import akka.pattern.{ask}
-import akka.util.Timeout
-import scala.concurrent.duration
-import scala.concurrent.Await
-import java.util.concurrent.TimeUnit
 
 /**
  * Anytime algorithms that compute probability of evidence.
@@ -39,7 +34,7 @@ trait AnytimeProbEvidence extends ProbEvidenceAlgorithm with Anytime {
    * Throws AlgorithmInactiveException if the algorithm is not active.
    */  
   def probabilityOfEvidence(): Double = {
-    awaitResponse(runner ? Handle(ComputeProbEvidence), messageTimeout.duration) match {
+    request(ComputeProbEvidence) match {
       case ProbEvidence(result) => result
       case _ => 0.0
     }    

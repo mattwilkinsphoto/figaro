@@ -44,8 +44,7 @@ import com.cra.figaro.experimental.particlebp.AutomaticDensityEstimator
 import com.cra.figaro.algorithm.sampling.ProbEvidenceSampler
 import com.cra.figaro.ndtest._
 import org.apache.commons.math3.distribution.MultivariateNormalDistribution
-import akka.util.Timeout
-import java.util.concurrent.TimeUnit
+import scala.concurrent.duration._
 
 class PBPTest extends WordSpec with Matchers {
 
@@ -422,7 +421,7 @@ class PBPTest extends WordSpec with Matchers {
       ParticleBeliefPropagation(outer, inner, argSamples, totalSamples, target)
     } else {
       val alg = ParticleBeliefPropagation(inner.toLong, argSamples, totalSamples, target)
-      alg.messageTimeout = Timeout(30000, TimeUnit.MILLISECONDS)
+      alg.messageTimeout = 30.seconds
       alg
     }
     algorithm.start()

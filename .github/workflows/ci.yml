@@ -51,6 +51,13 @@ jobs:
           com.cra.figaro.test.library.atomic.continuous.ContinuousTest
           -- -z "have the correct density"'
 
+      - name: Run anytime lifecycle regressions
+        run: >-
+          sbt
+          'figaro / Test / testOnly
+          com.cra.figaro.test.algorithm.AlgorithmTest
+          -- -z "An anytime algorithm"'
+
       - name: Build first reproducibility candidate
         run: >-
           sbt

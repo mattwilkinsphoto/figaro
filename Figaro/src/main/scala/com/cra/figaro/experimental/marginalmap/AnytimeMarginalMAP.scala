@@ -15,7 +15,6 @@ package com.cra.figaro.experimental.marginalmap
 
 import com.cra.figaro.algorithm._
 import com.cra.figaro.language._
-import akka.pattern.ask
 
 /**
  * Anytime algorithms that compute most likely values of some elements, and marginalize over all other elements.
@@ -39,7 +38,7 @@ trait AnytimeMarginalMAP extends MarginalMAPAlgorithm with Anytime {
     }
 
   protected def doMostLikelyValue[T](target: Element[T]): T = {
-    awaitResponse(runner ? Handle(ComputeMostLikelyValue(target)), messageTimeout.duration) match {
+    request(ComputeMostLikelyValue(target)) match {
       case MostLikelyValue(result) => result.asInstanceOf[T]
       case _ => {
         println("Error: Response not recognized from algorithm")
