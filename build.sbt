@@ -96,15 +96,13 @@ lazy val figaro = project
     assembly / packageOptions += Package.FixedTimestamp(Some(reproducibleTimestamp)),
     assembly / assemblyJarName := s"figaro_${scalaBinaryVersion.value}-${version.value}-fat.jar",
     assembly / assemblyOption := (assembly / assemblyOption).value.withIncludeScala(false),
-    testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
     logBuffered := false,
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
       "org.apache.commons" % "commons-math3" % "3.6.1",
       "io.github.argonaut-io" %% "argonaut" % "6.3.13",
-      "org.scala-lang.modules" %% "scala-swing" % "2.0.0",
-      "com.storm-enroute" %% "scalameter" % "0.8.2" % Provided,
-      "org.scalatest" %% "scalatest" % "3.0.3" % Test
+      "org.scala-lang.modules" %% "scala-swing" % "2.1.1",
+      "org.scalatest" %% "scalatest" % "3.1.0" % Test
     )
   )
   .settings(inConfig(DetTest)(Defaults.testTasks))

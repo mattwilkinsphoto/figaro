@@ -9,11 +9,11 @@ This inventory separates build-tool migration from runtime dependency changes. V
 | Breeze | 0.13.1 | One unused import in experimental particle belief propagation; no call sites | Removed. This also eliminates the old netlib, ARPACK, Spire, Shapeless, JTransforms, OpenCSV, and SLF4J transitive graph from the runtime artifact. |
 | Argonaut | 6.2 | Model-parameter JSON codecs in three main files and one serialization test | Upgraded to the actively published `io.github.argonaut-io` 6.3.13 line, which supports Scala 2.12, 2.13, and 3. The existing JSON shape and round-trip fixtures remain the compatibility contract. |
 | Prefuse | beta-20071021 | No direct Scala, Java, resource, or reflection references found | Removed after complete source search and Java 17 compile/regression validation. |
-| ASM | 3.3.1 | No direct Scala, Java, resource, or reflection references found | Removed as a direct runtime dependency. A newer ASM may remain test-only through ScalaMeter until benchmark tooling is modernized. |
+| ASM | 3.3.1 | No direct Scala, Java, resource, or reflection references found | Removed completely with the unused ScalaMeter dependency. |
 | Commons Math | 3.3 | Used directly and is the JSci replacement | Upgraded to 3.6.1. `SpecialFunctionsRegressionTest` fixes representative gamma, log-gamma, beta, erf, factorial, log-factorial, and binomial values. |
-| Scala Swing | 2.0.0 | UI/example capability | Keep out of the core artifact if feasible; evaluate a separate optional module. |
-| ScalaMeter | 0.8.2 | Benchmark test framework | Move benchmarks out of the default unit-test gate and upgrade or replace separately. |
-| ScalaTest | 3.0.3 | 164 legacy test sources | Retain for the first 2.12 build; migrate test APIs before the Scala 2.13 stage if required. |
+| Scala Swing | 2.0.0 | UI capability in main sources | Upgraded to 2.1.1, the first stable line published for both Scala 2.12 and 2.13. A future module split can make the desktop UI optional without coupling that structural change to the language migration. |
+| ScalaMeter | 0.8.2 | Build registration only; no benchmark source imports or suites exist | Removed completely. Figaro's named `FactorPerformanceTest` is a ScalaTest functional suite and does not use ScalaMeter. |
+| ScalaTest | 3.0.3 | 164 legacy test sources using the pre-3.2 package style | Upgraded to 3.1.0, the first stable release published for Scala 2.13 while retaining the legacy `WordSpec` and `Matchers` aliases. |
 
 ## Test architecture risks
 
@@ -40,3 +40,5 @@ The second checkpoint upgrades Apache Commons Math from 3.3 to 3.6.1 and routes 
 The third checkpoint replaces Akka 2.4.18 with a JDK `LinkedBlockingQueue`, `CompletableFuture`, and one daemon worker thread per active anytime algorithm. `messageTimeout` is now a standard Scala `FiniteDuration`; callers use values such as `5.seconds`. The service/response types and serialized query behavior remain intact.
 
 The fourth checkpoint upgrades Argonaut from the old `io.argonaut` 6.2 coordinate to `io.github.argonaut-io` 6.3.13. This keeps the small existing codec surface while moving onto an actively published release line with Scala 2.13 support.
+
+The fifth checkpoint removes ScalaMeter 0.8.2 after confirming that no benchmark suites use it. Scala Swing moves to 2.1.1 and ScalaTest to 3.1.0, keeping existing APIs source-compatible while making every remaining Scala dependency available for Scala 2.13.
