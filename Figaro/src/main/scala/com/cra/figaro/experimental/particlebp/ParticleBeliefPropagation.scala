@@ -27,7 +27,6 @@ import scala.collection.immutable.Set
 import scala.collection.mutable.Map
 import com.cra.figaro.algorithm.factored.beliefpropagation._
 import com.cra.figaro.algorithm.factored._
-import breeze.linalg.normalize
 import com.cra.figaro.algorithm.UnsupportedAlgorithmException
 import com.cra.figaro.algorithm.sampling.ProbEvidenceSampler
 import com.cra.figaro.algorithm.factored.factors.factory.Factory

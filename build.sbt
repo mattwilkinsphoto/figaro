@@ -96,21 +96,14 @@ lazy val figaro = project
     assembly / packageOptions += Package.FixedTimestamp(Some(reproducibleTimestamp)),
     assembly / assemblyJarName := s"figaro_${scalaBinaryVersion.value}-${version.value}-fat.jar",
     assembly / assemblyOption := (assembly / assemblyOption).value.withIncludeScala(false),
-    assembly / assemblyExcludedJars := {
-      val cp = (assembly / fullClasspath).value
-      cp.filter(_.data.getName == "arpack_combined_all-0.1-javadoc.jar")
-    },
     testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
     logBuffered := false,
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-      "asm" % "asm" % "3.3.1",
       "org.apache.commons" % "commons-math3" % "3.3",
       "net.sf.jsci" % "jsci" % "1.2",
       "com.typesafe.akka" %% "akka-actor" % "2.4.18",
-      "org.scalanlp" %% "breeze" % "0.13.1",
       "io.argonaut" %% "argonaut" % "6.2",
-      "org.prefuse" % "prefuse" % "beta-20071021",
       "org.scala-lang.modules" %% "scala-swing" % "2.0.0",
       "com.storm-enroute" %% "scalameter" % "0.8.2" % Provided,
       "org.scalatest" %% "scalatest" % "3.0.3" % Test
