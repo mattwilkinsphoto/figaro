@@ -26,8 +26,8 @@ import scala.math.{ exp, pow }
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.library.atomic.continuous._
 import com.cra.figaro.language._
-import JSci.maths.statistics._
-import JSci.maths.SpecialMath.gamma
+import com.cra.figaro.test.modernization.oracles._
+import com.cra.figaro.util.SpecialFunctions.gamma
 import org.apache.commons.math3.distribution.MultivariateNormalDistribution
 import com.cra.figaro.test.tags.NonDeterministic
 import com.cra.figaro.ndtest._

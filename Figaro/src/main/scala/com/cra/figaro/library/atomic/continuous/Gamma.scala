@@ -23,7 +23,7 @@ import com.cra.figaro.language._
 import com.cra.figaro.util._
 import annotation.tailrec
 import scala.math.{ exp, log, pow }
-import JSci.maths.SpecialMath.{ gamma, logGamma }
+import com.cra.figaro.util.SpecialFunctions.{ gamma, logGamma }
 
 /**
  * A Gamma distribution in which both the k and theta parameters are constants.

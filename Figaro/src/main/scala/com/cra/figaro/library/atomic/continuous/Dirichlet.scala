@@ -29,7 +29,7 @@ import com.cra.figaro.algorithm.lazyfactored.ValueSet
 import com.cra.figaro.language._
 import com.cra.figaro.util._
 
-import JSci.maths.SpecialMath._
+import com.cra.figaro.util.SpecialFunctions.{ gamma, logGamma }
 import argonaut._
 import argonaut.Argonaut._
 /**

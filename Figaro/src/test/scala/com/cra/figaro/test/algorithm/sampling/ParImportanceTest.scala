@@ -29,7 +29,6 @@ import com.cra.figaro.library.atomic._
 import com.cra.figaro.library.atomic.discrete.Binomial
 import com.cra.figaro.library.compound._
 import com.cra.figaro.test._
-import JSci.maths.statistics._
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 import org.scalatest.Matchers

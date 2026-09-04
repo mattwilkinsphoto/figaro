@@ -13,7 +13,7 @@
 
 package com.cra.figaro.experimental.normalproposals
 
-import JSci.maths.SpecialMath.gamma
+import com.cra.figaro.util.SpecialFunctions.gamma
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.Util
 

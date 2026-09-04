@@ -23,7 +23,7 @@ import scala.language.implicitConversions
 import com.cra.figaro.language._
 import com.cra.figaro.util._
 import math.{ pow, log }
-import JSci.maths.SpecialMath.{ beta, gamma, logGamma }
+import com.cra.figaro.util.SpecialFunctions.{ beta, logGamma }
 import com.cra.figaro.algorithm.ValuesMaker
 import com.cra.figaro.algorithm.lazyfactored.ValueSet
 import argonaut._, Argonaut._

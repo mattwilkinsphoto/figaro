@@ -40,7 +40,16 @@ jobs:
           sbt
           "figaro / Test / testOnly
           com.cra.figaro.test.modernization.ProbabilityRegressionTest
+          com.cra.figaro.test.modernization.SpecialFunctionsRegressionTest
           com.cra.figaro.test.learning.SerializationTest"
+
+      - name: Run deterministic legacy density regressions
+        run: >-
+          sbt
+          'figaro / Test / testOnly
+          com.cra.figaro.test.library.atomic.discrete.DiscreteTest
+          com.cra.figaro.test.library.atomic.continuous.ContinuousTest
+          -- -z "have the correct density"'
 
       - name: Build first reproducibility candidate
         run: >-

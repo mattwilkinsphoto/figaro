@@ -100,8 +100,7 @@ lazy val figaro = project
     logBuffered := false,
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
-      "org.apache.commons" % "commons-math3" % "3.3",
-      "net.sf.jsci" % "jsci" % "1.2",
+      "org.apache.commons" % "commons-math3" % "3.6.1",
       "com.typesafe.akka" %% "akka-actor" % "2.4.18",
       "io.argonaut" %% "argonaut" % "6.2",
       "org.scala-lang.modules" %% "scala-swing" % "2.0.0",

@@ -16,7 +16,7 @@ package com.cra.figaro.experimental.normalproposals
 import com.cra.figaro.language._
 
 import math.{ pow, sqrt }
-import JSci.maths.SpecialMath.beta
+import com.cra.figaro.util.SpecialFunctions.beta
 import com.cra.figaro.algorithm.ValuesMaker
 import com.cra.figaro.algorithm.lazyfactored.ValueSet
 import com.cra.figaro.library.atomic.continuous.Util

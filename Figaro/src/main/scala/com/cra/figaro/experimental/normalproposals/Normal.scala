@@ -13,7 +13,7 @@
 
 package com.cra.figaro.experimental.normalproposals
 
-import JSci.maths.SpecialMath.error
+import com.cra.figaro.util.SpecialFunctions.error
 import com.cra.figaro.language._
 import com.cra.figaro.util.random
 

@@ -82,6 +82,14 @@ The legacy full-suite failures and long-running learning example remain tracked 
 
 Dependency work begins only after the stage-one commit is stable. See `DEPENDENCIES.md` for the usage inventory and replacement order. Each dependency change must be isolated and tested against the deterministic probability and serialization gates before proceeding to the next library.
 
+Completed dependency checkpoints:
+
+- Removed unused direct ASM 3.3.1 and Prefuse beta-20071021 dependencies.
+- Removed Breeze 0.13.1 after confirming its only source occurrence was an unused import. Its old netlib/ARPACK/Spire/Shapeless transitive graph is no longer part of runtime.
+- Upgraded Apache Commons Math from 3.3 to 3.6.1 and replaced every production JSci call through a narrow `SpecialFunctions` boundary.
+- Replaced JSci-based test oracles with Commons Math adapters that retain Figaro's variance, exponential-rate, and one-based geometric conventions. JSci and its obsolete XML/native-solver transitives are fully removed.
+- All source sets compile. Thirteen focused numerical/probability/serialization checks and thirteen legacy deterministic density checks pass.
+
 ## Stage 3: Scala 2.13
 
 Target: Scala 2.13.18 after the dependency surface is made compatible. This is a separate source-migration stage, not part of the Java 17 build-tool commit.

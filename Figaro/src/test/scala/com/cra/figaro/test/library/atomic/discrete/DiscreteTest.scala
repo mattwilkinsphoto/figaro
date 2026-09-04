@@ -27,7 +27,7 @@ import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.library.atomic.discrete._
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound._
-import JSci.maths.statistics.{ BinomialDistribution, GeometricDistribution, PoissonDistribution }
+import com.cra.figaro.test.modernization.oracles.{ BinomialDistribution, GeometricDistribution, PoissonDistribution }
 
 class DiscreteTest extends WordSpec with Matchers {
   "A AtomicUniform" should {
@@ -116,7 +116,7 @@ class DiscreteTest extends WordSpec with Matchers {
     "have the correct density" in {
       Universe.createNew()
       val elem = Geometric(0.9)
-      val dist = new GeometricDistribution(0.1) // JSci parameterizes the geometric by probability of success
+      val dist = new GeometricDistribution(0.1)
       elem.density(3) should be(dist.probability(3.0) +- 0.00000001)
     }
 

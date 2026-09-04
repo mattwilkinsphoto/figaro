@@ -19,7 +19,7 @@ import scala.math.exp
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.experimental.normalproposals._
 import com.cra.figaro.language._
-import JSci.maths.statistics._
+import com.cra.figaro.test.modernization.oracles._
 import com.cra.figaro.test.tags.NonDeterministic
 import com.cra.figaro.ndtest._
 

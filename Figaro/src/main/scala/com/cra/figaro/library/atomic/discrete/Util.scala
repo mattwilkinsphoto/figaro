@@ -31,14 +31,14 @@ object Util {
   def binomialDensity(numTrials: Int, probSuccess: Double, numPositive: Int): Double = {
     val q = 1 - probSuccess
     if (numTrials > 10) {
-      val logNFact = JSci.maths.ExtraMath.logFactorial(numTrials)
-      val logKFact = JSci.maths.ExtraMath.logFactorial(numPositive)
-      val logNMinusKFact = JSci.maths.ExtraMath.logFactorial(numTrials-numPositive)
+      val logNFact = SpecialFunctions.logFactorial(numTrials)
+      val logKFact = SpecialFunctions.logFactorial(numPositive)
+      val logNMinusKFact = SpecialFunctions.logFactorial(numTrials-numPositive)
       val logBinomialCoefficient = logNFact - (logKFact + logNMinusKFact)
       val result = logBinomialCoefficient + (numPositive*Math.log(probSuccess) + ((numTrials-numPositive)*Math.log(q)))
       Math.exp(result)
     } else {
-      JSci.maths.ExtraMath.binomial(numTrials, numPositive) * math.pow(probSuccess, numPositive) * math.pow(q, numTrials - numPositive)
+      SpecialFunctions.binomial(numTrials, numPositive) * math.pow(probSuccess, numPositive) * math.pow(q, numTrials - numPositive)
     }
   }
 }

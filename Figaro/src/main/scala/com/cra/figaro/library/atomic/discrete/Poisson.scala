@@ -17,7 +17,7 @@ import com.cra.figaro.language._
 import com.cra.figaro.util._
 import annotation.tailrec
 import scala.math.{ exp, pow }
-import JSci.maths.ExtraMath.factorial
+import com.cra.figaro.util.SpecialFunctions.{ factorial, logFactorial }
 
 /**
  * A Poisson distribution in which the parameter is constant.
@@ -55,7 +55,7 @@ class AtomicPoisson(name: Name[Int], lambda: Double, collection: ElementCollecti
     if (k < lowerBound) 0.0 else {
       if (lambda > 10 || k > 10) { //Use approximation
         val logLambdaToK = k * Math.log(lambda)
-        val logKFact = JSci.maths.ExtraMath.logFactorial(k)
+        val logKFact = logFactorial(k)
         exp((logLambdaToK - logKFact) - lambda)
       } else { //Use exact
         pow(lambda, k) / factorial(k) * expMinusLambda
