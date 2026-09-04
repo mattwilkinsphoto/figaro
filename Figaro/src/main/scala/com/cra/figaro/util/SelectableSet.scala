@@ -102,7 +102,7 @@ class HashSelectableSet[T] extends SelectableSet[T] {
   /**
    * Add an element to the set.
    */
-  def +=(elem: T): this.type = {
+  def addOne(elem: T): this.type = {
     val i = index(elem)
     val binContents = contents(i)
     if (!binContents.contains(elem)) {
@@ -120,7 +120,7 @@ class HashSelectableSet[T] extends SelectableSet[T] {
   /**
    * Remove an element from the set.
    */
-  def -=(elem: T): this.type = {
+  def subtractOne(elem: T): this.type = {
     val i = index(elem)
     val binContents = contents(i)
     if (binContents.contains(elem)) {
@@ -140,6 +140,12 @@ class HashSelectableSet[T] extends SelectableSet[T] {
    */
   def contains(elem: T): Boolean =
     contents(index(elem)).contains(elem)
+
+  def clear(): Unit = {
+    power = 0
+    numElements = 0
+    calcVars()
+  }
 
   /*
    * select() selects an element uniformly at random. The challenge is that we cannot simply select a

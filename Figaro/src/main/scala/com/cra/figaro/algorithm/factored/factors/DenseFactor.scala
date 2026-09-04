@@ -36,7 +36,7 @@ class DenseFactor[T](val parents: List[Variable[_]], val output: List[Variable[_
   override def createFactor[T](parents: List[Variable[_]], output: List[Variable[_]], _semiring: Semiring[T] = semiring): Factor[T] =
     new DenseFactor[T](parents, output, _semiring)
     
-  val contents: ArraySeq[T] = ArraySeq.fill(size)(semiring.zero)
+  val contents: ArraySeq[T] = ArraySeq.fill[Any](size)(semiring.zero).asInstanceOf[ArraySeq[T]]
   
   def getContents(): Traversable[T] = contents
   

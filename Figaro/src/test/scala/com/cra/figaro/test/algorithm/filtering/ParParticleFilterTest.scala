@@ -14,7 +14,7 @@
 package com.cra.figaro.test.algorithm.filtering
 
 import org.scalatest.Matchers
-import org.scalatest.{ WordSpec, PrivateMethodTester }
+import org.scalatest.WordSpec
 import com.cra.figaro.algorithm.filtering._
 import com.cra.figaro.language._
 import com.cra.figaro.language.Universe._
@@ -24,7 +24,7 @@ import scala.language.existentials
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 
-class ParParticleFilterTest extends WordSpec with PrivateMethodTester with Matchers {
+class ParParticleFilterTest extends WordSpec with Matchers {
   
   val numThreads = 8
 
@@ -306,8 +306,14 @@ class ParParticleFilterTest extends WordSpec with PrivateMethodTester with Match
       val numParticles = 1000
       val numThreads = 7
       val pf = ParticleFilter.par(() => new Universe(), (u) => new Universe(), numParticles, numThreads)
-      val calculateIndices = PrivateMethod[Seq[(Int, Int)]]('calculateIndices)
-      val indices = pf invokePrivate calculateIndices(numParticles, numThreads)
+      val calculateIndices = pf.getClass.getDeclaredMethod(
+        "calculateIndices",
+        java.lang.Integer.TYPE,
+        java.lang.Integer.TYPE)
+      calculateIndices.setAccessible(true)
+      val indices = calculateIndices
+        .invoke(pf, Int.box(numParticles), Int.box(numThreads))
+        .asInstanceOf[Seq[(Int, Int)]]
       
       "assign work to each thread" in {
         indices.length should equal(numThreads)

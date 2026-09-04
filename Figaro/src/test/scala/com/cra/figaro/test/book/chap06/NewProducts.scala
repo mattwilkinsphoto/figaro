@@ -42,17 +42,17 @@ object NewProducts {
 
   def main(args: Array[String]) {
     var i : Double = 0.0
-    for { i <- 0.05 to 1.0 by 0.1 } {
+    for { i <- BigDecimal("0.05") to BigDecimal("1.0") by BigDecimal("0.1") } {
       println(i)
-      runExperiment(i)
+      runExperiment(i.toDouble)
     }
   }
 }
 
 class NewProductsTest extends WordSpec with Matchers {
   def testFunc {
-    for { i <- 0.05 to 1.0 by 0.1 } {
-      NewProducts.runExperiment(i)
+    for { i <- BigDecimal("0.05") to BigDecimal("1.0") by BigDecimal("0.1") } {
+      NewProducts.runExperiment(i.toDouble)
     }    
   }
 

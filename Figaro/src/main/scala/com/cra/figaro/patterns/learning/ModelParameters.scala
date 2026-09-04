@@ -140,7 +140,7 @@ class ModelParameters extends ElementCollection {
       val p = getElementByReference(s)
       val result = p match {
         case x: Parameter[_] => {
-          x match {
+          (x: Any) match {
             case d: DoubleParameter => ParameterType(d.MAPValue)
             case a: ArrayParameter => ParameterType(a.MAPValue)
             case default => throw new IllegalArgumentException("Cannot retrieve non-parameter elements from parameter collection.")
@@ -157,7 +157,7 @@ class ModelParameters extends ElementCollection {
       val p = getElementByReference(s)
       val result = p match {
         case x: Parameter[_] => {
-          x match {
+          (x: Any) match {
             case d: DoubleParameter => ParameterType(d.MAPValue)
             case a: ArrayParameter => ParameterType(a.MAPValue)
             case default => throw new IllegalArgumentException("Cannot retrieve non-parameter elements from parameter collection.")

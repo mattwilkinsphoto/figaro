@@ -191,10 +191,10 @@ object DecisionTestCases {
 
     Universe.createNew()
     val f1 = Flip(0.5)
-    val d1 = Decision(f1, 0.1 to 0.5 by 0.1)("d1", Universe.universe)
+    val d1 = Decision(f1, Seq(0.1, 0.2, 0.3, 0.4, 0.5))("d1", Universe.universe)
     val u1 = Apply(f1, d1, (f: Boolean, p: Double) => (if (f == false) p - .1 else .1 - p))
     val f2 = Flip(d1)
-    val d2 = Decision(f2, 0.1 to 0.5 by 0.1)("d2", Universe.universe)
+    val d2 = Decision(f2, Seq(0.1, 0.2, 0.3, 0.4, 0.5))("d2", Universe.universe)
     val u2 = Apply(f2, d2, (f: Boolean, p: Double) => (if (f == true) p - .1 else .1 - p))
 
     val Exp_before = if (sim) {
@@ -227,12 +227,12 @@ object DecisionTestCases {
 
     Universe.createNew()
     val f1 = If(Flip(0.5), Normal(1.0, 0.01), Normal(0.0, 0.01))
-    val d1 = new NonCachingDecision("", f1, (p: Double) => Uniform((0.1 to 0.5 by 0.1): _*), Universe.universe) with PolicyMaker[Double, Double] {
+    val d1 = new NonCachingDecision("", f1, (p: Double) => Uniform(0.1, 0.2, 0.3, 0.4, 0.5), Universe.universe) with PolicyMaker[Double, Double] {
       def makePolicy(policyMap: scala.collection.immutable.Map[(Double, Double), DecisionSample]) = DecisionPolicyNN(policyMap, 1000)
     }
     val u1 = Apply(f1, d1, (f: Double, p: Double) => (math.signum(0.5 - f) * (p - .1)))
     val f2 = If(Flip(d1), Normal(1.0, 0.01), Normal(0.0, 0.01))
-    val d2 = new NonCachingDecision("", f2, (p: Double) => Uniform((0.1 to 0.5 by 0.1): _*), Universe.universe) with PolicyMaker[Double, Double] {
+    val d2 = new NonCachingDecision("", f2, (p: Double) => Uniform(0.1, 0.2, 0.3, 0.4, 0.5), Universe.universe) with PolicyMaker[Double, Double] {
       def makePolicy(policyMap: scala.collection.immutable.Map[(Double, Double), DecisionSample]) = DecisionPolicyNN(policyMap, 1000)
     }
     val u2 = Apply(f2, d2, (f: Double, p: Double) => (math.signum(f - 0.5) * (p - .1)))

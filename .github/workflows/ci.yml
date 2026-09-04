@@ -58,6 +58,22 @@ jobs:
           com.cra.figaro.test.algorithm.AlgorithmTest
           -- -z "An anytime algorithm"'
 
+      - name: Run Scala 2.13 collection and factor regressions
+        run: >-
+          sbt
+          "figaro / Test / testOnly
+          com.cra.figaro.test.util.MultiSetTest
+          com.cra.figaro.test.util.PriorityMapTest
+          com.cra.figaro.test.util.SelectableSetTest
+          com.cra.figaro.test.util.CacheTest
+          com.cra.figaro.test.util.ResamplerTest
+          com.cra.figaro.test.algorithm.factored.FactorTest"
+
+      - name: Run deterministic parallel-structure regressions
+        run: |
+          sbt 'figaro / Test / testOnly com.cra.figaro.test.algorithm.filtering.ParParticleFilterTest -- -z "splitting up the particle indices over threads"'
+          sbt 'figaro / Test / testOnly com.cra.figaro.test.algorithm.sampling.ParImportanceTest -- -z "not suffer from stack overflow with small probability of success"'
+
       - name: Build first reproducibility candidate
         run: >-
           sbt
@@ -67,8 +83,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            Figaro/target/scala-2.12/figaro_2.12-5.0.0-modern.1-SNAPSHOT.jar \
-            Figaro/target/scala-2.12/figaro_2.12-5.0.0-modern.1-SNAPSHOT-fat.jar \
+            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT.jar \
+            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -88,7 +104,7 @@ jobs:
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: Figaro/target/scala-2.12/figaro_2.12-5.0.0-modern.1-SNAPSHOT-fat.jar
+          file: Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -97,10 +113,10 @@ jobs:
       - name: Upload JVM artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: figaro-java17-scala212
+          name: figaro-java17-scala213
           path: |
-            Figaro/target/scala-2.12/figaro_2.12-5.0.0-modern.1-SNAPSHOT.jar
-            Figaro/target/scala-2.12/figaro_2.12-5.0.0-modern.1-SNAPSHOT-fat.jar
-            Figaro/target/scala-2.12/figaro_2.12-5.0.0-modern.1-SNAPSHOT-sources.jar
-            Figaro/target/scala-2.12/figaro_2.12-5.0.0-modern.1-SNAPSHOT-javadoc.jar
+            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT.jar
+            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar
+            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-sources.jar
+            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-javadoc.jar
           if-no-files-found: error

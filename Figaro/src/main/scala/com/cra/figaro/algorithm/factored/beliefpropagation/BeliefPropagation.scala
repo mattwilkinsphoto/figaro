@@ -28,6 +28,7 @@ import com.cra.figaro.language._
 import com.cra.figaro.algorithm.lazyfactored.LazyValues
 import com.cra.figaro.algorithm.lazyfactored.BoundedProbFactor
 import scala.collection.mutable.Map
+import scala.collection.parallel.CollectionConverters._
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
 /**

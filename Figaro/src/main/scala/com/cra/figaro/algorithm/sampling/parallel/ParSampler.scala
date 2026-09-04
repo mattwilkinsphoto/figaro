@@ -18,6 +18,7 @@ import com.cra.figaro.util
 import com.cra.figaro.algorithm.sampling.BaseProbQuerySampler
 import com.cra.figaro.algorithm.sampling.ProbQuerySampler
 import scala.collection.parallel.ParSeq
+import scala.collection.parallel.CollectionConverters._
 
 /**
  * Parallel version of a sampling algorithm. Has a parallel collection of algorithm instances 

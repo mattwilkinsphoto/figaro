@@ -26,6 +26,7 @@ import com.cra.figaro.language.Universe._
 import com.cra.figaro.library.atomic.continuous._
 import com.cra.figaro.util
 import scala.collection._
+import scala.collection.immutable.Seq
 
 class SufficientStatisticsVariableEliminationTest extends WordSpec with PrivateMethodTester with Matchers {
 

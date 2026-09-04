@@ -136,7 +136,7 @@ class HeapPriorityMap[T, U]()(implicit ord: Ordering[U]) extends PriorityMap[T, 
    * Add the key/value pair to the priority map. If the key is already present, update its value,
    * moving it in the map.
    */
-  def +=(pair: (T, U)): HeapPriorityMap.this.type = {
+  def addOne(pair: (T, U)): HeapPriorityMap.this.type = {
     val (item, score) = pair
     indexMap.get(item) foreach (doRemove(_))
     doInsert(item, score)
@@ -146,7 +146,7 @@ class HeapPriorityMap[T, U]()(implicit ord: Ordering[U]) extends PriorityMap[T, 
   /**
    * Remove the key/value pair from the priority map.
    */
-  def -=(item: T): HeapPriorityMap.this.type = {
+  def subtractOne(item: T): HeapPriorityMap.this.type = {
     indexMap.get(item) foreach (doRemove(_))
     this
   }

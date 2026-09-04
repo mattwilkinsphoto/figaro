@@ -131,7 +131,7 @@ class MHCache(universe: Universe) extends Cache(universe) {
   /**
    * Removes an element from the cache. This is needed to properly clean up elements as they are deactivated.
    */
-  def -=(element: Element[_]) = {
+  def subtractOne(element: Element[_]) = {
     ccCache -= element
     nccCache -= element
     val invertValue = ccInvertedCache.get(element)

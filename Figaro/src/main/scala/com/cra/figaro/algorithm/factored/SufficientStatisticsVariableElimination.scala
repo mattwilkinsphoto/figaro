@@ -18,7 +18,7 @@ import com.cra.figaro.algorithm.learning._
 import com.cra.figaro.language._
 import scala.collection._
 import scala.collection.mutable.{ Set }
-import scala.collection.immutable.Map
+import scala.collection.immutable.{ Map, Seq }
 import com.cra.figaro.util.MultiSet
 import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.algorithm.factored.factors.factory.Factory

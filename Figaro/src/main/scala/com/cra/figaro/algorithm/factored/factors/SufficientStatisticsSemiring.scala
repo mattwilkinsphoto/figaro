@@ -15,7 +15,7 @@ package com.cra.figaro.algorithm.factored.factors
 
 import com.cra.figaro.language._
 import scala.collection._
-import scala.collection.immutable.{ Set, Map }
+import scala.collection.immutable.{ Set, Map, Seq }
 
 /**
  * Sum and product operations defined for sufficient statistics. 

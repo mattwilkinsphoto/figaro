@@ -15,6 +15,7 @@ package com.cra.figaro.algorithm.filtering
 
 import com.cra.figaro.language._
 import scala.collection.parallel.ParSeq
+import scala.collection.parallel.CollectionConverters._
 import com.cra.figaro.algorithm.filtering.ParticleFilter.WeightedParticle
 import com.cra.figaro.library.cache.PermanentCache
 import com.cra.figaro.library.cache.Cache

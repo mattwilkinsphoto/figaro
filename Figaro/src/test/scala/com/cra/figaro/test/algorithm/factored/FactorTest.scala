@@ -14,7 +14,6 @@
 package com.cra.figaro.test.algorithm.factored
 
 import org.scalatest.Matchers
-import org.scalatest.PrivateMethodTester
 import org.scalatest.WordSpec
 import com.cra.figaro.algorithm.Values
 import com.cra.figaro.algorithm.factored.factors._
@@ -32,7 +31,7 @@ import com.cra.figaro.algorithm.factored.VariableElimination
 import scala.collection.mutable.ListBuffer
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
-class FactorTest extends WordSpec with Matchers with PrivateMethodTester {
+class FactorTest extends WordSpec with Matchers {
 
   "A variable for an element" should {
     "have range equal to the element's values" in {
@@ -202,8 +201,7 @@ class FactorTest extends WordSpec with Matchers with PrivateMethodTester {
       val v6 = Variable(e6)
       val f = Factory.defaultFactor[Double](List(v1, v2, v3, v4), List())
       val g = Factory.defaultFactor[Double](List(v5, v3, v2, v6), List())
-      val unionVars = PrivateMethod[(List[Variable[_]], List[Variable[_]], List[Int], List[Int])]('unionVars)
-      val (parents, output, indexMap1, indexMap2) = f invokePrivate unionVars(g)
+      val (parents, output, indexMap1, indexMap2) = f.unionVars(g)
       val union = parents ::: output
       union should equal(List(v1, v2, v3, v4, v5, v6))
       indexMap1 should equal(List(0, 1, 2, 3))
@@ -645,6 +643,7 @@ class FactorTest extends WordSpec with Matchers with PrivateMethodTester {
           val v206 = v2Vals.indexOf(Regular(0.6))
           val v3f = v3Vals.indexOf(Regular(false))
           val v3t = v3Vals.indexOf(Regular(true))
+          val v4f = v4Vals.indexOf(Regular(false))
           val v5f = v5Vals.indexOf(Regular(false))
           val v5t = v5Vals.indexOf(Regular(true))
           Universe.universe.activeElements.foreach(Variable(_))
@@ -672,13 +671,13 @@ class FactorTest extends WordSpec with Matchers with PrivateMethodTester {
             val ind = pairRange.indexWhere(p => p(0).asInstanceOf[Regular[Int]].value == 1 && p(1).asInstanceOf[Regular[Boolean]].value == v5Vals(i).value)
             v1Factor.get(List(ind, j)) should equal(1.0)
           }
-          val v2index1 = pairRange.indexWhere(p => p(0).asInstanceOf[Regular[Int]].value == 1 && p(1).asInstanceOf[Regular[Boolean]].value == v5Vals(0).value)
-          //val v2index2 = pairRange.indexWhere(p => p(0).asInstanceOf[Regular[Int]].value == 1 && p(1).asInstanceOf[Regular[Boolean]].value == fals)
-          v2Factor.get(List(v2index1, v5f)) should equal(1.0)
-          v2Factor.get(List(v2index1, v5t)) should equal(0.0)
-          for { i <- 0 to 0; j <- 0 to 1 } {
-            val ind = pairRange.indexWhere(p => p(0).asInstanceOf[Regular[Int]].value == 0 && p(1).asInstanceOf[Regular[Boolean]].value == v5Vals(i).value)
-            v2Factor.get(List(ind, j)) should equal(1.0)
+          val v2FalseIndex = pairRange.indexWhere(p => p(0).asInstanceOf[Regular[Int]].value == 1 && !p(1).asInstanceOf[Regular[Boolean]].value)
+          val v2TrueIndex = pairRange.indexWhere(p => p(0).asInstanceOf[Regular[Int]].value == 1 && p(1).asInstanceOf[Regular[Boolean]].value)
+          v2Factor.get(List(v2FalseIndex, v4f)) should equal(1.0)
+          v2Factor.get(List(v2TrueIndex, v4f)) should equal(0.0)
+          for { overallValue <- List(false, true) } {
+            val ind = pairRange.indexWhere(p => p(0).asInstanceOf[Regular[Int]].value == 0 && p(1).asInstanceOf[Regular[Boolean]].value == overallValue)
+            v2Factor.get(List(ind, v4f)) should equal(1.0)
           }
         }
     }

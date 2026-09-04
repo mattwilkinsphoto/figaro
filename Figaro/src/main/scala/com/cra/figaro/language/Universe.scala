@@ -15,7 +15,6 @@ package com.cra.figaro.language
 
 import com.cra.figaro.algorithm._
 import com.cra.figaro.util._
-import collection.immutable.Stack
 import scala.annotation.tailrec
 import scala.collection.mutable.{ Set, Map }
 import scala.language.{ implicitConversions, existentials }

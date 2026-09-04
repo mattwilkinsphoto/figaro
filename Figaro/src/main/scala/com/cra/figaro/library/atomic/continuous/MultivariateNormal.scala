@@ -16,7 +16,6 @@ package com.cra.figaro.library.atomic.continuous
 import com.cra.figaro.language._
 import com.cra.figaro.util.random
 import scala.math._
-import scala.collection.JavaConversions
 import org.apache.commons.math3.distribution.MultivariateNormalDistribution
 import org.apache.commons.math3.random.RandomGenerator
 

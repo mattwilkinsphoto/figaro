@@ -19,7 +19,7 @@ import com.cra.figaro.util._
 import com.cra.figaro.algorithm.lazyfactored._
 import com.cra.figaro.algorithm.factored._
 import scala.collection.mutable.ListBuffer
-import com.cra.figaro.algorithm.factored.factors.factory._
+import com.cra.figaro.algorithm.factored.factors.factory.FactorMaker
 import com.cra.figaro.library.compound._
 import com.cra.figaro.library.collection._
 import com.cra.figaro.library.atomic.discrete._

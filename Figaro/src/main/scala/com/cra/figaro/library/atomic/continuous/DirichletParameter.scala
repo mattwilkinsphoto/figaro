@@ -16,7 +16,6 @@ package com.cra.figaro.library.atomic.continuous
 import com.cra.figaro.algorithm.ValuesMaker
 import com.cra.figaro.algorithm.lazyfactored.ValueSet
 import com.cra.figaro.language._
-import scala.Array.canBuildFrom
 import scala.collection.mutable
 
 object DirichletParameter extends Creatable {

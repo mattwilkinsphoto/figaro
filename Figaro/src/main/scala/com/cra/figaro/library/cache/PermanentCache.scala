@@ -74,7 +74,7 @@ class PermanentCache(universe: Universe) extends Cache(universe) {
   /**
    * Removes an element from the cache. This is needed to properly clean up elements as they are deactivated.
    */
-  def -=(element: Element[_]) = {
+  def subtractOne(element: Element[_]) = {
     ccCache -= element
     val invertValue = ccInvertedCache.get(element)
     if (invertValue.nonEmpty) invertValue.get.foreach(e => if (ccCache.contains(e._1)) ccCache(e._1) -= e._2)

@@ -29,7 +29,7 @@ object GaussianProcessTraining {
     
     // set up the model
     // y = x^2 + eps, eps ~ N(0, 1)
-    val x = Range.Double(1, 10, 1)
+    val x = (1 to 10).map(_.toDouble)
     val y = x.map(xi => math.pow(xi, 2) + random.nextGaussian())
   
     // wire together dependence structure

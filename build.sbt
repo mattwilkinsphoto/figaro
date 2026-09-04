@@ -39,9 +39,9 @@ lazy val examplesManifest = readManifest("FigaroExamples/META-INF/MANIFEST.MF")
 lazy val figaroSettings = Seq(
   organization := "io.github.mattwilkinsphoto",
   description := "Figaro: a language for probabilistic programming",
-  version := "5.0.0-modern.1-SNAPSHOT",
-  scalaVersion := "2.12.21",
-  crossScalaVersions := Seq("2.12.21"),
+  version := "5.0.0-modern.2-SNAPSHOT",
+  scalaVersion := "2.13.18",
+  crossScalaVersions := Seq("2.13.18"),
   crossPaths := true,
   publishMavenStyle := true,
   homepage := Some(url("https://github.com/mattwilkinsphoto/figaro")),
@@ -102,6 +102,7 @@ lazy val figaro = project
       "org.apache.commons" % "commons-math3" % "3.6.1",
       "io.github.argonaut-io" %% "argonaut" % "6.3.13",
       "org.scala-lang.modules" %% "scala-swing" % "2.1.1",
+      "org.scala-lang.modules" %% "scala-parallel-collections" % "1.2.0",
       "org.scalatest" %% "scalatest" % "3.1.0" % Test
     )
   )

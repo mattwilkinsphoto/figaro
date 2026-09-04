@@ -14,11 +14,11 @@
 package com.cra.figaro.test.util
 
 import org.scalatest.Matchers
-import org.scalatest.{ WordSpec, PrivateMethodTester }
+import org.scalatest.WordSpec
 import com.cra.figaro.util._
 import java.util.{ Map, TreeMap }
 
-class ResamplerTest extends WordSpec with PrivateMethodTester with Matchers {
+class ResamplerTest extends WordSpec with Matchers {
   "A MapResampler's map" should {
     "contain as values all the samples and none other" in {
       val r = new MapResampler(List(0.5 -> 1, 0.25 -> 2, 0.5 -> 3))
@@ -62,7 +62,8 @@ class ResamplerTest extends WordSpec with PrivateMethodTester with Matchers {
   }
 
   def getMap[T](r: Resampler[T]) = {
-    val getTheMap = PrivateMethod[TreeMap[Double, T]]('getTheMap)
-    r invokePrivate getTheMap()
+    val getTheMap = r.getClass.getDeclaredMethod("getTheMap")
+    getTheMap.setAccessible(true)
+    getTheMap.invoke(r).asInstanceOf[TreeMap[Double, T]]
   }
 }

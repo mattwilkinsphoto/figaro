@@ -196,7 +196,7 @@ class GeneralizedEM(inferenceAlgorithmConstructor: Seq[Element[_]] => Universe =
 class GeneralizedOnlineEM(inferenceAlgorithmConstructor: Seq[Element[_]] => Universe => ProbQueryAlgorithm with OneTime, override val initial: Universe, override val transition: Function0[Universe], val targetParameters: Parameter[_]*)(val terminationCriteria: () => EMTerminationCriteria) extends OnlineExpectationMaximization {
 
   protected def usesParameter(l: List[Element[_]]): Map[Parameter[_], Iterable[Parameterized[_]]] = {
-    (l.map { x => x match { case p: Parameterized[_] => { p -> p.parameters.head } } }).groupBy(_._2).mapValues(_.map(_._1))
+    (l.map { x => x match { case p: Parameterized[_] => { p -> p.parameters.head } } }).groupBy(_._2).view.mapValues(_.map(_._1)).toMap
   }
 
   protected def doExpectationStep(): Map[Parameter[_], Seq[Double]] = {

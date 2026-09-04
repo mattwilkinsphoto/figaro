@@ -36,7 +36,9 @@ object ScoringMatrix {
 
     // invert scoring matrix to make a minimization problem as NN algorithm works on min distance
     val maxScore = M.map(_._2.values.max).max
-    M.foreach { s => M += (s._1 -> s._2.mapValues(i => -1 * i + maxScore + 1)) }
+    M = M.map { case (aminoAcid, scores) =>
+      aminoAcid -> scores.map { case (other, score) => other -> (-score + maxScore + 1) }
+    }
     M
   }
 

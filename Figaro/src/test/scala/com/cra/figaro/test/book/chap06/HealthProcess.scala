@@ -25,8 +25,8 @@ import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object HealthProcess extends Process[Double, Boolean] {
-  val healthyPrior = Uniform((0.05 to 0.95 by 0.1):_*)
-  val healthChangeRate = Uniform((0.001 to 0.1 by 0.002):_*)
+  val healthyPrior = Uniform((BigDecimal("0.05") to BigDecimal("0.95") by BigDecimal("0.1")).map(_.toDouble):_*)
+  val healthChangeRate = Uniform((BigDecimal("0.001") to BigDecimal("0.1") by BigDecimal("0.002")).map(_.toDouble):_*)
 
   def generate(time: Double): Element[Boolean] = Flip(healthyPrior)
 
@@ -75,8 +75,8 @@ object HealthProcess extends Process[Double, Boolean] {
 class HealthProcessTest extends WordSpec with Matchers {
   Universe.createNew()
   "Health Process" should {
-    val healthyPrior = Uniform((0.05 to 0.95 by 0.1):_*)
-    val healthChangeRate = Uniform((0.001 to 0.1 by 0.002):_*)
+    val healthyPrior = Uniform((BigDecimal("0.05") to BigDecimal("0.95") by BigDecimal("0.1")).map(_.toDouble):_*)
+    val healthChangeRate = Uniform((BigDecimal("0.001") to BigDecimal("0.1") by BigDecimal("0.002")).map(_.toDouble):_*)
 
     val data = Map(0.1 -> true, 0.25 -> true, 0.3 -> false, 0.31 -> false, 0.34 -> false, 0.36 -> false, 0.4 -> true, 0.5 -> true, 0.55 -> true)
     val queries = List(0.35, 0.37, 0.45, 0.6)

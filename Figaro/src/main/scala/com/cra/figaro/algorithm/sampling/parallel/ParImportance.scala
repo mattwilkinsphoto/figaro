@@ -14,6 +14,7 @@
 package com.cra.figaro.algorithm.sampling.parallel
 
 import scala.collection.parallel.ParSeq
+import scala.collection.parallel.CollectionConverters._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm._
 import com.cra.figaro.language._

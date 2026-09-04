@@ -491,8 +491,8 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
         collectResults()
       }
     }
-    val successResults: scala.collection.Map[Predicate[_], Double] = successes.mapValues(_.toDouble / numSamples)
-    val proposalResults: scala.collection.Map[Element[_], Double] = proposalCounts.mapValues(_.toDouble / numSamples)
+    val successResults: scala.collection.Map[Predicate[_], Double] = successes.view.mapValues(_.toDouble / numSamples).toMap
+    val proposalResults: scala.collection.Map[Element[_], Double] = proposalCounts.view.mapValues(_.toDouble / numSamples).toMap
     val acceptanceRatio = accepts.toDouble / numSamples
     accepts = savedAccepts
     rejects = savedRejects

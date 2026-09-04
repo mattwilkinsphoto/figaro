@@ -62,16 +62,18 @@ class HashMultiSet[T] extends MultiSet[T] {
 
   def elements: List[T] = map.toList.map(pair => List.fill(pair._2)(pair._1)).flatten
 
-  def map[U](fn: T => U): HashMultiSet[U] = {
+  override def map[U](fn: T => U): HashMultiSet[U] = {
     val result = new HashMultiSet[U]()
     // Different Ts might map to the same U; this is correctly handled by addMany below.
     for { (key, value) <- map } { result.addMany(fn(key), value) }
     result
   }
 
-  def foreach[U](fn: T => U): Unit = {
+  override def foreach[U](fn: T => U): Unit = {
     for { (key, value) <- map; i <- 1 to value } { fn(key) }
   }
+
+  def iterator: Iterator[T] = elements.iterator
 }
 
 object HashMultiSet {

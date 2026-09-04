@@ -29,7 +29,7 @@ This inventory separates build-tool migration from runtime dependency changes. V
 3. Remove or replace unused and narrow dependencies (Prefuse, ASM, Breeze use, then Akka).
 4. Replace JSci with tested Commons Math equivalents and upgrade Commons Math.
 5. Freeze and modernize serialization.
-6. Add Scala 2.13.18 as a distinct migration stage.
+6. Add Scala 2.13.18 as a distinct migration stage. Completed with the external parallel-collections module and focused collection, factor, cache, and parallel-algorithm regressions.
 
 ## Completed dependency reductions
 
@@ -42,3 +42,5 @@ The third checkpoint replaces Akka 2.4.18 with a JDK `LinkedBlockingQueue`, `Com
 The fourth checkpoint upgrades Argonaut from the old `io.argonaut` 6.2 coordinate to `io.github.argonaut-io` 6.3.13. This keeps the small existing codec surface while moving onto an actively published release line with Scala 2.13 support.
 
 The fifth checkpoint removes ScalaMeter 0.8.2 after confirming that no benchmark suites use it. Scala Swing moves to 2.1.1 and ScalaTest to 3.1.0, keeping existing APIs source-compatible while making every remaining Scala dependency available for Scala 2.13.
+
+The sixth checkpoint moves the build to Scala 2.13.18 and adds `scala-parallel-collections` 1.2.0. This dependency is required only because four existing algorithms use `.par`; it replaces functionality removed from the 2.13 standard library without changing those algorithms' public API. ScalaTest remains on 3.1.0 for the legacy `WordSpec`/`Matchers` source aliases; its broken private-method name extraction on Scala 2.13 is removed from the three affected tests.

@@ -34,7 +34,7 @@ class AtomicBinomial(name: Name[Int], val numTrials: Int, val probSuccess: Doubl
   // Devroye, p. 525
   @tailrec
   private def generateHelper(x: Int, sum: Int): Int = {
-    val g = Util.generateGeometric(1 - probSuccess)
+    val g = com.cra.figaro.library.atomic.discrete.Util.generateGeometric(1 - probSuccess)
     val newSum = sum + g
     val newX = x + 1
     if (newSum <= numTrials) generateHelper(newX, newSum)
@@ -55,7 +55,7 @@ class AtomicBinomial(name: Name[Int], val numTrials: Int, val probSuccess: Doubl
    */
   def density(k: Int) = {
     if (k < 0 || k > numTrials) 0.0 else
-    Util.binomialDensity(numTrials, probSuccess, k)
+    com.cra.figaro.library.atomic.discrete.Util.binomialDensity(numTrials, probSuccess, k)
   }
 
   /**
@@ -110,7 +110,7 @@ class ParameterizedBinomialFixedNumTrials(name: Name[Int], val numTrials: Int, o
   def density(value: Int): Double = {
     val probSuccess = parameter.value
     if (value < 0 || value > numTrials) 0.0
-    else Util.binomialDensity(numTrials, probSuccess, value)
+    else com.cra.figaro.library.atomic.discrete.Util.binomialDensity(numTrials, probSuccess, value)
   }
 
  override def toString = "ParameterizedBinomial(" + numTrials + ", " + parameter + ")"

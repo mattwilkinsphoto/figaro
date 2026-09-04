@@ -46,7 +46,7 @@ class NoCache(universe: Universe) extends Cache(universe) {
     }
   }
   def clear() = {}
-  def -=(element: Element[_]) = this
+  def subtractOne(element: Element[_]) = this
 }
 
 

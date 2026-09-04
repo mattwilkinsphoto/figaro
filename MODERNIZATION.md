@@ -94,4 +94,22 @@ Completed dependency checkpoints:
 
 ## Stage 3: Scala 2.13
 
-Target: Scala 2.13.18 after the dependency surface is made compatible. This is a separate source-migration stage, not part of the Java 17 build-tool commit.
+Completed target:
+
+- Scala 2.13.18
+- `scala-parallel-collections` 1.2.0 for the four algorithms that retain parallel collection behavior
+- Modernization version `5.0.0-modern.2-SNAPSHOT`
+
+The migration updates the source for the Scala 2.13 collections redesign while preserving Figaro's public packages and inference behavior. The principal changes are explicit immutable `Seq` types where the API contract requires them, eager replacements for legacy `mapValues`, the 2.13 mutable-collection `addOne`/`subtractOne` protocol, and removal of obsolete `JavaConversions`, `Stack`, and builder imports.
+
+Parallel belief propagation, particle filtering, and importance sampling now opt into the separately published parallel-collections module. Custom `MultiSet`, priority-map, selectable-set, and cache implementations retain their original behavior under the 2.13 collection contracts. Legacy tests that used ScalaTest's pre-2.13 `PrivateMethodTester` implementation now use direct calls where the method is public and narrow Java reflection where it is not.
+
+One existing complex-`Dist` factor assertion depended on `Set` iteration order and indexed a one-value `Constant(false)` range with indices from a two-value result range. The test now identifies both tuple values and the constant's own range index explicitly; the production factor behavior is unchanged.
+
+Validation evidence:
+
+- All Figaro main, test, and example sources compile on JDK 17 with Scala 2.13.18.
+- The required modernization, density, anytime lifecycle, custom collection/cache, factor, resampler, serialization, and deterministic parallel-structure selections pass. These checks cover 111 tests across the migration-sensitive surfaces.
+- A wider parallel smoke run passed all 39 particle-filter and parallel-importance tests once. A repeat run passed 38/39: one untagged Monte Carlo evidence estimate produced `0.7087` against an expected `0.72 ± 0.01`. This is consistent with the stochastic-tolerance failures established on the JDK 8 baseline, so the full sampling suite is evidence rather than a required CI gate.
+- CI builds and checksum-compares the Scala 2.13 thin and fat JARs after a clean rebuild, publishes sources and Scaladoc classifiers locally, and generates a CycloneDX SBOM from the assembled runtime.
+- The complete legacy suite remains outside the required gate because its 22 known failures and heavyweight learning example were established on the untouched JDK 8 baseline before modernization.

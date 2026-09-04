@@ -18,7 +18,7 @@ package com.cra.figaro.util
  * 
  * @tparam T The type of values contained in the set
  */
-trait MultiSet[T] extends Traversable[T] {
+trait MultiSet[T] extends Iterable[T] {
   /**
    * Return the number of instances of the value in the set.
    */
@@ -52,12 +52,16 @@ trait MultiSet[T] extends Traversable[T] {
   /**
    * Map this set to another set by applying the supplied function.
    */
-  def map[U](fn: T => U): MultiSet[U]
+  override def map[U](fn: T => U): MultiSet[U] = {
+    val result = new HashMultiSet[U]
+    foreach(value => result.addOne(fn(value)))
+    result
+  }
 
   /**
    * Iterate over instances in this set and apply the given function.
    */
-  def foreach[U](fn: T => U): Unit
+  override def foreach[U](fn: T => U): Unit
 
   /**
    * Creates a list of elements, where each element may appear multiple times. Order is arbitrary.

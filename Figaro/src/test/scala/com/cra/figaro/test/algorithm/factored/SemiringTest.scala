@@ -14,7 +14,7 @@
 package com.cra.figaro.test.algorithm.factored
 
 import scala.collection.immutable.Map
-import scala.collection.Seq
+import scala.collection.immutable.Seq
 import scala.collection.mutable
 
 import org.scalatest.Matchers

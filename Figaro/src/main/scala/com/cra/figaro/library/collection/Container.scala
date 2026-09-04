@@ -52,7 +52,7 @@ extends Process[Index, Value] {
         Apply(elem1, f)("", elem1.universe)
       }
       def generate(indices: List[Index]) =
-        thisContainer.generate(indices).mapValues((e: Element[Value]) => Apply(e, f)("", e.universe))
+        thisContainer.generate(indices).map { case (i, e) => i -> Apply(e, f)("", e.universe) }
     }
   }
 
@@ -68,7 +68,7 @@ extends Process[Index, Value] {
         Chain(elem1, f)("", elem1.universe)
       }
       def generate(indices: List[Index]) =
-        thisContainer.generate(indices).mapValues((e: Element[Value]) => Chain(e, f)("", e.universe))
+        thisContainer.generate(indices).map { case (i, e) => i -> Chain(e, f)("", e.universe) }
     }
   }
   
