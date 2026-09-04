@@ -101,7 +101,7 @@ lazy val figaro = project
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value,
       "org.apache.commons" % "commons-math3" % "3.6.1",
-      "io.argonaut" %% "argonaut" % "6.2",
+      "io.github.argonaut-io" %% "argonaut" % "6.3.13",
       "org.scala-lang.modules" %% "scala-swing" % "2.0.0",
       "com.storm-enroute" %% "scalameter" % "0.8.2" % Provided,
       "org.scalatest" %% "scalatest" % "3.0.3" % Test

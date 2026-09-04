@@ -90,6 +90,7 @@ Completed dependency checkpoints:
 - Replaced JSci-based test oracles with Commons Math adapters that retain Figaro's variance, exponential-rate, and one-based geometric conventions. JSci and its obsolete XML/native-solver transitives are fully removed.
 - All source sets compile. Thirteen focused numerical/probability/serialization checks and thirteen legacy deterministic density checks pass.
 - Replaced the narrow Akka 2.4 actor surface with a JDK queue/worker. Lifecycle and query requests remain serialized and blocking; timeout configuration now uses Scala `FiniteDuration`.
+- Upgraded Argonaut to 6.3.13 on its current `io.github.argonaut-io` coordinate; the five JSON serialization and round-trip fixtures remain green.
 
 ## Stage 3: Scala 2.13
 
