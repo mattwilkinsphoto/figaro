@@ -29,7 +29,7 @@ import scala.language.existentials
  */
 trait ProbEvidenceAlgorithm extends Algorithm {
   val universe: Universe
-  val evidence: List[NamedEvidence[_]] = List[NamedEvidence[_]]()
+  val evidence: List[NamedEvidence[?]] = List[NamedEvidence[?]]()
   val denominator: Double = 1.0
 
   /* Particular implementations of probability of evidence algorithms must define the following method. */
@@ -39,12 +39,12 @@ trait ProbEvidenceAlgorithm extends Algorithm {
    * The algorithm used to compute the probability of additional evidence, as created by probAdditionalEvidence.
    * This algorithm can be different to the one defined in this class. (For example, a one-time algorithm can use an anytime algorithm for additional evidence.)
    */
-  def additionalEvidenceAlgorithm(evidence: List[NamedEvidence[_]]): ProbEvidenceAlgorithm
+  def additionalEvidenceAlgorithm(evidence: List[NamedEvidence[?]]): ProbEvidenceAlgorithm
 
   /**
    * Returns an algorithm to compute the probability of the additional evidence provided.
    */
-  def probAdditionalEvidence(evidence: List[NamedEvidence[_]]): ProbEvidenceAlgorithm = {
+  def probAdditionalEvidence(evidence: List[NamedEvidence[?]]): ProbEvidenceAlgorithm = {
     if (!active) throw new AlgorithmInactiveException
     additionalEvidenceAlgorithm(evidence)
   }
@@ -65,8 +65,8 @@ trait ProbEvidenceAlgorithm extends Algorithm {
     Math.log(probEvidence)
   }
   
-  private var savedConditions: List[List[(Element[_]#Condition, Element[_]#Contingency)]] = List()
-  private var savedConstraints: List[List[(Element[_]#Constraint, Element[_]#Contingency)]] = List()
+  private var savedConditions: List[List[(Element[?]#Condition, Element[?]#Contingency)]] = List()
+  private var savedConstraints: List[List[(Element[?]#Constraint, Element[?]#Contingency)]] = List()
 
   /**
    * Since probability of evidence algorithms introduce additional evidence (namely, their evidence argument), into an existing universe,

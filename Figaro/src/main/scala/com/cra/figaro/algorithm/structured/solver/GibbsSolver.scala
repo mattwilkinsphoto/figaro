@@ -24,7 +24,7 @@ import com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs
 import com.cra.figaro.algorithm.factored.gibbs.Gibbs
 import com.cra.figaro.algorithm.factored.gibbs.WalkSAT
 
-class GibbsSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], _factors: List[Factor[Double]],
+class GibbsSolver(problem: Problem, toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], _factors: List[Factor[Double]],
    _numSamples: Int,  _burnIn: Int,  _interval: Int, val blockToSampler: Gibbs.BlockSamplerCreator)
   extends BaseUnweightedSampler(null) with ProbabilisticGibbs with OneTime {
 
@@ -49,7 +49,7 @@ class GibbsSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: S
     for (_ <- 1 to burnIn) sampleAllBlocks()
   }
 
-  def chainMapper(chain: Chain[_, _]): Set[Variable[_]] = problem.collection(chain).actualSubproblemVariables.values.toSet
+  def chainMapper(chain: Chain[?, ?]): Set[Variable[?]] = problem.collection(chain).actualSubproblemVariables.values.toSet
 
   def run() = {}
 
@@ -77,14 +77,14 @@ class GibbsSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: S
     val variables = factors.flatMap(_.variables).toSet
     val variableParents = problem.collection.variableParents
     // Maps each variable to its deterministic children, i.e. variables that should be included in a block with this variable
-    val variableChildren: Map[Variable[_], Set[Variable[_]]] =
+    val variableChildren: Map[Variable[?], Set[Variable[?]]] =
       variables.map(v => v -> variables.filter(variableParents(_).contains(v))).toMap
 
     // Start with the purely stochastic variables with no parents
     val starterVariables = variables.filter(variableParents(_).isEmpty)
 
     @tailrec // Recursively add deterministic children to the block
-    def expandBlock(expand: Set[Variable[_]], block: Set[Variable[_]] = Set()): Gibbs.Block = {
+    def expandBlock(expand: Set[Variable[?]], block: Set[Variable[?]] = Set()): Gibbs.Block = {
       if (expand.isEmpty) block.toList
       else {
         val expandNext = expand.flatMap(variableChildren(_))

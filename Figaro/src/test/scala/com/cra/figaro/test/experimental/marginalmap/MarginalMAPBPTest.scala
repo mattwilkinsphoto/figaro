@@ -135,7 +135,7 @@ class MarginalMAPBPTest extends AnyWordSpec with Matchers {
       "produce the right answer without evidence" in {
         Universe.createNew()
         val rolls = for { i <- 1 to 10 } yield Uniform(1,2,3,4)
-        val c = Container(rolls: _*)
+        val c = Container(rolls*)
         val num4 = c.count(_ == 4)
 
         // num4 is effectively a binomial distribution with n=10, p=0.25
@@ -148,7 +148,7 @@ class MarginalMAPBPTest extends AnyWordSpec with Matchers {
 
       "produce the right answer with evidence" in {
         val rolls = for { i <- 1 to 10 } yield Uniform(1,2,3,4)
-        val c = Container(rolls: _*)
+        val c = Container(rolls*)
         val num4 = c.count(_ == 4)
 
         num4.addCondition(_ >= 5)

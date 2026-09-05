@@ -26,11 +26,11 @@ import scala.collection.mutable.Map
  * for each decision.
  */
 class OneTimeMultiDecisionMetropolisHastings(universe: Universe, myNumSamples: Int, ProposalMaker: ProposalMakerType,
-  burnIn: Int, interval: Int, utilityNodes: List[Element[_]], targets: Decision[_, _]*)
+  burnIn: Int, interval: Int, utilityNodes: List[Element[?]], targets: Decision[?, ?]*)
   extends MultiDecisionAlgorithm(universe, utilityNodes, targets.toList) {
 
   protected def createAlg[T, U](decisionTarget: Decision[T, U],
-    utilities: List[Element[_]], mv: Universe): OneTimeProbQueryDecision[T, U] = {
+    utilities: List[Element[?]], mv: Universe): OneTimeProbQueryDecision[T, U] = {
     new OneTimeDecisionMetropolisHastings[T, U](mv, myNumSamples, ProposalMaker(mv, decisionTarget), burnIn,
       interval, utilities, decisionTarget) with OneTimeProbQueryDecision[T, U]
   }
@@ -42,7 +42,7 @@ object MultiDecisionMetropolisHastings {
    * Type that defines how to create a proposal in a multi-decision MH algorithm. This is simply a function
    * from a universe and element (a decision) to a proposal scheme.
    */
-  type ProposalMakerType = (Universe, Element[_]) => ProposalScheme
+  type ProposalMakerType = (Universe, Element[?]) => ProposalScheme
 
   /**
    * Create a OneTime multi-decision Metropolis-Hastings sampler using the given number of samples, proposal
@@ -50,8 +50,8 @@ object MultiDecisionMetropolisHastings {
    * 
    * @param proposalMaker A function that specifies how to create a proposal for each decision in the target list
    */
-  def apply(numSamples: Int, proposalMaker: ProposalMakerType, utilityNodes: List[Element[_]], targets: Decision[_, _]*)(implicit universe: Universe) = {
-    new OneTimeMultiDecisionMetropolisHastings(universe, numSamples, proposalMaker, 0, 1, utilityNodes, targets: _*)
+  def apply(numSamples: Int, proposalMaker: ProposalMakerType, utilityNodes: List[Element[?]], targets: Decision[?, ?]*)(implicit universe: Universe) = {
+    new OneTimeMultiDecisionMetropolisHastings(universe, numSamples, proposalMaker, 0, 1, utilityNodes, targets*)
   }
 
   /**
@@ -61,8 +61,8 @@ object MultiDecisionMetropolisHastings {
    * @param proposalMaker A function that specifies how to create a proposal for each decision in the target list
    */
   def apply(numSamples: Int, proposalMaker: ProposalMakerType, burnIn: Int,
-    utilityNodes: List[Element[_]], targets: Decision[_, _]*)(implicit universe: Universe) = {
-    new OneTimeMultiDecisionMetropolisHastings(universe, numSamples, proposalMaker, burnIn, 1, utilityNodes, targets: _*)
+    utilityNodes: List[Element[?]], targets: Decision[?, ?]*)(implicit universe: Universe) = {
+    new OneTimeMultiDecisionMetropolisHastings(universe, numSamples, proposalMaker, burnIn, 1, utilityNodes, targets*)
   }
 
   /**
@@ -72,8 +72,8 @@ object MultiDecisionMetropolisHastings {
    * @param proposalMaker A function that specifies how to create a proposal for each decision in the target list
    */
   def apply(numSamples: Int, proposalMaker: ProposalMakerType, burnIn: Int, interval: Int, 
-      utilityNodes: List[Element[_]], targets: Decision[_, _]*)(implicit universe: Universe) = {
-    new OneTimeMultiDecisionMetropolisHastings(universe, numSamples, proposalMaker, burnIn, interval: Int, utilityNodes, targets: _*)
+      utilityNodes: List[Element[?]], targets: Decision[?, ?]*)(implicit universe: Universe) = {
+    new OneTimeMultiDecisionMetropolisHastings(universe, numSamples, proposalMaker, burnIn, interval: Int, utilityNodes, targets*)
   }
 
 }

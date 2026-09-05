@@ -29,7 +29,7 @@ object ReasoningComponent {
     val source = Source.fromFile(fileName)
     val lines = source.getLines().toList
     val (numEmailsLine :: spamLine :: hasManyUnusualWordsGivenSpamLine :: hasManyUnusualWordsGivenNormalLine ::
-        unusualWordGivenManyLine :: unusualWordGivenFewLine :: numWordsLine :: numFeatureWordsLine :: rest) = lines
+        unusualWordGivenManyLine :: unusualWordGivenFewLine :: numWordsLine :: numFeatureWordsLine :: rest) = (lines).runtimeChecked
     val numEmails = numEmailsLine.toInt
     val spamProbability = spamLine.toDouble
     val hasUnusualWordsGivenSpamProbability = hasManyUnusualWordsGivenSpamLine.toDouble
@@ -45,13 +45,13 @@ object ReasoningComponent {
     var wordsAndCounts = List[(String, Int)]()
 
     for { i <- 0 until numWords } {
-      val word :: countLine :: rest = linesRemaining
+      val word :: countLine :: rest = (linesRemaining).runtimeChecked
       linesRemaining = rest
       wordsAndCounts ::= (word, countLine.toInt)
     }
 
     for { i <- 0 until numFeatureWords } {
-      val word :: givenSpamLine :: givenNormalLine :: rest = linesRemaining
+      val word :: givenSpamLine :: givenNormalLine :: rest = (linesRemaining).runtimeChecked
       linesRemaining = rest
       wordsGivenSpamProbabilities += word -> givenSpamLine.toDouble
       wordsGivenNormalProbabilities += word -> givenNormalLine.toDouble

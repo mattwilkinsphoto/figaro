@@ -42,7 +42,7 @@ object Restaurant {
     val newTimes: List[Element[Int]] =
       for { time <- seated }
       yield Apply(Flip(time / 80.0), (b: Boolean) => if (b) -1 else time + 5)
-    val newTimesListElem: Element[List[Int]] = Inject(newTimes:_*)
+    val newTimesListElem: Element[List[Int]] = Inject(newTimes*)
     val staying = Apply(newTimesListElem, (l: List[Int]) => l.filter(_ >= 0))
 
     val arriving = Poisson(2)

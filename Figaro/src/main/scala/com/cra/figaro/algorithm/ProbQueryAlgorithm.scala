@@ -34,7 +34,7 @@ trait ProbQueryAlgorithm extends BaseProbQueryAlgorithm[Element[?], Element] {
    * Return an element representing the posterior probability distribution of the given element.
    */
   def posteriorElement[T](target: Element[T], universe: Universe = Universe.universe): Element[T] = {
-    Select(distribution(target).toList:_*)("", universe)
+    Select(distribution(target).toList*)(using "", universe)
   }
 
   universe.registerAlgorithm(this)
@@ -65,7 +65,7 @@ trait BaseProbQueryAlgorithm[Q, U[_] <: Q]
    * with its probability. The result is a lazy stream. It is up to the algorithm how the stream is
    * ordered.
    */
-  def computeDistribution[T](target: U[T]): Stream[(Double, T)]
+  def computeDistribution[T](target: U[T]): LazyList[(Double, T)]
 
   /**
    * Return an estimate of the expectation of the function under the marginal probability distribution
@@ -85,7 +85,7 @@ trait BaseProbQueryAlgorithm[Q, U[_] <: Q]
     projectDistribution(computeDistribution(target))
   }
   
-  private def projectDistribution[T](distribution: Stream[(Double, T)]): List[(T, Double)] = {
+  private def projectDistribution[T](distribution: LazyList[(Double, T)]): List[(T, Double)] = {
     (distribution map (_.swap)).toList
   }
     
@@ -95,7 +95,7 @@ trait BaseProbQueryAlgorithm[Q, U[_] <: Q]
    * and do not need to be defined by particular algorithm implementations.
    */
 
-  protected def doDistribution[T](target: U[T]): Stream[(Double, T)]
+  protected def doDistribution[T](target: U[T]): LazyList[(Double, T)]
 
   protected def doExpectation[T](target: U[T], function: T => Double): Double
 
@@ -118,7 +118,7 @@ trait BaseProbQueryAlgorithm[Q, U[_] <: Q]
    * targets of the algorithm.
    * Throws AlgorithmInactiveException if the algorithm is inactive.
    */
-  def distribution[T](target: U[T]): Stream[(Double, T)] = {
+  def distribution[T](target: U[T]): LazyList[(Double, T)] = {
     check(target)
     doDistribution(target)
   }
@@ -204,6 +204,6 @@ trait StreamableProbQueryAlgorithm extends ProbQueryAlgorithm {
 	/**
 	 * Sample an value from the posterior of this element
 	 */
-	def sampleFromPosterior[T](element: Element[T]): Stream[T]
+	def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 }
 

@@ -20,12 +20,12 @@ package object solve {
    * nested problem, or to raise factors to the next higher problem. Returns true if the factors should be raised, or
    * false if a solver should perform elimination.
    */
-  type RaisingCriteria = NestedProblem[_] => Boolean
+  type RaisingCriteria = NestedProblem[?] => Boolean
 
   /**
    * Raises a nested problem if any of its components are global.
    */
-  def raiseIfGlobal(problem: NestedProblem[_]): Boolean = {
+  def raiseIfGlobal(problem: NestedProblem[?]): Boolean = {
     // Raise if there exists a component that is neither internal nor a target
     problem.components.exists(pc => {
       val a = problem.internal(pc.variable)
@@ -38,10 +38,10 @@ package object solve {
    * Always raises a nested problem. This has the effect of "flattening" because all factors of problems strictly
    * contained in the top-level problem are raised.
    */
-  def flatRaising(problem: NestedProblem[_]): Boolean = true
+  def flatRaising(problem: NestedProblem[?]): Boolean = true
 
   /**
    * Never raises a nested problem without solving it.
    */
-  def structuredRaising(problem: NestedProblem[_]): Boolean = false
+  def structuredRaising(problem: NestedProblem[?]): Boolean = false
 }

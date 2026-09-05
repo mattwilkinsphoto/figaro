@@ -34,7 +34,7 @@ abstract class ParFiltering(transition: (Universe, Universe) => Universe) extend
   /**
    * Returns the distribution over the element referred to by the reference at the current time point.
    */
-  def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)] =
+  def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)] =
     computeCurrentDistribution(reference)
 
   /**
@@ -56,12 +56,12 @@ abstract class ParFiltering(transition: (Universe, Universe) => Universe) extend
   /**
    * Advance the filtering one time step, conditioning on the given evidence at the new time point.
    */
-  def advanceTime(evidence: Seq[NamedEvidence[_]]): Unit
+  def advanceTime(evidence: Seq[NamedEvidence[?]]): Unit
 
   /**
    * Returns the distribution over the element referred to by the reference at the current time point.
    */
-  protected def computeCurrentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+  protected def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 
   /**
    * Returns the expectation of the element referred to by the reference

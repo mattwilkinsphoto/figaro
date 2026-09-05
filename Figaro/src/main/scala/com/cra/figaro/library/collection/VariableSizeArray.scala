@@ -58,7 +58,7 @@ class MakeArray[T](name: Name[FixedSizeArray[T]], val numItems: Element[Int], va
    * An infinite stream of items in the array.
    */
   lazy val items = makeItems(0)
-  private def makeItems(i: Int): Stream[Element[T]] = {
+  private def makeItems(i: Int): LazyList[Element[T]] = {
     val item = itemMaker(i)
     //item.makePermanent() // Since the same item is used again and again, we don't want to deactivate it
     item #:: makeItems(i + 1)
@@ -69,7 +69,7 @@ class MakeArray[T](name: Name[FixedSizeArray[T]], val numItems: Element[Int], va
    * is the array prefix specified by the value of numItems.
    */
   lazy val arrays = makeArrays(0)
-  private def makeArrays(i: Int): Stream[FixedSizeArray[T]] = {
+  private def makeArrays(i: Int): LazyList[FixedSizeArray[T]] = {
     val array: FixedSizeArray[T] = new FixedSizeArray(i, (j: Int) => items(j))
     array #:: makeArrays(i + 1)
   }
@@ -84,7 +84,7 @@ class MakeArray[T](name: Name[FixedSizeArray[T]], val numItems: Element[Int], va
    */
   def apply(i: Int) = i < numItems.value match {
     case true => items(i)
-    case _ => throw new IllegalArgumentException("Invalid indices to MakeList")
+    case _ => throw new IllegalArgumentException("Invalid indices to MakeArray")
   }
 
   def values = LazyValues(universe)

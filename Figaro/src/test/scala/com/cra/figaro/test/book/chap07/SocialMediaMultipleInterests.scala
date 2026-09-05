@@ -27,11 +27,11 @@ object SocialMediaMultipleInterests {
 
   class Person() {
     def generateInterest(topic: String) = Flip(0.4)
-    val interested = memo(generateInterest _)
+    val interested = memo(generateInterest)
   }
 
   class Post(val poster: Person) {
-    val topic = Uniform(topics:_*)
+    val topic = Uniform(topics*)
     val interestMatch = Chain(topic, (s: String) => poster.interested(s))
     interestMatch.addConstraint((b: Boolean) => if (b) 1.0 else 0.2)
   }
@@ -40,7 +40,7 @@ object SocialMediaMultipleInterests {
     val connectionType = Uniform("acquaintance", "close friend", "family")
   }
   def generateConnection(pair: (Person, Person)) = new Connection(pair._1, pair._2)
-  val connection = memo(generateConnection _)
+  val connection = memo(generateConnection)
 
   class Comment(val post: Post, val commenter: Person) {
     val interestMatch = Chain(post.topic, (s: String) => commenter.interested(s))
@@ -52,7 +52,7 @@ object SocialMediaMultipleInterests {
       else if (connectionType == "close friend") 0.5
       else 0.1
     }
-    pair.addConstraint(constraint _)
+    pair.addConstraint(constraint)
   }
 
   def main(args: Array[String]): Unit = {
@@ -82,7 +82,7 @@ object SocialMediaMultipleInterests {
 class SocialMediaMultipleInterestsTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val topics = List("sports", "politics", "movies")
-  val connection = memo(SocialMediaMultipleInterests.generateConnection _)
+  val connection = memo(SocialMediaMultipleInterests.generateConnection)
   
   val amy = new SocialMediaMultipleInterests.Person()
   val brian = new SocialMediaMultipleInterests.Person()

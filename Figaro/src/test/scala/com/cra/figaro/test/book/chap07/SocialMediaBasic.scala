@@ -35,7 +35,7 @@ object SocialMediaBasic {
     val connectionType = Uniform("acquaintance", "close friend", "family")
   }
   def generateConnection(pair: (Person, Person)) = new Connection(pair._1, pair._2)
-  val connection = memo(generateConnection _)
+  val connection = memo(generateConnection)
 
   class Comment(val post: Post, val commenter: Person) {
     val topicMatch = post.topic === commenter.interest
@@ -47,7 +47,7 @@ object SocialMediaBasic {
       else if (connectionType == "close friend") 0.5
       else 0.1
     }
-    pair.addConstraint(constraint _)
+    pair.addConstraint(constraint)
   }
 
   def main(args: Array[String]): Unit = {
@@ -79,7 +79,7 @@ object SocialMediaBasic {
 
 class SocialMediaBasicTest extends AnyWordSpec with Matchers {
   Universe.createNew()
-  val connection = memo(SocialMediaBasic.generateConnection _)
+  val connection = memo(SocialMediaBasic.generateConnection)
   
   val amy = new SocialMediaBasic.Person()
   val brian = new SocialMediaBasic.Person()

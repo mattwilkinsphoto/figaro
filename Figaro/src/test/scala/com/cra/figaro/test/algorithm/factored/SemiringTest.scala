@@ -135,8 +135,8 @@ class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
       "handle zero values in weighted multiplication without crashing" in
         {
           val numberOfParameters = 1
-          val param: Parameter[_] = Dirichlet(1, 1, 1)
-          val parameterMap = Map.empty[Parameter[_], Seq[Double]] + (param -> Seq(0.0, 0.0, 0.0))
+          val param: Parameter[?] = Dirichlet(1, 1, 1)
+          val parameterMap = Map.empty[Parameter[?], Seq[Double]] + (param -> Seq(0.0, 0.0, 0.0))
 
           val semiring = new SufficientStatisticsSemiring(parameterMap)
 
@@ -162,7 +162,7 @@ class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
       "correctly multiply two numbers" in
         {
           val param = Dirichlet(1, 1, 1)
-          val parameterMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+          val parameterMap = mutable.Map.empty[Parameter[?], Seq[Double]]
           parameterMap += param -> Seq(0.0, 0.0, 0.0)
 
           val semiring = SufficientStatisticsSemiring(parameterMap.toMap)
@@ -179,7 +179,7 @@ class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
       "correctly add two numbers" in
         {
           val param = Dirichlet(1, 1, 1)
-          val parameterMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+          val parameterMap = mutable.Map.empty[Parameter[?], Seq[Double]]
           parameterMap += param -> Seq(0.0, 0.0, 0.0)
 
           val semiring = SufficientStatisticsSemiring(parameterMap.toMap)
@@ -209,7 +209,7 @@ class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
           val p9 = Dirichlet(1, 1, 1, 1, 1, 1, 1, 1, 1)
           val p10 = Dirichlet(1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
-          val zeroSufficientStatisticsMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+          val zeroSufficientStatisticsMap = mutable.Map.empty[Parameter[?], Seq[Double]]
 
           var j = 0
           while (j < iterations) {
@@ -245,10 +245,10 @@ class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
               p += 1
             }
 
-            def randomParameterMap(): Map[Parameter[_], Seq[Double]] =
+            def randomParameterMap(): Map[Parameter[?], Seq[Double]] =
               {
 
-                val paramMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+                val paramMap = mutable.Map.empty[Parameter[?], Seq[Double]]
                 for (p <- zeroSufficientStatisticsMap.keys) {
                   paramMap += p -> zeroSufficientStatisticsMap(p)
                   for (index <- 0 to paramMap(p).size - 1) {
@@ -258,7 +258,7 @@ class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
                 paramMap.toMap
               }
 
-            def create(): (Double, Map[Parameter[_], Seq[Double]]) =
+            def create(): (Double, Map[Parameter[?], Seq[Double]]) =
               {
                 val paramMap = randomParameterMap()
                 val prob = random.nextDouble()
@@ -269,7 +269,7 @@ class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
             val b = create()
             val c = create()
 
-            def probPlusOrMinus(x: (Double, Map[Parameter[_], Seq[Double]]), y: (Double, Map[Parameter[_], Seq[Double]]), epsilon: (Double, Map[Parameter[_], Seq[Double]])): Boolean =
+            def probPlusOrMinus(x: (Double, Map[Parameter[?], Seq[Double]]), y: (Double, Map[Parameter[?], Seq[Double]]), epsilon: (Double, Map[Parameter[?], Seq[Double]])): Boolean =
               {
                 var result1 = true
                 var result2 = true
@@ -297,7 +297,7 @@ class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
               }
 
             val semiring = new SufficientStatisticsSemiring(zeroSufficientStatisticsMap.toMap)
-            semiringProperties[(Double, Map[Parameter[_], Seq[Double]])](semiring.asInstanceOf[Semiring[(Double, Map[Parameter[_], Seq[Double]])]], a, b, c, probPlusOrMinus, (0.001, zeroSufficientStatisticsMap.toMap))
+            semiringProperties[(Double, Map[Parameter[?], Seq[Double]])](semiring.asInstanceOf[Semiring[(Double, Map[Parameter[?], Seq[Double]])]], a, b, c, probPlusOrMinus, (0.001, zeroSufficientStatisticsMap.toMap))
             
             j += 1
           }

@@ -28,9 +28,9 @@ class ContainerTest extends AnyWordSpec with Matchers {
     "create elements in the correct universe" in {
       val u1 = Universe.createNew()
       val proc = createContainer(List(2,3))
-      val fsa1 = new FixedSizeArray(1, i => Constant(true)("", u1))
+      val fsa1 = new FixedSizeArray(1, i => Constant(true)(using "", u1))
       val u2 = Universe.createNew()
-      val fsa2 = new FixedSizeArray(1, i => Constant(false)("", u2))
+      val fsa2 = new FixedSizeArray(1, i => Constant(false)(using "", u2))
       val e1 = proc(2)
       e1.universe should equal (u1)
       val e2 = proc.get(2)
@@ -79,9 +79,9 @@ class ContainerTest extends AnyWordSpec with Matchers {
      "create elements in the correct universe using flatMap instead of chain" in {
       val u1 = Universe.createNew()
       val proc = createContainer(List(2,3))
-      val fsa1 = new FixedSizeArray(1, i => Constant(true)("", u1))
+      val fsa1 = new FixedSizeArray(1, i => Constant(true)(using "", u1))
       val u2 = Universe.createNew()
-      val fsa2 = new FixedSizeArray(1, i => Constant(false)("", u2))
+      val fsa2 = new FixedSizeArray(1, i => Constant(false)(using "", u2))
       val e1 = proc(2)
       e1.universe should equal (u1)
       val e2 = proc.get(2)
@@ -285,12 +285,12 @@ class ContainerTest extends AnyWordSpec with Matchers {
   def createContainer(is: List[Int], invert: Boolean = false): Container[Int, Boolean] = new Container[Int, Boolean] {
     val universe = Universe.universe
     val indices = is
-    def generate(index: Int) = if (invert) Flip(1.0 - 1.0 / index)("", universe) else Flip(1.0 / index)("", universe)
+    def generate(index: Int) = if (invert) Flip(1.0 - 1.0 / index)(using "", universe) else Flip(1.0 / index)(using "", universe)
     def generate(indices: List[Int]) = {
       val unary = for {
         index <- indices
       } yield (index, generate(index))
-      val map = Map(unary:_*)
+      val map = Map(unary*)
       val binary =
         for {
           index1 <- indices
@@ -299,11 +299,11 @@ class ContainerTest extends AnyWordSpec with Matchers {
         } yield {
           val elem1 = map(index1)
           val elem2 = map(index2)
-          val pair = ^^(elem1, elem2)("", universe)
+          val pair = ^^(elem1, elem2)(using "", universe)
           pair.addConstraint((pair: (Boolean, Boolean)) => if (pair._1 != pair._2) 1.0 / (index1 + index2) else 1.0)
           pair
         }
-      Map(unary:_*)
+      Map(unary*)
     }
   }
 }

@@ -86,10 +86,10 @@ object ComplexFactory {
                   val result: List[Factor[Double]] =
                     Factory.makeConditionalSelector(element, firstVar, firstIndex, Variable(restElement)) :: Factory.make(restElement)
                   result
-                case cs: Traversable[_] =>
+                case cs: Iterable[_] =>
                   // Create a multi-valued reference element (MVRE) for each collection in the value of the first name.
                   // Since the first name is multi-valued, its value is the union of the values of all these MVREs.
-                  val collections = cs.asInstanceOf[Traversable[ElementCollection]].toList.distinct // Set semantics
+                  val collections = cs.asInstanceOf[Iterable[ElementCollection]].toList.distinct // Set semantics
                   val multis: List[MultiValuedReferenceElement[T]] = collections.map(element.embeddedElements(_)).toList
                   // Create the element that takes the union of the values of the all the MVREs.
                   // The combination and setMaker elements are encapsulated within this object and are created now, so we need to create factors for them.

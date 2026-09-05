@@ -19,7 +19,7 @@ import com.cra.figaro.language._
  * trait must implement run, computeAllProbabilityBounds, and computeExpectationBounds methods.
  */
 trait OneTimeBoundsProbQuery extends BoundsProbQueryAlgorithm with OneTimeProbQuery {
-  protected def doAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)] = {
+  protected def doAllProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)] = {
     computeAllProbabilityBounds(target)
   }
 

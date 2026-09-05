@@ -42,13 +42,13 @@ object SalesPrediction {
     val productQuality = Array.fill(numProducts)(Beta(2,2))
     val regionPenetration = Array.fill(numRegions)(Beta(2,2))
     def makeSales(i: Int, j: Int) = Flip(productQuality(i) * regionPenetration(j))
-    val highSalesLastYear = Array.tabulate(numProducts, numRegions)(makeSales _)
-    val highSalesNextYear = Array.tabulate(numProducts, numRegions)(makeSales _)
+    val highSalesLastYear = Array.tabulate(numProducts, numRegions)(makeSales)
+    val highSalesNextYear = Array.tabulate(numProducts, numRegions)(makeSales)
 
     def getSalesByProduct(i: Int) =
       for { j <- 0 until numRegions } yield highSalesNextYear(i)(j)
     val salesPredictionByProduct =
-      Array.tabulate(numProducts)(i => Container(getSalesByProduct(i):_*))
+      Array.tabulate(numProducts)(i => Container(getSalesByProduct(i)*))
 
     val numHighSales =
       for { predictions <- salesPredictionByProduct }
@@ -57,7 +57,7 @@ object SalesPrediction {
     val numHiresByProduct =
 //      for { i <- 0 until numProducts }
 //      yield Chain(numHighSales(i), (n: Int) => Poisson(n  + 1))
-      Container(numHighSales:_*).chain((n: Int) => Poisson(n + 1))
+      Container(numHighSales*).chain((n: Int) => Poisson(n + 1))
 
     /* Observe all the sales */
     for {
@@ -70,7 +70,7 @@ object SalesPrediction {
 
     /* Run inference */
     val targets = numHiresByProduct.elements
-    val algorithm = Importance(targets:_*)
+    val algorithm = Importance(targets*)
     algorithm.start()
     Thread.sleep(10000)
     algorithm.stop()
@@ -94,13 +94,13 @@ class SalesPredictionTest extends AnyWordSpec with Matchers {
     val productQuality = Array.fill(numProducts)(Beta(2,2))
     val regionPenetration = Array.fill(numRegions)(Beta(2,2))
     def makeSales(i: Int, j: Int) = Flip(productQuality(i) * regionPenetration(j))
-    val highSalesLastYear = Array.tabulate(numProducts, numRegions)(makeSales _)
-    val highSalesNextYear = Array.tabulate(numProducts, numRegions)(makeSales _)
+    val highSalesLastYear = Array.tabulate(numProducts, numRegions)(makeSales)
+    val highSalesNextYear = Array.tabulate(numProducts, numRegions)(makeSales)
 
     def getSalesByProduct(i: Int) =
       for { j <- 0 until numRegions } yield highSalesNextYear(i)(j)
     val salesPredictionByProduct =
-      Array.tabulate(numProducts)(i => Container(getSalesByProduct(i):_*))
+      Array.tabulate(numProducts)(i => Container(getSalesByProduct(i)*))
 
     val numHighSales =
       for { predictions <- salesPredictionByProduct }
@@ -109,7 +109,7 @@ class SalesPredictionTest extends AnyWordSpec with Matchers {
     val numHiresByProduct =
 //      for { i <- 0 until numProducts }
 //      yield Chain(numHighSales(i), (n: Int) => Poisson(n  + 1))
-      Container(numHighSales:_*).chain((n: Int) => Poisson(n + 1))
+      Container(numHighSales*).chain((n: Int) => Poisson(n + 1))
 
     /* Observe all the sales */
     for {
@@ -122,7 +122,7 @@ class SalesPredictionTest extends AnyWordSpec with Matchers {
 
     /* Run inference */
     val targets = numHiresByProduct.elements
-    val algorithm = Importance(targets:_*)
+    val algorithm = Importance(targets*)
     algorithm.start()
     Thread.sleep(10000)
     algorithm.stop()

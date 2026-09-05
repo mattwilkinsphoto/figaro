@@ -89,5 +89,5 @@ object Exponential extends Creatable {
 
   type ResultType = Double
 
-  def create(args: List[Element[_]]) = apply(args(0).asInstanceOf[Element[Double]])
+  def create(args: List[Element[?]]) = apply(args(0).asInstanceOf[Element[Double]])
 }

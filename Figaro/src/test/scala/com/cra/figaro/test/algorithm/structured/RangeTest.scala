@@ -911,7 +911,7 @@ class RangeTest extends AnyWordSpec with Matchers {
       val cc = new ComponentCollection
       val pr = new Problem(cc)
       val e1 = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)
-      val created = mutable.Set[Element[_]]()
+      val created = mutable.Set[Element[?]]()
       val e2 = Apply(e1, (i: Int) => {
         created += Flip(0.5)
         i / 2
@@ -1024,7 +1024,7 @@ class RangeTest extends AnyWordSpec with Matchers {
 
       c2.range.hasStar should equal (true)
       c2.range.regularValues should equal (Set())
-      c2.asInstanceOf[ChainComponent[_,_]].subproblems should be (empty)
+      c2.asInstanceOf[ChainComponent[?,?]].subproblems should be (empty)
     }
 
     "for an expanded chain with an added parent without *, set the range to the union of the ranges of the outcome elements" in {
@@ -1102,7 +1102,7 @@ class RangeTest extends AnyWordSpec with Matchers {
       val universe = Universe.createNew()
       val cc = new ComponentCollection
       val pr = new Problem(cc)
-      val e1 = Flip(0.5)("e1", universe)
+      val e1 = Flip(0.5)(using "e1", universe)
       val e2 = universe.get[Boolean]("e1")
       pr.add(e1)
       pr.add(e2)
@@ -1119,7 +1119,7 @@ class RangeTest extends AnyWordSpec with Matchers {
       val universe = Universe.createNew()
       val cc = new ComponentCollection
       val pr = new Problem(cc)
-      val e1 = Flip(0.5)("e1", universe)
+      val e1 = Flip(0.5)(using "e1", universe)
       val e2 = universe.get[Boolean]("e1")
       pr.add(e2)
       val c2 = cc(e2)
@@ -1135,8 +1135,8 @@ class RangeTest extends AnyWordSpec with Matchers {
       val cc = new ComponentCollection
       val pr = new Problem(cc)
       val ec1 = new EC1(universe)
-      val e1 = Flip(0.5)("e1", ec1)
-      val e2 = Constant(ec1)("e2", universe)
+      val e1 = Flip(0.5)(using "e1", ec1)
+      val e2 = Constant(ec1)(using "e2", universe)
       val e3 = universe.get[Boolean]("e2.e1")
       pr.add(e1)
       pr.add(e2)
@@ -1159,9 +1159,9 @@ class RangeTest extends AnyWordSpec with Matchers {
       val pr = new Problem(cc)
       val ec1 = new EC1(universe)
       val ec2 = new EC1(universe)
-      val e11 = Constant(true)("e1", ec1)
-      val e12 = Constant(false)("e1", ec2)
-      val e2 = Uniform(ec1, ec2)("e2", universe)
+      val e11 = Constant(true)(using "e1", ec1)
+      val e12 = Constant(false)(using "e1", ec2)
+      val e2 = Uniform(ec1, ec2)(using "e2", universe)
       val e3 = universe.get[Boolean]("e2.e1")
       pr.add(e11)
       pr.add(e12)
@@ -1185,8 +1185,8 @@ class RangeTest extends AnyWordSpec with Matchers {
       val cc = new ComponentCollection
       val pr = new Problem(cc)
       val ec1 = new EC1(universe)
-      val e1 = Flip(0.5)("e1", ec1)
-      val e2 = Constant(ec1)("e2", universe)
+      val e1 = Flip(0.5)(using "e1", ec1)
+      val e2 = Constant(ec1)(using "e2", universe)
       val e3 = universe.get[Boolean]("e2.e1")
       pr.add(e1)
       pr.add(e3)
@@ -1206,9 +1206,9 @@ class RangeTest extends AnyWordSpec with Matchers {
       val pr = new Problem(cc)
       val ec1 = new EC1(universe)
       val ec2 = new EC1(universe)
-      val e1 = Flip(0.5)("e1", ec1)
-      val e2 = Constant(ec1)("e2", ec2)
-      val e3 = Constant(ec2)("e3", universe)
+      val e1 = Flip(0.5)(using "e1", ec1)
+      val e2 = Constant(ec1)(using "e2", ec2)
+      val e3 = Constant(ec2)(using "e3", universe)
       val e4 = universe.get[Boolean]("e3.e2.e1")
       pr.add(e1)
       pr.add(e3)
@@ -1230,7 +1230,7 @@ class RangeTest extends AnyWordSpec with Matchers {
       def aggregate(ms: MultiSet[Boolean]) = ms(true)
       val cc = new ComponentCollection
       val pr = new Problem(cc)
-      val e1 = Flip(0.5)("e1", universe)
+      val e1 = Flip(0.5)(using "e1", universe)
       val e2 = universe.getAggregate[Boolean, Int](aggregate)("e1")
       val e3 = e2.mvre
       pr.add(e1)
@@ -1258,7 +1258,7 @@ class RangeTest extends AnyWordSpec with Matchers {
       def aggregate(ms: MultiSet[Boolean]) = ms(true)
       val cc = new ComponentCollection
       val pr = new Problem(cc)
-      val e1 = Flip(0.5)("e1", universe)
+      val e1 = Flip(0.5)(using "e1", universe)
       val e2 = universe.getAggregate[Boolean, Int](aggregate)("e1")
       val e3 = e2.mvre
       pr.add(e2) // don't need to add this
@@ -1279,8 +1279,8 @@ class RangeTest extends AnyWordSpec with Matchers {
       val cc = new ComponentCollection
       val pr = new Problem(cc)
       val ec1 = new EC1(universe)
-      val e1 = Flip(0.5)("e1", ec1)
-      val e2 = Constant(ec1)("e2", universe)
+      val e1 = Flip(0.5)(using "e1", ec1)
+      val e2 = Constant(ec1)(using "e2", universe)
       val e3 = universe.getAggregate[Boolean, Int](aggregate)("e2.e1")
       val e4 = e3.mvre
       pr.add(e1)
@@ -1312,8 +1312,8 @@ class RangeTest extends AnyWordSpec with Matchers {
       val cc = new ComponentCollection
       val pr = new Problem(cc)
       val ec1 = new EC1(universe)
-      val e1 = Flip(0.5)("e1", ec1)
-      val e2 = Constant(ec1)("e2", universe)
+      val e1 = Flip(0.5)(using "e1", ec1)
+      val e2 = Constant(ec1)(using "e2", universe)
       val e3 = universe.getAggregate[Boolean, Int](aggregate)("e2.e1")
       val e4 = e3.mvre
       pr.add(e1)
@@ -1338,9 +1338,9 @@ class RangeTest extends AnyWordSpec with Matchers {
       val pr = new Problem(cc)
       val ec1 = new EC1(universe)
       val ec2 = new EC1(universe)
-      val e1 = Flip(0.5)("e1", ec1)
-      val e2 = Constant(ec1)("e2", ec2)
-      val e3 = Constant(ec2)("e3", universe)
+      val e1 = Flip(0.5)(using "e1", ec1)
+      val e2 = Constant(ec1)(using "e2", ec2)
+      val e3 = Constant(ec2)(using "e3", universe)
       val e4 = universe.getAggregate[Boolean, Int](aggregate)("e3.e2.e1")
       val e5 = e4.mvre
       pr.add(e1)
@@ -1371,12 +1371,12 @@ class RangeTest extends AnyWordSpec with Matchers {
       val ec3 = new EC1(universe)
       val ec4 = new EC1(universe)
       val ec5 = new EC1(universe)
-      val e1a = Uniform(1, 2)("e1", ec1)
-      val e1b = Uniform(3, 4)("e1", ec2)
-      val e1c = Constant(5)("e1", ec3)
-      val e2a = Uniform(ec1, ec2)("e2", ec4)
-      val e2b = Constant(ec3)("e2", ec5)
-      val e3 = Uniform(List(ec4, ec5), List(ec5))("e3", universe)
+      val e1a = Uniform(1, 2)(using "e1", ec1)
+      val e1b = Uniform(3, 4)(using "e1", ec2)
+      val e1c = Constant(5)(using "e1", ec3)
+      val e2a = Uniform(ec1, ec2)(using "e2", ec4)
+      val e2b = Constant(ec3)(using "e2", ec5)
+      val e3 = Uniform(List(ec4, ec5), List(ec5))(using "e3", universe)
       val e4 = universe.getAggregate(aggregate)("e3.e2.e1")
       val e5 = e4.mvre
       pr.add(e1a)
@@ -1433,12 +1433,12 @@ class RangeTest extends AnyWordSpec with Matchers {
       val ec3 = new EC1(universe)
       val ec4 = new EC1(universe)
       val ec5 = new EC1(universe)
-      val e1a = Uniform(1, 2)("e1", ec1)
-      val e1b = Uniform(3, 4)("e1", ec2)
-      val e1c = Constant(5)("e1", ec3)
-      val e2a = Uniform(ec1, ec2)("e2", ec4)
-      val e2b = Constant(ec3)("e2", ec5)
-      val e3 = Uniform(List(ec4, ec5), List(ec5))("e3", universe)
+      val e1a = Uniform(1, 2)(using "e1", ec1)
+      val e1b = Uniform(3, 4)(using "e1", ec2)
+      val e1c = Constant(5)(using "e1", ec3)
+      val e2a = Uniform(ec1, ec2)(using "e2", ec4)
+      val e2b = Constant(ec3)(using "e2", ec5)
+      val e3 = Uniform(List(ec4, ec5), List(ec5))(using "e3", universe)
       val e4 = universe.getAggregate(aggregate)("e3.e2.e1")
       val e5 = e4.mvre
       pr.add(e1a)
@@ -1497,12 +1497,12 @@ class RangeTest extends AnyWordSpec with Matchers {
       val ec3 = new EC1(universe)
       val ec4 = new EC1(universe)
       val ec5 = new EC1(universe)
-      val e1a = Uniform(1, 2)("e1", ec1)
-      val e1b = Uniform(3, 4)("e1", ec2)
-      val e1c = Constant(5)("e1", ec3)
-      val e2a = Uniform(ec1, ec2)("e2", ec4)
-      val e2b = Constant(ec3)("e2", ec5)
-      val e3 = Uniform(List(ec4, ec5), List(ec5))("e3", universe)
+      val e1a = Uniform(1, 2)(using "e1", ec1)
+      val e1b = Uniform(3, 4)(using "e1", ec2)
+      val e1c = Constant(5)(using "e1", ec3)
+      val e2a = Uniform(ec1, ec2)(using "e2", ec4)
+      val e2b = Constant(ec3)(using "e2", ec5)
+      val e3 = Uniform(List(ec4, ec5), List(ec5))(using "e3", universe)
       val e4 = universe.getAggregate(aggregate)("e3.e2.e1")
       val e5 = e4.mvre
       pr.add(e1a)
@@ -1550,10 +1550,10 @@ class RangeTest extends AnyWordSpec with Matchers {
       c2.range.hasStar should equal (false)
       val values = c2.range.regularValues.toList
       values.size should equal (2)
-      values(0).isInstanceOf[FixedSizeArray[_]] should equal (true)
-      values(1).isInstanceOf[FixedSizeArray[_]] should equal (true)
-      val len0 = values(0).asInstanceOf[FixedSizeArray[_]].size
-      val len1 = values(1).asInstanceOf[FixedSizeArray[_]].size
+      values(0).isInstanceOf[FixedSizeArray[?]] should equal (true)
+      values(1).isInstanceOf[FixedSizeArray[?]] should equal (true)
+      val len0 = values(0).asInstanceOf[FixedSizeArray[?]].size
+      val len1 = values(1).asInstanceOf[FixedSizeArray[?]].size
       (len0 == 2 || len1 == 2) should equal (true)
       (len0 == 4 || len1 == 4) should equal (true)
     }
@@ -1577,8 +1577,8 @@ class RangeTest extends AnyWordSpec with Matchers {
       c2.range.hasStar should equal (true)
       val values = c2.range.regularValues.toList
       values.size should equal (1)
-      values(0).isInstanceOf[FixedSizeArray[_]] should equal (true)
-      values(0).asInstanceOf[FixedSizeArray[_]].size should equal (2)
+      values(0).isInstanceOf[FixedSizeArray[?]] should equal (true)
+      values(0).asInstanceOf[FixedSizeArray[?]].size should equal (2)
     }
 
     "for a MakeArray with an added parent with *, set the range to the set of fixed size arrays corresponding to the values of the parent plus *" in {
@@ -1604,8 +1604,8 @@ class RangeTest extends AnyWordSpec with Matchers {
       c4.range.hasStar should equal (true)
       val vs = c4.range.regularValues.toList
       vs.size should equal (1)
-      vs(0).isInstanceOf[FixedSizeArray[_]] should equal (true)
-      vs(0).asInstanceOf[FixedSizeArray[_]].size should equal (4)
+      vs(0).isInstanceOf[FixedSizeArray[?]] should equal (true)
+      vs(0).asInstanceOf[FixedSizeArray[?]].size should equal (4)
     }
 
     "for a MakeArray with an unadded parent, set the range to * and not add the parent" in {

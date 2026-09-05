@@ -82,8 +82,9 @@ object ComplexFactory {
    */
   def makeFactors[T](cc: ComponentCollection, element: MultiValuedReferenceElement[T]): List[Factor[Double]] = {
     def makeEmbeddedInject(inputVariables: List[Variable[MultiSet[T]]]): (Variable[List[MultiSet[T]]], Factor[Double]) = {
-      def rule(values: List[Extended[_]]) = {
-        val inputXvalues :+ resultXvalue = values
+      def rule(values: List[Extended[?]]) = {
+        val inputXvalues = values.init
+      val resultXvalue = values.last
         if (inputXvalues.exists(!_.isRegular)) {
           if (!resultXvalue.isRegular) 1.0; else 0.0
         } else if (resultXvalue.isRegular) {
@@ -93,19 +94,19 @@ object ComplexFactory {
       val argVSs = inputVariables.map(_.valueSet)
       val incomplete = argVSs.exists(_.hasStar)
       val argChoices = argVSs.toList.map(_.regularValues.toList)
-      val resultValues: Set[List[MultiSet[T]]] = homogeneousCartesianProduct(argChoices: _*).toSet
+      val resultValues: Set[List[MultiSet[T]]] = homogeneousCartesianProduct(argChoices*).toSet
       val injectRange = if (incomplete) withStar(resultValues); else withoutStar(resultValues)
 
       val resultVariable = Factory.makeVariable(cc, injectRange)
       val factor = new DenseFactor[Double](inputVariables, List(resultVariable))
-      factor.fillByRule(rule _)
+      factor.fillByRule(rule)
       (resultVariable, factor)
     }
 
     def makeEmbeddedApply(injectVar: Variable[List[MultiSet[T]]]): (Variable[MultiSet[T]], Factor[Double]) = {
       def rule(sets: List[MultiSet[T]]): MultiSet[T] = {
         val starter: MultiSet[T] = HashMultiSet[T]()
-        sets.foldLeft(starter)(_ union _)
+        sets.foldLeft(starter)(_.union(_))
       }
       val applyVS: ValueSet[MultiSet[T]] = injectVar.valueSet.map(rule(_))
       val applyVar = Factory.makeVariable(cc, applyVS)
@@ -165,7 +166,7 @@ object ComplexFactory {
                         val restVar: Variable[MultiSet[T]] = Factory.makeVariable(cc, restRange)
                         val restFactors = make(firstCollection, restVar, restRef)
                         Factory.makeConditionalSelector(pairVar, firstXvalue, restVar, Set()) :: restFactors
-                      case cs: Traversable[_] =>
+                      case cs: Iterable[_] =>
                         // If the first value consists of multiple element collections, we first get a list of distinct collections.
                         // This is because multi-valued references use set semantics, whereby if an element is pointed to more than once,
                         // its value only counts once in the multiset value of the reference element.
@@ -177,7 +178,7 @@ object ComplexFactory {
                         // However, unlike the old implementation, we do not actually create these as elements, as that would
                         // break the atomicity of makeFactors required by structured factored inference.
                         // We just create a variable for the Inject and a variable for the Apply and create the factors directly.
-                        val collections = cs.asInstanceOf[Traversable[ElementCollection]].toList.distinct // Set semantics
+                        val collections = cs.asInstanceOf[Iterable[ElementCollection]].toList.distinct // Set semantics
                         val factorsForCollections =
                           for { firstCollection <- collections } yield {
                             val restRange = Range.getRangeOfMultiValuedReference(cc, firstCollection, restRef)

@@ -432,7 +432,7 @@ class RaisingTest extends AnyWordSpec with Matchers {
           // Collect all variables in the factors
           val allVariables = strategy.chainNonConstraintFactors(c3).flatMap(_.variables).toSet
           // Separate into internal and regular variables
-          val (internal, regular) = allVariables.partition(_.isInstanceOf[InternalChainVariable[_]])
+          val (internal, regular) = allVariables.partition(_.isInstanceOf[InternalChainVariable[?]])
           // The only internal variable should be the tuple variable in the Chain factor
           internal should have size 1
           // For globals, the actual variable used should be the same
@@ -467,7 +467,7 @@ class RaisingTest extends AnyWordSpec with Matchers {
           // Collect all variables in the factors
           val allVariables = strategy.chainNonConstraintFactors(c3).flatMap(_.variables).toSet
           // Separate into internal and regular variables
-          val (internal, regular) = allVariables.partition(_.isInstanceOf[InternalChainVariable[_]])
+          val (internal, regular) = allVariables.partition(_.isInstanceOf[InternalChainVariable[?]])
           // The only internal variable should be the tuple variable in the Chain factor
           internal should have size 1
           // For globals, the actual variable used should be the same

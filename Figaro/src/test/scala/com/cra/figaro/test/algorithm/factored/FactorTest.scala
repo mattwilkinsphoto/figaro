@@ -591,7 +591,7 @@ class FactorTest extends AnyWordSpec with Matchers {
           val v1Index = v3.outcomes.indexOf(v1)
           val v2Index = v3.outcomes.indexOf(v2)
           Universe.universe.activeElements.foreach(Variable(_))
-          val selectFactor :: outcomeFactors = Factory.makeFactorsForElement(v3)
+          val selectFactor :: outcomeFactors = (Factory.makeFactorsForElement(v3)).runtimeChecked
           outcomeFactors.size should equal(3)
           val v1Factor = outcomeFactors(1+v1Index)
           val v2Factor = outcomeFactors(1+v2Index)
@@ -647,7 +647,7 @@ class FactorTest extends AnyWordSpec with Matchers {
           val v5f = v5Vals.indexOf(Regular(false))
           val v5t = v5Vals.indexOf(Regular(true))
           Universe.universe.activeElements.foreach(Variable(_))
-          val selectFactor :: outcomeFactors = Factory.makeFactorsForElement(v5)
+          val selectFactor :: outcomeFactors = (Factory.makeFactorsForElement(v5)).runtimeChecked
           outcomeFactors.size should equal(3)
           val v1Factor = outcomeFactors(1+v3Index)
           val v2Factor = outcomeFactors(1+v4Index)
@@ -1168,15 +1168,15 @@ class FactorTest extends AnyWordSpec with Matchers {
       Values()(x)
       Values()(y)
       val dependentUniverse = new Universe(List(x, y))
-      val u1 = Uniform(0.0, 1.0)("", dependentUniverse)
-      val u2 = Uniform(0.0, 2.0)("", dependentUniverse)
-      val a = CachingChain(x, y, (x: Boolean, y: Int) => if (x || y < 2) u1; else u2)("a", dependentUniverse)
+      val u1 = Uniform(0.0, 1.0)(using "", dependentUniverse)
+      val u2 = Uniform(0.0, 2.0)(using "", dependentUniverse)
+      val a = CachingChain(x, y, (x: Boolean, y: Int) => if (x || y < 2) u1; else u2)(using "a", dependentUniverse)
       Values(dependentUniverse)(a)
       val evidence = List(NamedEvidence("a", Condition((d: Double) => d < 0.5)))
       Universe.universe.activeElements.foreach(Variable(_))
       dependentUniverse.activeElements.foreach(Variable(_))
       val factor =
-        Factory.makeDependentFactor(Variable.cc, Universe.universe, dependentUniverse, () => ProbEvidenceSampler.computeProbEvidence(20000, evidence)(dependentUniverse))
+        Factory.makeDependentFactor(Variable.cc, Universe.universe, dependentUniverse, () => ProbEvidenceSampler.computeProbEvidence(20000, evidence)(using dependentUniverse))
       val xVar = Variable(x)
       val yVar = Variable(y)
       val variables = factor.variables
@@ -1398,7 +1398,7 @@ class FactorTest extends AnyWordSpec with Matchers {
     newFactors.toList
   }
 
-  val variableSet = scala.collection.mutable.Set[Variable[_]]()
+  val variableSet = scala.collection.mutable.Set[Variable[?]]()
   val nextFactors = ListBuffer[Factor[Double]]()
 
   private def reduceFactor(factor: Factor[Double], semiring: Semiring[Double], maxElementCount: Int): List[Factor[Double]] = {
@@ -1406,8 +1406,8 @@ class FactorTest extends AnyWordSpec with Matchers {
 
     var resultFactor = Factory.unit[Double](semiring).product(factor)
 
-    (variableSet /: List(factor))(_ ++= _.variables.asInstanceOf[List[Variable[_]]])
-    for (variable <- variableSet.filter { _.isInstanceOf[InternalVariable[_]] }) {
+    (List(factor)).foldLeft(variableSet)(_ ++= _.variables.asInstanceOf[List[Variable[?]]])
+    for (variable <- variableSet.filter { _.isInstanceOf[InternalVariable[?]] }) {
       resultFactor = resultFactor.sumOver(variable)
       variableSet.remove(variable)
     }
@@ -1419,8 +1419,8 @@ class FactorTest extends AnyWordSpec with Matchers {
     for { variable <- variableSet } {
       if (isTemporary(variable) && elementCount <= maxElementCount) {
         nextFactors.clear()
-        nextFactors ++= Factory.concreteFactors(Variable.cc, variable.asInstanceOf[ElementVariable[_]].element, false)
-        (variableSet /: nextFactors)(_ ++= _.variables.asInstanceOf[List[ElementVariable[_]]])
+        nextFactors ++= Factory.concreteFactors(Variable.cc, variable.asInstanceOf[ElementVariable[?]].element, false)
+        (nextFactors).foldLeft(variableSet)(_ ++= _.variables.asInstanceOf[List[ElementVariable[?]]])
         elementCount = variableSet count (v => !isTemporary(v))
 
         for (nextFactor <- nextFactors) {
@@ -1441,10 +1441,10 @@ class FactorTest extends AnyWordSpec with Matchers {
     List(resultFactor)
   }
 
-  private def calculateSize(currentSize: Int, variables: Set[Variable[_]]) = {
-    (currentSize /: variables)(_ * _.size)
+  private def calculateSize(currentSize: Int, variables: Set[Variable[?]]) = {
+    (variables).foldLeft(currentSize)(_ * _.size)
   }
-  private def isTemporary[_T](variable: Variable[_]): Boolean = {
+  private def isTemporary[_T](variable: Variable[?]): Boolean = {
     variable match {
       case e: ElementVariable[_] => e.element.isTemporary
       case i: InternalVariable[_] => true

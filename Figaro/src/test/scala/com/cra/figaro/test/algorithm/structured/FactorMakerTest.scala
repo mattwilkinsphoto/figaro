@@ -838,7 +838,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
           c2.expand() // need to do this so the atomic binomials for each of the beta values is added to the problem
           c2.generateRange()
 
-          val tupleFactor :: factors = c2.nonConstraintFactors(false)
+          val tupleFactor :: factors = (c2.nonConstraintFactors(false)).runtimeChecked
           val List(var1, var2, tupleVar) = tupleFactor.variables
           var1 should equal (c1.variable)
           var2 should equal (c2.variable)
@@ -969,7 +969,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
           val v3IndexF = v3Vals.indexOf(Regular(false))
           val v1Index = v3.outcomes.indexOf(v1)
           val v2Index = v3.outcomes.indexOf(v2)
-          val selectFactor :: tupleFactor :: outcomeFactors = c3.nonConstraintFactors()
+          val selectFactor :: tupleFactor :: outcomeFactors = (c3.nonConstraintFactors()).runtimeChecked
           tupleFactor.variables.size should equal (3)
           val selectVar = tupleFactor.variables(0)
           tupleFactor.variables(1) should equal (c3.variable)
@@ -1037,7 +1037,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
           val v3t = v3Vals.indexOf(Regular(true))
           val v5f = v5Vals.indexOf(Regular(false))
           val v5t = v5Vals.indexOf(Regular(true))
-          val selectFactor :: tupleFactor :: outcomeFactors = c5.nonConstraintFactors()
+          val selectFactor :: tupleFactor :: outcomeFactors = (c5.nonConstraintFactors()).runtimeChecked
           tupleFactor.variables.size should equal (3)
           val selectVar = tupleFactor.variables(0)
           tupleFactor.variables(1) should equal (c5.variable)
@@ -1104,7 +1104,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val v41 = v4Vals indexOf Regular(1)
         val v42 = v4Vals indexOf Regular(2)
         val v43 = v4Vals indexOf Regular(3)
-        val tupleFactor :: selectors = c4.nonConstraintFactors()
+        val tupleFactor :: selectors = (c4.nonConstraintFactors()).runtimeChecked
         selectors.size should equal (2)
         val (trueSelector, falseSelector) =
           if (v1t == 0) {
@@ -1187,7 +1187,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val v41 = v4Vals indexOf Regular(1)
         val v42 = v4Vals indexOf Regular(2)
         val v43 = v4Vals indexOf Regular(3)
-        val tupleFactor :: selectors = c4.nonConstraintFactors()
+        val tupleFactor :: selectors = (c4.nonConstraintFactors()).runtimeChecked
         selectors.size should equal (2)
         val (trueSelector, falseSelector) =
           if (v1t == 0) {
@@ -1268,7 +1268,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         c6.generateRange()
 
         val v3Star = c3.variable.range.indexWhere(!_.isRegular)
-        val tupleFactor :: selectors = c6.nonConstraintFactors()
+        val tupleFactor :: selectors = (c6.nonConstraintFactors()).runtimeChecked
         val tupleVar = tupleFactor.variables(2)
         val starSelector = selectors(v3Star)
         starSelector.variables.size should equal (2)
@@ -2536,7 +2536,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val universe = Universe.createNew()
         val cc = new ComponentCollection
         val pr = new Problem(cc)
-        val e1 = Flip(0.5)("e1", universe)
+        val e1 = Flip(0.5)(using "e1", universe)
         val e2 = universe.get[Boolean]("e1")
         pr.add(e1)
         pr.add(e2)
@@ -2564,7 +2564,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val pr = new Problem(cc)
         val e1 = Constant(true)
         val e2 = Constant(false)
-        val e3 = Uniform(e1, e2)("e3", universe)
+        val e3 = Uniform(e1, e2)(using "e3", universe)
         val e4 = universe.get[Boolean]("e3")
         pr.add(e2)
         pr.add(e3)
@@ -2595,9 +2595,9 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val pr = new Problem(cc)
         val ec1 = new EC1(universe)
         val ec2 = new EC1(universe)
-        val e11 = Constant(true)("e1", ec1)
-        val e12 = Constant(false)("e1", ec2)
-        val e2 = Uniform(ec1, ec2)("e2", universe)
+        val e11 = Constant(true)(using "e1", ec1)
+        val e12 = Constant(false)(using "e1", ec2)
+        val e2 = Uniform(ec1, ec2)(using "e2", universe)
         val e3 = universe.get[Boolean]("e2.e1")
         pr.add(e11)
         pr.add(e12)
@@ -2614,7 +2614,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
 
         // Four factors should be produced: two conditional selectors, and one for each of the possibilities
         // The conditional selector and result factors for each parent value are produced in turn
-        val tupleFactor :: factors = c3.nonConstraintFactors()
+        val tupleFactor :: factors = (c3.nonConstraintFactors()).runtimeChecked
         val tupleVar = tupleFactor.variables(2)
         tupleFactor.variables(1) should equal (c3.variable)
         val startVar = tupleFactor.variables(0)
@@ -2660,11 +2660,11 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val ec2 = new EC1(universe)
         val ec3 = new EC1(universe)
         val ec4 = new EC1(universe)
-        val e11 = Constant(true)("e1", ec1)
-        val e12 = Constant(false)("e1", ec2)
-        val e23 = Uniform(ec1, ec2)("e2", ec3)
-        val e24 = Constant(ec1)("e2", ec4)
-        val e3 = Uniform(ec3, ec4)("e3", universe)
+        val e11 = Constant(true)(using "e1", ec1)
+        val e12 = Constant(false)(using "e1", ec2)
+        val e23 = Uniform(ec1, ec2)(using "e2", ec3)
+        val e24 = Constant(ec1)(using "e2", ec4)
+        val e3 = Uniform(ec3, ec4)(using "e3", universe)
         val e4 = universe.get[Boolean]("e3.e2.e1")
         pr.add(e11)
         pr.add(e12)
@@ -2689,7 +2689,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         // Two conditional selectors at the top level,
         // Three conditional selectors at the second level
         // Three result factors at the third level
-        val topTupleFactor :: factors = c4.nonConstraintFactors()
+        val topTupleFactor :: factors = (c4.nonConstraintFactors()).runtimeChecked
         val topTupleVar = topTupleFactor.variables(2)
         val topIndex3T = topTupleVar.range.indexOf(Regular(List(Regular(ec3), Regular(true))))
         val topIndex3F = topTupleVar.range.indexOf(Regular(List(Regular(ec3), Regular(false))))
@@ -2705,7 +2705,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
 
         val (ec3Factors, ec4Factors) =
           if (c3Index3 == 0) (factors.slice(0, 6), factors.slice(6, 10)) else (factors.slice(4, 10), factors.slice(0, 4))
-        val ec3Selector :: ec3TupleFactor :: ec3RestFactors = ec3Factors
+        val ec3Selector :: ec3TupleFactor :: ec3RestFactors = (ec3Factors).runtimeChecked
         val (ec31Selector, ec31Result, ec32Selector, ec32Result) =
           if (c23Index1 == 0) (ec3RestFactors(0), ec3RestFactors(1), ec3RestFactors(2), ec3RestFactors(3))
           else (ec3RestFactors(2), ec3RestFactors(3), ec3RestFactors(0), ec3RestFactors(1))
@@ -2755,11 +2755,11 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val pr = new Problem(cc)
         val ec1 = new EC1(universe)
         val ec2 = new EC1(universe)
-        val e11 = Constant(true)("e1", ec1)
-        val e12 = Constant(false)("e1", ec2)
+        val e11 = Constant(true)(using "e1", ec1)
+        val e12 = Constant(false)(using "e1", ec2)
         val e21 = Constant(ec1)
         val e22 = Constant(ec2)
-        val e3 = Uniform(e21, e22)("e3", universe)
+        val e3 = Uniform(e21, e22)(using "e3", universe)
         val e4 = universe.get[Boolean]("e3.e1")
         pr.add(e11)
         pr.add(e12)
@@ -2785,7 +2785,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val e4FalseIndex = c4.variable.range.indexOf(Regular(false))
         val e4StarIndex = c4.variable.range.indexWhere(!_.isRegular)
         val e4Star = c4.variable.range(e4StarIndex)
-        val tupleFactor :: factors = c4.nonConstraintFactors()
+        val tupleFactor :: factors = (c4.nonConstraintFactors()).runtimeChecked
         val tupleVar = tupleFactor.variables(2)
         val vtIndexStarStar = tupleVar.range.indexOf(Regular(List(e3Star, e4Star)))
         val vtIndexStarF = tupleVar.range.indexOf(Regular(List(e3Star, Regular(false))))
@@ -2829,7 +2829,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         def aggregate(ms: MultiSet[Boolean]) = ms(true)
         val cc = new ComponentCollection
         val pr = new Problem(cc)
-        val e1 = Flip(0.5)("e1", universe)
+        val e1 = Flip(0.5)(using "e1", universe)
         val e2 = universe.getAggregate[Boolean, Int](aggregate)("e1")
         val e3 = e2.mvre
         pr.add(e1)
@@ -2857,7 +2857,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val pr = new Problem(cc)
         val e1 = Constant(true)
         val e2 = Constant(false)
-        val e3 = Uniform(e1, e2)("e3", universe)
+        val e3 = Uniform(e1, e2)(using "e3", universe)
         val e4 = universe.getAggregate[Boolean, Int](aggregate)("e3")
         val e5 = e4.mvre
         pr.add(e2)
@@ -2890,9 +2890,9 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val pr = new Problem(cc)
         val ec1 = new EC1(universe)
         val ec2 = new EC1(universe)
-        val e11 = Uniform(1, 2)("e1", ec1)
-        val e12 = Uniform(2, 3)("e1", ec2)
-        val e2 = Uniform(List(ec1), List(ec1, ec2))("e2", universe)
+        val e11 = Uniform(1, 2)(using "e1", ec1)
+        val e12 = Uniform(2, 3)(using "e1", ec2)
+        val e2 = Uniform(List(ec1), List(ec1, ec2))(using "e2", universe)
         val e3 = universe.getAggregate[Int, Int](aggregate)("e2.e1")
         val e4 = e3.mvre
         pr.add(e11)
@@ -2922,7 +2922,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val c4Index23 = c4.variable.range.indexOf(Regular(HashMultiSet(2, 3)))
 
         // 10 factors should be produced: one tuple factor, two conditional selectors, 2 applys, 2 injects, and three for the simple references
-        val tupleFactor :: factors = c4.nonConstraintFactors()
+        val tupleFactor :: factors = (c4.nonConstraintFactors()).runtimeChecked
         factors.size should equal (9)
         tupleFactor.variables(0) should equal (c2.variable)
         tupleFactor.variables(1) should equal (c4.variable)
@@ -3051,11 +3051,11 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val ec2 = new EC1(universe)
         val ec3 = new EC1(universe)
         val ec4 = new EC1(universe)
-        val e11 = Uniform(1, 2)("e1", ec1)
-        val e12 = Uniform(2, 3)("e1", ec2)
-        val e23 = Uniform(List(ec1), List(ec1, ec2))("e2", ec3)
-        val e24 = Constant(List(ec1))("e2", ec4)
-        val e3 = Uniform(ec3, ec4)("e3", universe)
+        val e11 = Uniform(1, 2)(using "e1", ec1)
+        val e12 = Uniform(2, 3)(using "e1", ec2)
+        val e23 = Uniform(List(ec1), List(ec1, ec2))(using "e2", ec3)
+        val e24 = Constant(List(ec1))(using "e2", ec4)
+        val e3 = Uniform(ec3, ec4)(using "e3", universe)
         val e4 = universe.getAggregate[Int, Int](aggregate)("e3.e2.e1")
         val e5 = e4.mvre
         pr.add(e11)
@@ -3081,7 +3081,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         // 1 top level tuple factor, 2 top level selectors
         // - for option ec3: 1 tuple factor, 2 selectors, 2 applys, 2 injects, 3 results
         // - for option ec4: 1 tuple factor, 1 selector, 1 apply, 1 inject, 1 result
-        val topTupleFactor :: factors = c5.nonConstraintFactors()
+        val topTupleFactor :: factors = (c5.nonConstraintFactors()).runtimeChecked
         factors.size should equal (17)
         val c11Index1 = c11.variable.range.indexOf(Regular(1))
         val c11Index2 = c11.variable.range.indexOf(Regular(2))
@@ -3101,7 +3101,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
 
         val (ec3Factors, ec4Factors) =
           if (c3Index3 == 0) (factors.slice(0, 11), factors.slice(11, 17)) else (factors.slice(0, 6), factors.slice(6, 17))
-        val ec3Selector :: ec3TupleFactor :: ec3Tail = ec3Factors
+        val ec3Selector :: ec3TupleFactor :: ec3Tail = (ec3Factors).runtimeChecked
         val (ec31Factors, ec312Factors) =
           if (c23Index1 == 0) (ec3Tail.slice(0, 4), ec3Tail.slice(4, 9)) else (ec3Tail.slice(5, 9), ec3Tail.slice(0, 5))
         val List(ec31Selector, ec31Apply, ec31Inject, ec31Result1) = ec31Factors
@@ -3243,12 +3243,12 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val pr = new Problem(cc)
         val ec1 = new EC1(universe)
         val ec2 = new EC1(universe)
-        val e11 = Uniform(1, 2)("e1", ec1)
-        val e12 = Uniform(2, 3)("e1", ec2)
+        val e11 = Uniform(1, 2)(using "e1", ec1)
+        val e12 = Uniform(2, 3)(using "e1", ec2)
         val l1 = Constant(List(ec1))
         val l12 = Constant(List(ec1, ec2))
         val l2 = Constant(List(ec2))
-        val e2 = Uniform(l1, l12, l2)("e2", universe)
+        val e2 = Uniform(l1, l12, l2)(using "e2", universe)
         val e3 = universe.getAggregate[Int, Int](aggregate)("e2.e1")
         val e4 = e3.mvre
         pr.add(e11)
@@ -3289,7 +3289,7 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
 
         // 1 factors should be produced:
         // one tuple factor, two conditional selectors, one star selector, 2 applys, 2 injects, and three for the simple references
-        val tupleFactor :: factors = c4.nonConstraintFactors()
+        val tupleFactor :: factors = (c4.nonConstraintFactors()).runtimeChecked
         factors.size should equal (10)
         val tupleVar = tupleFactor.variables(2)
         tupleFactor.variables(0) should equal (c2.variable)
@@ -3439,9 +3439,9 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val pr = new Problem(cc)
         val ec1 = new EC1(universe)
         val ec2 = new EC1(universe)
-        val e11 = Uniform(1, 2)("e1", ec1)
-        val e12 = Uniform(2, 3)("e1", ec2)
-        val e2 = Uniform(List(ec1), List(ec1, ec2))("e2", universe)
+        val e11 = Uniform(1, 2)(using "e1", ec1)
+        val e12 = Uniform(2, 3)(using "e1", ec2)
+        val e2 = Uniform(List(ec1), List(ec1, ec2))(using "e2", universe)
         val e3 = universe.getAggregate[Int, Int](aggregate)("e2.e1")
         val e4 = e3.mvre
         pr.add(e11)
@@ -3482,9 +3482,9 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val ec2 = new EC1(universe)
         val e01 = Constant(1)
         val e02 = Constant(2)
-        val e11 = Uniform(e01, e02)("e1", ec1)
-        val e12 = Uniform(2, 3)("e1", ec2)
-        val e2 = Uniform(List(ec1), List(ec1, ec2))("e2", universe)
+        val e11 = Uniform(e01, e02)(using "e1", ec1)
+        val e12 = Uniform(2, 3)(using "e1", ec2)
+        val e2 = Uniform(List(ec1), List(ec1, ec2))(using "e2", universe)
         val e3 = universe.getAggregate[Int, Int](aggregate)("e2.e1")
         val e4 = e3.mvre
         pr.add(e02)
@@ -3866,9 +3866,9 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val pr = new Problem(cc)
         val ec1 = new EC1(universe)
         val ec2 = new EC1(universe)
-        val e11 = Constant(true)("e1", ec1)
-        val e12 = Constant(false)("e1", ec2)
-        val e2 = Uniform(ec1, ec2)("e2", universe)
+        val e11 = Constant(true)(using "e1", ec1)
+        val e12 = Constant(false)(using "e1", ec2)
+        val e2 = Uniform(ec1, ec2)(using "e2", universe)
         universe.assertEvidence("e2.e1", Constraint((b: Boolean) => if (b) 0.6 else 0.3))
         pr.add(e11)
         pr.add(e12)
@@ -3904,9 +3904,9 @@ class FactorMakerTest extends AnyWordSpec with Matchers {
         val ec2 = new EC1(universe)
         val e01 = Constant(ec1)
         val e02 = Constant(ec2)
-        val e11 = Constant(true)("e1", ec1)
-        val e12 = Constant(false)("e1", ec2)
-        val e2 = Uniform(e01, e02)("e2", universe)
+        val e11 = Constant(true)(using "e1", ec1)
+        val e12 = Constant(false)(using "e1", ec2)
+        val e2 = Uniform(e01, e02)(using "e2", universe)
         universe.assertEvidence("e2.e1", Constraint((b: Boolean) => if (b) 0.6 else 0.3))
         pr.add(e02)
         pr.add(e11)

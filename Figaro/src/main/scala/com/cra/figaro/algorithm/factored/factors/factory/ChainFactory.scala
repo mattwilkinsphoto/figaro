@@ -30,7 +30,7 @@ object ChainFactory {
   import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
   def makeFactors[T, U](cc: ComponentCollection, chain: Chain[T, U])(implicit mapper: PointMapper[U]): List[Factor[Double]] = {
-    makeMultipleFactors(cc, chain)(mapper)
+    makeMultipleFactors(cc, chain)(using mapper)
   }
 
   def makeMultipleFactors[T, U](cc: ComponentCollection, chain: Chain[T, U])(implicit mapper: PointMapper[U]): List[Factor[Double]] = {
@@ -55,7 +55,7 @@ object ChainFactory {
         val actualVar = if (!nestedProblem.global(formalVar)) Factory.makeVariable(cc, formalVar.valueSet) else formalVar
         cc.variableParents(chainVar) += actualVar
         chainComp.actualSubproblemVariables += parentVal.value -> actualVar
-        List(Factory.makeConditionalSelector(pairVar, parentVal, actualVar, chainComp.range.regularValues)(mapper))
+        List(Factory.makeConditionalSelector(pairVar, parentVal, actualVar, chainComp.range.regularValues)(using mapper))
       } else {
         // We create a dummy variable for the outcome variable whose value is always star.
         // We create a dummy factor for that variable.

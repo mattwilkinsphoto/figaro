@@ -36,18 +36,18 @@ import com.cra.figaro.algorithm.lazyfactored.Extended
 trait Factor[T] {
   def semiring: Semiring[T]
 
-  def parents: List[Variable[_]]
-  def output: List[Variable[_]]
+  def parents: List[Variable[?]]
+  def output: List[Variable[?]]
   def variables = parents ::: output
 
   lazy val numVars = variables.size
 
-  val size = (1 /: variables)(_ * _.size)
+  val size = (variables).foldLeft(1)(_ * _.size)
 
   /**
    * Creates a new factor of the same type
    */
-  def createFactor[T](parents: List[Variable[_]], output: List[Variable[_]], _semiring: Semiring[T] = semiring): Factor[T]
+  def createFactor[T](parents: List[Variable[?]], output: List[Variable[?]], _semiring: Semiring[T] = semiring): Factor[T]
 
   /**
    * Description that includes the variable list and conditional probabilities
@@ -58,7 +58,7 @@ trait Factor[T] {
   /**
    * Indicates if any of this Factor's variables has Star
    */
-  def hasStar = (false /: variables)(_ || _.valueSet.hasStar)
+  def hasStar = (variables).foldLeft(false)(_ || _.valueSet.hasStar)
 
   /**
    * Indicates if this Factor has any variables
@@ -76,14 +76,14 @@ trait Factor[T] {
    * Fold the given function through the contents of the factor, beginning with the given initial values
    */
   def foldLeft(initial: T, fn: (T, T) => T): T = {
-    (initial /: getContents())(fn(_, _))
+    (getContents()).foldLeft(initial)(fn(_, _))
   }
 
   def getIndices: Indices = generateIndices
 
   def generateIndices: Indices = new Indices(variables)
 
-  def convertIndicesToValues(indices: List[Int]): List[Extended[_]] = {
+  def convertIndicesToValues(indices: List[Int]): List[Extended[?]] = {
     val values = for { i <- 0 until indices.size } yield variables(i).range(indices(i))
     values.toList
   }
@@ -91,7 +91,7 @@ trait Factor[T] {
   /**
    * Get the contents of a factor as a traversable (note: no indicies provided)
    */
-  def getContents(): Traversable[T]
+  def getContents(): Iterable[T]
 
   /**
    * Return the contents of a factor as a string
@@ -118,7 +118,7 @@ trait Factor[T] {
   /**
    * Fill the contents of this factor by applying a rule to every combination of values.
    */
-  def fillByRule(rule: List[Extended[_]] => T): Factor[T]
+  def fillByRule(rule: List[Extended[?]] => T): Factor[T]
 
   /**
    * Fill the contents of the target by applying the given function to all elements of this factor.
@@ -150,7 +150,7 @@ trait Factor[T] {
    * If no funciton is provided, this defaults to the sum function in this factor's semiring.
    */
   def sumOver(
-    variable: Variable[_],
+    variable: Variable[?],
     sum: (T, T) => T = semiring.sum): Factor[T]
 
   /**
@@ -168,7 +168,7 @@ trait Factor[T] {
    * Returns the marginalization of the factor to a variable according to the addition
    * function in this factor's semiring. This involves summing out all other variables.
    */
-  def marginalizeTo(targets: Variable[_]*): Factor[T] = marginalizeToWithSum(semiring.sum, targets: _*)
+  def marginalizeTo(targets: Variable[?]*): Factor[T] = marginalizeToWithSum(semiring.sum, targets*)
 
   /**
    * Returns the marginalization of the factor to a variable according to the given
@@ -181,7 +181,7 @@ trait Factor[T] {
    */
   def marginalizeToWithSum(
     sum: (T, T) => T,
-    targets: Variable[_]*): Factor[T]
+    targets: Variable[?]*): Factor[T]
 
   /**
    * Returns a new Factor with duplicate variable(s) removed
@@ -195,10 +195,10 @@ trait Factor[T] {
 
 }
 
-class Indices(variables: List[Variable[_]]) extends Iterable[List[Int]] {
+class Indices(variables: List[Variable[?]]) extends Iterable[List[Int]] {
   val limits = variables.map(_.size.asInstanceOf[Int] - 1)
   val numVars = limits.length
-  val factorSize = (1 /: variables)(_ * _.size)
+  val factorSize = (variables).foldLeft(1)(_ * _.size)
 
   def iterator = new Iterator[List[Int]] {
     var current: List[Int] = List(-1)

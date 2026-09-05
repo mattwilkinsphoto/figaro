@@ -19,8 +19,8 @@ import com.cra.figaro.algorithm.structured.algorithm._
 import com.cra.figaro.algorithm.factored.gibbs.Gibbs
 import com.cra.figaro.algorithm.factored.gibbs.BlockSampler
 
-class StructuredGibbs(universe: Universe, numSamples: Int, burnIn: Int, interval: Int, blockToSampler: Gibbs.BlockSamplerCreator, targets: Element[_]*)
-  extends StructuredProbQueryAlgorithm(universe, targets: _*) with DecompositionProbQuery {
+class StructuredGibbs(universe: Universe, numSamples: Int, burnIn: Int, interval: Int, blockToSampler: Gibbs.BlockSamplerCreator, targets: Element[?]*)
+  extends StructuredProbQueryAlgorithm(universe, targets*) with DecompositionProbQuery {
 
   def solvingStrategy() = new ConstantStrategy(problem, structuredRaising, marginalGibbs(numSamples, burnIn, interval, blockToSampler))
 }
@@ -29,21 +29,21 @@ object StructuredGibbs {
   /**
    * Create a structured Gibbs algorithm.
    */
-  def apply(numSamples: Int, targets: Element[_]*) = {
+  def apply(numSamples: Int, targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run Gibbs with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new StructuredGibbs(targets(0).universe, numSamples, 0, 1, BlockSampler.default, targets:_*)
+    new StructuredGibbs(targets(0).universe, numSamples, 0, 1, BlockSampler.default, targets*)
   }
 
   /**
    * Create a structured Gibbs algorithm.
    */
-  def apply(numSamples: Int, burnIn: Int, interval: Int, blockToSampler: Gibbs.BlockSamplerCreator, targets: Element[_]*) = {
+  def apply(numSamples: Int, burnIn: Int, interval: Int, blockToSampler: Gibbs.BlockSamplerCreator, targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run Gibbs with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new StructuredGibbs(targets(0).universe, numSamples, burnIn, interval, blockToSampler, targets:_*)
+    new StructuredGibbs(targets(0).universe, numSamples, burnIn, interval, blockToSampler, targets*)
   }
 
   /**

@@ -22,7 +22,7 @@ import com.cra.figaro.test.tags.BookExample
 
 object PrinterProblemTypeUncertainty extends ElementCollection {
   abstract class Printer extends ElementCollection {
-    val powerButtonOn = Flip(0.95)("power button on", this)
+    val powerButtonOn = Flip(0.95)(using "power button on", this)
 
     val paperFlow = Select(0.6 -> Symbol("smooth"), 0.2 -> Symbol("uneven"), 0.2 -> Symbol("jammed"))
     val paperJamIndicatorOn =
@@ -109,15 +109,15 @@ object PrinterProblemTypeUncertainty extends ElementCollection {
             (pages: Symbol, quickly: Boolean, quality: Boolean) =>
             if (pages == Symbol("zero")) Symbol("none")
             else if (pages == Symbol("some") || !quickly || !quality) Symbol("poor")
-            else Symbol("excellent"))("summary", this)
+            else Symbol("excellent"))(using "summary", this)
   }
 
-  val myPrinter = Select(0.3 -> new LaserPrinter, 0.7 -> new InkjetPrinter)("my printer", this)
+  val myPrinter = Select(0.3 -> new LaserPrinter, 0.7 -> new InkjetPrinter)(using "my printer", this)
   val mySoftware = new Software
   val myNetwork = new Network
   val me = new User
   val myExperience =
-    Apply(myPrinter, (p: Printer) => new PrintExperience(p, mySoftware, myNetwork, me))("print experience", this)
+    Apply(myPrinter, (p: Printer) => new PrintExperience(p, mySoftware, myNetwork, me))(using "print experience", this)
 
   def step1(): Unit = {
     val summary = get[Symbol]("print experience.summary")

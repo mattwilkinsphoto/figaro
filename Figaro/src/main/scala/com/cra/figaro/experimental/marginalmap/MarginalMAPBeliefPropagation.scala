@@ -18,9 +18,9 @@ import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.algorithm.sampling.ProbEvidenceSampler
 import com.cra.figaro.language._
 
-abstract class MarginalMAPBeliefPropagation(override val universe: Universe, targets: Element[_]*)(
-  val dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-  val dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double)
+abstract class MarginalMAPBeliefPropagation(override val universe: Universe, targets: Element[?]*)(
+  val dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+  val dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double)
   extends MarginalMAPAlgorithm
   with ProbabilisticBeliefPropagation {
 
@@ -31,7 +31,7 @@ abstract class MarginalMAPBeliefPropagation(override val universe: Universe, tar
   /*
    * Variables corresponding to MAP elements. This is set in the initialize() method.
    */
-  protected var maxVariables: Set[Variable[_]] = _
+  protected var maxVariables: Set[Variable[?]] = scala.compiletime.uninitialized
 
   /**
    * Value used to compute arg max messages. This could be thought of as an inverse
@@ -46,14 +46,14 @@ abstract class MarginalMAPBeliefPropagation(override val universe: Universe, tar
       val total = beliefMap(fn).combination(vnFactor, LogSumProductSemiring().divide)
       
       // Use sum-product to sum over sum variables
-      val sumOverSumVars = total.marginalizeTo(fn.variables.intersect(maxVariables).toSeq:_*)
+      val sumOverSumVars = total.marginalizeTo(fn.variables.intersect(maxVariables).toSeq*)
       // Use max-product to sum over max variables except vn.variable
       val sumOverMaxVars = sumOverSumVars.marginalizeToWithSum(LogMaxProductSemiring().sum, vn.variable)
       sumOverMaxVars
     }
     else {
       // Use sum-product to sum over sum variables, note that we don't divide by the last message here
-      val beliefOverMaxVars = beliefMap(fn).marginalizeTo(fn.variables.intersect(maxVariables).toSeq:_*)
+      val beliefOverMaxVars = beliefMap(fn).marginalizeTo(fn.variables.intersect(maxVariables).toSeq*)
       val maxBelief = beliefOverMaxVars.foldLeft(LogSumProductSemiring().zero, _ max _)
       // Filter the indices that maximize the  belief over the max variables in this factor
       // This approximation of the "indicator function" is used for two reasons:
@@ -97,18 +97,18 @@ object MarginalMAPBeliefPropagation {
    * @param myIterations Iterations of mixed-product BP to run.
    * @param targets MAP elements, which can be queried. Elements not supplied here are summed over.
    */
-  def apply(myIterations: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new MarginalMAPBeliefPropagation(universe, targets: _*)(
-      List(), (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+  def apply(myIterations: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new MarginalMAPBeliefPropagation(universe, targets*)(
+      List(), (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
       with OneTimeProbabilisticBeliefPropagation with OneTimeMarginalMAP { val iterations = myIterations }
 
   /**
    * Creates an Anytime marginal MAP belief propagation computer in the current default universe.
    * @param targets MAP elements, which can be queried. Elements not supplied here are summed over.
    */
-  def apply(targets: Element[_]*)(implicit universe: Universe) =
-    new MarginalMAPBeliefPropagation(universe, targets: _*)(
-      List(), (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+  def apply(targets: Element[?]*)(implicit universe: Universe) =
+    new MarginalMAPBeliefPropagation(universe, targets*)(
+      List(), (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
       with AnytimeProbabilisticBeliefPropagation with AnytimeMarginalMAP
 
   /**
@@ -117,9 +117,9 @@ object MarginalMAPBeliefPropagation {
    * @param myIterations Iterations of mixed-product BP to run.
    * @param targets MAP elements, which can be queried. Elements not supplied here are summed over.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])], myIterations: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new MarginalMAPBeliefPropagation(universe, targets: _*)(
-      dependentUniverses, (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])], myIterations: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new MarginalMAPBeliefPropagation(universe, targets*)(
+      dependentUniverses, (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
       with OneTimeProbabilisticBeliefPropagation with OneTimeMarginalMAP { val iterations = myIterations }
 
   /**
@@ -127,9 +127,9 @@ object MarginalMAPBeliefPropagation {
    * @param dependentUniverses Dependent universes for this algorithm.
    * @param targets MAP elements, which can be queried. Elements not supplied here are summed over.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])], targets: Element[_]*)(implicit universe: Universe) =
-    new MarginalMAPBeliefPropagation(universe, targets: _*)(
-      dependentUniverses, (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])], targets: Element[?]*)(implicit universe: Universe) =
+    new MarginalMAPBeliefPropagation(universe, targets*)(
+      dependentUniverses, (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
       with AnytimeProbabilisticBeliefPropagation with AnytimeMarginalMAP
 
   /**
@@ -140,10 +140,10 @@ object MarginalMAPBeliefPropagation {
    * @param targets MAP elements, which can be queried. Elements not supplied here are summed over.
    */
   def apply(
-    dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    myIterations: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new MarginalMAPBeliefPropagation(universe, targets: _*)(
+    dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    myIterations: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new MarginalMAPBeliefPropagation(universe, targets*)(
       dependentUniverses, dependentAlgorithm)
       with OneTimeProbabilisticBeliefPropagation with OneTimeMarginalMAP { val iterations = myIterations }
 
@@ -154,10 +154,10 @@ object MarginalMAPBeliefPropagation {
    * @param targets MAP elements, which can be queried. Elements not supplied here are summed over.
    */
   def apply(
-    dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    targets: Element[_]*)(implicit universe: Universe) =
-    new MarginalMAPBeliefPropagation(universe, targets: _*)(
+    dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    targets: Element[?]*)(implicit universe: Universe) =
+    new MarginalMAPBeliefPropagation(universe, targets*)(
       dependentUniverses, dependentAlgorithm)
       with AnytimeProbabilisticBeliefPropagation with AnytimeMarginalMAP
   
@@ -167,8 +167,8 @@ object MarginalMAPBeliefPropagation {
    * @param target Element for which to compute MAP value.
    * @param mapElements Additional elements to MAP. Elements not in this list are summed over.
    */
-  def mostLikelyValue[T](target: Element[T], mapElements: Element[_]*): T = {
-    val alg = MarginalMAPBeliefPropagation(10, (target +: mapElements).distinct:_*)
+  def mostLikelyValue[T](target: Element[T], mapElements: Element[?]*): T = {
+    val alg = MarginalMAPBeliefPropagation(10, (target +: mapElements).distinct*)
     alg.start()
     val result = alg.mostLikelyValue(target)
     alg.kill()

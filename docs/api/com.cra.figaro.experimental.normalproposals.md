@@ -149,30 +149,6 @@ Invocation template:
 receiver.generateRandomness()
 ```
 
-## `` com.cra.figaro.experimental.normalproposals.AtomicBeta.getLearnedElement ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/normalproposals/AtomicBeta.html#getLearnedElement-0)
-
-```scala
-def getLearnedElement: AtomicFlip
-```
-
-Returns an element that models the learned distribution.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` AtomicFlip ``.
-
-Source contract/attributes: Returns an element that models the learned distribution. Attributes
-
-Invocation template:
-
-```scala
-receiver.getLearnedElement
-```
-
 ## `` com.cra.figaro.experimental.normalproposals.AtomicBeta.lower ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/normalproposals/AtomicBeta.html#lower-0)

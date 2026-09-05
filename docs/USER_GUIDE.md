@@ -31,14 +31,14 @@ You need JDK 17 and an sbt runner. The repository pins its sbt/compiler/plugin v
 
    ```scala
    scalaVersion := "3.9.0"
-   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.1-SNAPSHOT"
+   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.2-SNAPSHOT"
    ```
 
 3. Compile your application on JDK 17 and use the imports below.
 
 `%%` selects the Scala binary suffix `_3`. Local publication normally uses the user's Ivy local repository; an isolated `sbt.ivy.home` changes that location. Producer and consumer must use the same repository. This snapshot is not promised on Maven Central. An unresolved dependency usually means it was not published into the consumer's repository. For a team/deployment, publish a versioned prerelease to your chosen repository rather than copying source or depending on a workstation path.
 
-Java/Maven consumers use `io.github.mattwilkinsphoto:figaro_3:6.0.0-modern.1-SNAPSHOT` and the POM dependencies. The API is Scala-shaped (functions, contexts, collections); a small Scala facade can provide a simpler Java boundary. A dedicated Java compatibility test has not been performed.
+Java/Maven consumers use `io.github.mattwilkinsphoto:figaro_3:6.0.0-modern.2-SNAPSHOT` and the POM dependencies. The API is Scala-shaped (functions, contexts, collections); a small Scala facade can provide a simpler Java boundary. A dedicated Java compatibility test has not been performed.
 
 Prefer the normal library JAR. The `-fat.jar` bundles non-Scala runtime libraries but deliberately **omits the Scala runtime**, and is not a standalone executable application. Do not put both the thin JAR with its dependencies and the fat JAR on one classpath.
 
@@ -127,11 +127,11 @@ Omitting the sample count (`Importance(target)`) creates an anytime worker that 
 - **Normal takes variance, not standard deviation:** `Normal(20, 4)` has standard deviation 2. Validate probabilities, positive variances/shapes, and supported outcomes yourself; early validation is not uniform across legacy constructors.
 - **Impossible evidence cannot define a useful posterior:** zero total mass cannot be normalized. Diagnose the model instead of accepting `NaN`, zero successful samples, or an exception as an answer.
 - **Target membership:** register every query node when constructing the algorithm. A same-looking newly created node is not the original target.
-- **Lazy streams:** `distribution` returns `(probability, value)` pairs in a legacy `Stream`. Materialize finite results while the algorithm is usable. Do not collect an unbounded posterior-sampling stream into a list.
+- **Lazy streams:** `distribution` returns `(probability, value)` pairs in a memoized `LazyList`. Materialize finite results while the algorithm is usable. Do not collect an unbounded posterior-sampling stream into a list.
 - **Statistical and timing checks:** use tolerances/repeated trials. A timing advisory failure does not prove a probability regression; one passing sample run does not prove equivalence.
 - **Dynamic creation:** `Create[T]` accepts a JVM singleton implementing `Creatable`, not any constructor. It is not a sandbox for untrusted plugin names, and cannot prove that a name returns the requested generic `T`.
 - **New artifact:** rebuild consumers for `_3`; old `_2.13` applications are not drop-in compatible. See [migration](MIGRATION.md).
-- **Build limitations:** Windows coverage transitions, legacy test failures, deprecations, and unvalidated OSGi metadata are covered in [building](BUILDING.md) and [migration](MIGRATION.md).
+- **Build limitations:** Windows coverage transitions, legacy test failures and unvalidated OSGi metadata are covered in [building](BUILDING.md) and [migration](MIGRATION.md).
 
 ## Related modules
 

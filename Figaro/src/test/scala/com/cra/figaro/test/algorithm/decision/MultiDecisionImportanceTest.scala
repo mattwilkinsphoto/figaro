@@ -40,7 +40,7 @@ class MultiDecisionImportanceTest extends AnyWordSpec with Matchers {
 
       "produce the correct strategy with discrete parents" in {
         val (alg, declist, before, after) = MultiDecisionDiscrete((e1: List[Element[Double]], e2: List[Decision[Boolean, Double]]) =>
-          MultiDecisionImportance(20000, e1, e2: _*), false)
+          MultiDecisionImportance(20000, e1, e2*), false)
 
         val d1 = declist(0)
         val d2 = declist(1)
@@ -53,13 +53,13 @@ class MultiDecisionImportanceTest extends AnyWordSpec with Matchers {
 
       "increase the expected value" in {
         val (alg, declist, before, after) = MultiDecisionDiscrete((e1: List[Element[Double]], e2: List[Decision[Boolean, Double]]) =>
-          MultiDecisionImportance(10000, e1, e2: _*), true)
+          MultiDecisionImportance(10000, e1, e2*), true)
         after should be > (before)
       }
 
       "produce the correct strategy with continuous parents" in {
         val (alg, declist, before, after) = MultiDecisionContinuous((e1: List[Element[Double]], e2: List[Decision[Double, Double]]) =>
-          MultiDecisionImportance(30000, e1, e2: _*), false)
+          MultiDecisionImportance(30000, e1, e2*), false)
         val d1 = declist(0)
         val d2 = declist(1)
 

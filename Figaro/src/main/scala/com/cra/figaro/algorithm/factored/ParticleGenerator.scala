@@ -31,26 +31,20 @@ import com.cra.figaro.algorithm.factored.factors.Factor
  */
 class ParticleGenerator(de: DensityEstimator, val numSamplesFromAtomics: Int, val maxNumSamplesAtChain: Int) {
 
-  @deprecated("numArgSamples is deprecated. Please use numSamplesFromAtomics", "4.1")
-  val numArgSamples = numSamplesFromAtomics
-  
-  @deprecated("numTotalSamples is deprecated. Please use maxNumSamplesAtChain", "4.1")
-  val numTotalSamples =  maxNumSamplesAtChain
-  
   var warningIssued = false
   
   // Caches the samples for an element
-  private val sampleMap = Map[Element[_], (List[(Double, _)], Int)]()
+  private val sampleMap = Map[Element[?], (List[(Double, ?)], Int)]()
 
   /**
    * Returns the set of sampled elements contained in this sampler
    */
-  def sampledElements(): Set[Element[_]] = sampleMap.keySet.toSet
+  def sampledElements(): Set[Element[?]] = sampleMap.keySet.toSet
 
   /**
    * Returns the number of samples that have been taken for the given element
    */
-  def samplesTaken(elem: Element[_]): Int = {
+  def samplesTaken(elem: Element[?]): Int = {
     sampleMap.get(elem) match {
       case Some((_, count)) => count
       case _ => 0
@@ -65,7 +59,7 @@ class ParticleGenerator(de: DensityEstimator, val numSamplesFromAtomics: Int, va
   /**
    * Updates the samples for an element
    */
-  def update(elem: Element[_], numSamples: Int, samples: List[(Double, _)]) = sampleMap.update(elem, (samples, numSamples))
+  def update(elem: Element[?], numSamples: Int, samples: List[(Double, ?)]) = sampleMap.update(elem, (samples, numSamples))
 
   /**
    * Retrieves the stored samples for an element if there are any. Otherwise, this takes the default number of samples,
@@ -132,7 +126,7 @@ class ParticleGenerator(de: DensityEstimator, val numSamplesFromAtomics: Int, va
    * Resample and update the element from the indicated beliefs
    * beliefs/oldMessages = (Probability, Value)
    */
-  def resample(elem: Element[_], beliefs: List[(Double, _)], oldMessages: List[List[(Double, _)]], proposalVariance: Double): Unit = {
+  def resample(elem: Element[?], beliefs: List[(Double, ?)], oldMessages: List[List[(Double, ?)]], proposalVariance: Double): Unit = {
 
     /* MH Proposal for Double type. 
      * TODO: Integrate these proposals with existing MH algorithms
@@ -200,7 +194,7 @@ class ParticleGenerator(de: DensityEstimator, val numSamplesFromAtomics: Int, va
    *  we estimate the density using the density estimator, then multiple all of the estimates together. Finally, since
    *  we only sample atomic elements, we multiple each result but the density of the values in the original element 
    */
-  private def accept[T](elem: Atomic[_], oldValue: T, newValue: T, proposalProb: Double, beliefs: List[List[(Double, T)]]): T = {
+  private def accept[T](elem: Atomic[?], oldValue: T, newValue: T, proposalProb: Double, beliefs: List[List[(Double, T)]]): T = {
     val oldDensity = beliefs.map(de.getDensity(oldValue, _)).product * elem.asInstanceOf[Atomic[T]].density(oldValue)
     val newDensity = beliefs.map(de.getDensity(newValue, _)).product * elem.asInstanceOf[Atomic[T]].density(newValue)
     val ratio = (newDensity / oldDensity) * proposalProb
@@ -220,17 +214,11 @@ object ParticleGenerator {
    */
   var defaultNumSamplesFromAtomics = 15
   
-  @deprecated("defaultArgSamples is deprecated. Please use defaultNumSamplesFromAtomics", "4.1")
-  var defaultArgSamples = defaultNumSamplesFromAtomics
-
   /**
    * Maximum number of particles to generate through a chain.
    */
   var defaultMaxNumSamplesAtChain = 15
   
-  @deprecated("defaultTotalSamples is deprecated. Please use defaultMaxNumSamplesAtChain", "4.1")
-  var defaultTotalSamples = defaultMaxNumSamplesAtChain
-
   private val samplerMap: Map[Universe, ParticleGenerator] = Map()
 
   /**

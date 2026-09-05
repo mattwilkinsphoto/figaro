@@ -44,15 +44,15 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
       
       "copy all named elements from the previous universe as atomic selects of the appropriate type" in {
         val universe1 = createNew()
-        val f1 = Flip(0.2)("f1", universe1)
-        val f2 = If(f1, 0.3, 0.6)("f2", universe1)
-        val f3 = Flip(f2)("f3", universe1)
-        val f4 = If(f1 === f3, 0, 1)("f4", universe1)
+        val f1 = Flip(0.2)(using "f1", universe1)
+        val f2 = If(f1, 0.3, 0.6)(using "f2", universe1)
+        val f3 = Flip(f2)(using "f3", universe1)
+        val f4 = If(f1 === f3, 0, 1)(using "f4", universe1)
         def trans(u: Universe): Universe = {
-          u.getElementByReference[Boolean]("f1") shouldBe an [AtomicSelect[ _ ]]
-          u.getElementByReference[Double]("f2") shouldBe an [AtomicSelect[ _ ]]
-          u.getElementByReference[Boolean]("f3") shouldBe an [AtomicSelect[ _ ]]
-          u.getElementByReference[Int]("f4") shouldBe an [AtomicSelect[ _ ]]
+          u.getElementByReference[Boolean]("f1") shouldBe an [AtomicSelect[ ? ]]
+          u.getElementByReference[Double]("f2") shouldBe an [AtomicSelect[ ? ]]
+          u.getElementByReference[Boolean]("f3") shouldBe an [AtomicSelect[ ? ]]
+          u.getElementByReference[Int]("f4") shouldBe an [AtomicSelect[ ? ]]
           createNew()
         }
         val ff = FactoredFrontier(universe1, trans(_), 3)
@@ -63,16 +63,16 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
       
       "copy all named elements from the previous static universe as atomic selects of the appropriate type" in {
         val static = createNew()
-        val f1 = Flip(0.2)("f1", static)
-        val f2 = If(f1, 0.3, 0.6)("f2", static)
+        val f1 = Flip(0.2)(using "f1", static)
+        val f2 = If(f1, 0.3, 0.6)(using "f2", static)
         val universe1 = createNew()
-        val f3 = Flip(f2)("f3", universe1)
-        val f4 = If(f1 === f3, 0, 1)("f4", universe1)
+        val f3 = Flip(f2)(using "f3", universe1)
+        val f4 = If(f1 === f3, 0, 1)(using "f4", universe1)
         def trans(static: Universe, previous: Universe): Universe = {
-          static.getElementByReference[Boolean]("f1") shouldBe an [AtomicSelect[ _ ]]
-          static.getElementByReference[Double]("f2") shouldBe an [AtomicSelect[ _ ]]
-          previous.getElementByReference[Boolean]("f3") shouldBe an [AtomicSelect[ _ ]]
-          previous.getElementByReference[Int]("f4") shouldBe an [AtomicSelect[ _ ]]
+          static.getElementByReference[Boolean]("f1") shouldBe an [AtomicSelect[ ? ]]
+          static.getElementByReference[Double]("f2") shouldBe an [AtomicSelect[ ? ]]
+          previous.getElementByReference[Boolean]("f3") shouldBe an [AtomicSelect[ ? ]]
+          previous.getElementByReference[Int]("f4") shouldBe an [AtomicSelect[ ? ]]
           previous.hasRef[Boolean]("f1") should equal(false)
           previous.hasRef[Double]("f2") should equal(false)
           static.hasRef[Boolean]("f3") should equal(false)
@@ -87,9 +87,9 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
       
       "clear the LazyValues associated with the previous universe and static universe" in {
         val static1 = createNew()
-        val f1 = Select(0.1 -> 0.2, 0.4 -> 0.3, 0.5 -> 0.6)("f1", static1)
+        val f1 = Select(0.1 -> 0.2, 0.4 -> 0.3, 0.5 -> 0.6)(using "f1", static1)
         val universe1 = createNew()
-        val f2 = Flip(f1)("f2", universe1)
+        val f2 = Flip(f1)(using "f2", universe1)
         def trans(static: Universe, previous: Universe): Universe = {
           LazyValues(static1).storedValues(f1).xvalues should be(empty)
           LazyValues(universe1).storedValues(f2).xvalues should be(empty)
@@ -107,8 +107,8 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
     "constructing the initial belief state" should {
       "contain a state with fraction proportional to its probability" in {
         createNew()
-        val f1 = Flip(0.2)("f1", universe)
-        val i2 = If(f1, Flip(0.3), Flip(0.6))("f2", universe)
+        val f1 = Flip(0.2)(using "f1", universe)
+        val i2 = If(f1, Flip(0.3), Flip(0.6))(using "f2", universe)
         i2.observe(true)
         val qf1True = 0.2 * 0.3
         val qf1False = 0.8 * 0.6
@@ -123,10 +123,10 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
     "constructing a new belief state with no evidence" should {      
       "contain a state with fraction proportional to its expected probability under the initial belief state" in {
         val universe1 = createNew()
-        val f1 = Flip(0.2)("f", universe1)
+        val f1 = Flip(0.2)(using "f", universe1)
         def trans(u: Universe): Universe = {
           val universe2 = createNew()
-          val f2 = If(u.getElementByReference[Boolean]("f"), Flip(0.8), Flip(0.3))("f", universe2)
+          val f2 = If(u.getElementByReference[Boolean]("f"), Flip(0.8), Flip(0.3))(using "f", universe2)
           universe2
         }
         val ff = FactoredFrontier(universe1, trans(_), 10)
@@ -142,11 +142,11 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
       "contain a state with fraction proportional to its expected probability under the initial belief state" +
         "conditioned on the evidence" in {
           val universe1 = createNew()
-          val f11 = Flip(0.2)("f1", universe1)
+          val f11 = Flip(0.2)(using "f1", universe1)
           def trans(u: Universe): Universe = {
             val universe2 = createNew()
-            val f12 = If(u.getElementByReference[Boolean]("f1"), Flip(0.8), Flip(0.3))("f1", universe2)
-            val f22 = If(f12, Flip(0.6), Flip(0.1))("f2", universe2)
+            val f12 = If(u.getElementByReference[Boolean]("f1"), Flip(0.8), Flip(0.3))(using "f1", universe2)
+            val f22 = If(f12, Flip(0.6), Flip(0.1))(using "f2", universe2)
             universe2
           }
           val ff = FactoredFrontier(universe1, trans(_), 10)
@@ -161,11 +161,11 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
 
       "correctly estimate static variables" in {
         val static = createNew()
-        val x = Flip(0.2)("x", static)
+        val x = Flip(0.2)(using "x", static)
         val universe2 = createNew()
         def trans(static: Universe, previous: Universe): Universe = {
           val universe3 = createNew()
-          val y = If(static.getElementByReference[Boolean]("x"), Flip(0.8), Flip(0.1))("y", universe3)
+          val y = If(static.getElementByReference[Boolean]("x"), Flip(0.8), Flip(0.1))(using "y", universe3)
           universe3
         }
         val ff = FactoredFrontier(static, universe2, trans(_, _), 10)
@@ -182,12 +182,12 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
     "iterating over two time steps with evidence on each step" should {
       "contain a state with the correct probability" in {
         val universe1 = createNew()
-        Flip(0.2)("f1", universe1)
+        Flip(0.2)(using "f1", universe1)
         def trans(previous: Universe): Universe = {
           val universe2 = createNew()
           val previousF1 = previous.getElementByReference[Boolean]("f1")
-          val f1 = If(previousF1, Flip(0.8), Flip(0.3))("f1", universe2)
-          val f2 = If(f1, Flip(0.6), Flip(0.1))("f2", universe2)
+          val f1 = If(previousF1, Flip(0.8), Flip(0.3))(using "f1", universe2)
+          val f2 = If(f1, Flip(0.6), Flip(0.1))(using "f2", universe2)
           universe2
         }
         val ff = FactoredFrontier(universe1, trans(_), 10)
@@ -217,12 +217,12 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
 
       "correctly estimate static variables" in {
         val static = createNew()
-        val x = Flip(0.2)("x", static)
+        val x = Flip(0.2)(using "x", static)
         val initial = createNew()
-        val y = Flip(0.3)("y", initial)
+        val y = Flip(0.3)(using "y", initial)
         def trans(static: Universe, previous: Universe): Universe = {
           val universe3 = createNew()
-          val y = If(static.getElementByReference[Boolean]("x"), Flip(0.8), previous.getElementByReference[Boolean]("y"))("y", universe3)
+          val y = If(static.getElementByReference[Boolean]("x"), Flip(0.8), previous.getElementByReference[Boolean]("y"))(using "y", universe3)
           universe3
         }
         val ff = FactoredFrontier(static, initial, trans(_, _), 10)
@@ -255,12 +255,12 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
     "iterating over two time steps with evidence on each step" should {
       "contain a the correct distribution over an element" in {
         val universe1 = createNew()
-        Flip(0.2)("f1", universe1)
+        Flip(0.2)(using "f1", universe1)
         def trans(previous: Universe): Universe = {
           val universe2 = createNew()
           val previousF1 = previous.getElementByReference[Boolean]("f1")
-          val f1 = If(previousF1, Flip(0.8), Flip(0.3))("f1", universe2)
-          val f2 = If(f1, Flip(0.6), Flip(0.1))("f2", universe2)
+          val f1 = If(previousF1, Flip(0.8), Flip(0.3))(using "f1", universe2)
+          val f2 = If(f1, Flip(0.6), Flip(0.1))(using "f2", universe2)
           universe2
         }
         val ff = FactoredFrontier(universe1, trans(_), 10)
@@ -274,7 +274,7 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
         val qf1TrueTime2 = (ff1TrueTime1 * 0.8 + ff1FalseTime1 * 0.3) * 0.4
         val qf1FalseTime2 = (ff1TrueTime1 * 0.2 + ff1FalseTime1 * 0.7) * 0.9
         val ff1TrueTime2 = qf1TrueTime2 / (qf1TrueTime2 + qf1FalseTime2)
-        val d = ff.currentDistribution("f1").asInstanceOf[Stream[(Double, Boolean)]]
+        val d = ff.currentDistribution("f1").asInstanceOf[LazyList[(Double, Boolean)]]
         d.size should equal(2)
         if (d(0)._2 == true) {
           d(0)._2 should equal(true)
@@ -307,13 +307,13 @@ class FactoredFrontierTest extends AnyWordSpec with Matchers {
         val numSteps = 1000
         val finalized = new BooleanTest
         val universe1 = createNew()
-        Constant(Array.fill(1000)(0))("f1", universe1)
+        Constant(Array.fill(1000)(0))(using "f1", universe1)
         def trans(previous: Universe): Universe = {
           // At least one of the previous universes should be finalized.
           // We always use the same transition function, so we assume that if one previous universe is finalized, all others should be finalized as well.
           val universe2 = if(finalized.b) createNew() else new UniverseTest(finalized)
           val previousF1 = previous.getElementByReference[Array[Int]]("f1")
-          Apply(previousF1, (a: Array[Int]) => a.map(_ + 1))("f1", universe2)
+          Apply(previousF1, (a: Array[Int]) => a.map(_ + 1))(using "f1", universe2)
           universe2
         }
         val ff = FactoredFrontier(universe1, trans(_), 10)

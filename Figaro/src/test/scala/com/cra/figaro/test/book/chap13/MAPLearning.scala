@@ -44,11 +44,11 @@ object MAPLearning {
   val featureWords = List("hello", "reply", "question", "free", "book")
 
   val params = ModelParameters()
-  val spamProbability = Beta(2,3)("spam probability", params)
+  val spamProbability = Beta(2,3)(using "spam probability", params)
   val wordGivenSpamProbabilities =
-    featureWords.map(word => (word, Beta(2,2)(word + " given spam", params))).toMap
+    featureWords.map(word => (word, Beta(2,2)(using word + " given spam", params))).toMap
   val wordGivenNormalProbabilities =
-    featureWords.map(word => (word, Beta(2,2)(word + " given normal", params))).toMap
+    featureWords.map(word => (word, Beta(2,2)(using word + " given normal", params))).toMap
 
   class EmailModel(paramCollection: ParameterCollection) {
     val isSpam = Flip(paramCollection.get("spam probability"))

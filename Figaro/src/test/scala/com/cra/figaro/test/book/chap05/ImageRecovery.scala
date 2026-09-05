@@ -50,7 +50,7 @@ object ImageRecovery {
   }
 
   def main(args: Array[String]): Unit = {
-  val data =
+    val data =
     """00?000?000
        0?010?0010
        110?010011
@@ -102,18 +102,18 @@ class ImageRecoveryTest extends AnyWordSpec with Matchers {
            01?01001?0
            0??000110?""".filterNot(_.isWhitespace)
     
-        ImageRecovery.setEvidence(data)
-        val algorithm = MPEBeliefPropagation(10)
-        algorithm.start()
-        for {
-          i <- 0 until 10
-        } {
-          for { j <- 0 until 10 } {
-            val mlv = algorithm.mostLikelyValue(pixels(i)(j))
-            if (mlv) print('1') else print('0')
-          }
-          println()
+      ImageRecovery.setEvidence(data)
+      val algorithm = MPEBeliefPropagation(10)
+      algorithm.start()
+      for {
+        i <- 0 until 10
+      } {
+        for { j <- 0 until 10 } {
+          val mlv = algorithm.mostLikelyValue(pixels(i)(j))
+          if (mlv) print('1') else print('0')
         }
+        println()
+      }
     }
   }
 }

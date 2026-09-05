@@ -24,10 +24,10 @@ import com.cra.figaro.library.cache.PermanentCache
 * The evidence is specified as NamedEvidence.
 * Only the probability of this evidence is computed. Conditions and constraints that are already on elements are considered part of the definition of the model.
 */
-abstract class ProbEvidenceSampler(override val universe: Universe, override val evidence: List[NamedEvidence[_]] = List[NamedEvidence[_]](), partition: Double = 1.0)
+abstract class ProbEvidenceSampler(override val universe: Universe, override val evidence: List[NamedEvidence[?]] = List[NamedEvidence[?]](), partition: Double = 1.0)
   extends ProbEvidenceAlgorithm with Sampler {
-  protected var successWeight: Double = _
-  protected var totalWeight: Double = _
+  protected var successWeight: Double = scala.compiletime.uninitialized
+  protected var totalWeight: Double = scala.compiletime.uninitialized
   
   //Logarithmic versions.
   
@@ -85,7 +85,7 @@ object ProbEvidenceSampler {
    * Create a one-time sampler that computes probability of the named evidence using the given number of samples.
    * Takes the conditions and constraints in the model as part of the model definition.
    */
-  def apply(numSamplesToUse: Int, evidence: List[NamedEvidence[_]])(implicit universe: Universe): ProbEvidenceAlgorithm = {
+  def apply(numSamplesToUse: Int, evidence: List[NamedEvidence[?]])(implicit universe: Universe): ProbEvidenceAlgorithm = {
     val baseline = new ProbEvidenceSampler(universe) with OneTimeProbEvidenceSampler { val numSamples = numSamplesToUse }
     baseline.start()
     baseline.probAdditionalEvidence(evidence)
@@ -99,7 +99,7 @@ object ProbEvidenceSampler {
    * 
    * @param baselineWaitingTime The amount of time to allow the algorithm for computing the baseline probability to run.
    */
-  def apply(baselineWaitingTime: Long, evidence: List[NamedEvidence[_]])(implicit universe: Universe): ProbEvidenceAlgorithm = {
+  def apply(baselineWaitingTime: Long, evidence: List[NamedEvidence[?]])(implicit universe: Universe): ProbEvidenceAlgorithm = {
     val baseline = new ProbEvidenceSampler(universe) with AnytimeProbEvidenceSampler
     baseline.start()
     Thread.sleep(baselineWaitingTime)
@@ -114,7 +114,7 @@ object ProbEvidenceSampler {
    * Takes the conditions and constraints in the model as part of the model definition.
    * This method takes care of creating and running the necessary algorithms.
    */
-  def computeProbEvidence(numSamplesToUse: Int, evidence: List[NamedEvidence[_]])(implicit universe: Universe): Double = {
+  def computeProbEvidence(numSamplesToUse: Int, evidence: List[NamedEvidence[?]])(implicit universe: Universe): Double = {
     val alg1 = new ProbEvidenceSampler(universe) with OneTimeProbEvidenceSampler { val numSamples = numSamplesToUse }
     alg1.start()
     val alg2 = alg1.probAdditionalEvidence(evidence)
@@ -132,7 +132,7 @@ object ProbEvidenceSampler {
    * 
    * @param waitingTime Total time given to all steps of the method.
    */
-  def computeProbEvidence(waitingTime: Long, evidence: List[NamedEvidence[_]])(implicit universe: Universe): Double = {
+  def computeProbEvidence(waitingTime: Long, evidence: List[NamedEvidence[?]])(implicit universe: Universe): Double = {
     val alg1 = new ProbEvidenceSampler(universe) with AnytimeProbEvidenceSampler
     alg1.start()
     Thread.sleep(waitingTime / 2)
@@ -149,5 +149,5 @@ object ProbEvidenceSampler {
   /**
    * Default algorithm to pass to dependent universe algorithms.
    */
-  val default = (u: Universe, e: List[NamedEvidence[_]]) => () => computeProbEvidence(10000, e)(u)
+  val default = (u: Universe, e: List[NamedEvidence[?]]) => () => computeProbEvidence(10000, e)(using u)
 }

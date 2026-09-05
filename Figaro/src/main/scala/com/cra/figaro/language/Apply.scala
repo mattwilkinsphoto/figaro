@@ -28,7 +28,7 @@ abstract class Apply[U](name: Name[U], collection: ElementCollection)
  */
 class Apply1[T1, U](name: Name[U], val arg1: Element[T1], val fn: T1 => U, collection: ElementCollection)
   extends Apply[U](name, collection) {
-  def args: List[Element[_]] = List(arg1)
+  def args: List[Element[?]] = List(arg1)
 
   type Arg1Type = T1
 
@@ -46,7 +46,7 @@ class Apply1[T1, U](name: Name[U], val arg1: Element[T1], val fn: T1 => U, colle
 class Apply2[T1, T2, U](name: Name[U], val arg1: Element[T1], val arg2: Element[T2],
   val fn: (T1, T2) => U, collection: ElementCollection)
   extends Apply[U](name, collection) {
-  def args: List[Element[_]] = List(arg1, arg2)
+  def args: List[Element[?]] = List(arg1, arg2)
 
   type Arg1Type = T1
   type Arg2Type = T2
@@ -66,7 +66,7 @@ class Apply2[T1, T2, U](name: Name[U], val arg1: Element[T1], val arg2: Element[
 class Apply3[T1, T2, T3, U](name: Name[U], val arg1: Element[T1], val arg2: Element[T2], val arg3: Element[T3],
   val fn: (T1, T2, T3) => U, collection: ElementCollection)
   extends Apply[U](name, collection) {
-  def args: List[Element[_]] = List(arg1, arg2, arg3)
+  def args: List[Element[?]] = List(arg1, arg2, arg3)
 
   type Arg1Type = T1
   type Arg2Type = T2
@@ -88,7 +88,7 @@ class Apply3[T1, T2, T3, U](name: Name[U], val arg1: Element[T1], val arg2: Elem
 class Apply4[T1, T2, T3, T4, U](name: Name[U], val arg1: Element[T1], val arg2: Element[T2], val arg3: Element[T3],
   val arg4: Element[T4], val fn: (T1, T2, T3, T4) => U, collection: ElementCollection)
   extends Apply[U](name, collection) {
-  def args: List[Element[_]] = List(arg1, arg2, arg3, arg4)
+  def args: List[Element[?]] = List(arg1, arg2, arg3, arg4)
 
   type Arg1Type = T1
   type Arg2Type = T2
@@ -112,7 +112,7 @@ class Apply4[T1, T2, T3, T4, U](name: Name[U], val arg1: Element[T1], val arg2: 
 class Apply5[T1, T2, T3, T4, T5, U](name: Name[U], val arg1: Element[T1], val arg2: Element[T2], val arg3: Element[T3],
   val arg4: Element[T4], val arg5: Element[T5], val fn: (T1, T2, T3, T4, T5) => U, collection: ElementCollection)
   extends Apply[U](name, collection) {
-  def args: List[Element[_]] = List(arg1, arg2, arg3, arg4, arg5)
+  def args: List[Element[?]] = List(arg1, arg2, arg3, arg4, arg5)
 
   type Arg1Type = T1
   type Arg2Type = T2

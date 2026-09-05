@@ -44,7 +44,7 @@ class TTestResult(val name: String, val target: Double, val alpha: Double = .05)
 
   def errorMessage = {
     val mean = statistics.getMean
-    val se = statistics.getVariance / math.sqrt(statistics.getN)
+    val se = statistics.getVariance / math.sqrt(statistics.getN.toDouble)
     f"mean $mean%.4f was not $target%.4f with standard error $se%.6f ($name)"
   }
 }

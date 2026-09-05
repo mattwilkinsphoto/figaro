@@ -34,19 +34,19 @@ object TopSort {
   var debug = false
 
   /* Returns the list of elements that directly used an element that are in the list of possible elements */
-  private def topSortDirectlyUses(universe: Universe, element: Element[_], possibleElements: List[Element[_]]) = {
+  private def topSortDirectlyUses(universe: Universe, element: Element[?], possibleElements: List[Element[?]]) = {
     universe.directlyUses(element).filter(elem => possibleElements contains elem)
   }
 
   /* Returns a list of elements sorted by conditioned elements, then constrained elements, then other elements */
-  private def prioritySort(universe: Universe, elements: List[Element[_]]) = {
+  private def prioritySort(universe: Universe, elements: List[Element[?]]) = {
     val priorityElements = (universe.conditionedElements intersect elements) ++ (universe.constrainedElements intersect elements)
     val otherElements = elements diff priorityElements
     priorityElements ++ otherElements
   }
 
   /* Returns a topologically sorted list of elements in the universe, given an unsorted list of elements */
-  def topologicallySort(updatesNeeded: Iterable[Element[_]], universe: Universe) = {
+  def topologicallySort(updatesNeeded: Iterable[Element[?]], universe: Universe) = {
 
     //Create a list of the original updates needed and all their recursive elements
     val elements = updatesNeeded.toList
@@ -59,11 +59,11 @@ object TopSort {
     var visitedNodes = 0
 
     //Initialize the topological ordering
-    var topologicalOrder: ListBuffer[Element[_]] = ListBuffer()
+    var topologicalOrder: ListBuffer[Element[?]] = ListBuffer()
 
     //Start with the elements with in-degree of 0 and add them into a queue
     val noParents = prioritySort(universe, indegree.filter(entry => (entry._2 == 0)).map(entry => entry._1).toList)
-    var queue: ListBuffer[Element[_]] = ListBuffer(noParents: _*)
+    var queue: ListBuffer[Element[?]] = ListBuffer(noParents*)
 
     //While the queue is not empty
     while (!queue.isEmpty) {
@@ -77,7 +77,7 @@ object TopSort {
       topologicalOrder += head
 
       //Decrease in-degree by 1 for all its neighboring nodes
-      var addToQueue: ListBuffer[Element[_]] = ListBuffer()
+      var addToQueue: ListBuffer[Element[?]] = ListBuffer()
       for (neighbor <- universe.directlyUsedBy(head)) {
         val newDegree = (indegree(neighbor) - 1)
         indegree += (neighbor -> (newDegree))

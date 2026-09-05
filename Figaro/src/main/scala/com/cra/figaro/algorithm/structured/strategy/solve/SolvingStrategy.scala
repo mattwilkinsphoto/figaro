@@ -40,7 +40,7 @@ abstract class SolvingStrategy(problem: Problem) {
    */
   def constraintFactors(bounds: Bounds): List[Factor[Double]] = {
     // Nested problems can't have evidence
-    if(problem.isInstanceOf[NestedProblem[_]]) List()
+    if(problem.isInstanceOf[NestedProblem[?]]) List()
     else problem.components.flatMap(_.constraintFactors(bounds))
   }
 
@@ -52,8 +52,8 @@ abstract class SolvingStrategy(problem: Problem) {
    * @return A list of factors over the variables to preserve representing their joint distribution, and a map of
    * recording factors for MPE.
    */
-  def eliminate(toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], factors: List[Factor[Double]]):
-    (List[Factor[Double]], Map[Variable[_], Factor[_]])
+  def eliminate(toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], factors: List[Factor[Double]]):
+    (List[Factor[Double]], Map[Variable[?], Factor[?]])
 
   /**
    * Solve the problem defined by all the components' current factors. This involves solving and incorporating
@@ -64,7 +64,7 @@ abstract class SolvingStrategy(problem: Problem) {
    */
   def execute(bounds: Bounds = Lower): Unit = {
     val allFactors = constraintFactors(bounds) ::: nonConstraintFactors()
-    val allVariables = (Set[Variable[_]]() /: allFactors)(_ ++ _.variables)
+    val allVariables = (allFactors).foldLeft(Set[Variable[?]]())(_ ++ _.variables)
     val (toEliminate, toPreserve) = allVariables.partition(problem.internal)
     val collection = problem.collection
     problem.globals = toPreserve.map(collection.variableToComponent(_))
@@ -72,7 +72,7 @@ abstract class SolvingStrategy(problem: Problem) {
     problem.solution = solution
     problem.recordingFactors = recordingFactors
     problem.solved = true
-    toEliminate.foreach((v: Variable[_]) => {
+    toEliminate.foreach((v: Variable[?]) => {
       if (collection.intermediates.contains(v)) collection.intermediates -= v
     })
   }

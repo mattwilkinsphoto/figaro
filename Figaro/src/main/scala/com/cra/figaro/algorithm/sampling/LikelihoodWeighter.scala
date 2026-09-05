@@ -36,7 +36,7 @@ import scala.collection.mutable.Set
 class LikelihoodWeighter(universe: Universe, cache: Cache) {
 
   /* Stores the dependencies between elements for likelihood weighting */
-  private[figaro] val dependencies = scala.collection.mutable.Map[Element[_], Set[Element[_]]]()
+  private[figaro] val dependencies = scala.collection.mutable.Map[Element[?], Set[Element[?]]]()
   universe.register(dependencies)
 
   /**
@@ -56,9 +56,9 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
   /**
    * Sample each element in the list of elements and compute their likelihood weight
    */
-  def computeWeight(elementsToVisit: List[Element[_]]): Double = {
+  def computeWeight(elementsToVisit: List[Element[?]]): Double = {
     // Do all dependencies first, then no need to check for them in the main traversal loop
-    val visited: Set[Element[_]] = Set()
+    val visited: Set[Element[?]] = Set()
     val dependencyWeights = traverse(List(), dependencies.values.flatten.toList, 0.0, visited)
     val remaining = elementsToVisit.filterNot(visited.contains(_))
     traverse(List(), remaining, dependencyWeights, visited)
@@ -68,8 +68,8 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
    * Traverse the elements in generative order, and return the weight
    */
   @tailrec
-  private[figaro] final def traverse(currentStack: List[(Element[_], Option[_], Option[Element[_]])],
-    elementsToVisit: List[Element[_]], currentWeight: Double, visited: Set[Element[_]]): Double = {
+  private[figaro] final def traverse(currentStack: List[(Element[?], Option[?], Option[Element[?]])],
+    elementsToVisit: List[Element[?]], currentWeight: Double, visited: Set[Element[?]]): Double = {
 
     // If everything is empty, just return the weight
     if (elementsToVisit.isEmpty && currentStack.isEmpty) {
@@ -109,7 +109,7 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
               if (visited.contains(resultElement) && currObs.nonEmpty) {
                 // we did this in the wrong order, and have to repropagate the result for likelihood weighting, and add it to the dependency map so we don't do this incorrectly next time
                 val elementsToRedo = findDependentElements(dist, resultElement)
-                val newWeight = (currentWeight /: elementsToRedo) ((c: Double, n: Element[_]) => undoWeight(c, n))
+                val newWeight = (elementsToRedo).foldLeft(currentWeight) ((c: Double, n: Element[?]) => undoWeight(c, n))
                 traverse(nextHead ::: currentStack.tail, elementsToRedo.toList ::: elementsToVisit, newWeight, visited --= elementsToRedo)
               } else if (!visited.contains(resultElement)) {
                 traverse(nextHead ::: currentStack.tail, elementsToVisit, currentWeight, visited)
@@ -131,7 +131,7 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
               if (visited.contains(next) && currObs.nonEmpty) {
                 // we did this in the wrong order, and have to repropagate the result for likelihood weighting
                 val elementsToRedo = findDependentElements(chain, next)
-                val newWeight = (currentWeight /: elementsToRedo) ((c: Double, n: Element[_]) => undoWeight(c, n))
+                val newWeight = (elementsToRedo).foldLeft(currentWeight) ((c: Double, n: Element[?]) => undoWeight(c, n))
                 traverse(nextHead ::: currentStack.tail, elementsToRedo.toList ::: elementsToVisit, newWeight, visited --= elementsToRedo)
               } else if (!visited.contains(next)) {
                 traverse(nextHead ::: currentStack.tail, elementsToVisit, currentWeight, visited)
@@ -168,16 +168,16 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
   /*
    * Finds the set of elements that need to be resampled when the likelihood weighting went in the wrong order
    */
-  private def findDependentElements(elem: Element[_], result: Element[_]) = {
-    val chainUsedBy = universe.usedBy(elem) + elem
-    val resultUseBy = universe.usedBy(result) + result
-    resultUseBy -- chainUsedBy
+  private def findDependentElements(elem: Element[?], result: Element[?]) = {
+    val chainUsedBy = universe.usedBy(elem).union(Set(elem))
+    val resultUseBy = universe.usedBy(result).union(Set(result))
+    resultUseBy.diff(chainUsedBy)
   }
 
   /*
    * Get the observation on an element, merging with any propagated observation from likelihood weighting
    */
-  protected def getObservation(element: Element[_], observation: Option[_]): Option[Any] = {
+  protected def getObservation(element: Element[?], observation: Option[?]): Option[Any] = {
     (observation, element.observation) match {
       case (None, None) => None
       case (Some(obs), None) => Some(obs)
@@ -199,7 +199,7 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
    * function, we add the log density to the current weight. If it doesn't have a density, we check to see if
    * it satisfies the observation
    */
-  private[figaro] def computeNextWeight(currentWeight: Double, element: Element[_], obs: Option[_]): Double = {
+  private[figaro] def computeNextWeight(currentWeight: Double, element: Element[?], obs: Option[?]): Double = {
     val nextWeight = if (obs.isEmpty) {
       if (!element.condition(element.value)) rejectionAction()
       currentWeight
@@ -224,7 +224,7 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
     nextWeight + element.constraint(element.value)
   }
 
-  protected def setObservation(element: Element[_], obs: Option[_]) = element.value = obs.get.asInstanceOf[element.Value]
+  protected def setObservation(element: Element[?], obs: Option[?]) = element.value = obs.get.asInstanceOf[element.Value]
 
   /* Action to take on a rejection. By default it throws an Importance.Reject exception, but this can be overriden for another behavior */
   protected def rejectionAction(): Unit = throw Importance.Reject
@@ -232,7 +232,7 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
   /*
    * Undo the application of this elements weight if we did likelihood weighting in the wrong order
    */
-  private def undoWeight(weight: Double, elem: Element[_]) = weight - computeNextWeight(0.0, elem, elem.observation)
+  private def undoWeight(weight: Double, elem: Element[?]) = weight - computeNextWeight(0.0, elem, elem.observation)
 
 }
 

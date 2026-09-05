@@ -37,7 +37,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             override def oneTest = {
               val target = 0.7
               val universe = Universe.createNew()
-              val f = Flip(target)("f", universe)
+              val f = Flip(target)(using "f", universe)
               val result = sampleTest(target, List(NamedEvidence("f", Observation(true))))
               update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
             }
@@ -52,7 +52,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val value = 0.7
             val target = Math.log(value)
             val universe = Universe.createNew()
-            val f = Flip(value)("f", universe)
+            val f = Flip(value)(using "f", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("f", Observation(true))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -71,8 +71,8 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val value2 = 0.4
             val target = value1 * value2
             val universe = Universe.createNew()
-            val f1 = Flip(value1)("f1", universe)
-            val f2 = Flip(value2)("f2", universe)
+            val f1 = Flip(value1)(using "f1", universe)
+            val f2 = Flip(value2)(using "f2", universe)
             val result = sampleTest(target, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
           }
@@ -88,8 +88,8 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val value2 = 0.4
             val target = Math.log((value1 * value2))
             val universe = Universe.createNew()
-            val f1 = Flip(value1)("f1", universe)
-            val f2 = Flip(value2)("f2", universe)
+            val f1 = Flip(value1)(using "f1", universe)
+            val f2 = Flip(value2)(using "f2", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -106,8 +106,8 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val target = 0.2 * 0.6 * 0.6 + 0.8 * 0.9 * 0.9
             val universe = Universe.createNew()
             val d = Select(0.2 -> 0.6, 0.8 -> 0.9)
-            val f1 = Flip(d)("f1", universe)
-            val f2 = Flip(d)("f2", universe)
+            val f1 = Flip(d)(using "f1", universe)
+            val f2 = Flip(d)(using "f2", universe)
             val result = sampleTest(target, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
           }
@@ -122,8 +122,8 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val target = Math.log((0.2 * 0.6 * 0.6 + 0.8 * 0.9 * 0.9))
             val universe = Universe.createNew()
             val d = Select(0.2 -> 0.6, 0.8 -> 0.9)
-            val f1 = Flip(d)("f1", universe)
-            val f2 = Flip(d)("f2", universe)
+            val f1 = Flip(d)(using "f1", universe)
+            val f2 = Flip(d)(using "f2", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -140,10 +140,10 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
           override def oneTest = {
             val target = 0.2 * 0.6 * 0.6 + 0.8 * 0.9 * 0.9
             val universe = Universe.createNew()
-            val d = Select(0.5 -> 0.6, 0.5 -> 0.9)("d", universe)
+            val d = Select(0.5 -> 0.6, 0.5 -> 0.9)(using "d", universe)
             d.setConstraint((d: Double) => if (d > 0.7) 0.8; else 0.2)
-            val f1 = Flip(d)("f1", universe)
-            val f2 = Flip(d)("f2", universe)
+            val f1 = Flip(d)(using "f1", universe)
+            val f2 = Flip(d)(using "f2", universe)
             val result = sampleTest(target, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
           }
@@ -157,10 +157,10 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
           override def oneTest = {
             val target = Math.log((0.2 * 0.6 * 0.6 + 0.8 * 0.9 * 0.9))
             val universe = Universe.createNew()
-            val d = Select(0.5 -> 0.6, 0.5 -> 0.9)("d", universe)
+            val d = Select(0.5 -> 0.6, 0.5 -> 0.9)(using "d", universe)
             d.setConstraint((d: Double) => if (d > 0.7) 0.8; else 0.2)
-            val f1 = Flip(d)("f1", universe)
-            val f2 = Flip(d)("f2", universe)
+            val f1 = Flip(d)(using "f1", universe)
+            val f2 = Flip(d)(using "f2", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -177,7 +177,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
           override def oneTest = {
             val target = 0.0
             val universe = Universe.createNew()
-            val c = Constant(8)("c", universe)
+            val c = Constant(8)(using "c", universe)
             val result = sampleTest(target, List(NamedEvidence("c", Observation(7))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
           }
@@ -191,7 +191,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
           override def oneTest = {
             val target = Double.NegativeInfinity
             val universe = Universe.createNew()
-            val c = Constant(8)("c", universe)
+            val c = Constant(8)(using "c", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("c", Observation(7))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -208,7 +208,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
           override def oneTest = {
             val target = 0.3 * 0.6 + 0.7 * 0.9
             val universe = Universe.createNew()
-            val d = Dist(0.3 -> Flip(0.6), 0.7 -> Flip(0.9))("d", universe)
+            val d = Dist(0.3 -> Flip(0.6), 0.7 -> Flip(0.9))(using "d", universe)
             val result = sampleTest(target, List(NamedEvidence("d", Observation(true))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
           }
@@ -222,7 +222,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
           override def oneTest = {
             val target = Math.log((0.3 * 0.6) + (0.7 * 0.9))
             val universe = Universe.createNew()
-            val d = Dist(0.3 -> Flip(0.6), 0.7 -> Flip(0.9))("d", universe)
+            val d = Dist(0.3 -> Flip(0.6), 0.7 -> Flip(0.9))(using "d", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("d", Observation(true))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -240,7 +240,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val universe = Universe.createNew()
             val p1 = Select(0.2 -> 0.4, 0.8 -> 0.6)
             val p2 = Constant(0.4)
-            val d = Dist(p1 -> Flip(0.6), p2 -> Flip(0.9))("d", universe)
+            val d = Dist(p1 -> Flip(0.6), p2 -> Flip(0.9))(using "d", universe)
             val result = sampleTest(target, List(NamedEvidence("d", Observation(true))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
           }
@@ -256,7 +256,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val universe = Universe.createNew()
             val p1 = Select(0.2 -> 0.4, 0.8 -> 0.6)
             val p2 = Constant(0.4)
-            val d = Dist(p1 -> Flip(0.6), p2 -> Flip(0.9))("d", universe)
+            val d = Dist(p1 -> Flip(0.6), p2 -> Flip(0.9))(using "d", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("d", Observation(true))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -272,7 +272,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
           override def oneTest = {
             val target = 0.4
             val universe = Universe.createNew()
-            val u = Uniform(0.0, 1.0)("u", universe)
+            val u = Uniform(0.0, 1.0)(using "u", universe)
             val condition = (d: Double) => d < target
             val result = sampleTest(target, List(NamedEvidence("u", Condition(condition))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
@@ -288,7 +288,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val value = 0.4
             val target = Math.log(value)
             val universe = Universe.createNew()
-            val u = Uniform(0.0, 1.0)("u", universe)
+            val u = Uniform(0.0, 1.0)(using "u", universe)
             val condition = (d: Double) => d < value
             val result = logProbabilitySampleTest(target, List(NamedEvidence("u", Condition(condition))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
@@ -306,7 +306,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val target = 0.4 * 0.3 + 0.6 * 0.8
             val universe = Universe.createNew()
             val p1 = Select(0.4 -> 0.3, 0.6 -> 0.9)
-            val c = CachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))("c", universe)
+            val c = CachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))(using "c", universe)
             val result = sampleTest(target, List(NamedEvidence("c", Observation(true))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
           }
@@ -321,7 +321,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val target = Math.log(0.4 * 0.3 + 0.6 * 0.8)
             val universe = Universe.createNew()
             val p1 = Select(0.4 -> 0.3, 0.6 -> 0.9)
-            val c = CachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))("c", universe)
+            val c = CachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))(using "c", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("c", Observation(true))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -339,7 +339,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val target = 0.4 * 0.3 + 0.6 * 0.8
             val universe = Universe.createNew()
             val p1 = Uniform(0.0, 1.0)
-            val c = NonCachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))("c", universe)
+            val c = NonCachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))(using "c", universe)
             val result = sampleTest(target, List(NamedEvidence("c", Observation(true))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
           }
@@ -354,7 +354,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val target = Math.log(0.4 * 0.3 + 0.6 * 0.8)
             val universe = Universe.createNew()
             val p1 = Uniform(0.0, 1.0)
-            val c = NonCachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))("c", universe)
+            val c = NonCachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))(using "c", universe)
             val result = logProbabilitySampleTest(target, List(NamedEvidence("c", Observation(true))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
           }
@@ -375,7 +375,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val y = Constant(false)
             val u1 = Uniform(0.0, 1.0)
             val u2 = Uniform(0.0, 2.0)
-            val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)("a", universe)
+            val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)(using "a", universe)
             def condition(d: Double) = d < 0.5
             val result = sampleTest(target, List(NamedEvidence("a", Condition(condition))))
             update(result, NDTest.TTEST, "SampleTestResults", target, alpha)
@@ -394,7 +394,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
             val y = Constant(false)
             val u1 = Uniform(0.0, 1.0)
             val u2 = Uniform(0.0, 2.0)
-            val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)("a", universe)
+            val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)(using "a", universe)
             def condition(d: Double) = d < 0.5
             val result = logProbabilitySampleTest(target, List(NamedEvidence("a", Condition(condition))))
             update(result, NDTest.TTEST, "LogProbabilitySampleTestResults", target, alpha)
@@ -449,7 +449,7 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
         override def oneTest = {
           val target = 0.3
           val universe = Universe.createNew()
-          val f = Flip(target)("f", universe)
+          val f = Flip(target)(using "f", universe)
           val alg = ProbEvidenceSampler(200L, List(NamedEvidence("f", Observation(true))))
           alg.start()
           Thread.sleep(200L)
@@ -464,8 +464,8 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
 
     "sets evidence appropriately and cleans up after itself" in {
       val universe = Universe.createNew()
-      val u = Uniform(0.0, 1.0)("u", universe)
-      val f = Flip(0.7)("f", universe)
+      val u = Uniform(0.0, 1.0)(using "u", universe)
+      val f = Flip(0.7)(using "f", universe)
       val contingency0: Element.Contingency = List(Element.ElemVal(f, false))
       val contingency1: Element.Contingency = List(Element.ElemVal(f, true))
       u.addCondition((d: Double) => d <= 0.5, contingency0)
@@ -498,11 +498,11 @@ class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
     }
   }
 
-  def sampleTest(prob: Double, evidence: List[NamedEvidence[_]]): Double = {
+  def sampleTest(prob: Double, evidence: List[NamedEvidence[?]]): Double = {
     ProbEvidenceSampler.computeProbEvidence(60000, evidence)
   }
 
-  def logProbabilitySampleTest(logProb: Double, evidence: List[NamedEvidence[_]]): Double = {
+  def logProbabilitySampleTest(logProb: Double, evidence: List[NamedEvidence[?]]): Double = {
     val alg = ProbEvidenceSampler(60000, evidence)
     alg.start()
     val result = alg.logProbEvidence

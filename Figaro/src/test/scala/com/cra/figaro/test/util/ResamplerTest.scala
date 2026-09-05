@@ -23,9 +23,9 @@ class ResamplerTest extends AnyWordSpec with Matchers {
     "contain as values all the samples and none other" in {
       val r = new MapResampler(List(0.5 -> 1, 0.25 -> 2, 0.5 -> 3))
       val v = getMap(r).values
-      assert(v contains 1)
-      assert(v contains 2)
-      assert(v contains 3)
+      assert(v.contains(1))
+      assert(v.contains(2))
+      assert(v.contains(3))
       assert(v.size == 3)
     }
 

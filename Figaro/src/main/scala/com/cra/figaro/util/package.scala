@@ -101,7 +101,7 @@ package object util {
    * An exception will be thrown if the inputs sum to 0.
    */
   def normalize(unnormalized: List[Double]): List[Double] = {
-    val normalizer = (0.0 /: unnormalized)(_ + _)
+    val normalizer = (unnormalized).foldLeft(0.0)(_ + _)
     if (normalizer == 0.0) throw new ZeroTotalUnnormalizedProbabilityException
     unnormalized map (_ / normalizer)
   }
@@ -131,10 +131,10 @@ package object util {
    * Returns the Cartesian product of any number of inputs. The results are returned in
    * lexicographic order.
    */
-  def cartesianProduct(args: List[_]*): List[List[Any]] =
+  def cartesianProduct(args: List[?]*): List[List[Any]] =
     args.toList match {
       case List() => List(List())
-      case arg1 :: rest => arg1 flatMap (x => cartesianProduct(rest: _*) map (y => x :: y))
+      case arg1 :: rest => arg1 flatMap (x => cartesianProduct(rest*) map (y => x :: y))
     }
 
   /**
@@ -144,7 +144,7 @@ package object util {
   def homogeneousCartesianProduct[T](args: List[T]*): List[List[T]] =
     args.toList match {
       case List() => List(List())
-      case arg1 :: rest => arg1 flatMap (x => homogeneousCartesianProduct(rest: _*) map (y => x :: y))
+      case arg1 :: rest => arg1 flatMap (x => homogeneousCartesianProduct(rest*) map (y => x :: y))
     }
 
   /**
@@ -159,8 +159,8 @@ package object util {
   /**
    * Returns all indices of the given element in the traversable.
    */
-  def indices[T](traversable: Traversable[T], x: T): List[Int] = {
-    def helper(position: Int, remaining: Traversable[T]): List[Int] =
+  def indices[T](traversable: Iterable[T], x: T): List[Int] = {
+    def helper(position: Int, remaining: Iterable[T]): List[Int] =
       if (remaining.isEmpty) List()
       else if (remaining.head == x) position :: helper(position + 1, remaining.tail)
       else helper(position + 1, remaining.tail)
@@ -177,8 +177,8 @@ package object util {
    * If the indices are such that there would be a gap in the resulting traversable,
    * IllegalArgumentException is thrown.
    */
-  def insertAtIndices[T](traversable: Traversable[T], indices: List[Int], value: T): List[T] = {
-    def helper(position: Int, remainingTraversable: Traversable[T], remainingIndices: List[Int]): List[T] =
+  def insertAtIndices[T](traversable: Iterable[T], indices: List[Int], value: T): List[T] = {
+    def helper(position: Int, remainingTraversable: Iterable[T], remainingIndices: List[Int]): List[T] =
       remainingIndices match {
         case Nil => remainingTraversable.toList
         case index :: rest if index == position => value :: helper(position + 1, remainingTraversable, rest)
@@ -201,7 +201,7 @@ package object util {
    * reachable by a path from another start node (or by a cycle containing itself), the node will be included the set
    * even if `includeStart` is set to false.
    */
-  def reachable[T](graph: T => Traversable[T], includeStart: Boolean, start: T*): Set[T] = {
+  def reachable[T](graph: T => Iterable[T], includeStart: Boolean, start: T*): Set[T] = {
     var marked: Set[T] = if(includeStart) start.toSet else Set()
 
     def helper(t: T): Unit =
@@ -280,7 +280,7 @@ package object util {
   /**
    * Computes the sum of many probabilities in log space. 
    */
-  def logSumMany(xs: Traversable[Double]): Double = {
+  def logSumMany(xs: Iterable[Double]): Double = {
     val max = xs.foldLeft(Double.NegativeInfinity)(_ max _)
     if (max == Double.NegativeInfinity) Double.NegativeInfinity
     else {

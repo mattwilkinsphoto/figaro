@@ -18,7 +18,7 @@ import com.cra.figaro.algorithm.structured.solver._
 import com.cra.figaro.algorithm.structured.strategy.solve._
 import com.cra.figaro.algorithm.structured.algorithm._
 
-class StructuredVE(universe: Universe, targets: Element[_]*) extends StructuredProbQueryAlgorithm(universe, targets: _*)
+class StructuredVE(universe: Universe, targets: Element[?]*) extends StructuredProbQueryAlgorithm(universe, targets*)
   with DecompositionProbQuery {
 
   def solvingStrategy() = new ConstantStrategy(problem, structuredRaising, marginalVariableElimination)
@@ -26,11 +26,11 @@ class StructuredVE(universe: Universe, targets: Element[_]*) extends StructuredP
 
 object StructuredVE {
   /** Create a structured variable elimination algorithm with the given query targets. */
-  def apply(targets: Element[_]*) = {
+  def apply(targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run VE with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new StructuredVE(targets(0).universe, targets: _*)
+    new StructuredVE(targets(0).universe, targets*)
   }
 
   /**

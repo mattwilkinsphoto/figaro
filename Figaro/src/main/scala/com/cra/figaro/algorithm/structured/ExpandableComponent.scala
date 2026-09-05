@@ -52,9 +52,9 @@ abstract class ExpandableComponent[ParentValue, Value](problem: Problem, parent:
 class ChainComponent[ParentValue, Value](problem: Problem, val chain: Chain[ParentValue, Value])
   extends ExpandableComponent[ParentValue, Value](problem, chain.parent, chain) {
 
-  val elementsCreated: scala.collection.mutable.Set[Element[_]] = scala.collection.mutable.Set() ++ chain.universe.contextContents(chain)
+  val elementsCreated: scala.collection.mutable.Set[Element[?]] = scala.collection.mutable.Set() ++ chain.universe.contextContents(chain)
 
-  val expandFunction = chain.get _
+  val expandFunction = chain.get
 
   /**
    *  The subproblems are defined in terms of formal variables. We need to create actual variables for each of the

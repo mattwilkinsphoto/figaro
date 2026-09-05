@@ -73,9 +73,9 @@ trait Anytime extends Algorithm {
   private case class StopRunner(result: CompletableFuture[Response]) extends RunnerCommand
   private case class KillRunner(result: CompletableFuture[Response]) extends RunnerCommand
 
-  @volatile private var commands: LinkedBlockingQueue[RunnerCommand] = _
-  @volatile private var worker: Thread = _
-  @volatile private var workerFailure: Throwable = _
+  @volatile private var commands: LinkedBlockingQueue[RunnerCommand] = scala.compiletime.uninitialized
+  @volatile private var worker: Thread = scala.compiletime.uninitialized
+  @volatile private var workerFailure: Throwable = scala.compiletime.uninitialized
   @volatile var running = false
 
   /**
@@ -111,16 +111,16 @@ trait Anytime extends Algorithm {
       worker.setDaemon(true)
       worker.start()
     }
-    submit(StartRunner)
+    submit(StartRunner.apply)
   }
 
   protected[algorithm] def doStop(): Unit = {
-    submit(StopRunner)
+    submit(StopRunner.apply)
     ()
   }
 
   protected[algorithm] def doResume(): Unit = {
-    submit(ResumeRunner)
+    submit(ResumeRunner.apply)
     ()
   }
 
@@ -133,7 +133,7 @@ trait Anytime extends Algorithm {
    */
   def shutdown: Unit = {
     if (running) {
-      submit(KillRunner)
+      submit(KillRunner.apply)
       val finishedWorker = worker
       if (finishedWorker != null && finishedWorker != Thread.currentThread()) {
         finishedWorker.join(messageTimeout.toMillis)

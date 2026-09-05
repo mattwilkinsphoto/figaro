@@ -55,10 +55,10 @@ receiver.rangingStrategy
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.AnytimeLSVE.allProbabilityBounds ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/AnytimeLSVE.html#allProbabilityBounds-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/AnytimeLSVE.html#allProbabilityBounds-f66)
 
 ```scala
-def allProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)]
+def allProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered.
@@ -67,7 +67,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, Double, T)] ``.
+Returns: `` LazyList[(Double, Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered. Value parameters target Element for which to compute bounds. Attributes Returns Bounds on the probability of each value for this element. Throws AlgorithmInactiveException if the algorithm is inactive. NotATargetException if called on a target that is not in the list of targets of the algorithm. Inherited from: BoundsProbQueryAlgorithm
 
@@ -127,10 +127,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.AnytimeLSVE.computeAllProbabilityBounds ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/AnytimeLSVE.html#computeAllProbabilityBounds-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/AnytimeLSVE.html#computeAllProbabilityBounds-f66)
 
 ```scala
-override def computeAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)]
+override def computeAllProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered.
@@ -139,7 +139,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, Double, T)] ``.
+Returns: `` LazyList[(Double, Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered. Attributes Definition Classes LazyStructuredProbQueryAlgorithm -> BoundsProbQueryAlgorithm Inherited from: LazyStructuredProbQueryAlgorithm
 
@@ -151,10 +151,10 @@ receiver.computeAllProbabilityBounds[T](target)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.AnytimeLSVE.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/AnytimeLSVE.html#computeDistribution-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/AnytimeLSVE.html#computeDistribution-f66)
 
 ```scala
-override def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+override def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed.
@@ -163,7 +163,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed. Attributes Definition Classes StructuredProbQueryAlgorithm -> BaseProbQueryAlgorithm Inherited from: StructuredProbQueryAlgorithm
 
@@ -271,10 +271,10 @@ receiver.computeProbabilityBounds[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.AnytimeLSVE.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/AnytimeLSVE.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/AnytimeLSVE.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -283,7 +283,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -1139,10 +1139,10 @@ receiver.solvingStrategy()
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.LazyStructuredVE.allProbabilityBounds ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/LazyStructuredVE.html#allProbabilityBounds-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/LazyStructuredVE.html#allProbabilityBounds-f66)
 
 ```scala
-def allProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)]
+def allProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered.
@@ -1151,7 +1151,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, Double, T)] ``.
+Returns: `` LazyList[(Double, Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered. Value parameters target Element for which to compute bounds. Attributes Returns Bounds on the probability of each value for this element. Throws AlgorithmInactiveException if the algorithm is inactive. NotATargetException if called on a target that is not in the list of targets of the algorithm. Inherited from: BoundsProbQueryAlgorithm
 
@@ -1211,10 +1211,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.LazyStructuredVE.computeAllProbabilityBounds ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/LazyStructuredVE.html#computeAllProbabilityBounds-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/LazyStructuredVE.html#computeAllProbabilityBounds-f66)
 
 ```scala
-override def computeAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)]
+override def computeAllProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered.
@@ -1223,7 +1223,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, Double, T)] ``.
+Returns: `` LazyList[(Double, Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered. Attributes Definition Classes LazyStructuredProbQueryAlgorithm -> BoundsProbQueryAlgorithm Inherited from: LazyStructuredProbQueryAlgorithm
 
@@ -1235,10 +1235,10 @@ receiver.computeAllProbabilityBounds[T](target)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.LazyStructuredVE.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/LazyStructuredVE.html#computeDistribution-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/LazyStructuredVE.html#computeDistribution-f66)
 
 ```scala
-override def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+override def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed.
@@ -1247,7 +1247,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed. Attributes Definition Classes StructuredProbQueryAlgorithm -> BaseProbQueryAlgorithm Inherited from: StructuredProbQueryAlgorithm
 
@@ -1355,10 +1355,10 @@ receiver.computeProbabilityBounds[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.LazyStructuredVE.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/LazyStructuredVE.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/LazyStructuredVE.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -1367,7 +1367,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -1959,10 +1959,10 @@ receiver.rangingStrategy
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.OneTimeLSVE.allProbabilityBounds ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/OneTimeLSVE.html#allProbabilityBounds-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/OneTimeLSVE.html#allProbabilityBounds-f66)
 
 ```scala
-def allProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)]
+def allProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered.
@@ -1971,7 +1971,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, Double, T)] ``.
+Returns: `` LazyList[(Double, Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered. Value parameters target Element for which to compute bounds. Attributes Returns Bounds on the probability of each value for this element. Throws AlgorithmInactiveException if the algorithm is inactive. NotATargetException if called on a target that is not in the list of targets of the algorithm. Inherited from: BoundsProbQueryAlgorithm
 
@@ -2031,10 +2031,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.OneTimeLSVE.computeAllProbabilityBounds ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/OneTimeLSVE.html#computeAllProbabilityBounds-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/OneTimeLSVE.html#computeAllProbabilityBounds-f66)
 
 ```scala
-override def computeAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)]
+override def computeAllProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered.
@@ -2043,7 +2043,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, Double, T)] ``.
+Returns: `` LazyList[(Double, Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each value with its probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the algorithm how the stream is ordered. Attributes Definition Classes LazyStructuredProbQueryAlgorithm -> BoundsProbQueryAlgorithm Inherited from: LazyStructuredProbQueryAlgorithm
 
@@ -2055,10 +2055,10 @@ receiver.computeAllProbabilityBounds[T](target)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.OneTimeLSVE.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/OneTimeLSVE.html#computeDistribution-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/OneTimeLSVE.html#computeDistribution-f66)
 
 ```scala
-override def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+override def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed.
@@ -2067,7 +2067,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed. Attributes Definition Classes StructuredProbQueryAlgorithm -> BaseProbQueryAlgorithm Inherited from: StructuredProbQueryAlgorithm
 
@@ -2175,10 +2175,10 @@ receiver.computeProbabilityBounds[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.laziness.OneTimeLSVE.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/OneTimeLSVE.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/laziness/OneTimeLSVE.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -2187,7 +2187,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 

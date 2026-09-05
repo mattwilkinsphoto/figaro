@@ -59,7 +59,7 @@ class FairCoinTest extends AnyWordSpec with Matchers {
       'H', 'H', 'H')
 
     val params = ModelParameters()
-    val fairness = Beta(2.0, 2.0)("fairness", params)
+    val fairness = Beta(2.0, 2.0)(using "fairness", params)
     val model = new Trials(params.priorParameters)
     data zip model.trials foreach {
       (datum: (Char, Flip)) => if (datum._1 == 'H') datum._2.observe(true) else datum._2.observe(false)

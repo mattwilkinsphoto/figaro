@@ -40,11 +40,11 @@ class SimpleMovieTest extends AnyWordSpec with Matchers {
   }
 
   class Actor(name: String) {
-    val famous = Flip(0.1)(name + "famous", universe)
+    val famous = Flip(0.1)(using name + "famous", universe)
   }
 
   class Movie(name: String) {
-    val quality = Select(0.3 -> Symbol("low"), 0.5 -> Symbol("medium"), 0.2 -> Symbol("high"))(name + "quality", universe)
+    val quality = Select(0.3 -> Symbol("low"), 0.5 -> Symbol("medium"), 0.2 -> Symbol("high"))(using name + "quality", universe)
   }
 
   class Appearance(name: String, val actor: Actor, val movie: Movie) {
@@ -57,16 +57,16 @@ class SimpleMovieTest extends AnyWordSpec with Matchers {
         case (Symbol("high"), false) => 0.05
         case (Symbol("high"), true) => 0.2
       }
-    val pa = Apply(movie.quality, actor.famous, (q: Symbol, f: Boolean) => probAward(q, f))(name + "probAward", universe)
-    val award = SwitchingFlip(pa)(name + "award", universe)
+    val pa = Apply(movie.quality, actor.famous, (q: Symbol, f: Boolean) => probAward(q, f))(using name + "probAward", universe)
+    val award = SwitchingFlip(pa)(using name + "award", universe)
   }
 
   val numActors = 3
   val numMovies = 2
   val numAppearances = 3
-  var actors: Array[Actor] = _
-  var movies: Array[Movie] = _
-  var appearances: Array[Appearance] = _
+  var actors: Array[Actor] = scala.compiletime.uninitialized
+  var movies: Array[Movie] = scala.compiletime.uninitialized
+  var appearances: Array[Appearance] = scala.compiletime.uninitialized
   val random = new scala.util.Random()
 
   // A proposal either proposes to switch the awardee to another awardee or proposes the properties of a movie or
@@ -111,7 +111,7 @@ class SimpleMovieTest extends AnyWordSpec with Matchers {
 
     // Ensure that exactly one appearance gets an award.
     val appearanceAwards: Array[Element[Boolean]] = appearances map (_.award)
-    val allAwards: Element[List[Boolean]] = Inject(appearanceAwards: _*)("allAwards", universe)
+    val allAwards: Element[List[Boolean]] = Inject(appearanceAwards*)(using "allAwards", universe)
     def uniqueAwardCondition(awards: List[Boolean]) = awards.count((b: Boolean) => b) == 1
     allAwards.setCondition(uniqueAwardCondition)
 

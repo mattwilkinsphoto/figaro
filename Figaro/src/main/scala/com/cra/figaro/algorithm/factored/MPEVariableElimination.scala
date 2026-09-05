@@ -29,8 +29,8 @@ import com.cra.figaro.util.MultiSet
  */
 class MPEVariableElimination(override val universe: Universe)(
   val showTiming: Boolean,
-  val dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-  val dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double) extends OneTimeMPE with ProbabilisticVariableElimination {
+  val dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+  val dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double) extends OneTimeMPE with ProbabilisticVariableElimination {
 
   override val comparator = Some((x: Double, y: Double) => x < y)
   override val semiring = MaxProductSemiring()
@@ -43,29 +43,29 @@ class MPEVariableElimination(override val universe: Universe)(
   /**
    * Empty for MPE Algorithms.
    */
-  val targetElements = List[Element[_]]()
+  val targetElements = List[Element[?]]()
 
-  private val maximizers: Map[Variable[_], Any] = Map()
+  private val maximizers: Map[Variable[?], Any] = Map()
 
   private def getMaximizer[T](variable: Variable[T]): T = maximizers(variable).asInstanceOf[variable.Value]
 
   /*
    * Convert factors to use MaxProduct
    */
-  override def getFactors(allElements: List[Element[_]], targetElements: List[Element[_]], upper: Boolean = false): List[Factor[Double]] = {
+  override def getFactors(allElements: List[Element[?]], targetElements: List[Element[?]], upper: Boolean = false): List[Factor[Double]] = {
     val factors = super.getFactors(allElements, targetElements, upper)
     factors.map (_.mapTo(x => x, semiring))
   }
 
   def mostLikelyValue[T](target: Element[T]): T = getMaximizer(Variable(target))
 
-  private def backtrackOne[T](factor: Factor[_], variable: Variable[T]): Unit = {
+  private def backtrackOne[T](factor: Factor[?], variable: Variable[T]): Unit = {
     val indices =
       for { variable <- factor.variables } yield util.indices(variable.range, Regular(getMaximizer(variable))).head
     maximizers += variable -> factor.get(indices)
   }
 
-  def finish(factorsAfterElimination: MultiSet[Factor[Double]], eliminationOrder: List[Variable[_]]): Unit =
+  def finish(factorsAfterElimination: MultiSet[Factor[Double]], eliminationOrder: List[Variable[?]]): Unit =
     for { (variable, factor) <- eliminationOrder.reverse.zip(recordingFactors) } { backtrackOne(factor, variable) }
 }
 
@@ -79,18 +79,18 @@ object MPEVariableElimination {
     new MPEVariableElimination(universe)(
       false,
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
 
   /**
    * Create a most probable explanation computer using variable elimination
    * with the given target query variables and using the given
    * dependent universes in the current default universe.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])])(implicit universe: Universe) =
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])])(implicit universe: Universe) =
     new MPEVariableElimination(universe)(
       false,
       dependentUniverses,
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
 
   /**
    * Create a most probable explanation computer using variable elimination
@@ -99,8 +99,8 @@ object MPEVariableElimination {
    * determine the algorithm to use to compute probability of evidence in each dependent universe.
    */
   def apply(
-    dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double)(implicit universe: Universe) =
+    dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double)(implicit universe: Universe) =
     new MPEVariableElimination(universe)(
       false,
       dependentUniverses,

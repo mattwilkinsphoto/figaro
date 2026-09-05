@@ -56,15 +56,16 @@ object ConstraintFactory {
   }
 
   private def makeContingentConstraintFactor[T](cc: ComponentCollection, elem: Element[T], constraint: T => Double,
-      firstConting: Element.ElemVal[_], restContinges: Element.Contingency, upper: Boolean): Factor[Double] = {
+      firstConting: Element.ElemVal[?], restContinges: Element.Contingency, upper: Boolean): Factor[Double] = {
     val restFactor = makeConstraintFactor(cc, elem, (constraint, restContinges), upper)
     extendConstraintFactor(cc, restFactor, firstConting, upper)
   }
 
-  private def extendConstraintFactor(cc: ComponentCollection, restFactor: Factor[Double], firstConting: Element.ElemVal[_], upper: Boolean): Factor[Double] = {
+  private def extendConstraintFactor(cc: ComponentCollection, restFactor: Factor[Double], firstConting: Element.ElemVal[?], upper: Boolean): Factor[Double] = {
     // The extended factor is obtained by getting the underlying factor and expanding each row so that the row only provides its entry if the contingent variable takes
     // on the appropriate value, otherwise the entry is 1
-    val Element.ElemVal(firstElem, firstValue) = firstConting
+    val firstElem = firstConting.elem
+    val firstValue = firstConting.value
     val firstVar = Factory.getVariable(cc, firstElem)
     val firstValues = firstVar.range
     val numFirstValues = firstValues.size

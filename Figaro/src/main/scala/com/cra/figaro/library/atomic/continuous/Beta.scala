@@ -69,15 +69,6 @@ class AtomicBeta(name: Name[Double], a: Double, b: Double, collection: ElementCo
     Seq(0.0, 0.0)
   }
 
-  /**
-   * Returns an element that models the learned distribution.
-   *
-   * @deprecated
-   */
-  def getLearnedElement: AtomicFlip = {
-    new AtomicFlip("", MAPValue, collection)
-  }
-
   override def sufficientStatistics[Boolean](b: Boolean): Seq[Double] = {
     if (b == true) {
       Seq(1.0, 0.0)
@@ -102,10 +93,6 @@ class AtomicBeta(name: Name[Double], a: Double, b: Double, collection: ElementCo
     if (learnedAlpha + learnedBeta == 2) 0.5
     else (learnedAlpha - 1) / (learnedAlpha + learnedBeta - 2)
   }
-
-  // Values for Beta parameters now handled directly in the algorithms
-  @deprecated("Values for Beta parameters are now handled directly in the algorithms", "4.1.0")
-  def makeValues(depth: Int) = ValueSet.withoutStar(Set(MAPValue))
 
   def maximize(sufficientStatistics: Seq[Double]): Unit = {
     require(sufficientStatistics.size == 2)
@@ -169,13 +156,13 @@ object Beta extends Creatable {
       aValue <- (c --\ "aValue").as[Double]
       bValue <- (c --\ "bValue").as[Double]
       name <- (c --\ "name").as[String]
-    } yield Beta(aValue, bValue)(name, collection))
+    } yield Beta(aValue, bValue)(using name, collection))
 
   implicit def BetaDecodeJson(name: Name[Double])(implicit collection: ElementCollection): DecodeJson[AtomicBeta] =
     DecodeJson(c => for {
       aValue <- (c --\ "aValue").as[Double]
       bValue <- (c --\ "bValue").as[Double]
-    } yield Beta(aValue, bValue)(name, collection))
+    } yield Beta(aValue, bValue)(using name, collection))
 
   /**
    * Create a Beta distribution in which the parameters are constants.
@@ -191,5 +178,5 @@ object Beta extends Creatable {
 
   type ResultType = Double
 
-  def create(args: List[Element[_]]) = apply(args(0).asInstanceOf[Element[Double]], args(1).asInstanceOf[Element[Double]])
+  def create(args: List[Element[?]]) = apply(args(0).asInstanceOf[Element[Double]], args(1).asInstanceOf[Element[Double]])
 }

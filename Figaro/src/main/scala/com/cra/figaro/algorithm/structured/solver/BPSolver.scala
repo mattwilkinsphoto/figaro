@@ -24,7 +24,7 @@ import com.cra.figaro.algorithm.factored.factors.factory.Factory._
 import com.cra.figaro.algorithm.factored.beliefpropagation._
 import com.cra.figaro.algorithm.structured._
 
-class BPSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], factors: List[Factor[Double]], val iters: Int,
+class BPSolver(problem: Problem, toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], factors: List[Factor[Double]], val iters: Int,
   val semiring: LogConvertibleSemiRing[Double])
   extends com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation {
   // We need to create a joint probability distribution over the interface to this nested subproblem.
@@ -35,7 +35,7 @@ class BPSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: Set[
 
   def iterations = iters
   
-  val (tupleVar, tupleFactor): (Variable[_], Factor[Double]) = makeTupleVarAndFactor(problem.collection, None, toPreserve.toList: _*)
+  val (tupleVar, tupleFactor) = makeTupleVarAndFactor(problem.collection, None, toPreserve.toList*)
 
   def generateGraph() = {
     val allFactors = tupleFactor :: factors
@@ -48,7 +48,7 @@ class BPSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: Set[
     super.initialize()
   }
 
-  def go(): (List[Factor[Double]], Map[Variable[_], Factor[_]]) = {
+  def go(): (List[Factor[Double]], Map[Variable[?], Factor[?]]) = {
     initialize()
     run()
     val targetVars = toPreserve.toList ::: List(tupleVar)

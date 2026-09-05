@@ -32,17 +32,17 @@ import scala.collection.mutable.{ Set, Map }
  * track of utilities and probabilities (to compute expected utility) and it implements DecisionAlgorithm trait.
  */
 
-abstract class DecisionImportance[T, U] private (override val universe: Universe, utilityNodes: List[Element[_]], decisionTarget: Decision[T, U],
-  dummyTarget: Element[_]) extends Importance(universe, dummyTarget) with DecisionAlgorithm[T, U] {
+abstract class DecisionImportance[T, U] private (override val universe: Universe, utilityNodes: List[Element[?]], decisionTarget: Decision[T, U],
+  dummyTarget: Element[?]) extends Importance(universe, dummyTarget) with DecisionAlgorithm[T, U] {
 
-  def this(universe: Universe, utilityNodes: List[Element[_]], decisionTarget: Decision[T, U]) =
+  def this(universe: Universe, utilityNodes: List[Element[?]], decisionTarget: Decision[T, U]) =
     this(universe, utilityNodes, decisionTarget, createDecisionDummy(decisionTarget))
 
   import Importance.State
 
-  private var allUtilitiesSeen: List[WeightSeen[_]] = _
+  private var allUtilitiesSeen: List[WeightSeen[?]] = scala.compiletime.uninitialized
 
-  private def utilitySum = (0.0 /: utilityNodes)((s: Double, n: Element[_]) => s + n.value.asInstanceOf[Double])
+  private def utilitySum = (utilityNodes).foldLeft(0.0)((s: Double, n: Element[?]) => s + n.value.asInstanceOf[Double])
 
   /**
    * Cleans up the temporary elements created during sampling.
@@ -88,7 +88,7 @@ object DecisionImportance {
   /* Checks conditions of Decision Usage
    * 1. Double utilities
    */
-  private def UsageCheck(utilityNodes: List[Element[_]], target: Decision[_, _]) = {
+  private def UsageCheck(utilityNodes: List[Element[?]], target: Decision[?, ?]) = {
     utilityNodes.foreach { u =>
       u.value match {
         case d: Double => 1
@@ -107,7 +107,7 @@ object DecisionImportance {
   /**
    * Create an Anytime DecisionImportance sampler with the given decision over the given universe.
    */
-  def apply[T, U](utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate()) // need initial values for the utility nodes before the usage check
     UsageCheck(utilityNodes, target)
     new DecisionImportance[T, U](universe, utilityNodes, target) with AnytimeProbQuerySampler
@@ -117,7 +117,7 @@ object DecisionImportance {
    * Create an OneTime DecisionImportance sampler with the given decision over the given universe
    * using the given number of samples.
    */
-  def apply[T, U](myNumSamples: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](myNumSamples: Int, utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate()) // need initial values for the utility nodes before the usage check
     UsageCheck(utilityNodes, target)
     new DecisionImportance[T, U](universe, utilityNodes, target) with OneTimeProbQuerySampler { val numSamples = myNumSamples }

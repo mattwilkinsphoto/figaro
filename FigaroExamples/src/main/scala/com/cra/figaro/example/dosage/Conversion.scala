@@ -58,7 +58,7 @@ object Conversion {
     var M = Map[String, List[String]]()
     compToAA.keys.foreach { k =>
       val l = k.toList.map(c => symbolToN(c.toString()))
-      val prod = homogeneousCartesianProduct(l: _*)
+      val prod = homogeneousCartesianProduct(l*)
       M += (k -> prod.map(v => v.reduce(_ + _)))
     }
     M
@@ -73,7 +73,7 @@ object Conversion {
 
   implicit def toAminoAcidSequence(n: NucleotideSequence): AminoAcidSequence = {
     val aa = for { i <- 0 until n.seq.size by 3 } yield (compToAA(codonToComp(n.seq.substring(i, i + 3))))
-    AminoAcidSequence(("" /: aa)(_ + _))
+    AminoAcidSequence((aa).foldLeft("")(_ + _))
   }
 
 }

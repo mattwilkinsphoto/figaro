@@ -58,7 +58,7 @@ object Factory {
     v
   }
 
-  def makeVariable[T](cc: ComponentCollection, valueSet: ValueSet[T], chain: Chain[_, _]): Variable[T] = {
+  def makeVariable[T](cc: ComponentCollection, valueSet: ValueSet[T], chain: Chain[?, ?]): Variable[T] = {
     val v = new InternalChainVariable(valueSet, chain, getVariable(cc, chain))
     cc.intermediates += v
     v
@@ -96,16 +96,16 @@ object Factory {
    * and create the factor mapping the inputs to their tuple.
    * @param inputs the variables to be formed into a tuple
    */
-  def makeTupleVarAndFactor(cc: ComponentCollection, chain: Option[Chain[_, _]], inputs: Variable[_]*): (Variable[List[Extended[_]]], Factor[Double]) = {
-    val inputList: List[Variable[_]] = inputs.toList
+  def makeTupleVarAndFactor(cc: ComponentCollection, chain: Option[Chain[?, ?]], inputs: Variable[?]*): (Variable[List[Extended[?]]], Factor[Double]) = {
+    val inputList: List[Variable[?]] = inputs.toList
     // Subtlety alert: In the tuple, we can't just map inputs with * to *. We need to remember which input was *.
     // Therefore, instead, we make the value a regular value consisting of a list of extended values.
-    val tupleRangeRegular: List[List[_]] = cartesianProduct(inputList.map(_.range): _*)
-    val tupleVS: ValueSet[List[Extended[_]]] = withoutStar(tupleRangeRegular.map(_.asInstanceOf[List[Extended[_]]]).toSet)
-    val tupleVar: Variable[List[Extended[_]]] = if (chain.nonEmpty) Factory.makeVariable(cc, tupleVS, chain.get) else Factory.makeVariable(cc, tupleVS)
+    val tupleRangeRegular: List[List[?]] = cartesianProduct(inputList.map(_.range)*)
+    val tupleVS: ValueSet[List[Extended[?]]] = withoutStar(tupleRangeRegular.map(_.asInstanceOf[List[Extended[?]]]).toSet)
+    val tupleVar: Variable[List[Extended[?]]] = if (chain.nonEmpty) Factory.makeVariable(cc, tupleVS, chain.get) else Factory.makeVariable(cc, tupleVS)
     val tupleFactor = new SparseFactor[Double](inputList, List(tupleVar))
     for { pair <- tupleVar.range.zipWithIndex } {
-      val tupleVal: List[Extended[_]] = pair._1.value
+      val tupleVal: List[Extended[?]] = pair._1.value
       val tupleIndex = pair._2
       val inputIndices =
         for { (input, value) <- inputList.zip(tupleVal) } yield input.range.indexOf(value)
@@ -117,7 +117,7 @@ object Factory {
   /**
    * Create a DenseFactor from the supplied parent and children variables
    */
-  def defaultFactor[T](parents: List[Variable[_]], children: List[Variable[_]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]]) =
+  def defaultFactor[T](parents: List[Variable[?]], children: List[Variable[?]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]]) =
     new DenseFactor[T](parents, children, _semiring)
 
   private def makeFactors[T](cc: ComponentCollection, const: Constant[T]): List[Factor[Double]] = {
@@ -140,7 +140,7 @@ object Factory {
    * parent element, one of the result elements, and the overall chain element.
    */
 
-  def makeConditionalSelector[T, U](pairVar: Variable[List[Extended[_]]], parentXVal: Extended[T], outcomeVar: Variable[U], choices: Set[U])(implicit mapper: PointMapper[U]): Factor[Double] = {
+  def makeConditionalSelector[T, U](pairVar: Variable[List[Extended[?]]], parentXVal: Extended[T], outcomeVar: Variable[U], choices: Set[U])(implicit mapper: PointMapper[U]): Factor[Double] = {
     val factor = new ConditionalSelector[Double](List(pairVar), List(outcomeVar))
     for {
       (pairXVal, pairIndex) <- pairVar.range.zipWithIndex
@@ -162,7 +162,7 @@ object Factory {
     factor
   }
 
-  private def isTemporary[_T](variable: Variable[_]): Boolean = {
+  private def isTemporary[_T](variable: Variable[?]): Boolean = {
     variable match {
       case e: ElementVariable[_] => e.element.isTemporary
       case _ => false
@@ -170,8 +170,9 @@ object Factory {
   }
 
   private def makeFactors[T](cc: ComponentCollection, inject: Inject[T]): List[Factor[Double]] = {
-    def rule(values: List[Extended[_]]) = {
-      val inputXvalues :+ resultXvalue = values
+    def rule(values: List[Extended[?]]) = {
+      val inputXvalues = values.init
+      val resultXvalue = values.last
       // See logic under makeCares
       if (inputXvalues.exists(!_.isRegular)) {
         if (!resultXvalue.isRegular) 1.0; else 0.0
@@ -183,12 +184,12 @@ object Factory {
     val resultVariable = getVariable(cc, inject)
     //    val variables = resultVariable :: inputVariables
     val factor = new DenseFactor[Double](inputVariables, List(resultVariable))
-    factor.fillByRule(rule _)
+    factor.fillByRule(rule)
     List(factor)
   }
 
   // When we're using a parameter to compute expected sufficient statistics, we just use its expected value
-  private def makeParameterFactors(cc: ComponentCollection, param: Parameter[_]): List[Factor[Double]] = {
+  private def makeParameterFactors(cc: ComponentCollection, param: Parameter[?]): List[Factor[Double]] = {
     // The parameter should have one possible value, which is its expected value
     val paramVar = getVariable(cc, param)
     assert(paramVar.range.size == 1)
@@ -206,7 +207,7 @@ object Factory {
   }
 
   
-  def parameterCheck(elem: Element[_], parameterized: Boolean): Boolean = {
+  def parameterCheck(elem: Element[?], parameterized: Boolean): Boolean = {
     elem match {
       case parameter: DoubleParameter => parameterized
       case _ => false
@@ -245,7 +246,6 @@ object Factory {
       case r: SingleValuedReferenceElement[_] => ComplexFactory.makeFactors(cc, r)
       case r: MultiValuedReferenceElement[_] => ComplexFactory.makeFactors(cc, r)
       case r: Aggregate[_, _] => ComplexFactory.makeFactors(cc, r)
-      //case m: MakeList[_] => ComplexFactory.makeFactors(cc, m)
       case m: MakeArray[_] => ComplexFactory.makeFactors(cc, m)
       case f: FoldLeft[_, _] => ComplexFactory.makeFactors(cc, f)
       case f: FactorMaker[_] => f.makeFactors
@@ -273,12 +273,12 @@ object Factory {
 
   private def makeAbstract[T](cc: ComponentCollection, elem: Element[T], abstraction: Abstraction[T]): List[Factor[Double]] =
     elem match {
-      case apply: Apply1[_, _] => ApplyFactory.makeFactors(cc, apply)(abstraction.scheme)
-      case apply: Apply2[_, _, _] => ApplyFactory.makeFactors(cc, apply)(abstraction.scheme)
-      case apply: Apply3[_, _, _, _] => ApplyFactory.makeFactors(cc, apply)(abstraction.scheme)
+      case apply: Apply1[_, _] => ApplyFactory.makeFactors(cc, apply)(using abstraction.scheme)
+      case apply: Apply2[_, _, _] => ApplyFactory.makeFactors(cc, apply)(using abstraction.scheme)
+      case apply: Apply3[_, _, _, _] => ApplyFactory.makeFactors(cc, apply)(using abstraction.scheme)
       // In the case of a Chain, its pragmas are inherited by the expanded result elements. The abstraction will be
       // taken into account when we generate factors for the result elements.
-      case chain: Chain[_, _] => ChainFactory.makeFactors(cc, chain)(abstraction.scheme)
+      case chain: Chain[_, _] => ChainFactory.makeFactors(cc, chain)(using abstraction.scheme)
       case atomic: Atomic[_] => makeAbstract(cc, atomic, abstraction)
       case _ => throw new UnsupportedAlgorithmException(elem)
     }
@@ -316,14 +316,14 @@ object Factory {
     }
     val variables = uses map (cc(_).variable)
     val factor = new DenseFactor[Double](variables, List())
-    factor.fillByRule(rule _)
+    factor.fillByRule(rule)
     factor
   }
 
   /**
    * Make factors for a particular element. This function wraps the SFI method of creating factors using component collections
    */
-  def makeFactorsForElement[Value](elem: Element[_], upper: Boolean = false, parameterized: Boolean = false) = {
+  def makeFactorsForElement[Value](elem: Element[?], upper: Boolean = false, parameterized: Boolean = false) = {
     val variable = Variable(elem)
     val comp = Variable.cc(elem)
     if (elem.intervention.isDefined) {

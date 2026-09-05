@@ -26,12 +26,12 @@ trait Creatable {
   type ResultType
   
   /** Create an element of this type with the given arguments. */
-  def create(args: List[Element[_]]): Element[ResultType]
+  def create(args: List[Element[?]]): Element[ResultType]
 }
 
 object Create {
   /** Create an element with the given class name and inputs. The class name must name a creatable element class. */
-  def apply[T](className: String, inputs: Element[_]*): Element[T] = {
+  def apply[T](className: String, inputs: Element[?]*): Element[T] = {
     // Scala 2 and Scala 3 singleton objects share the JVM MODULE$ convention.
     // Invoke the Creatable contract directly; Scala 2 runtime mirrors cannot
     // inspect Scala 3 TASTy metadata.

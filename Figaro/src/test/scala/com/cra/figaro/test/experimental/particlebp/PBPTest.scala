@@ -65,7 +65,7 @@ class PBPTest extends AnyWordSpec with Matchers {
     }
 
     "resample according to the resampler values " in {
-      def mean(p: List[(Double, Double)]) = (0.0 /: p)((c: Double, n: (Double, Double)) => c + n._1 * n._2)
+      def mean(p: List[(Double, Double)]) = (p).foldLeft(0.0)((c: Double, n: (Double, Double)) => c + n._1 * n._2)
       Universe.createNew()
       val n = Normal(0.0, 1.0)
       val pbpSampler = ParticleGenerator(Universe.universe, new AutomaticDensityEstimator, 100, 100)
@@ -81,16 +81,16 @@ class PBPTest extends AnyWordSpec with Matchers {
       val number = Apply(n, (d: Double) => d.round.toInt)
       val items = Chain(number, (num: Int) => {
         val f = for { i <- 0 until num } yield Flip(0.5)
-        Inject(f: _*)
+        Inject(f*)
       })
       val pbpSampler = ParticleGenerator(Universe.universe)
-      pbpSampler.update(n, pbpSampler.numSamplesFromAtomics, List[(Double, _)]((1.0, 2.0)))
+      pbpSampler.update(n, pbpSampler.numSamplesFromAtomics, List[(Double, ?)]((1.0, 2.0)))
       val bpb = ParticleBeliefPropagation(1, 1, items)
       bpb.runOuterLoop()
       val fg_2 = bpb.bp.factorGraph.getNodes().filter(p => p.isInstanceOf[VariableNode]).toSet
 
-      pbpSampler.update(n, pbpSampler.numSamplesFromAtomics, List[(Double, _)]((1.0, 3.0)))
-      val dependentElems = Set[Element[_]](n, number, items)
+      pbpSampler.update(n, pbpSampler.numSamplesFromAtomics, List[(Double, ?)]((1.0, 3.0)))
+      val dependentElems = Set[Element[?]](n, number, items)
       bpb.runInnerLoop(dependentElems, Set())
       // Currently have to subtract 3 since the old factors for n = 2 also get created since they exist in the chain cache
       val fg_3 = bpb.bp.factorGraph.getNodes().filter(p => p.isInstanceOf[VariableNode]).toSet
@@ -133,7 +133,7 @@ class PBPTest extends AnyWordSpec with Matchers {
       val number = Apply(n, (d: Double) => d.round.toInt)
       val items = Chain(number, (num: Int) => {
         val f = for { i <- 0 until num } yield Flip(0.5)
-        Inject(f: _*)
+        Inject(f*)
       })
       val bpb = ParticleBeliefPropagation(1, 1, items)
       bpb.runInnerLoop(Set(), Set())
@@ -274,7 +274,7 @@ class PBPTest extends AnyWordSpec with Matchers {
           val f = Flip(u)
           val a = If(f, Select(0.3 -> 1, 0.7 -> 2), Constant(2))
           Universe.createNew()
-          val algorithm = ParticleBeliefPropagation(1, 20, 100, 100, f)(u1)
+          val algorithm = ParticleBeliefPropagation(1, 20, 100, 100, f)(using u1)
           algorithm.start()
           val result = algorithm.probability(f)(b => b)
           algorithm.kill()
@@ -329,8 +329,8 @@ class PBPTest extends AnyWordSpec with Matchers {
       val origCov = 8.0
       val mvn = new MultivariateNormalDistribution(Array(0.0, 0.0), Array(Array(8.0, origCov), Array(origCov, 16.0)))
       Universe.createNew()
-      val locX = CUniform(20, 80)("X", Universe.universe)
-      val locY = CUniform(20, 80)("Y", Universe.universe)
+      val locX = CUniform(20, 80)(using "X", Universe.universe)
+      val locY = CUniform(20, 80)(using "Y", Universe.universe)
       val loc = ^^(locX, locY)
       loc.addConstraint((l: (Double, Double)) => {
         mvn.density(Array((l._1 - 40.0), (l._2 - 40.0)))
@@ -356,13 +356,13 @@ class PBPTest extends AnyWordSpec with Matchers {
       val x1 = Apply(x, (i: Int) => i < 1)
       val y1 = Apply(y, (i: Int) => i < 2)
       val dependentUniverse = new Universe(List(x1, y1))
-      val u1 = CUniform(0.0, 1.0)("", dependentUniverse)
-      val u2 = CUniform(0.0, 2.0)("", dependentUniverse)
+      val u1 = CUniform(0.0, 1.0)(using "", dependentUniverse)
+      val u2 = CUniform(0.0, 2.0)(using "", dependentUniverse)
 
-      val a = CachingChain(x1, y1, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)("a", dependentUniverse)
+      val a = CachingChain(x1, y1, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)(using "a", dependentUniverse)
       val condition = (d: Double) => d < 0.5
       val ve = ParticleBeliefPropagation(List((dependentUniverse, List(NamedEvidence("a", Condition(condition))))),
-        (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
+        (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
         1, 40, x1)
       ve.start()
       val peGivenXTrue = 0.5

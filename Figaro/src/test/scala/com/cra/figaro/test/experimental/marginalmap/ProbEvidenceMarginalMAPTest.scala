@@ -28,11 +28,11 @@ class ProbEvidenceMarginalMAPTest extends AnyWordSpec with Matchers {
   // rather than exploration of a large state space
   val linearSchedule = Schedule((temp, iter) => iter)
 
-  def anytime(elems: Element[_]*) =
-    ProbEvidenceMarginalMAP(0.05, 100, 100, ProposalScheme.default, linearSchedule, elems:_*)
+  def anytime(elems: Element[?]*) =
+    ProbEvidenceMarginalMAP(0.05, 100, 100, ProposalScheme.default, linearSchedule, elems*)
 
-  def oneTime(elems: Element[_]*) =
-    ProbEvidenceMarginalMAP(2000, 0.05, 100, 100, ProposalScheme.default, linearSchedule, elems:_*)
+  def oneTime(elems: Element[?]*) =
+    ProbEvidenceMarginalMAP(2000, 0.05, 100, 100, ProposalScheme.default, linearSchedule, elems*)
 
   "Marginal MAP using probability of evidence" should {
     "increase temperature with additional iterations" in {
@@ -184,7 +184,7 @@ class ProbEvidenceMarginalMAPTest extends AnyWordSpec with Matchers {
       "produce the right answer with a condition" in {
         Universe.createNew()
         val rolls = for { i <- 1 to 10 } yield Uniform(1,2,3,4)
-        val c = Container(rolls: _*)
+        val c = Container(rolls*)
         val num4 = c.count(_ == 4)
 
         num4.addCondition(_ >= 5)
@@ -202,7 +202,7 @@ class ProbEvidenceMarginalMAPTest extends AnyWordSpec with Matchers {
       "produce the right answer with a constraint" in {
         Universe.createNew()
         val rolls = for { i <- 1 to 10 } yield Uniform(1,2,3,4)
-        val c = Container(rolls: _*)
+        val c = Container(rolls*)
         val num4 = c.count(_ == 4)
 
         val constraint = (x: Int) => math.exp(- (x - 6) * (x - 6))
@@ -329,7 +329,7 @@ class ProbEvidenceMarginalMAPTest extends AnyWordSpec with Matchers {
       "produce the right answer with a condition" in {
         Universe.createNew()
         val rolls = for { i <- 1 to 10 } yield Uniform(1,2,3,4)
-        val c = Container(rolls: _*)
+        val c = Container(rolls*)
         val num4 = c.count(_ == 4)
 
         num4.addCondition(_ >= 5)
@@ -345,7 +345,7 @@ class ProbEvidenceMarginalMAPTest extends AnyWordSpec with Matchers {
       "produce the right answer with a constraint" in {
         Universe.createNew()
         val rolls = for { i <- 1 to 10 } yield Uniform(1,2,3,4)
-        val c = Container(rolls: _*)
+        val c = Container(rolls*)
         val num4 = c.count(_ == 4)
 
         val constraint = (x: Int) => math.exp(- (x - 6) * (x - 6))

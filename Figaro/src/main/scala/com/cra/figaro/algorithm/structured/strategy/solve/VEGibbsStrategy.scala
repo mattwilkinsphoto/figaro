@@ -25,7 +25,7 @@ class VEGibbsStrategy(problem: Problem, raisingCriteria: RaisingCriteria, val sc
                       val numSamples: Int, val burnIn: Int, val interval: Int,  val blockToSampler: Gibbs.BlockSamplerCreator)
   extends RaisingStrategy(problem, raisingCriteria) {
 
-  override def eliminate(toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], factors: List[Factor[Double]]): (List[Factor[Double]], Map[Variable[_], Factor[_]]) = {
+  override def eliminate(toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], factors: List[Factor[Double]]): (List[Factor[Double]], Map[Variable[?], Factor[?]]) = {
     val (score, order) = VariableElimination.eliminationOrder(factors, toPreserve)
     if (score > scoreThreshold) {
       solver.marginalGibbs(numSamples, burnIn, interval, blockToSampler)(problem, toEliminate, toPreserve, factors)
@@ -34,7 +34,7 @@ class VEGibbsStrategy(problem: Problem, raisingCriteria: RaisingCriteria, val sc
     }
   }
 
-  override def recurse(subproblem: NestedProblem[_]) = {
+  override def recurse(subproblem: NestedProblem[?]) = {
     new VEGibbsStrategy(subproblem, raisingCriteria, scoreThreshold, numSamples, burnIn, interval, blockToSampler)
   }
 

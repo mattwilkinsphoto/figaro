@@ -34,7 +34,7 @@ trait Semiring[T] {
    * Sum of many entries. Typically, this would be implemented by the ordinary sum,
    * but there may be more efficient implementations.
    */
-  def sumMany(xs: Traversable[T]): T = {
+  def sumMany(xs: Iterable[T]): T = {
     xs.foldLeft(zero)(sum(_, _))
   }
 
@@ -155,7 +155,7 @@ case class LogSumProductSemiring() extends DivideableSemiRing[Double] with LogCo
 
   def divide(x: Double, y: Double) = if (y == zero) zero else x - y
 
-  override def sumMany(xs: Traversable[Double]): Double = {
+  override def sumMany(xs: Iterable[Double]): Double = {
     val max = xs.foldLeft(Double.NegativeInfinity)(_ max _)
     if (max == Double.NegativeInfinity) Double.NegativeInfinity
     else {

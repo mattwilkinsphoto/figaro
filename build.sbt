@@ -44,7 +44,7 @@ lazy val legalSettings = Seq(
 lazy val figaroSettings = Seq(
   organization := "io.github.mattwilkinsphoto",
   description := "Figaro: a language for probabilistic programming",
-  version := "6.0.0-modern.1-SNAPSHOT",
+  version := "6.0.0-modern.2-SNAPSHOT",
   scalaVersion := "3.9.0",
   crossScalaVersions := Seq("3.9.0"),
   crossPaths := true,
@@ -71,6 +71,8 @@ lazy val figaroSettings = Seq(
     "-no-indent",
     "-feature",
     "-deprecation",
+    // Retired language/library APIs must not return through library, examples, or tests.
+    "-Wconf:cat=deprecation:error",
     "-language:postfixOps"
   ),
   Compile / javacOptions ++= Seq("--release", "17")

@@ -175,7 +175,7 @@ Behavioral validation:
 - A broader 284-test selection passes across language/universe/reference behavior, decision utilities, structured ranges/raising, semirings, and sparse factors.
 - One earlier required-gate run produced a Monte Carlo estimate of `0.48995` against `0.50 +/- 0.01` in the legacy dependent-factor test. The repeat passed without changing the tolerance or sampling budget. This remains a bounded sampling check, not a deterministic proof; the full historical suite is still not claimed green.
 
-Remaining maintenance: the compiler still reports legacy deprecations (including `Stream`, wildcard spelling, implicit-argument syntax, and non-local returns). These are visible, not suppressed. Broad stylistic rewrites and redesigning all deprecated APIs are outside this migration. The inherited OSGi metadata remains unvalidated.
+At this checkpoint, legacy deprecations remained visible rather than suppressed. The subsequent [deprecation-retirement stage](docs/DEPRECATION_RETIREMENT.md) replaces deprecated syntax and library usage and removes obsolete Figaro entry points. The inherited OSGi metadata remains unvalidated.
 
 Artifact validation:
 

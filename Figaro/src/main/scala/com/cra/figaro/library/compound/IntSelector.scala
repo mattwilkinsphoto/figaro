@@ -32,11 +32,15 @@ class IntSelector(name: Name[Int], val counter: Element[Int], collection: Elemen
   // We achieve the two properties by making the randomness a random stream of doubles and selecting the index
   // within range that has the highest randomness. If the bound changes, the double associated with the index
   // does not change, so quite often the highest index will stay the same.
-  type Randomness = Stream[Double]
+  type Randomness = LazyList[Double]
 
   def args = List(counter)
 
-  def generateRandomness(): Randomness = Stream.continually(random.nextDouble())
+  def generateRandomness(): Randomness = {
+    // Preserve the initial eager draw while retaining memoized, unbounded randomness.
+    val first = random.nextDouble()
+    LazyList.cons(first, LazyList.continually(random.nextDouble()))
+  }
 
   def generateValue(rand: Randomness): Int = argmax(rand take counter.value)
 

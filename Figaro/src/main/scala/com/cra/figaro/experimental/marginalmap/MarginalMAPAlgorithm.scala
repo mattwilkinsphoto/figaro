@@ -27,7 +27,7 @@ trait MarginalMAPAlgorithm extends Algorithm {
   /**
    * Elements for which to perform MAP queries. This algorithm marginalizes over elements not in this list.
    */
-  def mapElements: Seq[Element[_]]
+  def mapElements: Seq[Element[?]]
   
   /*
    * Particular implementations of algorithm must provide the following method.

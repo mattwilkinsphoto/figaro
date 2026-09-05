@@ -39,15 +39,15 @@ class HashSelectableSet[T] extends SelectableSet[T] {
 
   private var numElements = 0
 
-  private var arraySize: Int = _
+  private var arraySize: Int = scala.compiletime.uninitialized
 
-  private var maxNumElements: Int = _
+  private var maxNumElements: Int = scala.compiletime.uninitialized
 
-  private var minNumElements: Int = _
+  private var minNumElements: Int = scala.compiletime.uninitialized
 
-  private var binSizeLimit: Int = _
+  private var binSizeLimit: Int = scala.compiletime.uninitialized
 
-  private var contents: Array[List[T]] = _
+  private var contents: Array[List[T]] = scala.compiletime.uninitialized
 
   /**
    * Make a copy of this HashSelectableSet, returning a new HashSelectableSet

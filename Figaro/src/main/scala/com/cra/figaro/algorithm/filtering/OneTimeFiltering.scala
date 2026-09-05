@@ -24,7 +24,7 @@ trait OneTimeFiltering extends Filtering with OneTime {
   /**
    * Returns the distribution over the element referred to by the reference at the current time point.
    */
-  def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)] =
+  def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)] =
     computeCurrentDistribution(reference)
 
   /**

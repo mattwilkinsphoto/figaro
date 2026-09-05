@@ -41,10 +41,10 @@ class FirmsTest extends AnyWordSpec with Matchers {
   }
 
   private class Firm(name: String) {
-    val efficient = Flip(0.3)(name + "efficient", universe)
-    val bidWhenEfficient = continuous.Uniform(5.0, 15.0)(name + "bidWhenEfficient", universe)
-    val bidWhenInefficient = continuous.Uniform(10.0, 20.0)(name + "bidWhenInefficient", universe)
-    val bid = If(efficient, bidWhenEfficient, bidWhenInefficient)("bid", universe)
+    val efficient = Flip(0.3)(using name + "efficient", universe)
+    val bidWhenEfficient = continuous.Uniform(5.0, 15.0)(using name + "bidWhenEfficient", universe)
+    val bidWhenInefficient = continuous.Uniform(10.0, 20.0)(using name + "bidWhenInefficient", universe)
+    val bid = If(efficient, bidWhenEfficient, bidWhenInefficient)(using "bid", universe)
   }
 
   def test(algorithmCreator: Element[Boolean] => ProbQueryAlgorithm): Unit = {
@@ -52,10 +52,10 @@ class FirmsTest extends AnyWordSpec with Matchers {
     val firm1 = new Firm("Firm1")
     val firm2 = new Firm("Firm2")
     val firms = Array(firm1, firm2)
-    val winner = discrete.Uniform(firms: _*)("winner", universe)
-    val winningBid = CachingChain(winner, (f: Firm) => f.bid)("winningBid", universe)
+    val winner = discrete.Uniform(firms*)(using "winner", universe)
+    val winningBid = CachingChain(winner, (f: Firm) => f.bid)(using "winningBid", universe)
     winningBid.setConstraint((d: Double) => 20 - d)
-    val winningEfficiency = CachingChain(winner, (f: Firm) => f.efficient)("winningEfficiency", universe)
+    val winningEfficiency = CachingChain(winner, (f: Firm) => f.efficient)(using "winningEfficiency", universe)
 
     // Expected constraint for efficient firm = 0.1 \int_5^15 (20 - x) dx
     // = 0.1 [20x - 0.5 x^2]_5^15 = 0.1 (300 - 112.5 - 100 + 12.5) = 10

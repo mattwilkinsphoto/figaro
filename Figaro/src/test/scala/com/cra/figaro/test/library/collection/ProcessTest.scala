@@ -208,12 +208,12 @@ class ProcessTest extends AnyWordSpec with Matchers {
   def createProcess(indices: List[Int], invert: Boolean = false): Process[Int, Boolean] = new Process[Int, Boolean] {
     val universe = Universe.universe
     def rangeCheck(index: Int) = indices.contains(index)
-    def generate(index: Int) = if (invert) Flip(1.0 - 1.0 / index)("", universe) else Flip(1.0 / index)("", universe)
+    def generate(index: Int) = if (invert) Flip(1.0 - 1.0 / index)(using "", universe) else Flip(1.0 / index)(using "", universe)
     def generate(indices: List[Int]) = {
       val unary = for {
         index <- indices
       } yield (index, generate(index))
-      val map = Map(unary:_*)
+      val map = Map(unary*)
       val binary =
         for {
           index1 <- indices
@@ -222,11 +222,11 @@ class ProcessTest extends AnyWordSpec with Matchers {
         } yield {
           val elem1 = map(index1)
           val elem2 = map(index2)
-          val pair = ^^(elem1, elem2)("", universe)
+          val pair = ^^(elem1, elem2)(using "", universe)
           pair.addConstraint((pair: (Boolean, Boolean)) => if (pair._1 != pair._2) 1.0 / (index1 + index2) else 1.0)
           pair
         }
-      Map(unary:_*)
+      Map(unary*)
     }
   }
 }

@@ -57,7 +57,7 @@ abstract class Dist[P, T](name: Name[T], val clauses: List[(P, Element[T])], col
  */
 class AtomicDist[T](name: Name[T], clauses: List[(Double, Element[T])], collection: ElementCollection)
   extends Dist(name, clauses, collection) {
-  def args: List[Element[_]] = outcomes
+  def args: List[Element[?]] = outcomes
 
   private lazy val indexedProbs = normalize(probs).zipWithIndex
 
@@ -79,7 +79,7 @@ class CompoundDist[T](name: Name[T], clauses: List[(Element[Double], Element[T])
   extends Dist(name, clauses, collection) {
   // args is a val rather than a def because some work needs to be done to produce it;
   // it is lazy to avoid uninitialized val bug
-  lazy val args: List[Element[_]] = probs ::: outcomes
+  lazy val args: List[Element[?]] = probs ::: outcomes
 
   /**
    * Select which outcome clause will be used, based on the randomness.

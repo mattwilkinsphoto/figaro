@@ -37,7 +37,7 @@ class Dictionary(initNumEmails: Int) {
   object OrderByCount extends Ordering[String] {
     def compare(a: String, b: String) = getCount(b) - getCount(a)
   }
-  def words = counts.keySet.toList.sorted(OrderByCount)
+  def words = counts.keySet.toList.sorted(using OrderByCount)
 
   def nonStopWords = words.dropWhile(counts(_) >= numEmails * Dictionary.stopWordFraction)
   def featureWords = nonStopWords.take(Dictionary.numFeatures)
@@ -51,7 +51,7 @@ class Dictionary(initNumEmails: Int) {
 }
 
 object Dictionary {
-  def fromEmails(emails: Traversable[Email]) = {
+  def fromEmails(emails: Iterable[Email]) = {
     val result = new Dictionary(0)
     for { email <- emails } { result.addEmail(email) }
     result

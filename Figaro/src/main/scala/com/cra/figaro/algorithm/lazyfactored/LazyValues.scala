@@ -64,7 +64,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
       case p: Parameter[_] if paramaterized => ValueSet.withoutStar(Set(p.MAPValue))
       case c: Constant[_]     => withoutStar(Set(c.constant))
       case f: Flip            => withoutStar(Set(true, false))
-      case d: Select[_, _]    => withoutStar(Set(d.outcomes: _*))
+      case d: Select[_, _]    => withoutStar(Set(d.outcomes*))
       case d: Dist[_, _] =>
         val componentSets = d.outcomes.map(storedValues(_))
         componentSets.reduce(_ ++ _)
@@ -100,7 +100,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
         val applyMap = getMap(a)
         val vs1 = LazyValues(a.arg1.universe).storedValues(a.arg1)
         val vs2 = LazyValues(a.arg2.universe).storedValues(a.arg2)
-        val choices = cartesianProduct(vs1.xvalues.toList, vs2.xvalues.toList).asInstanceOf[List[List[Extended[_]]]]
+        val choices = cartesianProduct(vs1.xvalues.toList, vs2.xvalues.toList).asInstanceOf[List[List[Extended[?]]]]
         val resultsList =
           for {
             List(arg1, arg2) <- choices
@@ -116,7 +116,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
         val vs1 = LazyValues(a.arg1.universe).storedValues(a.arg1)
         val vs2 = LazyValues(a.arg2.universe).storedValues(a.arg2)
         val vs3 = LazyValues(a.arg3.universe).storedValues(a.arg3)
-        val choices = cartesianProduct(vs1.xvalues.toList, vs2.xvalues.toList, vs3.xvalues.toList).asInstanceOf[List[List[Extended[_]]]]
+        val choices = cartesianProduct(vs1.xvalues.toList, vs2.xvalues.toList, vs3.xvalues.toList).asInstanceOf[List[List[Extended[?]]]]
         val resultsList =
           for {
             List(arg1, arg2, arg3) <- choices
@@ -134,7 +134,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
         val vs2 = LazyValues(a.arg2.universe).storedValues(a.arg2)
         val vs3 = LazyValues(a.arg3.universe).storedValues(a.arg3)
         val vs4 = LazyValues(a.arg4.universe).storedValues(a.arg4)
-        val choices = cartesianProduct(vs1.xvalues.toList, vs2.xvalues.toList, vs3.xvalues.toList, vs4.xvalues.toList).asInstanceOf[List[List[Extended[_]]]]
+        val choices = cartesianProduct(vs1.xvalues.toList, vs2.xvalues.toList, vs3.xvalues.toList, vs4.xvalues.toList).asInstanceOf[List[List[Extended[?]]]]
         val resultsList =
           for {
             List(arg1, arg2, arg3, arg4) <- choices
@@ -154,7 +154,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
         val vs3 = LazyValues(a.arg3.universe).storedValues(a.arg3)
         val vs4 = LazyValues(a.arg4.universe).storedValues(a.arg4)
         val vs5 = LazyValues(a.arg5.universe).storedValues(a.arg5)
-        val choices = cartesianProduct(vs1.xvalues.toList, vs2.xvalues.toList, vs3.xvalues.toList, vs4.xvalues.toList, vs5.xvalues.toList).asInstanceOf[List[List[Extended[_]]]]
+        val choices = cartesianProduct(vs1.xvalues.toList, vs2.xvalues.toList, vs3.xvalues.toList, vs4.xvalues.toList, vs5.xvalues.toList).asInstanceOf[List[List[Extended[?]]]]
         val resultsList =
           for {
             List(arg1, arg2, arg3, arg4, arg5) <- choices
@@ -198,7 +198,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
         val elementVSs = i.args.map(arg => LazyValues(arg.universe).storedValues(arg))
         val incomplete = elementVSs.exists(_.hasStar)
         val elementValues = elementVSs.toList.map(_.regularValues.toList)
-        val resultValues = homogeneousCartesianProduct(elementValues: _*).toSet.asInstanceOf[Set[i.Value]]
+        val resultValues = homogeneousCartesianProduct(elementValues*).toSet.asInstanceOf[Set[i.Value]]
         if (incomplete) withStar(resultValues); else withoutStar(resultValues)
       case v: ValuesMaker[_] => {
         v.makeValues(depth)
@@ -215,7 +215,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
 
   private def abstractValues[T](element: Element[T], abstraction: Abstraction[T], depth: Int,
                                 numArgSamples: Int, numTotalSamples: Int): ValueSet[T] = {
-    val (inputs, hasStar): (List[T], Boolean) = {
+    val (inputs, hasStar) = {
       element match {
         case _: Atomic[_] =>
           val values =
@@ -235,10 +235,10 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
    * The memoized values for an element contains the value set that was found so far for the element, together with
    * the depth of expansion that was performed.
    */
-  private val memoValues: Map[Element[_], (ValueSet[_], Int)] = Map()
+  private val memoValues: Map[Element[?], (ValueSet[?], Int)] = Map()
   universe.register(memoValues)
 
-  private val requiredDepths: Map[Element[_], Int] = Map()
+  private val requiredDepths: Map[Element[?], Int] = Map()
   universe.register(requiredDepths)
 
   /*
@@ -246,7 +246,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
    * For this reason, we keep track of which elements a given element is used by.
    * This usedBy map is different from the one in Universe because it only contains usedBy elements in this values computation.
    */
-  private val usedBy: Map[Element[_], Set[Element[_]]] = Map()
+  private val usedBy: Map[Element[?], Set[Element[?]]] = Map()
   universe.register(usedBy)
 
   /**
@@ -304,7 +304,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
    * This code ensures that if there are multiple elements that need to be expanded to a certain depth, then if one uses another, the full value set
    * of the second is used in computing the value set of the first.
    */
-  def expandAll(elementDepths: scala.collection.Set[(Element[_], Int)]) = {
+  def expandAll(elementDepths: scala.collection.Set[(Element[?], Int)]) = {
     for { (element, depth) <- elementDepths } {
       requiredDepths += element -> requiredDepths.getOrElse(element, -1).max(depth)
     }
@@ -316,7 +316,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
   /**
    * Returns the elements whose values have been computed.
    */
-  def expandedElements: scala.collection.Set[Element[_]] = memoValues.keySet
+  def expandedElements: scala.collection.Set[Element[?]] = memoValues.keySet
 
   /**
    * Returns the previously computed values at maximum depth, if any.
@@ -350,17 +350,17 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
    * where the result of Apply is a Cons containing a head element and a tail element. In these cases, we also need to make sure that these elements are
    * the same. Therefore, we also have to maintain a map from Apply arguments to their resulting values. This cache is contained in applyMap.
    */
-  private val chainMaps: Map[Element[_], Map[Any, Element[_]]] = Map()
+  private val chainMaps: Map[Element[?], Map[Any, Element[?]]] = Map()
   universe.register(chainMaps)
 
   /**
    * Gets the mapping from parent values to result elements associated with a chain.
    */
   def getMap[T, U](chain: Chain[T, U]): Map[T, Element[U]] = {
-    getOrElseInsert(chainMaps, chain, Map[Any, Element[_]]()).asInstanceOf[Map[T, Element[U]]]
+    getOrElseInsert(chainMaps, chain, Map[Any, Element[?]]()).asInstanceOf[Map[T, Element[U]]]
   }
 
-  private val applyMaps: Map[Element[_], Map[Any, Any]] = Map()
+  private val applyMaps: Map[Element[?], Map[Any, Any]] = Map()
   universe.register(applyMaps)
 
   /**

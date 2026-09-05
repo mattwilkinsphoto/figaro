@@ -27,18 +27,18 @@ trait InnerBPHandler {
   /**
    * Universe associated with this algorithm.
    */
-  protected var currentUniverse: Universe = _
+  protected var currentUniverse: Universe = scala.compiletime.uninitialized
 
   /**
    * BP algorithm associated with this time step.
    */
-  protected[figaro] var bp: ProbQueryBeliefPropagation = _
+  protected[figaro] var bp: ProbQueryBeliefPropagation = scala.compiletime.uninitialized
 
   /**
    * Instantiates the appropriate BP algorithm for the current time step.
    */
-  protected def createBP(targets: List[Element[_]], dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double, depth: Int = Int.MaxValue, upperBounds: Boolean = false): Unit
+  protected def createBP(targets: List[Element[?]], dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double, depth: Int = Int.MaxValue, upperBounds: Boolean = false): Unit
 
   /**
    * Runs the BP algorithm at the current time step.
@@ -56,9 +56,9 @@ trait OneTimeInnerBPHandler extends InnerBPHandler {
    */
   val innerIterations: Int
 
-  protected def createBP(targets: List[Element[_]], dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double, depth: Int = Int.MaxValue, upperBounds: Boolean = false): Unit = {
-    bp = new ProbQueryBeliefPropagation(currentUniverse, targets: _*)(dependentUniverses, dependentAlgorithm, depth, upperBounds) with OneTimeProbabilisticBeliefPropagation with OneTimeProbQuery {
+  protected def createBP(targets: List[Element[?]], dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double, depth: Int = Int.MaxValue, upperBounds: Boolean = false): Unit = {
+    bp = new ProbQueryBeliefPropagation(currentUniverse, targets*)(dependentUniverses, dependentAlgorithm, depth, upperBounds) with OneTimeProbabilisticBeliefPropagation with OneTimeProbQuery {
       override val iterations = innerIterations
     }
   }
@@ -77,10 +77,10 @@ trait AnytimeInnerBPHandler extends InnerBPHandler {
    */
   val myStepTimeMillis: Long
 
-  protected def createBP(targets: List[Element[_]], dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double, depth: Int = Int.MaxValue, upperBounds: Boolean = false): Unit = {
+  protected def createBP(targets: List[Element[?]], dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double, depth: Int = Int.MaxValue, upperBounds: Boolean = false): Unit = {
     if (bp != null) bp.kill()
-    bp = new ProbQueryBeliefPropagation(currentUniverse, targets: _*)(dependentUniverses, dependentAlgorithm, depth, upperBounds) with AnytimeProbabilisticBeliefPropagation with AnytimeProbQuery
+    bp = new ProbQueryBeliefPropagation(currentUniverse, targets*)(dependentUniverses, dependentAlgorithm, depth, upperBounds) with AnytimeProbabilisticBeliefPropagation with AnytimeProbQuery
   }
 
   protected def runBP(): Unit = {

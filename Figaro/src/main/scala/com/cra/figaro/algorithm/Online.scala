@@ -33,7 +33,7 @@ abstract trait Online extends Algorithm {
   /**
    * Update the algorithm, conditioning on the new evidence
    */
-  def update(evidence: Seq[NamedEvidence[_]]=Seq()): Unit
+  def update(evidence: Seq[NamedEvidence[?]]=Seq()): Unit
   val initial: Universe
   val transition: Function0[Universe]
 

@@ -38,7 +38,7 @@ class ParOneTimeParticleFilter(static: () => Universe, initial: () => Universe, 
   extends ParFiltering(transition) with ParticleFilter {
   
   /** sequence of UniverseWindows -- one for each thread */
-  private var windows: Seq[UniverseWindow] = _
+  private var windows: Seq[UniverseWindow] = scala.compiletime.uninitialized
   
   /** (start, end) indices for each thread to divide up numParticles */
   private val indices = calculateIndices(numParticles, numThreads)
@@ -80,7 +80,7 @@ class ParOneTimeParticleFilter(static: () => Universe, initial: () => Universe, 
     doTimeStep(particles)
   }
   
-  def advanceTime(evidence: Seq[NamedEvidence[_]] = List()): Unit = {
+  def advanceTime(evidence: Seq[NamedEvidence[?]] = List()): Unit = {
     val newWindows = advanceUniverseWindows(windows)
     val newWindowsWithCaches = newWindows.map(w => (w, new LikelihoodWeighter(w.current, new PermanentCache(w.current))))
     val particles = genParticles(newWindowsWithCaches, (w, i) => addWeightedParticle(evidence, i, w._1, w._2))

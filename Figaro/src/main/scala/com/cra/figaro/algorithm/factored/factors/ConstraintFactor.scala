@@ -27,7 +27,7 @@ import com.cra.figaro.algorithm.lazyfactored.Extended
  * 
  * This factor is used to model constraints on elements.
  */
-class ConstraintFactor[T](parents: List[Variable[_]], output: List[Variable[_]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]])//(implicit tag: TypeTag[T])
+class ConstraintFactor[T](parents: List[Variable[?]], output: List[Variable[?]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]])//(implicit tag: TypeTag[T])
   extends DenseFactor[T](parents, output, _semiring){
     override val isConstraint = true
 } 

@@ -92,7 +92,7 @@ class BinomialFixedNumTrials(name: Name[Int], val numTrials: Int, val probSucces
 class ParameterizedBinomialFixedNumTrials(name: Name[Int], val numTrials: Int, override val parameter: AtomicBeta, collection: ElementCollection)
   extends CachingChain[Double, Int](name, parameter, (p: Double) => new AtomicBinomial("", numTrials, p, collection), collection)
   with SingleParameterized[Int] {
-  override def distributionToStatistics(distribution: Stream[(Double, Int)]): Seq[Double] = {
+  override def distributionToStatistics(distribution: LazyList[(Double, Int)]): Seq[Double] = {
     val distList = distribution.toList
     var totalPos = 0.0
     var totalNeg = 0.0
@@ -159,5 +159,5 @@ object Binomial extends Creatable {
 
   type ResultType = Int
 
-  def create(args: List[Element[_]]) = apply(args(0).asInstanceOf[Element[Int]], args(1).asInstanceOf[Element[Double]])
+  def create(args: List[Element[?]]) = apply(args(0).asInstanceOf[Element[Int]], args(1).asInstanceOf[Element[Double]])
 }

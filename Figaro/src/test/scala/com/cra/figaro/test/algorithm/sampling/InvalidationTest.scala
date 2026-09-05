@@ -31,17 +31,17 @@ class InvalidationTest extends AnyWordSpec with Matchers with PrivateMethodTeste
 
       for (i <- 0 until 10) {
         val universe = Universe.createNew()
-        val p = Uniform(0, 1)("p", universe)
-        val f1 = Flip(.3)("f1", universe)
-        val f2 = Flip(.8)("f2", universe)
+        val p = Uniform(0, 1)(using "p", universe)
+        val f1 = Flip(.3)(using "f1", universe)
+        val f2 = Flip(.8)(using "f2", universe)
         val q = Chain(p, (d: Int) => {
           if (d > 0) f1 else f2
-        })("q", universe)
+        })(using "q", universe)
 
         q.observe(true)
 
         val targets = List(p, f1, f2, q)
-        val alg = MetropolisHastings(200000, ProposalScheme.default, targets: _*)
+        val alg = MetropolisHastings(200000, ProposalScheme.default, targets*)
         alg.start()
         alg.stop()
         alg.probability(q, true) should equal(1.0)

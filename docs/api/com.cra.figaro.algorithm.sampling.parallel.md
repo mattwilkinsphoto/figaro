@@ -274,7 +274,7 @@ com.cra.figaro.algorithm.sampling.parallel.ParImportance.apply(generator, numThr
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParImportance$.html#apply-5b6)
 
 ```scala
-def apply(generator: () => Universe, numThreads: Int, numSamples: Int, targets: Reference[_]*): ParSampler & ParOneTime & ProbEvidenceQuery { Unsupported[Not supported type in refinement AppliedType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class collection)),object parallel),ParSeq),List(AndType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class algorithm)),object sampling),Importance),AndType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class algorithm)),object sampling),OneTimeProbQuerySampler),TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class figaro)),object algorithm),ProbEvidenceQuery)))))]; }
+def apply(generator: () => Universe, numThreads: Int, numSamples: Int, targets: Reference[_]*): ParSampler & ParOneTime & ProbEvidenceQuery { Unsupported[Not supported type in refinement AppliedType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class collection)),object parallel),ParSeq),List(AndType(AndType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class algorithm)),object sampling),Importance),TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class algorithm)),object sampling),OneTimeProbQuerySampler)),TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class figaro)),object algorithm),ProbEvidenceQuery))))]; }
 ```
 
 Create a parallel one-time importance sampler with the given target query references using the given number of samples.
@@ -283,7 +283,7 @@ Type parameters: none.
 
 Parameters, list 1: `` generator: () => Universe ``; `` numThreads: Int ``; `` numSamples: Int ``; `` targets: Reference[_]* ``.
 
-Returns: `` ParSampler & ParOneTime & ProbEvidenceQuery { Unsupported[Not supported type in refinement AppliedType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class collection)),object parallel),ParSeq),List(AndType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class algorithm)),object sampling),Importance),AndType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class algorithm)),object sampling),OneTimeProbQuerySampler),TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class figaro)),object algorithm),ProbEvidenceQuery)))))]; } ``.
+Returns: `` ParSampler & ParOneTime & ProbEvidenceQuery { Unsupported[Not supported type in refinement AppliedType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class collection)),object parallel),ParSeq),List(AndType(AndType(TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class algorithm)),object sampling),Importance),TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class algorithm)),object sampling),OneTimeProbQuerySampler)),TypeRef(TermRef(ThisType(TypeRef(NoPrefix,module class figaro)),object algorithm),ProbEvidenceQuery))))]; } ``.
 
 Source contract/attributes: Create a parallel one-time importance sampler with the given target query references using the given number of samples. Value parameters generator a function that returns a universe, with any evidence applied numSamples the number of samples to take, total, across the threads numThreads the number of threads to spawn targets references to the target elements Attributes
 
@@ -583,10 +583,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.sampling.parallel.ParSampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParSampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParSampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Reference[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Reference[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -595,7 +595,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -655,10 +655,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.parallel.ParSampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParSampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParSampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Reference[T]): Stream[(Double, T)]
+def distribution[T](target: Reference[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -667,7 +667,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 

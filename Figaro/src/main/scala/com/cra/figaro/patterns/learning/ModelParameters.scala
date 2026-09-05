@@ -64,7 +64,7 @@ case class ParameterArray(val p: Parameter[Array[Double]]) extends ParameterType
 
 object ParameterType {
   def apply(d: Double) = new PrimitiveDouble(d)
-  def apply(p: Parameter[_]) = {
+  def apply(p: Parameter[?]) = {
     p match {
       case b: AtomicBeta => new ParameterDouble(b)
       case d: AtomicDirichlet => new ParameterArray(d)
@@ -100,8 +100,8 @@ class ModelParameters extends ElementCollection {
   /**
    * Convert the contents of to a list of parameter elements
    */
-  def convertToParameterList: List[Parameter[_]] = {
-    val l = ListBuffer.empty[Parameter[_]]
+  def convertToParameterList: List[Parameter[?]] = {
+    val l = ListBuffer.empty[Parameter[?]]
     for (p <- this.namedElements) {
       p match {
         case a: Parameter[_] => {
@@ -191,9 +191,9 @@ object ModelParameters {
   /**
    * Decode JSON into a parameter element
    */
-  implicit val decodeJson: DecodeJson[Parameter[_]] = DecodeJson { c =>
-    c.downField("Beta").as[AtomicBeta].map(parameter => parameter: Parameter[_]) |||
-    c.downField("Dirichlet").as[AtomicDirichlet].map(parameter => parameter: Parameter[_])
+  implicit val decodeJson: DecodeJson[Parameter[?]] = DecodeJson { c =>
+    c.downField("Beta").as[AtomicBeta].map(parameter => parameter: Parameter[?]) |||
+    c.downField("Dirichlet").as[AtomicDirichlet].map(parameter => parameter: Parameter[?])
   }
   
   /**
@@ -217,7 +217,7 @@ object ModelParameters {
    */
   implicit def ModelParametersDecodeJson(implicit collection: ElementCollection): DecodeJson[ModelParameters] =
     DecodeJson(c => for {
-      jsonParameters <- (c --\ "allParameters").as[List[Parameter[_]]]
+      jsonParameters <- (c --\ "allParameters").as[List[Parameter[?]]]
     } yield ModelParameters(jsonParameters))
 
   /**
@@ -227,7 +227,7 @@ object ModelParameters {
     /**
    * Create a new set of model parameters containing the list of parameters provided
    */
-  def apply(l: List[Parameter[_]]) = {
+  def apply(l: List[Parameter[?]]) = {
     val m = new ModelParameters()
     l.foreach(m.add(_))
     m

@@ -173,30 +173,6 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
-## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.getLearnedElement ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#getLearnedElement-0)
-
-```scala
-def getLearnedElement: AtomicFlip
-```
-
-Returns an element that models the learned distribution.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` AtomicFlip ``.
-
-Source contract/attributes: Returns an element that models the learned distribution. Attributes
-
-Invocation template:
-
-```scala
-receiver.getLearnedElement
-```
-
 ## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.maximize ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#maximize-fffff9b7)
@@ -291,30 +267,6 @@ Invocation template:
 
 ```scala
 receiver.zeroSufficientStatistics
-```
-
-## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.makeValues ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#makeValues-6da)
-
-```scala
-def makeValues(depth: Int): ValueSet[Double]
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: `` depth: Int ``.
-
-Returns: `` ValueSet[Double] ``.
-
-Source contract/attributes: Attributes Deprecated [Since version 4.1.0] Values for Beta parameters are now handled directly in the algorithms
-
-Invocation template:
-
-```scala
-receiver.makeValues(depth)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.!== ``
@@ -1503,30 +1455,6 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
-## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.getLearnedElement ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html#getLearnedElement-fffff9d3)
-
-```scala
-def getLearnedElement[T](outcomes: List[T]): AtomicSelect[T]
-```
-
-Returns an element that models the learned distribution.
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` outcomes: List[T] ``.
-
-Returns: `` AtomicSelect[T] ``.
-
-Source contract/attributes: Returns an element that models the learned distribution. Attributes
-
-Invocation template:
-
-```scala
-receiver.getLearnedElement[T](outcomes)
-```
-
 ## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.maximize ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html#maximize-fffff9b7)
@@ -1621,30 +1549,6 @@ Invocation template:
 
 ```scala
 receiver.zeroSufficientStatistics
-```
-
-## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.makeValues ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html#makeValues-6da)
-
-```scala
-def makeValues(depth: Int): ValueSet[Array[Double]]
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: `` depth: Int ``.
-
-Returns: `` ValueSet[Array[Double]] ``.
-
-Source contract/attributes: Attributes Deprecated [Since version 4.1.0] Values for Beta parameters are now handled directly in the algorithms
-
-Invocation template:
-
-```scala
-receiver.makeValues(depth)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.!== ``
@@ -10967,56 +10871,6 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
-## `` com.cra.figaro.library.atomic.continuous.BetaParameter.apply ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/BetaParameter$.html#apply-9ce)
-
-```scala
-def apply(a: Double, b: Double)(implicit name: Name[Double], collection: ElementCollection): AtomicBeta
-```
-
-Create a beta parameter with prior hyperparameters a and b
-
-Type parameters: none.
-
-Parameters, list 1: `` a: Double ``; `` b: Double ``.
-
-Context parameters, list 2: `` name: Name[Double] ``; `` collection: ElementCollection ``.
-
-Returns: `` AtomicBeta ``.
-
-Source contract/attributes: Create a beta parameter with prior hyperparameters a and b Attributes
-
-Invocation template:
-
-```scala
-com.cra.figaro.library.atomic.continuous.BetaParameter.apply(a, b)(using name, collection)
-```
-
-## `` com.cra.figaro.library.atomic.continuous.BetaParameter.create ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/BetaParameter$.html#create-3f)
-
-```scala
-def create(args: List[Element[_]]): Element[ResultType]
-```
-
-Create an element of this type with the given arguments.
-
-Type parameters: none.
-
-Parameters, list 1: `` args: List[Element[_]] ``.
-
-Returns: `` Element[ResultType] ``.
-
-Source contract/attributes: Create an element of this type with the given arguments. Attributes
-
-Invocation template:
-
-```scala
-com.cra.figaro.library.atomic.continuous.BetaParameter.create(args)
-```
-
 ## `` com.cra.figaro.library.atomic.continuous.CompoundBeta.aValue ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/CompoundBeta.html#aValue-0)
@@ -19485,56 +19339,6 @@ Invocation template:
 
 ```scala
 receiver.generateValue(rand)
-```
-
-## `` com.cra.figaro.library.atomic.continuous.DirichletParameter.apply ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/DirichletParameter$.html#apply-fffffca3)
-
-```scala
-def apply(alphas: Double*)(implicit name: Name[Array[Double]], collection: ElementCollection): AtomicDirichlet
-```
-
-Create a Dirichlet parameter in which the parameters are constants.
-
-Type parameters: none.
-
-Parameters, list 1: `` alphas: Double* ``.
-
-Context parameters, list 2: `` name: Name[Array[Double]] ``; `` collection: ElementCollection ``.
-
-Returns: `` AtomicDirichlet ``.
-
-Source contract/attributes: Create a Dirichlet parameter in which the parameters are constants. Attributes
-
-Invocation template:
-
-```scala
-com.cra.figaro.library.atomic.continuous.DirichletParameter.apply(alphas*)(using name, collection)
-```
-
-## `` com.cra.figaro.library.atomic.continuous.DirichletParameter.create ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/DirichletParameter$.html#create-3f)
-
-```scala
-def create(args: List[Element[_]]): Element[ResultType]
-```
-
-Create an element of this type with the given arguments.
-
-Type parameters: none.
-
-Parameters, list 1: `` args: List[Element[_]] ``.
-
-Returns: `` Element[ResultType] ``.
-
-Source contract/attributes: Create an element of this type with the given arguments. Attributes
-
-Invocation template:
-
-```scala
-com.cra.figaro.library.atomic.continuous.DirichletParameter.create(args)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.Exponential.apply ``

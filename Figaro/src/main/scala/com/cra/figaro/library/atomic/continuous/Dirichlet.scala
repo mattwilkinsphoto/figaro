@@ -70,21 +70,12 @@ class AtomicDirichlet(name: Name[Array[Double]], val alphas: Array[Double], coll
    * Density of a value.
    */
   def density(xs: Array[Double]) =
-    (1.0 /: (xs zip alphas))(_ * onePow(_)) * normalizer
+    ((xs zip alphas)).foldLeft(1.0)(_ * onePow(_)) * normalizer
 
   /**
    * The learned concentration parameters of the Dirichlet distribution
    */
-  var concentrationParameters: mutable.Seq[Double] = mutable.Seq(alphas: _*)
-
-  /**
-   * Returns an element that models the learned distribution.
-   *
-   * @deprecated
-   */
-  def getLearnedElement[T](outcomes: List[T]): AtomicSelect[T] = {
-    new AtomicSelect("", MAPValue.toList zip outcomes, collection)
-  }
+  var concentrationParameters: mutable.Seq[Double] = mutable.Seq(alphas*)
 
   def maximize(sufficientStatistics: Seq[Double]) = {
     require(sufficientStatistics.size == concentrationParameters.size)
@@ -99,17 +90,17 @@ class AtomicDirichlet(name: Name[Array[Double]], val alphas: Array[Double], coll
     val result = alphas.map(a => 0.0)
     require(i < result.size)
     result.update(i, 1.0)
-    result
+    result.toIndexedSeq
   }
 
   override def sufficientStatistics[A](a: A): Seq[Double] = {
     val result = vector
-    result
+    result.toIndexedSeq
   }
 
   override def zeroSufficientStatistics: Seq[Double] = {
     val result = vector
-    result
+    result.toIndexedSeq
   }
 
   override def expectedValue: Array[Double] = {
@@ -141,10 +132,6 @@ class AtomicDirichlet(name: Name[Array[Double]], val alphas: Array[Double], coll
     result
   }
 
-  // Values for Beta parameters now handled directly in the algorithms
-  @deprecated("Values for Beta parameters are now handled directly in the algorithms", "4.1.0")
-  def makeValues(depth: Int) = ValueSet.withoutStar(Set(MAPValue))
-
   override def toString = "Dirichlet(" + alphas.mkString(", ") + ")"
 }
 
@@ -154,7 +141,7 @@ class AtomicDirichlet(name: Name[Array[Double]], val alphas: Array[Double], coll
 class CompoundDirichlet(name: Name[Array[Double]], alphas: Array[Element[Double]], collection: ElementCollection)
     extends NonCachingChain[List[Double], Array[Double]](
       name,
-      new Inject("", alphas, collection),
+      new Inject("", alphas.toIndexedSeq, collection),
       (aa: Seq[Double]) => new AtomicDirichlet("", aa.toArray, collection),
       collection)
     with Dirichlet {
@@ -185,7 +172,7 @@ trait Dirichlet extends Continuous[Array[Double]] {
         val (a, x) = v
         (a - 1) * log(x)
       }.sum + normalizer,
-      alphaValues.map(_ > 0): _*)
+      alphaValues.map(_ > 0)*)
 
 }
 
@@ -199,7 +186,7 @@ object Dirichlet extends Creatable {
     DecodeJson(c => for {
       alphaValues <- (c --\ "alphaValues").as[List[Double]]
       name <- (c --\ "name").as[String]
-    } yield Dirichlet(alphaValues.toArray)(name, collection))
+    } yield Dirichlet(alphaValues.toArray)(using name, collection))
 
   /**
    * Create a Dirichlet distribution in which the parameters are constants.
@@ -218,5 +205,5 @@ object Dirichlet extends Creatable {
 
   type ResultType = Array[Double]
 
-  def create(args: List[Element[_]]) = apply(args.map(_.asInstanceOf[Element[Double]]): _*)
+  def create(args: List[Element[?]]) = apply(args.map(_.asInstanceOf[Element[Double]])*)
 }

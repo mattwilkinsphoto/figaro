@@ -44,13 +44,13 @@ import com.cra.figaro.library.collection.Container
  */
 // proposalScheme might evaluate to a different step each time it is called; making it by name gets the right effect.
 abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalScheme, burnIn: Int, interval: Int,
-                                  targets: Element[_]*)
-    extends BaseUnweightedSampler(universe, targets: _*) {
+                                  targets: Element[?]*)
+    extends BaseUnweightedSampler(universe, targets*) {
   import MetropolisHastings._
 
   // Used for debugging
-  private var elementsToTrack: Map[Element[_], Null] = Map()
-  private var proposalCounts: Map[Element[_], Int] = Map()
+  private var elementsToTrack: Map[Element[?], Null] = Map()
+  private var proposalCounts: Map[Element[?], Int] = Map()
   // Make sure these maps don't cause memory leaks
   universe.register(elementsToTrack)
   universe.register(proposalCounts)
@@ -58,7 +58,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
   protected var accepts = 0
   protected var rejects = 0
 
-  protected val currentConstraintValues: Map[Element[_], Double] = Map()
+  protected val currentConstraintValues: Map[Element[?], Double] = Map()
   universe.register(currentConstraintValues)
 
   /**
@@ -72,10 +72,10 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
   var debug = false
 
   /* Stores the topologically sorted list of updates needed for a given set of proposed elements */
-  protected var proposedElementsSortedUpdates: Map[Iterable[Element[_]], List[Element[_]]] = Map()
+  protected var proposedElementsSortedUpdates: Map[Iterable[Element[?]], List[Element[?]]] = Map()
 
   /* Stores the list of elements used by each proposed element */
-  protected var elementsUsedBy: Map[Element[_], Set[Element[_]]] = Map()
+  protected var elementsUsedBy: Map[Element[?], Set[Element[?]]] = Map()
 
   /**
    * Set this flag to true when constraints are bound between 0 and 1
@@ -100,12 +100,12 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
    * We also keep track of which elements do not have their condition satisfied by the new proposal.
    */
   private def attemptChange[T](state: State, elem: Element[T]): State = {
-    val newOldValues = state.oldValues + (elem -> elem.value)
+    val newOldValues = state.oldValues.concat(List(elem -> elem.value))
     /* Do not generate a new value for an observed element because it will not agree with the observation.
      * For a compound element we cannot do this because we have to condition the arguments by the
      * probability of generating the correct value.
      */
-    val newValue = if (elem.observation.isEmpty || !elem.isInstanceOf[Atomic[_]]) {
+    val newValue = if (elem.observation.isEmpty || !elem.isInstanceOf[Atomic[?]]) {
       chainCache(elem) match {
         case None => elem.generateValue(elem.randomness)
         case Some(result) =>
@@ -164,7 +164,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
           state
         } else {
           val newOldRandomness = {
-            state.oldRandomness + (elem -> elem.randomness)
+            state.oldRandomness.concat(List(elem -> elem.randomness))
           }
           elem.randomness = randomness
           State(state.oldValues, newOldRandomness, state.proposalProb + log(proposalProb), state.modelProb + log(modelProb), state.dissatisfied, state.reverseVisitOrder)
@@ -193,10 +193,10 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     val state1 = {
       val newOldRandomness1 =
         if (state.oldRandomness contains elem1) state.oldRandomness
-        else state.oldRandomness + (elem1 -> oldRandomness1)
+        else state.oldRandomness.concat(List(elem1 -> oldRandomness1))
       val newOldRandomness2 =
         if (newOldRandomness1 contains elem2) newOldRandomness1
-        else newOldRandomness1 + (elem2 -> oldRandomness2)
+        else newOldRandomness1.concat(List(elem2 -> oldRandomness2))
       State(state.oldValues, newOldRandomness2, state.proposalProb, state.modelProb, state.dissatisfied, state.reverseVisitOrder)
     }
     val state2 = attemptChange(state1, elem1)
@@ -239,9 +239,9 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
         continue(state1, rest)
     }
 
-  private def proposeChainCheck(elem: Element[_]): Element[_] = {
+  private def proposeChainCheck(elem: Element[?]): Element[?] = {
     val e = chainCache(elem)
-    if (e.isEmpty) elem else e.get.asInstanceOf[Element[_]]
+    if (e.isEmpty) elem else e.get.asInstanceOf[Element[?]]
   }
 
   protected def runScheme(): State = runStep(newState, proposalScheme)
@@ -328,7 +328,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     state
   }
 
-  protected var dissatisfied: Set[Element[_]] = _
+  protected var dissatisfied: Set[Element[?]] = scala.compiletime.uninitialized
 
   protected def getDissatisfied = dissatisfied // for testing
 
@@ -351,12 +351,12 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     dissatisfied = (dissatisfied filter (e => !e.conditionSatisfied && e.intervention.isEmpty)) ++ state.dissatisfied
   }
 
-  private def setValue(pair: (Element[_], Any)) = {
+  private def setValue(pair: (Element[?], Any)) = {
     val (elem, value) = pair
     elem.value = value.asInstanceOf[elem.Value]
   }
 
-  private def setRandomness(pair: (Element[_], Any)) = {
+  private def setRandomness(pair: (Element[?], Any)) = {
     val (elem, randomness) = pair
     elem.randomness = randomness.asInstanceOf[elem.Randomness]
   }
@@ -435,7 +435,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     val newState = mhStep()
     if (dissatisfied.isEmpty) {
       val values = newState.oldValues.keys.filter(fastTargets.contains(_)) map (target => target -> target.value)
-      (true, Map(values.toSeq: _*))
+      (true, Map(values.toSeq*))
     } else {
       (false, Map())
     }
@@ -460,14 +460,14 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
    * is returned. By the resulting state, we mean the new state if it is accepted and the original state
    * if not.
    */
-  def test(numSamples: Int, predicates: Seq[Predicate[_]], elementsToTrack: Seq[Element[_]]): (Double, scala.collection.Map[Predicate[_], Double], scala.collection.Map[Element[_], Double]) = {
+  def test(numSamples: Int, predicates: Seq[Predicate[?]], elementsToTrack: Seq[Element[?]]): (Double, scala.collection.Map[Predicate[?], Double], scala.collection.Map[Element[?], Double]) = {
     val savedAccepts = accepts
     val savedRejects = rejects
     val savedProposalCounts = proposalCounts
     accepts = 0
     rejects = 0
-    proposalCounts = Map((elementsToTrack map (_ -> 0)): _*)
-    val successes: Map[Predicate[_], Int] = Map((predicates map (_ -> 0)): _*)
+    proposalCounts = Map((elementsToTrack map (_ -> 0))*)
+    val successes: Map[Predicate[?], Int] = Map((predicates map (_ -> 0))*)
     this.elementsToTrack = Map(elementsToTrack.map(_ -> null)*)
     dissatisfied = universe.conditionedElements.toSet filter (!_.conditionSatisfied)
     def collectResults() =
@@ -491,8 +491,8 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
         collectResults()
       }
     }
-    val successResults: scala.collection.Map[Predicate[_], Double] = successes.view.mapValues(_.toDouble / numSamples).toMap
-    val proposalResults: scala.collection.Map[Element[_], Double] = proposalCounts.view.mapValues(_.toDouble / numSamples).toMap
+    val successResults: scala.collection.Map[Predicate[?], Double] = successes.view.mapValues(_.toDouble / numSamples).toMap
+    val proposalResults: scala.collection.Map[Element[?], Double] = proposalCounts.view.mapValues(_.toDouble / numSamples).toMap
     val acceptanceRatio = accepts.toDouble / numSamples
     accepts = savedAccepts
     rejects = savedRejects
@@ -518,8 +518,8 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
  */
 class AnytimeMetropolisHastings(universe: Universe,
                                 scheme: ProposalScheme, burnIn: Int, interval: Int,
-                                targets: Element[_]*)
-    extends MetropolisHastings(universe, scheme, burnIn, interval, targets: _*)
+                                targets: Element[?]*)
+    extends MetropolisHastings(universe, scheme, burnIn, interval, targets*)
     with UnweightedSampler with AnytimeProbQuerySampler {
   /**
    * Initialize the sampler.
@@ -538,8 +538,8 @@ class AnytimeMetropolisHastings(universe: Universe,
  *
  */
 class OneTimeMetropolisHastings(universe: Universe, myNumSamples: Int, scheme: ProposalScheme,
-                                burnIn: Int, interval: Int, targets: Element[_]*)
-    extends MetropolisHastings(universe, scheme, burnIn, interval, targets: _*)
+                                burnIn: Int, interval: Int, targets: Element[?]*)
+    extends MetropolisHastings(universe, scheme, burnIn, interval, targets*)
     with UnweightedSampler with OneTimeProbQuerySampler {
 
   val numSamples = myNumSamples
@@ -560,44 +560,44 @@ object MetropolisHastings {
    * Create an anytime Metropolis-Hastings sampler using the given proposal scheme with the given target
    * query elements.
    */
-  def apply(scheme: ProposalScheme, targets: Element[_]*)(implicit universe: Universe) =
-    new AnytimeMetropolisHastings(universe, scheme, 0, 1, targets: _*)
+  def apply(scheme: ProposalScheme, targets: Element[?]*)(implicit universe: Universe) =
+    new AnytimeMetropolisHastings(universe, scheme, 0, 1, targets*)
 
   /**
    * Create a one-time Metropolis-Hastings sampler using the given number of samples and proposal
    * scheme with the given target query elements.
    */
-  def apply(numSamples: Int, scheme: ProposalScheme, targets: Element[_]*)(implicit universe: Universe) =
-    new OneTimeMetropolisHastings(universe, numSamples, scheme, 0, 1, targets: _*)
+  def apply(numSamples: Int, scheme: ProposalScheme, targets: Element[?]*)(implicit universe: Universe) =
+    new OneTimeMetropolisHastings(universe, numSamples, scheme, 0, 1, targets*)
 
   /**
    * Create an anytime Metropolis-Hastings sampler using the given proposal scheme and number
    * of burn-in samples with the given target query elements.
    */
-  def apply(scheme: ProposalScheme, burnIn: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new AnytimeMetropolisHastings(universe, scheme, burnIn, 1, targets: _*)
+  def apply(scheme: ProposalScheme, burnIn: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new AnytimeMetropolisHastings(universe, scheme, burnIn, 1, targets*)
 
   /**
    * Create a one-time Metropolis-Hastings sampler using the given number of samples, proposal scheme, and
    * number of burn-in samples with the given target query elements.
    */
-  def apply(numSamples: Int, scheme: ProposalScheme, burnIn: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new OneTimeMetropolisHastings(universe, numSamples, scheme, burnIn, 1, targets: _*)
+  def apply(numSamples: Int, scheme: ProposalScheme, burnIn: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new OneTimeMetropolisHastings(universe, numSamples, scheme, burnIn, 1, targets*)
 
   /**
    * Create an anytime Metropolis-Hastings sampler using the given proposal scheme, number of burn-in
    * samples, and interval between samples with the given target query elements.
    */
-  def apply(scheme: ProposalScheme, burnIn: Int, interval: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new AnytimeMetropolisHastings(universe, scheme, burnIn, interval, targets: _*)
+  def apply(scheme: ProposalScheme, burnIn: Int, interval: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new AnytimeMetropolisHastings(universe, scheme, burnIn, interval, targets*)
 
   /**
    * Create a one-time Metropolis-Hastings sampler using the given number of samples, proposal scheme,
    * number of burn-in samples, and interval between samples with the given target query elements.
    */
   def apply(numSamples: Int, scheme: ProposalScheme,
-            burnIn: Int, interval: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new OneTimeMetropolisHastings(universe, numSamples, scheme, burnIn, interval: Int, targets: _*)
+            burnIn: Int, interval: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new OneTimeMetropolisHastings(universe, numSamples, scheme, burnIn, interval: Int, targets*)
 
   /**
    * Use MH to compute the probability that the given element has the given value.
@@ -619,21 +619,21 @@ object MetropolisHastings {
   /**
    * Use MH to sample the joint posterior distribution of several variables
    */
-  def sampleJointPosterior(targets: Element[_]*)(implicit universe: Universe): Stream[List[Any]] = {
+  def sampleJointPosterior(targets: Element[?]*)(implicit universe: Universe): LazyList[List[Any]] = {
     val jointElement = Container[Any](targets.asInstanceOf[Seq[Element[Any]]]*).foldLeft(List[Any]())((l: List[Any], i: Any) => l :+ i)
-    val alg = MetropolisHastings(1000000, ProposalScheme.default, jointElement)(universe)
+    val alg = MetropolisHastings(1000000, ProposalScheme.default, jointElement)(using universe)
     alg.start()
     val posterior = alg.sampleFromPosterior(jointElement)
     alg.kill()
     posterior
   }
 
-  private[figaro] case class State(oldValues: Map[Element[_], Any],
-                                   oldRandomness: Map[Element[_], Any],
+  private[figaro] case class State(oldValues: Map[Element[?], Any],
+                                   oldRandomness: Map[Element[?], Any],
                                    proposalProb: Double,
                                    modelProb: Double,
-                                   dissatisfied: scala.collection.mutable.Set[Element[_]],
-                                   reverseVisitOrder: List[Element[_]])
+                                   dissatisfied: scala.collection.mutable.Set[Element[?]],
+                                   reverseVisitOrder: List[Element[?]])
 
   /**
    * Thrown any time a state is rejected (either pre-maturely or after all updates have been made).

@@ -63,7 +63,7 @@ object MultiDecision {
     val ve_before = VariableElimination(value, cost)
     ve_before.start()
  
-    val propmaker = (mv: Universe, e: Element[_]) => ProposalScheme.default(mv)
+    val propmaker = (mv: Universe, e: Element[?]) => ProposalScheme.default(using mv)
     val alg = MultiDecisionMetropolisHastings(200000, propmaker, 20000, List(value, cost), test, found)
 
     alg.start()

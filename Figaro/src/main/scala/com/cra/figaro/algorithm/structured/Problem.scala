@@ -24,16 +24,16 @@ import com.cra.figaro.language._
  * The targets are elements that appear in this problem that are visible outside.
  * They might be newly defined in this problem or they might be defined previously, but either way, they should not be eliminated.
  */
-class Problem(val collection: ComponentCollection, val targets: List[Element[_]] = List()) {
+class Problem(val collection: ComponentCollection, val targets: List[Element[?]] = List()) {
   /**
    *  Components outside of this problem that appear in the solution to this problem.
    */
-  var globals: Set[ProblemComponent[_]] = Set()
+  var globals: Set[ProblemComponent[?]] = Set()
 
   /**
    *  Components directly defined in this problem.
    */
-  var components: List[ProblemComponent[_]] = List()
+  var components: List[ProblemComponent[?]] = List()
 
   /**
    *  Factors over globals produced by solving the problem.
@@ -45,7 +45,7 @@ class Problem(val collection: ComponentCollection, val targets: List[Element[_]]
    *  The support of each factor is over the product of the supports of the interface variables
    *  
    */
-  var recordingFactors: Map[Variable[_], Factor[_]] = Map()
+  var recordingFactors: Map[Variable[?], Factor[?]] = Map()
   
   /**
    * A flag indicating whether the problem has been solved.
@@ -60,7 +60,7 @@ class Problem(val collection: ComponentCollection, val targets: List[Element[_]]
   /**
    *  Determines if a variable is internal to this problem and should be eliminated
    */
-  def internal(variable: Variable[_]): Boolean = {
+  def internal(variable: Variable[?]): Boolean = {
     collection.intermediates.contains(variable) || {
       val component = collection.variableToComponent(variable)
       contains(component.problem) & !targets.contains(component.element)
@@ -70,7 +70,7 @@ class Problem(val collection: ComponentCollection, val targets: List[Element[_]]
   /**
    * Determines if a variable is in scope outside of this problem
    */
-  def global(variable: Variable[_]): Boolean = {
+  def global(variable: Variable[?]): Boolean = {
     !collection.intermediates.contains(variable) && 
     !contains(collection.variableToComponent(variable).problem)
   }
@@ -81,7 +81,7 @@ class Problem(val collection: ComponentCollection, val targets: List[Element[_]]
    * Any variables in the contained problem should also be eliminated when this problem is solved.
    */
   def contains(otherProblem: Problem): Boolean = {
-    def componentContains(component: ProblemComponent[_]): Boolean = {
+    def componentContains(component: ProblemComponent[?]): Boolean = {
       component match {
         case c: ChainComponent[_,_] => c.subproblems.values.exists(_.contains(otherProblem))
         case _ => false
@@ -93,7 +93,7 @@ class Problem(val collection: ComponentCollection, val targets: List[Element[_]]
   /**
    * Produce a single weighted sample of all the elements in this problem.
    */
-  def sample(): (Map[Element[_], _], Double) = {
+  def sample(): (Map[Element[?], ?], Double) = {
     (Map(), 1.0)
   }
 
@@ -106,7 +106,7 @@ class Problem(val collection: ComponentCollection, val targets: List[Element[_]]
   /**
    * Targets of this problem as a list of components in the collection.
    */
-  def targetComponents: List[ProblemComponent[_]] = targets.map(collection(_))
+  def targetComponents: List[ProblemComponent[?]] = targets.map(collection(_))
 
   targets.foreach(target => if (!collection.contains(target)) add(target))
 }

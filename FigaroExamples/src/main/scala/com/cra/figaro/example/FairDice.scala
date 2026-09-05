@@ -36,8 +36,8 @@ class DiceModel(val parameters: ParameterCollection, val data: Seq[(Int, Int, In
 
   val sum = (i1: Int, i2: Int) => i1 + i2
   val trials = for (datum <- data) yield {
-    val die1 = Select(parameters.get("fairness" + datum._1), outcomes: _*)
-    val die2 = Select(parameters.get("fairness" + datum._2), outcomes: _*)
+    val die1 = Select(parameters.get("fairness" + datum._1), outcomes*)
+    val die2 = Select(parameters.get("fairness" + datum._2), outcomes*)
     Apply(die1, die2, sum)
   }
 }
@@ -74,9 +74,9 @@ object FairDice {
     /*
      * Each coin is initially assumed to be fair
      */
-    val fairness1 = Dirichlet(2.0, 2.0, 2.0, 2.0, 2.0, 2.0)("fairness1", params)
-    val fairness2 = Dirichlet(2.0, 2.0, 2.0, 2.0, 2.0, 2.0)("fairness2", params)
-    val fairness3 = Dirichlet(2.0, 2.0, 2.0, 2.0, 2.0, 2.0)("fairness3", params)
+    val fairness1 = Dirichlet(2.0, 2.0, 2.0, 2.0, 2.0, 2.0)(using "fairness1", params)
+    val fairness2 = Dirichlet(2.0, 2.0, 2.0, 2.0, 2.0, 2.0)(using "fairness2", params)
+    val fairness3 = Dirichlet(2.0, 2.0, 2.0, 2.0, 2.0, 2.0)(using "fairness3", params)
 
     val model = new DiceModel(params.priorParameters, data, outcomes)
 
@@ -92,9 +92,9 @@ object FairDice {
 
     println("The probabilities of seeing each side of d_1 are: ")
     //A little ugly with the 'asInstanceOf' here.
-    val d1 = Select(params.posteriorParameters.get("fairness1"), outcomes:_*)
-    val d2 = Select(params.posteriorParameters.get("fairness2"), outcomes:_*)
-    val d3 = Select(params.posteriorParameters.get("fairness3"), outcomes:_*)
+    val d1 = Select(params.posteriorParameters.get("fairness1"), outcomes*)
+    val d2 = Select(params.posteriorParameters.get("fairness2"), outcomes*)
+    val d3 = Select(params.posteriorParameters.get("fairness3"), outcomes*)
 
     val ve = VariableElimination(d1,d2,d3)
     ve.start()

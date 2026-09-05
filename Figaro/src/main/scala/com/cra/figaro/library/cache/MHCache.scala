@@ -31,12 +31,12 @@ import scala.collection.mutable.Set
 class MHCache(universe: Universe) extends Cache(universe) {
 
   /* Caching chain cache that maps from an element to a map of parent values and resulting elements */
-  private[figaro] val ccCache: Map[Element[_], Map[Any, Element[_]]] = Map()
+  private[figaro] val ccCache: Map[Element[?], Map[Any, Element[?]]] = Map()
 
   /* The inverted cache. This maps from result elements back to the chain that uses them. This is needed
-   * to properly clean up deactivated elements 
+   * to properly clean up deactivated elements
    */
-  private[figaro] val ccInvertedCache: Map[Element[_], Map[Element[_], Any]] = Map()
+  private[figaro] val ccInvertedCache: Map[Element[?], Map[Element[?], Any]] = Map()
 
   /*
    * The non-caching chain "cache". This is a map from elements to a list of:
@@ -44,7 +44,7 @@ class MHCache(universe: Universe) extends Cache(universe) {
    * The Set is needed since once a parent value falls off the stack, we have to clear all the elements
    * created in the context of that parent value or else we will have memory leaks
    */
-  private[figaro] val nccCache: Map[Element[_], List[(Any, Element[_], Set[Element[_]])]] = Map()
+  private[figaro] val nccCache: Map[Element[?], List[(Any, Element[?], Set[Element[?]])]] = Map()
 
   /**
    * Retrieve any cached element generated from the current value of the supplied element. Returns None if
@@ -86,11 +86,11 @@ class MHCache(universe: Universe) extends Cache(universe) {
   /*
    * Retrieves an element for a non-caching chain. This is not really a cache but rather,
    * for each element, a 2-deep stack is maintained that has the current result element of the chain
-   * at the top of the stack, and the last result element at the bottom of the stack. This is for use in 
+   * at the top of the stack, and the last result element at the bottom of the stack. This is for use in
    * MH. When a proposal is made, the chain may change its value. In such a case, we don't want to lose
    * the current result element in case the proposal is rejected, so it is moved to the back of the stack.
    * If the proposal is reject, the chain is regenerated and the old element is restored to the top of the stack.
-   * 
+   *
    */
   private def doNonCachingChain[U, T](c: NonCachingChain[U, T]): Option[Element[T]] = {
     val nccElems = nccCache.getOrElse(c, List())
@@ -106,12 +106,12 @@ class MHCache(universe: Universe) extends Cache(universe) {
     } else if (nccElems.size > 1 && c.parent.value == nccElems.last._1) {
       // If the current value matches the value at the bottom of the stack, then we need to do a swap; move the back to the front
       // and the front to the back
-      
+
       // Store the elements in the context of the top of the stack. This is the current context of the chain minus the context
       // of the value at the back of the stack
-      val oldContext = c.directContextContents.clone -- nccElems.last._3
+      val oldContext = c.directContextContents.diff(nccElems.last._3)
       // swap the head and last positions
-      val head = (nccElems.last._1, nccElems.last._2, Set[Element[_]]())
+      val head = (nccElems.last._1, nccElems.last._2, Set[Element[?]]())
       val last = (nccElems.head._1, nccElems.head._2, oldContext)
       nccCache += (c -> List(head, last))
       Some(nccElems.last._2.asInstanceOf[Element[T]])
@@ -121,7 +121,7 @@ class MHCache(universe: Universe) extends Cache(universe) {
       if (nccElems.size == 2) universe.deactivate(nccElems.last._3)
       val oldContext = c.directContextContents.clone
       val result = c.get(c.parent.value)
-      val head = (c.parent.value, result, Set[Element[_]]())
+      val head = (c.parent.value, result, Set[Element[?]]())
       val last = (nccElems.head._1, nccElems.head._2, oldContext)
       nccCache += (c -> List(head, last))
       Some(result)
@@ -131,7 +131,7 @@ class MHCache(universe: Universe) extends Cache(universe) {
   /**
    * Removes an element from the cache. This is needed to properly clean up elements as they are deactivated.
    */
-  def subtractOne(element: Element[_]) = {
+  def subtractOne(element: Element[?]) = {
     ccCache -= element
     nccCache -= element
     val invertValue = ccInvertedCache.get(element)

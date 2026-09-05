@@ -14909,17 +14909,17 @@ receiver.density(value)
 
 ## `` com.cra.figaro.library.atomic.discrete.ParameterizedBinomialFixedNumTrials.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ParameterizedBinomialFixedNumTrials.html#distributionToStatistics-fffff55f)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ParameterizedBinomialFixedNumTrials.html#distributionToStatistics-391)
 
 ```scala
-override def distributionToStatistics(distribution: Stream[(Double, Int)]): Seq[Double]
+override def distributionToStatistics(distribution: LazyList[(Double, Int)]): Seq[Double]
 ```
 
 Convert a distribution from this element into sufficient statistics
 
 Type parameters: none.
 
-Parameters, list 1: `` distribution: Stream[(Double, Int)] ``.
+Parameters, list 1: `` distribution: LazyList[(Double, Int)] ``.
 
 Returns: `` Seq[Double] ``.
 
@@ -15419,17 +15419,17 @@ receiver.directContextContents
 
 ## `` com.cra.figaro.library.atomic.discrete.ParameterizedBinomialFixedNumTrials.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ParameterizedBinomialFixedNumTrials.html#distributionToStatistics-b61)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ParameterizedBinomialFixedNumTrials.html#distributionToStatistics-113)
 
 ```scala
-override def distributionToStatistics(p: Parameter[_], distribution: Stream[(Double, Int)]): Seq[Double]
+override def distributionToStatistics(p: Parameter[_], distribution: LazyList[(Double, Int)]): Seq[Double]
 ```
 
 Convert a distribution from this element into sufficient statistics for the specified parameter
 
 Type parameters: none.
 
-Parameters, list 1: `` p: Parameter[_] ``; `` distribution: Stream[(Double, Int)] ``.
+Parameters, list 1: `` p: Parameter[_] ``; `` distribution: LazyList[(Double, Int)] ``.
 
 Returns: `` Seq[Double] ``.
 

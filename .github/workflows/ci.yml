@@ -54,6 +54,7 @@ jobs:
           "figaro / Test / testOnly
           com.cra.figaro.test.modernization.ProbabilityRegressionTest
           com.cra.figaro.test.modernization.Scala3RegressionTest
+          com.cra.figaro.test.modernization.DeprecationRegressionTest
           com.cra.figaro.test.modernization.SpecialFunctionsRegressionTest
           com.cra.figaro.test.learning.SerializationTest"
 
@@ -113,8 +114,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.2-SNAPSHOT.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.2-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -131,7 +132,7 @@ jobs:
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.2-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -142,8 +143,8 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.2-SNAPSHOT.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.2-SNAPSHOT-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.2-SNAPSHOT-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.2-SNAPSHOT-javadoc.jar
           if-no-files-found: error

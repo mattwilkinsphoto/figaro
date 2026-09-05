@@ -33,13 +33,13 @@ import com.cra.figaro.library.compound.^^
  * CollapsedProbQueryGibbs only uses graph information and the list of targets to collapse some variables.
  * extend with HeuristicCollapser or RecurringCollapser to implement other features described in Gogate et. al. 
  */
-abstract class CollapsedProbQueryGibbs(override val universe: Universe, targets: Element[_]*)(
-override val dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-override val dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
+abstract class CollapsedProbQueryGibbs(override val universe: Universe, targets: Element[?]*)(
+override val dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+override val dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
 override val burnIn: Int, override val interval: Int,
 override val blockToSampler: Gibbs.BlockSamplerCreator, alphaIn: Int = 10, gammaIn:Int = 1000, 
 	upperBounds: Boolean = false)
-extends ProbQueryGibbs(universe, targets: _*)(dependentUniverses, dependentAlgorithm, 0, interval, 
+extends ProbQueryGibbs(universe, targets*)(dependentUniverses, dependentAlgorithm, 0, interval,
 		blockToSampler, upperBounds)
 with CollapsedProbabilisticGibbs {
   override def initialize() = {
@@ -70,7 +70,7 @@ trait CollapsedProbabilisticGibbs extends ProbabilisticGibbs {
   /**
    * We need a list of variables in order so we can access them by index.
    */
-  var varsInOrder: List[Variable[_]] = List()
+  var varsInOrder: List[Variable[?]] = List()
 
 
   var originalBlocks:List[Gibbs.Block] = List()
@@ -78,44 +78,44 @@ trait CollapsedProbabilisticGibbs extends ProbabilisticGibbs {
    * List of variables corresponding to target elements.
    * Creating these is memoized, so we don't need to worry about duplicates.
    */
-  var targetVariables: List[Variable[_]] = List()
+  var targetVariables: List[Variable[?]] = List()
   
   /**
    * Only variables with alpha or fewer neighbors in the primal graph are candidates for collapsing.
    */
-  var alpha:Int = _
+  var alpha:Int = scala.compiletime.uninitialized
   /*
   gamma controls the trade-off between blocking and collapsing. See collapseVariables.
   */
-  var gamma:Int = _
+  var gamma:Int = scala.compiletime.uninitialized
 
 
   /**
    * We use ( alpha C 2 ) often, may as well store it.
    */
-  var alphaChoose2:Double = _
+  var alphaChoose2:Double = scala.compiletime.uninitialized
 
 
   /**
    * globalGraph lets us traverse the primal graph.
    */
-  var globalGraph: VEGraph = _
+  var globalGraph: VEGraph = scala.compiletime.uninitialized
 
 
   /**
    * Store which elements are our target variables so that subclasses can make use of them. 
    */
-  var targs:Seq[Element[_]] = _
+  var targs:Seq[Element[?]] = scala.compiletime.uninitialized
 
   /**
    * Store which elements are our target variables so that subclasses can make use of them. 
    */
-  var upperB:Boolean = _
+  var upperB:Boolean = scala.compiletime.uninitialized
 
   /*
    * Keep the BlockSamplerCreator for later use.
    */
-  var blockSamplerCreate: Gibbs.BlockSamplerCreator = _
+  var blockSamplerCreate: Gibbs.BlockSamplerCreator = scala.compiletime.uninitialized
 
   /**
    * Returns how many edges would be added to the primal graph by removing var1. 
@@ -138,7 +138,7 @@ trait CollapsedProbabilisticGibbs extends ProbabilisticGibbs {
 	 * xs which is fully contained in another block ys.
    */
   def correctBlocks(originalBlocks:List[Gibbs.Block]):List[Gibbs.Block] = {
-  	val initial = MutableSet[Set[Variable[_]]]()
+    val initial = MutableSet[Set[Variable[?]]]()
   	for {x <- originalBlocks.map(bl => bl.filter(y => variables.contains(y)).toSet).distinct} {
   		initial add x
   	}
@@ -167,16 +167,16 @@ trait CollapsedProbabilisticGibbs extends ProbabilisticGibbs {
    * Eliminate a variable. This follows the same approach as in VariableElimination.scala.
   }*/
 	def eliminate(
-    variable: Variable[_],
+    variable: Variable[?],
     factors: MultiSet[Factor[Double]],
-    map: MutableMap[Variable[_], MultiSet[Factor[Double]]]): Unit = {
+    map: MutableMap[Variable[?], MultiSet[Factor[Double]]]): Unit = {
     val varFactors = map(variable)
     if (varFactors nonEmpty) {
     	//flatten all of varFactors into one factor
       val productFactor = varFactors reduceLeft (_.product(_))
       //marginalize that factor to all variables other than variable
       val resultFactor = productFactor.marginalizeTo( 
-      	productFactor.variables.filter(_ != variable): _*)
+        productFactor.variables.filter(_ != variable)*)
       //update our multiset of factors, and our map variables ->: factors
       varFactors.foreach(factors.removeOne(_))
       factors.addOne(resultFactor)
@@ -190,7 +190,7 @@ trait CollapsedProbabilisticGibbs extends ProbabilisticGibbs {
   /**
    * Marginalize a factor to a particular variable. 
    */
-  def marginalizeToTarget(factor: Factor[Double], target: Variable[_]) = {
+  def marginalizeToTarget(factor: Factor[Double], target: Variable[?]) = {
     val unnormalizedTargetFactor = factor.marginalizeTo(target)
     val z = unnormalizedTargetFactor.foldLeft(semiring.zero, _ + _)
     //val targetFactor = Factory.make[Double](unnormalizedTargetFactor.variables)
@@ -216,20 +216,20 @@ trait CollapsedProbabilisticGibbs extends ProbabilisticGibbs {
   /**
    * add a factor to the list
    */
-  def addFactor[T](factor: Factor[T], map: MutableMap[Variable[_], MultiSet[Factor[T]]]): Unit =
+  def addFactor[T](factor: Factor[T], map: MutableMap[Variable[?], MultiSet[Factor[T]]]): Unit =
     factor.variables foreach (v => map += v -> (map.getOrElse(v, HashMultiSet()).addOne(factor)))
 
   /**
    * remove a factor from the list
    */
-  def removeFactor[T](factor: Factor[T], map: MutableMap[Variable[_], MultiSet[Factor[T]]]): Unit =
+  def removeFactor[T](factor: Factor[T], map: MutableMap[Variable[?], MultiSet[Factor[T]]]): Unit =
     factor.variables foreach (v => map += v -> (map.getOrElse(v, HashMultiSet()).removeOne(factor)))
 
 
   /**
    * Sort variables by the target heuristic, if they have fewer than alpha neighbors and are not targets.
    */
-  def sortByHeuristic(varList:List[Variable[_]], HeuristicMap:MutableMap[Variable[_], Double]) = {
+  def sortByHeuristic(varList:List[Variable[?]], HeuristicMap:MutableMap[Variable[?], Double]) = {
     varList.filter(x => !targetVariables.contains(x) && 
     	(globalGraph.info(x).neighbors.toList.length - 1) <= alpha).sortWith(HeuristicMap(_) > HeuristicMap(_))
   }
@@ -238,13 +238,13 @@ trait CollapsedProbabilisticGibbs extends ProbabilisticGibbs {
    */
   def collapseVariables() = {
     //store the heuristic for every variable, so we don't have to calculate it as often.
-    val graphHeuristic:MutableMap[Variable[_], Double] = MutableMap() ++ variables.map(v => 
+    val graphHeuristic:MutableMap[Variable[?], Double] = MutableMap() ++ variables.map(v =>
     	v-> graphHeuristicFunction(v)).toMap
     //sort the variables using stored values
     var sortedVars = sortByHeuristic(variables.toList, graphHeuristic)
     var edgesAdded:Int = 0
     //map and tempFactors are to help with variable elimination.
-    val map = MutableMap[Variable[_], MultiSet[Factor[Double]]]()
+    val map = MutableMap[Variable[?], MultiSet[Factor[Double]]]()
     val tempFactors = HashMultiSet[Factor[Double]]()
     factors foreach (x => tempFactors.addOne(x))
     for {fact <- tempFactors} {
@@ -253,7 +253,7 @@ trait CollapsedProbabilisticGibbs extends ProbabilisticGibbs {
     //we collapse variables until either we are out of candidates or we've added too many edges.
     while (sortedVars.length > 0 && edgesAdded < gamma) {
       //eliminate the variable with highest heuristic.
-      var toRemove:Variable[_] = sortedVars(0)
+      var toRemove:Variable[?] = sortedVars(0)
       eliminate(toRemove, tempFactors, map)
       variables = variables.filter(_ != toRemove)
       var oldNeighbors = globalGraph.info(toRemove).neighbors.filter(_ != toRemove)

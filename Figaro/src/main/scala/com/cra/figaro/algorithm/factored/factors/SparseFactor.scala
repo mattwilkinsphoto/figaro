@@ -31,17 +31,17 @@ import com.cra.figaro.language.Parameter
  * This implementation stores only non-default (non-zero) elements and supplies special sum and product methods to
  * account for the missing values.
  */
-class SparseFactor[T](val parents: List[Variable[_]], val output: List[Variable[_]], val semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]])
+class SparseFactor[T](val parents: List[Variable[?]], val output: List[Variable[?]], val semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]])
     extends BasicFactor[T] {
 
-  override def createFactor[T](_parents: List[Variable[_]], _output: List[Variable[_]], _semiring: Semiring[T] = semiring) = {
+  override def createFactor[T](_parents: List[Variable[?]], _output: List[Variable[?]], _semiring: Semiring[T] = semiring) = {
     val nf = new SparseFactor[T](_parents, _output, _semiring)
     nf
   }
 
   val contents: Map[List[Int], T] = Map()
 
-  def getContents(): Traversable[T] = contents.values
+  def getContents(): Iterable[T] = contents.values
 
   def stringContents(): String = contents.mkString(",")
 
@@ -210,7 +210,7 @@ class SparseFactor[T](val parents: List[Variable[_]], val output: List[Variable[
     result
   }
 
-  class SparseIndices(variables: List[Variable[_]]) extends Indices(variables) {
+  class SparseIndices(variables: List[Variable[?]]) extends Indices(variables) {
     override def iterator = contents.keys.iterator
 
   }

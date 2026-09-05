@@ -28,15 +28,15 @@ object ParImportance {
    * @param numThreads the number of threads to spawn
    * @param targets references to the target elements
    */
-  def apply(generator: () => Universe, numThreads: Int, targets: Reference[_]*) = {
+  def apply(generator: () => Universe, numThreads: Int, targets: Reference[?]*) = {
     val algs = for ( _ <- 1 to numThreads) yield {
       val universe = generator()
       val elements = targets.map(universe.getElementByReference(_))
-      Importance(elements: _*)(universe)
+      Importance(elements*)(using universe)
     }
-    new ParSampler(algs, targets: _*) with ParAnytime {
+    new ParSampler(algs, targets*) with ParAnytime {
       
-      override val parAlgs: ParSeq[Importance with AnytimeProbQuerySampler] = algs.par
+      override val parAlgs: ParSeq[Importance & AnytimeProbQuerySampler] = algs.par
       
     }
   }
@@ -50,22 +50,22 @@ object ParImportance {
    * @param numSamples the number of samples to take, total, across the threads
    * @param targets references to the target elements
    */
-  def apply(generator: () => Universe, numThreads: Int, numSamples: Int, targets: Reference[_]*) = {
+  def apply(generator: () => Universe, numThreads: Int, numSamples: Int, targets: Reference[?]*) = {
     val algs = for ( _ <- 1 to numThreads) yield {
       val universe = generator()
       val elements = targets.map(universe.getElementByReference(_))
-      Importance(numSamples / numThreads, elements: _*)(universe)
+      Importance(numSamples / numThreads, elements*)(using universe)
     }
-    new ParSampler(algs, targets: _*) with ParOneTime with ProbEvidenceQuery {
+    new ParSampler(algs, targets*) with ParOneTime with ProbEvidenceQuery {
       
-      override val parAlgs: ParSeq[Importance with OneTimeProbQuerySampler with ProbEvidenceQuery] = algs.par
+      override val parAlgs: ParSeq[Importance & OneTimeProbQuerySampler & ProbEvidenceQuery] = algs.par
       
       /**
         * Compute the probability of the given named evidence.
         * Takes the conditions and constraints in the model as part of the model definition.
         * This method takes care of creating and running the necessary algorithms.
         */
-      override def probabilityOfEvidence(evidence: List[NamedEvidence[_]]): Double = {
+      override def probabilityOfEvidence(evidence: List[NamedEvidence[?]]): Double = {
         val poes = parAlgs.toList.map { alg => 
           alg.probabilityOfEvidence(evidence)
         }

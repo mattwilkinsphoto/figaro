@@ -25,8 +25,8 @@ import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object HealthProcess extends Process[Double, Boolean] {
-  val healthyPrior = Uniform((BigDecimal("0.05") to BigDecimal("0.95") by BigDecimal("0.1")).map(_.toDouble):_*)
-  val healthChangeRate = Uniform((BigDecimal("0.001") to BigDecimal("0.1") by BigDecimal("0.002")).map(_.toDouble):_*)
+  val healthyPrior = Uniform((BigDecimal("0.05") to BigDecimal("0.95") by BigDecimal("0.1")).map(_.toDouble)*)
+  val healthChangeRate = Uniform((BigDecimal("0.001") to BigDecimal("0.1") by BigDecimal("0.002")).map(_.toDouble)*)
 
   def generate(time: Double): Element[Boolean] = Flip(healthyPrior)
 
@@ -35,7 +35,7 @@ object HealthProcess extends Process[Double, Boolean] {
     val healthy = sortedTimes.map(time => (time, generate(time))).toMap
     def makePairs(remaining: List[Double]): Unit = {
       if (remaining.length >= 2) {
-        val time1 :: time2 :: rest = remaining
+        val time1 :: time2 :: rest = (remaining).runtimeChecked
         val probChange = Apply(healthChangeRate, (d: Double) => 1 - math.exp(- (time2 - time1) / d))
         val equalHealth = healthy(time1) === healthy(time2)
         val healthStatusChecker = If(equalHealth, Constant(true), Flip(probChange))
@@ -61,7 +61,7 @@ object HealthProcess extends Process[Double, Boolean] {
 
     val queryElements = queries.map(healthy(_))
     val queryTargets = healthyPrior :: healthChangeRate :: queryElements
-    val algorithm = VariableElimination(queryTargets:_*)
+    val algorithm = VariableElimination(queryTargets*)
     algorithm.start()
     for { query <- queries } {
       println("Probability the patient is healthy at time " + query + " = " + algorithm.probability(healthy(query), true))
@@ -75,8 +75,8 @@ object HealthProcess extends Process[Double, Boolean] {
 class HealthProcessTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Health Process" should {
-    val healthyPrior = Uniform((BigDecimal("0.05") to BigDecimal("0.95") by BigDecimal("0.1")).map(_.toDouble):_*)
-    val healthChangeRate = Uniform((BigDecimal("0.001") to BigDecimal("0.1") by BigDecimal("0.002")).map(_.toDouble):_*)
+    val healthyPrior = Uniform((BigDecimal("0.05") to BigDecimal("0.95") by BigDecimal("0.1")).map(_.toDouble)*)
+    val healthChangeRate = Uniform((BigDecimal("0.001") to BigDecimal("0.1") by BigDecimal("0.002")).map(_.toDouble)*)
 
     val data = Map(0.1 -> true, 0.25 -> true, 0.3 -> false, 0.31 -> false, 0.34 -> false, 0.36 -> false, 0.4 -> true, 0.5 -> true, 0.55 -> true)
     val queries = List(0.35, 0.37, 0.45, 0.6)
@@ -89,7 +89,7 @@ class HealthProcessTest extends AnyWordSpec with Matchers {
 
     val queryElements = queries.map(healthy(_))
     val queryTargets = healthyPrior :: healthChangeRate :: queryElements
-    val algorithm = VariableElimination(queryTargets:_*)
+    val algorithm = VariableElimination(queryTargets*)
     algorithm.start()
     for { query <- queries } {
       println("Probability the patient is healthy at time " + query + " = " + algorithm.probability(healthy(query), true))

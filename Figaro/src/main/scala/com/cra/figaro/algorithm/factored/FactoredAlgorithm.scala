@@ -41,7 +41,7 @@ trait FactoredAlgorithm[T] extends Algorithm {
    * If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both.
    * If they don't, we don't need to compute bounds. 
    */
-  def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = false): (List[Element[_]], Boolean) = {
+  def getNeededElements(starterElements: List[Element[?]], depth: Int, parameterized: Boolean = false): (List[Element[?]], Boolean) = {
     // Since there may be evidence on the dependent universes, we have to include their parents as important elements
     val dependentUniverseParents = 
       for { 
@@ -53,13 +53,13 @@ trait FactoredAlgorithm[T] extends Algorithm {
     val boundsInducingElements = universe.conditionedElements ::: universe.constrainedElements ::: dependentUniverseParents
 
     // Later, we will need to draw connections between elements that are both parents of the same dependent universe
-    var dependentUniverseCoparents: Map[Element[_], Set[Element[_]]] = Map()
+    var dependentUniverseCoparents: Map[Element[?], Set[Element[?]]] = Map()
     for {
       (dependentUniverse, _) <- dependentUniverses
       parent <- dependentUniverse.parentElements
     } {
       val previous = dependentUniverseCoparents.getOrElse(parent, Set())
-      dependentUniverseCoparents += parent -> (previous ++ dependentUniverse.parentElements.toSet - parent)
+      dependentUniverseCoparents = dependentUniverseCoparents.concat(List(parent -> (previous ++ dependentUniverse.parentElements.toSet - parent)))
     }
     // Make sure we compute values from scratch in case the elements have changed
     LazyValues.clear(universe)
@@ -71,13 +71,13 @@ trait FactoredAlgorithm[T] extends Algorithm {
      * Each time we go down to the next element, the depth is reduced by 1.
      * An element is included in the result if its required depth is greater than its previously expanded depth.
      */
-    def chaseDown(element: Element[_], depth: Int, chasedSoFar: Set[Element[_]]): Set[(Element[_], Int)] = {
+    def chaseDown(element: Element[?], depth: Int, chasedSoFar: Set[Element[?]]): Set[(Element[?], Int)] = {
         if (depth >= 0) {
           val includeThisElement = depth > LazyValues(element.universe).expandedDepth(element).getOrElse(-1)
           // Keeping track of what's been chased so far avoids infinite recursion
           val related = element.universe.directlyUsedBy(element).toSet ++ dependentUniverseCoparents.getOrElse(element, Set())
           val toChase = related.filter(!chasedSoFar.contains(_))
-          val rest = toChase.flatMap((elem: Element[_]) => chaseDown(elem, depth - 1, chasedSoFar ++ toChase))
+          val rest = toChase.flatMap((elem: Element[?]) => chaseDown(elem, depth - 1, chasedSoFar ++ toChase))
           if (includeThisElement) rest + ((element, depth)); else rest
         } else Set()
       }
@@ -88,14 +88,14 @@ trait FactoredAlgorithm[T] extends Algorithm {
      * 
      * */
     val newlyNeededElements = 
-      Element.closeUnderContingencies(starterElements.toSet ++ boundsInducingElements.toSet).map((elem: Element[_]) => (elem, depth))
+      Element.closeUnderContingencies(starterElements.toSet ++ boundsInducingElements.toSet).map((elem: Element[?]) => (elem, depth))
       
     
     @tailrec
-    def expandElements(curr: Set[(Element[_], Int)]): Unit = {
+    def expandElements(curr: Set[(Element[?], Int)]): Unit = {
       if(curr.isEmpty) return
       val currGrouped = curr.groupBy(_._1.universe)
-      val allNeededElements = currGrouped.flatMap((pair: (Universe, Set[(Element[_], Int)])) => {
+      val allNeededElements = currGrouped.flatMap((pair: (Universe, Set[(Element[?], Int)])) => {
         val (uni, set) = pair
         val values = LazyValues(uni)
         values.expandAll(set)
@@ -133,7 +133,7 @@ trait FactoredAlgorithm[T] extends Algorithm {
    * All implementations of factored algorithms must specify a way to get the factors from the given universe and
    * dependent universes.
    */
-  def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = false): List[Factor[T]]
+  def getFactors(neededElements: List[Element[?]], targetElements: List[Element[?]], upperBounds: Boolean = false): List[Factor[T]]
   
   /**
    * The universe on which this variable elimination algorithm should be applied.
@@ -144,14 +144,14 @@ trait FactoredAlgorithm[T] extends Algorithm {
    * A list of universes that depend on this universe such that evidence on those universes should be taken into
    * account in this universe.
    */
-  val dependentUniverses: List[(Universe, List[NamedEvidence[_]])]
+  val dependentUniverses: List[(Universe, List[NamedEvidence[?]])]
 
   /**
    * The algorithm to compute probability of specified evidence in a dependent universe.
    * We use () => Double to represent this algorithm instead of an instance of ProbEvidenceAlgorithm. 
    * Typical usage is to return the result of ProbEvidenceAlgorithm.computeProbEvidence when invoked.
    */
-  val dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double
+  val dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double
 
   /**
    * The sum, product operations on the factor types and

@@ -33,14 +33,10 @@ trait ElementCollection {
    * with a given name, rather than a Set, so we always know which is the most recent.) When evidence is applied to a name, all the elements with that name have the evidence
    * applied to them.
    */
-  private val myElementMap: Map[Name[_], List[Element[_]]] = Map()
+  private val myElementMap: Map[Name[?], List[Element[?]]] = Map()
 
   /** All named elements in this collection. */
-  @deprecated("Use namedElements instead", "2.3.0.0")
-  def allElements: List[Element[_]] = myElementMap.values.flatten.toList
-
-  /** All named elements in this collection. */
-  def namedElements: List[Element[_]] = myElementMap.values.flatten.toList
+  def namedElements: List[Element[?]] = myElementMap.values.flatten.toList
 
   /**
    * Returns a reference element representing the single-valued reference.
@@ -94,7 +90,7 @@ trait ElementCollection {
   /**
    * Assert the given evidence associated with references to elements in the collection.
    */
-  def assertEvidence(evidencePairs: Seq[NamedEvidence[_]]): Unit =
+  def assertEvidence(evidencePairs: Seq[NamedEvidence[?]]): Unit =
     for { case NamedEvidence(reference, evidence, contingency) <- evidencePairs } assertEvidence(reference, evidence, contingency)
 
   /**
@@ -159,7 +155,7 @@ trait ElementCollection {
    * Therefore, we keep track of
    */
   private case class RefEv[T](ref: Reference[T], ev: Evidence[T], contingency: Element.Contingency)
-  private var collectedEvidence: Map[Reference[_], RefEv[_]] = Map()
+  private var collectedEvidence: Map[Reference[?], RefEv[?]] = Map()
 
   /**
    * Returns all resolutions of the given reference. Considers all possible values of each of the elements on the path and all elements with each name on the path.
@@ -173,8 +169,8 @@ trait ElementCollection {
   /*
    * Finds all of the valid values of elements needed to resolve a reference
    */
-  private def findResolvableValues[T](resolutions: Set[(Option[Element[T]], Element.Contingency)]): Map[Element[_], Set[Any]] = {
-    val resolveMap: Map[Element[_], Set[Any]] = Map()
+  private def findResolvableValues[T](resolutions: Set[(Option[Element[T]], Element.Contingency)]): Map[Element[?], Set[Any]] = {
+    val resolveMap: Map[Element[?], Set[Any]] = Map()
     resolutions.foreach { r =>
       val (possibility, contingency) = r
       contingency.foreach { c =>
@@ -237,7 +233,7 @@ trait ElementCollection {
   // The arguments of a reference include the arguments of all its possibilities as well as all references along the
   // way, because the value depends on these references. It also includes all the possibilities since the value of
   // the reference is dependent on their value.
-  private[language] def makeArgs(reference: Reference[_]): Set[Element[_]] = {
+  private[language] def makeArgs(reference: Reference[?]): Set[Element[?]] = {
     reference match {
       case Name(name) =>
         val elems = myElementMap(name)
@@ -258,7 +254,7 @@ trait ElementCollection {
    * Gets the first element in the chain contained by the reference, together with an optional remaining
    * reference. If the reference is simply a name, the element is the referred to element and the remainder is None.
    */
-  def getFirst[T](reference: Reference[T]): (Element[_], Option[Reference[T]]) =
+  def getFirst[T](reference: Reference[T]): (Element[?], Option[Reference[T]]) =
     reference match {
       case Name(name) =>
         val elems = myElementMap(name)
@@ -317,7 +313,7 @@ trait ElementCollection {
           val headElems = myElementMap(head)
           headElems.head.generate()
           val nextECs = ElementCollection.makeElementCollectionSet(headElems.head.value) // use most recent element with the name
-          (Set[Element[T]]() /: nextECs)(_ union _.getManyElementsByReference(tail))
+          (nextECs).foldLeft(Set[Element[T]]())((elements, collection) => elements.union(collection.getManyElementsByReference(tail)))
         } catch {
           case e: ClassCastException =>
             throw new IllegalArgumentException("Invalid reference: " + head +
@@ -339,7 +335,7 @@ object ElementCollection {
     def makeEC[T](s: Set[T]) = s map (_.asInstanceOf[ElementCollection])
     value match {
       case ec: ElementCollection => Set(ec)
-      case t: Traversable[_] => makeEC(t.toSet)
+      case t: Iterable[_] => makeEC(t.toSet)
       case _ => throw new IllegalArgumentException("Not collections: " + value)
     }
   }

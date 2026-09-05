@@ -51,7 +51,7 @@ trait L2Norm {
   /**
    * Reduce a variable list of doubles using the L2 norm.
    */
-  def reduce(v: Double*) = math.pow((0.0 /: v)((c, n) => c + math.pow(math.abs(n), 2.0)), 0.5)
+  def reduce(v: Double*) = math.pow((v).foldLeft(0.0)((c, n) => c + math.pow(math.abs(n), 2.0)), 0.5)
 }
 
 /**

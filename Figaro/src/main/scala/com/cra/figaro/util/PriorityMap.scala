@@ -33,7 +33,7 @@ object PriorityMap {
    * implementation.
    */
   def apply[T, U](pairs: (T, U)*)(implicit ord: Ordering[U]): PriorityMap[T, U] = {
-    val result = new HeapPriorityMap[T, U]()(ord)
+    val result = new HeapPriorityMap[T, U]()(using ord)
     pairs foreach (result += _)
     result
   }

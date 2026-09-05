@@ -32,11 +32,11 @@ object WalkSAT {
    * @param prob The probability of reassigning a random variable in a factor instead of taking the greedy approach.
    * @param maxIterations Maximum number of iterations to run before throwing an exception for taking too long.
    */
-  def apply[T](factors: List[Factor[T]], variables: Set[Variable[_]], semiring: Semiring[T], chainMapper: Chain[_,_] => Set[Variable[_]],
-    prob: Double = 0.1, maxIterations: Int = 100000): MutableMap[Variable[_], Int] = {
-    val currentSamples = MutableMap[Variable[_], Int]()
+  def apply[T](factors: List[Factor[T]], variables: Set[Variable[?]], semiring: Semiring[T], chainMapper: Chain[?,?] => Set[Variable[?]],
+    prob: Double = 0.1, maxIterations: Int = 100000): MutableMap[Variable[?], Int] = {
+    val currentSamples = MutableMap[Variable[?], Int]()
     val nonConstraintFactors = factors.filterNot(_.isConstraint)
-    val variableParents = MutableMap[Variable[_], Set[Variable[_]]]()
+    val variableParents = MutableMap[Variable[?], Set[Variable[?]]]()
 
     // Compute the set of parents of each variable that determine its value in generative order
     // Similar but not identical to variableParentMap used for Gibbs sampling
@@ -47,8 +47,8 @@ object WalkSAT {
       }
 
       case icv: InternalChainVariable[_] => {
-        val chain = icv.chain.asInstanceOf[Chain[_, _]]
-        val chainResults: Set[Variable[_]] = chainMapper(chain)
+        val chain = icv.chain.asInstanceOf[Chain[?, ?]]
+        val chainResults: Set[Variable[?]] = chainMapper(chain)
         //val chainResults: Set[Variable[_]] = LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet
         variableParents(icv) = chainResults + Variable(chain.parent)
         variableParents(icv.chainVar) = Set(icv)
@@ -60,7 +60,7 @@ object WalkSAT {
     walkSAT(maxIterations)
 
     @tailrec
-    def pseudoForwardSample(toSample: Set[Variable[_]]): Unit = {
+    def pseudoForwardSample(toSample: Set[Variable[?]]): Unit = {
       // Look for a variable who has no parents yet to be sampled
       val variableOption = toSample.find(variable => variableParents.getOrElse(variable, Set()).intersect(toSample).isEmpty)
       variableOption match {
@@ -69,7 +69,7 @@ object WalkSAT {
           val adjacentFactors = nonConstraintFactors.filter(f => f.variables.contains(variableToSample))
           val varAndParents = variableParents.getOrElse(variableToSample, Set()) + variableToSample
           // Marginalize to the variable and its parents
-          val parentFactors = adjacentFactors.map(_.marginalizeTo(varAndParents.toList:_*))
+          val parentFactors = adjacentFactors.map(_.marginalizeTo(varAndParents.toList*))
           // Produce a sample
           val sampleOption = (0 until variableToSample.size).find(sample => parentFactors.forall(factor => {
             factor.get(factor.variables.map(currentSamples.getOrElse(_, sample))) != semiring.zero

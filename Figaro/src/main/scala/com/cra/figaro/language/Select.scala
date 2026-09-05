@@ -1,13 +1,13 @@
 /*
  * Select.scala
  * Distributions with randomly chosen outcomes.
- * 
+ *
  * Created By:      Avi Pfeffer (apfeffer@cra.com)
  * Creation Date:   Jan 1, 2009
- * 
+ *
  * Copyright 2017 Avrom J. Pfeffer and Charles River Analytics, Inc.
  * See http://www.cra.com or email figaro@cra.com for information.
- * 
+ *
  * See http://www.github.com/p2t2/figaro for a copy of the software license.
  */
 
@@ -24,7 +24,7 @@ import com.cra.figaro.util.selectMultinomial
 /**
  * Distributions with randomly chosen outcomes. The probabilities can
  * either be simple (Doubles) or complex (Elements).
- * 
+ *
  * @param clauses The list of pairs of probability specifications and values.
  * @tparam P The type of the probability specification.
  * @tparam T The type of values of this element.
@@ -53,7 +53,7 @@ class AtomicSelect[T](name: Name[T], clauses: List[(Double, T)], collection: Ele
 
   private lazy val normalizedClauses = normalizedProbs zip outcomes
 
-  def density(outcome: T) = (0.0 /: (normalizedClauses filter (_._2 == outcome)))(_ + _._1)
+  def density(outcome: T) = ((normalizedClauses filter (_._2 == outcome))).foldLeft(0.0)(_ + _._1)
 
   def generateValue(rand: Randomness) = selectMultinomial(rand, normalizedClauses)
 }
@@ -63,7 +63,7 @@ class AtomicSelect[T](name: Name[T], clauses: List[(Double, T)], collection: Ele
  */
 class CompoundSelect[T](name: Name[T], clauses: List[(Element[Double], T)], collection: ElementCollection)
   extends Select(name, clauses, collection) {
-  def args: List[Element[_]] = probs
+  def args: List[Element[?]] = probs
 
   def generateValue(rand: Randomness) = {
     probs.foreach(prob => if (prob.value.asInstanceOf[java.lang.Double] == null) prob.generate())
@@ -79,12 +79,12 @@ class CompoundSelect[T](name: Name[T], clauses: List[(Element[Double], T)], coll
 class ParameterizedSelect[T](name: Name[T], override val parameter: AtomicDirichlet, outcomes: List[T], collection: ElementCollection)
   extends Select(name, parameter.alphas.toList zip outcomes, collection) with SingleParameterized[T] {
   private lazy val normalizedProbs = normalize(probs)
-  def args: List[Element[_]] = List(parameter)
+  def args: List[Element[?]] = List(parameter)
   private lazy val normalizedClauses = normalizedProbs zip outcomes
 
-  def distributionToStatistics(distribution: Stream[(Double, T)]): Seq[Double] = {
+  def distributionToStatistics(distribution: LazyList[(Double, T)]): Seq[Double] = {
     val distList = distribution.toList
-    for { outcome <- outcomes } 
+    for { outcome <- outcomes }
     yield {
       distList.find(_._2 == outcome) match {
         case Some((prob, _)) => prob
@@ -92,14 +92,14 @@ class ParameterizedSelect[T](name: Name[T], override val parameter: AtomicDirich
       }
     }
   }
-  
+
   def density(value: T): Double = {
     outcomes.indexOf(value) match {
       case -1 => 0.0
       case i => parameter.value(i)
     }
   }
-  
+
   def generateValue(rand: Randomness) = selectMultinomial(rand, normalizedClauses)
 
 }
@@ -118,14 +118,14 @@ object Select {
       case _ => new AtomicSelect("bad", ((List.fill(outcomes.length)(1.0)) zip outcomes).toList, collection)//Kind of a trick - Needs a default case
     }
   }
-/*  
+/*
   def apply[T](parameter: ParameterArray, outcomes: T*)(implicit name: Name[T], collection: ElementCollection) {
     parameter.p match {
       case d: AtomicDirichlet => makeParameterizedSelect(name, d, outcomes.toList,collection)
       case _ => apply((List.fill(outcomes.length)(1.0)),outcomes.toList)(name,collection)//Kind of a trick - Needs a default case
     }
   }
-  
+
   def apply[T](parameter: PrimitiveArray, outcomes: T*)(implicit name: Name[T], collection: ElementCollection)
   = apply(parameter.a.toList,outcomes.toList)
   */
@@ -158,6 +158,6 @@ object Select {
   */
   def apply[T](parameter: AtomicDirichlet, outcomes: T*)(implicit name: Name[T], collection: ElementCollection) =
     makeParameterizedSelect(name, parameter, outcomes.toList, collection)
-        
+
 }
 

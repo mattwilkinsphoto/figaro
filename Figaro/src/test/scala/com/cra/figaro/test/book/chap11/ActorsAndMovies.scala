@@ -60,7 +60,7 @@ object ActorsAndMovies {
     val n = awards.count(b => b)
     if (n == 0) 0.0 else 1.0 / (n * n)
   }
-  val allAwards: Element[List[Boolean]] = Inject(appearances.map(_.award): _*)
+  val allAwards: Element[List[Boolean]] = Inject(appearances.map(_.award)*)
   allAwards.setConstraint(uniqueAwardConstraint)
 
   val scheme: ProposalScheme = {

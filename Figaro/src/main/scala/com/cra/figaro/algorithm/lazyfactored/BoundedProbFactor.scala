@@ -56,15 +56,16 @@ object BoundedProbFactor {
     factor
   }
 
-  private def makeContingentConstraintFactor[T](elem: Element[T], constraint: T => Double, firstConting: Element.ElemVal[_], restContinges: Element.Contingency, upper: Boolean): Factor[Double] = {
+  private def makeContingentConstraintFactor[T](elem: Element[T], constraint: T => Double, firstConting: Element.ElemVal[?], restContinges: Element.Contingency, upper: Boolean): Factor[Double] = {
     val restFactor = makeConstraintFactor(elem, (constraint, restContinges), upper)
     extendConstraintFactor(restFactor, firstConting)
   }
 
-  private def extendConstraintFactor(baseFactor: Factor[Double], firstConting: Element.ElemVal[_]): Factor[Double] = {
+  private def extendConstraintFactor(baseFactor: Factor[Double], firstConting: Element.ElemVal[?]): Factor[Double] = {
     // The extended factor is obtained by getting the underlying factor and expanding each row so that the row only provides its entry if the contingent variable takes
     // on the appropriate value, otherwise the entry is 1
-    val Element.ElemVal(firstElem, firstValue) = firstConting
+    val firstElem = firstConting.elem
+    val firstValue = firstConting.value
     val firstVar = Variable(firstElem)
     val firstValues = firstVar.range
     val numFirstValues = firstValues.size
@@ -84,7 +85,7 @@ object BoundedProbFactor {
   /**
    * Create the probabilistic factors associated with an element. 
    */
-  def make(elem: Element[_], upper: Boolean): List[Factor[Double]] = {
+  def make(elem: Element[?], upper: Boolean): List[Factor[Double]] = {
     val constraintFactors = makeConditionAndConstraintFactors(elem, upper)
     constraintFactors ::: Factory.makeNonConstraintFactors(elem)
   }
@@ -99,7 +100,7 @@ object BoundedProbFactor {
     dependentUniverse: Universe,
     probEvidenceComputer: () => Double): (Factor[Double], Factor[Double]) = {
     val uses = dependentUniverse.parentElements filter (_.universe == parentUniverse)
-    def rule(upper: Boolean)(values: List[Extended[_]]) = {
+    def rule(upper: Boolean)(values: List[Extended[?]]) = {
       if (values.exists(!_.isRegular)) { if (upper) 1.0; else 0.0 }
       else {
         for { (elem, value) <- uses zip values } { elem.value = value.asInstanceOf[Regular[elem.Value]].value }

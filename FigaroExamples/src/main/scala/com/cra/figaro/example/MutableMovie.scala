@@ -32,7 +32,7 @@ object MutableMovie {
 
     lazy val skillful = Flip(0.1)
 
-    lazy val qualities = Container(movies.map(_.quality):_*)
+    lazy val qualities = Container(movies.map(_.quality)*)
 
     lazy val numGoodMovies = qualities.count(_ == Symbol("high"))
 
@@ -42,7 +42,7 @@ object MutableMovie {
   private class Movie {
     var actors: List[Actor] = List()
 
-    lazy val skills = Container(actors.map(_.skillful):_*)
+    lazy val skills = Container(actors.map(_.skillful)*)
 
     lazy val actorsAllGood = skills.exists(b => b)
 
@@ -92,7 +92,7 @@ object MutableMovie {
 
   // Ensure that exactly one appearance gets an award.
   private def uniqueAwardCondition(awards: List[Boolean]) = awards.count((b: Boolean) => b) == 1
-  private val allAwards: Element[List[Boolean]] = Inject(appearances.map(_.award): _*)
+  private val allAwards: Element[List[Boolean]] = Inject(appearances.map(_.award)*)
   allAwards.setCondition(uniqueAwardCondition)
 
   // A proposal either proposes to switch the awardee to another awardee or proposes the properties of a movie or

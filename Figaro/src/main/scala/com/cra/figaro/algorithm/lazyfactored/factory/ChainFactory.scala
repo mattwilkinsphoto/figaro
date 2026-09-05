@@ -47,7 +47,7 @@ object ChainFactory {
       // parentVal.value should have been placed in applyMap at the time the values of this apply were computed.
       // By using chainMap, we can make sure that the result element is the same now as they were when values were computed.
       if (parent.isRegular) {
-        tempFactors.append(makeSelection(chain, selectorVar, parentSize, parentIndex, Variable(chainMap(parent.value)), selector)(mapper))
+        tempFactors.append(makeSelection(chain, selectorVar, parentSize, parentIndex, Variable(chainMap(parent.value)), selector)(using mapper))
       } else {
         // We create a dummy variable for the outcome variable whose value is always star.
         // We create a dummy factor for that variable.
@@ -55,7 +55,7 @@ object ChainFactory {
         val dummy = new Variable(ValueSet.withStar[U](Set()))
         val dummyFactor = new DenseFactor[Double](List(), List(dummy))
         dummyFactor.set(List(0), 1.0)
-        tempFactors.append(makeSelection(chain, selectorVar, parentSize, parentIndex, dummy, selector), dummyFactor)
+        tempFactors.appendAll(List(makeSelection(chain, selectorVar, parentSize, parentIndex, dummy, selector), dummyFactor))
       }
     }
 
@@ -66,15 +66,15 @@ object ChainFactory {
    * Create a temporary variable representing the combination of the parent variable and the chain
    * variable
    */
-  private def makeSelectorVariable[U](parent: Variable[_], overallVar: ElementVariable[U]): Variable[_] = {
+  private def makeSelectorVariable[U](parent: Variable[?], overallVar: ElementVariable[U]): Variable[?] = {
     val selectorSize = parent.size * overallVar.size
 
-    val values: List[List[Extended[_]]] = parent.range.flatMap(p => overallVar.range.map(o => List(p, o)))
+    val values: List[List[Extended[?]]] = parent.range.flatMap(p => overallVar.range.map(o => List(p, o)))
     
-    val tupleRangeRegular: List[List[_]] = cartesianProduct(List(parent, overallVar).map(_.range): _*)
-    val tupleVS: ValueSet[List[Extended[_]]] = ValueSet.withoutStar(tupleRangeRegular.map(_.asInstanceOf[List[Extended[_]]]).toSet)
+    val tupleRangeRegular: List[List[?]] = cartesianProduct(List(parent, overallVar).map(_.range)*)
+    val tupleVS: ValueSet[List[Extended[?]]] = ValueSet.withoutStar(tupleRangeRegular.map(_.asInstanceOf[List[Extended[?]]]).toSet)
     
-    new InternalChainVariable(tupleVS, overallVar.element.asInstanceOf[Chain[_,U]], overallVar.asInstanceOf[Variable[U]])
+    new InternalChainVariable(tupleVS, overallVar.element.asInstanceOf[Chain[?,U]], overallVar.asInstanceOf[Variable[U]])
   }
 
   /**
@@ -90,13 +90,13 @@ object ChainFactory {
    * value (handled by makeDontCares)
    *
    */
-  private def makeSelection[U](chain: Element[U], selectorVar: Variable[_], parentSize: Int,
+  private def makeSelection[U](chain: Element[U], selectorVar: Variable[?], parentSize: Int,
     parentIndex: Int, resultVar: Variable[U], selector: Factor[Double])(implicit mapper: PointMapper[U]): Factor[Double] = {
     val chainVar = Variable(chain)
     val chainValues = LazyValues(chain.universe).storedValues(chain)
     val factor = new ConditionalSelector[Double](List(selectorVar), List(resultVar))
 
-    makeCares(factor, parentIndex, resultVar, chainVar, chainValues.regularValues, selector)(mapper)
+    makeCares(factor, parentIndex, resultVar, chainVar, chainValues.regularValues, selector)(using mapper)
     for (index <- 0 until parentSize) {
       if (index != parentIndex)
         makeDontCares[U](factor, index, resultVar, chainVar, selector)

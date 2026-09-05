@@ -23,7 +23,7 @@ trait FactorGraph[T] {
   /**
    * Returns a uniform factor.
    */
-  def uniformFactor(v: List[Variable[_]]): Factor[T]
+  def uniformFactor(v: List[Variable[?]]): Factor[T]
   
   /**
    * Returns true if the graph contains a node for a (single) variable.

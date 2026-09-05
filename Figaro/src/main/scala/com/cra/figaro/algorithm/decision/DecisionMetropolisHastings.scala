@@ -31,11 +31,11 @@ import scala.annotation.tailrec
  */
 
 abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, proposalScheme: ProposalScheme, burnIn: Int, interval: Int,
-  utilityNodes: List[Element[_]], decisionTarget: Decision[T, U], dummyTarget: Element[_])
+  utilityNodes: List[Element[?]], decisionTarget: Decision[T, U], dummyTarget: Element[?])
   extends MetropolisHastings(universe, proposalScheme, burnIn, interval, dummyTarget) with DecisionAlgorithm[T, U] {
 
   def this(universe: Universe, proposalScheme: ProposalScheme, burnIn: Int, interval: Int,
-    utilityNodes: List[Element[_]], decisionTarget: Decision[T, U]) = this(universe, proposalScheme,
+    utilityNodes: List[Element[?]], decisionTarget: Decision[T, U]) = this(universe, proposalScheme,
     burnIn, interval, utilityNodes, decisionTarget, createDecisionDummy(decisionTarget))
 
   import MetropolisHastings._
@@ -47,9 +47,9 @@ abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, pro
   /**
    * Contains all of the sample data (decision values, utilities) for a given target decision
    */
-  private var allUtilitiesSeen: List[WeightSeen[_]] = _
+  private var allUtilitiesSeen: List[WeightSeen[?]] = scala.compiletime.uninitialized
 
-  private def utilitySum = (0.0 /: utilityNodes)((s: Double, n: Element[_]) => s + n.value.asInstanceOf[Double])
+  private def utilitySum = (utilityNodes).foldLeft(0.0)((s: Double, n: Element[?]) => s + n.value.asInstanceOf[Double])
 
   /**
    * Cleans up the temporary elements created during sampling
@@ -72,7 +72,7 @@ abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, pro
   protected def updateWeightSeenWithValue[T](value: T, weight: Double, weightSeen: WeightSeen[T]): Unit =
     weightSeen._2 += value -> (weightSeen._2.getOrElse(value, 0.0) + weight)
 
-  protected def updateWeightSeenForTarget[T](sample: (Double, Map[Element[_], Any]), weightSeen: WeightSeen[T]): Unit = {
+  protected def updateWeightSeenForTarget[T](sample: (Double, Map[Element[?], Any]), weightSeen: WeightSeen[T]): Unit = {
     val (weight, values) = sample
     val value = values(weightSeen._1).asInstanceOf[T]
     updateWeightSeenWithValue(value, weight, weightSeen)
@@ -85,7 +85,7 @@ abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, pro
     mhStep()
     if (dissatisfied.isEmpty) {
       val values = queryTargets map (target => target -> target.value)
-      (true, Map(values: _*))
+      (true, Map(values*))
     } else {
       (false, Map())
     }
@@ -112,7 +112,7 @@ abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, pro
   protected override def update(): Unit = {
     super.update()
     sampleCount += 1
-    allUtilitiesSeen foreach (updateWeightSeenForTarget((utilitySum, Map[Element[_], Any](dummyTarget -> dummyTarget.value)), _))
+    allUtilitiesSeen foreach (updateWeightSeenForTarget((utilitySum, Map[Element[?], Any](dummyTarget -> dummyTarget.value)), _))
     sampleCount -= 1
   }
 
@@ -122,7 +122,7 @@ abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, pro
  * Anytime Decision Metropolis-Hastings sampler.
  */
 class AnytimeDecisionMetropolisHastings[T, U](universe: Universe,
-  scheme: ProposalScheme, burnIn: Int, interval: Int, utilityNodes: List[Element[_]],
+  scheme: ProposalScheme, burnIn: Int, interval: Int, utilityNodes: List[Element[?]],
   decisionTarget: Decision[T, U])
   extends DecisionMetropolisHastings(universe, scheme, burnIn, interval, utilityNodes, decisionTarget)
   with UnweightedSampler with AnytimeProbQuerySampler {
@@ -148,7 +148,7 @@ class AnytimeDecisionMetropolisHastings[T, U](universe: Universe,
  * One-time Decision Metropolis-Hastings sampler.
  */
 class OneTimeDecisionMetropolisHastings[T, U](universe: Universe, myNumSamples: Int, scheme: ProposalScheme,
-  burnIn: Int, interval: Int, utilityNodes: List[Element[_]],
+  burnIn: Int, interval: Int, utilityNodes: List[Element[?]],
   decisionTarget: Decision[T, U])
   extends DecisionMetropolisHastings(universe, scheme, burnIn, interval, utilityNodes, decisionTarget)
   with UnweightedSampler with OneTimeProbQuerySampler {
@@ -172,7 +172,7 @@ object DecisionMetropolisHastings {
   /* Checks conditions of Decision Usage
    * 1. Double utilities
    */
-  private def UsageCheck(utilityNodes: List[Element[_]], target: Decision[_, _]) = {
+  private def UsageCheck(utilityNodes: List[Element[?]], target: Decision[?, ?]) = {
     utilityNodes.foreach { u =>
       u.value match {
         case d: Double => 1
@@ -192,7 +192,7 @@ object DecisionMetropolisHastings {
    *  to track expected utilities during the sampling
    * 
    */
-  def apply[T, U](scheme: ProposalScheme, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](scheme: ProposalScheme, utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new AnytimeDecisionMetropolisHastings[T, U](universe, scheme, 0, 1, utilityNodes, target)
@@ -202,7 +202,7 @@ object DecisionMetropolisHastings {
    * Create a OneTime DecisionMetropolis-Hastings sampler using the given number of samples and proposal
    * scheme with the given decision.
    */
-  def apply[T, U](numSamples: Int, scheme: ProposalScheme, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](numSamples: Int, scheme: ProposalScheme, utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new OneTimeDecisionMetropolisHastings[T, U](universe, numSamples, scheme, 0, 1, utilityNodes, target)
@@ -212,7 +212,7 @@ object DecisionMetropolisHastings {
    * Create an Anytime DecisionMetropolis-Hastings sampler using the given proposal scheme and number
    * of burn-in samples with the given decision.
    */
-  def apply[T, U](scheme: ProposalScheme, burnIn: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](scheme: ProposalScheme, burnIn: Int, utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new AnytimeDecisionMetropolisHastings[T, U](universe, scheme, burnIn, 1, utilityNodes, target)
@@ -222,7 +222,7 @@ object DecisionMetropolisHastings {
    * Create a OneTime DecisionMetropolis-Hastings sampler using the given number of samples, proposal scheme, and
    * number of burn-in samples with the given decision.
    */
-  def apply[T, U](numSamples: Int, scheme: ProposalScheme, burnIn: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](numSamples: Int, scheme: ProposalScheme, burnIn: Int, utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new OneTimeDecisionMetropolisHastings[T, U](universe, numSamples, scheme, burnIn, 1, utilityNodes, target)
@@ -232,7 +232,7 @@ object DecisionMetropolisHastings {
    * Create an Anytime DecisionMetropolis-Hastings sampler using the given proposal scheme, number of burn-in
    * samples, and interval between samples with the given decision.
    */
-  def apply[T, U](scheme: ProposalScheme, burnIn: Int, interval: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](scheme: ProposalScheme, burnIn: Int, interval: Int, utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new AnytimeDecisionMetropolisHastings[T, U](universe, scheme, burnIn, interval, utilityNodes, target)
@@ -243,15 +243,15 @@ object DecisionMetropolisHastings {
    * number of burn-in samples, and interval between samples with the given decision.
    */
   def apply[T, U](numSamples: Int, scheme: ProposalScheme,
-    burnIn: Int, interval: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+    burnIn: Int, interval: Int, utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new OneTimeDecisionMetropolisHastings[T, U](universe, numSamples, scheme, burnIn, interval: Int, utilityNodes, target)
   }
 
-  private[figaro] case class State(oldValues: Map[Element[_], Any],
-    oldRandomness: Map[Element[_], Any],
+  private[figaro] case class State(oldValues: Map[Element[?], Any],
+    oldRandomness: Map[Element[?], Any],
     proposalProb: Double,
     modelProb: Double,
-    dissatisfied: scala.collection.mutable.Set[Element[_]])
+    dissatisfied: scala.collection.mutable.Set[Element[?]])
 }

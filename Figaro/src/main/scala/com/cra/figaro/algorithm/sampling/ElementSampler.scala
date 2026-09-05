@@ -22,11 +22,11 @@ import scala.collection.mutable.Map
  * An abstract class to generates samples from the marginal distribution of an element.
  * @param target The element to generate samples from
  */
-abstract class ElementSampler(target: Element[_]) extends BaseUnweightedSampler(target.universe, target) {
+abstract class ElementSampler(target: Element[?]) extends BaseUnweightedSampler(target.universe, target) {
 
   def sample(): (Boolean, Sample) = {
     Forward(target)
-    (true, Map[Element[_], Any](target -> target.value))
+    (true, Map[Element[?], Any](target -> target.value))
   }
 
   protected def doInitialize(): Unit = {
@@ -39,7 +39,7 @@ abstract class ElementSampler(target: Element[_]) extends BaseUnweightedSampler(
 /**
  * Anytime Element sampler.
  */
-class AnytimeElementSampler(target: Element[_])
+class AnytimeElementSampler(target: Element[?])
   extends ElementSampler(target)
   with UnweightedSampler with AnytimeProbQuerySampler {
   /**
@@ -64,7 +64,7 @@ class AnytimeElementSampler(target: Element[_])
  *
  * @param myNumSamples The number samples to take from the element
  */
-class OneTimeElementSampler(target: Element[_], myNumSamples: Int)
+class OneTimeElementSampler(target: Element[?], myNumSamples: Int)
   extends ElementSampler(target)
   with UnweightedSampler with OneTimeProbQuerySampler {
 
@@ -87,10 +87,10 @@ object ElementSampler {
   /**
    * Create an anytime Element sampler with the given target element
    */
-  def apply(target: Element[_]) =  new AnytimeElementSampler(target)
+  def apply(target: Element[?]) =  new AnytimeElementSampler(target)
 
   /**
    * Create an one time Element sampler with the given target element using the number of samples
    */
-  def apply(target: Element[_], numSamples: Int) = new OneTimeElementSampler(target, numSamples)
+  def apply(target: Element[?], numSamples: Int) = new OneTimeElementSampler(target, numSamples)
 }

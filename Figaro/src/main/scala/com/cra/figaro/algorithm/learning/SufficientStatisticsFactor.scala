@@ -43,27 +43,27 @@ import com.cra.figaro.algorithm.factored.factors.factory.Factory
  * @param parameterMap Map of parameters to their sufficient statistics. Expectation
  */
 
-class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
+class SufficientStatisticsFactor(parameterMap: Map[Parameter[?], Seq[Double]]) {
   val semiring = new SufficientStatisticsSemiring(parameterMap)
 
-  def convertFactor[T](factor: Factor[Double]): Factor[(Double, Map[Parameter[_], Seq[Double]])] = {
-    def doubleToParam(d: Double) = (d, Map(parameterMap.toSeq: _*))
+  def convertFactor[T](factor: Factor[Double]): Factor[(Double, Map[Parameter[?], Seq[Double]])] = {
+    def doubleToParam(d: Double) = (d, Map(parameterMap.toSeq*))
     factor.mapTo(doubleToParam, semiring)
   }
 
   def partitionConstraintFactors(factors: List[Factor[Double]]) = factors.partition(_.isConstraint)
 
-  private def makeFactors(flip: ParameterizedFlip): List[Factor[(Double, Map[Parameter[_], Seq[Double]])]] = {
+  private def makeFactors(flip: ParameterizedFlip): List[Factor[(Double, Map[Parameter[?], Seq[Double]])]] = {
     val origFactor = Factory.makeFactorsForElement(flip, false, true)
     val (constraints, nonconstraints) = partitionConstraintFactors(origFactor)
 
     val flipVar = Variable(flip)
-    val factor = Factory.defaultFactor[(Double, Map[Parameter[_], Seq[Double]])](List(), List(flipVar), semiring)
+    val factor = Factory.defaultFactor[(Double, Map[Parameter[?], Seq[Double]])](List(), List(flipVar), semiring)
     val prob = flip.parameter.MAPValue
     val i = flipVar.range.indexOf(Regular(true))
 
-    val falseMapping = Map(parameterMap.toSeq: _*) + ((flip.parameter: Parameter[_]) -> Seq(0.0, 1.0))
-    val trueMapping = Map(parameterMap.toSeq: _*) + ((flip.parameter: Parameter[_]) -> Seq(1.0, 0.0))
+    val falseMapping = Map(parameterMap.toSeq*) + ((flip.parameter: Parameter[?]) -> Seq(0.0, 1.0))
+    val trueMapping = Map(parameterMap.toSeq*) + ((flip.parameter: Parameter[?]) -> Seq(1.0, 0.0))
 
     factor.set(List(i), (prob, trueMapping))
     factor.set(List(1 - i), (1.0 - prob, falseMapping))
@@ -71,21 +71,21 @@ class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
     constraints.map(convertFactor(_)) ++ List(factor)
   }
 
-  private def makeFactors(bin: ParameterizedBinomialFixedNumTrials): List[Factor[(Double, Map[Parameter[_], Seq[Double]])]] = {
+  private def makeFactors(bin: ParameterizedBinomialFixedNumTrials): List[Factor[(Double, Map[Parameter[?], Seq[Double]])]] = {
     val origFactor = Factory.makeFactorsForElement(bin, false, true)
     val (constraints, nonconstraints) = partitionConstraintFactors(origFactor)
 
     val binVar = Variable(bin)
-    val factor = Factory.defaultFactor[(Double, Map[Parameter[_], Seq[Double]])](List(), List(binVar), semiring)
+    val factor = Factory.defaultFactor[(Double, Map[Parameter[?], Seq[Double]])](List(), List(binVar), semiring)
     val prob = bin.parameter.MAPValue.asInstanceOf[Double]
-    val mappings = binVar.range.map(i => (i, Map(parameterMap.toSeq: _*)))
+    val mappings = binVar.range.map(i => (i, Map(parameterMap.toSeq*)))
     for {
       ext <- binVar.range
       if (ext.isRegular)
     } {
       val i = ext.value
-      val kv: (Parameter[_], Seq[Double]) = (bin.parameter, Seq[Double](i, bin.numTrials - i))
-      val map = Map(parameterMap.toSeq: _*) + kv
+      val kv: (Parameter[?], Seq[Double]) = (bin.parameter, Seq[Double](i, bin.numTrials - i))
+      val map = Map(parameterMap.toSeq*) + kv
       val density = binomial(bin.numTrials, i) * pow(prob, i) * pow(1 - prob, bin.numTrials - i)
       val index = binVar.range.indexOf(ext)
       factor.set(List(index), (density, map))
@@ -93,11 +93,11 @@ class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
     constraints.map(convertFactor(_)) ++ List(factor)
   }
 
-  private def makeSimpleDistributionForParameterized[T](target: Variable[T], probs: List[Double], select: ParameterizedSelect[T]): List[Factor[(Double, Map[Parameter[_], Seq[Double]])]] = {
+  private def makeSimpleDistributionForParameterized[T](target: Variable[T], probs: List[Double], select: ParameterizedSelect[T]): List[Factor[(Double, Map[Parameter[?], Seq[Double]])]] = {
     val origFactor = Factory.makeFactorsForElement(select, false, true)
     val (constraints, nonconstraints) = partitionConstraintFactors(origFactor)
 
-    val factor = Factory.defaultFactor[(Double, Map[Parameter[_], Seq[Double]])](List(), List(target), semiring)
+    val factor = Factory.defaultFactor[(Double, Map[Parameter[?], Seq[Double]])](List(), List(target), semiring)
     //For each outcome
     val unzippedClauses = select.clauses.unzip
 
@@ -107,7 +107,7 @@ class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
       val varIndex = unzippedClauses._2.indexOf(target.range(probindex).value)
       val entry = select.parameter.zeroSufficientStatistics.updated(varIndex, 1.0)
       //Row is a vector of zeros for all parameters
-      val rowMapping = Map(parameterMap.toSeq: _*) + ((select.parameter: Parameter[_]) -> entry)
+      val rowMapping = Map(parameterMap.toSeq*) + ((select.parameter: Parameter[?]) -> entry)
       factor.set(List(probindex), (prob, rowMapping))
     }
     factor :: constraints.map(convertFactor(_))
@@ -122,23 +122,25 @@ class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
     result
   }
 
-  private def makeFactors[T](select: ParameterizedSelect[T]): List[Factor[(Double, Map[Parameter[_], Seq[Double]])]] = {
+  private def makeFactors[T](select: ParameterizedSelect[T]): List[Factor[(Double, Map[Parameter[?], Seq[Double]])]] = {
     val (selectVar, probs) = selectVarAndProbs(select)
     makeSimpleDistributionForParameterized(selectVar, probs, select)
   }
 
-  private def makeFactors[T](inject: Inject[T]): List[Factor[(Double, Map[Parameter[_], Seq[Double]])]] = {
+  private def makeFactors[T](inject: Inject[T]): List[Factor[(Double, Map[Parameter[?], Seq[Double]])]] = {
     def blankRule(values: List[Any]) = {
-      val resultValue :: inputValues = values
-      val rowMapping = Map(parameterMap.toSeq: _*)
+      val resultValue = values.head
+      val inputValues = values.tail
+      val rowMapping = Map(parameterMap.toSeq*)
       if (resultValue.asInstanceOf[List[T]].toList == inputValues) (1.0, rowMapping)
       else (0.0, rowMapping)
     }
 
     def parameterRule(values: List[T], p: ParameterizedVariable[T]) = {
-      val resultValue :: inputValues = values
+      val resultValue = values.head
+      val inputValues = values.tail
 
-      val rowMapping = Map(parameterMap.toSeq: _*) ++ {
+      val rowMapping = Map(parameterMap.toSeq*) ++ {
         if (resultValue.asInstanceOf[List[T]].toList == inputValues) {
           for (pr <- p.element.parameters) yield {
             (pr, pr.sufficientStatistics(resultValue))
@@ -158,12 +160,12 @@ class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
 
     val inputVariables = inject.args map (Variable(_))
     val resultVariable = Variable(inject)
-    val factor = Factory.defaultFactor[(Double, Map[Parameter[_], Seq[Double]])](inputVariables, List(resultVariable), semiring)
+    val factor = Factory.defaultFactor[(Double, Map[Parameter[?], Seq[Double]])](inputVariables, List(resultVariable), semiring)
     val variables = factor.variables
 
     val ranges: List[(List[(Any, Int)], Int)] = List()
 
-    val mapping = Map.empty[Int, Variable[_]] ++ {
+    val mapping = Map.empty[Int, Variable[?]] ++ {
       for (v <- variables) yield {
         ranges :: List((v.range.zipWithIndex, v.id))
         (v.id, v)
@@ -175,7 +177,7 @@ class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
       newRanges :: l._1.map(a => (a._1, a._2, l._2))
     }
 
-    val cases: List[List[Any]] = cartesianProduct(newRanges: _*)
+    val cases: List[List[Any]] = cartesianProduct(newRanges*)
     for { cas <- cases } {
       //Unzip splits into a list of values and a list of indices
       val values: List[Any] = List()
@@ -201,7 +203,7 @@ class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
   /**
    * Create the probabilistic factors associated with an element. This method is memoized.
    */
-  def make(elem: Element[_]): List[Factor[(Double, Map[Parameter[_], Seq[Double]])]] = {
+  def make(elem: Element[?]): List[Factor[(Double, Map[Parameter[?], Seq[Double]])]] = {
     elem match {
       case f: ParameterizedFlip => makeFactors(f)
       case s: ParameterizedSelect[_] => makeFactors(s)
@@ -222,7 +224,7 @@ class SufficientStatisticsFactor(parameterMap: Map[Parameter[_], Seq[Double]]) {
    */
   def makeDependentFactor(cc: ComponentCollection, parentUniverse: Universe,
     dependentUniverse: Universe,
-    probEvidenceComputer: () => Double): Factor[(Double, Map[Parameter[_], Seq[Double]])] = {
+    probEvidenceComputer: () => Double): Factor[(Double, Map[Parameter[?], Seq[Double]])] = {
     val factor = Factory.makeDependentFactor(cc, parentUniverse, dependentUniverse, probEvidenceComputer)
     convertFactor(factor)
     

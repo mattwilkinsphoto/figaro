@@ -88,7 +88,7 @@ class InternalVariable[T](values: ValueSet[T]) extends Variable(values) {
   override def toString = "Internal variable:" + values.toString
 }
 
-class InternalChainVariable[U](values: ValueSet[U], val chain: Chain[_, _], val chainVar: Variable[_]) extends InternalVariable(values) 
+class InternalChainVariable[U](values: ValueSet[U], val chain: Chain[?, ?], val chainVar: Variable[?]) extends InternalVariable(values)
 
 object Variable {
 
@@ -96,7 +96,7 @@ object Variable {
   private[figaro] var cc: ComponentCollection = new ComponentCollection
   private[figaro] var problem = new Problem(cc, List())
 
-  private def variableExists(elem: Element[_]) = cc.contains(elem) && (cc(elem).variable != null)
+  private def variableExists(elem: Element[?]) = cc.contains(elem) && (cc(elem).variable != null)
 
   private def makeComponent[T](elem: Element[T]): ProblemComponent[T] = elem match {
     case chain: Chain[_, T] => new ChainComponent(problem, chain)
@@ -109,13 +109,11 @@ object Variable {
   }
 
   // Make sure to register this map (or replace the memoMake)
-  private val idCache: Map[Element[_], Int] = new HashMap[Element[_], Int]() {
-    override def hashCode = 2
-  }
+  private val idCache: Map[Element[?], Int] = new com.cra.figaro.util.RegisteredMap[Element[?], Int](2)
 
   private var idState: Int = 0
 
-  def nextId(elem: Element[_]): Int = {
+  def nextId(elem: Element[?]): Int = {
     idCache.get(elem) match {
       case Some(id) => id
       case None =>

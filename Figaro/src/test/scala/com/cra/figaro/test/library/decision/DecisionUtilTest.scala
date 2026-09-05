@@ -110,7 +110,7 @@ class DecisionUtilTest extends AnyWordSpec with Matchers {
 
   }
 
-  def genNetwork(): (Universe, List[Element[_]], List[Element[_]], List[List[Element[_]]]) = {
+  def genNetwork(): (Universe, List[Element[?]], List[Element[?]], List[List[Element[?]]]) = {
 
     val U = Universe.createNew()
     val f1 = Flip(0.1)
@@ -135,21 +135,21 @@ class DecisionUtilTest extends AnyWordSpec with Matchers {
 
   }
 
-  def genNetwork2(): (Universe, List[Element[_]], List[Element[_]], List[List[Element[_]]]) = {
+  def genNetwork2(): (Universe, List[Element[?]], List[Element[?]], List[List[Element[?]]]) = {
 
     val U = Universe.createNew()
 
     val f1 = Flip(0.5)
-    val d1 = Decision(f1, Seq(0.1, 0.2, 0.3, 0.4, 0.5))("d1", U)
+    val d1 = Decision(f1, Seq(0.1, 0.2, 0.3, 0.4, 0.5))(using "d1", U)
     val u1 = Apply(f1, d1, (f: Boolean, p: Double) => if (f == true) .4 - 5 else p - .5)
     val f2 = Flip(d1)
-    val d2 = Decision(f2, Seq(0.1, 0.2, 0.3, 0.4, 0.5))("d2", U)
+    val d2 = Decision(f2, Seq(0.1, 0.2, 0.3, 0.4, 0.5))(using "d2", U)
     val u2 = Apply(f2, d2, (f: Boolean, p: Double) => if (f == true) .4 - p else p - .4)
     val f3 = Flip(d2)
-    val d3 = Decision(f3, Seq(0.1, 0.2, 0.3, 0.4, 0.5))("d3", U)
+    val d3 = Decision(f3, Seq(0.1, 0.2, 0.3, 0.4, 0.5))(using "d3", U)
     val u3 = Apply(f3, d3, (f: Boolean, p: Double) => if (f == true) p - .2 else .2 - p)
     val f4 = Flip(d3)
-    val d4 = Decision(f4, Seq(0.1, 0.2, 0.3, 0.4, 0.5))("d4", U)
+    val d4 = Decision(f4, Seq(0.1, 0.2, 0.3, 0.4, 0.5))(using "d4", U)
     val u4 = Apply(f4, d4, (f: Boolean, p: Double) => if (f == true) p - .1 else .1 - p)
 
     val elems_d1_list = List(f1, d1, u1, f2, d2)

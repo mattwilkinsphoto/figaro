@@ -25,11 +25,11 @@ import com.cra.figaro.algorithm.structured._
 class ConstantStrategy(problem: Problem, raisingCriteria: RaisingCriteria, solverToUse: Solver)
   extends RaisingStrategy(problem, raisingCriteria) {
 
-  override def eliminate(toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], factors: List[Factor[Double]]) = {
+  override def eliminate(toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], factors: List[Factor[Double]]) = {
     solverToUse(problem, toEliminate, toPreserve, factors)
   }
 
-  override def recurse(subproblem: NestedProblem[_]) = {
+  override def recurse(subproblem: NestedProblem[?]) = {
     new ConstantStrategy(subproblem, raisingCriteria, solverToUse)
   }
 }

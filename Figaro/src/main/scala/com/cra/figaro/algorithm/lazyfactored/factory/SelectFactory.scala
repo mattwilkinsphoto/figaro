@@ -93,7 +93,8 @@ object SelectFactory {
     val counterVar = Variable(select.counter)
     val comb = new DenseFactor[Double](List(counterVar), List(elementVar))
     comb.fillByRule((l: List[Any]) => {
-      val counterValue :: elementValue :: _ = l.asInstanceOf[List[Extended[Int]]]
+      val counterValue = l.head.asInstanceOf[Extended[Int]]
+      val elementValue = l(1).asInstanceOf[Extended[Int]]
       if (counterValue.isRegular && elementValue.isRegular) {
         if (elementValue.value < counterValue.value) 1.0 / counterValue.value; else 0.0
       } else 1.0

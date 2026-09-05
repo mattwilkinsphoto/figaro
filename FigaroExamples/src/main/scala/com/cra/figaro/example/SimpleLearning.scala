@@ -68,39 +68,39 @@ object SimpleLearning {
   val trueUniverse = new Universe
 
   object TrueParameters extends Parameters(trueUniverse) {
-    val b1 = Constant(trueB1)("b1", universe)
-    val b2 = Constant(trueB2)("b2", universe)
-    val b3 = Constant(trueB3)("b3", universe)
-    val b4 = Constant(trueB4)("b4", universe)
-    val b5 = Constant(trueB5)("b5", universe)
-    val b6 = Constant(trueB6)("b6", universe)
-    val b7 = Constant(trueB7)("b7", universe)
-    val b8 = Constant(trueB8)("b8", universe)
-    val b9 = Constant(trueB9)("b9", universe)
+    val b1 = Constant(trueB1)(using "b1", universe)
+    val b2 = Constant(trueB2)(using "b2", universe)
+    val b3 = Constant(trueB3)(using "b3", universe)
+    val b4 = Constant(trueB4)(using "b4", universe)
+    val b5 = Constant(trueB5)(using "b5", universe)
+    val b6 = Constant(trueB6)(using "b6", universe)
+    val b7 = Constant(trueB7)(using "b7", universe)
+    val b8 = Constant(trueB8)(using "b8", universe)
+    val b9 = Constant(trueB9)(using "b9", universe)
   }
 
   class BayesianParameters(universe: Universe) extends Parameters(universe) {
-    val b1: AtomicBeta = Beta(1, 1)("b1", universe)
-    val b2: AtomicBeta = Beta(1, 1)("b2", universe)
-    val b3: AtomicBeta = Beta(1, 1)("b3", universe)
-    val b4: AtomicBeta = Beta(1, 1)("b4", universe)
-    val b5: AtomicBeta = Beta(1, 1)("b5", universe)
-    val b6: AtomicBeta = Beta(1, 1)("b6", universe)
-    val b7: AtomicBeta = Beta(1, 1)("b7", universe)
-    val b8: AtomicBeta = Beta(1, 1)("b8", universe)
-    val b9: AtomicBeta = Beta(1, 1)("b9", universe)
+    val b1: AtomicBeta = Beta(1, 1)(using "b1", universe)
+    val b2: AtomicBeta = Beta(1, 1)(using "b2", universe)
+    val b3: AtomicBeta = Beta(1, 1)(using "b3", universe)
+    val b4: AtomicBeta = Beta(1, 1)(using "b4", universe)
+    val b5: AtomicBeta = Beta(1, 1)(using "b5", universe)
+    val b6: AtomicBeta = Beta(1, 1)(using "b6", universe)
+    val b7: AtomicBeta = Beta(1, 1)(using "b7", universe)
+    val b8: AtomicBeta = Beta(1, 1)(using "b8", universe)
+    val b9: AtomicBeta = Beta(1, 1)(using "b9", universe)
   }
 
   class LearnableParameters(universe: Universe) extends Parameters(universe) {
-    val b1: AtomicBeta = BetaParameter(1, 1)("b1", universe)
-    val b2: AtomicBeta = BetaParameter(1, 1)("b2", universe)
-    val b3: AtomicBeta = BetaParameter(1, 1)("b3", universe)
-    val b4: AtomicBeta = BetaParameter(1, 1)("b4", universe)
-    val b5: AtomicBeta = BetaParameter(1, 1)("b5", universe)
-    val b6: AtomicBeta = BetaParameter(1, 1)("b6", universe)
-    val b7: AtomicBeta = BetaParameter(1, 1)("b7", universe)
-    val b8: AtomicBeta = BetaParameter(1, 1)("b8", universe)
-    val b9: AtomicBeta = BetaParameter(1, 1)("b9", universe)
+    val b1: AtomicBeta = Beta(1, 1)(using "b1", universe)
+    val b2: AtomicBeta = Beta(1, 1)(using "b2", universe)
+    val b3: AtomicBeta = Beta(1, 1)(using "b3", universe)
+    val b4: AtomicBeta = Beta(1, 1)(using "b4", universe)
+    val b5: AtomicBeta = Beta(1, 1)(using "b5", universe)
+    val b6: AtomicBeta = Beta(1, 1)(using "b6", universe)
+    val b7: AtomicBeta = Beta(1, 1)(using "b7", universe)
+    val b8: AtomicBeta = Beta(1, 1)(using "b8", universe)
+    val b9: AtomicBeta = Beta(1, 1)(using "b9", universe)
   }
 
   var id = 0
@@ -117,10 +117,10 @@ object SimpleLearning {
     val f7 = flipConstructor(parameters.b7, "f7_" + id, universe)
     val f8 = flipConstructor(parameters.b8, "f8_" + id, universe)
     val f9 = flipConstructor(parameters.b9, "f9_" + id, universe)
-    val y = If(x, f2, f3)("y_" + id, universe)
-    val z = If(x, f4, f5)("z_" + id, universe)
+    val y = If(x, f2, f3)(using "y_" + id, universe)
+    val z = If(x, f4, f5)(using "z_" + id, universe)
     val w = CPD(y, z, (true, true) -> f6, (true, false) -> f7,
-      (false, true) -> f8, (false, false) -> f9)("w_" + id, universe)
+      (false, true) -> f8, (false, false) -> f9)(using "w_" + id, universe)
   }
 
   def normalFlipConstructor(parameter: Element[Double], name: String, universe: Universe) = new CompoundFlip(name, parameter, universe)
@@ -160,28 +160,28 @@ object SimpleLearning {
         model.y.observe(datum.y)
         model.z.observe(datum.z)
         model.w.observe(datum.w)
-        val alg = MetropolisHastings(20000, ProposalScheme.default(model.universe), model.x)(model.universe)
+        val alg = MetropolisHastings(20000, ProposalScheme.default(using model.universe), model.x)(using model.universe)
         alg.start()
         alg.probability(model.x, datum.x)
       case 1 =>
         model.x.observe(datum.x)
         model.z.observe(datum.z)
         model.w.observe(datum.w)
-        val alg = MetropolisHastings(20000, ProposalScheme.default(model.universe), model.y)(model.universe)
+        val alg = MetropolisHastings(20000, ProposalScheme.default(using model.universe), model.y)(using model.universe)
         alg.start()
         alg.probability(model.y, datum.y)
       case 2 =>
         model.x.observe(datum.x)
         model.y.observe(datum.y)
         model.w.observe(datum.w)
-        val alg = MetropolisHastings(20000, ProposalScheme.default(model.universe), model.z)(model.universe)
+        val alg = MetropolisHastings(20000, ProposalScheme.default(using model.universe), model.z)(using model.universe)
         alg.start()
         alg.probability(model.z, datum.z)
       case 3 =>
         model.x.observe(datum.x)
         model.y.observe(datum.y)
         model.z.observe(datum.z)
-        val alg = MetropolisHastings(20000, ProposalScheme.default(model.universe), model.w)(model.universe)
+        val alg = MetropolisHastings(20000, ProposalScheme.default(using model.universe), model.w)(using model.universe)
         alg.start()
         alg.probability(model.w, datum.w)
     }
@@ -215,7 +215,7 @@ object SimpleLearning {
     algorithm.start()
 
     val resultUniverse = new Universe
-    def extractParameter(parameter: Element[Double], name: String) = Constant(valueGetter(algorithm, parameter))(name, resultUniverse)
+    def extractParameter(parameter: Element[Double], name: String) = Constant(valueGetter(algorithm, parameter))(using name, resultUniverse)
     val learnedParameters = new Parameters(resultUniverse) {
       val b1 = extractParameter(parameters.b1, "b1")
       val b2 = extractParameter(parameters.b2, "b2")
@@ -241,7 +241,7 @@ object SimpleLearning {
 
     def learner(parameters: Parameters): Algorithm = {
       parameters match {
-        case ps: LearnableParameters => EMWithVE(numEMIterations, ps.b1, ps.b2, ps.b3, ps.b4, ps.b5, ps.b6, ps.b7, ps.b8, ps.b9)(parameters.universe)
+        case ps: LearnableParameters => EMWithVE(numEMIterations, ps.b1, ps.b2, ps.b3, ps.b4, ps.b5, ps.b6, ps.b7, ps.b8, ps.b9)(using parameters.universe)
         case _ => throw new IllegalArgumentException("Not learnable parameters")
       }
     }
@@ -254,8 +254,8 @@ object SimpleLearning {
     }
 
     def mh(ps: Parameters) =
-      MetropolisHastings(trainingSetSize * numSamplesPerTrainingExample, ProposalScheme.default(ps.universe),
-        ps.b1, ps.b2, ps.b3, ps.b4, ps.b5, ps.b6, ps.b7, ps.b8, ps.b9)(ps.universe)
+      MetropolisHastings(trainingSetSize * numSamplesPerTrainingExample, ProposalScheme.default(using ps.universe),
+        ps.b1, ps.b2, ps.b3, ps.b4, ps.b5, ps.b6, ps.b7, ps.b8, ps.b9)(using ps.universe)
 
     def probQueryGetter(algorithm: Algorithm, parameter: Element[Double]): Double = {
       algorithm match {

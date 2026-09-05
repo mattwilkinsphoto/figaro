@@ -32,14 +32,14 @@ import scala.annotation.tailrec
 // proposalScheme might evaluate to a different step each time it is called; making it by name gets the right effect.
 abstract class MetropolisHastingsAnnealer(universe: Universe, proposalScheme: ProposalScheme, annealSchedule: Schedule,
                                           burnIn: Int, interval: Int)
-    extends MetropolisHastings(universe, proposalScheme, burnIn, interval, List(): _*) with MPEAlgorithm {
+    extends MetropolisHastings(universe, proposalScheme, burnIn, interval, List()*) with MPEAlgorithm {
   import MetropolisHastings._
 
   private var lastTemperature = 1.0
   private var lastIter = 0
   private var transProb = 0.0
   protected var bestEnergy: Double = Double.MinValue
-  protected var currentEnergy: Double = _
+  protected var currentEnergy: Double = scala.compiletime.uninitialized
   constraintsBound = false
 
   /**
@@ -93,12 +93,12 @@ abstract class MetropolisHastingsAnnealer(universe: Universe, proposalScheme: Pr
     }
   }
 
-  private def saveState: Map[Element[_], Any] = {
+  private def saveState: Map[Element[?], Any] = {
     bestEnergy = currentEnergy
-    Map(universe.permanentElements.map(e => (e -> e.value)): _*)
+    Map(universe.permanentElements.map(e => (e -> e.value))*)
   }
 
-  override protected def initUpdates() = allLastUpdates = Map(universe.permanentElements.map(e => (e -> (e.value, 0))): _*)
+  override protected def initUpdates() = allLastUpdates = Map(universe.permanentElements.map(e => (e -> (e.value, 0)))*)
 
   override protected def updateTimesSeenForTarget[T](elem: Element[T], newValue: T): Unit = {
     allLastUpdates += (elem -> (newValue, sampleCount))
@@ -114,7 +114,7 @@ abstract class MetropolisHastingsAnnealer(universe: Universe, proposalScheme: Pr
       sampleCount += 1
       val toUpdate = if (currentEnergy >= bestEnergy) {
         saveState
-      } else Map[Element[_], Any]()
+      } else Map[Element[?], Any]()
       (true, toUpdate)
     } else {
       (false, Map())

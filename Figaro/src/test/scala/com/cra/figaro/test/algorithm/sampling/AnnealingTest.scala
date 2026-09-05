@@ -32,7 +32,7 @@ class AnnealingTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   def buildUndirected(n: Int, prev: Element[Boolean], fcn: ((Boolean, Boolean)) => Double): Unit = if (n == 0) return else {
     val f = Flip(.5)
-    val a = ^^(f, prev)("a" + n, Universe.universe)
+    val a = ^^(f, prev)(using "a" + n, Universe.universe)
     a.addConstraint(fcn)
     buildUndirected(n - 1, f, fcn)
   }
@@ -216,7 +216,7 @@ class AnnealingTest extends AnyWordSpec with Matchers with PrivateMethodTester {
       val u = Universe.createNew()
       val flips = Seq.fill(1000)(Math.pow(0.01, Random.nextDouble())).map(SwitchingFlip(_))
       val ifs = for ((f, i) <- flips.zipWithIndex) yield {
-        val fi = If(f, SwitchingFlip(Math.pow(0.01, Random.nextDouble())), Constant(false))(i.toString(), u)
+        val fi = If(f, SwitchingFlip(Math.pow(0.01, Random.nextDouble())), Constant(false))(using i.toString(), u)
         if (Random.nextDouble() > 0.80) fi.observe(Random.nextBoolean())
       }
       u
@@ -225,7 +225,7 @@ class AnnealingTest extends AnyWordSpec with Matchers with PrivateMethodTester {
     "give a most likely value at any time" in {
       try {
         val u = buildComplicatedModel()
-        val annealer = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0))(u)
+        val annealer = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0))(using u)
         if (annealer.isActive) annealer.resume() else annealer.start()
         Thread.sleep(100)
         annealer.stop()

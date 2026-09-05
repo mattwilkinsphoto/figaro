@@ -166,7 +166,7 @@ object NonCachingDecision {
    */
   def apply[U](range: Seq[U])(implicit name: Name[U], collection: ElementCollection, conversion: Int => Distance[Int]): Decision[Int, U] = {
     val defElement = rangeToElement(range)
-    apply(() => defElement)(name, collection, conversion)
+    apply(() => defElement)(using name, collection, conversion)
   }
 
   /**
@@ -175,10 +175,10 @@ object NonCachingDecision {
    */
   def apply[T, U](arg1: Element[T], range: Seq[U])(implicit name: Name[U], collection: ElementCollection, conversion: T => Distance[T]): Decision[T, U] = {
     val defElement = rangeToElement(range)
-    apply(arg1, (d: T) => defElement)(name, collection, conversion)
+    apply(arg1, (d: T) => defElement)(using name, collection, conversion)
   }
 
-  private def rangeToElement[U](range: Seq[U]): Element[U] = Uniform[U](range: _*)
+  private def rangeToElement[U](range: Seq[U]): Element[U] = Uniform[U](range*)
 }
 
 /*
@@ -207,7 +207,7 @@ object CachingDecision {
    * Uses an exact PolicyMaker.
    */
   def apply[U](range: Seq[U])(implicit name: Name[U], collection: ElementCollection): Decision[Int, U] = {
-    apply(() => rangeToElement(range))(name, collection)
+    apply(() => rangeToElement(range))(using name, collection)
   }
 
    /**
@@ -215,10 +215,10 @@ object CachingDecision {
    * Uses an exact PolicyMaker.
    */
   def apply[T, U](arg1: Element[T], range: Seq[U])(implicit name: Name[U], collection: ElementCollection): Decision[T, U] = {
-    apply(arg1, (d: T) => rangeToElement(range))(name, collection)
+    apply(arg1, (d: T) => rangeToElement(range))(using name, collection)
   }
 
-  private def rangeToElement[U](range: Seq[U]): Element[U] = Uniform[U](range: _*)
+  private def rangeToElement[U](range: Seq[U]): Element[U] = Uniform[U](range*)
 }
 
 /**
@@ -246,7 +246,7 @@ object Decision {
    * Uses an exact PolicyMaker.
    */
   def apply[U](range: Seq[U])(implicit name: Name[U], collection: ElementCollection): Decision[Int, U] = {
-    apply(() => rangeToElement(range))(name, collection)
+    apply(() => rangeToElement(range))(using name, collection)
   }
 
   /**
@@ -254,8 +254,8 @@ object Decision {
    * Uses an exact PolicyMaker.
    */
   def apply[T, U](arg1: Element[T], range: Seq[U])(implicit name: Name[U], collection: ElementCollection): Decision[T, U] = {
-    apply(arg1, (d: T) => rangeToElement(range))(name, collection)
+    apply(arg1, (d: T) => rangeToElement(range))(using name, collection)
   }
 
-  private def rangeToElement[U](range: Seq[U]): Element[U] = Uniform[U](range: _*)
+  private def rangeToElement[U](range: Seq[U]): Element[U] = Uniform[U](range*)
 }

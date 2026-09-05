@@ -50,7 +50,7 @@ class GibbsTest extends AnyWordSpec with Matchers {
       val c = If(f, u1, u2)
       val alg = Gibbs(1, c)
       alg.initialize()
-      val icv = alg.variables.find(_.isInstanceOf[InternalChainVariable[_]]).get
+      val icv = alg.variables.find(_.isInstanceOf[InternalChainVariable[?]]).get
       val blocks = alg.createBlocks()
       blocks.map(_.toSet) should contain theSameElementsAs (List(
         Set(Variable(f), icv),
@@ -119,7 +119,7 @@ class GibbsTest extends AnyWordSpec with Matchers {
 
   "WalkSAT" should {
     "return the correct state on a conditioned model" in {
-      def chainMapper(chain: Chain[_, _]): Set[Variable[_]] = LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet
+      def chainMapper(chain: Chain[?, ?]): Set[Variable[?]] = LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet
 
       Universe.createNew()
       val x = Flip(0.5)
@@ -139,7 +139,7 @@ class GibbsTest extends AnyWordSpec with Matchers {
     }
 
     "fail on a contradictory model" in {
-      def chainMapper(chain: Chain[_, _]): Set[Variable[_]] = LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet
+      def chainMapper(chain: Chain[?, ?]): Set[Variable[?]] = LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet
 
       Universe.createNew()
       val x = Flip(0.5)
@@ -209,7 +209,7 @@ class GibbsTest extends AnyWordSpec with Matchers {
       f32.set(List(1, 0), math.log(0.1))
       f32.set(List(1, 1), math.log(0.9))
       val sampler = BlockSampler.default(List(v2), List(f12, f32))
-      val currentSamples = collection.mutable.Map[Variable[_], Int](v1 -> 0, v2 -> 1, v3 -> 1)
+      val currentSamples = collection.mutable.Map[Variable[?], Int](v1 -> 0, v2 -> 1, v3 -> 1)
       val samplingFactor = sampler.computeSamplingFactor(currentSamples)
       val tol = 1e-9
       samplingFactor.get(List(0)) should be((0.3 * 0.1) / (0.3 * 0.1 + 0.7 * 0.9) +- tol)
@@ -227,7 +227,7 @@ class GibbsTest extends AnyWordSpec with Matchers {
       factor.set(List(1, 0), math.log(0.8))
       factor.set(List(1, 1), math.log(0.2))
       val sampler = BlockSampler.default(List(v2), List(factor))
-      val currentSamples = collection.mutable.Map[Variable[_], Int](v1 -> 0, v2 -> 1)
+      val currentSamples = collection.mutable.Map[Variable[?], Int](v1 -> 0, v2 -> 1)
       val samplingFactor1 = sampler.getSamplingFactor(currentSamples)
       val samplingFactor2 = sampler.getSamplingFactor(currentSamples)
       samplingFactor1 should be theSameInstanceAs samplingFactor2
@@ -235,7 +235,7 @@ class GibbsTest extends AnyWordSpec with Matchers {
   }
 
   def makeFactors(): List[Factor[Double]] = {
-    LazyValues(Universe.universe).expandAll(Universe.universe.activeElements.toSet.map((elem: Element[_]) => ((elem, Integer.MAX_VALUE))))
+    LazyValues(Universe.universe).expandAll(Universe.universe.activeElements.toSet.map((elem: Element[?]) => ((elem, Integer.MAX_VALUE))))
     Universe.universe.activeElements.foreach(Variable(_))
     Universe.universe.activeElements flatMap (Factory.makeFactorsForElement(_))
   }

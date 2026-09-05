@@ -37,7 +37,7 @@ class ParameterizedTest extends AnyWordSpec with PrivateMethodTester with Matche
         val b2: AtomicBeta = Beta(5, 2)
         val f = Flip(b2)
         val statistics = f match {
-          case pf: SingleParameterized[Boolean] => pf.distributionToStatistics(b1,List((0.50,true),(0.50,false)).toStream)
+          case pf: SingleParameterized[Boolean] => pf.distributionToStatistics(b1,List((0.50,true),(0.50,false)).to(LazyList))
           case _ => Seq.empty[Double]
         }
         statistics.isEmpty should equal(false)
@@ -50,7 +50,7 @@ class ParameterizedTest extends AnyWordSpec with PrivateMethodTester with Matche
         val b2: AtomicBeta = Beta(5, 2)
         val f = Flip(b2)
         val statistics = f match {
-          case pf: SingleParameterized[Boolean] => pf.distributionToStatistics(b2,List((0.50,true),(0.50,false)).toStream)
+          case pf: SingleParameterized[Boolean] => pf.distributionToStatistics(b2,List((0.50,true),(0.50,false)).to(LazyList))
           case _ => Seq.empty[Double]
         }
         statistics.isEmpty should equal(false)

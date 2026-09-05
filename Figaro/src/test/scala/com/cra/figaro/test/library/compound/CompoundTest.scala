@@ -545,11 +545,11 @@ class CompoundTest extends AnyWordSpec with Matchers {
     }
   }
 
-  "A MakeList" should {
+  "A variable-size collection folded to a list" should {
     "have the number of items be distributed according to the first argument" in {
       Universe.createNew()
       val x1 = Geometric(0.9)
-      val x2 = MakeList(x1, () => Flip(0.2))
+      val x2 = com.cra.figaro.library.collection.VariableSizeArray(x1, (_: Int) => Flip(0.2)).foldLeft(List.empty[Boolean])((xs, value) => xs :+ value)
       val x3 = Apply(x2, (vs: List[Boolean]) => vs.length)
       val alg = Importance(10000, x3)
       alg.start()
@@ -560,7 +560,7 @@ class CompoundTest extends AnyWordSpec with Matchers {
     "have each item be distributed according to the element generator" in {
       Universe.createNew()
       val x1 = Select(0.5 -> 2, 0.5 -> 3)
-      val x2 = MakeList(x1, () => Flip(0.2))
+      val x2 = com.cra.figaro.library.collection.VariableSizeArray(x1, (_: Int) => Flip(0.2)).foldLeft(List.empty[Boolean])((xs, value) => xs :+ value)
       val x3 = Apply(x2, (vs: List[Boolean]) => vs(0))
       val x4 = Apply(x2, (vs: List[Boolean]) => vs(1))
       val alg = Importance(20000, x3, x4)
@@ -573,7 +573,7 @@ class CompoundTest extends AnyWordSpec with Matchers {
     "have the items be generated independently" in {
       Universe.createNew()
       val x1 = Select(0.5 -> 2, 0.5 -> 3)
-      val x2 = MakeList(x1, () => Flip(0.2))
+      val x2 = com.cra.figaro.library.collection.VariableSizeArray(x1, (_: Int) => Flip(0.2)).foldLeft(List.empty[Boolean])((xs, value) => xs :+ value)
       val x3 = Apply(x2, (vs: List[Boolean]) => vs(0))
       val x4 = Apply(x2, (vs: List[Boolean]) => vs(1))
       val x5 = x3 === x4
@@ -586,7 +586,7 @@ class CompoundTest extends AnyWordSpec with Matchers {
     "have the correct set of possible values" in {
       Universe.createNew()
       val x1 = Select(0.4 -> 2, 0.6 -> 3)
-      val x2 = MakeList(x1, () => Flip(0.2))
+      val x2 = com.cra.figaro.library.collection.VariableSizeArray(x1, (_: Int) => Flip(0.2)).foldLeft(List.empty[Boolean])((xs, value) => xs :+ value)
       Values()(x2) should equal(Set(
         List(false, false), List(false, true), List(true, false), List(true, true),
         List(false, false, false), List(false, false, true), List(false, true, false), List(false, true, true),
@@ -596,8 +596,8 @@ class CompoundTest extends AnyWordSpec with Matchers {
     "return the correct probability under importance sampling" in {
       Universe.createNew()
       val x1 = Select(0.4 -> 2, 0.6 -> 3)
-      val x2 = MakeList(x1, () => Flip(0.2))
-      val x3 = Apply(x2, (vs: List[Boolean]) => (false /: vs)((x: Boolean, y: Boolean) => x || y))
+      val x2 = com.cra.figaro.library.collection.VariableSizeArray(x1, (_: Int) => Flip(0.2)).foldLeft(List.empty[Boolean])((xs, value) => xs :+ value)
+      val x3 = Apply(x2, (vs: List[Boolean]) => (vs).foldLeft(false)((x: Boolean, y: Boolean) => x || y))
       x3.observe(true)
       val alg = Importance(50000, x1)
       alg.start()
@@ -610,11 +610,11 @@ class CompoundTest extends AnyWordSpec with Matchers {
     "return the correct probability under variable elimination" in {
       Universe.createNew()
       val x1 = Select(0.4 -> 2, 0.6 -> 3)
-      val x2 = MakeList(x1, () => Flip(0.2))
+      val x2 = com.cra.figaro.library.collection.VariableSizeArray(x1, (_: Int) => Flip(0.2)).foldLeft(List.empty[Boolean])((xs, value) => xs :+ value)
       //val i2 = Inject(Flip(0.2), Flip(0.2))
       //val i3 = Inject(Flip(0.2), Flip(0.2), Flip(0.2))
       //val x2 = Chain(x1, (i: Int) => if (i == 2) i2; else i3)//CPD(x1, (2) -> i2, (3) -> i3)
-      val x3 = Apply(x2, (vs: List[Boolean]) => (false /: vs)((x: Boolean, y: Boolean) => x || y))
+      val x3 = Apply(x2, (vs: List[Boolean]) => (vs).foldLeft(false)((x: Boolean, y: Boolean) => x || y))
       x3.observe(true)
       val alg = VariableElimination(x1)
       alg.start()
@@ -627,8 +627,8 @@ class CompoundTest extends AnyWordSpec with Matchers {
     "return the correct probability under Metropolis-Hastings" in {
       Universe.createNew()
       val x1 = Select(0.4 -> 2, 0.6 -> 3)
-      val x2 = MakeList(x1, () => Flip(0.2))
-      val x3 = Apply(x2, (vs: List[Boolean]) => (false /: vs)((x: Boolean, y: Boolean) => x || y))
+      val x2 = com.cra.figaro.library.collection.VariableSizeArray(x1, (_: Int) => Flip(0.2)).foldLeft(List.empty[Boolean])((xs, value) => xs :+ value)
+      val x3 = Apply(x2, (vs: List[Boolean]) => (vs).foldLeft(false)((x: Boolean, y: Boolean) => x || y))
       x3.observe(true)
       val alg = MetropolisHastings(200000, ProposalScheme.default, x1)
       alg.start()
@@ -655,7 +655,7 @@ class CompoundTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val x1 = Geometric(0.9)
       val x2 = IntSelector(x1)
-      x2.randomness = Stream(0.6, 0.2, 0.9)
+      x2.randomness = LazyList(0.6, 0.2, 0.9)
       x1.value = 1
       x2.value = x2.generateValue(x2.randomness)
       x2.value should equal(0)
@@ -684,7 +684,7 @@ class CompoundTest extends AnyWordSpec with Matchers {
       def prob(counter: Int, value: Int) = if (value < counter) 1.0/counter else 0.0
       Universe.createNew()
       val clauses = List((0.75, 3), (0.25, 5))
-      val x1 = Select(clauses:_*)
+      val x1 = Select(clauses*)
       val x2 = IntSelector(x1)
       val alg = VariableElimination(x2)
       alg.start()
@@ -700,9 +700,9 @@ class CompoundTest extends AnyWordSpec with Matchers {
   "Folding" should {
     "produce the correct result under importance sampling" in {
       val elems = List(Flip(0.3), Flip(0.4), Flip(0.6))
-      val fl = FoldLeft(true, (b1: Boolean, b2: Boolean) => (b1 && b2))(elems:_*)
-      val fr = FoldRight(true, (b1: Boolean, b2: Boolean) => (b1 && b2))(elems:_*)
-      val red = Reduce((b1: Boolean, b2: Boolean) => (b1 && b2))(elems:_*)
+      val fl = FoldLeft(true, (b1: Boolean, b2: Boolean) => (b1 && b2))(elems*)
+      val fr = FoldRight(true, (b1: Boolean, b2: Boolean) => (b1 && b2))(elems*)
+      val red = Reduce((b1: Boolean, b2: Boolean) => (b1 && b2))(elems*)
       val alg = Importance(20000, fl, fr, red)
       alg.start()
       val answer = 0.3 * 0.4 * 0.6
@@ -714,9 +714,9 @@ class CompoundTest extends AnyWordSpec with Matchers {
 
     "produce the correct result under variable elimination" in {
       val elems = List(Flip(0.3), Flip(0.4), Flip(0.6))
-      val fl = FoldLeft(true, (b1: Boolean, b2: Boolean) => (b1 && b2))(elems:_*)
-      val fr = FoldRight(true, (b1: Boolean, b2: Boolean) => (b1 && b2))(elems:_*)
-      val red = Reduce((b1: Boolean, b2: Boolean) => (b1 && b2))(elems:_*)
+      val fl = FoldLeft(true, (b1: Boolean, b2: Boolean) => (b1 && b2))(elems*)
+      val fr = FoldRight(true, (b1: Boolean, b2: Boolean) => (b1 && b2))(elems*)
+      val red = Reduce((b1: Boolean, b2: Boolean) => (b1 && b2))(elems*)
       val alg = VariableElimination(fl, fr, red)
       alg.start()
       val answer = 0.3 * 0.4 * 0.6
@@ -728,8 +728,8 @@ class CompoundTest extends AnyWordSpec with Matchers {
 
     "process items in the correct order" in {
       val elems = List(Constant(Symbol("a")), Constant(Symbol("b")))
-      val fl = FoldLeft(Symbol("z"), (x: Symbol, y: Symbol) => if (x == Symbol("z")) y else x)(elems:_*)
-      val fr = FoldRight(Symbol("z"), (x: Symbol, y: Symbol) => if (y == Symbol("z")) x else y)(elems:_*)
+      val fl = FoldLeft(Symbol("z"), (x: Symbol, y: Symbol) => if (x == Symbol("z")) y else x)(elems*)
+      val fr = FoldRight(Symbol("z"), (x: Symbol, y: Symbol) => if (y == Symbol("z")) x else y)(elems*)
       val alg = VariableElimination(fl, fr)
       alg.start()
       alg.probability(fl, Symbol("a")) should equal (1.0)

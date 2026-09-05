@@ -24,19 +24,19 @@ import com.cra.figaro.util._
 /**
  * Samplers that use samples without weights.
  */
-abstract class BaseUnweightedSampler(val universe: Universe, targets: Element[_]*) extends Sampler {
+abstract class BaseUnweightedSampler(val universe: Universe, targets: Element[?]*) extends Sampler {
   lazy val queryTargets = targets.toList
   /**
    * A sample is a map from elements to their values.
    */
-  type Sample = Map[Element[_], Any]
+  type Sample = Map[Element[?], Any]
 
   /**
    * Produce a single sample.
    */
   def sample(): (Boolean, Sample)
 
-  protected var sampleCount: Int = _
+  protected var sampleCount: Int = scala.compiletime.uninitialized
 
   /**
    * Number of samples taken
@@ -54,15 +54,15 @@ abstract class BaseUnweightedSampler(val universe: Universe, targets: Element[_]
   protected def newTimesSeen[T](target: Element[T]): TimesSeen[T] = Map()
   protected def newLastUpdate[T](target: Element[T]): LastUpdate[T] = (target.value, 1)
 
-  protected var allTimesSeen: Map[Element[_], TimesSeen[_]] = Map()
+  protected var allTimesSeen: Map[Element[?], TimesSeen[?]] = Map()
 
-  protected var allLastUpdates: Map[Element[_], LastUpdate[_]] = Map()
+  protected var allLastUpdates: Map[Element[?], LastUpdate[?]] = Map()
 
-  protected def initUpdates() = allLastUpdates = Map(targets.toList.map(t => (t -> newLastUpdate(t))): _*)
+  protected def initUpdates() = allLastUpdates = Map(targets.toList.map(t => (t -> newLastUpdate(t)))*)
 
   protected def resetCounts(): Unit = {
     sampleCount = 0
-    allTimesSeen = Map(targets.toList.map(t => (t -> newTimesSeen(t))): _*)
+    allTimesSeen = Map(targets.toList.map(t => (t -> newTimesSeen(t)))*)
   }
 
   protected def updateTimesSeenWithValue[T](value: T, timesSeen: TimesSeen[T], seen: Int): Unit =
@@ -103,15 +103,19 @@ trait UnweightedSampler extends BaseUnweightedSampler with ProbQuerySampler with
   override protected[algorithm] def computeProjection[T](target: Element[T]): List[(T, Double)] = {
     if (allLastUpdates.nonEmpty) {
       val timesSeen = allTimesSeen.find(_._1 == target).get._2.asInstanceOf[Map[T, Int]]
-      timesSeen.mapValues(_ / sampleCount.toDouble).toList
+      timesSeen.view.mapValues(_ / sampleCount.toDouble).toList
     } else {
       println("Error: MH sampler did not accept any samples")
       List()
     }
   }
   
-  def sampleFromPosterior[T](element: Element[T]): Stream[T] = {
-    def nextSample(posterior: List[(Double, T)]): Stream[T] = sampleMultinomial(posterior) #:: nextSample(posterior)
+  def sampleFromPosterior[T](element: Element[T]): LazyList[T] = {
+    def nextSample(posterior: List[(Double, T)]): LazyList[T] = {
+      // Keep the first draw eager, as it was with Stream; memoize subsequent draws.
+      val value = sampleMultinomial(posterior)
+      value #:: nextSample(posterior)
+    }
 
     if (!allTimesSeen.contains(element)) {
       throw new NotATargetException(element)

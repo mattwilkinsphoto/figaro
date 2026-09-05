@@ -23,7 +23,7 @@ import com.cra.figaro.algorithm.factored.VariableElimination
 class VEBPStrategy(problem: Problem, raisingCriteria: RaisingCriteria, val scoreThreshold: Double, val iterations: Int)
   extends RaisingStrategy(problem, raisingCriteria) {
 
-  override def eliminate(toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], factors: List[Factor[Double]]): (List[Factor[Double]], Map[Variable[_], Factor[_]]) = {
+  override def eliminate(toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], factors: List[Factor[Double]]): (List[Factor[Double]], Map[Variable[?], Factor[?]]) = {
     val (score, order) = VariableElimination.eliminationOrder(factors, toPreserve)
     if (score > scoreThreshold) {
       solver.marginalBeliefPropagation(iterations)(problem, toEliminate, toPreserve, factors)
@@ -32,8 +32,8 @@ class VEBPStrategy(problem: Problem, raisingCriteria: RaisingCriteria, val score
     }
   }
 
-  override def recurse(subproblem: NestedProblem[_]) = {
+  override def recurse(subproblem: NestedProblem[?]) = {
     new VEBPStrategy(subproblem, raisingCriteria, scoreThreshold, iterations)
   }
-  
+
 }

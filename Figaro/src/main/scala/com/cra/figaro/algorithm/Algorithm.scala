@@ -21,7 +21,7 @@ package com.cra.figaro.algorithm
 
 import com.cra.figaro.language._
 
-class UnsupportedAlgorithmException(element: Element[_]) extends RuntimeException(element.toString)
+class UnsupportedAlgorithmException(element: Element[?]) extends RuntimeException(element.toString)
 
 class AlgorithmException extends RuntimeException
 class AlgorithmInactiveException extends AlgorithmException

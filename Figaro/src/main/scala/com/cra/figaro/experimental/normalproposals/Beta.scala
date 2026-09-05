@@ -72,15 +72,6 @@ class AtomicBeta(name: Name[Double], a: Double, b: Double, collection: ElementCo
     Seq(0.0, 0.0)
   }
 
-  /**
-   * Returns an element that models the learned distribution.
-   *
-   * @deprecated
-   */
-  def getLearnedElement: AtomicFlip = {
-    new AtomicFlip("", MAPValue, collection)
-  }
-
   override def sufficientStatistics[Boolean](b: Boolean): Seq[Double] = {
     if (b == true) {
       Seq(1.0, 0.0)

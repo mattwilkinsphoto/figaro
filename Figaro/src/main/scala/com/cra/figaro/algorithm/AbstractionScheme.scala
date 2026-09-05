@@ -75,11 +75,11 @@ object AbstractionScheme {
      * concrete points into equal sized bins.
      */
     def select(concretePoints: Seq[Double], numAbstractPoints: Int): SortedSet[Double] = {
-      val min = (Double.MaxValue /: concretePoints)(_ min _)
-      val max = (Double.MinValue /: concretePoints)(_ max _)
+      val min = (concretePoints).foldLeft(Double.MaxValue)(_ min _)
+      val max = (concretePoints).foldLeft(Double.MinValue)(_ max _)
       val step = (max - min) / numAbstractPoints
       val start = min + step / 2
-      SortedSet((for { i <- 0 until numAbstractPoints } yield start + step * i): _*)
+      SortedSet((for { i <- 0 until numAbstractPoints } yield start + step * i)*)
     }
 
     /**

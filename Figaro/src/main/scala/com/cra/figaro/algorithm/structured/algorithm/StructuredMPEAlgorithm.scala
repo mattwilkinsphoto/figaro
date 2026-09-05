@@ -29,7 +29,7 @@ abstract class StructuredMPEAlgorithm(universe: Universe, collection: ComponentC
   override def problemTargets = List()
 
   // Solutions contain MPE values of individual variables, and are precisely the problem's recording factors.
-  protected var targetFactors: Map[Variable[_], Factor[_]] = Map()
+  protected var targetFactors: Map[Variable[?], Factor[?]] = Map()
 
   override def processSolutions(solutions: Map[Bounds, Solution]): Unit = {
     if(solutions.size > 1) {

@@ -235,14 +235,14 @@ class VETest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val small = 100
       val large = 200
-      def make(numVars: Int): Traversable[Factor[Double]] = {
+      def make(numVars: Int): Iterable[Factor[Double]] = {
         val universe = new Universe
-        val a: List[Variable[_]] = List.tabulate(numVars)(i => Variable(Flip(0.3)("", universe)))
+        val a: List[Variable[?]] = List.tabulate(numVars)(i => Variable(Flip(0.3)(using "", universe)))
         for { i <- 0 to numVars - 2 } yield Factory.defaultFactor[Double](List(a(i), a(i + 1)), List())
       }
       val factors1 = make(small)
       val factors2 = make(large)
-      def order(factors: Traversable[Factor[Double]]) = () =>
+      def order(factors: Iterable[Factor[Double]]) = () =>
         VariableElimination.eliminationOrder(factors, List())._2
       val time1 = measureTime(order(factors1), 20, 100)
       val time2 = measureTime(order(factors2), 20, 100)
@@ -323,7 +323,7 @@ class VETest extends AnyWordSpec with Matchers {
       val f = Flip(u)
       Universe.createNew()
       val tolerance = 0.0000001
-      val algorithm = VariableElimination(f)(u1)
+      val algorithm = VariableElimination(f)(using u1)
       algorithm.start()
       algorithm.probability(f)(b => b) should be(0.6 +- tolerance)
       algorithm.kill()
@@ -365,9 +365,9 @@ class VETest extends AnyWordSpec with Matchers {
       val x = Flip(0.1)
       val y = Flip(0.2)
       val dependentUniverse = new Universe(List(x, y))
-      val u1 = Uniform(0.0, 1.0)("", dependentUniverse)
-      val u2 = Uniform(0.0, 2.0)("", dependentUniverse)
-      val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)("a", dependentUniverse)
+      val u1 = Uniform(0.0, 1.0)(using "", dependentUniverse)
+      val u2 = Uniform(0.0, 2.0)(using "", dependentUniverse)
+      val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)(using "a", dependentUniverse)
       val condition = (d: Double) => d < 0.5
       val ve = VariableElimination(List((dependentUniverse, List(NamedEvidence("a", Condition(condition))))), x)
       ve.start()

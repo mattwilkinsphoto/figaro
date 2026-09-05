@@ -29,7 +29,7 @@ import scala.collection.mutable.{Map, Set}
  * These factors are used to compute lower or upper bounds on the queries.
  * Then it uses ordinary variable elimination to solve these factors.
  */
-class LazyVariableElimination(targetElements: Element[_]*)(implicit val universe: Universe) extends FactoredAlgorithm[Double]
+class LazyVariableElimination(targetElements: Element[?]*)(implicit val universe: Universe) extends FactoredAlgorithm[Double]
 with LazyAlgorithm {
   var debug = false
   var showTiming = false
@@ -40,7 +40,7 @@ with LazyAlgorithm {
 
   val semiring = SumProductSemiring()
 
-  var currentResult: Factor[(Double, Double)] = _
+  var currentResult: Factor[(Double, Double)] = scala.compiletime.uninitialized
 
   /**
    * Create the necessary factors.
@@ -49,7 +49,7 @@ with LazyAlgorithm {
    * @param targetElements query targets
    * @param upperBounds flag indicating whether lower (false) or upper (true) bounds should be computed for unexpanded parts of the model
    */
-  def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = false): List[Factor[Double]] = {
+  def getFactors(neededElements: List[Element[?]], targetElements: List[Element[?]], upperBounds: Boolean = false): List[Factor[Double]] = {
     for {
       elem <- neededElements
       factor <- BoundedProbFactor.make(elem, upperBounds)
@@ -81,29 +81,29 @@ with LazyAlgorithm {
     marginalize(currentResult)
   }
 
-  protected def doElimination(allFactors: List[Factor[Double]], targetVariables: Seq[Variable[_]]): Set[Factor[Double]] = {
-    val allVars = (Set[/*Extended*/Variable[_]]() /: allFactors)(_ ++ _./*extended*/variables)
+  protected def doElimination(allFactors: List[Factor[Double]], targetVariables: Seq[Variable[?]]): Set[Factor[Double]] = {
+    val allVars = (allFactors).foldLeft(Set[/*Extended*/Variable[?]]())(_ ++ _./*extended*/variables)
     if (debug) {
       println("*****************\nElement ids:")
       for { variable <- allVars } {
         variable match {
           case elemVar: /*Extended*/ElementVariable[_] =>
-            println(variable.id + "(" + elemVar.element.name.string + ")" + "@" + elemVar.element.hashCode + ": " + elemVar.element)
+            println(variable.id.toString + "(" + elemVar.element.name.string + ")" + "@" + elemVar.element.hashCode + ": " + elemVar.element)
           case _ =>
-            println(variable.id + ": not an element variable")
+            println(variable.id.toString + ": not an element variable")
         }
       }
     }
     recordingFactors = List()
     if (debug) {
       println("*****************\nStarting factors\n")
-      allFactors.foreach((f: /*Extended*/Factor[_]) => println(f.toReadableString))
+      allFactors.foreach((f: /*Extended*/Factor[?]) => println(f.toReadableString))
     }
     val order = optionallyShowTiming(eliminationOrder(allVars, allFactors, targetVariables), "Computing elimination order")
     val factorsAfterElimination =
-      optionallyShowTiming(eliminateInOrder(order, Set(allFactors: _*), initialFactorMap(allFactors)), "Elimination")
+      optionallyShowTiming(eliminateInOrder(order, Set(allFactors*), initialFactorMap(allFactors)), "Elimination")
     if (debug) println("*****************")
-    if (debug) factorsAfterElimination foreach (f => println(f.toReadableString))
+    if (debug) factorsAfterElimination.foreach(f => println(f.toReadableString))
     factorsAfterElimination
   }
 
@@ -111,13 +111,13 @@ with LazyAlgorithm {
    * Determine if the second row can be absorbed into the first. This is true iff, for each position, either the second value is *
    * or they are equal.
    */
-  private  def pairConsistent(range: Array[Extended[_]], index1: Int, index2: Int): Boolean = {
+  private  def pairConsistent(range: Array[Extended[?]], index1: Int, index2: Int): Boolean = {
     val x1 = range(index1)
     val x2 = range(index2)
     x1 == x2 || !x2.isRegular
   }
 
-  private def consistent(ranges: List[Array[Extended[_]]], indices1: List[Int], indices2: List[Int]): Boolean = {
+  private def consistent(ranges: List[Array[Extended[?]]], indices1: List[Int], indices2: List[Int]): Boolean = {
     (ranges.zip(indices1).zip(indices2)).forall{ case ((range, indices1), indices2) => pairConsistent(range, indices1, indices2) }
   }
 
@@ -153,7 +153,7 @@ with LazyAlgorithm {
   private def normalizeAndAbsorbWithBounds(lowerFactor: Factor[Double], upperFactor: Factor[Double]): Factor[(Double, Double)] = {
     assert(lowerFactor.variables == upperFactor.variables)
 
-    val ranges: List[Array[Extended[_]]] = lowerFactor.variables.map(_.range.toArray[Extended[_]])
+    val ranges: List[Array[Extended[?]]] = lowerFactor.variables.map(_.range.toArray[Extended[?]])
 
     /*
      * First, we compute the sum of unnormalized lower and upper bounds.
@@ -203,9 +203,9 @@ with LazyAlgorithm {
     result
   }
 
-  var targetFactors: Map[Element[_], Factor[(Double, Double)]] = Map()
+  var targetFactors: Map[Element[?], Factor[(Double, Double)]] = Map()
 
-  private def marginalizeToTarget(factor: Factor[(Double, Double)], target: Element[_]): Unit = {
+  private def marginalizeToTarget(factor: Factor[(Double, Double)], target: Element[?]): Unit = {
     val targetFactor = factor.marginalizeToWithSum(BoundsSumProductSemiring().sum, Variable(target))
     targetFactors += target -> targetFactor
   }
@@ -217,7 +217,7 @@ with LazyAlgorithm {
   /**
    * Returns the lower and upper bounds of the probability of the target.
    */
-  def probabilityBounds[T](target: Element[_], value: T): (Double, Double) = {
+  def probabilityBounds[T](target: Element[?], value: T): (Double, Double) = {
     require(targetElements contains target)
     val index = Variable(target).range.indexOf(Regular(value))
     if (index == -1) (0, 1)
@@ -254,21 +254,21 @@ with LazyAlgorithm {
   /* This code is copied straight from VariableElimination. It should be refactored to avoid duplication. */
    // The first element of FactorMap is the complete set of factors.
   // The second element maps variables to the factors mentioning that variable.
-  private type FactorMap[T] = Map[Variable[_], Set[Factor[T]]]
+  private type FactorMap[T] = Map[Variable[?], Set[Factor[T]]]
 
   private def addFactor[T](factor: Factor[T], map: FactorMap[T]): Unit =
-    factor.variables foreach (v => map += v -> (map.getOrElse(v, Set()) + factor))
+    factor.variables foreach (v => map += v -> (map.getOrElse(v, Set()).union(Set(factor))))
 
   private def removeFactor[T](factor: Factor[T], map: FactorMap[T]): Unit =
-    factor.variables foreach (v => map += v -> (map.getOrElse(v, Set()) - factor))
+    factor.variables foreach (v => map += v -> (map.getOrElse(v, Set()).diff(Set(factor))))
 
-  private def initialFactorMap(factors: Traversable[Factor[Double]]): FactorMap[Double] = {
+  private def initialFactorMap(factors: Iterable[Factor[Double]]): FactorMap[Double] = {
     val map: FactorMap[Double] = Map()
     factors foreach (addFactor(_, map))
     map
   }
 
-  protected var recordingFactors: List[Factor[_]] = List()
+  protected var recordingFactors: List[Factor[?]] = List()
 
   /**
    * Some variable elimination algorithms, such as computing the most probable explanation, record values of
@@ -282,7 +282,7 @@ with LazyAlgorithm {
   val comparator: Option[(Double, Double) => Boolean] = None
 
   private def eliminate(
-    variable: Variable[_],
+    variable: Variable[?],
     factors: Set[Factor[Double]],
     map: FactorMap[Double]): Unit = {
     val varFactors: Set[Factor[Double]] = map(variable)
@@ -309,7 +309,7 @@ with LazyAlgorithm {
   }
 
   private def eliminateInOrder(
-    order: List[Variable[_]],
+    order: List[Variable[?]],
     factors: Set[Factor[Double]],
     map: FactorMap[Double]): Set[Factor[Double]] =
     order match {
@@ -321,7 +321,7 @@ with LazyAlgorithm {
     }
 
   // for debugging
-  private def printVariables(variables: Traversable[/*Extended*/Variable[_]]): Unit = {
+  private def printVariables(variables: Iterable[/*Extended*/Variable[?]]): Unit = {
     for { variable <- variables } {
       print("  ")
       variable match {
@@ -337,25 +337,25 @@ with LazyAlgorithm {
    * minimizes the number of extra factor entries that would be created when it is eliminated.
    * Override this method if you want a different rule.
    */
-  def eliminationOrder(allVars: Set[Variable[_]], factors: Traversable[Factor[Double]], toPreserve: Traversable[Variable[_]]): List[Variable[_]] = {
-    val eliminableVars =  allVars -- toPreserve
+  def eliminationOrder(allVars: Set[Variable[?]], factors: Iterable[Factor[Double]], toPreserve: Iterable[Variable[?]]): List[Variable[?]] = {
+    val eliminableVars = allVars.diff(toPreserve.toSet)
     var initialGraph = new VEGraph(factors)
-    val candidates = new HeapPriorityMap[Variable[_], Double]
-    eliminableVars foreach (v => candidates += v.asInstanceOf[Variable[_]] -> initialGraph.score(v))
+    val candidates = new HeapPriorityMap[Variable[?], Double]
+    eliminableVars.foreach(v => candidates += v.asInstanceOf[Variable[?]] -> initialGraph.score(v))
     eliminationOrderHelper(candidates, toPreserve, initialGraph, List())
   }
 
-  @tailrec private def eliminationOrderHelper(candidates: PriorityMap[Variable[_], Double],
-    toPreserve: Traversable[Variable[_]],
+  @tailrec private def eliminationOrderHelper(candidates: PriorityMap[Variable[?], Double],
+    toPreserve: Iterable[Variable[?]],
     graph: VEGraph,
-    accum: List[Variable[_]]): List[Variable[_]] = {
+    accum: List[Variable[?]]): List[Variable[?]] = {
     if (candidates.isEmpty) accum.reverse
     else {
       val best = candidates.extractMin()._1
       // do not read the best variable after it has been removed, and do not add the preserved variables
       val touched = graph.info(best).neighbors - best -- toPreserve
       val (nextGraph, newCost) = graph.eliminate(best)
-      touched foreach (v => candidates += v.asInstanceOf[Variable[_]] -> graph.score(v))
+      touched foreach (v => candidates += v.asInstanceOf[Variable[?]] -> graph.score(v))
       eliminationOrderHelper(candidates, toPreserve, nextGraph, best :: accum)
     }
   }

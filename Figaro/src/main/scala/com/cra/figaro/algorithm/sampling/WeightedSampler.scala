@@ -22,19 +22,19 @@ import com.cra.figaro.util._
 /**
  * Samplers that use weighted samples.
  */
-abstract class WeightedSampler(override val universe: Universe, targets: Element[_]*) extends ProbQuerySampler with Sampler with StreamableProbQueryAlgorithm {
+abstract class WeightedSampler(override val universe: Universe, targets: Element[?]*) extends ProbQuerySampler with Sampler with StreamableProbQueryAlgorithm {
   lazy val queryTargets = targets.toList
   /**
    * A sample consists of a weight and a map from elements to their values.
    */
-  type Sample = (Double, Map[Element[_], Any])
+  type Sample = (Double, Map[Element[?], Any])
 
   /**
    * Produce a single sample.
    */
   def sample(): Sample
 
-  protected var totalWeight: Double = _
+  protected var totalWeight: Double = scala.compiletime.uninitialized
 
   /**
    * Total weight of samples taken.
@@ -52,7 +52,7 @@ abstract class WeightedSampler(override val universe: Universe, targets: Element
 
   protected def newWeightSeen[T](target: Element[T]): WeightSeen[T] = WeightSeen(target, Map())
 
-  protected var allWeightsSeen: List[WeightSeen[_]] = _
+  protected var allWeightsSeen: List[WeightSeen[?]] = scala.compiletime.uninitialized
 
   protected def resetCounts() = {
     totalWeight = Double.NegativeInfinity
@@ -79,11 +79,15 @@ abstract class WeightedSampler(override val universe: Universe, targets: Element
 
   override protected[algorithm] def computeProjection[T](target: Element[T]): List[(T, Double)] = {
     val weightSeen = allWeightsSeen.find(_._1 == target).get._2.asInstanceOf[Map[T, Double]]
-    weightSeen.mapValues(s => math.exp(s - getTotalWeight)).toList
+    weightSeen.view.mapValues(s => math.exp(s - getTotalWeight)).toList
   }
   
-  def sampleFromPosterior[T](element: Element[T]): Stream[T] = {
-    def nextSample(posterior: List[(Double, T)]): Stream[T] = sampleMultinomial(posterior) #:: nextSample(posterior)
+  def sampleFromPosterior[T](element: Element[T]): LazyList[T] = {
+    def nextSample(posterior: List[(Double, T)]): LazyList[T] = {
+      // Keep the first draw eager, as it was with Stream; memoize subsequent draws.
+      val value = sampleMultinomial(posterior)
+      value #:: nextSample(posterior)
+    }
     
     val elementIndex = allWeightsSeen.indexWhere(_._1 == element)
     if (elementIndex < 0) {

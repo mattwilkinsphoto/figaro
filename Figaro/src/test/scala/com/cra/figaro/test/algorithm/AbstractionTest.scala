@@ -95,7 +95,7 @@ class AbstractionTest extends AnyWordSpec with Matchers {
       "produce an sequence of the correct size of uniformly distributed values" taggedAs (NonDeterministic) in {
         Universe.createNew()
         val u = Uniform(0.0, 1.0)
-        u.addPragma(Abstraction(100)(AbstractionScheme.RegularDiscretization))
+        u.addPragma(Abstraction(100)(using AbstractionScheme.RegularDiscretization))
         val v = Values()(u).toList.sorted
         v.length should equal(100)
 
@@ -112,11 +112,11 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         Universe.createNew()
         def f(d: Double) = {
           val u = Uniform(d, d + 1)
-          u.addPragma(Abstraction(100)(AbstractionScheme.RegularDiscretization))
+          u.addPragma(Abstraction(100)(using AbstractionScheme.RegularDiscretization))
           u
         }
         val c = Chain(Select(0.5 -> 0.0, 0.5 -> 3.0), f)
-        c.addPragma(Abstraction(20)(AbstractionScheme.RegularDiscretization))
+        c.addPragma(Abstraction(20)(using AbstractionScheme.RegularDiscretization))
 
         val v = Values()(c).toList.sorted
         v.head should be(0.1 +- 0.02)
@@ -128,9 +128,9 @@ class AbstractionTest extends AnyWordSpec with Matchers {
       "produce a sequence ranging from the minimum to maximum of all the results" in {
         Universe.createNew()
         val u = Uniform(0.0, 2.0)
-        u.addPragma(Abstraction(200)(AbstractionScheme.RegularDiscretization))
+        u.addPragma(Abstraction(200)(using AbstractionScheme.RegularDiscretization))
         val a = Apply(u, u, ((d1: Double, d2: Double) => d1 * d2))
-        a.addPragma(Abstraction(20)(AbstractionScheme.RegularDiscretization))
+        a.addPragma(Abstraction(20)(using AbstractionScheme.RegularDiscretization))
 
         val v = Values()(a).toList.sorted
         v.head should be(0.1 +- 0.05)
@@ -146,7 +146,7 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         val max = 2.0
         val numBins = 20
         val uniform = Uniform(0.0, max)
-        uniform.addPragma(Abstraction(numBins)(AbstractionScheme.RegularDiscretization))
+        uniform.addPragma(Abstraction(numBins)(using AbstractionScheme.RegularDiscretization))
         Values()(uniform)
         Variable(uniform)
         val factors = Factory.makeFactorsForElement(uniform)
@@ -169,9 +169,9 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         val numBinsUniform = 20
         val numBinsApply = 10
         val uniform = Uniform(0.0, max)
-        uniform.addPragma(Abstraction(numBinsUniform)(AbstractionScheme.RegularDiscretization))
+        uniform.addPragma(Abstraction(numBinsUniform)(using AbstractionScheme.RegularDiscretization))
         val apply = Apply(uniform, (d: Double) => d * d)
-        apply.addPragma(Abstraction(numBinsApply)(AbstractionScheme.RegularDiscretization))
+        apply.addPragma(Abstraction(numBinsApply)(using AbstractionScheme.RegularDiscretization))
         Values()(apply)
         Variable(apply)
         Variable(uniform)
@@ -188,7 +188,7 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         def check(uniformValue: Double, applyValue: Double): Boolean = {
           val resultValue = uniformValue * uniformValue
           def minDiff: Double =
-            (Double.MaxValue /: applyValues)((d1: Double, d2: Double) => d1 min math.abs(resultValue - d2))
+            (applyValues).foldLeft(Double.MaxValue)((d1: Double, d2: Double) => d1 min math.abs(resultValue - d2))
           math.abs(resultValue - applyValue) <= minDiff
         }
         for {
@@ -208,11 +208,11 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         val numBinsUniform = 5
         val numBinsApply = 10
         val uniform1 = Uniform(0.0, max)
-        uniform1.addPragma(Abstraction(numBinsUniform)(AbstractionScheme.RegularDiscretization))
+        uniform1.addPragma(Abstraction(numBinsUniform)(using AbstractionScheme.RegularDiscretization))
         val uniform2 = Uniform(0.0, max)
-        uniform2.addPragma(Abstraction(numBinsUniform)(AbstractionScheme.RegularDiscretization))
+        uniform2.addPragma(Abstraction(numBinsUniform)(using AbstractionScheme.RegularDiscretization))
         val apply = Apply(uniform1, uniform2, (d1: Double, d2: Double) => d1 * d2)
-        apply.addPragma(Abstraction(numBinsApply)(AbstractionScheme.RegularDiscretization))
+        apply.addPragma(Abstraction(numBinsApply)(using AbstractionScheme.RegularDiscretization))
         Values()(apply)
         val uniform1Variable = Variable(uniform1)
         val uniform2Variable = Variable(uniform2)
@@ -229,7 +229,7 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         def check(uniform1Value: Double, uniform2Value: Double, applyValue: Double): Boolean = {
           val resultValue = uniform1Value * uniform2Value
           def minDiff: Double =
-            (Double.MaxValue /: applyValues)((d1: Double, d2: Double) => d1 min math.abs(resultValue - d2))
+            (applyValues).foldLeft(Double.MaxValue)((d1: Double, d2: Double) => d1 min math.abs(resultValue - d2))
           math.abs(resultValue - applyValue) <= minDiff
         }
         for {
@@ -251,13 +251,13 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         val numBinsUniform = 5
         val numBinsApply = 10
         val uniform1 = Uniform(0.0, max)
-        uniform1.addPragma(Abstraction(numBinsUniform)(AbstractionScheme.RegularDiscretization))
+        uniform1.addPragma(Abstraction(numBinsUniform)(using AbstractionScheme.RegularDiscretization))
         val uniform2 = Uniform(0.0, max)
-        uniform2.addPragma(Abstraction(numBinsUniform)(AbstractionScheme.RegularDiscretization))
+        uniform2.addPragma(Abstraction(numBinsUniform)(using AbstractionScheme.RegularDiscretization))
         val uniform3 = Uniform(0.0, max)
-        uniform3.addPragma(Abstraction(numBinsUniform)(AbstractionScheme.RegularDiscretization))
+        uniform3.addPragma(Abstraction(numBinsUniform)(using AbstractionScheme.RegularDiscretization))
         val apply = Apply(uniform1, uniform2, uniform3, (d1: Double, d2: Double, d3: Double) => d1 * d2 * d3)
-        apply.addPragma(Abstraction(numBinsApply)(AbstractionScheme.RegularDiscretization))
+        apply.addPragma(Abstraction(numBinsApply)(using AbstractionScheme.RegularDiscretization))
         Values()(apply)
         val uniform1Variable = Variable(uniform1)
         val uniform2Variable = Variable(uniform2)
@@ -276,7 +276,7 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         def check(uniform1Value: Double, uniform2Value: Double, uniform3Value: Double, applyValue: Double): Boolean = {
           val resultValue = uniform1Value * uniform2Value * uniform3Value
           def minDiff: Double =
-            (Double.MaxValue /: applyValues)((d1: Double, d2: Double) => d1 min math.abs(resultValue - d2))
+            (applyValues).foldLeft(Double.MaxValue)((d1: Double, d2: Double) => d1 min math.abs(resultValue - d2))
           math.abs(resultValue - applyValue) <= minDiff
         }
         for {
@@ -301,10 +301,10 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         val flip = Flip(0.5)
         val uniform1 = Uniform(0.0, 1.0)
         val uniform2 = Uniform(1.0, 2.0)
-        uniform1.addPragma(Abstraction(numBinsUniform)(AbstractionScheme.RegularDiscretization))
-        uniform2.addPragma(Abstraction(numBinsUniform)(AbstractionScheme.RegularDiscretization))
+        uniform1.addPragma(Abstraction(numBinsUniform)(using AbstractionScheme.RegularDiscretization))
+        uniform2.addPragma(Abstraction(numBinsUniform)(using AbstractionScheme.RegularDiscretization))
         val chain = Chain(flip, (b: Boolean) => if (b) uniform1; else uniform2)
-        chain.addPragma(Abstraction(numBinsChain)(AbstractionScheme.RegularDiscretization))
+        chain.addPragma(Abstraction(numBinsChain)(using AbstractionScheme.RegularDiscretization))
         Values()(chain)
         val flipVariable = Variable(flip)
         val uniform1Variable = Variable(uniform1)
@@ -326,7 +326,7 @@ class AbstractionTest extends AnyWordSpec with Matchers {
         val selectorValues: List[List[Any]] = selectorVar.range.map(_.value.asInstanceOf[List[Any]])
         def closest(chainValue: Double, uniformValue: Double): Boolean = {
           def minDiff: Double =
-            (Double.MaxValue /: chainValues)((d1: Double, d2: Double) => d1 min math.abs(uniformValue - d2))
+            (chainValues).foldLeft(Double.MaxValue)((d1: Double, d2: Double) => d1 min math.abs(uniformValue - d2))
           math.abs(uniformValue - chainValue) <= minDiff
         }
         def check1(flipValue: Boolean, uniformValue: Double, chainValue: Double): Boolean =

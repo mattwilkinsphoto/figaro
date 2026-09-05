@@ -26,11 +26,11 @@ import com.cra.figaro.language._
  * this constructor to ensure that (1) the components in this set and their arguments already belong to the collection,
  * and (2) that such a call maintains consistency across component ranges.
  */
-class FlatStrategy(collection: ComponentCollection, override val initialComponents: Set[ProblemComponent[_]])
+class FlatStrategy(collection: ComponentCollection, override val initialComponents: Set[ProblemComponent[?]])
   extends DepthFirstStrategy(collection) {
 
   // Only refine components in the given set
-  override def shouldRefine(comp: ProblemComponent[_]): Boolean = initialComponents.contains(comp)
+  override def shouldRefine(comp: ProblemComponent[?]): Boolean = initialComponents.contains(comp)
 
   // Assume that all arguments already belong to the collection
   override def checkArg[T](element: Element[T]): ProblemComponent[T] = collection(element)

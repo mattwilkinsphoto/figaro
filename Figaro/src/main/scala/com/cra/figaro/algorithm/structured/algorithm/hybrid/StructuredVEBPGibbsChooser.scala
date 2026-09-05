@@ -19,8 +19,8 @@ import com.cra.figaro.algorithm.structured.algorithm._
 import com.cra.figaro.algorithm.factored.gibbs.Gibbs
 import com.cra.figaro.algorithm.factored.gibbs.BlockSampler
 
-class StructuredVEBPGibbsChooser(universe: Universe, scoreThreshold: Double, determThreshold: Double, bpIters: Int, numSamples: Int, burnIn: Int, interval: Int, blockToSampler: Gibbs.BlockSamplerCreator, targets: Element[_]*)
-  extends StructuredProbQueryAlgorithm(universe, targets: _*) with DecompositionProbQuery {
+class StructuredVEBPGibbsChooser(universe: Universe, scoreThreshold: Double, determThreshold: Double, bpIters: Int, numSamples: Int, burnIn: Int, interval: Int, blockToSampler: Gibbs.BlockSamplerCreator, targets: Element[?]*)
+  extends StructuredProbQueryAlgorithm(universe, targets*) with DecompositionProbQuery {
 
   def solvingStrategy() = new VEBPGibbsStrategy(problem, structuredRaising, scoreThreshold, determThreshold, bpIters, numSamples, burnIn, interval, blockToSampler)
 }
@@ -29,21 +29,21 @@ object StructuredVEBPGibbsChooser {
   /**
    * Create a hybrid algorithm that chooses between variable elimination and Gibbs sampling on each subproblem.
    */
-  def apply(scoreThreshold: Double, determThreshold: Double, bpIters: Int, numSamples: Int, targets: Element[_]*) = {
+  def apply(scoreThreshold: Double, determThreshold: Double, bpIters: Int, numSamples: Int, targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run VE/Gibbs with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new StructuredVEBPGibbsChooser(targets(0).universe, scoreThreshold, determThreshold, bpIters, numSamples, 0, 1, BlockSampler.default, targets: _*)
+    new StructuredVEBPGibbsChooser(targets(0).universe, scoreThreshold, determThreshold, bpIters, numSamples, 0, 1, BlockSampler.default, targets*)
   }
 
   /**
    * Create a hybrid algorithm that chooses between variable elimination and Gibbs sampling on each subproblem.
    */
-  def apply(scoreThreshold: Double, determThreshold: Double, bpIters: Int, numSamples: Int, burnIn: Int, interval: Int, blockToSampler: Gibbs.BlockSamplerCreator, targets: Element[_]*) = {
+  def apply(scoreThreshold: Double, determThreshold: Double, bpIters: Int, numSamples: Int, burnIn: Int, interval: Int, blockToSampler: Gibbs.BlockSamplerCreator, targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run VE/Gibbs with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new StructuredVEBPGibbsChooser(targets(0).universe, scoreThreshold, determThreshold, bpIters, numSamples, burnIn, interval, blockToSampler, targets: _*)
+    new StructuredVEBPGibbsChooser(targets(0).universe, scoreThreshold, determThreshold, bpIters, numSamples, burnIn, interval, blockToSampler, targets*)
   }
 
   /**

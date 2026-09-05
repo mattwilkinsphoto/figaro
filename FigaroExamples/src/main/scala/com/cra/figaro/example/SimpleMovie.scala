@@ -68,7 +68,7 @@ object SimpleMovie {
 
   // Ensure that exactly one appearance gets an award.
   private def uniqueAwardCondition(awards: List[Boolean]) = awards.count((b: Boolean) => b) == 1
-  private val allAwards: Element[List[Boolean]] = Inject(appearances.map(_.award): _*)
+  private val allAwards: Element[List[Boolean]] = Inject(appearances.map(_.award)*)
   allAwards.setCondition(uniqueAwardCondition)
 
   // A proposal either proposes to switch the awardee to another awardee or proposes the properties of a movie or

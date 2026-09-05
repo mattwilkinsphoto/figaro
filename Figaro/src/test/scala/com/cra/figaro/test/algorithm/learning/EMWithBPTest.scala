@@ -53,7 +53,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               f.observe(false)
             }
 
-            val algorithm = EMWithBP(terminationCriteria, 10, b)(universe)
+            val algorithm = EMWithBP(terminationCriteria, 10, b)(using universe)
             algorithm.start()
 
             val result = b.MAPValue
@@ -83,7 +83,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
                 f.observe(false)
               }
 
-              val algorithm = EMWithBP(15, 10, b)(universe)
+              val algorithm = EMWithBP(15, 10, b)(using universe)
               algorithm.start()
 
               val result = b.MAPValue
@@ -108,7 +108,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
                 f.observe(false)
               }
 
-              val algorithm = EMWithBP(15, 10, b)(universe)
+              val algorithm = EMWithBP(15, 10, b)(using universe)
               algorithm.start()
 
               val result = b.MAPValue
@@ -125,7 +125,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
             val b2 = Binomial(3, b)
             b2.observe(1)
 
-            val algorithm = EMWithBP(15, 10, b)(universe)
+            val algorithm = EMWithBP(15, 10, b)(using universe)
             algorithm.start()
 
             val result = b.MAPValue
@@ -143,7 +143,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         val b2 = Binomial(3, b)
         b2.observe(1)
 
-        val algorithm = EMWithBP(15, 10, b)(universe)
+        val algorithm = EMWithBP(15, 10, b)(using universe)
         algorithm.start()
 
         val result = b.MAPValue
@@ -172,7 +172,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
                 f.observe(false)
               }
 
-              val algorithm = EMWithBP(15, 10, b)(universe)
+              val algorithm = EMWithBP(15, 10, b)(using universe)
               algorithm.start()
 
               val result = b.MAPValue
@@ -197,7 +197,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
                 f.observe(false)
               }
 
-              val algorithm = EMWithBP(15, 10, b)(universe)
+              val algorithm = EMWithBP(15, 10, b)(using universe)
               algorithm.start()
 
               val result = b.MAPValue
@@ -215,9 +215,9 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
             {
               val universe = Universe.createNew()
               val alphas = Seq[Double](0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476)
-              val d = Dirichlet(alphas: _*)
+              val d = Dirichlet(alphas*)
               val outcomes = List(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
-              val outcome = Select(d, outcomes: _*)
+              val outcome = Select(d, outcomes*)
               val algorithm = EMWithBP(5, 10, d)
               algorithm.start()
 
@@ -252,11 +252,11 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
             {
               val universe = Universe.createNew()
               val alphas = Seq[Double](1.0476, 1.0476, 1.0476, 1.0476, 1.0476)
-              val d = Dirichlet(alphas: _*)
+              val d = Dirichlet(alphas*)
               val outcomes = List(2, 3, 4, 5, 6)
 
               for (i <- 1 to 10) {
-                val outcome = Select(d, outcomes: _*)
+                val outcome = Select(d, outcomes*)
                 outcome.addCondition(x => x >= 3 && x <= 6)
               }
 
@@ -279,21 +279,21 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val outcomes = List(1, 2, 3)
               val errorTolerance = 0.01
               for (i <- 1 to 8) {
-                val f = Select(b, outcomes: _*)
+                val f = Select(b, outcomes*)
                 f.observe(1)
               }
 
               for (i <- 1 to 6) {
-                val f = Select(b, outcomes: _*)
+                val f = Select(b, outcomes*)
                 f.observe(2)
               }
 
               for (i <- 1 to 2) {
-                val f = Select(b, outcomes: _*)
+                val f = Select(b, outcomes*)
                 f.observe(3)
               }
 
-              val algorithm = EMWithBP(15, 10, b)(universe)
+              val algorithm = EMWithBP(15, 10, b)(using universe)
               algorithm.start()
 
               val result = b.MAPValue
@@ -313,23 +313,23 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val outcomes = List(1, 2, 3)
 
               for (i <- 1 to 3) {
-                val f2 = Select(b, outcomes: _*)
+                val f2 = Select(b, outcomes*)
 
                 f2.observe(1)
               }
 
               for (i <- 1 to 2) {
-                val f3 = Select(b, outcomes: _*)
+                val f3 = Select(b, outcomes*)
                 f3.observe(2)
               }
 
               for (i <- 1 to 3) {
 
-                val f1 = Select(b, outcomes: _*)
+                val f1 = Select(b, outcomes*)
                 f1.observe(3)
               }
 
-              val algorithm = EMWithBP(3, 10, b)(universe)
+              val algorithm = EMWithBP(3, 10, b)(using universe)
               algorithm.start()
 
               val result = b.MAPValue
@@ -348,22 +348,22 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
               for (i <- 1 to 3) {
 
-                val f2 = Select(b, outcomes: _*)
+                val f2 = Select(b, outcomes*)
                 f2.observe(1)
               }
 
               for (i <- 1 to 3) {
-                val f3 = Select(b, outcomes: _*)
+                val f3 = Select(b, outcomes*)
                 f3.observe(2)
               }
 
               for (i <- 1 to 3) {
 
-                val f1 = Select(b, outcomes: _*)
+                val f1 = Select(b, outcomes*)
                 f1.observe(3)
               }
 
-              val algorithm = EMWithBP(3, 10, b)(universe)
+              val algorithm = EMWithBP(3, 10, b)(using universe)
               algorithm.start()
 
               val result = b.MAPValue
@@ -387,23 +387,23 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
               for (i <- 1 to 4) {
 
-                val f2 = Select(d, outcomes: _*)
+                val f2 = Select(d, outcomes*)
                 f2.observe(1)
               }
 
               for (i <- 1 to 2) {
 
-                val f3 = Select(d, outcomes: _*)
+                val f3 = Select(d, outcomes*)
                 f3.observe(2)
               }
 
               for (i <- 1 to 4) {
 
-                val f1 = Select(d, outcomes: _*)
+                val f1 = Select(d, outcomes*)
                 f1.observe(3)
               }
 
-              val algorithm = EMWithBP(100, 10, d, b)(universe)
+              val algorithm = EMWithBP(100, 10, d, b)(using universe)
               algorithm.start()
 
               val result = d.MAPValue
@@ -426,18 +426,18 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
               for (i <- 1 to 3) {
 
-                val f2 = Select(d, outcomes: _*)
+                val f2 = Select(d, outcomes*)
                 f2.observe(1)
               }
 
               for (i <- 1 to 2) {
-                val f3 = Select(d, outcomes: _*)
+                val f3 = Select(d, outcomes*)
                 f3.observe(2)
               }
 
               for (i <- 1 to 3) {
 
-                val f1 = Select(d, outcomes: _*)
+                val f1 = Select(d, outcomes*)
                 f1.observe(3)
               }
 
@@ -453,7 +453,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
                 f.observe(false)
               }
 
-              val algorithm = EMWithBP(5, 10, b, d)(universe)
+              val algorithm = EMWithBP(5, 10, b, d)(using universe)
               algorithm.start()
 
               val result = d.MAPValue
@@ -501,27 +501,27 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       val trueUniverse = new Universe
 
       object TrueParameters extends Parameters(trueUniverse) {
-        val b1 = Constant(trueB1)("b1", universe)
-        val b2 = Constant(trueB2)("b2", universe)
-        val b3 = Constant(trueB3)("b3", universe)
-        val b4 = Constant(trueB4)("b4", universe)
-        val b5 = Constant(trueB5)("b5", universe)
-        val b6 = Constant(trueB6)("b6", universe)
-        val b7 = Constant(trueB7)("b7", universe)
-        val b8 = Constant(trueB8)("b8", universe)
-        val b9 = Constant(trueB9)("b9", universe)
+        val b1 = Constant(trueB1)(using "b1", universe)
+        val b2 = Constant(trueB2)(using "b2", universe)
+        val b3 = Constant(trueB3)(using "b3", universe)
+        val b4 = Constant(trueB4)(using "b4", universe)
+        val b5 = Constant(trueB5)(using "b5", universe)
+        val b6 = Constant(trueB6)(using "b6", universe)
+        val b7 = Constant(trueB7)(using "b7", universe)
+        val b8 = Constant(trueB8)(using "b8", universe)
+        val b9 = Constant(trueB9)(using "b9", universe)
       }
 
       class LearnableParameters(universe: Universe) extends Parameters(universe) {
-        val b1: AtomicBeta = Beta(1, 1)("b1", universe)
-        val b2: AtomicBeta = Beta(1, 1)("b2", universe)
-        val b3: AtomicBeta = Beta(1, 1)("b3", universe)
-        val b4: AtomicBeta = Beta(1, 1)("b4", universe)
-        val b5: AtomicBeta = Beta(1, 1)("b5", universe)
-        val b6: AtomicBeta = Beta(1, 1)("b6", universe)
-        val b7: AtomicBeta = Beta(1, 1)("b7", universe)
-        val b8: AtomicBeta = Beta(1, 1)("b8", universe)
-        val b9: AtomicBeta = Beta(1, 1)("b9", universe)
+        val b1: AtomicBeta = Beta(1, 1)(using "b1", universe)
+        val b2: AtomicBeta = Beta(1, 1)(using "b2", universe)
+        val b3: AtomicBeta = Beta(1, 1)(using "b3", universe)
+        val b4: AtomicBeta = Beta(1, 1)(using "b4", universe)
+        val b5: AtomicBeta = Beta(1, 1)(using "b5", universe)
+        val b6: AtomicBeta = Beta(1, 1)(using "b6", universe)
+        val b7: AtomicBeta = Beta(1, 1)(using "b7", universe)
+        val b8: AtomicBeta = Beta(1, 1)(using "b8", universe)
+        val b9: AtomicBeta = Beta(1, 1)(using "b9", universe)
       }
 
       var id = 0
@@ -538,10 +538,10 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         val f7 = flipConstructor(parameters.b7, "f7_" + id, universe)
         val f8 = flipConstructor(parameters.b8, "f8_" + id, universe)
         val f9 = flipConstructor(parameters.b9, "f9_" + id, universe)
-        val y = If(x, f2, f3)("y_" + id, universe)
-        val z = If(x, f4, f5)("z_" + id, universe)
+        val y = If(x, f2, f3)(using "y_" + id, universe)
+        val z = If(x, f4, f5)(using "z_" + id, universe)
         val w = CPD(y, z, (true, true) -> f6, (true, false) -> f7,
-          (false, true) -> f8, (false, false) -> f9)("w_" + id, universe)
+          (false, true) -> f8, (false, false) -> f9)(using "w_" + id, universe)
       }
 
       def normalFlipConstructor(parameter: Element[Double], name: String, universe: Universe) = new CompoundFlip(name, parameter, universe)
@@ -582,28 +582,28 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
             model.y.observe(datum.y)
             model.z.observe(datum.z)
             model.w.observe(datum.w)
-            val alg = VariableElimination(model.x)(model.universe)
+            val alg = VariableElimination(model.x)(using model.universe)
             alg.start()
             alg.probability(model.x, datum.x)
           case 1 =>
             model.x.observe(datum.x)
             model.z.observe(datum.z)
             model.w.observe(datum.w)
-            val alg = VariableElimination(model.y)(model.universe)
+            val alg = VariableElimination(model.y)(using model.universe)
             alg.start()
             alg.probability(model.y, datum.y)
           case 2 =>
             model.x.observe(datum.x)
             model.y.observe(datum.y)
             model.w.observe(datum.w)
-            val alg = VariableElimination(model.z)(model.universe)
+            val alg = VariableElimination(model.z)(using model.universe)
             alg.start()
             alg.probability(model.z, datum.z)
           case 3 =>
             model.x.observe(datum.x)
             model.y.observe(datum.y)
             model.z.observe(datum.z)
-            val alg = VariableElimination(model.w)(model.universe)
+            val alg = VariableElimination(model.w)(using model.universe)
             alg.start()
             alg.probability(model.w, datum.w)
         }
@@ -642,9 +642,9 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               case b: AtomicBeta =>
                 {
 
-                  Constant(valueGetter(algorithm, parameter))(name, resultUniverse)
+                  Constant(valueGetter(algorithm, parameter))(using name, resultUniverse)
                 }
-              case _ => Constant(valueGetter(algorithm, parameter))(name, resultUniverse)
+              case _ => Constant(valueGetter(algorithm, parameter))(using name, resultUniverse)
             }
 
           }
@@ -676,7 +676,7 @@ class EMWithBPTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
           def learner(parameters: Parameters): Algorithm = {
             parameters match {
-              case ps: LearnableParameters => EMWithBP(numEMIterations, 10, ps.b1, ps.b2, ps.b3, ps.b4, ps.b5, ps.b6, ps.b7, ps.b8, ps.b9)(parameters.universe)
+              case ps: LearnableParameters => EMWithBP(numEMIterations, 10, ps.b1, ps.b2, ps.b3, ps.b4, ps.b5, ps.b6, ps.b7, ps.b8, ps.b9)(using parameters.universe)
               case _ => throw new IllegalArgumentException("Not learnable parameters")
             }
           }

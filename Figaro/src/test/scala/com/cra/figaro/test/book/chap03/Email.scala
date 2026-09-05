@@ -30,7 +30,7 @@ class Email(file: File) {
       } yield word.toLowerCase()
     }
 
-    val source = Source.fromFile(file)("ISO-8859-1")
+    val source = Source.fromFile(file)(using "ISO-8859-1")
     val allLines = source.getLines().toList
 
     val allWordsWithRepeats =

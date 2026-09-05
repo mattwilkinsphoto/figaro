@@ -25,12 +25,12 @@ import scala.collection.mutable.Map
 class PermanentCache(universe: Universe) extends Cache(universe) {
 
   /* Caching chain cache that maps from an element to a map of parent values and resulting elements */
-  private[figaro] val ccCache: Map[Element[_], Map[Any, Element[_]]] = Map()
+  private[figaro] val ccCache: Map[Element[?], Map[Any, Element[?]]] = Map()
 
   /* The inverted cache. This maps from result elements back to the chain that uses them. This is needed
-   * to properly clean up deactivated elements 
+   * to properly clean up deactivated elements
    */
-  private[figaro] val ccInvertedCache: Map[Element[_], Map[Element[_], Any]] = Map()
+  private[figaro] val ccInvertedCache: Map[Element[?], Map[Element[?], Any]] = Map()
 
   /**
    * Retrieve any cached element generated from the current value of the supplied element. Returns None if
@@ -74,7 +74,7 @@ class PermanentCache(universe: Universe) extends Cache(universe) {
   /**
    * Removes an element from the cache. This is needed to properly clean up elements as they are deactivated.
    */
-  def subtractOne(element: Element[_]) = {
+  def subtractOne(element: Element[?]) = {
     ccCache -= element
     val invertValue = ccInvertedCache.get(element)
     if (invertValue.nonEmpty) invertValue.get.foreach(e => if (ccCache.contains(e._1)) ccCache(e._1) -= e._2)

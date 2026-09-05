@@ -54,9 +54,9 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
                                        maxRuns: Int,
                                        proposalScheme: ProposalScheme,
                                        schedule: Schedule,
-                                       val mapElements: List[Element[_]])
+                                       val mapElements: List[Element[?]])
   // Burn-in and interval aren't needed in this context, so they are set to 0 and 1, respectively
-  extends MetropolisHastings(universe, proposalScheme, 0, 1, mapElements:_*) with MarginalMAPAlgorithm {
+  extends MetropolisHastings(universe, proposalScheme, 0, 1, mapElements*) with MarginalMAPAlgorithm {
   import MetropolisHastings._
 
   require(samplesPerIteration >= 2, "samples per iteration must be at least 2")
@@ -66,14 +66,14 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
   // The probability of evidence sampler associated with the current state of the MAP variables. Initialized when this
   // (i.e. the ProbEvidenceMarginalMAP) is started. In general, while this is active, probEvidenceSampler refers to
   // an active MMAPProbEvidenceSampler that can be run for additional iterations to improve its estimate.
-  protected var probEvidenceSampler: MMAPProbEvidenceSampler = _
+  protected var probEvidenceSampler: MMAPProbEvidenceSampler = scala.compiletime.uninitialized
 
   // Elements created by MH (and stored in chainCache) that should not be deleted while sampling probability of evidence.
   // This is needed because ProbEvidenceSampler can create temporary elements while running, and they must be cleared to
   // avoid memory leaks. However, we don't just call universe.clearTemporaries() because this would also clear
   // chainCache, which we don't want. This is a var (as opposed to an argument to MMAPProbEvidenceSampler) because it
   // may change between iterations of MH.
-  protected var preserve: Set[Element[_]] = _
+  protected var preserve: Set[Element[?]] = scala.compiletime.uninitialized
 
   // Increasing temperature used for simulated annealing.
   protected var temperature = 1.0
@@ -102,7 +102,7 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
     // probability of evidence computation.
     val newState = proposeAndUpdate()
     // We don't care about dissatisfied elements that aren't MAP elements; remove them
-    newState.dissatisfied.retain(fastTargets.contains)
+    newState.dissatisfied.filterInPlace(fastTargets.contains)
 
     if(decideToAccept(newState)) {
       accepts += 1
@@ -189,9 +189,9 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
   /**
    * Record the current values of all MAP elements.
    */
-  protected def currentMAPValues: List[ElemVal[_]] = {
+  protected def currentMAPValues: List[ElemVal[?]] = {
     // For whatever reason, the Scala compiler complains if we try to make this an anonymous function.
-    def makeElemVal[T](elem: Element[_]) = ElemVal[T](elem.asInstanceOf[Element[T]], elem.value.asInstanceOf[T])
+    def makeElemVal[T](elem: Element[?]) = ElemVal[T](elem.asInstanceOf[Element[T]], elem.value.asInstanceOf[T])
     mapElements.map(makeElemVal)
   }
 
@@ -235,7 +235,7 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
     if(dissatisfied.isEmpty) {
       // Update as long as no MAP elements are dissatisfied
       val values = mapElements.map(elem => elem -> elem.value)
-      (true, mutable.Map(values:_*))
+      (true, mutable.Map(values*))
     }
     else {
       (false, mutable.Map())
@@ -296,7 +296,7 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
    * @param observations Elements and corresponding values that should be observed each time this algorithm is run.
    * Normally, this contains MAP elements and their proposed values.
    */
-  class MMAPProbEvidenceSampler(val observations: List[ElemVal[_]]) extends ProbEvidenceSampler(universe)
+  class MMAPProbEvidenceSampler(val observations: List[ElemVal[?]]) extends ProbEvidenceSampler(universe)
     with OneTimeProbEvidenceSampler with OnlineLogStatistics {
 
     override val numSamples = samplesPerIteration
@@ -341,7 +341,7 @@ class AnytimeProbEvidenceMarginalMAP(universe: Universe,
                                      maxRuns: Int,
                                      proposalScheme: ProposalScheme,
                                      schedule: Schedule,
-                                     mapElements: List[Element[_]])
+                                     mapElements: List[Element[?]])
   extends ProbEvidenceMarginalMAP(universe, tolerance, samplesPerIteration, maxRuns, proposalScheme, schedule, mapElements)
     with AnytimeSampler with AnytimeMarginalMAP {
   /**
@@ -360,7 +360,7 @@ class OneTimeProbEvidenceMarginalMAP(val numSamples: Int,
                                      maxRuns: Int,
                                      proposalScheme: ProposalScheme,
                                      schedule: Schedule,
-                                     mapElements: List[Element[_]])
+                                     mapElements: List[Element[?]])
   extends ProbEvidenceMarginalMAP(universe, tolerance, samplesPerIteration, maxRuns, proposalScheme, schedule, mapElements)
     with OneTimeSampler with OneTimeMarginalMAP {
 
@@ -380,7 +380,7 @@ object ProbEvidenceMarginalMAP {
    * of the parameters.
    */
   def apply(iterations: Int, tolerance: Double, samplesPerIteration: Int, maxRuns: Int, proposalScheme: ProposalScheme,
-            schedule: Schedule, mapElements: Element[_]*)(implicit universe: Universe) =
+            schedule: Schedule, mapElements: Element[?]*)(implicit universe: Universe) =
     new OneTimeProbEvidenceMarginalMAP(iterations, universe, tolerance, samplesPerIteration, maxRuns, proposalScheme, schedule, mapElements.toList)
 
   /**
@@ -389,7 +389,7 @@ object ProbEvidenceMarginalMAP {
    * of the parameters.
    */
   def apply(tolerance: Double, samplesPerIteration: Int, maxRuns: Int, proposalScheme: ProposalScheme,
-            schedule: Schedule, mapElements: Element[_]*)(implicit universe: Universe) =
+            schedule: Schedule, mapElements: Element[?]*)(implicit universe: Universe) =
   new AnytimeProbEvidenceMarginalMAP(universe, tolerance, samplesPerIteration, maxRuns, proposalScheme, schedule, mapElements.toList)
 
   /**
@@ -398,8 +398,8 @@ object ProbEvidenceMarginalMAP {
    * @see [[com.cra.figaro.experimental.marginalmap.ProbEvidenceMarginalMAP]] abstract class for a complete description
    * of the parameters.
    */
-  def apply(iterations: Int, mapElements: Element[_]*)(implicit universe: Universe) =
-  new OneTimeProbEvidenceMarginalMAP(iterations, universe, 0.05, 100, 100, ProposalScheme.default(universe), Schedule.default(), mapElements.toList)
+  def apply(iterations: Int, mapElements: Element[?]*)(implicit universe: Universe) =
+  new OneTimeProbEvidenceMarginalMAP(iterations, universe, 0.05, 100, 100, ProposalScheme.default(using universe), Schedule.default(), mapElements.toList)
 
   /**
    * Creates an anytime marginal MAP algorithm that uses probability of evidence. Takes 100 samples per iteration at a
@@ -407,6 +407,6 @@ object ProbEvidenceMarginalMAP {
    * @see [[com.cra.figaro.experimental.marginalmap.ProbEvidenceMarginalMAP]] abstract class for a complete description
    * of the parameters.
    */
-  def apply(mapElements: Element[_]*)(implicit universe: Universe) =
-    new AnytimeProbEvidenceMarginalMAP(universe, 0.05, 100, 100, ProposalScheme.default(universe), Schedule.default(), mapElements.toList)
+  def apply(mapElements: Element[?]*)(implicit universe: Universe) =
+    new AnytimeProbEvidenceMarginalMAP(universe, 0.05, 100, 100, ProposalScheme.default(using universe), Schedule.default(), mapElements.toList)
 }

@@ -25,7 +25,7 @@ trait BoundsProbQueryAlgorithm extends ProbQueryAlgorithm {
    * probability bounds. Each entry is a triple (lower, upper, value). The result is a lazy stream. It is up to the
    * algorithm how the stream is ordered.
    */
-  def computeAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)]
+  def computeAllProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)]
 
   /**
    * Return an estimate of the bounds on the expectation of the function under the marginal probability distribution
@@ -48,7 +48,7 @@ trait BoundsProbQueryAlgorithm extends ProbQueryAlgorithm {
    * and do not need to be defined by particular algorithm implementations.
    */
 
-  protected def doAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)]
+  protected def doAllProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)]
 
   protected def doExpectationBounds[T](target: Element[T], function: T => Double, bounds: Option[(Double, Double)]): (Double, Double)
 
@@ -63,7 +63,7 @@ trait BoundsProbQueryAlgorithm extends ProbQueryAlgorithm {
    * @throws AlgorithmInactiveException if the algorithm is inactive.
    * @return Bounds on the probability of each value for this element.
    */
-  def allProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)] = {
+  def allProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)] = {
     check(target)
     doAllProbabilityBounds(target)
   }

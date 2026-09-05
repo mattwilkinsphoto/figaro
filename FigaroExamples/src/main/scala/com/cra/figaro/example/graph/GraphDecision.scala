@@ -45,7 +45,7 @@ object GraphDecision {
 
   /* An Element[dGraph], that from an input graph, select a node uniformly at random to be the vertex of interest
    * (ie, the person the product is given to) */
-  val VoISelect = Chain(GraphGenerator, (G: dGraph) => Uniform((0 until G.NodeCount): _*))
+  val VoISelect = Chain(GraphGenerator, (G: dGraph) => Uniform((0 until G.NodeCount)*))
   def voifcn(v: Int, g: dGraph) = {
     val G = g.copy()
     G.VoI = G.Nodes(v)

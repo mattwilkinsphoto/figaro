@@ -30,7 +30,7 @@ class VariableSizeArrayTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       def generator(n: Int) = Flip(1.0 / (n + 1))
       val lengthChooser = Select(0.4 -> 2, 0.6 -> 3)
-      val array = Container(lengthChooser, generator _)
+      val array = Container(lengthChooser, generator)
       val all = array.forall((b: Boolean) => b)
       val p1 = 1.0 / 1 * 1.0 / 2
       val p2 = p1 * 1.0 / 3
@@ -43,7 +43,7 @@ class VariableSizeArrayTest extends AnyWordSpec with Matchers {
       var count = 0
       def generator(n: Int) = { count += 1; Flip(1.0 / (n + 1)) }
       val lengthChooser = Select(0.5 -> 1, 0.5 -> 2)
-      val array = Container(lengthChooser, generator _)
+      val array = Container(lengthChooser, generator)
       lengthChooser.observe(1) // causes the array element to generate
       lengthChooser.observe(2) // causes the array element to generate
       count should equal (2) // proves that we've only generated two elements, so the first one was shared

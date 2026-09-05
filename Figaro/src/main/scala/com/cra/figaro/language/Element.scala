@@ -23,7 +23,7 @@ import com.cra.figaro.library.compound._
 import scala.collection.mutable.Set
 import scala.language.implicitConversions
 
-class EvidenceNotAllowedException(element: Element[_]) extends RuntimeException("Evidence not allowed on " + element.toString + " because it is a temporary element")
+class EvidenceNotAllowedException(element: Element[?]) extends RuntimeException("Evidence not allowed on " + element.toString + " because it is a temporary element")
 
 /**
  * An Element is the core component of a probabilistic model. Elements can be understood as
@@ -126,7 +126,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
   /**
    * The current randomness content of the element.
    */
-  var randomness: Randomness = _
+  var randomness: Randomness = scala.compiletime.uninitialized
 
   /**
    * Generate the value of the element deterministically given its randomness and the values of
@@ -137,7 +137,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
   /**
    * The current value of the element.
    */
-  var value: Value = _
+  var value: Value = scala.compiletime.uninitialized
 
   /** Whether the existing boxed-value sentinel has been initialized. */
   private[figaro] def hasValue: Boolean = {
@@ -158,7 +158,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
   }
 
   /* Complete context of this element */
-  private[language] var myContext: List[Element[_]] = List()
+  private[language] var myContext: List[Element[?]] = List()
 
   /** The elements on which the existence of this element depends. */
   def context = if (!active) {
@@ -168,18 +168,18 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
   /* Stores the elements that were created in this element's context. Note this is not used
    * for chains, since they maintain their own context control.
    */
-  private val myDirectContextContents: Set[Element[_]] = Set()
+  private val myDirectContextContents: Set[Element[?]] = Set()
 
   /**
    * Returns the set of elements directly created in the context of this element.
    */
-  def directContextContents: Set[Element[_]] = if (!active) {
+  def directContextContents: Set[Element[?]] = if (!active) {
     throw new NoSuchElementException
   } else myDirectContextContents
 
-  private[figaro] def addContextContents(e: Element[_]): Unit = myDirectContextContents += e
+  private[figaro] def addContextContents(e: Element[?]): Unit = myDirectContextContents += e
 
-  private[figaro] def removeContextContents(e: Element[_]): Unit = myDirectContextContents -= e
+  private[figaro] def removeContextContents(e: Element[?]): Unit = myDirectContextContents -= e
 
   /**
    * Returns true if this element is temporary, that is, was created in the context of another element.
@@ -212,7 +212,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
    * hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample
    * those other elements first. This method is supplied to support this use case.
    */
-  def elementsIAmContingentOn: Set[Element[_]] = {
+  def elementsIAmContingentOn: Set[Element[?]] = {
     val conditionElements =
       for {
         (condition, contingency) <- myConditions
@@ -223,7 +223,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
         (constraint, contingency) <- myConstraints
         case Element.ElemVal(element, value) <- contingency
       } yield element
-    Set((conditionElements ::: constraintElements): _*)
+    Set((conditionElements ::: constraintElements)*)
   }
 
   /*
@@ -276,7 +276,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
    * appropriate values and the condition itself is not satisfied for the given value.
    */
   private def satisfiesContingentCondition(condition: Condition, contingency: Contingency, value: Any): Boolean = {
-    val contingencySatisfied = contingency.forall((e: ElemVal[_]) => e.elem.value == e.value)
+    val contingencySatisfied = contingency.forall((e: ElemVal[?]) => e.elem.value == e.value)
     !contingencySatisfied || checkedCondition(condition, value)
   }
 
@@ -350,7 +350,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
    * otherwise it is the result of the constraint itself applied to the given value.
    */
   private def contingentConstraintResult(constraint: Constraint, contingency: Contingency, value: Any): Double = {
-    val contingencySatisfied = contingency.forall((e: ElemVal[_]) => e.elem.value == e.value)
+    val contingencySatisfied = contingency.forall((e: ElemVal[?]) => e.elem.value == e.value)
     if (contingencySatisfied) checkedConstraint(constraint, value); else 0.0
   }
 
@@ -360,7 +360,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
   def constraint(value: Any) = {
     val results = for { (constr, conting) <- myConstraints }
       yield contingentConstraintResult(constr, conting, value)
-    (results :\ 0.0)(_ + _)
+    (results).foldRight(0.0)(_ + _)
   }
 
   /**
@@ -503,12 +503,12 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
   /**
    * The arguments on which the element depends.
    */
-  def args: List[Element[_]]
+  def args: List[Element[?]]
 
   /**
    * Flag indicating whether the element is currently active in its universe.
    */
-  var active: Boolean = _
+  var active: Boolean = scala.compiletime.uninitialized
 
   universe.activate(this)
 
@@ -550,10 +550,10 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
   def toNameString = if (name.string != "") name.string; else toString
 
   def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U] =
-    Apply(this, fn)(name, collection)
+    Apply(this, fn)(using name, collection)
 
   def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U] =
-    Chain(this, fn)(name, collection)
+    Chain(this, fn)(using name, collection)
 }
 
 object Element {
@@ -605,14 +605,14 @@ object Element {
   case class ElemVal[T](elem: Element[T], value: T)
 
   /** The type of contingencies that can hold on elements. */
-  type Contingency = List[ElemVal[_]]
+  type Contingency = List[ElemVal[?]]
 
   /**
    * Returns the given elements and all elements on which they are contingent, closed recursively.
    * Only elements with condition.
    */
-  def closeUnderContingencies(elements: scala.collection.Set[Element[_]]): scala.collection.Set[Element[_]] = {
-    def findContingent(elements: scala.collection.Set[Element[_]]): scala.collection.Set[Element[_]] = {
+  def closeUnderContingencies(elements: scala.collection.Set[Element[?]]): scala.collection.Set[Element[?]] = {
+    def findContingent(elements: scala.collection.Set[Element[?]]): scala.collection.Set[Element[?]] = {
       // Find all elements not in the input set that the input set is contingent on
       for {
         element <- elements

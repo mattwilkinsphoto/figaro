@@ -28,9 +28,9 @@ import com.cra.figaro.test.tags.Example
 class SourcesTest extends AnyWordSpec with Matchers {
   "The sources example" should {
     "produce the correct answer under variable elimination with dependent universe reasoning" taggedAs (Example) in {
-      def peAlg(universe: Universe, evidence: List[NamedEvidence[_]]) = () => ProbEvidenceSampler.computeProbEvidence(1000000, evidence)(universe)
-      test((dependentUniverses: List[(Universe, List[NamedEvidence[_]])], element: Element[Source]) =>
-        VariableElimination(dependentUniverses, peAlg _, element))
+      def peAlg(universe: Universe, evidence: List[NamedEvidence[?]]) = () => ProbEvidenceSampler.computeProbEvidence(1000000, evidence)(using universe)
+      test((dependentUniverses: List[(Universe, List[NamedEvidence[?]])], element: Element[Source]) =>
+        VariableElimination(dependentUniverses, peAlg, element))
 
     }
   }
@@ -47,13 +47,13 @@ class SourcesTest extends AnyWordSpec with Matchers {
 
   class Pair(val source: Source, val sample: Sample) {
     val universe = new Universe(List(sample.fromSource))
-    val isTheRightSource = Apply(sample.fromSource, (s: Source) => s == source)("", universe)
-    val rightSourceDistance = Normal(0.0, 1.0)("", universe)
-    val wrongSourceDistance = Uniform(0.0, 10.0)("", universe)
-    val distance = If(isTheRightSource, rightSourceDistance, wrongSourceDistance)("distance", universe)
+    val isTheRightSource = Apply(sample.fromSource, (s: Source) => s == source)(using "", universe)
+    val rightSourceDistance = Normal(0.0, 1.0)(using "", universe)
+    val wrongSourceDistance = Uniform(0.0, 10.0)(using "", universe)
+    val distance = If(isTheRightSource, rightSourceDistance, wrongSourceDistance)(using "distance", universe)
   }
 
-  def test(algorithmCreator: (List[(Universe, List[NamedEvidence[_]])], Element[Source]) => ProbQueryAlgorithm): Unit = {
+  def test(algorithmCreator: (List[(Universe, List[NamedEvidence[?]])], Element[Source]) => ProbQueryAlgorithm): Unit = {
     Universe.createNew()
     val source1 = new Source("Source 1")
     val source2 = new Source("Source 2")

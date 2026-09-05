@@ -29,7 +29,7 @@ abstract class RaisingStrategy(problem: Problem, raisingCriteria: RaisingCriteri
    * @param subproblem Unsolved nested problem to recurse on.
    * @return A strategy to solve the nested problem.
    */
-  def recurse(subproblem: NestedProblem[_]): RaisingStrategy
+  def recurse(subproblem: NestedProblem[?]): RaisingStrategy
 
   /**
    * Get all of the non-constraint factors needed for solving. This includes subproblem factors.

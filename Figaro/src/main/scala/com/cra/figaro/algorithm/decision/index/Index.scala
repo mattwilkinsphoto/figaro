@@ -16,7 +16,7 @@ package com.cra.figaro.algorithm.decision.index
 import com.cra.figaro.language._
 import com.cra.figaro.library.decision._
 import scala.collection.immutable.{ SortedMap, Map }
-import scala.collection.mutable.{ HashMap, MultiMap, Set, PriorityQueue }
+import scala.collection.mutable.{ HashMap, Set, PriorityQueue }
 
 /*
  * To create a new index class, it must inherit from the Index base class and implement getNN(parent value, num neighbors).
@@ -59,9 +59,9 @@ abstract class Index[T: DistanceConversion, U](stratMap: Map[(T, U), DecisionSam
  * 
  * @param leaf Indicates if this is a leaf node
  */
-abstract class Node[T, U](parent: Node[_, _], val leaf: Boolean) {
+abstract class Node[T, U](parent: Node[?, ?], val leaf: Boolean) {
 
-  protected type ObjectMapType = HashMap[Distance[T], Set[U]] with MultiMap[Distance[T], U]
+  protected type ObjectMapType = HashMap[Distance[T], Set[U]]
 
   /**
    *  Defines the distance between a query and the internal nodes of an index.
@@ -91,12 +91,15 @@ trait INode[T, U] extends Node[T, U] {
 
 /** Convenience trait for leaf node of a tree. */
 trait LNode[T, U] extends Node[T, U] {
-  val objects: ObjectMapType = new HashMap[Distance[T], Set[U]] with MultiMap[Distance[T], U]
+  val objects: ObjectMapType = HashMap.empty[Distance[T], Set[U]]
   
   /**
    * Adds an object of Distance[T] to the node that contains a value v of type U.
    */
-  def addObject(k: Distance[T], v: U) = objects.addBinding(k, v)
+  def addObject(k: Distance[T], v: U): ObjectMapType = {
+    objects.getOrElseUpdate(k, Set.empty[U]).add(v)
+    objects
+  }
 
   /**
    * Compute the distance between each object stored in the leaf node
@@ -109,7 +112,6 @@ trait LNode[T, U] extends Node[T, U] {
   }
   def iDist(o: T) = Map[Double, Node[T, U]]()
 }
-
 
 
 

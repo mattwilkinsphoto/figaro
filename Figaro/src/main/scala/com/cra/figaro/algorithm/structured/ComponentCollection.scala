@@ -47,7 +47,7 @@ class ComponentCollection {
    * An expansion is defined by a generative process (a function) that produces an element, and a parent value used as
    * the argument to the function.
    */
-  type Expansion = (_ => Element[_], _)
+  type Expansion = (? => Element[?], ?)
 
   /**
    * Ranging strategy for atomic components. Initially uses the default non-lazy method that samples infinite atomics.
@@ -63,18 +63,17 @@ class ComponentCollection {
    * Maps a variable to the parents needed for creating blocks using Gibbs sampling.
    * TODO: test if this variable causes memory leaks.
    */
-  val variableParents: Map[Variable[_], Set[Variable[_]]] = Map().withDefaultValue(Set())
+  val variableParents: Map[Variable[?], Set[Variable[?]]] = Map().withDefaultValue(Set())
 
   /** All the components in the collection, each associated with an element. */
-  val components: Map[Element[_], ProblemComponent[_]] = new HashMap[Element[_], ProblemComponent[_]]() {
-    override val hashCode = ComponentHash.nextCode
-  }
+  val components: Map[Element[?], ProblemComponent[?]] =
+    new com.cra.figaro.util.RegisteredMap[Element[?], ProblemComponent[?]](ComponentHash.nextCode)
 
   /**
    *  Intermediate variables defined during the construction of factors.
    *  These are not associated with any element or component and are to be eliminated wherever they appear.
    */
-  var intermediates: Set[Variable[_]] = Set()
+  var intermediates: Set[Variable[?]] = Set()
 
   /**
    * Get the recursion depth associated with adding the given expansion to the given expandable component. Intuitively,
@@ -85,24 +84,24 @@ class ComponentCollection {
    *
    * By default, this method always returns 1, which is the default for non-recursive expansion.
    */
-  private[figaro] def getRecursionDepth(value: ExpandableComponent[_, _], newExpansion: Expansion): Int = 1
+  private[figaro] def getRecursionDepth(value: ExpandableComponent[?, ?], newExpansion: Expansion): Int = 1
 
   /**
    * Bijectively maps an expansion and a recursion depth to a corresponding problem. The inverse map is
    * `problemToExpansion`.
    */
-  private[figaro] val expansionToProblem: Map[(Expansion, Int), NestedProblem[_]] = Map()
+  private[figaro] val expansionToProblem: Map[(Expansion, Int), NestedProblem[?]] = Map()
 
   /**
    * Bijectively maps a subproblem to a corresponding expansion and a recursion depth. The inverse map is
    * `expansionToProblem`.
    */
-  private[figaro] val problemToExpansion: Map[NestedProblem[_], (Expansion, Int)] = Map()
+  private[figaro] val problemToExpansion: Map[NestedProblem[?], (Expansion, Int)] = Map()
 
   /**
    * Maps a nested problem to the set of problems that use it through an expandable component.
    */
-  private[figaro] val expandsFrom: Map[NestedProblem[_], Set[Problem]] = Map()
+  private[figaro] val expandsFrom: Map[NestedProblem[?], Set[Problem]] = Map()
 
   /**
    * Get the nested subproblem associated with a particular function and parent value. The recursion depth of the
@@ -127,7 +126,7 @@ class ComponentCollection {
    *  Returns the problem component associated with a particular variable.
    *  Not valid for intermediate variables.
    */
-  val variableToComponent: Map[Variable[_], ProblemComponent[_]] = Map()
+  val variableToComponent: Map[Variable[?], ProblemComponent[?]] = Map()
 
   /** Does the element have a component in this collection? */
   def contains[T](element: Element[T]): Boolean =
@@ -200,7 +199,7 @@ class IncrementingCollection extends ComponentCollection {
   /**
    * Get the recursion depth for expansion by incrementing the depth associated with the component's problem.
    */
-  override private[figaro] def getRecursionDepth(component: ExpandableComponent[_, _], newExpansion: Expansion): Int = {
+  override private[figaro] def getRecursionDepth(component: ExpandableComponent[?, ?], newExpansion: Expansion): Int = {
     component.problem match {
       case np: NestedProblem[_] =>
         // Get the expansion that produced this nested problem and increment it
@@ -255,7 +254,7 @@ class SelectiveIncrementingCollection extends ComponentCollection {
    * Because this search can be expensive (in general, it may take linear time in the number of expansions), it is
    * memoized.
    */
-  override private[figaro] def getRecursionDepth(component: ExpandableComponent[_, _], newExpansion: Expansion): Int = {
+  override private[figaro] def getRecursionDepth(component: ExpandableComponent[?, ?], newExpansion: Expansion): Int = {
     component.problem match {
       case np: NestedProblem[_] =>
         // Get the expansion that produced this nested problem
@@ -294,7 +293,7 @@ class MinimalIncrementingCollection extends ComponentCollection {
   /**
    * Tests if the adding the subproblem to the given component would create a cycle in the subproblem graph.
    */
-  private[figaro] def createsCycle(nestedProblem: NestedProblem[_], component: ExpandableComponent[_, _]): Boolean = {
+  private[figaro] def createsCycle(nestedProblem: NestedProblem[?], component: ExpandableComponent[?, ?]): Boolean = {
     // TODO consider using a dedicated incremental cycle detection data structure and algorithm for improved efficiency
     // For now, the current implementation just does a breadth first search from the component problem to see if there
     // exists a path from nestedProblem to component via the problem graph
@@ -302,7 +301,7 @@ class MinimalIncrementingCollection extends ComponentCollection {
       case componentProblem: NestedProblem[_] =>
         // Does nestedProblem ever use component.problem?
         // Test by searching backwards from component.problem through the expandable components that use it
-        @tailrec def bfs(problems: Set[NestedProblem[_]]): Boolean = {
+        @tailrec def bfs(problems: Set[NestedProblem[?]]): Boolean = {
           if(problems.contains(nestedProblem)) true
           else if(problems.isEmpty) false
           else {
@@ -321,7 +320,7 @@ class MinimalIncrementingCollection extends ComponentCollection {
    * Get the recursion depth for an expansion by looking for the least recursion depth that does not create a cycle in
    * the subproblem graph.
    */
-  override private[figaro] def getRecursionDepth(component: ExpandableComponent[_, _], newExpansion: Expansion): Int = {
+  override private[figaro] def getRecursionDepth(component: ExpandableComponent[?, ?], newExpansion: Expansion): Int = {
     // Tests if expanding into the copy of this new expansion at this particular depth would create a cycle
     def depthCreatesCycle(depth: Int): Boolean = {
       expansionToProblem.get((newExpansion, depth)).exists(createsCycle(_, component))

@@ -156,7 +156,7 @@ class AlgorithmTest extends AnyWordSpec with Matchers {
     "block on stop, kill or queries" in {
       Universe.createNew()
       val num = 400
-      def makeModel(depth: Int, elems: List[Element[_]]): List[Element[_]] = {
+      def makeModel(depth: Int, elems: List[Element[?]]): List[Element[?]] = {
         if (depth > 0) {
           val e = Chain(FromRange(2, 10), (i: Int) => Binomial(i, 0.2))
           makeModel(depth - 1, elems :+ e)
@@ -165,7 +165,7 @@ class AlgorithmTest extends AnyWordSpec with Matchers {
       val l = makeModel(num, List())
 
       for { _ <- 0 until 20 } {
-        val alg = Importance(l: _*)
+        val alg = Importance(l*)
         alg.start()
         Thread.sleep(1000)
         alg.stop()
@@ -261,13 +261,13 @@ class AlgorithmTest extends AnyWordSpec with Matchers {
 
     def doKill() = ()
 
-    def computeDistribution[T](target: Element[T]): Stream[(Double, T)] = Stream()
+    def computeDistribution[T](target: Element[T]): LazyList[(Double, T)] = LazyList()
 
     // Assumes a uniform distribution over the values
     def computeExpectation[T](target: Element[T], function: T => Double): Double =
       p * function(true.asInstanceOf[T]) + (1 - p) * function(false.asInstanceOf[T])
 
-    def doDistribution[T](target: Element[T]): Stream[(Double, T)] = computeDistribution(target)
+    def doDistribution[T](target: Element[T]): LazyList[(Double, T)] = computeDistribution(target)
 
     def doExpectation[T](target: Element[T], function: T => Double) = computeExpectation(target, function)
 
@@ -275,7 +275,7 @@ class AlgorithmTest extends AnyWordSpec with Matchers {
       doExpectation(target, (t: T) => if (predicate(t)) 1.0; else 0.0)
   }
 
-  class SimpleAnytime(targets: Element[_]*) extends AnytimeProbQuery {
+  class SimpleAnytime(targets: Element[?]*) extends AnytimeProbQuery {
     lazy val universe = Universe.universe
     lazy val queryTargets = targets.toList
 
@@ -285,8 +285,8 @@ class AlgorithmTest extends AnyWordSpec with Matchers {
 
     def runStep() = count += 1
 
-    def computeDistribution[T](target: Element[T]): Stream[(Double, T)] =
-      Stream(Values(Universe.universe)(target).toList: _*) map ((1.0, _))
+    def computeDistribution[T](target: Element[T]): LazyList[(Double, T)] =
+      LazyList(Values(Universe.universe)(target).toList*) map ((1.0, _))
 
     def computeExpectation[T](target: Element[T], function: T => Double): Double = count.toDouble
   }

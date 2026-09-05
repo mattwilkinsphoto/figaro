@@ -35,7 +35,7 @@ object dGraphGen {
 
   def addGraph(G: dGraph, NewEdges: List[Node], ID: Int): dGraph = {
     val N = new Node(ID)
-    N.Edges = Set(NewEdges.distinct.map(s => new Edge(N.ID, s.ID)).toSeq: _*)
+    N.Edges = Set(NewEdges.distinct.map(s => new Edge(N.ID, s.ID)).toSeq*)
     val newG = G.copy()
     newG.insertNode(N)
     newG

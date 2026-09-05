@@ -30,13 +30,13 @@ import scala.language.existentials
  *
  * Note: Only OneTime algorithms are supported in multi-decision algorithms.
  */
-abstract class MultiDecisionAlgorithm(universe: Universe, utilityNodes: List[Element[_]], targets: List[Element[_]])
+abstract class MultiDecisionAlgorithm(universe: Universe, utilityNodes: List[Element[?]], targets: List[Element[?]])
   extends OneTime {
 
   /**
    * List of the single decision algorithms implemented in the multi-decision algorithm.
    */
-  var algList: Map[Decision[_, _], OneTimeProbQueryDecision[_, _]] = Map()
+  var algList: Map[Decision[?, ?], OneTimeProbQueryDecision[?, ?]] = Map()
 
   /*
    * Get the utility map for a specific decision in the multi-decision algorithm
@@ -68,13 +68,13 @@ abstract class MultiDecisionAlgorithm(universe: Universe, utilityNodes: List[Ele
    * multi-decision. Overridden by each multi-decision algorithm class.
    */
   protected def createAlg[T, U](decisionTarget: Decision[T, U],
-    utilities: List[Element[_]], mv: Universe): OneTimeProbQueryDecision[T, U]
+    utilities: List[Element[?]], mv: Universe): OneTimeProbQueryDecision[T, U]
 
   /*
    * Runs a decision algorithm for a set of INDEPENDENT decisions. Returns a mapping of each decision
    * element to the new element that represents the expected utility of each decision 
    */
-  protected def makeAlg(decisions: List[Decision[_, _]], succExpUtil: Map[Element[_], Element[_]]): Map[Element[_], Element[_]] = {
+  protected def makeAlg(decisions: List[Decision[?, ?]], succExpUtil: Map[Element[?], Element[?]]): Map[Element[?], Element[?]] = {
     // Loop through all the independent decisions
     decisions.map { d_old =>
       val d: Decision[d_old.PValue, d_old.DValue] = d_old.asInstanceOf[Decision[d_old.PValue, d_old.DValue]]
@@ -100,14 +100,14 @@ abstract class MultiDecisionAlgorithm(universe: Universe, utilityNodes: List[Ele
 
   /* Recursively run each decision algorithm in independent order. Setting oneStep to true will only run
    * the last decision */
-  private def runMulti(decisions: List[List[Element[_]]], oneStep: Boolean): Map[Element[_], Element[_]] = {
+  private def runMulti(decisions: List[List[Element[?]]], oneStep: Boolean): Map[Element[?], Element[?]] = {
     if (decisions.size == 1) {
-      makeAlg(decisions(0).asInstanceOf[List[Decision[_, _]]], Map[Element[_], Element[_]]())
+      makeAlg(decisions(0).asInstanceOf[List[Decision[?, ?]]], Map[Element[?], Element[?]]())
     } else {
-      val curr = decisions.head.asInstanceOf[List[Decision[_, _]]]
+      val curr = decisions.head.asInstanceOf[List[Decision[?, ?]]]
       val rest = decisions.tail
       val newElems = runMulti(rest, oneStep)
-      if (!oneStep) makeAlg(curr, newElems) else Map[Element[_], Element[_]]()
+      if (!oneStep) makeAlg(curr, newElems) else Map[Element[?], Element[?]]()
     }
   }
 

@@ -21,7 +21,7 @@ import com.cra.figaro.language._
  * and computeExpectation methods.
  */
 trait OneTimeProbQuery extends ProbQueryAlgorithm with OneTime {
-  protected def doDistribution[T](target: Element[T]): Stream[(Double, T)] = computeDistribution(target)
+  protected def doDistribution[T](target: Element[T]): LazyList[(Double, T)] = computeDistribution(target)
 
   protected def doExpectation[T](target: Element[T], function: T => Double): Double =
     computeExpectation(target, function)

@@ -31,7 +31,7 @@ class Node(val ID: Int) {
   }
 
   override def toString() = {
-    ID + ": " + ("" /: Edges.map(_.toString()))((c: String, n: String) => c + n + ",")
+    ID.toString + ": " + (Edges.map(_.toString())).foldLeft("")((c: String, n: String) => c + n + ",")
   }
 }
 object Node {}
@@ -82,7 +82,7 @@ class dGraph() extends Distance[dGraph] {
       0.0
     } else {
       val K = L.map(s => Nodes(s).Edges).flatten
-      val T = (0 /: K)((c: Int, n: Edge) => {
+      val T = (K).foldLeft(0)((c: Int, n: Edge) => {
         if (L.contains(n.to) && L.contains(n.from)) c + 1 else c
       })
       val c = T.toDouble / (L.size * (L.size - 1)).toDouble
@@ -100,7 +100,7 @@ class dGraph() extends Distance[dGraph] {
   }
 
   override def toString(): String = {
-    ("" /: Nodes.map(_._2.toString()))((c, n) => c + n + "\r\n")
+    (Nodes.map(_._2.toString())).foldLeft("")((c, n) => c + n + "\r\n")
   }
 
 }

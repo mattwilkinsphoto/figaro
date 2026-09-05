@@ -52,10 +52,10 @@ object OpenUniverseLearning {
   val probIncorrectObservation1 = 0.4
   val probIncorrectObservation2 = 0.2
   
-  val betaContinue1 = BetaParameter(1,1)
-  val betaContinue2 = BetaParameter(1,1)
-  val betaObserve1 = BetaParameter(1,1)
-  val betaObserve2 = BetaParameter(1,1)
+  val betaContinue1 = Beta(1,1)
+  val betaContinue2 = Beta(1,1)
+  val betaObserve1 = Beta(1,1)
+  val betaObserve2 = Beta(1,1)
   
   sealed abstract class Observation
   case object Aircraft1 extends Observation

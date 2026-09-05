@@ -17,8 +17,8 @@ import com.cra.figaro.language._
 import com.cra.figaro.algorithm.structured.strategy.solve._
 import com.cra.figaro.algorithm.structured.algorithm._
 
-class StructuredVEBPChooser(universe: Universe, scoreThreshold: Double, BPIterations: Int, targets: Element[_]*)
-  extends StructuredProbQueryAlgorithm(universe, targets: _*) with DecompositionProbQuery {
+class StructuredVEBPChooser(universe: Universe, scoreThreshold: Double, BPIterations: Int, targets: Element[?]*)
+  extends StructuredProbQueryAlgorithm(universe, targets*) with DecompositionProbQuery {
 
   def solvingStrategy() = new VEBPStrategy(problem, structuredRaising, scoreThreshold, BPIterations)
 }
@@ -31,11 +31,11 @@ object StructuredVEBPChooser {
    * @param bpIterations The number of iterations to use when BP is chosen for a subproblem.
    * @param targets The query targets
    */
-  def apply(scoreThreshold: Double, BPIterations: Int, targets: Element[_]*) = {
+  def apply(scoreThreshold: Double, BPIterations: Int, targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run VE with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new StructuredVEBPChooser(targets(0).universe, scoreThreshold, BPIterations, targets: _*)
+    new StructuredVEBPChooser(targets(0).universe, scoreThreshold, BPIterations, targets*)
   }
 
   /**

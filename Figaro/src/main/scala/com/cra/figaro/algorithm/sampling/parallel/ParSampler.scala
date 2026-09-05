@@ -42,11 +42,11 @@ import scala.collection.parallel.CollectionConverters._
  * is returned. This last step adds some overhead, which should be negligible as long as you are 
  * taking a large number of samples.
  */
-abstract class ParSampler(algs: Seq[ProbQuerySampler], targets: Reference[_]*) 
+abstract class ParSampler(algs: Seq[ProbQuerySampler], targets: Reference[?]*)
  extends BaseProbQuerySampler[Reference[?], Reference] with ParSamplingAlgorithm {
   
   /** The query targets are references in this case **/
-  override val queryTargets: Seq[Reference[_]] = targets.toSeq
+  override val queryTargets: Seq[Reference[?]] = targets.toSeq
   
   /** A parallel collection of algorithms **/
   protected val parAlgs: ParSeq[ProbQuerySampler] = algs.par
@@ -73,7 +73,7 @@ abstract class ParSampler(algs: Seq[ProbQuerySampler], targets: Reference[_]*)
       projection map { case (v, w) => (v, w * algWeight) }
     }
     val groupedByValue = flatWeightedProjections groupBy (_._1)
-    val combinedWeights = groupedByValue mapValues { (group: List[(T, Double)]) => 
+    val combinedWeights = groupedByValue.view.mapValues { (group: List[(T, Double)]) =>
       group.map(_._2).sum
     }
     combinedWeights.toList

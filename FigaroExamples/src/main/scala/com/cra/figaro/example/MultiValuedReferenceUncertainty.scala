@@ -24,7 +24,7 @@ import com.cra.figaro.util.MultiSet
  */
 object MultiValuedReferenceUncertainty {
   class Component extends ElementCollection {
-    val f = Select(0.2 -> 2, 0.3 -> 3, 0.5 -> 5)("f", this)
+    val f = Select(0.2 -> 2, 0.3 -> 3, 0.5 -> 5)(using "f", this)
   }
 
   val specialComponent1 = new Component
@@ -33,9 +33,11 @@ object MultiValuedReferenceUncertainty {
   val makeComponent = () => Select(0.1 -> specialComponent1, 0.2 -> specialComponent2, 0.7 -> new Component)
 
   class Container extends ElementCollection {
-    val components = MakeList(Select(0.5 -> 1, 0.5 -> 2), makeComponent)("components", this)
+    val components = Apply(com.cra.figaro.library.collection.VariableSizeArray(Select(0.5 -> 1, 0.5 -> 2), (_: Int) => makeComponent())(using "", this)
+          .foldLeft(List.empty[Component])((xs, value) => xs :+ value),
+          (values: List[Component]) => values)(using "components", this)
 
-    val sum = getAggregate((xs: MultiSet[Int]) => (0 /: xs)(_ + _))("components.f")
+    val sum = getAggregate((xs: MultiSet[Int]) => (xs).foldLeft(0)(_ + _))("components.f")
   }
 
   def main(args: Array[String]): Unit = {

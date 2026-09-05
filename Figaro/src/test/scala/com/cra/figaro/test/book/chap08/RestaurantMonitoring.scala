@@ -27,15 +27,15 @@ object RestaurantMonitoring {
   val capacity = 10
 
   val initial = Universe.createNew()
-  Constant(List(0, 5, 15, 15, 25, 30, 40, 60, 65, 75))("seated", initial)
-  Constant(3)("waiting", initial)
-  Constant(0)("arriving", initial)
+  Constant(List(0, 5, 15, 15, 25, 30, 40, 60, 65, 75))(using "seated", initial)
+  Constant(3)(using "waiting", initial)
+  Constant(0)(using "arriving", initial)
 
   def transition(seated: List[Int], waiting: Int): (Element[(List[Int], Int, Int)]) = {
     val newTimes: List[Element[Int]] =
       for { time <- seated }
       yield Apply(Flip(time / 80.0), (b: Boolean) => if (b) -1 else time + 5)
-    val newTimesListElem: Element[List[Int]] = Inject(newTimes:_*)
+    val newTimesListElem: Element[List[Int]] = Inject(newTimes*)
     val staying = Apply(newTimesListElem, (l: List[Int]) => l.filter(_ >= 0))
 
     val arriving = Poisson(2)
@@ -54,10 +54,10 @@ object RestaurantMonitoring {
     val next = Universe.createNew()
     val previousSeated = previous.get[List[Int]]("seated")
     val previousWaiting = previous.get[Int]("waiting")
-    val newState = Chain(previousSeated, previousWaiting, transition _)
-    Apply(newState, (s: (List[Int], Int, Int)) => s._1)("seated", next)
-    Apply(newState, (s: (List[Int], Int, Int)) => s._2)("waiting", next)
-    Apply(newState, (s: (List[Int], Int, Int)) => s._3)("arriving", next)
+    val newState = Chain(previousSeated, previousWaiting, transition)
+    Apply(newState, (s: (List[Int], Int, Int)) => s._1)(using "seated", next)
+    Apply(newState, (s: (List[Int], Int, Int)) => s._2)(using "waiting", next)
+    Apply(newState, (s: (List[Int], Int, Int)) => s._3)(using "arriving", next)
     next
   }
 

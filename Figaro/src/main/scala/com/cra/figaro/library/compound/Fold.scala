@@ -74,7 +74,7 @@ object FoldLeft  {
  */
 object FoldRight  {
   def apply[T,U](start: U, function: (T, U) => U)(elements: Element[T]*)(implicit name: Name[U], collection: ElementCollection): Element[U] = {
-    FoldLeft(start, (u: U, t: T) => function(t, u))(elements.reverse:_*)(name, collection)
+    FoldLeft(start, (u: U, t: T) => function(t, u))(elements.reverse*)(using name, collection)
   }
 }
 
@@ -86,6 +86,6 @@ object Reduce {
   def apply[T](function: (T, T) => T)(elements: Element[T]*)(implicit name: Name[T], collection: ElementCollection): Element[T] = {
     val elem = elements.head
     if (!elem.active) elem.activate()
-    Chain(elem, (t: T) => FoldLeft(t, function)(elements.tail:_*))(name, collection)
+    Chain(elem, (t: T) => FoldLeft(t, function)(elements.tail*))(using name, collection)
   }
 }

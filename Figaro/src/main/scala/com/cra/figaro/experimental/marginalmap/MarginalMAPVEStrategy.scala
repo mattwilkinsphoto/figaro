@@ -23,8 +23,8 @@ import com.cra.figaro.algorithm.structured.{NestedProblem, Problem, solver}
 class MarginalMAPVEStrategy(problem: Problem, raisingCriteria: RaisingCriteria)
   extends RaisingStrategy(problem, raisingCriteria) {
 
-  def eliminate(toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], factors: List[Factor[Double]]):
-    (List[Factor[Double]], Map[Variable[_], Factor[_]]) = {
+  def eliminate(toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], factors: List[Factor[Double]]):
+    (List[Factor[Double]], Map[Variable[?], Factor[?]]) = {
     // Sum over the remaining non-MAP variables (i.e. toEliminate), and MAP the rest (i.e. toPreserve)
     // marginalizedFactors is a set of factors over just the MAP variables
     val (marginalizedFactors, _) = solver.marginalVariableElimination(problem, toEliminate, toPreserve, factors)
@@ -33,7 +33,7 @@ class MarginalMAPVEStrategy(problem: Problem, raisingCriteria: RaisingCriteria)
     solver.mpeVariableElimination(problem, toPreserve, Set(), marginalizedFactors)
   }
 
-  override def recurse(subproblem: NestedProblem[_]) = {
+  override def recurse(subproblem: NestedProblem[?]) = {
     // A problem needed for the initial step of summing out the non-MAP variables; use marginal VE for this
     new ConstantStrategy(subproblem, raisingCriteria, solver.marginalVariableElimination)
   }

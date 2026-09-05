@@ -35,19 +35,19 @@ object CarAndEngine {
   }
 
   private class V8 extends Engine {
-    val power: Element[Symbol] = Select(0.8 -> Symbol("high"), 0.2 -> Symbol("medium"))("power", this)
+    val power: Element[Symbol] = Select(0.8 -> Symbol("high"), 0.2 -> Symbol("medium"))(using "power", this)
   }
 
   private class V6 extends Engine {
-    val power: Element[Symbol] = Select(0.2 -> Symbol("high"), 0.5 -> Symbol("medium"), 0.3 -> Symbol("low"))("power", this)
+    val power: Element[Symbol] = Select(0.2 -> Symbol("high"), 0.5 -> Symbol("medium"), 0.3 -> Symbol("low"))(using "power", this)
   }
 
   private object MySuperEngine extends V8 {
-    override val power: Element[Symbol] = Constant(Symbol("high"))("power", this)
+    override val power: Element[Symbol] = Constant(Symbol("high"))(using "power", this)
   }
 
   class Car extends ElementCollection {
-    val engine = Uniform[Engine](new V8, new V6, MySuperEngine)("engine", this)
+    val engine = Uniform[Engine](new V8, new V6, MySuperEngine)(using "engine", this)
 
     val speed = CPD(
       get[Symbol]("engine.power"),

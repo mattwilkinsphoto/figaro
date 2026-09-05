@@ -559,16 +559,16 @@ class MHTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   }
 
-  def getDissatisfied(mh: MetropolisHastings): Set[Element[_]] = {
+  def getDissatisfied(mh: MetropolisHastings): Set[Element[?]] = {
     val cls = mh.getClass().getSuperclass()
     val method = cls.getDeclaredMethod("getDissatisfied")
     method.setAccessible(true)
-    method.invoke(mh).asInstanceOf[Set[Element[_]]]
+    method.invoke(mh).asInstanceOf[Set[Element[?]]]
   }
 
-  def propose(mh: MetropolisHastings, state: State, elem: Element[_]): State = {
+  def propose(mh: MetropolisHastings, state: State, elem: Element[?]): State = {
     val cls = mh.getClass().getSuperclass()
-    val method = cls.getDeclaredMethod("propose", classOf[State], classOf[Element[_]])
+    val method = cls.getDeclaredMethod("propose", classOf[State], classOf[Element[?]])
     method.setAccessible(true)
     method.invoke(mh, state, elem).asInstanceOf[State]
   }
@@ -580,16 +580,16 @@ class MHTest extends AnyWordSpec with Matchers with PrivateMethodTester {
     method.invoke(mh).asInstanceOf[State]
   }
 
-  def updateOne(mh: MetropolisHastings, state: State, elem: Element[_]): State = {
+  def updateOne(mh: MetropolisHastings, state: State, elem: Element[?]): State = {
     val cls = mh.getClass().getSuperclass()
-    val method = cls.getDeclaredMethod("updateOne", classOf[State], classOf[Element[_]])
+    val method = cls.getDeclaredMethod("updateOne", classOf[State], classOf[Element[?]])
     method.setAccessible(true)
     method.invoke(mh, state, elem).asInstanceOf[State]
   }
 
-  def update(mh: MetropolisHastings, state: State, elem: Element[_]): State = {
+  def update(mh: MetropolisHastings, state: State, elem: Element[?]): State = {
     val cls = mh.getClass().getSuperclass()
-    val method = cls.getDeclaredMethod("update", classOf[State], classOf[Element[_]])
+    val method = cls.getDeclaredMethod("update", classOf[State], classOf[Element[?]])
     method.setAccessible(true)
     method.invoke(mh, state, elem).asInstanceOf[State]
   }

@@ -49,7 +49,7 @@ class AtomicFlip(name: Name[Boolean], val prob: Double, collection: ElementColle
  */
 class CompoundFlip(name: Name[Boolean], val prob: Element[Double], collection: ElementCollection)
   extends Element[Boolean](name, collection) with Flip {
-  def args: List[Element[_]] = List(prob)
+  def args: List[Element[?]] = List(prob)
 
   protected def probValue = prob.value
 
@@ -61,13 +61,13 @@ class CompoundFlip(name: Name[Boolean], val prob: Element[Double], collection: E
  */
 class ParameterizedFlip(name: Name[Boolean], override val parameter: AtomicBeta, collection: ElementCollection)
   extends Element[Boolean](name, collection) with Flip with SingleParameterized[Boolean] {
-  def args: List[Element[_]] = List(parameter)
+  def args: List[Element[?]] = List(parameter)
 
   protected def probValue = parameter.value
 /**
    * Convert a distribution from this Flip into sufficient statistics
    */
-  def distributionToStatistics(distribution: Stream[(Double, Boolean)]): Seq[Double] = {
+  def distributionToStatistics(distribution: LazyList[(Double, Boolean)]): Seq[Double] = {
     val distList = distribution.toList
     val trueProb = 
       distList.find(_._2) match {
@@ -99,10 +99,10 @@ object Flip extends Creatable {
 
   def apply(prob: ParameterType)(implicit name: Name[Boolean], collection: ElementCollection): Flip = {
     val result = prob match {
-      case a: PrimitiveDouble => { this.apply(a.d)(name,collection) }
+      case a: PrimitiveDouble => { this.apply(a.d)(using name,collection) }
       case b: ParameterDouble => { 
           b.p match {
-            case p: Parameter[Double] => this.apply(b.p)(name,collection) 
+            case p: Parameter[Double] => this.apply(b.p)(using name,collection)
           }
         }
     }
@@ -124,5 +124,5 @@ object Flip extends Creatable {
   type ResultType = Boolean
 
   /** Used for reflection. */
-  def create(args: List[Element[_]]) = apply(args(0).asInstanceOf[Element[Double]])
+  def create(args: List[Element[?]]) = apply(args(0).asInstanceOf[Element[Double]])
 }

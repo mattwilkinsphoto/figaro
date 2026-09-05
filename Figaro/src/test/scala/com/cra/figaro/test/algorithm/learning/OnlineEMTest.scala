@@ -44,10 +44,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val b = Beta(2, 2)
               def transition = () => {
                 val next = Universe.createNew()
-                val f = Flip(b)("f",next)
+                val f = Flip(b)(using "f",next)
                 next
               }
-              val algorithm = EMWithBP.online(transition, b)(initial)
+              val algorithm = EMWithBP.online(transition, b)(using initial)
               algorithm.start()
               for (i <- 1 to 7) {
                 algorithm.update(List(NamedEvidence("f", Observation(true))))
@@ -70,10 +70,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val b = Beta(3.0, 7.0)
               def transition = () => {
                 val next = Universe.createNew()
-                val f = Flip(b)("f",next)
+                val f = Flip(b)(using "f",next)
                 next
               }
-              val algorithm = EMWithBP.online(transition, b)(initial)
+              val algorithm = EMWithBP.online(transition, b)(using initial)
               algorithm.start()
               for (i <- 1 to 7) {
                 algorithm.update(List(NamedEvidence("f", Observation(true))))
@@ -91,10 +91,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val b = Beta(2, 2)
               def transition = () => {
                 val next = Universe.createNew()
-                val f = Binomial(5,b)("binomial",next)
+                val f = Binomial(5,b)(using "binomial",next)
                 next
               }
-              val algorithm = EMWithBP.online(transition, b)(initial)
+              val algorithm = EMWithBP.online(transition, b)(using initial)
               algorithm.start()
               algorithm.update(List(NamedEvidence("binomial", Observation(4))))
               algorithm.update(List(NamedEvidence("binomial", Observation(3))))
@@ -108,10 +108,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val b = Beta(1, 1)
               def transition = () => {
                 val next = Universe.createNew()
-                val f = Binomial(5,b)("binomial",next)
+                val f = Binomial(5,b)(using "binomial",next)
                 next
               }
-              val algorithm = EMWithBP.online(transition, b)(initial)
+              val algorithm = EMWithBP.online(transition, b)(using initial)
               algorithm.start()
               algorithm.update(List(NamedEvidence("binomial", Observation(4))))
               algorithm.update(List(NamedEvidence("binomial", Observation(3))))
@@ -131,10 +131,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val d = Dirichlet(2, 2)
               def transition = () => {
                 val next = Universe.createNew()
-                val s = Select(d, true, false)("s",next)
+                val s = Select(d, true, false)(using "s",next)
                 next
               }
-              val algorithm = EMWithBP.online(transition, d)(initial)
+              val algorithm = EMWithBP.online(transition, d)(using initial)
               algorithm.start()
               for (i <- 1 to 7) {
                 algorithm.update(List(NamedEvidence("s", Observation(true))))
@@ -154,10 +154,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val d = Dirichlet(3, 7)
               def transition = () => {
                 val next = Universe.createNew()
-                val s = Select(d, true, false)("s",next)
+                val s = Select(d, true, false)(using "s",next)
                 next
               }
-              val algorithm = EMWithBP.online(transition, d)(initial)
+              val algorithm = EMWithBP.online(transition, d)(using initial)
                          algorithm.start()
               for (i <- 1 to 7) {
                 algorithm.update(List(NamedEvidence("s", Observation(true))))
@@ -185,10 +185,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
                   def transition = () => {
                     val next = Universe.createNew()
-                    val s = Select(d, outcomes:_*)("s",next)
+                    val s = Select(d, outcomes*)(using "s",next)
                     next
                   }
-                  val algorithm = EMWithBP.online(transition,d,b)(initial)
+                  val algorithm = EMWithBP.online(transition,d,b)(using initial)
                              algorithm.start()
                   for (i <- 1 to 4) {
                     algorithm.update(List(NamedEvidence("s", Observation(1))))
@@ -224,11 +224,11 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
                   
                   def transition = () => {
                     val next = Universe.createNew()
-                    val s = Select(d, outcomes:_*)("s",next)
-                    val f = Flip(b)("f",next)
+                    val s = Select(d, outcomes*)(using "s",next)
+                    val f = Flip(b)(using "f",next)
                     next
                   }
-                  val algorithm = EMWithBP.online(transition,d,b)(initial)
+                  val algorithm = EMWithBP.online(transition,d,b)(using initial)
                              algorithm.start()
                   for (i <- 1 to 4) {
                     algorithm.update(List(NamedEvidence("s", Observation(1))))
@@ -275,10 +275,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val b = Beta(2, 2)
               def transition = () => {
                 val next = Universe.createNew()
-                val f = Flip(b)("f",next)
+                val f = Flip(b)(using "f",next)
                 next
               }
-              val algorithm = EMWithVE.online(transition, b)(initial)
+              val algorithm = EMWithVE.online(transition, b)(using initial)
               algorithm.start()
               for (i <- 1 to 7) {
                 algorithm.update(List(NamedEvidence("f", Observation(true))))
@@ -301,10 +301,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val b = Beta(3.0, 7.0)
               def transition = () => {
                 val next = Universe.createNew()
-                val f = Flip(b)("f",next)
+                val f = Flip(b)(using "f",next)
                 next
               }
-              val algorithm = EMWithVE.online(transition, b)(initial)
+              val algorithm = EMWithVE.online(transition, b)(using initial)
               algorithm.start()
               for (i <- 1 to 7) {
                 algorithm.update(List(NamedEvidence("f", Observation(true))))
@@ -322,10 +322,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val b = Beta(2, 2)
               def transition = () => {
                 val next = Universe.createNew()
-                val f = Binomial(5,b)("binomial",next)
+                val f = Binomial(5,b)(using "binomial",next)
                 next
               }
-              val algorithm = EMWithVE.online(transition, b)(initial)
+              val algorithm = EMWithVE.online(transition, b)(using initial)
               algorithm.start()
               algorithm.update(List(NamedEvidence("binomial", Observation(4))))
               algorithm.update(List(NamedEvidence("binomial", Observation(3))))
@@ -339,10 +339,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val b = Beta(1, 1)
               def transition = () => {
                 val next = Universe.createNew()
-                val f = Binomial(5,b)("binomial",next)
+                val f = Binomial(5,b)(using "binomial",next)
                 next
               }
-              val algorithm = EMWithVE.online(transition, b)(initial)
+              val algorithm = EMWithVE.online(transition, b)(using initial)
               algorithm.start()
               algorithm.update(List(NamedEvidence("binomial", Observation(4))))
               algorithm.update(List(NamedEvidence("binomial", Observation(3))))
@@ -362,10 +362,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val d = Dirichlet(2, 2)
               def transition = () => {
                 val next = Universe.createNew()
-                val s = Select(d, true, false)("s",next)
+                val s = Select(d, true, false)(using "s",next)
                 next
               }
-              val algorithm = EMWithVE.online(transition, d)(initial)
+              val algorithm = EMWithVE.online(transition, d)(using initial)
               algorithm.start()
               for (i <- 1 to 7) {
                 algorithm.update(List(NamedEvidence("s", Observation(true))))
@@ -385,10 +385,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
               val d = Dirichlet(3, 7)
               def transition = () => {
                 val next = Universe.createNew()
-                val s = Select(d, true, false)("s",next)
+                val s = Select(d, true, false)(using "s",next)
                 next
               }
-              val algorithm = EMWithVE.online(transition, d)(initial)
+              val algorithm = EMWithVE.online(transition, d)(using initial)
                          algorithm.start()
               for (i <- 1 to 7) {
                 algorithm.update(List(NamedEvidence("s", Observation(true))))
@@ -416,10 +416,10 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
                   def transition = () => {
                     val next = Universe.createNew()
-                    val s = Select(d, outcomes:_*)("s",next)
+                    val s = Select(d, outcomes*)(using "s",next)
                     next
                   }
-                  val algorithm = EMWithVE.online(transition,d,b)(initial)
+                  val algorithm = EMWithVE.online(transition,d,b)(using initial)
                              algorithm.start()
                   for (i <- 1 to 4) {
                     algorithm.update(List(NamedEvidence("s", Observation(1))))
@@ -455,11 +455,11 @@ class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
                   
                   def transition = () => {
                     val next = Universe.createNew()
-                    val s = Select(d, outcomes:_*)("s",next)
-                    val f = Flip(b)("f",next)
+                    val s = Select(d, outcomes*)(using "s",next)
+                    val f = Flip(b)(using "f",next)
                     next
                   }
-                  val algorithm = EMWithVE.online(transition,d,b)(initial)
+                  val algorithm = EMWithVE.online(transition,d,b)(using initial)
                              algorithm.start()
                   for (i <- 1 to 4) {
                     algorithm.update(List(NamedEvidence("s", Observation(1))))

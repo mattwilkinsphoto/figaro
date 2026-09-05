@@ -33,7 +33,7 @@ import com.cra.figaro.language._
  * @param maxDepth Nonnegative maximum recursion depth for recursive subproblems. Defaults to `Int.MaxValue` for
  * expansion of the entire model (does not terminate on infinite models).
  */
-class RecursionDepthStrategy(problem: Problem, override val initialComponents: Traversable[ProblemComponent[_]],
+class RecursionDepthStrategy(problem: Problem, override val initialComponents: Iterable[ProblemComponent[?]],
                              maxDepth: Int = Int.MaxValue) extends DepthFirstStrategy(problem.collection) {
 
   /**
@@ -51,7 +51,7 @@ class RecursionDepthStrategy(problem: Problem, override val initialComponents: T
   }
 
   // Refine any component not fully-refined that is associated with a problem below the given depth
-  override def shouldRefine(comp: ProblemComponent[_]): Boolean = {
+  override def shouldRefine(comp: ProblemComponent[?]): Boolean = {
     !comp.fullyRefined && recursionDepth(comp.problem) <= maxDepth
   }
 

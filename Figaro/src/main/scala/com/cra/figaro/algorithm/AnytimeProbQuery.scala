@@ -28,7 +28,7 @@ trait AnytimeProbQuery extends ProbQueryAlgorithm with Anytime {
  /**
    * A message from the handler containing the distribution of the previously requested element.
    */
-  case class Distribution[T](distribution: Stream[(Double, T)]) extends Response
+  case class Distribution[T](distribution: LazyList[(Double, T)]) extends Response
    /**
    * A message instructing the handler to compute the expectation of the target element under the given function.
    */
@@ -66,10 +66,10 @@ trait AnytimeProbQuery extends ProbQueryAlgorithm with Anytime {
         Projection(computeProjection(target))
     }
   
-  protected def doDistribution[T](target: Element[T]): Stream[(Double, T)] = {
+  protected def doDistribution[T](target: Element[T]): LazyList[(Double, T)] = {
     request(ComputeDistribution(target)) match {
-      case Distribution(result) => result.asInstanceOf[Stream[(Double, T)]]
-      case _ => Stream()
+      case Distribution(result) => result.asInstanceOf[LazyList[(Double, T)]]
+      case _ => LazyList()
     } 
   }
 

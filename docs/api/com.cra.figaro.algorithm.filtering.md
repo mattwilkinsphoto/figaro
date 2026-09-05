@@ -151,10 +151,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.filtering.FactoredFrontier.computeCurrentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FactoredFrontier.html#computeCurrentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FactoredFrontier.html#computeCurrentDistribution-5b7)
 
 ```scala
-def computeCurrentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -163,7 +163,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes
 
@@ -247,10 +247,10 @@ receiver.run()
 
 ## `` com.cra.figaro.algorithm.filtering.FactoredFrontier.currentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FactoredFrontier.html#currentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FactoredFrontier.html#currentDistribution-5b7)
 
 ```scala
-def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -259,7 +259,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes Inherited from: OneTimeFiltering
 
@@ -487,10 +487,10 @@ receiver.advanceTime(evidence)
 
 ## `` com.cra.figaro.algorithm.filtering.Filtering.currentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/Filtering.html#currentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/Filtering.html#currentDistribution-5b7)
 
 ```scala
-def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -499,7 +499,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes
 
@@ -751,10 +751,10 @@ receiver.stop()
 
 ## `` com.cra.figaro.algorithm.filtering.OneTimeFiltering.currentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/OneTimeFiltering.html#currentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/OneTimeFiltering.html#currentDistribution-5b7)
 
 ```scala
-def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -763,7 +763,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes
 
@@ -1135,10 +1135,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.filtering.OneTimeParticleFilter.computeCurrentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/OneTimeParticleFilter.html#computeCurrentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/OneTimeParticleFilter.html#computeCurrentDistribution-5b7)
 
 ```scala
-def computeCurrentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -1147,7 +1147,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes Inherited from: ParticleFilter
 
@@ -1183,10 +1183,10 @@ receiver.computeCurrentExpectation[T](reference, function)
 
 ## `` com.cra.figaro.algorithm.filtering.OneTimeParticleFilter.currentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/OneTimeParticleFilter.html#currentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/OneTimeParticleFilter.html#currentDistribution-5b7)
 
 ```scala
-def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -1195,7 +1195,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes Inherited from: OneTimeFiltering
 
@@ -1495,10 +1495,10 @@ receiver.advanceTime(evidence)
 
 ## `` com.cra.figaro.algorithm.filtering.ParFiltering.currentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParFiltering.html#currentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParFiltering.html#currentDistribution-5b7)
 
 ```scala
-def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -1507,7 +1507,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes
 
@@ -1855,10 +1855,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.filtering.ParOneTimeParticleFilter.computeCurrentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParOneTimeParticleFilter.html#computeCurrentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParOneTimeParticleFilter.html#computeCurrentDistribution-5b7)
 
 ```scala
-def computeCurrentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -1867,7 +1867,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes Inherited from: ParticleFilter
 
@@ -1903,10 +1903,10 @@ receiver.computeCurrentExpectation[T](reference, function)
 
 ## `` com.cra.figaro.algorithm.filtering.ParOneTimeParticleFilter.currentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParOneTimeParticleFilter.html#currentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParOneTimeParticleFilter.html#currentDistribution-5b7)
 
 ```scala
-def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -1915,7 +1915,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes Inherited from: ParFiltering
 
@@ -2309,36 +2309,12 @@ Invocation template:
 com.cra.figaro.algorithm.filtering.ParticleFilter.par
 ```
 
-## `` com.cra.figaro.algorithm.filtering.ParticleFilter.apply ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$.html#apply-f59)
-
-```scala
-def apply(static: Universe, initial: Universe, transition: Universe => Universe, numParticles: Int): OneTimeParticleFilter
-```
-
-A one-time particle filter.
-
-Type parameters: none.
-
-Parameters, list 1: `` static: Universe ``; `` initial: Universe ``; `` transition: Universe => Universe ``; `` numParticles: Int ``.
-
-Returns: `` OneTimeParticleFilter ``.
-
-Source contract/attributes: A one-time particle filter. Value parameters initial The universe describing the distribution over the initial state of the system numParticles Number of particles to use at each time step static The universe of elements whose values do not change over time transition The transition model describing how the current state of the system depends on the previous Attributes Deprecated [Since version 2.3.0.0] If the static universe is defined, use the constructor where the transition function takes two universes
-
-Invocation template:
-
-```scala
-com.cra.figaro.algorithm.filtering.ParticleFilter.apply(static, initial, transition, numParticles)
-```
-
 ## `` com.cra.figaro.algorithm.filtering.ParticleFilter.computeCurrentDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter.html#computeCurrentDistribution-fffff445)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter.html#computeCurrentDistribution-5b7)
 
 ```scala
-def computeCurrentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 ```
 
 Returns the distribution over the element referred to by the reference at the current time point.
@@ -2347,7 +2323,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` reference: Reference[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Returns the distribution over the element referred to by the reference at the current time point. Attributes
 

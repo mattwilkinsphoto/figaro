@@ -24,7 +24,7 @@ object dGraphRandWalk {
     def fcn(t: List[Int], i: Int) = {
       val prob = G.Nodes(t.head).Edges.size
       val e = List.tabulate(prob)(j => (1.0 - restart) * (1.0 / prob.toDouble)).zip(G.Nodes(t.head).Edges.map(_.to).toList)
-      Select((e ::: List((restart, i))): _*)
+      Select((e ::: List((restart, i)))*)
     }
     NonCachingChain(curr, (t: List[Int]) => fcn(t, init))
   }

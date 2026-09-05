@@ -24,7 +24,7 @@ trait DecompositionStructuredAlgorithm extends OneTimeStructured {
    * Initial elements to pass to the bottom-up strategy for decomposition. Defaults to a list containing all problem
    * targets and all evidence elements in the universe.
    */
-  def initialElements: List[Element[_]] = {
+  def initialElements: List[Element[?]] = {
     (problemTargets ::: universe.conditionedElements ::: universe.constrainedElements).distinct
   }
 

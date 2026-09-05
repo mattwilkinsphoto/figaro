@@ -25,7 +25,7 @@ class ProblemComponent[Value](val problem: Problem, val element: Element[Value])
   /** The current range of the element. May grow or change over time. */
   var range: ValueSet[Value] = ValueSet.withStar(Set())
 
-  private var _variable: Variable[Value] = _
+  private var _variable: Variable[Value] = scala.compiletime.uninitialized
 
   /**
    *  The current variable representing this component in factors.

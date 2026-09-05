@@ -38,7 +38,7 @@ extends Process[Index, Value] {
    * Convert this container into an ordinary Scala map.
    */
   def toMap: Map[Index, Element[Value]] =
-    Map(indices.map(i => i -> apply(i)):_*)
+    Map(indices.map(i => i -> apply(i))*)
 
   /**
    * Apply the given function to every value in this container, returning a new container.
@@ -49,10 +49,10 @@ extends Process[Index, Value] {
       val indices = thisContainer.indices
       def generate(i: Index) = {
         val elem1 = thisContainer(i)
-        Apply(elem1, f)("", elem1.universe)
+        Apply(elem1, f)(using "", elem1.universe)
       }
       def generate(indices: List[Index]) =
-        thisContainer.generate(indices).map { case (i, e) => i -> Apply(e, f)("", e.universe) }
+        thisContainer.generate(indices).map { case (i, e) => i -> Apply(e, f)(using "", e.universe) }
     }
   }
 
@@ -65,10 +65,10 @@ extends Process[Index, Value] {
       val indices = thisContainer.indices
       def generate(i: Index) = {
         val elem1 = thisContainer(i)
-        Chain(elem1, f)("", elem1.universe)
+        Chain(elem1, f)(using "", elem1.universe)
       }
       def generate(indices: List[Index]) =
-        thisContainer.generate(indices).map { case (i, e) => i -> Chain(e, f)("", e.universe) }
+        thisContainer.generate(indices).map { case (i, e) => i -> Chain(e, f)(using "", e.universe) }
     }
   }
   
@@ -83,7 +83,7 @@ extends Process[Index, Value] {
   def foldLeft[Value2](start: Value2)(f: (Value2, Value) => Value2)(implicit name: Name[Value2], collection: ElementCollection): Element[Value2] = {
     val myArgs = indices.map(apply(_)).toList
 //    myArgs.foreach { arg => if (!arg.active) arg.activate }
-    FoldLeft(start, f)(myArgs:_*)(name, collection)
+    FoldLeft(start, f)(myArgs*)(using name, collection)
   }
 
   /**
@@ -92,7 +92,7 @@ extends Process[Index, Value] {
   def foldRight[Value2](start: Value2)(f: (Value, Value2) => Value2)(implicit name: Name[Value2], collection: ElementCollection): Element[Value2] = {
     val myArgs = indices.map(apply(_)).toList
 //    myArgs.foreach { arg => if (!arg.active) arg.activate }
-    FoldRight(start, f)(myArgs:_*)(name, collection)
+    FoldRight(start, f)(myArgs*)(using name, collection)
   }
 
   /**
@@ -101,7 +101,7 @@ extends Process[Index, Value] {
   def reduce(f: (Value, Value) => Value)(implicit name: Name[Value], collection: ElementCollection): Element[Value] = {
     val myArgs = indices.map(apply(_)).toList
 //    myArgs.foreach { arg => if (!arg.active) arg.activate }
-    Reduce(f)(myArgs:_*)(name, collection)
+    Reduce(f)(myArgs*)(using name, collection)
   }
 
   /**
@@ -109,28 +109,28 @@ extends Process[Index, Value] {
    */
   def aggregate[Value2](start: => Value2)(seqop: (Value2, Value) => Value2, combop: (Value2, Value2) => Value2)
   (implicit name: Name[Value2], collection: ElementCollection): Element[Value2] = {
-    foldLeft(start)((v1: Value2, v2: Value) => combop(v1, seqop(v1, v2)))(name, collection)
+    foldLeft(start)((v1: Value2, v2: Value) => combop(v1, seqop(v1, v2)))(using name, collection)
   }
 
   /**
    * Returns an element representing the number of elements in the container whose values satisfy the predicate.
    */
   def count(f: (Value) => Boolean)(implicit name: Name[Int], collection: ElementCollection): Element[Int] = {
-    foldLeft(0)((i: Int, v: Value) => if (f(v)) i + 1 else i)(name, collection)
+    foldLeft(0)((i: Int, v: Value) => if (f(v)) i + 1 else i)(using name, collection)
   }
 
   /**
    * Returns an element representing whether the value of any element in the container satisfies the predicate.
    */
   def exists(pred: Value => Boolean)(implicit name: Name[Boolean], collection: ElementCollection): Element[Boolean] = {
-    foldLeft(false)((b: Boolean, v: Value) => pred(v) || b)(name, collection)
+    foldLeft(false)((b: Boolean, v: Value) => pred(v) || b)(using name, collection)
   }
 
   /**
    * Returns an element representing whether the values of all elements in the container satisfy the predicate.
    */
   def forall(pred: Value => Boolean)(implicit name: Name[Boolean], collection: ElementCollection): Element[Boolean] = {
-    foldLeft(true)((b: Boolean, v: Value) => pred(v) && b)(name, collection)
+    foldLeft(true)((b: Boolean, v: Value) => pred(v) && b)(using name, collection)
   }
 
   /**
@@ -145,7 +145,7 @@ extends Process[Index, Value] {
     }
     val myArgs = argMap.values.toList
 //    myArgs.foreach { arg => if (!arg.active) arg.activate }
-  	new Deterministic[Option[Index]](name, collection) {
+    new Deterministic[Option[Index]](name, collection) {
       def args = myArgs
       def generateValue(): Option[Index] = {
         indices.foldLeft(None: Option[Index])(step)
@@ -183,13 +183,14 @@ extends Process[Index, Value] {
     Chain(selector, (i: Int) => apply(indices(i)))
   }
 }
-object Container {
+
+object Container {
   def apply[T](elements: Element[T]*): Container[Int, T] = {
     new FixedSizeArray(elements.size, (i: Int) => elements(i))
   }
 
   def apply[T](numItems: Element[Int], generator: Int => Element[T])(implicit name: Name[FixedSizeArray[T]], collection: ElementCollection): FixedSizeArrayElement[T] = {
-    VariableSizeArray(numItems, generator)(name, collection)
+    VariableSizeArray(numItems, generator)(using name, collection)
   }
 
   implicit def toContainerElement[I, T](container: Container[I, T]): ContainerElement[I, T] = new ContainerElement(Constant(container))

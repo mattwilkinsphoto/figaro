@@ -29,8 +29,8 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
   "A snapshot" should {
     "contain the values of all named elements" in {
       val universe1 = Universe.createNew()
-      val x = Flip(0.2)("x", universe1)
-      val y = Select(0.3 -> 1, 0.5 -> 2, 0.2 -> 3)("y", universe1)
+      val x = Flip(0.2)(using "x", universe1)
+      val y = Select(0.3 -> 1, 0.5 -> 2, 0.2 -> 3)(using "y", universe1)
       x.value = false
       y.value = 3
       val snapshot = new Snapshot
@@ -43,15 +43,15 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
 
     "restore the state of the original universe" in {
       val universe1 = Universe.createNew()
-      val x = Flip(0.2)("x", universe1)
-      val y = Select(0.3 -> 1, 0.5 -> 2, 0.2 -> 3)("y", universe1)
+      val x = Flip(0.2)(using "x", universe1)
+      val y = Select(0.3 -> 1, 0.5 -> 2, 0.2 -> 3)(using "y", universe1)
       x.value = false
       y.value = 3
       val snapshot = new Snapshot
       snapshot.store(universe1)
       val universe2 = Universe.createNew()
-      val x2 = Flip(0.7)("x", universe2)
-      val y2 = Flip(0.9)("y", universe2)
+      val x2 = Flip(0.7)(using "x", universe2)
+      val y2 = Flip(0.9)(using "y", universe2)
       x2.value = true
       snapshot.restore(universe2)
       x2.value should equal(false)
@@ -64,8 +64,8 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
         val staticSnapshot = new Snapshot
         createNew()
         val numParticles = 10000
-        val f1 = Flip(0.2)("f1", universe)
-        val f2 = Flip(0.7)("f2", universe)
+        val f1 = Flip(0.2)(using "f1", universe)
+        val f2 = Flip(0.7)(using "f2", universe)
         f1.value = true
         f2.value = false
         val dynamicSnapshot1 = new Snapshot
@@ -89,8 +89,8 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
       "contain a state with fraction proportional to its probability" taggedAs(NonDeterministic) in {
         createNew()
         val numParticles = 20000
-        val f1 = Flip(0.2)("f1", universe)
-        val i2 = If(f1, Flip(0.3), Flip(0.6))("f2", universe)
+        val f1 = Flip(0.2)(using "f1", universe)
+        val i2 = If(f1, Flip(0.3), Flip(0.6))(using "f2", universe)
         i2.observe(true)
         val qf1True = 0.2 * 0.3
         val qf1False = 0.8 * 0.6
@@ -105,10 +105,10 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
       "contain a state with fraction proportional to its expected probability under the initial belief state" in {
         val numParticles = 20000
         val universe1 = createNew()
-        val f1 = Flip(0.2)("f", universe1)
+        val f1 = Flip(0.2)(using "f", universe1)
         def trans(u: Universe): Universe = {
           val universe2 = createNew()
-          val f2 = If(u.get[Boolean]("f"), Flip(0.8), Flip(0.3))("f", universe2)
+          val f2 = If(u.get[Boolean]("f"), Flip(0.8), Flip(0.3))(using "f", universe2)
           universe2
         }
         val pf = ParticleFilter(universe1, trans, numParticles)
@@ -124,11 +124,11 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
         "conditioned on the evidence" in {
           val numParticles = 50000
           val universe1 = createNew()
-          val f11 = Flip(0.2)("f1", universe1)
+          val f11 = Flip(0.2)(using "f1", universe1)
           def trans(u: Universe): Universe = {
             val universe2 = createNew()
-            val f12 = If(u.get[Boolean]("f1"), Flip(0.8), Flip(0.3))("f1", universe2)
-            val f22 = If(f12, Flip(0.6), Flip(0.1))("f2", universe2)
+            val f12 = If(u.get[Boolean]("f1"), Flip(0.8), Flip(0.3))(using "f1", universe2)
+            val f22 = If(f12, Flip(0.6), Flip(0.1))(using "f2", universe2)
             universe2
           }
           val pf = ParticleFilter(universe1, trans, numParticles)
@@ -143,11 +143,11 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
       "correctly estimate static variables" in {
         val numParticles = 100000
         val static = createNew()
-        val x = Flip(0.2)("x", static)
+        val x = Flip(0.2)(using "x", static)
         val universe2 = createNew()
         def trans(static: Universe, previous: Universe): Universe = {
           val universe3 = createNew()
-          val y = If(static.get[Boolean]("x"), Flip(0.8), Flip(0.1))("y", universe3)
+          val y = If(static.get[Boolean]("x"), Flip(0.8), Flip(0.1))(using "y", universe3)
           universe3
         }
         val pf = ParticleFilter(static, universe2, trans(_, _), numParticles)
@@ -164,12 +164,12 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
       "contain a state with the correct probability" in {
         val numParticles = 100000
         val universe1 = createNew()
-        Flip(0.2)("f1", universe1)
+        Flip(0.2)(using "f1", universe1)
         def trans(previous: Universe): Universe = {
           val universe2 = createNew()
           val previousF1 = previous.get("f1").asInstanceOf[Element[Boolean]]
-          val f1 = If(previousF1, Flip(0.8), Flip(0.3))("f1", universe2)
-          val f2 = If(f1, Flip(0.6), Flip(0.1))("f2", universe2)
+          val f1 = If(previousF1, Flip(0.8), Flip(0.3))(using "f1", universe2)
+          val f2 = If(f1, Flip(0.6), Flip(0.1))(using "f2", universe2)
           universe2
         }
         val pf = ParticleFilter(universe1, trans, numParticles)
@@ -199,12 +199,12 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
       "correctly estimate static variables" in {
         val numParticles = 100000
         val static = createNew()
-        val x = Flip(0.2)("x", static)
+        val x = Flip(0.2)(using "x", static)
         val initial = createNew()
-        val y = Flip(0.3)("y", initial)
+        val y = Flip(0.3)(using "y", initial)
         def trans(static: Universe, previous: Universe): Universe = {
           val universe3 = createNew()
-          val y = If(static.get[Boolean]("x"), Flip(0.8), previous.get[Boolean]("y"))("y", universe3)
+          val y = If(static.get[Boolean]("x"), Flip(0.8), previous.get[Boolean]("y"))(using "y", universe3)
           universe3
         }
         val pf = ParticleFilter(static, initial, trans(_, _), numParticles)
@@ -237,12 +237,12 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
       "contain a the correct distribution over an element" in {
         val numParticles = 100000
         val universe1 = createNew()
-        Flip(0.2)("f1", universe1)
+        Flip(0.2)(using "f1", universe1)
         def trans(previous: Universe): Universe = {
           val universe2 = createNew()
           val previousF1 = previous.get("f1").asInstanceOf[Element[Boolean]]
-          val f1 = If(previousF1, Flip(0.8), Flip(0.3))("f1", universe2)
-          val f2 = If(f1, Flip(0.6), Flip(0.1))("f2", universe2)
+          val f1 = If(previousF1, Flip(0.8), Flip(0.3))(using "f1", universe2)
+          val f2 = If(f1, Flip(0.6), Flip(0.1))(using "f2", universe2)
           universe2
         }
         val pf = ParticleFilter(universe1, trans, numParticles)
@@ -256,7 +256,7 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
         val qf1TrueTime2 = (pf1TrueTime1 * 0.8 + pf1FalseTime1 * 0.3) * 0.4
         val qf1FalseTime2 = (pf1TrueTime1 * 0.2 + pf1FalseTime1 * 0.7) * 0.9
         val pf1TrueTime2 = qf1TrueTime2 / (qf1TrueTime2 + qf1FalseTime2)
-        val d = pf.currentDistribution("f1").asInstanceOf[Stream[(Double, Boolean)]]
+        val d = pf.currentDistribution("f1").asInstanceOf[LazyList[(Double, Boolean)]]
         d.size should equal(2)
         if (d(0)._2 == true) {
           d(0)._2 should equal(true)
@@ -277,11 +277,11 @@ class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Match
         val numParticles = 1000
         val numSteps = 1000
         val universe1 = createNew()
-        Constant(Array.fill(1000)(0))("f1", universe1)
+        Constant(Array.fill(1000)(0))(using "f1", universe1)
         def trans(previous: Universe): Universe = {
           val universe2 = createNew()
           val previousF1 = previous.get[Array[Int]]("f1")
-          Apply(previousF1, (a: Array[Int]) => a.map(_ + 1))("f1", universe2)
+          Apply(previousF1, (a: Array[Int]) => a.map(_ + 1))(using "f1", universe2)
           universe2
         }
         val pf = ParticleFilter(universe1, trans, numParticles)

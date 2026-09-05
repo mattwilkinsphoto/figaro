@@ -67,7 +67,7 @@ trait AnytimeProbQuerySampler extends AnytimeProbQuery with AnytimeSampler
  * Anytime sampling algorithms that compute probability of evidence.
  */
 trait AnytimeProbEvidenceSampler extends AnytimeSampler with AnytimeProbEvidence {
-  def additionalEvidenceAlgorithm(evidence: List[NamedEvidence[_]]) =
+  def additionalEvidenceAlgorithm(evidence: List[NamedEvidence[?]]) =
     new ProbEvidenceSampler(universe, evidence, computedResult) with AnytimeProbEvidenceSampler
 }
 
@@ -104,7 +104,7 @@ trait OneTimeProbQuerySampler extends ProbQueryAlgorithm with OneTimeSampler wit
  * One-time sampling algorithms that compute probability of evidence.
  */
 trait OneTimeProbEvidenceSampler extends OneTimeSampler with OneTimeProbEvidence {
-  def additionalEvidenceAlgorithm(evidence: List[NamedEvidence[_]]) = {
+  def additionalEvidenceAlgorithm(evidence: List[NamedEvidence[?]]) = {
     val ns = numSamples
     new ProbEvidenceSampler(universe, evidence, computedResult) with OneTimeProbEvidenceSampler { val numSamples = ns }
   }

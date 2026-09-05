@@ -28,7 +28,7 @@ class DecisionTest extends AnyWordSpec with Matchers {
 
     "expand all parent values" in {
       val U = Universe.createNew()
-      val u1 = Uniform((0 until 5): _*)
+      val u1 = Uniform((0 until 5)*)
       val d1 = CachingDecision(u1, 5 until 10)
       val elems = Values()(u1).map(v => d1.get(v))
       elems.foreach(s => assert(U.activeElements contains s))
@@ -36,7 +36,7 @@ class DecisionTest extends AnyWordSpec with Matchers {
 
     "remove all cached elements when setting the strategy" in {
       val U = Universe.createNew()
-      val u1 = Uniform((0 until 5): _*)
+      val u1 = Uniform((0 until 5)*)
       val d1 = CachingDecision(u1, 5 until 10)
       val elems = Values()(u1).map(v => d1.get(v))
       d1.setPolicy((i: Int) => Constant(i))

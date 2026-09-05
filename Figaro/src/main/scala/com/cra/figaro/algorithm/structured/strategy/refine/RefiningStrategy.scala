@@ -43,7 +43,7 @@ abstract class RefiningStrategy(val collection: ComponentCollection) {
       case _ => Set()
     }
     // We have to work our way up the whole problem graph marking problems as unsolved; reachable does this efficiently
-    val allUnsolvedProblems = util.reachable(problemGraph, true, problems.toSeq:_*)
+    val allUnsolvedProblems = util.reachable(problemGraph, true, problems.toSeq*)
     // Mark each reachable problem as unsolved
     for(pr <- allUnsolvedProblems) {
       pr.solved = false
@@ -56,7 +56,7 @@ abstract class RefiningStrategy(val collection: ComponentCollection) {
    * may be necessary to check if the component is fully enumerated or refined.
    * @param comp Component to process.
    */
-  def generateRange(comp: ProblemComponent[_]): Unit = {
+  def generateRange(comp: ProblemComponent[?]): Unit = {
     if(!comp.fullyEnumerated) {
       comp.generateRange()
     }

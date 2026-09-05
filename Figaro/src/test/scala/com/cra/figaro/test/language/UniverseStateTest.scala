@@ -378,8 +378,8 @@ class UniverseStateTest extends AnyWordSpec with Matchers {
         "registered element maps change" in {
           val universe = Universe.createNew()
           val e1 = Flip(0.2)
-          val set1: mutable.Set[Element[_]] = mutable.Set(e1)
-          val set2: mutable.Set[Element[_]] = mutable.Set(e1)
+          val set1: mutable.Set[Element[?]] = mutable.Set(e1)
+          val set2: mutable.Set[Element[?]] = mutable.Set(e1)
           universe.register(set1)
           val state = new UniverseState(universe)
 

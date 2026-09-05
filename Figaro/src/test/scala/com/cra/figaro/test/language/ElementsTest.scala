@@ -146,7 +146,7 @@ class ElementsTest extends AnyWordSpec with Matchers {
           Constant(b)
         }
         val f1 = Uniform(0, 1, 2)
-        val c = NonCachingChain(f1, fn _)
+        val c = NonCachingChain(f1, fn)
         sum = 0
         c.get(0)
         c.get(1)

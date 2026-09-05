@@ -46,7 +46,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
               val f3 = Flip(p1)
               val targetParameters = List(p1)
 
-              val emptyMap : mutable.Map[Parameter[_], Seq[Double]] = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap : mutable.Map[Parameter[?], Seq[Double]] = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics
@@ -91,7 +91,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
               val f3 = Select(p1, true, false)
               val targetParameters = List(p1)
 
-              val emptyMap : mutable.Map[Parameter[_], Seq[Double]] = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap : mutable.Map[Parameter[?], Seq[Double]] = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics
@@ -137,7 +137,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
               val f3 = Select(p1, 1, 2, 3)
               val targetParameters = List(p1)
 
-              val emptyMap : mutable.Map[Parameter[_], Seq[Double]] = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap : mutable.Map[Parameter[?], Seq[Double]] = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics
@@ -184,7 +184,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
 
               val targetParameters = List(p1)
 
-              val emptyMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics
@@ -216,7 +216,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
               f3.observe(true)
               val targetParameters = List(p1)
 
-              val emptyMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics
@@ -248,7 +248,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
 
               val targetParameters = List(p1)
 
-              val emptyMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics
@@ -284,7 +284,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
 
               val targetParameters = List(p1)
 
-              val emptyMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics
@@ -322,7 +322,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
 
               val targetParameters = List(p1)
 
-              val emptyMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics
@@ -363,7 +363,7 @@ class SufficientStatisticsVariableEliminationTest extends AnyWordSpec with Priva
 
               val targetParameters = List(p1)
 
-              val emptyMap = mutable.Map.empty[Parameter[_], Seq[Double]]
+              val emptyMap = mutable.Map.empty[Parameter[?], Seq[Double]]
 
               for (p <- targetParameters) {
                 emptyMap += p -> p.zeroSufficientStatistics

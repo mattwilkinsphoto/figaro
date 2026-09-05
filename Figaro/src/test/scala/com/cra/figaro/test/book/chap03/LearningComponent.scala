@@ -61,7 +61,7 @@ object LearningComponent {
   def learnMAP(params: PriorParameters): LearnedParameters = {
 println("Beginning training")
 println("Number of elements: " + Universe.universe.activeElements.length)
-    val algorithm = EMWithBP(params.fullParameterList:_*)
+    val algorithm = EMWithBP(params.fullParameterList*)
 val time0 = System.currentTimeMillis()
     algorithm.start()
 val time1 = System.currentTimeMillis()

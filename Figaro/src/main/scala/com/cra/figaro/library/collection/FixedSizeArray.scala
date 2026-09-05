@@ -33,7 +33,7 @@ class FixedSizeArray[Value](
   def generate(index: Int) = generator(index)
 
   def generate(indices: List[Int]) = {
-    Map(indices.map(index => (index, generator(index))):_*)
+    Map(indices.map(index => (index, generator(index)))*)
   }
 
   /**

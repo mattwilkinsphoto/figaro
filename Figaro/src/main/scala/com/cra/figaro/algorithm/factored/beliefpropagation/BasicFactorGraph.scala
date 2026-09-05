@@ -26,7 +26,7 @@ class BasicFactorGraph(factors: List[Factor[Double]], semiring: Semiring[Double]
   /**
    * Create a uniform factor to initialize the graph
    */
-  def uniformFactor(v: List[Variable[_]]): Factor[Double] = {
+  def uniformFactor(v: List[Variable[?]]): Factor[Double] = {
     val f = new DenseFactor[Double](List(), v, semiring)
     f.fillByRule((l: List[Any]) => semiring.one)
     f

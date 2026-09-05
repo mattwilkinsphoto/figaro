@@ -21,6 +21,7 @@ import com.cra.figaro.language._
 import com.cra.figaro.language.Universe._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.library.atomic._
+import com.cra.figaro.library.collection.{MakeArray, FixedSizeArrayElement, FixedSizeArray}
 import com.cra.figaro.util._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
@@ -38,7 +39,10 @@ class OpenUniverseTest extends AnyWordSpec with Matchers {
     Universe.createNew()
 
     val numSources = discrete.Geometric(probOneMoreSource)
-    val sources = MakeList(numSources, () => continuous.Uniform(0.0, 1.0))
+    val sourceItems = new MakeArray[Double](Name[FixedSizeArray[Double]](""), numSources,
+      (_: Int) => continuous.Uniform(0.0, 1.0), Universe.universe)
+    val sources = new FixedSizeArrayElement(sourceItems)
+      .foldLeft(List.empty[Double])((xs, value) => xs :+ value)
 
     class Sample(s: String) {
       val sourceNum = IntSelector(numSources)
@@ -56,7 +60,7 @@ class OpenUniverseTest extends AnyWordSpec with Matchers {
     def chooseScheme(): ProposalScheme =
       DisjointScheme(
         (0.25, () => ProposalScheme(numSources)),
-        (0.25, () => ProposalScheme(sources.items(random.nextInt(numSources.value)))),
+        (0.25, () => ProposalScheme(sourceItems.items(random.nextInt(numSources.value)))),
         (0.25, () => ProposalScheme(samples(random.nextInt(numSamples)).sourceNum)),
         (0.25, () => ProposalScheme(samples(random.nextInt(numSamples)).position)))
 
@@ -80,8 +84,8 @@ class OpenUniverseTest extends AnyWordSpec with Matchers {
     def geometricProb(n: Int) = scala.math.pow(probOneMoreSource, n - 1) * (1 - probOneMoreSource)
     def probSame(n: Int) = geometricProb(n) / n * 0.23333333
     def probDifferent(n: Int) = geometricProb(n) * (n - 1) / n * 0.3 * 0.3
-    val totalProbSame = (0.0 /: (1 to limitNumSources))(_ + probSame(_))
-    val totalProbDifferent = (0.0 /: (1 to limitNumSources))(_ + probDifferent(_))
+    val totalProbSame = ((1 to limitNumSources)).foldLeft(0.0)(_ + probSame(_))
+    val totalProbDifferent = ((1 to limitNumSources)).foldLeft(0.0)(_ + probDifferent(_))
     val answer = totalProbSame / (totalProbSame + totalProbDifferent)
     val alg = MetropolisHastings(200000, chooseScheme(), 5000, equal)
     alg.start()

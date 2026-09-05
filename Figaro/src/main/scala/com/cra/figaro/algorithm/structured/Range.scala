@@ -107,7 +107,7 @@ object Range {
           if (hs) hasStar = true
           subTargetSet.toList
         }
-      val combinations: List[List[List[Element[V]]]] = homogeneousCartesianProduct(subTargetSets: _*)
+      val combinations: List[List[List[Element[V]]]] = homogeneousCartesianProduct(subTargetSets*)
       val targetSets = combinations.map(_.flatten).toSet
       (targetSets, hasStar)
     }
@@ -115,7 +115,7 @@ object Range {
     def getMultiSetPossibilities(targetSet: List[Element[V]]): ValueSet[MultiSet[V]] = {
       val ranges: List[ValueSet[V]] = targetSet.map(getRange(cc, _))
       val regularRanges: List[List[V]] = ranges.map(_.regularValues.toList)
-      val possibilities: List[List[V]] = homogeneousCartesianProduct(regularRanges: _*)
+      val possibilities: List[List[V]] = homogeneousCartesianProduct(regularRanges*)
       val multiSets: List[MultiSet[V]] =
         for {
           possibility <- possibilities
@@ -305,7 +305,7 @@ object Range {
     atomic match {
       case f: AtomicFlip  => withoutStar(Set(true, false))
 
-      case s: AtomicSelect[_] => withoutStar(Set(s.outcomes: _*))
+      case s: AtomicSelect[_] => withoutStar(Set(s.outcomes*))
 
       case b: AtomicBinomial => ValueSet.withoutStar((0 to b.numTrials).toSet)
 
@@ -330,11 +330,11 @@ object Range {
         if (getRange(collection, f.prob).hasStar) withStar(Set(true, false)) else withoutStar(Set(true, false))
 
       case s: ParameterizedSelect[_] =>
-        val values = Set(s.outcomes: _*)
+        val values = Set(s.outcomes*)
         if (getRange(collection, s.parameter).hasStar) withStar(values) else withoutStar(values)
 
       case s: CompoundSelect[_] =>
-        val values = Set(s.outcomes: _*)
+        val values = Set(s.outcomes*)
         if (s.probs.map(getRange(collection, _)).exists(_.hasStar)) withStar(values) else withoutStar(values)
 
       case d: AtomicDist[_] =>
@@ -357,7 +357,7 @@ object Range {
         //        val elementVSs = i.args.map(arg => LazyValues(arg.universe).storedValues(arg))
         val incomplete = argVSs.exists(_.hasStar)
         val elementValues = argVSs.toList.map(_.regularValues.toList)
-        val resultValues = homogeneousCartesianProduct(elementValues: _*).toSet.asInstanceOf[Set[i.Value]]
+        val resultValues = homogeneousCartesianProduct(elementValues*).toSet.asInstanceOf[Set[i.Value]]
         if (incomplete) withStar(resultValues); else withoutStar(resultValues)
 
       case r: SingleValuedReferenceElement[_] => getRangeOfSingleValuedReference(collection, r.collection, r.reference)
@@ -376,7 +376,7 @@ object Range {
         if (counterValues.regularValues.nonEmpty) {
           val maxCounter = counterValues.regularValues.max
           //          val all = List.tabulate(maxCounter)(i => i).toSet
-          val all = Set((0 until maxCounter): _*)
+          val all = Set((0 until maxCounter)*)
           if (counterValues.hasStar) ValueSet.withStar(all); else ValueSet.withoutStar(all)
         } else { ValueSet.withStar(Set()) }
 

@@ -48,7 +48,7 @@ trait ProbEvidenceBeliefPropagation extends ProbabilisticBeliefPropagation with 
     val logFactorMapping = probFactor.variables.map(v => logFactor.variables.indexOf(v))
     def remap(l: List[Int]) = l.zipWithIndex.map(s => (s._1, logFactorMapping(s._2))).sortBy(_._2).unzip._1
 
-    val e = (0.0 /: probFactor.getIndices)((c: Double, i: List[Int]) => {
+    val e = (probFactor.getIndices).foldLeft(0.0)((c: Double, i: List[Int]) => {
       val p = probFcn(probFactor.get(i))
       if (p == 0) c else c + p * logFcn(logFactor.get(remap(i)))
     })
@@ -90,13 +90,13 @@ trait ProbEvidenceBeliefPropagation extends ProbabilisticBeliefPropagation with 
  * Trait for One Time BP evidence algorithms.
  */
 trait OneTimeProbEvidenceBeliefPropagation extends OneTimeProbabilisticBeliefPropagation with OneTimeProbEvidence with ProbEvidenceBeliefPropagation {
-  def additionalEvidenceAlgorithm(evidence: List[NamedEvidence[_]]): ProbEvidenceAlgorithm = {
+  def additionalEvidenceAlgorithm(evidence: List[NamedEvidence[?]]): ProbEvidenceAlgorithm = {
     val myIterations = this.iterations
     val myResult = computedResult
     val myEvidence = evidence
-    new ProbQueryBeliefPropagation(universe, universe.activeElements: _*)(
+    new ProbQueryBeliefPropagation(universe, universe.activeElements*)(
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) with OneTimeProbEvidenceBeliefPropagation with OneTimeProbQuery {
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u)) with OneTimeProbEvidenceBeliefPropagation with OneTimeProbQuery {
       val iterations = myIterations
       override val denominator = myResult
       override val evidence = myEvidence
@@ -109,10 +109,10 @@ object ProbEvidenceBeliefPropagation {
   /**
    * Creates a One Time belief propagation computer in the current default universe.
    */
-def apply(myIterations: Int, evidence: List[NamedEvidence[_]])(implicit universe: Universe) = {
-    val baseline = new ProbQueryBeliefPropagation(universe, universe.activeElements:_*)(
+def apply(myIterations: Int, evidence: List[NamedEvidence[?]])(implicit universe: Universe) = {
+    val baseline = new ProbQueryBeliefPropagation(universe, universe.activeElements*)(
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) 
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
       with OneTimeProbabilisticBeliefPropagation with OneTimeProbQuery with OneTimeProbEvidenceBeliefPropagation { val iterations = myIterations }
     baseline.start()
     baseline.probAdditionalEvidence(evidence)
@@ -123,7 +123,7 @@ def apply(myIterations: Int, evidence: List[NamedEvidence[_]])(implicit universe
    * Takes the conditions and constraints in the model as part of the model definition.
    * This method takes care of creating and running the necessary algorithms.
    */
-  def computeProbEvidence(myIterations: Int, evidence: List[NamedEvidence[_]])(implicit universe: Universe): Double = {
+  def computeProbEvidence(myIterations: Int, evidence: List[NamedEvidence[?]])(implicit universe: Universe): Double = {
     val alg1 = apply(myIterations, List())
     alg1.start()
     val alg2 = alg1.probAdditionalEvidence(evidence)

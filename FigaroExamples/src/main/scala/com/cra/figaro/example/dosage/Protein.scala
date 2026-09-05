@@ -31,11 +31,11 @@ object Protein {
   def genFcn(s: String): Container[Int, AminoAcidSequence] = {
     val elems = s.map { c =>
       c match {
-        case '-' => Uniform(aaListAsSeq: _*)
+        case '-' => Uniform(aaListAsSeq*)
         case _ => Constant(AminoAcidSequence(c.toString))
       }
     }
-    Container(elems: _*)
+    Container(elems*)
   }
 
   def apply(arg: String) = genApplyFcn(genFcn(arg))

@@ -34,7 +34,7 @@ import scala.collection.immutable.Map
 
 class MultiDecisionMetropolisHastingsTest extends AnyWordSpec with Matchers {
 
-  def propmaker = (mv: Universe, e: Element[_]) => ProposalScheme.default(mv)
+  def propmaker = (mv: Universe, e: Element[?]) => ProposalScheme.default(using mv)
 
   "A MultiMetropolistHastings Sampler" when {
 
@@ -42,7 +42,7 @@ class MultiDecisionMetropolisHastingsTest extends AnyWordSpec with Matchers {
 
       "produce the correct strategy with discrete parents" in {
         val (alg, declist, before, after) = MultiDecisionDiscrete((e1: List[Element[Double]], e2: List[Decision[Boolean, Double]]) =>
-          MultiDecisionMetropolisHastings(20000, propmaker, 1000, e1, e2: _*), false)
+          MultiDecisionMetropolisHastings(20000, propmaker, 1000, e1, e2*), false)
 
         val d1 = declist(0)
         val d2 = declist(1)
@@ -56,16 +56,16 @@ class MultiDecisionMetropolisHastingsTest extends AnyWordSpec with Matchers {
 
       "increase the expected value" in {
         val (alg, declist, before, after) = MultiDecisionDiscrete((e1: List[Element[Double]], e2: List[Decision[Boolean, Double]]) =>
-          MultiDecisionMetropolisHastings(20000, propmaker, 1000, e1, e2: _*), true)
+          MultiDecisionMetropolisHastings(20000, propmaker, 1000, e1, e2*), true)
         after should be > (before)
       }
 
       "produce the correct strategy with continuous parents" in {
         val (alg, declist, before, after) = MultiDecisionContinuous((e1: List[Element[Double]], e2: List[Decision[Double, Double]]) => {
-          def propmakerCont = (mv: Universe, e: Element[_]) => {
+          def propmakerCont = (mv: Universe, e: Element[?]) => {
             UntypedScheme(() => e, Some(ProposalScheme.default))
           }
-          MultiDecisionMetropolisHastings(50000, propmakerCont, 5000, e1, e2: _*)
+          MultiDecisionMetropolisHastings(50000, propmakerCont, 5000, e1, e2*)
         }, false)
 
         val d1 = declist(0)

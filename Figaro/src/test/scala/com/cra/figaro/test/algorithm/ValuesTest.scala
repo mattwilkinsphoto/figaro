@@ -124,7 +124,7 @@ class ValuesTest extends AnyWordSpec with Matchers {
       "return the image of the product of its arguments' values sets" in {
         Universe.createNew()
         def fn(b: Boolean, i: Int) = if (b) i; else i + 1
-        val s: Set[Int] = Values()(Apply(Flip(0.4), Select(0.1 -> 1, 0.2 -> 2, 0.3 -> 3), fn _))
+        val s: Set[Int] = Values()(Apply(Flip(0.4), Select(0.1 -> 1, 0.2 -> 2, 0.3 -> 3), fn))
         s should contain(1)
         s should contain(2)
         s should contain(3)
@@ -137,7 +137,7 @@ class ValuesTest extends AnyWordSpec with Matchers {
       "return the image of the product of its arguments' values sets" in {
         Universe.createNew()
         def fn(b: Boolean, i: Int, j: Int) = if (b) i; else i + j
-        val s: Set[Int] = Values()(Apply(Flip(0.4), Select(0.1 -> 1, 0.2 -> 2, 0.3 -> 3), Constant(1), fn _))
+        val s: Set[Int] = Values()(Apply(Flip(0.4), Select(0.1 -> 1, 0.2 -> 2, 0.3 -> 3), Constant(1), fn))
         s should contain(1)
         s should contain(2)
         s should contain(3)
@@ -154,7 +154,7 @@ class ValuesTest extends AnyWordSpec with Matchers {
           Select(0.1 -> 1, 0.2 -> 2, 0.3 -> 3),
           Constant(1),
           Select(0.5 -> 4, 0.5 -> 5),
-          fn _))
+          fn))
         s should contain(2)
         s should contain(3)
         s should contain(4)
@@ -175,7 +175,7 @@ class ValuesTest extends AnyWordSpec with Matchers {
           Constant(1),
           Select(0.5 -> 4, 0.5 -> 5),
           Flip(0.7),
-          fn _))
+          fn))
         s should contain(2)
         s should contain(3)
         s should contain(4)
@@ -230,7 +230,7 @@ class ValuesTest extends AnyWordSpec with Matchers {
           sum += 1
           if (b) Constant(1); else Constant(2)
         }
-        val c = Chain(Flip(0.5), fn _)
+        val c = Chain(Flip(0.5), fn)
         Values()(c)
         var s1 = sum
         Values()(c)

@@ -26,8 +26,8 @@ import com.cra.figaro.util
  * that (1) the components in this set and their arguments already belong to the collection, and (2) that such a call
  * maintains consistency across component ranges.
  */
-class TopDownStrategy(collection: ComponentCollection, topLevel: ProblemComponent[_]*)
-  extends FlatStrategy(collection, TopDownStrategy.childrenInCollection(collection, topLevel:_*))
+class TopDownStrategy(collection: ComponentCollection, topLevel: ProblemComponent[?]*)
+  extends FlatStrategy(collection, TopDownStrategy.childrenInCollection(collection, topLevel*))
 
 object TopDownStrategy {
   /**
@@ -37,10 +37,10 @@ object TopDownStrategy {
    * @param topLevel Top-level components to work down from.
    * @return A strategy that uses the given components to find all (directly or indirectly) dependent
    */
-  def childrenInCollection(collection: ComponentCollection, topLevel: ProblemComponent[_]*): Set[ProblemComponent[_]] = {
+  def childrenInCollection(collection: ComponentCollection, topLevel: ProblemComponent[?]*): Set[ProblemComponent[?]] = {
     // Finds the direct children of the given component that are both in the component collection and not fully refined.
     // Used in computing the set of components that need updates after refining the top-level components.
-    def children(comp: ProblemComponent[_]): Traversable[ProblemComponent[_]] = {
+    def children(comp: ProblemComponent[?]): Iterable[ProblemComponent[?]] = {
       val elem = comp.element
       for {
         child <- elem.universe.directlyUsedBy(elem)
@@ -50,6 +50,6 @@ object TopDownStrategy {
       } yield childComp
     }
 
-    util.reachable(children, true, topLevel:_*)
+    util.reachable(children, true, topLevel*)
   }
 }

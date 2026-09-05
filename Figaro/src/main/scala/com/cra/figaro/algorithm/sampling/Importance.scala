@@ -33,8 +33,8 @@ import com.cra.figaro.library.collection.Container
 /**
  * Importance samplers.
  */
-abstract class Importance(universe: Universe, targets: Element[_]*)
-  extends WeightedSampler(universe, targets: _*) {
+abstract class Importance(universe: Universe, targets: Element[?]*)
+  extends WeightedSampler(universe, targets*) {
   import Importance.State
 
   val lw = new LikelihoodWeighter(universe, new PermanentCache(universe))
@@ -72,7 +72,7 @@ abstract class Importance(universe: Universe, targets: Element[_]*)
       try {
         val weight = lw.computeWeight(activeElements)
         val bindings = targets map (elem => elem -> elem.value)
-        Some((weight, Map(bindings: _*)))
+        Some((weight, Map(bindings*)))
       } catch {
         case Importance.Reject =>
           None
@@ -107,22 +107,22 @@ object Importance {
   /**
    * Convenience class to store the set of sampled elements, along with the current sampling weight.
    */
-  case class State(assigned: Set[Element[_]] = Set(), var weight: Double = 0.0)
+  case class State(assigned: Set[Element[?]] = Set(), var weight: Double = 0.0)
 
   object Reject extends RuntimeException
 
   /**
    * Create an anytime importance sampler with the given target query elements over the given universe.
    */
-  def apply(targets: Element[_]*)(implicit universe: Universe) =
-    new Importance(universe, targets: _*) with AnytimeProbQuerySampler
+  def apply(targets: Element[?]*)(implicit universe: Universe) =
+    new Importance(universe, targets*) with AnytimeProbQuerySampler
 
   /**
    * Create an one-time importance sampler with the given target query elements over the given universe
    * using the given number of samples.
    */
-  def apply(myNumSamples: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new Importance(universe, targets: _*) with OneTimeProbQuerySampler with ProbEvidenceQuery {
+  def apply(myNumSamples: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new Importance(universe, targets*) with OneTimeProbQuerySampler with ProbEvidenceQuery {
       val numSamples = myNumSamples
 
       /**
@@ -130,7 +130,7 @@ object Importance {
        * Takes the conditions and constraints in the model as part of the model definition.
        * This method takes care of creating and running the necessary algorithms.
        */
-      override def probabilityOfEvidence(evidence: List[NamedEvidence[_]]): Double = {
+      override def probabilityOfEvidence(evidence: List[NamedEvidence[?]]): Double = {
         val logPartition = logProbEvidence
         this.universe.assertEvidence(evidence)
         if (active) kill()
@@ -144,7 +144,7 @@ object Importance {
    * Use IS to compute the probability that the given element satisfies the given predicate.
    */
   def probability[T](target: Element[T], predicate: T => Boolean)(implicit universe: Universe): Double = {
-    val alg = Importance(10000, target)(universe)
+    val alg = Importance(10000, target)(using universe)
     alg.start()
     val result = alg.probability(target, predicate)
     alg.kill()
@@ -155,14 +155,14 @@ object Importance {
    * Use IS to compute the probability that the given element has the given value.
    */
   def probability[T](target: Element[T], value: T)(implicit universe: Universe): Double =
-    probability(target, (t: T) => t == value)(universe)
+    probability(target, (t: T) => t == value)(using universe)
 
     /**
      * Use IS to sample the joint posterior distribution of several variables
      */
-  def sampleJointPosterior(targets: Element[_]*)(implicit universe: Universe): Stream[List[Any]] = {
+  def sampleJointPosterior(targets: Element[?]*)(implicit universe: Universe): LazyList[List[Any]] = {
     val jointElement = Container[Any](targets.asInstanceOf[Seq[Element[Any]]]*).foldLeft(List[Any]())((l: List[Any], i: Any) => l :+ i)
-    val alg = Importance(10000, jointElement)(universe)
+    val alg = Importance(10000, jointElement)(using universe)
     alg.start()
     val posterior = alg.sampleFromPosterior(jointElement)
     alg.kill()

@@ -34,7 +34,7 @@ object OpenUniverse {
 
   private val numSources = FromRange(1,4)
 
-  private val sources = MakeList(numSources, source _)
+  private val sources = VariableSizeArray(numSources, (_: Int) => source()).foldLeft(List.empty[Double])((xs, value) => xs :+ value)
 
   private class Sample {
     val sourceNum = IntSelector(numSources)
@@ -62,7 +62,7 @@ object OpenUniverse {
     Thread.sleep(10000)
     alg.stop()
     println(alg.probability(equal, true))
-    println(alg.getSampleCount + " samples taken")
+    println(alg.getSampleCount.toString + " samples taken")
     alg.kill()
   }
 }

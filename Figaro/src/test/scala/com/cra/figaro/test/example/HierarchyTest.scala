@@ -58,29 +58,29 @@ class HierarchyTest extends AnyWordSpec with Matchers {
   }
 
   class Truck extends Vehicle {
-    val size: Element[Symbol] = Select(0.25 -> Symbol("medium"), 0.75 -> Symbol("big"))("size", this)
-    val speed: Element[Int] = Uniform(50, 60, 70)("speed", this)
-    override lazy val capacity: Element[Int] = Chain(size, (s: Symbol) => if (s == Symbol("big")) Select(0.5 -> 1000, 0.5 -> 2000); else Constant(100))("capacity", this)
+    val size: Element[Symbol] = Select(0.25 -> Symbol("medium"), 0.75 -> Symbol("big"))(using "size", this)
+    val speed: Element[Int] = Uniform(50, 60, 70)(using "speed", this)
+    override lazy val capacity: Element[Int] = Chain(size, (s: Symbol) => if (s == Symbol("big")) Select(0.5 -> 1000, 0.5 -> 2000); else Constant(100))(using "capacity", this)
   }
 
   class Pickup extends Truck {
-    override val speed: Element[Int] = Uniform(70, 80)("speed", this)
-    override val size: Element[Symbol] = Constant(Symbol("medium"))("size", this)
+    override val speed: Element[Int] = Uniform(70, 80)(using "speed", this)
+    override val size: Element[Symbol] = Constant(Symbol("medium"))(using "size", this)
   }
 
   class TwentyWheeler extends Truck {
-    override val size: Element[Symbol] = Constant(Symbol("huge"))("size", this)
-    override lazy val capacity = Constant(5000)("capacity", this)
+    override val size: Element[Symbol] = Constant(Symbol("huge"))(using "size", this)
+    override lazy val capacity = Constant(5000)(using "capacity", this)
   }
 
   class Car extends Vehicle {
-    val size = Constant(Symbol("small"))("size", this)
-    val speed = Uniform(70, 80)("speed", this)
+    val size = Constant(Symbol("small"))(using "size", this)
+    val speed = Uniform(70, 80)(using "speed", this)
   }
 
   object Vehicle {
     def generate(name: String): Element[Vehicle] =
-      Dist(0.6 -> Car.generate, 0.4 -> Truck.generate)(name, universe)
+      Dist(0.6 -> Car.generate, 0.4 -> Truck.generate)(using name, universe)
   }
 
   object Truck {

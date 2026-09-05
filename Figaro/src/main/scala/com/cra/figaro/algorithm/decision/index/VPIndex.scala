@@ -18,7 +18,7 @@ import com.cra.figaro.algorithm.decision.index._
 import com.cra.figaro.language._
 import com.cra.figaro.library.decision._
 import com.cra.figaro.util._
-import scala.collection.mutable.{ HashMap, MultiMap, Set, PriorityQueue }
+import scala.collection.mutable.{ HashMap, Set, PriorityQueue }
 import scala.collection.immutable.Map
 import scala.collection.immutable.{ List, SortedMap }
 import math.{ min, max }
@@ -26,12 +26,12 @@ import math.{ min, max }
 /**
  * VP index leaf node class
  */
-private[index] class VPlnode[T, U](parent: Node[_, _]) extends Node[T, U](parent, true) with LNode[T, U]
+private[index] class VPlnode[T, U](parent: Node[?, ?]) extends Node[T, U](parent, true) with LNode[T, U]
 
 /**
  * VP index internal node class
  */
-private[index] class VPinode[T, U](parent: Node[_, _], val pivot: Distance[T], val radius: Double) extends Node[T, U](parent, false) with INode[T, U] {
+private[index] class VPinode[T, U](parent: Node[?, ?], val pivot: Distance[T], val radius: Double) extends Node[T, U](parent, false) with INode[T, U] {
 
   def lchild = children.head
   def rchild = children.last
@@ -132,7 +132,7 @@ class VPIndex[T: DistanceConversion, U](stratMap: Map[(T, U), DecisionSample], c
   }
 
   // Split a node with too many children
-  private def split(parent: Node[_, _], samples: List[(T, (U, DecisionSample))]): Node[T, (U, DecisionSample)] = {
+  private def split(parent: Node[?, ?], samples: List[(T, (U, DecisionSample))]): Node[T, (U, DecisionSample)] = {
     if (samples.length < capacity) {
       val n = new VPlnode[T, (U, DecisionSample)](parent)
       samples.foreach { s => n.addObject(summon[DistanceConversion[T]](s._1), s._2) }

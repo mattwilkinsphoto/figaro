@@ -23,7 +23,7 @@ import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object ProbabilityOfEvidence {
-  val pixels = Array.tabulate(4, 4)((i: Int, j: Int) => Flip(0.4)("pixel(" + i + "," + j + ")", Universe.universe))
+  val pixels = Array.tabulate(4, 4)((i: Int, j: Int) => Flip(0.4)(using "pixel(" + i + "," + j + ")", Universe.universe))
 
   def makeConstraint(pixel1: Element[Boolean], pixel2: Element[Boolean]): Unit = {
     val pairElem = ^^(pixel1, pixel2)

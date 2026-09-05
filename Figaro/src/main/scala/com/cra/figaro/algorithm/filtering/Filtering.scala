@@ -40,12 +40,12 @@ abstract class Filtering(static: Universe = new Universe(), initial: Universe, t
   /**
    * Advance the filtering one time step, conditioning on the given evidence at the new time point.
    */
-  def advanceTime(evidence: Seq[NamedEvidence[_]]): Unit
+  def advanceTime(evidence: Seq[NamedEvidence[?]]): Unit
 
   /**
    * Returns the distribution over the element referred to by the reference at the current time point.
    */
-  protected def computeCurrentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+  protected def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 
   /**
    * Returns the expectation of the element referred to by the reference
@@ -65,7 +65,7 @@ abstract class Filtering(static: Universe = new Universe(), initial: Universe, t
   /**
    * Returns the distribution over the element referred to by the reference at the current time point.
    */
-  def currentDistribution[T](reference: Reference[T]): Stream[(Double, T)]
+  def currentDistribution[T](reference: Reference[T]): LazyList[(Double, T)]
 
   /**
    * Returns the expectation of the element referred to by the reference

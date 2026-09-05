@@ -25,7 +25,7 @@ class SolvingTest extends AnyWordSpec with Matchers {
 
   def solvingStrategy(problem: Problem, solver: Solver = marginalVariableElimination): SolvingStrategy = {
     new SolvingStrategy(problem) {
-      override def eliminate(toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], factors: List[Factor[Double]]): (List[Factor[Double]], Map[Variable[_], Factor[_]]) = {
+      override def eliminate(toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], factors: List[Factor[Double]]): (List[Factor[Double]], Map[Variable[?], Factor[?]]) = {
         solver(problem, toEliminate, toPreserve, factors)
       }
     }

@@ -44,9 +44,9 @@ class MutableMovieTest extends AnyWordSpec with Matchers {
   val numActors = 2
   val numMovies = 2
   val numAppearances = 3
-  var actors: Array[Actor] = _
-  var movies: Array[Movie] = _
-  var appearances: Array[Appearance] = _
+  var actors: Array[Actor] = scala.compiletime.uninitialized
+  var movies: Array[Movie] = scala.compiletime.uninitialized
+  var appearances: Array[Appearance] = scala.compiletime.uninitialized
 
   def test(algorithmCreator: Element[Boolean] => ProbQueryAlgorithm): Unit = {
     Universe.createNew()
@@ -61,7 +61,7 @@ class MutableMovieTest extends AnyWordSpec with Matchers {
     movies = Array(movie1, movie2)
     appearances = Array(appearance1, appearance2, appearance3)
     // Ensure that exactly one appearance gets an award.
-    val allAwards: Element[List[Boolean]] = Inject(appearances.map(_.award): _*)
+    val allAwards: Element[List[Boolean]] = Inject(appearances.map(_.award)*)
     def uniqueAwardCondition(awards: List[Boolean]) = awards.count((b: Boolean) => b) == 1
     allAwards.setCondition(uniqueAwardCondition)
 
@@ -176,7 +176,7 @@ class MutableMovieTest extends AnyWordSpec with Matchers {
 
     lazy val skillful = Flip(0.1)
 
-    lazy val famous = Flip(Apply(Inject(movies.map(_.quality): _*), probFamous _))
+    lazy val famous = Flip(Apply(Inject(movies.map(_.quality)*), probFamous))
 
     private def probFamous(qualities: Seq[Symbol]) = if (qualities.count(_ == Symbol("high")) >= 2) 0.8; else 0.1
   }
@@ -184,7 +184,7 @@ class MutableMovieTest extends AnyWordSpec with Matchers {
   class Movie {
     var actors: List[Actor] = List()
 
-    lazy val actorsAllGood = Apply(Inject(actors.map(_.skillful): _*), (s: Seq[Boolean]) => !(s.contains(false)))
+    lazy val actorsAllGood = Apply(Inject(actors.map(_.skillful)*), (s: Seq[Boolean]) => !(s.contains(false)))
 
     lazy val probLow = Apply(actorsAllGood, (b: Boolean) => if (b) 0.2; else 0.5)
 

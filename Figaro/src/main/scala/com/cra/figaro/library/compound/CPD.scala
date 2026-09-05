@@ -28,7 +28,7 @@ class CPD2[T1, T2, U](name: Name[U], arg1: Element[T1], arg2: Element[T2],
   clauses: Seq[((T1, T2), Element[U])], collection: ElementCollection)
   extends CachingChain[(T1, T2), U](
     name,
-    ^^(arg1, arg2)("", collection),
+    ^^(arg1, arg2)(using "", collection),
     (p: (T1, T2)) => CPD.getMatch(clauses, p),
     collection)
 
@@ -39,7 +39,7 @@ class CPD3[T1, T2, T3, U](name: Name[U], arg1: Element[T1], arg2: Element[T2], a
   clauses: Seq[((T1, T2, T3), Element[U])], collection: ElementCollection)
   extends CachingChain[(T1, T2, T3), U](
     name,
-    ^^(arg1, arg2, arg3)("", collection),
+    ^^(arg1, arg2, arg3)(using "", collection),
     (p: (T1, T2, T3)) => CPD.getMatch(clauses, p),
     collection)
 
@@ -50,7 +50,7 @@ class CPD4[T1, T2, T3, T4, U](name: Name[U], arg1: Element[T1], arg2: Element[T2
   clauses: Seq[((T1, T2, T3, T4), Element[U])], collection: ElementCollection)
   extends CachingChain[(T1, T2, T3, T4), U](
     name,
-    ^^(arg1, arg2, arg3, arg4)("", collection),
+    ^^(arg1, arg2, arg3, arg4)(using "", collection),
     (p: (T1, T2, T3, T4)) => CPD.getMatch(clauses, p),
     collection)
 
@@ -61,7 +61,7 @@ class CPD5[T1, T2, T3, T4, T5, U](name: Name[U], arg1: Element[T1], arg2: Elemen
   arg5: Element[T5], clauses: Seq[((T1, T2, T3, T4, T5), Element[U])], collection: ElementCollection)
   extends CachingChain[(T1, T2, T3, T4, T5), U](
     name,
-    ^^(arg1, arg2, arg3, arg4, arg5)("", collection),
+    ^^(arg1, arg2, arg3, arg4, arg5)(using "", collection),
     (p: (T1, T2, T3, T4, T5)) => CPD.getMatch(clauses, p),
     collection)
 

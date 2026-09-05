@@ -24,17 +24,17 @@ import com.cra.figaro.language._
  * @param universe Universe on which to perform inference.
  * @param mapElements Elements for which to compute MAP queries. Elements not in this sequence are summed over.
  */
-abstract class StructuredMarginalMAPAlgorithm(universe: Universe, collection: ComponentCollection, val mapElements: Element[_]*)
+abstract class StructuredMarginalMAPAlgorithm(universe: Universe, collection: ComponentCollection, val mapElements: Element[?]*)
   extends StructuredAlgorithm(universe, collection) with MarginalMAPAlgorithm {
 
-  def this(universe: Universe, mapElements: Element[_]*) = {
-    this(universe, new ComponentCollection, mapElements:_*)
+  def this(universe: Universe, mapElements: Element[?]*) = {
+    this(universe, new ComponentCollection, mapElements*)
   }
 
   override def problemTargets = mapElements.toList
 
   // Solutions contain MPE values of individual variables, and are precisely the problem's recording factors.
-  protected var targetFactors: Map[Variable[_], Factor[_]] = Map()
+  protected var targetFactors: Map[Variable[?], Factor[?]] = Map()
 
   override def processSolutions(solutions: Map[Bounds, Solution]): Unit = {
     if(solutions.size > 1) {

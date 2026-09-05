@@ -21,8 +21,8 @@ import com.cra.figaro.language._
  * @param universe Universe on which to perform inference.
  * @param mapElements Elements for which to compute MAP queries. Elements not in this list are summed over.
  */
-class StructuredMarginalMAPVE(universe: Universe, mapElements: Element[_]*)
-  extends StructuredMarginalMAPAlgorithm(universe, mapElements:_*) with DecompositionMarginalMAP {
+class StructuredMarginalMAPVE(universe: Universe, mapElements: Element[?]*)
+  extends StructuredMarginalMAPAlgorithm(universe, mapElements*) with DecompositionMarginalMAP {
 
   def solvingStrategy() = new MarginalMAPVEStrategy(problem, structuredRaising)
 }
@@ -33,8 +33,8 @@ object StructuredMarginalMAPVE {
    * @param mapElements Elements for which to compute MAP queries. Elements not in this list are summed over,
    * and cannot be queried.
    */
-  def apply(mapElements: Element[_]*)(implicit universe: Universe) = {        
-    new StructuredMarginalMAPVE(universe, mapElements:_*)
+  def apply(mapElements: Element[?]*)(implicit universe: Universe) = {
+    new StructuredMarginalMAPVE(universe, mapElements*)
   }
 
   /**
@@ -42,8 +42,8 @@ object StructuredMarginalMAPVE {
    * @param target Element for which to compute MAP value.
    * @param mapElements Additional elements to MAP. Elements not in this list are summed over.
    */
-  def mostLikelyValue[T](target: Element[T], mapElements: Element[_]*): T = {
-    val alg = StructuredMarginalMAPVE((target +: mapElements).distinct:_*)
+  def mostLikelyValue[T](target: Element[T], mapElements: Element[?]*): T = {
+    val alg = StructuredMarginalMAPVE((target +: mapElements).distinct*)
     alg.start()
     val result = alg.mostLikelyValue(target)
     alg.kill()

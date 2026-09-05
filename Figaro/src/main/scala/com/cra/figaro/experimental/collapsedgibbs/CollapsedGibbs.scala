@@ -33,7 +33,7 @@ import com.cra.figaro.library.compound.^^
 object CollapsedGibbs {
 
   // A block is just a list of variables
-  type Block = List[Variable[_]]
+  type Block = List[Variable[?]]
 
   // Information passed to BlockSampler constructor
   type BlockInfo = (Block, List[Factor[Double]])
@@ -45,40 +45,40 @@ object CollapsedGibbs {
    * Create a one-time collapsed Gibbs sampler using the given number of samples and target elements.
    * This sampler will use the default collapsing strategy (Heuristic) and default params for that strategy.
    */
-  def apply(mySamples: Int, targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply("", List[(Universe, List[NamedEvidence[_]])](),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    mySamples, 0, 1, BlockSampler.default, targets: _*)
+  def apply(mySamples: Int, targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply("", List[(Universe, List[NamedEvidence[?]])](),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    mySamples, 0, 1, BlockSampler.default, targets*)
 
   /**
    * Create a one-time collapsed Gibbs sampler using the given strategy for collapsing, number of samples,
    * and target elements.
    * Uses the default params for the strategy.
    */
-  def apply(strategy:String, mySamples: Int, targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply(strategy, List[(Universe, List[NamedEvidence[_]])](),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    mySamples, 0, 1, BlockSampler.default, targets: _*)
+  def apply(strategy:String, mySamples: Int, targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply(strategy, List[(Universe, List[NamedEvidence[?]])](),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    mySamples, 0, 1, BlockSampler.default, targets*)
 
   /**
    * Create a one-time collapsed Gibbs sampler using the specified strategy and parameters, and the
    * given number of samples and target elements.
    */
   def apply(strategy:String, collapseParameters:Seq[Int], mySamples: Int, 
-  	targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply(strategy, collapseParameters, List[(Universe, List[NamedEvidence[_]])](),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    mySamples, 0, 1, BlockSampler.default, targets: _*)
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply(strategy, collapseParameters, List[(Universe, List[NamedEvidence[?]])](),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    mySamples, 0, 1, BlockSampler.default, targets*)
 
   /**
    * Create a one-time collapsed Gibbs sampler using the given number of samples, the number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
   def apply(mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator,
-  	targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply("", List[(Universe, List[NamedEvidence[_]])](),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    mySamples, burnIn, interval, blockToSampler, targets: _*)
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply("", List[(Universe, List[NamedEvidence[?]])](),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    mySamples, burnIn, interval, blockToSampler, targets*)
 
   /**
    * Create a one-time collapsed Gibbs sampler using the given strategy, number of samples, the number of samples to burn in,
@@ -86,10 +86,10 @@ object CollapsedGibbs {
    * Uses the default params for the strategy.
    */
   def apply(strategy: String, mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator,
-  	targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply(strategy, List[(Universe, List[NamedEvidence[_]])](),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    mySamples, burnIn, interval, blockToSampler, targets: _*)
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply(strategy, List[(Universe, List[NamedEvidence[?]])](),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    mySamples, burnIn, interval, blockToSampler, targets*)
 
   /**
    * Create a one-time collapsed Gibbs sampler using the specified strategy and parameters,
@@ -98,10 +98,10 @@ object CollapsedGibbs {
    */
   def apply(strategy: String, collapseParameters:Seq[Int], mySamples: Int, burnIn: Int,
     interval: Int, blockToSampler: BlockSamplerCreator,
-  	targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply(strategy, List[(Universe, List[NamedEvidence[_]])](),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    mySamples, burnIn, interval, blockToSampler, targets: _*)
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply(strategy, List[(Universe, List[NamedEvidence[?]])](),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    mySamples, burnIn, interval, blockToSampler, targets*)
 
   /**
    * Create a one-time collapsed Gibbs sampler using the 
@@ -109,14 +109,14 @@ object CollapsedGibbs {
    * the number of samples, the number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
     mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator,
-    targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
     this.apply("",
       dependentUniverses,
       dependentAlgorithm,
-      mySamples, burnIn, interval, blockToSampler, targets: _*)
+      mySamples, burnIn, interval, blockToSampler, targets*)
 
   /**
    * Create a one-time collapsed Gibbs sampler using the given strategy, 
@@ -124,31 +124,31 @@ object CollapsedGibbs {
    * the number of samples, the number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
-  def apply(strategy:String, dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[_]*)(implicit universe: Universe) =
+  def apply(strategy:String, dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[?]*)(implicit universe: Universe) =
     strategy match {
-    	case "SIMPLE" =>  new CollapsedProbQueryGibbs(universe, targets: _*)(
+      case "SIMPLE" =>  new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs {
 	      val numSamples = mySamples }
-    	case "FACTOR" => new CollapsedProbQueryGibbs(universe, targets: _*)(
+      case "FACTOR" => new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs
 	    	with FactorSizeCollapseStrategy { val numSamples = mySamples }
-    	case "DETERM" => new CollapsedProbQueryGibbs(universe, targets: _*)(
+      case "DETERM" => new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs
 	    	with DeterministicCollapseStrategy { val numSamples = mySamples }
-    	case "RECURR" => new CollapsedProbQueryGibbs(universe, targets: _*)(
+      case "RECURR" => new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs
 	    	with RecurringCollapseStrategy { val numSamples = mySamples }
-	    case _ => new CollapsedProbQueryGibbs(universe, targets: _*)(
+	    case _ => new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -160,9 +160,9 @@ object CollapsedGibbs {
    * the number of samples, the number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
-  def apply(strategy:String, collapseParameters:Seq[Int], dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[_]*)(implicit universe: Universe) =
+  def apply(strategy:String, collapseParameters:Seq[Int], dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[?]*)(implicit universe: Universe) =
     strategy match {
         /* 
          * In all the constructors below:
@@ -171,7 +171,7 @@ object CollapsedGibbs {
          */ 
     	case "SIMPLE" =>  {
     		val Seq(alpha, gamma) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs {
@@ -181,7 +181,7 @@ object CollapsedGibbs {
         //factorThresh is the maximum total cost of all variables eliminated.
         //when we exceed this value, collapsing stops, even if there are still candidates.
     		val Seq(alpha, gamma, factorThresh) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -192,7 +192,7 @@ object CollapsedGibbs {
 	    }
     	case "DETERM" => {
     		val Seq(alpha, gamma) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -203,7 +203,7 @@ object CollapsedGibbs {
         //sampleResetFrequency is the frequency with which we reset and re-collapse the model.
         //sampleSaveFrequency is the frequency with which we store a sample to use in our marginal estimates.
     		val Seq(alpha, gamma, sampleResetFrequency, sampleSaveFrequency) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -215,7 +215,7 @@ object CollapsedGibbs {
 	    }
 	    case _ => {
     		val Seq(alpha, gamma) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -226,26 +226,26 @@ object CollapsedGibbs {
   /**
    * Create an anytime collapsed Gibbs sampler using the given target elements.
    */
-  def apply(targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply("", List[(Universe, List[NamedEvidence[_]])](),
-    (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    0, 1, BlockSampler.default, targets: _*)
+  def apply(targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply("", List[(Universe, List[NamedEvidence[?]])](),
+    (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    0, 1, BlockSampler.default, targets*)
 
   /**
    * Create an anytime collapsed Gibbs sampler using the given strategy and target elements.
    */
-  def apply(strategy:String, targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply(strategy, List[(Universe, List[NamedEvidence[_]])](),
-    (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    0, 1, BlockSampler.default, targets: _*)
+  def apply(strategy:String, targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply(strategy, List[(Universe, List[NamedEvidence[?]])](),
+    (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    0, 1, BlockSampler.default, targets*)
 
   /**
    * Create an anytime collapsed Gibbs sampler using the given strategy, parameters, and target elements.
    */
-  def apply(strategy: String, collapseParameters:Seq[Int], targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply(strategy, collapseParameters, List[(Universe, List[NamedEvidence[_]])](),
-    (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    0, 1, BlockSampler.default, targets: _*)
+  def apply(strategy: String, collapseParameters:Seq[Int], targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply(strategy, collapseParameters, List[(Universe, List[NamedEvidence[?]])](),
+    (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    0, 1, BlockSampler.default, targets*)
 
   /**
    * Create an anytime collapsed Gibbs sampler using the default strategy with default parameters,
@@ -253,30 +253,30 @@ object CollapsedGibbs {
    * the sampling interval, the BlockSampler generator, and target elements.
    */
   def apply(burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator,
-  	targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply("", List[(Universe, List[NamedEvidence[_]])](),
-    (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    burnIn, interval, blockToSampler, targets: _*)
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply("", List[(Universe, List[NamedEvidence[?]])](),
+    (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    burnIn, interval, blockToSampler, targets*)
 
   /**
    * Create an anytime collapsed Gibbs sampler using the given strategy, number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
   def apply(strategy:String, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator,
-  	targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply(strategy, List[(Universe, List[NamedEvidence[_]])](),
-    (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    burnIn, interval, blockToSampler, targets: _*)
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply(strategy, List[(Universe, List[NamedEvidence[?]])](),
+    (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    burnIn, interval, blockToSampler, targets*)
 
   /**
    * Create an anytime collapsed Gibbs sampler using the given number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
   def apply(strategy:String, collapseParameters:Seq[Int], burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator,
-  	targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
-  	this.apply(strategy, collapseParameters, List[(Universe, List[NamedEvidence[_]])](),
-    (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
-    burnIn, interval, blockToSampler, targets: _*)
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    this.apply(strategy, collapseParameters, List[(Universe, List[NamedEvidence[?]])](),
+    (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
+    burnIn, interval, blockToSampler, targets*)
 
   /**
    * Create an anytime collapsed Gibbs sampler using the default strategy with default paramters,
@@ -284,14 +284,14 @@ object CollapsedGibbs {
    * the number of samples to burn in, the sampling interval,
    * the BlockSampler generator, and target elements.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
     burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator,
-    targets: Element[_]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
+    targets: Element[?]*)(implicit universe: Universe):CollapsedProbQueryGibbs =
     this.apply("",
       dependentUniverses,
       dependentAlgorithm,
-      burnIn, interval, blockToSampler, targets: _*)
+      burnIn, interval, blockToSampler, targets*)
 
    /**
    * Create an anytime collapsed Gibbs sampler using the given strategy (with default parameters), 
@@ -299,30 +299,30 @@ object CollapsedGibbs {
    * the number of samples to burn in, the sampling interval,
    * the BlockSampler generator, and target elements.
    */
-  def apply(strategy: String, dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[_]*)(implicit universe: Universe) =
+  def apply(strategy: String, dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[?]*)(implicit universe: Universe) =
     strategy match {
-    	case "SIMPLE" =>  new CollapsedProbQueryGibbs(universe, targets: _*)(
+      case "SIMPLE" =>  new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
-    	case "FACTOR" => new CollapsedProbQueryGibbs(universe, targets: _*)(
+      case "FACTOR" => new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
 	    	with FactorSizeCollapseStrategy
-    	case "DETERM" => new CollapsedProbQueryGibbs(universe, targets: _*)(
+      case "DETERM" => new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
 	    	with DeterministicCollapseStrategy
-    	case "RECURR" => new CollapsedProbQueryGibbs(universe, targets: _*)(
+      case "RECURR" => new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
 	    	with RecurringCollapseStrategy
-	    case _ => new CollapsedProbQueryGibbs(universe, targets: _*)(
+	    case _ => new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -335,9 +335,9 @@ object CollapsedGibbs {
    * the number of samples to burn in, the sampling interval,
    * the BlockSampler generator, and target elements.
    */
-  def apply(strategy: String, collapseParameters:Seq[Int], dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[_]*)(implicit universe: Universe) =
+  def apply(strategy: String, collapseParameters:Seq[Int], dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[?]*)(implicit universe: Universe) =
     strategy match {
         /* 
          * In all the constructors below:
@@ -346,7 +346,7 @@ object CollapsedGibbs {
          */ 
     	case "SIMPLE" =>  {
     		val Seq(alpha, gamma) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -355,7 +355,7 @@ object CollapsedGibbs {
       //when we exceed this value, collapsing stops, even if there are still candidates.
     	case "FACTOR" => {
     		val Seq(alpha, gamma, factorThresh) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -365,7 +365,7 @@ object CollapsedGibbs {
 	    }
     	case "DETERM" => {
     		val Seq(alpha, gamma) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -375,7 +375,7 @@ object CollapsedGibbs {
         //sampleResetFrequency is the frequency with which we reset and re-collapse the model.
         //sampleSaveFrequency is the frequency with which we store a sample to use in our marginal estimates.
     		val Seq(alpha, gamma, sampleResetFrequency, sampleSaveFrequency) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
@@ -386,7 +386,7 @@ object CollapsedGibbs {
 	    }
 	    case _ => {
     		val Seq(alpha, gamma, trackSamples) = collapseParameters
-    		new CollapsedProbQueryGibbs(universe, targets: _*)(
+        new CollapsedProbQueryGibbs(universe, targets*)(
 	      dependentUniverses,
 	      dependentAlgorithm,
 	      burnIn, interval, blockToSampler, alpha, gamma) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs

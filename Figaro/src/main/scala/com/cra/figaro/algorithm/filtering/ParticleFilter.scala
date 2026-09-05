@@ -51,15 +51,15 @@ trait ParticleFilter {
    * under the given function at the current time point.
    */
   def computeCurrentExpectation[T](reference: Reference[T], function: T => Double): Double = {
-    val fValues: Seq[Double] = beliefState.map(state => function(state.get(reference)))
-    val total = (fValues :\ 0.0)(_ + _)
+    val fValues: Seq[Double] = beliefState.iterator.map(state => function(state.get(reference))).toIndexedSeq
+    val total = (fValues).foldRight(0.0)(_ + _)
     total.toDouble / numParticles
   }
 
   /**
    * Returns the distribution over the element referred to by the reference at the current time point.
    */
-  def computeCurrentDistribution[T](reference: Reference[T]): Stream[(Double, T)] = {
+  def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)] = {
     val map = scala.collection.mutable.Map[T, Int]()
     for {
       state <- beliefState
@@ -70,7 +70,7 @@ trait ParticleFilter {
     }
     val z = 1.0 / beliefState.size
     val normalized = map.toList.map((pair: (T, Int)) => (pair._2 * z, pair._1))
-    normalized.toStream
+    normalized.to(LazyList)
   }
 
   /*
@@ -117,7 +117,7 @@ trait ParticleFilter {
     logProbEvidence = logProbEvidence + scala.math.log(sum / numParticles)
   }
 
-  protected def addWeightedParticle(evidence: Seq[NamedEvidence[_]], index: Int, universes: UniverseWindow, lw: LikelihoodWeighter): ParticleFilter.WeightedParticle = {
+  protected def addWeightedParticle(evidence: Seq[NamedEvidence[?]], index: Int, universes: UniverseWindow, lw: LikelihoodWeighter): ParticleFilter.WeightedParticle = {
     val previousState = beliefState(index)
     previousState.dynamic.restore(universes.previous)
     previousState.static.restore(universes.static)
@@ -180,7 +180,7 @@ class OneTimeParticleFilter(static: Universe = new Universe(), initial: Universe
   extends Filtering(static, initial, transition) with ParticleFilter with OneTimeFiltering {
 
   var currentUniverse: Universe = initial
-  var previousUniverse: Universe = _
+  var previousUniverse: Universe = scala.compiletime.uninitialized
 
   private def doTimeStep(weightedParticleCreator: Int => ParticleFilter.WeightedParticle): Unit = {
     val weightedParticles = for { i <- 0 until numParticles } yield weightedParticleCreator(i)
@@ -203,7 +203,7 @@ class OneTimeParticleFilter(static: Universe = new Universe(), initial: Universe
   /**
    * Advance the filtering one time step, conditioning on the given evidence at the new time point.
    */
-  def advanceTime(evidence: Seq[NamedEvidence[_]] = List()): Unit = {
+  def advanceTime(evidence: Seq[NamedEvidence[?]] = List()): Unit = {
 
     val currentWindow = new UniverseWindow(previousUniverse, currentUniverse, static)
     val newWindow = advanceUniverse(currentWindow, transition)
@@ -227,18 +227,6 @@ object ParticleFilter {
    */
   def apply(static: Universe, initial: Universe, transition: (Universe, Universe) => Universe, numParticles: Int): OneTimeParticleFilter =
     new OneTimeParticleFilter(static, initial, transition, numParticles)
-
-  /**
-   * A one-time particle filter.
-   *
-   * @param static The universe of elements whose values do not change over time
-   * @param initial The universe describing the distribution over the initial state of the system
-   * @param transition The transition model describing how the current state of the system depends on the previous
-   * @param numParticles Number of particles to use at each time step
-   */
-  @deprecated("If the static universe is defined, use the constructor where the transition function takes two universes", "2.3.0.0")
-  def apply(static: Universe, initial: Universe, transition: Universe => Universe, numParticles: Int): OneTimeParticleFilter =
-    new OneTimeParticleFilter(static, initial, (static: Universe, previous: Universe) => transition(previous), numParticles)
 
   /**
    * A one-time particle filter in which the static universe is empty.

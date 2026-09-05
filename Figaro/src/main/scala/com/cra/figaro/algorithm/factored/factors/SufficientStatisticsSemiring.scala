@@ -24,26 +24,26 @@ import scala.collection.immutable.{ Set, Map, Seq }
  *  @param parameterMap Map of parameters to their sufficient statistics. Expectation 
  *  Maximization determines the parameterMap automatically from the parameters. 
  */
-class SufficientStatisticsSemiring(parameterMap: immutable.Map[Parameter[_], Seq[Double]])
-  extends Semiring[(Double, immutable.Map[Parameter[_], Seq[Double]])] {
+class SufficientStatisticsSemiring(parameterMap: immutable.Map[Parameter[?], Seq[Double]])
+  extends Semiring[(Double, immutable.Map[Parameter[?], Seq[Double]])] {
   
   /**
    * 0 probability and a vector of zeros for all parameters. The vector for a parameter
    * must be of length equal to number of possible observations of the parameter.
    */
-  val zero = (0.0, immutable.Map(parameterMap.toSeq: _*))
+  val zero = (0.0, immutable.Map(parameterMap.toSeq*))
   
   /**
    * 1 probability and a vector of zeros for all parameters. The vector for a parameter
    * must be of length equal to number of possible observations of the parameter.
    */
-  val one = (1.0, immutable.Map(parameterMap.toSeq: _*))
+  val one = (1.0, immutable.Map(parameterMap.toSeq*))
 
   /**
    * Probabilities are multiplied using standard multiplication. 
    * Sufficient statistics for each parameter are summed together.
    */
-  def product(xVector: (Double, Map[Parameter[_], Seq[Double]]), yVector: (Double, Map[Parameter[_], Seq[Double]])): (Double, Map[Parameter[_], Seq[Double]]) = {	  
+  def product(xVector: (Double, Map[Parameter[?], Seq[Double]]), yVector: (Double, Map[Parameter[?], Seq[Double]])): (Double, Map[Parameter[?], Seq[Double]]) = {
     (simpleProduct(xVector._1, yVector._1), mapProduct(xVector, yVector))
   }
 
@@ -52,18 +52,18 @@ class SufficientStatisticsSemiring(parameterMap: immutable.Map[Parameter[_], Seq
    * Sufficient statistics for each parameter are weighted by their respective probabilities and summed together, 
    * then divided by the sum of both probabilities.
    */
-  def sum(xVector: (Double, Map[Parameter[_], Seq[Double]]), yVector: (Double, Map[Parameter[_], Seq[Double]])): (Double, Map[Parameter[_], Seq[Double]]) = {
+  def sum(xVector: (Double, Map[Parameter[?], Seq[Double]]), yVector: (Double, Map[Parameter[?], Seq[Double]])): (Double, Map[Parameter[?], Seq[Double]]) = {
     (simpleSum(xVector._1, yVector._1), mapSum(xVector, yVector))
   }
 
-  private def mapSum(xVector: (Double, Map[Parameter[_], Seq[Double]]), yVector: (Double, Map[Parameter[_], Seq[Double]])): Map[Parameter[_], Seq[Double]] = {
+  private def mapSum(xVector: (Double, Map[Parameter[?], Seq[Double]]), yVector: (Double, Map[Parameter[?], Seq[Double]])): Map[Parameter[?], Seq[Double]] = {
     require(xVector._2.size == yVector._2.size)    
     Map() ++ {for (x <- xVector._2.keys)  yield {
       x -> weightedComponentSum(xVector._2(x), yVector._2(x), xVector._1, yVector._1)
     }}
   }
 
-  private def mapProduct(xVector: (Double, Map[Parameter[_], Seq[Double]]), yVector: (Double, Map[Parameter[_], Seq[Double]])): Map[Parameter[_], Seq[Double]] = {    
+  private def mapProduct(xVector: (Double, Map[Parameter[?], Seq[Double]]), yVector: (Double, Map[Parameter[?], Seq[Double]])): Map[Parameter[?], Seq[Double]] = {
     require(xVector._2.size == yVector._2.size)
     Map() ++ {for (x <- xVector._2.keys) yield {
       x -> simpleComponentSum(xVector._2(x), yVector._2(x))
@@ -104,5 +104,5 @@ class SufficientStatisticsSemiring(parameterMap: immutable.Map[Parameter[_], Seq
 
 object SufficientStatisticsSemiring
 {
-	def apply(parameterMap : immutable.Map[Parameter[_], Seq[Double]]) = new SufficientStatisticsSemiring(parameterMap)
+	def apply(parameterMap : immutable.Map[Parameter[?], Seq[Double]]) = new SufficientStatisticsSemiring(parameterMap)
 }

@@ -40,7 +40,7 @@ class MultiDecisionVETest extends AnyWordSpec with Matchers {
 
       "produce the correct strategy with discrete strategies" in {
         val (alg, declist, before, after) = MultiDecisionDiscrete((e1: List[Element[Double]], e2: List[Decision[Boolean, Double]]) =>
-          MultiDecisionVariableElimination(e1, e2: _*), false)
+          MultiDecisionVariableElimination(e1, e2*), false)
         val d1 = declist(0)
         val d2 = declist(1)
 
@@ -52,7 +52,7 @@ class MultiDecisionVETest extends AnyWordSpec with Matchers {
     }
     "increase the expected utility" in {
       val (alg, declist, before, after) = MultiDecisionDiscrete((e1: List[Element[Double]], e2: List[Decision[Boolean, Double]]) =>
-        MultiDecisionVariableElimination(e1, e2: _*), true)
+        MultiDecisionVariableElimination(e1, e2*), true)
       after should be > (before)
     }
 

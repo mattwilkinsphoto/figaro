@@ -43,10 +43,10 @@ object Sources {
 
   private class Pair(val source: Source, val sample: Sample) {
     val universe = new Universe(List(sample.fromSource))
-    val isTheRightSource = Apply(sample.fromSource, (s: Source) => s == source)("isTheRightSource", universe)
-    val rightSourceDistance = Normal(0.0, 1.0)("rightSourceDistance", universe)
-    val wrongSourceDistance = Uniform(0.0, 10.0)("wrongSourceDistance", universe)
-    val distance = If(isTheRightSource, rightSourceDistance, wrongSourceDistance)("distance", universe)
+    val isTheRightSource = Apply(sample.fromSource, (s: Source) => s == source)(using "isTheRightSource", universe)
+    val rightSourceDistance = Normal(0.0, 1.0)(using "rightSourceDistance", universe)
+    val wrongSourceDistance = Uniform(0.0, 10.0)(using "wrongSourceDistance", universe)
+    val distance = If(isTheRightSource, rightSourceDistance, wrongSourceDistance)(using "distance", universe)
   }
 
   private val source1 = new Source("Source 1")
@@ -80,8 +80,8 @@ object Sources {
     val ue2 = (pair2.universe, List(evidence2))
     val ue3 = (pair3.universe, List(evidence3))
     val ue4 = (pair4.universe, List(evidence4))
-    def peAlg(universe: Universe, evidence: List[NamedEvidence[_]]) = () => ProbEvidenceSampler.computeProbEvidence(100000, evidence)(universe)
-    val alg = VariableElimination(List(ue1, ue2, ue3, ue4), peAlg _, sample1.fromSource)
+    def peAlg(universe: Universe, evidence: List[NamedEvidence[?]]) = () => ProbEvidenceSampler.computeProbEvidence(100000, evidence)(using universe)
+    val alg = VariableElimination(List(ue1, ue2, ue3, ue4), peAlg, sample1.fromSource)
     alg.start()
     val result = alg.probability(sample1.fromSource)(_ == source1)
     println("Probability of Source 1: " + result)

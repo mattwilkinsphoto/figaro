@@ -122,7 +122,7 @@ class Aggregate[T, U](collection: ElementCollection, reference: Reference[T], va
   private def possibleInputs(depth: Int): ValueSet[MultiSet[T]] =
     LazyValues(universe)(mvre, depth)
 
-  def generateValue(): U = aggregate(HashMultiSet(collection.getManyElementsByReference(reference).toList.map(_.value): _*))
+  def generateValue(): U = aggregate(HashMultiSet(collection.getManyElementsByReference(reference).toList.map(_.value)*))
 
   def makeValues(depth: Int): ValueSet[U] = {
     val inputs = possibleInputs(depth)
@@ -177,11 +177,11 @@ class MultiValuedReferenceElement[T](coll: ElementCollection, ref: Reference[T])
   def generateValue(): MultiSet[T] = {
     val referredToElements = collection.getManyElementsByReference(reference).toList
     referredToElements.foreach(elem => elem.generateValue(elem.randomness))
-    HashMultiSet(referredToElements: _*) map ((e: Element[T]) => e.value)
+    HashMultiSet(referredToElements*).map((e: Element[T]) => e.value)
   }
 
   private def allUnions(setset1: ValueSet[MultiSet[T]], setset2: ValueSet[MultiSet[T]]): ValueSet[MultiSet[T]] = {
-    val multiSets = for { set1 <- setset1.regularValues; set2 <- setset2.regularValues } yield set1 union set2
+    val multiSets = for { set1 <- setset1.regularValues; set2 <- setset2.regularValues } yield set1.union(set2)
     if (setset1.hasStar || setset2.hasStar) withStar(multiSets); else withoutStar(multiSets)
   }
 
@@ -209,10 +209,10 @@ class MultiValuedReferenceElement[T](coll: ElementCollection, ref: Reference[T])
     rest match {
       case None =>
         val firstValues = LazyValues(universe)(first.asInstanceOf[Element[T]], depth)
-        firstValues.map((t: T) => HashMultiSet(List(t): _*))
+        firstValues.map((t: T) => HashMultiSet(List(t)*))
       case Some(restRef) =>
         val results: Set[ValueSet[MultiSet[T]]] = {
-          val firstValues: ValueSet[_] = LazyValues(universe)(first, depth)
+          val firstValues: ValueSet[?] = LazyValues(universe)(first, depth)
           for { firstXvalue <- firstValues.xvalues } yield {
             if (firstXvalue.isRegular) {
               firstXvalue.value match {
@@ -220,7 +220,7 @@ class MultiValuedReferenceElement[T](coll: ElementCollection, ref: Reference[T])
                   val embedded = new MultiValuedReferenceElement(firstColl, restRef)
                   embeddedElements += firstColl -> embedded
                   LazyValues(universe)(embedded, depth - 1)
-                case ecs: Traversable[_] =>
+                case ecs: Iterable[_] =>
                   val collections: List[ElementCollection] = ecs.map((x: Any) => x.asInstanceOf[ElementCollection]).toList.distinct
                   val multis = {
                     for {
@@ -231,11 +231,11 @@ class MultiValuedReferenceElement[T](coll: ElementCollection, ref: Reference[T])
                       restMulti
                     }
                   }
-                  val combination: Element[List[MultiSet[T]]] = Inject(multis: _*)
+                  val combination: Element[List[MultiSet[T]]] = Inject(multis*)
                   LazyValues(universe)(combination, depth - 1)
                   embeddedInject += collections -> combination
                   val applyStarter: MultiSet[T] = HashMultiSet[T]()
-                  val setMaker = Apply(combination, (sets: List[MultiSet[T]]) => (applyStarter /: sets)(_ union _))
+                  val setMaker = Apply(combination, (sets: List[MultiSet[T]]) => (sets).foldLeft(applyStarter)(_.union(_)))
                   LazyValues(universe)(setMaker, depth - 1)
                   embeddedApply += collections -> setMaker
                   val resultSets: List[ValueSet[MultiSet[T]]] =
@@ -250,7 +250,7 @@ class MultiValuedReferenceElement[T](coll: ElementCollection, ref: Reference[T])
                      * multiset, which is why the start is the value set containing the single empty multiset.
                      */
                   val starter: ValueSet[MultiSet[T]] = withoutStar(Set(HashMultiSet()))
-                  (starter /: resultSets)(allUnions(_, _))
+                  (resultSets).foldLeft(starter)(allUnions(_, _))
               }
             } else withStar[MultiSet[T]](Set())
           }
@@ -260,7 +260,7 @@ class MultiValuedReferenceElement[T](coll: ElementCollection, ref: Reference[T])
          * so that starter is the empty value set.
          */
         val starter: ValueSet[MultiSet[T]] = withoutStar(Set())
-        (starter /: results)(_ ++ _)
+        (results).foldLeft(starter)(_ ++ _)
     }
   }
 
@@ -291,10 +291,10 @@ class MultiValuedReferenceElement[T](coll: ElementCollection, ref: Reference[T])
   //                    val result: List[Factor[Double]] =
   //                      Factory.makeConditionalSelector(this, firstVar, firstIndex, Variable(restElement)) :: Factory.make(restElement)
   //                    result
-  //                  case cs: Traversable[_] =>
+  //                  case cs: Iterable[_] =>
   //                    // Create a multi-valued reference element (MVRE) for each collection in the value of the first name.
   //                    // Since the first name is multi-valued, its value is the union of the values of all these MVREs.
-  //                    val collections = cs.asInstanceOf[Traversable[ElementCollection]].toList.distinct // Set semantics
+  //                    val collections = cs.asInstanceOf[Iterable[ElementCollection]].toList.distinct // Set semantics
   //                    val multis: List[MultiValuedReferenceElement[T]] = collections.map(embeddedElements(_)).toList
   //                    // Create the element that takes the union of the values of the all the MVREs.
   //                    // The combination and setMaker elements are encapsulated within this object and are created now, so we need to create factors for them.

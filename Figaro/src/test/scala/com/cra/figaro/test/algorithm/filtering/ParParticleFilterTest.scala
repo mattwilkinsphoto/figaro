@@ -35,8 +35,8 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val genWithStates = () => {
           val staticSnapshot = new Snapshot
           val universe = new Universe()
-          val f1 = Flip(0.2)("f1", universe)
-          val f2 = Flip(0.7)("f2", universe)
+          val f1 = Flip(0.2)(using "f1", universe)
+          val f2 = Flip(0.7)(using "f2", universe)
           f1.value = true
           f2.value = false
           val dynamicSnapshot1 = new Snapshot
@@ -65,8 +65,8 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val numParticles = 20000
         val gen = () => {
           val universe = new Universe()
-          val f1 = Flip(0.2)("f1", universe)
-          val i2 = If(f1, Flip(0.3)(Name.default, universe), Flip(0.6)(Name.default, universe))("f2", universe)
+          val f1 = Flip(0.2)(using "f1", universe)
+          val i2 = If(f1, Flip(0.3)(using Name.default, universe), Flip(0.6)(using Name.default, universe))(using "f2", universe)
           i2.observe(true)
           universe
         }
@@ -85,12 +85,12 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val numParticles = 20000
         val gen = () => {
           val universe1 = new Universe()
-          val f1 = Flip(0.2)("f", universe1)
+          val f1 = Flip(0.2)(using "f", universe1)
           universe1
         }
         def trans(u: Universe): Universe = {
           val universe2 = new Universe()
-          val f2 = If(u.get[Boolean]("f"), Flip(0.8)(Name.default, universe2), Flip(0.3)(Name.default, universe2))("f", universe2)
+          val f2 = If(u.get[Boolean]("f"), Flip(0.8)(using Name.default, universe2), Flip(0.3)(using Name.default, universe2))(using "f", universe2)
           universe2
         }
         val pf = ParticleFilter.par(gen, trans, numParticles, numThreads)
@@ -110,13 +110,13 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
           val numParticles = 50000
           val gen = () => {
             val universe1 = new Universe()
-            val f11 = Flip(0.2)("f1", universe1)
+            val f11 = Flip(0.2)(using "f1", universe1)
             universe1
           }
           def trans(u: Universe): Universe = {
             val universe2 = new Universe()
-            val f12 = If(u.get[Boolean]("f1"), Flip(0.8)(Name.default, universe2), Flip(0.3)(Name.default, universe2))("f1", universe2)
-            val f22 = If(f12, Flip(0.6)(Name.default, universe2), Flip(0.1)(Name.default, universe2))("f2", universe2)
+            val f12 = If(u.get[Boolean]("f1"), Flip(0.8)(using Name.default, universe2), Flip(0.3)(using Name.default, universe2))(using "f1", universe2)
+            val f22 = If(f12, Flip(0.6)(using Name.default, universe2), Flip(0.1)(using Name.default, universe2))(using "f2", universe2)
             universe2
           }
           val pf = ParticleFilter.par(gen, trans, numParticles, numThreads)
@@ -132,7 +132,7 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val numParticles = 100000
         val staticGen = () => {
           val static = new Universe()
-          val x = Flip(0.2)("x", static)
+          val x = Flip(0.2)(using "x", static)
           static
         }
         val gen = () => {
@@ -141,7 +141,7 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         }
         def trans(static: Universe, previous: Universe): Universe = {
           val universe3 = new Universe()
-          val y = If(static.get[Boolean]("x"), Flip(0.8)(Name.default, universe3), Flip(0.1)(Name.default, universe3))("y", universe3)
+          val y = If(static.get[Boolean]("x"), Flip(0.8)(using Name.default, universe3), Flip(0.1)(using Name.default, universe3))(using "y", universe3)
           universe3
         }
         val pf = ParticleFilter.par(staticGen, gen, trans(_, _), numParticles, numThreads)
@@ -159,14 +159,14 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val numParticles = 100000
         val gen = () => {
           val universe1 = new Universe()
-          Flip(0.2)("f1", universe1)
+          Flip(0.2)(using "f1", universe1)
           universe1
         }
         def trans(previous: Universe): Universe = {
           val universe2 = new Universe()
           val previousF1 = previous.get("f1").asInstanceOf[Element[Boolean]]
-          val f1 = If(previousF1, Flip(0.8)(Name.default, universe2), Flip(0.3)(Name.default, universe2))("f1", universe2)
-          val f2 = If(f1, Flip(0.6)(Name.default, universe2), Flip(0.1)(Name.default, universe2))("f2", universe2)
+          val f1 = If(previousF1, Flip(0.8)(using Name.default, universe2), Flip(0.3)(using Name.default, universe2))(using "f1", universe2)
+          val f2 = If(f1, Flip(0.6)(using Name.default, universe2), Flip(0.1)(using Name.default, universe2))(using "f2", universe2)
           universe2
         }
         val pf = ParticleFilter.par(gen, trans, numParticles, numThreads)
@@ -197,17 +197,17 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val numParticles = 100000
         val staticGen = () => {
           val static = new Universe()
-          val x = Flip(0.2)("x", static)
+          val x = Flip(0.2)(using "x", static)
           static
         }
         val initialGen = () => {
           val initial = new Universe()
-          val y = Flip(0.3)("y", initial)
+          val y = Flip(0.3)(using "y", initial)
           initial
         }
         def trans(static: Universe, previous: Universe): Universe = {
           val universe3 = new Universe()
-          val y = If(static.get[Boolean]("x"), Flip(0.8)(Name.default, universe3), previous.get[Boolean]("y"))("y", universe3)
+          val y = If(static.get[Boolean]("x"), Flip(0.8)(using Name.default, universe3), previous.get[Boolean]("y"))(using "y", universe3)
           universe3
         }
         val pf = ParticleFilter.par(staticGen, initialGen, trans(_, _), numParticles, numThreads)
@@ -241,14 +241,14 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val numParticles = 100000
         val gen = () => {
           val universe1 = new Universe()
-          Flip(0.2)("f1", universe1)
+          Flip(0.2)(using "f1", universe1)
           universe1
         }
         def trans(previous: Universe): Universe = {
           val universe2 = new Universe()
           val previousF1 = previous.get("f1").asInstanceOf[Element[Boolean]]
-          val f1 = If(previousF1, Flip(0.8)(Name.default, universe2), Flip(0.3)(Name.default, universe2))("f1", universe2)
-          val f2 = If(f1, Flip(0.6)(Name.default, universe2), Flip(0.1)(Name.default, universe2))("f2", universe2)
+          val f1 = If(previousF1, Flip(0.8)(using Name.default, universe2), Flip(0.3)(using Name.default, universe2))(using "f1", universe2)
+          val f2 = If(f1, Flip(0.6)(using Name.default, universe2), Flip(0.1)(using Name.default, universe2))(using "f2", universe2)
           universe2
         }
         val pf = ParticleFilter.par(gen, trans, numParticles, numThreads)
@@ -262,7 +262,7 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val qf1TrueTime2 = (pf1TrueTime1 * 0.8 + pf1FalseTime1 * 0.3) * 0.4
         val qf1FalseTime2 = (pf1TrueTime1 * 0.2 + pf1FalseTime1 * 0.7) * 0.9
         val pf1TrueTime2 = qf1TrueTime2 / (qf1TrueTime2 + qf1FalseTime2)
-        val d = pf.currentDistribution("f1").asInstanceOf[Stream[(Double, Boolean)]]
+        val d = pf.currentDistribution("f1").asInstanceOf[LazyList[(Double, Boolean)]]
         d.size should equal(2)
         if (d(0)._2 == true) {
           d(0)._2 should equal(true)
@@ -284,13 +284,13 @@ class ParParticleFilterTest extends AnyWordSpec with Matchers {
         val numSteps = 1000
         val gen = () => {
           val universe1 = new Universe()
-          Constant(Array.fill(1000)(0))("f1", universe1)
+          Constant(Array.fill(1000)(0))(using "f1", universe1)
           universe1
         }
         def trans(previous: Universe): Universe = {
           val universe2 = new Universe()
           val previousF1 = previous.get[Array[Int]]("f1")
-          Apply(previousF1, (a: Array[Int]) => a.map(_ + 1))("f1", universe2)
+          Apply(previousF1, (a: Array[Int]) => a.map(_ + 1))(using "f1", universe2)
           universe2
         }
         val pf = ParticleFilter.par(gen, trans, numParticles, numThreads)

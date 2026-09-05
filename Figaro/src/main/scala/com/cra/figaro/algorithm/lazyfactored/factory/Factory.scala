@@ -45,7 +45,7 @@ object Factory {
   /**
    * Create a DenseFactor from the supplied parent and children variables
    */
-  def defaultFactor[T](parents: List[Variable[_]], children: List[Variable[_]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]]) =
+  def defaultFactor[T](parents: List[Variable[?]], children: List[Variable[?]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]]) =
       new DenseFactor[T](parents, children, _semiring)
 
   private def makeFactors[T](const: Constant[T]): List[Factor[Double]] = {
@@ -107,7 +107,7 @@ object Factory {
     val factor = new ConditionalSelector[Double](List(selector, outcomeVar), List(overallVar))
     for { i <- 0 until selector.size } {
       if (i == outcomeIndex) {
-        makeCares(factor, outcomeIndex, outcomeVar, overallVar, overallValues.regularValues)(mapper)
+        makeCares(factor, outcomeIndex, outcomeVar, overallVar, overallValues.regularValues)(using mapper)
       } else {
         makeDontCares(factor, i, outcomeVar, overallVar)
       }
@@ -193,7 +193,7 @@ object Factory {
     newFactors.toList
   }
 
-  val variableSet = scala.collection.mutable.Set[Variable[_]]()
+  val variableSet = scala.collection.mutable.Set[Variable[?]]()
   val nextFactors = ListBuffer[Factor[Double]]()
 
   private def reduceFactor(factor: Factor[Double], semiring: Semiring[Double], maxElementCount: Int): List[Factor[Double]] = {
@@ -201,8 +201,8 @@ object Factory {
 
     var resultFactor = unit[Double](semiring).product(factor)
 
-    (variableSet /: List(factor))(_ ++= _.variables.asInstanceOf[List[Variable[_]]])
-    for (variable <- variableSet.filter { _.isInstanceOf[InternalVariable[_]]}) {
+    (List(factor)).foldLeft(variableSet)(_ ++= _.variables.asInstanceOf[List[Variable[?]]])
+    for (variable <- variableSet.filter { _.isInstanceOf[InternalVariable[?]]}) {
       resultFactor = resultFactor.sumOver(variable)
       variableSet.remove(variable)
     }
@@ -214,8 +214,8 @@ object Factory {
     for { variable <- variableSet } {
       if (isTemporary(variable) && elementCount <= maxElementCount) {
         nextFactors.clear()
-        nextFactors ++= concreteFactors(variable.asInstanceOf[ElementVariable[_]].element)
-        (variableSet /: nextFactors)(_ ++= _.variables.asInstanceOf[List[ElementVariable[_]]])
+        nextFactors ++= concreteFactors(variable.asInstanceOf[ElementVariable[?]].element)
+        (nextFactors).foldLeft(variableSet)(_ ++= _.variables.asInstanceOf[List[ElementVariable[?]]])
         elementCount = variableSet count (v => !isTemporary(v))
 
         for (nextFactor <- nextFactors) {
@@ -236,11 +236,11 @@ object Factory {
     List(resultFactor)
   }
 
-  private def calculateSize(currentSize: Int, variables: Set[Variable[_]]) = {
-    (currentSize /: variables)(_ * _.size)
+  private def calculateSize(currentSize: Int, variables: Set[Variable[?]]) = {
+    (variables).foldLeft(currentSize)(_ * _.size)
   }
 
-  private def isTemporary[_T](variable: Variable[_]): Boolean = {
+  private def isTemporary[_T](variable: Variable[?]): Boolean = {
     variable match {
       case e: ElementVariable[_] => e.element.isTemporary
       case i: InternalVariable[_] => true
@@ -249,8 +249,9 @@ object Factory {
   }
 
   private def makeFactors[T](inject: Inject[T]): List[Factor[Double]] = {
-    def rule(values: List[Extended[_]]) = {
-      val inputXvalues :+ resultXvalue = values
+    def rule(values: List[Extended[?]]) = {
+      val inputXvalues = values.init
+      val resultXvalue = values.last
       // See logic under makeCares
       if (inputXvalues.exists(!_.isRegular)) {
         if (!resultXvalue.isRegular) 1.0; else 0.0
@@ -262,12 +263,12 @@ object Factory {
     val resultVariable = Variable(inject)
     //    val variables = resultVariable :: inputVariables
     val factor = new DenseFactor[Double](inputVariables, List(resultVariable))
-    factor.fillByRule(rule _)
+    factor.fillByRule(rule)
     List(factor)
   }
 
   // When we're using a parameter to compute expected sufficient statistics, we just use its expected value
-  private def makeParameterFactors(param: Parameter[_]): List[Factor[Double]] = {
+  private def makeParameterFactors(param: Parameter[?]): List[Factor[Double]] = {
     // The parameter should have one possible value, which is its expected value
     assert(Variable(param).range.size == 1)
     val factor = new DenseFactor[Double](List(), List(Variable(param)))
@@ -320,7 +321,6 @@ object Factory {
       case r: SingleValuedReferenceElement[_] => ComplexFactory.makeFactors(r)
       case r: MultiValuedReferenceElement[_] => ComplexFactory.makeFactors(r)
       case r: Aggregate[_, _] => ComplexFactory.makeFactors(r)
-      //case m: MakeList[_] => ComplexFactory.makeFactors(m)
       case m: MakeArray[_] => ComplexFactory.makeFactors(m)
       case f: FoldLeft[_, _] => ComplexFactory.makeFactors(f)
       case f: FactorMaker[_] => f.makeFactors
@@ -346,12 +346,12 @@ object Factory {
 
   private def makeAbstract[T](elem: Element[T], abstraction: Abstraction[T]): List[Factor[Double]] =
     elem match {
-      case apply: Apply1[_, _] => ApplyFactory.makeFactors(apply)(abstraction.scheme)
-      case apply: Apply2[_, _, _] => ApplyFactory.makeFactors(apply)(abstraction.scheme)
-      case apply: Apply3[_, _, _, _] => ApplyFactory.makeFactors(apply)(abstraction.scheme)
+      case apply: Apply1[_, _] => ApplyFactory.makeFactors(apply)(using abstraction.scheme)
+      case apply: Apply2[_, _, _] => ApplyFactory.makeFactors(apply)(using abstraction.scheme)
+      case apply: Apply3[_, _, _, _] => ApplyFactory.makeFactors(apply)(using abstraction.scheme)
       // In the case of a Chain, its pragmas are inherited by the expanded result elements. The abstraction will be
       // taken into account when we generate factors for the result elements.
-      case chain: Chain[_, _] => ChainFactory.makeFactors(chain)(abstraction.scheme)
+      case chain: Chain[_, _] => ChainFactory.makeFactors(chain)(using abstraction.scheme)
       case atomic: Atomic[_] => makeAbstract(atomic, abstraction)
       case _ => throw new UnsupportedAlgorithmException(elem)
     }
@@ -405,15 +405,16 @@ object Factory {
     factor
   }
 
-  private def makeContingentConstraintFactor[T](elem: Element[T], constraint: T => Double, firstConting: Element.ElemVal[_], restContinges: Element.Contingency): Factor[Double] = {
+  private def makeContingentConstraintFactor[T](elem: Element[T], constraint: T => Double, firstConting: Element.ElemVal[?], restContinges: Element.Contingency): Factor[Double] = {
     val restFactor = makeConstraintFactor(elem, (constraint, restContinges))
     extendConstraintFactor(restFactor, firstConting)
   }
 
-  private def extendConstraintFactor(restFactor: Factor[Double], firstConting: Element.ElemVal[_]): Factor[Double] = {
+  private def extendConstraintFactor(restFactor: Factor[Double], firstConting: Element.ElemVal[?]): Factor[Double] = {
     // The extended factor is obtained by getting the underlying factor and expanding each row so that the row only provides its entry if the contingent variable takes
     // on the appropriate value, otherwise the entry is 1
-    val Element.ElemVal(firstElem, firstValue) = firstConting
+    val firstElem = firstConting.elem
+    val firstValue = firstConting.value
     val firstVar = Variable(firstElem)
     val firstValues = firstVar.range
     val numFirstValues = firstValues.size
@@ -429,13 +430,11 @@ object Factory {
     resultFactor
   }
 
-  private val factorCache = new HashMap[Element[_], List[Factor[Double]]]() {
-    override def hashCode = 3
-  }
+  private val factorCache = new com.cra.figaro.util.RegisteredMap[Element[?], List[Factor[Double]]](3)
   /**
    * Construct a Factor without constraints.
    */
-  def makeNonConstraintFactors(elem: Element[_]): List[Factor[Double]] = {
+  def makeNonConstraintFactors(elem: Element[?]): List[Factor[Double]] = {
     factorCache.get(elem) match {
       case Some(l) => l
       case None =>
@@ -449,14 +448,14 @@ object Factory {
   /**
    * Create the probabilistic factors associated with an element. This method is memoized.
    */
-  def make(elem: Element[_]): List[Factor[Double]] = {
+  def make(elem: Element[?]): List[Factor[Double]] = {
     makeConditionAndConstraintFactors(elem) ::: makeNonConstraintFactors(elem)
   }
 
   /**
    * Creates a DenseFactor from the supplied variables
    */
-  def simpleMake[T](variables: List[Variable[_]]) =
+  def simpleMake[T](variables: List[Variable[?]]) =
     new DenseFactor[T](variables, List())
 
   /**
@@ -464,7 +463,7 @@ object Factory {
    * are regenerated. This is important, for example,  if evidence on the variable has changed.
    *
    */
-  def removeFactors(elem: Element[_]): Unit = { factorCache -= elem }
+  def removeFactors(elem: Element[?]): Unit = { factorCache -= elem }
 
   /**
    * Clear the factor cache.
@@ -474,7 +473,7 @@ object Factory {
   /**
    * Update the factor cache.
    */
-  def updateFactor[T](elem: Element[_], f: List[Factor[Double]]): Unit = { factorCache.update(elem, f) }
+  def updateFactor[T](elem: Element[?], f: List[Factor[Double]]): Unit = { factorCache.update(elem, f) }
 
   /**
    * Create the probabilistic factor encoding the probability of evidence in the dependent universe as a function of the
@@ -493,7 +492,7 @@ object Factory {
     }
     val variables = uses map (Variable(_))
     val factor = new DenseFactor[Double](variables, List())
-    factor.fillByRule(rule _)
+    factor.fillByRule(rule)
     factor
   }
     

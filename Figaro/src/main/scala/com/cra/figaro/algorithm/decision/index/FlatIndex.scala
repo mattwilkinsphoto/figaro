@@ -18,7 +18,7 @@ import com.cra.figaro.library.decision._
 import com.cra.figaro.algorithm.decision.index._
 import com.cra.figaro.language._
 import scala.collection.immutable.Map
-import scala.collection.mutable.{ HashMap, MultiMap, Set }
+import scala.collection.mutable.{ HashMap, Set }
 
 /**
  * Node class used in the flat index.

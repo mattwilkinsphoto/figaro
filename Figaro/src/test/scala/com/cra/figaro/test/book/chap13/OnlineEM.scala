@@ -25,10 +25,10 @@ import com.cra.figaro.test.tags.BookExample
 object OnlineEM {
   def main(args: Array[String]): Unit = {
     val parameters = ModelParameters()
-    val d = Dirichlet(2.0,2.0,2.0)("d",parameters)
+    val d = Dirichlet(2.0,2.0,2.0)(using "d",parameters)
 
     class Model(parameters: ParameterCollection, modelUniverse: Universe) {
-      val s = Select(parameters.get("d"), 1, 2, 3)("s", modelUniverse)
+      val s = Select(parameters.get("d"), 1, 2, 3)(using "s", modelUniverse)
     }
 
     def f = () => {
@@ -62,10 +62,10 @@ object OnlineEM {
 
 class OnlineEMTest extends AnyWordSpec with Matchers {
     val parameters = ModelParameters()
-    val d = Dirichlet(2.0,2.0,2.0)("d",parameters)
+    val d = Dirichlet(2.0,2.0,2.0)(using "d",parameters)
 
     class Model(parameters: ParameterCollection, modelUniverse: Universe) {
-      val s = Select(parameters.get("d"), 1, 2, 3)("s", modelUniverse)
+      val s = Select(parameters.get("d"), 1, 2, 3)(using "s", modelUniverse)
     }
 
     def f = () => {

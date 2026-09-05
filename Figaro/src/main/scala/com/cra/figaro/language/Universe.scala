@@ -19,7 +19,7 @@ import scala.annotation.tailrec
 import scala.collection.mutable.{ Set, Map }
 import scala.language.{ implicitConversions, existentials }
 import java.lang.IllegalArgumentException
-import scala.collection.generic.Shrinkable
+import scala.collection.mutable.Shrinkable
 
 /**
  * A universe is a collection of elements that can be used by a reasoning algorithm.
@@ -29,52 +29,52 @@ import scala.collection.generic.Shrinkable
  *
  * @param parentElements The parent elements on which this universe depends.
  */
-class Universe(val parentElements: List[Element[_]] = List()) extends ElementCollection {
+class Universe(val parentElements: List[Element[?]] = List()) extends ElementCollection {
 
   /**
    * The universe to which elements in this universe belongs, which is, of course, this universe.
    */
   override val universe = this
 
-  private[language] val myActiveElements: Set[Element[_]] = Set()
+  private[language] val myActiveElements: Set[Element[?]] = Set()
 
   /**
    * The active elements in the universe.
    */
-  def activeElements: List[Element[_]] = myActiveElements.toList
+  def activeElements: List[Element[?]] = myActiveElements.toList
 
   /** Elements in the universe that are not defined in the context of another element. */
-  def permanentElements: List[Element[_]] = myActiveElements.toList filterNot (_.isTemporary)
+  def permanentElements: List[Element[?]] = myActiveElements.toList filterNot (_.isTemporary)
 
-  private[language] val myConditionedElements: Set[Element[_]] = Set()
+  private[language] val myConditionedElements: Set[Element[?]] = Set()
 
   /** Elements in the universe that have had a condition applied to them. */
-  def conditionedElements: List[Element[_]] = myConditionedElements.toList
+  def conditionedElements: List[Element[?]] = myConditionedElements.toList
 
-  private[language] def makeConditioned(elem: Element[_]): Unit = { myConditionedElements += elem }
+  private[language] def makeConditioned(elem: Element[?]): Unit = { myConditionedElements += elem }
 
-  private[language] def makeUnconditioned(elem: Element[_]): Unit = { myConditionedElements -= elem }
+  private[language] def makeUnconditioned(elem: Element[?]): Unit = { myConditionedElements -= elem }
 
-  private[language] val myConstrainedElements: Set[Element[_]] = Set()
+  private[language] val myConstrainedElements: Set[Element[?]] = Set()
 
   /** Elements in the universe that have had a constraint applied to them. */
-  def constrainedElements: List[Element[_]] = myConstrainedElements.toList
+  def constrainedElements: List[Element[?]] = myConstrainedElements.toList
 
-  private[language] def makeConstrained(elem: Element[_]): Unit = { myConstrainedElements += elem }
+  private[language] def makeConstrained(elem: Element[?]): Unit = { myConstrainedElements += elem }
 
-  private[language] def makeUnconstrained(elem: Element[_]): Unit = { myConstrainedElements -= elem }
+  private[language] def makeUnconstrained(elem: Element[?]): Unit = { myConstrainedElements -= elem }
 
-  private[language] val myStochasticElements = new HashSelectableSet[Element[_]]
+  private[language] val myStochasticElements = new HashSelectableSet[Element[?]]
 
   /**
    * The active non-deterministic elements in the universe.
    */
-  def stochasticElements: List[Element[_]] = myStochasticElements.toList
+  def stochasticElements: List[Element[?]] = myStochasticElements.toList
 
   /**
    * Selects a non-deterministic element uniformly at random.
    */
-  def randomStochasticElement(): Element[_] = myStochasticElements.select()
+  def randomStochasticElement(): Element[?] = myStochasticElements.select()
 
   /* A Chain can create new Elements. For memory management purposes, we may want to release such an Element when
    * the argument to Chain takes on a different value so that the Element is no longer relevant to avoid memory leaks.
@@ -89,23 +89,23 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
    * any Chain. Conversely, if it is not empty, it must have been created within a chain, so it is temporary. It is
    * possible to remove all temporary Elements from a Map.
    */
-  private[language] var myContextStack: List[Element[_]] = List()
+  private[language] var myContextStack: List[Element[?]] = List()
 
   private[figaro] def contextStack = myContextStack
 
-  private[figaro] def context(element: Element[_]): List[Element[_]] = element.context
+  private[figaro] def context(element: Element[?]): List[Element[?]] = element.context
 
-  private[figaro] def inContext(dependent: Element[_], container: Element[_]): Boolean = dependent.context contains container
+  private[figaro] def inContext(dependent: Element[?], container: Element[?]): Boolean = dependent.context contains container
 
   /*
    * Maps an Element to all the Elements that were created directly in its context.
    * This defines a directed graph of elements. The complete set of Elements created in a context is computed
    * by calling reachable on this graph.
    */
-  private[figaro] def contextContents(element: Element[_]): List[Element[_]] =
-    reachable((e: Element[_]) => e.directContextContents, false, element).toList
+  private[figaro] def contextContents(element: Element[?]): List[Element[?]] =
+    reachable((e: Element[?]) => e.directContextContents, false, element).toList
 
-  private[figaro] def pushContext(element: Element[_]): Unit = {
+  private[figaro] def pushContext(element: Element[?]): Unit = {
     myContextStack ::= element
   }
 
@@ -113,44 +113,44 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
    * popContext pops all elements at and above the given element from the context stack, if it contains the given
    * element, otherwise it does nothing.
    */
-  private[figaro] def popContext(element: Element[_]): Unit = {
+  private[figaro] def popContext(element: Element[?]): Unit = {
     if (myContextStack contains element)
       myContextStack = myContextStack dropWhile (_ != element) drop 1
   }
 
-  private[language] val myUses: Map[Element[_], Set[Element[_]]] = Map()
+  private[language] val myUses: Map[Element[?], Set[Element[?]]] = Map()
 
-  private[language] val myUsedBy: Map[Element[_], Set[Element[_]]] = Map()
+  private[language] val myUsedBy: Map[Element[?], Set[Element[?]]] = Map()
 
-  private[language] val myRecursiveUsedBy: Map[Element[_], Set[Element[_]]] = Map()
-  private[language] val myRecursiveUses: Map[Element[_], Set[Element[_]]] = Map()
+  private[language] val myRecursiveUsedBy: Map[Element[?], Set[Element[?]]] = Map()
+  private[language] val myRecursiveUses: Map[Element[?], Set[Element[?]]] = Map()
 
   /**
    * Returns the set of elements that the given element uses in its generation, either directly or recursively.
    */
-  def uses(elem: Element[_]): Set[Element[_]] = {
-    elemGraphBuilder(List[(Element[_], Set[Element[_]])]() :+ (elem, Set[Element[_]]()), myUses, myRecursiveUses)
+  def uses(elem: Element[?]): Set[Element[?]] = {
+    elemGraphBuilder(List[(Element[?], Set[Element[?]])]() :+ (elem, Set[Element[?]]()), myUses, myRecursiveUses)
     myRecursiveUses.getOrElse(elem, Set())
   }
 
   /**
    * Returns the set of elements that the given element directly uses in its generation, without recursing.
    */
-  def directlyUses(elem: Element[_]): Set[Element[_]] = myUses.getOrElse(elem, Set())
+  def directlyUses(elem: Element[?]): Set[Element[?]] = myUses.getOrElse(elem, Set())
 
   /**
    * Returns the set of elements that use the given element in their generation, either directly or
    * recursively.
    */
-  def usedBy(elem: Element[_]): Set[Element[_]] = {
-    elemGraphBuilder(List[(Element[_], Set[Element[_]])]() :+ (elem, Set[Element[_]]()), myUsedBy, myRecursiveUsedBy)
+  def usedBy(elem: Element[?]): Set[Element[?]] = {
+    elemGraphBuilder(List[(Element[?], Set[Element[?]])]() :+ (elem, Set[Element[?]]()), myUsedBy, myRecursiveUsedBy)
     myRecursiveUsedBy.getOrElse(elem, Set())
   }
 
   /**
    * Returns the set of elements that use the given element in their generation, without recursing.
    */
-  def directlyUsedBy(elem: Element[_]): Set[Element[_]] = myUsedBy.getOrElse(elem, Set())
+  def directlyUsedBy(elem: Element[?]): Set[Element[?]] = myUsedBy.getOrElse(elem, Set())
 
   private[figaro] def registerUses[T, U](user: Element[T], used: Element[U]): Unit = {
     if (!(myUses contains user)) myUses += user -> Set()
@@ -172,12 +172,12 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
     }
   }
 
-  private[language] def activate(element: Element[_]): Unit = {
+  private[language] def activate(element: Element[?]): Unit = {
     if (element.active)
       throw new IllegalArgumentException("Activating active element")
     element.args.filter(!_.active).foreach(activate(_))
     myActiveElements.add(element)
-    if (!element.isInstanceOf[Deterministic[_]]) myStochasticElements.add(element)
+    if (!element.isInstanceOf[Deterministic[?]]) myStochasticElements.add(element)
 
     if (myContextStack.nonEmpty) {
       element.myContext = myContextStack
@@ -187,7 +187,7 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
     element.active = true
   }
 
-  private[language] def deactivate(element: Element[_]): Unit = {
+  private[language] def deactivate(element: Element[?]): Unit = {
     if (!element.active)
       throw new IllegalArgumentException("Deactivating inactive element")
     // When we deactivate an element, we must deactivate all elements that were created in its context
@@ -210,7 +210,7 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
     myUses -= element
     myRecursiveUsedBy -= element
     myRecursiveUses -= element
-    if (!element.isInstanceOf[Deterministic[_]]) myStochasticElements.remove(element)
+    if (!element.isInstanceOf[Deterministic[?]]) myStochasticElements.remove(element)
     myActiveElements.remove(element)
     element.collection.remove(element)
     registeredMaps foreach (_ -= element)
@@ -220,7 +220,7 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
   /**
    * Safely deactivate all the given elements.
    */
-  def deactivate(elems: Traversable[Element[_]]): Unit = {
+  def deactivate(elems: Iterable[Element[?]]): Unit = {
     // We need to check if elements are still active because they might be deactivated when other elements are
     // deactivated.
     elems foreach (elem => if (elem.active) deactivate(elem))
@@ -258,9 +258,9 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
   private[figaro] def clearContext[T](element: Element[T]): Unit =
     deactivate(contextContents(element))
 
-  private var registeredMaps: Set[Shrinkable[Element[_]]] = Set()
+  private var registeredMaps: Set[Shrinkable[Element[?]]] = Set()
 
-  private var registeredUniverseMaps: Set[Map[Universe, _]] = Set()
+  private var registeredUniverseMaps: Set[Map[Universe, ?]] = Set()
 
   private var registeredAlgorithms: Set[Algorithm] = Set()
 
@@ -268,10 +268,10 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
    * Register a map so that elements are removed from it when they are deactivated.
    * This avoids memory management problems.
    */
-  def register(collection: Shrinkable[Element[_]]): Unit = registeredMaps += collection
+  def register(collection: Shrinkable[Element[?]]): Unit = registeredMaps += collection
 
   /** Deregister a map of elements. */
-  def deregister(collection: Shrinkable[Element[_]]): Unit = registeredMaps -= collection
+  def deregister(collection: Shrinkable[Element[?]]): Unit = registeredMaps -= collection
 
   // Immediately register the constrained and conditioned elements
   register(myConditionedElements)
@@ -281,10 +281,10 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
    * Register the maps that this universe is used as a key.
    * Needed to make sure Universe is garbage collected when cleared and dereferenced.
    */
-  def registerUniverse(map: Map[Universe, _]): Unit = registeredUniverseMaps += map
+  def registerUniverse(map: Map[Universe, ?]): Unit = registeredUniverseMaps += map
 
   /** Deregister a map that uses this universe as a key. */
-  def deregisterUniverse(map: Map[Universe, _]): Unit = registeredUniverseMaps -= map
+  def deregisterUniverse(map: Map[Universe, ?]): Unit = registeredUniverseMaps -= map
 
   /**
    * Register algorithms that use this universe.
@@ -301,14 +301,14 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
    * I.e., they do not use any of the elements in the set in their generation. Also returns the
    * remaining non-independent elements.
    */
-  def independentElements(elems: Traversable[Element[_]]): (Traversable[Element[_]], Traversable[Element[_]]) =
-    elems partition ((e1: Element[_]) => !(elems exists ((e2: Element[_]) => usedBy(e2) contains e1)))
+  def independentElements(elems: Iterable[Element[?]]): (Iterable[Element[?]], Iterable[Element[?]]) =
+    elems partition ((e1: Element[?]) => !(elems exists ((e2: Element[?]) => usedBy(e2) contains e1)))
 
   /**
    * Returns a list of layers of elements in the given set of elements, where the elements in each layer can be
    * generated independently of each other given elements in previous layers.
    */
-  def layers(elems: Traversable[Element[_]]): List[List[Element[_]]] = {
+  def layers(elems: Iterable[Element[?]]): List[List[Element[?]]] = {
     if (elems.isEmpty) List()
     else {
       val (first, rest) = independentElements(elems)
@@ -322,7 +322,7 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
     super.finalize()
   }
 
-  private type Graph = Map[Element[_], Set[Element[_]]]
+  private type Graph = Map[Element[?], Set[Element[?]]]
 
   /*
    * Recursively (depth-first) builds a usedBy/uses graph and will re-use previously cached paths
@@ -330,18 +330,18 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
    * any previous recursive paths that have already been cached.
    */
   @tailrec
-  private def elemGraphBuilder(elems: List[(Element[_], Set[Element[_]])], base: Graph, curr: Graph): Graph = {
+  private def elemGraphBuilder(elems: List[(Element[?], Set[Element[?]])], base: Graph, curr: Graph): Graph = {
 
     if (elems.isEmpty) return curr
     val (elem, visitStack) = elems.head
 
     if (visitStack.contains(elem)) throw new IllegalArgumentException("Cyclic set of elements - cannot walk graph")
     val toAdd = if (curr.contains(elem)) {
-      visitStack.foreach(e => curr.getOrElseUpdate(e, Set()) ++= (curr(elem) + elem))
-      List[(Element[_], Set[Element[_]])]()
+      visitStack.foreach(e => curr.getOrElseUpdate(e, Set()) ++= (curr(elem).union(Set(elem))))
+      List[(Element[?], Set[Element[?]])]()
     } else {
       visitStack.foreach(e => curr.getOrElseUpdate(e, Set()) += elem)
-      base.getOrElse(elem, Set()).toList.map(e => (e, (visitStack + elem)))
+      base.getOrElse(elem, Set()).toList.map(e => (e, (visitStack.union(Set(elem)))))
     }
     return elemGraphBuilder(toAdd ++ elems.tail, base, curr)
   }
@@ -371,7 +371,7 @@ object AssertEvidence {
   /**
    * Assert the given evidence associated with references to elements in the collection.
    */
-  def apply(evidencePairs: Seq[NamedEvidence[_]]): Unit = {
+  def apply(evidencePairs: Seq[NamedEvidence[?]]): Unit = {
     for { case NamedEvidence(reference, evidence, contingency) <- evidencePairs } Universe.universe.assertEvidence(reference, evidence, contingency)
   }
 

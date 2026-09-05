@@ -27,7 +27,7 @@ trait AnytimeBoundsProbQuery extends BoundsProbQueryAlgorithm with AnytimeProbQu
   /**
    * A message from the handler containing all probability bounds of the previously requested element.
    */
-  case class AllProbabilityBounds[T](bounds: Stream[(Double, Double, T)]) extends Response
+  case class AllProbabilityBounds[T](bounds: LazyList[(Double, Double, T)]) extends Response
 
   /**
    * A message instructing the handler to compute bounds on the expectation of the target element under the given function.
@@ -67,10 +67,10 @@ trait AnytimeBoundsProbQuery extends BoundsProbQueryAlgorithm with AnytimeProbQu
         ProbabilityBounds(computeProbabilityBounds(target, predicate))
     }
 
-  protected def doAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)] = {
+  protected def doAllProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)] = {
     request(ComputeAllProbabilityBounds(target)) match {
-      case AllProbabilityBounds(result) => result.asInstanceOf[Stream[(Double, Double, T)]]
-      case _ => Stream()
+      case AllProbabilityBounds(result) => result.asInstanceOf[LazyList[(Double, Double, T)]]
+      case _ => LazyList()
     }
   }
 

@@ -122,5 +122,5 @@ object MultivariateNormal extends Creatable {
 
   type ResultType = List[Double]
 
-  def create(args: List[Element[_]]) = apply(args(0).asInstanceOf[Element[List[Double]]], args(1).asInstanceOf[Element[List[List[Double]]]])
+  def create(args: List[Element[?]]) = apply(args(0).asInstanceOf[Element[List[Double]]], args(1).asInstanceOf[Element[List[List[Double]]]])
 }

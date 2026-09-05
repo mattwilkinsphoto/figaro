@@ -54,7 +54,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Uniform(0.0, 2.0)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the fraction represented by the range" taggedAs (NonDeterministic) in {
@@ -118,7 +118,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val upper = Constant(2.0)
       val uniformComplex = Uniform(lower, upper)
 
-      uniformComplex shouldBe a [Continuous[_]]
+      uniformComplex shouldBe a [Continuous[?]]
     }
 
     "have value equal to the expectation over the parents of the uniform probability" taggedAs (NonDeterministic) in {
@@ -156,7 +156,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Normal(1.0, 2.0)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the cumulative probability of the upper minus the lower" taggedAs (NonDeterministic) in {
@@ -217,7 +217,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Normal(Select(0.5 -> 0.5, 0.5 -> 1.0), 2.0)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the expectation over the mean of the" +
@@ -254,7 +254,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Normal(2.0, Select(0.5 -> 2.0, 0.5 -> 3.0))
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     //Need to work this out on paper.
@@ -292,7 +292,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Normal(Select(0.5 -> 0.5, 0.5 -> 1.0), Select(0.5 -> 2.0, 0.5 -> 3.0))
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the expectation over the mean and variance of the" +
@@ -367,13 +367,13 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val ndtest = new NDTest {
         override def oneTest = {
           val sampleUniverse = Universe.createNew()
-          val nSamples = Normal(2.5, 2.0)("", sampleUniverse)
+          val nSamples = Normal(2.5, 2.0)(using "", sampleUniverse)
           val samples = for (i <- 1 to 200)
             yield nSamples.generateValue(nSamples.generateRandomness())
 
           val universe = Universe.createNew()
-          val mean = Uniform(-5, 5)("mean", universe)
-          val variance = Uniform(0, 5)("variance", universe)
+          val mean = Uniform(-5, 5)(using "mean", universe)
+          val variance = Uniform(0, 5)(using "variance", universe)
           for (sample <- samples) {
             val normal = Normal(mean, variance)
             normal.observe(sample)
@@ -424,7 +424,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = MultivariateNormal(means, covariances)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have the correct density" in {
@@ -494,7 +494,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
 
       val elem = KernelDensity(data, bandwidth)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have the correct density" in {
@@ -530,7 +530,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
           }
           val sampleStdDev = deviations.sum / (deviations.length - 1)
           // selected indices should be uniform
-          val indDistr = selectedIndices.groupBy(d => d).mapValues(s => 1.0 * s.length / selectedIndices.length)
+          val indDistr = selectedIndices.groupBy(d => d).view.mapValues(s => 1.0 * s.length / selectedIndices.length)
 
           update(sampleStdDev, NDTest.TTEST, "KernelDensityTestResultsStdDev", 2.3, alpha)
           update(indDistr(0), NDTest.TTEST, "KernelDensityTestResultsSampleDistr1", 0.33, alpha)
@@ -576,7 +576,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = MultivariateNormal(means, covariances)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have the correct density" in {
@@ -645,7 +645,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Exponential(2.0)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the cumulative probability of the upper minus the lower" taggedAs (NonDeterministic) in {
@@ -706,7 +706,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Exponential(Select(0.5 -> 1.0, 0.5 -> 2.0))
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the expectation over the mean of the" +
@@ -771,12 +771,12 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val ndtest = new NDTest {
         override def oneTest = {
           val sampleUniverse = Universe.createNew()
-          val nSamples = Exponential(2)("", sampleUniverse)
+          val nSamples = Exponential(2)(using "", sampleUniverse)
           val samples = for (i <- 1 to 200)
             yield nSamples.generateValue(nSamples.generateRandomness())
 
           val universe = Universe.createNew()
-          val lambda = Uniform(0, 10)("lambda", universe)
+          val lambda = Uniform(0, 10)(using "lambda", universe)
           for (sample <- samples) {
             val exponential = Exponential(lambda)
             exponential.observe(sample)
@@ -801,7 +801,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val k = 2.5
       val elem = Gamma(k)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "k > 1.0, theta = 1.0" should {
@@ -1008,7 +1008,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Gamma(Select(0.5 -> 2.0, 0.5 -> 3.0))
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the expectation over k of the" +
@@ -1045,7 +1045,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Gamma(Select(0.5 -> 0.5, 0.5 -> 1.0), Constant(1.0))
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the expectation over k and theta of the" +
@@ -1113,14 +1113,14 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val ndtest = new NDTest {
         override def oneTest = {
           val sampleUniverse = Universe.createNew()
-          val nSamples = Gamma(2, 2)("", sampleUniverse)
+          val nSamples = Gamma(2, 2)(using "", sampleUniverse)
 
           val samples = for (i <- 1 to 200)
             yield nSamples.generateValue(nSamples.generateRandomness())
 
           val universe = Universe.createNew()
-          val k = Uniform(0, 10)("k", universe)
-          val theta = Uniform(0, 10)("theta", universe)
+          val k = Uniform(0, 10)(using "k", universe)
+          val theta = Uniform(0, 10)(using "theta", universe)
           for (sample <- samples) {
             val gamma = Gamma(k, theta)
             gamma.observe(sample)
@@ -1146,7 +1146,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Beta(1.2, 0.5)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the cumulative probability of the upper minus the lower" taggedAs (NonDeterministic) in {
@@ -1212,7 +1212,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Beta(Select(0.5 -> 0.5, 0.5 -> 1.0), Select(0.5 -> 2.0, 0.5 -> 3.0))
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the expectation over a and b of the" +
@@ -1282,13 +1282,13 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val ndtest = new NDTest {
         override def oneTest = {
           val sampleUniverse = Universe.createNew()
-          val nSamples = Beta(2, 5)("", sampleUniverse)
+          val nSamples = Beta(2, 5)(using "", sampleUniverse)
           val samples = for (i <- 1 to 200)
             yield nSamples.generateValue(nSamples.generateRandomness())
 
           val universe = Universe.createNew()
-          val a = Uniform(0, 10)("a", universe)
-          val b = Uniform(0, 10)("b", universe)
+          val a = Uniform(0, 10)(using "a", universe)
+          val b = Uniform(0, 10)(using "b", universe)
           for (sample <- samples) {
             val beta = Beta(a, b)
             beta.observe(sample)
@@ -1314,7 +1314,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       Universe.createNew()
       val elem = Dirichlet(1.2, 0.5)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the cumulative probability of the upper minus the lower" taggedAs (NonDeterministic) in {
@@ -1395,7 +1395,7 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val beta = Constant(0.5)
       val elem = Dirichlet(alpha, beta)
 
-      elem shouldBe a [Continuous[_]]
+      elem shouldBe a [Continuous[?]]
     }
 
     "have value within a range with probability equal to the expectation over the alphas " +
@@ -1482,14 +1482,14 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val ndtest = new NDTest {
         override def oneTest = {
           val sampleUniverse = Universe.createNew()
-          val nSamples = Dirichlet(1, 2, 3)("", sampleUniverse)
+          val nSamples = Dirichlet(1, 2, 3)(using "", sampleUniverse)
           val samples = for (i <- 1 to 200)
             yield nSamples.generateValue(nSamples.generateRandomness())
 
           val universe = Universe.createNew()
-          val alpha1 = Uniform(0, 10)("a1", universe)
-          val alpha2 = Uniform(0, 10)("a2", universe)
-          val alpha3 = Uniform(0, 10)("a3", universe)
+          val alpha1 = Uniform(0, 10)(using "a1", universe)
+          val alpha2 = Uniform(0, 10)(using "a2", universe)
+          val alpha3 = Uniform(0, 10)(using "a3", universe)
           for (sample <- samples) {
             val dirichlet = Dirichlet(alpha1, alpha2, alpha3)
             dirichlet.observe(sample)

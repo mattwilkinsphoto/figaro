@@ -151,10 +151,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.hybrid.RaisingVE.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/RaisingVE.html#computeDistribution-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/RaisingVE.html#computeDistribution-f66)
 
 ```scala
-override def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+override def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed.
@@ -163,7 +163,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed. Attributes Definition Classes StructuredProbQueryAlgorithm -> BaseProbQueryAlgorithm Inherited from: StructuredProbQueryAlgorithm
 
@@ -223,10 +223,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.hybrid.RaisingVE.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/RaisingVE.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/RaisingVE.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -235,7 +235,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -947,10 +947,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.hybrid.StructuredVEBPChooser.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEBPChooser.html#computeDistribution-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEBPChooser.html#computeDistribution-f66)
 
 ```scala
-override def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+override def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed.
@@ -959,7 +959,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed. Attributes Definition Classes StructuredProbQueryAlgorithm -> BaseProbQueryAlgorithm Inherited from: StructuredProbQueryAlgorithm
 
@@ -1019,10 +1019,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.hybrid.StructuredVEBPChooser.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEBPChooser.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEBPChooser.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -1031,7 +1031,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -1767,10 +1767,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.hybrid.StructuredVEBPGibbsChooser.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEBPGibbsChooser.html#computeDistribution-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEBPGibbsChooser.html#computeDistribution-f66)
 
 ```scala
-override def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+override def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed.
@@ -1779,7 +1779,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed. Attributes Definition Classes StructuredProbQueryAlgorithm -> BaseProbQueryAlgorithm Inherited from: StructuredProbQueryAlgorithm
 
@@ -1839,10 +1839,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.hybrid.StructuredVEBPGibbsChooser.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEBPGibbsChooser.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEBPGibbsChooser.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -1851,7 +1851,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -2587,10 +2587,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.hybrid.StructuredVEGibbsChooser.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEGibbsChooser.html#computeDistribution-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEGibbsChooser.html#computeDistribution-f66)
 
 ```scala
-override def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+override def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed.
@@ -2599,7 +2599,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Computes the normalized distribution over a single target element. Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed. Attributes Definition Classes StructuredProbQueryAlgorithm -> BaseProbQueryAlgorithm Inherited from: StructuredProbQueryAlgorithm
 
@@ -2659,10 +2659,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.structured.algorithm.hybrid.StructuredVEGibbsChooser.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEGibbsChooser.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/algorithm/hybrid/StructuredVEGibbsChooser.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -2671,7 +2671,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 

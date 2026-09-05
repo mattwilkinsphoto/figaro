@@ -50,7 +50,7 @@ class UtilTest extends AnyWordSpec with Matchers {
     "given a list with positive total value" should {
       "produce a result that sums to 1" in {
         val n = normalize(List(0.2, 0.3))
-        (0.0 /: n)(_ + _) should be(1.0 +- 0.00000001)
+        (n).foldLeft(0.0)(_ + _) should be(1.0 +- 0.00000001)
       }
 
       "maintain the proportions between the values" in {
@@ -141,7 +141,7 @@ class UtilTest extends AnyWordSpec with Matchers {
   "Util.indices" when {
     "given a traversable and an element" should {
       "return a list containing all indices of the element in the traversable and no others" in {
-        val l: Traversable[Int] = List(1, 2, 3, 1, 4, 5, 1)
+        val l: Iterable[Int] = List(1, 2, 3, 1, 4, 5, 1)
         indices(l, 1) should equal(List(0, 3, 6))
         indices(l, 0) should equal(List())
       }
@@ -152,7 +152,7 @@ class UtilTest extends AnyWordSpec with Matchers {
     "given a traversable, a value, and a list of indices in order" should {
       "return a traversable that contains all elements of the original traversable with the given value inserted at " +
         "the given indices" in {
-          val t: Traversable[Int] = List(1, 2)
+          val t: Iterable[Int] = List(1, 2)
           insertAtIndices(t, List(0, 2, 4), 3).toList should equal(List(3, 1, 3, 2, 3))
         }
     }
@@ -187,7 +187,7 @@ class UtilTest extends AnyWordSpec with Matchers {
           count += 1
           x + 1
         }
-        val mf = memo(f _)
+        val mf = memo(f)
         mf(7)
         mf(7)
         count should equal(1)
@@ -219,8 +219,8 @@ class UtilTest extends AnyWordSpec with Matchers {
           count += 1
           x + 1
         }
-        val mf = memo(f _)
-        val nf = memo(f _)
+        val mf = memo(f)
+        val nf = memo(f)
         mf(7)
         nf(7)
         count should equal(2)

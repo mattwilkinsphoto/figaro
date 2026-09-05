@@ -46,13 +46,13 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
   /**
    * Target elements that should not be eliminated but should be available for querying.
    */
-  val targetElements: List[Element[_]]
+  val targetElements: List[Element[?]]
 
   /**
    * Elements towards which queries are directed. By default, these are the target elements.
    * This is overridden by DecisionVariableElimination, where it also includes utility variables.
    */
-  def starterElements: List[Element[_]] = targetElements
+  def starterElements: List[Element[?]] = targetElements
 
   /**
    * Flag indicating whether the run time of each step should be displayed.
@@ -71,7 +71,7 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
   // The second element maps variables to the factors mentioning that variable.
   // The previous implementation used sets, but that resulted in bugs where an identical factor appeared more than once.
   // The new implementation uses multisets.
-  private type FactorMap[T] = Map[Variable[_], MultiSet[Factor[T]]]
+  private type FactorMap[T] = Map[Variable[?], MultiSet[Factor[T]]]
 
   // Add a factor to the list, even if it appears already.
   private def addFactor[T](factor: Factor[T], map: FactorMap[T]): Unit =
@@ -81,13 +81,13 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
   private def removeFactor[T](factor: Factor[T], map: FactorMap[T]): Unit =
     factor.variables foreach (v => map += v -> (map.getOrElse(v, HashMultiSet()).removeOne(factor)))
 
-  protected def initialFactorMap(factors: Traversable[Factor[T]]): FactorMap[T] = {
+  protected def initialFactorMap(factors: Iterable[Factor[T]]): FactorMap[T] = {
     val map: FactorMap[T] = Map()
     factors foreach (addFactor(_, map))
     map
   }
 
-  protected var recordingFactors: List[Factor[_]] = List()
+  protected var recordingFactors: List[Factor[?]] = List()
 
   /**
    * Some variable elimination algorithms, such as computing the most probable explanation, record values of
@@ -101,7 +101,7 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
   val comparator: Option[(T, T) => Boolean] = None
 
   private def eliminate(
-    variable: Variable[_],
+    variable: Variable[?],
     factors: MultiSet[Factor[T]],
     map: FactorMap[T]): Unit = {
     val varFactors = map(variable)
@@ -128,7 +128,7 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
 
   // Wraps the TailRec class and returns the result
   protected def eliminateInOrder(
-    order: List[Variable[_]],
+    order: List[Variable[?]],
     factors: MultiSet[Factor[T]],
     map: FactorMap[T]): MultiSet[Factor[T]] = {
     callEliminateInOrder(order, factors, map).result
@@ -139,7 +139,7 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
    *  The result needs to be extracted explicitly
    */
   private def callEliminateInOrder(
-    order: List[Variable[_]],
+    order: List[Variable[?]],
     factors: MultiSet[Factor[T]],
     map: FactorMap[T]): TailRec[MultiSet[Factor[T]]] = {
     order match {
@@ -160,28 +160,28 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
     doElimination(allFactors, targetVariables)
   }
 
-  protected def doElimination(allFactors: List[Factor[T]], targetVariables: Seq[Variable[_]]): Unit = {
+  protected def doElimination(allFactors: List[Factor[T]], targetVariables: Seq[Variable[?]]): Unit = {
     recordingFactors = List()
     if (debug) {
       println("*****************\nStarting factors\n")
-      allFactors.foreach((f: Factor[_]) => println(f.toReadableString))
+      allFactors.foreach((f: Factor[?]) => println(f.toReadableString))
     }
     val (score, order) = optionallyShowTiming(VariableElimination.eliminationOrder(allFactors, targetVariables), "Computing elimination order")
     if (debug) println("***************** Eliminition Score: " + score)
     val factorsAfterElimination =
-      optionallyShowTiming(eliminateInOrder(order, HashMultiSet(allFactors: _*), initialFactorMap(allFactors)), "Elimination")
+      optionallyShowTiming(eliminateInOrder(order, HashMultiSet(allFactors*), initialFactorMap(allFactors)), "Elimination")
     if (debug) println("*****************")
-    if (debug) factorsAfterElimination foreach (f => println(f.toReadableString))
+    if (debug) factorsAfterElimination.foreach(f => println(f.toReadableString))
     optionallyShowTiming(finish(factorsAfterElimination, order), "Finalizing")
     if (debug) targetFactors.values foreach (f => println(f.toReadableString))
   }
 
-  protected[figaro] var targetFactors: Map[Element[_], Factor[T]] = Map()
+  protected[figaro] var targetFactors: Map[Element[?], Factor[T]] = Map()
 
   /**
    * All implementation of variable elimination must specify what to do after variables have been eliminated.
    */
-  def finish(factorsAfterElimination: MultiSet[Factor[T]], eliminationOrder: List[Variable[_]]): Unit
+  def finish(factorsAfterElimination: MultiSet[Factor[T]], eliminationOrder: List[Variable[?]]): Unit
 
   def run() = ve()
 
@@ -191,11 +191,11 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
  * Variable elimination over probabilistic factors.
  */
 trait ProbabilisticVariableElimination extends VariableElimination[Double] {
-  def getFactors(allElements: List[Element[_]], targetElements: List[Element[_]], upper: Boolean = false): List[Factor[Double]] = {
+  def getFactors(allElements: List[Element[?]], targetElements: List[Element[?]], upper: Boolean = false): List[Factor[Double]] = {
     if (debug) {
       println("Elements appearing in factors and their ranges:")
       for { element <- allElements } {
-        println(Variable(element).id + "(" + element.name.string + "@" + element.hashCode + ")" + ": " + element + ": " + Variable(element).range.mkString(","))
+        println(Variable(element).id.toString + "(" + element.name.string + "@" + element.hashCode + ")" + ": " + element + ": " + Variable(element).range.mkString(","))
       }
     }
     val thisUniverseFactors = allElements flatMap(Factory.makeFactorsForElement(_))
@@ -210,10 +210,10 @@ trait ProbabilisticVariableElimination extends VariableElimination[Double] {
  * Variable elimination algorithm that computes the conditional probability of query elements.
  *
  */
-class ProbQueryVariableElimination(override val universe: Universe, targets: Element[_]*)(
+class ProbQueryVariableElimination(override val universe: Universe, targets: Element[?]*)(
   val showTiming: Boolean,
-  val dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-  val dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double)
+  val dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+  val dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double)
   extends OneTimeProbQuery
   with ProbabilisticVariableElimination {
   val targetElements = targets.toList
@@ -221,7 +221,7 @@ class ProbQueryVariableElimination(override val universe: Universe, targets: Ele
 
   val semiring = SumProductSemiring()
 
-  private def marginalizeToTarget(factor: Factor[Double], target: Element[_]): Unit = {
+  private def marginalizeToTarget(factor: Factor[Double], target: Element[?]): Unit = {
     val unnormalizedTargetFactor = factor.marginalizeTo(Variable(target))
     val z = unnormalizedTargetFactor.foldLeft(semiring.zero, _ + _)
     //val targetFactor = Factory.make[Double](unnormalizedTargetFactor.variables)
@@ -238,19 +238,19 @@ class ProbQueryVariableElimination(override val universe: Universe, targets: Ele
     factorsAfterElimination.foldLeft(Factory.unit(semiring))(_.product(_))
   }
 
-  def finish(factorsAfterElimination: MultiSet[Factor[Double]], eliminationOrder: List[Variable[_]]) =
+  def finish(factorsAfterElimination: MultiSet[Factor[Double]], eliminationOrder: List[Variable[?]]) =
     marginalize(makeResultFactor(factorsAfterElimination))
 
   /**
    * Computes the normalized distribution over a single target element.
    */
-  def computeDistribution[T](target: Element[T]): Stream[(Double, T)] = {
+  def computeDistribution[T](target: Element[T]): LazyList[(Double, T)] = {
     val factor = targetFactors(target)
     if (factor.numVars > 1) throw new UnsupportedAlgorithmException(target)
     val targetVar = if (factor.output.nonEmpty) factor.output.head.asInstanceOf[Variable[T]] else factor.parents.head.asInstanceOf[Variable[T]]
     val dist = factor.getIndices.filter(f => targetVar.range(f.head).isRegular).map(f => (factor.get(f), targetVar.range(f.head).value))
     // normalization is unnecessary here because it is done in marginalizeTo
-    dist.toStream
+    dist.to(LazyList)
   }
 
   /**
@@ -258,7 +258,7 @@ class ProbQueryVariableElimination(override val universe: Universe, targets: Ele
    */
   def computeExpectation[T](target: Element[T], function: T => Double): Double = {
     def get(pair: (Double, T)) = pair._1 * function(pair._2)
-    (0.0 /: computeDistribution(target))(_ + get(_))
+    (computeDistribution(target)).foldLeft(0.0)(_ + get(_))
   }
 }
 
@@ -272,20 +272,20 @@ object VariableElimination {
    * Returns the score of the ordering as well as the ordering. If useBestScore is set to false, then it returns the total score of the 
    * entire eliminiation operation
    */
-  def eliminationOrder[T](factors: Traversable[Factor[T]], toPreserve: Traversable[Variable[_]], useBestScore: Boolean = true): (Double, List[Variable[_]]) = {
-    val eliminableVars = (Set[Variable[_]]() /: factors)(_ ++ _.variables) -- toPreserve
+  def eliminationOrder[T](factors: Iterable[Factor[T]], toPreserve: Iterable[Variable[?]], useBestScore: Boolean = true): (Double, List[Variable[?]]) = {
+    val eliminableVars = (factors).foldLeft(Set[Variable[?]]())(_ ++ _.variables).diff(toPreserve.toSet)
     var initialGraph = new VEGraph(factors)
-    val candidates = new HeapPriorityMap[Variable[_], Double]
-    eliminableVars foreach (v => candidates += v -> initialGraph.score(v))
+    val candidates = new HeapPriorityMap[Variable[?], Double]
+    eliminableVars.foreach(v => candidates += v -> initialGraph.score(v))
     val initScore = if (useBestScore) Double.NegativeInfinity else 0.0
     eliminationOrderHelper(candidates, toPreserve, initialGraph, initScore, List(), useBestScore)
   }
 
-  @tailrec private def eliminationOrderHelper(candidates: PriorityMap[Variable[_], Double],
-    toPreserve: Traversable[Variable[_]],
+  @tailrec private def eliminationOrderHelper(candidates: PriorityMap[Variable[?], Double],
+    toPreserve: Iterable[Variable[?]],
     graph: VEGraph,
     currentScore: Double,
-    accum: List[Variable[_]], useBestScore: Boolean): (Double, List[Variable[_]]) = {
+    accum: List[Variable[?]], useBestScore: Boolean): (Double, List[Variable[?]]) = {
     if (candidates.isEmpty) (currentScore, accum.reverse)
     else {
       val (best, bestScore) = candidates.extractMin()
@@ -302,40 +302,40 @@ object VariableElimination {
    * Create a variable elimination computer with the given target query variables in the current default
    * universe.
    */
-  def apply(targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryVariableElimination(universe, targets: _*)(
+  def apply(targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryVariableElimination(universe, targets*)(
       false,
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
 
   /**
    * Create a variable elimination computer with the given target query variables in the current default
    * universe, with debug information enabled.
    */
-  def debugged(targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryVariableElimination(universe, targets: _*)(
+  def debugged(targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryVariableElimination(universe, targets*)(
       true,
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) { debug = true }
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u)) { debug = true }
   /**
    * Create a variable elimination computer with the given target query variables in the current default
    * universe, with timing information enabled.
    */
-  def timed(targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryVariableElimination(universe, targets: _*)(
+  def timed(targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryVariableElimination(universe, targets*)(
       true,
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
 
   /**
    * Create a variable elimination computer with the given target query variables and using the given
    * dependent universes in the current default universe.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])], targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryVariableElimination(universe, targets: _*)(
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])], targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryVariableElimination(universe, targets*)(
       false,
       dependentUniverses,
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
 
   /**
    * Create a variable elimination computer with the given target query variables and using the given
@@ -343,10 +343,10 @@ object VariableElimination {
    * determine the algorithm to use to compute probability of evidence in each dependent universe.
    */
   def apply(
-    dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryVariableElimination(universe, targets: _*)(
+    dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryVariableElimination(universe, targets*)(
       false,
       dependentUniverses,
       dependentAlgorithm)

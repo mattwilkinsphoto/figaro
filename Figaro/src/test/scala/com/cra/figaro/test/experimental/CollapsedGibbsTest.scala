@@ -169,7 +169,7 @@ class CollapsedGibbsTest extends AnyWordSpec with Matchers {
   }
 
   def makeFactors(): List[Factor[Double]] = {
-    LazyValues(Universe.universe).expandAll(Universe.universe.activeElements.toSet.map((elem: Element[_]) => ((elem, Integer.MAX_VALUE))))
+    LazyValues(Universe.universe).expandAll(Universe.universe.activeElements.toSet.map((elem: Element[?]) => ((elem, Integer.MAX_VALUE))))
     Universe.universe.activeElements.foreach(Variable(_))
     Universe.universe.activeElements flatMap (Factory.makeFactorsForElement(_))
   }

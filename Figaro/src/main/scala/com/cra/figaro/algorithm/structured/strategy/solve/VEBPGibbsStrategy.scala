@@ -26,7 +26,7 @@ class VEBPGibbsStrategy(problem: Problem, raisingCriteria: RaisingCriteria, val 
                         val interval: Int, val blockToSampler: Gibbs.BlockSamplerCreator)
   extends RaisingStrategy(problem, raisingCriteria) {
 
-  override def eliminate(toEliminate: Set[Variable[_]], toPreserve: Set[Variable[_]], factors: List[Factor[Double]]): (List[Factor[Double]], Map[Variable[_], Factor[_]]) = {
+  override def eliminate(toEliminate: Set[Variable[?]], toPreserve: Set[Variable[?]], factors: List[Factor[Double]]): (List[Factor[Double]], Map[Variable[?], Factor[?]]) = {
     val (score, order) = VariableElimination.eliminationOrder(factors, toPreserve)
     if (score <= scoreThreshold) {
       solver.marginalVariableElimination(problem, toEliminate, toPreserve, factors)
@@ -50,9 +50,9 @@ class VEBPGibbsStrategy(problem: Problem, raisingCriteria: RaisingCriteria, val 
     }
   }
 
-  def hasDeterminism(problem: Problem, v: Variable[_]): Boolean = problem.collection.variableParents(v).nonEmpty
+  def hasDeterminism(problem: Problem, v: Variable[?]): Boolean = problem.collection.variableParents(v).nonEmpty
 
-  override def recurse(subproblem: NestedProblem[_]) = {
+  override def recurse(subproblem: NestedProblem[?]) = {
     new VEBPGibbsStrategy(subproblem, raisingCriteria, scoreThreshold, determThreshold, bpIters, numSamples, burnIn, interval, blockToSampler)
   }
   

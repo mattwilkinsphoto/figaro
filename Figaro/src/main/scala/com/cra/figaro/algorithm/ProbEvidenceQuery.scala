@@ -25,5 +25,5 @@ trait ProbEvidenceQuery {
       * Takes the conditions and constraints in the model as part of the model definition.
       * This method takes care of creating and running the necessary algorithms.
       */
-  def probabilityOfEvidence(evidence: List[NamedEvidence[_]]): Double
+  def probabilityOfEvidence(evidence: List[NamedEvidence[?]]): Double
 }

@@ -52,7 +52,7 @@ trait BasicFactor[T] extends Factor[T] {
    * Fill the contents of this factor by applying a rule to every combination of 
    * parent and output values.
    */
-  override def fillByRule(rule: List[Extended[_]] => T): Factor[T] = {
+  override def fillByRule(rule: List[Extended[?]] => T): Factor[T] = {
     for (indices <- getIndices) {
       val values = convertIndicesToValues(indices)
       set(indices, rule(values))
@@ -65,9 +65,9 @@ trait BasicFactor[T] extends Factor[T] {
     * It produces a mapping from each original variable to its new location.
     * Similarly it produces a mapping from each new variable to its new location.
     */
-  def unionVars[U](that: Factor[U]): (List[Variable[_]], List[Variable[_]], List[Int], List[Int]) = {
+  def unionVars[U](that: Factor[U]): (List[Variable[?]], List[Variable[?]], List[Int], List[Int]) = {
     val allOutputs = that.output
-    val allParents = variables.union(that.variables).distinct diff (allOutputs)
+    val allParents = variables.concat(that.variables).distinct diff (allOutputs)
 
     val resultVars = allParents ::: allOutputs
     val thisIndexMap: List[Int] = variables map (resultVars.indexOf(_))
@@ -123,7 +123,7 @@ trait BasicFactor[T] extends Factor[T] {
   }
 
   override def sumOver(
-    variable: Variable[_],
+    variable: Variable[?],
     sum: (T, T) => T = semiring.sum): Factor[T] = {
     if (variables contains variable) {
       // The summed over variable does not necessarily appear exactly once in the factor.
@@ -203,9 +203,9 @@ trait BasicFactor[T] extends Factor[T] {
 
   override def marginalizeToWithSum(
     sum: (T, T) => T,
-    targets: Variable[_]*): Factor[T] = {
+    targets: Variable[?]*): Factor[T] = {
     val marginalized =
-      (this.asInstanceOf[Factor[T]] /: variables)((factor: Factor[T], variable: Variable[_]) =>
+      (variables).foldLeft(this.asInstanceOf[Factor[T]])((factor: Factor[T], variable: Variable[?]) =>
         if (targets contains variable) factor
         else factor.sumOver(variable, sum))
     // It's possible that the target variable appears more than once in this factor. If so, we need to reduce it to
@@ -225,7 +225,7 @@ trait BasicFactor[T] extends Factor[T] {
       val reducedParents = reducedVariables.intersect(parents)
       val reducedChildren = reducedVariables.diff(reducedParents)
       val reduced = createFactor[T](reducedParents, reducedChildren, semiring)
-      val newVariableLocations = factor.variables.distinct.map((v: Variable[_]) => repeats(v)(0))
+      val newVariableLocations = factor.variables.distinct.map((v: Variable[?]) => repeats(v)(0))
       val repeatedVariables = repeats.values.filter(_.size > 1)
       for (row <- factor.getIndices) {
         contentsContains (row) match {
@@ -248,8 +248,8 @@ trait BasicFactor[T] extends Factor[T] {
     noConflict
   }
 
-  private def findRepeats(varList: List[Variable[_]]): Map[Variable[_], List[Int]] = {
-    val repeats: Map[Variable[_], List[Int]] = Map() ++ varList.zipWithIndex.groupBy(_._1).map(e => e._1 -> e._2.unzip._2)
+  private def findRepeats(varList: List[Variable[?]]): Map[Variable[?], List[Int]] = {
+    val repeats: Map[Variable[?], List[Int]] = Map() ++ varList.zipWithIndex.groupBy(_._1).map(e => e._1 -> e._2.unzip._2)
     repeats
   }
 

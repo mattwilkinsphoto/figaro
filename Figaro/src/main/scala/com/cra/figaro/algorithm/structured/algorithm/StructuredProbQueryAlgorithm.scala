@@ -20,17 +20,17 @@ import com.cra.figaro.algorithm.structured._
 import com.cra.figaro.algorithm.lazyfactored.Extended
 import com.cra.figaro.algorithm.structured.solver.Solution
 
-abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: ComponentCollection, val queryTargets: Element[_]*)
+abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: ComponentCollection, val queryTargets: Element[?]*)
   extends StructuredAlgorithm(universe, collection) with ProbQueryAlgorithm {
 
-  def this(universe: Universe, queryTargets: Element[_]*) = {
-    this(universe, new ComponentCollection, queryTargets:_*)
+  def this(universe: Universe, queryTargets: Element[?]*) = {
+    this(universe, new ComponentCollection, queryTargets*)
   }
 
   override def problemTargets = queryTargets.toList
 
   // Solutions are unnormalized factors marginalized to individual targets.
-  protected var targetFactors: Map[Bounds, Map[Element[_], Factor[Double]]] = Map()
+  protected var targetFactors: Map[Bounds, Map[Element[?], Factor[Double]]] = Map()
 
   // For each of the bounds, marginalize to each target element
   override def processSolutions(solutions: Map[Bounds, Solution]): Unit = {
@@ -41,7 +41,7 @@ abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: Comp
         val factor = joint.marginalizeTo(targetVar)
         (target, factor)
       }
-      bounds -> marginalsByTarget.toMap[Element[_], Factor[Double]]
+      bounds -> marginalsByTarget.toMap[Element[?], Factor[Double]]
     }
   }
 
@@ -52,7 +52,7 @@ abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: Comp
    * Computes the normalized distribution over a single target element.
    * Throws an IllegalArgumentException if the range of the target contains star, or if lower and upper bounds are needed.
    */
-  override def computeDistribution[T](target: Element[T]): Stream[(Double, T)] = {
+  override def computeDistribution[T](target: Element[T]): LazyList[(Double, T)] = {
     val targetVar = collection(target).variable
     if(targetVar.valueSet.hasStar) {
       throw new IllegalArgumentException("target range contains *; " + useBoundsString)
@@ -64,7 +64,7 @@ abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: Comp
     val factor = solutions.head._2(target)
     val normalizer = factor.foldLeft(0.0, _ + _)
     val dist = factor.getIndices.map(indices => (factor.get(indices) / normalizer, targetVar.range(indices.head).value))
-    dist.toStream
+    dist.to(LazyList)
   }
 
   /**
@@ -73,13 +73,13 @@ abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: Comp
    */
   override def computeExpectation[T](target: Element[T], function: T => Double): Double = {
     def get(pair: (Double, T)) = pair._1 * function(pair._2)
-    (0.0 /: computeDistribution(target))(_ + get(_))
+    (computeDistribution(target)).foldLeft(0.0)(_ + get(_))
   }
 
-  def distribution(target: List[Element[_]]): (List[(String, ProblemComponent[_])], List[(Double, List[Extended[_]])]) = {
+  def distribution(target: List[Element[?]]): (List[(String, ProblemComponent[?])], List[(Double, List[Extended[?]])]) = {
     val targetVars = target.map(collection(_).variable)
     val jointFactor = problem.solution.foldLeft(Factory.unit(SumProductSemiring()))(_.product(_))
-    val unnormalizedTargetFactor = jointFactor.marginalizeTo(targetVars: _*)
+    val unnormalizedTargetFactor = jointFactor.marginalizeTo(targetVars*)
     val z = unnormalizedTargetFactor.foldLeft(0.0, _ + _)
     val targetFactor = unnormalizedTargetFactor.mapTo((d: Double) => d / z)
     val components = nameComponents(target, targetFactor)
@@ -87,8 +87,8 @@ abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: Comp
     (components, dist)
   }
 
-  private def nameComponents(targets: Seq[Element[_]], factor: Factor[_]): List[(String, ProblemComponent[_])] = {
-    val targetVars: Seq[(String, ProblemComponent[_])] = targets.map(t => (t.name.string, collection(t)))
+  private def nameComponents(targets: Seq[Element[?]], factor: Factor[?]): List[(String, ProblemComponent[?])] = {
+    val targetVars: Seq[(String, ProblemComponent[?])] = targets.map(t => (t.name.string, collection(t)))
     val variables = factor.variables
     val mappedElementNames = targetVars.map(t => (t._1, t._2, variables.indexOf(t._2.variable))).sortBy(_._3).toList
     for ((name, component, pos) <- mappedElementNames) yield (name, component)

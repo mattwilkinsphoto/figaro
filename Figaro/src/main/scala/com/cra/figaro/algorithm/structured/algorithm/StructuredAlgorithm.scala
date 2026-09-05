@@ -33,7 +33,7 @@ abstract class StructuredAlgorithm(val universe: Universe, val collection: Compo
    * List of targets that should not be eliminated when solving the problem.
    * @return Targets for the problem.
    */
-  def problemTargets: List[Element[_]]
+  def problemTargets: List[Element[?]]
 
   /**
    * Strategy to use for ranging atomic components. This is only called once. Note that this is called during

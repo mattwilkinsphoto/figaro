@@ -3,7 +3,7 @@
 
 [User guide](../USER_GUIDE.md) · [Practical API guide](../API_GUIDE.md) · [Build instructions](../BUILDING.md)
 
-Compiler-derived inventory: **11295 public method entries** from **697 Scala 3 API pages**. Excluded 748 protected/private method entries. Overloads have separate entries.
+Compiler-derived inventory: **11233 public method entries** from **693 Scala 3 API pages**. Excluded 748 protected/private method entries. Overloads have separate entries.
 
 Scope: every public `def` exposed on the generated `com.cra.figaro` API pages, including abstract methods and compiler-generated methods shown by Scaladoc. Inherited members are included wherever Scaladoc renders them. Fields, type aliases, primary constructor signatures, inheritance diagrams, and members hidden by Scaladoc remain available in the linked full API site; this handbook does not reclassify them as functions.
 
@@ -24,7 +24,7 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 - [com.cra.figaro.algorithm.factored.factors](com.cra.figaro.algorithm.factored.factors.md) — 482 methods
 - [com.cra.figaro.algorithm.factored.factors.factory](com.cra.figaro.algorithm.factored.factors.factory.md) — 43 methods
 - [com.cra.figaro.algorithm.factored.gibbs](com.cra.figaro.algorithm.factored.gibbs.md) — 140 methods
-- [com.cra.figaro.algorithm.filtering](com.cra.figaro.algorithm.filtering.md) — 106 methods
+- [com.cra.figaro.algorithm.filtering](com.cra.figaro.algorithm.filtering.md) — 105 methods
 - [com.cra.figaro.algorithm.lazyfactored](com.cra.figaro.algorithm.lazyfactored.md) — 53 methods
 - [com.cra.figaro.algorithm.lazyfactored.factory](com.cra.figaro.algorithm.lazyfactored.factory.md) — 37 methods
 - [com.cra.figaro.algorithm.learning](com.cra.figaro.algorithm.learning.md) — 94 methods
@@ -44,14 +44,14 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 - [com.cra.figaro.algorithm.structured.strategy.solve](com.cra.figaro.algorithm.structured.strategy.solve.md) — 40 methods
 - [com.cra.figaro.experimental.collapsedgibbs](com.cra.figaro.experimental.collapsedgibbs.md) — 198 methods
 - [com.cra.figaro.experimental.marginalmap](com.cra.figaro.experimental.marginalmap.md) — 250 methods
-- [com.cra.figaro.experimental.normalproposals](com.cra.figaro.experimental.normalproposals.md) — 366 methods
+- [com.cra.figaro.experimental.normalproposals](com.cra.figaro.experimental.normalproposals.md) — 365 methods
 - [com.cra.figaro.experimental.particlebp](com.cra.figaro.experimental.particlebp.md) — 76 methods
-- [com.cra.figaro.language](com.cra.figaro.language.md) — 1921 methods
-- [com.cra.figaro.library.atomic.continuous](com.cra.figaro.library.atomic.continuous.md) — 1399 methods
+- [com.cra.figaro.language](com.cra.figaro.language.md) — 1919 methods
+- [com.cra.figaro.library.atomic.continuous](com.cra.figaro.library.atomic.continuous.md) — 1391 methods
 - [com.cra.figaro.library.atomic.discrete](com.cra.figaro.library.atomic.discrete.md) — 718 methods
 - [com.cra.figaro.library.cache](com.cra.figaro.library.cache.md) — 28 methods
 - [com.cra.figaro.library.collection](com.cra.figaro.library.collection.md) — 191 methods
-- [com.cra.figaro.library.compound](com.cra.figaro.library.compound.md) — 997 methods
+- [com.cra.figaro.library.compound](com.cra.figaro.library.compound.md) — 948 methods
 - [com.cra.figaro.library.decision](com.cra.figaro.library.decision.md) — 258 methods
-- [com.cra.figaro.patterns.learning](com.cra.figaro.patterns.learning.md) — 36 methods
+- [com.cra.figaro.patterns.learning](com.cra.figaro.patterns.learning.md) — 35 methods
 - [com.cra.figaro.util](com.cra.figaro.util.md) — 1042 methods

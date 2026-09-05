@@ -45,8 +45,8 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       val gen: Function0[Universe] = () => {
         val universe = Universe.createNew()
         val u = Uniform(0.2, 1.0)
-        val f = Flip(u)("f", universe)
-        val a = If(f, Select(0.3 -> 1, 0.7 -> 2)(Name.default, universe), Constant(2)(Name.default, universe))
+        val f = Flip(u)(using "f", universe)
+        val a = If(f, Select(0.3 -> 1, 0.7 -> 2)(using Name.default, universe), Constant(2)(using Name.default, universe))
         universe
       }
       weightedSampleTest(gen, "f", (b: Boolean) => b, 0.6)
@@ -56,8 +56,8 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       val gen = () => {
         val universe = Universe.createNew()
         val u = Uniform(0.2, 1.0)
-        val f = Flip(u)("f", universe)
-        val a = If(f, Select(0.3 -> 1, 0.7 -> 2)(Name.default, universe), Constant(2)(Name.default, universe))
+        val f = Flip(u)(using "f", universe)
+        val a = If(f, Select(0.3 -> 1, 0.7 -> 2)(using Name.default, universe), Constant(2)(using Name.default, universe))
         a.setCondition((i: Int) => i == 2)
         universe
       }
@@ -72,8 +72,8 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       val gen = () => {
         val universe = Universe.createNew()
         val u = Uniform(0.2, 1.0)
-        val f = Flip(u)("f", universe)
-        val a = If(f, Select(0.3 -> 1, 0.7 -> 2)(Name.default, universe), Constant(2)(Name.default, universe))
+        val f = Flip(u)(using "f", universe)
+        val a = If(f, Select(0.3 -> 1, 0.7 -> 2)(using Name.default, universe), Constant(2)(using Name.default, universe))
         a.setConstraint((i: Int) => i.toDouble)
         universe
       }
@@ -102,7 +102,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
         val f2 = Flip(0.3)
         val e1 = f1 === f1
         val e2 = f1 === f2
-        val d = Dist(0.5 -> e1, 0.5 -> e2)("d", universe)
+        val d = Dist(0.5 -> e1, 0.5 -> e2)(using "d", universe)
         f1.setConstraint((b: Boolean) => if (b) 3.0; else 2.0)
         universe
       }
@@ -117,9 +117,9 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       // Tests the likelihood weighting implementation for compound flip
       val gen = () => {
         val universe = new Universe
-        val b = Uniform(0.0, 1.0)("b", universe)
-        for (_ <- 1 to 16) { Flip(b)("", universe).observe(true) }
-        for (_ <- 1 to 4) { Flip(b)("", universe).observe(false) }
+        val b = Uniform(0.0, 1.0)(using "b", universe)
+        for (_ <- 1 to 16) { Flip(b)(using "", universe).observe(true) }
+        for (_ <- 1 to 4) { Flip(b)(using "", universe).observe(false) }
         universe
       }
       val alg = Importance.par(gen, numThreads, "b")
@@ -143,9 +143,9 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       // Tests the likelihood weighting implementation for compound flip
       val gen = () => {
         val universe = new Universe
-        val b = Beta(2.0, 5.0)("b", universe)
-        for (_ <- 1 to 16) { Flip(b)("", universe).observe(true) }
-        for (_ <- 1 to 4) { Flip(b)("", universe).observe(false) }
+        val b = Beta(2.0, 5.0)(using "b", universe)
+        for (_ <- 1 to 16) { Flip(b)(using "", universe).observe(true) }
+        for (_ <- 1 to 4) { Flip(b)(using "", universe).observe(false) }
         universe
       }
       val alg = Importance.par(gen, numThreads, "b")
@@ -168,8 +168,8 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       // Tests the likelihood weighting implementation for chain
       val gen = () => {
         val universe = new Universe
-        val beta = Beta(2.0, 5.0)("beta", universe)
-        val bin = Binomial(2000, beta)("", universe)
+        val beta = Beta(2.0, 5.0)(using "beta", universe)
+        val bin = Binomial(2000, beta)(using "", universe)
         bin.observe(1600)
         universe
       }
@@ -193,8 +193,8 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       // Tests the likelihood weighting implementation for chain
       val gen = () => {
         val universe = new Universe
-        val beta = Uniform(0.0, 1.0)("beta", universe)
-        val bin = Binomial(2000, beta)("", universe)
+        val beta = Uniform(0.0, 1.0)(using "beta", universe)
+        val bin = Binomial(2000, beta)(using "", universe)
         bin.observe(1600)
         universe
       }
@@ -219,8 +219,8 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       // Tests the likelihood weighting implementation for dist
       val gen = () => {
         val universe = new Universe
-        val beta = Beta(2.0, 5.0)("beta", universe)
-        val dist = Dist(0.5 -> Constant(1000)(Name.default, universe), 0.5 -> Binomial(2000, beta)(Name.default, universe))("", universe)
+        val beta = Beta(2.0, 5.0)(using "beta", universe)
+        val dist = Dist(0.5 -> Constant(1000)(using Name.default, universe), 0.5 -> Binomial(2000, beta)(using Name.default, universe))(using "", universe)
         dist.observe(1600) // forces it to choose bin, and observation should propagate to it
         universe
       }
@@ -246,7 +246,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       def gen(obs: Double*) = () => {
         val universe = Universe.createNew()
         val s = Select(0.5 -> 0.3, 0.5 -> 0.6)
-        val f = Flip(s)("f", universe)
+        val f = Flip(s)(using "f", universe)
         for (o <- obs) {
           s.observe(o)
         }
@@ -286,7 +286,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
     "not suffer from stack overflow with small probability of success" taggedAs (Performance) in {
       val gen = () => {
         val universe = Universe.createNew()
-        val f = Flip(0.000001)("f", universe)
+        val f = Flip(0.000001)(using "f", universe)
         f.observe(true)
         universe
       }
@@ -297,7 +297,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
     "not suffer from memory leaks" taggedAs (Performance) in {
       val gen = () => {
         val universe = Universe.createNew()
-        val c = NonCachingChain(Uniform(0.2, 1.0), (d: Double) => Flip(d)(Name.default, universe))("c", universe)
+        val c = NonCachingChain(Uniform(0.2, 1.0), (d: Double) => Flip(d)(using Name.default, universe))(using "c", universe)
         universe
       }
       val i = Importance.par(gen, numThreads, 1000000, "c")
@@ -311,7 +311,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       "return the probability the condition is satisfied" in {
         val gen = () => {
           val universe = Universe.createNew()
-          val f = Flip(0.7)("f", universe)
+          val f = Flip(0.7)(using "f", universe)
           universe
         }
         probEvidenceTest(gen, 0.7, List(NamedEvidence("f", Observation(true))))
@@ -322,8 +322,8 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       "return the probability both conditions are satisfied" in {
         val gen = () => {
           val universe = Universe.createNew()
-          val f1 = Flip(0.7)("f1", universe)
-          val f2 = Flip(0.4)("f2", universe)
+          val f1 = Flip(0.7)(using "f1", universe)
+          val f2 = Flip(0.4)(using "f2", universe)
           universe
         }
         val prob = 0.7 * 0.4
@@ -340,8 +340,8 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
         val gen = () => {
           val universe = Universe.createNew()
           val d = Select(0.2 -> 0.6, 0.8 -> 0.9)
-          val f1 = Flip(d)("f1", universe)
-          val f2 = Flip(d)("f2", universe)
+          val f1 = Flip(d)(using "f1", universe)
+          val f2 = Flip(d)(using "f2", universe)
           universe
         }
         probEvidenceTest(gen, 0.2 * 0.6 * 0.6 + 0.8 * 0.9 * 0.9, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
@@ -352,10 +352,10 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       "return the probability both conditions are satisfied, taking into account the constraint" in {
         val gen = () => {
           val universe = Universe.createNew()
-          val d = Select(0.5 -> 0.6, 0.5 -> 0.9)("d", universe)
+          val d = Select(0.5 -> 0.6, 0.5 -> 0.9)(using "d", universe)
           d.setConstraint((d: Double) => if (d > 0.7) 0.8; else 0.2)
-          val f1 = Flip(d)("f1", universe)
-          val f2 = Flip(d)("f2", universe)
+          val f1 = Flip(d)(using "f1", universe)
+          val f2 = Flip(d)(using "f2", universe)
           universe
         }
         probEvidenceTest(gen, 0.2 * 0.6 * 0.6 + 0.8 * 0.9 * 0.9, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
@@ -366,7 +366,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       "return the expectation over the clauses of the probability the result satisfies the condition" in {
         val gen = () => {
           val universe = Universe.createNew()
-          val d = Dist(0.3 -> Flip(0.6), 0.7 -> Flip(0.9))("d", universe)
+          val d = Dist(0.3 -> Flip(0.6), 0.7 -> Flip(0.9))(using "d", universe)
           universe
         }
         probEvidenceTest(gen, 0.3 * 0.6 + 0.7 * 0.9, List(NamedEvidence("d", Observation(true))))
@@ -379,7 +379,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
           val universe = Universe.createNew()
           val p1 = Select(0.2 -> 0.4, 0.8 -> 0.6)
           val p2 = Constant(0.4)
-          val d = Dist(p1 -> Flip(0.6), p2 -> Flip(0.9))("d", universe)
+          val d = Dist(p1 -> Flip(0.6), p2 -> Flip(0.9))(using "d", universe)
           universe
         }
         probEvidenceTest(gen, 0.2 * (0.5 * 0.6 + 0.5 * 0.9) + 0.8 * (0.6 * 0.6 + 0.4 * 0.9), List(NamedEvidence("d", Observation(true))))
@@ -390,7 +390,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
       "return the uniform probability of the condition" in {
         val gen = () => {
           val universe = Universe.createNew()
-          val u = Uniform(0.0, 1.0)("u", universe)
+          val u = Uniform(0.0, 1.0)(using "u", universe)
           universe
         }
         val condition = (d: Double) => d < 0.4
@@ -403,7 +403,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
         val gen = () => {
           val universe = Universe.createNew()
           val p1 = Select(0.4 -> 0.3, 0.6 -> 0.9)
-          val c = CachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3)(Name.default, universe); else Flip(0.8)(Name.default, universe))("c", universe)
+          val c = CachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3)(using Name.default, universe); else Flip(0.8)(using Name.default, universe))(using "c", universe)
           universe
         }
         probEvidenceTest(gen, 0.4 * 0.3 + 0.6 * 0.8, List(NamedEvidence("c", Observation(true))))
@@ -416,7 +416,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
         val gen = () => {
           val universe = Universe.createNew()
           val p1 = Uniform(0.0, 1.0)
-          val c = NonCachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3)(Name.default, universe); else Flip(0.8)(Name.default, universe))("c", universe)
+          val c = NonCachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3)(using Name.default, universe); else Flip(0.8)(using Name.default, universe))(using "c", universe)
           universe
         }
         probEvidenceTest(gen, 0.4 * 0.3 + 0.6 * 0.8, List(NamedEvidence("c", Observation(true))))
@@ -431,7 +431,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
           val y = Constant(false)
           val u1 = Uniform(0.0, 1.0)
           val u2 = Uniform(0.0, 2.0)
-          val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)("a", universe)
+          val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)(using "a", universe)
           universe
         }
         def condition(d: Double) = d < 0.5
@@ -449,7 +449,7 @@ class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTest
     algorithm.probability(target, predicate) should be(prob +- tolerance)
   }
   
-  def probEvidenceTest(gen: Function0[Universe], prob: Double, evidence: List[NamedEvidence[_]]): Unit = {
+  def probEvidenceTest(gen: Function0[Universe], prob: Double, evidence: List[NamedEvidence[?]]): Unit = {
     val alg = Importance.par(gen, numThreads, 10000)
     alg.start()
     alg.probabilityOfEvidence(evidence) should be(prob +- 0.01)

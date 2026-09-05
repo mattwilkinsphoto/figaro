@@ -6,7 +6,7 @@ The tables below use simplified result supertypes for readability; use the compl
 
 ## Universes and model construction
 
-Most constructors have a final contextual argument list containing `Name[T]` and `ElementCollection`. Default name/context lookup makes calls such as `Flip(0.2)` work. To be explicit in Scala 3, use `Flip(0.2)(using Name[Boolean]("cause"), universe)`; the legacy `Flip(0.2)("cause", universe)` spelling remains accepted with a compiler warning. Use distinct nodes/names consistently in a model.
+Most constructors have a final contextual argument list containing `Name[T]` and `ElementCollection`. Default name/context lookup makes calls such as `Flip(0.2)` work. To be explicit in Scala 3, use `Flip(0.2)(using Name[Boolean]("cause"), universe)`. Legacy context-argument spelling is rejected by this branch's deprecation gate. Use distinct nodes/names consistently in a model.
 
 | Public entry point | Parameters | Returns | Example |
 | --- | --- | --- | --- |
@@ -97,7 +97,7 @@ These methods are available through probability-query algorithms. In the ordinar
 | `expectation(target, function)` | Target and `T => Double` | Expected/estimated `Double` | `alg.expectation(delivery, (s: String) => if (s == "late") 10.0 else 0.0)` |
 | `mean(target)` | `Element[Double]` | Expected/estimated mean | `alg.mean(temperature)` |
 | `variance(target)` | `Element[Double]` | Expected/estimated variance | `alg.variance(temperature)` |
-| `distribution(target)` | Target element | Lazy `Stream[(Double, T)]`, probability first | `val finiteResults = alg.distribution(cause).toList` |
+| `distribution(target)` | Target element | Lazy `LazyList[(Double, T)]`, probability first | `val finiteResults = alg.distribution(cause).toList` |
 
 Predicate and expectation APIs also expose curried overloads with a compatibility dummy argument; use the two-argument forms above to avoid overload confusion. Query failures include an inactive algorithm and `NotATargetException`. Sampling answers and variances carry numerical/statistical error. Do not assume distributions are sorted or finite for every algorithm/model.
 

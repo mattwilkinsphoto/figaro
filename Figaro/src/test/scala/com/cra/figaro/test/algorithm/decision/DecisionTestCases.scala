@@ -191,10 +191,10 @@ object DecisionTestCases {
 
     Universe.createNew()
     val f1 = Flip(0.5)
-    val d1 = Decision(f1, Seq(0.1, 0.2, 0.3, 0.4, 0.5))("d1", Universe.universe)
+    val d1 = Decision(f1, Seq(0.1, 0.2, 0.3, 0.4, 0.5))(using "d1", Universe.universe)
     val u1 = Apply(f1, d1, (f: Boolean, p: Double) => (if (f == false) p - .1 else .1 - p))
     val f2 = Flip(d1)
-    val d2 = Decision(f2, Seq(0.1, 0.2, 0.3, 0.4, 0.5))("d2", Universe.universe)
+    val d2 = Decision(f2, Seq(0.1, 0.2, 0.3, 0.4, 0.5))(using "d2", Universe.universe)
     val u2 = Apply(f2, d2, (f: Boolean, p: Double) => (if (f == true) p - .1 else .1 - p))
 
     val Exp_before = if (sim) {

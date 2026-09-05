@@ -25,8 +25,8 @@ import com.cra.figaro.util._
 object dGraphEdgeGen {
 
   def genEdge(NumEdges: Int, Probabilities: List[(Double, Node)]) = {
-    val e = for { i <- 0 until NumEdges } yield Select(Probabilities: _*)
-    Inject(e: _*)
+    val e = for { i <- 0 until NumEdges } yield Select(Probabilities*)
+    Inject(e*)
   }
 
   def apply(NumEdges: Element[Int], Probabilities: Element[List[(Double, Node)]])(implicit name: Name[List[Node]], collection: ElementCollection): NonCachingChain[Int, List[Node]] = {

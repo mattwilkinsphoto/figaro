@@ -27,7 +27,7 @@ import com.cra.figaro.test.tags.BookExample
 
 object SocialMediaTopicObjects {
   class Topic() extends ElementCollection {
-    val hot = Flip(0.1)("hot", this)
+    val hot = Flip(0.1)(using "hot", this)
   }
 
   val sports = new Topic()
@@ -38,14 +38,14 @@ object SocialMediaTopicObjects {
   }
 
   class Post(val poster: Person) extends ElementCollection {
-    val topic = If(Flip(0.9), poster.interest, Uniform(sports, politics))("topic", this)
+    val topic = If(Flip(0.9), poster.interest, Uniform(sports, politics))(using "topic", this)
   }
 
   class Connection(person1: Person, person2: Person) {
     val connectionType = Uniform("acquaintance", "close friend", "family")
   }
   def generateConnection(pair: (Person, Person)) = new Connection(pair._1, pair._2)
-  val connection = memo(generateConnection _)
+  val connection = memo(generateConnection)
 
   class Comment(val post: Post, val commenter: Person) {
     val isHot = post.get[Boolean]("topic.hot")
@@ -58,7 +58,7 @@ object SocialMediaTopicObjects {
       else if (pair._2 == "close friend") 0.5
       else 0.1
     }
-    pair.addConstraint(constraint _)
+    pair.addConstraint(constraint)
   }
 
   def main(args: Array[String]): Unit = {
@@ -97,7 +97,7 @@ class SocialMediaTopicObjectsTest extends AnyWordSpec with Matchers {
   Universe.createNew()
     
   class Topic() extends ElementCollection {
-    val hot = Flip(0.1)("hot", this)
+    val hot = Flip(0.1)(using "hot", this)
   }
 
   val sports = new Topic()
@@ -108,14 +108,14 @@ class SocialMediaTopicObjectsTest extends AnyWordSpec with Matchers {
   }
 
   class Post(val poster: Person) extends ElementCollection {
-    val topic = If(Flip(0.9), poster.interest, Uniform(sports, politics))("topic", this)
+    val topic = If(Flip(0.9), poster.interest, Uniform(sports, politics))(using "topic", this)
   }
 
   class Connection(person1: Person, person2: Person) {
     val connectionType = Uniform("acquaintance", "close friend", "family")
   }
   def generateConnection(pair: (Person, Person)) = new Connection(pair._1, pair._2)
-  val connection = memo(generateConnection _)
+  val connection = memo(generateConnection)
 
   class Comment(val post: Post, val commenter: Person) {
     val isHot = post.get[Boolean]("topic.hot")
@@ -128,7 +128,7 @@ class SocialMediaTopicObjectsTest extends AnyWordSpec with Matchers {
       else if (pair._2 == "close friend") 0.5
       else 0.1
     }
-    pair.addConstraint(constraint _)
+    pair.addConstraint(constraint)
   }
   
   val amy = new Person()

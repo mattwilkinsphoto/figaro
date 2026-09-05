@@ -389,9 +389,9 @@ class GibbsSolverTest extends AnyWordSpec with Matchers {
         val cc = new ComponentCollection
         val ec1 = new EC1
         val ec2 = new EC1
-        val e11 = Flip(0.6)("e1", ec1)
-        val e12 = Flip(0.3)("e1", ec2)
-        val e2 = Select(0.8 -> ec1, 0.2 -> ec2)("e2", universe)
+        val e11 = Flip(0.6)(using "e1", ec1)
+        val e12 = Flip(0.3)(using "e1", ec2)
+        val e2 = Select(0.8 -> ec1, 0.2 -> ec2)(using "e2", universe)
         universe.assertEvidence("e2.e1", Observation(true))
         val pr = new Problem(cc, List(e2))
         pr.add(e11)

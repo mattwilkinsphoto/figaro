@@ -35,20 +35,20 @@ import scala.collection.mutable
  * returns * for the range of a component. Thus, setting the maximum depth to 0 corresponds to not recursing at all.
  * Defaults to `Int.MaxValue` for expansion of the entire model (does not terminate on infinite models).
  */
-class BacktrackingStrategy(problem: Problem, initialComponents: List[ProblemComponent[_]],
+class BacktrackingStrategy(problem: Problem, initialComponents: List[ProblemComponent[?]],
                            maxDepth: Int = Int.MaxValue) extends RefiningStrategy(problem.collection) {
 
   /**
    * Map from problem components to the greatest depth at which that component has been visited. This also implicitly
    * stores the set of components that have been refined by this strategy.
    */
-  private[figaro] val depths = mutable.Map[ProblemComponent[_], Int]()
+  private[figaro] val depths = mutable.Map[ProblemComponent[?], Int]()
   /**
    * Map from problem components to the set of visited components that directly depend on it. This map is used for
    * backtracking: it is possible that due to lazy expansion, a component gets visited more than once at increasing
    * depth. When this happens, we need to backtrack and update any dependendent components to have consistent ranges.
    */
-  private[figaro] val directUpdates = mutable.Map[ProblemComponent[_], Set[ProblemComponent[_]]]().withDefaultValue(Set())
+  private[figaro] val directUpdates = mutable.Map[ProblemComponent[?], Set[ProblemComponent[?]]]().withDefaultValue(Set())
 
   /**
    * Get the problem component associated with an element. This involves adding the element to the collection if a
@@ -85,7 +85,7 @@ class BacktrackingStrategy(problem: Problem, initialComponents: List[ProblemComp
    * is fully refined or has already been expanded to the desired depth, this method does nothing.
    * @param depth Depth of expansion with respect to this component.
    */
-  def refine(comp: ProblemComponent[_], depth: Int): Unit = {
+  def refine(comp: ProblemComponent[?], depth: Int): Unit = {
     if (depth > depths.getOrElse(comp, -1) && !comp.fullyRefined) {
       comp match {
         case chainComp: ChainComponent[_, _] =>
@@ -102,7 +102,7 @@ class BacktrackingStrategy(problem: Problem, initialComponents: List[ProblemComp
       // Also used to track which components/problems have been modified
       depths(comp) = depth
       // Update any dependencies in a top-down recursive manner
-      val updatesNeeded = util.reachable((pc: ProblemComponent[_]) => directUpdates(pc), false, comp)
+      val updatesNeeded = util.reachable((pc: ProblemComponent[?]) => directUpdates(pc), false, comp)
       if(updatesNeeded.nonEmpty) new FlatStrategy(collection, updatesNeeded).execute()
     }
   }

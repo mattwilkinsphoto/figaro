@@ -209,7 +209,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
       Universe.createNew()
       class Test {
         val count = discrete.Uniform(1, 2)
-        val array = MakeList(count, () => Flip(.9))
+        val array = com.cra.figaro.library.collection.VariableSizeArray(count, (_: Int) => Flip(.9)).foldLeft(List.empty[Boolean])((xs, value) => xs :+ value)
       }
       val test = Constant(new Test)
       val c = Chain(test, (t: Test) => {
@@ -567,7 +567,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
     "given a vanilla model with one condition" should {
       "return the probability the condition is satisfied" in {
         val universe = Universe.createNew()
-        val f = Flip(0.7)("f", universe)
+        val f = Flip(0.7)(using "f", universe)
         probEvidenceTest(0.7, List(NamedEvidence("f", Observation(true))))
       }
     }
@@ -575,8 +575,8 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
     "given a vanilla model with two independent conditions" should {
       "return the probability both conditions are satisfied" in {
         val universe = Universe.createNew()
-        val f1 = Flip(0.7)("f1", universe)
-        val f2 = Flip(0.4)("f2", universe)
+        val f1 = Flip(0.7)(using "f1", universe)
+        val f2 = Flip(0.4)(using "f2", universe)
         probEvidenceTest(0.7 * 0.4, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
       }
     }
@@ -585,8 +585,8 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
       "return the probability both conditions are jointly satisfied" in {
         val universe = Universe.createNew()
         val d = Select(0.2 -> 0.6, 0.8 -> 0.9)
-        val f1 = Flip(d)("f1", universe)
-        val f2 = Flip(d)("f2", universe)
+        val f1 = Flip(d)(using "f1", universe)
+        val f2 = Flip(d)(using "f2", universe)
         probEvidenceTest(0.2 * 0.6 * 0.6 + 0.8 * 0.9 * 0.9, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
       }
     }
@@ -594,10 +594,10 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
     "given a vanilla model with two dependent conditions and a constraint" should {
       "return the probability both conditions are satisfied, taking into account the constraint" in {
         val universe = Universe.createNew()
-        val d = Select(0.5 -> 0.6, 0.5 -> 0.9)("d", universe)
+        val d = Select(0.5 -> 0.6, 0.5 -> 0.9)(using "d", universe)
         d.setConstraint((d: Double) => if (d > 0.7) 0.8; else 0.2)
-        val f1 = Flip(d)("f1", universe)
-        val f2 = Flip(d)("f2", universe)
+        val f1 = Flip(d)(using "f1", universe)
+        val f2 = Flip(d)(using "f2", universe)
         probEvidenceTest(0.2 * 0.6 * 0.6 + 0.8 * 0.9 * 0.9, List(NamedEvidence("f1", Observation(true)), NamedEvidence("f2", Observation(true))))
       }
     }
@@ -605,7 +605,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
     "given a simple dist with a condition on the result" should {
       "return the expectation over the clauses of the probability the result satisfies the condition" in {
         val universe = Universe.createNew()
-        val d = Dist(0.3 -> Flip(0.6), 0.7 -> Flip(0.9))("d", universe)
+        val d = Dist(0.3 -> Flip(0.6), 0.7 -> Flip(0.9))(using "d", universe)
         probEvidenceTest(0.3 * 0.6 + 0.7 * 0.9, List(NamedEvidence("d", Observation(true))))
       }
     }
@@ -615,7 +615,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
         val universe = Universe.createNew()
         val p1 = Select(0.2 -> 0.4, 0.8 -> 0.6)
         val p2 = Constant(0.4)
-        val d = Dist(p1 -> Flip(0.6), p2 -> Flip(0.9))("d", universe)
+        val d = Dist(p1 -> Flip(0.6), p2 -> Flip(0.9))(using "d", universe)
         probEvidenceTest(0.2 * (0.5 * 0.6 + 0.5 * 0.9) + 0.8 * (0.6 * 0.6 + 0.4 * 0.9), List(NamedEvidence("d", Observation(true))))
       }
     }
@@ -623,7 +623,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
     "given a continuous uniform with a condition" should {
       "return the uniform probability of the condition" in {
         val universe = Universe.createNew()
-        val u = Uniform(0.0, 1.0)("u", universe)
+        val u = Uniform(0.0, 1.0)(using "u", universe)
         val condition = (d: Double) => d < 0.4
         probEvidenceTest(0.4, List(NamedEvidence("u", Condition(condition))))
       }
@@ -633,7 +633,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
       "return the expectation over the parent of the probability the result satisfies the condition" in {
         val universe = Universe.createNew()
         val p1 = Select(0.4 -> 0.3, 0.6 -> 0.9)
-        val c = CachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))("c", universe)
+        val c = CachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))(using "c", universe)
         probEvidenceTest(0.4 * 0.3 + 0.6 * 0.8, List(NamedEvidence("c", Observation(true))))
       }
     }
@@ -643,7 +643,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
       "return the expectation over the parent of the probability the result satisfies the condition" in {
         val universe = Universe.createNew()
         val p1 = Uniform(0.0, 1.0)
-        val c = NonCachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))("c", universe)
+        val c = NonCachingChain(p1, (d: Double) => if (d < 0.4) Flip(0.3); else Flip(0.8))(using "c", universe)
         probEvidenceTest(0.4 * 0.3 + 0.6 * 0.8, List(NamedEvidence("c", Observation(true))))
       }
     }
@@ -655,7 +655,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
         val y = Constant(false)
         val u1 = Uniform(0.0, 1.0)
         val u2 = Uniform(0.0, 2.0)
-        val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)("a", universe)
+        val a = CachingChain(x, y, (x: Boolean, y: Boolean) => if (x || y) u1; else u2)(using "a", universe)
         def condition(d: Double) = d < 0.5
         probEvidenceTest(0.25, List(NamedEvidence("a", Condition(condition))))
       }
@@ -736,7 +736,7 @@ class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester 
     imp.shutdown
   }
 
-  def probEvidenceTest(prob: Double, evidence: List[NamedEvidence[_]]): Unit = {
+  def probEvidenceTest(prob: Double, evidence: List[NamedEvidence[?]]): Unit = {
     val alg = Importance(10000)
     alg.start()
     alg.probabilityOfEvidence(evidence) should be(prob +- 0.01)

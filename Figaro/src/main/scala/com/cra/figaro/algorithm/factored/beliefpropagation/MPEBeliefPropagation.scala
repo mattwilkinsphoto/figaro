@@ -25,15 +25,15 @@ import scala.collection.mutable.{ Set, Map }
  * BP algorithm to compute the most probable explanation.
  */
 abstract class MPEBeliefPropagation(override val universe: Universe)(
-  val dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-  val dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double)
+  val dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+  val dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double)
   extends MPEAlgorithm with ProbabilisticBeliefPropagation {
 
   override val semiring = MaxProductSemiring()
   /*
    * Empty for MPE Algorithms
    */
-  val targetElements = List[Element[_]]()
+  val targetElements = List[Element[?]]()
 
   override def initialize() = {
     val (neededElements, _) = getNeededElements(universe.activeElements, Int.MaxValue)
@@ -44,7 +44,7 @@ abstract class MPEBeliefPropagation(override val universe: Universe)(
   /*
    * Convert factors to use MaxProduct
    */
-  override def getFactors(allElements: List[Element[_]], targetElements: List[Element[_]], upper: Boolean = false): List[Factor[Double]] = {
+  override def getFactors(allElements: List[Element[?]], targetElements: List[Element[?]], upper: Boolean = false): List[Factor[Double]] = {
     val factors = super.getFactors(allElements, targetElements, upper)
     // Not needed since BP now converts factors to log space of the defined semiring
     //factors.map (_.mapTo(x => x, logSpaceSemiring()))
@@ -66,7 +66,7 @@ object MPEBeliefPropagation {
   def apply(myIterations: Int)(implicit universe: Universe) =
     new MPEBeliefPropagation(universe)(
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) with OneTimeProbabilisticBeliefPropagation with OneTimeMPE { val iterations = myIterations }
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u)) with OneTimeProbabilisticBeliefPropagation with OneTimeMPE { val iterations = myIterations }
 
   /**
    * Create a most probable explanation computer using Anytime BP
@@ -75,25 +75,25 @@ object MPEBeliefPropagation {
   def apply()(implicit universe: Universe) =
     new MPEBeliefPropagation(universe)(
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) with AnytimeProbabilisticBeliefPropagation with AnytimeMPE
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u)) with AnytimeProbabilisticBeliefPropagation with AnytimeMPE
 
   /**
    * Create a most probable explanation computer using One time BP using the given
    * dependent universes in the current default universe.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])], myIterations: Int)(implicit universe: Universe) =
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])], myIterations: Int)(implicit universe: Universe) =
     new MPEBeliefPropagation(universe)(
       dependentUniverses,
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) with OneTimeProbabilisticBeliefPropagation with OneTimeMPE { val iterations = myIterations }
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u)) with OneTimeProbabilisticBeliefPropagation with OneTimeMPE { val iterations = myIterations }
 
   /**
    * Create a most probable explanation computer using Anytime BP using the given
    * dependent universes in the current default universe.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])])(implicit universe: Universe) =
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])])(implicit universe: Universe) =
     new MPEBeliefPropagation(universe)(
       dependentUniverses,
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) with AnytimeProbabilisticBeliefPropagation with AnytimeMPE
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u)) with AnytimeProbabilisticBeliefPropagation with AnytimeMPE
 
   /**
    * Create a most probable explanation computer using One time BP
@@ -102,8 +102,8 @@ object MPEBeliefPropagation {
    * determine the algorithm to use to compute probability of evidence in each dependent universe.
    */
   def apply(
-    dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double, myIterations: Int)(implicit universe: Universe) =
+    dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double, myIterations: Int)(implicit universe: Universe) =
     new MPEBeliefPropagation(universe)(
       dependentUniverses,
       dependentAlgorithm) with OneTimeProbabilisticBeliefPropagation with OneTimeMPE { val iterations = myIterations }
@@ -115,8 +115,8 @@ object MPEBeliefPropagation {
    * determine the algorithm to use to compute probability of evidence in each dependent universe.
    */
   def apply(
-    dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double)(implicit universe: Universe) =
+    dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double)(implicit universe: Universe) =
     new MPEBeliefPropagation(universe)(
       dependentUniverses,
       dependentAlgorithm) with AnytimeProbabilisticBeliefPropagation with AnytimeMPE

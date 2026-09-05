@@ -33,7 +33,7 @@ object Sales {
     val productQuality = Array.fill(numProducts)(Beta(2,2))
     val regionPenetration = Array.fill(numRegions)(Beta(2,2))
     def makeSales(i: Int, j: Int) = Flip(productQuality(i) * regionPenetration(j))
-    val highSales = Array.tabulate(numProducts, numRegions)(makeSales _)
+    val highSales = Array.tabulate(numProducts, numRegions)(makeSales)
 
     /* Observe all the sales */
     for {
@@ -46,7 +46,7 @@ object Sales {
 
     /* Run inference */
     val targets = productQuality ++ regionPenetration
-    val algorithm = Importance(targets:_*)
+    val algorithm = Importance(targets*)
     algorithm.start()
     Thread.sleep(1000)
     algorithm.stop()
@@ -73,7 +73,7 @@ class SalesTest extends AnyWordSpec with Matchers {
     val productQuality = Array.fill(numProducts)(Beta(2,2))
     val regionPenetration = Array.fill(numRegions)(Beta(2,2))
     def makeSales(i: Int, j: Int) = Flip(productQuality(i) * regionPenetration(j))
-    val highSales = Array.tabulate(numProducts, numRegions)(makeSales _)
+    val highSales = Array.tabulate(numProducts, numRegions)(makeSales)
   
     /* Observe all the sales */
     for {
@@ -86,7 +86,7 @@ class SalesTest extends AnyWordSpec with Matchers {
   
     /* Run inference */
     val targets = productQuality ++ regionPenetration
-    val algorithm = Importance(targets:_*)
+    val algorithm = Importance(targets*)
     algorithm.start()
     Thread.sleep(1000)
     algorithm.stop()

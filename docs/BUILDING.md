@@ -33,7 +33,7 @@ Outputs are under `target/out/jvm/scala-3.9.0/figaro/`:
 
 | Artifact suffix | Purpose |
 | --- | --- |
-| `figaro_3-6.0.0-modern.1-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
+| `figaro_3-6.0.0-modern.2-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
 | `-sources.jar` | Library Scala sources |
 | `-javadoc.jar` | Generated Scala 3 API documentation |
 | `-fat.jar` | Library plus assembled dependencies, **excluding Scala runtime**; not a `java -jar` application |
@@ -91,7 +91,7 @@ External manifest/legal inputs are read with `Def.uncached`; the resulting conte
 - Do not run concurrent builds against the same output tree. On Windows, switching a running sbt session from ordinary testing to coverage can lock an exported project JAR. Exit the sessions holding it and use separate fresh processes; do not disable test forking or run the whole build as administrator as a workaround.
 - Very long Windows IPC paths can prevent forked tests from starting. Point `XDG_RUNTIME_DIR` at a short, existing, writable local directory before launching sbt. Keep it specific to your checkout/process. This is a path-length workaround, not a fix to sbt's IPC implementation.
 - Custom local-repository settings can make a successful `publishLocal` invisible to a consumer using different settings. Ensure both builds resolve the same Ivy local repository.
-- New compiler warnings remain visible. Deprecated `Stream`, symbol APIs, or legacy implicit syntax may compile today without being desirable new application APIs.
+- Deprecations are errors through `-Wconf:cat=deprecation:error`, including test and example compilation. Other compiler diagnostics remain visible; no warning suppression or migration mode is retained. See [deprecation retirement](DEPRECATION_RETIREMENT.md) for replacements and compatibility changes.
 
 ## Related
 

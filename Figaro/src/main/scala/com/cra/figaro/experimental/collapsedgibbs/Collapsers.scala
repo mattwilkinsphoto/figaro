@@ -65,7 +65,7 @@ trait HeuristicCollapseStrategy extends CollapsedProbabilisticGibbs {
     blockSamplers = blocks.map(block => blockSamplerCreate((block,
     	factors.filter(_.variables.exists(block.contains(_))))))
     val initialSample = WalkSAT(factors, variables, semiring, 
-    	(chain: Chain[_,_]) => LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet)
+      (chain: Chain[?,?]) => LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet)
 		variables.foreach(v => currentSamples(v) = initialSample(v))
     for (_ <- 1 to burnIn) sampleAllBlocks()
   }
@@ -149,12 +149,12 @@ trait HeuristicCollapseStrategy extends CollapsedProbabilisticGibbs {
    */
   override def collapseVariables() = {
     //store the heuristic for every variable, so we don't have to calculate it as often.
-    var graphHeuristic:MutableMap[Variable[_], Double] = MutableMap() ++ variables.map(v => v-> graphHeuristicFunction(v)).toMap
+    var graphHeuristic:MutableMap[Variable[?], Double] = MutableMap() ++ variables.map(v => v-> graphHeuristicFunction(v)).toMap
     //sort the variables using stored values
     var sortedVars = sortByHeuristic(variables.toList, graphHeuristic)
     var edgesAdded:Int = 0
     //map and tempFactors are to help with variable elimination
-    var map = MutableMap[Variable[_], MultiSet[Factor[Double]]]()
+    var map = MutableMap[Variable[?], MultiSet[Factor[Double]]]()
     var tempFactors = HashMultiSet[Factor[Double]]()
     factors foreach (x => tempFactors.addOne(x))
     for {fact <- tempFactors} {
@@ -163,7 +163,7 @@ trait HeuristicCollapseStrategy extends CollapsedProbabilisticGibbs {
     //we collapse variables until either we are out of candidates or we've added too many edges
     while (sortedVars.length > 0 && edgesAdded < gamma) {
       //eliminate the variable with highest heuristic.
-      var toRemove:Variable[_] = sortedVars(0)
+      var toRemove:Variable[?] = sortedVars(0)
       eliminate(toRemove, tempFactors, map)
       variables = variables.filter(_ != toRemove)
       var oldNeighbors = globalGraph.info(toRemove).neighbors.filter(_ != toRemove)
@@ -202,12 +202,12 @@ trait FactorSizeCollapseStrategy extends CollapsedProbabilisticGibbs {
    */
   override def collapseVariables() = {
     //store the heuristic for every variable, so we don't have to calculate it as often.
-    var graphHeuristic:MutableMap[Variable[_], Double] = MutableMap() ++ variables.map(v => v-> graphHeuristicFunction(v)).toMap
+    var graphHeuristic:MutableMap[Variable[?], Double] = MutableMap() ++ variables.map(v => v-> graphHeuristicFunction(v)).toMap
     //sort the variables using stored values
     var sortedVars = sortByHeuristic(variables.toList, graphHeuristic)
     var edgesAdded:Int = 0
     //map and tempFactors are to help with variable elimination
-    val map = MutableMap[Variable[_], MultiSet[Factor[Double]]]()
+    val map = MutableMap[Variable[?], MultiSet[Factor[Double]]]()
     var tempFactors = HashMultiSet[Factor[Double]]()
     factors foreach (x => tempFactors.addOne(x))
     for {fact <- tempFactors} {
@@ -218,7 +218,7 @@ trait FactorSizeCollapseStrategy extends CollapsedProbabilisticGibbs {
     while (costSum < factorThreshold && sortedVars.length > 0) {
       //eliminate the variable with highest heuristic.
       //println(tempFactors.map((x:Factor[Double]) => x.variables.map(y => varsInOrder.indexOf(y))))
-      var toRemove:Variable[_] = sortedVars(0)
+      var toRemove:Variable[?] = sortedVars(0)
       val cost = map(toRemove).map((x:Factor[Double]) => x.size).product
       //check to see if adding this cost will bring us above threshold. If so, move on to another variable.
       if (cost + costSum < factorThreshold) {
@@ -255,7 +255,7 @@ trait DeterministicCollapseStrategy extends CollapsedProbabilisticGibbs {
    * For this strategy we need access to the distance maps as well as the blocks.
    */
   var hellingerDistances: MutableMap[(Int, Int), Double] = MutableMap()
-  var blocks: List[Gibbs.Block] = _
+  var blocks: List[Gibbs.Block] = scala.compiletime.uninitialized
 
   /**
    * Unlike other 
@@ -269,7 +269,7 @@ trait DeterministicCollapseStrategy extends CollapsedProbabilisticGibbs {
     blockSamplers = blocks.map(block => blockSamplerCreate((block,
     	factors.filter(_.variables.exists(block.contains(_))))))
     val initialSample = WalkSAT(factors, variables, semiring, 
-    	(chain: Chain[_,_]) => LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet)
+      (chain: Chain[?,?]) => LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet)
 		variables.foreach(v => currentSamples(v) = initialSample(v))
     for (_ <- 1 to burnIn) sampleAllBlocks()
   }

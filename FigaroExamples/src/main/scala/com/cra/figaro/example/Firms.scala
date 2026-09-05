@@ -28,7 +28,7 @@ object Firms {
   }
 
   private val firms = Array.fill(20)(new Firm)
-  private val winner = discrete.Uniform(firms: _*)
+  private val winner = discrete.Uniform(firms*)
   private val winningBid = Chain(winner, (f: Firm) => f.bid)
   winningBid.setConstraint((d: Double) => 20 - d)
 

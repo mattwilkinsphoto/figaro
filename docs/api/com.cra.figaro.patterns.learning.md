@@ -463,30 +463,6 @@ Invocation template:
 receiver.removeEvidence[T](reference, contingency)
 ```
 
-## `` com.cra.figaro.patterns.learning.ModelParameters.allElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/patterns/learning/ModelParameters.html#allElements-0)
-
-```scala
-def allElements: List[Element[_]]
-```
-
-All named elements in this collection.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` List[Element[_]] ``.
-
-Source contract/attributes: All named elements in this collection. Attributes Deprecated [Since version 2.3.0.0] Use namedElements instead Inherited from: ElementCollection
-
-Invocation template:
-
-```scala
-receiver.allElements
-```
-
 ## `` com.cra.figaro.patterns.learning.ParameterArray.toString ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/patterns/learning/ParameterArray.html#toString-0)

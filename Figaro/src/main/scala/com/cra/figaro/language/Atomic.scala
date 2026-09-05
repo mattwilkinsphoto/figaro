@@ -21,5 +21,5 @@ trait Atomic[T] extends Element[T] with HasDensity[T] {
   /**
    * Returns an empty list.
    */
-  def args: List[Element[_]] = List()
+  def args: List[Element[?]] = List()
 }

@@ -17,7 +17,7 @@ import com.cra.figaro.algorithm.structured.solver._
 import com.cra.figaro.algorithm.structured.strategy.solve._
 import com.cra.figaro.algorithm.structured.algorithm._
 
-class FlatBP(universe: Universe, iterations: Int, targets: Element[_]*) extends StructuredProbQueryAlgorithm(universe, targets:_*)
+class FlatBP(universe: Universe, iterations: Int, targets: Element[?]*) extends StructuredProbQueryAlgorithm(universe, targets*)
   with DecompositionProbQuery {
   
   def solvingStrategy() = new ConstantStrategy(problem, flatRaising, marginalBeliefPropagation(iterations))
@@ -29,11 +29,11 @@ object FlatBP {
    * @param iterations the number of iterations to use for each subproblem
    * @param targets the query targets, which will all be part of the top level problem
    */
-  def apply(iterations: Int, targets: Element[_]*) = {
+  def apply(iterations: Int, targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run VE with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new FlatBP(targets(0).universe, iterations, targets:_*)
+    new FlatBP(targets(0).universe, iterations, targets*)
   }
 
   /**

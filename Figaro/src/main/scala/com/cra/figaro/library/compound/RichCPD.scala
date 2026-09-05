@@ -38,7 +38,7 @@ class RichCPD2[T1, T2, U](
   clauses: Seq[((CPDCase[T1], CPDCase[T2]), Element[U])],
   collection: ElementCollection) extends CachingChain[(T1, T2), U](
   name,
-  ^^(arg1, arg2)("", collection),
+  ^^(arg1, arg2)(using "", collection),
   (p: (T1, T2)) => RichCPD.getMatch(clauses, p._1, p._2),
   collection)
 
@@ -53,7 +53,7 @@ class RichCPD3[T1, T2, T3, U](
   clauses: Seq[((CPDCase[T1], CPDCase[T2], CPDCase[T3]), Element[U])],
   collection: ElementCollection) extends CachingChain[(T1, T2, T3), U](
   name,
-  ^^(arg1, arg2, arg3)("", collection),
+  ^^(arg1, arg2, arg3)(using "", collection),
   (p: (T1, T2, T3)) => RichCPD.getMatch(clauses, p._1, p._2, p._3),
   collection)
 
@@ -69,7 +69,7 @@ class RichCPD4[T1, T2, T3, T4, U](
   clauses: Seq[((CPDCase[T1], CPDCase[T2], CPDCase[T3], CPDCase[T4]), Element[U])],
   collection: ElementCollection) extends CachingChain[(T1, T2, T3, T4), U](
   name,
-  ^^(arg1, arg2, arg3, arg4)("", collection),
+  ^^(arg1, arg2, arg3, arg4)(using "", collection),
   (p: (T1, T2, T3, T4)) => RichCPD.getMatch(clauses, p._1, p._2, p._3, p._4),
   collection)
 
@@ -86,7 +86,7 @@ class RichCPD5[T1, T2, T3, T4, T5, U](
   clauses: Seq[((CPDCase[T1], CPDCase[T2], CPDCase[T3], CPDCase[T4], CPDCase[T5]), Element[U])],
   collection: ElementCollection) extends CachingChain[(T1, T2, T3, T4, T5), U](
   name,
-  ^^(arg1, arg2, arg3, arg4, arg5)("", collection),
+  ^^(arg1, arg2, arg3, arg4, arg5)(using "", collection),
   (p: (T1, T2, T3, T4, T5)) => RichCPD.getMatch(clauses, p._1, p._2, p._3, p._4, p._5),
   collection)
 
@@ -132,7 +132,7 @@ object RichCPD {
     new RichCPD5(name, arg1, arg2, arg3, arg4, arg5, clauses, collection)
 
   private[compound] def getMatch[T1, U](clauses: Seq[(CPDCase[T1], Element[U])], t1: T1): Element[U] =
-    clauses.find(_._1 contains t1) match {
+    clauses.find(_._1.contains(t1)) match {
       case Some(clause) => clause._2
       case None =>
         throw new MatchError(t1)
@@ -140,15 +140,15 @@ object RichCPD {
 
   private[compound] def getMatch[T1, T2, U](clauses: Seq[((CPDCase[T1], CPDCase[T2]), Element[U])],
     t1: T1, t2: T2): Element[U] =
-    clauses.find(clause => (clause._1._1 contains t1) && (clause._1._2 contains t2)) match {
+    clauses.find(clause => (clause._1._1.contains(t1)) && (clause._1._2.contains(t2))) match {
       case Some(clause) => clause._2
       case None => throw new MatchError((t1, t2))
     }
 
   private[compound] def getMatch[T1, T2, T3, U](clauses: Seq[((CPDCase[T1], CPDCase[T2], CPDCase[T3]), Element[U])],
     t1: T1, t2: T2, t3: T3): Element[U] =
-    clauses.find(clause => (clause._1._1 contains t1) &&
-      (clause._1._2 contains t2) && (clause._1._3 contains t3)) match {
+    clauses.find(clause => (clause._1._1.contains(t1)) &&
+      (clause._1._2.contains(t2)) && (clause._1._3.contains(t3))) match {
       case Some(clause) => clause._2
       case None => throw new MatchError((t1, t2, t3))
     }
@@ -156,9 +156,9 @@ object RichCPD {
   private[compound] def getMatch[T1, T2, T3, T4, U](
     clauses: Seq[((CPDCase[T1], CPDCase[T2], CPDCase[T3], CPDCase[T4]), Element[U])],
     t1: T1, t2: T2, t3: T3, t4: T4): Element[U] =
-    clauses.find(clause => (clause._1._1 contains t1) &&
-      (clause._1._2 contains t2) && (clause._1._3 contains t3) &&
-      (clause._1._4 contains t4)) match {
+    clauses.find(clause => (clause._1._1.contains(t1)) &&
+      (clause._1._2.contains(t2)) && (clause._1._3.contains(t3)) &&
+      (clause._1._4.contains(t4))) match {
       case Some(clause) => clause._2
       case None => throw new MatchError((t1, t2, t3, t4))
     }
@@ -166,9 +166,9 @@ object RichCPD {
   private[compound] def getMatch[T1, T2, T3, T4, T5, U](
     clauses: Seq[((CPDCase[T1], CPDCase[T2], CPDCase[T3], CPDCase[T4], CPDCase[T5]), Element[U])],
     t1: T1, t2: T2, t3: T3, t4: T4, t5: T5): Element[U] =
-    clauses.find(clause => (clause._1._1 contains t1) &&
-      (clause._1._2 contains t2) && (clause._1._3 contains t3) &&
-      (clause._1._4 contains t4) && (clause._1._5 contains t5)) match {
+    clauses.find(clause => (clause._1._1.contains(t1)) &&
+      (clause._1._2.contains(t2)) && (clause._1._3.contains(t3)) &&
+      (clause._1._4.contains(t4)) && (clause._1._5.contains(t5))) match {
       case Some(clause) => clause._2
       case None => throw new MatchError((t1, t2, t3, t4, t5))
     }

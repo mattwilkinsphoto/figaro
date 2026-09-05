@@ -38,7 +38,7 @@ trait ProbabilisticVariableEliminationDecision extends VariableElimination[(Doub
   /** Retrieve utility nodes in the model
    */
   /* Implementations must define this */
-  def getUtilityNodes: List[Element[_]]
+  def getUtilityNodes: List[Element[?]]
 
   /**
    * Semiring for Decisions uses a sum-product-utility semiring.
@@ -49,7 +49,7 @@ trait ProbabilisticVariableEliminationDecision extends VariableElimination[(Doub
    * Makes a utility factor an element designated as a utility. This is factor of a tuple (Double, Double)
    * where the first value is 1.0 and the second is a possible utility of the element.
    */
-  def makeUtilFactor(e: Element[_]): Factor[(Double, Double)] = {
+  def makeUtilFactor(e: Element[?]): Factor[(Double, Double)] = {
     val f = Factory.defaultFactor[(Double, Double)](List(), List(Variable(e)), semiring)
     f.fillByRule((l: List[Any]) => (1.0, l.asInstanceOf[List[Extended[Double]]](0).value))
     f
@@ -63,11 +63,11 @@ trait ProbabilisticVariableEliminationDecision extends VariableElimination[(Doub
    * Create the factors for decision factors. Each factor is hardcoded as a tuple of (Double, Double),
    * where the first value is the probability and the second is the utility.
    */
-  def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upper: Boolean = false): List[Factor[(Double, Double)]] = {
+  def getFactors(neededElements: List[Element[?]], targetElements: List[Element[?]], upper: Boolean = false): List[Factor[(Double, Double)]] = {
     if (debug) {
       println("Elements (other than utilities) appearing in factors and their ranges:")
       for { element <- neededElements } {
-        println(Variable(element).id + "(" + element.name.string + "@" + element.hashCode + ")" + ": " + element + ": " + Variable(element).range.mkString(","))
+        println(Variable(element).id.toString + "(" + element.name.string + "@" + element.hashCode + ")" + ": " + element + ": " + Variable(element).range.mkString(","))
       }
     }
 
@@ -114,10 +114,10 @@ trait ProbabilisticVariableEliminationDecision extends VariableElimination[(Doub
  * Decision VariableElimination algorithm that computes the expected utility of decision elements using the default
  * elimination order.
  */
-class ProbQueryVariableEliminationDecision[T, U](override val universe: Universe, utilityNodes: List[Element[_]], target: Element[_])(
+class ProbQueryVariableEliminationDecision[T, U](override val universe: Universe, utilityNodes: List[Element[?]], target: Element[?])(
     val showTiming: Boolean,
-    val dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    val dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double)
+    val dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    val dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double)
   extends OneTimeProbQuery
   with ProbabilisticVariableEliminationDecision
   with DecisionAlgorithm[T, U] {
@@ -136,7 +136,7 @@ class ProbQueryVariableEliminationDecision[T, U](override val universe: Universe
   /* Marginalizes the final factor using the semiring for decisions
    *
    */
-  private def marginalizeToTarget(factor: Factor[(Double, Double)], target: Element[_]): Unit = {
+  private def marginalizeToTarget(factor: Factor[(Double, Double)], target: Element[?]): Unit = {
     val unnormalizedTargetFactor = factor.marginalizeTo(Variable(target))
     val z = unnormalizedTargetFactor.foldLeft(semiring.zero, (x: (Double, Double), y: (Double, Double)) => (x._1 + y._1, 0.0))
    //val targetFactor = Factory.make[(Double, Double)](unnormalizedTargetFactor.variables)
@@ -153,18 +153,18 @@ class ProbQueryVariableEliminationDecision[T, U](override val universe: Universe
     factorsAfterElimination.foldLeft(Factory.unit(semiring))(_.product(_))
   }
 
-  def finish(factorsAfterElimination: MultiSet[Factor[(Double, Double)]], eliminationOrder: List[Variable[_]]) =
+  def finish(factorsAfterElimination: MultiSet[Factor[(Double, Double)]], eliminationOrder: List[Variable[?]]) =
     finalFactors = makeResultFactor(factorsAfterElimination)
 
   /**
    * Returns distribution of the target, ignoring utilities.
    */
-  def computeDistribution[T](target: Element[T]): Stream[(Double, T)] = {
+  def computeDistribution[T](target: Element[T]): LazyList[(Double, T)] = {
     val factor = targetFactors(target)
     val targetVar = Variable(target)
     val dist = targetVar.range.filter(_.isRegular).map(_.value).zipWithIndex map (pair => (factor.get(List(pair._2))._1, pair._1))
     // normalization is unnecessary here because it is done in marginalizeTo
-    dist.toStream
+    dist.to(LazyList)
   }
 
   /**
@@ -172,7 +172,7 @@ class ProbQueryVariableEliminationDecision[T, U](override val universe: Universe
    */
   def computeExpectation[T](target: Element[T], function: T => Double): Double = {
     def get(pair: (Double, T)) = pair._1 * function(pair._2)
-    (0.0 /: computeDistribution(target))(_ + get(_))
+    (computeDistribution(target)).foldLeft(0.0)(_ + get(_))
   }
 
   /**
@@ -188,7 +188,7 @@ class ProbQueryVariableEliminationDecision[T, U](override val universe: Universe
     val strat = Map[(T, U), DecisionSample]()
 
     //find the variable associated with the decision
-    val decisionVariable = factor.variables.filter(_.asInstanceOf[ElementVariable[_]].element == target)(0)
+    val decisionVariable = factor.variables.filter(_.asInstanceOf[ElementVariable[?]].element == target)(0)
 
     // find the variables of the parents.
     val parentVariable = factor.variables.filterNot(_ == decisionVariable)(0)
@@ -221,7 +221,7 @@ object DecisionVariableElimination {
     /* Checks conditions of Decision Usage
    * 1. Double utilities
    */
-  private[decision] def usageCheck(utilityNodes: List[Element[_]], target: Decision[_, _]): Unit = {
+  private[decision] def usageCheck(utilityNodes: List[Element[?]], target: Decision[?, ?]): Unit = {
     utilityNodes.foreach { u =>
       u.value match {
         case d: Double => 1
@@ -234,25 +234,25 @@ object DecisionVariableElimination {
    * Create a decision variable elimination instance with the given decision variables and indicated utility
    * nodes.
    */
-  def apply[T, U](utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate()) // need initial values for the utility nodes before the usage check
     usageCheck(utilityNodes, target)
     new ProbQueryVariableEliminationDecision[T, U](universe, utilityNodes, target)(
       false,
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
   }
   /**
    * Create a decision variable elimination algorithm with  the given decision variables and indicated utility
    * nodes and using the given dependent universes in the current default universe.
    */
-  def apply[T, U](dependentUniverses: List[(Universe, List[NamedEvidence[_]])], utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
+  def apply[T, U](dependentUniverses: List[(Universe, List[NamedEvidence[?]])], utilityNodes: List[Element[?]], target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate()) // need initial values for the utility nodes before the usage check
     usageCheck(utilityNodes, target)
     new ProbQueryVariableEliminationDecision[T, U](universe, utilityNodes, target)(
       false,
       dependentUniverses,
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u))
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u))
   }
   /**
    * Create a decision variable elimination algorithm with  the given decision variables and indicated utility
@@ -260,9 +260,9 @@ object DecisionVariableElimination {
    * algorithm function to determine the algorithm to use to compute probability of evidence in each dependent universe.
    */
   def apply[T, U](
-    dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    utilityNodes: List[Element[_]],
+    dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    utilityNodes: List[Element[?]],
     target: Decision[T, U])(implicit universe: Universe) = {
     utilityNodes.foreach(_.generate()) // need initial values for the utility nodes before the usage check
     usageCheck(utilityNodes, target)

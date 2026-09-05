@@ -55,10 +55,10 @@ receiver.initialize()
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeElementSampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeElementSampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeElementSampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -67,7 +67,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -127,10 +127,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeElementSampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeElementSampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeElementSampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -139,7 +139,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -515,10 +515,10 @@ receiver.sample()
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeElementSampler.sampleFromPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeElementSampler.html#sampleFromPosterior-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeElementSampler.html#sampleFromPosterior-f66)
 
 ```scala
-def sampleFromPosterior[T](element: Element[T]): Stream[T]
+def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 ```
 
 Sample an value from the posterior of this element
@@ -527,7 +527,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` element: Element[T] ``.
 
-Returns: `` Stream[T] ``.
+Returns: `` LazyList[T] ``.
 
 Source contract/attributes: Sample an value from the posterior of this element Attributes Inherited from: UnweightedSampler
 
@@ -1019,10 +1019,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeMetropolisHastings.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMetropolisHastings.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMetropolisHastings.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -1031,7 +1031,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -1091,10 +1091,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeMetropolisHastings.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMetropolisHastings.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMetropolisHastings.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -1103,7 +1103,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -1479,10 +1479,10 @@ receiver.sample()
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeMetropolisHastings.sampleFromPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMetropolisHastings.html#sampleFromPosterior-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMetropolisHastings.html#sampleFromPosterior-f66)
 
 ```scala
-def sampleFromPosterior[T](element: Element[T]): Stream[T]
+def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 ```
 
 Sample an value from the posterior of this element
@@ -1491,7 +1491,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` element: Element[T] ``.
 
-Returns: `` Stream[T] ``.
+Returns: `` LazyList[T] ``.
 
 Source contract/attributes: Sample an value from the posterior of this element Attributes Inherited from: UnweightedSampler
 
@@ -2583,10 +2583,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeProbQuerySampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeProbQuerySampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeProbQuerySampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -2595,7 +2595,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -3043,10 +3043,10 @@ receiver.variance(target)
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeProbQuerySampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeProbQuerySampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeProbQuerySampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered.
@@ -3055,7 +3055,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -3427,10 +3427,10 @@ receiver.getTotalWeight
 
 ## `` com.cra.figaro.algorithm.sampling.BaseProbQuerySampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/BaseProbQuerySampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/BaseProbQuerySampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: U[T]): Stream[(Double, T)]
+def computeDistribution[T](target: U[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -3439,7 +3439,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: U[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes
 
@@ -3523,10 +3523,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.BaseProbQuerySampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/BaseProbQuerySampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/BaseProbQuerySampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: U[T]): Stream[(Double, T)]
+def distribution[T](target: U[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -3535,7 +3535,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: U[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -5455,10 +5455,10 @@ com.cra.figaro.algorithm.sampling.Importance.probability[T](target, value)(using
 
 ## `` com.cra.figaro.algorithm.sampling.Importance.sampleJointPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance$.html#sampleJointPosterior-fffff659)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance$.html#sampleJointPosterior-2cb)
 
 ```scala
-def sampleJointPosterior(targets: Element[_]*)(implicit universe: Universe): Stream[List[Any]]
+def sampleJointPosterior(targets: Element[_]*)(implicit universe: Universe): LazyList[List[Any]]
 ```
 
 Use IS to sample the joint posterior distribution of several variables
@@ -5469,7 +5469,7 @@ Parameters, list 1: `` targets: Element[_]* ``.
 
 Context parameters, list 2: `` universe: Universe ``.
 
-Returns: `` Stream[List[Any]] ``.
+Returns: `` LazyList[List[Any]] ``.
 
 Source contract/attributes: Use IS to sample the joint posterior distribution of several variables Attributes
 
@@ -5599,10 +5599,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.sampling.Importance.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -5611,7 +5611,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -5671,10 +5671,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.Importance.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -5683,7 +5683,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -5963,10 +5963,10 @@ receiver.resume()
 
 ## `` com.cra.figaro.algorithm.sampling.Importance.sampleFromPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance.html#sampleFromPosterior-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance.html#sampleFromPosterior-f66)
 
 ```scala
-def sampleFromPosterior[T](element: Element[T]): Stream[T]
+def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 ```
 
 Sample an value from the posterior of this element
@@ -5975,7 +5975,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` element: Element[T] ``.
 
-Returns: `` Stream[T] ``.
+Returns: `` LazyList[T] ``.
 
 Source contract/attributes: Sample an value from the posterior of this element Attributes Inherited from: WeightedSampler
 
@@ -6695,10 +6695,10 @@ com.cra.figaro.algorithm.sampling.MetropolisHastings.probability[T](target, valu
 
 ## `` com.cra.figaro.algorithm.sampling.MetropolisHastings.sampleJointPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MetropolisHastings$.html#sampleJointPosterior-fffff659)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MetropolisHastings$.html#sampleJointPosterior-2cb)
 
 ```scala
-def sampleJointPosterior(targets: Element[_]*)(implicit universe: Universe): Stream[List[Any]]
+def sampleJointPosterior(targets: Element[_]*)(implicit universe: Universe): LazyList[List[Any]]
 ```
 
 Use MH to sample the joint posterior distribution of several variables
@@ -6709,7 +6709,7 @@ Parameters, list 1: `` targets: Element[_]* ``.
 
 Context parameters, list 2: `` universe: Universe ``.
 
-Returns: `` Stream[List[Any]] ``.
+Returns: `` LazyList[List[Any]] ``.
 
 Source contract/attributes: Use MH to sample the joint posterior distribution of several variables Attributes
 
@@ -7597,10 +7597,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeElementSampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeElementSampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeElementSampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -7609,7 +7609,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -7669,10 +7669,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeElementSampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeElementSampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeElementSampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -7681,7 +7681,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -8033,10 +8033,10 @@ receiver.sample()
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeElementSampler.sampleFromPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeElementSampler.html#sampleFromPosterior-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeElementSampler.html#sampleFromPosterior-f66)
 
 ```scala
-def sampleFromPosterior[T](element: Element[T]): Stream[T]
+def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 ```
 
 Sample an value from the posterior of this element
@@ -8045,7 +8045,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` element: Element[T] ``.
 
-Returns: `` Stream[T] ``.
+Returns: `` LazyList[T] ``.
 
 Source contract/attributes: Sample an value from the posterior of this element Attributes Inherited from: UnweightedSampler
 
@@ -8417,10 +8417,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeMetropolisHastings.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMetropolisHastings.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMetropolisHastings.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -8429,7 +8429,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -8489,10 +8489,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeMetropolisHastings.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMetropolisHastings.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMetropolisHastings.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -8501,7 +8501,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -8853,10 +8853,10 @@ receiver.sample()
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeMetropolisHastings.sampleFromPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMetropolisHastings.html#sampleFromPosterior-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMetropolisHastings.html#sampleFromPosterior-f66)
 
 ```scala
-def sampleFromPosterior[T](element: Element[T]): Stream[T]
+def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 ```
 
 Sample an value from the posterior of this element
@@ -8865,7 +8865,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` element: Element[T] ``.
 
-Returns: `` Stream[T] ``.
+Returns: `` LazyList[T] ``.
 
 Source contract/attributes: Sample an value from the posterior of this element Attributes Inherited from: UnweightedSampler
 
@@ -9765,10 +9765,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeProbQuerySampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeProbQuerySampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeProbQuerySampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -9777,7 +9777,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -10153,10 +10153,10 @@ receiver.variance(target)
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeProbQuerySampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeProbQuerySampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeProbQuerySampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered.
@@ -10165,7 +10165,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -10833,10 +10833,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.sampling.ProbQuerySampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/ProbQuerySampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/ProbQuerySampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -10845,7 +10845,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -10905,10 +10905,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.ProbQuerySampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/ProbQuerySampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/ProbQuerySampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -10917,7 +10917,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -11749,10 +11749,10 @@ receiver.getTotalWeight
 
 ## `` com.cra.figaro.algorithm.sampling.UnweightedSampler.sampleFromPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/UnweightedSampler.html#sampleFromPosterior-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/UnweightedSampler.html#sampleFromPosterior-f66)
 
 ```scala
-def sampleFromPosterior[T](element: Element[T]): Stream[T]
+def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 ```
 
 Sample an value from the posterior of this element
@@ -11761,7 +11761,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` element: Element[T] ``.
 
-Returns: `` Stream[T] ``.
+Returns: `` LazyList[T] ``.
 
 Source contract/attributes: Sample an value from the posterior of this element Attributes
 
@@ -11797,10 +11797,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.sampling.UnweightedSampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/UnweightedSampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/UnweightedSampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -11809,7 +11809,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -11869,10 +11869,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.UnweightedSampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/UnweightedSampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/UnweightedSampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -11881,7 +11881,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -12377,10 +12377,10 @@ receiver.getTotalWeight
 
 ## `` com.cra.figaro.algorithm.sampling.WeightedSampler.sampleFromPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/WeightedSampler.html#sampleFromPosterior-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/WeightedSampler.html#sampleFromPosterior-f66)
 
 ```scala
-def sampleFromPosterior[T](element: Element[T]): Stream[T]
+def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 ```
 
 Sample an value from the posterior of this element
@@ -12389,7 +12389,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` element: Element[T] ``.
 
-Returns: `` Stream[T] ``.
+Returns: `` LazyList[T] ``.
 
 Source contract/attributes: Sample an value from the posterior of this element Attributes
 
@@ -12425,10 +12425,10 @@ receiver.cleanUp()
 
 ## `` com.cra.figaro.algorithm.sampling.WeightedSampler.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/WeightedSampler.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/WeightedSampler.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -12437,7 +12437,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -12497,10 +12497,10 @@ receiver.computeProbability[T](target, predicate)
 
 ## `` com.cra.figaro.algorithm.sampling.WeightedSampler.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/WeightedSampler.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/WeightedSampler.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -12509,7 +12509,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 

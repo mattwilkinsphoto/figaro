@@ -39,8 +39,10 @@ class MultiValuedTest extends AnyWordSpec with Matchers {
       def makeComponent = () => Select(0.2 -> specialComponent1, 0.8 -> new Component)
 
       class Container extends ElementCollection {
-        val components = MakeList(Select(0.3 -> 1, 0.7 -> 2), makeComponent)("components", this)
-        val sum = getAggregate((xs: MultiSet[Int]) => (0 /: xs)(_ + _))("components.f")
+        val components = Apply(com.cra.figaro.library.collection.VariableSizeArray(Select(0.3 -> 1, 0.7 -> 2), (_: Int) => makeComponent())(using "", this)
+          .foldLeft(List.empty[Component])((xs, value) => xs :+ value),
+          (values: List[Component]) => values)(using "components", this)
+        val sum = getAggregate((xs: MultiSet[Int]) => (xs).foldLeft(0)(_ + _))("components.f")
       }
 
       val c = new Container
@@ -75,8 +77,10 @@ class MultiValuedTest extends AnyWordSpec with Matchers {
       def makeComponent = () => Select(0.2 -> specialComponent1, 0.8 -> new Component)
 
       class Container extends ElementCollection {
-        val components = MakeList(Select(0.3 -> 1, 0.7 -> 2), makeComponent)("components", this)
-        val sum = getAggregate((xs: MultiSet[Int]) => (0 /: xs)(_ + _))("components.f")
+        val components = Apply(com.cra.figaro.library.collection.VariableSizeArray(Select(0.3 -> 1, 0.7 -> 2), (_: Int) => makeComponent())(using "", this)
+          .foldLeft(List.empty[Component])((xs, value) => xs :+ value),
+          (values: List[Component]) => values)(using "components", this)
+        val sum = getAggregate((xs: MultiSet[Int]) => (xs).foldLeft(0)(_ + _))("components.f")
       }
 
       val c = new Container
@@ -111,8 +115,10 @@ class MultiValuedTest extends AnyWordSpec with Matchers {
       def makeComponent = () => Select(0.2 -> specialComponent1, 0.8 -> new Component)
 
       class Container extends ElementCollection {
-        val components = MakeList(Select(0.3 -> 1, 0.7 -> 2), makeComponent)("components", this)
-        val sum = getAggregate((xs: MultiSet[Int]) => (0 /: xs)(_ + _))("components.f")
+        val components = Apply(com.cra.figaro.library.collection.VariableSizeArray(Select(0.3 -> 1, 0.7 -> 2), (_: Int) => makeComponent())(using "", this)
+          .foldLeft(List.empty[Component])((xs, value) => xs :+ value),
+          (values: List[Component]) => values)(using "components", this)
+        val sum = getAggregate((xs: MultiSet[Int]) => (xs).foldLeft(0)(_ + _))("components.f")
       }
 
       val c = new Container
@@ -143,7 +149,7 @@ class MultiValuedTest extends AnyWordSpec with Matchers {
   class Component extends ElementCollection {
     Component.id += 1
     val name = "Component " + Component.id
-    val f = Select(0.4 -> 2, 0.6 -> 3)("f", this)
+    val f = Select(0.4 -> 2, 0.6 -> 3)(using "f", this)
     override def toString = name
   }
 

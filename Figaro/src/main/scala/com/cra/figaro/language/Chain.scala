@@ -31,7 +31,7 @@ import scala.collection.mutable.Set
 class Chain[T, U](name: Name[U], val parent: Element[T], fcn: T => Element[U], collection: ElementCollection)
   extends Deterministic[U](name, collection) {
 
-  def args: List[Element[_]] = List(parent)
+  def args: List[Element[?]] = List(parent)
 
   protected def cpd = fcn
 

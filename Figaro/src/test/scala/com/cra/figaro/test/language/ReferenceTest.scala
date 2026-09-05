@@ -55,7 +55,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         "getting the element associated with a name" should {
       "return the reference element associated with the name" in {
         createNew()
-        val u = Uniform(0.0, 1.0)("u", universe)
+        val u = Uniform(0.0, 1.0)(using "u", universe)
         universe.getElementByReference[Double]("u") should equal(u)
       }
     }
@@ -64,8 +64,8 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "correctly resolve the reference" in {
         createNew()
         val ec = new ElementCollection {}
-        val u = Uniform(0.0, 1.0)("u", ec)
-        val c = Constant(ec)("g", universe)
+        val u = Uniform(0.0, 1.0)(using "u", ec)
+        val c = Constant(ec)(using "g", universe)
         universe.getElementByReference[Double]("g.u") should equal(u)
       }
 
@@ -86,9 +86,9 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "return the resolvable nature of the reference" in {
         createNew()
         class Test extends ElementCollection {
-          val t = Constant(0)("t", this)
+          val t = Constant(0)(using "t", this)
         }
-        val u = Constant(new Test)("u", universe)
+        val u = Constant(new Test)(using "u", universe)
         universe.hasRef("u.t") should be (true)
         universe.hasRef("u.z") should be (false)
       }
@@ -103,12 +103,12 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         val ec3 = new ElementCollection {}
         val ec4 = new ElementCollection {}
         val ec5 = new ElementCollection {}
-        val z3 = Flip(0.1)("z", ec3)
-        val z4 = Flip(0.2)("z", ec4)
-        val z5 = Flip(0.3)("z", ec5)
-        val y1 = Constant(List(ec3, ec4))("y", ec1)
-        val y2 = Constant(List(ec4, ec5))("y", ec2)
-        val x = Constant(List(ec1, ec2))("x", universe)
+        val z3 = Flip(0.1)(using "z", ec3)
+        val z4 = Flip(0.2)(using "z", ec4)
+        val z5 = Flip(0.3)(using "z", ec5)
+        val y1 = Constant(List(ec3, ec4))(using "y", ec1)
+        val y2 = Constant(List(ec4, ec5))(using "y", ec2)
+        val x = Constant(List(ec1, ec2))(using "x", universe)
         universe.getManyElementsByReference[Boolean]("x.y.z") should equal(Set(z3, z4, z5))
       }
     }
@@ -116,7 +116,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
     "getting all possibilities associated with a reference" should {
       "given a single name produce the single element associated with the name" in {
         createNew()
-        val f = Flip(0.2)("f", universe)
+        val f = Flip(0.2)(using "f", universe)
         val poss = universe.allPossibleResolutions("f")
         poss should equal(Set((f, List())))
       }
@@ -124,11 +124,11 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "given an indirect reference of length two produce all the possibilities" in {
         createNew()
         class EC extends ElementCollection {
-          val u = Uniform(0.0, 1.0)("u", this)
+          val u = Uniform(0.0, 1.0)(using "u", this)
         }
         val ec1 = new EC
         val ec2 = new EC
-        val choice = Select(0.2 -> ec1, 0.8 -> ec2)("g", universe)
+        val choice = Select(0.2 -> ec1, 0.8 -> ec2)(using "g", universe)
         val poss = universe.allPossibleResolutions("g.u")
         poss should equal(Set((ec1.u, List(Element.ElemVal(choice, ec1))), (ec2.u, List(Element.ElemVal(choice, ec2)))))
       }
@@ -137,21 +137,21 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         createNew()
         class ECOut extends ElementCollection {
           class ECIn extends ElementCollection {
-            val u = Uniform(0.0, 1.0)("u", this)
+            val u = Uniform(0.0, 1.0)(using "u", this)
           }
           val ecIn1 = new ECIn
           val ecIn2 = new ECIn
-          val choiceIn = Select(0.5 -> ecIn1, 0.5 -> ecIn2)("c", this)
+          val choiceIn = Select(0.5 -> ecIn1, 0.5 -> ecIn2)(using "c", this)
         }
         val ecOut1 = new ECOut
         val ecOut2 = new ECOut
-        val choiceOut = Select(0.2 -> ecOut1, 0.8 -> ecOut2)("g", universe)
+        val choiceOut = Select(0.2 -> ecOut1, 0.8 -> ecOut2)(using "g", universe)
         val poss = universe.allPossibleResolutions("g.c.u")
         poss should equal(Set(
-          (ecOut1.ecIn1.u, List[Element.ElemVal[_]](Element.ElemVal(choiceOut, ecOut1), Element.ElemVal(ecOut1.choiceIn, ecOut1.ecIn1))),
-          (ecOut1.ecIn2.u, List[Element.ElemVal[_]](Element.ElemVal(choiceOut, ecOut1), Element.ElemVal(ecOut1.choiceIn, ecOut1.ecIn2))),
-          (ecOut2.ecIn1.u, List[Element.ElemVal[_]](Element.ElemVal(choiceOut, ecOut2), Element.ElemVal(ecOut2.choiceIn, ecOut2.ecIn1))),
-          (ecOut2.ecIn2.u, List[Element.ElemVal[_]](Element.ElemVal(choiceOut, ecOut2), Element.ElemVal(ecOut2.choiceIn, ecOut2.ecIn2)))))
+          (ecOut1.ecIn1.u, List[Element.ElemVal[?]](Element.ElemVal(choiceOut, ecOut1), Element.ElemVal(ecOut1.choiceIn, ecOut1.ecIn1))),
+          (ecOut1.ecIn2.u, List[Element.ElemVal[?]](Element.ElemVal(choiceOut, ecOut1), Element.ElemVal(ecOut1.choiceIn, ecOut1.ecIn2))),
+          (ecOut2.ecIn1.u, List[Element.ElemVal[?]](Element.ElemVal(choiceOut, ecOut2), Element.ElemVal(ecOut2.choiceIn, ecOut2.ecIn1))),
+          (ecOut2.ecIn2.u, List[Element.ElemVal[?]](Element.ElemVal(choiceOut, ecOut2), Element.ElemVal(ecOut2.choiceIn, ecOut2.ecIn2)))))
       }
     }
 
@@ -160,7 +160,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         "as well as the element itself" in {
           createNew()
           val u = Uniform(0.0, 1.0)
-          val f = Flip(u)("f", universe)
+          val f = Flip(u)(using "f", universe)
           val refelem = universe.get("f")
           refelem.args.toSet should equal(Set(u, f))
         }
@@ -170,11 +170,11 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
           createNew()
           class EC extends ElementCollection {
             val u = Uniform(0.0, 1.0)
-            val f = Flip(u)("f", this)
+            val f = Flip(u)(using "f", this)
           }
           val ec1 = new EC
           val ec2 = new EC
-          val choice = Select(0.2 -> ec1, 0.8 -> ec2)("g", universe)
+          val choice = Select(0.2 -> ec1, 0.8 -> ec2)(using "g", universe)
           val refelem = universe.get("g.f")
           refelem.args.toSet should equal(Set(ec1.u, ec1.f, ec2.u, ec2.f, choice))
         }
@@ -185,15 +185,15 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
           class ECOut extends ElementCollection {
             class ECIn extends ElementCollection {
               val u = Uniform(0.0, 1.0)
-              val f = Flip(u)("f", this)
+              val f = Flip(u)(using "f", this)
             }
             val ecIn1 = new ECIn
             val ecIn2 = new ECIn
-            val choiceIn = Select(0.5 -> ecIn1, 0.5 -> ecIn2)("c", this)
+            val choiceIn = Select(0.5 -> ecIn1, 0.5 -> ecIn2)(using "c", this)
           }
           val ecOut1 = new ECOut
           val ecOut2 = new ECOut
-          val choiceOut = Select(0.2 -> ecOut1, 0.8 -> ecOut2)("g", universe)
+          val choiceOut = Select(0.2 -> ecOut1, 0.8 -> ecOut2)(using "g", universe)
           val refelem = universe.get("g.c.f")
           refelem.args.toSet should equal(Set(ecOut1.ecIn1.u, ecOut1.ecIn1.f, ecOut1.ecIn2.u, ecOut1.ecIn2.f,
             ecOut2.ecIn1.u, ecOut2.ecIn1.f, ecOut2.ecIn2.u, ecOut2.ecIn2.f,
@@ -206,7 +206,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "have simple evidence exist in an existing element" in {
         createNew()
         class EC1 extends ElementCollection {
-          Flip(0.3)("f1", this)
+          Flip(0.3)(using "f1", this)
         }
         val ec1 = new EC1
         ec1.assertEvidence("f1", Observation(true))
@@ -218,10 +218,10 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "have indirect evidence exist in a single existing embedded element" in {
         createNew()
         class EC1 extends ElementCollection {
-          Flip(0.3)("f1", this)
+          Flip(0.3)(using "f1", this)
         }
         class EC2 extends ElementCollection {
-          Constant(new EC1)("x1", this)
+          Constant(new EC1)(using "x1", this)
         }
         val ec2 = new EC2
         ec2.assertEvidence("x1.f1", Observation(true))
@@ -233,10 +233,10 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "have indirect evidence exist in multiple existing embedded elements" in {
         createNew()
         class EC1 extends ElementCollection {
-          Flip(0.3)("f1", this)
+          Flip(0.3)(using "f1", this)
         }
         class EC2 extends ElementCollection {
-          Constant(Set(new EC1, new EC1))("x1", this)
+          Constant(Set(new EC1, new EC1))(using "x1", this)
         }
         val ec2 = new EC2
         ec2.assertEvidence("x1.f1", Observation(true))
@@ -253,7 +253,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         class EC1 extends ElementCollection
         val ec1 = new EC1
         ec1.assertEvidence("f1", Observation(true))
-        Flip(0.3)("f1", ec1)
+        Flip(0.3)(using "f1", ec1)
         val f1 = ec1.getElementByReference[Boolean]("f1")
         f1.condition(true) should equal(true)
         f1.condition(false) should equal(false)
@@ -264,11 +264,11 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         class EC1 extends ElementCollection
         val ec1 = new EC1
         class EC2 extends ElementCollection {
-          Constant(ec1)("x1", this)
+          Constant(ec1)(using "x1", this)
         }
         val ec2 = new EC2
         ec2.assertEvidence("x1.f1", Observation(true))
-        Flip(0.3)("f1", ec1)
+        Flip(0.3)(using "f1", ec1)
         val f1 = ec2.getElementByReference[Boolean]("x1.f1")
         f1.condition(true) should equal(true)
         f1.condition(false) should equal(false)
@@ -281,8 +281,8 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         class EC2 extends ElementCollection
         val ec2 = new EC2
         ec2.assertEvidence("x1.f1", Observation(true))
-        Flip(0.3)("f1", ec1)
-        Constant(ec1)("x1", ec2)
+        Flip(0.3)(using "f1", ec1)
+        Constant(ec1)(using "x1", ec2)
         val f1 = ec2.getElementByReference[Boolean]("x1.f1")
         f1.condition(true) should equal(true)
         f1.condition(false) should equal(false)
@@ -295,8 +295,8 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         class EC2 extends ElementCollection
         val ec2 = new EC2
         ec2.assertEvidence("x1.f1", Observation(true))
-        Constant(ec1)("x1", ec2)
-        Flip(0.3)("f1", ec1)
+        Constant(ec1)(using "x1", ec2)
+        Flip(0.3)(using "f1", ec1)
         val f1 = ec2.getElementByReference[Boolean]("x1.f1")
         f1.condition(true) should equal(true)
         f1.condition(false) should equal(false)
@@ -305,12 +305,12 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "have indirect evidence exist in correct values of previously created element, depending on contingencies" in {
         createNew()
         class EC1 extends ElementCollection {
-          val f = Flip(0.3)("f", this)
+          val f = Flip(0.3)(using "f", this)
         }
         val ec11 = new EC1
         val ec12 = new EC1
         class EC2 extends ElementCollection {
-          val x = Select(0.5 -> ec11, 0.5 -> ec12)("x", this)
+          val x = Select(0.5 -> ec11, 0.5 -> ec12)(using "x", this)
         }
         val ec2 = new EC2
         ec2.assertEvidence("x.f", Observation(true))
@@ -331,7 +331,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "have indirect evidence exist in correct values of newly created element, depending on contingencies" in {
         createNew()
         class EC1 extends ElementCollection {
-          val f = Flip(0.3)("f", this)
+          val f = Flip(0.3)(using "f", this)
         }
         val ec11 = new EC1
         val ec12 = new EC1
@@ -339,7 +339,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         }
         val ec2 = new EC2
         ec2.assertEvidence("x.f", Observation(true))
-        val x = Select(0.5 -> ec11, 0.5 -> ec12)("x", ec2)
+        val x = Select(0.5 -> ec11, 0.5 -> ec12)(using "x", ec2)
         val f1 = ec11.f
         val f2 = ec12.f
         x.value = ec11
@@ -358,7 +358,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       "allow setting of evidence on lazy val element" in {
         createNew()
         class EC1 extends ElementCollection {
-          lazy val f = Flip(0.3)("f", this)
+          lazy val f = Flip(0.3)(using "f", this)
         }
         val ec1 = new EC1
         ec1.assertEvidence("f", Observation(true))
@@ -371,15 +371,15 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         createNew()
         class EC extends ElementCollection
         class EC1 extends ElementCollection {
-          val f = Flip(0.3)("f", this)
+          val f = Flip(0.3)(using "f", this)
         }
         class EC2 extends ElementCollection {
-          val g = Flip(0.3)("g", this)
+          val g = Flip(0.3)(using "g", this)
         }
         val ec1 = new EC1
         val ec2 = new EC2
         val ec = new EC
-        val x = Select(0.5 -> ec1, 0.5 -> ec2)("x", ec)
+        val x = Select(0.5 -> ec1, 0.5 -> ec2)(using "x", ec)
         ec.assertEvidence("x.f", Observation(true))
         x.condition(ec1) should equal(true)
         x.condition(ec2) should equal(false)
@@ -389,15 +389,15 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
         createNew()
         class EC extends ElementCollection
         class EC1 extends ElementCollection {
-          val f = Flip(0.3)("f", this)
+          val f = Flip(0.3)(using "f", this)
         }
         class EC2 extends ElementCollection {
-          val g = Flip(0.3)("g", this)
+          val g = Flip(0.3)(using "g", this)
         }
         val ec1 = new EC1
         val ec2 = new EC2
         val ec = new EC
-        val x = Select(0.5 -> ec1, 0.5 -> ec2)("x", ec)
+        val x = Select(0.5 -> ec1, 0.5 -> ec2)(using "x", ec)
         ec.assertEvidence("x.f", Observation(true))
         ec.removeEvidence("x.f")
         x.condition(ec1) should equal(true)
@@ -418,14 +418,14 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
     "having activated an element with a name" should {
       "allow getting the associated element" in {
         createNew()
-        val f = Flip(0.2)("f", universe)
+        val f = Flip(0.2)(using "f", universe)
         universe.getElementByReference[Boolean]("f") should equal(f)
       }
 
       "allow activating another element with the same name, and get the most recent" in {
         createNew()
-        val f = Flip(0.2)("f", universe)
-        val c = Constant(1)("f", universe)
+        val f = Flip(0.2)(using "f", universe)
+        val c = Constant(1)(using "f", universe)
         universe.getElementByReference[Int]("f") should equal(c)
         assert(universe.activeElements.contains(f))
         assert(universe.activeElements.contains(c))
@@ -435,16 +435,16 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
     "having deactivated an element with a name" should {
       "allow activating another element with the same name" in {
         createNew()
-        val f = Flip(0.2)("f", universe)
+        val f = Flip(0.2)(using "f", universe)
         f.deactivate()
-        Constant(1)("f", universe)
+        Constant(1)(using "f", universe)
       }
     }
 
     "asserting evidence" should {
       "given a name and a condition set the condition of the associated element" in {
         val u = new Universe
-        val e = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", u)
+        val e = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", u)
         val evidence = NamedEvidence[Int]("s", Condition((i: Int) => i > 1))
         u.assertEvidence(List(evidence))
         e.condition(1) should equal(false)
@@ -454,7 +454,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
       "given a name and a constraint set the constraint of the associated element" in {
         val u = new Universe
-        val e = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", u)
+        val e = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", u)
         val evidence = NamedEvidence[Int]("s", Constraint((i: Int) => i.toDouble))
         u.assertEvidence(List(evidence))
         //e.constraint(1) should equal(log(1.0))
@@ -464,7 +464,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
       "given a name and an observation set the condition of the associated element" in {
         val u = new Universe
-        val e = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", u)
+        val e = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", u)
         val evidence = NamedEvidence[Int]("s", Observation(3))
         u.assertEvidence(List(evidence))
         e.condition(1) should equal(false)
@@ -477,7 +477,7 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
   "Computing values" should {
     "produce the correct set of values for a simple single-valued reference" in {
       val u = Universe.createNew()
-      val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", u)
+      val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", u)
       val r = u.getElementByReference[Int]("s")
       Values()(r) should equal(Set(1, 2, 3))
     }
@@ -485,12 +485,12 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
     "produce the correct set of values for an indirect single-valued reference" in {
       val u = Universe.createNew()
       class C1 extends ElementCollection {
-        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", this)
+        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", this)
       }
       class C2 extends C1 {
-        override val s = Select(0.5 -> 4, 0.5 -> 2)("s", this)
+        override val s = Select(0.5 -> 4, 0.5 -> 2)(using "s", this)
       }
-      val x = Select(0.2 -> new C1, 0.8 -> new C2)("x", u)
+      val x = Select(0.2 -> new C1, 0.8 -> new C2)(using "x", u)
       val r = u.get[Int]("x.s")
       Values()(r) should equal(Set(1, 2, 3, 4))
     }
@@ -498,32 +498,32 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
     "produce the correct set of values for an aggregate" in {
       val u = Universe.createNew()
       class C1 extends ElementCollection {
-        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", this)
+        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", this)
       }
       class C2 extends C1 {
-        override val s = Select(0.5 -> 7, 0.5 -> 3)("s", this)
+        override val s = Select(0.5 -> 7, 0.5 -> 3)(using "s", this)
       }
-      val x = Select(0.2 -> HashMultiSet(new C1, new C1, new C1), 0.8 -> HashMultiSet(new C2, new C2))("x", universe)
-      val a = u.getAggregate((s: MultiSet[Int]) => (0 /: s)(_ + _))("x.s")
+      val x = Select(0.2 -> HashMultiSet(new C1, new C1, new C1), 0.8 -> HashMultiSet(new C2, new C2))(using "x", universe)
+      val a = u.getAggregate((s: MultiSet[Int]) => (s).foldLeft(0)(_ + _))("x.s")
       Values()(a) should equal(Set(3, 4, 5, 6, 7, 8, 9, 10, 14))
     }
 
     "produce the correct set of values for a multi-step aggregate" in {
       val u = Universe.createNew()
       class C1 extends ElementCollection {
-        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", this)
+        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", this)
       }
       class C2 extends C1 {
-        override val s = Select(0.5 -> 7, 0.5 -> 3)("s", this)
+        override val s = Select(0.5 -> 7, 0.5 -> 3)(using "s", this)
       }
       class C3(n: Int) extends ElementCollection {
-        val x = Select(0.2 -> HashMultiSet[C1](List.tabulate(n + 1)(i => new C1): _*), 0.8 -> HashMultiSet[C1](List.tabulate(n)(i => new C2): _*))("x", this)
+        val x = Select(0.2 -> HashMultiSet[C1](List.tabulate(n + 1)(i => new C1)*), 0.8 -> HashMultiSet[C1](List.tabulate(n)(i => new C2)*))(using "x", this)
       }
       class C4 extends ElementCollection {
-        val y = Select(0.6 -> new C3(1), 0.4 -> new C3(2))("y", this)
+        val y = Select(0.6 -> new C3(1), 0.4 -> new C3(2))(using "y", this)
       }
-      val w = Select(0.5 -> List(new C4), 0.5 -> List(new C4, new C4))("w", u)
-      val a = u.getAggregate((s: MultiSet[Int]) => (0 /: s)(_ + _))("w.y.x.s")
+      val w = Select(0.5 -> List(new C4), 0.5 -> List(new C4, new C4))(using "w", u)
+      val a = u.getAggregate((s: MultiSet[Int]) => (s).foldLeft(0)(_ + _))("w.y.x.s")
       // A single y could be (C1, C1), (C1, C1, C1), (C2), or (C2, C2)
       // w is 1 or 2 of these in any combination. The possibilities are (C1, C1), (C1, C1, C1), (C2), (C2, C2), (C1, C1, C1, C1), (C1, C1, C1, C1, C1),
       // (C1, C1, C2), (C1, C1, C2, C2), (C1, C1, C1, C1, C1, C1), (C1, C1, C1, C2), (C1, C1, C1, C2, C2), (C2, C2, C2), or (C2, C2, C2, C2)
@@ -531,14 +531,14 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
       // (5,6,7,8,9,10,11,12,13), (8,9,10,11,12,13,14,15,16,17,18,19,20), (6,7,8,9,10,11,12,13,14,15,16,17,18), (6,7,8,9,10,11,12,13,14,15,16),
       // (9,10,11,12,13,14,15,16,17,18,19,20,21,22,23), (9,13,17,21), (12,16,20,24,28)
       // POssible values are 2-24 and 28.
-      Values()(a) should equal(Set((2 to 24): _*) + 28)
+      Values()(a) should equal(Set((2 to 24)*) + 28)
     }
   }
 
   "Running variable elimination" should {
     "produce the correct result for a simple single-valued reference" in {
       val u = Universe.createNew()
-      val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", u)
+      val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", u)
       val r = u.getElementByReference[Int]("s")
       val alg = VariableElimination(r)
       alg.start()
@@ -548,12 +548,12 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
     "produce the correct set of values for an indirect single-valued reference" in {
       val u = Universe.createNew()
       class C1 extends ElementCollection {
-        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", this)
+        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", this)
       }
       class C2 extends C1 {
-        override val s = Select(0.5 -> 4, 0.5 -> 2)("s", this)
+        override val s = Select(0.5 -> 4, 0.5 -> 2)(using "s", this)
       }
-      val x = Select(0.2 -> new C1, 0.8 -> new C2)("x", u)
+      val x = Select(0.2 -> new C1, 0.8 -> new C2)(using "x", u)
       val r = u.get[Int]("x.s")
       val alg = VariableElimination(r)
       alg.start()
@@ -564,13 +564,13 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
     "produce the correct set of values for an aggregate" in {
       val u = Universe.createNew()
       class C1 extends ElementCollection {
-        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", this)
+        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", this)
       }
       class C2 extends C1 {
-        override val s = Select(0.5 -> 7, 0.5 -> 3)("s", this)
+        override val s = Select(0.5 -> 7, 0.5 -> 3)(using "s", this)
       }
-      val x = Select(0.2 -> HashMultiSet(new C1, new C1, new C1), 0.8 -> HashMultiSet(new C2, new C2))("x", universe)
-      val a = u.getAggregate((s: MultiSet[Int]) => (0 /: s)(_ + _))("x.s")
+      val x = Select(0.2 -> HashMultiSet(new C1, new C1, new C1), 0.8 -> HashMultiSet(new C2, new C2))(using "x", universe)
+      val a = u.getAggregate((s: MultiSet[Int]) => (s).foldLeft(0)(_ + _))("x.s")
       val alg = VariableElimination(a)
       alg.start()
       // 6 can result in the following ways: Using C1: (1,2,3), (1,3,2), (2,1,3), (2,3,1), (3,1,2), (3,2,1), (2,2,2); Using C2: (3,3)
@@ -581,19 +581,19 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
     "produce the correct set of values for a multi-step aggregate" in {
       val u = Universe.createNew()
       class C1 extends ElementCollection {
-        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)("s", this)
+        val s = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)(using "s", this)
       }
       class C2 extends C1 {
-        override val s = Select(0.25 -> 7, 0.75 -> 3)("s", this)
+        override val s = Select(0.25 -> 7, 0.75 -> 3)(using "s", this)
       }
       class C3(n: Int) extends ElementCollection {
-        val x = Select(0.2 -> HashMultiSet[C1](List.tabulate(n + 1)(i => new C1): _*), 0.8 -> HashMultiSet[C1](List.tabulate(n)(i => new C2): _*))("x", this)
+        val x = Select(0.2 -> HashMultiSet[C1](List.tabulate(n + 1)(i => new C1)*), 0.8 -> HashMultiSet[C1](List.tabulate(n)(i => new C2)*))(using "x", this)
       }
       class C4 extends ElementCollection {
-        val y = Select(0.6 -> new C3(0), 0.4 -> new C3(1))("y", this)
+        val y = Select(0.6 -> new C3(0), 0.4 -> new C3(1))(using "y", this)
       }
-      val w = Select(0.1 -> List(new C4), 0.9 -> List(new C4, new C4))("w", u)
-      val a = u.getAggregate((s: MultiSet[Int]) => (0 /: s)(_ + _))("w.y.x.s")
+      val w = Select(0.1 -> List(new C4), 0.9 -> List(new C4, new C4))(using "w", u)
+      val a = u.getAggregate((s: MultiSet[Int]) => (s).foldLeft(0)(_ + _))("w.y.x.s")
       val alg = BeliefPropagation(100, a) //VariableElimination.debugged(a)
       alg.start()
       // C3(0) could be (1) (prob 0.2 * 0.2), (2) (prob 0.2 * 0.3), (3) (prob 0.2 * 0.5), () (prob 0.8)
@@ -688,27 +688,27 @@ class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
   }
 
   class Truck extends Vehicle {
-    val size: Element[Symbol] = Select(0.25 -> Symbol("medium"), 0.75 -> Symbol("big"))("size", this)
-    lazy val capacity: Element[Int] = Chain(size, (s: Symbol) => if (s == Symbol("big")) Select(0.5 -> 1000, 0.5 -> 2000); else Constant(100))("capacity", this)
+    val size: Element[Symbol] = Select(0.25 -> Symbol("medium"), 0.75 -> Symbol("big"))(using "size", this)
+    lazy val capacity: Element[Int] = Chain(size, (s: Symbol) => if (s == Symbol("big")) Select(0.5 -> 1000, 0.5 -> 2000); else Constant(100))(using "capacity", this)
   }
 
   class Pickup extends Truck {
-    override val size: Element[Symbol] = Constant(Symbol("medium"))("size", this)
+    override val size: Element[Symbol] = Constant(Symbol("medium"))(using "size", this)
     val color: Element[Symbol] = discrete.Uniform(Symbol("blue"), Symbol("red"))
   }
 
   class TwentyWheeler extends Truck {
-    override val size: Element[Symbol] = Constant(Symbol("huge"))("size", this)
-    override lazy val capacity = Constant(5000)("capacity", this)
+    override val size: Element[Symbol] = Constant(Symbol("huge"))(using "size", this)
+    override lazy val capacity = Constant(5000)(using "capacity", this)
   }
 
   class Car extends Vehicle {
-    val size = Constant(Symbol("small"))("size", this)
+    val size = Constant(Symbol("small"))(using "size", this)
   }
 
   object Vehicle {
     def generate(name: String): Element[Vehicle] = 
-      Dist(0.6 -> Car.generate, 0.4 -> Truck.generate)(name, Universe.universe)
+      Dist(0.6 -> Car.generate, 0.4 -> Truck.generate)(using name, Universe.universe)
   }
 
   object Truck {

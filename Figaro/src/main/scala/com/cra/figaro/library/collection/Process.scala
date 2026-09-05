@@ -72,7 +72,7 @@ trait Process[Index, Value] {
    * Get the elements representing the value of the process at the given indices.
    * Throws IndexOutOfRangeException if any index has no value.
    */
-  def apply(indices: Traversable[Index]): Map[Index, Element[Value]] = {
+  def apply(indices: Iterable[Index]): Map[Index, Element[Value]] = {
     for { index <- indices } {
       if (!rangeCheck(index)) throw IndexOutOfRangeException(index)
     }
@@ -98,7 +98,7 @@ trait Process[Index, Value] {
    * Any index that is not in range will always have value None.
    * Dependencies between elements for indices in range will be produced.
    */
-  def get(indices: Traversable[Index]): Map[Index, Element[Option[Value]]] = {
+  def get(indices: Iterable[Index]): Map[Index, Element[Option[Value]]] = {
     val (inRange, outOfRange) = indices.partition(rangeCheck(_))
     val inRangeElems: Map[Index, Element[Value]] = generate(inRange.toList)
     val inRangeOptPairs: List[(Index, Element[Option[Value]])] =
@@ -113,7 +113,7 @@ trait Process[Index, Value] {
         (i, elem)
       }
     }
-    Map((inRangeOptPairs ::: outOfRangeOptPairs):_*)
+    Map((inRangeOptPairs ::: outOfRangeOptPairs)*)
   }
 
   /**
@@ -124,10 +124,10 @@ trait Process[Index, Value] {
     new Process[Index, Value2] {
       def generate(i: Index) = {
         val elem1 = thisProcess(i)
-        Apply(elem1, f)("", elem1.universe)
+        Apply(elem1, f)(using "", elem1.universe)
       }
       def generate(indices: List[Index]) =
-        thisProcess.generate(indices).map { case (i, e) => i -> Apply(e, f)("", e.universe) }
+        thisProcess.generate(indices).map { case (i, e) => i -> Apply(e, f)(using "", e.universe) }
       def rangeCheck(i: Index) = thisProcess.rangeCheck(i)
     }
   }
@@ -140,10 +140,10 @@ trait Process[Index, Value] {
     new Process[Index, Value2] {
       def generate(i: Index) = {
         val elem1 = thisProcess(i)
-        Chain(elem1, f)("", elem1.universe)
+        Chain(elem1, f)(using "", elem1.universe)
       }
       def generate(indices: List[Index]) =
-        thisProcess.generate(indices).map { case (i, e) => i -> Chain(e, f)("", e.universe) }
+        thisProcess.generate(indices).map { case (i, e) => i -> Chain(e, f)(using "", e.universe) }
       def rangeCheck(i: Index) = thisProcess.rangeCheck(i)
     }
   }

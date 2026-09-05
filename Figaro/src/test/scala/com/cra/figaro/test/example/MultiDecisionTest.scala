@@ -28,11 +28,11 @@ import com.cra.figaro.ndtest._
 
 class MultiDecisionTest extends AnyWordSpec with Matchers {
 
-  def propmaker = (mv: Universe, e: Element[_]) => ProposalScheme.default(mv)
+  def propmaker = (mv: Universe, e: Element[?]) => ProposalScheme.default(using mv)
 
   "A multi decision network" should {
     "produce the correct decisions under variable elimination" taggedAs (Example) in {
-      val result = doTest((e1: List[Element[Double]], e2: List[Decision[_, _]]) => MultiDecisionVariableElimination(e1, e2: _*))
+      val result = doTest((e1: List[Element[Double]], e2: List[Decision[?, ?]]) => MultiDecisionVariableElimination(e1, e2*))
 
       result(0) should equal(true)
       result(1) should equal(false)
@@ -43,7 +43,7 @@ class MultiDecisionTest extends AnyWordSpec with Matchers {
     }
 
     "produce the correct decisions under importance sampling" taggedAs (Example) in {
-      val result = doTest((e1: List[Element[Double]], e2: List[Decision[_, _]]) => MultiDecisionImportance(30000, e1, e2: _*))
+      val result = doTest((e1: List[Element[Double]], e2: List[Decision[?, ?]]) => MultiDecisionImportance(30000, e1, e2*))
 
       result(0) should equal(true)
       result(1) should equal(false)
@@ -57,8 +57,8 @@ class MultiDecisionTest extends AnyWordSpec with Matchers {
       val ndtest = new NDTest {
         override def oneTest = {
 
-          val result = doTest((e1: List[Element[Double]], e2: List[Decision[_, _]]) =>
-            MultiDecisionMetropolisHastings(300000, propmaker, 20000, e1, e2: _*))
+          val result = doTest((e1: List[Element[Double]], e2: List[Decision[?, ?]]) =>
+            MultiDecisionMetropolisHastings(300000, propmaker, 20000, e1, e2*))
 
           update(result(0), NDTest.BOOLEAN, "MHMulti-DecisionFound(-1)", true, .90)
           update(result(1), NDTest.BOOLEAN, "MHMulti-DecisionFound(0)", false, .90)
@@ -72,7 +72,7 @@ class MultiDecisionTest extends AnyWordSpec with Matchers {
     }
   }
 
-  def doTest(algorithmCreator: (List[Element[Double]], List[Decision[_, _]]) => MultiDecisionAlgorithm) = {
+  def doTest(algorithmCreator: (List[Element[Double]], List[Decision[?, ?]]) => MultiDecisionAlgorithm) = {
     Universe.createNew()
     val Market = Select(0.5 -> 0, 0.3 -> 1, 0.2 -> 2)
     val Test = Decision(Constant(0), List(true, false))

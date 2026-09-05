@@ -62,8 +62,8 @@ class LearningModel(dictionary: Dictionary, parameters: PriorParameters) extends
   val isSpam = Flip(parameters.spamProbability)
 
   val hasWordElements = {
-    val wordGivenSpamMap = Map(parameters.wordGivenSpamProbabilities:_*)
-    val wordGivenNormalMap = Map(parameters.wordGivenNormalProbabilities:_*)
+    val wordGivenSpamMap = Map(parameters.wordGivenSpamProbabilities*)
+    val wordGivenNormalMap = Map(parameters.wordGivenNormalProbabilities*)
     for { word <- dictionary.featureWords } yield {
       val givenSpamProbability = wordGivenSpamMap(word)
       val givenNormalProbability = wordGivenNormalMap(word)

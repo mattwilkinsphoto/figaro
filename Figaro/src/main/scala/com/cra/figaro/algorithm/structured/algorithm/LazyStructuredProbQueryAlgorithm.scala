@@ -17,13 +17,13 @@ import com.cra.figaro.algorithm.structured.{ComponentCollection, Lower, Incremen
 import com.cra.figaro.algorithm.{AnytimeBoundsProbQuery, BoundsProbQueryAlgorithm, OneTimeBoundsProbQuery}
 import com.cra.figaro.language._
 
-abstract class LazyStructuredProbQueryAlgorithm(universe: Universe, collection: ComponentCollection, queryTargets: Element[_]*)
-  extends StructuredProbQueryAlgorithm(universe, collection, queryTargets:_*)
+abstract class LazyStructuredProbQueryAlgorithm(universe: Universe, collection: ComponentCollection, queryTargets: Element[?]*)
+  extends StructuredProbQueryAlgorithm(universe, collection, queryTargets*)
   with LazyStructured with BoundsProbQueryAlgorithm {
 
   // Important: the default constructor uses a recursive collection for recursive infinite models
-  def this(universe: Universe, queryTargets: Element[_]*) = {
-    this(universe, new IncrementingCollection, queryTargets:_*)
+  def this(universe: Universe, queryTargets: Element[?]*) = {
+    this(universe, new IncrementingCollection, queryTargets*)
   }
 
   override protected def useBoundsString: String =
@@ -95,9 +95,9 @@ abstract class LazyStructuredProbQueryAlgorithm(universe: Universe, collection: 
     (regularBounds, lowerProbStar, upperProbStar)
   }
 
-  override def computeAllProbabilityBounds[T](target: Element[T]): Stream[(Double, Double, T)] = {
+  override def computeAllProbabilityBounds[T](target: Element[T]): LazyList[(Double, Double, T)] = {
     val (lowerFactor, upperFactor) = boundFactors(target)
-    regularAndStarBounds(lowerFactor, upperFactor)._1.toStream
+    regularAndStarBounds(lowerFactor, upperFactor)._1.to(LazyList)
   }
 
   /**

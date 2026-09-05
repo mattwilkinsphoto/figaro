@@ -1,5 +1,7 @@
 # Migrating to Scala 3 and sbt 2
 
+The current follow-up is [deprecation retirement](DEPRECATION_RETIREMENT.md) on `modernize/deprecation-retirement`, with snapshot `6.0.0-modern.2-SNAPSHOT`. It keeps Scala 3.9.0, sbt 2.0.8, and JDK 17 fixed, replaces `Stream` with `LazyList`, and removes the obsolete Figaro entry points listed there. Recompile consumers and use that snapshot for this branch. The tables below describe the earlier upgrade checkpoints.
+
 ## Overview
 
 This document is for application developers updating their build/model code. [MODERNIZATION.md](../MODERNIZATION.md) retains the chronological engineering evidence. The new line is a reasonable development baseline, not a claim that every historical algorithm, workload, or deployment mode has been fully revalidated.
@@ -53,7 +55,7 @@ def refresh(): Unit = { /* implementation */ }
 
 Accessor-like members are now consistently parameterless, including `isCachable`, `burnIn`, `interval`, `discretize`, `fullyRefinable`, `depth`, `isLog`, `computedResult`, and `zeroSufficientStatistics`. For example, use `element.isCachable`, not `element.isCachable()`. Lifecycle and generation methods still use `()`. Match the actual base declaration when overriding rather than mechanically adding/removing parentheses everywhere.
 
-The build uses normal Scala 3 type checking. `-source:3.0-migration` is **not** retained. `-no-indent` is an intentional brace-syntax choice, not a type-safety escape hatch. Remaining deprecated spellings are visible compiler warnings. Scala/build sources are pinned to LF to avoid a Windows carriage-return issue encountered in automatic symbol rewrites.
+The build uses normal Scala 3 type checking. `-source:3.0-migration` is **not** retained. `-no-indent` is an intentional brace-syntax choice, not a type-safety escape hatch. The deprecation-retirement branch treats deprecations as errors. Scala/build sources are pinned to LF to avoid a Windows carriage-return issue encountered in automatic symbol rewrites.
 
 ### Generic query extension points
 
@@ -127,7 +129,7 @@ Legacy Akka configuration/types do not control that worker. Scala parallel colle
 | Statistical tests | A required legacy test missed `0.50 +/- 0.01` once with `0.48995`; repeats passed without loosening tolerance. Test reliability remains work, not a solved risk. |
 | Full historical suite | Already had failures and a heavyweight learning example before modernization. We have not made it green or proved every old failure unchanged under Scala 3. |
 | OSGi, Java facade, custom class loaders, broad performance | Not comprehensively validated. Validate any of these deployment modes before depending on them. |
-| Deprecations | Visible maintenance debt (`Stream`, syntax, non-local returns, etc.); not all cleaned up in this migration. |
+| Deprecations | Retired in the [follow-up stage](DEPRECATION_RETIREMENT.md); obsolete public entry points are removed and consumers must recompile. Other warning categories remain a separate audit. |
 
 The migration implementation passed 119 required tests, 284 broader local checks, coverage-plugin smoke tests, publication, legal-file checks, and genuinely fresh byte-for-byte thin/fat JAR rebuilds. [Required GitHub CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/33952691424) passed; its timing advisory failed. These counts describe that checkpoint, not a universal guarantee for all workloads or a full-suite coverage percentage.
 

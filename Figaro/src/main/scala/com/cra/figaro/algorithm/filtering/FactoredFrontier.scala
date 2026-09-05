@@ -38,7 +38,7 @@ abstract class FactoredFrontier(static: Universe, initial: Universe, transition:
   currentUniverse = initial
   
   val dependentUniverse = List()
-  val dependentAlgorithm = (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)
+  val dependentAlgorithm = (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u)
 
   override def initialize(): Unit = {
     LazyValues.clear(static)
@@ -63,7 +63,7 @@ abstract class FactoredFrontier(static: Universe, initial: Universe, transition:
   private def createDummyUniverse(u: Universe): Universe = {
     val dummyUniverse = new Universe
     for (e <- getNamedElements(u)) {
-      Select(bp.getBeliefsForElement(e).filterNot(_._1 == 0.0): _*)(e.name.string, dummyUniverse)
+      Select(bp.getBeliefsForElement(e).filterNot(_._1 == 0.0)*)(using e.name.string, dummyUniverse)
     }
     dummyUniverse
   }
@@ -71,7 +71,7 @@ abstract class FactoredFrontier(static: Universe, initial: Universe, transition:
   /**
    * Advance the algorithm one time step based on the provided evidence.
    */
-  def advanceTime(evidence: Seq[NamedEvidence[_]] = List()): Unit = {
+  def advanceTime(evidence: Seq[NamedEvidence[?]] = List()): Unit = {
     val previousUniverse = currentUniverse
     val previousStatic = currentStatic
     val dummyUniverse = createDummyUniverse(previousUniverse)
@@ -103,7 +103,7 @@ abstract class FactoredFrontier(static: Universe, initial: Universe, transition:
   /**
    * Returns the distribution over the element referred to by the reference at the current time point.
    */
-  def computeCurrentDistribution[T](reference: Reference[T]): Stream[(Double, T)] = {
+  def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)] = {
     try {
       bp.computeDistribution(currentUniverse.getElementByReference(reference))
     } catch {
@@ -136,7 +136,7 @@ trait FFBPHandler extends InnerBPHandler {
   /**
    * Returns all named elements in this universe.
    */
-  protected def getNamedElements(u: Universe): List[Element[_]] = {
+  protected def getNamedElements(u: Universe): List[Element[?]] = {
     u.activeElements.filterNot(_.name.isEmpty)
   }
 }

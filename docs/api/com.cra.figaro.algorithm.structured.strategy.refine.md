@@ -189,7 +189,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Iterable[ProblemComponent[_]] ``.
 
-Source contract/attributes: Initial components to process. Decomposition proceeds in a depth-first fashion from these components. Attributes Returns Traversable of components from which to refine initially.
+Source contract/attributes: Initial components to process. Decomposition proceeds in a depth-first fashion from these components. Attributes Returns Iterable of components from which to refine initially.
 
 Invocation template:
 

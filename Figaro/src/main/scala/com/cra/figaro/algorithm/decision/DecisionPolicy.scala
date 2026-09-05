@@ -21,7 +21,6 @@ import com.cra.figaro.library.compound._
 import com.cra.figaro.library.decision._
 import com.cra.figaro.util._
 import scala.collection.immutable.Map
-import scala.collection.mutable.MultiMap
 import com.cra.figaro.algorithm.lazyfactored.Regular
 
 /**
@@ -66,7 +65,7 @@ object DecisionPolicy {
       val curr = decisions.getOrElse(decision, DecisionSample(0.0, 0.0))
       decisions += decision -> (curr + sample)
     }
-    val de = decisions.mapValues(s => s.norm).maxBy(_._2)
+    val de = decisions.view.mapValues(s => s.norm).maxBy(_._2)
     de
   }
   /**
@@ -85,7 +84,7 @@ object DecisionPolicy {
       val curr = decisions.getOrElse(decision, DecisionSample(0.0, 0.0))
       decisions += decision -> (curr + sample)
     }
-    val de = decisions.mapValues(s => s.norm).maxBy(_._2)
+    val de = decisions.view.mapValues(s => s.norm).maxBy(_._2)
     de
   }
 }
@@ -243,7 +242,7 @@ object DecisionPolicyNN {
    *  
    */
   def apply[T: DistanceConversion, U](Alg: DecisionAlgorithm[T, U], kNN: Double): DecisionPolicy[T, U] = {
-    apply(Alg, DecisionPolicy.UWMAX[U]_, kNN)
+    apply(Alg, DecisionPolicy.UWMAX[U], kNN)
   }
 
   /** 
@@ -252,7 +251,7 @@ object DecisionPolicyNN {
    *  
    */
   def apply[T: DistanceConversion, U](policy: Map[(T, U), DecisionSample], kNN: Double = .01): DecisionPolicy[T, U] = {
-    apply(policy, DecisionPolicy.UWMAX[U]_, kNN)
+    apply(policy, DecisionPolicy.UWMAX[U], kNN)
   }
 
   /** 
@@ -261,7 +260,7 @@ object DecisionPolicyNN {
    *  
    */
   def apply[T: DistanceConversion, U](nnIndex: Index[T, U], kNN: Double): DecisionPolicy[T, U] = {
-    apply(nnIndex, DecisionPolicy.UWMAX[U]_, kNN)
+    apply(nnIndex, DecisionPolicy.UWMAX[U], kNN)
   }
 
 }

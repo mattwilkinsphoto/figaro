@@ -47,14 +47,14 @@ trait BaseProbQuerySampler[Q, U[_] <: Q] extends BaseProbQueryAlgorithm[Q, U] {
    */
   def computeExpectation[T](target: U[T], function: T => Double) = {
     val contributions = computeProjection(target) map (pair => function(pair._1) * pair._2)
-    (0.0 /: contributions)(_ + _)
+    (contributions).foldLeft(0.0)(_ + _)
   }
 
   /**
    * Return an estimate of the expectation of the function under the marginal probability distribution
    * of the target.
    */
-  def computeDistribution[T](target: U[T]): Stream[(Double, T)] =
-    computeProjection(target) map (_.swap) toStream
+  def computeDistribution[T](target: U[T]): LazyList[(Double, T)] =
+    computeProjection(target) map (_.swap) to(LazyList)
     
 }

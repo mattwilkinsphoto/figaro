@@ -53,12 +53,12 @@ abstract class BlockSampler(val blockInfo: Gibbs.BlockInfo) {
    * Get the factor from which to sample this block
    * Returns a non-logarithmic factor
    */
-  def getSamplingFactor(currentSamples: MutableMap[Variable[_], Int]): Factor[Double]
+  def getSamplingFactor(currentSamples: MutableMap[Variable[?], Int]): Factor[Double]
 
   /**
    * Sample this block once
    */
-  def sample(currentSamples: MutableMap[Variable[_], Int]): Unit = {
+  def sample(currentSamples: MutableMap[Variable[?], Int]): Unit = {
     // Get the joint factor over variables in this block conditioned on the samples
     val samplingFactor = getSamplingFactor(currentSamples)
     // Sample from the factor
@@ -98,9 +98,9 @@ class SimpleBlockSampler(blockInfo: Gibbs.BlockInfo)
   val indexMap = block.zipWithIndex.toMap
 
   // Override e.g. for caching
-  def getSamplingFactor(currentSamples: MutableMap[Variable[_], Int]): Factor[Double] = computeSamplingFactor(currentSamples)
+  def getSamplingFactor(currentSamples: MutableMap[Variable[?], Int]): Factor[Double] = computeSamplingFactor(currentSamples)
 
-  def computeSamplingFactor(currentSamples: MutableMap[Variable[_], Int]): Factor[Double] = {
+  def computeSamplingFactor(currentSamples: MutableMap[Variable[?], Int]): Factor[Double] = {
     // Sparse to make sampling faster when variables in the block are correlated
     val result = new SparseFactor[Double](block, List())
     // Loop through all possible assignments of variables in this block
@@ -183,7 +183,7 @@ trait FactorProduct extends SimpleBlockSampler {
     }
   }
 
-  override def computeSamplingFactor(currentSamples: MutableMap[Variable[_], Int]): Factor[Double] = {
+  override def computeSamplingFactor(currentSamples: MutableMap[Variable[?], Int]): Factor[Double] = {
     // Extract the rows from each factor and take their product
     val toMultiply: List[Factor[Double]] = mbLookupFactors.map(factor => factor.get(factor.variables.map(currentSamples(_))))
     /*
@@ -214,7 +214,7 @@ trait Cached extends SimpleBlockSampler {
   // Override to limit the cache size
   lazy val maxSize = 1000
 
-  override def getSamplingFactor(currentSamples: MutableMap[Variable[_], Int]): Factor[Double] = {
+  override def getSamplingFactor(currentSamples: MutableMap[Variable[?], Int]): Factor[Double] = {
     val key = markovBlanket.map(currentSamples(_))
     cache.get(key) match {
       // Return the cached factor

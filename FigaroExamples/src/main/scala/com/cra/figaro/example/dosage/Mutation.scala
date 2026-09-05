@@ -37,8 +37,8 @@ object Mutation {
     * new nucleotide sequence. */
   def step(curr: Element[NucleotideSequence], tranMtx: Map[String, List[(Double, String)]]): Element[NucleotideSequence] = {
     def fcn(n: NucleotideSequence) = {
-      val trans = n.seq map (c => Select(tranMtx(c.toString): _*))
-      Apply(Inject(trans: _*), (s: List[String]) => (NucleotideSequence("") /: s)(_ + NucleotideSequence(_)))
+      val trans = n.seq map (c => Select(tranMtx(c.toString)*))
+      Apply(Inject(trans*), (s: List[String]) => (s).foldLeft(NucleotideSequence(""))(_ + NucleotideSequence(_)))
     }
     NonCachingChain(curr, fcn)
   }

@@ -13,13 +13,13 @@
 package com.cra.figaro.library.cache
 
 import com.cra.figaro.language._
-import scala.collection.generic.Shrinkable
+import scala.collection.mutable.Shrinkable
 
 /**
  * Abstract class to manage caching of element generation for a universe. This class can be used
  * by algorithms to manage caching of chains.
  */
-abstract class Cache(universe: Universe) extends Shrinkable[Element[_]] {
+abstract class Cache(universe: Universe) extends Shrinkable[Element[?]] {
 
   /**
    * Return the next element from the generative process defined by element. If no process
@@ -33,7 +33,7 @@ abstract class Cache(universe: Universe) extends Shrinkable[Element[_]] {
    * Clear any caching
    */
   def clear(): Unit
-  
+
 }
 
 /** A Cache class which performs no caching */
@@ -42,11 +42,11 @@ class NoCache(universe: Universe) extends Cache(universe) {
     element match {
       case c: Chain[_,T] => Some(c.get(c.parent.value))
       case _ => None
-      
+
     }
   }
   def clear() = {}
-  def subtractOne(element: Element[_]) = this
+  def subtractOne(element: Element[?]) = this
 }
 
 

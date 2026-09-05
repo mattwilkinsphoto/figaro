@@ -35,7 +35,7 @@ object JointDistribution {
   val economicClimateGood = Flip(0.5)
   def makeSales: Element[Int] = If(economicClimateGood, Uniform(80, 120, 160), Uniform(60, 90, 120))
   val sales = Array.fill(20)(makeSales)
-  val totalSales = Container(sales:_*).reduce(_ + _)
+  val totalSales = Container(sales*).reduce(_ + _)
 
   def main(args: Array[String]): Unit = {
     val salesPair = ^^(sales(0), sales(1))

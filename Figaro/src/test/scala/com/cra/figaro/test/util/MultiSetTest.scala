@@ -102,7 +102,7 @@ class MultiSetTest extends AnyWordSpec with Matchers {
       val ms2 = HashMultiSet[Int]()
       ms1.addMany(5, 3)
       ms1.addMany(7, 4)
-      val ms3 = ms1 union ms2
+      val ms3 = ms1.union(ms2)
       ms3(5) should equal(5)
       ms3(6) should equal(1)
       ms3(7) should equal(4)

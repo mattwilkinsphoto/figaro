@@ -26,11 +26,6 @@ import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
 trait Gibbs[T] extends BaseUnweightedSampler with FactoredAlgorithm[T] {
   /**
-   * The universe in which this Gibbs sampler is to be applied.
-   */
-  val universe: Universe
-
-  /**
    * Semiring for use in factors.
    */
   val semiring: Semiring[T]
@@ -38,22 +33,22 @@ trait Gibbs[T] extends BaseUnweightedSampler with FactoredAlgorithm[T] {
   /**
    * Elements whose samples will be recorded at each iteration.
    */
-  val targetElements: List[Element[_]]
+  val targetElements: List[Element[?]]
 
   /**
    * List of all factors.
    */
-  var factors: List[Factor[T]] = _
+  var factors: List[Factor[T]] = scala.compiletime.uninitialized
 
   /**
    * Variables to sample at each time step.
    */
-  var variables: Set[Variable[_]] = _
+  var variables: Set[Variable[?]] = scala.compiletime.uninitialized
 
   /**
    * The most recent set of samples, used for sampling variables conditioned on the values of other variables.
    */
-  val currentSamples: MutableMap[Variable[_], Int] = MutableMap()
+  val currentSamples: MutableMap[Variable[?], Int] = MutableMap()
 
   /**
    * Number of samples to throw away initially.
@@ -79,50 +74,50 @@ trait Gibbs[T] extends BaseUnweightedSampler with FactoredAlgorithm[T] {
  */
 trait ChainApplyBlockingGibbs extends Gibbs[Double] {
   // Maps a variable to its deterministic parents
-  def variableParentMap(): Map[Variable[_], Set[Variable[_]]] = variables.map(_ match {
+  def variableParentMap(): Map[Variable[?], Set[Variable[?]]] = variables.map(_ match {
     case ev: ElementVariable[_] => ev.element match {
       // For Chain, we treat all of the result variables as deterministic parents
       case c: Chain[_, _] => {
       /*
        * Must ensure this code is not called in SFI!
        */
-        val chainResults: Set[Variable[_]] = LazyValues(universe).getMap(c).values.map(Variable(_)).toSet
+        val chainResults: Set[Variable[?]] = LazyValues(universe).getMap(c).values.map(Variable(_)).toSet
         (ev, chainResults)
       }
       // For Apply, we take the deterministic parents to be its arguments
       case a: Apply[_] => (ev, a.args.map(Variable(_)).toSet)
-      case a: Atomic[_] => (ev, Set[Variable[_]]())
-      case c: Constant[_] => (ev, Set[Variable[_]]())
+      case a: Atomic[_] => (ev, Set[Variable[?]]())
+      case c: Constant[_] => (ev, Set[Variable[?]]())
       case _ => throw new UnsupportedAlgorithmException(ev.element)
     }
 
     // This handles internal variables in Chains
     // We treat all of the result variables, as well as the parent variable, as deterministic parents
     case icv: InternalChainVariable[_] => {
-      val chain = icv.chain.asInstanceOf[Chain[_, _]]
+      val chain = icv.chain.asInstanceOf[Chain[?, ?]]
       /*
        * Must ensure this code is not called in SFI!
        */
-      val chainResults: Set[Variable[_]] = LazyValues(universe).getMap(chain).values.map(Variable(_)).toSet
+      val chainResults: Set[Variable[?]] = LazyValues(universe).getMap(chain).values.map(Variable(_)).toSet
       (icv, chainResults + Variable(chain.parent))
     }
 
     // Otherwise, we assume (perhaps incorrectly) that the variable is stochastic
     // It will not be blocked with any parents
-    case v => (v, Set[Variable[_]]())
+    case v => (v, Set[Variable[?]]())
   }).toMap
 
   def createBlocks(): List[Gibbs.Block] = {
     val variableParents = variableParentMap()
     // Maps each variable to its deterministic children, i.e. variables that should be included in a block with this variable
-    val variableChildren: Map[Variable[_], Set[Variable[_]]] =
+    val variableChildren: Map[Variable[?], Set[Variable[?]]] =
       variables.map(v => v -> variables.filter(variableParents(_).contains(v))).toMap
 
     // Start with the purely stochastic variables with no parents
     val starterVariables = variables.filter(variableParents(_).isEmpty)
 
     @tailrec // Recursively add deterministic children to the block
-    def expandBlock(expand: Set[Variable[_]], block: Set[Variable[_]] = Set()): Gibbs.Block = {
+    def expandBlock(expand: Set[Variable[?]], block: Set[Variable[?]] = Set()): Gibbs.Block = {
       if (expand.isEmpty) block.toList
       else {
         val expandNext = expand.flatMap(variableChildren(_))
@@ -134,13 +129,13 @@ trait ChainApplyBlockingGibbs extends Gibbs[Double] {
 }
 
 trait ProbabilisticGibbs extends Gibbs[Double] {
-  class StarSampleException(elem: Element[_]) extends AlgorithmException
+  class StarSampleException(elem: Element[?]) extends AlgorithmException
 
   val semiring = LogSumProductSemiring()
 
-  protected var blockSamplers: List[BlockSampler] = _
+  protected var blockSamplers: List[BlockSampler] = scala.compiletime.uninitialized
 
-  def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = false): List[Factor[Double]] = {      
+  def getFactors(neededElements: List[Element[?]], targetElements: List[Element[?]], upperBounds: Boolean = false): List[Factor[Double]] = {
     val thisUniverseFactors = neededElements flatMap(Factory.makeFactorsForElement(_))
     val dependentUniverseFactors =
       for { (dependentUniverse, evidence) <- dependentUniverses } yield Factory.makeDependentFactor(Variable.cc, universe, dependentUniverse, dependentAlgorithm(dependentUniverse, evidence))
@@ -164,7 +159,7 @@ trait ProbabilisticGibbs extends Gibbs[Double] {
       if (extended.isRegular) (e, extended.value)
       else throw new StarSampleException(e)
     })
-    (true, MutableMap(result: _*))
+    (true, MutableMap(result*))
   }
 
   protected override def doSample() = {
@@ -176,12 +171,12 @@ trait ProbabilisticGibbs extends Gibbs[Double] {
   }
 }
 
-abstract class ProbQueryGibbs(override val universe: Universe, targets: Element[_]*)(
-  val dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-  val dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
+abstract class ProbQueryGibbs(override val universe: Universe, targets: Element[?]*)(
+  val dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+  val dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
   val burnIn: Int, val interval: Int,
   val blockToSampler: Gibbs.BlockSamplerCreator, upperBounds: Boolean = false)
-  extends BaseUnweightedSampler(universe, targets: _*)
+  extends BaseUnweightedSampler(universe, targets*)
   with ProbabilisticGibbs with UnweightedSampler {
 
   val targetElements = targets.toList
@@ -201,12 +196,12 @@ abstract class ProbQueryGibbs(override val universe: Universe, targets: Element[
     for (_ <- 1 to burnIn) sampleAllBlocks()
   }
   
-  def chainMapper(chain: Chain[_,_]): Set[Variable[_]] = LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet
+  def chainMapper(chain: Chain[?,?]): Set[Variable[?]] = LazyValues(chain.universe).getMap(chain).values.map(Variable(_)).toSet
 }
 
 object Gibbs {
   // A block is just a list of variables
-  type Block = List[Variable[_]]
+  type Block = List[Variable[?]]
 
   // Information passed to BlockSampler constructor
   type BlockInfo = (Block, List[Factor[Double]])
@@ -217,20 +212,20 @@ object Gibbs {
   /**
    * Create a one-time Gibbs sampler using the given number of samples and target elements.
    */
-  def apply(mySamples: Int, targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryGibbs(universe, targets: _*)(
+  def apply(mySamples: Int, targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryGibbs(universe, targets*)(
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
       0, 1, BlockSampler.default) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs { val numSamples = mySamples }
 
   /**
    * Create a one-time Gibbs sampler using the given number of samples, the number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
-  def apply(mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryGibbs(universe, targets: _*)(
+  def apply(mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryGibbs(universe, targets*)(
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
       burnIn, interval, blockToSampler) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs { val numSamples = mySamples }
 
   /**
@@ -238,10 +233,10 @@ object Gibbs {
    * the number of samples, the number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryGibbs(universe, targets: _*)(
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    mySamples: Int, burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryGibbs(universe, targets*)(
       dependentUniverses,
       dependentAlgorithm,
       burnIn, interval, blockToSampler) with OneTimeProbQuerySampler with ChainApplyBlockingGibbs { val numSamples = mySamples }
@@ -249,20 +244,20 @@ object Gibbs {
   /**
    * Create an anytime Gibbs sampler using the given target elements.
    */
-  def apply(targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryGibbs(universe, targets: _*)(
+  def apply(targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryGibbs(universe, targets*)(
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
       0, 1, BlockSampler.default) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
 
   /**
    * Create an anytime Gibbs sampler using the given number of samples to burn in,
    * the sampling interval, the BlockSampler generator, and target elements.
    */
-  def apply(burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryGibbs(universe, targets: _*)(
+  def apply(burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryGibbs(universe, targets*)(
       List(),
-      (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u),
+      (u: Universe, e: List[NamedEvidence[?]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(using u),
       burnIn, interval, blockToSampler) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs
 
   /**
@@ -270,10 +265,10 @@ object Gibbs {
    * the number of samples to burn in, the sampling interval,
    * the BlockSampler generator, and target elements.
    */
-  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
-    dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double,
-    burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[_]*)(implicit universe: Universe) =
-    new ProbQueryGibbs(universe, targets: _*)(
+  def apply(dependentUniverses: List[(Universe, List[NamedEvidence[?]])],
+    dependentAlgorithm: (Universe, List[NamedEvidence[?]]) => () => Double,
+    burnIn: Int, interval: Int, blockToSampler: BlockSamplerCreator, targets: Element[?]*)(implicit universe: Universe) =
+    new ProbQueryGibbs(universe, targets*)(
       dependentUniverses,
       dependentAlgorithm,
       burnIn, interval, blockToSampler) with AnytimeProbQuerySampler with ChainApplyBlockingGibbs

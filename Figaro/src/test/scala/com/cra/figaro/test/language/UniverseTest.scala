@@ -177,7 +177,7 @@ class UniverseTest extends AnyWordSpec with Matchers {
         universe.pushContext(e1)
         val e2 = Constant(7)
         universe.pushContext(e2)
-        val m: Map[Element[_], String] = Map(e1 -> "a", e2 -> "b")
+        val m: Map[Element[?], String] = Map(e1 -> "a", e2 -> "b")
         universe.register(m)
         e2.deactivate()
         m should equal(Map(e1 -> "a"))
@@ -424,8 +424,8 @@ class UniverseTest extends AnyWordSpec with Matchers {
   "clearing unnamed elements" should {
     "remove only elements without names" in {
       val u = Universe.createNew()
-      val e1 = Flip(0.1)("e1",u)
-      val e2 = Flip(0.2)("e2",u)
+      val e1 = Flip(0.1)(using "e1",u)
+      val e2 = Flip(0.2)(using "e2",u)
       val e3 = Flip(0.3)
       u.activeElements.size should equal(3)
       u.clearUnnamed()

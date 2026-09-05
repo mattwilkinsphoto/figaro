@@ -34,7 +34,7 @@ class SerializationTest extends AnyWordSpec with Matchers {
   "A Beta parameter" should {
     "serialize its name and alpha and beta values" in {
       val u = Universe.createNew()
-      val b: Beta = Beta(1,5)("b", u)
+      val b: Beta = Beta(1,5)(using "b", u)
       val jsonBeta = b.asJson
       println(jsonBeta.spaces2)
       val name = jsonBeta.field("name").get.as[String].value.get
@@ -60,7 +60,7 @@ class SerializationTest extends AnyWordSpec with Matchers {
     "serialize its name and concentration parameters" in{
       val u = Universe.createNew()
      
-      val d: Dirichlet = Dirichlet(1,2,3,4,5)("d", u)
+      val d: Dirichlet = Dirichlet(1,2,3,4,5)(using "d", u)
       val jsonDirichlet = d.asJson
       println(jsonDirichlet.spaces2)
       val name = jsonDirichlet.field("name").get.as[String].value.get
@@ -90,10 +90,10 @@ class SerializationTest extends AnyWordSpec with Matchers {
   "A parameter collection" should {
     "serialize and deserialize set of parameters" in{
       val m = ModelParameters()
-      val b1: AtomicBeta = Beta(1,5)("b1",m)
-      val d1 = Dirichlet(3,2,4,1)("d1",m)
-      val b2: AtomicBeta = Beta(2,2)("b2",m)
-      val d2 = Dirichlet(1,2,3,4,5,6)("d2",m)
+      val b1: AtomicBeta = Beta(1,5)(using "b1",m)
+      val d1 = Dirichlet(3,2,4,1)(using "d1",m)
+      val b2: AtomicBeta = Beta(2,2)(using "b2",m)
+      val d2 = Dirichlet(1,2,3,4,5,6)(using "d2",m)
       val jsonParameters = m.asJson
       
       val u = Universe.createNew()

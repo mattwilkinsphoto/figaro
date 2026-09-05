@@ -19,9 +19,9 @@ import scala.collection.mutable.Map
 /** A record of the values of a set of named elements at a particular point in time. */
 class Snapshot {
   /** The values of the elements in the snapshot. */
-  private[filtering] val values: Map[Name[_], Any] = Map()
+  private[filtering] val values: Map[Name[?], Any] = Map()
 
-  private[filtering] var universe: Universe = _
+  private[filtering] var universe: Universe = scala.compiletime.uninitialized
 
   /** Store the values of all named elements in the universe in this snapshot. */
   def store(universe: Universe): Unit = {

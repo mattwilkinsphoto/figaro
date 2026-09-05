@@ -28649,30 +28649,6 @@ Invocation template:
 receiver.removeEvidence[T](reference, contingency)
 ```
 
-## `` com.cra.figaro.language.ElementCollection.allElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ElementCollection.html#allElements-0)
-
-```scala
-def allElements: List[Element[_]]
-```
-
-All named elements in this collection.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` List[Element[_]] ``.
-
-Source contract/attributes: All named elements in this collection. Attributes Deprecated [Since version 2.3.0.0] Use namedElements instead
-
-Invocation template:
-
-```scala
-receiver.allElements
-```
-
 ## `` com.cra.figaro.language.ElementState.restore ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ElementState.html#restore-94c)
@@ -37635,17 +37611,17 @@ receiver.generateValue(rand)
 
 ## `` com.cra.figaro.language.Parameterized.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/Parameterized.html#distributionToStatistics-b61)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/Parameterized.html#distributionToStatistics-113)
 
 ```scala
-def distributionToStatistics(p: Parameter[_], distribution: Stream[(Double, T)]): Seq[Double]
+def distributionToStatistics(p: Parameter[_], distribution: LazyList[(Double, T)]): Seq[Double]
 ```
 
 Convert a distribution from this element into sufficient statistics for the specified parameter
 
 Type parameters: none.
 
-Parameters, list 1: `` p: Parameter[_] ``; `` distribution: Stream[(Double, T)] ``.
+Parameters, list 1: `` p: Parameter[_] ``; `` distribution: LazyList[(Double, T)] ``.
 
 Returns: `` Seq[Double] ``.
 
@@ -38797,17 +38773,17 @@ receiver.density(value)
 
 ## `` com.cra.figaro.language.ParameterizedFlip.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ParameterizedFlip.html#distributionToStatistics-fffff55f)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ParameterizedFlip.html#distributionToStatistics-391)
 
 ```scala
-def distributionToStatistics(distribution: Stream[(Double, Boolean)]): Seq[Double]
+def distributionToStatistics(distribution: LazyList[(Double, Boolean)]): Seq[Double]
 ```
 
 Convert a distribution from this Flip into sufficient statistics
 
 Type parameters: none.
 
-Parameters, list 1: `` distribution: Stream[(Double, Boolean)] ``.
+Parameters, list 1: `` distribution: LazyList[(Double, Boolean)] ``.
 
 Returns: `` Seq[Double] ``.
 
@@ -39283,17 +39259,17 @@ receiver.directContextContents
 
 ## `` com.cra.figaro.language.ParameterizedFlip.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ParameterizedFlip.html#distributionToStatistics-b61)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ParameterizedFlip.html#distributionToStatistics-113)
 
 ```scala
-override def distributionToStatistics(p: Parameter[_], distribution: Stream[(Double, Boolean)]): Seq[Double]
+override def distributionToStatistics(p: Parameter[_], distribution: LazyList[(Double, Boolean)]): Seq[Double]
 ```
 
 Convert a distribution from this element into sufficient statistics for the specified parameter
 
 Type parameters: none.
 
-Parameters, list 1: `` p: Parameter[_] ``; `` distribution: Stream[(Double, Boolean)] ``.
+Parameters, list 1: `` p: Parameter[_] ``; `` distribution: LazyList[(Double, Boolean)] ``.
 
 Returns: `` Seq[Double] ``.
 
@@ -39959,17 +39935,17 @@ receiver.density(value)
 
 ## `` com.cra.figaro.language.ParameterizedSelect.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ParameterizedSelect.html#distributionToStatistics-fffff55f)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ParameterizedSelect.html#distributionToStatistics-391)
 
 ```scala
-def distributionToStatistics(distribution: Stream[(Double, T)]): Seq[Double]
+def distributionToStatistics(distribution: LazyList[(Double, T)]): Seq[Double]
 ```
 
 Convert a distribution from this element into sufficient statistics
 
 Type parameters: none.
 
-Parameters, list 1: `` distribution: Stream[(Double, T)] ``.
+Parameters, list 1: `` distribution: LazyList[(Double, T)] ``.
 
 Returns: `` Seq[Double] ``.
 
@@ -40445,17 +40421,17 @@ receiver.directContextContents
 
 ## `` com.cra.figaro.language.ParameterizedSelect.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ParameterizedSelect.html#distributionToStatistics-b61)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/ParameterizedSelect.html#distributionToStatistics-113)
 
 ```scala
-override def distributionToStatistics(p: Parameter[_], distribution: Stream[(Double, T)]): Seq[Double]
+override def distributionToStatistics(p: Parameter[_], distribution: LazyList[(Double, T)]): Seq[Double]
 ```
 
 Convert a distribution from this element into sufficient statistics for the specified parameter
 
 Type parameters: none.
 
-Parameters, list 1: `` p: Parameter[_] ``; `` distribution: Stream[(Double, T)] ``.
+Parameters, list 1: `` p: Parameter[_] ``; `` distribution: LazyList[(Double, T)] ``.
 
 Returns: `` Seq[Double] ``.
 
@@ -43407,17 +43383,17 @@ receiver.generateValue(rand)
 
 ## `` com.cra.figaro.language.SingleParameterized.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/SingleParameterized.html#distributionToStatistics-fffff55f)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/SingleParameterized.html#distributionToStatistics-391)
 
 ```scala
-def distributionToStatistics(distribution: Stream[(Double, T)]): Seq[Double]
+def distributionToStatistics(distribution: LazyList[(Double, T)]): Seq[Double]
 ```
 
 Convert a distribution from this element into sufficient statistics
 
 Type parameters: none.
 
-Parameters, list 1: `` distribution: Stream[(Double, T)] ``.
+Parameters, list 1: `` distribution: LazyList[(Double, T)] ``.
 
 Returns: `` Seq[Double] ``.
 
@@ -43431,17 +43407,17 @@ receiver.distributionToStatistics(distribution)
 
 ## `` com.cra.figaro.language.SingleParameterized.distributionToStatistics ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/SingleParameterized.html#distributionToStatistics-b61)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/SingleParameterized.html#distributionToStatistics-113)
 
 ```scala
-override def distributionToStatistics(p: Parameter[_], distribution: Stream[(Double, T)]): Seq[Double]
+override def distributionToStatistics(p: Parameter[_], distribution: LazyList[(Double, T)]): Seq[Double]
 ```
 
 Convert a distribution from this element into sufficient statistics for the specified parameter
 
 Type parameters: none.
 
-Parameters, list 1: `` p: Parameter[_] ``; `` distribution: Stream[(Double, T)] ``.
+Parameters, list 1: `` p: Parameter[_] ``; `` distribution: LazyList[(Double, T)] ``.
 
 Returns: `` Seq[Double] ``.
 
@@ -46497,30 +46473,6 @@ Invocation template:
 
 ```scala
 receiver.removeEvidence[T](reference, contingency)
-```
-
-## `` com.cra.figaro.language.Universe.allElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/Universe.html#allElements-0)
-
-```scala
-def allElements: List[Element[_]]
-```
-
-All named elements in this collection.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` List[Element[_]] ``.
-
-Source contract/attributes: All named elements in this collection. Attributes Deprecated [Since version 2.3.0.0] Use namedElements instead Inherited from: ElementCollection
-
-Invocation template:
-
-```scala
-receiver.allElements
 ```
 
 ## `` com.cra.figaro.language.UniverseState.restore ``

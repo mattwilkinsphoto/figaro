@@ -27,7 +27,7 @@ class ContainerElement[Index, Value](val element: Element[Container[Index, Value
    */
   def apply(i: Index): Element[Value] = {
     if (!element.active) element.activate()
-    CachingChain(element, (c: Container[Index, Value]) => c(i))("", element.universe)
+    CachingChain(element, (c: Container[Index, Value]) => c(i))(using "", element.universe)
   }
 
   /**
@@ -36,7 +36,7 @@ class ContainerElement[Index, Value](val element: Element[Container[Index, Value
    */
   def get(i: Index): Element[Option[Value]] = {
     if (!element.active) element.activate()
-    CachingChain(element, (c: Container[Index, Value]) => c.get(i))("", element.universe)
+    CachingChain(element, (c: Container[Index, Value]) => c.get(i))(using "", element.universe)
   }
 
   /**
@@ -44,7 +44,7 @@ class ContainerElement[Index, Value](val element: Element[Container[Index, Value
    */
   def map[Value2](f: Value => Value2): ContainerElement[Index, Value2] = {
     if (!element.active) element.activate()
-    new ContainerElement(Apply(element, (c: Container[Index, Value]) => c.map(f))("", element.universe))
+    new ContainerElement(Apply(element, (c: Container[Index, Value]) => c.map(f))(using "", element.universe))
   }
 
   /**
@@ -52,7 +52,7 @@ class ContainerElement[Index, Value](val element: Element[Container[Index, Value
    */
   def chain[Value2](f: Value => Element[Value2]): ContainerElement[Index, Value2] = {
     if (!element.active) element.activate()
-    new ContainerElement(Apply(element, (c: Container[Index, Value]) => c.chain(f))("", element.universe))
+    new ContainerElement(Apply(element, (c: Container[Index, Value]) => c.chain(f))(using "", element.universe))
   }
 
   /**
@@ -60,7 +60,7 @@ class ContainerElement[Index, Value](val element: Element[Container[Index, Value
    */
   def foldLeft[Value2](start: Value2)(f: (Value2, Value) => Value2): Element[Value2] = {
     if (!element.active) element.activate()
-    CachingChain(element, (c: Container[Index, Value]) => c.foldLeft(start)(f))("", element.universe)
+    CachingChain(element, (c: Container[Index, Value]) => c.foldLeft(start)(f))(using "", element.universe)
   }
 
   /**
@@ -68,7 +68,7 @@ class ContainerElement[Index, Value](val element: Element[Container[Index, Value
    */
   def foldRight[Value2](start: Value2)(f: (Value, Value2) => Value2): Element[Value2] = {
     if (!element.active) element.activate()
-    CachingChain(element, (c: Container[Index, Value]) => c.foldRight(start)(f))("", element.universe)
+    CachingChain(element, (c: Container[Index, Value]) => c.foldRight(start)(f))(using "", element.universe)
   }
 
   /**
@@ -76,7 +76,7 @@ class ContainerElement[Index, Value](val element: Element[Container[Index, Value
    */
   def reduce(f: (Value, Value) => Value): Element[Value] = {
     if (!element.active) element.activate()
-    CachingChain(element, (c: Container[Index, Value]) => c.reduce(f))("", element.universe)
+    CachingChain(element, (c: Container[Index, Value]) => c.reduce(f))(using "", element.universe)
   }
 
   /**

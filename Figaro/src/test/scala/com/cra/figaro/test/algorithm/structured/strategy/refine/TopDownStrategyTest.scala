@@ -54,7 +54,7 @@ class TopDownStrategyTest extends AnyWordSpec with Matchers {
       new BacktrackingStrategy(pr, pr.targetComponents).execute()
       new TopDownStrategy(cc, c2).execute()
 
-      val c3ExpectedValues = c2.range.regularValues.map(_ + 1) + (-1.0, 1.0)
+      val c3ExpectedValues = c2.range.regularValues.map(_ + 1) ++ Set(-1.0, 1.0)
       c3.range.regularValues should equal(c3ExpectedValues)
       c3ExpectedValues should have size 22
     }

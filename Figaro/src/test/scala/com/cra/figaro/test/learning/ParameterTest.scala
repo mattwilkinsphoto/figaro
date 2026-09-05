@@ -29,11 +29,11 @@ class ParameterTest extends AnyWordSpec with Matchers {
         val l = List(0, 1)
       }
       val n = new D
-      val f1 = Select(b, n.l: _*)
-      val f2 = Select(b, n.l: _*)
-      val f3 = Select(b, n.l: _*)
-      val f4 = Select(b, n.l: _*)
-      val f5 = Select(b, n.l: _*)
+      val f1 = Select(b, n.l*)
+      val f2 = Select(b, n.l*)
+      val f3 = Select(b, n.l*)
+      val f4 = Select(b, n.l*)
+      val f5 = Select(b, n.l*)
 
       val sum1 = (i1: Int, i2: Int) => i1 + i2
       val a1 = Apply(f1, f2, sum1)

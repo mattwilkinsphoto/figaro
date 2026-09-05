@@ -27,7 +27,7 @@ abstract class DepthFirstStrategy(collection: ComponentCollection) extends Refin
   /**
    * Set of components that have been refined by this strategy.
    */
-  private[figaro] val done: mutable.Set[ProblemComponent[_]] = mutable.Set()
+  private[figaro] val done: mutable.Set[ProblemComponent[?]] = mutable.Set()
 
   /**
    * Get the problem component associated with an element. This may involve adding the element to the collection if a
@@ -43,13 +43,13 @@ abstract class DepthFirstStrategy(collection: ComponentCollection) extends Refin
    * @param comp Component to consider refining.
    * @return True if and only if this strategy should refine the argument.
    */
-  protected def shouldRefine(comp: ProblemComponent[_]): Boolean
+  protected def shouldRefine(comp: ProblemComponent[?]): Boolean
 
   /**
    * Initial components to process. Decomposition proceeds in a depth-first fashion from these components.
-   * @return Traversable of components from which to refine initially.
+   * @return Iterable of components from which to refine initially.
    */
-  def initialComponents: Traversable[ProblemComponent[_]]
+  def initialComponents: Iterable[ProblemComponent[?]]
 
   override def execute(): Unit = {
     initialComponents.foreach(refine)
@@ -71,7 +71,7 @@ abstract class DepthFirstStrategy(collection: ComponentCollection) extends Refin
    * @param comp Component to refine. This strategy never refines a component more than once, so if the component is
    * fully refined or in the set done, this method does nothing.
    */
-  def refine(comp: ProblemComponent[_]): Unit = {
+  def refine(comp: ProblemComponent[?]): Unit = {
     // Only process if the component is neither fully refined nor already visited
     if(!done.contains(comp) && shouldRefine(comp)) {
       comp match {

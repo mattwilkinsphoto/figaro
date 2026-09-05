@@ -20,8 +20,8 @@ import com.cra.figaro.algorithm.structured.algorithm._
 import com.cra.figaro.algorithm.structured.strategy.range.RangingStrategy
 import com.cra.figaro.algorithm.structured.strategy.refine._
 
-abstract class LazyStructuredVE(universe: Universe, targets: Element[_]*)
-  extends LazyStructuredProbQueryAlgorithm(universe, targets: _*) {
+abstract class LazyStructuredVE(universe: Universe, targets: Element[?]*)
+  extends LazyStructuredProbQueryAlgorithm(universe, targets*) {
 
   /**
    * Depth to which to expand the model at the current iteration.
@@ -32,7 +32,7 @@ abstract class LazyStructuredVE(universe: Universe, targets: Element[_]*)
    * Initial elements to pass to the bottom-up strategy for decomposition. Defaults to a list containing all problem
    * targets and all evidence elements in the universe.
    */
-  val initialElements: List[Element[_]] = {
+  val initialElements: List[Element[?]] = {
     (problemTargets ::: universe.conditionedElements ::: universe.constrainedElements).distinct
   }
 
@@ -49,8 +49,8 @@ abstract class LazyStructuredVE(universe: Universe, targets: Element[_]*)
 }
 
 // One time lazy structured VE uses a fixed depth
-class OneTimeLSVE(override val depth: Int, universe: Universe, targets: Element[_]*)
-  extends LazyStructuredVE(universe, targets: _*) with OneTimeLazyStructuredProbQuery {
+class OneTimeLSVE(override val depth: Int, universe: Universe, targets: Element[?]*)
+  extends LazyStructuredVE(universe, targets*) with OneTimeLazyStructuredProbQuery {
 
   override def rangingStrategy: RangingStrategy = {
     RangingStrategy.defaultLazy(depth)
@@ -58,8 +58,8 @@ class OneTimeLSVE(override val depth: Int, universe: Universe, targets: Element[
 }
 
 // Anytime lazy structured VE increases depth by the given increment at each iteration
-class AnytimeLSVE(depthIncrement: Int, universe: Universe, targets: Element[_]*)
-  extends LazyStructuredVE(universe, targets: _*) with AnytimeLazyStructuredProbQuery {
+class AnytimeLSVE(depthIncrement: Int, universe: Universe, targets: Element[?]*)
+  extends LazyStructuredVE(universe, targets*) with AnytimeLazyStructuredProbQuery {
 
   // Current depth of expansion
   var currentDepth = 0
@@ -82,11 +82,11 @@ object LazyStructuredVE {
    * @param targets Query targets.
    * @return A one time lazy structured VE algorithm.
    */
-  def apply(depth: Int, targets: Element[_]*) = {
+  def apply(depth: Int, targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run VE with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new OneTimeLSVE(depth, targets(0).universe, targets: _*)
+    new OneTimeLSVE(depth, targets(0).universe, targets*)
   }
 
   /**
@@ -94,11 +94,11 @@ object LazyStructuredVE {
    * @param targets Query targets.
    * @return An anytime lazy structured VE algorithm.
    */
-  def apply(targets: Element[_]*) = {
+  def apply(targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run VE with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new AnytimeLSVE(1, targets(0).universe, targets: _*)
+    new AnytimeLSVE(1, targets(0).universe, targets*)
   }
 
   /**
@@ -108,10 +108,10 @@ object LazyStructuredVE {
    * @param targets Query targets.
    * @return An anytime lazy structured VE algorithm.
    */
-  def anytime(depthIncrement: Int, targets: Element[_]*) = {
+  def anytime(depthIncrement: Int, targets: Element[?]*) = {
     if (targets.isEmpty) throw new IllegalArgumentException("Cannot run VE with no targets")
     val universes = targets.map(_.universe).toSet
     if (universes.size > 1) throw new IllegalArgumentException("Cannot have targets in different universes")
-    new AnytimeLSVE(depthIncrement, targets(0).universe, targets: _*)
+    new AnytimeLSVE(depthIncrement, targets(0).universe, targets*)
   }
 }

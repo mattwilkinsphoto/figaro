@@ -39,7 +39,7 @@ class UniverseState(universe: Universe) {
   val myRecursiveUsedBy = makeImmutable(universe.myRecursiveUsedBy)
 
   // States over elements
-  val elementStates: Map[Element[_], ElementState] = myActiveElements.map(e => (e, new ElementState(e))).toMap
+  val elementStates: Map[Element[?], ElementState] = myActiveElements.map(e => (e, new ElementState(e))).toMap
 
   /**
    * Restores the universe to its state at the time of construction of this class. In general, this means that any calls
@@ -58,7 +58,7 @@ class UniverseState(universe: Universe) {
    */
   def restore(): Unit = {
     // Deactivate any newly created elements
-    for(newElement <- universe.myActiveElements -- myActiveElements) newElement.deactivate()
+    for(newElement <- universe.myActiveElements.diff(myActiveElements)) newElement.deactivate()
 
     // For immutable types, we can just replace the references
     universe.myContextStack = myContextStack
@@ -83,7 +83,7 @@ class UniverseState(universe: Universe) {
    * @param toReplace Set whose elements should be replaced.
    * @param replaceWith Set of elements to replace with.
    */
-  private def replace[T](toReplace: mutable.Set[T], replaceWith: TraversableOnce[T]): Unit = {
+  private def replace[T](toReplace: mutable.Set[T], replaceWith: IterableOnce[T]): Unit = {
     toReplace.clear()
     toReplace ++= replaceWith
   }
@@ -101,7 +101,7 @@ class UniverseState(universe: Universe) {
   }
 
   private def makeImmutable[T](map: mutable.Map[T, mutable.Set[T]]): Map[T, Set[T]] = {
-    // map.toMap.mapValues(_.toSet)
+    // map.toMap.view.mapValues(_.toSet)
     // Wait! Calling mapValues returns a VIEW into the original map, which we don't want because the underlying sets are
     // mutable. See Scala issues SI-4776.
     map.map{ case (key, value) => (key, value.toSet) }.toMap
@@ -114,7 +114,7 @@ class UniverseState(universe: Universe) {
  *
  * @param element Element to save. Information about the current state of this element is copied in the constructor.
  */
-class ElementState(val element: Element[_]) {
+class ElementState(val element: Element[?]) {
   // Immutable types
   val active = element.active
   val setFlag = element.setFlag

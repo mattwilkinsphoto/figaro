@@ -643,10 +643,10 @@ receiver.collapseVariables()
 
 ## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbQueryGibbs.computeDistribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbQueryGibbs.html#computeDistribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbQueryGibbs.html#computeDistribution-fffff1a2)
 
 ```scala
-def computeDistribution[T](target: Element[T]): Stream[(Double, T)]
+def computeDistribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the expectation of the function under the marginal probability distribution of the target.
@@ -655,7 +655,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the expectation of the function under the marginal probability distribution of the target. Attributes Inherited from: BaseProbQuerySampler
 
@@ -739,10 +739,10 @@ receiver.correctBlocks(originalBlocks)
 
 ## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbQueryGibbs.distribution ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbQueryGibbs.html#distribution-fffffef0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbQueryGibbs.html#distribution-fffff1a2)
 
 ```scala
-def distribution[T](target: Element[T]): Stream[(Double, T)]
+def distribution[T](target: Element[T]): LazyList[(Double, T)]
 ```
 
 Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive.
@@ -751,7 +751,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` target: Element[T] ``.
 
-Returns: `` Stream[(Double, T)] ``.
+Returns: `` LazyList[(Double, T)] ``.
 
 Source contract/attributes: Return an estimate of the marginal probability distribution over the target that lists each element with its probability. The result is a lazy stream. It is up to the algorithm how the stream is ordered. Throws NotATargetException if called on a target that is not in the list of targets of the algorithm. Throws AlgorithmInactiveException if the algorithm is inactive. Attributes Inherited from: BaseProbQueryAlgorithm
 
@@ -1319,10 +1319,10 @@ receiver.sampleAllBlocks()
 
 ## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbQueryGibbs.sampleFromPosterior ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbQueryGibbs.html#sampleFromPosterior-fffffdb4)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbQueryGibbs.html#sampleFromPosterior-f66)
 
 ```scala
-def sampleFromPosterior[T](element: Element[T]): Stream[T]
+def sampleFromPosterior[T](element: Element[T]): LazyList[T]
 ```
 
 Sample an value from the posterior of this element
@@ -1331,7 +1331,7 @@ Type parameters: `` T ``.
 
 Parameters, list 1: `` element: Element[T] ``.
 
-Returns: `` Stream[T] ``.
+Returns: `` LazyList[T] ``.
 
 Source contract/attributes: Sample an value from the posterior of this element Attributes Inherited from: UnweightedSampler
 

@@ -19,7 +19,7 @@ import com.cra.figaro.language.Parameter
  * Termination criteria for EM algorithms. A termination criteria can be passed as an argument to the EM apply method.
  */
 abstract class EMTerminationCriteria {
-  type SufficientStatistics = Map[Parameter[_], Seq[Double]]
+  type SufficientStatistics = Map[Parameter[?], Seq[Double]]
   def apply(s: SufficientStatistics): Boolean
 }
 
@@ -38,7 +38,7 @@ class MaxIterations(val max: Int) extends EMTerminationCriteria {
  * Terminate when the magnitude of sufficient statistics does not exhibit a change greater than the specified tolerance.
  */
 class SufficientStatisticsMagnitudes(val tolerance: Double) extends EMTerminationCriteria {
-  var previousSufficientStatistics = Map.empty[Parameter[_], Seq[Double]]
+  var previousSufficientStatistics = Map.empty[Parameter[?], Seq[Double]]
 
   def difference(x: Seq[Double], y: Seq[Double]): Double = {
     require(x.size == y.size)
