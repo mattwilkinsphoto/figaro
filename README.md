@@ -50,7 +50,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Migration changes](docs/MIGRATION.md): breaking changes, accepted workarounds, remaining risks, and upgrade checklist.
 - [Build and verification](docs/BUILDING.md): sbt 2 commands, tests, coverage, publication, documentation generation, and Windows troubleshooting.
 - [Library module](Figaro/README.md) and [examples module](FigaroExamples/README.md).
-- [Engineering history](MODERNIZATION.md), [dependency inventory](DEPENDENCIES.md), and [consumer boundary](CONSUMER_BOUNDARY.md).
+- [Engineering history](MODERNIZATION.md), [dependency inventory](DEPENDENCIES.md), and [JVM integration](CONSUMER_BOUNDARY.md).
 
 Generate the searchable Scala 3 API site with `sbt "figaro / Compile / doc"`. Open `target/out/jvm/scala-3.9.0/figaro/api/index.html` locally. The checked-in `ScalaDoc/` tree is historical Scala 2 documentation, not this branch's API reference.
 

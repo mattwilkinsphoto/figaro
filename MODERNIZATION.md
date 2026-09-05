@@ -10,11 +10,9 @@ This log records decisions, compatibility findings, risks, and test evidence for
 
 - Upstream: <https://github.com/charles-river-analytics/figaro>
 - Modernization origin: <https://github.com/mattwilkinsphoto/figaro>
-- Local repository: `E:\Users\mpwil\Documents\Figaro\figaro`
-- Traffic software boundary: `E:\Users\mpwil\Documents\Easement` is a separate repository and is not modified by this work.
 - Upstream baseline commit: `14f48d148f715017211822e31b7ea3291733fefe` (2022-06-01).
 
-The GitHub origin began as an empty standalone public repository rather than a GitHub fork. It is seeded from the exact upstream history, and the local checkout retains a separate `upstream` remote so provenance and future synchronization remain explicit.
+The modernization repository began as an empty standalone public repository rather than a GitHub fork. It preserves the upstream Git history so provenance and future synchronization remain explicit.
 
 ## Stage 0: legacy baseline
 
@@ -145,7 +143,7 @@ Local verification:
 - A cached clean rebuild and a separate cache-bypassed fresh compilation produce identical thin and fat JARs. Thin SHA-256: `20C9EB19B4961112CD5FE2D38902159111D03E2953E72F5E265A0A08FEAD88E6`; fat SHA-256: `BEF7BCB600B96E96A287F31E178C8EA3FB67CE317B2F497C234F2EF078519F32`.
 - The thin JAR is byte-for-byte identical to the sbt 1 baseline. Every shared entry in the old and new fat JARs has identical contents; the new fat JAR additionally includes Figaro's own legal entries because sbt 2 supplies the packaged project JAR on the assembly classpath.
 
-Windows notes: the isolated long temporary directory initially exceeded the worker IPC socket-path limit. A short, task-local `XDG_RUNTIME_DIR` resolved it without disabling test forking. Developer Mode is not required: sbt reports failed optional symbolic-link creation but the build and cache restoration succeed. Generated items receive explicit Full Control for the non-administrator `MATT-DESKTOP\astroman97` account.
+Windows notes: a long temporary directory initially exceeded the worker IPC socket-path limit. A short `XDG_RUNTIME_DIR` resolved it without disabling test forking. Developer Mode is not required: sbt reports failed optional symbolic-link creation but the build and cache restoration succeed.
 
 The known legacy full-suite failures remain unchanged in scope; this stage does not claim that the entire historical suite is green. The inherited OSGi manifests still contain legacy bundle metadata; OSGi deployment is not validated by this JVM migration gate.
 
@@ -155,7 +153,7 @@ References: [sbt 2 migration guide](https://www.scala-sbt.org/2.x/docs/en/change
 
 Date: 2026-09-05. Branch: `modernize/scala-3`, based on the pushed sbt 2 checkpoint `b281f016`. The sbt 2 checkpoint's [GitHub Actions run](https://github.com/mattwilkinsphoto/figaro/actions/runs/33950767885) passed the required gates; the separate legacy timing advisory reported its known selectable-set timing failure.
 
-Target: Scala 3.9.0 LTS, sbt 2.0.8, JDK 17, library version `6.0.0-modern.1-SNAPSHOT`. This is a Scala 3-only line with the `_3` artifact suffix. The prior Scala 2.13 artifact is not replaced in place and Scala consumers must recompile. No consumer repository is changed.
+Target: Scala 3.9.0 LTS, sbt 2.0.8, JDK 17, library version `6.0.0-modern.1-SNAPSHOT`. This is a Scala 3-only line with the `_3` artifact suffix. The prior Scala 2.13 artifact is not replaced in place and Scala consumers must recompile.
 
 Migration decisions:
 

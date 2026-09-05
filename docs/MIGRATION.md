@@ -20,7 +20,7 @@ The Scala compiler inside sbt compiles the build definition; it does not select 
 2. Publish Figaro locally, move the consumer to Scala 3.9.0, update its dependency to `6.0.0-modern.1-SNAPSHOT`, and recompile. Replace manually pinned `_2.13` coordinates with `_3`; `%%` does this in sbt.
 3. Fix source changes below and run representative end-to-end inference/serialization tests in the consumer. Compare numerical answers with justified tolerances, not only successful compilation.
 
-Retain the previous dependency/checkpoint until the consumer passes. Reverting a consumer dependency is a deployment rollback; it does not make Scala 3-compiled application classes runnable against an old Scala 2 JAR. Rebuild the matching application version too. No migration of another repository or release publication is performed implicitly.
+Retain the previous dependency/checkpoint until the consumer passes. Reverting a consumer dependency is a deployment rollback; it does not make Scala 3-compiled application classes runnable against an old Scala 2 JAR. Rebuild the matching application version too. Release publication is a separate step from local upgrade testing.
 
 ## sbt 2 changes users encounter
 
@@ -135,4 +135,4 @@ Before production: exercise the actual consumer's model construction, evidence, 
 
 ## Related
 
-[User guide](USER_GUIDE.md), [API changes in context](API_GUIDE.md), [build/verification](BUILDING.md), [engineering log](../MODERNIZATION.md), and [consumer boundary](../CONSUMER_BOUNDARY.md).
+[User guide](USER_GUIDE.md), [API changes in context](API_GUIDE.md), [build/verification](BUILDING.md), [engineering log](../MODERNIZATION.md), and [JVM integration](../CONSUMER_BOUNDARY.md).

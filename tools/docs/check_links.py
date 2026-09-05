@@ -22,7 +22,7 @@ def main():
     root = Path(__file__).resolve().parents[2]
     paths = [root / name for name in (
         "README.md", "Figaro/README.md", "FigaroExamples/README.md",
-        "tools/docs/README.md", "MODERNIZATION.md", "DEPENDENCIES.md")]
+        "tools/docs/README.md", "MODERNIZATION.md", "DEPENDENCIES.md", "CONSUMER_BOUNDARY.md")]
     paths += sorted((root / "docs").rglob("*.md"))
     errors, count = [], 0
     for path in paths:

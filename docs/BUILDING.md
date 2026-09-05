@@ -90,8 +90,7 @@ External manifest/legal inputs are read with `Def.uncached`; the resulting conte
 - Allow substantial memory for large inference tests. The checked-in build forks tests with a 6 GB maximum heap; running multiple sbt/test JVMs can exceed your available memory.
 - Do not run concurrent builds against the same output tree. On Windows, switching a running sbt session from ordinary testing to coverage can lock an exported project JAR. Exit the sessions holding it and use separate fresh processes; do not disable test forking or run the whole build as administrator as a workaround.
 - Very long Windows IPC paths can prevent forked tests from starting. Point `XDG_RUNTIME_DIR` at a short, existing, writable local directory before launching sbt. Keep it specific to your checkout/process. This is a path-length workaround, not a fix to sbt's IPC implementation.
-- Machine-specific launch scripts used during modernization are not prerequisites and are not included here. Isolated Ivy/Coursier caches in such scripts can make a successful `publishLocal` invisible to a normally launched consumer.
-- Windows workspaces may have account-specific ACL requirements. Apply your workspace's explicit access grants to generated directories/files; the reference generator supports an immediate ACL hook. Do not broaden access or change ownership to fix a build.
+- Custom local-repository settings can make a successful `publishLocal` invisible to a consumer using different settings. Ensure both builds resolve the same Ivy local repository.
 - New compiler warnings remain visible. Deprecated `Stream`, symbol APIs, or legacy implicit syntax may compile today without being desirable new application APIs.
 
 ## Related

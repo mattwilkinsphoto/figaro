@@ -22,7 +22,7 @@ Run from the repository root:
 | `--api-dir PATH` | API root containing `com/cra/figaro`; default `target/out/jvm/scala-3.9.0/figaro/api` | Changes the source HTML directory | `python -B tools/docs/build_reference.py --api-dir target/out/jvm/scala-3.9.0/figaro/api` |
 | `--output PATH` | Dedicated generated directory; parent must exist; default `docs/api` | Writes the reference there; existing unrelated Markdown is not overwritten | `python -B tools/docs/build_reference.py --output docs/api` |
 | `--check` | Existing output and generated HTML | Read-only; nonzero for missing, changed, or obsolete output files | `python -B tools/docs/build_reference.py --check` |
-| `--acl-script PATH` | Optional trusted PowerShell script accepting `-Paths` with one absolute path | Runs immediately after each file/directory creation or change; hook failure stops generation | `python -B tools/docs/build_reference.py --acl-script C:/workspace/Grant-Access.ps1` with your actual access hook |
+| `--acl-script PATH` | Optional trusted PowerShell permission hook accepting `-Paths` with one absolute path | Runs immediately after each file/directory creation or change; hook failure stops generation; not required for ordinary generation | `python -B tools/docs/build_reference.py --acl-script path/to/access-hook.ps1` (replace the placeholder with an existing script) |
 | `check_links.py` | Maintained Markdown and built HTML, located relative to the script | Checks local inline-link file targets, prints counts, exits 1 on missing files; performs no network requests | `python -B tools/docs/check_links.py` |
 
 `inventory.json` uses schema version 1. Each method records owner, name, compiler signature, type parameters, ordered parameter lists (with contextual flags), return type, source prose, invocation template, object/instance classification, HTML page, and anchor. Treat this as generator data, not a published model-serialization format.
@@ -51,7 +51,8 @@ python -B -m unittest discover -s tools/docs -p "test_*.py"
 - Run generation from the repository root. Change the default API path and all documented artifact paths when changing compiler versions. Keep the generated HTML beside this checkout if using Markdown-to-HTML links locally; those links do not resolve in GitHub's viewer because build output is not committed.
 - The link checker checks local **file existence**, not section anchors, arbitrary Markdown syntax, external URLs, or HTML content. Generate Scaladoc before running it. It deliberately does not audit the historical `ScalaDoc/` tree.
 - Generation does not delete obsolete files. If a package disappears, inspect the obsolete generated files reported by `--check` and remove only those confirmed obsolete files.
-- `-B` avoids creating Python bytecode cache files. On Windows with explicit workspace ACL requirements, supply a suitable `--acl-script`; the hook must preserve existing ACLs/ownership, grant the intended account access, and verify it. The generator prefers `pwsh` when available.
+- `-B` avoids creating Python bytecode cache files. The optional permission hook uses `pwsh` when available and otherwise falls back to `powershell`.
+- Keep Figaro documentation self-contained: use repository-relative paths and portable examples, and exclude developer account names, workstation locations, and unrelated project details. Preserve Figaro provenance, dependency coordinates, and reproducible modernization evidence.
 
 Internal Python functions/classes implement HTML parsing, signature decomposition, rendering, and link scanning. They are not a supported import API; their contracts are tested in the adjacent unit tests. The supported entry points are the CLI commands above.
 

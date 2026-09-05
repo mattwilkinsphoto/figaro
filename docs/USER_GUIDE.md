@@ -148,4 +148,4 @@ Omitting the sample count (`Importance(target)`) creates an anytime worker that 
 | `util` | Numeric, collection, and display helpers |
 | `FigaroExamples` / sbt `examples` | Runnable models depending on core; not a dependency for your application |
 
-The root sbt project aggregates core and examples; publish `figaro`, not the root. Application-specific schemas/workflows belong in consumer adapters, not core. See [consumer boundary](../CONSUMER_BOUNDARY.md).
+The root sbt project aggregates core and examples; publish `figaro`, not the root. See [JVM integration](../CONSUMER_BOUNDARY.md) for the library's dependency contract and release-readiness checklist.

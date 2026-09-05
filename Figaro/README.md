@@ -47,4 +47,4 @@ This is a Scala 3 snapshot requiring consumer recompilation, not a binary-compat
 
 ## Related
 
-[Examples module](../FigaroExamples/README.md) depends on this library. The root build aggregates both. No other application's code or Java facade is included in the modernization boundary; see [consumer boundary](../CONSUMER_BOUNDARY.md).
+[Examples module](../FigaroExamples/README.md) depends on this library. The root build aggregates both. See [JVM integration](../CONSUMER_BOUNDARY.md) for Figaro's dependency contract and release-readiness checklist.
