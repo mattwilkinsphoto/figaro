@@ -17,6 +17,8 @@ This inventory separates build-tool migration from runtime dependency changes. V
 
 ## Test architecture risks
 
+The sbt 2 migration keeps all runtime dependencies and ScalaTest 3.1.0 fixed. Its test-only `scala-xml` dependency is explicitly aligned to 2.4.0 (excluding ScalaTest's transitive 1.2.0) to coexist with sbt-scoverage 2.4.4's reporter. This resolves sbt 2's coverage-mode eviction error without relaxing dependency compatibility checks or adding XML to Figaro's runtime dependency graph.
+
 - Default `test` currently mixes deterministic unit tests, stochastic checks, performance assertions, and heavyweight book examples.
 - Several probability assertions use exact `Double` equality.
 - Stochastic tests do not consistently expose or pin random seeds.

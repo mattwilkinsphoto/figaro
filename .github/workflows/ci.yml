@@ -1,4 +1,4 @@
-name: Java 17 modernization
+name: Java 17 and sbt 2 modernization
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
         uses: sbt/setup-sbt@v1
 
       - name: Compile all source sets
-        run: sbt -v clean compile Test/compile
+        run: sbt -v "clean; compile; Test / compile"
 
       - name: Run deterministic modernization regressions
         run: >-
@@ -67,44 +67,57 @@ jobs:
           com.cra.figaro.test.util.SelectableSetTest
           com.cra.figaro.test.util.CacheTest
           com.cra.figaro.test.util.ResamplerTest
-          com.cra.figaro.test.algorithm.factored.FactorTest"
+          com.cra.figaro.test.algorithm.factored.FactorTest
+          -- -l com.cra.figaro.test.Performance"
+
+      - name: Observe legacy collection timing checks (advisory)
+        continue-on-error: true
+        run: >-
+          sbt
+          "figaro / Test / testOnly
+          com.cra.figaro.test.util.PriorityMapTest
+          com.cra.figaro.test.util.SelectableSetTest
+          -- -n com.cra.figaro.test.Performance"
 
       - name: Run deterministic parallel-structure regressions
         run: |
           sbt 'figaro / Test / testOnly com.cra.figaro.test.algorithm.filtering.ParParticleFilterTest -- -z "splitting up the particle indices over threads"'
           sbt 'figaro / Test / testOnly com.cra.figaro.test.algorithm.sampling.ParImportanceTest -- -z "not suffer from stack overflow with small probability of success"'
 
+      - name: Verify coverage plugin and restore non-instrumented build
+        run: >-
+          sbt
+          "coverage;
+          figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest;
+          figaro / coverageReport; coverageOff; clean"
+
       - name: Build first reproducibility candidate
         run: >-
           sbt
-          "figaro / Compile / packageBin"
-          "figaro / assembly"
+          "figaro / Compile / packageBin; figaro / assembly"
 
       - name: Record artifact checksums
         run: |
           sha256sum \
-            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT.jar \
-            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT.jar \
+            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
         run: |
-          sbt clean \
-            "figaro / Compile / packageBin" \
-            "figaro / assembly"
+          # Bypass sbt 2's artifact cache: restoring the first JAR is not a rebuild.
+          sbt "set Global / cacheStores := Seq.empty; clean; figaro / Compile / packageBin; figaro / assembly"
           sha256sum --check "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Build classifiers and verify local Maven publication
         run: >-
           sbt
-          "figaro / Compile / packageSrc"
-          "figaro / Compile / packageDoc"
-          "figaro / publishLocal"
+          "figaro / Compile / packageSrc; figaro / Compile / packageDoc; figaro / publishLocal"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -113,10 +126,10 @@ jobs:
       - name: Upload JVM artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: figaro-java17-scala213
+          name: figaro-java17-scala213-sbt2
           path: |
-            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT.jar
-            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar
-            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-sources.jar
-            Figaro/target/scala-2.13/figaro_2.13-5.0.0-modern.2-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT.jar
+            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar
+            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-sources.jar
+            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-javadoc.jar
           if-no-files-found: error

@@ -6,18 +6,15 @@
 // See LICENSE and FigaroAttributions.txt.
 //
 
-import sbt._
-import Keys._
-import sbt.Package.ManifestAttributes
-import sbtassembly.AssemblyPlugin.autoImport._
-
-name := "figaro-root"
+import sbt.{given, *}
+import Keys.*
+import sbtassembly.AssemblyPlugin.autoImport.*
 
 // sbt uses this fixed ZIP-entry timestamp for package tasks. Declaring it here,
 // together with sbt-assembly's stable ordering, makes the release policy explicit.
 val reproducibleTimestamp = 1262304000000L
-ThisBuild / packageTimestamp := Some(reproducibleTimestamp)
-ThisBuild / assemblyRepeatableBuild := true
+packageTimestamp := Some(reproducibleTimestamp)
+assemblyRepeatableBuild := true
 
 lazy val DetTest = config("det").extend(Test)
 lazy val NonDetTest = config("nonDet").extend(Test)
@@ -28,13 +25,21 @@ def readManifest(path: String): java.util.jar.Manifest = {
   finally stream.close()
 }
 
-def legalMappings(repositoryRoot: File): Seq[(File, String)] = Seq(
+def legalMappings(repositoryRoot: File, converter: xsbti.FileConverter): Seq[(xsbti.HashedVirtualFileRef, String)] = Seq(
   repositoryRoot / "LICENSE" -> "META-INF/LICENSE",
   repositoryRoot / "FigaroAttributions.txt" -> "META-INF/FigaroAttributions.txt"
-)
+).map { case (source, destination) => converter.toVirtualFile(source.toPath) -> destination }
 
-lazy val figaroManifest = readManifest("Figaro/META-INF/MANIFEST.MF")
-lazy val examplesManifest = readManifest("FigaroExamples/META-INF/MANIFEST.MF")
+// Read external legal/manifest inputs on each invocation; parent package tasks
+// still cache using the resulting content hashes and manifest attributes.
+lazy val legalSettings = Seq(
+  Compile / packageBin / packageOptions := Def.uncached {
+    Seq(Package.JarManifest(readManifest((baseDirectory.value / "META-INF" / "MANIFEST.MF").getPath)))
+  },
+  Compile / packageBin / mappings ++= Def.uncached { legalMappings(baseDirectory.value.getParentFile, fileConverter.value) },
+  Compile / packageSrc / mappings ++= Def.uncached { legalMappings(baseDirectory.value.getParentFile, fileConverter.value) },
+  Compile / packageDoc / mappings ++= Def.uncached { legalMappings(baseDirectory.value.getParentFile, fileConverter.value) }
+)
 
 lazy val figaroSettings = Seq(
   organization := "io.github.mattwilkinsphoto",
@@ -44,11 +49,11 @@ lazy val figaroSettings = Seq(
   crossScalaVersions := Seq("2.13.18"),
   crossPaths := true,
   publishMavenStyle := true,
-  homepage := Some(url("https://github.com/mattwilkinsphoto/figaro")),
-  licenses := Seq("Figaro License" -> url("https://github.com/charles-river-analytics/figaro/blob/master/LICENSE")),
+  homepage := Some(uri("https://github.com/mattwilkinsphoto/figaro")),
+  licenses := Seq("Figaro License" -> uri("https://github.com/charles-river-analytics/figaro/blob/master/LICENSE")),
   scmInfo := Some(
     ScmInfo(
-      url("https://github.com/mattwilkinsphoto/figaro"),
+      uri("https://github.com/mattwilkinsphoto/figaro"),
       "scm:git:https://github.com/mattwilkinsphoto/figaro.git"
     )
   ),
@@ -57,7 +62,7 @@ lazy val figaroSettings = Seq(
       id = "cra-figaro",
       name = "Figaro contributors",
       email = "figaro@cra.com",
-      url = url("https://github.com/charles-river-analytics/figaro")
+      url = uri("https://github.com/charles-river-analytics/figaro")
     )
   ),
   Compile / scalacOptions ++= Seq(
@@ -73,7 +78,7 @@ lazy val figaroSettings = Seq(
 lazy val root = project
   .in(file("."))
   .settings(figaroSettings)
-  .settings(publish / skip := true)
+  .settings(name := "figaro-root", publish / skip := true)
   .dependsOn(figaro, examples)
   .aggregate(figaro, examples)
 
@@ -81,18 +86,16 @@ lazy val figaro = project
   .in(file("Figaro"))
   .configs(DetTest, NonDetTest)
   .settings(figaroSettings)
+  .settings(legalSettings)
   .settings(
-    Compile / packageBin / packageOptions := Seq(Package.JarManifest(figaroManifest)),
-    Compile / packageBin / mappings ++= legalMappings(baseDirectory.value.getParentFile),
-    Compile / packageSrc / mappings ++= legalMappings(baseDirectory.value.getParentFile),
-    Compile / packageDoc / mappings ++= legalMappings(baseDirectory.value.getParentFile),
     Test / fork := true,
     Test / javaOptions += "-Xmx6G",
     Compile / run / fork := true,
+    Compile / run / baseDirectory := baseDirectory.value,
     Compile / run / javaOptions += "-Xmx6G",
     Test / parallelExecution := false,
     Test / testOptions += Tests.Argument("-oD"),
-    assembly / test := {},
+    assembly / test := sbt.protocol.testing.TestResult.Empty,
     assembly / packageOptions += Package.FixedTimestamp(Some(reproducibleTimestamp)),
     assembly / assemblyJarName := s"figaro_${scalaBinaryVersion.value}-${version.value}-fat.jar",
     assembly / assemblyOption := (assembly / assemblyOption).value.withIncludeScala(false),
@@ -103,7 +106,11 @@ lazy val figaro = project
       "io.github.argonaut-io" %% "argonaut" % "6.3.13",
       "org.scala-lang.modules" %% "scala-swing" % "2.1.1",
       "org.scala-lang.modules" %% "scala-parallel-collections" % "1.2.0",
-      "org.scalatest" %% "scalatest" % "3.1.0" % Test
+      // sbt 2 checks the test graph against scoverage's scala-xml 2.x dependency.
+      // Align the test-only XML library explicitly instead of suppressing eviction errors.
+      ("org.scalatest" %% "scalatest" % "3.1.0" % Test)
+        .exclude("org.scala-lang.modules", "scala-xml_2.13"),
+      "org.scala-lang.modules" %% "scala-xml" % "2.4.0" % Test
     )
   )
   .settings(inConfig(DetTest)(Defaults.testTasks))
@@ -115,9 +122,4 @@ lazy val examples = project
   .in(file("FigaroExamples"))
   .dependsOn(figaro)
   .settings(figaroSettings)
-  .settings(
-    Compile / packageBin / packageOptions := Seq(Package.JarManifest(examplesManifest)),
-    Compile / packageBin / mappings ++= legalMappings(baseDirectory.value.getParentFile),
-    Compile / packageSrc / mappings ++= legalMappings(baseDirectory.value.getParentFile),
-    Compile / packageDoc / mappings ++= legalMappings(baseDirectory.value.getParentFile)
-  )
+  .settings(legalSettings)
