@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 from collections import defaultdict
+import difflib
 from html.parser import HTMLParser
 import json
 import os
@@ -307,6 +308,15 @@ def main():
             continue
         if args.check:
             stale.append(name)
+            if old is not None and name.endswith(".md"):
+                differences = difflib.unified_diff(old.splitlines(), text.splitlines(),
+                                                   fromfile=name + " (checked in)",
+                                                   tofile=name + " (generated)", n=2)
+                for index, line in enumerate(differences):
+                    if index == 40:
+                        print("... further differences omitted")
+                        break
+                    print(line)
         else:
             if old is not None and name != "inventory.json" and not old.startswith(MARKER):
                 raise ValueError(f"Refusing to overwrite non-generated file: {path}")
