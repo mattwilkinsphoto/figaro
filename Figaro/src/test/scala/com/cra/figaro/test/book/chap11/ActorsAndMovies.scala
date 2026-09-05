@@ -15,8 +15,8 @@ package com.cra.figaro.test.book.chap11
 
 import com.cra.figaro.language._
 import com.cra.figaro.algorithm.sampling._
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
@@ -28,18 +28,18 @@ object ActorsAndMovies {
   }
 
   class Movie {
-    val quality = Select(0.3 -> 'low, 0.5 -> 'medium, 0.2 -> 'high)
+    val quality = Select(0.3 -> Symbol("low"), 0.5 -> Symbol("medium"), 0.2 -> Symbol("high"))
   }
 
   class Appearance(val actor: Actor, val movie: Movie) {
     def getProb(quality: Symbol, famous: Boolean) =
       (quality, famous) match {
-        case ('low, false) => 0.001
-        case ('low, true) => 0.01
-        case ('medium, false) => 0.01
-        case ('medium, true) => 0.05
-        case ('high, false) => 0.05
-        case ('high, true) => 0.2
+        case (Symbol("low"), false) => 0.001
+        case (Symbol("low"), true) => 0.01
+        case (Symbol("medium"), false) => 0.01
+        case (Symbol("medium"), true) => 0.05
+        case (Symbol("high"), false) => 0.05
+        case (Symbol("high"), true) => 0.2
       }
     val probability =
       Apply(movie.quality, actor.famous, (q: Symbol, f: Boolean) => getProb(q, f))
@@ -72,7 +72,7 @@ object ActorsAndMovies {
 
   def main(args: Array[String]): Unit = {
     appearances(0).actor.famous.observe(true)
-    appearances(0).movie.quality.observe('high)
+    appearances(0).movie.quality.observe(Symbol("high"))
 
     val alg = MetropolisHastings(1000000, scheme, 100000, appearances(0).award)
     alg.start()
@@ -82,10 +82,10 @@ object ActorsAndMovies {
   }
 }
 
-class ActorsAndMoviesTest extends WordSpec with Matchers {
+class ActorsAndMoviesTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   ActorsAndMovies.appearances(0).actor.famous.observe(true)
-  ActorsAndMovies.appearances(0).movie.quality.observe('high)
+  ActorsAndMovies.appearances(0).movie.quality.observe(Symbol("high"))
 
   val alg = MetropolisHastings(1000000, ActorsAndMovies.scheme, 100000, ActorsAndMovies.appearances(0).award)
   alg.start()

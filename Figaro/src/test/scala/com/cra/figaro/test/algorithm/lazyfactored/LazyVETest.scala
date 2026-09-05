@@ -13,18 +13,18 @@
 
 package com.cra.figaro.test.algorithm.lazyfactored
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.algorithm.lazyfactored.LazyVariableElimination
 
-class LazyVETest extends WordSpec with Matchers {
+class LazyVETest extends AnyWordSpec with Matchers {
   "Running lazy variable elimination" when {
     "given a simple two-level chain with no evidence" should {
       "produce the correct depth 1 approximation" in {
     	Universe.createNew()
-    	val outerIf = twoLevelChain
+      val outerIf = twoLevelChain()
         val alg = new LazyVariableElimination(outerIf)
     	alg.start()
     	alg.probabilityBounds(outerIf, true)._1 should be (0.02 +- 0.000000001)
@@ -35,7 +35,7 @@ class LazyVETest extends WordSpec with Matchers {
       
       "produce the correct depth 2 perfect answer" in {
     	Universe.createNew()
-    	val outerIf = twoLevelChain
+      val outerIf = twoLevelChain()
         val alg = new LazyVariableElimination(outerIf)
     	alg.start()
     	alg.pump()
@@ -54,7 +54,7 @@ class LazyVETest extends WordSpec with Matchers {
       "produce the correct depth 2 approximation" in {
     	Universe.createNew()
     	// This is designed so that depth 2 catches the check and its Flip arguments, but not the inner Flips of the two level chain.
-    	val outerIf = twoLevelChain
+      val outerIf = twoLevelChain()
     	val apply = Apply(outerIf, (b: Boolean) => b)
     	val check = If(apply, Flip(0.6), Flip(0.3))
     	check.observe(true)
@@ -79,7 +79,7 @@ class LazyVETest extends WordSpec with Matchers {
       
       "produce the correct depth 3 perfect answer" in {
     	Universe.createNew()
-    	val outerIf = twoLevelChain
+      val outerIf = twoLevelChain()
     	val apply = Apply(outerIf, (b: Boolean) => b)
     	val check = If(apply, Flip(0.6), Flip(0.3))
     	check.observe(true)
@@ -105,7 +105,7 @@ class LazyVETest extends WordSpec with Matchers {
     "given a simple two-level chain with a constraint" should {
       "produce the correct depth 1 approximation" in {
     	Universe.createNew()
-    	val outerIf = twoLevelChain
+      val outerIf = twoLevelChain()
     	outerIf.addConstraint((b: Boolean) => if (b) 0.6; else 0.3)
     	val alg = new LazyVariableElimination(outerIf)
     	alg.start()
@@ -127,7 +127,7 @@ class LazyVETest extends WordSpec with Matchers {
       
       "produce the correct depth 2 perfect answer" in {
     	Universe.createNew()
-    	val outerIf = twoLevelChain
+      val outerIf = twoLevelChain()
     	outerIf.addConstraint((b: Boolean) => if (b) 0.6; else 0.3)
         val alg = new LazyVariableElimination(outerIf)
     	alg.start()
@@ -151,8 +151,8 @@ class LazyVETest extends WordSpec with Matchers {
       "produce a shrinking sequence of bounds converging on the correct answer" in {
         Universe.createNew()
         val el = generate()
-        val cb = contains('b, el)
-        val ca = contains('a, el)
+        val cb = contains(Symbol("b"), el)
+        val ca = contains(Symbol("a"), el)
         val alg = new LazyVariableElimination(cb)
         alg.start()
         var (pLow, pHigh) = alg.probabilityBounds(cb, true)
@@ -178,8 +178,8 @@ class LazyVETest extends WordSpec with Matchers {
       "produce a shrinking sequence of bounds converging on the correct answer" in {
         Universe.createNew()
         val el = generate()
-        val cb = contains('b, el)
-        val ca = contains('a, el)
+        val cb = contains(Symbol("b"), el)
+        val ca = contains(Symbol("a"), el)
         ca.observe(true)
         val alg = new LazyVariableElimination(cb)
         alg.start()
@@ -229,7 +229,7 @@ class LazyVETest extends WordSpec with Matchers {
   }
 
   def generate(): Element[L] = {
-    Apply(Flip(0.5), (b: Boolean) => if (b) Empty; else Cons(Select(0.6 -> 'a, 0.4 -> 'b), generate()))
+    Apply(Flip(0.5), (b: Boolean) => if (b) Empty; else Cons(Select(0.6 -> Symbol("a"), 0.4 -> Symbol("b")), generate()))
   }
 
 }

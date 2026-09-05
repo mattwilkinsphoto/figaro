@@ -17,11 +17,12 @@ import com.cra.figaro.algorithm.OneTime
 import com.cra.figaro.language.Element.ElemVal
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.{Normal, Uniform}
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 import scala.collection.mutable
 
-class UniverseStateTest extends WordSpec with Matchers {
+class UniverseStateTest extends AnyWordSpec with Matchers {
   "A universe state" when {
     "restoring elements in the universe" should {
       "restore value and randomness" in {

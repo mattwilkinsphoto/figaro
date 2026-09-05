@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.language._
@@ -25,7 +25,7 @@ import com.cra.figaro.util._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 
-class OpenUniverseTest extends WordSpec with Matchers {
+class OpenUniverseTest extends AnyWordSpec with Matchers {
   "The open universe example" should {
     "produce the correct answer under Metropolis-Hastings" taggedAs (Example) in {
       test()
@@ -34,7 +34,7 @@ class OpenUniverseTest extends WordSpec with Matchers {
 
   val probOneMoreSource = 0.9
 
-  def test() {
+  def test(): Unit = {
     Universe.createNew()
 
     val numSources = discrete.Geometric(probOneMoreSource)
@@ -83,9 +83,9 @@ class OpenUniverseTest extends WordSpec with Matchers {
     val totalProbSame = (0.0 /: (1 to limitNumSources))(_ + probSame(_))
     val totalProbDifferent = (0.0 /: (1 to limitNumSources))(_ + probDifferent(_))
     val answer = totalProbSame / (totalProbSame + totalProbDifferent)
-    val alg = MetropolisHastings(200000, chooseScheme, 5000, equal)
+    val alg = MetropolisHastings(200000, chooseScheme(), 5000, equal)
     alg.start()
     alg.probability(equal, true) should be(answer +- 0.02)
-    alg.kill
+    alg.kill()
   }
 }

@@ -30,25 +30,25 @@ trait LazyAlgorithm extends Algorithm {
   /**
    * Start the algorithm. This will run the algorithm to one depth.
    */
-  def doStart() { pump() }
+  def doStart(): Unit = { pump() }
 
   /**
    * Increase the depth and run the algorithm again.
    */
-  def pump() { depth += 1; run(depth) }
+  def pump(): Unit = { depth += 1; run(depth) }
 
   /**
    * Stop the algorithm.
    */
-  def doStop() { }
+  def doStop(): Unit = { }
 
   /**
    * Resume the algorithm by increasing the depth and running again.
    */
-  def doResume() { pump() }
+  def doResume(): Unit = { pump() }
 
   /**
    * Kill the algorithm.
    */
-  def doKill() { depth = -1 }
+  def doKill(): Unit = { depth = -1 }
 }

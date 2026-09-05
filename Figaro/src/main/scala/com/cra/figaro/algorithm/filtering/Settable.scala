@@ -16,7 +16,7 @@ package com.cra.figaro.algorithm.filtering
 import com.cra.figaro.language._
 
 private[filtering] class Settable[T](name: Name[T], var myValue: T, collection: ElementCollection) extends Deterministic[T](name, collection) with Atomic[T] {
-  override def set(newValue: T) { myValue = newValue; super.set(newValue) }
+  override def set(newValue: T): Unit = { myValue = newValue; super.set(newValue) }
 
   def generateValue() = myValue
 

@@ -13,11 +13,11 @@
 
 package com.cra.figaro.ndtest
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import scala.collection.mutable.Map
 
-abstract class NDTest extends WordSpec with Matchers {
+abstract class NDTest extends AnyWordSpec with Matchers {
   val results: Map[String, NDTestResult] = Map()
 
   def update(value: Any, test: String, name: String, target: Any, alpha: Double = .05) =
@@ -37,7 +37,7 @@ abstract class NDTest extends WordSpec with Matchers {
     }  
   }
   
-  final def run(n: Int, clear: Boolean = true)
+  final def run(n: Int, clear: Boolean = true): Unit =
   {
     if (clear) results.clear()
     

@@ -1,4 +1,4 @@
-name: Java 17 and sbt 2 modernization
+name: Java 17, Scala 3, and sbt 2 modernization
 
 on:
   push:
@@ -40,6 +40,7 @@ jobs:
           sbt
           "figaro / Test / testOnly
           com.cra.figaro.test.modernization.ProbabilityRegressionTest
+          com.cra.figaro.test.modernization.Scala3RegressionTest
           com.cra.figaro.test.modernization.SpecialFunctionsRegressionTest
           com.cra.figaro.test.learning.SerializationTest"
 
@@ -58,7 +59,7 @@ jobs:
           com.cra.figaro.test.algorithm.AlgorithmTest
           -- -z "An anytime algorithm"'
 
-      - name: Run Scala 2.13 collection and factor regressions
+      - name: Run collection and factor regressions
         run: >-
           sbt
           "figaro / Test / testOnly
@@ -99,8 +100,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT.jar \
-            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -117,7 +118,7 @@ jobs:
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -126,10 +127,10 @@ jobs:
       - name: Upload JVM artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: figaro-java17-scala213-sbt2
+          name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT.jar
-            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-fat.jar
-            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-sources.jar
-            target/out/jvm/scala-2.13.18/figaro/figaro_2.13-5.0.0-modern.2-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.1-SNAPSHOT-javadoc.jar
           if-no-files-found: error

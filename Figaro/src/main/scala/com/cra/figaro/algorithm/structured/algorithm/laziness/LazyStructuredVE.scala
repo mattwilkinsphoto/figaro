@@ -26,7 +26,7 @@ abstract class LazyStructuredVE(universe: Universe, targets: Element[_]*)
   /**
    * Depth to which to expand the model at the current iteration.
    */
-  def depth(): Int
+  def depth: Int
 
   /**
    * Initial elements to pass to the bottom-up strategy for decomposition. Defaults to a list containing all problem
@@ -42,7 +42,7 @@ abstract class LazyStructuredVE(universe: Universe, targets: Element[_]*)
   }
 
   override def refiningStrategy(): RefiningStrategy =
-    new RecursionDepthStrategy(problem, initialElements.map(collection(_)), depth())
+    new RecursionDepthStrategy(problem, initialElements.map(collection(_)), depth)
 
   override def solvingStrategy(): SolvingStrategy =
     new ConstantStrategy(problem, structuredRaising, marginalVariableElimination)
@@ -64,7 +64,7 @@ class AnytimeLSVE(depthIncrement: Int, universe: Universe, targets: Element[_]*)
   // Current depth of expansion
   var currentDepth = 0
 
-  override def depth(): Int = {
+  override def depth: Int = {
     // Increment depth each time we create a refining strategy
     currentDepth += depthIncrement
     currentDepth

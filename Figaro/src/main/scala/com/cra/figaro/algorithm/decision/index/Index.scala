@@ -33,7 +33,7 @@ import scala.collection.mutable.{ HashMap, MultiMap, Set, PriorityQueue }
  *  @param stratMap A mapping from parent/decision values to observed utilities. This is output
  *  by a DecisionAlgorithm.
  */
-abstract class Index[T <% Distance[T], U](stratMap: Map[(T, U), DecisionSample]) {
+abstract class Index[T: DistanceConversion, U](stratMap: Map[(T, U), DecisionSample]) {
   
   /* Implementors must define this class */
   /**
@@ -103,8 +103,8 @@ trait LNode[T, U] extends Node[T, U] {
    * and a query value of type Distance[T]. Will return the distances in sorted order.
    */
   def oDist(o: T): Iterable[(Double, Set[U])] = {
-    val m = PriorityQueue[(Double, Set[U])]()(Ordering.by(-1.0 * _._1))
-    objects.foreach { s: (Distance[T], Set[U]) => m += ((s._1.distance(o), s._2)) }
+    val m = PriorityQueue.empty[(Double, Set[U])](using Ordering.by[(Double, Set[U]), Double](x => -x._1))
+    objects.foreach { (s: (Distance[T], Set[U])) => m += ((s._1.distance(o), s._2)) }
     m
   }
   def iDist(o: T) = Map[Double, Node[T, U]]()

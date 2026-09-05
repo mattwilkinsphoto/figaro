@@ -1,13 +1,13 @@
 /*
  * InnerBPHandler.scala
  * Trait for creating and running Belief Propagation within another algorithm
- * 
+ *
  * Created By:      Brian Ruttenberg (bruttenberg@cra.com)
  * Creation Date:   Oct 20, 2014
- * 
+ *
  * Copyright 2017 Avrom J. Pfeffer and Charles River Analytics, Inc.
  * See http://www.cra.com or email figaro@cra.com for information.
- * 
+ *
  * See http://www.github.com/p2t2/figaro for a copy of the software license.
  */
 
@@ -63,7 +63,7 @@ trait OneTimeInnerBPHandler extends InnerBPHandler {
     }
   }
 
-  protected def runBP() {
+  protected def runBP(): Unit = {
     bp.start()
   }
 }
@@ -79,11 +79,11 @@ trait AnytimeInnerBPHandler extends InnerBPHandler {
 
   protected def createBP(targets: List[Element[_]], dependentUniverses: List[(Universe, List[NamedEvidence[_]])],
     dependentAlgorithm: (Universe, List[NamedEvidence[_]]) => () => Double, depth: Int = Int.MaxValue, upperBounds: Boolean = false): Unit = {
-    if (bp != null) bp.kill
+    if (bp != null) bp.kill()
     bp = new ProbQueryBeliefPropagation(currentUniverse, targets: _*)(dependentUniverses, dependentAlgorithm, depth, upperBounds) with AnytimeProbabilisticBeliefPropagation with AnytimeProbQuery
   }
 
-  protected def runBP() {
+  protected def runBP(): Unit = {
     bp.start()
     Thread.sleep(myStepTimeMillis)
     bp.stop()

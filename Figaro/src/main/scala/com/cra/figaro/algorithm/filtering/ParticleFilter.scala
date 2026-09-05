@@ -90,11 +90,11 @@ trait ParticleFilter {
     val snapshot = new Snapshot
     snapshot.store(currentUniverse)
     val state = new State(snapshot, previousState.static)
-    currentUniverse.clearTemporaries
+    currentUniverse.clearTemporaries()
     (weight, state)
   }
 
-  private[figaro] def updateBeliefState(weightedParticles: Seq[ParticleFilter.WeightedParticle]) {
+  private[figaro] def updateBeliefState(weightedParticles: Seq[ParticleFilter.WeightedParticle]): Unit = {
     // If all the particles have weight 1, there is no need to resample
     // If all the particles have weight 0, none of them satisfy the conditions, so the best we can do is produce a uniform distribution over them.
     if (weightedParticles.forall(_._1 == 1.0) || weightedParticles.forall(_._1 == 0.0)) {
@@ -110,7 +110,7 @@ trait ParticleFilter {
     }
   }
 
-  private[figaro] def computeProbEvidence(weightedParticles: Seq[ParticleFilter.WeightedParticle]) {
+  private[figaro] def computeProbEvidence(weightedParticles: Seq[ParticleFilter.WeightedParticle]): Unit = {
     // compute probability of evidence here by taking the average weight of the weighted particles and store it so you can later return it as a query result
     val weightedParticleArray = weightedParticles.toArray
     val sum = weightedParticleArray.map(_._1).sum
@@ -182,7 +182,7 @@ class OneTimeParticleFilter(static: Universe = new Universe(), initial: Universe
   var currentUniverse: Universe = initial
   var previousUniverse: Universe = _
 
-  private def doTimeStep(weightedParticleCreator: Int => ParticleFilter.WeightedParticle) {
+  private def doTimeStep(weightedParticleCreator: Int => ParticleFilter.WeightedParticle): Unit = {
     val weightedParticles = for { i <- 0 until numParticles } yield weightedParticleCreator(i)
 
     // compute probability of evidence here by taking the average weight of the weighted particles and store it so you can later return it as a query result

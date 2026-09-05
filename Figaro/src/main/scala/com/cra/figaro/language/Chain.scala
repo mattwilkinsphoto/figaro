@@ -43,9 +43,9 @@ class Chain[T, U](name: Name[U], val parent: Element[T], fcn: T => Element[U], c
   type ParentType = T
 
   def generateValue() = {
-    if (parent.value == null) parent.generate()
+    if (!parent.hasValue) parent.generate()
     val resultElement = get(parent.value)
-    if (resultElement.value == null) resultElement.generate()
+    if (!resultElement.hasValue) resultElement.generate()
     resultElement.value
   }
 

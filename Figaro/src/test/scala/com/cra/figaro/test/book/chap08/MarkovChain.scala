@@ -17,8 +17,8 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.Beta
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.algorithm.factored.VariableElimination
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 object MarkovChain {
@@ -29,7 +29,7 @@ object MarkovChain {
     ourPossession(minute) = If(ourPossession(minute - 1), Flip(0.6), Flip(0.3))
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println("Probability we have possession at time step 5")
     println("Prior probability: " + VariableElimination.probability(ourPossession(5), true))
     ourPossession(4).observe(true)
@@ -43,7 +43,7 @@ object MarkovChain {
   }
 }
 
-class MarkovChainTest extends WordSpec with Matchers {
+class MarkovChainTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val prior = VariableElimination.probability(MarkovChain.ourPossession(5), true)
   MarkovChain.ourPossession(4).observe(true)

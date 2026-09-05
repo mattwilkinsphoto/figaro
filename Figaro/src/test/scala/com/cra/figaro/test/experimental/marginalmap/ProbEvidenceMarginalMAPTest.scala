@@ -20,9 +20,10 @@ import com.cra.figaro.library.atomic.continuous.Normal
 import com.cra.figaro.library.atomic.discrete.{Uniform, Util}
 import com.cra.figaro.library.collection.Container
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class ProbEvidenceMarginalMAPTest extends WordSpec with Matchers {
+class ProbEvidenceMarginalMAPTest extends AnyWordSpec with Matchers {
   // For testing, it's more efficient to use a linear schedule on simple models where we just want quick convergence,
   // rather than exploration of a large state space
   val linearSchedule = Schedule((temp, iter) => iter)

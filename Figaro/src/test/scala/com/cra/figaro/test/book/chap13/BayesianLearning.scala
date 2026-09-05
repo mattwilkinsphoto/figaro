@@ -20,8 +20,8 @@ import com.cra.figaro.library.compound.If
 import com.cra.figaro.language.Element
 import com.cra.figaro.algorithm.sampling.MetropolisHastings
 import com.cra.figaro.algorithm.sampling.ProposalScheme
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
@@ -66,7 +66,7 @@ object BayesianLearning {
     model.isSpam.observe(email.label == "spam")
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val futureEmail = new Email(List("Feel free to reply if you have any ideas."), "unknown")
     val futureModel = new EmailModel
     for { word <- featureWords } {
@@ -81,7 +81,7 @@ object BayesianLearning {
   }
 }
 
-class BayesianLearningTest extends WordSpec with Matchers {
+class BayesianLearningTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val futureEmail = new BayesianLearning.Email(List("Feel free to reply if you have any ideas."), "unknown")
   val futureModel = new BayesianLearning.EmailModel

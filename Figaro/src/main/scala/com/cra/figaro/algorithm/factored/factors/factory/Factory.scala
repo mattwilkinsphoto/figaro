@@ -30,7 +30,6 @@ import com.cra.figaro.library.compound._
 import com.cra.figaro.library.collection._
 import com.cra.figaro.library.atomic.discrete._
 import com.cra.figaro.algorithm.structured._
-import scala.reflect.runtime.universe.{typeTag, TypeTag}
 
 
 /**
@@ -86,7 +85,7 @@ object Factory {
   /**
    * The mutliplicative identity factor.
    */
-  def unit[T: TypeTag](semiring: Semiring[T]): Factor[T] = {
+  def unit[T](semiring: Semiring[T]): Factor[T] = {
     val result = new DenseFactor[T](List(), List(), semiring)
     result.set(List(), semiring.one)
     result
@@ -118,7 +117,7 @@ object Factory {
   /**
    * Create a DenseFactor from the supplied parent and children variables
    */
-  def defaultFactor[T: TypeTag](parents: List[Variable[_]], children: List[Variable[_]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]]) =
+  def defaultFactor[T](parents: List[Variable[_]], children: List[Variable[_]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]]) =
     new DenseFactor[T](parents, children, _semiring)
 
   private def makeFactors[T](cc: ComponentCollection, const: Constant[T]): List[Factor[Double]] = {
@@ -357,7 +356,7 @@ object Factory {
         case atomicComp: AtomicComponent[Value] =>
           // The range for this component was generated, but not its distribution
           // This computes the probability mass for each value in the range
-          atomicComp.probs = atomicComp.ranger.discretize()
+          atomicComp.probs = atomicComp.ranger.discretize
         case _ => ()
       }
       // Make the constraint and non-constraint factors for the element by calling the

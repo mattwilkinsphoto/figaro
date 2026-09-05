@@ -38,7 +38,7 @@ abstract class MPEBeliefPropagation(override val universe: Universe)(
   override def initialize() = {
     val (neededElements, _) = getNeededElements(universe.activeElements, Int.MaxValue)
     factorGraph = new BasicFactorGraph(getFactors(neededElements, targetElements), logSpaceSemiring()): FactorGraph[Double]
-    super.initialize
+    super.initialize()
   }
 
   /*

@@ -8,9 +8,10 @@
 package com.cra.figaro.test.modernization
 
 import com.cra.figaro.util.SpecialFunctions
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class SpecialFunctionsRegressionTest extends WordSpec with Matchers {
+class SpecialFunctionsRegressionTest extends AnyWordSpec with Matchers {
   private val tolerance = 1e-12
 
   "The Commons Math special-function boundary" should {

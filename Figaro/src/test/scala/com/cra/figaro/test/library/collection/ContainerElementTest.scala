@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.library.collection
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.library.collection._
 import com.cra.figaro.language._
 import com.cra.figaro.util._
@@ -22,7 +22,7 @@ import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.algorithm.sampling.{Importance, Forward}
 import com.cra.figaro.library.compound._
 
-class ContainerElementTest extends WordSpec with Matchers {
+class ContainerElementTest extends AnyWordSpec with Matchers {
   "A container element" should {
     "create elements in the right universes" in {
       val u1 = Universe.createNew()
@@ -143,7 +143,7 @@ class ContainerElementTest extends WordSpec with Matchers {
     "select a random element correctly without throwing IndexOutOfRangeException" in {
       Universe.createNew()
       val vsa = VariableSizeArray(Select(0.2 -> 1, 0.8 -> 2), i => Constant(i))
-      val elem = vsa.randomElement
+      val elem = vsa.randomElement()
       Importance.probability(elem, 1) should be ((0.8 * 0.5) +- 0.01)
     }
 

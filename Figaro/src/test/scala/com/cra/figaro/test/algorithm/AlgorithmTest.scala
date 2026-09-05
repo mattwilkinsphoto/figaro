@@ -20,8 +20,8 @@
 
 package com.cra.figaro.test.algorithm
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm.factored.VariableElimination
@@ -32,7 +32,7 @@ import scala.collection.mutable.Map
 import com.cra.figaro.library.atomic.discrete.FromRange
 import com.cra.figaro.library.atomic.discrete.Binomial
 
-class AlgorithmTest extends WordSpec with Matchers {
+class AlgorithmTest extends AnyWordSpec with Matchers {
   "An algorithm" should {
     "not allow queries before starting" in {
       Universe.createNew()
@@ -166,11 +166,11 @@ class AlgorithmTest extends WordSpec with Matchers {
 
       for { _ <- 0 until 20 } {
         val alg = Importance(l: _*)
-        alg.start
+        alg.start()
         Thread.sleep(1000)
-        alg.stop
+        alg.stop()
         val init = Universe.universe.activeElements.size
-        alg.kill
+        alg.kill()
         val after = Universe.universe.activeElements.size
         after should equal (400*2)
       }

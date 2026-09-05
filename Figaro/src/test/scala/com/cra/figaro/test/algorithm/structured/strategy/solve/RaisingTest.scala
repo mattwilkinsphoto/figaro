@@ -17,9 +17,10 @@ import com.cra.figaro.algorithm.structured.solver._
 import com.cra.figaro.algorithm.structured.strategy.solve._
 import com.cra.figaro.algorithm.structured.{ComponentCollection, Problem}
 import com.cra.figaro.language._
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class RaisingTest extends WordSpec with Matchers {
+class RaisingTest extends AnyWordSpec with Matchers {
 
   "A raising strategy" when {
     "eliminating variables" should {
@@ -43,9 +44,10 @@ class RaisingTest extends WordSpec with Matchers {
 
         val strategy = new ConstantStrategy(pr, structuredRaising, marginalVariableElimination) {
           // Make nonConstraintFactors a lazy val so we can look at cc.intermediates
-          override lazy val nonConstraintFactors: List[Factor[Double]] = super.nonConstraintFactors()
+          private lazy val cachedNonConstraintFactors: List[Factor[Double]] = super.nonConstraintFactors()
+          override def nonConstraintFactors(): List[Factor[Double]] = cachedNonConstraintFactors
         }
-        strategy.nonConstraintFactors
+        strategy.nonConstraintFactors()
         cc.intermediates shouldNot be(empty)
         val intermediates = cc.intermediates
         strategy.execute()

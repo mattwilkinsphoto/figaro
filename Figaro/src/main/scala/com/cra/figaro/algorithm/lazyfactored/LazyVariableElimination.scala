@@ -60,7 +60,7 @@ with LazyAlgorithm {
   private def optionallyShowTiming[T](op: => T, name: String) =
     if (showTiming) timed(op, name); else op
 
-  def run(depth: Int) {
+  def run(depth: Int): Unit = {
     Variable.clearCache()
     val (includedElements, needsBounds) = getNeededElements(targetElements.toList, depth)
     val targetVariables = targetElements.map(Variable(_))
@@ -321,7 +321,7 @@ with LazyAlgorithm {
     }
 
   // for debugging
-  private def printVariables(variables: Traversable[/*Extended*/Variable[_]]) {
+  private def printVariables(variables: Traversable[/*Extended*/Variable[_]]): Unit = {
     for { variable <- variables } {
       print("  ")
       variable match {

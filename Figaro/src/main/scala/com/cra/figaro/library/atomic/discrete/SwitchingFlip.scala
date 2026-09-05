@@ -32,7 +32,7 @@ trait SwitchingFlip extends Flip {
     if (rand < probValue) (uniform(probValue, 1.0), 1.0, (1.0 - probValue) / probValue)
     else (uniform(0.0, probValue), 1.0, probValue / (1.0 - probValue))
 
-  private def uniform(lower: Double, upper: Double) = random.nextDouble * (upper - lower) + lower
+  private def uniform(lower: Double, upper: Double) = random.nextDouble() * (upper - lower) + lower
 }
 
 /**

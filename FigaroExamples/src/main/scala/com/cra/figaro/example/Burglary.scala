@@ -43,11 +43,11 @@ object Burglary {
     false -> Flip(0.01),
     true -> Flip(0.7))
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     johnCalls.observe(true)
     val alg = VariableElimination(burglary, earthquake)
     alg.start()
     println("Probability of burglary: " + alg.probability(burglary, true))
-    alg.kill
+    alg.kill()
   }
 }      

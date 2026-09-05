@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.sampling._
@@ -24,7 +24,7 @@ import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 import com.cra.figaro.test.tags.NonDeterministic
 
-class MutableMovieTest extends WordSpec with Matchers {
+class MutableMovieTest extends AnyWordSpec with Matchers {
   "A PRM with a global constraint with mutation" should {
     "produce the correct probability under variable elimination" taggedAs (Example) in {
       test((e: Element[Boolean]) => VariableElimination(e))
@@ -66,7 +66,7 @@ class MutableMovieTest extends WordSpec with Matchers {
     allAwards.setCondition(uniqueAwardCondition)
 
     actor1.famous.observe(true)
-    movie2.quality.observe('high)
+    movie2.quality.observe(Symbol("high"))
 
     // We first make sure the initial state satisfies the unique award condition, and then make sure that all
     // subsequent proposals keep that condition.
@@ -178,7 +178,7 @@ class MutableMovieTest extends WordSpec with Matchers {
 
     lazy val famous = Flip(Apply(Inject(movies.map(_.quality): _*), probFamous _))
 
-    private def probFamous(qualities: Seq[Symbol]) = if (qualities.count(_ == 'high) >= 2) 0.8; else 0.1
+    private def probFamous(qualities: Seq[Symbol]) = if (qualities.count(_ == Symbol("high")) >= 2) 0.8; else 0.1
   }
 
   class Movie {
@@ -190,7 +190,7 @@ class MutableMovieTest extends WordSpec with Matchers {
 
     lazy val probHigh = Apply(actorsAllGood, (b: Boolean) => if (b) 0.5; else 0.2)
 
-    lazy val quality = Select(probLow -> 'low, Constant(0.3) -> 'medium, probHigh -> 'high)
+    lazy val quality = Select(probLow -> Symbol("low"), Constant(0.3) -> Symbol("medium"), probHigh -> Symbol("high"))
   }
 
   class Appearance(actor: Actor, movie: Movie) {
@@ -199,12 +199,12 @@ class MutableMovieTest extends WordSpec with Matchers {
 
     def probAward(quality: Symbol, famous: Boolean) =
       (quality, famous) match {
-        case ('low, false) => 0.001
-        case ('low, true) => 0.01
-        case ('medium, false) => 0.01
-        case ('medium, true) => 0.05
-        case ('high, false) => 0.05
-        case ('high, true) => 0.2
+        case (Symbol("low"), false) => 0.001
+        case (Symbol("low"), true) => 0.01
+        case (Symbol("medium"), false) => 0.01
+        case (Symbol("medium"), true) => 0.05
+        case (Symbol("high"), false) => 0.05
+        case (Symbol("high"), true) => 0.2
       }
     lazy val award = SwitchingFlip(Apply(movie.quality, actor.famous, (q: Symbol, f: Boolean) => probAward(q, f)))
   }

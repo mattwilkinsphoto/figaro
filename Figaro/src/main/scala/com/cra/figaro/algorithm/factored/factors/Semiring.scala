@@ -60,7 +60,7 @@ trait LogConvertibleSemiRing[T] extends DivideableSemiRing[T] {
   /**
    * Is true if this semiring is in log space
    */
-  def isLog(): Boolean
+  def isLog: Boolean
   /**
    * Converts this semiring into its log inverse
    * For non-log space semirings, converts to log, and for log semirings exponentiates

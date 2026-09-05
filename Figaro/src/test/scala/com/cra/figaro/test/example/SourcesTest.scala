@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.sampling._
@@ -25,7 +25,7 @@ import com.cra.figaro.util._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 
-class SourcesTest extends WordSpec with Matchers {
+class SourcesTest extends AnyWordSpec with Matchers {
   "The sources example" should {
     "produce the correct answer under variable elimination with dependent universe reasoning" taggedAs (Example) in {
       def peAlg(universe: Universe, evidence: List[NamedEvidence[_]]) = () => ProbEvidenceSampler.computeProbEvidence(1000000, evidence)(universe)
@@ -53,7 +53,7 @@ class SourcesTest extends WordSpec with Matchers {
     val distance = If(isTheRightSource, rightSourceDistance, wrongSourceDistance)("distance", universe)
   }
 
-  def test(algorithmCreator: (List[(Universe, List[NamedEvidence[_]])], Element[Source]) => ProbQueryAlgorithm) {
+  def test(algorithmCreator: (List[(Universe, List[NamedEvidence[_]])], Element[Source]) => ProbQueryAlgorithm): Unit = {
     Universe.createNew()
     val source1 = new Source("Source 1")
     val source2 = new Source("Source 2")
@@ -108,7 +108,7 @@ class SourcesTest extends WordSpec with Matchers {
     val alg = algorithmCreator(List(dependent1, dependent2, dependent3, dependent4), sample1.fromSource)
     alg.start()
     alg.probability(sample1.fromSource, source1) should be(answer +- 0.01)
-    alg.kill
+    alg.kill()
   }
 
 }

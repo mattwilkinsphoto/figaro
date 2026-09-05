@@ -24,7 +24,7 @@ class Snapshot {
   private[filtering] var universe: Universe = _
 
   /** Store the values of all named elements in the universe in this snapshot. */
-  def store(universe: Universe) {
+  def store(universe: Universe): Unit = {
     this.universe = universe
 
     values.clear()
@@ -43,12 +43,12 @@ class Snapshot {
   def get[T](reference: Reference[T]): T = apply(universe.getElementByReference(reference))
 
   /** Restore the values stored in the snapshot into the given new universe. */
-  def restore(newUniverse: Universe) {
+  def restore(newUniverse: Universe): Unit = {
     for {
       (name, value) <- values
     } {
       val element = newUniverse.getElementByReference(name)
-      if (!element.active) element.activate
+      if (!element.active) element.activate()
       element.set(value.asInstanceOf[element.Value])
     }
   }

@@ -13,9 +13,9 @@
 
 package com.cra.figaro.test.algorithm.filtering
 
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.PrivateMethodTester
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language._
 import com.cra.figaro.language.Universe._
 import com.cra.figaro.language.Flip
@@ -25,7 +25,7 @@ import com.cra.figaro.algorithm.filtering.FactoredFrontier
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.algorithm.lazyfactored.LazyValues
 
-class FactoredFrontierTest extends WordSpec with Matchers {
+class FactoredFrontierTest extends AnyWordSpec with Matchers {
   "A factored frontier" when {
     "creating a new universe from a previous time step" should {
       "create dummy universes for the previous and static universes" in {
@@ -298,7 +298,7 @@ class FactoredFrontierTest extends WordSpec with Matchers {
         }
         
         class UniverseTest(finalized: BooleanTest) extends Universe(List()){
-          override def finalize(){
+          override def finalize(): Unit ={
             super.finalize()
             finalized.b = true
           }

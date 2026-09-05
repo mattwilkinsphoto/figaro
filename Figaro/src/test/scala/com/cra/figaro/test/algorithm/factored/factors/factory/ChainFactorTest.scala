@@ -13,9 +13,9 @@
 
 package com.cra.figaro.test.algorithm.factored.factors.factory
 
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.PrivateMethodTester
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.Values
 import com.cra.figaro.algorithm.factored.factors.{ SumProductSemiring, Semiring, Variable }
 import com.cra.figaro.algorithm.lazyfactored._
@@ -28,7 +28,7 @@ import com.cra.figaro.algorithm.factored.ParticleGenerator
 import com.cra.figaro.algorithm.lazyfactored.Extended
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
-class ChainFactorTest extends WordSpec with Matchers with PrivateMethodTester {
+class ChainFactorTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   def findIndex[T, U](range: List[List[Any]], select: T, chain: U): Int = {
     val i = range.indexWhere(p => p(0).asInstanceOf[Regular[T]].value == select && p(1).asInstanceOf[Regular[U]].value == chain)

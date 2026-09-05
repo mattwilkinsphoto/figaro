@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm.decision._
@@ -25,7 +25,7 @@ import com.cra.figaro.library.decision._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 
-class SingleDecisionTest extends WordSpec with Matchers {
+class SingleDecisionTest extends AnyWordSpec with Matchers {
   "A single decision network" should {
     "produce the correct decisions under variable elimination" taggedAs (Example) in {
       test((e1: List[Element[Double]], e2: Decision[Int, Boolean]) => DecisionVariableElimination(e1, e2))
@@ -68,7 +68,7 @@ class SingleDecisionTest extends WordSpec with Matchers {
     Found.getPolicy(0).value should equal(false)
     Found.getPolicy(1).value should equal(true)
     Found.getPolicy(2).value should equal(true)
-    alg.kill
+    alg.kill()
 
   }
 }

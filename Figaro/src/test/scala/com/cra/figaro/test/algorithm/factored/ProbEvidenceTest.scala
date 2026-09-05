@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.algorithm.factored
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous._
@@ -22,7 +22,7 @@ import com.cra.figaro.test._
 import com.cra.figaro.algorithm.factored.beliefpropagation.BeliefPropagation
 import com.cra.figaro.algorithm.factored.beliefpropagation.ProbEvidenceBeliefPropagation
 
-class ProbEvidenceTest extends WordSpec with Matchers {
+class ProbEvidenceTest extends AnyWordSpec with Matchers {
 
   "Computing probability of evidence" when {
     "given a vanilla model with one condition" should {
@@ -102,7 +102,7 @@ class ProbEvidenceTest extends WordSpec with Matchers {
 
   }
 
-  def sampleTest(prob: Double, evidence: List[NamedEvidence[_]], universe: Universe) {
+  def sampleTest(prob: Double, evidence: List[NamedEvidence[_]], universe: Universe): Unit = {
     
     //universe.assertEvidence(evidence)
     //val alg = BeliefPropagation(100, universe.activeElements.toList:_*)

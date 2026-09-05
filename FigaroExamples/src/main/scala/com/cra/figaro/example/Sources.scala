@@ -71,7 +71,7 @@ object Sources {
     ^^(firstSample.fromSource, secondSample.fromSource).addCondition((p: (Source, Source)) => p._1 != p._2)
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val evidence1 = NamedEvidence("distance", Condition((d: Double) => d > 0.5 && d < 0.6))
     val evidence2 = NamedEvidence("distance", Condition((d: Double) => d > 1.5 && d < 1.6))
     val evidence3 = NamedEvidence("distance", Condition((d: Double) => d > 2.5 && d < 2.6))

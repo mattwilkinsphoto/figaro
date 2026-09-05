@@ -19,8 +19,8 @@ import com.cra.figaro.library.atomic.discrete.Uniform
 import com.cra.figaro.library.compound.{^^, If}
 import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.library.compound.If
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
@@ -33,7 +33,7 @@ object HealthProcess extends Process[Double, Boolean] {
   def generate(times: List[Double]): Map[Double, Element[Boolean]] = {
     val sortedTimes = times.sorted
     val healthy = sortedTimes.map(time => (time, generate(time))).toMap
-    def makePairs(remaining: List[Double]) {
+    def makePairs(remaining: List[Double]): Unit = {
       if (remaining.length >= 2) {
         val time1 :: time2 :: rest = remaining
         val probChange = Apply(healthChangeRate, (d: Double) => 1 - math.exp(- (time2 - time1) / d))
@@ -49,7 +49,7 @@ object HealthProcess extends Process[Double, Boolean] {
 
   def rangeCheck(time: Double) = time >= 0
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val data = Map(0.1 -> true, 0.25 -> true, 0.3 -> false, 0.31 -> false, 0.34 -> false, 0.36 -> false, 0.4 -> true, 0.5 -> true, 0.55 -> true)
     val queries = List(0.35, 0.37, 0.45, 0.6)
     val targets = queries ::: data.keys.toList
@@ -72,7 +72,7 @@ object HealthProcess extends Process[Double, Boolean] {
   }
 }
 
-class HealthProcessTest extends WordSpec with Matchers {
+class HealthProcessTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Health Process" should {
     val healthyPrior = Uniform((BigDecimal("0.05") to BigDecimal("0.95") by BigDecimal("0.1")).map(_.toDouble):_*)

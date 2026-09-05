@@ -45,7 +45,7 @@ class BPSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: Set[
 
   override def initialize() = {
     if (factorGraph == null) generateGraph()
-    super.initialize
+    super.initialize()
   }
 
   def go(): (List[Factor[Double]], Map[Variable[_], Factor[_]]) = {
@@ -54,7 +54,7 @@ class BPSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: Set[
     val targetVars = toPreserve.toList ::: List(tupleVar)
     val tupleBelief = belief(FactorNode(toPreserve + tupleVar))
     val targetBelief = tupleBelief.sumOver(tupleVar)
-    val targetFactors = if (semiring.isLog()) {
+    val targetFactors = if (semiring.isLog) {
       List(normalize(targetBelief))
     } else {
       List(unmakeLogarithmic(normalize(targetBelief)))

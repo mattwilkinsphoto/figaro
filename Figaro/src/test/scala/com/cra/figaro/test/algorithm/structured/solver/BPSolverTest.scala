@@ -12,7 +12,8 @@
  */
 package com.cra.figaro.test.algorithm.structured.solver
 
-import org.scalatest.{ WordSpec, Matchers }
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.algorithm.factored.factors.Factor
@@ -23,7 +24,7 @@ import com.cra.figaro.algorithm.structured.strategy.solve._
 import com.cra.figaro.algorithm.structured._
 import com.cra.figaro.algorithm.structured.solver._
 
-class BPSolverTest extends WordSpec with Matchers {
+class BPSolverTest extends AnyWordSpec with Matchers {
 
   "Making a tuple factor for the BP solver" should {
     "create a factor whose variables are the targets plus a tuple variable" in {

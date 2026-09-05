@@ -17,7 +17,6 @@ import scala.annotation.tailrec
 import scala.collection.mutable.Map
 import com.cra.figaro.language._
 import com.cra.figaro.algorithm.lazyfactored.Extended
-import scala.reflect.runtime.universe._
 import scala.collection.mutable.WrappedArray
 import scala.reflect.ClassTag
 import scala.collection.mutable.ArraySeq
@@ -263,12 +262,12 @@ trait BasicFactor[T] extends Factor[T] {
         val maxValueLength = valueLengths.foldLeft(4)(_ max _)
         (maxValueLength max variable.id.toString.length) + 2 // add 2 for spaces
       }
-    val resultWidth = getContents.map(_.toString.length).foldLeft(4)(_ max _) + 2
-    def addBorderRow() {
+    val resultWidth = getContents().map(_.toString.length).foldLeft(4)(_ max _) + 2
+    def addBorderRow(): Unit = {
       for { width <- valueWidths } { result.append("|" + "-" * width) }
       result.append("|" + "-" * resultWidth + "|\n") //
     }
-    def addCentered(string: String, width: Int) {
+    def addCentered(string: String, width: Int): Unit = {
       val buffer = (width - string.length) / 2
       val bufferRemainder = (width - string.length) % 2
       result.append(" " * buffer + string + " " * (buffer + bufferRemainder))

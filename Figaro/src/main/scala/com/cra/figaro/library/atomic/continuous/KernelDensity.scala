@@ -30,7 +30,7 @@ class KernelDensity(name: Name[Double], val samples: Seq[Double], val bandwidth:
   type Randomness = (Int, normalElt.Randomness)
   
   /** Generates a random sample index and offset */
-  def generateRandomness:Randomness = {
+  def generateRandomness():Randomness = {
     val idx = com.cra.figaro.util.random.nextInt(samples.length)
     val rand = normalElt.generateRandomness()
     (idx, rand)

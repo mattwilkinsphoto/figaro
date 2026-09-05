@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.experimental.normalproposals
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import scala.math.exp
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.experimental.normalproposals._
@@ -26,7 +26,7 @@ import com.cra.figaro.ndtest._
 // Largely copied from ContinuousTest, but applied only to NormalProposer elements using MH. The idea is that if we
 // integrate the NormalProposer elements into the main library, then we can reuse the previous tests. Some additional
 // tests were added for multiple Beta parameters, since Beta only conditionally uses Normal proposals.
-class NormalProposerTest extends WordSpec with Matchers {
+class NormalProposerTest extends AnyWordSpec with Matchers {
 
   val alpha: Double = 0.05
 

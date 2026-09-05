@@ -11,8 +11,9 @@
  * See http://www.github.com/p2t2/figaro for a copy of the software license.
  */
 package com.cra.figaro.test.algorithm.learning
-import org.scalatest.Matchers
-import org.scalatest.{ PrivateMethodTester, WordSpec }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.PrivateMethodTester
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.online.Online
 import com.cra.figaro.algorithm.factored._
@@ -29,7 +30,7 @@ import scala.math.abs
 import java.io._
 import com.cra.figaro.test.tags.NonDeterministic
 
-class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
+class OnlineEMTest extends AnyWordSpec with PrivateMethodTester with Matchers {
   
     "Online expectation maximization with BP" when
     {
@@ -39,10 +40,10 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "detect bias after a large enough number of trials" in
             {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val b = Beta(2, 2)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val f = Flip(b)("f",next)
                 next
               }
@@ -58,17 +59,17 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.6666 +- 0.01)
 
             }
 
           "take the prior concentration parameters into account" in
             {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val b = Beta(3.0, 7.0)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val f = Flip(b)("f",next)
                 next
               }
@@ -81,15 +82,15 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
                 algorithm.update(List(NamedEvidence("f", Observation(false))))
               }
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.50 +- 0.01)
             }
 
           "learn the bias from observations of binomial elements" in {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val b = Beta(2, 2)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val f = Binomial(5,b)("binomial",next)
                 next
               }
@@ -98,15 +99,15 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
               algorithm.update(List(NamedEvidence("binomial", Observation(4))))
               algorithm.update(List(NamedEvidence("binomial", Observation(3))))
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.6666 +- 0.01)
           }
 
           "correctly use a uniform prior" in {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val b = Beta(1, 1)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val f = Binomial(5,b)("binomial",next)
                 next
               }
@@ -115,7 +116,7 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
               algorithm.update(List(NamedEvidence("binomial", Observation(4))))
               algorithm.update(List(NamedEvidence("binomial", Observation(3))))
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.7 +- 0.01)
           }
 
@@ -126,10 +127,10 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "detect bias after a large enough number of trials" in
             {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val d = Dirichlet(2, 2)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val s = Select(d, true, false)("s",next)
                 next
               }
@@ -142,17 +143,17 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
                 algorithm.update(List(NamedEvidence("s", Observation(false))))
               }
               val result = d.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.6666 +- 0.01)
 
             }
 
           "take the prior concentration parameters into account" in
             {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val d = Dirichlet(3, 7)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val s = Select(d, true, false)("s",next)
                 next
               }
@@ -165,7 +166,7 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
                 algorithm.update(List(NamedEvidence("s", Observation(false))))
               }
               val result = d.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.50 +- 0.01)
 
             }
@@ -177,13 +178,13 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
               "leave parameters having no observations unchanged" in
                 {
-                  val initial = Universe.createNew
+                  val initial = Universe.createNew()
                   val d = Dirichlet(2.0, 4.0, 2.0)
                   val b = Beta(2.0, 2.0)
                   val outcomes = List(1, 2, 3)
 
                   def transition = () => {
-                    val next = Universe.createNew
+                    val next = Universe.createNew()
                     val s = Select(d, outcomes:_*)("s",next)
                     next
                   }
@@ -211,18 +212,18 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
                   val betaResult = b.MAPValue
                   betaResult should be(0.5)
-                  algorithm.kill
+                  algorithm.kill()
                 }
 
               "correctly estimate all parameters with observations" in
                 {
-                  val initial = Universe.createNew
+                  val initial = Universe.createNew()
                   val d = Dirichlet(2.0, 3.0, 2.0)
                   val b = Beta(3.0, 7.0)
                   val outcomes = List(1, 2, 3)
                   
                   def transition = () => {
-                    val next = Universe.createNew
+                    val next = Universe.createNew()
                     val s = Select(d, outcomes:_*)("s",next)
                     val f = Flip(b)("f",next)
                     next
@@ -257,7 +258,7 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
                   val betaResult = b.MAPValue
                   betaResult should be(0.5 +- 0.01)
-                 algorithm.kill
+                 algorithm.kill()
                 }
             }
     }
@@ -270,10 +271,10 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "detect bias after a large enough number of trials" in
             {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val b = Beta(2, 2)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val f = Flip(b)("f",next)
                 next
               }
@@ -289,17 +290,17 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.6666 +- 0.01)
 
             }
 
           "take the prior concentration parameters into account" in
             {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val b = Beta(3.0, 7.0)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val f = Flip(b)("f",next)
                 next
               }
@@ -312,15 +313,15 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
                 algorithm.update(List(NamedEvidence("f", Observation(false))))
               }
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.50 +- 0.01)
             }
 
           "learn the bias from observations of binomial elements" in {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val b = Beta(2, 2)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val f = Binomial(5,b)("binomial",next)
                 next
               }
@@ -329,15 +330,15 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
               algorithm.update(List(NamedEvidence("binomial", Observation(4))))
               algorithm.update(List(NamedEvidence("binomial", Observation(3))))
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.6666 +- 0.01)
           }
 
           "correctly use a uniform prior" in {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val b = Beta(1, 1)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val f = Binomial(5,b)("binomial",next)
                 next
               }
@@ -346,7 +347,7 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
               algorithm.update(List(NamedEvidence("binomial", Observation(4))))
               algorithm.update(List(NamedEvidence("binomial", Observation(3))))
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.7 +- 0.01)
           }
 
@@ -357,10 +358,10 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "detect bias after a large enough number of trials" in
             {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val d = Dirichlet(2, 2)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val s = Select(d, true, false)("s",next)
                 next
               }
@@ -373,17 +374,17 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
                 algorithm.update(List(NamedEvidence("s", Observation(false))))
               }
               val result = d.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.6666 +- 0.01)
 
             }
 
           "take the prior concentration parameters into account" in
             {
-              val initial = Universe.createNew
+              val initial = Universe.createNew()
               val d = Dirichlet(3, 7)
               def transition = () => {
-                val next = Universe.createNew
+                val next = Universe.createNew()
                 val s = Select(d, true, false)("s",next)
                 next
               }
@@ -396,7 +397,7 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
                 algorithm.update(List(NamedEvidence("s", Observation(false))))
               }
               val result = d.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.50 +- 0.01)
 
             }
@@ -408,13 +409,13 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
               "leave parameters having no observations unchanged" in
                 {
-                  val initial = Universe.createNew
+                  val initial = Universe.createNew()
                   val d = Dirichlet(2.0, 4.0, 2.0)
                   val b = Beta(2.0, 2.0)
                   val outcomes = List(1, 2, 3)
 
                   def transition = () => {
-                    val next = Universe.createNew
+                    val next = Universe.createNew()
                     val s = Select(d, outcomes:_*)("s",next)
                     next
                   }
@@ -442,18 +443,18 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
                   val betaResult = b.MAPValue
                   betaResult should be(0.5)
-                  algorithm.kill
+                  algorithm.kill()
                 }
 
               "correctly estimate all parameters with observations" in
                 {
-                  val initial = Universe.createNew
+                  val initial = Universe.createNew()
                   val d = Dirichlet(2.0, 3.0, 2.0)
                   val b = Beta(3.0, 7.0)
                   val outcomes = List(1, 2, 3)
                   
                   def transition = () => {
-                    val next = Universe.createNew
+                    val next = Universe.createNew()
                     val s = Select(d, outcomes:_*)("s",next)
                     val f = Flip(b)("f",next)
                     next
@@ -488,7 +489,7 @@ class OnlineEMTest extends WordSpec with PrivateMethodTester with Matchers {
 
                   val betaResult = b.MAPValue
                   betaResult should be(0.5 +- 0.01)
-                 algorithm.kill
+                 algorithm.kill()
                 }
             }
     }

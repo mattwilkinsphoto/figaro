@@ -51,18 +51,18 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
   /** Elements in the universe that have had a condition applied to them. */
   def conditionedElements: List[Element[_]] = myConditionedElements.toList
 
-  private[language] def makeConditioned(elem: Element[_]) { myConditionedElements += elem }
+  private[language] def makeConditioned(elem: Element[_]): Unit = { myConditionedElements += elem }
 
-  private[language] def makeUnconditioned(elem: Element[_]) { myConditionedElements -= elem }
+  private[language] def makeUnconditioned(elem: Element[_]): Unit = { myConditionedElements -= elem }
 
   private[language] val myConstrainedElements: Set[Element[_]] = Set()
 
   /** Elements in the universe that have had a constraint applied to them. */
   def constrainedElements: List[Element[_]] = myConstrainedElements.toList
 
-  private[language] def makeConstrained(elem: Element[_]) { myConstrainedElements += elem }
+  private[language] def makeConstrained(elem: Element[_]): Unit = { myConstrainedElements += elem }
 
-  private[language] def makeUnconstrained(elem: Element[_]) { myConstrainedElements -= elem }
+  private[language] def makeUnconstrained(elem: Element[_]): Unit = { myConstrainedElements -= elem }
 
   private[language] val myStochasticElements = new HashSelectableSet[Element[_]]
 
@@ -158,8 +158,8 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
     if (used.universe == this && !(myUsedBy(used) contains user)) {
       myUses(user) += used
       myUsedBy(used) += user
-      myRecursiveUsedBy.clear
-      myRecursiveUses.clear
+      myRecursiveUsedBy.clear()
+      myRecursiveUses.clear()
     }
   }
 
@@ -167,8 +167,8 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
     if (used.universe == this) {
       if (myUses.contains(user)) myUses(user) -= used
       if (myUsedBy.contains(used)) myUsedBy(used) -= user
-      myRecursiveUsedBy.clear
-      myRecursiveUses.clear
+      myRecursiveUsedBy.clear()
+      myRecursiveUses.clear()
     }
   }
 
@@ -244,7 +244,7 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
    * of expanding a chain.
    */
   def clearTemporaries(): Unit = {
-    permanentElements foreach (_.clearContext)
+    permanentElements foreach (_.clearContext())
     myContextStack = List()
   }
 
@@ -317,7 +317,7 @@ class Universe(val parentElements: List[Element[_]] = List()) extends ElementCol
     }
   }
 
-  override def finalize = {
+  override def finalize() = {
     clear()
     super.finalize()
   }
@@ -372,7 +372,7 @@ object AssertEvidence {
    * Assert the given evidence associated with references to elements in the collection.
    */
   def apply(evidencePairs: Seq[NamedEvidence[_]]): Unit = {
-    for { NamedEvidence(reference, evidence, contingency) <- evidencePairs } Universe.universe.assertEvidence(reference, evidence, contingency)
+    for { case NamedEvidence(reference, evidence, contingency) <- evidencePairs } Universe.universe.assertEvidence(reference, evidence, contingency)
   }
 
   def apply[T](evidence: NamedEvidence[T]): Unit = {

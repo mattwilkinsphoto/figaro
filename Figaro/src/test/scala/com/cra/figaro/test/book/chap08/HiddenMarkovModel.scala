@@ -17,8 +17,8 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.Beta
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.algorithm.factored.VariableElimination
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 object HiddenMarkovModel {
@@ -33,7 +33,7 @@ object HiddenMarkovModel {
     ourPossession(minute) = If(confident(minute), Flip(0.7), Flip(0.3))
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println("Probability we are confident at time step 2")
     println("Prior probability: " + VariableElimination.probability(confident(2), true))
     ourPossession(2).observe(true)
@@ -49,7 +49,7 @@ object HiddenMarkovModel {
   }
 }
 
-class HiddenMarkovModelTest extends WordSpec with Matchers {
+class HiddenMarkovModelTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val prior = VariableElimination.probability(HiddenMarkovModel.confident(2), true)
   HiddenMarkovModel.ourPossession(2).observe(true)

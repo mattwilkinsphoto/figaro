@@ -105,7 +105,7 @@ object ProbEvidenceSampler {
     Thread.sleep(baselineWaitingTime)
     baseline.stop()
     val alg = baseline.probAdditionalEvidence(evidence)
-    baseline.kill
+    baseline.kill()
     alg
   }
   

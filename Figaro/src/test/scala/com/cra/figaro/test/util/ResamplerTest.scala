@@ -13,12 +13,12 @@
 
 package com.cra.figaro.test.util
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.util._
 import java.util.{ Map, TreeMap }
 
-class ResamplerTest extends WordSpec with Matchers {
+class ResamplerTest extends AnyWordSpec with Matchers {
   "A MapResampler's map" should {
     "contain as values all the samples and none other" in {
       val r = new MapResampler(List(0.5 -> 1, 0.25 -> 2, 0.5 -> 3))

@@ -35,14 +35,14 @@ object LazyList {
   }
 
   def generate(): Element[L] = {
-    Apply(Flip(0.5), (b: Boolean) => if (b) Empty; else Cons(Select(0.6 -> 'a, 0.4 -> 'b), generate()))
+    Apply(Flip(0.5), (b: Boolean) => if (b) Empty; else Cons(Select(0.6 -> Symbol("a"), 0.4 -> Symbol("b")), generate()))
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val el = generate()
-    val cb = contains('b, el)
-    val ca = contains('a, el)
+    val cb = contains(Symbol("b"), el)
+    val ca = contains(Symbol("a"), el)
     ca.observe(true)
     val alg = new LazyVariableElimination(cb)
 

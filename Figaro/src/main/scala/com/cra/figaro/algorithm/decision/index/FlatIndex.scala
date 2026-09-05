@@ -34,7 +34,7 @@ private[index] class FlatNode[T, U] extends Node[T, U](null, true) with LNode[T,
  *  @param stratMap A mapping from parent/decision values to observed utilities. This is output
  *  by a DecisionAlgorithm.
  */
-class FlatIndex[T <% Distance[T], U](stratMap: Map[(T, U), DecisionSample]) extends Index[T, U](stratMap) {
+class FlatIndex[T: DistanceConversion, U](stratMap: Map[(T, U), DecisionSample]) extends Index[T, U](stratMap) {
 
   private val db = toFlatNode(stratMap)
 
@@ -54,7 +54,7 @@ class FlatIndex[T <% Distance[T], U](stratMap: Map[(T, U), DecisionSample]) exte
 
   private def toFlatNode(strat: Map[(T, U), DecisionSample]): FlatNode[T, (U, DecisionSample)] = {
     val db = new FlatNode[T, (U, DecisionSample)]
-    strat.foreach(k => db.addObject(k._1._1, (k._1._2, k._2)))
+    strat.foreach(k => db.addObject(summon[DistanceConversion[T]](k._1._1), (k._1._2, k._2)))
     db
   }
 
@@ -65,7 +65,7 @@ object FlatIndex {
   /**
  * Create a flat index from a map of (parent, decision) -> Decision values.
  */
-  def apply[T <% Distance[T], U](strat: Map[(T, U), DecisionSample]) = {
+  def apply[T: DistanceConversion, U](strat: Map[(T, U), DecisionSample]) = {
     new FlatIndex(strat)
   }
 }

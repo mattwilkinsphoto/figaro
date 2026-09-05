@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.algorithm.filtering
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.filtering._
 import com.cra.figaro.language._
 import com.cra.figaro.language.Universe._
@@ -24,7 +24,7 @@ import scala.language.existentials
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 
-class ParParticleFilterTest extends WordSpec with Matchers {
+class ParParticleFilterTest extends AnyWordSpec with Matchers {
   
   val numThreads = 8
 

@@ -15,9 +15,10 @@ package com.cra.figaro.test.util
 
 import com.cra.figaro.util._
 import com.cra.figaro.util.LogStatistics.oneSidedTTest
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class LogStatisticsTest extends WordSpec with Matchers {
+class LogStatisticsTest extends AnyWordSpec with Matchers {
   // Used to test underflow/overflow
   val logOffset = 100000
 

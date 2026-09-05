@@ -12,12 +12,13 @@
  */
 package com.cra.figaro.test.algorithm.structured.algorithm.laziness
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language._
 import com.cra.figaro.algorithm.structured.algorithm.laziness.LazyStructuredVE
 import com.cra.figaro.library.compound.If
 
-class LazyStructuredVETest extends WordSpec with Matchers {
+class LazyStructuredVETest extends AnyWordSpec with Matchers {
   // Two-level chain model
   def twoLevelChain(): Element[Boolean] = {
     If(Flip(0.1), Flip(0.2), If(Flip(0.3), Flip(0.4), Flip(0.5)))

@@ -21,7 +21,7 @@ import com.cra.figaro.language._
 abstract class StructuredMPEAlgorithm(universe: Universe, collection: ComponentCollection)
   extends StructuredAlgorithm(universe, collection) with MPEAlgorithm {
 
-  def this(universe: Universe) {
+  def this(universe: Universe) = {
     this(universe, new ComponentCollection)
   }
 

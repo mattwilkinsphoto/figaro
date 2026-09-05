@@ -13,8 +13,9 @@
 
 package com.cra.figaro.test.algorithm.filtering
 
-import org.scalatest.Matchers
-import org.scalatest.{ WordSpec, PrivateMethodTester }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.PrivateMethodTester
 import com.cra.figaro.algorithm.filtering._
 import com.cra.figaro.language._
 import com.cra.figaro.language.Universe._
@@ -24,7 +25,7 @@ import scala.language.existentials
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 
-class ParticleFilterTest extends WordSpec with PrivateMethodTester with Matchers {
+class ParticleFilterTest extends AnyWordSpec with PrivateMethodTester with Matchers {
   "A snapshot" should {
     "contain the values of all named elements" in {
       val universe1 = Universe.createNew()

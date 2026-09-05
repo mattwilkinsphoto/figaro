@@ -26,12 +26,12 @@ class ColorGradient {
   
   buildGradientMap
   
-  def setGradient(gradient: String) {
+  def setGradient(gradient: String): Unit = {
     selectedGradient = gradient
   }
   
-  def buildGradientMap {
-    gradients += (ColorGradient.HEATMAP -> heatMap, 
+  def buildGradientMap: Unit = {
+    gradients ++= Map(ColorGradient.HEATMAP -> heatMap,
         ColorGradient.MONOCHROME -> monochromeMap, 
         ColorGradient.TWOCOLOR -> twoColorMap,
         ColorGradient.SINGLECOLOR -> singleColor

@@ -29,8 +29,8 @@ class GibbsSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: S
   extends BaseUnweightedSampler(null) with ProbabilisticGibbs with OneTime {
 
   def numSamples() = _numSamples
-  def burnIn() = _burnIn
-  def interval() = _interval 
+  def burnIn = _burnIn
+  def interval = _interval
   
   def initializeBlocks() = {
     factors = _factors.map(_.mapTo(math.log, semiring))
@@ -41,7 +41,7 @@ class GibbsSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: S
   }
 
   override def initialize() = {
-    super.initialize
+    super.initialize()
     if (blockSamplers == null) initializeBlocks()
     // Initialize the samples to a valid state and take the burn-in samples
     val initialSample = WalkSAT(factors, variables, semiring, chainMapper)
@@ -51,20 +51,20 @@ class GibbsSolver(problem: Problem, toEliminate: Set[Variable[_]], toPreserve: S
 
   def chainMapper(chain: Chain[_, _]): Set[Variable[_]] = problem.collection(chain).actualSubproblemVariables.values.toSet
 
-  def run = {}
+  def run() = {}
 
   def go(): List[Factor[Double]] = {
     initialize()
     val targetVars = toPreserve.toList
     val result = new SparseFactor[Double](targetVars, List())
-    for (_ <- 0 until numSamples) {
+    for (_ <- 0 until numSamples()) {
       for (_ <- 0 until interval) {
         sampleAllBlocks()
       }
       val factorIndex = targetVars.map(currentSamples(_))
       result.set(factorIndex, result.get(factorIndex) + 1)
     }
-    List(result.mapTo(_ / numSamples))
+    List(result.mapTo(_ / numSamples()))
   }
 
   val dependentUniverses = null

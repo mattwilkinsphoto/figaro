@@ -186,7 +186,7 @@ class ComponentCollection {
     }
   }
 
-  private[structured] def remove[T](element: Element[T]) {
+  private[structured] def remove[T](element: Element[T]): Unit = {
     components -= element
   }
 }

@@ -13,8 +13,9 @@
 
 package com.cra.figaro.test.algorithm.learning
 
-import org.scalatest.Matchers
-import org.scalatest.{ PrivateMethodTester, WordSpec }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.PrivateMethodTester
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.sampling._
@@ -30,7 +31,7 @@ import scala.math.abs
 import java.io._
 import com.cra.figaro.test.tags.NonDeterministic
 
-class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
+class EMWithMHTest extends AnyWordSpec with PrivateMethodTester with Matchers {
 
   def binomialConstraint(count: Int)(truth: Int, baseWeight: Double): Double = {
     if (count == truth) baseWeight
@@ -43,7 +44,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
     {
           "when provided a termination criteria based on sufficient statistics magnitudes" should {
         "exit before reaching the maximum iterations" in {
-            val universe = Universe.createNew
+            val universe = Universe.createNew()
             val b = Beta(2, 2)
             val terminationCriteria = EMTerminationCriteria.sufficientStatisticsMagnitude(0.05)
             for (i <- 1 to 7) {
@@ -59,10 +60,10 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
             }
 
             val algorithm = EMWithMH(terminationCriteria, 10000, b)(universe)
-            algorithm.start
+            algorithm.start()
 
             val result = b.MAPValue
-            algorithm.kill
+            algorithm.kill()
             result should be(0.6666 +- 0.01)
 
           }
@@ -74,7 +75,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "detect bias after a large enough number of trials" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Beta(2, 2)
 
               for (i <- 1 to 7) {
@@ -90,17 +91,17 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               }
 
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.6666 +- 0.01)
 
             }
 
           "take the prior concentration parameters into account" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Beta(3.0, 7.0)
 
               for (i <- 1 to 7) {
@@ -116,16 +117,16 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               }
 
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.50 +- 0.01)
 
             }
 
           "learn the bias from observations of binomial elements" in {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Beta(2, 2)
 
               val b1 = Binomial(7, b)
@@ -134,10 +135,10 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               b2.setConstraint((c: Int) => binomialConstraint(c)(1,1.0))
 
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.6666 +- 0.01)
 
             
@@ -145,7 +146,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
         }
 
           "correctly use a uniform prior" in {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Beta(1, 1)
 
               val b1 = Binomial(7, b)
@@ -154,10 +155,10 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               b2.setConstraint((c: Int) => binomialConstraint(c)(1,1.0))
 
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result should be(0.7 +- 0.01)
 
             
@@ -168,7 +169,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "detect bias after a large enough number of trials" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Dirichlet(2, 2)
 
               for (i <- 1 to 7) {
@@ -184,17 +185,17 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               }
 
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.6666 +- 0.01)
 
             }
 
           "take the prior concentration parameters into account" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
 
               val b = Dirichlet(3, 7)
 
@@ -211,10 +212,10 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               }
 
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.50 +- 0.01)
 
             }
@@ -226,16 +227,16 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "calculate sufficient statistics in the correct order for long lists of concentration parameters" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val alphas = Seq[Double](0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476, 0.0476)
               val d = Dirichlet(alphas: _*)
               val outcomes = List(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23)
               val outcome = Select(d, outcomes: _*)
               val algorithm = EMWithMH(2, 100000, d)
-              algorithm.start
+              algorithm.start()
 
               val result = d.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.04 +- 0.01)
               result(1) should be(0.04 +- 0.01)
               result(2) should be(0.04 +- 0.01)
@@ -263,7 +264,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "calculate sufficient statistics in the correct order for long lists of concentration parameters, taking into account a condition" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val alphas = Seq[Double](1.0476, 1.0476, 1.0476, 1.0476, 1.0476)
               val d = Dirichlet(alphas: _*)
               val outcomes = List(2, 3, 4, 5, 6)
@@ -274,9 +275,9 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               }
 
               val algorithm = EMWithMH(2, 100000, d)
-              algorithm.start
+              algorithm.start()
               val result = d.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.0 +- 0.01)
               result(1) should be(0.25 +- 0.01)
               result(2) should be(0.25 +- 0.01)
@@ -286,7 +287,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "detect bias after a large enough number of trials" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Dirichlet(2, 2, 2)
               val outcomes = List(1, 2, 3)
               val errorTolerance = 0.01
@@ -309,10 +310,10 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               }
 
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
 
               //9/19
               result(0) should be(0.47 +- errorTolerance)
@@ -325,7 +326,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "take the prior concentration parameters into account" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Dirichlet(2.0, 3.0, 2.0)
               val outcomes = List(1, 2, 3)
 
@@ -347,10 +348,10 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               }
 
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.33 +- 0.01)
               result(1) should be(0.33 +- 0.01)
               result(2) should be(0.33 +- 0.01)
@@ -359,7 +360,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
           "correctly use a uniform prior" in 
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Dirichlet(1.0, 1.0, 1.0)
               val outcomes = List(1, 2, 3)
 
@@ -381,10 +382,10 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
               }
         
               val algorithm = EMWithMH(2, 100000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.33 +- 0.01)
               result(1) should be(0.33 +- 0.01)
               result(2) should be(0.33 +- 0.01)
@@ -397,7 +398,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
               "leave parameters having no observations unchanged" in
                 {
-                  val universe = Universe.createNew
+                  val universe = Universe.createNew()
                   val d = Dirichlet(2.0, 4.0, 2.0)
                   val b = Beta(2.0, 2.0)
                   val outcomes = List(1, 2, 3)
@@ -420,10 +421,10 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
                   }
 
                   val algorithm = EMWithMH(2, 100000, d, b)(universe)
-                  algorithm.start
+                  algorithm.start()
 
                   val result = d.MAPValue
-                  algorithm.kill
+                  algorithm.kill()
                   result(0) should be(0.33 +- 0.01)
                   result(1) should be(0.33 +- 0.01)
                   result(2) should be(0.33 +- 0.01)
@@ -435,7 +436,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
 
               "correctly estimate all parameters with observations" in
                 {
-                  val universe = Universe.createNew
+                  val universe = Universe.createNew()
                   val d = Dirichlet(2.0, 3.0, 2.0)
                   val b = Beta(3.0, 7.0)
                   val outcomes = List(1, 2, 3)
@@ -470,7 +471,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
                   }
 
                   val algorithm = EMWithMH(2, 100000, b,d)(universe)
-                  algorithm.start
+                  algorithm.start()
 
                   val result = d.MAPValue
 
@@ -527,15 +528,15 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
       }
 
       class LearnableParameters(universe: Universe) extends Parameters(universe) {
-        val b1 = Beta(1, 1)("b1", universe)
-        val b2 = Beta(1, 1)("b2", universe)
-        val b3 = Beta(1, 1)("b3", universe)
-        val b4 = Beta(1, 1)("b4", universe)
-        val b5 = Beta(1, 1)("b5", universe)
-        val b6 = Beta(1, 1)("b6", universe)
-        val b7 = Beta(1, 1)("b7", universe)
-        val b8 = Beta(1, 1)("b8", universe)
-        val b9 = Beta(1, 1)("b9", universe)
+        val b1: AtomicBeta = Beta(1, 1)("b1", universe)
+        val b2: AtomicBeta = Beta(1, 1)("b2", universe)
+        val b3: AtomicBeta = Beta(1, 1)("b3", universe)
+        val b4: AtomicBeta = Beta(1, 1)("b4", universe)
+        val b5: AtomicBeta = Beta(1, 1)("b5", universe)
+        val b6: AtomicBeta = Beta(1, 1)("b6", universe)
+        val b7: AtomicBeta = Beta(1, 1)("b7", universe)
+        val b8: AtomicBeta = Beta(1, 1)("b8", universe)
+        val b9: AtomicBeta = Beta(1, 1)("b9", universe)
       }
 
       var id = 0
@@ -577,7 +578,7 @@ class EMWithMHTest extends WordSpec with PrivateMethodTester with Matchers {
         Datum(model.x.value, model.y.value, model.z.value, model.w.value)
       }
 
-      def observe(model: Model, datum: Datum) {
+      def observe(model: Model, datum: Datum): Unit = {
         if (random.nextDouble() < observationProbability) model.x.observe(datum.x)
         if (random.nextDouble() < observationProbability) model.y.observe(datum.y)
         if (random.nextDouble() < observationProbability) model.z.observe(datum.z)

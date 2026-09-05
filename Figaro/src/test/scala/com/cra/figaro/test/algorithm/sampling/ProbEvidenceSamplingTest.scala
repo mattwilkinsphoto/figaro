@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.algorithm.sampling
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous._
@@ -25,7 +25,7 @@ import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 import com.cra.figaro.ndtest._
 
-class ProbEvidenceSamplingTest extends WordSpec with Matchers {
+class ProbEvidenceSamplingTest extends AnyWordSpec with Matchers {
   
   val alpha: Double = 0.05
 
@@ -492,9 +492,9 @@ class ProbEvidenceSamplingTest extends WordSpec with Matchers {
       Universe.createNew()
       val c = NonCachingChain(Uniform(0.2, 1.0), (d: Double) => Flip(d))
       val alg = ProbEvidenceSampler(1000000, List())
-      alg.start
-      alg.stop
-      alg.kill
+      alg.start()
+      alg.stop()
+      alg.kill()
     }
   }
 
@@ -504,10 +504,10 @@ class ProbEvidenceSamplingTest extends WordSpec with Matchers {
 
   def logProbabilitySampleTest(logProb: Double, evidence: List[NamedEvidence[_]]): Double = {
     val alg = ProbEvidenceSampler(60000, evidence)
-    alg.start
+    alg.start()
     val result = alg.logProbEvidence
-    alg.stop
-    alg.kill
+    alg.stop()
+    alg.kill()
     result
   }
 }

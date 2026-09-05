@@ -25,7 +25,6 @@ import com.cra.figaro.library.collection._
 import com.cra.figaro.library.atomic.discrete._
 import scala.collection.mutable.HashMap
 import com.cra.figaro.algorithm.factored.factors._
-import scala.reflect.runtime.universe.{typeTag, TypeTag}
 
 
 
@@ -37,7 +36,7 @@ object Factory {
   /**
    * The mutliplicative identity factor.
    */
-  def unit[T: TypeTag](semiring: Semiring[T]): Factor[T] = {
+  def unit[T](semiring: Semiring[T]): Factor[T] = {
     val result = new DenseFactor[T](List(), List(), semiring)
     result.set(List(), semiring.one)
     result
@@ -46,7 +45,7 @@ object Factory {
   /**
    * Create a DenseFactor from the supplied parent and children variables
    */
-  def defaultFactor[T: TypeTag](parents: List[Variable[_]], children: List[Variable[_]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]]) = 
+  def defaultFactor[T](parents: List[Variable[_]], children: List[Variable[_]], _semiring: Semiring[T] = SumProductSemiring().asInstanceOf[Semiring[T]]) =
       new DenseFactor[T](parents, children, _semiring)
 
   private def makeFactors[T](const: Constant[T]): List[Factor[Double]] = {
@@ -148,8 +147,8 @@ object Factory {
    * been decomposed into many dependent Factors and a single Factor is required.
    */
   def combineFactors(oldFactors: List[Factor[Double]], semiring: Semiring[Double], removeTemporaries: Boolean): List[Factor[Double]] = {
-    newFactors.clear
-    tempFactors.clear
+    newFactors.clear()
+    tempFactors.clear()
 
     for (factor <- oldFactors) {
       if (factor.hasStar) {
@@ -198,7 +197,7 @@ object Factory {
   val nextFactors = ListBuffer[Factor[Double]]()
 
   private def reduceFactor(factor: Factor[Double], semiring: Semiring[Double], maxElementCount: Int): List[Factor[Double]] = {
-    variableSet.clear
+    variableSet.clear()
 
     var resultFactor = unit[Double](semiring).product(factor)
 
@@ -214,7 +213,7 @@ object Factory {
 
     for { variable <- variableSet } {
       if (isTemporary(variable) && elementCount <= maxElementCount) {
-        nextFactors.clear
+        nextFactors.clear()
         nextFactors ++= concreteFactors(variable.asInstanceOf[ElementVariable[_]].element)
         (variableSet /: nextFactors)(_ ++= _.variables.asInstanceOf[List[ElementVariable[_]]])
         elementCount = variableSet count (v => !isTemporary(v))
@@ -457,7 +456,7 @@ object Factory {
   /**
    * Creates a DenseFactor from the supplied variables
    */
-  def simpleMake[T: TypeTag](variables: List[Variable[_]]) =
+  def simpleMake[T](variables: List[Variable[_]]) =
     new DenseFactor[T](variables, List())
 
   /**
@@ -465,17 +464,17 @@ object Factory {
    * are regenerated. This is important, for example,  if evidence on the variable has changed.
    *
    */
-  def removeFactors(elem: Element[_]) { factorCache -= elem }
+  def removeFactors(elem: Element[_]): Unit = { factorCache -= elem }
 
   /**
    * Clear the factor cache.
    */
-  def removeFactors() { factorCache.clear }
+  def removeFactors(): Unit = { factorCache.clear() }
 
   /**
    * Update the factor cache.
    */
-  def updateFactor[T](elem: Element[_], f: List[Factor[Double]]) { factorCache.update(elem, f) }
+  def updateFactor[T](elem: Element[_], f: List[Factor[Double]]): Unit = { factorCache.update(elem, f) }
 
   /**
    * Create the probabilistic factor encoding the probability of evidence in the dependent universe as a function of the

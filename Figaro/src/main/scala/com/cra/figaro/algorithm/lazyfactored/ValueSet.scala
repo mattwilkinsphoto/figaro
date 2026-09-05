@@ -69,7 +69,7 @@ class ValueSet[T](val xvalues: Set[Extended[T]]) {
     def xf(x: Extended[T]): Extended[U] = {
       x match {
         case Regular(t) => Regular(f(t))
-        case _ => Star[U]
+        case _ => Star[U]()
       }
     }
     new ValueSet(xvalues.map(xf(_)))
@@ -86,7 +86,7 @@ object ValueSet {
   
   def withStar[T](values: Set[T]) = {
     val xs: Set[Extended[T]] = values.map(Regular(_))
-    new ValueSet(xs + Star[T])
+    new ValueSet(xs + Star[T]())
   }
 }
 

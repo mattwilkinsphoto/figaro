@@ -19,13 +19,13 @@ import com.cra.figaro.library.collection.VariableSizeArray
 import com.cra.figaro.algorithm.sampling.Importance
 import com.cra.figaro.language.Universe
 import com.cra.figaro.language.Flip
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object NewProducts {
-  def runExperiment(rNDLevel: Double) {
+  def runExperiment(rNDLevel: Double): Unit = {
     Universe.createNew()
     val numNewProducts = Geometric(rNDLevel)
     val productQuality = VariableSizeArray(numNewProducts, i => Beta(1, i + 1))
@@ -40,7 +40,7 @@ object NewProducts {
     algorithm.kill()
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     var i : Double = 0.0
     for { i <- BigDecimal("0.05") to BigDecimal("1.0") by BigDecimal("0.1") } {
       println(i)
@@ -49,8 +49,8 @@ object NewProducts {
   }
 }
 
-class NewProductsTest extends WordSpec with Matchers {
-  def testFunc {
+class NewProductsTest extends AnyWordSpec with Matchers {
+  def testFunc: Unit = {
     for { i <- BigDecimal("0.05") to BigDecimal("1.0") by BigDecimal("0.1") } {
       NewProducts.runExperiment(i.toDouble)
     }    

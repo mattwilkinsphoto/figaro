@@ -68,7 +68,7 @@ class AtomicBeta(name: Name[Double], a: Double, b: Double, collection: ElementCo
   /**
    * Returns an empty sufficient statistics vector.
    */
-  override def zeroSufficientStatistics(): Seq[Double] = {
+  override def zeroSufficientStatistics: Seq[Double] = {
     Seq(0.0, 0.0)
   }
 
@@ -108,7 +108,7 @@ class AtomicBeta(name: Name[Double], a: Double, b: Double, collection: ElementCo
 
   def makeValues(depth: Int) = ValueSet.withoutStar(Set(MAPValue))
 
-  def maximize(sufficientStatistics: Seq[Double]) {
+  def maximize(sufficientStatistics: Seq[Double]): Unit = {
     require(sufficientStatistics.size == 2)
     learnedAlpha = sufficientStatistics(0) + a
     learnedBeta = sufficientStatistics(1) + b

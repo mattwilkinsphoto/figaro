@@ -31,7 +31,7 @@ class Inject[T](name: Name[List[T]], val xs: Seq[Element[T]], collection: Elemen
   def args = xs.toList
 
   def generateValue() = {
-    xs foreach (x => if (x.value == null) x.generate())
+    xs foreach (x => if (!x.hasValue) x.generate())
     (xs map (_.value)).toList
   }
 

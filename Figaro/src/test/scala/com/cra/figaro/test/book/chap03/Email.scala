@@ -16,8 +16,8 @@ package com.cra.figaro.test.book.chap03
 import com.cra.figaro.language.Universe
 import java.io.File
 import scala.io.Source
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 class Email(file: File) {
@@ -44,7 +44,7 @@ class Email(file: File) {
 
   val allWords: Set[String] = getAllWords()
 
-  def observeEvidence(model: Model, label: Option[Boolean], learning: Boolean) {
+  def observeEvidence(model: Model, label: Option[Boolean], learning: Boolean): Unit = {
     label match {
       case Some(b) => model.isSpam.observe(b)
       case None => ()
@@ -64,13 +64,13 @@ class Email(file: File) {
 }
 
 object Email {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val email = new Email(new File("src/test/resources/BookData/Test/TestEmail_9.txt"))
     println(email.allWords)
   }
 }
 
-class EmailTest extends WordSpec with Matchers {
+class EmailTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val email = new Email(new File("src/test/resources/BookData/Test/TestEmail_9.txt"))
 

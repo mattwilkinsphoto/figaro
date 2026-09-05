@@ -66,5 +66,5 @@ object Name {
   /**
    * Implicitly convert a name to a string.
    */
-  implicit def nameToString[T](m: Name[T]) = m.string
+  implicit def nameToString[T](m: Name[T]): String = m.string
 }

@@ -19,10 +19,10 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics
 class BooleanResult(val name: String, val target: Boolean, val alpha: Double = .90) extends NDTestResult {
   val statistics = BooleanStatistics(target)
 
-  def update(value: Any) {
+  def update(value: Any): Unit = {
     value match {
       case x: Boolean => statistics.addValue(x)
-      case _ => println(value + " improper value for t-test")
+      case _ => println(String.valueOf(value) + " improper value for t-test")
     }
   }
 
@@ -43,7 +43,7 @@ class BooleanResult(val name: String, val target: Boolean, val alpha: Double = .
     var hits = 0
     var count = 0
 
-    def addValue(value: Boolean) {
+    def addValue(value: Boolean): Unit = {
       count += 1
       if (target == value) hits += 1
     }

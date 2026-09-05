@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.algorithm.lazyfactored
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 import com.cra.figaro.algorithm.lazyfactored.LazyValues
 import com.cra.figaro.algorithm.lazyfactored.Regular
@@ -35,7 +35,7 @@ import com.cra.figaro.library.atomic.discrete
 /*
  * The tests for unbounded depth values computation are in com.cra.figaro.test.algorithm.ValuesTest.
  */
-class LazyValuesTest extends WordSpec with Matchers {
+class LazyValuesTest extends AnyWordSpec with Matchers {
   "Calling values()" should {
     
     // This should be changed to a non-atomic element, since we now automatically sample atomic elements

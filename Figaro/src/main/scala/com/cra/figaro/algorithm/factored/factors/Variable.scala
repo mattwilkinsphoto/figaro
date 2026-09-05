@@ -181,7 +181,7 @@ object Variable {
   /**
    * Clear the variable cache
    */
-  def clearCache() { 
+  def clearCache(): Unit = {
     cc.components.foreach{c => c._1.universe.deregister(cc.components)}
     cc = new ComponentCollection
     problem = new Problem(cc, List())

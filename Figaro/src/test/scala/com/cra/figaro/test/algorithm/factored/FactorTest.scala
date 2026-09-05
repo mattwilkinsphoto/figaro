@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.algorithm.factored
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.Values
 import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.algorithm.lazyfactored.LazyValues
@@ -31,7 +31,7 @@ import com.cra.figaro.algorithm.factored.VariableElimination
 import scala.collection.mutable.ListBuffer
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
-class FactorTest extends WordSpec with Matchers {
+class FactorTest extends AnyWordSpec with Matchers {
 
   "A variable for an element" should {
     "have range equal to the element's values" in {
@@ -57,7 +57,7 @@ class FactorTest extends WordSpec with Matchers {
       val e1 = Flip(0.2)
       Values()(e1)
       val v1 = Variable(e1).id
-      Variable.clearCache
+      Variable.clearCache()
       LazyValues.clear(Universe.universe)
       Values()(e1)
       val v2 = Variable(e1).id
@@ -185,7 +185,7 @@ class FactorTest extends WordSpec with Matchers {
       val e2 = Constant(8)
       val e3 = Select(0.2 -> "a", 0.3 -> "b", 0.5 -> "c")
       val e4 = Flip(0.7)
-      val e5 = Constant('a)
+      val e5 = Constant(Symbol("a"))
       val e6 = Select(0.1 -> 1.5, 0.9 -> 2.5)
       Values()(e1)
       Values()(e2)
@@ -1201,8 +1201,8 @@ class FactorTest extends WordSpec with Matchers {
         factor.get(List(y3, xFalse)) should be(0.25 +- 0.01)
         factor.get(List(y1, xTrue)) should be(0.5 +- 0.01)
         factor.get(List(y1, xFalse)) should be(0.5 +- 0.01)
-        factor.get(List(y2, xFalse)) should be(0.5 +- 0.01)
-        factor.get(List(y3, xFalse)) should be(0.5 +- 0.01)
+        factor.get(List(y2, xTrue)) should be(0.5 +- 0.01)
+        factor.get(List(y3, xTrue)) should be(0.5 +- 0.01)
       }
     }
   }
@@ -1216,7 +1216,7 @@ class FactorTest extends WordSpec with Matchers {
 
         Universe.createNew()
         val v1u2 = Select(0.3 -> 0, 0.5 -> 1, 0.2 -> 3)
-        Universe.createNew
+        Universe.createNew()
         val v2u3 = Apply(v1u1, (i: Int) => i % 3)
 
         (Variable(v1u1).range) should equal(Variable(v1u2).range)
@@ -1352,8 +1352,8 @@ class FactorTest extends WordSpec with Matchers {
    * been decomposed into many dependent Factors and a single Factor is required.
    */
   def combineFactors(oldFactors: List[Factor[Double]], semiring: Semiring[Double], removeTemporaries: Boolean): List[Factor[Double]] = {
-    newFactors.clear
-    tempFactors.clear
+    newFactors.clear()
+    tempFactors.clear()
 
     for (factor <- oldFactors) {
       if (factor.hasStar) {
@@ -1402,7 +1402,7 @@ class FactorTest extends WordSpec with Matchers {
   val nextFactors = ListBuffer[Factor[Double]]()
 
   private def reduceFactor(factor: Factor[Double], semiring: Semiring[Double], maxElementCount: Int): List[Factor[Double]] = {
-    variableSet.clear
+    variableSet.clear()
 
     var resultFactor = Factory.unit[Double](semiring).product(factor)
 
@@ -1418,7 +1418,7 @@ class FactorTest extends WordSpec with Matchers {
 
     for { variable <- variableSet } {
       if (isTemporary(variable) && elementCount <= maxElementCount) {
-        nextFactors.clear
+        nextFactors.clear()
         nextFactors ++= Factory.concreteFactors(Variable.cc, variable.asInstanceOf[ElementVariable[_]].element, false)
         (variableSet /: nextFactors)(_ ++= _.variables.asInstanceOf[List[ElementVariable[_]]])
         elementCount = variableSet count (v => !isTemporary(v))

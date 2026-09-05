@@ -21,9 +21,10 @@ import com.cra.figaro.language.Element.toBooleanElement
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.discrete.Uniform
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class FlatTest extends WordSpec with Matchers {
+class FlatTest extends AnyWordSpec with Matchers {
   "Executing a flat strategy" when {
     
     "expanding the model" should {
@@ -187,7 +188,7 @@ class FlatTest extends WordSpec with Matchers {
         val e1 = Apply(Constant(1), (i: Int) => { count += 1; 5 })
         val e2 = Flip(0.5)
         val alg = FlatVE(e2)
-        alg.start
+        alg.start()
         alg.probability(e2, true) should equal (0.5)
         alg.problem.collection(e1).nonConstraintFactors().isEmpty should be (true)
         //count should equal (0)

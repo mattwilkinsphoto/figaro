@@ -13,8 +13,9 @@
 
 package com.cra.figaro.test.algorithm.factored
 
-import org.scalatest.Matchers
-import org.scalatest.{ WordSpec, PrivateMethodTester }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.PrivateMethodTester
 import math.log
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
@@ -29,7 +30,7 @@ import scala.collection.mutable.Map
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 
-class FactoredAlgorithmTest extends WordSpec with Matchers {
+class FactoredAlgorithmTest extends AnyWordSpec with Matchers {
   "A Factored Algorithm" when {
     "getting needed elements" should {
       "return factors originating from the targets and evidence" in {

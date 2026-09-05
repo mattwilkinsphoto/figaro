@@ -23,7 +23,7 @@ import com.cra.figaro.algorithm.structured.solver.Solution
 abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: ComponentCollection, val queryTargets: Element[_]*)
   extends StructuredAlgorithm(universe, collection) with ProbQueryAlgorithm {
 
-  def this(universe: Universe, queryTargets: Element[_]*) {
+  def this(universe: Universe, queryTargets: Element[_]*) = {
     this(universe, new ComponentCollection, queryTargets:_*)
   }
 
@@ -86,7 +86,7 @@ abstract class StructuredProbQueryAlgorithm(universe: Universe, collection: Comp
     val dist = targetFactor.getIndices.map(f => (targetFactor.get(f), targetFactor.convertIndicesToValues(f))).toList
     (components, dist)
   }
-  
+
   private def nameComponents(targets: Seq[Element[_]], factor: Factor[_]): List[(String, ProblemComponent[_])] = {
     val targetVars: Seq[(String, ProblemComponent[_])] = targets.map(t => (t.name.string, collection(t)))
     val variables = factor.variables

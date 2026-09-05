@@ -15,7 +15,7 @@ package com.cra.figaro.ndtest
 
 trait NDTestResult  {
   def name : String
-  def update(value: Any)
+  def update(value: Any): Unit
   def check: Boolean
   def errorMessage: String
 }

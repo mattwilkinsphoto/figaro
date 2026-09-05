@@ -13,11 +13,11 @@
 
 package com.cra.figaro.test.util
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.util._
 
-class MultiSetTest extends WordSpec with Matchers {
+class MultiSetTest extends AnyWordSpec with Matchers {
   "A hashing multiset" should {
     "contain an element the correct number of times after multiple addOnes" in {
       val ms = HashMultiSet[Int]()
@@ -79,7 +79,7 @@ class MultiSetTest extends WordSpec with Matchers {
       ms.addMany(5, 2)
       ms.addMany(6, 1)
       var x = 0
-      def f(i: Int) { x += i }
+      def f(i: Int): Unit = { x += i }
       ms.foreach(f)
       x should equal(16)
     }

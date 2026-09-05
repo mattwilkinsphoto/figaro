@@ -24,8 +24,8 @@ import com.cra.figaro.library.atomic.continuous.Normal
 import com.cra.figaro.library.atomic.discrete.{FromRange, Poisson}
 import com.cra.figaro.library.compound.{If, ^^}
 import com.cra.figaro.algorithm.sampling.Importance
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
@@ -64,7 +64,7 @@ object Restaurant {
     waiting(step) = newState._2
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val alg = Importance(10000, waiting(numSteps - 1))
     alg.start()
     println(alg.probability(waiting(numSteps - 1))(_ > 4))
@@ -72,7 +72,7 @@ object Restaurant {
   }
 }
 
-class RestaurantTest extends WordSpec with Matchers {
+class RestaurantTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Restaurant" should {
     "produce a probability = 0.465 +- 0.01" taggedAs (BookExample, NonDeterministic) in {

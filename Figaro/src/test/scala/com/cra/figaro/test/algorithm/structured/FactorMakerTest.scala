@@ -12,7 +12,8 @@
  */
 package com.cra.figaro.test.algorithm.structured
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language._
 import com.cra.figaro.algorithm.structured._
 import com.cra.figaro.algorithm.structured.strategy.solve._
@@ -34,7 +35,7 @@ import com.cra.figaro.algorithm.factored.factors.factory.Factory.{makeConditiona
 import com.cra.figaro.algorithm.structured.algorithm.structured.StructuredVE
 import com.cra.figaro.algorithm.structured.strategy.range._
 
-class FactorMakerTest extends WordSpec with Matchers {
+class FactorMakerTest extends AnyWordSpec with Matchers {
   "Making a tuple variable and factor for a set of variables" should {
     "create a factor whose variables are the targets plus a tuple variable" in {
       Universe.createNew()

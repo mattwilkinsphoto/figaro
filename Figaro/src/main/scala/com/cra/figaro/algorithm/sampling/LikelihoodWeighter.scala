@@ -24,10 +24,10 @@ import scala.collection.mutable.Set
  *  observations. To avoid this, we keep track of all these dependencies.
  *  The dependencies map contains all the elements that could propagate an
  *  observation to any given element.
- *  To avoid calling values on Chains, we dynamically build the list of dependencies. 
+ *  To avoid calling values on Chains, we dynamically build the list of dependencies.
  *  If we encounter the result element of a chain before it's parent, we redo the sampling
- *  on the result and undo any weight associated with that element. 
- *   
+ *  on the result and undo any weight associated with that element.
+ *
  */
 
 /**
@@ -43,12 +43,12 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
    * Clear the cache
    */
   def clearCache() = {
-    cache.clear
+    cache.clear()
   }
 
-  /** 
+  /**
    * Deregister the map of dependencies between elements
-   */  
+   */
    def deregisterDependencies() = {
     universe.deregister(dependencies)
   }
@@ -164,7 +164,7 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
     }
   }
 
-  
+
   /*
    * Finds the set of elements that need to be resampled when the likelihood weighting went in the wrong order
    */
@@ -194,9 +194,9 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
    * Compute the current weight of the model by incorporating the weight of the current sampled element
    * If there is no observation on the element, the weight is the current weight plus the constraint on the element.
    * If there is a condition on the element (not an observation), then we throw a rejection if the condition is not met.
-   * 
+   *
    * If there is an observation on the element, we implement likelihood weighting. If the element has a density
-   * function, we add the log density to the current weight. If it doesn't have a density, we check to see if 
+   * function, we add the log density to the current weight. If it doesn't have a density, we check to see if
    * it satisfies the observation
    */
   private[figaro] def computeNextWeight(currentWeight: Double, element: Element[_], obs: Option[_]): Double = {
@@ -224,12 +224,12 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
     nextWeight + element.constraint(element.value)
   }
 
-  protected def setObservation(element: Element[_], obs: Option[_]) = element.value = obs.get.asInstanceOf[element.Value]  
-  
+  protected def setObservation(element: Element[_], obs: Option[_]) = element.value = obs.get.asInstanceOf[element.Value]
+
   /* Action to take on a rejection. By default it throws an Importance.Reject exception, but this can be overriden for another behavior */
   protected def rejectionAction(): Unit = throw Importance.Reject
 
-  /*  
+  /*
    * Undo the application of this elements weight if we did likelihood weighting in the wrong order
    */
   private def undoWeight(weight: Double, elem: Element[_]) = weight - computeNextWeight(0.0, elem, elem.observation)

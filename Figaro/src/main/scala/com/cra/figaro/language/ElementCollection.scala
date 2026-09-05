@@ -58,12 +58,12 @@ trait ElementCollection {
   /**
    * Add an element to the element collection.
    */
-  def add[T](element: Element[T]) {
+  def add[T](element: Element[T]): Unit = {
     if (element.name.string != "") {
       val current = myElementMap.getOrElse(element.name, List())
       myElementMap += element.name -> (element :: current)
       // We need to propagate previously created evidence into the new element
-      for { RefEv(reference, evidence, contingency) <- collectedEvidence.values } {
+      for { case RefEv(reference, evidence, contingency) <- collectedEvidence.values } {
         reference match {
           case Name(first) =>
             if (element.name.string == first) evidence.asInstanceOf[Evidence[T]].set(element, contingency)
@@ -84,7 +84,7 @@ trait ElementCollection {
   /**
    * Remove an element from the element collection.
    */
-  def remove[T](element: Element[T]) {
+  def remove[T](element: Element[T]): Unit = {
     if (element.name.string != "") {
       val current = myElementMap.getOrElse(element.name, List())
       myElementMap += element.name -> (current.filterNot(_ == element))
@@ -95,7 +95,7 @@ trait ElementCollection {
    * Assert the given evidence associated with references to elements in the collection.
    */
   def assertEvidence(evidencePairs: Seq[NamedEvidence[_]]): Unit =
-    for { NamedEvidence(reference, evidence, contingency) <- evidencePairs } assertEvidence(reference, evidence, contingency)
+    for { case NamedEvidence(reference, evidence, contingency) <- evidencePairs } assertEvidence(reference, evidence, contingency)
 
   /**
    *   Assert the given evidence on the given reference. The third argument is an optional contingency.

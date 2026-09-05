@@ -32,7 +32,7 @@ object Firms {
   private val winningBid = Chain(winner, (f: Firm) => f.bid)
   winningBid.setConstraint((d: Double) => 20 - d)
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val winningEfficiency = Chain(winner, (f: Firm) => f.efficient)
     val alg = Importance(winningEfficiency)
     alg.start()

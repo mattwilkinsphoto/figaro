@@ -27,7 +27,7 @@ import com.cra.figaro.language._
 abstract class StructuredMarginalMAPAlgorithm(universe: Universe, collection: ComponentCollection, val mapElements: Element[_]*)
   extends StructuredAlgorithm(universe, collection) with MarginalMAPAlgorithm {
 
-  def this(universe: Universe, mapElements: Element[_]*) {
+  def this(universe: Universe, mapElements: Element[_]*) = {
     this(universe, new ComponentCollection, mapElements:_*)
   }
 

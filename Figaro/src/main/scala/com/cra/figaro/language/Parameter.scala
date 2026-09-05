@@ -29,7 +29,7 @@ abstract trait Parameter[T] extends Atomic[T] {
   /**
    * Sets the hyperparameters of this parameter to their most likely value based on the sufficient statistics provided.
    */
-  def maximize(sufficientStatistics: Seq[Double])
+  def maximize(sufficientStatistics: Seq[Double]): Unit
   /**
    * Returns a zero vector of sufficient statistics.
    */

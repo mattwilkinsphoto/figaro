@@ -10,9 +10,10 @@ package com.cra.figaro.test.modernization
 import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.language.{Flip, Select, Universe}
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class ProbabilityRegressionTest extends WordSpec with Matchers {
+class ProbabilityRegressionTest extends AnyWordSpec with Matchers {
   private val tolerance = 1e-12
 
   "The modernized Java 17 build" should {

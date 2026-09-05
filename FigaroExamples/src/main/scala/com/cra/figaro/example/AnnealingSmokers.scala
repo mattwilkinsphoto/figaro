@@ -37,13 +37,13 @@ object AnnealingSmokers {
     ^^(p1.smokes, p2.smokes).setConstraint(smokingInfluence)
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val alg = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(3.0))
     alg.start()
     Thread.sleep(1000)
     alg.stop()
     println("Most likely state of Alice: " + alg.mostLikelyValue(alice.smokes))
     println("Most likely state of Bob: " + alg.mostLikelyValue(bob.smokes))
-    alg.kill
+    alg.kill()
   }
 }

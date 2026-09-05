@@ -12,7 +12,8 @@
  */
 package com.cra.figaro.test.algorithm.structured.solver
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.algorithm.lazyfactored.Regular
 import com.cra.figaro.algorithm.factored.gibbs.BlockSampler
@@ -25,7 +26,7 @@ import com.cra.figaro.algorithm.structured._
 import com.cra.figaro.algorithm.structured.solver._
 
 
-class GibbsSolverTest extends WordSpec with Matchers {
+class GibbsSolverTest extends AnyWordSpec with Matchers {
   "Running a Gibbs solver" should {
     "correctly produce blocks" when {
       "given a problem that uses Apply" in {

@@ -121,7 +121,7 @@ object OpenUniverseLearning {
     Datum(model.count11.value, model.count22.value, model.total3.value)
   }
   
-  def observe(model: Model, datum: Datum) {
+  def observe(model: Model, datum: Datum): Unit = {
     model.count11.observe(datum.count1)
     model.count22.observe(datum.count2)
     model.total3.observe(datum.count3)
@@ -159,7 +159,7 @@ object OpenUniverseLearning {
     (continue1Error, continue2Error, observe1Error, observe2Error, average)
   }
   
-  def experiment(stream: BufferedWriter, numTrainingExamples: Int) {
+  def experiment(stream: BufferedWriter, numTrainingExamples: Int): Unit = {
 
     println(numTrainingExamples.toString + " training examples")
     val trainingSet = List.fill(numTrainingExamples)(generate())
@@ -173,7 +173,7 @@ object OpenUniverseLearning {
     stream.flush()
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val time0 = System.currentTimeMillis()
     val file = new File(filename)
     val outputStream = new BufferedWriter(new FileWriter(file))

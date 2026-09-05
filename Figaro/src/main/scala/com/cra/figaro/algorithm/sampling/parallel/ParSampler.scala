@@ -43,7 +43,7 @@ import scala.collection.parallel.CollectionConverters._
  * taking a large number of samples.
  */
 abstract class ParSampler(algs: Seq[ProbQuerySampler], targets: Reference[_]*) 
- extends BaseProbQuerySampler[Reference] with ParSamplingAlgorithm {
+ extends BaseProbQuerySampler[Reference[?], Reference] with ParSamplingAlgorithm {
   
   /** The query targets are references in this case **/
   override val queryTargets: Seq[Reference[_]] = targets.toSeq

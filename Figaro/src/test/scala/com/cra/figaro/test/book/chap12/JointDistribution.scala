@@ -26,8 +26,8 @@ import com.cra.figaro.library.compound.{If, ^^}
 import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.library.collection.Container
 import com.cra.figaro.algorithm.sampling.Importance
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
@@ -37,7 +37,7 @@ object JointDistribution {
   val sales = Array.fill(20)(makeSales)
   val totalSales = Container(sales:_*).reduce(_ + _)
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val salesPair = ^^(sales(0), sales(1))
     val ve = VariableElimination(sales(0), sales(1), salesPair)
     ve.start()
@@ -60,7 +60,7 @@ object JointDistribution {
   }
 }
 
-class JointDistributionTest extends WordSpec with Matchers {
+class JointDistributionTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val salesPair = ^^(JointDistribution.sales(0), JointDistribution.sales(1))
   val ve = VariableElimination(JointDistribution.sales(0), JointDistribution.sales(1), salesPair)

@@ -1,13 +1,13 @@
 /*
  * MetropolisHastingsAnnealer.scala
  * Metropolis-Hastings Annealer.
- * 
+ *
  * Created By:      Brian Ruttenberg (bruttenberg@cra.com)
  * Creation Date:   Mar 1, 2013
- * 
+ *
  * Copyright 2017 Avrom J. Pfeffer and Charles River Analytics, Inc.
  * See http://www.cra.com or email figaro@cra.com for information.
- * 
+ *
  * See http://www.github.com/p2t2/figaro for a copy of the software license.
  */
 
@@ -75,7 +75,7 @@ abstract class MetropolisHastingsAnnealer(universe: Universe, proposalScheme: Pr
     try {
       val newStateUnconstrained = proposeAndUpdate()
       val newState = State(newStateUnconstrained.oldValues, newStateUnconstrained.oldRandomness,
-        newStateUnconstrained.proposalProb, newStateUnconstrained.modelProb + computeScores, newStateUnconstrained.dissatisfied, newStateUnconstrained.reverseVisitOrder)
+        newStateUnconstrained.proposalProb, newStateUnconstrained.modelProb + computeScores(), newStateUnconstrained.dissatisfied, newStateUnconstrained.reverseVisitOrder)
       if (decideToAccept(newState)) {
         accepts += 1
         accept(newState)

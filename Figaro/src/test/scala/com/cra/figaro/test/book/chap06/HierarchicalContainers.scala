@@ -18,13 +18,13 @@ import com.cra.figaro.library.atomic.continuous.{Uniform, Beta}
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.algorithm.sampling.Importance
 import com.cra.figaro.library.collection.FixedSizeArray
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object HierarchicalContainers {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val initialTosses : Array[String] = Array("0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1")
     val numCoins = initialTosses.length
 
@@ -59,7 +59,7 @@ object HierarchicalContainers {
   }
 }
 
-class HierarchicalContainersTest extends WordSpec with Matchers {
+class HierarchicalContainersTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Hierarchical Containers" should {
     val initialTosses : Array[String] = Array("0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1","0","1")

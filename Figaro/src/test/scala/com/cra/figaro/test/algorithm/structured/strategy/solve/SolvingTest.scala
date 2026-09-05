@@ -18,9 +18,10 @@ import com.cra.figaro.algorithm.structured.solver._
 import com.cra.figaro.algorithm.structured.strategy.solve.SolvingStrategy
 import com.cra.figaro.language.{Apply, Universe}
 import com.cra.figaro.library.atomic.discrete.Uniform
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class SolvingTest extends WordSpec with Matchers {
+class SolvingTest extends AnyWordSpec with Matchers {
 
   def solvingStrategy(problem: Problem, solver: Solver = marginalVariableElimination): SolvingStrategy = {
     new SolvingStrategy(problem) {

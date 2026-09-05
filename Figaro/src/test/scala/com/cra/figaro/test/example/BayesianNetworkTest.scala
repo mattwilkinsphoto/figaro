@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.factored._
 import beliefpropagation.BeliefPropagation
 import com.cra.figaro.library.compound._
@@ -27,7 +27,7 @@ import com.cra.figaro.test.tags.NonDeterministic
 import com.cra.figaro.algorithm.factored.gibbs.Gibbs
 import com.cra.figaro.algorithm.factored.gibbs.BlockSampler
 
-class BayesianNetworkTest extends WordSpec with Matchers {
+class BayesianNetworkTest extends AnyWordSpec with Matchers {
   "A simple Bayesian network" should {
     "produce the correct probability under variable elimination" taggedAs (Example, NonDeterministic) in {
       val model = new Model

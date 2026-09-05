@@ -18,9 +18,10 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.discrete.Uniform
 import com.cra.figaro.library.collection.Container
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class MarginalMAPBPTest extends WordSpec with Matchers {
+class MarginalMAPBPTest extends AnyWordSpec with Matchers {
   "Marginal MAP BP" when {
     "given a model with MAP queries on all elements" should {
       "produce the right answer without evidence" in {
@@ -44,14 +45,14 @@ class MarginalMAPBPTest extends WordSpec with Matchers {
         // p(a=F,b11=F,b12=F) = 0.2 * 0.3 * 0.4 = 0.024
         // MAP: a=T,b11=T,b12=T which implies b1=T,b2=F,b=T
         val alg = MarginalMAPBeliefPropagation(20, a, b11, b12, b1, b2, b)
-        alg.start
+        alg.start()
         alg.mostLikelyValue(a) should equal(true)
         alg.mostLikelyValue(b11) should equal(true)
         alg.mostLikelyValue(b12) should equal(true)
         alg.mostLikelyValue(b1) should equal(true)
         alg.mostLikelyValue(b2) should equal(false)
         alg.mostLikelyValue(b) should equal(true)
-        alg.kill
+        alg.kill()
       }
 
       "produce the right answer with evidence" in {
@@ -77,14 +78,14 @@ class MarginalMAPBPTest extends WordSpec with Matchers {
         // p(a=F,b11=F,b12=F) = 0.2 * 0.3 * 0.4 = 0.024
         // MAP: a=T,b11=T,b12=F which implies b1=F,b2=F,b=F
         val alg = MarginalMAPBeliefPropagation(20, a, b11, b12, b1, b2, b)
-        alg.start
+        alg.start()
         alg.mostLikelyValue(a) should equal(true)
         alg.mostLikelyValue(b11) should equal(true)
         alg.mostLikelyValue(b12) should equal(false)
         alg.mostLikelyValue(b1) should equal(false)
         alg.mostLikelyValue(b2) should equal(false)
         alg.mostLikelyValue(b) should equal(false)
-        alg.kill
+        alg.kill()
       }
     }
 
@@ -102,10 +103,10 @@ class MarginalMAPBPTest extends WordSpec with Matchers {
         // p(a=F,b=F) = 0.4 * 0.6 = 0.24
         // MAP: a=T,b=F
         val alg = MarginalMAPBeliefPropagation(20, a, b)
-        alg.start
+        alg.start()
         alg.mostLikelyValue(a) should equal(true)
         alg.mostLikelyValue(b) should equal(false)
-        alg.kill
+        alg.kill()
       }
 
       "produce the right answer with evidence" in {
@@ -123,10 +124,10 @@ class MarginalMAPBPTest extends WordSpec with Matchers {
         // p(a=F,b=F) = 0
         // MAP: a=F,b=T
         val alg = MarginalMAPBeliefPropagation(20, a, b)
-        alg.start
+        alg.start()
         alg.mostLikelyValue(a) should equal(false)
         alg.mostLikelyValue(b) should equal(true)
-        alg.kill
+        alg.kill()
       }
     }
 
@@ -140,9 +141,9 @@ class MarginalMAPBPTest extends WordSpec with Matchers {
         // num4 is effectively a binomial distribution with n=10, p=0.25
         // The mode is floor(p*(n+1))=2
         val alg = MarginalMAPBeliefPropagation(20, num4)
-        alg.start
+        alg.start()
         alg.mostLikelyValue(num4) should equal(2)
-        alg.kill
+        alg.kill()
       }
 
       "produce the right answer with evidence" in {
@@ -155,9 +156,9 @@ class MarginalMAPBPTest extends WordSpec with Matchers {
         // Since the pmf of a binomial distribution is strictly decreasing past the mode,
         // the most likely value should be the least possible value given the evidence
         val alg = MarginalMAPBeliefPropagation(20, num4)
-        alg.start
+        alg.start()
         alg.mostLikelyValue(num4) should equal(5)
-        alg.kill
+        alg.kill()
       }
     }
 

@@ -82,7 +82,7 @@ object GraphDecision {
   } else 0.0
   val GraphUtil = Apply(GraphDecision, NumSteps, RWalkFcn, util_fcn)
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     println("Running MH Before...")
     val ImpBefore = MetropolisHastings(20000, ProposalScheme.default, 5000, GraphUtil)
@@ -112,9 +112,9 @@ object GraphDecision {
       println("Node " + i + " -> " + GraphDecision.getPolicy(g1) + ", " + GraphDecision.getPolicy().toUtility()(g1))
     }
 
-    alg.kill
-    ImpBefore.kill
-    ImpAfter.kill
+    alg.kill()
+    ImpBefore.kill()
+    ImpAfter.kill()
 
   }
 

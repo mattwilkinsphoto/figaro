@@ -95,7 +95,7 @@ trait ExpectationMaximization extends Algorithm with ParameterLearner {
  */
 trait OnlineExpectationMaximization extends Online with ExpectationMaximization {
 
-  override def doStart = {}
+  override def doStart() = {}
 
   protected var lastIterationStatistics: Map[Parameter[_], Seq[Double]] = Map[Parameter[_], Seq[Double]](targetParameters.map(p => p -> p.zeroSufficientStatistics): _*)
   override val initial: Universe
@@ -115,7 +115,7 @@ trait OnlineExpectationMaximization extends Online with ExpectationMaximization 
   def update(evidence: Seq[NamedEvidence[_]] = Seq()): Unit = {
     currentUniverse = transition()
     currentUniverse.assertEvidence(evidence)
-    val newStatistics = doExpectationStep
+    val newStatistics = doExpectationStep()
     val updated = updateStatistics(newStatistics)
     doMaximizationStep(updated)
     lastIterationStatistics = updated
@@ -130,9 +130,9 @@ class ExpectationMaximizationWithFactors(val universe: Universe, val targetParam
 
   protected def doExpectationStep(): Map[Parameter[_], Seq[Double]] = {
     val algorithm = SufficientStatisticsVariableElimination(paramMap)(universe)
-    algorithm.start
+    algorithm.start()
     val result = algorithm.getSufficientStatisticsForAllParameters
-    algorithm.kill
+    algorithm.kill()
     result
   }
 
@@ -144,12 +144,12 @@ class ExpectationMaximizationWithFactors(val universe: Universe, val targetParam
 class OnlineExpectationMaximizationWithFactors(override val initial: Universe, override val transition: Function0[Universe], val targetParameters: Parameter[_]*)(val terminationCriteria: () => EMTerminationCriteria)
   extends OnlineExpectationMaximization {
 
-  def doExpectationStep = {
+  def doExpectationStep() = {
     val algorithm = SufficientStatisticsVariableElimination(paramMap)(currentUniverse)
-    algorithm.start
-    algorithm.stop
+    algorithm.start()
+    algorithm.stop()
     val newStatistics = algorithm.getSufficientStatisticsForAllParameters
-    algorithm.kill
+    algorithm.kill()
     newStatistics
   }
 }
@@ -244,7 +244,7 @@ object EMWithBP {
   }
 
   private def makeBP(numIterations: Int, targets: Seq[Element[_]])(universe: Universe) = {
-    Variable.clearCache
+    Variable.clearCache()
     new ProbQueryBeliefPropagation(universe, targets: _*)(
       List(),
       (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) 

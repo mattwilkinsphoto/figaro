@@ -111,7 +111,7 @@ abstract class DepthFirstStrategy(collection: ComponentCollection) extends Refin
     // An atomic element has no args; simply generate its range
     generateRange(atomicComp)
     // Decide if the component is fully enumerated/refined based on the ranging strategy used
-    atomicComp.fullyRefined = atomicComp.ranger.fullyRefinable()
+    atomicComp.fullyRefined = atomicComp.ranger.fullyRefinable
     atomicComp.fullyEnumerated = atomicComp.fullyRefined
   }
 

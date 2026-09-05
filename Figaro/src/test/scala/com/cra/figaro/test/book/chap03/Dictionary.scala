@@ -15,19 +15,19 @@ package com.cra.figaro.test.book.chap03
 
 import com.cra.figaro.language.Universe
 import scala.collection.mutable.Map
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 class Dictionary(initNumEmails: Int) {
   val counts: Map[String, Int] = Map()
   var numEmails = initNumEmails
 
-  def addWord(word: String) {
+  def addWord(word: String): Unit = {
     counts += word -> (getCount(word) + 1)
   }
 
-  def addEmail(email: Email) {
+  def addEmail(email: Email): Unit = {
     numEmails += 1
     for { word <- email.allWords } {
       addWord(word)
@@ -73,7 +73,7 @@ object Dictionary {
   }
 }
 
-class DictionaryTest extends WordSpec with Matchers {
+class DictionaryTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val emails = LearningComponent.readEmails("src/test/resources/BookData/Test")
   val dict = Dictionary.fromEmails(emails.map(_._2))

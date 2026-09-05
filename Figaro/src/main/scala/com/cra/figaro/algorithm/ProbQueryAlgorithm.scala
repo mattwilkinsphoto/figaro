@@ -26,9 +26,9 @@ import scala.language.higherKinds
 /**
  * Algorithms that compute conditional probabilities of queries over elements in a universe.
  */
-trait ProbQueryAlgorithm extends BaseProbQueryAlgorithm[Element] {
+trait ProbQueryAlgorithm extends BaseProbQueryAlgorithm[Element[?], Element] {
   
-  val universe: Universe
+  def universe: Universe
   
   /**
    * Return an element representing the posterior probability distribution of the given element.
@@ -44,16 +44,18 @@ trait ProbQueryAlgorithm extends BaseProbQueryAlgorithm[Element] {
 /**
  * Algorithms that compute conditional probabilities of queries. This is a base trait, to provide 
  * support for both elements in a single universe, or references across multiple universes.
- * Generic type U is either an Element or a Reference. T is the type of the element or reference.
+ * Generic type U is either Element or Reference; Q is its heterogeneous target
+ * supertype (Element[?] or Reference[?]). The bound keeps every U[T] within Q
+ * without applying a wildcard to an abstract higher-kinded type.
  */
-trait BaseProbQueryAlgorithm[U[_]]
+trait BaseProbQueryAlgorithm[Q, U[_] <: Q]
   extends Algorithm {
   
   class NotATargetException[T](target: U[T]) extends AlgorithmException
   /*
    * @param targets List of elements that can be queried after running the algorithm.
    */
-  val queryTargets: Seq[U[_]]
+  def queryTargets: Seq[Q]
   /*
    * Particular implementations of algorithm must provide the following two methods.
    */

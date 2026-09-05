@@ -50,7 +50,7 @@ class ProblemComponent[Value](val problem: Problem, val element: Element[Value])
   /**
    *  Set the variable associated with this component to the given variable.
    */
-  def setVariable(v: Variable[Value]) {
+  def setVariable(v: Variable[Value]): Unit = {
     _variable = v
     problem.collection.variableToComponent += v -> this
   }
@@ -72,7 +72,7 @@ class ProblemComponent[Value](val problem: Problem, val element: Element[Value])
    *  defaults to false.
    */
   def nonConstraintFactors(parameterized: Boolean = false): List[Factor[Double]] = {
-    Factory.makeFactors(problem.collection, element, parameterized).map(_.deDuplicate)
+    Factory.makeFactors(problem.collection, element, parameterized).map(_.deDuplicate())
   }
 
   /*
@@ -96,7 +96,7 @@ class ProblemComponent[Value](val problem: Problem, val element: Element[Value])
    * The range will include * based on argument ranges including * or any subproblem not being expanded.\
    *
    */
-  def generateRange() {
+  def generateRange(): Unit = {
     val newRange = Range(this)
     if ((newRange.hasStar ^ range.hasStar) || (newRange.regularValues != range.regularValues)) {
       range = newRange

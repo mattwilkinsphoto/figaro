@@ -23,7 +23,7 @@ import scala.language.higherKinds
  * and that use the projection of all the samples of a target variable to calculate the
  * distribution of that variable or the expectation of a function on that variable.
  */
-trait ProbQuerySampler extends BaseProbQuerySampler[Element] {
+trait ProbQuerySampler extends BaseProbQuerySampler[Element[?], Element] {
   val universe: Universe
 }
 
@@ -31,9 +31,10 @@ trait ProbQuerySampler extends BaseProbQuerySampler[Element] {
  * A base trait for sampling algorithms that compute conditional probabilities of queries,
  * and that use the projection of all the samples of a target variable to calculate the
  * distribution of that variable or the expectation of a function on that variable.
- * Generic type U is either `Element` or `Reference`.
+ * Generic type U is either `Element` or `Reference`, and Q is the corresponding
+ * heterogeneous target supertype, `Element[?]` or `Reference[?]`.
  */
-trait BaseProbQuerySampler[U[_]] extends BaseProbQueryAlgorithm[U] {
+trait BaseProbQuerySampler[Q, U[_] <: Q] extends BaseProbQueryAlgorithm[Q, U] {
   
   /**
    * Total weight of samples taken, in log space

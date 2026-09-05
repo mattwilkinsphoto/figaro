@@ -16,7 +16,7 @@ package com.cra.figaro.test.algorithm.decision
 import com.cra.figaro.algorithm.factored._
 
 private object Test {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     (new DecisionVETest).execute()
     (new DecisionImportanceTest).execute()
     (new DecisionMetropolisHastingsTest).execute()

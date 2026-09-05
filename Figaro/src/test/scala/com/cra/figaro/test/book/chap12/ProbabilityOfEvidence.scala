@@ -17,15 +17,15 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.compound.^^
 import com.cra.figaro.algorithm.sampling.ProbEvidenceSampler
 import com.cra.figaro.algorithm.factored.beliefpropagation.ProbEvidenceBeliefPropagation
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object ProbabilityOfEvidence {
   val pixels = Array.tabulate(4, 4)((i: Int, j: Int) => Flip(0.4)("pixel(" + i + "," + j + ")", Universe.universe))
 
-  def makeConstraint(pixel1: Element[Boolean], pixel2: Element[Boolean]) {
+  def makeConstraint(pixel1: Element[Boolean], pixel2: Element[Boolean]): Unit = {
     val pairElem = ^^(pixel1, pixel2)
     pairElem.setConstraint(pair => if (pair._1 == pair._2) 1.0 else 0.5)
   }
@@ -48,7 +48,7 @@ object ProbabilityOfEvidence {
          makeNamedEvidence(2, 3, false),
          makeNamedEvidence(3, 1, true))
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println("Probability of evidence sampling")
     println(ProbEvidenceSampler.computeProbEvidence(100000, evidence))
     println("Probability of evidence belief propagation")
@@ -56,7 +56,7 @@ object ProbabilityOfEvidence {
   }
 }
 
-class ProbabilityOfEvidenceTest extends WordSpec with Matchers {
+class ProbabilityOfEvidenceTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Probability of Evidence" should {
     "produce a probability of evidence sampling = 0.002 +- 0.001" taggedAs (BookExample, NonDeterministic) in {

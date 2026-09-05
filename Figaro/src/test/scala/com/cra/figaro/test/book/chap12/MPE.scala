@@ -21,15 +21,15 @@ import com.cra.figaro.algorithm.factored.beliefpropagation.MPEBeliefPropagation
 import com.cra.figaro.algorithm.sampling.MetropolisHastingsAnnealer
 import com.cra.figaro.algorithm.sampling.ProposalScheme
 import com.cra.figaro.algorithm.sampling.Schedule
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object MPE {
   val pixels = Array.fill(4, 4)(Flip(0.4))
 
-  def makeConstraint(pixel1: Element[Boolean], pixel2: Element[Boolean]) {
+  def makeConstraint(pixel1: Element[Boolean], pixel2: Element[Boolean]): Unit = {
     val pairElem = ^^(pixel1, pixel2)
     pairElem.setConstraint(pair => if (pair._1 == pair._2) 1.0 else 0.5)
   }
@@ -49,7 +49,7 @@ object MPE {
   pixels(2)(3).observe(false)
   pixels(3)(1).observe(true)
 
-  def run(algorithm: OneTimeMPE) {
+  def run(algorithm: OneTimeMPE): Unit = {
     algorithm.start()
     for { i <- 0 until 4 } {
       for { j <- 0 until 4 } {
@@ -62,7 +62,7 @@ object MPE {
     algorithm.kill()
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println("MPE variable elimination")
     run(MPEVariableElimination())
     println("MPE belief propagation")
@@ -72,7 +72,7 @@ object MPE {
   }
 }
 
-class MPETest extends WordSpec with Matchers {
+class MPETest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "MPE" should {
     "produce the correct result with Variable Elimination" taggedAs (BookExample, NonDeterministic) in {

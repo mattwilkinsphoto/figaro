@@ -63,7 +63,7 @@ class BasicFactorGraph(factors: List[Factor[Double]], semiring: Semiring[Double]
   def toMutableMap(m: Map[Node, Factor[Double]]): scala.collection.mutable.Map[Node, Factor[Double]] =
     scala.collection.mutable.Map[Node, Factor[Double]]() ++ m
 
-  private[figaro] val factorsByNode = combineFactors.map(factor => (new FactorNode(factor.variables.toSet) -> (factor))).toMap
+  private[figaro] val factorsByNode = combineFactors().map(factor => (new FactorNode(factor.variables.toSet) -> (factor))).toMap
 
   private[figaro] val adjacencyList = (adjacencyListFactors() ++ adjacencyListVariables()).map(m => m._1 -> toMutableMap(m._2))
 

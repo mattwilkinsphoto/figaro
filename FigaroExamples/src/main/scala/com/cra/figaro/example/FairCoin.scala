@@ -47,7 +47,7 @@ object CoinExample {
     'H', 'H', 'H', 'H', 'H', 'H', 'H', 'T', 'H', 'T',
     'H', 'H', 'H')
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val params = ModelParameters()
     val fairness = Beta(2.0, 2.0)("fairness", params)
@@ -59,9 +59,9 @@ object CoinExample {
     val numberOfEMIterations = 10
     val numberOfBPIterations = 10
     val learningAlgorithm = EMWithBP(10, 10, params)
-    learningAlgorithm.start
-    learningAlgorithm.stop
-    learningAlgorithm.kill
+    learningAlgorithm.start()
+    learningAlgorithm.stop()
+    learningAlgorithm.kill()
     /*
      * This will create a flip having a probability of 'true' learned from the input data. 
      */

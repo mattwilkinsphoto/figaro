@@ -113,7 +113,7 @@ abstract class MultiDecisionAlgorithm(universe: Universe, utilityNodes: List[Ele
 
   def run(): Unit = run(false)
 
-  override def cleanUp() = algList.foreach(_._2.kill)
+  override def cleanUp() = algList.foreach(_._2.kill())
 
   /**
    * Run in a debug mode where only a single decision is run each time.

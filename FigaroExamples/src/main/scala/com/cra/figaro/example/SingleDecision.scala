@@ -48,7 +48,7 @@ object Entrepreneur {
 
   val value = Apply(found, market, valueFcn)
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val alg = DecisionVariableElimination(List(value), found)
 
@@ -61,7 +61,7 @@ object Entrepreneur {
     println("1 -> " + found.getPolicy(1) + ", (" + alg.getUtility(1, false).norm + " vs " + alg.getUtility(1, true).norm + ")")
     println("2 -> " + found.getPolicy(2) + ", (" + alg.getUtility(2, false).norm + " vs " + alg.getUtility(2, true).norm + ")")
 
-    alg.kill
+    alg.kill()
   }
 } 
 

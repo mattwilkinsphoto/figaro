@@ -31,13 +31,13 @@ abstract class AtomicRanger[T](val atomic: Atomic[T]) {
    * @return A discretized distribution for this element, represented as a map from extended values to probabilities
    * such that the sum of the probabilities is 1.0.
    */
-  def discretize(): Map[Extended[T], Double]
+  def discretize: Map[Extended[T], Double]
 
   /**
    * Whether or not this ranger can compute the complete (i.e. fully refined) distribution.
-   * @return True if and only if `discretize()` will always return a complete range and distribution.
+   * @return True if and only if `discretize` will always return a complete range and distribution.
    */
-  def fullyRefinable(): Boolean
+  def fullyRefinable: Boolean
 }
 
 /**
@@ -68,7 +68,7 @@ class FiniteRanger[T](atomic: Atomic[T]) extends AtomicRanger(atomic) {
 /**
  * Approximate a distribution by sampling. This takes additional samples at each iteration.
  * @param atomic Atomic to range.
- * @param samplesPerIteration Additional samples to take each time `discretize()` is called. Must be > 0.
+ * @param samplesPerIteration Additional samples to take each time `discretize` is called. Must be > 0.
  */
 class SamplingRanger[T](atomic: Atomic[T], var samplesPerIteration: Int = 1) extends AtomicRanger(atomic) {
   /**
@@ -81,7 +81,7 @@ class SamplingRanger[T](atomic: Atomic[T], var samplesPerIteration: Int = 1) ext
    */
   protected var samplesTaken: Int = 0
 
-  override def discretize(): Map[Extended[T], Double] = {
+  override def discretize: Map[Extended[T], Double] = {
     for(_ <- 1 to samplesPerIteration) {
       atomic.generate()
       val sample = atomic.value
@@ -104,7 +104,7 @@ class SamplingRanger[T](atomic: Atomic[T], var samplesPerIteration: Int = 1) ext
  * Ranging proceeds by taking all integers in the range [L,U] for an increasing upper bound U.
  * @param atomic Atomic to range.
  * @param lower Lower bound L, described above.
- * @param valuesPerIteration Number of additional values to take each time `discretize()` is called.
+ * @param valuesPerIteration Number of additional values to take each time `discretize` is called.
  */
 class CountingRanger(atomic: Atomic[Int], val lower: Int, var valuesPerIteration: Int = 1) extends AtomicRanger(atomic) {
   // TODO consider other ways to sample than just taking the first n values
@@ -116,7 +116,7 @@ class CountingRanger(atomic: Atomic[Int], val lower: Int, var valuesPerIteration
    */
   protected var numValues: Int = 0
 
-  override def discretize(): Map[Extended[Int], Double] = {
+  override def discretize: Map[Extended[Int], Double] = {
     // Take additional samples each iteration
     numValues += valuesPerIteration
     // Accumulate the total probability mass on regular values
@@ -142,7 +142,7 @@ class CountingRanger(atomic: Atomic[Int], val lower: Int, var valuesPerIteration
  * for the purpose of putting a distribution on the values.
  */
 private[figaro] class ValuesRanger[T](atomic: Atomic[T], collection: ComponentCollection) extends AtomicRanger(atomic) {
-  override def discretize(): Map[Extended[T], Double] = {
+  override def discretize: Map[Extended[T], Double] = {
     val atomicComp = collection(atomic)
     val variable = atomicComp.variable
     // Default ranging falls into one of 3 cases:
@@ -168,7 +168,7 @@ private[figaro] class ValuesRanger[T](atomic: Atomic[T], collection: ComponentCo
   }
 
   // This component should not be used within LSFI, so this method always returns false
-  override def fullyRefinable(): Boolean = false
+  override def fullyRefinable: Boolean = false
 }
 
 // TODO binning component for continuous elements

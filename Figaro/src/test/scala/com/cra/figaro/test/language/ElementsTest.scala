@@ -21,15 +21,15 @@
 
 package com.cra.figaro.test.language
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.library.atomic.discrete.Uniform
 import scala.math.log
 
-class ElementsTest extends WordSpec with Matchers {
+class ElementsTest extends AnyWordSpec with Matchers {
   "A Constant" should {
     "have value equal to the given constant" in {
       Universe.createNew()
@@ -243,7 +243,11 @@ class ElementsTest extends WordSpec with Matchers {
         val f3 = Flip(0.9)
         val f4 = Flip(0.235)
         val fn = (b1: Boolean, b2: Boolean) => if (b1 && b2) f3; else f4
-        NonCachingChain(f1, f2, fn).toString should equal("Chain(Apply(" + f1 + ", " + f2 + ", " + fn + "), <function1>)")
+        val chain = NonCachingChain(f1, f2, fn)
+        val pair = chain.parent.asInstanceOf[Apply2[Boolean, Boolean, (Boolean, Boolean)]]
+        // Generated lambda strings include identity in Scala 3. Check the
+        // functions actually stored by the chain, not the original two-arg CPD.
+        chain.toString should equal(s"Chain(Apply($f1, $f2, ${pair.fn}), ${chain.chainFunction})")
       }
 
       "evaluate the CPD each time get is called" in {
@@ -292,9 +296,9 @@ class ElementsTest extends WordSpec with Matchers {
         val f3 = Flip(0.9)
         val f4 = Flip(0.235)
         val fn = (b1: Boolean, b2: Boolean) => if (b1 && b2) f3; else f4
-        //      "Chain(Apply(Flip(0.7), Flip(0.4), <function2>), <function1>)"
-
-        CachingChain(f1, f2, fn).toString should equal("Chain(Apply(" + f1 + ", " + f2 + ", " + fn + "), <function1>)")
+        val chain = CachingChain(f1, f2, fn)
+        val pair = chain.parent.asInstanceOf[Apply2[Boolean, Boolean, (Boolean, Boolean)]]
+        chain.toString should equal(s"Chain(Apply($f1, $f2, ${pair.fn}), ${chain.chainFunction})")
       }
       //((((((((((80 * .50) * 1.08) + 82.4 * .50) * 1.08) + 84.8 * .50) * 1.08) + 87.3 * .50) * 1.08) + 89.9 * .50) * 1.08)
 

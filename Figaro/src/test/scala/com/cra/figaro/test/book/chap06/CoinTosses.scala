@@ -17,13 +17,13 @@ import com.cra.figaro.language.Universe
 import com.cra.figaro.library.atomic.continuous.Beta
 import com.cra.figaro.language.Flip
 import com.cra.figaro.algorithm.sampling.Importance
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object CoinTosses {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val outcomes = "10"
     val numTosses = outcomes.length
 
@@ -50,7 +50,7 @@ object CoinTosses {
   }
 }
 
-class CoinTossesTest extends WordSpec with Matchers {
+class CoinTossesTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Coin Tosses" should {
     val outcomes = "10"

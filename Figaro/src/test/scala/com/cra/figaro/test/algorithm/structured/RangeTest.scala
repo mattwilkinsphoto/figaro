@@ -12,7 +12,8 @@
  */
 package com.cra.figaro.test.algorithm.structured
 
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.discrete.{Binomial, Geometric, Poisson, Uniform}
 import com.cra.figaro.library.compound.If
@@ -33,7 +34,7 @@ import com.cra.figaro.algorithm.structured.strategy.range.{CountingRanger, Rangi
 import scala.collection.mutable
 
 
-class RangeTest extends WordSpec with Matchers {
+class RangeTest extends AnyWordSpec with Matchers {
   "Setting the range of a component" should {
     "for a constant, set the range to only that constant" in {
       Universe.createNew()
@@ -144,13 +145,13 @@ class RangeTest extends WordSpec with Matchers {
       Universe.createNew()
       val cc = new ComponentCollection
       val pr = new Problem(cc)
-      val e1 = Select(0.1 -> 'a, 0.2 -> 'b, 0.3 -> 'c)
+      val e1 = Select(0.1 -> Symbol("a"), 0.2 -> Symbol("b"), 0.3 -> Symbol("c"))
       pr.add(e1)
       val c1 = cc(e1)
       c1.generateRange()
 
       c1.range.hasStar should equal (false)
-      c1.range.regularValues should equal (Set('a, 'b, 'c))
+      c1.range.regularValues should equal (Set(Symbol("a"), Symbol("b"), Symbol("c")))
     }
 
     "for a compound select with all parents added and without *, set the range to only the outcomes" in {

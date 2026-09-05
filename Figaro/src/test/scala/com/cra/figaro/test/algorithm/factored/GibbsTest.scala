@@ -18,8 +18,8 @@ import com.cra.figaro.algorithm.lazyfactored.{ LazyValues, ValueSet }
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.discrete.Uniform
 import com.cra.figaro.library.compound.If
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 import com.cra.figaro.algorithm.factored.gibbs.Gibbs
 import com.cra.figaro.algorithm.factored.gibbs.WalkSAT
@@ -27,10 +27,10 @@ import com.cra.figaro.algorithm.factored.gibbs.StateNotFoundException
 import com.cra.figaro.algorithm.factored.gibbs.BlockSampler
 import com.cra.figaro.language.Element.toBooleanElement
 
-class GibbsTest extends WordSpec with Matchers {
+class GibbsTest extends AnyWordSpec with Matchers {
   "A Gibbs sampler" should {
     "block Apply elements" in {
-      Universe.createNew
+      Universe.createNew()
       val u1 = Uniform(1, 2, 3)
       val u2 = Uniform(4, 5, 6)
       val a = Apply[Int, Int, Int](u1, u2, _ + _)
@@ -43,7 +43,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "block Chain elements" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val u1 = Uniform(1, 2, 3)
       val u2 = Uniform(2, 3, 4)
@@ -59,7 +59,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "with an unconstrained model produce the correct result" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val s1 = Select(0.1 -> 1, 0.4 -> 2, 0.5 -> 3)
       val s2 = Select(0.7 -> 2, 0.1 -> 3, 0.2 -> 4)
@@ -69,7 +69,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "with a constrained model produce the correct result" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val s1 = Select(0.1 -> 1, 0.4 -> 2, 0.5 -> 3)
       val s2 = Select(0.7 -> 2, 0.1 -> 3, 0.2 -> 4)
@@ -80,7 +80,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "with a constraint on a Chain produce the correct result for the parent" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val c = If(f, Flip(0.8), Constant(false))
       c.addConstraint(b => if (b) 2.0 else 1.0)
@@ -89,7 +89,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "with a constraint on a Chain result correctly constrain the Chain but not the parent" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val r1 = Flip(0.8)
       r1.addConstraint(b => if (b) 2.0 else 1.0)
@@ -101,7 +101,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "with an element used multiple times use the same value each time" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val e = f === f
       test[Boolean](e, identity, 1.0)
@@ -154,7 +154,7 @@ class GibbsTest extends WordSpec with Matchers {
 
   "A default block sampler" should {
     "produce sub-factors on initialization" in {
-      Universe.createNew
+      Universe.createNew()
       val v1 = new Variable(ValueSet.withoutStar(Set(0, 1, 2, 3)))
       val v2 = new Variable(ValueSet.withoutStar(Set(0, 1)))
       val semiring = LogSumProductSemiring()
@@ -175,7 +175,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "normalize and make un-logarithmic a factor" in {
-      Universe.createNew
+      Universe.createNew()
       val v1 = new Variable(ValueSet.withoutStar(Set(0, 1)))
       val v2 = new Variable(ValueSet.withoutStar(Set(0, 1)))
       val semiring = LogSumProductSemiring()
@@ -193,7 +193,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "compute a sampling factor" in {
-      Universe.createNew
+      Universe.createNew()
       val v1 = new Variable(ValueSet.withoutStar(Set(0, 1)))
       val v2 = new Variable(ValueSet.withoutStar(Set(0, 1)))
       val v3 = new Variable(ValueSet.withoutStar(Set(0, 1)))
@@ -217,7 +217,7 @@ class GibbsTest extends WordSpec with Matchers {
     }
 
     "cache recent sampling factors" in {
-      Universe.createNew
+      Universe.createNew()
       val v1 = new Variable(ValueSet.withoutStar(Set(0, 1)))
       val v2 = new Variable(ValueSet.withoutStar(Set(0, 1)))
       val semiring = LogSumProductSemiring()
@@ -240,7 +240,7 @@ class GibbsTest extends WordSpec with Matchers {
     Universe.universe.activeElements flatMap (Factory.makeFactorsForElement(_))
   }
 
-  def test[T](target: Element[T], predicate: T => Boolean, prob: Double, tol: Double = 0.025) {
+  def test[T](target: Element[T], predicate: T => Boolean, prob: Double, tol: Double = 0.025): Unit = {
     val algorithm = Gibbs(100000, target)
     algorithm.start()
     algorithm.probability(target, predicate) should be(prob +- tol)

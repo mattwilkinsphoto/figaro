@@ -15,6 +15,9 @@ package com.cra.figaro.algorithm.decision.index
 
 import scala.language.implicitConversions
 
+/** Conversion evidence used by nearest-neighbor decision indexes. */
+type DistanceConversion[T] = T => Distance[T]
+
 /**
  * Trait Distance
  *
@@ -95,9 +98,11 @@ private[index] case class BooleanDistance(value: Boolean) extends Distance[Boole
  * 
  * @param value The tuple to compute the distance to.
  */
-case class TupleDistance2[T1 <% Distance[T1], T2 <% Distance[T2]](value: (T1, T2))
+case class TupleDistance2[T1: DistanceConversion, T2: DistanceConversion](value: (T1, T2))
   extends TupleDistance with Distance[(T1, T2)] with L2Norm {
-  def distance(that: (T1, T2)) = reduce(value._1.distance(that._1), value._2.distance(that._2))
+  def distance(that: (T1, T2)) = reduce(
+    summon[DistanceConversion[T1]](value._1).distance(that._1),
+    summon[DistanceConversion[T2]](value._2).distance(that._2))
 }
 
 /** 
@@ -107,11 +112,11 @@ case class TupleDistance2[T1 <% Distance[T1], T2 <% Distance[T2]](value: (T1, T2
  *  Uses L1 distance for single values and L2 distance for tuples.
  */
 object Distance {
-  implicit def int2Dist(x: Int) = IntDistance(x)
-  implicit def double2Dist(x: Double) = DoubleDistance(x)
-  implicit def boolean2Dist(x: Boolean) = BooleanDistance(x)
+  implicit def int2Dist(x: Int): IntDistance = IntDistance(x)
+  implicit def double2Dist(x: Double): DoubleDistance = DoubleDistance(x)
+  implicit def boolean2Dist(x: Boolean): BooleanDistance = BooleanDistance(x)
 
-  implicit def int2DistTuple(x: (Int, Int)) = TupleDistance2[Int, Int](x)
-  implicit def double2DistTuple(x: (Double, Double)) = TupleDistance2[Double, Double](x)
-  implicit def boolean2DistTuple(x: (Boolean, Boolean)) = TupleDistance2[Boolean, Boolean](x)
+  implicit def int2DistTuple(x: (Int, Int)): TupleDistance2[Int, Int] = TupleDistance2[Int, Int](x)
+  implicit def double2DistTuple(x: (Double, Double)): TupleDistance2[Double, Double] = TupleDistance2[Double, Double](x)
+  implicit def boolean2DistTuple(x: (Boolean, Boolean)): TupleDistance2[Boolean, Boolean] = TupleDistance2[Boolean, Boolean](x)
 }

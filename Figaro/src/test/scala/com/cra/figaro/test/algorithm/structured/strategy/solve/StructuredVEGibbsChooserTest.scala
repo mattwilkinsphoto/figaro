@@ -16,9 +16,10 @@ import com.cra.figaro.algorithm.structured.algorithm.hybrid.StructuredVEGibbsCho
 import com.cra.figaro.language.Element.toBooleanElement
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class StructuredVEGibbsChooserTest extends WordSpec with Matchers {
+class StructuredVEGibbsChooserTest extends AnyWordSpec with Matchers {
   "Executing a recursive structured BP solver strategy" when {
     "given a flat model with an atomic flip without evidence" should {
       "produce the correct answer" in {

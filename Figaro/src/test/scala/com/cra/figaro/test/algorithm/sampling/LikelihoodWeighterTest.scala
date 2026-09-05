@@ -14,7 +14,7 @@
 package com.cra.figaro.test.algorithm.sampling
 
 import org.scalatest._
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling.Importance.Reject
 import com.cra.figaro.algorithm.sampling._
@@ -28,11 +28,12 @@ import com.cra.figaro.util.logSum
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 import scala.language.reflectiveCalls
-import org.scalatest.Matchers
-import org.scalatest.{ PrivateMethodTester, WordSpec }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.PrivateMethodTester
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.sampling.LikelihoodWeighter
 import com.cra.figaro.library.cache.NoCache
-class LikelihoodWeighterTest extends WordSpec with Matchers with PrivateMethodTester {
+class LikelihoodWeighterTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   // Note, many test cases are covered under the Importance sampling tests
   val normalizer = 1.0 / math.sqrt(2.0 * math.Pi)

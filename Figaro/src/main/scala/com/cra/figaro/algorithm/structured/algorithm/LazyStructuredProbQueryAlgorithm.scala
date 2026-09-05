@@ -22,7 +22,7 @@ abstract class LazyStructuredProbQueryAlgorithm(universe: Universe, collection: 
   with LazyStructured with BoundsProbQueryAlgorithm {
 
   // Important: the default constructor uses a recursive collection for recursive infinite models
-  def this(universe: Universe, queryTargets: Element[_]*) {
+  def this(universe: Universe, queryTargets: Element[_]*) = {
     this(universe, new IncrementingCollection, queryTargets:_*)
   }
 

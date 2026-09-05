@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.language._
 import com.cra.figaro.algorithm.factored._
@@ -23,12 +23,12 @@ import com.cra.figaro.library.compound.^^
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 
-class AnnealingSmokersTest extends WordSpec with Matchers {
+class AnnealingSmokersTest extends AnyWordSpec with Matchers {
 
   "A simple AnnealingSmokersTest" should {
     "produce the correct probability under Metropolis-Hastings Annealing" taggedAs (Example) in {
 
-      Universe.createNew
+      Universe.createNew()
 
       class Person {
         val smokes = Flip(0.6)
@@ -51,7 +51,7 @@ class AnnealingSmokersTest extends WordSpec with Matchers {
       alg.stop()
       alg.mostLikelyValue(alice.smokes) should be(true)
       alg.mostLikelyValue(bob.smokes) should be(true)
-      alg.kill
+      alg.kill()
     }
   }
 

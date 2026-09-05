@@ -15,9 +15,10 @@ package com.cra.figaro.test.algorithm.structured.strategy.solve
 import com.cra.figaro.algorithm.structured.algorithm.structured.StructuredGibbs
 import com.cra.figaro.language.Element.toBooleanElement
 import com.cra.figaro.language._
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class StructuredGibbsTest extends WordSpec with Matchers {
+class StructuredGibbsTest extends AnyWordSpec with Matchers {
   "Executing a recursive structured BP solver strategy" when {
     "given a flat model with an atomic flip without evidence" should {
       "produce the correct answer" in {

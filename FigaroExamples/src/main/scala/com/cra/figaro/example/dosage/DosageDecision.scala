@@ -125,7 +125,7 @@ object DosageDecision {
     val policy = dec.getPolicy(AminoAcidSequence("PLAY"))
     println(policy)
 
-    decmh.kill
+    decmh.kill()
   }
 
 }

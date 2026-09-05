@@ -26,8 +26,8 @@ import com.cra.figaro.algorithm.learning.EMWithBP
 import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.algorithm.learning.EMWithVE
 import com.cra.figaro.algorithm.learning.ExpectationMaximization
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 object MAPLearning {
@@ -74,7 +74,7 @@ object MAPLearning {
     model.isSpam.observe(email.label == "spam")
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val learningAlg = EMWithVE(10, params)
     learningAlg.start()
 
@@ -93,7 +93,7 @@ object MAPLearning {
   }
 }
 
-class MAPLearningTest extends WordSpec with Matchers {
+class MAPLearningTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val learningAlg = EMWithVE(10, MAPLearning.params)
   learningAlg.start()

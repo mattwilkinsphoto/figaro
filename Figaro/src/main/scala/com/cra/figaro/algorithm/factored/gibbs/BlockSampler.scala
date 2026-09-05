@@ -76,12 +76,12 @@ abstract class BlockSampler(val blockInfo: Gibbs.BlockInfo) {
     val iterator = factor.getIndices.iterator
     @tailrec
     def helper(index: Double): List[Int] = {
-      val next = iterator.next
+      val next = iterator.next()
       val prob = factor.get(next)
       if(index < prob) next
       else helper(index - prob)
     }
-    helper(random.nextDouble)
+    helper(random.nextDouble())
   }
 }
 
@@ -191,7 +191,7 @@ trait FactorProduct extends SimpleBlockSampler {
      * the final product should be sparse, it's possible for intermediate factors to become exponentially
      * large in the size of the block if multiplied in the wrong order.
      */
-    val queue = PriorityQueue(toMultiply:_*)(ord)
+    val queue = PriorityQueue(toMultiply*)(using ord)
     while(queue.length > 1) {
       val product = queue.dequeue().product(queue.dequeue())
       queue.enqueue(product)
@@ -290,6 +290,6 @@ trait GaussianWeight extends DoubleWeight {
     val diff = resultValue - chainValue
     // No need to multiply by a constant at the front because we normalize later anyways
     // Moreover, we want this to return 0.0 when diff == 0.0
-    - (diff * diff) / (2.0 * variance)
+    -(diff * diff) / (2.0 * variance)
   }
 }

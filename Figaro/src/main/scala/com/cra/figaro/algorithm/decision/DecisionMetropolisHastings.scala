@@ -41,8 +41,8 @@ abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, pro
   import MetropolisHastings._
 
 
-  protected type WeightSeen[T] = (Element[T], Map[T, Double])
-  protected def newWeightSeen[T](target: Element[T]): WeightSeen[T] = (target, Map())
+  protected case class WeightSeen[T](_1: Element[T], _2: Map[T, Double])
+  protected def newWeightSeen[T](target: Element[T]): WeightSeen[T] = WeightSeen(target, Map())
 
   /**
    * Contains all of the sample data (decision values, utilities) for a given target decision
@@ -99,7 +99,7 @@ abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, pro
   protected override final def doSample() = {
     for { i <- 1 to interval - 1 } { mhStep() }
     if (sampleCount == 0) {
-      initUpdates
+      initUpdates()
     }
     val s = sample()
     if (s._1) {
@@ -110,7 +110,7 @@ abstract class DecisionMetropolisHastings[T, U] private (universe: Universe, pro
   }
 
   protected override def update(): Unit = {
-    super.update
+    super.update()
     sampleCount += 1
     allUtilitiesSeen foreach (updateWeightSeenForTarget((utilitySum, Map[Element[_], Any](dummyTarget -> dummyTarget.value)), _))
     sampleCount -= 1
@@ -163,7 +163,7 @@ class OneTimeDecisionMetropolisHastings[T, U](universe: Universe, myNumSamples: 
   override def run(): Unit = {
     doInitialize()
     super.run()
-    update
+    update()
   }
 }
 
@@ -193,7 +193,7 @@ object DecisionMetropolisHastings {
    * 
    */
   def apply[T, U](scheme: ProposalScheme, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
-    utilityNodes.foreach(_.generate)
+    utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new AnytimeDecisionMetropolisHastings[T, U](universe, scheme, 0, 1, utilityNodes, target)
   }
@@ -203,7 +203,7 @@ object DecisionMetropolisHastings {
    * scheme with the given decision.
    */
   def apply[T, U](numSamples: Int, scheme: ProposalScheme, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
-    utilityNodes.foreach(_.generate)
+    utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new OneTimeDecisionMetropolisHastings[T, U](universe, numSamples, scheme, 0, 1, utilityNodes, target)
   }
@@ -213,7 +213,7 @@ object DecisionMetropolisHastings {
    * of burn-in samples with the given decision.
    */
   def apply[T, U](scheme: ProposalScheme, burnIn: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
-    utilityNodes.foreach(_.generate)
+    utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new AnytimeDecisionMetropolisHastings[T, U](universe, scheme, burnIn, 1, utilityNodes, target)
   }
@@ -223,7 +223,7 @@ object DecisionMetropolisHastings {
    * number of burn-in samples with the given decision.
    */
   def apply[T, U](numSamples: Int, scheme: ProposalScheme, burnIn: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
-    utilityNodes.foreach(_.generate)
+    utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new OneTimeDecisionMetropolisHastings[T, U](universe, numSamples, scheme, burnIn, 1, utilityNodes, target)
   }
@@ -233,7 +233,7 @@ object DecisionMetropolisHastings {
    * samples, and interval between samples with the given decision.
    */
   def apply[T, U](scheme: ProposalScheme, burnIn: Int, interval: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
-    utilityNodes.foreach(_.generate)
+    utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new AnytimeDecisionMetropolisHastings[T, U](universe, scheme, burnIn, interval, utilityNodes, target)
   }
@@ -244,7 +244,7 @@ object DecisionMetropolisHastings {
    */
   def apply[T, U](numSamples: Int, scheme: ProposalScheme,
     burnIn: Int, interval: Int, utilityNodes: List[Element[_]], target: Decision[T, U])(implicit universe: Universe) = {
-    utilityNodes.foreach(_.generate)
+    utilityNodes.foreach(_.generate())
     UsageCheck(utilityNodes, target)
     new OneTimeDecisionMetropolisHastings[T, U](universe, numSamples, scheme, burnIn, interval: Int, utilityNodes, target)
   }

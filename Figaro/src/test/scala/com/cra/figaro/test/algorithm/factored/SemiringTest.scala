@@ -17,9 +17,9 @@ import scala.collection.immutable.Map
 import scala.collection.immutable.Seq
 import scala.collection.mutable
 
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.PrivateMethodTester
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
 import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.language.Parameter
@@ -27,7 +27,7 @@ import com.cra.figaro.library.atomic.continuous.Beta
 import com.cra.figaro.library.atomic.continuous.Dirichlet
 import com.cra.figaro.util.random
 
-class SemiringTest extends WordSpec with Matchers with PrivateMethodTester {
+class SemiringTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   "The joint semiring" should
     {
@@ -265,9 +265,9 @@ class SemiringTest extends WordSpec with Matchers with PrivateMethodTester {
                 (prob, paramMap)
               }
 
-            val a = create
-            val b = create
-            val c = create
+            val a = create()
+            val b = create()
+            val c = create()
 
             def probPlusOrMinus(x: (Double, Map[Parameter[_], Seq[Double]]), y: (Double, Map[Parameter[_], Seq[Double]]), epsilon: (Double, Map[Parameter[_], Seq[Double]])): Boolean =
               {
@@ -307,7 +307,7 @@ class SemiringTest extends WordSpec with Matchers with PrivateMethodTester {
   //Because the structure may be more complicated than an operation on two primitive types, we
   //can't use the built-in 'plusOrMinus' from the ScalaTest package. Instead, define an appropriate
   //+/- function and include it when this method is called.
-  def semiringProperties[T1](semiring: Semiring[T1], a: T1, b: T1, c: T1, withPlusOrMinus: (T1, T1, T1) => Boolean, tolerance: T1) {
+  def semiringProperties[T1](semiring: Semiring[T1], a: T1, b: T1, c: T1, withPlusOrMinus: (T1, T1, T1) => Boolean, tolerance: T1): Unit = {
     val one = semiring.one
     val zero = semiring.zero
 

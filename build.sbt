@@ -44,9 +44,9 @@ lazy val legalSettings = Seq(
 lazy val figaroSettings = Seq(
   organization := "io.github.mattwilkinsphoto",
   description := "Figaro: a language for probabilistic programming",
-  version := "5.0.0-modern.2-SNAPSHOT",
-  scalaVersion := "2.13.18",
-  crossScalaVersions := Seq("2.13.18"),
+  version := "6.0.0-modern.1-SNAPSHOT",
+  scalaVersion := "3.9.0",
+  crossScalaVersions := Seq("3.9.0"),
   crossPaths := true,
   publishMavenStyle := true,
   homepage := Some(uri("https://github.com/mattwilkinsphoto/figaro")),
@@ -67,8 +67,9 @@ lazy val figaroSettings = Seq(
   ),
   Compile / scalacOptions ++= Seq(
     "-release:17",
+    // Keep the repository's brace-delimited syntax without indentation semantics.
+    "-no-indent",
     "-feature",
-    "-language:existentials",
     "-deprecation",
     "-language:postfixOps"
   ),
@@ -101,16 +102,11 @@ lazy val figaro = project
     assembly / assemblyOption := (assembly / assemblyOption).value.withIncludeScala(false),
     logBuffered := false,
     libraryDependencies ++= Seq(
-      "org.scala-lang" % "scala-reflect" % scalaVersion.value,
       "org.apache.commons" % "commons-math3" % "3.6.1",
       "io.github.argonaut-io" %% "argonaut" % "6.3.13",
-      "org.scala-lang.modules" %% "scala-swing" % "2.1.1",
+      "org.scala-lang.modules" %% "scala-swing" % "3.0.0",
       "org.scala-lang.modules" %% "scala-parallel-collections" % "1.2.0",
-      // sbt 2 checks the test graph against scoverage's scala-xml 2.x dependency.
-      // Align the test-only XML library explicitly instead of suppressing eviction errors.
-      ("org.scalatest" %% "scalatest" % "3.1.0" % Test)
-        .exclude("org.scala-lang.modules", "scala-xml_2.13"),
-      "org.scala-lang.modules" %% "scala-xml" % "2.4.0" % Test
+      "org.scalatest" %% "scalatest" % "3.2.20" % Test
     )
   )
   .settings(inConfig(DetTest)(Defaults.testTasks))

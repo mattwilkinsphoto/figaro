@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.util
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language.CachingChain
 import com.cra.figaro.language.Chain
 import com.cra.figaro.language.Constant
@@ -25,7 +25,7 @@ import com.cra.figaro.library.cache.MHCache
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.library.cache.PermanentCache
 
-class CacheTest extends WordSpec with Matchers {
+class CacheTest extends AnyWordSpec with Matchers {
   "A MH cache" should {
     "correctly retrieve cache elements for caching chains" in {
       val u = Universe.createNew()
@@ -49,7 +49,7 @@ class CacheTest extends WordSpec with Matchers {
       val f = Uniform(0.0, 1.0)
       val c = Chain(f, (d: Double) => Constant(d))
       for { _ <- 0 until 10 } {
-        f.generate
+        f.generate()
         cc(c)
       }
       cc.nccCache(c).size should equal(2)
@@ -65,7 +65,7 @@ class CacheTest extends WordSpec with Matchers {
       s.value = true; cc(c)
       s.value = false; cc(c)
       cc.ccCache(c).size should equal(2)
-      a1.deactivate
+      a1.deactivate()
       cc.ccCache(c).size should equal(1)
     }
 
@@ -78,11 +78,11 @@ class CacheTest extends WordSpec with Matchers {
       val f = Uniform(0.0, 1.0)
       val c = Chain(f, fn)
 
-      f.generate; cc(c)
+      f.generate(); cc(c)
       c.directContextContents.size should equal(3)
-      f.generate; cc(c)
+      f.generate(); cc(c)
       c.directContextContents.size should equal(6)
-      f.generate; cc(c)
+      f.generate(); cc(c)
       c.directContextContents.size should equal(6)
       u.activeElements.size should equal(8)
     }
@@ -104,11 +104,11 @@ class CacheTest extends WordSpec with Matchers {
       })
 
       for { _ <- 0 until 100 } {
-        f.generate
-        fl.generate
+        f.generate()
+        fl.generate()
         cc(c2)
       }
-      u.clearTemporaries
+      u.clearTemporaries()
       u.activeElements.size should equal(4)
       cc.ccCache(c2).size should equal(1)
       cc.ccInvertedCache(perm).size should equal(1)
@@ -122,9 +122,9 @@ class CacheTest extends WordSpec with Matchers {
       val s = Flip(0.5)
       val c = Chain(s, (b: Boolean) => if (b) f1 else f2)
 
-      s.generate
-      f1.generate
-      f2.generate
+      s.generate()
+      f1.generate()
+      f2.generate()
       val cache = new PermanentCache(Universe.universe)
       val r = cache(c)
       cache -= c

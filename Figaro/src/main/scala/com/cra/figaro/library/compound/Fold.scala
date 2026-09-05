@@ -31,7 +31,7 @@ extends Deterministic[U](name, collection) with ValuesMaker[U] {
    * For other algorithms, we use a simple generateValue.
    */
   def args = elements.toList
-  override def generateValue = elements.map(_.value).foldLeft(start)(function)
+  override def generateValue() = elements.map(_.value).foldLeft(start)(function)
 
   def makeValues(depth: Int): ValueSet[U] = {
     val values = LazyValues(universe)
@@ -60,7 +60,7 @@ object FoldLeft  {
     if (elements.isEmpty) Constant(start)
     else {
       val elem = elements.head
-      if (!elem.active) elem.activate
+      if (!elem.active) elem.activate()
       new FoldLeft(name, start, function, elements, collection)
     }
   }
@@ -85,7 +85,7 @@ object FoldRight  {
 object Reduce {
   def apply[T](function: (T, T) => T)(elements: Element[T]*)(implicit name: Name[T], collection: ElementCollection): Element[T] = {
     val elem = elements.head
-    if (!elem.active) elem.activate
+    if (!elem.active) elem.activate()
     Chain(elem, (t: T) => FoldLeft(t, function)(elements.tail:_*))(name, collection)
   }
 }

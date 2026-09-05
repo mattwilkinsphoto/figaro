@@ -34,7 +34,7 @@ object MutableMovie {
 
     lazy val qualities = Container(movies.map(_.quality):_*)
 
-    lazy val numGoodMovies = qualities.count(_ == 'high)
+    lazy val numGoodMovies = qualities.count(_ == Symbol("high"))
 
     lazy val famous = Chain(numGoodMovies, (n: Int) => if (n >= 2) Flip(0.8) else Flip(0.1))
   }
@@ -50,7 +50,7 @@ object MutableMovie {
 
     lazy val probHigh = Apply(actorsAllGood, (b: Boolean) => if (b) 0.5; else 0.2)
 
-    lazy val quality = Select(probLow -> 'low, Constant(0.3) -> 'medium, probHigh -> 'high)
+    lazy val quality = Select(probLow -> Symbol("low"), Constant(0.3) -> Symbol("medium"), probHigh -> Symbol("high"))
   }
 
   private class Appearance(actor: Actor, movie: Movie) {
@@ -59,12 +59,12 @@ object MutableMovie {
 
     def probAward(quality: Symbol, famous: Boolean) =
       (quality, famous) match {
-        case ('low, false) => 0.001
-        case ('low, true) => 0.01
-        case ('medium, false) => 0.01
-        case ('medium, true) => 0.05
-        case ('high, false) => 0.05
-        case ('high, true) => 0.2
+        case (Symbol("low"), false) => 0.001
+        case (Symbol("low"), true) => 0.01
+        case (Symbol("medium"), false) => 0.01
+        case (Symbol("medium"), true) => 0.05
+        case (Symbol("high"), false) => 0.05
+        case (Symbol("high"), true) => 0.2
       }
     lazy val award = SwitchingFlip(Apply(movie.quality, actor.famous, (q: Symbol, f: Boolean) => probAward(q, f)))
   }
@@ -124,7 +124,7 @@ object MutableMovie {
 
   def main(args: Array[String]): Unit = {
     actor3.skillful.observe(true)
-    movie2.quality.observe('high)
+    movie2.quality.observe(Symbol("high"))
 
     // We first make sure the initial state satisfies the unique award condition, and then guide all
     // subsequent proposals to keep that condition.

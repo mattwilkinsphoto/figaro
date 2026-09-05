@@ -109,14 +109,14 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
       chainCache(elem) match {
         case None => elem.generateValue(elem.randomness)
         case Some(result) =>
-          if (result.value == null) result.generate
+          if (!result.hasValue) result.generate()
           result.value
       }
     } else elem.observation.get
     elem.value = newValue
 
     /* Early rejection of states is possible when attempting to change constrained or conditioned elements.
-     * If the constraints are bound between 0 and 1 (indicated by the constraintsBound flag), 
+     * If the constraints are bound between 0 and 1 (indicated by the constraintsBound flag),
      * there were previously no conditions dissatisfied, and there is a constraint on the element, then
      * early rejection occurs (via the throwable RejectState object) if the logical statement is true.
      * If the element has a condition on it, and that condition was newly dissatisfied, we also reject early.
@@ -268,12 +268,12 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
   }
 
   /*
-   * A single step of MetropolisHastings lists of proposing according to the scheme and updating 
+   * A single step of MetropolisHastings lists of proposing according to the scheme and updating
    * any elements that depend on those changed.
    */
   protected def proposeAndUpdate(): State = {
     /* Before making any proposals, set the acceptProbability */
-    acceptProbability = log(random.nextDouble)
+    acceptProbability = log(random.nextDouble())
 
     val state1 = runScheme()
 
@@ -282,7 +282,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
 
       /* elementsUsedBy stores the list of elements used by each proposed element.
        * If an element is being proposed for the first time, it will not appear in elementsUsedBy (or proposedElementsSortedUpdates).
-       * Therefore, the element and its usedBy list can simply be added to elementsUsedBy. 
+       * Therefore, the element and its usedBy list can simply be added to elementsUsedBy.
        * This is true for all first time proposals for permanent elements and temporary elements.
        * Temporary elements most often go through this process as they are brand new elements upon creation.
        */
@@ -290,8 +290,8 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
       if (!elementsUsedBy.contains(elem)) {
         elementsUsedBy += (elem -> usedBy)
       } else if (usedBy != elementsUsedBy(elem)) {
-        /*  An element's usedBy list can change in between proposals, so we must compare its latest usedBy list to its previous 
-         *  usedBy list (as stored in elementsUsedBy). If the two lists do not match, the element is invalidated and we must remove 
+        /*  An element's usedBy list can change in between proposals, so we must compare its latest usedBy list to its previous
+         *  usedBy list (as stored in elementsUsedBy). If the two lists do not match, the element is invalidated and we must remove
          *  its stored sorted update lists for all proposed element sets that contain the invalidated element. We also overwrite the old
          *  usedBy list in elementsUsedBy with the new list.
          */
@@ -315,9 +315,9 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     var state = state1
     var updatesNeeded = proposedElementsSortedUpdates(proposedElements)
     if (constraintsBound) {
-      /* constraintsSum is used in the attemptChange method to determine if a state can be rejected early given new constraint 
+      /* constraintsSum is used in the attemptChange method to determine if a state can be rejected early given new constraint
        * values compared to their old values. Here, we set it to the sum of old constraint values for the elements
-       * that must be updated. 
+       * that must be updated.
        */
       constraintsSum = updatesNeeded.map(e => e.constraintValue).sum
     }
@@ -401,8 +401,8 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     universe.constrainedElements.foreach(e => currentConstraintValues += (e -> e.constraintValue))
   }
 
-  /* To execute a single step, we call proposeAndUpdate, which after proposing and updating elements, returns 
-   * a new state if it does not choose to reject early. If at any point, a change leads to an early rejection, the RejectState 
+  /* To execute a single step, we call proposeAndUpdate, which after proposing and updating elements, returns
+   * a new state if it does not choose to reject early. If at any point, a change leads to an early rejection, the RejectState
    * object is thrown and handled here by undoing the modified state to its original form. Even if a new state is returned
    * by proposeAndUpdate, we must decide to accept or reject it. In the case of accept, the new state becomes the current state.
    * In the case of reject, the RejectState object is thrown and the new state is undone to its original form.
@@ -411,7 +411,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     try {
       val newStateUnconstrained = proposeAndUpdate()
       val newState = State(newStateUnconstrained.oldValues, newStateUnconstrained.oldRandomness,
-        newStateUnconstrained.proposalProb, newStateUnconstrained.modelProb + computeScores, newStateUnconstrained.dissatisfied, newStateUnconstrained.reverseVisitOrder)
+        newStateUnconstrained.proposalProb, newStateUnconstrained.modelProb + computeScores(), newStateUnconstrained.dissatisfied, newStateUnconstrained.reverseVisitOrder)
       if (decideToAccept(newState)) {
         accepts += 1
         accept(newState)
@@ -468,7 +468,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     rejects = 0
     proposalCounts = Map((elementsToTrack map (_ -> 0)): _*)
     val successes: Map[Predicate[_], Int] = Map((predicates map (_ -> 0)): _*)
-    this.elementsToTrack = Map((elementsToTrack map (_ -> null): _*))
+    this.elementsToTrack = Map(elementsToTrack.map(_ -> null)*)
     dissatisfied = universe.conditionedElements.toSet filter (!_.conditionSatisfied)
     def collectResults() =
       for { predicate <- predicates } {
@@ -478,7 +478,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
     for { i <- 1 to numSamples } {
       val newStateUnconstrained = proposeAndUpdate()
       val state1 = State(newStateUnconstrained.oldValues, newStateUnconstrained.oldRandomness,
-        newStateUnconstrained.proposalProb, newStateUnconstrained.modelProb + computeScores, newStateUnconstrained.dissatisfied, newStateUnconstrained.reverseVisitOrder)
+        newStateUnconstrained.proposalProb, newStateUnconstrained.modelProb + computeScores(), newStateUnconstrained.dissatisfied, newStateUnconstrained.reverseVisitOrder)
       if (decideToAccept(state1)) {
         accepts += 1
         // collect results for the new state and restore the original state
@@ -550,7 +550,7 @@ class OneTimeMetropolisHastings(universe: Universe, myNumSamples: Int, scheme: P
   override def run(): Unit = {
     doInitialize()
     super.run()
-    update
+    update()
   }
 }
 
@@ -620,7 +620,7 @@ object MetropolisHastings {
    * Use MH to sample the joint posterior distribution of several variables
    */
   def sampleJointPosterior(targets: Element[_]*)(implicit universe: Universe): Stream[List[Any]] = {
-    val jointElement = Container(targets: _*).foldLeft(List[Any]())((l: List[Any], i: Any) => l :+ i)
+    val jointElement = Container[Any](targets.asInstanceOf[Seq[Element[Any]]]*).foldLeft(List[Any]())((l: List[Any], i: Any) => l :+ i)
     val alg = MetropolisHastings(1000000, ProposalScheme.default, jointElement)(universe)
     alg.start()
     val posterior = alg.sampleFromPosterior(jointElement)

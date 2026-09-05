@@ -23,8 +23,8 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.discrete.{Binomial, Poisson}
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.algorithm.sampling.Importance
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
@@ -68,7 +68,7 @@ object ProductDistribution {
     result
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println("Popularity\tProduct quality\tAffordability\tPredicted number of buyers")
     println("100       \t0.5            \t0.5          \t" + predict(100, 0.5, 0.5))
     println("100       \t0.5            \t0.9          \t" + predict(100, 0.5, 0.9))
@@ -81,7 +81,7 @@ object ProductDistribution {
   }
 }
 
-class ProductDistributionTest extends WordSpec with Matchers {
+class ProductDistributionTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Product Distribution" should {
     "produce the correct results at each step" taggedAs (BookExample, NonDeterministic) in {

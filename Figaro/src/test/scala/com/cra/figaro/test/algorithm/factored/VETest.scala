@@ -20,8 +20,9 @@
 
 package com.cra.figaro.test.algorithm.factored
 
-import org.scalatest.Matchers
-import org.scalatest.{ WordSpec, PrivateMethodTester }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.PrivateMethodTester
 import math.log
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
@@ -38,7 +39,7 @@ import com.cra.figaro.test.tags.NonDeterministic
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 import com.cra.figaro.algorithm.structured.algorithm.structured.StructuredMPEVE
 
-class VETest extends WordSpec with Matchers {
+class VETest extends AnyWordSpec with Matchers {
   "A VEGraph" when {
     "initially" should {
       "associate each element with all its factors and neighbors" in {
@@ -47,7 +48,7 @@ class VETest extends WordSpec with Matchers {
         val e2 = Constant(8)
         val e3 = Select(0.2 -> "a", 0.3 -> "b", 0.5 -> "c")
         val e4 = Flip(0.7)
-        val e5 = Constant('a)
+        val e5 = Constant(Symbol("a"))
         val e6 = Select(0.1 -> 1.5, 0.9 -> 2.5)
         val v1 = Variable(e1)
         val v2 = Variable(e2)
@@ -77,7 +78,7 @@ class VETest extends WordSpec with Matchers {
         val e2 = Constant(8)
         val e3 = Select(0.2 -> "a", 0.3 -> "b", 0.5 -> "c")
         val e4 = Flip(0.7)
-        val e5 = Constant('a)
+        val e5 = Constant(Symbol("a"))
         val e6 = Select(0.1 -> 1.5, 0.9 -> 2.5)
         Values()(e1)
         Values()(e2)
@@ -106,7 +107,7 @@ class VETest extends WordSpec with Matchers {
         val e2 = Constant(8)
         val e3 = Select(0.2 -> "a", 0.3 -> "b", 0.5 -> "c")
         val e4 = Flip(0.7)
-        val e5 = Constant('a)
+        val e5 = Constant(Symbol("a"))
         val e6 = Select(0.1 -> 1.5, 0.9 -> 2.5)
         val e7 = Flip(0.9)
         Values()(e1)
@@ -140,7 +141,7 @@ class VETest extends WordSpec with Matchers {
           val e2 = Constant(8)
           val e3 = Select(0.2 -> "a", 0.3 -> "b", 0.5 -> "c")
           val e4 = Flip(0.7)
-          val e5 = Constant('a)
+          val e5 = Constant(Symbol("a"))
           val e6 = Select(0.1 -> 1.5, 0.9 -> 2.5)
           val e7 = Flip(0.9)
           val v1 = Variable(e1)
@@ -166,7 +167,7 @@ class VETest extends WordSpec with Matchers {
         val e2 = Constant(8)
         val e3 = Select(0.2 -> "a", 0.3 -> "b", 0.5 -> "c")
         val e4 = Flip(0.7)
-        val e5 = Constant('a)
+        val e5 = Constant(Symbol("a"))
         val e6 = Select(0.1 -> 1.5, 0.9 -> 2.5)
         val e7 = Flip(0.9)
         val v1 = Variable(e1)
@@ -195,7 +196,7 @@ class VETest extends WordSpec with Matchers {
         val e2 = Constant(8)
         val e3 = Select(0.2 -> "a", 0.3 -> "b", 0.5 -> "c")
         val e4 = Flip(0.7)
-        val e5 = Constant('a)
+        val e5 = Constant(Symbol("a"))
         val e6 = Select(0.1 -> 1.5, 0.9 -> 2.5)
         val e7 = Flip(0.9)
         val e8 = Flip(0.3)
@@ -386,9 +387,9 @@ class VETest extends WordSpec with Matchers {
       y.setCondition((b: Boolean) => b, List(Element.ElemVal(x, true)))
       // Probability of y should be (0.1 * 0.2 + 0.9 * 0.2) / (0.1 * 0.2 + 0.9 * 0.2 + 0.9 * 0.8) (because the case where x is true and y is false has been ruled out)
       val ve = VariableElimination(y)
-      ve.start
+      ve.start()
       ve.probability(y, true) should be(((0.1 * 0.2 + 0.9 * 0.2) / (0.1 * 0.2 + 0.9 * 0.2 + 0.9 * 0.8)) +- 0.0000000001)
-      ve.kill
+      ve.kill()
     }
 
     "with a very wide model produce the correct result" in {
@@ -398,7 +399,7 @@ class VETest extends WordSpec with Matchers {
       val rand = new scala.util.Random(System.currentTimeMillis)
       for (_ <- 0 until 1000) {
         val v = If(root, Flip(0.5), Flip(0.5))
-        if (rand.nextBoolean) {
+        if (rand.nextBoolean()) {
           v.observe(true)
         } else {
           v.observe(false)
@@ -458,16 +459,16 @@ class VETest extends WordSpec with Matchers {
       // p(e1=F,e2=F,e3=F) = 0.25 * 0.1 * 0.6 = .015
       // MPE: e1=T,e2=F,e3=F,e4=T
       val alg = MPEVariableElimination()      
-      alg.start
+      alg.start()
       alg.mostLikelyValue(e1) should equal(true)
       alg.mostLikelyValue(e2) should equal(false)
       alg.mostLikelyValue(e3) should equal(false)
       alg.mostLikelyValue(e4) should equal(true)
-      alg.kill
+      alg.kill()
     }
   }
 
-  def test[T](target: Element[T], predicate: T => Boolean, prob: Double) {
+  def test[T](target: Element[T], predicate: T => Boolean, prob: Double): Unit = {
     val tolerance = 0.0000001
     val algorithm = VariableElimination(target)
     algorithm.start()

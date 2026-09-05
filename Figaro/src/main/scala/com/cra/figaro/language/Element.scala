@@ -99,7 +99,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
    * The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused.
    *  In general, continuous distributions are not cacheable.
    */
-  def isCachable(): Boolean = false
+  def isCachable: Boolean = false
 
   /**
    * Generate the randomness content.
@@ -139,13 +139,19 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
    */
   var value: Value = _
 
+  /** Whether the existing boxed-value sentinel has been initialized. */
+  private[figaro] def hasValue: Boolean = {
+    val current: Any = value
+    current != null
+  }
+
   /**
    * First generate the randomness, then generate the value given the randomness. Store the results
    * in randomness and value.
    */
   final def generate(): Unit = {
     if (!setFlag) { // Make sure we do not generate this element if we have already set its value
-      args.foreach(arg => if (arg.value == null) arg.generate()) // make sure arguments have a valid value
+      args.foreach(arg => if (!arg.hasValue) arg.generate()) // make sure arguments have a valid value
       randomness = generateRandomness()
       value = generateValue(randomness)
     }
@@ -210,12 +216,12 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
     val conditionElements =
       for {
         (condition, contingency) <- myConditions
-        Element.ElemVal(element, value) <- contingency
+        case Element.ElemVal(element, value) <- contingency
       } yield element
     val constraintElements =
       for {
         (constraint, contingency) <- myConstraints
-        Element.ElemVal(element, value) <- contingency
+        case Element.ElemVal(element, value) <- contingency
       } yield element
     Set((conditionElements ::: constraintElements): _*)
   }
@@ -226,7 +232,7 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
    * Not removing these elements from the relevant lists cannot affect correctness of algorithms, but it may impact their efficiency.
    * One can argue that removal of evidence is not a common use case and does not need to be optimized.
    */
-  private def ensureContingency[T](elem: Element[T]) {
+  private def ensureContingency[T](elem: Element[T]): Unit = {
     universe.registerUses(this, elem)
   }
 
@@ -255,9 +261,9 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
    */
   private[figaro] var intervention: Option[Value] = None
 
-  def intervene(v: Value) { intervention = Some(v); value = v }
+  def intervene(v: Value): Unit = { intervention = Some(v); value = v }
 
-  def unintervene() { intervention = None }
+  def unintervene(): Unit = { intervention = None }
 
   /*
    * Testing whether a condition is satisfied can use any type of value. The condition can only be satisfied if the value has the right type and the condition returns true.

@@ -19,12 +19,12 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics
 class TTestResult(val name: String, val target: Double, val alpha: Double = .05) extends NDTestResult {
   val statistics = new SummaryStatistics()
 
-  def update(value: Any) {
+  def update(value: Any): Unit = {
     value match {
       case x: Double => statistics.addValue(x)
       case x: Int => statistics.addValue(x.toDouble)
       case x: Float => statistics.addValue(x.toDouble)
-      case _ => println(value + " improper value for t-test")
+      case _ => println(String.valueOf(value) + " improper value for t-test")
     }
   }
 

@@ -25,9 +25,10 @@ import com.cra.figaro.library.atomic.continuous.{Beta, Normal}
 import com.cra.figaro.library.atomic.discrete
 import com.cra.figaro.library.atomic.discrete._
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class BacktrackingStrategyTest extends WordSpec with Matchers {
+class BacktrackingStrategyTest extends AnyWordSpec with Matchers {
   "A complete backtracking strategy" should {
     "create ranges for all components" in {
       Universe.createNew()

@@ -20,8 +20,8 @@
 
 package com.cra.figaro.test.experimental.particlebp
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.factored.beliefpropagation._
 import com.cra.figaro.language._
@@ -46,7 +46,7 @@ import com.cra.figaro.ndtest._
 import org.apache.commons.math3.distribution.MultivariateNormalDistribution
 import scala.concurrent.duration._
 
-class PBPTest extends WordSpec with Matchers {
+class PBPTest extends AnyWordSpec with Matchers {
 
   val globalTol = 0.025
   val alpha = 0.05
@@ -60,7 +60,7 @@ class PBPTest extends WordSpec with Matchers {
       bpb.runInnerLoop(Set(), Set())
       val pbpSampler = ParticleGenerator(Universe.universe)
       val samples = pbpSampler(n)
-      bpb.resample
+      bpb.resample()
       samples should not be pbpSampler(n)
     }
 
@@ -86,14 +86,14 @@ class PBPTest extends WordSpec with Matchers {
       val pbpSampler = ParticleGenerator(Universe.universe)
       pbpSampler.update(n, pbpSampler.numSamplesFromAtomics, List[(Double, _)]((1.0, 2.0)))
       val bpb = ParticleBeliefPropagation(1, 1, items)
-      bpb.runOuterLoop
-      val fg_2 = bpb.bp.factorGraph.getNodes.filter(p => p.isInstanceOf[VariableNode]).toSet
+      bpb.runOuterLoop()
+      val fg_2 = bpb.bp.factorGraph.getNodes().filter(p => p.isInstanceOf[VariableNode]).toSet
 
       pbpSampler.update(n, pbpSampler.numSamplesFromAtomics, List[(Double, _)]((1.0, 3.0)))
       val dependentElems = Set[Element[_]](n, number, items)
       bpb.runInnerLoop(dependentElems, Set())
       // Currently have to subtract 3 since the old factors for n = 2 also get created since they exist in the chain cache
-      val fg_3 = bpb.bp.factorGraph.getNodes.filter(p => p.isInstanceOf[VariableNode]).toSet
+      val fg_3 = bpb.bp.factorGraph.getNodes().filter(p => p.isInstanceOf[VariableNode]).toSet
       val diff = fg_3 -- fg_2
       diff.nonEmpty should equal(true)
     }
@@ -110,7 +110,7 @@ class PBPTest extends WordSpec with Matchers {
       val e2 = IntSelector(ep)
 
       val bp = ParticleBeliefPropagation(5, 30, 100, 100, e2, e1, ep)
-      bp.start
+      bp.start()
 
       val e2_0 = 0.33333333 * (0.5 + 0.3333333 + 0.25)
       val e2_1 = 0.33333333 * (0.5 + 0.3333333 + 0.25)
@@ -317,7 +317,7 @@ class PBPTest extends WordSpec with Matchers {
           algorithm.start()
           // algorithm.expectation(fp, (i: Double) => i) should be(.375 +- globalTol)
           val result = algorithm.expectation(fp, (i: Double) => i)
-          algorithm.kill
+          algorithm.kill()
 
           update(result, NDTest.TTEST, "PosteriorDifferentThanPrior", 0.375, alpha)
         }
@@ -340,7 +340,7 @@ class PBPTest extends WordSpec with Matchers {
       val locE = algorithm.expectation(loc)(d => d._1 * d._2)
       val cov = locE - algorithm.mean(locX) * algorithm.mean(locY)
 
-      ParticleGenerator.clear
+      ParticleGenerator.clear()
       val algorithm2 = ParticleBeliefPropagation(1, 20, 15, 15, loc, locX, locY)
       algorithm2.start()
       val locE2 = algorithm2.expectation(loc, (d: (Double, Double)) => d._1 * d._2)
@@ -426,11 +426,11 @@ class PBPTest extends WordSpec with Matchers {
     }
     algorithm.start()
     if (!oneTime) Thread.sleep(outer.toLong)
-    algorithm.stop
+    algorithm.stop()
     //    algorithm.probability(target, predicate) should be(prob +- tol)
 
     val result = algorithm.probability(target, predicate)
-    algorithm.kill
+    algorithm.kill()
 
     result
   }

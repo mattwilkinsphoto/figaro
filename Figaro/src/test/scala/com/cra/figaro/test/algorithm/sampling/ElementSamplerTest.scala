@@ -14,7 +14,8 @@
 package com.cra.figaro.test.algorithm.sampling
 
 import org.scalatest._
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.language._
@@ -27,7 +28,7 @@ import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 import scala.language.reflectiveCalls
 
-class ElementSamplerTest extends WordSpec with Matchers with PrivateMethodTester {
+class ElementSamplerTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   val epsilon = 0.01
   val lambda = 0.05
@@ -254,23 +255,23 @@ class ElementSamplerTest extends WordSpec with Matchers with PrivateMethodTester
 
   }
 
-  def anytimeSampleOneTest[T](target: Element[T], predicate: T => Boolean, prob: Double) {
+  def anytimeSampleOneTest[T](target: Element[T], predicate: T => Boolean, prob: Double): Unit = {
     val es = ElementSampler(target)
-    es.start
+    es.start()
     Thread.sleep(1000)
-    es.stop
+    es.stop()
     val predProb = es.probability(target, predicate)
     predProb should be(prob +- epsilon)
-    es.kill
+    es.kill()
   }
 
-  def sampleOneTest[T](target: Element[T], predicate: T => Boolean, prob: Double) {
+  def sampleOneTest[T](target: Element[T], predicate: T => Boolean, prob: Double): Unit = {
     val numTrials = SamplingUtil.computeNumberOfSamples(epsilon, lambda)
     val es = ElementSampler(target, numTrials)
-    es.start
+    es.start()
     val predProb = es.probability(target, predicate)
     predProb should be(prob +- epsilon)
-    es.kill
+    es.kill()
   }
 
 }

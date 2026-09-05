@@ -61,7 +61,7 @@ object ValveReliability {
     next
   }
   
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val ff = FactoredFrontier(static, initial, transition, 5)
     ff.start()
     println("|------------|------------|------------|------------|")

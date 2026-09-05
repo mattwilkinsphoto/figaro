@@ -17,8 +17,8 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.Beta
 import com.cra.figaro.library.compound.{If, CPD}
 import com.cra.figaro.algorithm.factored.VariableElimination
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 object DynamicBayesianNetwork {
@@ -55,7 +55,7 @@ object DynamicBayesianNetwork {
          scoreDifferential(minute - 1))
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     println("Probability we will win the game")
     println("Prior probability: " +
       VariableElimination.probability(scoreDifferential(length - 1), (i: Int) => i > 0))
@@ -66,7 +66,7 @@ object DynamicBayesianNetwork {
   }
 }
 
-class DynamicBayesianNetworkTest extends WordSpec with Matchers {
+class DynamicBayesianNetworkTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val prior = VariableElimination.probability(DynamicBayesianNetwork.scoreDifferential(DynamicBayesianNetwork.length - 1), (i: Int) => i > 0)
   DynamicBayesianNetwork.ourPossession(4).observe(true)

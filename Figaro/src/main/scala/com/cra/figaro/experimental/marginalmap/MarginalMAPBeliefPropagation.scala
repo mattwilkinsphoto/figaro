@@ -79,7 +79,7 @@ abstract class MarginalMAPBeliefPropagation(override val universe: Universe, tar
   override def initialize() = {
     val (neededElements, _) = getNeededElements(universe.activeElements, Int.MaxValue)
     factorGraph = new BasicFactorGraph(getFactors(neededElements, targetElements), logSpaceSemiring())
-    maxVariables = factorGraph.getNodes.collect {
+    maxVariables = factorGraph.getNodes().collect {
       case VariableNode(ev: ElementVariable[_]) if mapElements.contains(ev.element) => ev
     }.toSet
     super.initialize()

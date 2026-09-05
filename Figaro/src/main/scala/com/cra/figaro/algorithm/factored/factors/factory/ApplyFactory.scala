@@ -33,7 +33,7 @@ object ApplyFactory {
     val resultVar = Factory.getVariable(cc, apply)
     cc.variableParents(resultVar) += arg1Var
     val applyComponent = cc(apply)
-    val applyMap = applyComponent.getMap
+    val applyMap = applyComponent.getMap()
     val applyValues = applyComponent.range
     val factor = new SparseFactor[Double](List(arg1Var), List(resultVar))
     val arg1Indices = arg1Var.range.zipWithIndex
@@ -61,7 +61,7 @@ object ApplyFactory {
     val resultVar = Factory.getVariable(cc, apply)
     cc.variableParents(resultVar) ++= Set(arg1Var, arg2Var)
     val applyComponent = cc(apply)
-    val applyMap = applyComponent.getMap
+    val applyMap = applyComponent.getMap()
     val applyValues = cc(apply).range
     val factor = new SparseFactor[Double](List(arg1Var, arg2Var), List(resultVar))
     val arg1Indices = arg1Var.range.zipWithIndex
@@ -93,7 +93,7 @@ object ApplyFactory {
     val resultVar = Factory.getVariable(cc, apply)
     cc.variableParents(resultVar) ++= Set(arg1Var, arg2Var, arg3Var)
     val applyComponent = cc(apply)
-    val applyMap = applyComponent.getMap
+    val applyMap = applyComponent.getMap()
     val applyValues = cc(apply).range
     val factor = new SparseFactor[Double](List(arg1Var, arg2Var, arg3Var), List(resultVar))
     val arg1Indices = arg1Var.range.zipWithIndex
@@ -127,7 +127,7 @@ object ApplyFactory {
     val resultVar = Factory.getVariable(cc, apply)
     cc.variableParents(resultVar) ++= Set(arg1Var, arg2Var, arg3Var, arg4Var)
     val applyComponent = cc(apply)
-    val applyMap = applyComponent.getMap
+    val applyMap = applyComponent.getMap()
     val applyValues = cc(apply).range
     val factor = new SparseFactor[Double](List(arg1Var, arg2Var, arg3Var, arg4Var), List(resultVar))
     val arg1Indices = arg1Var.range.zipWithIndex
@@ -164,7 +164,7 @@ object ApplyFactory {
     val resultVar = Factory.getVariable(cc, apply)
     cc.variableParents(resultVar) ++= Set(arg1Var, arg2Var, arg3Var, arg4Var, arg5Var)
     val applyComponent = cc(apply)
-    val applyMap = applyComponent.getMap
+    val applyMap = applyComponent.getMap()
     val applyValues = cc(apply).range
     val factor = new SparseFactor[Double](List(arg1Var, arg2Var, arg3Var, arg4Var, arg5Var), List(resultVar))
     val arg1Indices = arg1Var.range.zipWithIndex

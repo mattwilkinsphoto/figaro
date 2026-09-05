@@ -13,9 +13,9 @@ package com.cra.figaro.test.algorithm.sampling
 
 import scala.language.existentials
 
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.PrivateMethodTester
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
 import com.cra.figaro.algorithm.sampling.MetropolisHastings
 import com.cra.figaro.algorithm.sampling.ProposalScheme
@@ -24,13 +24,13 @@ import com.cra.figaro.language.Flip
 import com.cra.figaro.language.Universe
 import com.cra.figaro.library.atomic.discrete.Uniform
 
-class InvalidationTest extends WordSpec with Matchers with PrivateMethodTester {
+class InvalidationTest extends AnyWordSpec with Matchers with PrivateMethodTester {
   "Invalidating MetropolisHastings" should {
 
     "calculate constrained element value used by an invalidated element" in {
 
       for (i <- 0 until 10) {
-        val universe = Universe.createNew
+        val universe = Universe.createNew()
         val p = Uniform(0, 1)("p", universe)
         val f1 = Flip(.3)("f1", universe)
         val f2 = Flip(.8)("f2", universe)
@@ -42,10 +42,10 @@ class InvalidationTest extends WordSpec with Matchers with PrivateMethodTester {
 
         val targets = List(p, f1, f2, q)
         val alg = MetropolisHastings(200000, ProposalScheme.default, targets: _*)
-        alg.start
-        alg.stop
+        alg.start()
+        alg.stop()
         alg.probability(q, true) should equal(1.0)
-        alg.kill
+        alg.kill()
       }
 
     }

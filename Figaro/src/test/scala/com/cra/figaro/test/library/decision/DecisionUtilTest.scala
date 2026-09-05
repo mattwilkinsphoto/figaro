@@ -13,8 +13,9 @@
 
 package com.cra.figaro.test.library.decision
 
-import org.scalatest.Matchers
-import org.scalatest.{ WordSpec, PrivateMethodTester }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.PrivateMethodTester
 import math.log
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
@@ -30,7 +31,7 @@ import com.cra.figaro.util._
 import com.cra.figaro.test._
 import scala.collection.mutable.Map
 
-class DecisionUtilTest extends WordSpec with Matchers {
+class DecisionUtilTest extends AnyWordSpec with Matchers {
 
   "DecisionUtil" should {
 
@@ -51,7 +52,7 @@ class DecisionUtilTest extends WordSpec with Matchers {
       val pred_d2 = getPredDecisions(dec(1), order, univ)
       val pred_d3 = getPredDecisions(dec(2), order, univ)
       assert(pred_d2 contains dec(0))
-      pred_d3 should be('empty)
+      pred_d3 should be(Symbol("empty"))
     }
 
     "return the correct successor decisions" in {
@@ -62,8 +63,8 @@ class DecisionUtilTest extends WordSpec with Matchers {
       val succ_d3 = getSuccDecisions(dec(2), order, univ)
       assert(succ_d1 contains dec(1))
       succ_d1 should have size (1)
-      succ_d2 should be('empty)
-      succ_d3 should be('empty)
+      succ_d2 should be(Symbol("empty"))
+      succ_d3 should be(Symbol("empty"))
     }
 
     "return the relevent utilities" in {

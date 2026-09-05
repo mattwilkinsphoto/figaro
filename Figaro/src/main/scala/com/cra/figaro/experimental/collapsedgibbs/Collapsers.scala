@@ -56,7 +56,7 @@ trait HeuristicCollapseStrategy extends CollapsedProbabilisticGibbs {
     //Initialize the maps that keep track of marginals and pairwise marginals.
     resetMarginals()
     //Get the initial samples.
-    for {_ <- 1 to trackingSamples} sampleAllBlocksWithTracking
+    for {_ <- 1 to trackingSamples} sampleAllBlocksWithTracking()
     //Compute the Hellinger Distances, then use them to collapse some variables.
     updateDistances()
     collapseVariables()

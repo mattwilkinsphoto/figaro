@@ -14,7 +14,7 @@
 package com.cra.figaro.test.library
 
 object Test {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     (new atomic.continuous.ContinuousTest).execute()
     (new atomic.discrete.DiscreteTest).execute()
     (new compound.CompoundTest).execute()

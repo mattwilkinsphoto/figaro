@@ -76,7 +76,7 @@ class MakeArray[T](name: Name[FixedSizeArray[T]], val numItems: Element[Int], va
 
   override def args = numItems :: (items take numItems.value).toList
 
-  override def generateValue = arrays(numItems.value)
+  override def generateValue() = arrays(numItems.value)
 
   /**
    * Return the i-th item in the list. Throws IllegalArgumentException if i is greater

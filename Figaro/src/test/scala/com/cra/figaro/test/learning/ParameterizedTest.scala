@@ -13,15 +13,15 @@
 
 package com.cra.figaro.test.learning
 
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.PrivateMethodTester
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
 import com.cra.figaro.language._
 import com.cra.figaro.language.Universe._
 import com.cra.figaro.library.atomic.continuous._
 
-class ParameterizedTest extends WordSpec with PrivateMethodTester with Matchers {
+class ParameterizedTest extends AnyWordSpec with PrivateMethodTester with Matchers {
   "A flip" when {
     "created from a beta parameter" should {
       "create a parameterized flip" in {
@@ -33,8 +33,8 @@ class ParameterizedTest extends WordSpec with PrivateMethodTester with Matchers 
     
    "converting a distribution to sufficient statistics" should {
       "return zero statistics if not associated with the input parameter" in {
-        val b1 = Beta(5, 2)
-        val b2 = Beta(5, 2)
+        val b1: AtomicBeta = Beta(5, 2)
+        val b2: AtomicBeta = Beta(5, 2)
         val f = Flip(b2)
         val statistics = f match {
           case pf: SingleParameterized[Boolean] => pf.distributionToStatistics(b1,List((0.50,true),(0.50,false)).toStream)
@@ -46,8 +46,8 @@ class ParameterizedTest extends WordSpec with PrivateMethodTester with Matchers 
       }
      
       "return statistics if associated with the input parameter" in {
-        val b1 = Beta(5, 2)
-        val b2 = Beta(5, 2)
+        val b1: AtomicBeta = Beta(5, 2)
+        val b2: AtomicBeta = Beta(5, 2)
         val f = Flip(b2)
         val statistics = f match {
           case pf: SingleParameterized[Boolean] => pf.distributionToStatistics(b2,List((0.50,true),(0.50,false)).toStream)

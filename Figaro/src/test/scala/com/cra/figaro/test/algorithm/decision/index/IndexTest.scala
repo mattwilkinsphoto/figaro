@@ -13,8 +13,9 @@
 
 package com.cra.figaro.test.algorithm.decision.index
 
-import org.scalatest.Matchers
-import org.scalatest.{ WordSpec, PrivateMethodTester }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.PrivateMethodTester
 import math.log
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
@@ -31,7 +32,7 @@ import com.cra.figaro.util._
 import com.cra.figaro.test._
 import scala.collection.immutable.Map
 
-class IndexTest extends WordSpec with Matchers {
+class IndexTest extends AnyWordSpec with Matchers {
 
   "An Index" when {
 
@@ -45,7 +46,7 @@ class IndexTest extends WordSpec with Matchers {
         val nn1 = index1.getNN(0.0, 100)
         val nn2 = index2.getNN(0.0, 100)
         val diff = nn1.diff(nn2)
-        diff should be('empty)
+        diff should be(Symbol("empty"))
       }
     }
 

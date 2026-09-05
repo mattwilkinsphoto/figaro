@@ -24,9 +24,10 @@ import com.cra.figaro.library.atomic.continuous.{Beta, Normal}
 import com.cra.figaro.library.atomic.{continuous, discrete}
 import com.cra.figaro.library.atomic.discrete.{Binomial, FromRange, Poisson}
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class RecursionDepthStrategyTest extends WordSpec with Matchers {
+class RecursionDepthStrategyTest extends AnyWordSpec with Matchers {
   "A complete recursion depth strategy" should {
     "create ranges for all components" in {
       Universe.createNew()

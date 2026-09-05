@@ -160,7 +160,7 @@ trait VariableElimination[T] extends FactoredAlgorithm[T] with OneTime {
     doElimination(allFactors, targetVariables)
   }
 
-  protected def doElimination(allFactors: List[Factor[T]], targetVariables: Seq[Variable[_]]) {
+  protected def doElimination(allFactors: List[Factor[T]], targetVariables: Seq[Variable[_]]): Unit = {
     recordingFactors = List()
     if (debug) {
       println("*****************\nStarting factors\n")

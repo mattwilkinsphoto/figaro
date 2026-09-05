@@ -1,12 +1,12 @@
 /*
  * TopSort.scala
- * 
+ *
  * Created By:      Alison O'Connor (aoconnor@cra.com)
  * Creation Date:   August 15, 2017
- * 
+ *
  * Copyright 2017 Avrom J. Pfeffer and Charles River Analytics, Inc.
  * See http://www.cra.com or email figaro@cra.com for information.
- * 
+ *
  * See http://www.github.com/p2t2/figaro for a copy of the software license.
  */
 
@@ -50,7 +50,7 @@ object TopSort {
 
     //Create a list of the original updates needed and all their recursive elements
     val elements = updatesNeeded.toList
-    if (debug) { println("No. recursive elements: " + elements.size); elements foreach (e => print(e.name + ", ")); println }
+    if (debug) { println("No. recursive elements: " + elements.size); elements foreach (e => print(e.name + ", ")); println() }
 
     //Compute the in-degree (number of incoming edges) for each of the elements
     var indegree = (elements zip elements.map(elem => topSortDirectlyUses(universe, elem, elements).size)).toMap
@@ -58,7 +58,7 @@ object TopSort {
     //Initialize the count of visited nodes as 0
     var visitedNodes = 0
 
-    //Initialize the topological ordering 
+    //Initialize the topological ordering
     var topologicalOrder: ListBuffer[Element[_]] = ListBuffer()
 
     //Start with the elements with in-degree of 0 and add them into a queue

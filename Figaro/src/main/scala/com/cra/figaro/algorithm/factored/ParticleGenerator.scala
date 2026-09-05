@@ -60,7 +60,7 @@ class ParticleGenerator(de: DensityEstimator, val numSamplesFromAtomics: Int, va
   /**
    * Clears all of the samples for elements in this sampler
    */
-  def clear() = sampleMap.clear
+  def clear() = sampleMap.clear()
 
   /**
    * Updates the samples for an element
@@ -151,7 +151,7 @@ class ParticleGenerator(de: DensityEstimator, val numSamplesFromAtomics: Int, va
       case o: OneShifter => {
         val toResample = if (beliefs.size < numSamples) {
           val resampler = new MapResampler(beliefs.map(s => (s._1, s._2)))
-          List.fill(numSamples)(1.0 / numSamples, resampler.resample)
+          List.fill(numSamples)(1.0 / numSamples, resampler.resample())
         } else {
           beliefs
         }
@@ -208,7 +208,7 @@ class ParticleGenerator(de: DensityEstimator, val numSamplesFromAtomics: Int, va
     val nextValue = if (ratio > 1) {
       newValue
     } else {
-      if (random.nextDouble < ratio) newValue else oldValue
+      if (random.nextDouble() < ratio) newValue else oldValue
     }
     nextValue
   }
@@ -241,7 +241,7 @@ object ParticleGenerator {
   /**
    * Clear all particle generators
    */
-  def clear() = samplerMap.clear
+  def clear() = samplerMap.clear()
 
   /**
    * Create a new particle generator for the given universe, using the given density estimatore, number of argument samples and total number of samples

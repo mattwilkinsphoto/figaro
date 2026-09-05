@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.library.collection
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.library.collection._
 import com.cra.figaro.language._
 import com.cra.figaro.util._
@@ -23,7 +23,7 @@ import com.cra.figaro.algorithm.sampling.Importance
 import com.cra.figaro.library.compound._
 import com.cra.figaro.algorithm.sampling.MetropolisHastings
 
-class ContainerTest extends WordSpec with Matchers {
+class ContainerTest extends AnyWordSpec with Matchers {
   "A Container" should {
     "create elements in the correct universe" in {
       val u1 = Universe.createNew()
@@ -268,7 +268,7 @@ class ContainerTest extends WordSpec with Matchers {
     "when choosing a random element, choose one of the elements uniformly at random" in {
       Universe.createNew()
       val fsa = new FixedSizeArray(2, i => Constant(i))
-      val elem = fsa.randomElement
+      val elem = fsa.randomElement()
       VariableElimination.probability(elem, 1) should be (0.5 +- 0.00000001)
     }
 

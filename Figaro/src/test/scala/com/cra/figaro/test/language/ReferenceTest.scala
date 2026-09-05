@@ -13,8 +13,9 @@
 
 package com.cra.figaro.test.language
 
-import org.scalatest.Matchers
-import org.scalatest.{ PrivateMethodTester, WordSpec }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.PrivateMethodTester
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.sampling._
@@ -26,7 +27,7 @@ import com.cra.figaro.util._
 import scala.math.log
 import com.cra.figaro.algorithm.factored.beliefpropagation.BeliefPropagation
 
-class ReferenceTest extends WordSpec with PrivateMethodTester with Matchers {
+class ReferenceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
   "A Reference" when {
 
     "created from a string with no periods" should {
@@ -632,7 +633,7 @@ class ReferenceTest extends WordSpec with PrivateMethodTester with Matchers {
     "produce the correct result with a class hierarchy with evidence" in {
       Universe.createNew()
       val myVehicle = Vehicle.generate("v1")
-      universe.assertEvidence(List(NamedEvidence("v1.size", Observation('medium))))
+      universe.assertEvidence(List(NamedEvidence("v1.size", Observation(Symbol("medium")))))
       val i1 = Apply(myVehicle, (v: Vehicle) => v.isInstanceOf[Pickup])
       val alg = VariableElimination(i1)
       alg.start()
@@ -653,7 +654,7 @@ class ReferenceTest extends WordSpec with PrivateMethodTester with Matchers {
     "produce the correct result with a class hierarchy with evidence" in {
       Universe.createNew()
       val myVehicle = Vehicle.generate("v1")
-      universe.assertEvidence(List(NamedEvidence("v1.size", Observation('medium))))
+      universe.assertEvidence(List(NamedEvidence("v1.size", Observation(Symbol("medium")))))
       val i1 = Apply(myVehicle, (v: Vehicle) => v.isInstanceOf[Pickup])
       val alg = Importance(10000, i1)
       alg.start()
@@ -674,7 +675,7 @@ class ReferenceTest extends WordSpec with PrivateMethodTester with Matchers {
     "produce the correct result with a class hierarchy with evidence" in {
       Universe.createNew()
       val myVehicle = Vehicle.generate("v1")
-      universe.assertEvidence(List(NamedEvidence("v1.size", Observation('medium))))
+      universe.assertEvidence(List(NamedEvidence("v1.size", Observation(Symbol("medium")))))
       val i1 = Apply(myVehicle, (v: Vehicle) => v.isInstanceOf[Pickup])
       val alg = MetropolisHastings(1000000, ProposalScheme.default, i1)
       alg.start()
@@ -687,22 +688,22 @@ class ReferenceTest extends WordSpec with PrivateMethodTester with Matchers {
   }
 
   class Truck extends Vehicle {
-    val size: Element[Symbol] = Select(0.25 -> 'medium, 0.75 -> 'big)("size", this)
-    lazy val capacity: Element[Int] = Chain(size, (s: Symbol) => if (s == 'big) Select(0.5 -> 1000, 0.5 -> 2000); else Constant(100))("capacity", this)
+    val size: Element[Symbol] = Select(0.25 -> Symbol("medium"), 0.75 -> Symbol("big"))("size", this)
+    lazy val capacity: Element[Int] = Chain(size, (s: Symbol) => if (s == Symbol("big")) Select(0.5 -> 1000, 0.5 -> 2000); else Constant(100))("capacity", this)
   }
 
   class Pickup extends Truck {
-    override val size: Element[Symbol] = Constant('medium)("size", this)
-    val color: Element[Symbol] = discrete.Uniform('blue, 'red)
+    override val size: Element[Symbol] = Constant(Symbol("medium"))("size", this)
+    val color: Element[Symbol] = discrete.Uniform(Symbol("blue"), Symbol("red"))
   }
 
   class TwentyWheeler extends Truck {
-    override val size: Element[Symbol] = Constant('huge)("size", this)
+    override val size: Element[Symbol] = Constant(Symbol("huge"))("size", this)
     override lazy val capacity = Constant(5000)("capacity", this)
   }
 
   class Car extends Vehicle {
-    val size = Constant('small)("size", this)
+    val size = Constant(Symbol("small"))("size", this)
   }
 
   object Vehicle {

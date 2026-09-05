@@ -67,7 +67,7 @@ trait BeliefPropagation[T] extends FactoredAlgorithm[T] {
   /**
    * Returns the log space version of the semiring (or the semiring if already in log space)
    */
-  protected def logSpaceSemiring(): LogConvertibleSemiRing[T] = if (semiring.isLog) semiring else semiring.convert
+  protected def logSpaceSemiring(): LogConvertibleSemiRing[T] = if (semiring.isLog) semiring else semiring.convert()
 
   /**
    * Elements towards which queries are directed. By default, these are the target elements.
@@ -149,39 +149,39 @@ trait BeliefPropagation[T] extends FactoredAlgorithm[T] {
    * Propagates one set of synchronous message in the graph
    */
   private def synchronousUpdate(): Unit = {
-    val updates = factorGraph.getNodes.par.flatMap { node1 =>
+    val updates = factorGraph.getNodes().par.flatMap { node1 =>
       factorGraph.getNeighbors(node1).map { node2 =>
         (node1, node2, newMessage(node1, node2))
       }
     }
     updates.foreach { u => factorGraph.update(u._1, u._2, u._3) }
     // Update the beliefs of each node
-    factorGraph.getNodes.foreach(n => beliefMap.update(n, belief(n)))
+    factorGraph.getNodes().foreach(n => beliefMap.update(n, belief(n)))
   }
 
   /**
    * Runs this belief propagation algorithm for one iteration. An iteration
    * consists of each node of the factor graph sending a message to each of its neighbors.
    */
-  def runStep() {
+  def runStep(): Unit = {
     if (debug) {
       println("Factor graph: ")
-      println(factorGraph.getNodes.map(n => n -> factorGraph.getNeighbors(n)).toMap.mkString("\n"))
+      println(factorGraph.getNodes().map(n => n -> factorGraph.getNeighbors(n)).toMap.mkString("\n"))
       println()
     }
     synchronousUpdate()
     if (debug) {
-      beliefMap.foreach(a => println(a._1 + " => " + a._2)); println
+      beliefMap.foreach(a => println(a._1.toString + " => " + a._2)); println()
       println("Factor Messages:")
-      factorGraph.getNodes.foreach { n =>
-        println(n + ": ")
+      factorGraph.getNodes().foreach { n =>
+        println(n.toString + ": ")
         println(factorGraph.getMessagesForNode(n))
       }
     }
   }
 
   override def initialize() = {
-    factorGraph.getNodes.foreach(n => beliefMap.update(n, belief(n)))
+    factorGraph.getNodes().foreach(n => beliefMap.update(n, belief(n)))
   }
 
 }
@@ -256,7 +256,7 @@ trait ProbabilisticBeliefPropagation extends BeliefPropagation[Double] {
   }
 
   private[figaro] def unmakeLogarithmic(factor: Factor[Double]): Factor[Double] = {
-    factor.mapTo((d: Double) => Math.exp(d), logSpaceSemiring().convert)
+    factor.mapTo((d: Double) => Math.exp(d), logSpaceSemiring().convert())
   }
 
   /**
@@ -275,7 +275,7 @@ trait ProbabilisticBeliefPropagation extends BeliefPropagation[Double] {
    * Find the node in the factor graph corresponding to a particular element
    */
   protected[figaro] def findNodeForElement[T](target: Element[T]): Node = {
-    val targetNode = factorGraph.getNodes.find { node =>
+    val targetNode = factorGraph.getNodes().find { node =>
       node match {
         case vn: VariableNode => {
           vn.variable match {
@@ -321,8 +321,8 @@ trait OneTimeProbabilisticBeliefPropagation extends ProbabilisticBeliefPropagati
   def iterations: Int
   def run() = {
     if (debug) {
-      val varNodes = factorGraph.getNodes.filter(_.isInstanceOf[VariableNode])
-      val allVars = (Set[Variable[_]]() /: factorGraph.getNodes)((s: Set[Variable[_]], n: Node) => {
+      val varNodes = factorGraph.getNodes().filter(_.isInstanceOf[VariableNode])
+      val allVars = (Set[Variable[_]]() /: factorGraph.getNodes())((s: Set[Variable[_]], n: Node) => {
         val a = (n match {
           case vn: VariableNode => Set(vn.variable)
           case fn: FactorNode => fn.variables
@@ -339,7 +339,7 @@ trait OneTimeProbabilisticBeliefPropagation extends ProbabilisticBeliefPropagati
         }
       }
       println("*****************\nOriginal Factors:")
-      factorGraph.getNodes.foreach { n =>
+      factorGraph.getNodes().foreach { n =>
         n match {
           case fn: FactorNode => println(factorGraph.getFactorForNode(fn).toReadableString)
           case _ =>
@@ -397,7 +397,7 @@ abstract class ProbQueryBeliefPropagation(override val universe: Universe, targe
 
   override def initialize() = {
     if (factorGraph == null) generateGraph()
-    super.initialize
+    super.initialize()
   }
 
   def computeDistribution[T](target: Element[T]): Stream[(Double, T)] = getBeliefsForElement(target).toStream

@@ -19,8 +19,8 @@ import scala.io.Source
 import com.cra.figaro.language.{Universe, Constant}
 import com.cra.figaro.library.atomic.continuous.{Beta, AtomicBeta}
 import com.cra.figaro.algorithm.learning._
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 // MXR (10-MAR-2016):
@@ -124,7 +124,7 @@ println("Training time: " + ((time1 - time0) / 1000.0))
     output.close()
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val trainingDirectoryName = "src/test/resources/BookData/Training"
     val labelFileName = "src/test/resources/BookData/Labels.txt"
     val learningFileName = "src/test/resources/BookData/LearnedModel.txt"
@@ -148,7 +148,7 @@ println("Training time: " + ((time1 - time0) / 1000.0))
   }
 }
 
-class LearningComponentTest extends WordSpec with Matchers {
+class LearningComponentTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val trainingDirectoryName = "src/test/resources/BookData/Training"
   val labelFileName = "src/test/resources/BookData/Labels.txt"

@@ -19,8 +19,8 @@
 
 package com.cra.figaro.test.library.atomic.discrete
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
@@ -29,7 +29,7 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.test.modernization.oracles.{ BinomialDistribution, GeometricDistribution, PoissonDistribution }
 
-class DiscreteTest extends WordSpec with Matchers {
+class DiscreteTest extends AnyWordSpec with Matchers {
   "A AtomicUniform" should {
     "have a value within the options with probability equal to 1 divided by the number of options" in {
       Universe.createNew()

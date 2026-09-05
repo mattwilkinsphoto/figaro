@@ -13,14 +13,14 @@
 
 package com.cra.figaro.test.book.appendixA
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.language._
 import com.cra.figaro.algorithm.sampling._
 
 object Test {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val test = Constant("Test")
     val algorithm = Importance(1000, test)
     algorithm.start()
@@ -28,7 +28,7 @@ object Test {
   }
 }
 
-class Test extends WordSpec with Matchers {
+class Test extends AnyWordSpec with Matchers {
   Universe.createNew()
   "AppendixA Importance value" should {
     "equal 1.0" taggedAs (BookExample) in {

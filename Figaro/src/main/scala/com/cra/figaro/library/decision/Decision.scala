@@ -101,9 +101,9 @@ trait Decision[T, U] extends Chain[T, U] with PolicyMaker[T, U] {
     fcn = new_fcn
 
     // Remove all factors since the old factors are now out of date
-    Variable.clearCache
+    Variable.clearCache()
     // Have to nullify the last result even if parents the same since the function changed
-    clearContext
+    clearContext()
     // Have to clear the last element in the cache since clearTempory always leaves an element in the cache
     //if (cache.nonEmpty) resizeCache(cache.last._1)    
     // Have to remove the expansion of the universe since it is out of data
@@ -145,7 +145,7 @@ object NonCachingDecision {
    * Create a NonCachingDecision with no parent that uses an approximate (kNN) PolicyMaker.
    */
   def apply[U](fcn: () => Element[U])(implicit name: Name[U], collection: ElementCollection, conversion: Int => Distance[Int]): Decision[Int, U] = {
-    new NonCachingDecision(name, Constant(0), (i: Int) => fcn(), collection) with PolicyMaker[Int, U] {
+    new NonCachingDecision[Int, U](name, Constant(0), (i: Int) => fcn(), collection) with PolicyMaker[Int, U] {
       def makePolicy(policyMap: Map[(Int, U), DecisionSample]) = DecisionPolicyNN(policyMap)
     }
   }
@@ -191,7 +191,7 @@ object CachingDecision {
    * Create a CachingDecision with no parent that uses an exact PolicyMaker.
    */
   def apply[U](fcn: () => Element[U])(implicit name: Name[U], collection: ElementCollection): Decision[Int, U] = {
-    new CachingDecision(name, Constant(0), (i: Int) => fcn(), collection) with ExactPolicyMaker[Int, U]
+    new CachingDecision[Int, U](name, Constant(0), (i: Int) => fcn(), collection) with ExactPolicyMaker[Int, U]
   }
 
    /**
@@ -230,7 +230,7 @@ object Decision {
    * Create a CachingDecision with no parent that uses an exact PolicyMaker.
    */
   def apply[U](fcn: () => Element[U])(implicit name: Name[U], collection: ElementCollection): Decision[Int, U] = {
-    new CachingDecision(name, Constant(0), (i: Int) => fcn(), collection) with ExactPolicyMaker[Int, U]
+    new CachingDecision[Int, U](name, Constant(0), (i: Int) => fcn(), collection) with ExactPolicyMaker[Int, U]
   }
 
    /**

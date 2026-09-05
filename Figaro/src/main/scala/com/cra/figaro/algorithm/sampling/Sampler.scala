@@ -55,7 +55,7 @@ trait AnytimeSampler extends Algorithm with Anytime with Sampler {
   /**
    * Override the stopUpdate function in anytime to call the sampler update function
    */
-  override def stopUpdate() = update
+  override def stopUpdate() = update()
 }
 
 /**

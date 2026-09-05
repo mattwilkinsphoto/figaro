@@ -16,14 +16,14 @@ package com.cra.figaro.test.book.chap05
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.algorithm.factored.beliefpropagation._
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object ImageRecovery {
   val pixels = Array.fill(10, 10)(Flip(0.4))
-  def setConstraint(i1: Int, j1: Int, i2: Int, j2: Int) {
+  def setConstraint(i1: Int, j1: Int, i2: Int, j2: Int): Unit = {
     val pixel1 = pixels(i1)(j1)
     val pixel2 = pixels(i2)(j2)
     val pair = ^^(pixel1, pixel2)
@@ -49,7 +49,7 @@ object ImageRecovery {
     }
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
   val data =
     """00?000?000
        0?010?0010
@@ -77,7 +77,7 @@ object ImageRecovery {
   }
 }
 
-class ImageRecoveryTest extends WordSpec with Matchers {
+class ImageRecoveryTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Image Recovery" should {
     "produce the correct results" taggedAs (BookExample, NonDeterministic) in {

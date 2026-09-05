@@ -19,8 +19,8 @@
 
 package com.cra.figaro.test.learning
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm.learning._
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous._
@@ -29,7 +29,7 @@ import argonaut._, Argonaut._
 import com.cra.figaro.library.atomic.continuous.Dirichlet
 import com.cra.figaro.library.atomic.continuous.Beta
 import com.cra.figaro.patterns.learning._
-class SerializationTest extends WordSpec with Matchers {
+class SerializationTest extends AnyWordSpec with Matchers {
   
   "A Beta parameter" should {
     "serialize its name and alpha and beta values" in {
@@ -90,9 +90,9 @@ class SerializationTest extends WordSpec with Matchers {
   "A parameter collection" should {
     "serialize and deserialize set of parameters" in{
       val m = ModelParameters()
-      val b1 = Beta(1,5)("b1",m)
+      val b1: AtomicBeta = Beta(1,5)("b1",m)
       val d1 = Dirichlet(3,2,4,1)("d1",m)
-      val b2 = Beta(2,2)("b2",m)
+      val b2: AtomicBeta = Beta(2,2)("b2",m)
       val d2 = Dirichlet(1,2,3,4,5,6)("d2",m)
       val jsonParameters = m.asJson
       

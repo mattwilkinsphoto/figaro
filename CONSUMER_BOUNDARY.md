@@ -10,7 +10,7 @@ The consumer should depend on a compiled, versioned JVM artifact rather than sou
 libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "<released-version>"
 ```
 
-Java consumers will use the corresponding binary artifact (`figaro_2.13` for the modernized line) together with its declared Scala/runtime dependencies. The published POM is the dependency contract.
+Java consumers will use the corresponding binary artifact (`figaro_3` for the modernized line) together with its declared Scala/runtime dependencies. The published POM is the dependency contract.
 
 ## Release requirements before traffic integration
 

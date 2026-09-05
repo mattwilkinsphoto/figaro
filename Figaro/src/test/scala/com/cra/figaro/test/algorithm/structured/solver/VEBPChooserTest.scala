@@ -12,7 +12,8 @@
  */
 package com.cra.figaro.test.algorithm.structured.solver
 
-import org.scalatest.{WordSpec, Matchers}
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.algorithm.factored.factors.Factor
@@ -23,7 +24,7 @@ import com.cra.figaro.algorithm.structured.strategy.solve._
 import com.cra.figaro.algorithm.structured._
 import com.cra.figaro.algorithm.structured.solver._
 
-class VEBPChooserTest extends WordSpec with Matchers {
+class VEBPChooserTest extends AnyWordSpec with Matchers {
   "Choosing VE or BP with a high score threshold so VE is chosen" when {
     "given a flat model with no conditions or constraints" should {
       "produce the correct result over a single element" in {

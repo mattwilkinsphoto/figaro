@@ -13,19 +13,18 @@
 
 package com.cra.figaro.test.algorithm.factored.factors
 
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.PrivateMethodTester
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language._
 import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.library.atomic.discrete.FromRange
 import com.cra.figaro.util._
 import com.cra.figaro.algorithm.lazyfactored.LazyValues
 import com.cra.figaro.language.Element.toIntElement
-import scala.reflect.runtime.universe
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
-class FactorPerformanceTest extends WordSpec with Matchers with PrivateMethodTester {
+class FactorPerformanceTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   val factorSize = 75
   val analyze = true

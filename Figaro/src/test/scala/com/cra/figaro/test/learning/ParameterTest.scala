@@ -13,14 +13,14 @@
 
 package com.cra.figaro.test.learning
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm.learning._
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous._
 import com.cra.figaro.library.compound._
 
-class ParameterTest extends WordSpec with Matchers {
+class ParameterTest extends AnyWordSpec with Matchers {
   "A Beta parameter" should {
 
     "not forget its sufficient statistics when placed in apply" in {
@@ -48,7 +48,7 @@ class ParameterTest extends WordSpec with Matchers {
       val numberOfIterations = 2
 
       val algorithm = EMWithVE(numberOfIterations, b)
-      algorithm.start
+      algorithm.start()
     }
 
    "properly calculate sufficient statistics" in {
@@ -66,14 +66,14 @@ class ParameterTest extends WordSpec with Matchers {
     "properly calculate expected value" in {
       val b = Beta(1, 1)
       b.expectedValue should equal(0.5)
-      val b2 = Beta(3, 2)
+      val b2: AtomicBeta = Beta(3, 2)
       b2.expectedValue should be(0.6 +- 0.001)
     }
 
     "properly calculate MAP value" in {
       val b = Beta(1, 1)
       b.MAPValue should equal(0.5)
-      val b2 = Beta(3, 2)
+      val b2: AtomicBeta = Beta(3, 2)
       b2.MAPValue should be((2.0 / 3.0) +- 0.001)
     }
     

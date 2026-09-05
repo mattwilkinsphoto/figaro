@@ -18,9 +18,10 @@ import com.cra.figaro.algorithm.structured.strategy.range.SamplingRanger
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.{Normal, Uniform}
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class TopDownStrategyTest extends WordSpec with Matchers {
+class TopDownStrategyTest extends AnyWordSpec with Matchers {
   "A top-down refining strategy" should {
     "update ranges to be consistent" in {
       Universe.createNew()

@@ -220,7 +220,7 @@ class LazyValues(universe: Universe, paramaterized: Boolean = false) {
         case _: Atomic[_] =>
           val values =
             for { i <- 1 to abstraction.numAbstractPoints * abstraction.numConcretePointsPerAbstractPoint }
-              yield element.generateValue(element.generateRandomness)
+              yield element.generateValue(element.generateRandomness())
           (values.toList, false)
         case _ =>
           val values = concreteValues(element, depth, numArgSamples, numTotalSamples)
@@ -411,7 +411,7 @@ object LazyValues {
 
   var debug = false
 
-  def clear(universe: Universe) {
+  def clear(universe: Universe): Unit = {
     expansions.get(universe) match {
       case Some(e) => {
         e.memoValues.clear()

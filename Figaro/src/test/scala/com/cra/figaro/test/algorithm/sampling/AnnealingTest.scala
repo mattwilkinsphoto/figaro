@@ -14,8 +14,8 @@
 package com.cra.figaro.test.algorithm.sampling
 
 import org.scalatest._
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.language._
@@ -26,7 +26,7 @@ import scala.util.Random
 import com.cra.figaro.library.atomic.discrete.SwitchingFlip
 import com.cra.figaro.library.compound.If
 
-class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
+class AnnealingTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   def build1(n: Int, prev: List[Element[Double]]): List[Element[Double]] = if (n == 0) return prev else build1(n - 1, prev :+ Normal(prev.last, 1.0))
 
@@ -46,7 +46,7 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
       Thread.sleep(500)
       annealer.stop()
       elems.foreach { e => annealer.mostLikelyValue(e) should be > Double.MinValue }
-      annealer.kill
+      annealer.kill()
     }
 
     "converge to the most likely value" in {
@@ -60,7 +60,7 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
         val a = Universe.universe.getElementByReference[(Boolean, Boolean)]("a" + i)
         annealer.mostLikelyValue(a) should equal(true, true)
       }
-      annealer.kill
+      annealer.kill()
     }
 
     "converge to the most likely value with an interval using anytime" in {
@@ -74,7 +74,7 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
         val a = Universe.universe.getElementByReference[(Boolean, Boolean)]("a" + i)
         annealer.mostLikelyValue(a) should equal(true, true)
       }
-      annealer.kill
+      annealer.kill()
     }
 
     "converge to the most likely value with an interval using one-time" in {
@@ -87,7 +87,7 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
         val a = Universe.universe.getElementByReference[(Boolean, Boolean)]("a" + i)
         annealer.mostLikelyValue(a) should equal(true, true)
       }
-      annealer.kill
+      annealer.kill()
     }
 
     "produce higher temperatue with higher k" in {
@@ -104,8 +104,8 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
 
       temp2 should be > temp1
 
-      annealer1.kill
-      annealer2.kill
+      annealer1.kill()
+      annealer2.kill()
     }
 
     "produce higher temperatue with higher k with burn-in" in {
@@ -122,8 +122,8 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
 
       temp2 should be > temp1
 
-      annealer1.kill
-      annealer2.kill
+      annealer1.kill()
+      annealer2.kill()
     }
 
     "increase the temperature with more iterations" in {
@@ -132,17 +132,17 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
       val annealer1 = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0))
       annealer1.start()
       Thread.sleep(250)
-      annealer1.stop
+      annealer1.stop()
       val temp1 = annealer1.getTemperature
 
       annealer1.resume()
       Thread.sleep(250)
-      annealer1.stop
+      annealer1.stop()
 
       val temp2 = annealer1.getTemperature
 
       temp2 should be > temp1
-      annealer1.kill
+      annealer1.kill()
     }
 
     "increase the temperature with more iterations, including with burn-in" in {
@@ -151,17 +151,17 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
       val annealer1 = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0), 100)
       annealer1.start()
       Thread.sleep(250)
-      annealer1.stop
+      annealer1.stop()
       val temp1 = annealer1.getTemperature
 
       annealer1.resume()
       Thread.sleep(250)
-      annealer1.stop
+      annealer1.stop()
 
       val temp2 = annealer1.getTemperature
 
       temp2 should be > temp1
-      annealer1.kill
+      annealer1.kill()
     }
 
   }
@@ -214,10 +214,10 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
 
     def buildComplicatedModel(): Universe = {
       val u = Universe.createNew()
-      val flips = Seq.fill(1000)(Math.pow(0.01, Random.nextDouble)).map(SwitchingFlip(_))
+      val flips = Seq.fill(1000)(Math.pow(0.01, Random.nextDouble())).map(SwitchingFlip(_))
       val ifs = for ((f, i) <- flips.zipWithIndex) yield {
-        val fi = If(f, SwitchingFlip(Math.pow(0.01, Random.nextDouble)), Constant(false))(i.toString(), u)
-        if (Random.nextDouble > 0.80) fi.observe(Random.nextBoolean())
+        val fi = If(f, SwitchingFlip(Math.pow(0.01, Random.nextDouble())), Constant(false))(i.toString(), u)
+        if (Random.nextDouble() > 0.80) fi.observe(Random.nextBoolean())
       }
       u
     }
@@ -226,18 +226,18 @@ class AnnealingTest extends WordSpec with Matchers with PrivateMethodTester {
       try {
         val u = buildComplicatedModel()
         val annealer = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0))(u)
-        if (annealer.isActive) annealer.resume else annealer.start
+        if (annealer.isActive) annealer.resume() else annealer.start()
         Thread.sleep(100)
         annealer.stop()
         for (i <- 1 to 1000) {
-          if (annealer.isActive) annealer.resume else annealer.start
+          if (annealer.isActive) annealer.resume() else annealer.start()
           Thread.sleep(25)
           annealer.stop()
           for (i <- 0 until 1000) {
             annealer.mostLikelyValue(u.getElementByReference[Boolean](i.toString()))
           }
         }
-        annealer.kill
+        annealer.kill()
       } catch {
         case knf: Exception => fail("running algorithm should not produce exceptions.")
         case _: Throwable => ()

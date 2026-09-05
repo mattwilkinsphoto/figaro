@@ -44,14 +44,14 @@ abstract class Importance(universe: Universe, targets: Element[_]*)
   private var numSamples = 0
   def getSamples() = numSamples
 
-  override protected def resetCounts() {
+  override protected def resetCounts(): Unit = {
     super.resetCounts()
     numRejections = 0
     logSuccessWeight = 0.0
     numSamples = 0
   }
 
-  override def kill () {
+  override def kill (): Unit = {
     super.kill()
     lw.clearCache()
     lw.deregisterDependencies()
@@ -132,7 +132,7 @@ object Importance {
        */
       override def probabilityOfEvidence(evidence: List[NamedEvidence[_]]): Double = {
         val logPartition = logProbEvidence
-        universe.assertEvidence(evidence)
+        this.universe.assertEvidence(evidence)
         if (active) kill()
         start()
         Math.exp(logProbEvidence - logPartition)
@@ -161,7 +161,7 @@ object Importance {
      * Use IS to sample the joint posterior distribution of several variables
      */
   def sampleJointPosterior(targets: Element[_]*)(implicit universe: Universe): Stream[List[Any]] = {
-    val jointElement = Container(targets: _*).foldLeft(List[Any]())((l: List[Any], i: Any) => l :+ i)
+    val jointElement = Container[Any](targets.asInstanceOf[Seq[Element[Any]]]*).foldLeft(List[Any]())((l: List[Any], i: Any) => l :+ i)
     val alg = Importance(10000, jointElement)(universe)
     alg.start()
     val posterior = alg.sampleFromPosterior(jointElement)

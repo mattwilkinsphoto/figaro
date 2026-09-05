@@ -18,8 +18,8 @@ import com.cra.figaro.library.atomic.continuous.Normal
 import com.cra.figaro.library.atomic.discrete.{FromRange, Poisson}
 import com.cra.figaro.library.compound.{If, ^^}
 import com.cra.figaro.algorithm.filtering.ParticleFilter
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
@@ -61,7 +61,7 @@ object RestaurantMonitoring {
     next
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val arrivingObservation = List(None, None, Some(1), None, None, Some(2), None, Some(0), Some(3), None, None, None, Some(1))
     val alg = ParticleFilter(initial, nextUniverse, 10000)
     alg.start()
@@ -80,7 +80,7 @@ object RestaurantMonitoring {
   }
 }
 
-class RestaurantMonitoringTest extends WordSpec with Matchers {
+class RestaurantMonitoringTest extends AnyWordSpec with Matchers {
   "Restaurant Monitoring" should {
     "produce the correct results" taggedAs (BookExample, NonDeterministic) in {
       val arrivingObservation = List(None, None, Some(1), None, None, Some(2), None, Some(0), Some(3), None, None, None, Some(1))

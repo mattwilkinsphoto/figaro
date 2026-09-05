@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.library.compound._
@@ -25,9 +25,9 @@ import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 import com.cra.figaro.test.tags.NonDeterministic
 
-class HierarchyTest extends WordSpec with Matchers {
+class HierarchyTest extends AnyWordSpec with Matchers {
 
-  var universe = Universe.createNew
+  var universe = Universe.createNew()
 
   "A simple HierarchyTest" should {
     "produce the correct probability under variable elimination" taggedAs (Example, NonDeterministic) in {
@@ -58,23 +58,23 @@ class HierarchyTest extends WordSpec with Matchers {
   }
 
   class Truck extends Vehicle {
-    val size: Element[Symbol] = Select(0.25 -> 'medium, 0.75 -> 'big)("size", this)
+    val size: Element[Symbol] = Select(0.25 -> Symbol("medium"), 0.75 -> Symbol("big"))("size", this)
     val speed: Element[Int] = Uniform(50, 60, 70)("speed", this)
-    override lazy val capacity: Element[Int] = Chain(size, (s: Symbol) => if (s == 'big) Select(0.5 -> 1000, 0.5 -> 2000); else Constant(100))("capacity", this)
+    override lazy val capacity: Element[Int] = Chain(size, (s: Symbol) => if (s == Symbol("big")) Select(0.5 -> 1000, 0.5 -> 2000); else Constant(100))("capacity", this)
   }
 
   class Pickup extends Truck {
     override val speed: Element[Int] = Uniform(70, 80)("speed", this)
-    override val size: Element[Symbol] = Constant('medium)("size", this)
+    override val size: Element[Symbol] = Constant(Symbol("medium"))("size", this)
   }
 
   class TwentyWheeler extends Truck {
-    override val size: Element[Symbol] = Constant('huge)("size", this)
+    override val size: Element[Symbol] = Constant(Symbol("huge"))("size", this)
     override lazy val capacity = Constant(5000)("capacity", this)
   }
 
   class Car extends Vehicle {
-    val size = Constant('small)("size", this)
+    val size = Constant(Symbol("small"))("size", this)
     val speed = Uniform(70, 80)("speed", this)
   }
 
@@ -100,15 +100,15 @@ class HierarchyTest extends WordSpec with Matchers {
   }
 
   def test(algorithmCreator: (Element[Boolean], Element[String]) => ProbQueryAlgorithm): Unit = {
-    universe = Universe.createNew
+    universe = Universe.createNew()
     val myVehicle = Vehicle.generate("v1")
     val name = shortClassName(myVehicle)
-    universe.assertEvidence(List(NamedEvidence("v1.size", Observation('medium))))
+    universe.assertEvidence(List(NamedEvidence("v1.size", Observation(Symbol("medium")))))
     val isPickup = Apply(myVehicle, (v: Vehicle) => v.isInstanceOf[Pickup])
     val alg = algorithmCreator(isPickup, name)
     alg.start()
     alg.stop()
     alg.probability(isPickup, true) should be(.666 +- 0.02)
-    alg.kill
+    alg.kill()
   }
 }

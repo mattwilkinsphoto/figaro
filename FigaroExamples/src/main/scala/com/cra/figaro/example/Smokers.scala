@@ -36,10 +36,10 @@ object Smokers {
     ^^(p1.smokes, p2.smokes).setConstraint(smokingInfluence)
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val alg = MetropolisHastings(20000, ProposalScheme.default, alice.smokes)
     alg.start()
     println("Probability of Alice smoking: " + alg.probability(alice.smokes, true))
-    alg.kill
+    alg.kill()
   }
 }

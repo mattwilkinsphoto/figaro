@@ -19,8 +19,8 @@
 
 package com.cra.figaro.test.algorithm
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.factored.factors._
@@ -31,7 +31,7 @@ import com.cra.figaro.library.compound._
 import com.cra.figaro.test.tags.NonDeterministic
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
-class AbstractionTest extends WordSpec with Matchers {
+class AbstractionTest extends AnyWordSpec with Matchers {
   "A regular discretization" should {
     "select to an ordered range with the specified number of elements in which the bins " +
       "are of equal size" in {
@@ -382,7 +382,7 @@ class AbstractionTest extends WordSpec with Matchers {
        * Therefore flip should be around 0.4 for true.
        */
       ve.probability(flip)(b => b) should be(0.4 +- 0.02)
-      ve.kill
+      ve.kill()
     }
   }
 }

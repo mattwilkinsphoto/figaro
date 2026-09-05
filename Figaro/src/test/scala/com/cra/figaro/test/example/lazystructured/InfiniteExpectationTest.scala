@@ -19,9 +19,10 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.{AtomicBeta, Beta}
 import com.cra.figaro.test.tags.Example
 import org.apache.commons.math3.distribution.BetaDistribution
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class InfiniteExpectationTest extends WordSpec with Matchers {
+class InfiniteExpectationTest extends AnyWordSpec with Matchers {
   "Lazy inference on a model with infinite expected recursion" should {
     "converge to the posterior mean of the Beta" taggedAs Example in {
       val model = new InfiniteExpectationModel
@@ -77,12 +78,12 @@ class InfiniteExpectationTest extends WordSpec with Matchers {
     val dist = new BetaDistribution(beta.aValue, beta.bValue)
 
     // This is not fully refinable because it acts on an element that has infinite range
-    override def fullyRefinable() = false
+    override def fullyRefinable = false
 
     // Total number of values (bins) to use at the current iteration
     var totalValues: Int = 0
 
-    override def discretize() = {
+    override def discretize = {
       // Take additional values each iteration
       totalValues += valuesPerIteration
       // Make equally-spaced bins, each weighted by the prior probability of sampling from that bin

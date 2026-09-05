@@ -19,8 +19,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
 import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.algorithm.learning.EMWithBP
@@ -33,7 +33,7 @@ import com.cra.figaro.patterns.learning.ModelParameters
 import com.cra.figaro.patterns.learning.ParameterCollection
 import com.cra.figaro.test.tags.Example
 
-class FairDiceTest extends WordSpec with Matchers {
+class FairDiceTest extends AnyWordSpec with Matchers {
   "A simple FairDiceTest" should {
     "produce the correct probability under expectation maximization" taggedAs (Example) in {
       test()
@@ -75,7 +75,7 @@ class FairDiceTest extends WordSpec with Matchers {
     (1, 3, 7), (1, 3, 7), (1, 2, 3))
 
 
-  def test() {
+  def test(): Unit = {
     val params = ModelParameters()
     val outcomes = List(1, 2, 3, 4, 5, 6)
     /*
@@ -94,8 +94,8 @@ class FairDiceTest extends WordSpec with Matchers {
     val numberOfEMIterations = 10
     val numberOfBPIterations = 10
     val algorithm = EMWithBP(numberOfEMIterations, numberOfBPIterations, params)
-    algorithm.start
-    algorithm.stop
+    algorithm.start()
+    algorithm.stop()
 
     println("The probabilities of seeing each side of d_1 are: ")
 
@@ -119,6 +119,6 @@ class FairDiceTest extends WordSpec with Matchers {
     (ve.probability(d3)(_ == outcomes(5)) > .8) should be(true)
 
     ve.kill()
-    algorithm.kill
+    algorithm.kill()
   }
 }

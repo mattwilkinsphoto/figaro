@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm.decision._
@@ -26,7 +26,7 @@ import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 import com.cra.figaro.ndtest._
 
-class MultiDecisionTest extends WordSpec with Matchers {
+class MultiDecisionTest extends AnyWordSpec with Matchers {
 
   def propmaker = (mv: Universe, e: Element[_]) => ProposalScheme.default(mv)
 
@@ -113,7 +113,7 @@ class MultiDecisionTest extends WordSpec with Matchers {
       Found.getPolicy(2).value,
       Test.getPolicy(0).value)
 
-    alg.kill
+    alg.kill()
 
     result
   }

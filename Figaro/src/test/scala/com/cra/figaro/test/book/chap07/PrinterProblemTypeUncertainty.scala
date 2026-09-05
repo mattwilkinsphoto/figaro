@@ -16,43 +16,43 @@ package com.cra.figaro.test.book.chap07
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.algorithm.factored.VariableElimination
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 object PrinterProblemTypeUncertainty extends ElementCollection {
   abstract class Printer extends ElementCollection {
     val powerButtonOn = Flip(0.95)("power button on", this)
 
-    val paperFlow = Select(0.6 -> 'smooth, 0.2 -> 'uneven, 0.2 -> 'jammed)
+    val paperFlow = Select(0.6 -> Symbol("smooth"), 0.2 -> Symbol("uneven"), 0.2 -> Symbol("jammed"))
     val paperJamIndicatorOn =
       If(powerButtonOn,
          CPD(paperFlow,
-             'smooth -> Flip(0.1),
-             'uneven -> Flip(0.3),
-             'jammed -> Flip(0.99)),
+             Symbol("smooth") -> Flip(0.1),
+             Symbol("uneven") -> Flip(0.3),
+             Symbol("jammed") -> Flip(0.99)),
          Constant(false))
 
     val state: Element[Symbol]
   }
 
   class LaserPrinter extends Printer {
-    val tonerLevel = Select(0.7 -> 'high, 0.2 -> 'low, 0.1 -> 'out)
+    val tonerLevel = Select(0.7 -> Symbol("high"), 0.2 -> Symbol("low"), 0.1 -> Symbol("out"))
     val tonerLowIndicatorOn =
       If(powerButtonOn,
          CPD(tonerLevel,
-             'high -> Flip(0.2),
-             'low -> Flip(0.6),
-             'out -> Flip(0.99)),
+             Symbol("high") -> Flip(0.2),
+             Symbol("low") -> Flip(0.6),
+             Symbol("out") -> Flip(0.99)),
          Constant(false))
     val state =
       Apply(powerButtonOn, tonerLevel, paperFlow,
             (power: Boolean, toner: Symbol, paper: Symbol) => {
               if (power) {
-                if (toner == 'high && paper == 'smooth) 'good
-                else if (toner == 'out || paper == 'out) 'out
-                else 'poor
-              } else 'out
+                if (toner == Symbol("high") && paper == Symbol("smooth")) Symbol("good")
+                else if (toner == Symbol("out") || paper == Symbol("out")) Symbol("out")
+                else Symbol("poor")
+              } else Symbol("out")
             }
       )
   }
@@ -65,20 +65,20 @@ object PrinterProblemTypeUncertainty extends ElementCollection {
       Apply(powerButtonOn, inkCartridgeEmpty, cloggedNozzle, paperFlow,
             (power: Boolean, ink: Boolean, nozzle: Boolean, paper: Symbol) => {
               if (power && !ink && !nozzle) {
-                if (paper == 'smooth) 'good
-                else if (paper == 'uneven) 'poor
-                else 'out
-              } else 'out
+                if (paper == Symbol("smooth")) Symbol("good")
+                else if (paper == Symbol("uneven")) Symbol("poor")
+                else Symbol("out")
+              } else Symbol("out")
             }
       )
   }
 
   class Software {
-    val state = Select(0.8 -> 'correct, 0.15 -> 'glitchy, 0.05 -> 'crashed)
+    val state = Select(0.8 -> Symbol("correct"), 0.15 -> Symbol("glitchy"), 0.05 -> Symbol("crashed"))
   }
 
   class Network {
-    val state = Select(0.7 -> 'up, 0.2 -> 'intermittent, 0.1 -> 'down)
+    val state = Select(0.7 -> Symbol("up"), 0.2 -> Symbol("intermittent"), 0.1 -> Symbol("down"))
   }
 
   class User {
@@ -88,28 +88,28 @@ object PrinterProblemTypeUncertainty extends ElementCollection {
   class PrintExperience(printer: Printer, software: Software, network: Network, user: User) extends ElementCollection {
     val numPrintedPages =
       RichCPD(user.commandCorrect, network.state, software.state, printer.state,
-          (*, *, *, OneOf('out)) -> Constant('zero),
-          (*, *, OneOf('crashed), *) -> Constant('zero),
-          (*, OneOf('down), *, *) -> Constant('zero),
-          (OneOf(false), *, *, *) -> Select(0.3 -> 'zero, 0.6 -> 'some, 0.1 -> 'all),
-          (OneOf(true), *, *, *) -> Select(0.01 -> 'zero, 0.01 -> 'some, 0.98 -> 'all))
+          (*, *, *, OneOf(Symbol("out"))) -> Constant(Symbol("zero")),
+          (*, *, OneOf(Symbol("crashed")), *) -> Constant(Symbol("zero")),
+          (*, OneOf(Symbol("down")), *, *) -> Constant(Symbol("zero")),
+          (OneOf(false), *, *, *) -> Select(0.3 -> Symbol("zero"), 0.6 -> Symbol("some"), 0.1 -> Symbol("all")),
+          (OneOf(true), *, *, *) -> Select(0.01 -> Symbol("zero"), 0.01 -> Symbol("some"), 0.98 -> Symbol("all")))
     val printsQuickly =
       Chain(network.state, software.state,
             (network: Symbol, software: Symbol) =>
-              if (network == 'down || software == 'crashed) Constant(false)
-              else if (network == 'intermittent || software == 'glitchy) Flip(0.5)
+              if (network == Symbol("down") || software == Symbol("crashed")) Constant(false)
+              else if (network == Symbol("intermittent") || software == Symbol("glitchy")) Flip(0.5)
               else Flip(0.9))
     val goodPrintQuality =
       CPD(printer.state,
-          'good -> Flip(0.95),
-          'poor -> Flip(0.3),
-          'out -> Constant(false))
+          Symbol("good") -> Flip(0.95),
+          Symbol("poor") -> Flip(0.3),
+          Symbol("out") -> Constant(false))
     val summary =
       Apply(numPrintedPages, printsQuickly, goodPrintQuality,
             (pages: Symbol, quickly: Boolean, quality: Boolean) =>
-            if (pages == 'zero) 'none
-            else if (pages == 'some || !quickly || !quality) 'poor
-            else 'excellent)("summary", this)
+            if (pages == Symbol("zero")) Symbol("none")
+            else if (pages == Symbol("some") || !quickly || !quality) Symbol("poor")
+            else Symbol("excellent"))("summary", this)
   }
 
   val myPrinter = Select(0.3 -> new LaserPrinter, 0.7 -> new InkjetPrinter)("my printer", this)
@@ -119,9 +119,9 @@ object PrinterProblemTypeUncertainty extends ElementCollection {
   val myExperience =
     Apply(myPrinter, (p: Printer) => new PrintExperience(p, mySoftware, myNetwork, me))("print experience", this)
 
-  def step1() {
+  def step1(): Unit = {
     val summary = get[Symbol]("print experience.summary")
-    summary.observe('none)
+    summary.observe(Symbol("none"))
 
     val powerButtonOn = get[Boolean]("my printer.power button on")
     val isLaser = Apply(myPrinter, (p: Printer) => p.isInstanceOf[LaserPrinter])
@@ -133,15 +133,15 @@ object PrinterProblemTypeUncertainty extends ElementCollection {
     alg.kill()
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     step1()
   }
 }
 
-class PrinterProblemTypeUncertaintyTest extends WordSpec with Matchers {
+class PrinterProblemTypeUncertaintyTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val summary = PrinterProblemTypeUncertainty.get[Symbol]("print experience.summary")
-  summary.observe('none)
+  summary.observe(Symbol("none"))
   
   val powerButtonOn = PrinterProblemTypeUncertainty.get[Boolean]("my printer.power button on")
   val isLaser = Apply(PrinterProblemTypeUncertainty.myPrinter, (p: PrinterProblemTypeUncertainty.Printer) => p.isInstanceOf[PrinterProblemTypeUncertainty.LaserPrinter])

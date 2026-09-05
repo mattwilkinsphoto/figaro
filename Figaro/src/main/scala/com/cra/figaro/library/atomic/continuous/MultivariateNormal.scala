@@ -30,14 +30,14 @@ class AtomicMultivariateNormal(name: Name[List[Double]], val means: List[Double]
    */
   private[figaro] abstract class RandomGeneratorWrapper extends RandomGenerator {
     val rng: scala.util.Random
-    def nextBoolean(): Boolean = rng.nextBoolean
+    def nextBoolean(): Boolean = rng.nextBoolean()
     def nextBytes(bytes: Array[Byte]) = rng.nextBytes(bytes)
-    def nextDouble() = rng.nextDouble
-    def nextFloat() = rng.nextFloat
-    def nextGaussian() = rng.nextGaussian
-    def nextInt() = rng.nextInt
+    def nextDouble() = rng.nextDouble()
+    def nextFloat() = rng.nextFloat()
+    def nextGaussian() = rng.nextGaussian()
+    def nextInt() = rng.nextInt()
     def nextInt(n: Int) = rng.nextInt(n)
-    def nextLong() = rng.nextLong
+    def nextLong() = rng.nextLong()
     def setSeed(seed: Int) = {}
     def setSeed(seed: Array[Int]) = {}
     def setSeed(seed: Long) = {}

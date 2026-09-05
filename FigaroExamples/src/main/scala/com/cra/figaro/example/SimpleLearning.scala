@@ -80,27 +80,27 @@ object SimpleLearning {
   }
 
   class BayesianParameters(universe: Universe) extends Parameters(universe) {
-    val b1 = Beta(1, 1)("b1", universe)
-    val b2 = Beta(1, 1)("b2", universe)
-    val b3 = Beta(1, 1)("b3", universe)
-    val b4 = Beta(1, 1)("b4", universe)
-    val b5 = Beta(1, 1)("b5", universe)
-    val b6 = Beta(1, 1)("b6", universe)
-    val b7 = Beta(1, 1)("b7", universe)
-    val b8 = Beta(1, 1)("b8", universe)
-    val b9 = Beta(1, 1)("b9", universe)
+    val b1: AtomicBeta = Beta(1, 1)("b1", universe)
+    val b2: AtomicBeta = Beta(1, 1)("b2", universe)
+    val b3: AtomicBeta = Beta(1, 1)("b3", universe)
+    val b4: AtomicBeta = Beta(1, 1)("b4", universe)
+    val b5: AtomicBeta = Beta(1, 1)("b5", universe)
+    val b6: AtomicBeta = Beta(1, 1)("b6", universe)
+    val b7: AtomicBeta = Beta(1, 1)("b7", universe)
+    val b8: AtomicBeta = Beta(1, 1)("b8", universe)
+    val b9: AtomicBeta = Beta(1, 1)("b9", universe)
   }
 
   class LearnableParameters(universe: Universe) extends Parameters(universe) {
-    val b1 = BetaParameter(1, 1)("b1", universe)
-    val b2 = BetaParameter(1, 1)("b2", universe)
-    val b3 = BetaParameter(1, 1)("b3", universe)
-    val b4 = BetaParameter(1, 1)("b4", universe)
-    val b5 = BetaParameter(1, 1)("b5", universe)
-    val b6 = BetaParameter(1, 1)("b6", universe)
-    val b7 = BetaParameter(1, 1)("b7", universe)
-    val b8 = BetaParameter(1, 1)("b8", universe)
-    val b9 = BetaParameter(1, 1)("b9", universe)
+    val b1: AtomicBeta = BetaParameter(1, 1)("b1", universe)
+    val b2: AtomicBeta = BetaParameter(1, 1)("b2", universe)
+    val b3: AtomicBeta = BetaParameter(1, 1)("b3", universe)
+    val b4: AtomicBeta = BetaParameter(1, 1)("b4", universe)
+    val b5: AtomicBeta = BetaParameter(1, 1)("b5", universe)
+    val b6: AtomicBeta = BetaParameter(1, 1)("b6", universe)
+    val b7: AtomicBeta = BetaParameter(1, 1)("b7", universe)
+    val b8: AtomicBeta = BetaParameter(1, 1)("b8", universe)
+    val b9: AtomicBeta = BetaParameter(1, 1)("b9", universe)
   }
 
   var id = 0
@@ -141,7 +141,7 @@ object SimpleLearning {
     Datum(model.x.value, model.y.value, model.z.value, model.w.value)
   }
 
-  def observe(model: Model, datum: Datum) {
+  def observe(model: Model, datum: Datum): Unit = {
     if (random.nextDouble() < observationProbability) model.x.observe(datum.x)
     if (random.nextDouble() < observationProbability) model.y.observe(datum.y)
     if (random.nextDouble() < observationProbability) model.z.observe(datum.z)
@@ -235,7 +235,7 @@ object SimpleLearning {
     (new Model(learnedParameters, normalFlipConstructor), totalTime)
   }
 
-  def experiment(stream: BufferedWriter, testSet: List[Datum], scale: Int, trainingSet: List[Datum], truePredictiveAccuracy: Double) {
+  def experiment(stream: BufferedWriter, testSet: List[Datum], scale: Int, trainingSet: List[Datum], truePredictiveAccuracy: Double): Unit = {
     val numEMIterations = scale
     val numSamplesPerTrainingExample = mHScaleFactor * scale
 
@@ -278,7 +278,7 @@ object SimpleLearning {
     stream.flush()
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val time0 = System.currentTimeMillis()
     val testSet = List.fill(testSetSize)(generateDatum())
     val trainingSet = List.fill(trainingSetSize)(generateDatum())

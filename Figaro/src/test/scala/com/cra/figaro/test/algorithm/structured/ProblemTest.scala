@@ -12,14 +12,15 @@
  */
 package com.cra.figaro.test.algorithm.structured
 
-import org.scalatest.{WordSpec, Matchers}
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.library.collection.MakeArray
 import com.cra.figaro.algorithm.structured._
 import com.cra.figaro.language.Name.stringToName
 
-class ProblemTest extends WordSpec with Matchers {
+class ProblemTest extends AnyWordSpec with Matchers {
   "Adding an element to a problem" should {
     "for an ordinary element, create an initialized ordinary problem component in the collection whose problem is the given problem" in {
       Universe.createNew()

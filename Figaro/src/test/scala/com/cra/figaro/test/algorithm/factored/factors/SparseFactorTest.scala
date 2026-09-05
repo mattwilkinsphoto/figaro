@@ -13,9 +13,9 @@
 
 package com.cra.figaro.test.algorithm.factored.factors
 
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.PrivateMethodTester
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.Values
 import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.algorithm.lazyfactored.LazyValues
@@ -29,7 +29,7 @@ import com.cra.figaro.library.compound.CPD
 import com.cra.figaro.algorithm.factored.ParticleGenerator
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
-class SparseFactorTest extends WordSpec with Matchers with PrivateMethodTester {
+class SparseFactorTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   "A sparse factor" when {
     "get the same value for a given set of variable indices as was last set" in {
@@ -59,7 +59,7 @@ class SparseFactorTest extends WordSpec with Matchers with PrivateMethodTester {
       val e2 = Constant(8)
       val e3 = Select(0.2 -> "a", 0.3 -> "b", 0.5 -> "c")
       val e4 = Flip(0.7)
-      val e5 = Constant('a)
+      val e5 = Constant(Symbol("a"))
       val e6 = Select(0.1 -> 1.5, 0.9 -> 2.5)
       Values()(e1)
       Values()(e2)

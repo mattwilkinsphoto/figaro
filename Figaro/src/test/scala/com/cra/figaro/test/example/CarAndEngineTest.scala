@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm.factored._
@@ -24,7 +24,7 @@ import com.cra.figaro.language._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 
-class CarAndEngineTest extends WordSpec with Matchers {
+class CarAndEngineTest extends AnyWordSpec with Matchers {
   "A simple CarAndEngineTest" should {
     "produce the correct probability under variable elimination" taggedAs (Example) in {
       test((e1: Element[Double]) => VariableElimination(e1))
@@ -48,15 +48,15 @@ class CarAndEngineTest extends WordSpec with Matchers {
     }
 
     private class V8 extends Engine {
-      val power: Element[Symbol] = Select(0.8 -> 'high, 0.2 -> 'medium)("power", this)
+      val power: Element[Symbol] = Select(0.8 -> Symbol("high"), 0.2 -> Symbol("medium"))("power", this)
     }
 
     private class V6 extends Engine {
-      val power: Element[Symbol] = Select(0.2 -> 'high, 0.5 -> 'medium, 0.3 -> 'low)("power", this)
+      val power: Element[Symbol] = Select(0.2 -> Symbol("high"), 0.5 -> Symbol("medium"), 0.3 -> Symbol("low"))("power", this)
     }
 
     private object MySuperEngine extends V8 {
-      override val power: Element[Symbol] = Constant('high)("power", this)
+      override val power: Element[Symbol] = Constant(Symbol("high"))("power", this)
     }
 
     class Car extends ElementCollection {
@@ -64,9 +64,9 @@ class CarAndEngineTest extends WordSpec with Matchers {
 
       val speed = CPD(
         get[Symbol]("engine.power"),
-        'high -> Constant(90.0),
-        'medium -> Constant(80.0),
-        'low -> Constant(70.0))
+        Symbol("high") -> Constant(90.0),
+        Symbol("medium") -> Constant(80.0),
+        Symbol("low") -> Constant(70.0))
     }
     
     val car = new Car

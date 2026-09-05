@@ -60,7 +60,7 @@ private[index] class VPinode[T, U](parent: Node[_, _], val pivot: Distance[T], v
  *  by a DecisionAlgorithm.
  * 
  */
-class VPIndex[T <% Distance[T], U](stratMap: Map[(T, U), DecisionSample], capacity: Int) extends Index[T, U](stratMap) {
+class VPIndex[T: DistanceConversion, U](stratMap: Map[(T, U), DecisionSample], capacity: Int) extends Index[T, U](stratMap) {
 
   private def pivotSamples = 0.1
 
@@ -80,8 +80,8 @@ class VPIndex[T <% Distance[T], U](stratMap: Map[(T, U), DecisionSample], capaci
    */
   override def getNNDebug(parent: T, num: Int): Iterable[(Double, Set[(U, DecisionSample)])] = {
 
-    val NodeQueue = PriorityQueue[(Double, Node[T, (U, DecisionSample)])]()(Ordering.by(-1.0 * _._1))
-    val NNQueue = PriorityQueue[(Double, Set[(U, DecisionSample)])]()(Ordering.by(_._1))
+    val NodeQueue = PriorityQueue.empty[(Double, Node[T, (U, DecisionSample)])](using Ordering.by[(Double, Node[T, (U, DecisionSample)]), Double](x => -x._1))
+    val NNQueue = PriorityQueue.empty[(Double, Set[(U, DecisionSample)])](using Ordering.by[(Double, Set[(U, DecisionSample)]), Double](_._1))
 
     if (tree.leaf) {
       tree.oDist(parent).toList.sortBy(_._1).take(num)
@@ -127,7 +127,7 @@ class VPIndex[T <% Distance[T], U](stratMap: Map[(T, U), DecisionSample], capaci
     val numrand = max(1, pivotSamples * samples.length.toDouble).toInt
     val rpivot = random.shuffle(samples).take(numrand)
     val rsamples = random.shuffle(samples).take(numrand).unzip._1
-    val maxvarindex = (rpivot.map(s => variance(s._1, rsamples))).zipWithIndex.max._2
+    val maxvarindex = (rpivot.map(s => variance(summon[DistanceConversion[T]](s._1), rsamples))).zipWithIndex.max._2
     rpivot(maxvarindex)
   }
 
@@ -135,16 +135,16 @@ class VPIndex[T <% Distance[T], U](stratMap: Map[(T, U), DecisionSample], capaci
   private def split(parent: Node[_, _], samples: List[(T, (U, DecisionSample))]): Node[T, (U, DecisionSample)] = {
     if (samples.length < capacity) {
       val n = new VPlnode[T, (U, DecisionSample)](parent)
-      samples.foreach { s => n.addObject(s._1, s._2) }
+      samples.foreach { s => n.addObject(summon[DistanceConversion[T]](s._1), s._2) }
       n
     } else {
       val pivot = findPivot(samples)
-      val pivotdistance = samples.map(s => pivot._1.distance(s._1)).zip(samples)
+      val pivotdistance = samples.map(s => summon[DistanceConversion[T]](pivot._1).distance(s._1)).zip(samples)
       val sortedDs = pivotdistance.sortBy(_._1)
       val medianindex = sortedDs.length / 2
       val (left, right) = sortedDs.unzip._2.splitAt(medianindex)
 
-      val newnode = new VPinode[T, (U, DecisionSample)](parent, pivot._1, sortedDs(medianindex)._1)
+      val newnode = new VPinode[T, (U, DecisionSample)](parent, summon[DistanceConversion[T]](pivot._1), sortedDs(medianindex)._1)
       newnode.addChild(split(newnode, left))
       newnode.addChild(split(newnode, right))
       newnode
@@ -157,7 +157,7 @@ object VPIndex {
   /**
    * Create a VP index from a map of (parent, decision) -> DecisionSamples with the given leaf node capacity
    */
-  def apply[T <% Distance[T], U](strat: Map[(T, U), DecisionSample], capacity: Int) = {
+  def apply[T: DistanceConversion, U](strat: Map[(T, U), DecisionSample], capacity: Int) = {
     new VPIndex(strat, capacity)
   }
 }

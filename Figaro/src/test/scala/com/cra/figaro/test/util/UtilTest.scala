@@ -19,13 +19,13 @@
 
 package com.cra.figaro.test.util
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.util._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Performance
 
-class UtilTest extends WordSpec with Matchers {
+class UtilTest extends AnyWordSpec with Matchers {
   "Util.round" when {
     "given a number that is less than the lowest point" should {
       "return the lowest point" in {
@@ -69,14 +69,14 @@ class UtilTest extends WordSpec with Matchers {
   "Util.selectMultinomial" when {
     "given an index that is less than the sum of the probabilities" should {
       "select the correct item according to the index" in {
-        val m = List(0.2 -> 'foo, 0.3 -> 'bar, 0.5 -> 'baz)
-        selectMultinomial(0.4, m) should equal('bar)
+        val m = List(0.2 -> Symbol("foo"), 0.3 -> Symbol("bar"), 0.5 -> Symbol("baz"))
+        selectMultinomial(0.4, m) should equal(Symbol("bar"))
       }
     }
 
     "given an index that is greater than the sum of the probabilities" should {
       "throw InvalidMultinomialIndexException" in {
-        val m = List(0.2 -> 'foo, 0.3 -> 'bar, 0.5 -> 'baz)
+        val m = List(0.2 -> Symbol("foo"), 0.3 -> Symbol("bar"), 0.5 -> Symbol("baz"))
         an [InvalidMultinomialIndexException] should be thrownBy { selectMultinomial(1.2, m) } 
       }
     }
@@ -85,17 +85,17 @@ class UtilTest extends WordSpec with Matchers {
   "Util.sampleMultinomial" when {
     "given probabilities that sum to 1" should {
       "select an item with frequency equal to its probability" in {
-        val m = List(0.2 -> 'foo, 0.3 -> 'bar, 0.5 -> 'baz)
+        val m = List(0.2 -> Symbol("foo"), 0.3 -> Symbol("bar"), 0.5 -> Symbol("baz"))
         var numTrials = 100000
         var successes = 0
-        for { i <- 1 to numTrials } { if (sampleMultinomial(m) == 'bar) successes += 1 }
+        for { i <- 1 to numTrials } { if (sampleMultinomial(m) == Symbol("bar")) successes += 1 }
         successes.toDouble / numTrials should be(0.3 +- 0.01)
       }
     }
 
     "given probabilities that sum to less than 1" should {
       "sometimes throw LessThanOneTotalProbabilityException" in {
-        val m = List(0.2 -> 'foo, 0.3 -> 'bar, 0.4 -> 'baz)
+        val m = List(0.2 -> Symbol("foo"), 0.3 -> Symbol("bar"), 0.4 -> Symbol("baz"))
         try {
           for { i <- 1 to 100000 } { sampleMultinomial(m) }
           assert(false, "no exception thrown")

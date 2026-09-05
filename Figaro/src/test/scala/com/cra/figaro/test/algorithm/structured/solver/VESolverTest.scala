@@ -12,7 +12,8 @@
  */
 package com.cra.figaro.test.algorithm.structured.solver
 
-import org.scalatest.{ WordSpec, Matchers }
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.algorithm.factored.factors.Factor
@@ -25,7 +26,7 @@ import com.cra.figaro.algorithm.structured.solver._
 import com.cra.figaro.algorithm.structured.algorithm.structured.StructuredMPEVE
 import com.cra.figaro.library.atomic.discrete.Uniform
 
-class VESolverTest extends WordSpec with Matchers {
+class VESolverTest extends AnyWordSpec with Matchers {
   "Running VariableElimination without *" when {
     "given a flat model with no conditions or constraints" should {
       "produce the correct result over a single element" in {

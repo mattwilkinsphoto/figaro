@@ -20,7 +20,7 @@
 package com.cra.figaro.test.algorithm.sampling
 
 import org.scalatest._
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.language._
@@ -31,11 +31,12 @@ import com.cra.figaro.library.compound._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
-import org.scalatest.Matchers
-import org.scalatest.{ PrivateMethodTester, WordSpec }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.PrivateMethodTester
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language.Name.stringToName
 import com.cra.figaro.language.Reference.stringToReference
-class ParImportanceTest extends WordSpec with Matchers with PrivateMethodTester {
+class ParImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester {
   
   val numThreads = 3
   
@@ -290,7 +291,7 @@ class ParImportanceTest extends WordSpec with Matchers with PrivateMethodTester 
         universe
       }
       val i = Importance.par(gen, numThreads, 1, "f")
-      i.start
+      i.start()
     }
 
     "not suffer from memory leaks" taggedAs (Performance) in {
@@ -300,7 +301,7 @@ class ParImportanceTest extends WordSpec with Matchers with PrivateMethodTester 
         universe
       }
       val i = Importance.par(gen, numThreads, 1000000, "c")
-      i.start
+      i.start()
     }
   }
 
@@ -440,7 +441,7 @@ class ParImportanceTest extends WordSpec with Matchers with PrivateMethodTester 
 
   }
 
-  def weightedSampleTest[T](gen: Function0[Universe], target: Reference[T], predicate: T => Boolean, prob: Double) {
+  def weightedSampleTest[T](gen: Function0[Universe], target: Reference[T], predicate: T => Boolean, prob: Double): Unit = {
     val numTrials = 100000
     val tolerance = 0.01
     val algorithm = Importance.par(gen, numThreads, numTrials, target)
@@ -448,7 +449,7 @@ class ParImportanceTest extends WordSpec with Matchers with PrivateMethodTester 
     algorithm.probability(target, predicate) should be(prob +- tolerance)
   }
   
-  def probEvidenceTest(gen: Function0[Universe], prob: Double, evidence: List[NamedEvidence[_]]) {
+  def probEvidenceTest(gen: Function0[Universe], prob: Double, evidence: List[NamedEvidence[_]]): Unit = {
     val alg = Importance.par(gen, numThreads, 10000)
     alg.start()
     alg.probabilityOfEvidence(evidence) should be(prob +- 0.01)

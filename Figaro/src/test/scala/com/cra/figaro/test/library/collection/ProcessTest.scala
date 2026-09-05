@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.library.collection
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.library.collection._
 import com.cra.figaro.language._
 import com.cra.figaro.util._
@@ -22,7 +22,7 @@ import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.algorithm.sampling.Importance
 import com.cra.figaro.library.compound._
 
-class ProcessTest extends WordSpec with Matchers {
+class ProcessTest extends AnyWordSpec with Matchers {
   "A process" should {
     "create elements in the correct universe" in {
       val u1 = Universe.createNew()

@@ -19,8 +19,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.lazyfactored._
@@ -29,7 +29,7 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.compound._
 import com.cra.figaro.util._
 
-class MultiValuedTest extends WordSpec with Matchers {
+class MultiValuedTest extends AnyWordSpec with Matchers {
   "A model with multi-valued reference uncertainty" should {
     "produce the correct distribution over values under importance sampling" in {
       Universe.createNew()
@@ -64,7 +64,7 @@ class MultiValuedTest extends WordSpec with Matchers {
       alg.probability(c.sum, 4) should be(p4 +- 0.01)
       alg.probability(c.sum, 5) should be(p5 +- 0.01)
       alg.probability(c.sum, 6) should be(p6 +- 0.01)
-      alg.kill
+      alg.kill()
     }
 
     "produce the correct distribution over values under variable elimination" in {
@@ -100,7 +100,7 @@ class MultiValuedTest extends WordSpec with Matchers {
       alg.probability(c.sum, 4) should be(p4 +- 0.0000001)
       alg.probability(c.sum, 5) should be(p5 +- 0.0000001)
       alg.probability(c.sum, 6) should be(p6 +- 0.0000001)
-      alg.kill
+      alg.kill()
     }
 
     "produce the correct distribution over values under Metropolis-Hastings" in {
@@ -136,7 +136,7 @@ class MultiValuedTest extends WordSpec with Matchers {
       alg.probability(c.sum, 4) should be(p4 +- 0.01)
       alg.probability(c.sum, 5) should be(p5 +- 0.01)
       alg.probability(c.sum, 6) should be(p6 +- 0.01)
-      alg.kill
+      alg.kill()
     }
   }
 

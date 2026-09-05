@@ -19,8 +19,8 @@ import com.cra.figaro.language.{Constant, Element, Universe}
 import com.cra.figaro.algorithm.sampling.Importance
 import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.algorithm.factored.beliefpropagation.BeliefPropagation
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 // MXR (10-MAR-2016): some println statements commented out to minimize testing output
@@ -90,7 +90,7 @@ object ReasoningComponent {
     isSpamProbability
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val emailFileName = "src/test/resources/BookData/Test/TestEmail_9.txt"
     val learningFileName = "src/test/resources/BookData/LearnedModel.txt"
     val (dictionary, parameters) = loadResults(learningFileName)
@@ -99,7 +99,7 @@ object ReasoningComponent {
   }
 }
 
-class ReasoningComponentTest extends WordSpec with Matchers {
+class ReasoningComponentTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val emailFileName = "src/test/resources/BookData/Test/TestEmail_9.txt"
   val learningFileName = "src/test/resources/BookData/LearnedModel.txt"

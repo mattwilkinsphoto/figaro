@@ -22,9 +22,9 @@ package com.cra.figaro.test.algorithm.sampling
 import scala.collection.mutable.Map
 import scala.language.existentials
 
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.PrivateMethodTester
-import org.scalatest.WordSpec
+import org.scalatest.wordspec.AnyWordSpec
 
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
@@ -36,7 +36,7 @@ import com.cra.figaro.test._
 import com.cra.figaro.test.tags.NonDeterministic
 import com.cra.figaro.test.tags.Performance
 
-class MHTest extends WordSpec with Matchers with PrivateMethodTester {
+class MHTest extends AnyWordSpec with Matchers with PrivateMethodTester {
   "Anytime MetropolisHastings" should {
 
     "for a constant produce the constant with probability 1" in {

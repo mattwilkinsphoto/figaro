@@ -59,10 +59,10 @@ trait ProbEvidenceBeliefPropagation extends ProbabilisticBeliefPropagation with 
    * Compute the evidence of the model. Returns the probability of evidence on the model. This assumes that BP
    * has already been run on this algorithm instance.
    */
-  def computedResult(): Double = {
+  def computedResult: Double = {
 
-    val factorNodes = factorGraph.getNodes.filter(_.isInstanceOf[FactorNode]).toList
-    val varNodes = factorGraph.getNodes.filter(_.isInstanceOf[VariableNode]).toList
+    val factorNodes = factorGraph.getNodes().filter(_.isInstanceOf[FactorNode]).toList
+    val varNodes = factorGraph.getNodes().filter(_.isInstanceOf[VariableNode]).toList
 
     val nonZeroEvidence = factorNodes.exists(p => beliefMap(p).getContents().exists(_ != Double.NegativeInfinity))
 
@@ -114,7 +114,7 @@ def apply(myIterations: Int, evidence: List[NamedEvidence[_]])(implicit universe
       List(),
       (u: Universe, e: List[NamedEvidence[_]]) => () => ProbEvidenceSampler.computeProbEvidence(10000, e)(u)) 
       with OneTimeProbabilisticBeliefPropagation with OneTimeProbQuery with OneTimeProbEvidenceBeliefPropagation { val iterations = myIterations }
-    baseline.start
+    baseline.start()
     baseline.probAdditionalEvidence(evidence)
   }
 

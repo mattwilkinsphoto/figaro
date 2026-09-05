@@ -26,14 +26,14 @@ import com.cra.figaro.algorithm.sampling.Importance
 import com.cra.figaro.library.collection.Container
 import com.cra.figaro.library.atomic.discrete.Poisson
 import com.cra.figaro.language.Chain
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object SalesPrediction {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val products : Array[String] = Array("A","B","C","D","E")
     val numProducts = products.length
     val numRegions = products(0).length
@@ -83,7 +83,7 @@ object SalesPrediction {
   }
 }
 
-class SalesPredictionTest extends WordSpec with Matchers {
+class SalesPredictionTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Sales Prediction" should {
     val products : Array[String] = Array("A","B","C","D","E")

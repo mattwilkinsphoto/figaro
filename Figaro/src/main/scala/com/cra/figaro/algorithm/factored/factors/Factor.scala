@@ -17,7 +17,6 @@ import scala.collection.Iterable
 import scala.collection.mutable.ListBuffer
 import com.cra.figaro.language.Element
 import com.cra.figaro.algorithm.lazyfactored.Extended
-import scala.reflect.runtime.universe._
 
 /**
  * Definition of Factor <p>
@@ -54,7 +53,7 @@ trait Factor[T] {
    * Description that includes the variable list and conditional probabilities
    */
   //override def toString = "Factor(" + variables.map(_.id).mkString(",") + " " + contents.mkString(",") + ")"
-  override def toString = "Factor(" + variables.map(_.id).mkString(",") + " " + stringContents + ")"
+  override def toString = "Factor(" + variables.map(_.id).mkString(",") + " " + stringContents() + ")"
 
   /**
    * Indicates if any of this Factor's variables has Star

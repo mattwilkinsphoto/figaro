@@ -67,7 +67,7 @@ object FairDice {
     (1, 3, 7), (2, 3, 8), (2, 3, 8), (1, 2, 7), (1, 2, 7), (1, 2, 7), (2, 3, 8),
     (1, 3, 7), (1, 3, 7), (1, 2, 3))
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val params = ModelParameters()
     val outcomes = List(1, 2, 3, 4, 5, 6)
@@ -87,8 +87,8 @@ object FairDice {
     val numberOfEMIterations = 10
     val numberOfBPIterations = 10
     val algorithm = EMWithBP(numberOfEMIterations, numberOfBPIterations, params)
-    algorithm.start
-    algorithm.stop
+    algorithm.start()
+    algorithm.stop()
 
     println("The probabilities of seeing each side of d_1 are: ")
     //A little ugly with the 'asInstanceOf' here.
@@ -109,7 +109,7 @@ object FairDice {
 
 
     ve.kill()
-    algorithm.kill
+    algorithm.kill()
   }
 
 }  

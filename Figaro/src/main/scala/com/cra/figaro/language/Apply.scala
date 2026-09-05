@@ -33,7 +33,7 @@ class Apply1[T1, U](name: Name[U], val arg1: Element[T1], val fn: T1 => U, colle
   type Arg1Type = T1
 
   def generateValue() = {
-    if (arg1.value == null) arg1.generate() 
+    if (!arg1.hasValue) arg1.generate()
     fn(arg1.value)
   }
 
@@ -52,8 +52,8 @@ class Apply2[T1, T2, U](name: Name[U], val arg1: Element[T1], val arg2: Element[
   type Arg2Type = T2
 
   def generateValue() = {
-    if (arg1.value == null) arg1.generate()
-    if (arg2.value == null) arg2.generate()
+    if (!arg1.hasValue) arg1.generate()
+    if (!arg2.hasValue) arg2.generate()
     fn(arg1.value, arg2.value)
   }
 
@@ -73,9 +73,9 @@ class Apply3[T1, T2, T3, U](name: Name[U], val arg1: Element[T1], val arg2: Elem
   type Arg3Type = T3
 
   def generateValue() = {
-    if (arg1.value == null) arg1.generate()
-    if (arg2.value == null) arg2.generate()
-    if (arg3.value == null) arg3.generate()
+    if (!arg1.hasValue) arg1.generate()
+    if (!arg2.hasValue) arg2.generate()
+    if (!arg3.hasValue) arg3.generate()
     fn(arg1.value, arg2.value, arg3.value)
   }
 
@@ -96,10 +96,10 @@ class Apply4[T1, T2, T3, T4, U](name: Name[U], val arg1: Element[T1], val arg2: 
   type Arg4Type = T4
 
   def generateValue() = {
-    if (arg1.value == null) arg1.generate()
-    if (arg2.value == null) arg2.generate()
-    if (arg3.value == null) arg3.generate()
-    if (arg4.value == null) arg4.generate()
+    if (!arg1.hasValue) arg1.generate()
+    if (!arg2.hasValue) arg2.generate()
+    if (!arg3.hasValue) arg3.generate()
+    if (!arg4.hasValue) arg4.generate()
     fn(arg1.value, arg2.value, arg3.value, arg4.value)
   }
 
@@ -121,11 +121,11 @@ class Apply5[T1, T2, T3, T4, T5, U](name: Name[U], val arg1: Element[T1], val ar
   type Arg5Type = T5
 
   def generateValue() = {
-    if (arg1.value == null) arg1.generate()
-    if (arg2.value == null) arg2.generate()
-    if (arg3.value == null) arg3.generate()
-    if (arg4.value == null) arg4.generate()
-    if (arg5.value == null) arg5.generate()
+    if (!arg1.hasValue) arg1.generate()
+    if (!arg2.hasValue) arg2.generate()
+    if (!arg3.hasValue) arg3.generate()
+    if (!arg4.hasValue) arg4.generate()
+    if (!arg5.hasValue) arg5.generate()
     fn(arg1.value, arg2.value, arg3.value, arg4.value, arg5.value)
   }
 

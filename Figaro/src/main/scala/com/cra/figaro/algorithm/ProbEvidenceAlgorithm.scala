@@ -75,8 +75,8 @@ trait ProbEvidenceAlgorithm extends Algorithm {
    */
   override def initialize(): Unit = {
     
-    savedConditions = for { NamedEvidence(ref, _, _) <- evidence } yield universe.get(ref).allConditions
-    savedConstraints = for { NamedEvidence(ref, _, _) <- evidence } yield universe.get(ref).allConstraints
+    savedConditions = for { case NamedEvidence(ref, _, _) <- evidence } yield universe.get(ref).allConditions
+    savedConstraints = for { case NamedEvidence(ref, _, _) <- evidence } yield universe.get(ref).allConstraints
     universe.assertEvidence(evidence)
     super.initialize()
   }
@@ -85,7 +85,7 @@ trait ProbEvidenceAlgorithm extends Algorithm {
    * Removes the evidence provided in the constructor from the universe.
    */
   override def cleanUp(): Unit = {
-    for { ((NamedEvidence(ref, _, contingency), conditions), constraints) <- evidence.zip(savedConditions).zip(savedConstraints) } {
+    for { case ((NamedEvidence(ref, _, contingency), conditions), constraints) <- evidence.zip(savedConditions).zip(savedConstraints) } {
       universe.removeEvidence(ref, contingency)
       val elem = universe.get(ref)
       // The following should use asInstanceOf[Element.Contingency], which is the same as elem.Contingency. There is no need for the Element class to contain a public type which is the

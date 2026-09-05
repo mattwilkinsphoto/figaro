@@ -12,7 +12,8 @@
  */
 package com.cra.figaro.test.algorithm.structured
 
-import org.scalatest.{ WordSpec, Matchers }
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm.structured.ComponentCollection
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.discrete.Uniform
@@ -20,7 +21,7 @@ import com.cra.figaro.library.collection.MakeArray
 import com.cra.figaro.algorithm.structured._
 import com.cra.figaro.language.Name.stringToName
 
-class ExpandTest extends WordSpec with Matchers {
+class ExpandTest extends AnyWordSpec with Matchers {
   def recursiveElement(): Chain[Boolean, Boolean] = Chain(Flip(0.5), chainFunction)
   val chainFunction = (_: Boolean) => recursiveElement()
 

@@ -224,7 +224,7 @@ object SelectFactory {
           for { (probPlusStarIndex, position) <- probPlusStarIndices.zipWithIndex } yield {
           val xprob: Extended[Double] =
             if (position < targetStarIndex) probVals(position)(probPlusStarIndex)
-            else if (position == targetStarIndex) Star[Double]
+            else if (position == targetStarIndex) Star[Double]()
             else probVals(position)(probPlusStarIndex - 1)
           if (allProbsRegular) {
             if (position != targetStarIndex) xprob.value else 0.0

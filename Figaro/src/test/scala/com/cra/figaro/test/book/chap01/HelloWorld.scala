@@ -14,8 +14,8 @@
 package com.cra.figaro.test.book.chap01
 
 import com.cra.figaro.language.Universe
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.language.{Flip, Select}			//#A
 import com.cra.figaro.library.compound.If				//#A
@@ -55,14 +55,14 @@ object HelloWorldFigaro {
     result
   }
   
-  def main(args: Array[String]) {					//#I
+  def main(args: Array[String]): Unit = {					//#I
     predict()							//#I
     infer()								//#I
     learnAndPredict()						//#I
   }
 }
 
-class HelloWorldTest extends WordSpec with Matchers {
+class HelloWorldTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Chap01 Variable Elimination value" should {
     "equal 0.27999999999999997 when predicted" taggedAs (BookExample) in {

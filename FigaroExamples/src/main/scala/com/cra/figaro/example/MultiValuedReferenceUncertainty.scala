@@ -43,6 +43,6 @@ object MultiValuedReferenceUncertainty {
     val alg = Importance(100000, c.sum)
     alg.start()
     println(alg.distribution(c.sum).toList)
-    alg.kill
+    alg.kill()
   }
 }

@@ -17,13 +17,13 @@ import com.cra.figaro.language.{Flip, Constant, Universe} //#A
 import com.cra.figaro.library.atomic.continuous.{Uniform, Beta} //#A
 import com.cra.figaro.library.compound.If //#A
 import com.cra.figaro.algorithm.sampling.Importance //#A
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object Hierarchical {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val initialTosses : Array[String] = Array("010101010101010101010101010101")
     val numCoins = initialTosses.length
 
@@ -65,7 +65,7 @@ object Hierarchical {
   }
 }
 
-class HierarchicalTest extends WordSpec with Matchers {
+class HierarchicalTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   "Hierarchical" should {
     val initialTosses : Array[String] = Array("010101010101010101010101010101")

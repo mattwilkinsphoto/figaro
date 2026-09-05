@@ -118,7 +118,7 @@ class DecisionPolicyExact[T, U](policy: Map[T, (U, Double)]) extends DecisionPol
  * a nearest neighbor algorithm. By default, this uses a VP-tree to store the samples.
  */
 
-class DecisionPolicyNN[T <% Distance[T], U](D: Index[T, U], combineFcn: (List[(Double, U, DecisionSample)]) => (U, Double), 
+class DecisionPolicyNN[T: DistanceConversion, U](D: Index[T, U], combineFcn: (List[(Double, U, DecisionSample)]) => (U, Double),
   protected var numNNSamples: Double) extends DecisionPolicy[T, U] {
   
   /**
@@ -210,7 +210,7 @@ object DecisionPolicyNN {
    *  and kNN. This uses the default index (VP-Tree).
    *  
    */
-  def apply[T <% Distance[T], U](Alg: DecisionAlgorithm[T, U], 
+  def apply[T: DistanceConversion, U](Alg: DecisionAlgorithm[T, U],
     combineFcn: (List[(Double, U, DecisionSample)]) => (U, Double), kNN: Double) = {
     val policy = Alg.getUtility()
     val nnIndex = new VPIndex[T, U](policy, 100)
@@ -222,7 +222,7 @@ object DecisionPolicyNN {
    *  using the supplied combination function and kNN. This uses the default index (VP-Tree).
    *  
    */
-  def apply[T <% Distance[T], U](policy: Map[(T, U), DecisionSample], 
+  def apply[T: DistanceConversion, U](policy: Map[(T, U), DecisionSample],
     combineFcn: (List[(Double, U, DecisionSample)]) => (U, Double), kNN: Double) = {
     val nnIndex = new VPIndex[T, U](policy, 100)
     new DecisionPolicyNN(nnIndex, combineFcn, kNN)
@@ -232,7 +232,7 @@ object DecisionPolicyNN {
    *  Create an approximate decision policy from an index, using the supplied combination function and kNN. 
    *  
    */
-  def apply[T <% Distance[T], U](nnIndex: Index[T, U], 
+  def apply[T: DistanceConversion, U](nnIndex: Index[T, U],
     combineFcn: (List[(Double, U, DecisionSample)]) => (U, Double), kNN: Double) = {
     new DecisionPolicyNN(nnIndex, combineFcn, kNN)
   }
@@ -242,7 +242,7 @@ object DecisionPolicyNN {
    *  This uses the default combination function (unweighted maximum) and index (VP-Tree).
    *  
    */
-  def apply[T <% Distance[T], U](Alg: DecisionAlgorithm[T, U], kNN: Double): DecisionPolicy[T, U] = {
+  def apply[T: DistanceConversion, U](Alg: DecisionAlgorithm[T, U], kNN: Double): DecisionPolicy[T, U] = {
     apply(Alg, DecisionPolicy.UWMAX[U]_, kNN)
   }
 
@@ -251,7 +251,7 @@ object DecisionPolicyNN {
    *  using the supplied kNN. This uses the default combination function (unweighted maximum) and index (VP-Tree).
    *  
    */
-  def apply[T <% Distance[T], U](policy: Map[(T, U), DecisionSample], kNN: Double = .01): DecisionPolicy[T, U] = {
+  def apply[T: DistanceConversion, U](policy: Map[(T, U), DecisionSample], kNN: Double = .01): DecisionPolicy[T, U] = {
     apply(policy, DecisionPolicy.UWMAX[U]_, kNN)
   }
 
@@ -260,7 +260,7 @@ object DecisionPolicyNN {
    *  This uses the default combination function (unweighted maximum).
    *  
    */
-  def apply[T <% Distance[T], U](nnIndex: Index[T, U], kNN: Double): DecisionPolicy[T, U] = {
+  def apply[T: DistanceConversion, U](nnIndex: Index[T, U], kNN: Double): DecisionPolicy[T, U] = {
     apply(nnIndex, DecisionPolicy.UWMAX[U]_, kNN)
   }
 

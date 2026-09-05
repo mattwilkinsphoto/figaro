@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm.factored._
@@ -25,7 +25,7 @@ import com.cra.figaro.library.atomic._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 
-class FirmsTest extends WordSpec with Matchers {
+class FirmsTest extends AnyWordSpec with Matchers {
   "The firms example" should {
     "produce the correct answer under importance sampling" taggedAs (Example) in {
       test((e: Element[Boolean]) => Importance(20000, e))
@@ -47,7 +47,7 @@ class FirmsTest extends WordSpec with Matchers {
     val bid = If(efficient, bidWhenEfficient, bidWhenInefficient)("bid", universe)
   }
 
-  def test(algorithmCreator: Element[Boolean] => ProbQueryAlgorithm) {
+  def test(algorithmCreator: Element[Boolean] => ProbQueryAlgorithm): Unit = {
     Universe.createNew()
     val firm1 = new Firm("Firm1")
     val firm2 = new Firm("Firm2")
@@ -72,7 +72,7 @@ class FirmsTest extends WordSpec with Matchers {
     val bid1WhenEfficient: Element[Double] = universe.get("Firm1bidWhenEfficient")
     alg.start()
     alg.probability(winningEfficiency, true) should be(answer +- 0.01)
-    alg.kill
+    alg.kill()
   }
 
 }

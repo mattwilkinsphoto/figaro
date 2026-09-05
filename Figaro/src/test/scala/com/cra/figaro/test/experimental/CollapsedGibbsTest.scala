@@ -18,17 +18,17 @@ import com.cra.figaro.algorithm.lazyfactored.LazyValues
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.library.compound.^^
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 import com.cra.figaro.algorithm.factored.gibbs.Gibbs
 import com.cra.figaro.experimental.collapsedgibbs._
 
-class CollapsedGibbsTest extends WordSpec with Matchers {
+class CollapsedGibbsTest extends AnyWordSpec with Matchers {
   "A Collapsed Gibbs sampler" should {
     
     "with an unconstrained model produce the correct result" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val s1 = Select(0.1 -> 1, 0.4 -> 2, 0.5 -> 3)
       val s2 = Select(0.7 -> 2, 0.1 -> 3, 0.2 -> 4)
@@ -38,7 +38,7 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     }
 
     "with a constrained model produce the correct result" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val s1 = Select(0.1 -> 1, 0.4 -> 2, 0.5 -> 3)
       val s2 = Select(0.7 -> 2, 0.1 -> 3, 0.2 -> 4)
@@ -49,7 +49,7 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     }
 
     "with a constraint on a Chain produce the correct result for the parent" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val c = If(f, Flip(0.8), Constant(false))
       c.addConstraint(b => if (b) 2.0 else 1.0)
@@ -58,7 +58,7 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     }
 
     "with a constraint on a Chain result correctly constrain the Chain but not the parent" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val r1 = Flip(0.8)
       r1.addConstraint(b => if (b) 2.0 else 1.0)
@@ -70,7 +70,7 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     }
 
     "with an element used multiple times use the same value each time" in {
-      Universe.createNew
+      Universe.createNew()
       val f = Flip(0.3)
       val e = f === f
       test[Boolean](e, identity, 1.0)
@@ -150,7 +150,7 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     }
     
     "with the default collapser and default parameters collapse down to query variables" in {
-      Universe.createNew
+      Universe.createNew()
       val a1 = Flip(0.5)
       val a2 = Flip(0.5)
       val a3 = Flip(0.5)
@@ -174,16 +174,16 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     Universe.universe.activeElements flatMap (Factory.makeFactorsForElement(_))
   }
 
-  def test[T](target: Element[T], predicate: T => Boolean, prob: Double, tol: Double = 0.025) {
+  def test[T](target: Element[T], predicate: T => Boolean, prob: Double, tol: Double = 0.025): Unit = {
     val algorithm = CollapsedGibbs(100000, target)
     algorithm.start()
     algorithm.stop()
     algorithm.probability(target, predicate) should be(prob +- tol)
     algorithm.kill()
   }
-  def testStrategyDeterministicModel[T](strategy:String, tol: Double = 0.025) {
+  def testStrategyDeterministicModel[T](strategy:String, tol: Double = 0.025): Unit = {
     Universe.universe.finalize()
-    Universe.createNew
+    Universe.createNew()
     val a1 = Flip(0.5)
     val a2 = Flip(0.5)
     val a3 = Flip(0.5)
@@ -200,9 +200,9 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     algorithm.probability(d3, true) should be(.875 +- tol)
     algorithm.kill()
   }
-  def testStrategyWithParamsDeterministicModel[T](strategy:String, params:Seq[Int], tol: Double = 0.025) {
+  def testStrategyWithParamsDeterministicModel[T](strategy:String, params:Seq[Int], tol: Double = 0.025): Unit = {
     Universe.universe.finalize()
-    Universe.createNew
+    Universe.createNew()
     val a1 = Flip(0.5)
     val a2 = Flip(0.5)
     val a3 = Flip(0.5)
@@ -219,7 +219,7 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     algorithm.probability(d3, true) should be(.875 +- tol)
     algorithm.kill()
   }
-  def testStrategyIsingModel[T](strategy:String, tol: Double = 0.025) {
+  def testStrategyIsingModel[T](strategy:String, tol: Double = 0.025): Unit = {
     Universe.universe.finalize()
     Universe.createNew()
     def IsingConstraint(pair: (Boolean, Boolean)) = if (pair._1 == pair._2) 1.1; else 1.0
@@ -239,7 +239,7 @@ class CollapsedGibbsTest extends WordSpec with Matchers {
     algorithm.probability(toTest, true) should be(Gibbs.probability(toTest, true) +- tol)
     algorithm.kill()
   }
-  def testStrategyWithParamsIsingModel[T](strategy:String, params:Seq[Int], tol: Double = 0.025) {
+  def testStrategyWithParamsIsingModel[T](strategy:String, params:Seq[Int], tol: Double = 0.025): Unit = {
     Universe.universe.finalize()
     Universe.createNew()
     def IsingConstraint(pair: (Boolean, Boolean)) = if (pair._1 == pair._2) 1.1; else 1.0

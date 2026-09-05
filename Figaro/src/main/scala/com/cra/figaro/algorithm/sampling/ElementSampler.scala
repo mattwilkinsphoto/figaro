@@ -1,13 +1,13 @@
 /*
  * ElementSampler.scala
  * A forward sampler for elements.
- * 
+ *
  * Created By:      Brian Ruttenberg (bruttenberg@cra.com)
  * Creation Date:   Sep 26, 2014
- * 
+ *
  * Copyright 2017 Avrom J. Pfeffer and Charles River Analytics, Inc.
  * See http://www.cra.com or email figaro@cra.com for information.
- * 
+ *
  * See http://www.github.com/p2t2/figaro for a copy of the software license.
  */
 
@@ -25,12 +25,12 @@ import scala.collection.mutable.Map
 abstract class ElementSampler(target: Element[_]) extends BaseUnweightedSampler(target.universe, target) {
 
   def sample(): (Boolean, Sample) = {
-    Forward(target)    
+    Forward(target)
     (true, Map[Element[_], Any](target -> target.value))
   }
 
   protected def doInitialize(): Unit = {
-    // Need to prime the universe to make sure all elements have a generated value    
+    // Need to prime the universe to make sure all elements have a generated value
     Forward(target)
   }
 
@@ -76,7 +76,7 @@ class OneTimeElementSampler(target: Element[_], myNumSamples: Int)
   override def run(): Unit = {
     doInitialize()
     super.run()
-    update
+    update()
     //universe.clearTemporaries
   }
 }

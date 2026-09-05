@@ -22,8 +22,8 @@ import com.cra.figaro.util._
 trait OneShifter extends Atomic[Int] {
   type Randomness = Int
 
-  protected val lowerBound: Int
-  protected val upperBound: Int
+  protected def lowerBound: Int
+  protected def upperBound: Int
 
   private lazy val density0 = density(lowerBound)
   private lazy val density1 = density(lowerBound + 1)
@@ -52,12 +52,12 @@ trait OneShifter extends Atomic[Int] {
     if (rand == lowerBound) {
       (lowerBound + 1, prob10, density1 / density0) // automatically go up
     } else if (rand == lowerBound + 1) {
-      if (random.nextDouble < prob12) (lowerBound + 2, prob21 / prob12, density2 / density1)
+      if (random.nextDouble() < prob12) (lowerBound + 2, prob21 / prob12, density2 / density1)
       else (lowerBound, 1.0 / prob10, density0 / density1)
     } else if (rand == upperBound) {
       (upperBound - 1, probU10, densityU1 / densityU0) // automatically go up
     } else if (rand == upperBound - 1) {
-      if (random.nextDouble < probU12) (upperBound - 2, probU21 / probU12, densityU2 / densityU1)
+      if (random.nextDouble() < probU12) (upperBound - 2, probU21 / probU12, densityU2 / densityU1)
       else (upperBound, 1.0 / probU10, densityU0 / densityU1)
     } else {
       val densityThis = density(rand)

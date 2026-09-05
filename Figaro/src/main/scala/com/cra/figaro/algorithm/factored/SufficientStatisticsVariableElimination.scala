@@ -45,8 +45,8 @@ class SufficientStatisticsVariableElimination(
   /**
    * Clear the sufficient statistics factors used by this algorithm.
    */
-  private def removeFactors() {
-    Variable.clearCache
+  private def removeFactors(): Unit = {
+    Variable.clearCache()
   }
 
   /**

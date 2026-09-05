@@ -20,8 +20,8 @@
 package com.cra.figaro.test.algorithm.factored
 
 import scala.collection.mutable.Map
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.algorithm.factored.beliefpropagation._
@@ -34,13 +34,13 @@ import com.cra.figaro.algorithm.lazyfactored.LazyValues
 import com.cra.figaro.algorithm.UnsupportedAlgorithmException
 import com.cra.figaro.algorithm.factored.factors.factory.Factory
 
-class BPTest extends WordSpec with Matchers {
+class BPTest extends AnyWordSpec with Matchers {
 
   val globalTol = 0.025
 
   "A basic factor graph" should {
     "Create nodes for all factors and variables" in {
-      Universe.createNew
+      Universe.createNew()
       val u = Select(0.25 -> 0.3, 0.25 -> 0.5, 0.25 -> 0.7, 0.25 -> 0.9)
       val f = Flip(u)
       val a = If(f, Select(0.3 -> 1, 0.7 -> 2), Constant(2))
@@ -57,7 +57,7 @@ class BPTest extends WordSpec with Matchers {
     }
 
     "Create an edge to between each factor and the variables it has" in {
-      Universe.createNew
+      Universe.createNew()
       val u = Select(0.25 -> 0.3, 0.25 -> 0.5, 0.25 -> 0.7, 0.25 -> 0.9)
       val f = Flip(u)
       val a = If(f, Select(0.3 -> 1, 0.7 -> 2), Constant(2))
@@ -82,12 +82,12 @@ class BPTest extends WordSpec with Matchers {
 
   "Running BeliefPropagation" should {
     "Send the correct type of message" in {
-      Universe.createNew
+      Universe.createNew()
       val u = Select(0.25 -> 0.3, 0.25 -> 0.5, 0.25 -> 0.7, 0.25 -> 0.9)
       val f = Flip(u)
       val a = If(f, Select(0.3 -> 1, 0.7 -> 2), Constant(2))
       val bp = BeliefPropagation(3)
-      bp.start
+      bp.start()
       val fn = bp.factorGraph.asInstanceOf[BasicFactorGraph].adjacencyList.filter(p => { p._1 match { case fn: FactorNode => true; case _ => false; } })
       val vn = bp.factorGraph.asInstanceOf[BasicFactorGraph].adjacencyList.filter(p => { p._1 match { case vn: VariableNode => true; case _ => false; } })
 
@@ -355,7 +355,7 @@ class BPTest extends WordSpec with Matchers {
 
   }
 
-  def test[T](target: Element[T], predicate: T => Boolean, prob: Double, tol: Double) {
+  def test[T](target: Element[T], predicate: T => Boolean, prob: Double, tol: Double): Unit = {
     val algorithm = BeliefPropagation(100, target)
     algorithm.start()
     algorithm.probability(target, predicate) should be(prob +- tol)

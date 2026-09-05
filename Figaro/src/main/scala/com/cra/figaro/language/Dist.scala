@@ -45,7 +45,7 @@ abstract class Dist[P, T](name: Name[T], val clauses: List[(P, Element[T])], col
    */
   def finishGeneration(index: Int): T = {
     val outcome = outcomeArray(index)
-    if (outcome.value == null) outcome.generate()
+    if (!outcome.hasValue) outcome.generate()
     outcome.value
   }
 

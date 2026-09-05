@@ -18,12 +18,12 @@ import com.cra.figaro.patterns.learning.{ModelParameters, ParameterCollection}
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.Dirichlet
 import com.cra.figaro.algorithm.factored.VariableElimination
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 object OnlineEM {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val parameters = ModelParameters()
     val d = Dirichlet(2.0,2.0,2.0)("d",parameters)
 
@@ -60,7 +60,7 @@ object OnlineEM {
   }
 }
 
-class OnlineEMTest extends WordSpec with Matchers {
+class OnlineEMTest extends AnyWordSpec with Matchers {
     val parameters = ModelParameters()
     val d = Dirichlet(2.0,2.0,2.0)("d",parameters)
 

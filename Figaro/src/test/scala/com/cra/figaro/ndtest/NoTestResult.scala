@@ -18,7 +18,7 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics
 
 class NoTestResult(val name: String) extends NDTestResult {
 
-  def update(value: Any) {
+  def update(value: Any): Unit = {
   }
 
   def check: Boolean = {

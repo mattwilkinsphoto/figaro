@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm.factored._
@@ -27,7 +27,7 @@ import com.cra.figaro.test.tags.Example
 import com.cra.figaro.patterns.learning.ModelParameters
 import com.cra.figaro.patterns.learning.ParameterCollection
 
-class FairCoinTest extends WordSpec with Matchers {
+class FairCoinTest extends AnyWordSpec with Matchers {
   "A simple FairCoinTest" should {
     "produce the correct probability under expectation maximization" taggedAs (Example) in {
       test()
@@ -68,9 +68,9 @@ class FairCoinTest extends WordSpec with Matchers {
     val numberOfEMIterations = 10
     val numberOfBPIterations = 10
     val learningAlgorithm = EMWithBP(10, 10, params)
-    learningAlgorithm.start
-    learningAlgorithm.stop
-    learningAlgorithm.kill
+    learningAlgorithm.start()
+    learningAlgorithm.stop()
+    learningAlgorithm.kill()
     /*
      * This will create a flip having a probability of 'true' learned from the input data. 
      */

@@ -13,8 +13,9 @@
 
 package com.cra.figaro.test.algorithm.learning
 
-import org.scalatest.Matchers
-import org.scalatest.{ PrivateMethodTester, WordSpec }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.PrivateMethodTester
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.sampling._
@@ -31,7 +32,7 @@ import java.io._
 import com.cra.figaro.test.tags.NonDeterministic
 import com.cra.figaro.ndtest._
 
-class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matchers {
+class EMWithImportanceTest extends AnyWordSpec with PrivateMethodTester with Matchers {
   val alpha: Double = 0.05
   def binomialConstraint(count: Int)(truth: Int, baseWeight: Double): Double = {
     if (count == truth) baseWeight
@@ -44,7 +45,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
     {
       "provided a termination criteria based on sufficient statistics magnitudes" should {
         "exit before reaching the maximum iterations" in {
-          val universe = Universe.createNew
+          val universe = Universe.createNew()
           val b = Beta(2, 2)
           val terminationCriteria = EMTerminationCriteria.sufficientStatisticsMagnitude(0.05)
           for (i <- 1 to 7) {
@@ -60,10 +61,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
           }
 
           val algorithm = EMWithImportance(terminationCriteria, 10, b)(universe)
-          algorithm.start
+          algorithm.start()
 
           val result = b.MAPValue
-          algorithm.kill
+          algorithm.kill()
 
           result should be(0.666666 +- 0.000001)
         }
@@ -73,7 +74,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
         {
           "detect bias after a large enough number of trials" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Beta(2, 2)
 
               for (i <- 1 to 7) {
@@ -89,17 +90,17 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 100, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
 
               result should be(0.666666 +- 0.000001)
             }
 
           "take the prior concentration parameters into account" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Beta(3.0, 7.0)
 
               for (i <- 1 to 7) {
@@ -115,10 +116,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 100, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
 
               result should be(0.50 +- 0.001)
             }
@@ -126,7 +127,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
           "learn the bias from observations of binomial elements" taggedAs (NonDeterministic) in {
             val ndtest = new NDTest {
               override def oneTest = {
-                val universe = Universe.createNew
+                val universe = Universe.createNew()
                 val b = Beta(2, 2)
 
                 val b1 = Binomial(7, b)
@@ -135,10 +136,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
                 b2.setConstraint((c: Int) => binomialConstraint(c)(1, 1.0))
 
                 val algorithm = EMWithImportance(2, 100, b)(universe)
-                algorithm.start
+                algorithm.start()
 
                 val result = b.MAPValue
-                algorithm.kill
+                algorithm.kill()
 
                 update(result, NDTest.TTEST, "EMImportanceTestResults", 0.6666, alpha)
               }
@@ -150,7 +151,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
           "correctly use a uniform prior" taggedAs (NonDeterministic) in {
             val ndtest = new NDTest {
               override def oneTest = {
-                val universe = Universe.createNew
+                val universe = Universe.createNew()
                 val b = Beta(1, 1)
 
                 val b1 = Binomial(7, b)
@@ -159,10 +160,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
                 b2.setConstraint((c: Int) => binomialConstraint(c)(1, 1.0))
 
                 val algorithm = EMWithImportance(2, 100, b)(universe)
-                algorithm.start
+                algorithm.start()
 
                 val result = b.MAPValue
-                algorithm.kill
+                algorithm.kill()
                 update(result, NDTest.TTEST, "EMImportanceTestResults", 0.7, alpha)
               }
             }
@@ -176,7 +177,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
 
           "detect bias after a large enough number of trials" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Dirichlet(2, 2)
 
               for (i <- 1 to 7) {
@@ -192,17 +193,17 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 1000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
 
               result(0) should be(0.666666 +- 0.000001)
             }
 
           "take the prior concentration parameters into account" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
 
               val b = Dirichlet(3, 7)
 
@@ -219,10 +220,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 1000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
 
               result(0) should be(0.50 +- 0.001)
             }
@@ -236,7 +237,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
           "calculate sufficient statistics in the correct order for long lists of concentration parameters, taking into account a condition" in
             {
 
-                  val universe = Universe.createNew
+                  val universe = Universe.createNew()
                   val alphas = Seq[Double](2.0,2.0,2.0,2.0,2.0)
                   val d = Dirichlet(alphas: _*)
                   val outcomes = List(2, 3, 4, 5, 6)
@@ -247,9 +248,9 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
                   }
 
                   val algorithm = EMWithImportance(2, 1000, d)
-                  algorithm.start
+                  algorithm.start()
                   val result = d.MAPValue
-                  algorithm.kill
+                  algorithm.kill()
                   result(0) should be ((2.0 + 0.0 - 1.0) / (10.0 + 10.0 - 5.0) +- 0.01) 
                   result(1) should be ((2.0 + 10*.25 - 1.0) / (10.0 + 10.0 - 5.0)+- 0.01) 
                   result(2) should be ((2.0 + 10*.25 - 1.0) / (10.0 + 10.0 - 5.0)+- 0.01) 
@@ -259,7 +260,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
 
           "detect bias after a large enough number of trials" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Dirichlet(2, 2, 2)
               val outcomes = List(1, 2, 3)
               for (i <- 1 to 8) {
@@ -280,10 +281,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 1000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
 
               // 9/19
               result(0) should be(0.473 +- 0.001)
@@ -296,7 +297,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
 
           "take the prior concentration parameters into account" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Dirichlet(2.0, 3.0, 2.0)
               val outcomes = List(1, 2, 3)
 
@@ -318,10 +319,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 1000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
 
               result(0) should be(0.333333 +- 0.000001)
               result(1) should be(0.333333 +- 0.000001)
@@ -330,7 +331,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
 
           "correctly use a uniform prior" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val b = Dirichlet(1.0, 1.0, 1.0)
               val outcomes = List(1, 2, 3)
 
@@ -351,10 +352,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 1000, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = b.MAPValue
-              algorithm.kill
+              algorithm.kill()
               result(0) should be(0.333333 +- 0.000001)
               result(1) should be(0.333333 +- 0.000001)
               result(2) should be(0.333333 +- 0.000001)
@@ -366,7 +367,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
 
           "leave parameters having no observations unchanged" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val d = Dirichlet(2.0, 4.0, 2.0)
               val b = Beta(2.0, 2.0)
               val outcomes = List(1, 2, 3)
@@ -388,10 +389,10 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 1000, d, b)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = d.MAPValue
-              algorithm.kill
+              algorithm.kill()
 
               val betaResult = b.MAPValue
 
@@ -403,7 +404,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
 
           "correctly estimate all parameters with observations" in
             {
-              val universe = Universe.createNew
+              val universe = Universe.createNew()
               val d = Dirichlet(2.0, 3.0, 2.0)
               val b = Beta(3.0, 7.0)
               val outcomes = List(1, 2, 3)
@@ -436,7 +437,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
               }
 
               val algorithm = EMWithImportance(2, 1000, b, d)(universe)
-              algorithm.start
+              algorithm.start()
 
               val result = d.MAPValue
 
@@ -494,15 +495,15 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
       }
 
       class LearnableParameters(universe: Universe) extends Parameters(universe) {
-        val b1 = Beta(1, 1)("b1", universe)
-        val b2 = Beta(1, 1)("b2", universe)
-        val b3 = Beta(1, 1)("b3", universe)
-        val b4 = Beta(1, 1)("b4", universe)
-        val b5 = Beta(1, 1)("b5", universe)
-        val b6 = Beta(1, 1)("b6", universe)
-        val b7 = Beta(1, 1)("b7", universe)
-        val b8 = Beta(1, 1)("b8", universe)
-        val b9 = Beta(1, 1)("b9", universe)
+        val b1: AtomicBeta = Beta(1, 1)("b1", universe)
+        val b2: AtomicBeta = Beta(1, 1)("b2", universe)
+        val b3: AtomicBeta = Beta(1, 1)("b3", universe)
+        val b4: AtomicBeta = Beta(1, 1)("b4", universe)
+        val b5: AtomicBeta = Beta(1, 1)("b5", universe)
+        val b6: AtomicBeta = Beta(1, 1)("b6", universe)
+        val b7: AtomicBeta = Beta(1, 1)("b7", universe)
+        val b8: AtomicBeta = Beta(1, 1)("b8", universe)
+        val b9: AtomicBeta = Beta(1, 1)("b9", universe)
       }
 
       var id = 0
@@ -543,7 +544,7 @@ class EMWithImportanceTest extends WordSpec with PrivateMethodTester with Matche
         Datum(model.x.value, model.y.value, model.z.value, model.w.value)
       }
 
-      def observe(model: Model, datum: Datum) {
+      def observe(model: Model, datum: Datum): Unit = {
         if (random.nextDouble() < observationProbability) model.x.observe(datum.x)
         if (random.nextDouble() < observationProbability) model.y.observe(datum.y)
         if (random.nextDouble() < observationProbability) model.z.observe(datum.z)

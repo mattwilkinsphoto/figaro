@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.library.compound
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.factored._
 import com.cra.figaro.algorithm.sampling._
@@ -23,7 +23,7 @@ import com.cra.figaro.library.compound._
 import com.cra.figaro.library.atomic.continuous.Uniform
 import com.cra.figaro.library.atomic.discrete.Geometric
 
-class CompoundTest extends WordSpec with Matchers {
+class CompoundTest extends AnyWordSpec with Matchers {
   "A FastIf" should {
     "have value equal to the then clause if the test is true and the else clause if the test is false" in {
       Universe.createNew()
@@ -398,19 +398,19 @@ class CompoundTest extends WordSpec with Matchers {
       val x2 = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)
       val x3 = Constant(7)
       val x4 = Flip(0.9)
-      val x5 = Constant('a)
-      val y = CPD(x1, x2, x3, x4, x5, (false, 1, 7, false, 'a) -> Flip(0.1),
-        (false, 2, 7, false, 'a) -> Flip(0.2),
-        (false, 3, 7, false, 'a) -> Flip(0.3),
-        (true, 1, 7, false, 'a) -> Flip(0.4),
-        (true, 2, 7, false, 'a) -> Flip(0.5),
-        (true, 3, 7, false, 'a) -> Flip(0.6),
-        (false, 1, 7, true, 'a) -> Flip(0.15),
-        (false, 2, 7, true, 'a) -> Flip(0.25),
-        (false, 3, 7, true, 'a) -> Flip(0.35),
-        (true, 1, 7, true, 'a) -> Flip(0.45),
-        (true, 2, 7, true, 'a) -> Flip(0.55),
-        (true, 3, 7, true, 'a) -> Flip(0.65))
+      val x5 = Constant(Symbol("a"))
+      val y = CPD(x1, x2, x3, x4, x5, (false, 1, 7, false, Symbol("a")) -> Flip(0.1),
+        (false, 2, 7, false, Symbol("a")) -> Flip(0.2),
+        (false, 3, 7, false, Symbol("a")) -> Flip(0.3),
+        (true, 1, 7, false, Symbol("a")) -> Flip(0.4),
+        (true, 2, 7, false, Symbol("a")) -> Flip(0.5),
+        (true, 3, 7, false, Symbol("a")) -> Flip(0.6),
+        (false, 1, 7, true, Symbol("a")) -> Flip(0.15),
+        (false, 2, 7, true, Symbol("a")) -> Flip(0.25),
+        (false, 3, 7, true, Symbol("a")) -> Flip(0.35),
+        (true, 1, 7, true, Symbol("a")) -> Flip(0.45),
+        (true, 2, 7, true, Symbol("a")) -> Flip(0.55),
+        (true, 3, 7, true, Symbol("a")) -> Flip(0.65))
       val alg = VariableElimination(y)
       alg.start()
       alg.probability(y, true) should be((0.2 * 0.9 * (0.2 * 0.45 + 0.3 * 0.55 + 0.5 * 0.65) +
@@ -426,19 +426,19 @@ class CompoundTest extends WordSpec with Matchers {
       val x2 = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)
       val x3 = Constant(7)
       val x4 = Flip(0.9)
-      val x5 = Constant('a)
+      val x5 = Constant(Symbol("a"))
       an [MatchError] should be thrownBy {
-        val y = CPD(x1, x2, x3, x4, x5, (false, 1, 7, false, 'a) -> Flip(0.1),
-          (false, 3, 7, false, 'a) -> Flip(0.3),
-          (true, 1, 7, false, 'a) -> Flip(0.4),
-          (true, 2, 7, false, 'a) -> Flip(0.5),
-          (true, 3, 7, false, 'a) -> Flip(0.6),
-          (false, 1, 7, true, 'a) -> Flip(0.15),
-          (false, 2, 7, true, 'a) -> Flip(0.25),
-          (false, 3, 7, true, 'a) -> Flip(0.35),
-          (true, 1, 7, true, 'a) -> Flip(0.45),
-          (true, 2, 7, true, 'a) -> Flip(0.55),
-          (true, 3, 7, true, 'a) -> Flip(0.65))
+        val y = CPD(x1, x2, x3, x4, x5, (false, 1, 7, false, Symbol("a")) -> Flip(0.1),
+          (false, 3, 7, false, Symbol("a")) -> Flip(0.3),
+          (true, 1, 7, false, Symbol("a")) -> Flip(0.4),
+          (true, 2, 7, false, Symbol("a")) -> Flip(0.5),
+          (true, 3, 7, false, Symbol("a")) -> Flip(0.6),
+          (false, 1, 7, true, Symbol("a")) -> Flip(0.15),
+          (false, 2, 7, true, Symbol("a")) -> Flip(0.25),
+          (false, 3, 7, true, Symbol("a")) -> Flip(0.35),
+          (true, 1, 7, true, Symbol("a")) -> Flip(0.45),
+          (true, 2, 7, true, Symbol("a")) -> Flip(0.55),
+          (true, 3, 7, true, Symbol("a")) -> Flip(0.65))
         val alg = VariableElimination(y)
         alg.start()
       }
@@ -687,7 +687,7 @@ class CompoundTest extends WordSpec with Matchers {
       val x1 = Select(clauses:_*)
       val x2 = IntSelector(x1)
       val alg = VariableElimination(x2)
-      alg.start
+      alg.start()
       val dist = alg.distribution(x2)
       dist.foreach{v =>
         v._1 should be(clauses.filter(v._2 < _._2).map(c => c._1/c._2).sum +- 0.0001)
@@ -727,13 +727,13 @@ class CompoundTest extends WordSpec with Matchers {
     }
 
     "process items in the correct order" in {
-      val elems = List(Constant('a), Constant('b))
-      val fl = FoldLeft('z, (x: Symbol, y: Symbol) => if (x == 'z) y else x)(elems:_*)
-      val fr = FoldRight('z, (x: Symbol, y: Symbol) => if (y == 'z) x else y)(elems:_*)
+      val elems = List(Constant(Symbol("a")), Constant(Symbol("b")))
+      val fl = FoldLeft(Symbol("z"), (x: Symbol, y: Symbol) => if (x == Symbol("z")) y else x)(elems:_*)
+      val fr = FoldRight(Symbol("z"), (x: Symbol, y: Symbol) => if (y == Symbol("z")) x else y)(elems:_*)
       val alg = VariableElimination(fl, fr)
       alg.start()
-      alg.probability(fl, 'a) should equal (1.0)
-      alg.probability(fr, 'b) should equal (1.0)
+      alg.probability(fl, Symbol("a")) should equal (1.0)
+      alg.probability(fr, Symbol("b")) should equal (1.0)
       alg.kill()
     }
   }

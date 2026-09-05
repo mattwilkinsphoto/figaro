@@ -119,6 +119,6 @@ class ContainerElement[Index, Value](val element: Element[Container[Index, Value
    * Select a random element from the container. Ensures that no IndexOutOfRange exception should be thrown.
    */
   def randomElement(): Element[Value] = {
-    element.flatMap(_.randomElement)
+    element.flatMap(_.randomElement())
   }
 }

@@ -164,7 +164,7 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
     // correspond to a meaningful change over the MAP elements. In particular, if new values are proposed for non-MAP
     // elements but none of the values of MAP elements change, it would not be sensible to weight one state as being
     // more or less favorable than the other.
-    val logConstant =  math.log(random.nextDouble) / temperature - computeScores()
+    val logConstant =  math.log(random.nextDouble()) / temperature - computeScores()
     // We've already run newProbEvidence sampler once by calling start(), so use maxRuns - 1
     val accepted = compareMeans(probEvidenceSampler, newProbEvidenceSampler, logConstant, maxRuns - 1)
 
@@ -306,7 +306,7 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
      * method again is allowed. The additional samples are accounted for when returning the total log statistics.
      */
     override def run(): Unit = {
-      for(ElemVal(elem, value) <- observations) elem.observe(value)
+      for(case ElemVal(elem, value) <- observations) elem.observe(value)
       super.run()
     }
 
@@ -317,7 +317,7 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
       totalWeight += 1
 
       try {
-        val weight = lw.computeWeight(universe.activeElements)
+        val weight = lw.computeWeight(this.universe.activeElements)
         successWeight = logSum(successWeight, weight)
         // Record the weight for the variance computation
         record(weight)
@@ -326,7 +326,7 @@ abstract class ProbEvidenceMarginalMAP(universe: Universe,
       }
 
       // Deactivate only the temporary elements created during probability of evidence sampling
-      for(elem <- universe.activeElements) {
+      for(elem <- this.universe.activeElements) {
         // Since an element deactivates its direct context contents when deactivated, it's possible that an element
         // in the list will be deactivated before we reach it, so we have to check again that it is active
         if(elem.active && !preserve.contains(elem)) elem.deactivate()

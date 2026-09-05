@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.library.collection
 
-import org.scalatest.WordSpec
-import org.scalatest.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.language._
 import com.cra.figaro.library.collection._
 import com.cra.figaro.algorithm.sampling.{Importance, MetropolisHastings, ProposalScheme}
@@ -23,7 +23,7 @@ import com.cra.figaro.algorithm.factored.beliefpropagation.BeliefPropagation
 import com.cra.figaro.library.atomic.discrete.Geometric
 import com.cra.figaro.algorithm.lazyfactored.LazyValues
 
-class VariableSizeArrayTest extends WordSpec with Matchers {
+class VariableSizeArrayTest extends AnyWordSpec with Matchers {
 
   "A variable size array" should {
     "correctly create random lists of the appropriate lengths" in {

@@ -19,7 +19,6 @@ import scala.collection.mutable.Map
 import scala.util.control.Breaks._
 import com.cra.figaro.language.Element
 import com.cra.figaro.algorithm.lazyfactored.Extended
-import scala.reflect.runtime.universe._
 import com.cra.figaro.language.Parameter
 
 /**

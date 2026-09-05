@@ -32,7 +32,7 @@ class AtomicComponent[Value](problem: Problem, val atomic: Atomic[Value], val ra
 
   override def generateRange(): Unit = {
     // Generate extended values and probabilities with the discretizer
-    probs = ranger.discretize()
+    probs = ranger.discretize
     // Assign the range in the normal way using the extended values
     val newRange = new ValueSet(probs.keySet)
     if ((newRange.hasStar ^ range.hasStar) || (newRange.regularValues != range.regularValues)) {

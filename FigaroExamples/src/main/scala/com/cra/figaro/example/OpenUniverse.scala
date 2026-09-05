@@ -57,12 +57,12 @@ object OpenUniverse {
   def main(args: Array[String]) = {
     sample1.position.addCondition((y: Double) => y >= 0.7 && y < 0.8)
     sample2.position.addCondition((y: Double) => y >= 0.7 && y < 0.8)
-    val alg = MetropolisHastings(chooseScheme, 5000, equal)
+    val alg = MetropolisHastings(chooseScheme(), 5000, equal)
     alg.start()
     Thread.sleep(10000)
     alg.stop()
     println(alg.probability(equal, true))
     println(alg.getSampleCount + " samples taken")
-    alg.kill
+    alg.kill()
   }
 }

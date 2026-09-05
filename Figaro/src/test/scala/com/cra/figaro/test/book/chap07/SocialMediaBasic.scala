@@ -18,8 +18,8 @@ import com.cra.figaro.library.atomic.discrete.Uniform
 import com.cra.figaro.library.compound.{If, ^^}
 import com.cra.figaro.algorithm.factored.VariableElimination
 import com.cra.figaro.util.memo
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 object SocialMediaBasic {
@@ -50,7 +50,7 @@ object SocialMediaBasic {
     pair.addConstraint(constraint _)
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val amy = new Person()
     val brian = new Person()
     val cheryl = new Person()
@@ -77,7 +77,7 @@ object SocialMediaBasic {
   }
 }
 
-class SocialMediaBasicTest extends WordSpec with Matchers {
+class SocialMediaBasicTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val connection = memo(SocialMediaBasic.generateConnection _)
   

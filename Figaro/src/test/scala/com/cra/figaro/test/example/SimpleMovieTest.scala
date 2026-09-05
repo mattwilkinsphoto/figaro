@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm.factored._
@@ -24,7 +24,7 @@ import com.cra.figaro.language.Universe._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 
-class SimpleMovieTest extends WordSpec with Matchers {
+class SimpleMovieTest extends AnyWordSpec with Matchers {
   "A PRM with a global constraint without mutation" should {
     "produce the correct probability under variable elimination" taggedAs (Example) in {
       test((e: Element[Boolean]) => VariableElimination(e))
@@ -35,7 +35,7 @@ class SimpleMovieTest extends WordSpec with Matchers {
     }
 
     "produce the correct probability under Metropolis-Hastings" taggedAs (Example) in {
-      test((e: Element[Boolean]) => { val m = MetropolisHastings(100000, chooseScheme, 0, e); /*m.debug = true;*/ m })
+      test((e: Element[Boolean]) => { val m = MetropolisHastings(100000, chooseScheme(), 0, e); /*m.debug = true;*/ m })
     }
   }
 
@@ -44,18 +44,18 @@ class SimpleMovieTest extends WordSpec with Matchers {
   }
 
   class Movie(name: String) {
-    val quality = Select(0.3 -> 'low, 0.5 -> 'medium, 0.2 -> 'high)(name + "quality", universe)
+    val quality = Select(0.3 -> Symbol("low"), 0.5 -> Symbol("medium"), 0.2 -> Symbol("high"))(name + "quality", universe)
   }
 
   class Appearance(name: String, val actor: Actor, val movie: Movie) {
     def probAward(quality: Symbol, famous: Boolean) =
       (quality, famous) match {
-        case ('low, false) => 0.001
-        case ('low, true) => 0.01
-        case ('medium, false) => 0.01
-        case ('medium, true) => 0.05
-        case ('high, false) => 0.05
-        case ('high, true) => 0.2
+        case (Symbol("low"), false) => 0.001
+        case (Symbol("low"), true) => 0.01
+        case (Symbol("medium"), false) => 0.01
+        case (Symbol("medium"), true) => 0.05
+        case (Symbol("high"), false) => 0.05
+        case (Symbol("high"), true) => 0.2
       }
     val pa = Apply(movie.quality, actor.famous, (q: Symbol, f: Boolean) => probAward(q, f))(name + "probAward", universe)
     val award = SwitchingFlip(pa)(name + "award", universe)
@@ -116,7 +116,7 @@ class SimpleMovieTest extends WordSpec with Matchers {
     allAwards.setCondition(uniqueAwardCondition)
 
     actor3.famous.observe(true)
-    movie2.quality.observe('high)
+    movie2.quality.observe(Symbol("high"))
 
     // We first make sure the initial state satisfies the unique award condition, and then make sure that all
     // subsequent proposals keep that condition.

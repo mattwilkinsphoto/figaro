@@ -114,7 +114,7 @@ trait ParticleBeliefPropagation extends FactoredAlgorithm[Double] with InnerBPHa
    * have to be removed (since resampling can change the structure).
    */
   private[figaro] def resample(): (Set[Element[_]], Set[Element[_]]) = {
-    val needsToBeResampled = pbpSampler.sampledElements.filter(e => bp.factorGraph.contains(VariableNode(Variable(e))))
+    val needsToBeResampled = pbpSampler.sampledElements().filter(e => bp.factorGraph.contains(VariableNode(Variable(e))))
     val dependentElems = needsToBeResampled.flatMap { elem =>
       elem match {
         case a: Atomic[_] =>
@@ -172,7 +172,7 @@ trait ParticleBeliefPropagation extends FactoredAlgorithm[Double] with InnerBPHa
    */
   private[figaro] def runOuterLoop() = {
 
-    val (needsToBeResampled, dependentElems): (Set[Element[_]], Set[Element[_]]) = if (bp != null) resample() else (Set(), Set())
+    val (needsToBeResampled, dependentElems): (Set[Element[_]], Set[Element[_]]) = if (bp != null) resample() else (Set.empty[Element[_]], Set.empty[Element[_]])
     val elemsWithPosteriors: Set[Element[_]] = if (bp != null) bp.neededElements.toSet -- dependentElems -- needsToBeResampled else Set()
 
     runInnerLoop(elemsWithPosteriors, dependentElems)
@@ -200,7 +200,7 @@ trait ParticleBeliefPropagation extends FactoredAlgorithm[Double] with InnerBPHa
    * Runs this particle belief propagation algorithm for one iteration. An iteration here is
    * one iteration of the outer loop. This means that the inner BP loop may run several iterations.
    */
-  def runStep() {
+  def runStep(): Unit = {
     runOuterLoop()
   }
 
@@ -221,7 +221,7 @@ trait OneTimeParticleBeliefPropagation extends ParticleBeliefPropagation with On
  * Trait for Anytime PBP algorithms
  */
 trait AnytimeParticleBeliefPropagation extends ParticleBeliefPropagation with Anytime with AnytimeInnerBPHandler {
-  override def cleanUp() = if (bp != null) bp.kill
+  override def cleanUp() = if (bp != null) bp.kill()
 }
 
 /**

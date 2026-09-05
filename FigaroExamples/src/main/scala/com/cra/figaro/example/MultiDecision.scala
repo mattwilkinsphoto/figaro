@@ -58,7 +58,7 @@ object MultiDecision {
   }
   val value = Apply(found, market, valueFcn)
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
 
     val ve_before = VariableElimination(value, cost)
     ve_before.start()
@@ -87,7 +87,7 @@ object MultiDecision {
     println("1 -> " + found.getPolicy(1) + ", (" + alg.getUtility(found, 1, false).norm + " vs " + alg.getUtility(found, 1, true).norm + ")")
     println("2 -> " + found.getPolicy(2) + ", (" + alg.getUtility(found, 2, false).norm + " vs " + alg.getUtility(found, 2, true).norm + ")")
 
-    alg.kill
+    alg.kill()
   }
 } 
 

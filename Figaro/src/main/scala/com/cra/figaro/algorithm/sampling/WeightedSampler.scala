@@ -46,9 +46,11 @@ abstract class WeightedSampler(override val universe: Universe, targets: Element
   // will be saved. However, if every sample produces a different value for the target, the memory requirements will
   // still be substantial.
 
-  protected type WeightSeen[T] = (Element[T], Map[T, Double])
+  // A wrapper preserves the correlation between the element and map key types
+  // when a heterogeneous list captures WeightSeen[?] under Scala 3.
+  protected case class WeightSeen[T](_1: Element[T], _2: Map[T, Double])
 
-  protected def newWeightSeen[T](target: Element[T]): WeightSeen[T] = (target, Map())
+  protected def newWeightSeen[T](target: Element[T]): WeightSeen[T] = WeightSeen(target, Map())
 
   protected var allWeightsSeen: List[WeightSeen[_]] = _
 

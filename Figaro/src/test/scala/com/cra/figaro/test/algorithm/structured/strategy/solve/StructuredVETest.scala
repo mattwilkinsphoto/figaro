@@ -16,9 +16,10 @@ import com.cra.figaro.algorithm.structured.algorithm.structured.{StructuredMPEVE
 import com.cra.figaro.language.Element.toBooleanElement
 import com.cra.figaro.language._
 import com.cra.figaro.library.compound.If
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class StructuredVETest extends WordSpec with Matchers {
+class StructuredVETest extends AnyWordSpec with Matchers {
   "Executing a recursive structured VE solver strategy" when {
     "given a flat model with an atomic flip without evidence" should {
       "produce the correct answer" in {
@@ -181,10 +182,10 @@ class StructuredVETest extends WordSpec with Matchers {
       val e1 = Flip(0.4)
       val e2 = Flip(0.6)
       val alg = StructuredMPEVE()
-      alg.start
+      alg.start()
       alg.mostLikelyValue(e1) should equal(false)
       alg.mostLikelyValue(e2) should equal(true)
-      alg.kill
+      alg.kill()
     }
     
     "given a flat model without evidence should produce the right answer" in {
@@ -194,7 +195,7 @@ class StructuredVETest extends WordSpec with Matchers {
       val e3 = Flip(e1)
       val e4 = e2 === e3
       val alg = StructuredMPEVE()
-      alg.start
+      alg.start()
       // p(e1=.2,e2=T,e3=T,e4=T) = 0.75 * 0.2 * 0.2 = .03
       // p(e1=.2,e2=F,e3=F,e4=T) = 0.75 * 0.8 * 0.8 = .48
       // p(e1=.3,e2=T,e3=T,e4=T) = 0.25 * 0.3 * 0.3 = .0225
@@ -208,7 +209,7 @@ class StructuredVETest extends WordSpec with Matchers {
       alg.mostLikelyValue(e2) should equal(false)
       alg.mostLikelyValue(e3) should equal(false)
       alg.mostLikelyValue(e4) should equal(true)
-      alg.kill
+      alg.kill()
     }
 
     "given a flat model with evidence should produce the right answer" in {
@@ -221,7 +222,7 @@ class StructuredVETest extends WordSpec with Matchers {
       e4.observe(true)
       val alg = StructuredMPEVE()
       alg.collection.useSingleChainFactor = true
-      alg.start
+      alg.start()
       // p(e1=.2,e2=T,e3=T,e4=T) = 0.75 * 0.2 * 0.2 = .03
       // p(e1=.2,e2=F,e3=F,e4=T) = 0.75 * 0.8 * 0.8 = .48
       // p(e1=.3,e2=T,e3=T,e4=T) = 0.25 * 0.3 * 0.3 = .0225
@@ -231,7 +232,7 @@ class StructuredVETest extends WordSpec with Matchers {
       alg.mostLikelyValue(e2) should equal(false)
       alg.mostLikelyValue(e3) should equal(false)
       alg.mostLikelyValue(e4) should equal(true)
-      alg.kill
+      alg.kill()
     }
 
     "given a structured model with evidence should produce the right answer" in {
@@ -256,12 +257,12 @@ class StructuredVETest extends WordSpec with Matchers {
       // MPE: e1=T,e2=F,e3=F,e4=T
       val alg = StructuredMPEVE()
       alg.collection.useSingleChainFactor = true
-      alg.start
+      alg.start()
       alg.mostLikelyValue(e1) should equal(true)
       alg.mostLikelyValue(e2) should equal(false)
       alg.mostLikelyValue(e3) should equal(false)
       alg.mostLikelyValue(e4) should equal(true)
-      alg.kill
+      alg.kill()
     }
 
   }

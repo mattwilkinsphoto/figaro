@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.language
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.language._
 import com.cra.figaro.language.Universe._
 import com.cra.figaro.library.atomic.continuous._
@@ -23,7 +23,7 @@ import scala.collection.mutable._
 import scala.collection.mutable.Map
 import com.cra.figaro.algorithm.factored.VariableElimination
 
-class UniverseTest extends WordSpec with Matchers {
+class UniverseTest extends AnyWordSpec with Matchers {
   "A Universe" when {
     "having activated and deactivated some elements" should {
       
@@ -94,7 +94,7 @@ class UniverseTest extends WordSpec with Matchers {
       "have the context be the context stack at time of activation" in {
         createNew()
         val e1 = Constant(8)
-        universe.context(e1) should be('empty)
+        universe.context(e1) should be(Symbol("empty"))
         universe.pushContext(e1)
         val e2 = Constant(7)
         universe.context(e2) should equal(List(e1))
@@ -150,7 +150,7 @@ class UniverseTest extends WordSpec with Matchers {
         val e1 = Constant(8)
         universe.pushContext(e1)
         e1.deactivate()
-        universe.contextStack should be('empty)
+        universe.contextStack should be(Symbol("empty"))
       }
 
       "have the element not be included in the Universe.universe.contextContents of another element" in {
@@ -159,7 +159,7 @@ class UniverseTest extends WordSpec with Matchers {
         universe.pushContext(e1)
         val e2 = Constant(7)
         e2.deactivate()
-        universe.contextContents(e1) should be('empty)
+        universe.contextContents(e1) should be(Symbol("empty"))
       }
 
       "have all elements in its context contents be deactivated" in {
@@ -189,7 +189,7 @@ class UniverseTest extends WordSpec with Matchers {
         createNew()
         val e = Constant(8)
         createNew()
-        universe.activeElements should be('empty)
+        universe.activeElements should be(Symbol("empty"))
       }
 
       "have empty context stack" in {
@@ -197,7 +197,7 @@ class UniverseTest extends WordSpec with Matchers {
         val e = Constant(8)
         universe.pushContext(e)
         createNew()
-        universe.contextStack should be('empty)
+        universe.contextStack should be(Symbol("empty"))
       }
     }
 
@@ -207,7 +207,7 @@ class UniverseTest extends WordSpec with Matchers {
         val e = Constant(8)
         universe.pushContext(e)
         universe.clearTemporaries()
-        universe.contextStack should be('empty)
+        universe.contextStack should be(Symbol("empty"))
       }
 
       "have temporary elements be inactive but permanent elements active" in {
@@ -226,14 +226,14 @@ class UniverseTest extends WordSpec with Matchers {
         //val C1 = NonCachingChain(P1, (b1: Boolean) => Constant(0))
         val X1 = Apply(C1, (i: Int) => i)
 
-        P1.generate
-        P2.generate
-        C1.generate
-        X1.generate
+        P1.generate()
+        P2.generate()
+        C1.generate()
+        X1.generate()
 
         val usesBefore = Universe.universe.uses(X1).clone
 
-        Universe.universe.clearTemporaries
+        Universe.universe.clearTemporaries()
         val usesAfter = Universe.universe.uses(X1)
         usesAfter.contains(P2) should equal(true)
         //usesBefore should equal (usesAfter)
@@ -249,11 +249,11 @@ class UniverseTest extends WordSpec with Matchers {
         val x1 = Apply(a1, a2, c1, (i1: Boolean, i2: Boolean, i3: Int) => 0)
 
         f1.value = true
-        c1.generate
+        c1.generate()
         f1.value = false
-        c1.generate
+        c1.generate()
 
-        Universe.universe.clearTemporaries
+        Universe.universe.clearTemporaries()
         val usedByAfter = Universe.universe.usedBy(a1)
         usedByAfter.contains(x1) should equal(true)
       }

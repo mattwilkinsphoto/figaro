@@ -20,7 +20,7 @@
 package com.cra.figaro.test.algorithm.sampling
 
 import org.scalatest._
-import org.scalatest.Matchers
+import org.scalatest.matchers.should.Matchers
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling.Importance.Reject
 import com.cra.figaro.algorithm.sampling._
@@ -34,11 +34,12 @@ import com.cra.figaro.util.logSum
 import com.cra.figaro.test.tags.Performance
 import com.cra.figaro.test.tags.NonDeterministic
 import scala.language.reflectiveCalls
-import org.scalatest.Matchers
-import org.scalatest.{ PrivateMethodTester, WordSpec }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.PrivateMethodTester
+import org.scalatest.wordspec.AnyWordSpec
 import scala.collection.mutable.Set
 
-class ImportanceTest extends WordSpec with Matchers with PrivateMethodTester {
+class ImportanceTest extends AnyWordSpec with Matchers with PrivateMethodTester {
 
   "Sampling a value of a single element" should {
 
@@ -550,14 +551,14 @@ class ImportanceTest extends WordSpec with Matchers with PrivateMethodTester {
       val f = Flip(0.000001)
       f.observe(true)
       val i = Importance(1, f)
-      i.start
+      i.start()
     }
 
     "not suffer from memory leaks" taggedAs (Performance) in {
       Universe.createNew()
       val c = NonCachingChain(Uniform(0.2, 1.0), (d: Double) => Flip(d))
       val i = Importance(1000000, c)
-      i.start
+      i.start()
     }
   }
 
@@ -700,7 +701,7 @@ class ImportanceTest extends WordSpec with Matchers with PrivateMethodTester {
 
   }
 
-  def weightedSampleTest[T](target: Element[T], predicate: T => Boolean, prob: Double) {
+  def weightedSampleTest[T](target: Element[T], predicate: T => Boolean, prob: Double): Unit = {
     val numTrials = 100000
     val tolerance = 0.01
     val algorithm = Importance(numTrials, target)
@@ -708,7 +709,7 @@ class ImportanceTest extends WordSpec with Matchers with PrivateMethodTester {
     algorithm.probability(target, predicate) should be(prob +- tolerance)
   }
 
-  def sampleOneTest[T](target: Element[T], predicate: T => Boolean, prob: Double) {
+  def sampleOneTest[T](target: Element[T], predicate: T => Boolean, prob: Double): Unit = {
     val numTrials = 100000
     val tolerance = 0.01
     val imp = Importance(target)
@@ -735,7 +736,7 @@ class ImportanceTest extends WordSpec with Matchers with PrivateMethodTester {
     imp.shutdown
   }
 
-  def probEvidenceTest(prob: Double, evidence: List[NamedEvidence[_]]) {
+  def probEvidenceTest(prob: Double, evidence: List[NamedEvidence[_]]): Unit = {
     val alg = Importance(10000)
     alg.start()
     alg.probabilityOfEvidence(evidence) should be(prob +- 0.01)

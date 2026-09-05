@@ -17,13 +17,13 @@ import com.cra.figaro.language.Universe
 import com.cra.figaro.library.atomic.continuous.Normal
 import com.cra.figaro.library.compound.^^
 import com.cra.figaro.algorithm.sampling.MetropolisHastings
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 import com.cra.figaro.test.tags.NonDeterministic
 
 object TwoVariableMCMC {
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val x = Normal(0.75, 0.2)
     val y = Normal(0.4, 0.2)
     x.setCondition((d: Double) => d > 0 && d < 1)
@@ -33,7 +33,7 @@ object TwoVariableMCMC {
   }
 }
 
-class TwoVariableMCMCTest extends WordSpec with Matchers {
+class TwoVariableMCMCTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val x = Normal(0.75, 0.2)
   val y = Normal(0.4, 0.2)

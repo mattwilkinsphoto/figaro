@@ -60,7 +60,7 @@ abstract class BaseUnweightedSampler(val universe: Universe, targets: Element[_]
 
   protected def initUpdates() = allLastUpdates = Map(targets.toList.map(t => (t -> newLastUpdate(t))): _*)
 
-  protected def resetCounts() {
+  protected def resetCounts(): Unit = {
     sampleCount = 0
     allTimesSeen = Map(targets.toList.map(t => (t -> newTimesSeen(t))): _*)
   }
@@ -77,7 +77,7 @@ abstract class BaseUnweightedSampler(val universe: Universe, targets: Element[_]
   protected def doSample(): Unit = {
     val s = sample()
     if (sampleCount == 0 && s._1) {
-      initUpdates
+      initUpdates()
     }
     if (s._1) {
       sampleCount += 1

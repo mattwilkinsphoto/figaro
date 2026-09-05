@@ -35,15 +35,15 @@ object CarAndEngine {
   }
 
   private class V8 extends Engine {
-    val power: Element[Symbol] = Select(0.8 -> 'high, 0.2 -> 'medium)("power", this)
+    val power: Element[Symbol] = Select(0.8 -> Symbol("high"), 0.2 -> Symbol("medium"))("power", this)
   }
 
   private class V6 extends Engine {
-    val power: Element[Symbol] = Select(0.2 -> 'high, 0.5 -> 'medium, 0.3 -> 'low)("power", this)
+    val power: Element[Symbol] = Select(0.2 -> Symbol("high"), 0.5 -> Symbol("medium"), 0.3 -> Symbol("low"))("power", this)
   }
 
   private object MySuperEngine extends V8 {
-    override val power: Element[Symbol] = Constant('high)("power", this)
+    override val power: Element[Symbol] = Constant(Symbol("high"))("power", this)
   }
 
   class Car extends ElementCollection {
@@ -51,12 +51,12 @@ object CarAndEngine {
 
     val speed = CPD(
       get[Symbol]("engine.power"),
-      'high -> Constant(90.0),
-      'medium -> Constant(80.0),
-      'low -> Constant(70.0))
+      Symbol("high") -> Constant(90.0),
+      Symbol("medium") -> Constant(80.0),
+      Symbol("low") -> Constant(70.0))
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val car = new Car
     val alg = VariableElimination(car.speed)
     alg.start()

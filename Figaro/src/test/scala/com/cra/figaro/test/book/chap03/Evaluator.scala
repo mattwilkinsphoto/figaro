@@ -14,8 +14,8 @@
 package com.cra.figaro.test.book.chap03
 
 import com.cra.figaro.language.Universe
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.test.tags.BookExample
 
 object Evaluator {
@@ -63,7 +63,7 @@ object Evaluator {
   }
 }
 
-class EvaluatorTest extends WordSpec with Matchers {
+class EvaluatorTest extends AnyWordSpec with Matchers {
   Universe.createNew()
   val testDirectoryName = "src/test/resources/BookData/Test"
   val labelFileName = "src/test/resources/BookData/Labels.txt"

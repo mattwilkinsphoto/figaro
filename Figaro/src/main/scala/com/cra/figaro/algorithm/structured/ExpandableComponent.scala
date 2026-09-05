@@ -27,7 +27,7 @@ abstract class ExpandableComponent[ParentValue, Value](problem: Problem, parent:
   /**
    * Expand for all values of the parent that were not previously expanded, based on the current range of the parent.
    */
-  def expand() {
+  def expand(): Unit = {
     if (problem.collection.contains(parent)) {
       val parentValues = problem.collection(parent).range.regularValues
       for (parentValue <- parentValues if !subproblems.contains(parentValue)) expand(parentValue)
@@ -67,7 +67,7 @@ class ChainComponent[ParentValue, Value](problem: Problem, val chain: Chain[Pare
    *  Create a subproblem for a particular parent value.
    *  Memoized.
    */
-  def expand(parentValue: ParentValue) {
+  def expand(parentValue: ParentValue): Unit = {
     val subproblem = problem.collection.expansion(this, chain.chainFunction, parentValue)
     val chainContextElements = chain.universe.contextContents(chain)
     val remainingElements = chainContextElements.filter(!elementsCreated.contains(_))
@@ -139,7 +139,7 @@ class MakeArrayComponent[Value](problem: Problem, val makeArray: MakeArray[Value
   /**
    * Ensure that the given number of items is expanded.
    */
-  def expand(n: Int) {
+  def expand(n: Int): Unit = {
     // Make sure the first n items are added to the component collection.
     // Any newly added items will be added to this problem.
     for { i <- maxExpanded until n } {
@@ -152,7 +152,7 @@ class MakeArrayComponent[Value](problem: Problem, val makeArray: MakeArray[Value
   /**
    * Expand all the potential items according to the maximum value in the range of the MakeArray's number of items.
    */
-  override def expand() {
+  override def expand(): Unit = {
     if (problem.collection.contains(makeArray.numItems)) {
       expand(problem.collection(makeArray.numItems).range.regularValues.max)
     }

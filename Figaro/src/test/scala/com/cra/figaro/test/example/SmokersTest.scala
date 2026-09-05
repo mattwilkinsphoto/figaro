@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.example
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm.factored._
@@ -25,7 +25,7 @@ import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Example
 import com.cra.figaro.test.tags.NonDeterministic
 
-class SmokersTest extends WordSpec with Matchers {
+class SmokersTest extends AnyWordSpec with Matchers {
   "The friends and smokers example" should {
     "produce the correct answer under importance sampling" taggedAs (Example, NonDeterministic)  in {
       test((e: Element[Boolean]) => Importance(20000, e))
@@ -51,7 +51,7 @@ class SmokersTest extends WordSpec with Matchers {
   private def smokingInfluence(pair: (Boolean, Boolean)) =
     if (pair._1 == pair._2) 3.0; else 1.0
 
-  def test(algorithmCreator: Element[Boolean] => ProbQueryAlgorithm) {
+  def test(algorithmCreator: Element[Boolean] => ProbQueryAlgorithm): Unit = {
     Universe.createNew()
 
     val alice, bob, clara = new Person
@@ -70,7 +70,7 @@ class SmokersTest extends WordSpec with Matchers {
     val alg = algorithmCreator(alice.smokes)
     alg.start()
     alg.probability(alice.smokes, true) should be(answer +- 0.01)
-    alg.kill
+    alg.kill()
   }
 
 }

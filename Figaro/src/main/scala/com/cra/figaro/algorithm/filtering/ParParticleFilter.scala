@@ -68,7 +68,7 @@ class ParOneTimeParticleFilter(static: () => Universe, initial: () => Universe, 
   }
   
   /** compute probability of evidence for the particles, and update the belief state (after re-sampling) */
-  private def doTimeStep(weightedParticles: Seq[WeightedParticle]) {
+  private def doTimeStep(weightedParticles: Seq[WeightedParticle]): Unit = {
     computeProbEvidence(weightedParticles)
     updateBeliefState(weightedParticles)
   }

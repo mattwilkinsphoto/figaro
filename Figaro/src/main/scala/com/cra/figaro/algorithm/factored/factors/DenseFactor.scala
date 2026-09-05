@@ -17,7 +17,6 @@ import scala.annotation.tailrec
 import scala.collection.mutable.Map
 import com.cra.figaro.language._
 import com.cra.figaro.algorithm.lazyfactored.Extended
-import scala.reflect.runtime.universe._
 import scala.collection.mutable.WrappedArray
 import scala.reflect.ClassTag
 import scala.collection.mutable.ArraySeq

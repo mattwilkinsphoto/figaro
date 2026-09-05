@@ -31,18 +31,18 @@ object SimpleMovie {
   }
 
   private class Movie {
-    val quality = Select(0.3 -> 'low, 0.5 -> 'medium, 0.2 -> 'high)
+    val quality = Select(0.3 -> Symbol("low"), 0.5 -> Symbol("medium"), 0.2 -> Symbol("high"))
   }
 
   private class Appearance(val actor: Actor, val movie: Movie) {
     def probAward(quality: Symbol, famous: Boolean) =
       (quality, famous) match {
-        case ('low, false) => 0.001
-        case ('low, true) => 0.01
-        case ('medium, false) => 0.01
-        case ('medium, true) => 0.05
-        case ('high, false) => 0.05
-        case ('high, true) => 0.2
+        case (Symbol("low"), false) => 0.001
+        case (Symbol("low"), true) => 0.01
+        case (Symbol("medium"), false) => 0.01
+        case (Symbol("medium"), true) => 0.05
+        case (Symbol("high"), false) => 0.05
+        case (Symbol("high"), true) => 0.2
       }
     val award = SwitchingFlip(Apply(movie.quality, actor.famous, (q: Symbol, f: Boolean) => probAward(q, f)))
   }
@@ -99,7 +99,7 @@ object SimpleMovie {
 
   def main(args: Array[String]): Unit = {
     actor3.famous.observe(true)
-    movie2.quality.observe('high)
+    movie2.quality.observe(Symbol("high"))
 
     // We first make sure the initial state satisfies the unique award condition, and then make sure that all
     // subsequent proposals keep that condition.
@@ -109,7 +109,7 @@ object SimpleMovie {
       appearance.award.value = appearance.award.generateValue(appearance.award.randomness))
     allAwards.generate()
 
-    val alg = MetropolisHastings(200000, chooseScheme, 5000, appearance1.award, appearance2.award, appearance3.award)
+    val alg = MetropolisHastings(200000, chooseScheme(), 5000, appearance1.award, appearance2.award, appearance3.award)
 
     util.timed(alg.start(), "Inference")
     alg.stop()

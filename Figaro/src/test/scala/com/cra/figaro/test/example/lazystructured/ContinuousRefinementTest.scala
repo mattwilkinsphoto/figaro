@@ -21,9 +21,10 @@ import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous.{Beta, Normal}
 import com.cra.figaro.library.compound.If
 import com.cra.figaro.test.tags.Example
-import org.scalatest.{Matchers, WordSpec}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class ContinuousRefinementTest extends WordSpec with Matchers {
+class ContinuousRefinementTest extends AnyWordSpec with Matchers {
   "Continuous refinement" should {
     "converge to the posterior mean of the Beta" taggedAs Example in {
       val universe = Universe.createNew()

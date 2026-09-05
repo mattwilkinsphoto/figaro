@@ -146,3 +146,41 @@ Windows notes: the isolated long temporary directory initially exceeded the work
 The known legacy full-suite failures remain unchanged in scope; this stage does not claim that the entire historical suite is green. The inherited OSGi manifests still contain legacy bundle metadata; OSGi deployment is not validated by this JVM migration gate.
 
 References: [sbt 2 migration guide](https://www.scala-sbt.org/2.x/docs/en/changes/migrating-from-sbt-1.x.html), [cached tasks](https://www.scala-sbt.org/2.x/docs/en/reference/cached-task.html).
+
+## Stage 5: Scala 3 library migration
+
+Date: 2026-09-05. Branch: `modernize/scala-3`, based on the pushed sbt 2 checkpoint `b281f016`. The sbt 2 checkpoint's [GitHub Actions run](https://github.com/mattwilkinsphoto/figaro/actions/runs/33950767885) passed the required gates; the separate legacy timing advisory reported its known selectable-set timing failure.
+
+Target: Scala 3.9.0 LTS, sbt 2.0.8, JDK 17, library version `6.0.0-modern.1-SNAPSHOT`. This is a Scala 3-only line with the `_3` artifact suffix. The prior Scala 2.13 artifact is not replaced in place and Scala consumers must recompile. No consumer repository is changed.
+
+Migration decisions:
+
+- Compile all library, example, and test sources with normal Scala 3 type checking. The temporary `-source:3.0-migration` flag is removed. `-no-indent` deliberately preserves the repository's brace-delimited syntax; adopting indentation syntax is not required to use Scala 3.
+- Replace procedure syntax, symbol literals, and implicit empty-argument method calls. Align overridden method signatures, explicitly type priority-queue orderings and inherited learning parameters, and replace removed view bounds with `DistanceConversion[T]` context evidence.
+- Replace Scala 2 runtime mirrors with JVM singleton lookup and direct calls to the existing `Creatable` contract. Unknown class names, invalid objects, and rejected arguments have regression coverage. Unused `TypeTag` constraints and the `scala-reflect` dependency are removed.
+- Preserve the correlation between an element's value type and its weight-map key type using a generic `WeightSeen` wrapper. Explicitly widen heterogeneous, read-only joint-sampling inputs at the collection boundary. Check the boxed initialization sentinel through `Element.hasValue`, distinguishing missing values from valid `false` and `0` values.
+- Represent heterogeneous query targets with `BaseProbQueryAlgorithm[Q, U[_] <: Q]` and `BaseProbQuerySampler[Q, U[_] <: Q]`. Standard specializations use `Element[?]` or `Reference[?]` for Q. Scala 3 cannot apply an existential wildcard directly to an abstract higher-kinded constructor.
+- Use native Scala 3 Argonaut 6.3.13, Scala Swing 3.0.0, parallel collections 1.2.0, and ScalaTest 3.2.20. Test styles migrate to `AnyWordSpec` and `matchers.should.Matchers`; the previous test-only XML alignment is removed.
+- Fix two contradictory dependent-factor test coordinates in the alternate variable-order branch (`xFalse` was asserted to have both 0.25 and 0.5 probability). Preserve the existing sampling budget and tolerance. Two chain-rendering tests now inspect the actual generated functions rather than assuming Scala 2's shared `<function1>`/`<function2>` descriptions. Production rendering is unchanged.
+- Inspect compiler-generated rewrites for Windows CRLF effects: the compiler had moved a carriage return into some end-of-line symbol strings. Restore those original symbol names and enforce LF for Scala/build sources in `.gitattributes`.
+
+Source/API notes for consumers: accessor-style members such as `isCachable`, `burnIn`, `interval`, `discretize`, and `fullyRefinable` are consistently parameterless; lifecycle and generation methods retain `()`. Abstract target/universe/bound getters permit lazy implementations. Custom subclasses of the two generic query bases or of samplers using the protected weight representation need source adaptation. Packages remain under `com.cra.figaro`; this is not a promise of Scala 2 binary or complete source compatibility.
+
+Behavioral validation:
+
+- All 264 main, 168 test, and 37 example sources compile.
+- The required functional selections pass 119 tests, including 15 new Scala 3 regressions for dynamic creation, initialization, heterogeneous sampling, primitive/custom distance conversion, and flat/VP nearest-neighbor ordering.
+- A broader 284-test selection passes across language/universe/reference behavior, decision utilities, structured ranges/raising, semirings, and sparse factors.
+- One earlier required-gate run produced a Monte Carlo estimate of `0.48995` against `0.50 +/- 0.01` in the legacy dependent-factor test. The repeat passed without changing the tolerance or sampling budget. This remains a bounded sampling check, not a deterministic proof; the full historical suite is still not claimed green.
+
+Remaining maintenance: the compiler still reports legacy deprecations (including `Stream`, wildcard spelling, implicit-argument syntax, and non-local returns). These are visible, not suppressed. Broad stylistic rewrites and redesigning all deprecated APIs are outside this migration. The inherited OSGi metadata remains unvalidated.
+
+Artifact validation:
+
+- Scala 3 coverage instrumentation passes the three exact probability fixtures and emits XML, HTML, and Cobertura reports. This is a coverage-plugin smoke check, not a full-suite coverage claim.
+- A clean normal build compiles every source set and produces thin, fat, sources, and API-documentation JARs, plus isolated local publication. All four preserve the byte-identical Figaro license and attribution; assembly renames the license to `META-INF/LICENSE_figaro-6.0.0-modern.1-SNAPSHOT` to avoid third-party license collisions. Removed and test-only runtimes are absent from binary entries. The POM uses native `_3` dependencies and keeps ScalaTest test-scoped.
+- A second clean compilation with `Global / cacheStores := Seq.empty` reproduces both binary JARs byte-for-byte. Thin SHA-256: `086E61E07BD7BF97B40DF2CC45FF72657B110803EE954E0FC37962798F3664D0`; fat SHA-256: `BF8AFD0D8624426C85E21782FFC94798CE6BFAFB68BE9169E88FD1BB3F297EA2`.
+
+Windows build caveat: switching normal and coverage compilation inside one sbt JVM can leave the exported project JAR open and fail replacement with `AccessDeniedException`. Use a fresh sbt invocation for coverage, and another fresh invocation for `clean` plus normal packaging. This does not require disabling forked tests, changing file ownership, or granting administrator membership.
+
+References: [Scala 3.9.0 LTS download](https://www.scala-lang.org/download/), [runtime compatibility](https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html), [migration-mode tooling](https://docs.scala-lang.org/scala3/guides/migration/tooling-migration-mode.html), [higher-kinded wildcard restriction](https://docs.scala-lang.org/scala3/reference/error-codes/E043.html).

@@ -19,14 +19,15 @@
 
 package com.cra.figaro.test.util
 
-import org.scalatest.Matchers
-import org.scalatest.{ WordSpec, PrivateMethodTester }
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
+import org.scalatest.PrivateMethodTester
 import math.log
 import com.cra.figaro.util._
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Performance
 
-class SelectableSetTest extends WordSpec with PrivateMethodTester with Matchers {
+class SelectableSetTest extends AnyWordSpec with PrivateMethodTester with Matchers {
   "A SelectableSet" should {   
     "contain an element after insertion" in {
       val s = new HashSelectableSet[Int]

@@ -2,6 +2,12 @@
 
 This inventory separates build-tool migration from runtime dependency changes. Versions listed as "legacy" are intentionally retained during the first Java 17 / Scala 2.12.21 build pass.
 
+## Current Scala 3 line
+
+The Scala 3.9.0 LTS build uses native `_3` artifacts for Argonaut 6.3.13, Scala Swing 3.0.0, parallel collections 1.2.0, and ScalaTest 3.2.20 (test only). Commons Math remains 3.6.1. Scala 2 runtime reflection has been removed: dynamic creation resolves the JVM singleton and invokes Figaro's `Creatable` interface directly. Unused `TypeTag` bounds are gone.
+
+ScalaTest now uses `AnyWordSpec` and `matchers.should.Matchers`; the temporary ScalaTest 3.1 XML exclusion/alignment from the sbt 2 checkpoint is no longer needed. The historical inventory below records how the previous checkpoints were reached.
+
 | Dependency | Legacy version | Observed source surface | Initial remediation decision |
 | --- | ---: | --- | --- |
 | JSci | 1.2 | Special functions and factorial/binomial helpers in main code; statistical distribution oracles in legacy tests; pulls very old XML and lpsolve transitive artifacts | Removed completely. Main code uses a narrow Commons Math boundary with fixed numerical regressions; test-only adapters preserve legacy variance/rate/support conventions on Commons Math. |

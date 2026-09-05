@@ -13,8 +13,8 @@
 
 package com.cra.figaro.test.algorithm.filtering;
 
-import org.scalatest.Matchers
-import org.scalatest.WordSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 import com.cra.figaro.algorithm.filtering._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.language._
@@ -23,7 +23,7 @@ import com.cra.figaro.library.compound.If
 import com.cra.figaro.test._
 import com.cra.figaro.test.tags.Performance
 
-class ProbEvidenceTest extends WordSpec with Matchers {
+class ProbEvidenceTest extends AnyWordSpec with Matchers {
   
     "Computing probability of evidence" when {
     "given a vanilla model with one condition" should {
@@ -345,7 +345,7 @@ class ProbEvidenceTest extends WordSpec with Matchers {
       alg.start()
       alg.advanceTime(List(NamedEvidence("f", Observation(true))))
       Thread.sleep(200L)
-      alg.probEvidence should be (0.3 +- 0.01)
+      alg.probEvidence() should be (0.3 +- 0.01)
       alg.kill()
     }
 
@@ -367,34 +367,34 @@ class ProbEvidenceTest extends WordSpec with Matchers {
     } 
   }
     
-  def sampleTest(prob: Double, initial: Universe, transition: Universe => Universe, numParticles: Int,  evidence: List[NamedEvidence[_]]) {
+  def sampleTest(prob: Double, initial: Universe, transition: Universe => Universe, numParticles: Int,  evidence: List[NamedEvidence[_]]): Unit = {
      val alg = ParticleFilter(initial, transition, numParticles)
      alg.start()
      alg.advanceTime(evidence)
-     val probEvidence = alg.probEvidence	
+     val probEvidence = alg.probEvidence()
      alg.stop()
      alg.kill()
      probEvidence should be (prob +- 0.01)
   }
   
-    def sampleTest2(prob: Double, initial: Universe, transition: Universe => Universe, numParticles: Int,  evidence: List[NamedEvidence[_]]) {
+    def sampleTest2(prob: Double, initial: Universe, transition: Universe => Universe, numParticles: Int,  evidence: List[NamedEvidence[_]]): Unit = {
      val alg = ParticleFilter(initial, transition, numParticles)
      alg.start()
      alg.advanceTime(evidence)
      alg.advanceTime(evidence)
-     val probEvidence = alg.probEvidence	
+     val probEvidence = alg.probEvidence()
      alg.stop()
      alg.kill()
      probEvidence should be (prob +- 0.01)
   }
     
-     def sampleTest3(prob: Double, initial: Universe, transition: Universe => Universe, numParticles: Int,  evidence: List[NamedEvidence[_]]) {
+     def sampleTest3(prob: Double, initial: Universe, transition: Universe => Universe, numParticles: Int,  evidence: List[NamedEvidence[_]]): Unit = {
      val alg = ParticleFilter(initial, transition, numParticles)
      alg.start()
      alg.advanceTime(evidence)
      alg.advanceTime(evidence)
      alg.advanceTime(evidence)
-     val probEvidence = alg.probEvidence	
+     val probEvidence = alg.probEvidence()
      alg.stop()
      alg.kill()
      probEvidence should be (prob +- 0.01)
