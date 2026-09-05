@@ -35,6 +35,12 @@ jobs:
       - name: Compile all source sets
         run: sbt -v "clean; compile; Test / compile"
 
+      - name: Run documented quick start and common patterns
+        run: >-
+          sbt
+          "examples / Compile / runMain com.cra.figaro.example.documentation.QuickStart;
+          examples / Compile / runMain com.cra.figaro.example.documentation.CommonPatterns"
+
       - name: Run deterministic modernization regressions
         run: >-
           sbt
@@ -114,6 +120,12 @@ jobs:
         run: >-
           sbt
           "figaro / Compile / packageSrc; figaro / Compile / packageDoc; figaro / publishLocal"
+
+      - name: Verify documentation tooling, reference freshness, and local links
+        run: |
+          python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
+          python3 -B tools/docs/build_reference.py --check
+          python3 -B tools/docs/check_links.py
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0

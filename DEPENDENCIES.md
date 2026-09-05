@@ -1,5 +1,7 @@
 # Dependency modernization inventory
 
+Application-facing changes and accepted limitations are summarized in [migration changes](docs/MIGRATION.md); see [building](docs/BUILDING.md) for publication and runtime packaging.
+
 This inventory separates build-tool migration from runtime dependency changes. Versions listed as "legacy" are intentionally retained during the first Java 17 / Scala 2.12.21 build pass.
 
 ## Current Scala 3 line

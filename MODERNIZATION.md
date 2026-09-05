@@ -1,5 +1,7 @@
 # Figaro modernization log
 
+For day-to-day use, start with the [user guide](docs/USER_GUIDE.md), [migration changes](docs/MIGRATION.md), and [build instructions](docs/BUILDING.md). This file preserves the historical sequence of checkpoints rather than replacing the current user documentation.
+
 This log records decisions, compatibility findings, risks, and test evidence for the modernization of the Charles River Analytics Figaro codebase. The original license and `FigaroAttributions.txt` remain authoritative and must be preserved.
 
 ## Repository and provenance
