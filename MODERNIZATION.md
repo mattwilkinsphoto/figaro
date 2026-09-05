@@ -2,6 +2,8 @@
 
 For day-to-day use, start with the [user guide](docs/USER_GUIDE.md), [migration changes](docs/MIGRATION.md), and [build instructions](docs/BUILDING.md). This file preserves the historical sequence of checkpoints rather than replacing the current user documentation.
 
+Documentation follow-up: the new onboarding examples passed in [CI run 33969951669](https://github.com/mattwilkinsphoto/figaro/actions/runs/33969951669), as did the regression steps preceding coverage. Coverage then aborted before running tests because instrumented classes attempted to write into a missing `scoverage-data` directory. The absence of a coverage compile in that warmed run is consistent with action-cache restoration omitting required side effects. The coverage gate now disables cache stores and cleans before enabling instrumentation; the user-facing build commands carry the same precaution. This is distinct from the Windows exported-JAR locking issue.
+
 This log records decisions, compatibility findings, risks, and test evidence for the modernization of the Charles River Analytics Figaro codebase. The original license and `FigaroAttributions.txt` remain authoritative and must be preserved.
 
 ## Repository and provenance

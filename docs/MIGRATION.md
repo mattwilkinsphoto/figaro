@@ -122,6 +122,7 @@ Legacy Akka configuration/types do not control that worker. Scala parallel colle
 | JVM singleton reflection and narrow casts | Accepted for the current API, with the limits above. Test custom dynamic distributions in the consumer. |
 | Windows JAR locking | Operational workaround, not a root-cause fix: use fresh sbt invocations for coverage and subsequent normal clean/packaging. See exact commands in [building](BUILDING.md#3-update-documentation-or-measure-coverage). |
 | Long Windows IPC paths | A short `XDG_RUNTIME_DIR` avoids the observed socket-path failure. Forked tests remain enabled; administrator membership is unnecessary. |
+| Warm-cache coverage | A later documentation CI run found instrumented classes without `scoverage-data` after cache reuse. The coverage command now disables action-cache stores and cleans before instrumentation so compiler/report side effects are regenerated; it does not weaken or skip tests. |
 | Timing advisory | Machine-sensitive legacy checks are visible but non-blocking. Their failure is not a demonstrated numerical regression, nor proof that performance is unchanged. |
 | Statistical tests | A required legacy test missed `0.50 +/- 0.01` once with `0.48995`; repeats passed without loosening tolerance. Test reliability remains work, not a solved risk. |
 | Full historical suite | Already had failures and a heavyweight learning example before modernization. We have not made it green or proved every old failure unchanged under Scala 3. |

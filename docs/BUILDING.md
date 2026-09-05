@@ -65,11 +65,13 @@ Open `target/out/jvm/scala-3.9.0/figaro/api/index.html` locally. Edit public con
 Coverage is a separate workflow. On Windows especially, start it in a **fresh sbt process**, then exit before normal packaging:
 
 ```sh
-sbt "coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest; figaro / coverageReport; coverageOff"
+sbt "set Global / cacheStores := Seq.empty; clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest; figaro / coverageReport; coverageOff"
 sbt "clean; figaro / Compile / packageBin; figaro / assembly"
 ```
 
 This smoke run verifies instrumentation/reporting, not broad coverage. Inspect the reported XML/HTML/Cobertura locations in sbt output. Never publish instrumentation-bearing artifacts.
+
+The clean, cache-bypassed coverage build is intentional: a warmed CI run restored instrumented classes without the required `scoverage-data` directory, causing `FileNotFoundException` before any test could run. Recompiling coverage outputs avoids relying on cached compiler side effects. This is separate from Windows JAR locking; creating an empty directory alone would not establish that report metadata is complete.
 
 ## Build helper reference
 

@@ -94,7 +94,7 @@ jobs:
       - name: Verify coverage plugin and restore non-instrumented build
         run: >-
           sbt
-          "coverage;
+          "set Global / cacheStores := Seq.empty; clean; coverage;
           figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest;
           figaro / coverageReport; coverageOff; clean"
 
