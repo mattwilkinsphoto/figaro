@@ -1999,388 +1999,6 @@ Invocation template:
 receiver.stop()
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.iterations ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#iterations-0)
-
-```scala
-def iterations: Int
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Int ``.
-
-Invocation template:
-
-```scala
-receiver.iterations
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.run ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#run-94c)
-
-```scala
-def run(): Unit
-```
-
-Run the algorithm, performing its computation to completion.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Run the algorithm, performing its computation to completion. Attributes
-
-Invocation template:
-
-```scala
-receiver.run()
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.belief ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#belief-e6a)
-
-```scala
-def belief(source: Node): Factor[Double]
-```
-
-Returns the product of all messages from a source node's neighbors to itself.
-
-Type parameters: none.
-
-Parameters, list 1: `` source: Node ``.
-
-Returns: `` Factor[Double] ``.
-
-Source contract/attributes: Returns the product of all messages from a source node's neighbors to itself. Attributes Inherited from: BeliefPropagation
-
-Invocation template:
-
-```scala
-receiver.belief(source)
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.cleanUp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#cleanUp-94c)
-
-```scala
-def cleanUp(): Unit
-```
-
-Called when the algorithm is killed. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.cleanUp()
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.getFactors ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#getFactors-eb2)
-
-```scala
-def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = ...): List[Factor[Double]]
-```
-
-Returns the factors needed for BP. Since BP operates on a complete factor graph, factors are created for all elements in the universe.
-
-Type parameters: none.
-
-Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upperBounds: Boolean = ... ``.
-
-Returns: `` List[Factor[Double]] ``.
-
-Source contract/attributes: Returns the factors needed for BP. Since BP operates on a complete factor graph, factors are created for all elements in the universe. Attributes Inherited from: ProbabilisticBeliefPropagation
-
-Invocation template:
-
-```scala
-receiver.getFactors(neededElements, targetElements, upperBounds)
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.getFinalFactorForElement ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#getFinalFactorForElement-c2f)
-
-```scala
-def getFinalFactorForElement[T](target: Element[T]): Factor[Double]
-```
-
-Get the final factor for an element.
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` target: Element[T] ``.
-
-Returns: `` Factor[Double] ``.
-
-Source contract/attributes: Get the final factor for an element. Attributes Inherited from: ProbabilisticBeliefPropagation
-
-Invocation template:
-
-```scala
-receiver.getFinalFactorForElement[T](target)
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.getNeededElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#getNeededElements-91d)
-
-```scala
-def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
-```
-
-Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed.
-
-Type parameters: none.
-
-Parameters, list 1: `` starterElements: List[Element[_]] ``; `` depth: Int ``; `` parameterized: Boolean = ... ``.
-
-Returns: `` (List[Element[_]], Boolean) ``.
-
-Source contract/attributes: Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed. In addition to getting all the needed elements, it determines if any of the conditioned, constrained, or dependent universe parent elements has * in its range. If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both. If they don't, we don't need to compute bounds. Attributes Inherited from: FactoredAlgorithm
-
-Invocation template:
-
-```scala
-receiver.getNeededElements(starterElements, depth, parameterized)
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.initialize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#initialize-94c)
-
-```scala
-override def initialize(): Unit
-```
-
-Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Definition Classes BeliefPropagation -> Algorithm Inherited from: BeliefPropagation
-
-Invocation template:
-
-```scala
-receiver.initialize()
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.isActive ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#isActive-0)
-
-```scala
-def isActive: Boolean
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Boolean ``.
-
-Source contract/attributes: Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.isActive
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.kill ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#kill-94c)
-
-```scala
-def kill(): Unit
-```
-
-Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.kill()
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.normalize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#normalize-fffffd5e)
-
-```scala
-def normalize(factor: Factor[Double]): Factor[Double]
-```
-
-Normalize a factor.
-
-Type parameters: none.
-
-Parameters, list 1: `` factor: Factor[Double] ``.
-
-Returns: `` Factor[Double] ``.
-
-Source contract/attributes: Normalize a factor. Attributes Inherited from: ProbabilisticBeliefPropagation
-
-Invocation template:
-
-```scala
-receiver.normalize(factor)
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.resume ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#resume-94c)
-
-```scala
-def resume(): Unit
-```
-
-Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.resume()
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.runStep ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#runStep-94c)
-
-```scala
-def runStep(): Unit
-```
-
-Runs this belief propagation algorithm for one iteration. An iteration consists of each node of the factor graph sending a message to each of its neighbors.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Runs this belief propagation algorithm for one iteration. An iteration consists of each node of the factor graph sending a message to each of its neighbors. Attributes Inherited from: BeliefPropagation
-
-Invocation template:
-
-```scala
-receiver.runStep()
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.start ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#start-94c)
-
-```scala
-def start(): Unit
-```
-
-Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.start()
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.starterElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#starterElements-0)
-
-```scala
-def starterElements: List[Element[_]]
-```
-
-Elements towards which queries are directed. By default, these are the target elements. This is overridden by DecisionVariableElimination, where it also includes utility variables.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` List[Element[_]] ``.
-
-Source contract/attributes: Elements towards which queries are directed. By default, these are the target elements. This is overridden by DecisionVariableElimination, where it also includes utility variables. Attributes Inherited from: BeliefPropagation
-
-Invocation template:
-
-```scala
-receiver.starterElements
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.stop ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#stop-94c)
-
-```scala
-def stop(): Unit
-```
-
-Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.stop()
-```
-
 ## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbEvidenceBeliefPropagation.additionalEvidenceAlgorithm ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbEvidenceBeliefPropagation.html#additionalEvidenceAlgorithm-98b)
@@ -2909,81 +2527,55 @@ Invocation template:
 receiver.iterations
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.getFactors ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.iterations ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#getFactors-eb2)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#iterations-0)
 
 ```scala
-def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = ...): List[Factor[Double]]
+def iterations: Int
 ```
 
-Returns the factors needed for BP. Since BP operates on a complete factor graph, factors are created for all elements in the universe.
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
 
 Type parameters: none.
 
-Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upperBounds: Boolean = ... ``.
+Parameters: none (parameterless member; do not append `()`).
 
-Returns: `` List[Factor[Double]] ``.
-
-Source contract/attributes: Returns the factors needed for BP. Since BP operates on a complete factor graph, factors are created for all elements in the universe. Attributes
+Returns: `` Int ``.
 
 Invocation template:
 
 ```scala
-receiver.getFactors(neededElements, targetElements, upperBounds)
+receiver.iterations
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.getFinalFactorForElement ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.run ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#getFinalFactorForElement-c2f)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#run-94c)
 
 ```scala
-def getFinalFactorForElement[T](target: Element[T]): Factor[Double]
+def run(): Unit
 ```
 
-Get the final factor for an element.
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` target: Element[T] ``.
-
-Returns: `` Factor[Double] ``.
-
-Source contract/attributes: Get the final factor for an element. Attributes
-
-Invocation template:
-
-```scala
-receiver.getFinalFactorForElement[T](target)
-```
-
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.normalize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#normalize-fffffd5e)
-
-```scala
-def normalize(factor: Factor[Double]): Factor[Double]
-```
-
-Normalize a factor.
+Run the algorithm, performing its computation to completion.
 
 Type parameters: none.
 
-Parameters, list 1: `` factor: Factor[Double] ``.
+Parameters, list 1: none (empty argument list `()`).
 
-Returns: `` Factor[Double] ``.
+Returns: `` Unit ``.
 
-Source contract/attributes: Normalize a factor. Attributes
+Source contract/attributes: Run the algorithm, performing its computation to completion. Attributes
 
 Invocation template:
 
 ```scala
-receiver.normalize(factor)
+receiver.run()
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.belief ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.belief ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#belief-e6a)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#belief-e6a)
 
 ```scala
 def belief(source: Node): Factor[Double]
@@ -3005,9 +2597,9 @@ Invocation template:
 receiver.belief(source)
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.cleanUp ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.cleanUp ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#cleanUp-94c)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#cleanUp-94c)
 
 ```scala
 def cleanUp(): Unit
@@ -3029,9 +2621,57 @@ Invocation template:
 receiver.cleanUp()
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.getNeededElements ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.getFactors ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#getNeededElements-91d)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#getFactors-eb2)
+
+```scala
+def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = ...): List[Factor[Double]]
+```
+
+Returns the factors needed for BP. Since BP operates on a complete factor graph, factors are created for all elements in the universe.
+
+Type parameters: none.
+
+Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upperBounds: Boolean = ... ``.
+
+Returns: `` List[Factor[Double]] ``.
+
+Source contract/attributes: Returns the factors needed for BP. Since BP operates on a complete factor graph, factors are created for all elements in the universe. Attributes Inherited from: ProbabilisticBeliefPropagation
+
+Invocation template:
+
+```scala
+receiver.getFactors(neededElements, targetElements, upperBounds)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.getFinalFactorForElement ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#getFinalFactorForElement-c2f)
+
+```scala
+def getFinalFactorForElement[T](target: Element[T]): Factor[Double]
+```
+
+Get the final factor for an element.
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` target: Element[T] ``.
+
+Returns: `` Factor[Double] ``.
+
+Source contract/attributes: Get the final factor for an element. Attributes Inherited from: ProbabilisticBeliefPropagation
+
+Invocation template:
+
+```scala
+receiver.getFinalFactorForElement[T](target)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.getNeededElements ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#getNeededElements-91d)
 
 ```scala
 def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
@@ -3053,9 +2693,9 @@ Invocation template:
 receiver.getNeededElements(starterElements, depth, parameterized)
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.initialize ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.initialize ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#initialize-94c)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#initialize-94c)
 
 ```scala
 override def initialize(): Unit
@@ -3077,9 +2717,9 @@ Invocation template:
 receiver.initialize()
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.isActive ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.isActive ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#isActive-0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#isActive-0)
 
 ```scala
 def isActive: Boolean
@@ -3101,9 +2741,9 @@ Invocation template:
 receiver.isActive
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.kill ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.kill ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#kill-94c)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#kill-94c)
 
 ```scala
 def kill(): Unit
@@ -3125,9 +2765,33 @@ Invocation template:
 receiver.kill()
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.resume ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.normalize ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#resume-94c)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#normalize-fffffd5e)
+
+```scala
+def normalize(factor: Factor[Double]): Factor[Double]
+```
+
+Normalize a factor.
+
+Type parameters: none.
+
+Parameters, list 1: `` factor: Factor[Double] ``.
+
+Returns: `` Factor[Double] ``.
+
+Source contract/attributes: Normalize a factor. Attributes Inherited from: ProbabilisticBeliefPropagation
+
+Invocation template:
+
+```scala
+receiver.normalize(factor)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.resume ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#resume-94c)
 
 ```scala
 def resume(): Unit
@@ -3149,9 +2813,9 @@ Invocation template:
 receiver.resume()
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.runStep ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.runStep ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#runStep-94c)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#runStep-94c)
 
 ```scala
 def runStep(): Unit
@@ -3173,9 +2837,9 @@ Invocation template:
 receiver.runStep()
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.start ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.start ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#start-94c)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#start-94c)
 
 ```scala
 def start(): Unit
@@ -3197,9 +2861,9 @@ Invocation template:
 receiver.start()
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.starterElements ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.starterElements ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#starterElements-0)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#starterElements-0)
 
 ```scala
 def starterElements: List[Element[_]]
@@ -3221,9 +2885,9 @@ Invocation template:
 receiver.starterElements
 ```
 
-## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.stop ``
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.OneTimeProbabilisticBeliefPropagation.stop ``
 
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#stop-94c)
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/OneTimeProbabilisticBeliefPropagation.html#stop-94c)
 
 ```scala
 def stop(): Unit
@@ -4401,6 +4065,342 @@ Invocation template:
 
 ```scala
 receiver.variance(target)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.getFactors ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#getFactors-eb2)
+
+```scala
+def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = ...): List[Factor[Double]]
+```
+
+Returns the factors needed for BP. Since BP operates on a complete factor graph, factors are created for all elements in the universe.
+
+Type parameters: none.
+
+Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upperBounds: Boolean = ... ``.
+
+Returns: `` List[Factor[Double]] ``.
+
+Source contract/attributes: Returns the factors needed for BP. Since BP operates on a complete factor graph, factors are created for all elements in the universe. Attributes
+
+Invocation template:
+
+```scala
+receiver.getFactors(neededElements, targetElements, upperBounds)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.getFinalFactorForElement ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#getFinalFactorForElement-c2f)
+
+```scala
+def getFinalFactorForElement[T](target: Element[T]): Factor[Double]
+```
+
+Get the final factor for an element.
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` target: Element[T] ``.
+
+Returns: `` Factor[Double] ``.
+
+Source contract/attributes: Get the final factor for an element. Attributes
+
+Invocation template:
+
+```scala
+receiver.getFinalFactorForElement[T](target)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.normalize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#normalize-fffffd5e)
+
+```scala
+def normalize(factor: Factor[Double]): Factor[Double]
+```
+
+Normalize a factor.
+
+Type parameters: none.
+
+Parameters, list 1: `` factor: Factor[Double] ``.
+
+Returns: `` Factor[Double] ``.
+
+Source contract/attributes: Normalize a factor. Attributes
+
+Invocation template:
+
+```scala
+receiver.normalize(factor)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.belief ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#belief-e6a)
+
+```scala
+def belief(source: Node): Factor[Double]
+```
+
+Returns the product of all messages from a source node's neighbors to itself.
+
+Type parameters: none.
+
+Parameters, list 1: `` source: Node ``.
+
+Returns: `` Factor[Double] ``.
+
+Source contract/attributes: Returns the product of all messages from a source node's neighbors to itself. Attributes Inherited from: BeliefPropagation
+
+Invocation template:
+
+```scala
+receiver.belief(source)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.cleanUp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#cleanUp-94c)
+
+```scala
+def cleanUp(): Unit
+```
+
+Called when the algorithm is killed. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.cleanUp()
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.getNeededElements ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#getNeededElements-91d)
+
+```scala
+def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
+```
+
+Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed.
+
+Type parameters: none.
+
+Parameters, list 1: `` starterElements: List[Element[_]] ``; `` depth: Int ``; `` parameterized: Boolean = ... ``.
+
+Returns: `` (List[Element[_]], Boolean) ``.
+
+Source contract/attributes: Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed. In addition to getting all the needed elements, it determines if any of the conditioned, constrained, or dependent universe parent elements has * in its range. If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both. If they don't, we don't need to compute bounds. Attributes Inherited from: FactoredAlgorithm
+
+Invocation template:
+
+```scala
+receiver.getNeededElements(starterElements, depth, parameterized)
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.initialize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#initialize-94c)
+
+```scala
+override def initialize(): Unit
+```
+
+Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Definition Classes BeliefPropagation -> Algorithm Inherited from: BeliefPropagation
+
+Invocation template:
+
+```scala
+receiver.initialize()
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.isActive ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#isActive-0)
+
+```scala
+def isActive: Boolean
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.isActive
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.kill ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#kill-94c)
+
+```scala
+def kill(): Unit
+```
+
+Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.kill()
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.resume ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#resume-94c)
+
+```scala
+def resume(): Unit
+```
+
+Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.resume()
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.runStep ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#runStep-94c)
+
+```scala
+def runStep(): Unit
+```
+
+Runs this belief propagation algorithm for one iteration. An iteration consists of each node of the factor graph sending a message to each of its neighbors.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Runs this belief propagation algorithm for one iteration. An iteration consists of each node of the factor graph sending a message to each of its neighbors. Attributes Inherited from: BeliefPropagation
+
+Invocation template:
+
+```scala
+receiver.runStep()
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.start ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#start-94c)
+
+```scala
+def start(): Unit
+```
+
+Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.start()
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.starterElements ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#starterElements-0)
+
+```scala
+def starterElements: List[Element[_]]
+```
+
+Elements towards which queries are directed. By default, these are the target elements. This is overridden by DecisionVariableElimination, where it also includes utility variables.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: Elements towards which queries are directed. By default, these are the target elements. This is overridden by DecisionVariableElimination, where it also includes utility variables. Attributes Inherited from: BeliefPropagation
+
+Invocation template:
+
+```scala
+receiver.starterElements
+```
+
+## `` com.cra.figaro.algorithm.factored.beliefpropagation.ProbabilisticBeliefPropagation.stop ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/beliefpropagation/ProbabilisticBeliefPropagation.html#stop-94c)
+
+```scala
+def stop(): Unit
+```
+
+Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.stop()
 ```
 
 ## `` com.cra.figaro.algorithm.factored.beliefpropagation.VariableNode.toString ``

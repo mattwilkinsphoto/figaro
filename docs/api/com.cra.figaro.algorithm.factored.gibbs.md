@@ -1575,676 +1575,6 @@ Invocation template:
 receiver.sample()
 ```
 
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.addSuppressed ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#addSuppressed-4b8)
-
-```scala
-final def addSuppressed(x$0: Throwable): Unit
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: `` x$0: Throwable ``.
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.addSuppressed(x$0)
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.fillInStackTrace ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#fillInStackTrace-26c)
-
-```scala
-def fillInStackTrace(): Throwable
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Throwable ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.fillInStackTrace()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getCause ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getCause-26c)
-
-```scala
-def getCause(): Throwable
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Throwable ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.getCause()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getLocalizedMessage ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getLocalizedMessage-665)
-
-```scala
-def getLocalizedMessage(): String
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` String ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.getLocalizedMessage()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getMessage ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getMessage-665)
-
-```scala
-def getMessage(): String
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` String ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.getMessage()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getStackTrace ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getStackTrace-fffffa6d)
-
-```scala
-def getStackTrace(): Array[StackTraceElement]
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Array[StackTraceElement] ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.getStackTrace()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getSuppressed ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getSuppressed-fffff2ce)
-
-```scala
-final def getSuppressed(): Array[Throwable]
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Array[Throwable] ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.getSuppressed()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.initCause ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#initCause-fffff080)
-
-```scala
-def initCause(x$0: Throwable): Throwable
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: `` x$0: Throwable ``.
-
-Returns: `` Throwable ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.initCause(x$0)
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.printStackTrace ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#printStackTrace-fffff230)
-
-```scala
-def printStackTrace(x$0: PrintWriter): Unit
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: `` x$0: PrintWriter ``.
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.printStackTrace(x$0)
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.printStackTrace ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#printStackTrace-fffff0fd)
-
-```scala
-def printStackTrace(x$0: PrintStream): Unit
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: `` x$0: PrintStream ``.
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.printStackTrace(x$0)
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.printStackTrace ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#printStackTrace-94c)
-
-```scala
-def printStackTrace(): Unit
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.printStackTrace()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.setStackTrace ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#setStackTrace-f79)
-
-```scala
-def setStackTrace(x$0: Array[StackTraceElement]): Unit
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: `` x$0: Array[StackTraceElement] ``.
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Attributes Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.setStackTrace(x$0)
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.toString ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#toString-665)
-
-```scala
-def toString(): String
-```
-
-Returns a string representation of the object.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` String ``.
-
-Source contract/attributes: Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable
-
-Invocation template:
-
-```scala
-receiver.toString()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.getFactors ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#getFactors-eb2)
-
-```scala
-def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = ...): List[Factor[Double]]
-```
-
-All implementations of factored algorithms must specify a way to get the factors from the given universe and dependent universes.
-
-Type parameters: none.
-
-Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upperBounds: Boolean = ... ``.
-
-Returns: `` List[Factor[Double]] ``.
-
-Source contract/attributes: All implementations of factored algorithms must specify a way to get the factors from the given universe and dependent universes. Attributes
-
-Invocation template:
-
-```scala
-receiver.getFactors(neededElements, targetElements, upperBounds)
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.sample ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#sample-ffffff32)
-
-```scala
-def sample(): (Boolean, Sample)
-```
-
-Produce a single sample.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` (Boolean, Sample) ``.
-
-Source contract/attributes: Produce a single sample. Attributes
-
-Invocation template:
-
-```scala
-receiver.sample()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.sampleAllBlocks ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#sampleAllBlocks-94c)
-
-```scala
-def sampleAllBlocks(): Unit
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Invocation template:
-
-```scala
-receiver.sampleAllBlocks()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.cleanUp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#cleanUp-94c)
-
-```scala
-def cleanUp(): Unit
-```
-
-Called when the algorithm is killed. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.cleanUp()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.getNeededElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#getNeededElements-91d)
-
-```scala
-def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
-```
-
-Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed.
-
-Type parameters: none.
-
-Parameters, list 1: `` starterElements: List[Element[_]] ``; `` depth: Int ``; `` parameterized: Boolean = ... ``.
-
-Returns: `` (List[Element[_]], Boolean) ``.
-
-Source contract/attributes: Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed. In addition to getting all the needed elements, it determines if any of the conditioned, constrained, or dependent universe parent elements has * in its range. If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both. If they don't, we don't need to compute bounds. Attributes Inherited from: FactoredAlgorithm
-
-Invocation template:
-
-```scala
-receiver.getNeededElements(starterElements, depth, parameterized)
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.getSampleCount ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#getSampleCount-0)
-
-```scala
-def getSampleCount: Int
-```
-
-Number of samples taken
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Int ``.
-
-Source contract/attributes: Number of samples taken Attributes Inherited from: BaseUnweightedSampler
-
-Invocation template:
-
-```scala
-receiver.getSampleCount
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.initialize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#initialize-94c)
-
-```scala
-def initialize(): Unit
-```
-
-Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.initialize()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.isActive ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#isActive-0)
-
-```scala
-def isActive: Boolean
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Boolean ``.
-
-Source contract/attributes: Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.isActive
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.kill ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#kill-94c)
-
-```scala
-def kill(): Unit
-```
-
-Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.kill()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.resume ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#resume-94c)
-
-```scala
-def resume(): Unit
-```
-
-Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.resume()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.start ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#start-94c)
-
-```scala
-def start(): Unit
-```
-
-Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.start()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.stop ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#stop-94c)
-
-```scala
-def stop(): Unit
-```
-
-Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.stop()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.burnIn ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#burnIn-0)
-
-```scala
-def burnIn: Int
-```
-
-Number of samples to throw away initially.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Int ``.
-
-Source contract/attributes: Number of samples to throw away initially. Attributes Inherited from: Gibbs
-
-Invocation template:
-
-```scala
-receiver.burnIn
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.createBlocks ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#createBlocks-fffffc52)
-
-```scala
-def createBlocks(): List[Block]
-```
-
-Method to create a blocking scheme given information about the model and factors.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` List[Block] ``.
-
-Source contract/attributes: Method to create a blocking scheme given information about the model and factors. Attributes Inherited from: Gibbs
-
-Invocation template:
-
-```scala
-receiver.createBlocks()
-```
-
-## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.interval ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#interval-0)
-
-```scala
-def interval: Int
-```
-
-Iterations thrown away between samples.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Int ``.
-
-Source contract/attributes: Iterations thrown away between samples. Attributes Inherited from: Gibbs
-
-Invocation template:
-
-```scala
-receiver.interval
-```
-
 ## `` com.cra.figaro.algorithm.factored.gibbs.ProbQueryGibbs.chainMapper ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbQueryGibbs.html#chainMapper-ffffff84)
@@ -2917,6 +2247,676 @@ Invocation template:
 
 ```scala
 receiver.createBlocks()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.addSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#addSuppressed-4b8)
+
+```scala
+final def addSuppressed(x$0: Throwable): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.addSuppressed(x$0)
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.fillInStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#fillInStackTrace-26c)
+
+```scala
+def fillInStackTrace(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.fillInStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getCause-26c)
+
+```scala
+def getCause(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getCause()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getLocalizedMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getLocalizedMessage-665)
+
+```scala
+def getLocalizedMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getLocalizedMessage()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getMessage-665)
+
+```scala
+def getMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getMessage()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getStackTrace-fffffa6d)
+
+```scala
+def getStackTrace(): Array[StackTraceElement]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[StackTraceElement] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.getSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#getSuppressed-fffff2ce)
+
+```scala
+final def getSuppressed(): Array[Throwable]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[Throwable] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getSuppressed()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.initCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#initCause-fffff080)
+
+```scala
+def initCause(x$0: Throwable): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.initCause(x$0)
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#printStackTrace-fffff230)
+
+```scala
+def printStackTrace(x$0: PrintWriter): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintWriter ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#printStackTrace-fffff0fd)
+
+```scala
+def printStackTrace(x$0: PrintStream): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintStream ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#printStackTrace-94c)
+
+```scala
+def printStackTrace(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.setStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#setStackTrace-f79)
+
+```scala
+def setStackTrace(x$0: Array[StackTraceElement]): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Array[StackTraceElement] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.setStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.StarSampleException.toString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs$StarSampleException.html#toString-665)
+
+```scala
+def toString(): String
+```
+
+Returns a string representation of the object.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.toString()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.getFactors ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#getFactors-eb2)
+
+```scala
+def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = ...): List[Factor[Double]]
+```
+
+All implementations of factored algorithms must specify a way to get the factors from the given universe and dependent universes.
+
+Type parameters: none.
+
+Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upperBounds: Boolean = ... ``.
+
+Returns: `` List[Factor[Double]] ``.
+
+Source contract/attributes: All implementations of factored algorithms must specify a way to get the factors from the given universe and dependent universes. Attributes
+
+Invocation template:
+
+```scala
+receiver.getFactors(neededElements, targetElements, upperBounds)
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#sample-ffffff32)
+
+```scala
+def sample(): (Boolean, Sample)
+```
+
+Produce a single sample.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` (Boolean, Sample) ``.
+
+Source contract/attributes: Produce a single sample. Attributes
+
+Invocation template:
+
+```scala
+receiver.sample()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.sampleAllBlocks ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#sampleAllBlocks-94c)
+
+```scala
+def sampleAllBlocks(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Invocation template:
+
+```scala
+receiver.sampleAllBlocks()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.cleanUp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#cleanUp-94c)
+
+```scala
+def cleanUp(): Unit
+```
+
+Called when the algorithm is killed. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.cleanUp()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.getNeededElements ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#getNeededElements-91d)
+
+```scala
+def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
+```
+
+Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed.
+
+Type parameters: none.
+
+Parameters, list 1: `` starterElements: List[Element[_]] ``; `` depth: Int ``; `` parameterized: Boolean = ... ``.
+
+Returns: `` (List[Element[_]], Boolean) ``.
+
+Source contract/attributes: Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed. In addition to getting all the needed elements, it determines if any of the conditioned, constrained, or dependent universe parent elements has * in its range. If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both. If they don't, we don't need to compute bounds. Attributes Inherited from: FactoredAlgorithm
+
+Invocation template:
+
+```scala
+receiver.getNeededElements(starterElements, depth, parameterized)
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.getSampleCount ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#getSampleCount-0)
+
+```scala
+def getSampleCount: Int
+```
+
+Number of samples taken
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Int ``.
+
+Source contract/attributes: Number of samples taken Attributes Inherited from: BaseUnweightedSampler
+
+Invocation template:
+
+```scala
+receiver.getSampleCount
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.initialize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#initialize-94c)
+
+```scala
+def initialize(): Unit
+```
+
+Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.initialize()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.isActive ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#isActive-0)
+
+```scala
+def isActive: Boolean
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.isActive
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.kill ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#kill-94c)
+
+```scala
+def kill(): Unit
+```
+
+Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.kill()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.resume ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#resume-94c)
+
+```scala
+def resume(): Unit
+```
+
+Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.resume()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.start ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#start-94c)
+
+```scala
+def start(): Unit
+```
+
+Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.start()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.stop ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#stop-94c)
+
+```scala
+def stop(): Unit
+```
+
+Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.stop()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.burnIn ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#burnIn-0)
+
+```scala
+def burnIn: Int
+```
+
+Number of samples to throw away initially.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Int ``.
+
+Source contract/attributes: Number of samples to throw away initially. Attributes Inherited from: Gibbs
+
+Invocation template:
+
+```scala
+receiver.burnIn
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.createBlocks ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#createBlocks-fffffc52)
+
+```scala
+def createBlocks(): List[Block]
+```
+
+Method to create a blocking scheme given information about the model and factors.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` List[Block] ``.
+
+Source contract/attributes: Method to create a blocking scheme given information about the model and factors. Attributes Inherited from: Gibbs
+
+Invocation template:
+
+```scala
+receiver.createBlocks()
+```
+
+## `` com.cra.figaro.algorithm.factored.gibbs.ProbabilisticGibbs.interval ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/factored/gibbs/ProbabilisticGibbs.html#interval-0)
+
+```scala
+def interval: Int
+```
+
+Iterations thrown away between samples.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Int ``.
+
+Source contract/attributes: Iterations thrown away between samples. Attributes Inherited from: Gibbs
+
+Invocation template:
+
+```scala
+receiver.interval
 ```
 
 ## `` com.cra.figaro.algorithm.factored.gibbs.SimpleBlockSampler.computeSamplingFactor ``

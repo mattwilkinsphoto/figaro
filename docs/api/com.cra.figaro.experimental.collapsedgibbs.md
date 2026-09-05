@@ -521,630 +521,6 @@ Invocation template:
 com.cra.figaro.experimental.collapsedgibbs.CollapsedGibbs.probability[T](target, value)
 ```
 
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.addFactor ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#addFactor-cf8)
-
-```scala
-def addFactor[T](factor: Factor[T], map: Map[Variable[_], MultiSet[Factor[T]]]): Unit
-```
-
-add a factor to the list
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` factor: Factor[T] ``; `` map: Map[Variable[_], MultiSet[Factor[T]]] ``.
-
-Returns: `` Unit ``.
-
-Source contract/attributes: add a factor to the list Attributes
-
-Invocation template:
-
-```scala
-receiver.addFactor[T](factor, map)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.collapseVariables ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#collapseVariables-94c)
-
-```scala
-def collapseVariables(): Unit
-```
-
-Perform the collapsing step.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Perform the collapsing step. Attributes
-
-Invocation template:
-
-```scala
-receiver.collapseVariables()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.correctBlocks ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#correctBlocks-5c0)
-
-```scala
-def correctBlocks(originalBlocks: List[Block]): List[Block]
-```
-
-We want to alter the original blocks so that we filter out any variables which have been eliminated. If the original blocks overlapped a lot, then there'll be a lot of redundancy in the filtered blocks, so we take a further step of eliminating any block xs which is fully contained in another block ys.
-
-Type parameters: none.
-
-Parameters, list 1: `` originalBlocks: List[Block] ``.
-
-Returns: `` List[Block] ``.
-
-Source contract/attributes: We want to alter the original blocks so that we filter out any variables which have been eliminated. If the original blocks overlapped a lot, then there'll be a lot of redundancy in the filtered blocks, so we take a further step of eliminating any block xs which is fully contained in another block ys. Attributes
-
-Invocation template:
-
-```scala
-receiver.correctBlocks(originalBlocks)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.eliminate ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#eliminate-fffffdbe)
-
-```scala
-def eliminate(variable: Variable[_], factors: MultiSet[Factor[Double]], map: Map[Variable[_], MultiSet[Factor[Double]]]): Unit
-```
-
-Eliminate a variable. This follows the same approach as in VariableElimination.scala. }
-
-Type parameters: none.
-
-Parameters, list 1: `` variable: Variable[_] ``; `` factors: MultiSet[Factor[Double]] ``; `` map: Map[Variable[_], MultiSet[Factor[Double]]] ``.
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Eliminate a variable. This follows the same approach as in VariableElimination.scala. } Attributes
-
-Invocation template:
-
-```scala
-receiver.eliminate(variable, factors, map)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.graphHeuristicFunction ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#graphHeuristicFunction-ce6)
-
-```scala
-def graphHeuristicFunction[T](var1: Variable[T]): Double
-```
-
-The heuristic of a node is how many edges would be added to the primal graph by removing that variable. Because we make a clique over the variable's neighbors. Since we only eliminate variables with alpha or fewer neighbors, this is capped at (alpha C 2). So we return the number of edges as a percentage of (alpha C 2).
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` var1: Variable[T] ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: The heuristic of a node is how many edges would be added to the primal graph by removing that variable. Because we make a clique over the variable's neighbors. Since we only eliminate variables with alpha or fewer neighbors, this is capped at (alpha C 2). So we return the number of edges as a percentage of (alpha C 2). Attributes
-
-Invocation template:
-
-```scala
-receiver.graphHeuristicFunction[T](var1)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.graphTerm ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#graphTerm-ce6)
-
-```scala
-def graphTerm[T](var1: Variable[T]): Double
-```
-
-Returns how many edges would be added to the primal graph by removing var1. Note: this is number of edges added, NOT net edges added and removed. Source paper is somewhat ambiguous on whether this should be added or net.
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` var1: Variable[T] ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Returns how many edges would be added to the primal graph by removing var1. Note: this is number of edges added, NOT net edges added and removed. Source paper is somewhat ambiguous on whether this should be added or net. Attributes
-
-Invocation template:
-
-```scala
-receiver.graphTerm[T](var1)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.makeResultFactor ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#makeResultFactor-ff9)
-
-```scala
-def makeResultFactor(factorsAfterElimination: MultiSet[Factor[Double]]): Factor[Double]
-```
-
-Combine all the remaining factors into one 'result factor', as in VE.
-
-Type parameters: none.
-
-Parameters, list 1: `` factorsAfterElimination: MultiSet[Factor[Double]] ``.
-
-Returns: `` Factor[Double] ``.
-
-Source contract/attributes: Combine all the remaining factors into one 'result factor', as in VE. Attributes
-
-Invocation template:
-
-```scala
-receiver.makeResultFactor(factorsAfterElimination)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.marginalize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#marginalize-ac3)
-
-```scala
-def marginalize(resultFactor: Factor[Double]): List[Factor[Double]]
-```
-
-Marginalize all factors to their component variables.
-
-Type parameters: none.
-
-Parameters, list 1: `` resultFactor: Factor[Double] ``.
-
-Returns: `` List[Factor[Double]] ``.
-
-Source contract/attributes: Marginalize all factors to their component variables. Attributes
-
-Invocation template:
-
-```scala
-receiver.marginalize(resultFactor)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.marginalizeToTarget ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#marginalizeToTarget-87a)
-
-```scala
-def marginalizeToTarget(factor: Factor[Double], target: Variable[_]): Factor[Double]
-```
-
-Marginalize a factor to a particular variable.
-
-Type parameters: none.
-
-Parameters, list 1: `` factor: Factor[Double] ``; `` target: Variable[_] ``.
-
-Returns: `` Factor[Double] ``.
-
-Source contract/attributes: Marginalize a factor to a particular variable. Attributes
-
-Invocation template:
-
-```scala
-receiver.marginalizeToTarget(factor, target)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.removeFactor ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#removeFactor-cf8)
-
-```scala
-def removeFactor[T](factor: Factor[T], map: Map[Variable[_], MultiSet[Factor[T]]]): Unit
-```
-
-remove a factor from the list
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` factor: Factor[T] ``; `` map: Map[Variable[_], MultiSet[Factor[T]]] ``.
-
-Returns: `` Unit ``.
-
-Source contract/attributes: remove a factor from the list Attributes
-
-Invocation template:
-
-```scala
-receiver.removeFactor[T](factor, map)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.sortByHeuristic ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#sortByHeuristic-674)
-
-```scala
-def sortByHeuristic(varList: List[Variable[_]], HeuristicMap: Map[Variable[_], Double]): List[Variable[_]]
-```
-
-Sort variables by the target heuristic, if they have fewer than alpha neighbors and are not targets.
-
-Type parameters: none.
-
-Parameters, list 1: `` varList: List[Variable[_]] ``; `` HeuristicMap: Map[Variable[_], Double] ``.
-
-Returns: `` List[Variable[_]] ``.
-
-Source contract/attributes: Sort variables by the target heuristic, if they have fewer than alpha neighbors and are not targets. Attributes
-
-Invocation template:
-
-```scala
-receiver.sortByHeuristic(varList, HeuristicMap)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.cleanUp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#cleanUp-94c)
-
-```scala
-def cleanUp(): Unit
-```
-
-Called when the algorithm is killed. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.cleanUp()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.getFactors ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#getFactors-eb2)
-
-```scala
-def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = ...): List[Factor[Double]]
-```
-
-All implementations of factored algorithms must specify a way to get the factors from the given universe and dependent universes.
-
-Type parameters: none.
-
-Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upperBounds: Boolean = ... ``.
-
-Returns: `` List[Factor[Double]] ``.
-
-Source contract/attributes: All implementations of factored algorithms must specify a way to get the factors from the given universe and dependent universes. Attributes Inherited from: ProbabilisticGibbs
-
-Invocation template:
-
-```scala
-receiver.getFactors(neededElements, targetElements, upperBounds)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.getNeededElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#getNeededElements-91d)
-
-```scala
-def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
-```
-
-Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed.
-
-Type parameters: none.
-
-Parameters, list 1: `` starterElements: List[Element[_]] ``; `` depth: Int ``; `` parameterized: Boolean = ... ``.
-
-Returns: `` (List[Element[_]], Boolean) ``.
-
-Source contract/attributes: Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed. In addition to getting all the needed elements, it determines if any of the conditioned, constrained, or dependent universe parent elements has * in its range. If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both. If they don't, we don't need to compute bounds. Attributes Inherited from: FactoredAlgorithm
-
-Invocation template:
-
-```scala
-receiver.getNeededElements(starterElements, depth, parameterized)
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.getSampleCount ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#getSampleCount-0)
-
-```scala
-def getSampleCount: Int
-```
-
-Number of samples taken
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Int ``.
-
-Source contract/attributes: Number of samples taken Attributes Inherited from: BaseUnweightedSampler
-
-Invocation template:
-
-```scala
-receiver.getSampleCount
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.initialize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#initialize-94c)
-
-```scala
-def initialize(): Unit
-```
-
-Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.initialize()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.isActive ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#isActive-0)
-
-```scala
-def isActive: Boolean
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Boolean ``.
-
-Source contract/attributes: Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.isActive
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.kill ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#kill-94c)
-
-```scala
-def kill(): Unit
-```
-
-Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.kill()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.resume ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#resume-94c)
-
-```scala
-def resume(): Unit
-```
-
-Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.resume()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.sample ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#sample-ffffff32)
-
-```scala
-def sample(): (Boolean, Sample)
-```
-
-Produce a single sample.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` (Boolean, Sample) ``.
-
-Source contract/attributes: Produce a single sample. Attributes Inherited from: ProbabilisticGibbs
-
-Invocation template:
-
-```scala
-receiver.sample()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.sampleAllBlocks ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#sampleAllBlocks-94c)
-
-```scala
-def sampleAllBlocks(): Unit
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Attributes Inherited from: ProbabilisticGibbs
-
-Invocation template:
-
-```scala
-receiver.sampleAllBlocks()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.start ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#start-94c)
-
-```scala
-def start(): Unit
-```
-
-Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.start()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.stop ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#stop-94c)
-
-```scala
-def stop(): Unit
-```
-
-Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.stop()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.burnIn ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#burnIn-0)
-
-```scala
-def burnIn: Int
-```
-
-Number of samples to throw away initially.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Int ``.
-
-Source contract/attributes: Number of samples to throw away initially. Attributes Inherited from: Gibbs
-
-Invocation template:
-
-```scala
-receiver.burnIn
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.createBlocks ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#createBlocks-fffffc52)
-
-```scala
-def createBlocks(): List[Block]
-```
-
-Method to create a blocking scheme given information about the model and factors.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` List[Block] ``.
-
-Source contract/attributes: Method to create a blocking scheme given information about the model and factors. Attributes Inherited from: Gibbs
-
-Invocation template:
-
-```scala
-receiver.createBlocks()
-```
-
-## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.interval ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#interval-0)
-
-```scala
-def interval: Int
-```
-
-Iterations thrown away between samples.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Int ``.
-
-Source contract/attributes: Iterations thrown away between samples. Attributes Inherited from: Gibbs
-
-Invocation template:
-
-```scala
-receiver.interval
-```
-
 ## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbQueryGibbs.initialize ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbQueryGibbs.html#initialize-94c)
@@ -2083,6 +1459,630 @@ Invocation template:
 
 ```scala
 receiver.createBlocks()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.addFactor ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#addFactor-cf8)
+
+```scala
+def addFactor[T](factor: Factor[T], map: Map[Variable[_], MultiSet[Factor[T]]]): Unit
+```
+
+add a factor to the list
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` factor: Factor[T] ``; `` map: Map[Variable[_], MultiSet[Factor[T]]] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: add a factor to the list Attributes
+
+Invocation template:
+
+```scala
+receiver.addFactor[T](factor, map)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.collapseVariables ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#collapseVariables-94c)
+
+```scala
+def collapseVariables(): Unit
+```
+
+Perform the collapsing step.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Perform the collapsing step. Attributes
+
+Invocation template:
+
+```scala
+receiver.collapseVariables()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.correctBlocks ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#correctBlocks-5c0)
+
+```scala
+def correctBlocks(originalBlocks: List[Block]): List[Block]
+```
+
+We want to alter the original blocks so that we filter out any variables which have been eliminated. If the original blocks overlapped a lot, then there'll be a lot of redundancy in the filtered blocks, so we take a further step of eliminating any block xs which is fully contained in another block ys.
+
+Type parameters: none.
+
+Parameters, list 1: `` originalBlocks: List[Block] ``.
+
+Returns: `` List[Block] ``.
+
+Source contract/attributes: We want to alter the original blocks so that we filter out any variables which have been eliminated. If the original blocks overlapped a lot, then there'll be a lot of redundancy in the filtered blocks, so we take a further step of eliminating any block xs which is fully contained in another block ys. Attributes
+
+Invocation template:
+
+```scala
+receiver.correctBlocks(originalBlocks)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.eliminate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#eliminate-fffffdbe)
+
+```scala
+def eliminate(variable: Variable[_], factors: MultiSet[Factor[Double]], map: Map[Variable[_], MultiSet[Factor[Double]]]): Unit
+```
+
+Eliminate a variable. This follows the same approach as in VariableElimination.scala. }
+
+Type parameters: none.
+
+Parameters, list 1: `` variable: Variable[_] ``; `` factors: MultiSet[Factor[Double]] ``; `` map: Map[Variable[_], MultiSet[Factor[Double]]] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Eliminate a variable. This follows the same approach as in VariableElimination.scala. } Attributes
+
+Invocation template:
+
+```scala
+receiver.eliminate(variable, factors, map)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.graphHeuristicFunction ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#graphHeuristicFunction-ce6)
+
+```scala
+def graphHeuristicFunction[T](var1: Variable[T]): Double
+```
+
+The heuristic of a node is how many edges would be added to the primal graph by removing that variable. Because we make a clique over the variable's neighbors. Since we only eliminate variables with alpha or fewer neighbors, this is capped at (alpha C 2). So we return the number of edges as a percentage of (alpha C 2).
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` var1: Variable[T] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: The heuristic of a node is how many edges would be added to the primal graph by removing that variable. Because we make a clique over the variable's neighbors. Since we only eliminate variables with alpha or fewer neighbors, this is capped at (alpha C 2). So we return the number of edges as a percentage of (alpha C 2). Attributes
+
+Invocation template:
+
+```scala
+receiver.graphHeuristicFunction[T](var1)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.graphTerm ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#graphTerm-ce6)
+
+```scala
+def graphTerm[T](var1: Variable[T]): Double
+```
+
+Returns how many edges would be added to the primal graph by removing var1. Note: this is number of edges added, NOT net edges added and removed. Source paper is somewhat ambiguous on whether this should be added or net.
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` var1: Variable[T] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Returns how many edges would be added to the primal graph by removing var1. Note: this is number of edges added, NOT net edges added and removed. Source paper is somewhat ambiguous on whether this should be added or net. Attributes
+
+Invocation template:
+
+```scala
+receiver.graphTerm[T](var1)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.makeResultFactor ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#makeResultFactor-ff9)
+
+```scala
+def makeResultFactor(factorsAfterElimination: MultiSet[Factor[Double]]): Factor[Double]
+```
+
+Combine all the remaining factors into one 'result factor', as in VE.
+
+Type parameters: none.
+
+Parameters, list 1: `` factorsAfterElimination: MultiSet[Factor[Double]] ``.
+
+Returns: `` Factor[Double] ``.
+
+Source contract/attributes: Combine all the remaining factors into one 'result factor', as in VE. Attributes
+
+Invocation template:
+
+```scala
+receiver.makeResultFactor(factorsAfterElimination)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.marginalize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#marginalize-ac3)
+
+```scala
+def marginalize(resultFactor: Factor[Double]): List[Factor[Double]]
+```
+
+Marginalize all factors to their component variables.
+
+Type parameters: none.
+
+Parameters, list 1: `` resultFactor: Factor[Double] ``.
+
+Returns: `` List[Factor[Double]] ``.
+
+Source contract/attributes: Marginalize all factors to their component variables. Attributes
+
+Invocation template:
+
+```scala
+receiver.marginalize(resultFactor)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.marginalizeToTarget ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#marginalizeToTarget-87a)
+
+```scala
+def marginalizeToTarget(factor: Factor[Double], target: Variable[_]): Factor[Double]
+```
+
+Marginalize a factor to a particular variable.
+
+Type parameters: none.
+
+Parameters, list 1: `` factor: Factor[Double] ``; `` target: Variable[_] ``.
+
+Returns: `` Factor[Double] ``.
+
+Source contract/attributes: Marginalize a factor to a particular variable. Attributes
+
+Invocation template:
+
+```scala
+receiver.marginalizeToTarget(factor, target)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.removeFactor ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#removeFactor-cf8)
+
+```scala
+def removeFactor[T](factor: Factor[T], map: Map[Variable[_], MultiSet[Factor[T]]]): Unit
+```
+
+remove a factor from the list
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` factor: Factor[T] ``; `` map: Map[Variable[_], MultiSet[Factor[T]]] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: remove a factor from the list Attributes
+
+Invocation template:
+
+```scala
+receiver.removeFactor[T](factor, map)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.sortByHeuristic ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#sortByHeuristic-674)
+
+```scala
+def sortByHeuristic(varList: List[Variable[_]], HeuristicMap: Map[Variable[_], Double]): List[Variable[_]]
+```
+
+Sort variables by the target heuristic, if they have fewer than alpha neighbors and are not targets.
+
+Type parameters: none.
+
+Parameters, list 1: `` varList: List[Variable[_]] ``; `` HeuristicMap: Map[Variable[_], Double] ``.
+
+Returns: `` List[Variable[_]] ``.
+
+Source contract/attributes: Sort variables by the target heuristic, if they have fewer than alpha neighbors and are not targets. Attributes
+
+Invocation template:
+
+```scala
+receiver.sortByHeuristic(varList, HeuristicMap)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.cleanUp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#cleanUp-94c)
+
+```scala
+def cleanUp(): Unit
+```
+
+Called when the algorithm is killed. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.cleanUp()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.getFactors ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#getFactors-eb2)
+
+```scala
+def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upperBounds: Boolean = ...): List[Factor[Double]]
+```
+
+All implementations of factored algorithms must specify a way to get the factors from the given universe and dependent universes.
+
+Type parameters: none.
+
+Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upperBounds: Boolean = ... ``.
+
+Returns: `` List[Factor[Double]] ``.
+
+Source contract/attributes: All implementations of factored algorithms must specify a way to get the factors from the given universe and dependent universes. Attributes Inherited from: ProbabilisticGibbs
+
+Invocation template:
+
+```scala
+receiver.getFactors(neededElements, targetElements, upperBounds)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.getNeededElements ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#getNeededElements-91d)
+
+```scala
+def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
+```
+
+Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed.
+
+Type parameters: none.
+
+Parameters, list 1: `` starterElements: List[Element[_]] ``; `` depth: Int ``; `` parameterized: Boolean = ... ``.
+
+Returns: `` (List[Element[_]], Boolean) ``.
+
+Source contract/attributes: Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed. In addition to getting all the needed elements, it determines if any of the conditioned, constrained, or dependent universe parent elements has * in its range. If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both. If they don't, we don't need to compute bounds. Attributes Inherited from: FactoredAlgorithm
+
+Invocation template:
+
+```scala
+receiver.getNeededElements(starterElements, depth, parameterized)
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.getSampleCount ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#getSampleCount-0)
+
+```scala
+def getSampleCount: Int
+```
+
+Number of samples taken
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Int ``.
+
+Source contract/attributes: Number of samples taken Attributes Inherited from: BaseUnweightedSampler
+
+Invocation template:
+
+```scala
+receiver.getSampleCount
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.initialize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#initialize-94c)
+
+```scala
+def initialize(): Unit
+```
+
+Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.initialize()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.isActive ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#isActive-0)
+
+```scala
+def isActive: Boolean
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.isActive
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.kill ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#kill-94c)
+
+```scala
+def kill(): Unit
+```
+
+Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.kill()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.resume ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#resume-94c)
+
+```scala
+def resume(): Unit
+```
+
+Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.resume()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#sample-ffffff32)
+
+```scala
+def sample(): (Boolean, Sample)
+```
+
+Produce a single sample.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` (Boolean, Sample) ``.
+
+Source contract/attributes: Produce a single sample. Attributes Inherited from: ProbabilisticGibbs
+
+Invocation template:
+
+```scala
+receiver.sample()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.sampleAllBlocks ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#sampleAllBlocks-94c)
+
+```scala
+def sampleAllBlocks(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: ProbabilisticGibbs
+
+Invocation template:
+
+```scala
+receiver.sampleAllBlocks()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.start ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#start-94c)
+
+```scala
+def start(): Unit
+```
+
+Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.start()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.stop ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#stop-94c)
+
+```scala
+def stop(): Unit
+```
+
+Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.stop()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.burnIn ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#burnIn-0)
+
+```scala
+def burnIn: Int
+```
+
+Number of samples to throw away initially.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Int ``.
+
+Source contract/attributes: Number of samples to throw away initially. Attributes Inherited from: Gibbs
+
+Invocation template:
+
+```scala
+receiver.burnIn
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.createBlocks ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#createBlocks-fffffc52)
+
+```scala
+def createBlocks(): List[Block]
+```
+
+Method to create a blocking scheme given information about the model and factors.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` List[Block] ``.
+
+Source contract/attributes: Method to create a blocking scheme given information about the model and factors. Attributes Inherited from: Gibbs
+
+Invocation template:
+
+```scala
+receiver.createBlocks()
+```
+
+## `` com.cra.figaro.experimental.collapsedgibbs.CollapsedProbabilisticGibbs.interval ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/experimental/collapsedgibbs/CollapsedProbabilisticGibbs.html#interval-0)
+
+```scala
+def interval: Int
+```
+
+Iterations thrown away between samples.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Int ``.
+
+Source contract/attributes: Iterations thrown away between samples. Attributes Inherited from: Gibbs
+
+Invocation template:
+
+```scala
+receiver.interval
 ```
 
 ## `` com.cra.figaro.experimental.collapsedgibbs.DeterministicCollapseStrategy.graphHeuristicFunction ``

@@ -215,10 +215,16 @@ def markdown_code(text):
     return "`` " + text + " ``"
 
 
+def relative_path_key(page, root):
+    """Use case-sensitive strings, not WindowsPath's case-insensitive ordering."""
+    return page.relative_to(root).as_posix()
+
+
 def render(api, output):
     groups = defaultdict(list)
     inventory, excluded, page_count = [], 0, 0
-    for page in sorted((api / "com" / "cra" / "figaro").rglob("*.html")):
+    for page in sorted((api / "com" / "cra" / "figaro").rglob("*.html"),
+                       key=lambda page: relative_path_key(page, api)):
         methods, hidden = extract(page)
         excluded += hidden
         page_count += 1

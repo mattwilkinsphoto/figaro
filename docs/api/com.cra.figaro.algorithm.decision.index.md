@@ -233,54 +233,6 @@ Invocation template:
 receiver.size
 ```
 
-## `` com.cra.figaro.algorithm.decision.index.Index.getNN ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/index/Index.html#getNN-2de)
-
-```scala
-def getNN(parent: T, num: Int): List[(Double, U, DecisionSample)]
-```
-
-Get the specified number of nearest neighbors of the parent value. Returns a tuple list of (distance to parent, decision value, weighted utility).
-
-Type parameters: none.
-
-Parameters, list 1: `` parent: T ``; `` num: Int ``.
-
-Returns: `` List[(Double, U, DecisionSample)] ``.
-
-Source contract/attributes: Get the specified number of nearest neighbors of the parent value. Returns a tuple list of (distance to parent, decision value, weighted utility). Attributes
-
-Invocation template:
-
-```scala
-receiver.getNN(parent, num)
-```
-
-## `` com.cra.figaro.algorithm.decision.index.Index.size ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/index/Index.html#size-0)
-
-```scala
-def size: Int
-```
-
-Get the size of the index.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Int ``.
-
-Source contract/attributes: Get the size of the index. Attributes
-
-Invocation template:
-
-```scala
-receiver.size
-```
-
 ## `` com.cra.figaro.algorithm.decision.index.INode.oDist ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/index/INode.html#oDist-f07)
@@ -351,6 +303,54 @@ Invocation template:
 
 ```scala
 receiver.iDist(v)
+```
+
+## `` com.cra.figaro.algorithm.decision.index.Index.getNN ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/index/Index.html#getNN-2de)
+
+```scala
+def getNN(parent: T, num: Int): List[(Double, U, DecisionSample)]
+```
+
+Get the specified number of nearest neighbors of the parent value. Returns a tuple list of (distance to parent, decision value, weighted utility).
+
+Type parameters: none.
+
+Parameters, list 1: `` parent: T ``; `` num: Int ``.
+
+Returns: `` List[(Double, U, DecisionSample)] ``.
+
+Source contract/attributes: Get the specified number of nearest neighbors of the parent value. Returns a tuple list of (distance to parent, decision value, weighted utility). Attributes
+
+Invocation template:
+
+```scala
+receiver.getNN(parent, num)
+```
+
+## `` com.cra.figaro.algorithm.decision.index.Index.size ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/index/Index.html#size-0)
+
+```scala
+def size: Int
+```
+
+Get the size of the index.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Int ``.
+
+Source contract/attributes: Get the size of the index. Attributes
+
+Invocation template:
+
+```scala
+receiver.size
 ```
 
 ## `` com.cra.figaro.algorithm.decision.index.L2Norm.reduce ``

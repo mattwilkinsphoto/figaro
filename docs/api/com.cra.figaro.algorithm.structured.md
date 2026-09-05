@@ -1963,6 +1963,78 @@ Invocation template:
 receiver.contains[T](element)
 ```
 
+## `` com.cra.figaro.algorithm.structured.Upper.fromProduct ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/Upper$.html#fromProduct-de7)
+
+```scala
+def fromProduct(p: Product): MirroredMonoType
+```
+
+Creates a new instance of type T with elements taken from product p.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Product ``.
+
+Returns: `` MirroredMonoType ``.
+
+Source contract/attributes: Creates a new instance of type T with elements taken from product p. Attributes Inherited from: Singleton
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.structured.Upper.fromProduct(p)
+```
+
+## `` com.cra.figaro.algorithm.structured.Upper.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/Upper$.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.structured.Upper.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.structured.Upper.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/Upper$.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.structured.Upper.productIterator
+```
+
 ## `` .marginalBeliefPropagation ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/solver.html#marginalBeliefPropagation-e43)
@@ -2087,76 +2159,4 @@ Invocation template:
 
 ```scala
 receiver.mpeVariableElimination(problem, toEliminate, toPreserve, factors)
-```
-
-## `` com.cra.figaro.algorithm.structured.Upper.fromProduct ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/Upper$.html#fromProduct-de7)
-
-```scala
-def fromProduct(p: Product): MirroredMonoType
-```
-
-Creates a new instance of type T with elements taken from product p.
-
-Type parameters: none.
-
-Parameters, list 1: `` p: Product ``.
-
-Returns: `` MirroredMonoType ``.
-
-Source contract/attributes: Creates a new instance of type T with elements taken from product p. Attributes Inherited from: Singleton
-
-Invocation template:
-
-```scala
-com.cra.figaro.algorithm.structured.Upper.fromProduct(p)
-```
-
-## `` com.cra.figaro.algorithm.structured.Upper.productElementNames ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/Upper$.html#productElementNames-0)
-
-```scala
-def productElementNames: Iterator[String]
-```
-
-An iterator over the names of all the elements of this product.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Iterator[String] ``.
-
-Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
-
-Invocation template:
-
-```scala
-com.cra.figaro.algorithm.structured.Upper.productElementNames
-```
-
-## `` com.cra.figaro.algorithm.structured.Upper.productIterator ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/structured/Upper$.html#productIterator-0)
-
-```scala
-def productIterator: Iterator[Any]
-```
-
-An iterator over all the elements of this product.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Iterator[Any] ``.
-
-Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
-
-Invocation template:
-
-```scala
-com.cra.figaro.algorithm.structured.Upper.productIterator
 ```

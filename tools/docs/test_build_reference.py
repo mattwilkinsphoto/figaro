@@ -1,9 +1,19 @@
 """Pure parser tests; no generated output or temporary directories."""
 import unittest
-from build_reference import DocParser, clean, invocation, signature_parts, split_top
+from pathlib import PurePosixPath, PureWindowsPath
+from build_reference import DocParser, clean, invocation, relative_path_key, signature_parts, split_top
 
 
 class SignatureTests(unittest.TestCase):
+    def test_page_order_is_identical_on_windows_and_linux(self):
+        names = ["Index.html", "INode.html", "Upper.html", "Upper$.html"]
+        expected = ["INode.html", "Index.html", "Upper$.html", "Upper.html"]
+        for path_type in (PureWindowsPath, PurePosixPath):
+            root = path_type("api")
+            pages = [root / name for name in names]
+            actual = sorted(pages, key=lambda page: relative_path_key(page, root))
+            self.assertEqual([p.name for p in actual], expected)
+
     def test_generic_varargs_and_context(self):
         types, groups, result = signature_parts(
             "def apply[T](targets: Element[T]*)(implicit universe: Universe): Algorithm[T]", "apply")

@@ -657,6 +657,294 @@ Invocation template:
 receiver.variance(target)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.cleanUp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#cleanUp-94c)
+
+```scala
+def cleanUp(): Unit
+```
+
+Called when the algorithm is killed. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.cleanUp()
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.handle ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#handle-fffff940)
+
+```scala
+def handle(service: Service): Response
+```
+
+A handler of services provided by the algorithm.
+
+Type parameters: none.
+
+Parameters, list 1: `` service: Service ``.
+
+Returns: `` Response ``.
+
+Source contract/attributes: A handler of services provided by the algorithm. Attributes Inherited from: AnytimeMPE
+
+Invocation template:
+
+```scala
+receiver.handle(service)
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.initialize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#initialize-94c)
+
+```scala
+override def initialize(): Unit
+```
+
+Called when the algorithm starts before running any steps.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm starts before running any steps. Attributes Definition Classes AnytimeSampler -> Algorithm Inherited from: AnytimeSampler
+
+Invocation template:
+
+```scala
+receiver.initialize()
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.isActive ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#isActive-0)
+
+```scala
+def isActive: Boolean
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.isActive
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.kill ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#kill-94c)
+
+```scala
+def kill(): Unit
+```
+
+Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.kill()
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.resume ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#resume-94c)
+
+```scala
+def resume(): Unit
+```
+
+Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.resume()
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.runStep ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#runStep-94c)
+
+```scala
+def runStep(): Unit
+```
+
+Run a single step of the algorithm. The algorithm must be able to provide answers after each step.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Run a single step of the algorithm. The algorithm must be able to provide answers after each step. Attributes Inherited from: AnytimeSampler
+
+Invocation template:
+
+```scala
+receiver.runStep()
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.shutdown ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#shutdown-0)
+
+```scala
+def shutdown: Unit
+```
+
+Release all resources from this anytime algorithm.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Release all resources from this anytime algorithm. Attributes Inherited from: Anytime
+
+Invocation template:
+
+```scala
+receiver.shutdown
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.start ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#start-94c)
+
+```scala
+def start(): Unit
+```
+
+Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.start()
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.stop ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#stop-94c)
+
+```scala
+def stop(): Unit
+```
+
+Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.stop()
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.stopUpdate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#stopUpdate-94c)
+
+```scala
+override def stopUpdate(): Unit
+```
+
+Override the stopUpdate function in anytime to call the sampler update function
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Override the stopUpdate function in anytime to call the sampler update function Attributes Definition Classes AnytimeSampler -> Anytime Inherited from: AnytimeSampler
+
+Invocation template:
+
+```scala
+receiver.stopUpdate()
+```
+
+## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.mostLikelyValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#mostLikelyValue-fffffa13)
+
+```scala
+def mostLikelyValue[T](target: Element[T]): T
+```
+
+Returns the most likely value for the target element.
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` target: Element[T] ``.
+
+Returns: `` T ``.
+
+Source contract/attributes: Returns the most likely value for the target element. Attributes Inherited from: MPEAlgorithm
+
+Invocation template:
+
+```scala
+receiver.mostLikelyValue[T](target)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.AnytimeMetropolisHastings.initialize ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMetropolisHastings.html#initialize-94c)
@@ -1859,294 +2147,6 @@ Invocation template:
 
 ```scala
 receiver.test(numSamples, predicates, elementsToTrack)
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.cleanUp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#cleanUp-94c)
-
-```scala
-def cleanUp(): Unit
-```
-
-Called when the algorithm is killed. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.cleanUp()
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.handle ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#handle-fffff940)
-
-```scala
-def handle(service: Service): Response
-```
-
-A handler of services provided by the algorithm.
-
-Type parameters: none.
-
-Parameters, list 1: `` service: Service ``.
-
-Returns: `` Response ``.
-
-Source contract/attributes: A handler of services provided by the algorithm. Attributes Inherited from: AnytimeMPE
-
-Invocation template:
-
-```scala
-receiver.handle(service)
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.initialize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#initialize-94c)
-
-```scala
-override def initialize(): Unit
-```
-
-Called when the algorithm starts before running any steps.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm starts before running any steps. Attributes Definition Classes AnytimeSampler -> Algorithm Inherited from: AnytimeSampler
-
-Invocation template:
-
-```scala
-receiver.initialize()
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.isActive ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#isActive-0)
-
-```scala
-def isActive: Boolean
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Boolean ``.
-
-Source contract/attributes: Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.isActive
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.kill ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#kill-94c)
-
-```scala
-def kill(): Unit
-```
-
-Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.kill()
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.resume ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#resume-94c)
-
-```scala
-def resume(): Unit
-```
-
-Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.resume()
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.runStep ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#runStep-94c)
-
-```scala
-def runStep(): Unit
-```
-
-Run a single step of the algorithm. The algorithm must be able to provide answers after each step.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Run a single step of the algorithm. The algorithm must be able to provide answers after each step. Attributes Inherited from: AnytimeSampler
-
-Invocation template:
-
-```scala
-receiver.runStep()
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.shutdown ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#shutdown-0)
-
-```scala
-def shutdown: Unit
-```
-
-Release all resources from this anytime algorithm.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Release all resources from this anytime algorithm. Attributes Inherited from: Anytime
-
-Invocation template:
-
-```scala
-receiver.shutdown
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.start ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#start-94c)
-
-```scala
-def start(): Unit
-```
-
-Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.start()
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.stop ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#stop-94c)
-
-```scala
-def stop(): Unit
-```
-
-Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.stop()
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.stopUpdate ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#stopUpdate-94c)
-
-```scala
-override def stopUpdate(): Unit
-```
-
-Override the stopUpdate function in anytime to call the sampler update function
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Override the stopUpdate function in anytime to call the sampler update function Attributes Definition Classes AnytimeSampler -> Anytime Inherited from: AnytimeSampler
-
-Invocation template:
-
-```scala
-receiver.stopUpdate()
-```
-
-## `` com.cra.figaro.algorithm.sampling.AnytimeMPESampler.mostLikelyValue ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/AnytimeMPESampler.html#mostLikelyValue-fffffa13)
-
-```scala
-def mostLikelyValue[T](target: Element[T]): T
-```
-
-Returns the most likely value for the target element.
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` target: Element[T] ``.
-
-Returns: `` T ``.
-
-Source contract/attributes: Returns the most likely value for the target element. Attributes Inherited from: MPEAlgorithm
-
-Invocation template:
-
-```scala
-receiver.mostLikelyValue[T](target)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.AnytimeProbEvidenceSampler.additionalEvidenceAlgorithm ``
@@ -8127,6 +8127,222 @@ Invocation template:
 receiver.variance(target)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.cleanUp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#cleanUp-94c)
+
+```scala
+def cleanUp(): Unit
+```
+
+Called when the algorithm is killed. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.cleanUp()
+```
+
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.initialize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#initialize-94c)
+
+```scala
+def initialize(): Unit
+```
+
+Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.initialize()
+```
+
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.isActive ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#isActive-0)
+
+```scala
+def isActive: Boolean
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.isActive
+```
+
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.kill ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#kill-94c)
+
+```scala
+def kill(): Unit
+```
+
+Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.kill()
+```
+
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.resume ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#resume-94c)
+
+```scala
+def resume(): Unit
+```
+
+Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.resume()
+```
+
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.run ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#run-94c)
+
+```scala
+def run(): Unit
+```
+
+Run the algorithm, performing its computation to completion.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Run the algorithm, performing its computation to completion. Attributes Inherited from: OneTimeSampler
+
+Invocation template:
+
+```scala
+receiver.run()
+```
+
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.start ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#start-94c)
+
+```scala
+def start(): Unit
+```
+
+Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.start()
+```
+
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.stop ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#stop-94c)
+
+```scala
+def stop(): Unit
+```
+
+Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.stop()
+```
+
+## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.mostLikelyValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#mostLikelyValue-fffffa13)
+
+```scala
+def mostLikelyValue[T](target: Element[T]): T
+```
+
+Returns the most likely value for the target element.
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` target: Element[T] ``.
+
+Returns: `` T ``.
+
+Source contract/attributes: Returns the most likely value for the target element. Attributes Inherited from: MPEAlgorithm
+
+Invocation template:
+
+```scala
+receiver.mostLikelyValue[T](target)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.OneTimeMetropolisHastings.run ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMetropolisHastings.html#run-94c)
@@ -9185,222 +9401,6 @@ Invocation template:
 
 ```scala
 receiver.test(numSamples, predicates, elementsToTrack)
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.cleanUp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#cleanUp-94c)
-
-```scala
-def cleanUp(): Unit
-```
-
-Called when the algorithm is killed. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.cleanUp()
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.initialize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#initialize-94c)
-
-```scala
-def initialize(): Unit
-```
-
-Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.initialize()
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.isActive ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#isActive-0)
-
-```scala
-def isActive: Boolean
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Boolean ``.
-
-Source contract/attributes: Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.isActive
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.kill ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#kill-94c)
-
-```scala
-def kill(): Unit
-```
-
-Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.kill()
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.resume ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#resume-94c)
-
-```scala
-def resume(): Unit
-```
-
-Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.resume()
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.run ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#run-94c)
-
-```scala
-def run(): Unit
-```
-
-Run the algorithm, performing its computation to completion.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Run the algorithm, performing its computation to completion. Attributes Inherited from: OneTimeSampler
-
-Invocation template:
-
-```scala
-receiver.run()
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.start ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#start-94c)
-
-```scala
-def start(): Unit
-```
-
-Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.start()
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.stop ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#stop-94c)
-
-```scala
-def stop(): Unit
-```
-
-Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.stop()
-```
-
-## `` com.cra.figaro.algorithm.sampling.OneTimeMPESampler.mostLikelyValue ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeMPESampler.html#mostLikelyValue-fffffa13)
-
-```scala
-def mostLikelyValue[T](target: Element[T]): T
-```
-
-Returns the most likely value for the target element.
-
-Type parameters: `` T ``.
-
-Parameters, list 1: `` target: Element[T] ``.
-
-Returns: `` T ``.
-
-Source contract/attributes: Returns the most likely value for the target element. Attributes Inherited from: MPEAlgorithm
-
-Invocation template:
-
-```scala
-receiver.mostLikelyValue[T](target)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.OneTimeProbEvidenceSampler.additionalEvidenceAlgorithm ``

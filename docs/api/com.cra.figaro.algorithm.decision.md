@@ -5401,342 +5401,6 @@ Invocation template:
 receiver.universe
 ```
 
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.getUtilityNodes ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#getUtilityNodes-0)
-
-```scala
-def getUtilityNodes: List[Element[_]]
-```
-
-Retrieve utility nodes in the model
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` List[Element[_]] ``.
-
-Source contract/attributes: Retrieve utility nodes in the model Attributes
-
-Invocation template:
-
-```scala
-receiver.getUtilityNodes
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.getFactors ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#getFactors-eb2)
-
-```scala
-def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upper: Boolean = ...): List[Factor[(Double, Double)]]
-```
-
-Create the factors for decision factors. Each factor is hardcoded as a tuple of (Double, Double), where the first value is the probability and the second is the utility.
-
-Type parameters: none.
-
-Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upper: Boolean = ... ``.
-
-Returns: `` List[Factor[(Double, Double)]] ``.
-
-Source contract/attributes: Create the factors for decision factors. Each factor is hardcoded as a tuple of (Double, Double), where the first value is the probability and the second is the utility. Attributes
-
-Invocation template:
-
-```scala
-receiver.getFactors(neededElements, targetElements, upper)
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.makeUtilFactor ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#makeUtilFactor-fffffc80)
-
-```scala
-def makeUtilFactor(e: Element[_]): Factor[(Double, Double)]
-```
-
-Makes a utility factor an element designated as a utility. This is factor of a tuple (Double, Double) where the first value is 1.0 and the second is a possible utility of the element.
-
-Type parameters: none.
-
-Parameters, list 1: `` e: Element[_] ``.
-
-Returns: `` Factor[(Double, Double)] ``.
-
-Source contract/attributes: Makes a utility factor an element designated as a utility. This is factor of a tuple (Double, Double) where the first value is 1.0 and the second is a possible utility of the element. Attributes
-
-Invocation template:
-
-```scala
-receiver.makeUtilFactor(e)
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.starterElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#starterElements-0)
-
-```scala
-override def starterElements: List[Element[_]]
-```
-
-Elements towards which queries are directed. By default, these are the target elements. This is overridden by DecisionVariableElimination, where it also includes utility variables.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` List[Element[_]] ``.
-
-Source contract/attributes: Elements towards which queries are directed. By default, these are the target elements. This is overridden by DecisionVariableElimination, where it also includes utility variables. Attributes Definition Classes VariableElimination
-
-Invocation template:
-
-```scala
-receiver.starterElements
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.cleanUp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#cleanUp-94c)
-
-```scala
-def cleanUp(): Unit
-```
-
-Called when the algorithm is killed. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.cleanUp()
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.getNeededElements ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#getNeededElements-91d)
-
-```scala
-def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
-```
-
-Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed.
-
-Type parameters: none.
-
-Parameters, list 1: `` starterElements: List[Element[_]] ``; `` depth: Int ``; `` parameterized: Boolean = ... ``.
-
-Returns: `` (List[Element[_]], Boolean) ``.
-
-Source contract/attributes: Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed. In addition to getting all the needed elements, it determines if any of the conditioned, constrained, or dependent universe parent elements has * in its range. If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both. If they don't, we don't need to compute bounds. Attributes Inherited from: FactoredAlgorithm
-
-Invocation template:
-
-```scala
-receiver.getNeededElements(starterElements, depth, parameterized)
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.initialize ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#initialize-94c)
-
-```scala
-def initialize(): Unit
-```
-
-Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.initialize()
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.isActive ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#isActive-0)
-
-```scala
-def isActive: Boolean
-```
-
-No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
-
-Type parameters: none.
-
-Parameters: none (parameterless member; do not append `()`).
-
-Returns: `` Boolean ``.
-
-Source contract/attributes: Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.isActive
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.kill ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#kill-94c)
-
-```scala
-def kill(): Unit
-```
-
-Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.kill()
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.resume ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#resume-94c)
-
-```scala
-def resume(): Unit
-```
-
-Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.resume()
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.run ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#run-94c)
-
-```scala
-def run(): Unit
-```
-
-Run the algorithm, performing its computation to completion.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Run the algorithm, performing its computation to completion. Attributes Inherited from: VariableElimination
-
-Invocation template:
-
-```scala
-receiver.run()
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.start ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#start-94c)
-
-```scala
-def start(): Unit
-```
-
-Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.start()
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.stop ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#stop-94c)
-
-```scala
-def stop(): Unit
-```
-
-Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
-
-Type parameters: none.
-
-Parameters, list 1: none (empty argument list `()`).
-
-Returns: `` Unit ``.
-
-Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
-
-Invocation template:
-
-```scala
-receiver.stop()
-```
-
-## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.finish ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#finish-fffff214)
-
-```scala
-def finish(factorsAfterElimination: MultiSet[Factor[(Double, Double)]], eliminationOrder: List[Variable[_]]): Unit
-```
-
-All implementation of variable elimination must specify what to do after variables have been eliminated.
-
-Type parameters: none.
-
-Parameters, list 1: `` factorsAfterElimination: MultiSet[Factor[(Double, Double)]] ``; `` eliminationOrder: List[Variable[_]] ``.
-
-Returns: `` Unit ``.
-
-Source contract/attributes: All implementation of variable elimination must specify what to do after variables have been eliminated. Attributes Inherited from: VariableElimination
-
-Invocation template:
-
-```scala
-receiver.finish(factorsAfterElimination, eliminationOrder)
-```
-
 ## `` com.cra.figaro.algorithm.decision.ProbQueryVariableEliminationDecision.computeDistribution ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbQueryVariableEliminationDecision.html#computeDistribution-fffffdb4)
@@ -6459,4 +6123,340 @@ Invocation template:
 
 ```scala
 receiver.variance(target)
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.getUtilityNodes ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#getUtilityNodes-0)
+
+```scala
+def getUtilityNodes: List[Element[_]]
+```
+
+Retrieve utility nodes in the model
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: Retrieve utility nodes in the model Attributes
+
+Invocation template:
+
+```scala
+receiver.getUtilityNodes
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.getFactors ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#getFactors-eb2)
+
+```scala
+def getFactors(neededElements: List[Element[_]], targetElements: List[Element[_]], upper: Boolean = ...): List[Factor[(Double, Double)]]
+```
+
+Create the factors for decision factors. Each factor is hardcoded as a tuple of (Double, Double), where the first value is the probability and the second is the utility.
+
+Type parameters: none.
+
+Parameters, list 1: `` neededElements: List[Element[_]] ``; `` targetElements: List[Element[_]] ``; `` upper: Boolean = ... ``.
+
+Returns: `` List[Factor[(Double, Double)]] ``.
+
+Source contract/attributes: Create the factors for decision factors. Each factor is hardcoded as a tuple of (Double, Double), where the first value is the probability and the second is the utility. Attributes
+
+Invocation template:
+
+```scala
+receiver.getFactors(neededElements, targetElements, upper)
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.makeUtilFactor ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#makeUtilFactor-fffffc80)
+
+```scala
+def makeUtilFactor(e: Element[_]): Factor[(Double, Double)]
+```
+
+Makes a utility factor an element designated as a utility. This is factor of a tuple (Double, Double) where the first value is 1.0 and the second is a possible utility of the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` e: Element[_] ``.
+
+Returns: `` Factor[(Double, Double)] ``.
+
+Source contract/attributes: Makes a utility factor an element designated as a utility. This is factor of a tuple (Double, Double) where the first value is 1.0 and the second is a possible utility of the element. Attributes
+
+Invocation template:
+
+```scala
+receiver.makeUtilFactor(e)
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.starterElements ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#starterElements-0)
+
+```scala
+override def starterElements: List[Element[_]]
+```
+
+Elements towards which queries are directed. By default, these are the target elements. This is overridden by DecisionVariableElimination, where it also includes utility variables.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: Elements towards which queries are directed. By default, these are the target elements. This is overridden by DecisionVariableElimination, where it also includes utility variables. Attributes Definition Classes VariableElimination
+
+Invocation template:
+
+```scala
+receiver.starterElements
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.cleanUp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#cleanUp-94c)
+
+```scala
+def cleanUp(): Unit
+```
+
+Called when the algorithm is killed. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is killed. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.cleanUp()
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.getNeededElements ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#getNeededElements-91d)
+
+```scala
+def getNeededElements(starterElements: List[Element[_]], depth: Int, parameterized: Boolean = ...): (List[Element[_]], Boolean)
+```
+
+Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed.
+
+Type parameters: none.
+
+Parameters, list 1: `` starterElements: List[Element[_]] ``; `` depth: Int ``; `` parameterized: Boolean = ... ``.
+
+Returns: `` (List[Element[_]], Boolean) ``.
+
+Source contract/attributes: Get the elements that are needed by the query target variables and the evidence variables. Also compute the values of those variables to the given depth. Only get factors for elements that are actually used by the target variables. This is more efficient. Also, it avoids problems when values of unused elements have not been computed. In addition to getting all the needed elements, it determines if any of the conditioned, constrained, or dependent universe parent elements has * in its range. If any of these elements has * in its range, the lower and upper bounds of factors will be different, so we need to compute both. If they don't, we don't need to compute bounds. Attributes Inherited from: FactoredAlgorithm
+
+Invocation template:
+
+```scala
+receiver.getNeededElements(starterElements, depth, parameterized)
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.initialize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#initialize-94c)
+
+```scala
+def initialize(): Unit
+```
+
+Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Called when the algorithm is started before running any steps. By default, does nothing. Can be overridden. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.initialize()
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.isActive ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#isActive-0)
+
+```scala
+def isActive: Boolean
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.isActive
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.kill ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#kill-94c)
+
+```scala
+def kill(): Unit
+```
+
+Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.kill()
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.resume ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#resume-94c)
+
+```scala
+def resume(): Unit
+```
+
+Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Resume the computation of the algorithm, if it has been stopped. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.resume()
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.run ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#run-94c)
+
+```scala
+def run(): Unit
+```
+
+Run the algorithm, performing its computation to completion.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Run the algorithm, performing its computation to completion. Attributes Inherited from: VariableElimination
+
+Invocation template:
+
+```scala
+receiver.run()
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.start ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#start-94c)
+
+```scala
+def start(): Unit
+```
+
+Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Start the algorithm and make it active. After it returns, the algorithm must be ready to provide answers. Throws AlgorithmActiveException if the algorithm is already active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.start()
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.stop ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#stop-94c)
+
+```scala
+def stop(): Unit
+```
+
+Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Stop the algorithm from computing. The algorithm is still ready to provide answers after it returns. Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm
+
+Invocation template:
+
+```scala
+receiver.stop()
+```
+
+## `` com.cra.figaro.algorithm.decision.ProbabilisticVariableEliminationDecision.finish ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/decision/ProbabilisticVariableEliminationDecision.html#finish-fffff214)
+
+```scala
+def finish(factorsAfterElimination: MultiSet[Factor[(Double, Double)]], eliminationOrder: List[Variable[_]]): Unit
+```
+
+All implementation of variable elimination must specify what to do after variables have been eliminated.
+
+Type parameters: none.
+
+Parameters, list 1: `` factorsAfterElimination: MultiSet[Factor[(Double, Double)]] ``; `` eliminationOrder: List[Variable[_]] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: All implementation of variable elimination must specify what to do after variables have been eliminated. Attributes Inherited from: VariableElimination
+
+Invocation template:
+
+```scala
+receiver.finish(factorsAfterElimination, eliminationOrder)
 ```
