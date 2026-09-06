@@ -395,3 +395,36 @@ same 11321 public method entries. Existing full-grid, profile, lifecycle and
 reference gates remain, and CI validates all three new checked datasets without timing
 thresholds. FFT/autocovariance representation costs are the next candidate; neither the
 FFT nor ranking implementation is changed in this stage.
+
+## Stage 22: invocation-owned primitive FFT buffers
+
+Branch: `modernize/primitive-fft-autocovariance`, based on `bb8be673`. The preceding
+primitive-reduction branch's [required CI passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34058813575).
+Snapshot modern.10, public signatures/defaults, dependencies and toolchain remain
+unchanged. Autocovariance now calls the existing Commons Math in-place FFT using
+private real/imaginary buffers. Exact conjugate-product arithmetic, exceptional-value
+fallback, zero padding, STANDARD normalization and division by N are preserved.
+Input/output arrays are not reused as shared scratch space. Loop interruption checks
+supplement the existing between-transform checks; a single FFT is still non-preemptible.
+
+Implementation/protocol commit `b9d9f34f` precedes both full measurements. All 252
+unprofiled and 252 profiled runs complete with unchanged non-timing outputs and full
+trace/diagnostic fingerprints. Four-worker diagnostics run 1.45-1.58x faster, with
+end-to-end gains of 1.04-1.40x over the previous checkpoint. Diagnostic allocation
+sample weight is about 58% lower, and no diagnostic Complex/Complex-array samples were
+observed for this grid. The fallback can still allocate Complex objects. The longest
+observed GC pause increases from 16.096 to 18.514 ms even as total pauses fall; all
+records are retained. These are sampled weights and separate-JVM timings, not general
+guarantees, retained-heap measurements or improved mixing/coverage.
+
+All 157 modernization tests pass, including every-lag bit comparisons against the old
+implementation for 116 edge/seeded arrays, an independent direct autocovariance oracle,
+input immutability, concurrent/output isolation and interruption flags. A supplemental
+finite-input forward-overflow test was added after measurement without changing the
+production implementation. All 41 documentation/report-tool tests, three vector example
+workflows and 108 smoke-grid runs pass. Fresh Scaladoc verifies the unchanged 11321 public
+method entries, and local links validate. CI retains the
+existing regression/profile/reference gates and validates all three new datasets without
+timing thresholds. See [usage, caveats, full protocol and results](docs/PRIMITIVE_FFT_AUTOCOVARIANCE.md).
+Ranking/sorting representation is the next bounded candidate; no ranking or sampler
+callback optimization is included here.

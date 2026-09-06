@@ -61,6 +61,18 @@ class McmcDiagnosticsRegressionTest extends AnyWordSpec with Matchers {
       }
     }
 
+    "preserve infinite forward-spectrum semantics from finite observations" in {
+      // Zero shifted mean, but the forward FFT overflows: exercise the infinity
+      // fallback separately from NaN input and finite-spectrum product overflow.
+      val x = Array(0.0, Double.MaxValue, -Double.MaxValue, 0.0)
+      val fft = new FastFourierTransformer(DftNormalization.STANDARD)
+      val spectrum = fft.transform(x ++ Array.fill(4)(0.0), TransformType.FORWARD)
+      spectrum.exists(_.isInfinite) shouldBe true
+      val expected = fft.transform(spectrum.map(z => z.multiply(z.conjugate())), TransformType.INVERSE)
+        .take(x.length).map(z => java.lang.Double.doubleToLongBits(z.getReal / x.length)).toVector
+      McmcDiagnostics.autocovariance(x).map(java.lang.Double.doubleToLongBits).toVector shouldBe expected
+    }
+
     "match direct biased autocovariances including the last lag and padding boundaries" in {
       val random = new java.util.Random(72039L)
       for (n <- Vector(2, 3, 4, 7, 8, 9, 31, 32, 33, 127, 128, 129)) {

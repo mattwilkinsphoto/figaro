@@ -75,6 +75,9 @@ jobs:
           python3 -B tools/summarize_vector_performance.py docs/primitive-reduction-performance-results.csv --repetitions 5 --baseline docs/parallel-vector-diagnostics-results.csv
           python3 -B tools/summarize_vector_profile.py docs/primitive-reduction-profile-results.csv
           python3 -B tools/summarize_vector_performance.py docs/primitive-reduction-profile-benchmark-results.csv --repetitions 5 --baseline docs/primitive-reduction-performance-results.csv
+          python3 -B tools/summarize_vector_performance.py docs/primitive-fft-performance-results.csv --repetitions 5 --baseline docs/primitive-reduction-performance-results.csv
+          python3 -B tools/summarize_vector_profile.py docs/primitive-fft-profile-results.csv
+          python3 -B tools/summarize_vector_performance.py docs/primitive-fft-profile-benchmark-results.csv --repetitions 5 --baseline docs/primitive-fft-performance-results.csv
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 

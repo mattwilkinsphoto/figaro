@@ -56,6 +56,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Parallel coordinate diagnostics](docs/PARALLEL_VECTOR_DIAGNOSTICS.md): bounded scheduling, serial fallback, memory tradeoffs, and before/after verification.
 - [Allocation and GC profiling](docs/VECTOR_ALLOCATION_PROFILE.md): opt-in JDK recording, allocation hotspots, and limits of memory-bandwidth inference.
 - [Primitive diagnostic reductions](docs/PRIMITIVE_DIAGNOSTIC_REDUCTIONS.md): reduced boxing, exact-result checks, and measured end-to-end effects.
+- [Primitive FFT autocovariance](docs/PRIMITIVE_FFT_AUTOCOVARIANCE.md): fewer complex-array temporaries, unchanged numerical results, and matched-work measurements.
 
 - [User guide](docs/USER_GUIDE.md): concepts, common patterns, gotchas, and related modules.
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.

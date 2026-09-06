@@ -1,5 +1,8 @@
 # Primitive diagnostic reductions
 
+Follow-up: [primitive FFT autocovariance](PRIMITIVE_FFT_AUTOCOVARIANCE.md).
+This document and its datasets remain the mean/variance optimization checkpoint.
+
 ## Overview: an internal allocation reduction
 
 MCMC diagnostics repeatedly calculate means and sample variances for raw, ranked,

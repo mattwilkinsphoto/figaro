@@ -1,5 +1,14 @@
 # Migrating to Scala 3 and sbt 2
 
+## Primitive FFT autocovariance follow-up
+
+`modernize/primitive-fft-autocovariance` keeps snapshot modern.10, public signatures,
+dependencies and defaults. Rebuild to obtain invocation-owned primitive FFT buffers;
+existing diagnostic/multi-chain calls benefit automatically without a new flag. The
+FFT algorithm, normalization, lag divisor, estimates and warnings are unchanged. Buffers
+are not shared between calls, and this does not make a shared model universe thread-safe.
+See [examples, exact-result checks and measurements](PRIMITIVE_FFT_AUTOCOVARIANCE.md).
+
 ## Primitive diagnostic reductions follow-up
 
 `modernize/primitive-diagnostic-reductions` retains snapshot modern.10, public signatures
