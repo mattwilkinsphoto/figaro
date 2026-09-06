@@ -47,6 +47,10 @@ This is a Scala 3 snapshot requiring consumer recompilation, not a binary-compat
 
 ## Related
 
+The [multi-chain vector runner](../docs/MULTI_CHAIN_VECTOR_SAMPLING.md) adds bounded
+scheduling and coordinate diagnostics to explicit continuous-vector targets. Chain count
+and worker count are independent; it does not change the graph-based MCMC runner.
+
 The [continuous-vector sampler](../docs/VECTOR_SLICE_SAMPLING.md) provides opt-in GPSS
 and quantile kernels for explicit log densities without graph construction. It is a
 single-chain blocking interface, not a shared-graph thread-safety change.

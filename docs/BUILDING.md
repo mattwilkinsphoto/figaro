@@ -43,7 +43,7 @@ Outputs are under `target/out/jvm/scala-3.9.0/figaro/`:
 
 | Artifact suffix | Purpose |
 | --- | --- |
-| `figaro_3-6.0.0-modern.9-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
+| `figaro_3-6.0.0-modern.10-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
 | `-sources.jar` | Library Scala sources |
 | `-javadoc.jar` | Generated Scala 3 API documentation |
 | `-fat.jar` | Library plus assembled dependencies, **excluding Scala runtime**; not a `java -jar` application |

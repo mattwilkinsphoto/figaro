@@ -1,5 +1,9 @@
 # Continuous-vector slice sampling
 
+For a managed pool of independent chains with combined coordinate diagnostics, use the
+additive [multi-chain wrapper](MULTI_CHAIN_VECTOR_SAMPLING.md). The single-chain API
+and contracts described below remain unchanged.
+
 ## Overview: when to use it
 
 `VectorSliceSampler` is an opt-in, blocking single-chain runner for a model that you can

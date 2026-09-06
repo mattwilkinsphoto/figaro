@@ -109,6 +109,12 @@ This compares Figaro's actual fixed block sampler with standalone immutable-vect
 
 ## Higher-dimensional validation (experimental)
 
+`MultiChainVectorSamplingExample.main(args: Array[String]): Unit` accepts an empty
+array and runs bounded Gaussian chains, capped positive-target chains, and derived-event
+diagnostics. It prints status/estimates and throws for invalid arguments or unmet fixture
+execution contracts. Example: `MultiChainVectorSamplingExample.main(Array.empty)`.
+See [multi-chain vector workflows](../docs/MULTI_CHAIN_VECTOR_SAMPLING.md).
+
 For the supported explicit-vector execution interface, see
 [continuous-vector sampling](../docs/VECTOR_SLICE_SAMPLING.md).
 `VectorSliceSamplingExample.main(args: Array[String]): Unit` accepts only an empty

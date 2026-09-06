@@ -1,5 +1,20 @@
 # Migrating to Scala 3 and sbt 2
 
+## Multi-chain continuous-vector follow-up
+
+`modernize/multi-chain-vector-sampling` uses `6.0.0-modern.10-SNAPSHOT`. The additive
+`MultiChainVectorSliceSampler` owns a bounded worker pool and calls `VectorSliceSampler.run`
+unchanged. Its factory receives chain index and assigned seed; the embedded single-chain
+configuration seed is a root expanded into independent chain seeds. Returned traces stay
+in chain-index order. Coordinate diagnostics use explicitly aligned prefixes if caps
+produce unequal lengths; every chain and its full accounting remain in the result.
+
+No existing API migration is required. Rebuild against this snapshot to use the wrapper.
+Graph inference, kernels, precision policies, dependencies, and toolchain are unchanged.
+Caller/factory interruption and worker failure have distinct contracts; uncooperative
+callbacks can outlive a failed bounded shutdown. See the
+[API and lifecycle guide](MULTI_CHAIN_VECTOR_SAMPLING.md).
+
 ## Continuous-vector sampling follow-up
 
 `modernize/continuous-vector-sampling` uses `6.0.0-modern.9-SNAPSHOT`. The additive

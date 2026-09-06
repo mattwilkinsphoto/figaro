@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 723,
+  "pages": 729,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -54124,6 +54124,402 @@
       "example": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runUntilPrecise(config, precision)(build)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "addSuppressed",
+      "anchor": "addSuppressed-4b8",
+      "signature": "final def addSuppressed(x$0: Throwable): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.addSuppressed(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "fillInStackTrace",
+      "anchor": "fillInStackTrace-26c",
+      "signature": "def fillInStackTrace(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.fillInStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "getCause",
+      "anchor": "getCause-26c",
+      "signature": "def getCause(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getCause()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "getLocalizedMessage",
+      "anchor": "getLocalizedMessage-665",
+      "signature": "def getLocalizedMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getLocalizedMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "getMessage",
+      "anchor": "getMessage-665",
+      "signature": "def getMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "getStackTrace",
+      "anchor": "getStackTrace-fffffa6d",
+      "signature": "def getStackTrace(): Array[StackTraceElement]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[StackTraceElement]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "getSuppressed",
+      "anchor": "getSuppressed-fffff2ce",
+      "signature": "final def getSuppressed(): Array[Throwable]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[Throwable]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getSuppressed()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "initCause",
+      "anchor": "initCause-fffff080",
+      "signature": "def initCause(x$0: Throwable): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.initCause(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff230",
+      "signature": "def printStackTrace(x$0: PrintWriter): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintWriter"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff0fd",
+      "signature": "def printStackTrace(x$0: PrintStream): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintStream"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-94c",
+      "signature": "def printStackTrace(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "setStackTrace",
+      "anchor": "setStackTrace-f79",
+      "signature": "def setStackTrace(x$0: Array[StackTraceElement]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Array[StackTraceElement]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.setStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure",
+      "name": "toString",
+      "anchor": "toString-665",
+      "signature": "def toString(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "Returns a string representation of the object.",
+      "contract": "Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable",
+      "example": "receiver.toString()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainResult",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainResult",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Model",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Model.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Model",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Model.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler",
+      "name": "run",
+      "anchor": "run-fffff477",
+      "signature": "def run(config: Config)(build: (Int, Long) => Model): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "build: (Int, Long) => Model"
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Build serially, execute on a private bounded pool, then summarize each coordinate.",
+      "contract": "Build serially, execute on a private bounded pool, then summarize each coordinate. Value parameters build serial factory receiving chain index and assigned seed; must produce equivalent independent targets config per-chain budgets, root seed, worker/storage/shutdown limits Attributes Returns complete chain accounting and explicit prefix diagnostics; budget exhaustion is not convergence Throws ChainFailure for invalid factory output or a worker/model failure; sibling tasks are interrupted InterruptedException for caller/factory interruption, preserving the caller's interrupt flag java.lang.IllegalStateException if workers cannot terminate within the shutdown budget Example run(Config(VS.Config(VS.Method.GPSS, draws = 100))) { (i, seed) => Model(Vector(i + 1.0, 1.0), x => -x.map(v => v*v).sum / 2) }",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.run(config)(build)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.parallel.ParAnytime",

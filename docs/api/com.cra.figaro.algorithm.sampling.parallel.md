@@ -851,6 +851,536 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runUntilPrecise(config, precision)(build)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.addSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#addSuppressed-4b8)
+
+```scala
+final def addSuppressed(x$0: Throwable): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.addSuppressed(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.fillInStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#fillInStackTrace-26c)
+
+```scala
+def fillInStackTrace(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.fillInStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.getCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#getCause-26c)
+
+```scala
+def getCause(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getCause()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.getLocalizedMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#getLocalizedMessage-665)
+
+```scala
+def getLocalizedMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getLocalizedMessage()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.getMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#getMessage-665)
+
+```scala
+def getMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getMessage()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.getStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#getStackTrace-fffffa6d)
+
+```scala
+def getStackTrace(): Array[StackTraceElement]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[StackTraceElement] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.getSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#getSuppressed-fffff2ce)
+
+```scala
+final def getSuppressed(): Array[Throwable]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[Throwable] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getSuppressed()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.initCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#initCause-fffff080)
+
+```scala
+def initCause(x$0: Throwable): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.initCause(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#printStackTrace-fffff230)
+
+```scala
+def printStackTrace(x$0: PrintWriter): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintWriter ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#printStackTrace-fffff0fd)
+
+```scala
+def printStackTrace(x$0: PrintStream): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintStream ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#printStackTrace-94c)
+
+```scala
+def printStackTrace(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.setStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#setStackTrace-f79)
+
+```scala
+def setStackTrace(x$0: Array[StackTraceElement]): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Array[StackTraceElement] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.setStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainFailure.toString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainFailure.html#toString-665)
+
+```scala
+def toString(): String
+```
+
+Returns a string representation of the object.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.toString()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainResult.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainResult.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.ChainResult.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$ChainResult.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Model.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Model.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Model.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Model.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.run ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$.html#run-fffff477)
+
+```scala
+def run(config: Config)(build: (Int, Long) => Model): Result
+```
+
+Build serially, execute on a private bounded pool, then summarize each coordinate.
+
+Type parameters: none.
+
+Parameters, list 1: `` config: Config ``.
+
+Parameters, list 2: `` build: (Int, Long) => Model ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Build serially, execute on a private bounded pool, then summarize each coordinate. Value parameters build serial factory receiving chain index and assigned seed; must produce equivalent independent targets config per-chain budgets, root seed, worker/storage/shutdown limits Attributes Returns complete chain accounting and explicit prefix diagnostics; budget exhaustion is not convergence Throws ChainFailure for invalid factory output or a worker/model failure; sibling tasks are interrupted InterruptedException for caller/factory interruption, preserving the caller's interrupt flag java.lang.IllegalStateException if workers cannot terminate within the shutdown budget Example run(Config(VS.Config(VS.Method.GPSS, draws = 100))) { (i, seed) => Model(Vector(i + 1.0, 1.0), x => -x.map(v => v*v).sum / 2) }
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler.run(config)(build)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.parallel.ParAnytime.runStep ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParAnytime.html#runStep-94c)
