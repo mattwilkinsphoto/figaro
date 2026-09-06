@@ -57,6 +57,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Allocation and GC profiling](docs/VECTOR_ALLOCATION_PROFILE.md): opt-in JDK recording, allocation hotspots, and limits of memory-bandwidth inference.
 - [Primitive diagnostic reductions](docs/PRIMITIVE_DIAGNOSTIC_REDUCTIONS.md): reduced boxing, exact-result checks, and measured end-to-end effects.
 - [Primitive FFT autocovariance](docs/PRIMITIVE_FFT_AUTOCOVARIANCE.md): fewer complex-array temporaries, unchanged numerical results, and matched-work measurements.
+- [Primitive diagnostic sorting](docs/PRIMITIVE_DIAGNOSTIC_SORTING.md): stable rank indices, primitive value sorting, exact tie handling, and measured tradeoffs.
 
 - [User guide](docs/USER_GUIDE.md): concepts, common patterns, gotchas, and related modules.
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.

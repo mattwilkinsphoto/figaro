@@ -428,3 +428,33 @@ existing regression/profile/reference gates and validates all three new datasets
 timing thresholds. See [usage, caveats, full protocol and results](docs/PRIMITIVE_FFT_AUTOCOVARIANCE.md).
 Ranking/sorting representation is the next bounded candidate; no ranking or sampler
 callback optimization is included here.
+
+## Stage 23: primitive diagnostic sorting
+
+Branch: `modernize/primitive-diagnostic-sorting`, based on `a144eb1a`. The preceding
+FFT branch's [required CI passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34059862442).
+Snapshot modern.10, public signatures/defaults, dependencies and toolchain remain
+unchanged. Rank ordering uses stable primitive-index merging; pooled median/tail sorts
+use JDK primitive sorting of copies. Signed-zero ordering, equal-key stability, numeric
+tie groups, normal scores, folded ranks, FFT/ESS formulas and stored traces are unchanged.
+Scratch arrays are invocation-owned; inputs are never sorted in place.
+
+Implementation/protocol commit `65bdb63a` precedes both full measurements. All 252
+unprofiled and 252 profiled runs preserve every non-timing result/fingerprint. Four-worker
+paired diagnostic gains are 1.20-1.36x and paired total gains 1.02-1.13x, but Gaussian 8D
+GPSS median runtime regresses from 48.63 to 53.11 ms. The paired ratio and ratio of medians
+are different statistics; both and all underlying rounds are retained. Diagnostic
+allocation sample weight drops about 21%, total weight about 2%, while primitive-array
+weight and GC collection count increase. These are sampled estimates/separate-JVM
+timings, not universal speed or retained-heap guarantees. Poor mixing remains unchanged.
+
+All 160 modernization tests pass, including exact sort checks on 41 edge/seeded arrays
+and 1024 signed-zero/tie combinations, exact rank checks on 60 four-chain fixtures,
+input immutability, concurrent/output isolation and interruption flags. CI retains
+existing test/profile/reference gates and adds all three checked datasets without timing
+thresholds. See [examples, protocol, results and limitations](docs/PRIMITIVE_DIAGNOSTIC_SORTING.md).
+All 41 documentation/report-tool tests, three vector example workflows and 108 smoke-grid
+runs pass; fresh Scaladoc regenerates the unchanged 11321 public method entries and local
+links validate. Four existing Scaladoc warnings remain.
+Next: interleaved performance revalidation and focused sampler/callback and interruption
+attribution, before another rewrite. No cancellation policy or density callback is changed.

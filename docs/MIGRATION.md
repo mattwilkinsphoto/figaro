@@ -1,5 +1,14 @@
 # Migrating to Scala 3 and sbt 2
 
+## Primitive diagnostic sorting follow-up
+
+`modernize/primitive-diagnostic-sorting` retains snapshot modern.10, public signatures,
+dependencies and defaults. Rebuild to use primitive rank-index and copied-value sorting
+automatically. Existing tie groups, signed-zero handling, normal scores and diagnostic
+outputs are unchanged. Inputs retain their temporal order; do not sort chains yourself.
+There is no new thread setting or shared buffer pool. See
+[examples, compatibility checks and measured tradeoffs](PRIMITIVE_DIAGNOSTIC_SORTING.md).
+
 ## Primitive FFT autocovariance follow-up
 
 `modernize/primitive-fft-autocovariance` keeps snapshot modern.10, public signatures,

@@ -1,5 +1,8 @@
 # Primitive FFT autocovariance
 
+Follow-up: [primitive diagnostic sorting](PRIMITIVE_DIAGNOSTIC_SORTING.md).
+This document and its datasets remain the FFT optimization checkpoint.
+
 ## Overview and pre-measurement protocol
 
 Branch `modernize/primitive-fft-autocovariance`, based on `bb8be673`. Replace only
