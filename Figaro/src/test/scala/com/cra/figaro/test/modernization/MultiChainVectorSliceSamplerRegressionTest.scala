@@ -14,6 +14,18 @@ class MultiChainVectorSliceSamplerRegressionTest extends AnyWordSpec with Matche
   private def model(i: Int, seed: Long): MC.Model = MC.Model(Vector(i + 0.5, -i - 0.5), normal)
 
   "Multi-chain vector sampling" should {
+    "partition benchmark time without changing public output or seeded work" in {
+      val c = cfg()
+      val (measured, times) = MC.measuredRun(c)(model)
+      val ordinary = MC.run(c)(model)
+      measured.chains shouldBe ordinary.chains
+      measured.diagnostics shouldBe ordinary.diagnostics
+      measured.warnings shouldBe ordinary.warnings
+      val phases = Vector(times.constructionSeconds, times.samplingAndShutdownSeconds, times.diagnosticsSeconds)
+      phases.foreach(t => { t.isFinite shouldBe true; t should be >= 0.0 })
+      phases.sum shouldBe measured.elapsedSeconds +- 1e-12
+    }
+
     "match individual kernels exactly across worker counts and assign seeds in index order" in {
       for (method <- VS.Method.values) {
         val c = cfg(method)

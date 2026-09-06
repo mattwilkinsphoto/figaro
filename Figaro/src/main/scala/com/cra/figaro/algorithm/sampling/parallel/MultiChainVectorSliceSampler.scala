@@ -63,7 +63,12 @@ object MultiChainVectorSliceSampler {
     * @throws java.lang.IllegalStateException if workers cannot terminate within the shutdown budget
     * @example `run(Config(VS.Config(VS.Method.GPSS, draws = 100))) { (i, seed) => Model(Vector(i + 1.0, 1.0), x => -x.map(v => v*v).sum / 2) }`
     */
-  def run(config: Config)(build: (Int, Long) => Model): Result = {
+  def run(config: Config)(build: (Int, Long) => Model): Result = measuredRun(config)(build)._1
+
+  // Benchmark instrumentation only: no public result/product-arity or sampling-policy change.
+  private[figaro] final case class PhaseTimes(constructionSeconds: Double,
+    samplingAndShutdownSeconds: Double, diagnosticsSeconds: Double)
+  private[figaro] def measuredRun(config: Config)(build: (Int, Long) => Model): (Result, PhaseTimes) = {
     require(config != null && build != null, "Config and model factory required")
     val started = System.nanoTime()
     val threads = new ConcurrentLinkedQueue[Thread]()
@@ -99,6 +104,7 @@ object MultiChainVectorSliceSampler {
         (model, seed)
       }
       interrupted()
+      val constructed = System.nanoTime()
       val runId = runIds.incrementAndGet()
       pool = Executors.newFixedThreadPool(math.min(config.parallelism, config.chains), (task: Runnable) => {
         val thread = new Thread(task, s"figaro-vector-mcmc-$runId-${threads.size() + 1}")
@@ -126,6 +132,7 @@ object MultiChainVectorSliceSampler {
       shutdownAttempted = true
       closePool(pool, threads, config.shutdownTimeoutMillis)
       interrupted()
+      val sampled = System.nanoTime()
       val chains = results.toVector
       val n = chains.map(_.result.samples.size).min
       val warnings = Vector.newBuilder[String]
@@ -143,7 +150,9 @@ object MultiChainVectorSliceSampler {
         summary
       }
       interrupted()
-      Result(chains, diagnostics, n, warnings.result(), (System.nanoTime() - started) / 1e9)
+      val finished = System.nanoTime()
+      (Result(chains, diagnostics, n, warnings.result(), (finished - started) / 1e9),
+        PhaseTimes((constructed - started) / 1e9, (sampled - constructed) / 1e9, (finished - sampled) / 1e9))
     } catch {
       case e: Throwable =>
         primary = e
