@@ -47,6 +47,8 @@ This is a Scala 3 snapshot requiring consumer recompilation, not a binary-compat
 
 ## Related
 
+The [pilot-calibration guide](../docs/PROPOSAL_CALIBRATION.md) adds an opt-in way to estimate a fixed Gaussian block proposal from discarded pilot traces. It rejects inadequate pilots and does not change existing sampler defaults or enable online adaptation.
+
 The [multi-chain MCMC guide](../docs/MULTI_CHAIN_MCMC.md) documents isolated MH execution with scalar traces and diagnostics. Its runner owns disposal, so its returned values do not require `kill()`. Its condition/likelihood evidence boundary is narrower than all legacy MH usages. The [parallel importance guide](../docs/PARALLEL_PERFORMANCE.md) describes the separate seeded importance API.
 
 [Examples module](../FigaroExamples/README.md) depends on this library. The root build aggregates both. See [JVM integration](../CONSUMER_BOUNDARY.md) for Figaro's dependency contract and release-readiness checklist.

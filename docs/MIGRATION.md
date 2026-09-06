@@ -1,5 +1,11 @@
 # Migrating to Scala 3 and sbt 2
 
+## Pilot-calibration follow-up
+
+`modernize/proposal-calibration` uses snapshot `6.0.0-modern.7-SNAPSHOT`. The additive [calibration API](PROPOSAL_CALIBRATION.md) estimates a fixed Gaussian block covariance from a separate pilot, discloses shrinkage/scaling and diagnostics, and binds the frozen matrix to fresh production elements by name. The Scala 3.9.0, sbt 2.0.8, and JDK 17 baseline is unchanged; rebuild and recompile consumers against this snapshot.
+
+There are no new proposal subtypes, changed sampler defaults, or changes to retained-sampling execution. Existing manual block proposals keep their numerical factorization and validation behavior. Pilot exclusion, separate production seeds/warm-up, and equivalent model/coordinate semantics are explicit caller responsibilities. Inadequate pilot traces are rejected without fallback. This is offline pilot calibration, not online adaptive MCMC, global mode discovery, automatic block selection, or a covariance-accuracy certificate. See [broader validation](PROPOSAL_CALIBRATION_VALIDATION.md), including pilot rejection and cases where calibration cost is not recovered.
+
 ## Blocked-proposal follow-up
 
 `modernize/blocked-proposals` uses snapshot `6.0.0-modern.6-SNAPSHOT` and adds [fixed-covariance Gaussian block proposals](BLOCKED_PROPOSALS.md). Scala 3.9.0, sbt 2.0.8, and JDK 17 are unchanged. Rebuild and recompile consumers against this snapshot; this is not a published stable release.

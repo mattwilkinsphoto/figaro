@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 713,
+  "pages": 716,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -46412,6 +46412,78 @@
       "example": "receiver.deregisterDependencies()",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/ForwardWeighter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianBlockCalibration$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianBlockCalibration$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.Fit",
+      "name": "proposal",
+      "anchor": "proposal-1bc",
+      "signature": "def proposal(targets: Map[String, AtomicNormal]): ProposalScheme",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "targets: Map[String, AtomicNormal]"
+          ]
+        }
+      ],
+      "returns": "ProposalScheme",
+      "summary": "Bind the frozen matrix to fresh production elements, by pilot observable name.",
+      "contract": "Bind the frozen matrix to fresh production elements, by pilot observable name. Value parameters targets exact name-to-AtomicNormal map; values must represent the same coordinates/units as the pilot Attributes Returns a new chain-owned fixed Gaussian proposal; no pilot model objects are retained Throws IllegalArgumentException for missing/extra names or unsupported block targets Example fit.proposal(Map(\"x\" -> x, \"y\" -> y))",
+      "example": "receiver.proposal(targets)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianBlockCalibration$$Fit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianBlockCalibration",
+      "name": "fit",
+      "anchor": "fit-504",
+      "signature": "def fit(pilot: Result, names: Seq[String], config: Config = ...): Fit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pilot: Result",
+            "names: Seq[String]",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Fit",
+      "summary": "Fit a proposal from raw-value pilot observables; discard the pilot and start fresh production chains.",
+      "contract": "Fit a proposal from raw-value pilot observables; discard the pilot and start fresh production chains. Value parameters config explicit covariance regularization, scaling, and diagnostic acceptance settings names distinct observable names selecting raw Normal VALUES in the desired block order pilot completed fixed-budget multi-chain run; its reported diagnostics are not trusted/reused Attributes Returns immutable empirical/regularized covariance, recomputed diagnostics, and pilot/configuration metadata Throws IllegalArgumentException for invalid traces, inadequate mixing, degenerate coordinates, or numeric range failure; there is no automatic fallback or automatic retry with relaxed thresholds Example GaussianBlockCalibration.fit(pilot, Vector(\"x\", \"y\"), GaussianBlockCalibration.Config())",
+      "example": "com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.fit(pilot, names, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianBlockCalibration$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.GaussianBlockProposal",

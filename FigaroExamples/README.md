@@ -85,4 +85,10 @@ The [blocked-proposal guide](../docs/BLOCKED_PROPOSALS.md) has three runnable pa
 
 `BlockedProposalBenchmark.main(args: Array[String]): Unit` accepts repetitions (positive, default 20), maximum draws per chain (at least 2000, default 12000), and workers (1-4, default 4). It prints `blocked,`-prefixed per-query CSV for fixed/adaptive runs and returns Unit; rounds -2 and -1 are JVM warm-ups. Invalid arguments raise `IllegalArgumentException` (including `NumberFormatException` for malformed integers); leaked workers also fail the run. Example: `BlockedProposalBenchmark.main(Array("50", "12000", "4"))`. See [measured results](../docs/BLOCKED_PROPOSAL_VALIDATION.md) for metric definitions and limitations.
 
+## Pilot proposal calibration
+
+`ProposalCalibrationExample.main(args: Array[String]): Unit` takes no arguments and prints a separate pilot's fitted covariance/diagnostics followed by fresh fixed-budget and precision-stopped production runs. Example: `ProposalCalibrationExample.main(Array.empty)`. Inadequate pilot diagnostics raise `IllegalArgumentException`; model failures propagate. See the [three-step user guide](../docs/PROPOSAL_CALIBRATION.md).
+
+`ProposalCalibrationBenchmark.main(args: Array[String]): Unit` accepts repetitions (positive, default 20), production draw cap (at least 2000, default 12000), workers (1-4, default 4), and pilot draws (at least 500, default 6000). It prints quoted `calibration` CSV rows comparing six geometries and four strategies, then returns Unit. Round -1 is an excluded JVM warm-up. Example: `ProposalCalibrationBenchmark.main(Array("30", "12000", "4", "6000"))`. Pilot-fit rejection is reported explicitly without production sampling; malformed arguments, model failures, and leaked workers fail execution. [Validation](../docs/PROPOSAL_CALIBRATION_VALIDATION.md) explains coverage, pilot-inclusive timing, and limitations.
+
 [Library module](../Figaro/README.md) implements the APIs; [build guide](../docs/BUILDING.md) explains tests and documentation generation; [migration guide](../docs/MIGRATION.md) explains changed syntax, dependencies, and remaining risks.

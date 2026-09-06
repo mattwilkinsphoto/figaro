@@ -4965,6 +4965,102 @@ Invocation template:
 receiver.deregisterDependencies()
 ```
 
+## `` com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianBlockCalibration$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianBlockCalibration$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.Fit.proposal ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianBlockCalibration$$Fit.html#proposal-1bc)
+
+```scala
+def proposal(targets: Map[String, AtomicNormal]): ProposalScheme
+```
+
+Bind the frozen matrix to fresh production elements, by pilot observable name.
+
+Type parameters: none.
+
+Parameters, list 1: `` targets: Map[String, AtomicNormal] ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Bind the frozen matrix to fresh production elements, by pilot observable name. Value parameters targets exact name-to-AtomicNormal map; values must represent the same coordinates/units as the pilot Attributes Returns a new chain-owned fixed Gaussian proposal; no pilot model objects are retained Throws IllegalArgumentException for missing/extra names or unsupported block targets Example fit.proposal(Map("x" -> x, "y" -> y))
+
+Invocation template:
+
+```scala
+receiver.proposal(targets)
+```
+
+## `` com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.fit ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianBlockCalibration$.html#fit-504)
+
+```scala
+def fit(pilot: Result, names: Seq[String], config: Config = ...): Fit
+```
+
+Fit a proposal from raw-value pilot observables; discard the pilot and start fresh production chains.
+
+Type parameters: none.
+
+Parameters, list 1: `` pilot: Result ``; `` names: Seq[String] ``; `` config: Config = ... ``.
+
+Returns: `` Fit ``.
+
+Source contract/attributes: Fit a proposal from raw-value pilot observables; discard the pilot and start fresh production chains. Value parameters config explicit covariance regularization, scaling, and diagnostic acceptance settings names distinct observable names selecting raw Normal VALUES in the desired block order pilot completed fixed-budget multi-chain run; its reported diagnostics are not trusted/reused Attributes Returns immutable empirical/regularized covariance, recomputed diagnostics, and pilot/configuration metadata Throws IllegalArgumentException for invalid traces, inadequate mixing, degenerate coordinates, or numeric range failure; there is no automatic fallback or automatic retry with relaxed thresholds Example GaussianBlockCalibration.fit(pilot, Vector("x", "y"), GaussianBlockCalibration.Config())
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.GaussianBlockCalibration.fit(pilot, names, config)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.GaussianBlockProposal.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianBlockProposal$.html#apply-fffff1aa)

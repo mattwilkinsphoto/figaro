@@ -25,7 +25,12 @@ object GaussianBlockProposal {
     require(targets.distinct.size == targets.size, "Block targets must be distinct")
     val universe = targets.head.universe
     validateTargets(targets, universe)
-    val n = targets.size
+    val factor = factorCovariance(covariance, targets.size)
+    GaussianBlockScheme(new Block(targets, universe, factor))
+  }
+
+  // Shared with pilot calibration so numerical admissibility is identical at fit and execution.
+  private[sampling] def factorCovariance(covariance: Seq[Seq[Double]], n: Int): Vector[Vector[Double]] = {
     require(covariance != null && covariance.size == n &&
       covariance.forall(row => row != null && row.size == n && row.forall(_.isFinite)), "Invalid covariance dimensions/entries")
     val matrix = covariance.map(_.toVector).toVector
@@ -44,7 +49,7 @@ object GaussianBlockProposal {
     val factor = Vector.tabulate(n)(i => Vector.tabulate(i + 1)(j => lower(i)(j) * sd(i)))
     require(factor.forall(_.forall(_.isFinite)) && factor.indices.forall(i => factor(i)(i) > 0),
       "Covariance factor outside numeric range")
-    GaussianBlockScheme(new Block(targets, universe, factor))
+    factor
   }
 
   private def validateTargets(targets: Vector[AtomicNormal], universe: Universe): Unit =

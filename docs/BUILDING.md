@@ -33,7 +33,7 @@ Outputs are under `target/out/jvm/scala-3.9.0/figaro/`:
 
 | Artifact suffix | Purpose |
 | --- | --- |
-| `figaro_3-6.0.0-modern.6-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
+| `figaro_3-6.0.0-modern.7-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
 | `-sources.jar` | Library Scala sources |
 | `-javadoc.jar` | Generated Scala 3 API documentation |
 | `-fat.jar` | Library plus assembled dependencies, **excluding Scala runtime**; not a `java -jar` application |
@@ -80,6 +80,10 @@ Run `sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.ParallelPer
 ## Multi-chain MCMC checks
 
 Run `sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest"` for posterior correctness, retained rejection states, dynamic ownership, worker-count seed independence, initialization limits, failure/cancellation cleanup, and independently checked diagnostics. Run `sbt "examples / Compile / runMain com.cra.figaro.example.MultiChainMcmcExample"` for the complete user example. The [multi-chain benchmark](MULTI_CHAIN_MCMC.md#performance-and-resource-planning) keeps chain count and sampling work fixed while varying concurrency. Timings are diagnostic, never a CI accuracy gate.
+
+## Pilot calibration checks
+
+For pilot calibration, run `sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest"` and `sbt "examples / Compile / runMain com.cra.figaro.example.ProposalCalibrationExample"`. The [calibration validation guide](PROPOSAL_CALIBRATION_VALIDATION.md) gives broader repeated-seed benchmark commands. Pilot-inclusive performance and statistical coverage are measured, not enforced as brittle CI timing thresholds.
 
 ## Build helper reference
 

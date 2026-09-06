@@ -22,7 +22,7 @@ Measure effective samples per second **and** accuracy and uncertainty checks. Ra
 
 ## Quick start in three steps
 
-Install the Scala 3 snapshot as described in [Building](BUILDING.md). On the blocked-proposals branch it is `6.0.0-modern.6-SNAPSHOT`.
+Install the Scala 3 snapshot as described in [Building](BUILDING.md). The current calibration branch uses `6.0.0-modern.7-SNAPSHOT`; the original blocked-proposals checkpoint was `6.0.0-modern.6-SNAPSHOT`.
 
 1. Import the APIs:
 
@@ -155,3 +155,5 @@ sbt "examples / Compile / runMain com.cra.figaro.example.BlockedProposalExample"
 See [measured proposal comparisons](BLOCKED_PROPOSAL_VALIDATION.md) for repeated-seed accuracy, joint interval coverage, ESS/s, precision success, and time-to-precision results, including unfavorable cases. The benchmark is not an automatic tuning tool.
 
 Related: [multi-chain MH](MULTI_CHAIN_MCMC.md), [precision stopping](STOPPING_CRITERIA.md), [prior validation](STOPPING_VALIDATION.md), [parallel importance](PARALLEL_PERFORMANCE.md), and [migration](MIGRATION.md).
+
+[Pilot calibration](PROPOSAL_CALIBRATION.md) can now estimate a candidate matrix from separate pilot traces. It freezes the result before fresh production chains start; the manual API above and all of its target/ownership restrictions remain unchanged. Calibration is not automatic and can be rejected or cost more than it saves.
