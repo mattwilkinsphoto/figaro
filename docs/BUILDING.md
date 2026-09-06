@@ -4,6 +4,14 @@
 
 The sbt 2 build compiles the `figaro` library and its dependent `examples` project, runs tests, and packages the library. The root aggregates both projects; it is not an application or a published artifact. Run commands below from the repository root, with JDK 17 and an sbt runner on your path. The runner reads the pinned version in `project/build.properties`. Initial dependency resolution requires network access.
 
+CI sets `SBT_OPTS="--server --batch"` to run the build JVM in the foreground. This avoids
+the native thin-client startup race seen in run `34048566245`, where an incomplete
+`active.json` prevented connection before compilation began. For the same symptom locally,
+use `sbt --server --batch "compile"`; ordinary interactive development need not change.
+The [sbt runner reference](https://www.scala-sbt.org/2.x/docs/en/reference/sbt.html) distinguishes
+the runner/client from the build JVM. This setting changes process startup, not the pinned
+sbt version, Scala compiler, sampling algorithms, or test requirements.
+
 ## Quick start
 
 1. Check `java -version` reports JDK 17.

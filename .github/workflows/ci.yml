@@ -17,6 +17,8 @@ jobs:
     timeout-minutes: 45
     env:
       JAVA_OPTS: -Xms1G -Xmx6G -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
+      # Avoid a thin-client startup race reading an incomplete active.json in ephemeral CI.
+      SBT_OPTS: --server --batch
 
     steps:
       - name: Check out source
