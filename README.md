@@ -55,6 +55,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Vector scaling measurements](docs/VECTOR_SAMPLING_PERFORMANCE.md): matched-trace worker comparisons, effective samples per second, and diagnostic overhead.
 - [Parallel coordinate diagnostics](docs/PARALLEL_VECTOR_DIAGNOSTICS.md): bounded scheduling, serial fallback, memory tradeoffs, and before/after verification.
 - [Allocation and GC profiling](docs/VECTOR_ALLOCATION_PROFILE.md): opt-in JDK recording, allocation hotspots, and limits of memory-bandwidth inference.
+- [Primitive diagnostic reductions](docs/PRIMITIVE_DIAGNOSTIC_REDUCTIONS.md): reduced boxing, exact-result checks, and measured end-to-end effects.
 
 - [User guide](docs/USER_GUIDE.md): concepts, common patterns, gotchas, and related modules.
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.

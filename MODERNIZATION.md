@@ -368,3 +368,30 @@ the 108-run profiling smoke grid, complete checked datasets, reference freshness
 local links pass. An existing recording is protected by exclusive creation and a verified
 unchanged SHA-256 on attempted reuse. CI adds profiler smoke/data-validation gates;
 raw recordings and local access details are not committed.
+
+## Stage 21: primitive mean and variance reductions
+
+Branch: `modernize/primitive-diagnostic-reductions`, based on CI-green `0462f1b0`;
+snapshot modern.10, public signatures/defaults and toolchain remain unchanged. Only
+`McmcDiagnostics.average` and `variance` move from mapped iterator reductions to primitive
+array loops. The first transformed accumulator value, left-to-right summation, shifted
+mean, two-pass sample variance and cancellation checks are preserved. Package-visible
+helpers support exact arithmetic regression tests, not a new consumer API. See the
+[protocol, examples and full measurements](docs/PRIMITIVE_DIAGNOSTIC_REDUCTIONS.md).
+
+Implementation/protocol commit `d94aa71d` precedes both full measurements. All 252
+unprofiled and 252 profiled runs complete with unchanged non-timing fields/fingerprints.
+Four-worker diagnostic speedups are 1.32-1.51x; observed total gains over the previous
+unprofiled checkpoint are 1.07-1.30x. Diagnostic allocation sample weight drops about 44%,
+with diagnostic boxed-double weight about 72% lower. These are separate-JVM timing
+comparisons and sampled allocation estimates, not universal guarantees or peak-memory
+measurements. Poor-mixing and wrong-mode outputs are deliberately unchanged.
+
+The new primitive-expression oracle covers 91 edge/seeded arrays with canonical-NaN bit
+comparisons, signed-zero checks and input immutability; interruption flag checks are
+also added. All 152 modernization tests, 41 documentation/report-tool tests, three vector
+example workflows and 108 smoke-grid runs pass locally. Fresh Scaladoc regenerates the
+same 11321 public method entries. Existing full-grid, profile, lifecycle and
+reference gates remain, and CI validates all three new checked datasets without timing
+thresholds. FFT/autocovariance representation costs are the next candidate; neither the
+FFT nor ranking implementation is changed in this stage.

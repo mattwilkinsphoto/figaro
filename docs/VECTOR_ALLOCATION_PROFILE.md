@@ -1,5 +1,8 @@
 # Vector allocation and GC investigation
 
+Follow-up implementation: [primitive mean/variance reductions](PRIMITIVE_DIAGNOSTIC_REDUCTIONS.md).
+This document and its checked data remain the pre-optimization profiling baseline.
+
 ## Overview
 
 This example-only tool identifies where Figaro's vector benchmark allocates temporary

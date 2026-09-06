@@ -1,5 +1,14 @@
 # Migrating to Scala 3 and sbt 2
 
+## Primitive diagnostic reductions follow-up
+
+`modernize/primitive-diagnostic-reductions` retains snapshot modern.10, public signatures
+and defaults. Rebuild to receive the internal mean/variance allocation reduction; no
+consumer changes or feature flags are needed. Existing summation order, estimates,
+warnings and cancellation contracts are preserved. This also affects scalar diagnostic
+callers; measured speedups cover the fixed vector benchmark, not arbitrary graph models.
+See [implementation scope, examples and results](PRIMITIVE_DIAGNOSTIC_REDUCTIONS.md).
+
 ## Parallel coordinate diagnostics follow-up
 
 `modernize/parallel-vector-diagnostics` retains snapshot `6.0.0-modern.10-SNAPSHOT`
