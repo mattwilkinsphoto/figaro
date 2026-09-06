@@ -58,6 +58,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Primitive diagnostic reductions](docs/PRIMITIVE_DIAGNOSTIC_REDUCTIONS.md): reduced boxing, exact-result checks, and measured end-to-end effects.
 - [Primitive FFT autocovariance](docs/PRIMITIVE_FFT_AUTOCOVARIANCE.md): fewer complex-array temporaries, unchanged numerical results, and matched-work measurements.
 - [Primitive diagnostic sorting](docs/PRIMITIVE_DIAGNOSTIC_SORTING.md): stable rank indices, primitive value sorting, exact tie handling, and measured tradeoffs.
+- [Interleaved performance audit](docs/INTERLEAVED_PERFORMANCE_AUDIT.md): fresh-JVM paired comparisons, callback allocation attribution, and limits of causal interpretation.
 
 - [User guide](docs/USER_GUIDE.md): concepts, common patterns, gotchas, and related modules.
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.

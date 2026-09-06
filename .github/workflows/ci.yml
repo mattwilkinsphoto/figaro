@@ -81,6 +81,9 @@ jobs:
           python3 -B tools/summarize_vector_performance.py docs/primitive-sorting-performance-results.csv --repetitions 5 --baseline docs/primitive-fft-performance-results.csv
           python3 -B tools/summarize_vector_profile.py docs/primitive-sorting-profile-results.csv
           python3 -B tools/summarize_vector_performance.py docs/primitive-sorting-profile-benchmark-results.csv --repetitions 5 --baseline docs/primitive-sorting-performance-results.csv
+          java -XX:-UsePerfData tools/VectorProfileAttribution.java --self-test
+          python3 -B tools/summarize_interleaved_performance.py check docs/interleaved-performance-results.csv --baseline-csv docs/primitive-fft-performance-results.csv
+          python3 -B tools/summarize_vector_attribution.py --csv docs/vector-attribution-results.csv --profile docs/primitive-sorting-profile-results.csv
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 

@@ -1,5 +1,15 @@
 # Migrating to Scala 3 and sbt 2
 
+## Interleaved performance audit follow-up
+
+`modernize/interleaved-performance-audit` adds investigation tools and checked evidence
+only. Snapshot modern.10, production code, public API, dependencies and sampling defaults
+are unchanged; consumers have nothing new to enable or migrate. The audit compares the
+FFT and sorting checkpoints in balanced fresh-JVM pairs and separates observed model
+callback allocations from sampler overhead. See the [protocol, reproduction commands,
+results and limitations](INTERLEAVED_PERFORMANCE_AUDIT.md). Timing evidence does not
+justify reducing sampling budgets or weakening cancellation safeguards.
+
 ## Primitive diagnostic sorting follow-up
 
 `modernize/primitive-diagnostic-sorting` retains snapshot modern.10, public signatures,

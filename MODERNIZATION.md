@@ -458,3 +458,37 @@ runs pass; fresh Scaladoc regenerates the unchanged 11321 public method entries 
 links validate. Four existing Scaladoc warnings remain.
 Next: interleaved performance revalidation and focused sampler/callback and interruption
 attribution, before another rewrite. No cancellation policy or density callback is changed.
+
+## Stage 24: interleaved performance and allocation attribution audit
+
+Branch: `modernize/interleaved-performance-audit`, based on `c2329aa0`; the preceding
+sorting branch's [required CI passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34061148225).
+Snapshot modern.10, production/library tests, benchmark fixture, public API, dependencies,
+toolchain and cancellation policy remain unchanged. Tools/tests and the fixed protocol
+were committed as `a504e70e` before measurement. See [the user guide, reproduction
+commands, complete results and limitations](docs/INTERLEAVED_PERFORMANCE_AUDIT.md).
+
+Four balanced adjacent fresh-JVM pairs compare the FFT and sorting checkpoints, with
+identical benchmark/dependency jars and only the Figaro jar differing. All 2016 records
+(1440 measured, 576 warm-up) preserve every non-timing field and fingerprint. Four-worker
+median pair total gains span 1.013–1.184x; diagnostic gains span 1.227–1.308x. The earlier
+Gaussian 8D GPSS slowdown did not recur: all four pairs favor current (1.098–1.219x).
+Gaussian 32D Quantile still has one slower pair (0.932x). All observations are retained;
+four pair estimates are not a universal speed guarantee or a confidence interval.
+
+Read-only reclassification of the existing JFR exactly reconciles every original
+allocation/execution key, count and weight. Observed benchmark callback frames account
+for 69.07% of allocation sample weight, observed sampler frames for 19.45%, and diagnostics
+for 10.75%. Diagnostics account for 73.98% of execution samples. Of 669 interruption-site
+samples, 651 have observed sorter callers; this is not exclusive causal CPU attribution
+and does not justify reducing cancellation checks. Truncated and missing stacks remain
+visible; raw recordings, local paths and runtime jars are not published.
+
+Compilation and all 160 modernization regressions pass. All 49 documentation/report-tool
+tests, ten Java classification checks and four smoke JVMs (432 records) pass. Reference
+freshness verifies the unchanged 11321 public method entries; local links pass. Scaladoc
+has four existing warnings. CI retains existing gates and adds attribution self-tests
+and checked-data reconciliation without
+timing thresholds or an eight-JVM benchmark requirement. Next: a bounded diagnostic
+sort/rank-normalization cost investigation with exact numerical oracles and unchanged
+interruption cadence, plus separately labeled application-callback profiling where useful.

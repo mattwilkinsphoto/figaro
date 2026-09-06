@@ -245,6 +245,11 @@ before choosing the next rewrite. Investigate interruption/normal-score attribut
 without changing responsiveness or diagnostic arithmetic. No further sampler, callback,
 normal-score or cancellation-policy optimization is included in this checkpoint.
 
+Follow-up: the [interleaved performance and attribution audit](INTERLEAVED_PERFORMANCE_AUDIT.md)
+now reports four balanced fresh-JVM pairs. The Gaussian 8D GPSS slowdown did not recur
+there; other small/noisy gains and a slower Gaussian 32D Quantile pair remain visible.
+The historical measurements above are retained, not replaced by the later experiment.
+
 ## Reproduce the two studies
 
 Local verification: compilation, all 160 modernization tests, 41 documentation/report-tool
