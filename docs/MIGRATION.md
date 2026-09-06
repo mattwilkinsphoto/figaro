@@ -1,6 +1,10 @@
 # Migrating to Scala 3 and sbt 2
 
-The current follow-up is [multi-chain MCMC](MULTI_CHAIN_MCMC.md) on `modernize/multi-chain-mcmc`, with snapshot `6.0.0-modern.4-SNAPSHOT`. Scala 3.9.0, sbt 2.0.8, and JDK 17 remain fixed. This includes the earlier [parallel importance work](PARALLEL_PERFORMANCE.md) and [deprecation retirement](DEPRECATION_RETIREMENT.md); obsolete APIs remain removed and deprecations still fail compilation. Recompile consumers and use this snapshot for this branch. The tables below describe earlier upgrade checkpoints.
+## Stopping-criteria follow-up
+
+The `modernize/stopping-criteria` branch adds [Gaussian TSPRT, categorical KL, and adaptive MCMC precision stopping](STOPPING_CRITERIA.md). Existing fixed-budget APIs and result types remain available. New `runUntilPrecise` treats `drawsPerChain` as a cap and returns an explicit stop reason plus batch-means precision assessments. No historical stopping-parameter tuple is adopted: error probabilities, observation SD, and boundary directions are named explicitly. KL-based MCMC convergence is not claimed or enabled. These changes do not require a Scala, sbt, or JDK upgrade.
+
+The preceding multi-chain milestone used snapshot `6.0.0-modern.4-SNAPSHOT`; the stopping follow-up uses `6.0.0-modern.5-SNAPSHOT`. Scala 3.9.0, sbt 2.0.8, and JDK 17 remain fixed. This includes the earlier [parallel importance work](PARALLEL_PERFORMANCE.md) and [deprecation retirement](DEPRECATION_RETIREMENT.md); obsolete APIs remain removed and deprecations still fail compilation. Recompile consumers after rebuilding this branch. The tables below describe earlier upgrade checkpoints.
 
 ## Multi-chain migration changes
 

@@ -5,7 +5,7 @@ import com.cra.figaro.algorithm.sampling.{ForwardWeighter, MetropolisHastings, P
 import com.cra.figaro.language.*
 import com.cra.figaro.util.RandomContext
 import java.util.concurrent.*
-import java.util.concurrent.atomic.AtomicInteger
+import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
 import scala.jdk.CollectionConverters.*
 import scala.util.control.NonFatal
 
@@ -74,6 +74,25 @@ object MultiChainMetropolisHastings {
   final case class Result(chains: Vector[ChainResult], diagnostics: Map[String, McmcDiagnostics.Summary],
     elapsedSeconds: Double)
 
+  /** Why an adaptive run finished; exhausting the budget is not a precision success. */
+  enum StopReason { case PrecisionReached, MaxDrawsReached }
+
+  /** Adaptive output with final assessments and number of synchronized checks. */
+  final case class StoppedResult(result: Result, reason: StopReason,
+    assessments: Map[String, McmcPrecision.Assessment], checks: Int)
+
+  /** Run persistent chains in batches until every scalar mean meets the precision policy or budget.
+    * @param config drawsPerChain is the MAXIMUM per-chain budget; other settings retain their meaning
+    * @param precision minimum work, batch/check schedule, confidence, and precision settings
+    * @param build independent model factory, exactly as for run
+    * @return detached traces, final assessments, and an explicit stop reason; inspect diagnostics too
+    * @example `runUntilPrecise(Config(), McmcPrecision.Config(relativeTolerance = 0.1))(build)`
+    */
+  def runUntilPrecise(config: Config, precision: McmcPrecision.Config)(build: (Universe, Int) => Model): StoppedResult = {
+    require(precision != null, "Precision policy required")
+    execute(config, Some(precision))(build)
+  }
+
   /** A failure identified by chain index, retaining the underlying exception. */
   final class ChainFailure(val chainIndex: Int, cause: Throwable)
     extends RuntimeException(s"MCMC chain $chainIndex failed: ${cause.getMessage}", cause)
@@ -87,12 +106,15 @@ object MultiChainMetropolisHastings {
     * @throws java.lang.IllegalStateException if callbacks prevent worker shutdown within 30 seconds
     * @example `MultiChainMetropolisHastings.run(Config()) { (u, i) => Model(Vector(Observable("coin", Flip(0.3)(using "", u))(b => if (b) 1.0 else 0.0))) }`
     */
-  def run(config: Config)(build: (Universe, Int) => Model): Result = {
+  def run(config: Config)(build: (Universe, Int) => Model): Result = execute(config, None)(build).result
+
+  private def execute(config: Config, precision: Option[McmcPrecision.Config])(build: (Universe, Int) => Model): StoppedResult = {
     require(config != null && build != null, "Config and model factory are required")
     val started = System.nanoTime()
     val seeds = new java.util.SplittableRandom(config.seed)
     val owned = scala.collection.mutable.ArrayBuffer.empty[Owned]
     val threads = new ConcurrentLinkedQueue[Thread]
+    val abandoned = new AtomicBoolean(false)
     var pool: ExecutorService = null
     var error: Throwable = null
     var interrupted = false
@@ -130,36 +152,63 @@ object MultiChainMetropolisHastings {
       })
       stopped = false
       val completed = new ExecutorCompletionService[ChainResult](pool)
-      owned.foreach { entry => completed.submit(new Callable[ChainResult] {
+      def submit(limit: Int): Unit = owned.foreach { entry => completed.submit(new Callable[ChainResult] {
         def call(): ChainResult = {
           entry.begin()
-          entry.scoped {
-            withCleanup {
-              try {
-                val kernel = new Kernel(entry, config)
-                withCleanup { kernel.start(); kernel.output } { if (kernel.isActive) kernel.kill() }
-              } catch {
-                case e if NonFatal(e) || e.isInstanceOf[InterruptedException] => throw new ChainFailure(entry.index, e)
+          withCleanup { entry.scoped {
+            try {
+              if (entry.kernel == null) {
+                entry.kernel = new Kernel(entry, config)
+                entry.kernel.start()
               }
-            } { entry.dispose() }
+              entry.kernel.advanceTo(limit)
+              entry.kernel.output
+            } catch {
+              case e if NonFatal(e) || e.isInstanceOf[InterruptedException] => throw new ChainFailure(entry.index, e)
+            }
+          } } {
+            entry.release()
+            if (abandoned.get()) entry.disposeIfIdle()
           }
         }
       }) }
       val results = new Array[ChainResult](config.chains)
-      for (_ <- 0 until config.chains) {
-        val result = try completed.take().get() catch { case e: ExecutionException => throw e.getCause }
-        results(result.index) = result
+      var limit = precision.fold(config.drawsPerChain)(p => math.min(p.minDrawsPerChain, config.drawsPerChain))
+      var assessments = Map.empty[String, McmcPrecision.Assessment]
+      var checks = 0
+      var reached = false
+      var done = false
+      while (!done) {
+        submit(limit)
+        // Never block worker threads at a barrier: fewer workers than chains is supported.
+        for (_ <- 0 until config.chains) {
+          val result = try completed.take().get() catch { case e: ExecutionException => throw e.getCause }
+          results(result.index) = result
+        }
+        precision.foreach { policy =>
+          assessments = names.map { name =>
+            checkInterrupted()
+            name -> McmcPrecision.evaluate(results.toVector.map(_.draws(name)), policy, names.size)
+          }.toMap
+          checks += 1
+          reached = assessments.values.forall(_.criteriaMet)
+        }
+        done = reached || limit == config.drawsPerChain
+        if (!done) limit = math.min(config.drawsPerChain.toLong, limit.toLong + precision.get.checkEvery).toInt
       }
       closePool(pool, threads)
       stopped = true
       val chains = results.toVector
-      val summaries = names.map { name =>
+      val summaries = if (precision.isDefined) assessments.view.mapValues(_.diagnostics).toMap else names.map { name =>
         checkInterrupted()
         name -> McmcDiagnostics.summarize(chains.map(_.draws(name)))
       }.toMap
-      Result(chains, summaries, (System.nanoTime() - started) / 1e9)
+      // Dispose before returning (and before timing stops); failure cleanup remains in finally.
+      owned.foreach(_.dispose())
+      StoppedResult(Result(chains, summaries, (System.nanoTime() - started) / 1e9),
+        if (reached) StopReason.PrecisionReached else StopReason.MaxDrawsReached, assessments, checks)
     } catch {
-      case e: Throwable => error = e; throw e
+      case e: Throwable => abandoned.set(true); error = e; throw e
     } finally {
       interrupted = Thread.interrupted() || error.isInstanceOf[InterruptedException]
       try {
@@ -173,7 +222,7 @@ object MultiChainMetropolisHastings {
         try {
           var cleanupError: Throwable = null
           owned.foreach { entry =>
-            try { if (stopped) entry.dispose() else entry.disposeIfNotStarted() } catch {
+            try { if (stopped) entry.dispose() else entry.disposeIfIdle() } catch {
               case e: Throwable =>
                 if (error != null) error.addSuppressed(e)
                 else if (cleanupError == null) cleanupError = e
@@ -203,13 +252,16 @@ object MultiChainMetropolisHastings {
 
   private final class Owned(val index: Int, val seed: Long, val universe: Universe, random: java.util.Random) {
     var model: Model = null
-    // 0 = queued/constructed, 1 = exclusively worker-owned, 2 = disposed.
-    // A CAS prevents a late-starting task from racing disposal after failed shutdown.
+    var kernel: Kernel = null
+    // 0 = constructed, 1 = running, 2 = disposed, 3 = idle between batches.
+    // CAS transitions prevent queued tasks and a late-returning worker racing failure cleanup.
     private val state = new AtomicInteger(0)
-    def begin(): Unit = if (!state.compareAndSet(0, 1)) throw new CancellationException("Chain already disposed")
+    def begin(): Unit = if (!state.compareAndSet(0, 1) && !state.compareAndSet(3, 1)) throw new CancellationException("Chain unavailable")
+    def release(): Unit = { state.compareAndSet(1, 3); () }
     def scoped[A](body: => A): A = Universe.withUniverse(universe) { RandomContext.withRandom(random)(body) }
-    def disposeIfNotStarted(): Unit = if (state.compareAndSet(0, 2)) scoped { universe.clear() }
-    def dispose(): Unit = if (state.getAndSet(2) != 2) scoped { universe.clear() }
+    private def clear(): Unit = scoped { withCleanup { if (kernel != null && kernel.isActive) kernel.kill() } { universe.clear() } }
+    def disposeIfIdle(): Unit = if (state.compareAndSet(0, 2) || state.compareAndSet(3, 2)) clear()
+    def dispose(): Unit = if (state.getAndSet(2) != 2) clear()
   }
   private def closePool(pool: ExecutorService, threads: ConcurrentLinkedQueue[Thread]): Unit = {
     val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
@@ -242,8 +294,14 @@ object MultiChainMetropolisHastings {
         result
       }
     }
-    private var result: ChainResult = null
-    def output: ChainResult = result
+    private val queries = owner.model.observables
+    private val columns = Array.fill(queries.size)(new Array[Double](config.drawsPerChain))
+    private var retained = 0
+    private var attempts = 0
+    private var samplingNanos = 0L
+    def output: ChainResult = ChainResult(owner.index, owner.seed,
+      queries.indices.map(i => queries(i).name -> columns(i).iterator.take(retained).toVector).toMap,
+      accepts.toDouble / (accepts.toLong + rejects), attempts, samplingNanos / 1e9)
     override protected def mhStep(): MetropolisHastings.State = {
       checkInterrupted()
       val state = super.mhStep()
@@ -269,7 +327,6 @@ object MultiChainMetropolisHastings {
     def run(): Unit = {
       val start = System.nanoTime()
       val initializer = new ForwardWeighter(universe, chainCache)
-      var attempts = 0
       var valid = false
       try {
         while (!valid && attempts < config.maxInitializationAttempts) {
@@ -288,10 +345,11 @@ object MultiChainMetropolisHastings {
       while (i < config.warmUp) { mhStep(); i += 1 }
       accepts = 0
       rejects = 0
-      val queries = owner.model.observables
-      val columns = Array.fill(queries.size)(new Array[Double](config.drawsPerChain))
-      i = 0
-      while (i < config.drawsPerChain) {
+      samplingNanos += System.nanoTime() - start
+    }
+    def advanceTo(limit: Int): Unit = {
+      val start = System.nanoTime()
+      while (retained < limit) {
         var step = 0
         while (step < config.thin) { mhStep(); step += 1 }
         require(dissatisfied.isEmpty, "MH left the valid state space; check proposal/evidence")
@@ -300,13 +358,12 @@ object MultiChainMetropolisHastings {
           require(queries(q).element.active, s"Observable target became inactive: ${queries(q).name}")
           val value = queries(q).read()
           require(value.isFinite, s"Non-finite observable: ${queries(q).name}")
-          columns(q)(i) = value
+          columns(q)(retained) = value
           q += 1
         }
-        i += 1
+        retained += 1
       }
-      result = ChainResult(owner.index, owner.seed, queries.indices.map(i => queries(i).name -> columns(i).toVector).toMap,
-        accepts.toDouble / (accepts.toLong + rejects), attempts, (System.nanoTime() - start) / 1e9)
+      samplingNanos += System.nanoTime() - start
     }
   }
 }

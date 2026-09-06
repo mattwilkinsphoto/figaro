@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 703,
+  "pages": 712,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -53116,6 +53116,85 @@
       "page": "com/cra/figaro/algorithm/sampling/parallel/McmcDiagnostics$.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Assessment",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Assessment.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Assessment",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Assessment.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcPrecision",
+      "name": "evaluate",
+      "anchor": "evaluate-a5c",
+      "signature": "def evaluate(chains: Seq[Seq[Double]], config: Config, simultaneousQueries: Int = ...): Assessment",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "chains: Seq[Seq[Double]]",
+            "config: Config",
+            "simultaneousQueries: Int = ..."
+          ]
+        }
+      ],
+      "returns": "Assessment",
+      "summary": "Evaluate ordered, equal-length scalar traces; does not alter them.",
+      "contract": "Evaluate ordered, equal-length scalar traces; does not alter them. Value parameters chains at least two finite chains of at least four draws config precision policy simultaneousQueries positive count of observables checked together, for Bonferroni confidence adjustment Attributes Returns diagnostics and a conditional precision assessment; no proof of convergence Example McmcPrecision.evaluate(traces, McmcPrecision.Config(relativeTolerance = 0.1))",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.evaluate(chains, config, simultaneousQueries)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
       "name": "addSuppressed",
       "anchor": "addSuppressed-4b8",
@@ -53515,6 +53594,34 @@
       "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$Result.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.StoppedResult",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$StoppedResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.StoppedResult",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$StoppedResult.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings",
       "name": "run",
       "anchor": "run-fffff617",
@@ -53538,6 +53645,34 @@
       "summary": "Construct models serially, run chains on a private bounded pool, and return detached results.",
       "contract": "Construct models serially, run chains on a private bounded pool, and return detached results. Value parameters build creates equivalent independent models in the supplied universe; index allows dispersed initial regions config work, scheduling, seed, and storage configuration Attributes Returns complete traces and diagnostics; no partial success result is returned Throws ChainFailure for a model/worker failure; other workers are interrupted InterruptedException when the calling thread is interrupted; its interrupt flag is restored java.lang.IllegalStateException if callbacks prevent worker shutdown within 30 seconds Example MultiChainMetropolisHastings.run(Config()) { (u, i) => Model(Vector(Observable(\"coin\", Flip(0.3)(using \"\", u))(b => if (b) 1.0 else 0.0))) }",
       "example": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.run(config)(build)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings",
+      "name": "runUntilPrecise",
+      "anchor": "runUntilPrecise-fffff67c",
+      "signature": "def runUntilPrecise(config: Config, precision: Config)(build: (Universe, Int) => Model): StoppedResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config",
+            "precision: Config"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "build: (Universe, Int) => Model"
+          ]
+        }
+      ],
+      "returns": "StoppedResult",
+      "summary": "Run persistent chains in batches until every scalar mean meets the precision policy or budget.",
+      "contract": "Run persistent chains in batches until every scalar mean meets the precision policy or budget. Value parameters build independent model factory, exactly as for run config drawsPerChain is the MAXIMUM per-chain budget; other settings retain their meaning precision minimum work, batch/check schedule, confidence, and precision settings Attributes Returns detached traces, final assessments, and an explicit stop reason; inspect diagnostics too Example runUntilPrecise(Config(), McmcPrecision.Config(relativeTolerance = 0.1))(build)",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runUntilPrecise(config, precision)(build)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html"
     },
@@ -54529,6 +54664,91 @@
       "example": "receiver.stop()",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/parallel/ParSamplingAlgorithm.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.Design",
+      "name": "advance",
+      "anchor": "advance-fffff2c7",
+      "signature": "def advance(state: State, observation: Double): State",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "state: State",
+            "observation: Double"
+          ]
+        }
+      ],
+      "returns": "State",
+      "summary": "Consume one observation; the terminal rule takes precedence at maxSamples.",
+      "contract": "Consume one observation; the terminal rule takes precedence at maxSamples. Value parameters observation finite scalar observation, not a precomputed likelihood ratio state nonterminal state created by this design Attributes Returns a new state; the supplied state is unchanged Throws IllegalArgumentException for foreign/terminal states or unrepresentable arithmetic Example val next = design.advance(design.initial, 0.2)",
+      "example": "receiver.advance(state, observation)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/TruncatedSprt$$Design.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.Design",
+      "name": "initial",
+      "anchor": "initial-0",
+      "signature": "def initial: State",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "State",
+      "summary": "",
+      "contract": "Attributes Returns a fresh state with no evidence and Decision.Continue Example val state = design.initial",
+      "example": "receiver.initial",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/TruncatedSprt$$Design.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt",
+      "name": "gaussian",
+      "anchor": "gaussian-44a",
+      "signature": "def gaussian(mean0: Double, mean1: Double, observationSd: Double, falseAlarmRate: Double = ..., missedDetectionRate: Double = ..., terminalFalseAlarmFraction: Double = ..., terminalMissFraction: Double = ...): Design",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "mean0: Double",
+            "mean1: Double",
+            "observationSd: Double",
+            "falseAlarmRate: Double = ...",
+            "missedDetectionRate: Double = ...",
+            "terminalFalseAlarmFraction: Double = ...",
+            "terminalMissFraction: Double = ..."
+          ]
+        }
+      ],
+      "returns": "Design",
+      "summary": "Construct a Gaussian truncated SPRT (Blostein-Huang 1991, equations 12-15).",
+      "contract": "Construct a Gaussian truncated SPRT (Blostein-Huang 1991, equations 12-15). Value parameters falseAlarmRate P(select H1 | H0), strictly between zero and 0.5 mean0 observation mean under H0 mean1 observation mean under H1, strictly greater than mean0 missedDetectionRate P(select H0 | H1), strictly between zero and 0.5; NOT detection power observationSd known common observation standard deviation, positive terminalFalseAlarmFraction fraction of false-alarm budget reserved for the terminal decision, in (0,1) terminalMissFraction fraction of miss budget reserved for the terminal decision, in (0,1) Attributes Returns immutable design with named boundaries and a positive integer sample limit Throws IllegalArgumentException for invalid inputs or a design outside Double/Int range Example val design = TruncatedSprt.gaussian(0.0, 1.0, 1.0, missedDetectionRate = 0.10)",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.gaussian(mean0, mean1, observationSd, falseAlarmRate, missedDetectionRate, terminalFalseAlarmFraction, terminalMissFraction)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/TruncatedSprt$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt",
+      "name": "klDivergence",
+      "anchor": "klDivergence-faf",
+      "signature": "def klDivergence(p: Seq[Double], q: Seq[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: Seq[Double]",
+            "q: Seq[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Discrete D_KL(P || Q) in nats, with explicit aligned support and no hidden smoothing.",
+      "contract": "Discrete D_KL(P || Q) in nats, with explicit aligned support and no hidden smoothing. Value parameters p nonempty normalized probability vector (sum tolerance 1e-10) q normalized vector of the same size and category order Attributes Returns nonnegative divergence; +Infinity if p has positive mass where q is zero; 0*log(0/q)=0 Throws IllegalArgumentException for invalid probabilities or mismatched support sizes Example TruncatedSprt.klDivergence(Vector(1.0, 0.0), Vector(0.5, 0.5)) // log(2)",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.klDivergence(p, q)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/TruncatedSprt$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.structured.ApplyComponent",

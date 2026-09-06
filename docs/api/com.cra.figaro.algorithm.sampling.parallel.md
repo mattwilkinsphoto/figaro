@@ -77,6 +77,126 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics.summarize(chains)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Assessment.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Assessment.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Assessment.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Assessment.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.evaluate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$.html#evaluate-a5c)
+
+```scala
+def evaluate(chains: Seq[Seq[Double]], config: Config, simultaneousQueries: Int = ...): Assessment
+```
+
+Evaluate ordered, equal-length scalar traces; does not alter them.
+
+Type parameters: none.
+
+Parameters, list 1: `` chains: Seq[Seq[Double]] ``; `` config: Config ``; `` simultaneousQueries: Int = ... ``.
+
+Returns: `` Assessment ``.
+
+Source contract/attributes: Evaluate ordered, equal-length scalar traces; does not alter them. Value parameters chains at least two finite chains of at least four draws config precision policy simultaneousQueries positive count of observables checked together, for Bonferroni confidence adjustment Attributes Returns diagnostics and a conditional precision assessment; no proof of convergence Example McmcPrecision.evaluate(traces, McmcPrecision.Config(relativeTolerance = 0.1))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.evaluate(chains, config, simultaneousQueries)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure.addSuppressed ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html#addSuppressed-4b8)
@@ -607,6 +727,54 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.StoppedResult.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$StoppedResult.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.StoppedResult.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$StoppedResult.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.run ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html#run-fffff617)
@@ -631,6 +799,32 @@ Invocation template:
 
 ```scala
 com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.run(config)(build)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runUntilPrecise ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html#runUntilPrecise-fffff67c)
+
+```scala
+def runUntilPrecise(config: Config, precision: Config)(build: (Universe, Int) => Model): StoppedResult
+```
+
+Run persistent chains in batches until every scalar mean meets the precision policy or budget.
+
+Type parameters: none.
+
+Parameters, list 1: `` config: Config ``; `` precision: Config ``.
+
+Parameters, list 2: `` build: (Universe, Int) => Model ``.
+
+Returns: `` StoppedResult ``.
+
+Source contract/attributes: Run persistent chains in batches until every scalar mean meets the precision policy or budget. Value parameters build independent model factory, exactly as for run config drawsPerChain is the MAXIMUM per-chain budget; other settings retain their meaning precision minimum work, batch/check schedule, confidence, and precision settings Attributes Returns detached traces, final assessments, and an explicit stop reason; inspect diagnostics too Example runUntilPrecise(Config(), McmcPrecision.Config(relativeTolerance = 0.1))(build)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runUntilPrecise(config, precision)(build)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.parallel.ParAnytime.runStep ``
@@ -1811,4 +2005,100 @@ Invocation template:
 
 ```scala
 receiver.stop()
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.Design.advance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/TruncatedSprt$$Design.html#advance-fffff2c7)
+
+```scala
+def advance(state: State, observation: Double): State
+```
+
+Consume one observation; the terminal rule takes precedence at maxSamples.
+
+Type parameters: none.
+
+Parameters, list 1: `` state: State ``; `` observation: Double ``.
+
+Returns: `` State ``.
+
+Source contract/attributes: Consume one observation; the terminal rule takes precedence at maxSamples. Value parameters observation finite scalar observation, not a precomputed likelihood ratio state nonterminal state created by this design Attributes Returns a new state; the supplied state is unchanged Throws IllegalArgumentException for foreign/terminal states or unrepresentable arithmetic Example val next = design.advance(design.initial, 0.2)
+
+Invocation template:
+
+```scala
+receiver.advance(state, observation)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.Design.initial ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/TruncatedSprt$$Design.html#initial-0)
+
+```scala
+def initial: State
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` State ``.
+
+Source contract/attributes: Attributes Returns a fresh state with no evidence and Decision.Continue Example val state = design.initial
+
+Invocation template:
+
+```scala
+receiver.initial
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.gaussian ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/TruncatedSprt$.html#gaussian-44a)
+
+```scala
+def gaussian(mean0: Double, mean1: Double, observationSd: Double, falseAlarmRate: Double = ..., missedDetectionRate: Double = ..., terminalFalseAlarmFraction: Double = ..., terminalMissFraction: Double = ...): Design
+```
+
+Construct a Gaussian truncated SPRT (Blostein-Huang 1991, equations 12-15).
+
+Type parameters: none.
+
+Parameters, list 1: `` mean0: Double ``; `` mean1: Double ``; `` observationSd: Double ``; `` falseAlarmRate: Double = ... ``; `` missedDetectionRate: Double = ... ``; `` terminalFalseAlarmFraction: Double = ... ``; `` terminalMissFraction: Double = ... ``.
+
+Returns: `` Design ``.
+
+Source contract/attributes: Construct a Gaussian truncated SPRT (Blostein-Huang 1991, equations 12-15). Value parameters falseAlarmRate P(select H1 | H0), strictly between zero and 0.5 mean0 observation mean under H0 mean1 observation mean under H1, strictly greater than mean0 missedDetectionRate P(select H0 | H1), strictly between zero and 0.5; NOT detection power observationSd known common observation standard deviation, positive terminalFalseAlarmFraction fraction of false-alarm budget reserved for the terminal decision, in (0,1) terminalMissFraction fraction of miss budget reserved for the terminal decision, in (0,1) Attributes Returns immutable design with named boundaries and a positive integer sample limit Throws IllegalArgumentException for invalid inputs or a design outside Double/Int range Example val design = TruncatedSprt.gaussian(0.0, 1.0, 1.0, missedDetectionRate = 0.10)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.gaussian(mean0, mean1, observationSd, falseAlarmRate, missedDetectionRate, terminalFalseAlarmFraction, terminalMissFraction)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.klDivergence ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/TruncatedSprt$.html#klDivergence-faf)
+
+```scala
+def klDivergence(p: Seq[Double], q: Seq[Double]): Double
+```
+
+Discrete D_KL(P || Q) in nats, with explicit aligned support and no hidden smoothing.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Seq[Double] ``; `` q: Seq[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Discrete D_KL(P || Q) in nats, with explicit aligned support and no hidden smoothing. Value parameters p nonempty normalized probability vector (sum tolerance 1e-10) q normalized vector of the same size and category order Attributes Returns nonnegative divergence; +Infinity if p has positive mass where q is zero; 0*log(0/q)=0 Throws IllegalArgumentException for invalid probabilities or mismatched support sizes Example TruncatedSprt.klDivergence(Vector(1.0, 0.0), Vector(0.5, 0.5)) // log(2)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.parallel.TruncatedSprt.klDivergence(p, q)
 ```

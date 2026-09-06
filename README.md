@@ -37,7 +37,7 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.4-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.5-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
@@ -51,6 +51,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Deprecation retirement](docs/DEPRECATION_RETIREMENT.md): API replacements and lazy-collection behavior.
 - [Parallel Monte Carlo](docs/PARALLEL_PERFORMANCE.md): opt-in seeded importance sampling, worker ownership, benchmarks, and limitations.
 - [Multi-chain MCMC](docs/MULTI_CHAIN_MCMC.md): isolated MH chains, retained traces, R-hat/ESS/MCSE diagnostics, evidence restrictions, and end-to-end benchmarks.
+- [Stopping criteria](docs/STOPPING_CRITERIA.md): Gaussian TSPRT, categorical KL, and opt-in scalar-mean precision stopping for multi-chain MCMC.
 - [Build and verification](docs/BUILDING.md): sbt 2 commands, tests, coverage, publication, documentation generation, and Windows troubleshooting.
 - [Library module](Figaro/README.md) and [examples module](FigaroExamples/README.md).
 - [Engineering history](MODERNIZATION.md), [dependency inventory](DEPENDENCIES.md), and [JVM integration](CONSUMER_BOUNDARY.md).

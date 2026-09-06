@@ -69,6 +69,10 @@ Run `sbt "examples / Compile / runMain com.cra.figaro.example.MultiChainMcmcExam
 
 ## Gotchas (all examples)
 
+`StoppingCriteriaValidation.main(args: Array[String]): Unit` runs paired fixed/adaptive validation against analytic expectations for normal, likelihood, conditioned, Bernoulli, correlated, and bimodal models, plus a deliberately trapped negative control. Arguments are positive repetitions (default 20), maximum draws per chain (at least 2000, default 12000), and workers (1-4, default 4). Two negative-index warm-up rounds are printed but excluded from analysis. It returns Unit and prints `validation,`-prefixed CSV; invalid arguments or a false precision success on the negative control throw `IllegalArgumentException`. Example: `StoppingCriteriaValidation.main(Array("50", "12000", "4"))`. See [validation results](../docs/STOPPING_VALIDATION.md) for timing and coverage qualifications.
+
+The [stopping-criteria example](src/main/scala/com/cra/figaro/example/StoppingCriteriaExample.scala) adds `StoppingCriteriaExample.main(args: Array[String]): Unit`. It requires empty arguments, prints categorical KL and a seeded Gaussian TSPRT decision, then compares fixed and adaptive MCMC retained work and assessments. Run `sbt "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaExample"`; this is an illustrative comparison, not a controlled speed benchmark. See [stopping criteria](../docs/STOPPING_CRITERIA.md) for precision units and statistical assumptions.
+
 - Use an explicit `runMain` class name. There are many historical entry points; `run` may prompt you to choose one.
 - Compilation does not establish that every historical example finishes quickly, has its required input files, or matches modern behavior. Some learning examples are very expensive and Swing examples need a graphical environment.
 - Sampled results change between runs. The onboarding check verifies numerical bounds, not a tight tolerance that could fail randomly.

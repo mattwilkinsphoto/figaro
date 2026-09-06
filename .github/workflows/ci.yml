@@ -58,6 +58,7 @@ jobs:
           examples / Compile / runMain com.cra.figaro.example.MultiChainMcmcBenchmark normal 200 1 1,2 2"
 
       - name: Verify documentation tooling, reference freshness, and local links
+        # Includes the stopping-policy contracts in the generated reference.
         run: |
           sbt "figaro / Compile / doc"
           python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
@@ -72,7 +73,15 @@ jobs:
           com.cra.figaro.test.modernization.Scala3RegressionTest
           com.cra.figaro.test.modernization.DeprecationRegressionTest
           com.cra.figaro.test.modernization.SpecialFunctionsRegressionTest
+          com.cra.figaro.test.modernization.StoppingCriteriaRegressionTest
           com.cra.figaro.test.learning.SerializationTest"
+
+      - name: Run stopping-criteria examples
+        run: sbt "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaExample"
+
+      - name: Exercise representative stopping models and trapped-chain control
+        # Smoke/lifecycle check only; full repeated-seed evidence is documented separately.
+        run: sbt "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaValidation 2 4000 2"
 
       - name: Run deterministic legacy density regressions
         run: >-
@@ -132,8 +141,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.4-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.4-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -150,7 +159,7 @@ jobs:
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.4-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -161,8 +170,8 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.4-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.4-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.4-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.4-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-javadoc.jar
           if-no-files-found: error

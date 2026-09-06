@@ -64,6 +64,8 @@ Four chains of 10,000 draws retain **40,000 draws**, not 10,000 total. With 1,00
 
 ## API reference
 
+For opt-in adaptive work budgets, see [stopping criteria](STOPPING_CRITERIA.md). `runUntilPrecise(config, precision)(build)` keeps chains alive between coordinated batches and returns an explicit precision-reached or budget-exhausted reason. Existing `run(config)(build)` remains fixed-budget; saved-result persistence and restart remain unsupported.
+
 Import `com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.*` and, for standalone diagnostics, `com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics`. The [compiler-derived reference](api/com.cra.figaro.algorithm.sampling.parallel.md) also lists all generated case-class operations, default accessors, parameter types, return types, and invocation templates.
 
 ### Configuration
@@ -279,7 +281,7 @@ These are short illustrative models, not production capacity forecasts. They do 
 - Custom proposals remain your responsibility. The runner does not adapt proposals, validate detailed balance, provide HMC/NUTS, or guarantee movement between modes.
 - The default proposal needs a stochastic element to propose. Use exact evaluation for a fully deterministic model; a constant projection inside a stochastic model is allowed but has undefined mixing diagnostics. Finite-sample R-hat can be slightly below one; closeness to one is not a guarantee either way.
 - Diagnostics support finite `Double` scalar projections, not categorical distribution objects or arbitrary model snapshots. Extreme numeric ranges can lose precision; unrepresentable SD/MCSE is flagged. Constant/discrete trace warnings deserve interpretation, not automatic failure suppression.
-- Cancellation is cooperative, not forcibly interruptible user code. There is no anytime querying, pause/resume, adaptive stopping, checkpoint recovery, automatic persistence, or partial-success result.
+- Cancellation is cooperative, not forcibly interruptible user code. There is no anytime querying, pause/resume, checkpoint recovery, automatic persistence, or partial-success result. Opt-in [precision stopping](STOPPING_CRITERIA.md) is available through `runUntilPrecise`; `run` remains fixed-budget.
 - The modern artifact is still a development snapshot. Focused tests and CI do not make the full historical Figaro test suite green; see [remaining migration risks](MIGRATION.md#accepted-workarounds-and-remaining-risk).
 
 ## Verification checkpoint

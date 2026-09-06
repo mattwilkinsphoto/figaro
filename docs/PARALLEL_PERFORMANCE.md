@@ -4,7 +4,7 @@
 
 This stage adds an opt-in, blocking importance sampler that owns a bounded thread pool, a separate model universe per worker, and a separate random stream per worker. It exists because the older parallel sampler shares Figaro's global random generator: adding cores can increase contention instead of throughput. Scala 3 and sbt 2 alone do not remove that runtime bottleneck.
 
-This milestone originated on `modernize/parallel-performance` with snapshot `6.0.0-modern.3-SNAPSHOT`, based on the CI-green deprecation checkpoint `55adc816`. It is also included in the current `modernize/multi-chain-mcmc` branch and `6.0.0-modern.4-SNAPSHOT`, using Scala 3.9.0, sbt 2.0.8, and JDK 17. Existing sequential and legacy parallel factories remain available. This stage does not make arbitrary Figaro models or all algorithms thread-safe. The newer [multi-chain MCMC guide](MULTI_CHAIN_MCMC.md) describes the separate supported MH runner; historical measurements below still describe the original importance/benchmark milestone.
+This milestone originated on `modernize/parallel-performance` with snapshot `6.0.0-modern.3-SNAPSHOT`, based on the CI-green deprecation checkpoint `55adc816`. It is also included in the current `modernize/multi-chain-mcmc` branch and `6.0.0-modern.5-SNAPSHOT`, using Scala 3.9.0, sbt 2.0.8, and JDK 17. Existing sequential and legacy parallel factories remain available. This stage does not make arbitrary Figaro models or all algorithms thread-safe. The newer [multi-chain MCMC guide](MULTI_CHAIN_MCMC.md) describes the separate supported MH runner; historical measurements below still describe the original importance/benchmark milestone.
 
 ## Should I enable this in my application?
 
@@ -305,6 +305,8 @@ Clean library, test, and example compilation passes with deprecations still trea
 The broader historical selection and unresolved learning-statistics failure are recorded in the [engineering log](../MODERNIZATION.md#stage-7-parallel-monte-carlo-performance). Required CI additionally verifies clean reproducible binary packaging and local publication; check the branch's latest run before merging. Timing checks remain advisory and the stable baseline is not merged by this stage.
 
 ## Related and next work
+
+[Stopping criteria](STOPPING_CRITERIA.md) adds opt-in scalar-mean precision stopping for the multi-chain MH runner, plus separate Gaussian TSPRT and categorical KL utilities. It does not change importance-sampling budgets or establish KL-based MCMC convergence.
 
 `language` supplies model ownership, references, and default-universe lookup; `util` supplies scoped randomness and atomic hash allocation; `algorithm.sampling` supplies importance/MH kernels; `algorithm.sampling.parallel` coordinates workers and weight aggregation; `FigaroExamples` supplies runnable demonstrations and the benchmark. The [build guide](BUILDING.md) lists verification commands.
 
