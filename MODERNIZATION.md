@@ -336,3 +336,35 @@ three vector workflows and four legacy anytime tests pass locally. The benchmark
 checked data and cross-revision equality join the CI gates. The previous branch's CI
 failed in the legacy anytime step despite passing vector/documentation checks; local
 success does not diagnose or resolve that remote failure. No gates are removed or weakened.
+
+## Stage 20: fixed-work allocation and GC profile
+
+Branch: `modernize/vector-allocation-profile`, based on `0e2456d8`. The previous
+parallel-diagnostic branch's [required CI passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34055899573).
+The production library, snapshot modern.10, public library API, estimator, defaults and
+toolchain remain unchanged. An example-only JDK Flight Recorder wrapper and standard-library
+report validator capture a fixed workload with explicit recording ownership and sanitized
+aggregates; raw recordings are ignored by Git and remain local. See the
+[protocol, complete datasets, API and findings](docs/VECTOR_ALLOCATION_PROFILE.md).
+
+Protocol commit `3b267dfc` precedes all 252 full-grid profiled runs. Every non-timing
+benchmark result matches the preceding unprofiled checkpoint. There are 30117 allocation
+samples, 5857 Java execution samples, zero reported lost bytes and a 105.226-second event
+span. Diagnostics represent 39.25% of allocation weight and 84.09% of Java execution
+samples; boxed doubles dominate diagnostic allocations. Mean/variance reduction sites
+represent about 15% of both totals. FFT/complex conversions and rank sorting are other
+material candidates. Sampler callback attribution includes benchmark density code.
+
+GC reports 586 collections and 1.674 seconds of summed pauses (1.59% of event span),
+with a longest pause of 17.905 ms. These are not total collector CPU cost, exact allocation
+accounting, process RSS or proof of memory-bandwidth saturation. Direct DRAM/cache/NUMA
+counter measurement remains unavailable. The next proposed experiment is primitive
+diagnostic reductions preserving existing arithmetic/ordering/cancellation, followed by
+unchanged-trace validation, profiling and independent unprofiled measurement. No new
+performance gain or reliability improvement is claimed by this profiling checkpoint.
+
+Compilation, all 150 modernization regressions, 41 documentation/report-tool tests,
+the 108-run profiling smoke grid, complete checked datasets, reference freshness and
+local links pass. An existing recording is protected by exclusive creation and a verified
+unchanged SHA-256 on attempted reuse. CI adds profiler smoke/data-validation gates;
+raw recordings and local access details are not committed.

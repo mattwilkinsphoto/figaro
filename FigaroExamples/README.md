@@ -109,6 +109,14 @@ This compares Figaro's actual fixed block sampler with standalone immutable-vect
 
 ## Higher-dimensional validation (experimental)
 
+`VectorSamplingProfile.main(args: Array[String]): Unit` records the unchanged full vector
+benchmark with JDK Flight Recorder and emits sanitized profile aggregates. Supply a new
+JFR path, optional repetitions (5), draws (4000), warm-up (500), and optional Windows
+PowerShell 7 ACL script. Example: `VectorSamplingProfile.main(Array("profile.jfr", "1", "100", "20"))`.
+Existing output and invalid arguments fail. See the [full argument/output contract,
+three workflows and limitations](../docs/VECTOR_ALLOCATION_PROFILE.md). Raw recordings
+are ignored by Git and profiling is never enabled by a library sampler.
+
 `VectorSamplingPerformance.main(args: Array[String]): Unit` accepts measured repetitions
 (default 5, 1-100), draws per chain (4000, 4-100000), and discarded warm-up transitions
 (500, 0-100000). It emits quoted CSV for the fixed six-fixture, two-method, three-worker

@@ -1,5 +1,9 @@
 # Bounded parallel coordinate diagnostics
 
+Follow-up: the [allocation/GC profile](VECTOR_ALLOCATION_PROFILE.md) now identifies
+primitive diagnostic reductions as the next candidate. It introduces no further production
+optimization and does not establish hardware memory-bandwidth saturation.
+
 ## Overview
 
 `MultiChainVectorSliceSampler` now uses its existing worker allowance for coordinate

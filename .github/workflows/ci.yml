@@ -70,6 +70,8 @@ jobs:
           python3 -B tools/summarize_high_dimensional.py docs/sampling-high-dimensional-results.csv --repetitions 20 --cap 300000
           python3 -B tools/summarize_vector_performance.py docs/vector-sampling-performance-results.csv --repetitions 5
           python3 -B tools/summarize_vector_performance.py docs/parallel-vector-diagnostics-results.csv --repetitions 5 --baseline docs/vector-sampling-performance-results.csv
+          python3 -B tools/summarize_vector_profile.py docs/vector-allocation-profile-results.csv
+          python3 -B tools/summarize_vector_performance.py docs/vector-profile-benchmark-results.csv --repetitions 5 --baseline docs/parallel-vector-diagnostics-results.csv
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 
@@ -81,6 +83,9 @@ jobs:
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.MultiChainVectorSamplingExample"
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.VectorSamplingPerformance 1 100 20" > "$RUNNER_TEMP/vector-performance-smoke.log"
           python3 -B tools/summarize_vector_performance.py "$RUNNER_TEMP/vector-performance-smoke.log" --repetitions 1 --draws 100 --warm-up 20
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.VectorSamplingProfile $RUNNER_TEMP/vector-profile.jfr 1 100 20" > "$RUNNER_TEMP/vector-profile-smoke.log"
+          python3 -B tools/summarize_vector_performance.py "$RUNNER_TEMP/vector-profile-smoke.log" --repetitions 1 --draws 100 --warm-up 20
+          python3 -B tools/summarize_vector_profile.py "$RUNNER_TEMP/vector-profile-smoke.log"
 
       - name: Run deterministic modernization regressions
         run: >-
