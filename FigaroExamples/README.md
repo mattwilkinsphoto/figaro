@@ -116,6 +116,8 @@ grid, including two JVM warm-up rounds. Invalid arguments or worker-dependent ou
 throw; runtime failures become explicit rows and interruption aborts.
 Example: `VectorSamplingPerformance.main(Array("1", "100", "20"))`.
 See the [protocol, metrics and results](../docs/VECTOR_SAMPLING_PERFORMANCE.md).
+The same entry point now exercises [bounded parallel coordinate diagnostics](../docs/PARALLEL_VECTOR_DIAGNOSTICS.md).
+Use the summary tool's `--baseline` option for a complete matching-trace cross-revision comparison.
 
 `MultiChainVectorSamplingExample.main(args: Array[String]): Unit` accepts an empty
 array and runs bounded Gaussian chains, capped positive-target chains, and derived-event

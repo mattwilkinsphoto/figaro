@@ -1,7 +1,8 @@
 # Bounded multi-chain continuous-vector sampling
 
 For measured worker scaling, worst-coordinate ESS/s, and diagnostic overhead, see the
-[fixed-trace performance study](VECTOR_SAMPLING_PERFORMANCE.md). The API below is unchanged.
+[baseline study](VECTOR_SAMPLING_PERFORMANCE.md) and the subsequent
+[parallel diagnostic implementation](PARALLEL_VECTOR_DIAGNOSTICS.md). Public signatures are unchanged.
 
 ## Overview: what changed and when to enable it
 
@@ -21,11 +22,12 @@ The vector API still requires a complete deterministic log density and does not 
 `Universe`, `Element`, or `observe()` calls. Existing graph inference and stopping policies
 are unchanged. This wrapper does not fix the [known exploration failures](SAMPLING_HIGH_DIMENSIONAL.md).
 
-`chains` controls independent traces. `parallelism` controls how many chains may execute
-simultaneously. Four chains and two workers means all four chains run, two at a time;
-it does not halve the per-chain budget. Increasing workers can reduce sampling time on
-expensive independent targets, but serial model construction, diagnostics, allocation,
-and CPU contention limit the gain. This milestone makes no measured speedup claim.
+`chains` controls independent traces. `parallelism` bounds both sampling workers and
+subsequent coordinate-diagnostic workers. Four chains and two workers means all four
+chains run, two at a time; then at most two coordinates are summarized concurrently.
+It does not halve the per-chain budget. Sampling and diagnostic pools never overlap.
+Serial model construction, allocation, memory bandwidth and CPU contention still limit
+gains; use the measured comparisons linked above rather than assuming linear speedup.
 
 ## Quick start (three steps)
 
@@ -78,8 +80,9 @@ The quick start is a complete example. Invalid top-level arguments throw
 `ChainFailure` with `chainIndex` and original `getCause`. A failure cancels siblings and
 does not return partial success. A worker-thrown `InterruptedException` is a chain
 failure; interruption of the caller or serial factory throws `InterruptedException`
-and preserves/restores the caller's flag. Diagnostics run on the caller after worker
-shutdown; unexpected diagnostic errors propagate, never produce fabricated summaries.
+and preserves/restores the caller's flag. Diagnostics run after sampling-worker shutdown,
+using a separate bounded pool (or the caller when only one diagnostic worker is allowed).
+Unexpected diagnostic errors propagate, never produce fabricated summaries.
 
 ### Configuration constructor and fields
 
@@ -87,15 +90,16 @@ shutdown; unexpected diagnostic errors propagate, never produce fabricated summa
 | --- | --- | --- |
 | `sampler: VS.Config` | Required | Method, requested draws, warm-up, evaluation/search limits per chain; `seed` is the root |
 | `chains: Int` | 4 | At least two independent chains |
-| `parallelism: Int` | 4 | Positive maximum worker count; actual pool size is `min(chains, parallelism)` |
+| `parallelism: Int` | 4 | Positive worker limit: sampling uses `min(chains, parallelism)`; subsequent diagnostics use `min(dimension, chains, parallelism)` |
 | `maxStoredValues: Long` | 40000000 | Positive cap on `chains * requested draws * dimension`, checked before sampling |
-| `shutdownTimeoutMillis: Long` | 30000 | 1-30000 ms for executor termination and thread joins together; **not a sampling timeout** |
+| `shutdownTimeoutMillis: Long` | 30000 | 1-30000 ms for each pool's executor termination and thread joins together; **not a run timeout** |
 
 Example: `MC.Config(VS.Config(VS.Method.Quantile, draws = 1000), parallelism = 2)`.
 `config.copy(parallelism = 1)` returns a revalidated configuration for serial scheduling.
 Both aggregate and underlying per-chain storage limits apply. Neither is a total heap
 bound; immutable-vector overhead, diagnostics, temporary arrays, callback allocations,
-and factory resources use additional memory. All requested traces remain stored.
+and factory resources use additional memory. Concurrent diagnostics multiply coordinate
+scratch space by their worker count. All requested traces remain stored.
 
 ### Model and output constructors/fields
 
@@ -205,8 +209,9 @@ adaptive stopping loop. Repeatedly restarting short chains is not a continuation
   Do not close resources still used by such a callback until you know it has exited.
 - The shutdown budget starts during cleanup, not when sampling starts. It cannot time out
   an indefinitely blocked serial factory or density callback while the caller remains
-  waiting; cancellation must come from the caller. Diagnostic calculations run serially,
-  with interruption checks between coordinates and before/after each summary computation.
+  waiting; cancellation must come from the caller. Diagnostic calculations now check
+  interruption between stages and within rank/ESS loops as well as between coordinates.
+  Sorting, array operations and a single FFT call remain non-preemptible.
 - Coordinate ordering/dimension must agree across chains, but the runner cannot verify
   equivalent posterior semantics. More threads cannot establish mode discovery or cure
   the existing mixture/curvature undercoverage problems.

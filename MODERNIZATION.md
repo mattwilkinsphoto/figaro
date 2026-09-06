@@ -308,3 +308,31 @@ Branch: `modernize/vector-sampling-performance`, based on `92e3b646`; snapshot m
 Four-worker end-to-end gains range from 1.04x on cheap Gaussian GPSS to 2.18x on dense-likelihood quantile sampling. The latter's sampling phase improves 3.74x; serial diagnostics limit total gain. Four-worker Gaussian GPSS spends about 88-89% of elapsed time in diagnostics. All target errors and warnings remain visible: three quantile mixture rounds have R-hat below 1.001 and no coordinate warnings while coordinate mean error is about 4.50. Apparent ESS/s is not reliable evidence of correct global exploration in those cases.
 
 The study adds complete-record/fingerprint/phase validation, four report-tool tests, a timing-partition regression, and a CI smoke grid. All 144 modernization regressions and 35 documentation/report-tool tests pass locally. Bounded coordinate-diagnostic parallelism is the next recommended performance milestone; it must preserve exact statistics and lifecycle guarantees. This checkpoint introduces no performance optimization or default change.
+
+## Stage 19: bounded parallel coordinate diagnostics
+
+Branch: `modernize/parallel-vector-diagnostics`, based on `b4d26d97`; snapshot modern.10,
+public signatures/default values, kernels and toolchain remain unchanged. The existing
+vector runner's `parallelism` now also bounds coordinate diagnostics after sampling
+workers exit: at most `min(dimension, chains, parallelism)` scratch owners, with one
+task per worker rather than per coordinate. One worker keeps diagnostics on the caller.
+Independent summaries retain exact coordinate order, aligned prefixes and warnings.
+Cleanup joins owned workers; failures cancel siblings without returning partial success.
+Scalar diagnostic calculations now check interruption between stages and in rank/ESS loops.
+See [usage, lifecycle, memory tradeoffs and results](docs/PARALLEL_VECTOR_DIAGNOSTICS.md).
+
+Implementation/protocol commit `829b36e5` precedes the unchanged 252-run grid. Every
+non-timing field and trace/diagnostic fingerprint matches the baseline. Four-worker
+diagnostic speedups are 2.12-2.57x and end-to-end gains over the old four-worker runner
+are 1.28-2.21x. Dense-likelihood quantile now scales 3.26x from one to four workers.
+Separate JVM invocations and uncontrolled desktop/GC conditions limit causal attribution;
+the one-worker positive quantile timing regression is retained and explicitly reported.
+Faster summaries do not repair the unchanged mixture/mixing counterexamples. Allocation
+and memory-bandwidth profiling, not further unmeasured worker increases, is the next
+performance investigation.
+
+All 150 modernization tests, 37 documentation/report-tool tests, 108 smoke-grid runs,
+three vector workflows and four legacy anytime tests pass locally. The benchmark's
+checked data and cross-revision equality join the CI gates. The previous branch's CI
+failed in the legacy anytime step despite passing vector/documentation checks; local
+success does not diagnose or resolve that remote failure. No gates are removed or weakened.

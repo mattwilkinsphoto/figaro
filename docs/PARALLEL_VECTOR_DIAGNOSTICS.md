@@ -23,7 +23,59 @@ The baseline and optimized measurements use separate JVM invocations, not interl
 A/B trials. Same seeds pair work/statistics, not OS load or GC state; small timing
 differences are not reliable rankings. The benchmark is not a memory profiler.
 
-Results will be added after correctness checks and the fixed-grid measurement.
+Protocol and implementation were committed at `829b36e5` before measurement.
+
+## Results: faster diagnostics, identical statistics
+
+On 6 September 2026 all **252 runs completed** (180 measured plus 72 JVM warm-ups),
+with zero failed/incomplete cases. Every non-timing field matched the baseline, including
+warm-up fingerprints, all traces, evaluation accounting, summaries and warnings. The
+[complete new CSV](parallel-vector-diagnostics-results.csv) preserves all rounds; the
+[baseline CSV](vector-sampling-performance-results.csv) is unchanged.
+
+Both measurements used an AMD Ryzen 9 9950X (16 cores / 32 logical processors), Windows
+11 Pro, Temurin JDK 17.0.4, Scala 3.9.0 and sbt 2.0.8, with 1 GiB initial and 6 GiB
+maximum heap. Each study used one sbt JVM, with no other local builds/tests launched
+alongside it. OS/background activity, affinity and GC state were not controlled.
+The optimized measured grid consumed the same 156590286 density evaluations.
+
+Times below are medians. Gains are medians of paired per-round ratios, not ratios of
+the displayed median times. Old/new columns both use four workers; the final column
+compares one and four workers within the new implementation.
+
+| Fixture / method | Old 4-worker ms | New 4-worker ms | Total gain | Diagnostic gain | New 1-to-4 worker gain |
+| --- | --- | --- | --- | --- | --- |
+| Gaussian 8D / GPSS | 157.25 | 85.36 | 1.87x | 2.12x | 1.87x |
+| Gaussian 8D / Quantile | 154.04 | 76.15 | 2.04x | 2.44x | 2.12x |
+| Gaussian 32D / GPSS | 576.11 | 261.10 | 2.21x | 2.57x | 2.20x |
+| Gaussian 32D / Quantile | 829.82 | 526.68 | 1.58x | 2.48x | 1.78x |
+| Correlated 32D / GPSS | 623.13 | 342.15 | 1.81x | 2.40x | 2.02x |
+| Correlated 32D / Quantile | 1331.46 | 1047.98 | 1.28x | 2.41x | 1.70x |
+| Positive 32D / GPSS | 607.17 | 310.50 | 1.93x | 2.44x | 2.24x |
+| Positive 32D / Quantile | 693.94 | 420.71 | 1.64x | 2.44x | 2.82x |
+| Dense likelihood 8D / GPSS | 150.47 | 77.39 | 1.94x | 2.45x | 2.60x |
+| Dense likelihood 8D / Quantile | 230.94 | 156.07 | 1.48x | 2.46x | 3.26x |
+| Mixture 8D / GPSS | 166.42 | 95.03 | 1.76x | 2.45x | 2.03x |
+| Mixture 8D / Quantile | 209.37 | 145.80 | 1.44x | 2.24x | 2.08x |
+
+The dense-likelihood quantile case now realizes 3.26x end-to-end scaling from one to
+four workers, rather than the baseline study's 2.18x. Gaussian 32D GPSS improves from
+576.11 to 261.10 ms at four workers; its median worst-coordinate mean ESS/s rises from
+25849 to 57195, with unchanged estimates and diagnostics. Diagnostic time still accounts
+for 76.52% of that optimized run. Allocation/GC and memory-bandwidth profiling are the
+next measurement, not a claim that their individual costs have already been identified.
+
+**Not every timing improves.** For example, one-worker positive-target quantile median
+time rises from 925.73 to 1188.04 ms between studies even though its seeded work is
+identical. These separate-JVM data cannot isolate the cause or certify absence of serial
+regressions. Four-worker gains above do not imply a universal improvement at every
+worker count, small trace length, dimension or memory limit. All worker-level data and
+CPU/GC counters remain in the CSV and standard summary output.
+
+The problematic statistical results are unchanged too: quantile mixture rounds 2-4
+still show no coordinate warnings, maximum R-hat below 1.001 and mean error about 4.50.
+Higher apparent ESS/s for those runs is **not** evidence of accurate mode weights or
+convergence. Correlated and positive-target GPSS warning cases were not excluded.
 
 ## Quick start (three steps)
 
@@ -128,3 +180,24 @@ Failed/incomplete paired cases receive no speedup estimate. All rounds remain pr
   [scalar diagnostics and MH](MULTI_CHAIN_MCMC.md),
   [diagnostic reliability](MCMC_RELIABILITY.md) and the
   [baseline study](VECTOR_SAMPLING_PERFORMANCE.md).
+
+## Verification checkpoint
+
+All 150 modernization regressions pass, including six new coordinate-diagnostic groups:
+exact odd/tied/constant/extreme summaries, bounded execution and ordering, failure with
+sibling cancellation, caller interruption, scalar/serial pre-interruption, and bounded
+shutdown failure without masking the primary error. Existing kernel, alignment, seed,
+nested-run and scalar diagnostic reference tests remain required.
+
+Compilation, Scaladoc, all three vector example workflows, the 108-run small benchmark
+grid, 25 report-tool tests and 12 documentation-tool tests pass. The full new dataset
+matches all 252 baseline records in every non-timing field. CI validates both datasets
+and cross-revision identity, with no machine-dependent speed threshold. Public-method
+inventory remains 11321 entries; local links and generated-reference freshness are checked.
+
+The previous checkpoint's [CI run](https://github.com/mattwilkinsphoto/figaro/actions/runs/34054229083)
+passed vector and documentation gates but failed the legacy anytime-lifecycle step.
+All four tests in that step pass locally on this branch. Detailed remote logs were
+unavailable (HTTP 403); this does not establish its cause or resolve the Linux failure.
+No legacy test, tolerance or gate was weakened. This is not a full historical-suite,
+packaging/publication or final CI-success claim.

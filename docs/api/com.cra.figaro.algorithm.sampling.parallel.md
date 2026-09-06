@@ -69,7 +69,7 @@ Parameters, list 1: `` chains: Seq[Seq[Double]] ``.
 
 Returns: `` Summary ``.
 
-Source contract/attributes: Summarize chains without concatenating away their order or identity. Value parameters chains at least two equal-length chains with at least four finite draws each Attributes Returns scalar summary; odd-length chains lose their middle draw only for split diagnostics Throws IllegalArgumentException for invalid dimensions or non-finite input Example McmcDiagnostics.summarize(Vector(Vector(1.0, 2.0, 1.0, 3.0), Vector(2.0, 1.0, 3.0, 2.0)))
+Source contract/attributes: Summarize chains without concatenating away their order or identity. Value parameters chains at least two equal-length chains with at least four finite draws each Attributes Returns scalar summary; odd-length chains lose their middle draw only for split diagnostics Throws IllegalArgumentException for invalid dimensions or non-finite input InterruptedException when interrupted; the interrupt flag is not cleared Example McmcDiagnostics.summarize(Vector(Vector(1.0, 2.0, 1.0, 3.0), Vector(2.0, 1.0, 3.0, 2.0)))
 
 Invocation template:
 

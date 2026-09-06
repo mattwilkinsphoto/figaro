@@ -69,6 +69,7 @@ jobs:
           python3 -B tools/summarize_sampling_budget.py docs/sampling-budget-results.csv --repetitions 30 --cap 100000
           python3 -B tools/summarize_high_dimensional.py docs/sampling-high-dimensional-results.csv --repetitions 20 --cap 300000
           python3 -B tools/summarize_vector_performance.py docs/vector-sampling-performance-results.csv --repetitions 5
+          python3 -B tools/summarize_vector_performance.py docs/parallel-vector-diagnostics-results.csv --repetitions 5 --baseline docs/vector-sampling-performance-results.csv
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 

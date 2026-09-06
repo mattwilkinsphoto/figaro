@@ -1,5 +1,18 @@
 # Migrating to Scala 3 and sbt 2
 
+## Parallel coordinate diagnostics follow-up
+
+`modernize/parallel-vector-diagnostics` retains snapshot `6.0.0-modern.10-SNAPSHOT`
+and all public signatures/default values. Rebuild to use the changed scheduling:
+`MultiChainVectorSliceSampler.Config.parallelism` now also bounds coordinate diagnostics
+after the sampling pool exits. Existing parallel calls automatically use this allowance;
+`parallelism = 1` restores serial diagnostic scheduling. Temporary diagnostic memory can
+increase with worker count; `maxStoredValues` is not a heap limit. Seeds, traces, summaries,
+warning order and aligned-prefix rules are unchanged. Scalar `McmcDiagnostics.summarize`
+now honors interruption between stages and within rank/ESS loops without clearing the
+flag. No graph thread-safety, estimator, dependency or toolchain change is implied.
+See [execution contracts and measured comparisons](PARALLEL_VECTOR_DIAGNOSTICS.md).
+
 ## Multi-chain continuous-vector follow-up
 
 `modernize/multi-chain-vector-sampling` uses `6.0.0-modern.10-SNAPSHOT`. The additive

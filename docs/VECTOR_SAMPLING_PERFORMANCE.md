@@ -1,5 +1,9 @@
 # Multi-chain vector scaling study
 
+This is the preserved **serial-diagnostics baseline**. The subsequent implementation and
+matching-trace results are in [bounded parallel diagnostics](PARALLEL_VECTOR_DIAGNOSTICS.md).
+The benchmark source now exercises that newer scheduling when run on the follow-up branch.
+
 ## Outcome: optimize diagnostics next, not just worker count
 
 The 6 September 2026 study completed all **252 runs** (180 measured plus 72 JVM warm-ups),
