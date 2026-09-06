@@ -65,6 +65,7 @@ jobs:
           python3 -B -m unittest discover -s tools -p 'test_summarize*.py'
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
           python3 -B tools/summarize_reliability.py docs/mcmc-reliability-results.csv --repetitions 60 --max-draws 48000
+          python3 -B tools/summarize_sampling_research.py docs/sampling-research-results.csv --repetitions 30 --draws 12000
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 
@@ -97,6 +98,12 @@ jobs:
           sbt "examples / Compile / runMain com.cra.figaro.example.ProposalCalibrationBenchmark 1 2000 2 6000"
           sbt "examples / Compile / runMain com.cra.figaro.example.BlockedProposalExample"
           sbt "examples / Compile / runMain com.cra.figaro.example.BlockedProposalBenchmark 2 4000 2"
+
+      - name: Verify isolated sampling research kernels and complete smoke report
+        run: |
+          sbt "examples / Compile / runMain com.cra.figaro.example.SamplingResearchExample check"
+          sbt "examples / Compile / runMain com.cra.figaro.example.SamplingResearchExample 1 2000" > "$RUNNER_TEMP/sampling-research-smoke.log"
+          python3 -B tools/summarize_sampling_research.py "$RUNNER_TEMP/sampling-research-smoke.log" --repetitions 1 --draws 2000
 
       - name: Exercise representative stopping models and trapped-chain control
         # Smoke/lifecycle check only; full repeated-seed evidence is documented separately.

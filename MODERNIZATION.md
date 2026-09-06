@@ -252,3 +252,11 @@ The [60-seed paired audit](docs/MCMC_RELIABILITY_VALIDATION.md) compares six str
 The safeguard improves fixed-prefix widths but does not solve hard-target exploration or selected-stop coverage. In particular, only 5/34 default-proposal successes and 18/54 joint-prior successes jointly covered all five truths under the new rule. Those limitations remain explicit in the user guide; this milestone is not general MCMC reliability certification. Geometry-aware proposals/reparameterization and broader stress tests remain follow-on research, not benefits implied by more threads.
 
 All 121 modernization tests passed locally, including eight new reliability regressions. Five new Python summary tests verify complete paired reports, corrupt records, and rejection accounting. CI adds the reliability example, a complete one-seed audit smoke check, checked-data validation, and instrumentation coverage; existing reproducibility/publication gates remain required.
+
+## Stage 13: recent sampling research and isolated prototypes
+
+Branch: `modernize/sampling-research`, based on `0c8732b7`. The production modern.8 library and toolchain are unchanged. The [research report](docs/SAMPLING_RESEARCH.md) screens recent quantile, multiproposal/adaptive elliptical, polar/affine, transport, and RQMC methods, with primary references and implementation boundaries.
+
+Independent Scala example-only prototypes implement uniform MESS and fixed-Cauchy quantile slice sampling, with an M=1 elliptical baseline and actual Figaro Gaussian-block comparator. No upstream sampler code or dependencies were imported. All 450 target/sampler/seed experiments completed: 30 seeds, three analytic targets, five methods, four chains, 12000 retained draws per chain. Quantile sampling improved banana stopped coverage and second-moment error, but required about 5.4 times as many density evaluations as the block comparator. Elliptical methods recovered unequal mode weights, but did not resolve curved-target undercoverage; higher proposal counts were not a consistent cost-normalized improvement.
+
+Kernel controls, complete-data validation, and three report-tool tests are CI-gated. This is a research checkpoint, not a production sampler release or an equal-budget speedup claim. Broader matched-computation validation and graph/lifecycle integration remain separate decisions.
