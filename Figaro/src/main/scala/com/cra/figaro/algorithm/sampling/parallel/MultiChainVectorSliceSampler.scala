@@ -2,7 +2,7 @@ package com.cra.figaro.algorithm.sampling.parallel
 
 import com.cra.figaro.algorithm.sampling.VectorSliceSampler as VS
 import java.util.concurrent.*
-import java.util.concurrent.atomic.AtomicLong
+import java.util.concurrent.atomic.{AtomicInteger, AtomicLong}
 import scala.jdk.CollectionConverters.*
 import scala.util.control.NonFatal
 
@@ -11,7 +11,8 @@ object MultiChainVectorSliceSampler {
   /** Work, scheduling and aggregate storage limits.
     * @param sampler per-chain method/work limits; its seed is the ROOT expanded in chain-index order
     * @param chains number of independent chains, at least two
-    * @param parallelism positive maximum simultaneous chains; does not affect seeds or traces
+    * @param parallelism positive worker limit for chains and subsequent coordinate diagnostics;
+    *                    each phase is also capped by chain count; does not affect seeds or traces
     * @param maxStoredValues positive cap on chains * requested draws * dimension, not total heap use
     * @param shutdownTimeoutMillis worker termination/join budget, 1-30000 milliseconds; not a run timeout
     */
@@ -143,7 +144,8 @@ object MultiChainVectorSliceSampler {
       val diagnostics = if (n < 4) {
         warnings += "Diagnostics unavailable: fewer than four retained draws in at least one chain"
         Vector.empty[McmcDiagnostics.Summary]
-      } else Vector.tabulate(dimension) { j =>
+      } else summarizeCoordinates(dimension, math.min(config.parallelism, config.chains),
+        config.shutdownTimeoutMillis) { j =>
         interrupted()
         val summary = McmcDiagnostics.summarize(chains.map(_.result.samples.take(n).map(_(j))))
         interrupted()
@@ -170,6 +172,70 @@ object MultiChainVectorSliceSampler {
     }
   }
 
+  // Submit only O(workers) tasks, not O(dimension) futures or transposed traces.
+  // Each worker owns one coordinate's scratch space at a time. CompletionService
+  // detects a failed later worker without waiting for an earlier stalled worker.
+  private[figaro] def summarizeCoordinates(dimension: Int, parallelism: Int, timeoutMillis: Long)
+    (summarize: Int => McmcDiagnostics.Summary): Vector[McmcDiagnostics.Summary] = {
+    require(dimension > 0 && parallelism > 0, "Positive coordinate count and parallelism required")
+    require(timeoutMillis > 0 && timeoutMillis <= 30000, "Shutdown budget must be 1-30000 ms")
+    interrupted()
+    val count = math.min(dimension, parallelism)
+    if (count == 1) return Vector.tabulate(dimension) { j =>
+      interrupted()
+      val result = summarize(j)
+      interrupted()
+      result
+    }
+    val threads = new ConcurrentLinkedQueue[Thread]()
+    val runId = runIds.incrementAndGet()
+    val pool = Executors.newFixedThreadPool(count, (task: Runnable) => {
+      val thread = new Thread(task, s"figaro-vector-diagnostics-$runId-${threads.size() + 1}")
+      thread.setDaemon(true)
+      threads.add(thread)
+      thread
+    })
+    val next = new AtomicInteger()
+    val results = new Array[McmcDiagnostics.Summary](dimension)
+    var primary: Throwable = null
+    try {
+      val completed = new ExecutorCompletionService[Unit](pool)
+      for (_ <- 0 until count) {
+        interrupted()
+        completed.submit(new Callable[Unit] {
+          def call(): Unit = {
+            interrupted()
+            var j = next.getAndIncrement()
+            while (j < dimension) {
+              interrupted()
+              results(j) = summarize(j)
+              interrupted()
+              j = next.getAndIncrement()
+            }
+          }
+        })
+      }
+      for (_ <- 0 until count) {
+        interrupted()
+        try completed.take().get() catch { case e: ExecutionException => throw e.getCause }
+      }
+      interrupted()
+      results.toVector
+    } catch {
+      case e: Throwable =>
+        primary = e
+        if (e.isInstanceOf[InterruptedException]) Thread.currentThread().interrupt()
+        throw e
+    } finally {
+      try closePool(pool, threads, timeoutMillis)
+      catch {
+        case cleanup: Throwable =>
+          if (primary == null) throw cleanup
+          else if (primary ne cleanup) primary.addSuppressed(cleanup)
+      }
+    }
+  }
+
   // A signalled executor can finish before its final worker thread exits. Join both.
   // Keep trying until one common deadline despite repeated caller interrupts.
   private def closePool(pool: ExecutorService, threads: ConcurrentLinkedQueue[Thread], millis: Long): Unit = {
@@ -181,7 +247,7 @@ object MultiChainVectorSliceSampler {
         try pool.awaitTermination(math.max(1L, deadline - System.nanoTime()), TimeUnit.NANOSECONDS)
         catch { case _: InterruptedException => wasInterrupted = true }
       }
-      if (!pool.isTerminated) throw new IllegalStateException(s"Vector callbacks did not stop within $millis ms")
+      if (!pool.isTerminated) throw new IllegalStateException(s"Vector workers did not stop within $millis ms")
       threads.asScala.foreach { thread =>
         while (thread.isAlive && deadline - System.nanoTime() > 0) {
           try TimeUnit.NANOSECONDS.timedJoin(thread, math.max(1L, deadline - System.nanoTime()))

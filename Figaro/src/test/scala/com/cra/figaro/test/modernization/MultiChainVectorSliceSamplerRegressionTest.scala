@@ -14,6 +14,131 @@ class MultiChainVectorSliceSamplerRegressionTest extends AnyWordSpec with Matche
   private def model(i: Int, seed: Long): MC.Model = MC.Model(Vector(i + 0.5, -i - 0.5), normal)
 
   "Multi-chain vector sampling" should {
+    "preserve exact coordinate summaries for odd, tied, constant and extreme traces across bounds" in {
+      for (n <- Vector(4, 5, 101)) {
+        val traces = Vector.tabulate(4, n, 9) { (chain, draw, coordinate) =>
+          coordinate % 3 match {
+            case 0 => coordinate.toDouble
+            case 1 => ((chain + draw) % 3 - 1).toDouble
+            case _ => if ((chain + draw) % 2 == 0) 1e300 else -1e300
+          }
+        }
+        def summary(j: Int) = McmcDiagnostics.summarize(traces.map(_.map(_(j))))
+        val expected = Vector.tabulate(9)(summary)
+        for (workers <- Vector(1, 2, 4, 20)) {
+          MC.summarizeCoordinates(9, workers, 5000)(summary) shouldBe expected
+        }
+      }
+    }
+
+    "bound diagnostic scratch owners, restore coordinate order and join every worker" in {
+      val entered = new CountDownLatch(2)
+      val second = new CountDownLatch(1)
+      val active = new AtomicInteger()
+      val maximum = new AtomicInteger()
+      val calls = new ConcurrentLinkedQueue[Int]()
+      val workers = new ConcurrentLinkedQueue[Thread]()
+      val template = McmcDiagnostics.summarize(Vector(Vector(1.0, 2.0, 3.0, 4.0), Vector(2.0, 3.0, 4.0, 5.0)))
+      val actual = MC.summarizeCoordinates(17, 2, 5000) { j =>
+        workers.add(Thread.currentThread())
+        maximum.accumulateAndGet(active.incrementAndGet(), (a, b) => math.max(a, b))
+        try {
+          if (j < 2) {
+            entered.countDown(); require(entered.await(5, TimeUnit.SECONDS))
+            if (j == 0) require(second.await(5, TimeUnit.SECONDS)) else second.countDown()
+          }
+          calls.add(j)
+          template.copy(mean = j.toDouble)
+        } finally active.decrementAndGet()
+      }
+      actual.map(_.mean) shouldBe (0 until 17).map(_.toDouble).toVector
+      calls.asScala.toVector.sorted shouldBe (0 until 17).toVector
+      maximum.get() shouldBe 2
+      workers.asScala.toVector.distinct.size shouldBe 2
+      workers.asScala.foreach(_.isAlive shouldBe false)
+      val caller = Thread.currentThread()
+      MC.summarizeCoordinates(1, 100, 5000) { _ =>
+        Thread.currentThread() shouldBe caller; template
+      } shouldBe Vector(template)
+    }
+
+    "propagate diagnostic failure promptly and cancel and join siblings without partial output" in {
+      val entered = new CountDownLatch(1)
+      val block = new CountDownLatch(1)
+      val workers = new ConcurrentLinkedQueue[Thread]()
+      val sentinel = new IllegalStateException("coordinate failed")
+      val error = intercept[IllegalStateException] {
+        MC.summarizeCoordinates(8, 2, 5000) { j =>
+          workers.add(Thread.currentThread())
+          if (j == 0) { entered.countDown(); block.await(); fail("Should be interrupted") }
+          else { require(entered.await(5, TimeUnit.SECONDS)); throw sentinel }
+        }
+      }
+      error should be theSameInstanceAs sentinel
+      workers.asScala.foreach(_.isAlive shouldBe false)
+    }
+
+    "cancel diagnostic workers on caller interruption and preserve its interrupt flag" in {
+      val entered = new CountDownLatch(2)
+      val block = new CountDownLatch(1)
+      val workers = new ConcurrentLinkedQueue[Thread]()
+      val error = new AtomicReference[Throwable]()
+      val flag = new AtomicReference[Boolean](false)
+      val caller = new Thread(new Runnable {
+        def run(): Unit = try {
+          MC.summarizeCoordinates(8, 2, 5000) { _ =>
+            workers.add(Thread.currentThread()); entered.countDown(); block.await()
+            fail("Should be interrupted")
+          }
+        } catch { case e: Throwable => error.set(e); flag.set(Thread.currentThread().isInterrupted) }
+      })
+      caller.setDaemon(true); caller.start()
+      try {
+        entered.await(5, TimeUnit.SECONDS) shouldBe true
+        caller.interrupt(); caller.join(5000)
+        caller.isAlive shouldBe false
+        error.get() shouldBe a[InterruptedException]
+        flag.get() shouldBe true
+        workers.asScala.foreach(_.isAlive shouldBe false)
+      } finally { block.countDown(); caller.interrupt(); caller.join(5000) }
+    }
+
+    "honor pre-interruption for scalar diagnostics and serial coordinate dispatch" in {
+      try {
+        Thread.currentThread().interrupt()
+        intercept[InterruptedException](McmcDiagnostics.summarize(Vector.fill(2)(Vector(1.0, 2.0, 3.0, 4.0))))
+        intercept[InterruptedException](MC.summarizeCoordinates(8, 1, 5000)(_ => fail("Must not run")))
+        Thread.currentThread().isInterrupted shouldBe true
+      } finally Thread.interrupted()
+    }
+
+    "retain the primary diagnostic error when a sibling exceeds its shutdown budget" in {
+      val entered = new CountDownLatch(1)
+      val release = new CountDownLatch(1)
+      val worker = new AtomicReference[Thread]()
+      val sentinel = new IllegalStateException("diagnostic primary")
+      try {
+        val error = intercept[IllegalStateException] {
+          MC.summarizeCoordinates(8, 2, 100) { j =>
+            if (j == 0) {
+              worker.set(Thread.currentThread()); entered.countDown()
+              var done = false
+              while (!done) {
+                try { release.await(); done = true } catch { case _: InterruptedException => () }
+              }
+              throw new InterruptedException("test release")
+            } else { require(entered.await(5, TimeUnit.SECONDS)); throw sentinel }
+          }
+        }
+        error should be theSameInstanceAs sentinel
+        error.getSuppressed.exists(_.isInstanceOf[IllegalStateException]) shouldBe true
+        worker.get().isAlive shouldBe true
+      } finally {
+        release.countDown()
+        if (worker.get() != null) { worker.get().join(5000); worker.get().isAlive shouldBe false }
+      }
+    }
+
     "partition benchmark time without changing public output or seeded work" in {
       val c = cfg()
       val (measured, times) = MC.measuredRun(c)(model)

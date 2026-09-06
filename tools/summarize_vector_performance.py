@@ -114,6 +114,36 @@ def summarize(records, repetitions):
     print("\nAll measured rounds retained; timing comparisons unavailable if any paired run failed/incomplete. Warm-up rows are validated but not summarized.")
 
 
+def compare(baseline, current, repetitions):
+    """Compare validated full grids, refusing any changed non-timing output."""
+    timing = {"wallSeconds", "constructionSeconds", "samplingSeconds", "diagnosticsSeconds", "cpuSeconds", "gcSeconds"}
+    if baseline.keys() != current.keys() or any(
+        any(baseline[key][field] != current[key][field] for field in FIELDS if field not in timing)
+        for key in current
+    ):
+        raise ValueError("Baseline differs in work, traces, diagnostics, warnings or status")
+    print("\nVerified identical non-timing outputs across revisions, including warm-up rounds.")
+    print("| Fixture / method | Old 4-worker ms | New 4-worker ms | Paired total gain | Paired diagnostic gain | New 1-to-4 worker gain |")
+    print("| --- | --- | --- | --- | --- | --- |")
+    for f, m in itertools.product(FIXTURES, METHODS):
+        old = [baseline[f, m, 4, r] for r in range(repetitions)]
+        new = [current[f, m, 4, r] for r in range(repetitions)]
+        serial = [current[f, m, 1, r] for r in range(repetitions)]
+        cells = ["N/A"] * 5
+        if all(row["status"] == "Complete" for row in old + new + serial):
+            def median(values):
+                return f"{stats.median(values):.2f}" if all(math.isfinite(v) for v in values) else "N/A"
+            def ratios(left, right, field):
+                return median([float(a[field]) / float(b[field]) if float(b[field]) > 0 else math.nan
+                               for a, b in zip(left, right)])
+            cells = [median([1000 * float(x["wallSeconds"]) for x in old]),
+                     median([1000 * float(x["wallSeconds"]) for x in new]),
+                     ratios(old, new, "wallSeconds"), ratios(old, new, "diagnosticsSeconds"),
+                     ratios(serial, new, "wallSeconds")]
+        print(f"| {f} / {m} | " + " | ".join(cells) + " |")
+    print("Separate-revision measurements are not interleaved A/B trials; retain machine/JVM context and all rounds.")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("logs", nargs="+", type=Path)
@@ -122,8 +152,12 @@ def main():
     parser.add_argument("--warm-up", type=int, default=500)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--acl-script", type=Path)
+    parser.add_argument("--baseline", type=Path, help="validated matching full-grid CSV for cross-revision timing comparison")
     args = parser.parse_args()
     records = load([p.read_text(encoding="utf-8-sig") for p in args.logs], args.repetitions, args.draws, args.warm_up)
+    if args.baseline:
+        baseline = load([args.baseline.read_text(encoding="utf-8-sig")], args.repetitions, args.draws, args.warm_up)
+        compare(baseline, records, args.repetitions)
     if args.output:
         with args.output.open("x", encoding="utf-8", newline="") as stream:
             writer = csv.DictWriter(stream, FIELDS, quoting=csv.QUOTE_ALL, lineterminator="\n")

@@ -1,8 +1,9 @@
 import csv
+from contextlib import redirect_stdout
 import io
 import itertools
 import unittest
-from summarize_vector_performance import FIELDS, FIXTURES, METHODS, WORKERS, load
+from summarize_vector_performance import FIELDS, FIXTURES, METHODS, WORKERS, load, compare
 
 
 class VectorPerformanceSummaryTest(unittest.TestCase):
@@ -21,6 +22,31 @@ class VectorPerformanceSummaryTest(unittest.TestCase):
     def test_complete_report(self):
         rows = self.rows()
         self.assertEqual(len(load([self.encode(rows[:50]), self.encode(rows[50:])], 1, 100, 20)), 108)
+
+    def test_cross_revision_comparison(self):
+        rows = self.rows()
+        baseline = load([self.encode(rows)], 1, 100, 20)
+        for row in rows:
+            row.update(wallSeconds="0.5", constructionSeconds="0.05", samplingSeconds="0.25", diagnosticsSeconds="0.2")
+        current = load([self.encode(rows)], 1, 100, 20)
+        output = io.StringIO()
+        with redirect_stdout(output): compare(baseline, current, 1)
+        self.assertIn("| 1000.00 | 500.00 | 2.00 | 2.00 | 1.00 |", output.getvalue())
+        for field in ("fingerprint", "evaluations", "minMeanEss", "warningCoordinates", "status"):
+            changed = {k: dict(v) for k, v in current.items()}
+            changed[next(iter(changed))][field] = "changed"
+            with self.assertRaises(ValueError): compare(baseline, changed, 1)
+
+    def test_cross_revision_failure_has_no_speedup(self):
+        rows = self.rows()
+        for row in rows:
+            row.update(status="Failed", fingerprint="", error="callback", evaluations="-1", alignedDraws="-1", warningCoordinates="-1")
+            for field in ("wallSeconds", "constructionSeconds", "samplingSeconds", "diagnosticsSeconds", "minMeanEss", "minBulkEss", "minTailEss", "maxRHat", "maxMeanError"):
+                row[field] = "NaN"
+        records = load([self.encode(rows)], 1, 100, 20)
+        output = io.StringIO()
+        with redirect_stdout(output): compare(records, records, 1)
+        self.assertIn("| N/A | N/A | N/A | N/A | N/A |", output.getvalue())
 
     def test_missing_duplicate_and_corrupt(self):
         rows = self.rows()

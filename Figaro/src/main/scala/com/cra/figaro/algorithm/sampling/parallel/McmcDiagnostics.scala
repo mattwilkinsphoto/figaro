@@ -5,6 +5,9 @@ import org.apache.commons.math3.transform.{DftNormalization, FastFourierTransfor
 
 /** Diagnostics for equally sized, ordered scalar chains; never a proof of convergence. */
 object McmcDiagnostics {
+  private def interrupted(): Unit =
+    if (Thread.currentThread().isInterrupted) throw new InterruptedException("MCMC diagnostics interrupted")
+
   /** Summary of one scalar observable. Missing diagnostics mean insufficient/degenerate information.
     * @param mean pooled mean, using every supplied draw
     * @param standardDeviation pooled sample standard deviation (not Monte Carlo error)
@@ -23,9 +26,11 @@ object McmcDiagnostics {
     * @param chains at least two equal-length chains with at least four finite draws each
     * @return scalar summary; odd-length chains lose their middle draw only for split diagnostics
     * @throws IllegalArgumentException for invalid dimensions or non-finite input
+    * @throws InterruptedException when interrupted; the interrupt flag is not cleared
     * @example `McmcDiagnostics.summarize(Vector(Vector(1.0, 2.0, 1.0, 3.0), Vector(2.0, 1.0, 3.0, 2.0)))`
     */
   def summarize(chains: Seq[Seq[Double]]): Summary = {
+    interrupted()
     require(chains.size >= 2, "Diagnostics require at least two chains")
     val n = chains.head.size
     require(n >= 4 && chains.forall(_.size == n), "Chains must have equal lengths of at least four")
@@ -43,8 +48,10 @@ object McmcDiagnostics {
     if (n % 2 != 0) warnings += "Middle draw omitted from each odd-length chain for split diagnostics"
     if (raw.exists(x => x.forall(_ == x.head))) warnings += "At least one chain is constant; inspect stuck or deterministic observables"
     val splitRaw = split(raw)
+    interrupted()
     val ranked = rankNormalize(splitRaw)
     val sortedScaled = scaled.sorted
+    interrupted()
     val lowerMedian = sortedScaled((flat.length - 1) / 2)
     val upperMedian = sortedScaled(flat.length / 2)
     // Preserve the exact tie between the two central order statistics. Subtracting
@@ -57,6 +64,7 @@ object McmcDiagnostics {
     val rh = if (rhats.isEmpty) None else Some(rhats.max)
     val bulk = ess(ranked)
     val sorted = flat.sorted
+    interrupted()
     val tails = Vector(0.05, 0.95).map { p =>
       val cut = quantile(sorted, p)
       ess(split(raw.map(_.map(x => if (x <= cut) 1.0 else 0.0))))
@@ -69,6 +77,7 @@ object McmcDiagnostics {
     if (bulk.isEmpty || bulk.exists(_ < 100.0 * raw.length)) warnings += "Bulk ESS unavailable or below 100 per chain"
     if (tail.isEmpty || tail.exists(_ < 100.0 * raw.length)) warnings += "Tail ESS unavailable or below 100 per chain (discrete tails can be constant)"
     if (!sd.isFinite || mcse.isEmpty) warnings += "Standard deviation or mean error is unavailable or outside numeric range"
+    interrupted()
     Summary(center * scale, sd, rh, bulk, tail, meanEss, mcse, warnings.result())
   }
 
@@ -87,18 +96,26 @@ object McmcDiagnostics {
     sorted(lo) * (1 - weight) + sorted(math.min(lo + 1, sorted.length - 1)) * weight
   }
   private def rankNormalize(chains: Array[Array[Double]]): Array[Array[Double]] = {
+    interrupted()
     val values = chains.flatten
     val order = values.indices.toArray.sortBy(values(_))
     val result = new Array[Double](values.length)
     val normal = new NormalDistribution(0, 1)
     var first = 0
     while (first < order.length) {
+      interrupted()
       var end = first + 1
-      while (end < order.length && values(order(end)) == values(order(first))) end += 1
+      while (end < order.length && values(order(end)) == values(order(first))) {
+        if ((end & 1023) == 0) interrupted()
+        end += 1
+      }
       val rank = (first + 1.0 + end) / 2.0
       val score = normal.inverseCumulativeProbability((rank - 0.375) / (values.length + 0.25))
       var index = first
-      while (index < end) { result(order(index)) = score; index += 1 }
+      while (index < end) {
+        if ((index & 1023) == 0) interrupted()
+        result(order(index)) = score; index += 1
+      }
       first = end
     }
     result.grouped(chains.head.length).map(_.toArray).toArray
@@ -114,6 +131,7 @@ object McmcDiagnostics {
 
   /** Biased autocovariances with zero padding, equivalent to sum((x_i-mean)(x_{i+lag}-mean))/N. */
   private[parallel] def autocovariance(values: Array[Double]): Array[Double] = {
+    interrupted()
     var length = 1
     while (length.toLong < 2L * values.length) {
       require(length <= (1 << 28), "Trace too large for FFT diagnostics")
@@ -125,10 +143,14 @@ object McmcDiagnostics {
     while (i < values.length) { centered(i) = values(i) - mean; i += 1 }
     val fft = new FastFourierTransformer(DftNormalization.STANDARD)
     val spectrum = fft.transform(centered, TransformType.FORWARD)
+    interrupted()
     val power = spectrum.map(z => z.multiply(z.conjugate()))
-    fft.transform(power, TransformType.INVERSE).take(values.length).map(_.getReal / values.length)
+    val inverse = fft.transform(power, TransformType.INVERSE)
+    interrupted()
+    inverse.take(values.length).map(_.getReal / values.length)
   }
   private def ess(chains: Array[Array[Double]]): Option[Double] = {
+    interrupted()
     val n = chains.head.length
     if (n < 3) return None
     val covariance = chains.map(autocovariance)
@@ -143,6 +165,7 @@ object McmcDiagnostics {
     var positive = true
     // Geyer's initial positive, then monotone paired autocorrelation sequence.
     while (lag + 1 < n && positive) {
+      if ((lag & 1023) == 0) interrupted()
       val pair = rho(lag) + rho(lag + 1)
       if (pair <= 0.0) positive = false
       else { previous = math.min(previous, pair); sum += previous; lag += 2 }
