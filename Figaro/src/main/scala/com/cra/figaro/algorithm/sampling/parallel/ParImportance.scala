@@ -19,7 +19,7 @@ import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm._
 import com.cra.figaro.language._
 import com.cra.figaro.util.RandomContext
-import java.util.concurrent.{Callable, CancellationException, ExecutionException, ExecutorService, Executors, TimeUnit}
+import java.util.concurrent.{Callable, CancellationException, ConcurrentLinkedQueue, ExecutionException, ExecutorService, Executors, TimeUnit}
 import scala.jdk.CollectionConverters.*
 import scala.util.control.NonFatal
 
@@ -144,12 +144,14 @@ object ParImportance {
     new ParSampler(workers.map(_._1), targets*) with ParOneTime {
       override protected val parAlgs: ParSeq[Importance & OneTimeProbQuerySampler] = workers.map(_._1).par
       private var executor: ExecutorService = null
+      private val poolThreads = new ConcurrentLinkedQueue[Thread]
       private def pool: ExecutorService = {
         if (executor == null || executor.isShutdown) {
           val threadIds = new java.util.concurrent.atomic.AtomicInteger(0)
           executor = Executors.newFixedThreadPool(count, (task: Runnable) => {
             val thread = new Thread(task, s"figaro-importance-worker-${threadIds.incrementAndGet()}")
             thread.setDaemon(true)
+            poolThreads.add(thread)
             thread
           })
         }
@@ -170,9 +172,18 @@ object ParImportance {
       }
       private def closePool(): Unit = {
         if (executor != null) {
+          val deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(30)
           executor.shutdownNow()
           if (!executor.awaitTermination(30, TimeUnit.SECONDS))
             throw new IllegalStateException("Sampling callbacks did not respond to cancellation within 30 seconds")
+          // ThreadPoolExecutor signals termination inside its last worker's exit path.
+          // Join our threads as well: awaitTermination alone can return before Thread.run has exited.
+          poolThreads.asScala.foreach { thread =>
+            val remaining = deadline - System.nanoTime()
+            if (remaining > 0L) TimeUnit.NANOSECONDS.timedJoin(thread, remaining)
+            if (thread.isAlive) throw new IllegalStateException("Sampling worker did not exit within 30 seconds")
+          }
+          poolThreads.clear()
           executor = null
         }
       }
