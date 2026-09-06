@@ -10,6 +10,8 @@ Two recent methods were practical to independently prototype in Scala without ad
 
 **Recommendation:** prioritize quantile slice sampling for a broader, equal-computation validation before integrating a production API. Its fixed Cauchy-reference prototype improved the curved target's error and stopped coverage at equal retained draw counts, but consumed about 5.4 times as many density evaluations. Ordinary elliptical sampling was effective on the separated-mode fixture; increasing its proposal count did not reliably improve cost-normalized performance or curved-target coverage. No production default should change on this evidence.
 
+Follow-up: [matched-budget affine/polar comparison](SAMPLING_BUDGET_VALIDATION.md). It uses new seeds, additional targets, strict evaluation caps, and a standalone Metropolis comparator; the earlier draw-matched results below are preserved.
+
 ## Key research and integration assessment
 
 ### 1. Quantile slice sampling — 2024, revised June 2025

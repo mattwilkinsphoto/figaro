@@ -66,6 +66,7 @@ jobs:
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
           python3 -B tools/summarize_reliability.py docs/mcmc-reliability-results.csv --repetitions 60 --max-draws 48000
           python3 -B tools/summarize_sampling_research.py docs/sampling-research-results.csv --repetitions 30 --draws 12000
+          python3 -B tools/summarize_sampling_budget.py docs/sampling-budget-results.csv --repetitions 30 --cap 100000
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 
@@ -104,6 +105,14 @@ jobs:
           sbt "examples / Compile / runMain com.cra.figaro.example.SamplingResearchExample check"
           sbt "examples / Compile / runMain com.cra.figaro.example.SamplingResearchExample 1 2000" > "$RUNNER_TEMP/sampling-research-smoke.log"
           python3 -B tools/summarize_sampling_research.py "$RUNNER_TEMP/sampling-research-smoke.log" --repetitions 1 --draws 2000
+
+      - name: Verify affine polar kernels and matched-budget accounting
+        # Budget validation is isolated from all production sampler APIs.
+        # Its checked data include every predeclared seed, not only passing precision runs.
+        run: |
+          sbt "examples / Compile / runMain com.cra.figaro.example.SamplingBudgetValidation check"
+          sbt "examples / Compile / runMain com.cra.figaro.example.SamplingBudgetValidation 1 30000" > "$RUNNER_TEMP/sampling-budget-smoke.log"
+          python3 -B tools/summarize_sampling_budget.py "$RUNNER_TEMP/sampling-budget-smoke.log" --repetitions 1 --cap 30000
 
       - name: Exercise representative stopping models and trapped-chain control
         # Smoke/lifecycle check only; full repeated-seed evidence is documented separately.

@@ -103,4 +103,8 @@ The [blocked-proposal guide](../docs/BLOCKED_PROPOSALS.md) has three runnable pa
 
 This compares Figaro's actual fixed block sampler with standalone immutable-vector research kernels; it does not accept arbitrary Figaro graphs. Four chains and 2000 warm-up draws are fixed; full traces are generated before stopped-prefix replay. Density-evaluation counts include full sampling/warm-up even on stopped records. See [research findings, reproduction, and three common workflows](../docs/SAMPLING_RESEARCH.md).
 
+## Matched-budget sampling validation (experimental)
+
+`SamplingBudgetValidation.main(args: Array[String]): Unit` runs `Array("check")` controls, or accepts positive repetitions (30), a per-chain density-evaluation cap (100000, 20000-1000000 and divisible by four), and nonnegative first seed round (0). Example: `SamplingBudgetValidation.main(Array("1", "30000"))`. It returns Unit and prints quoted CSV on five analytic targets and four standalone samplers, including finite-pilot affine GPSS. Invalid arguments throw; numerical/model/search failures become explicit failed records, and interruption aborts. A zero exit code does not imply every experiment passed. The [protocol, full API contract, examples, and limitations](../docs/SAMPLING_BUDGET_VALIDATION.md) explain equal costs, warm-up charges, aligned traces, and selected-stop coverage. No production library API or default changes.
+
 [Library module](../Figaro/README.md) implements the APIs; [build guide](../docs/BUILDING.md) explains tests and documentation generation; [migration guide](../docs/MIGRATION.md) explains changed syntax, dependencies, and remaining risks.

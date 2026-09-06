@@ -229,6 +229,7 @@ object SamplingBudgetValidation {
     val r = new java.util.Random(70921)
     for (target <- targets; affine <- Vector(Affine(), map)) {
       var sums = Vector.fill(5)(0.0)
+      var cross = 0.0
       val total = 30000
       for (_ <- 0 until total) {
         val z = r.nextGaussian(); val e = r.nextGaussian()
@@ -243,10 +244,13 @@ object SamplingBudgetValidation {
         }
         val end = affine.forward(polar(affine.inverse(start), v => target.density(affine.forward(v)), r))
         sums = sums.zip(projection(end, target)).map(_ + _)
+        cross += end(0) * end(1)
       }
       val tolerance = Vector(0.06, 0.06, 0.14, 0.14, 0.015)
       require(sums.indices.forall(i => math.abs(sums(i) / total - target.truths(i)) < tolerance(i)),
         s"Stationarity failed: ${target.name}, $affine, ${sums.map(_ / total)}")
+      require(math.abs(cross / total - (if (target.name == "rotated") 4.495 else 0.0)) < 0.14,
+        "Cross-moment stationarity failed")
     }
     for (method <- methods) {
       val a = chain(targets.head, method, 1234, 30000)
@@ -256,7 +260,17 @@ object SamplingBudgetValidation {
       require(a.pilotCost < a.warmCost && a.warmCost < a.costs.head && a.costs.last <= a.spent)
       val truncated = chain(targets.head, method, 1234, 25000)
       require(truncated.points == a.points.take(a.costs.takeWhile(_ <= 25000).size), "Budget replay mismatch")
+      val tiny = chain(targets.head, method, 1234, 1)
+      require(tiny.spent == 1 && tiny.points.isEmpty && tiny.error.isEmpty, "Tiny cap fabricated a sample")
     }
+    val broken = chain(Target("invalid", _ => Double.NaN, Vector.empty, tail), "gpss", 1, 100)
+    require(broken.error.nonEmpty && broken.points.isEmpty && broken.spent == 1, "Failure was dropped")
+    Thread.currentThread().interrupt()
+    var interrupted = false
+    try chain(targets.head, "gpss", 1, 100)
+    catch { case _: InterruptedException => interrupted = true }
+    finally Thread.interrupted()
+    require(interrupted, "Interruption must propagate, not become an ordinary failed record")
     println("Budget kernel checks passed: stationarity, affine maps, hard caps, replay, failures, reproducibility.")
   }
 
