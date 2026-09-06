@@ -89,7 +89,7 @@ object SamplingResearchExample {
   // Heiner et al., Quantile Slice Sampling (2024, revised 2025), Algorithm 2:
   // https://arxiv.org/html/2407.12608v2. Independent implementation, no package code copied.
   // One fixed-order Gibbs sweep with a Cauchy(0,2) pseudo-target for each conditional.
-  private def quantileSweep(current: Point, rng: java.util.Random, logDensity: Point => Double,
+  private[example] def quantileSweep(current: Point, rng: java.util.Random, logDensity: Point => Double,
     maxTrials: Int = 1000): Point = {
     require(current.nonEmpty && current.forall(_.isFinite) && maxTrials > 0, "Invalid quantile state/budget")
     def logReference(x: Double): Double = -math.log1p(math.pow(x / 2, 2)) // constants cancel
