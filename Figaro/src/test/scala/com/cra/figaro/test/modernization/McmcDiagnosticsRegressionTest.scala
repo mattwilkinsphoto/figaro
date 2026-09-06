@@ -30,6 +30,38 @@ class McmcDiagnosticsRegressionTest extends AnyWordSpec with Matchers {
     split.size.toDouble * n / math.max(1, -1 + 2 * monotone.sum)
   }
   "MCMC diagnostics" should {
+    "match the previous iterator reductions bit for bit without mutating inputs" in {
+      def oldAverage(x: Array[Double]): Double = x.head + x.iterator.map(_ - x.head).sum / x.length
+      def oldVariance(x: Array[Double]): Double = {
+        val mean = oldAverage(x)
+        x.iterator.map(v => (v - mean) * (v - mean)).sum / (x.length - 1)
+      }
+      def bits(x: Double) = java.lang.Double.doubleToLongBits(x)
+      val random = new java.util.Random(673821L)
+      val edges = Vector(Array(0.0), Array(-0.0), Array(-0.0, 0.0, -0.0),
+        Array(1e16, 1.0, -1e16, 1.0), Array(1e-300, -1e-300, java.lang.Double.MIN_VALUE),
+        Array(Double.MaxValue, -Double.MaxValue, 0.0), Array.fill(101)(7.0))
+      val cases = edges ++ (for (n <- Vector(1, 2, 3, 4, 5, 31, 32, 33, 1023, 1024, 1025, 4000);
+        exponent <- Vector(-1022, -500, -10, 0, 10, 500, 1000)) yield {
+          Array.fill(n)(java.lang.Math.scalb(random.nextGaussian(), exponent))
+        })
+      cases.foreach { x =>
+        val before = x.map(java.lang.Double.doubleToRawLongBits)
+        bits(McmcDiagnostics.average(x)) shouldBe bits(oldAverage(x))
+        bits(McmcDiagnostics.variance(x)) shouldBe bits(oldVariance(x))
+        x.map(java.lang.Double.doubleToRawLongBits).toVector shouldBe before.toVector
+      }
+    }
+
+    "preserve cancellation flags in both primitive reductions" in {
+      try {
+        Thread.currentThread().interrupt()
+        intercept[InterruptedException](McmcDiagnostics.average(Array(1.0, 2.0)))
+        intercept[InterruptedException](McmcDiagnostics.variance(Array(1.0, 2.0)))
+        Thread.currentThread().isInterrupted shouldBe true
+      } finally Thread.interrupted()
+    }
+
     "match an independently calculated tied-rank and folded-R-hat fixture" in {
       // Python standard-library statistics.NormalDist.inv_cdf, midranks, and
       // sample variances give rank R-hat=0.9860127788581047 and folded value below.

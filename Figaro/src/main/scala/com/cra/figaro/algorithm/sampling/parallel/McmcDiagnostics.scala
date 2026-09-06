@@ -81,10 +81,33 @@ object McmcDiagnostics {
     Summary(center * scale, sd, rh, bulk, tail, meanEss, mcse, warnings.result())
   }
 
-  private def average(x: Array[Double]): Double = x.head + x.iterator.map(_ - x.head).sum / x.length
-  private def variance(x: Array[Double]): Double = {
+  // Package visibility is for bit-exact regression checks, not an external API.
+  // Match the known-size iterator's left-to-right reduce: seed with the first
+  // transformed value, not zero. Keep the shifted mean and two-pass variance.
+  private[figaro] def average(x: Array[Double]): Double = {
+    interrupted()
+    val origin = x.head
+    var sum = origin - origin
+    var i = 1
+    while (i < x.length) {
+      if ((i & 1023) == 0) interrupted()
+      sum += x(i) - origin
+      i += 1
+    }
+    origin + sum / x.length
+  }
+  private[figaro] def variance(x: Array[Double]): Double = {
     val mean = average(x)
-    x.iterator.map(v => (v - mean) * (v - mean)).sum / (x.length - 1)
+    val first = x.head - mean
+    var sum = first * first
+    var i = 1
+    while (i < x.length) {
+      if ((i & 1023) == 0) interrupted()
+      val delta = x(i) - mean
+      sum += delta * delta
+      i += 1
+    }
+    sum / (x.length - 1)
   }
   private def split(chains: Array[Array[Double]]): Array[Array[Double]] =
     chains.flatMap(x => Array(x.take(x.length / 2), x.takeRight(x.length / 2)))
