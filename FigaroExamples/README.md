@@ -56,6 +56,17 @@ Import `com.cra.figaro.example.{ParallelSamplingExample, SamplingBenchmark}`. Th
 
 Run with `sbt "examples / Compile / runMain com.cra.figaro.example.ParallelSamplingExample"`. The [performance guide](../docs/PARALLEL_PERFORMANCE.md) explains benchmark forking, warm-up, metric limitations, and all three common workflows. This benchmark is diagnostic, not a wall-clock CI gate or a general parallel-MCMC API. It uses HotSpot-compatible management beans and should run in a dedicated JVM, not alongside application models.
 
+## Multi-chain MCMC examples
+
+Import `com.cra.figaro.example.{MultiChainMcmcExample, MultiChainMcmcBenchmark}`. Helpers are private; the public functions are:
+
+| Function | Parameters | Returns / behavior | Example |
+| --- | --- | --- | --- |
+| `MultiChainMcmcExample.main(args: Array[String]): Unit` | Arguments, ignored | Runs a known normal posterior with dispersed starts, prints scalar diagnostics and chain metadata, checks a broad mean bound, and disposes models through the runner | `MultiChainMcmcExample.main(Array.empty)` |
+| `MultiChainMcmcBenchmark.main(args: Array[String]): Unit` | Workload `normal/likelihood/correlated/wide`, draws per chain, positive measured repeats, comma-separated worker counts, chain count; defaults `normal 20000 3 1,2,4 4` | Prints fixed-chain end-to-end timing/CPU/ESS CSV; invalid inputs throw `IllegalArgumentException`, including numeric parsing errors | `MultiChainMcmcBenchmark.main(Array("wide", "20000", "5", "1,2,4", "4"))` |
+
+Run `sbt "examples / Compile / runMain com.cra.figaro.example.MultiChainMcmcExample"`. See the [multi-chain user guide](../docs/MULTI_CHAIN_MCMC.md) for the evidence boundary, trace/diagnostic interpretation, independent-chain ownership, and benchmark metric definitions. The earlier `SamplingBenchmark mh` remains a historical experiment, not an alias for this new API.
+
 ## Gotchas (all examples)
 
 - Use an explicit `runMain` class name. There are many historical entry points; `run` may prompt you to choose one.

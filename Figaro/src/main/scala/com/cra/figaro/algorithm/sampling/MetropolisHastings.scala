@@ -95,7 +95,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
   protected var chainCache: Cache = new MHCache(universe)
 
   /*
-   * We continually update the values of elements while making a proposal. In order to undo it, we must store the old value.cityside austin
+   * We continually update the values of elements while making a proposal. In order to undo it, we must store the old value.
    * We keep track of the improvement in the constraints for the new proposal compared to the original value.
    * We also keep track of which elements do not have their condition satisfied by the new proposal.
    */

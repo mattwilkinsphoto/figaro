@@ -31,14 +31,14 @@ You need JDK 17 and an sbt runner. The repository pins its sbt/compiler/plugin v
 
    ```scala
    scalaVersion := "3.9.0"
-   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.3-SNAPSHOT"
+   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.4-SNAPSHOT"
    ```
 
 3. Compile your application on JDK 17 and use the imports below.
 
 `%%` selects the Scala binary suffix `_3`. Local publication normally uses the user's Ivy local repository; an isolated `sbt.ivy.home` changes that location. Producer and consumer must use the same repository. This snapshot is not promised on Maven Central. An unresolved dependency usually means it was not published into the consumer's repository. For a team/deployment, publish a versioned prerelease to your chosen repository rather than copying source or depending on a workstation path.
 
-Java/Maven consumers use `io.github.mattwilkinsphoto:figaro_3:6.0.0-modern.3-SNAPSHOT` and the POM dependencies. The API is Scala-shaped (functions, contexts, collections); a small Scala facade can provide a simpler Java boundary. A dedicated Java compatibility test has not been performed.
+Java/Maven consumers use `io.github.mattwilkinsphoto:figaro_3:6.0.0-modern.4-SNAPSHOT` and the POM dependencies. The API is Scala-shaped (functions, contexts, collections); a small Scala facade can provide a simpler Java boundary. A dedicated Java compatibility test has not been performed.
 
 Prefer the normal library JAR. The `-fat.jar` bundles non-Scala runtime libraries but deliberately **omits the Scala runtime**, and is not a standalone executable application. Do not put both the thin JAR with its dependencies and the fat JAR on one classpath.
 

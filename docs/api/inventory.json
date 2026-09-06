@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 693,
+  "pages": 703,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -53065,6 +53065,481 @@
       "example": "receiver.variance(target)",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/WeightedSampler.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics.Summary",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcDiagnostics$$Summary.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics.Summary",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcDiagnostics$$Summary.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics",
+      "name": "summarize",
+      "anchor": "summarize-fffff51b",
+      "signature": "def summarize(chains: Seq[Seq[Double]]): Summary",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "chains: Seq[Seq[Double]]"
+          ]
+        }
+      ],
+      "returns": "Summary",
+      "summary": "Summarize chains without concatenating away their order or identity.",
+      "contract": "Summarize chains without concatenating away their order or identity. Value parameters chains at least two equal-length chains with at least four finite draws each Attributes Returns scalar summary; odd-length chains lose their middle draw only for split diagnostics Throws IllegalArgumentException for invalid dimensions or non-finite input Example McmcDiagnostics.summarize(Vector(Vector(1.0, 2.0, 1.0, 3.0), Vector(2.0, 1.0, 3.0, 2.0)))",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics.summarize(chains)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcDiagnostics$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "addSuppressed",
+      "anchor": "addSuppressed-4b8",
+      "signature": "final def addSuppressed(x$0: Throwable): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.addSuppressed(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "fillInStackTrace",
+      "anchor": "fillInStackTrace-26c",
+      "signature": "def fillInStackTrace(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.fillInStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "getCause",
+      "anchor": "getCause-26c",
+      "signature": "def getCause(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getCause()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "getLocalizedMessage",
+      "anchor": "getLocalizedMessage-665",
+      "signature": "def getLocalizedMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getLocalizedMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "getMessage",
+      "anchor": "getMessage-665",
+      "signature": "def getMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "getStackTrace",
+      "anchor": "getStackTrace-fffffa6d",
+      "signature": "def getStackTrace(): Array[StackTraceElement]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[StackTraceElement]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "getSuppressed",
+      "anchor": "getSuppressed-fffff2ce",
+      "signature": "final def getSuppressed(): Array[Throwable]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[Throwable]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getSuppressed()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "initCause",
+      "anchor": "initCause-fffff080",
+      "signature": "def initCause(x$0: Throwable): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.initCause(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff230",
+      "signature": "def printStackTrace(x$0: PrintWriter): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintWriter"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff0fd",
+      "signature": "def printStackTrace(x$0: PrintStream): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintStream"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-94c",
+      "signature": "def printStackTrace(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "setStackTrace",
+      "anchor": "setStackTrace-f79",
+      "signature": "def setStackTrace(x$0: Array[StackTraceElement]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Array[StackTraceElement]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.setStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainFailure",
+      "name": "toString",
+      "anchor": "toString-665",
+      "signature": "def toString(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "Returns a string representation of the object.",
+      "contract": "Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable",
+      "example": "receiver.toString()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainFailure.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainResult",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.ChainResult",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$ChainResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.Model",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$Model.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.Model",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$Model.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.Observable",
+      "name": "apply",
+      "anchor": "apply-fffff932",
+      "signature": "def apply[T](name: String, target: Element[T])(project: T => Double): Observable",
+      "type_parameters": [
+        "T"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "name: String",
+            "target: Element[T]"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "project: T => Double"
+          ]
+        }
+      ],
+      "returns": "Observable",
+      "summary": "Create a scalar query in the supplied chain universe.",
+      "contract": "Create a scalar query in the supplied chain universe. Value parameters name unique nonempty result key, identical across chains project pure outcome-to-finite-Double mapping, e.g. a Boolean indicator target chain-owned element Attributes Returns an observable definition, evaluated after each retained transition Example Observable(\"positive\", x)(value => if (value > 0) 1.0 else 0.0)",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.Observable.apply[T](name, target)(project)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$Observable$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings",
+      "name": "run",
+      "anchor": "run-fffff617",
+      "signature": "def run(config: Config)(build: (Universe, Int) => Model): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "build: (Universe, Int) => Model"
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Construct models serially, run chains on a private bounded pool, and return detached results.",
+      "contract": "Construct models serially, run chains on a private bounded pool, and return detached results. Value parameters build creates equivalent independent models in the supplied universe; index allows dispersed initial regions config work, scheduling, seed, and storage configuration Attributes Returns complete traces and diagnostics; no partial success result is returned Throws ChainFailure for a model/worker failure; other workers are interrupted InterruptedException when the calling thread is interrupted; its interrupt flag is restored java.lang.IllegalStateException if callbacks prevent worker shutdown within 30 seconds Example MultiChainMetropolisHastings.run(Config()) { (u, i) => Model(Vector(Observable(\"coin\", Flip(0.3)(using \"\", u))(b => if (b) 1.0 else 0.0))) }",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.run(config)(build)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.parallel.ParAnytime",

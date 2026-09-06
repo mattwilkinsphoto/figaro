@@ -33,7 +33,7 @@ Outputs are under `target/out/jvm/scala-3.9.0/figaro/`:
 
 | Artifact suffix | Purpose |
 | --- | --- |
-| `figaro_3-6.0.0-modern.3-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
+| `figaro_3-6.0.0-modern.4-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
 | `-sources.jar` | Library Scala sources |
 | `-javadoc.jar` | Generated Scala 3 API documentation |
 | `-fat.jar` | Library plus assembled dependencies, **excluding Scala runtime**; not a `java -jar` application |
@@ -76,6 +76,10 @@ The clean, cache-bypassed coverage build is intentional: a warmed CI run restore
 ## Parallel-performance checks
 
 Run `sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.ParallelPerformanceRegressionTest"` for RNG isolation, worker ownership, exact budget allocation, weighting, failure cleanup, and cooperative cancellation. Run `sbt "examples / Compile / runMain com.cra.figaro.example.ParallelSamplingExample"` for the user-facing example. The [benchmark guide](PARALLEL_PERFORMANCE.md#3-measure-before-choosing-a-worker-count) supplies reproducible performance commands; timings do not gate CI.
+
+## Multi-chain MCMC checks
+
+Run `sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest"` for posterior correctness, retained rejection states, dynamic ownership, worker-count seed independence, initialization limits, failure/cancellation cleanup, and independently checked diagnostics. Run `sbt "examples / Compile / runMain com.cra.figaro.example.MultiChainMcmcExample"` for the complete user example. The [multi-chain benchmark](MULTI_CHAIN_MCMC.md#performance-and-resource-planning) keeps chain count and sampling work fixed while varying concurrency. Timings are diagnostic, never a CI accuracy gate.
 
 ## Build helper reference
 

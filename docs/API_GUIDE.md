@@ -64,6 +64,8 @@ Observation, intervention, and direct state assignment have different meanings. 
 
 For bounded parallel importance sampling and synchronous seed scopes, see the [parallel API reference](PARALLEL_PERFORMANCE.md#api-reference). It covers `ParImportance.seeded`, `withRandomSeed`, and the scoped default-universe accessors, including parameter/return contracts and runnable examples.
 
+For independent MH chains with ordered scalar traces and R-hat/ESS/MCSE, see the [multi-chain MCMC API](MULTI_CHAIN_MCMC.md#api-reference). It has a factory-based ownership contract and automatically disposes its models; it is not a probability-query algorithm and does not support `observe()` in this milestone.
+
 Imports: `algorithm.factored.VariableElimination` and `algorithm.sampling.Importance`.
 
 | Entry point | Parameters | Returns | Example |

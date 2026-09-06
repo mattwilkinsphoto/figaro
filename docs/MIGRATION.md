@@ -1,6 +1,16 @@
 # Migrating to Scala 3 and sbt 2
 
-The current follow-up is [parallel Monte Carlo performance](PARALLEL_PERFORMANCE.md) on `modernize/parallel-performance`, with snapshot `6.0.0-modern.3-SNAPSHOT`. Scala 3.9.0, sbt 2.0.8, and JDK 17 remain fixed. This includes the earlier [deprecation retirement](DEPRECATION_RETIREMENT.md); obsolete APIs remain removed and deprecations still fail compilation. Recompile consumers and use this snapshot for this branch. The tables below describe earlier upgrade checkpoints.
+The current follow-up is [multi-chain MCMC](MULTI_CHAIN_MCMC.md) on `modernize/multi-chain-mcmc`, with snapshot `6.0.0-modern.4-SNAPSHOT`. Scala 3.9.0, sbt 2.0.8, and JDK 17 remain fixed. This includes the earlier [parallel importance work](PARALLEL_PERFORMANCE.md) and [deprecation retirement](DEPRECATION_RETIREMENT.md); obsolete APIs remain removed and deprecations still fail compilation. Recompile consumers and use this snapshot for this branch. The tables below describe earlier upgrade checkpoints.
+
+## Multi-chain migration changes
+
+This is an additive API: ordinary MH and seeded parallel importance remain available. Opt in by supplying a model factory to `MultiChainMetropolisHastings.run`. Each factory receives a runner-owned universe; do not pass existing model nodes or retain them after return. Results are immutable scalar traces and diagnostic summaries, not live algorithms requiring `kill()`.
+
+The draw count is **per chain**. Worker count controls scheduling independently of chain count and seed assignment. Warm-up is separately discarded for every chain, and rejection repeats are retained. Diagnostics report rank-normalized/folded split R-hat, bulk/tail ESS, raw-scale mean ESS, and MCSE; undefined values/warnings do not certify convergence. The ESS estimator is conservatively capped at the split draw count and is not an exact numerical clone of Stan/posterior's antithetic implementation.
+
+The supported evidence contract is intentionally narrower than all legacy MH call sites: use hard conditions or explicit likelihood constraints. `observe()` is rejected, not silently ignored or automatically translated. The guide shows a continuous likelihood and explains when omitted normalizers are valid. Initialization is bounded and must find a valid prior state; `initialState` only selects a starting region, not a different posterior for each chain.
+
+The isolated execution path does not certify shared universes, nested inference, learning/filtering caches, or arbitrary callback state as thread-safe. Cancellation is cooperative with bounded worker-shutdown waiting; uninterruptible user code can outlive a failed call. Model-specific proposals, multimodal exploration, trace storage pressure, and uncertainty in diagnostic estimates remain user-visible concerns. See the [complete contracts and gotchas](MULTI_CHAIN_MCMC.md).
 
 ## Parallel-performance changes
 
