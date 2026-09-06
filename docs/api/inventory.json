@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 717,
+  "pages": 723,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -52655,6 +52655,347 @@
       "example": "receiver.sample()",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/UnweightedSampler.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "addSuppressed",
+      "anchor": "addSuppressed-4b8",
+      "signature": "final def addSuppressed(x$0: Throwable): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.addSuppressed(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "fillInStackTrace",
+      "anchor": "fillInStackTrace-26c",
+      "signature": "def fillInStackTrace(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.fillInStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "getCause",
+      "anchor": "getCause-26c",
+      "signature": "def getCause(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getCause()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "getLocalizedMessage",
+      "anchor": "getLocalizedMessage-665",
+      "signature": "def getLocalizedMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getLocalizedMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "getMessage",
+      "anchor": "getMessage-665",
+      "signature": "def getMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "getStackTrace",
+      "anchor": "getStackTrace-fffffa6d",
+      "signature": "def getStackTrace(): Array[StackTraceElement]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[StackTraceElement]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "getSuppressed",
+      "anchor": "getSuppressed-fffff2ce",
+      "signature": "final def getSuppressed(): Array[Throwable]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[Throwable]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getSuppressed()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "initCause",
+      "anchor": "initCause-fffff080",
+      "signature": "def initCause(x$0: Throwable): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.initCause(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff230",
+      "signature": "def printStackTrace(x$0: PrintWriter): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintWriter"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff0fd",
+      "signature": "def printStackTrace(x$0: PrintStream): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintStream"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-94c",
+      "signature": "def printStackTrace(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "setStackTrace",
+      "anchor": "setStackTrace-f79",
+      "signature": "def setStackTrace(x$0: Array[StackTraceElement]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Array[StackTraceElement]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.setStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.SearchExhausted",
+      "name": "toString",
+      "anchor": "toString-665",
+      "signature": "def toString(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "Returns a string representation of the object.",
+      "contract": "Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable",
+      "example": "receiver.toString()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$$SearchExhausted.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler",
+      "name": "run",
+      "anchor": "run-319",
+      "signature": "def run(config: Config, initial: Vector[Double])(logDensity: Vector[Double] => Double): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config",
+            "initial: Vector[Double]"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "logDensity: Vector[Double] => Double"
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Run one chain synchronously on the caller's thread.",
+      "contract": "Run one chain synchronously on the caller's thread. Value parameters config kernel, seed, work and storage limits initial nonempty immutable finite vector with finite log density; GPSS cannot start at zero radius logDensity deterministic, thread-safe when shared, unnormalized log density w.r.t. Lebesgue measure; negative infinity means outside support. Callback resources remain caller-owned. Attributes Returns immutable result; budget exhaustion may return fewer draws and is never precision success Throws IllegalArgumentException for invalid input, NaN/+infinite density, or numerical loss of resolution InterruptedException on cooperative interruption; interrupt flag is preserved/restored SearchExhausted when bounded search fails; no result is returned Example VectorSliceSampler.run(Config(Method.GPSS, draws = 100), Vector(1.0, 1.0))(x => -x.map(v => v*v).sum / 2)",
+      "example": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.run(config, initial)(logDensity)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/VectorSliceSampler$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.WeightedSampler.WeightSeen",

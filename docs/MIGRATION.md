@@ -1,5 +1,19 @@
 # Migrating to Scala 3 and sbt 2
 
+## Continuous-vector sampling follow-up
+
+`modernize/continuous-vector-sampling` uses `6.0.0-modern.9-SNAPSHOT`. The additive
+`VectorSliceSampler` API accepts an explicit immutable continuous-vector log density,
+with GPSS or quantile selected by the caller. Existing graph samplers, stopping policies,
+dependencies, and the Scala 3.9.0 / sbt 2.0.8 / JDK 17 baseline are unchanged. Rebuild
+consumers against the new snapshot to use it; no existing API migration is required.
+
+Unlike the graph multi-chain runner, it runs one chain on the caller's thread, owns no
+Universe or executor, and supplies no automatic diagnostics/precision stopping. Budget
+exhaustion returns only complete transitions; callback/search/numerical failures throw.
+Do not substitute its output for graph query objects or treat `DrawsReached` as convergence.
+See [contracts, examples, and limitations](VECTOR_SLICE_SAMPLING.md).
+
 ## MCMC reliability follow-up
 
 `modernize/mcmc-reliability` uses `6.0.0-modern.8-SNAPSHOT`, with the same Scala 3.9.0, sbt 2.0.8, and JDK 17 baseline. Rebuild and recompile consumers. The [reliability guide](MCMC_RELIABILITY.md) explains the changed precision semantics and actionable failure reasons.

@@ -47,6 +47,10 @@ This is a Scala 3 snapshot requiring consumer recompilation, not a binary-compat
 
 ## Related
 
+The [continuous-vector sampler](../docs/VECTOR_SLICE_SAMPLING.md) provides opt-in GPSS
+and quantile kernels for explicit log densities without graph construction. It is a
+single-chain blocking interface, not a shared-graph thread-safety change.
+
 The [MCMC reliability guide](../docs/MCMC_RELIABILITY.md) explains the automatic MCSE floor, failure reasons, and why passing stopping checks is not proof of adequate exploration. Its [paired audit](../docs/MCMC_RELIABILITY_VALIDATION.md) includes unresolved curved-target failures.
 
 The [pilot-calibration guide](../docs/PROPOSAL_CALIBRATION.md) adds an opt-in way to estimate a fixed Gaussian block proposal from discarded pilot traces. It rejects inadequate pilots and does not change existing sampler defaults or enable online adaptation.

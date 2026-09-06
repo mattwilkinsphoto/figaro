@@ -109,6 +109,13 @@ This compares Figaro's actual fixed block sampler with standalone immutable-vect
 
 ## Higher-dimensional validation (experimental)
 
+For the supported explicit-vector execution interface, see
+[continuous-vector sampling](../docs/VECTOR_SLICE_SAMPLING.md).
+`VectorSliceSamplingExample.main(args: Array[String]): Unit` accepts only an empty
+array, runs Gaussian GPSS, positive quantile, and independent-chain diagnostics examples,
+and prints work status/estimates. Invalid arguments or an incomplete fixture throw.
+Example: `VectorSliceSamplingExample.main(Array.empty)`.
+
 `HighDimensionalSamplingValidation.main(args: Array[String]): Unit` runs `Array("check")` controls or accepts repetitions (20, positive), a per-chain density-evaluation cap (300000, 20000-1000000 and divisible by four), and first round (0, nonnegative). Example: `HighDimensionalSamplingValidation.main(Array("1", "20000"))`. It returns Unit and prints quoted CSV for GPSS/quantile samplers across six targets at dimensions 8 and 32. Invalid arguments throw; model/numerical/search failures are explicit failed rows; interruption aborts. A successful process exit is not proof of precision or successful execution of every chain. See the [full API, protocol, reproduction examples, and limitations](../docs/SAMPLING_HIGH_DIMENSIONAL.md). All kernels remain private and no production API changes.
 
 [Library module](../Figaro/README.md) implements the APIs; [build guide](../docs/BUILDING.md) explains tests and documentation generation; [migration guide](../docs/MIGRATION.md) explains changed syntax, dependencies, and remaining risks.

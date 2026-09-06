@@ -37,7 +37,7 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.8-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.9-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
@@ -50,6 +50,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Sampling research](docs/SAMPLING_RESEARCH.md): recent literature, isolated quantile/multiproposal slice prototypes, and measured limits; not a new production inference API.
 - [Matched-budget validation](docs/SAMPLING_BUDGET_VALIDATION.md): compare quantile and affine/polar research samplers with initialization-inclusive evaluation caps and explicit coverage checks.
 - [Higher-dimensional validation](docs/SAMPLING_HIGH_DIMENSIONAL.md): GPSS and quantile research at 8 and 32 dimensions, including hard constraints and asymmetric modes.
+- [Continuous-vector sampling](docs/VECTOR_SLICE_SAMPLING.md): opt-in GPSS/quantile over explicit log densities, with immutable traces, hard budgets, and cooperative cancellation.
 
 - [User guide](docs/USER_GUIDE.md): concepts, common patterns, gotchas, and related modules.
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.

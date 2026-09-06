@@ -1,5 +1,9 @@
 # Higher-dimensional GPSS and quantile validation
 
+Implementation follow-up: [continuous-vector sampling](VECTOR_SLICE_SAMPLING.md) adds
+a scoped, opt-in execution interface. The results and recommendation below record the
+preceding research checkpoint; no historical data have been regenerated or changed.
+
 ## Outcome: useful candidates, different strengths
 
 All 480 experiments completed without execution failures, consuming 576 million target
