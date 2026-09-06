@@ -17,8 +17,6 @@ jobs:
     timeout-minutes: 45
     env:
       JAVA_OPTS: -Xms1G -Xmx6G -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
-      # Avoid a thin-client startup race reading an incomplete active.json in ephemeral CI.
-      SBT_OPTS: --server --batch
 
     steps:
       - name: Check out source
@@ -35,24 +33,24 @@ jobs:
         uses: sbt/setup-sbt@v1
 
       - name: Compile all source sets
-        run: sbt -v "clean; compile; Test / compile"
+        run: sbt --server --batch -v "clean; compile; Test / compile"
 
       - name: Run documented quick start and common patterns
         run: >-
-          sbt
+          sbt --server --batch
           "examples / Compile / runMain com.cra.figaro.example.documentation.QuickStart;
           examples / Compile / runMain com.cra.figaro.example.documentation.CommonPatterns"
 
       - name: Verify seeded parallel sampling and benchmark entry point
         run: >-
-          sbt
+          sbt --server --batch
           "figaro / Test / testOnly com.cra.figaro.test.modernization.ParallelPerformanceRegressionTest;
           examples / Compile / runMain com.cra.figaro.example.ParallelSamplingExample;
           examples / Compile / runMain com.cra.figaro.example.SamplingBenchmark coin 1000 1 1,2 seeded"
 
       - name: Verify multi-chain MH correctness, diagnostics, and example entry points
         run: >-
-          sbt
+          sbt --server --batch
           "figaro / Test / testOnly
           com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest
           com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest;
@@ -62,7 +60,7 @@ jobs:
       - name: Verify documentation tooling, reference freshness, and local links
         # Includes the stopping-policy contracts in the generated reference.
         run: |
-          sbt "figaro / Compile / doc"
+          sbt --server --batch "figaro / Compile / doc"
           python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
           python3 -B -m unittest discover -s tools -p 'test_summarize*.py'
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
@@ -74,7 +72,7 @@ jobs:
 
       - name: Run deterministic modernization regressions
         run: >-
-          sbt
+          sbt --server --batch
           "figaro / Test / testOnly
           com.cra.figaro.test.modernization.ProbabilityRegressionTest
           com.cra.figaro.test.modernization.Scala3RegressionTest
@@ -84,45 +82,45 @@ jobs:
           com.cra.figaro.test.learning.SerializationTest"
 
       - name: Run stopping-criteria examples
-        run: sbt "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaExample"
+        run: sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaExample"
 
       - name: Verify reliability safeguards and matched-prefix audit entry point
         run: |
-          sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.McmcReliabilityRegressionTest"
-          sbt "examples / Compile / runMain com.cra.figaro.example.McmcReliabilityExample"
-          sbt "examples / Compile / runMain com.cra.figaro.example.McmcReliabilityValidation 1 12000 2" > "$RUNNER_TEMP/reliability-smoke.log"
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.McmcReliabilityRegressionTest"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.McmcReliabilityExample"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.McmcReliabilityValidation 1 12000 2" > "$RUNNER_TEMP/reliability-smoke.log"
           python3 -B tools/summarize_reliability.py "$RUNNER_TEMP/reliability-smoke.log" --repetitions 1 --max-draws 12000
 
       - name: Verify Gaussian block proposals
         run: |
-          sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest"
-          sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest"
-          sbt "examples / Compile / runMain com.cra.figaro.example.ProposalCalibrationExample"
-          sbt "examples / Compile / runMain com.cra.figaro.example.ProposalCalibrationBenchmark 1 2000 2 6000"
-          sbt "examples / Compile / runMain com.cra.figaro.example.BlockedProposalExample"
-          sbt "examples / Compile / runMain com.cra.figaro.example.BlockedProposalBenchmark 2 4000 2"
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest"
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.ProposalCalibrationExample"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.ProposalCalibrationBenchmark 1 2000 2 6000"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.BlockedProposalExample"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.BlockedProposalBenchmark 2 4000 2"
 
       - name: Verify isolated sampling research kernels and complete smoke report
         run: |
-          sbt "examples / Compile / runMain com.cra.figaro.example.SamplingResearchExample check"
-          sbt "examples / Compile / runMain com.cra.figaro.example.SamplingResearchExample 1 2000" > "$RUNNER_TEMP/sampling-research-smoke.log"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.SamplingResearchExample check"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.SamplingResearchExample 1 2000" > "$RUNNER_TEMP/sampling-research-smoke.log"
           python3 -B tools/summarize_sampling_research.py "$RUNNER_TEMP/sampling-research-smoke.log" --repetitions 1 --draws 2000
 
       - name: Verify affine polar kernels and matched-budget accounting
         # Budget validation is isolated from all production sampler APIs.
         # Its checked data include every predeclared seed, not only passing precision runs.
         run: |
-          sbt "examples / Compile / runMain com.cra.figaro.example.SamplingBudgetValidation check"
-          sbt "examples / Compile / runMain com.cra.figaro.example.SamplingBudgetValidation 1 30000" > "$RUNNER_TEMP/sampling-budget-smoke.log"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.SamplingBudgetValidation check"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.SamplingBudgetValidation 1 30000" > "$RUNNER_TEMP/sampling-budget-smoke.log"
           python3 -B tools/summarize_sampling_budget.py "$RUNNER_TEMP/sampling-budget-smoke.log" --repetitions 1 --cap 30000
 
       - name: Exercise representative stopping models and trapped-chain control
         # Smoke/lifecycle check only; full repeated-seed evidence is documented separately.
-        run: sbt "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaValidation 2 4000 2"
+        run: sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaValidation 2 4000 2"
 
       - name: Run deterministic legacy density regressions
         run: >-
-          sbt
+          sbt --server --batch
           'figaro / Test / testOnly
           com.cra.figaro.test.library.atomic.discrete.DiscreteTest
           com.cra.figaro.test.library.atomic.continuous.ContinuousTest
@@ -130,14 +128,14 @@ jobs:
 
       - name: Run anytime lifecycle regressions
         run: >-
-          sbt
+          sbt --server --batch
           'figaro / Test / testOnly
           com.cra.figaro.test.algorithm.AlgorithmTest
           -- -z "An anytime algorithm"'
 
       - name: Run collection and factor regressions
         run: >-
-          sbt
+          sbt --server --batch
           "figaro / Test / testOnly
           com.cra.figaro.test.util.MultiSetTest
           com.cra.figaro.test.util.PriorityMapTest
@@ -150,7 +148,7 @@ jobs:
       - name: Observe legacy collection timing checks (advisory)
         continue-on-error: true
         run: >-
-          sbt
+          sbt --server --batch
           "figaro / Test / testOnly
           com.cra.figaro.test.util.PriorityMapTest
           com.cra.figaro.test.util.SelectableSetTest
@@ -158,19 +156,19 @@ jobs:
 
       - name: Run deterministic parallel-structure regressions
         run: |
-          sbt 'figaro / Test / testOnly com.cra.figaro.test.algorithm.filtering.ParParticleFilterTest -- -z "splitting up the particle indices over threads"'
-          sbt 'figaro / Test / testOnly com.cra.figaro.test.algorithm.sampling.ParImportanceTest -- -z "not suffer from stack overflow with small probability of success"'
+          sbt --server --batch 'figaro / Test / testOnly com.cra.figaro.test.algorithm.filtering.ParParticleFilterTest -- -z "splitting up the particle indices over threads"'
+          sbt --server --batch 'figaro / Test / testOnly com.cra.figaro.test.algorithm.sampling.ParImportanceTest -- -z "not suffer from stack overflow with small probability of success"'
 
       - name: Verify coverage plugin and restore non-instrumented build
         # Keep tests last in their invocation so later sbt commands cannot mask a failure.
         run: |
-          sbt "set Global / cacheStores := Seq.empty; clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest com.cra.figaro.test.modernization.McmcReliabilityRegressionTest"
-          sbt "coverage; figaro / coverageReport"
-          sbt "coverageOff; clean"
+          sbt --server --batch "set Global / cacheStores := Seq.empty; clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest com.cra.figaro.test.modernization.McmcReliabilityRegressionTest"
+          sbt --server --batch "coverage; figaro / coverageReport"
+          sbt --server --batch "coverageOff; clean"
 
       - name: Build first reproducibility candidate
         run: >-
-          sbt
+          sbt --server --batch
           "figaro / Compile / packageBin; figaro / assembly"
 
       - name: Record artifact checksums
@@ -183,12 +181,12 @@ jobs:
       - name: Verify clean rebuild is byte-for-byte reproducible
         run: |
           # Bypass sbt 2's artifact cache: restoring the first JAR is not a rebuild.
-          sbt "set Global / cacheStores := Seq.empty; clean; figaro / Compile / packageBin; figaro / assembly"
+          sbt --server --batch "set Global / cacheStores := Seq.empty; clean; figaro / Compile / packageBin; figaro / assembly"
           sha256sum --check "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Build classifiers and verify local Maven publication
         run: >-
-          sbt
+          sbt --server --batch
           "figaro / Compile / packageSrc; figaro / Compile / packageDoc; figaro / publishLocal"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
