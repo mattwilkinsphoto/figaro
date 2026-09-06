@@ -1,6 +1,7 @@
 package com.cra.figaro.algorithm.sampling.parallel
 
 import org.apache.commons.math3.distribution.NormalDistribution
+import org.apache.commons.math3.complex.Complex
 import org.apache.commons.math3.transform.{DftNormalization, FastFourierTransformer, TransformType}
 
 /** Diagnostics for equally sized, ordered scalar chains; never a proof of convergence. */
@@ -153,24 +154,56 @@ object McmcDiagnostics {
   }
 
   /** Biased autocovariances with zero padding, equivalent to sum((x_i-mean)(x_{i+lag}-mean))/N. */
-  private[parallel] def autocovariance(values: Array[Double]): Array[Double] = {
+  private[figaro] def autocovariance(values: Array[Double]): Array[Double] = {
     interrupted()
     var length = 1
     while (length.toLong < 2L * values.length) {
       require(length <= (1 << 28), "Trace too large for FFT diagnostics")
       length *= 2
     }
-    val centered = new Array[Double](length)
+    // Invocation-owned buffers: the same Commons Math transform, without its
+    // real/Complex array round trips. Neither input nor shared state is mutated.
+    val real = new Array[Double](length)
+    val imaginary = new Array[Double](length)
+    val data = Array(real, imaginary)
     val mean = average(values)
     var i = 0
-    while (i < values.length) { centered(i) = values(i) - mean; i += 1 }
-    val fft = new FastFourierTransformer(DftNormalization.STANDARD)
-    val spectrum = fft.transform(centered, TransformType.FORWARD)
+    while (i < values.length) {
+      if ((i & 1023) == 0) interrupted()
+      real(i) = values(i) - mean
+      i += 1
+    }
+    FastFourierTransformer.transformInPlace(data, DftNormalization.STANDARD, TransformType.FORWARD)
     interrupted()
-    val power = spectrum.map(z => z.multiply(z.conjugate()))
-    val inverse = fft.transform(power, TransformType.INVERSE)
+    i = 0
+    while (i < length) {
+      if ((i & 1023) == 0) interrupted()
+      val r = real(i)
+      val im = imaginary(i)
+      if (r.isFinite && im.isFinite) {
+        // Keep complex multiplication order, including signed zero and finite
+        // products that overflow. Do not replace the imaginary component by zero.
+        real(i) = r * r - im * -im
+        imaginary(i) = r * -im + im * r
+      } else {
+        // Delegate the library's special NaN/infinity semantics on the rare path.
+        val z = new Complex(r, im)
+        val power = z.multiply(z.conjugate())
+        real(i) = power.getReal
+        imaginary(i) = power.getImaginary
+      }
+      i += 1
+    }
+    FastFourierTransformer.transformInPlace(data, DftNormalization.STANDARD, TransformType.INVERSE)
     interrupted()
-    inverse.take(values.length).map(_.getReal / values.length)
+    val result = new Array[Double](values.length)
+    i = 0
+    while (i < result.length) {
+      if ((i & 1023) == 0) interrupted()
+      result(i) = real(i) / values.length
+      i += 1
+    }
+    result
   }
   private def ess(chains: Array[Array[Double]]): Option[Double] = {
     interrupted()

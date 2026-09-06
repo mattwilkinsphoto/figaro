@@ -1,6 +1,7 @@
 package com.cra.figaro.test.modernization
 
 import com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics
+import org.apache.commons.math3.transform.{DftNormalization, FastFourierTransformer, TransformType}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
@@ -30,6 +31,76 @@ class McmcDiagnosticsRegressionTest extends AnyWordSpec with Matchers {
     split.size.toDouble * n / math.max(1, -1 + 2 * monotone.sum)
   }
   "MCMC diagnostics" should {
+    "match the former Complex-array autocovariance at every lag without mutating inputs" in {
+      def oldAutocovariance(x: Array[Double]): Array[Double] = {
+        var length = 1
+        while (length.toLong < 2L * x.length) length *= 2
+        val centered = new Array[Double](length)
+        val mean = x.head + x.iterator.map(_ - x.head).sum / x.length
+        x.indices.foreach(i => centered(i) = x(i) - mean)
+        val fft = new FastFourierTransformer(DftNormalization.STANDARD)
+        val spectrum = fft.transform(centered, TransformType.FORWARD)
+        val inverse = fft.transform(spectrum.map(z => z.multiply(z.conjugate())), TransformType.INVERSE)
+        inverse.take(x.length).map(_.getReal / x.length)
+      }
+      val random = new java.util.Random(442190L)
+      val edges = Vector(Array(0.0), Array(-0.0), Array(-0.0, 0.0, -0.0),
+        Array.fill(65)(3.0), Array.tabulate(65)(i => if (i == 0) 1.0 else 0.0),
+        Array.tabulate(65)(i => if (i % 2 == 0) 1.0 else -1.0),
+        Array(1e16, 1.0, -1e16, 1.0), Array(Double.MaxValue, -Double.MaxValue, 0.0),
+        Array(1e160, -1e160, 0.0), Array(Double.NaN, 1.0), Array(Double.PositiveInfinity, 1.0))
+      val cases = edges ++ (for (n <- Vector(1, 2, 3, 4, 5, 7, 8, 9, 31, 32, 33, 1023, 1024, 1025, 2000);
+        exponent <- Vector(-1022, -500, -10, 0, 10, 500, 1000)) yield {
+          Array.fill(n)(java.lang.Math.scalb(random.nextGaussian(), exponent))
+        })
+      cases.foreach { x =>
+        val before = x.map(java.lang.Double.doubleToRawLongBits).toVector
+        val expected = oldAutocovariance(x).map(java.lang.Double.doubleToLongBits).toVector
+        McmcDiagnostics.autocovariance(x).map(java.lang.Double.doubleToLongBits).toVector shouldBe expected
+        x.map(java.lang.Double.doubleToRawLongBits).toVector shouldBe before
+      }
+    }
+
+    "match direct biased autocovariances including the last lag and padding boundaries" in {
+      val random = new java.util.Random(72039L)
+      for (n <- Vector(2, 3, 4, 7, 8, 9, 31, 32, 33, 127, 128, 129)) {
+        val x = Array.fill(n)(random.nextGaussian())
+        val mean = x.sum / n
+        val actual = McmcDiagnostics.autocovariance(x)
+        for (lag <- x.indices) {
+          val expected = (0 until n - lag).map(i => (x(i) - mean) * (x(i + lag) - mean)).sum / n
+          actual(lag) shouldBe (expected +- 1e-12)
+        }
+      }
+    }
+
+    "isolate FFT buffers between concurrent calls and returned arrays" in {
+      val pool = java.util.concurrent.Executors.newFixedThreadPool(4)
+      val input = Array.tabulate(1025)(i => math.sin(i * 0.37))
+      val expected = McmcDiagnostics.autocovariance(input).toVector
+      try {
+        val futures = Vector.fill(16)(pool.submit(new java.util.concurrent.Callable[Array[Double]] {
+          def call(): Array[Double] = McmcDiagnostics.autocovariance(input)
+        }))
+        val results = futures.map(_.get(10, java.util.concurrent.TimeUnit.SECONDS))
+        results.foreach(_.toVector shouldBe expected)
+        results.head(0) = -123.0
+        results.tail.foreach(_.toVector shouldBe expected)
+        McmcDiagnostics.autocovariance(input).toVector shouldBe expected
+      } finally {
+        pool.shutdownNow()
+        pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS) shouldBe true
+      }
+    }
+
+    "preserve cancellation flags at autocovariance entry" in {
+      try {
+        Thread.currentThread().interrupt()
+        intercept[InterruptedException](McmcDiagnostics.autocovariance(Array(1.0, 2.0)))
+        Thread.currentThread().isInterrupted shouldBe true
+      } finally Thread.interrupted()
+    }
+
     "match the previous iterator reductions bit for bit without mutating inputs" in {
       def oldAverage(x: Array[Double]): Double = x.head + x.iterator.map(_ - x.head).sum / x.length
       def oldVariance(x: Array[Double]): Double = {
