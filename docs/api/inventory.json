@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 712,
+  "pages": 713,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -46412,6 +46412,28 @@
       "example": "receiver.deregisterDependencies()",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/ForwardWeighter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianBlockProposal",
+      "name": "apply",
+      "anchor": "apply-fffff1aa",
+      "signature": "def apply(elements: Seq[AtomicNormal], covariance: Seq[Seq[Double]]): ProposalScheme",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "elements: Seq[AtomicNormal]",
+            "covariance: Seq[Seq[Double]]"
+          ]
+        }
+      ],
+      "returns": "ProposalScheme",
+      "summary": "Build a chain-owned joint proposal. Use as the whole scheme or a DisjointScheme choice.",
+      "contract": "Build a chain-owned joint proposal. Use as the whole scheme or a DisjointScheme choice. Value parameters covariance finite exactly symmetric positive-definite increment covariance in element order; diagonal entries are variances, not standard deviations elements nonempty distinct active AtomicNormal instances in one universe; subclasses, observations, interventions, compound Normals, and temporary elements are unsupported Attributes Returns a fixed ProposalScheme that updates every member and makes one joint MH decision Throws IllegalArgumentException for invalid targets/covariance or unrepresentable factorization; execution also rejects foreign/inactive/modified targets and sequential composition Example GaussianBlockProposal(Vector(x, y), Vector(Vector(0.5, 0.49), Vector(0.49, 0.5)))",
+      "example": "com.cra.figaro.algorithm.sampling.GaussianBlockProposal.apply(elements, covariance)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianBlockProposal$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.Importance.Reject",

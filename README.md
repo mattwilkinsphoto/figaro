@@ -11,7 +11,7 @@ Prerequisites: Git, JDK 17 on your path, and an sbt runner. sbt downloads the co
 1. Get the Scala 3 branch:
 
    ```sh
-   git clone --branch modernize/multi-chain-mcmc https://github.com/mattwilkinsphoto/figaro.git
+   git clone --branch modernize/blocked-proposals https://github.com/mattwilkinsphoto/figaro.git
    cd figaro
    ```
 
@@ -37,12 +37,14 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.5-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.6-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
 
 ## Documentation
+
+- [Gaussian block proposals](docs/BLOCKED_PROPOSALS.md): opt-in correlated moves, covariance selection, acceptance rules, and measured counterexamples.
 
 - [User guide](docs/USER_GUIDE.md): concepts, common patterns, gotchas, and related modules.
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.

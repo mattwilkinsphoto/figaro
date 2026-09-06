@@ -1,5 +1,13 @@
 # Migrating to Scala 3 and sbt 2
 
+## Blocked-proposal follow-up
+
+`modernize/blocked-proposals` uses snapshot `6.0.0-modern.6-SNAPSHOT` and adds [fixed-covariance Gaussian block proposals](BLOCKED_PROPOSALS.md). Scala 3.9.0, sbt 2.0.8, and JDK 17 are unchanged. Rebuild and recompile consumers against this snapshot; this is not a published stable release.
+
+Existing default, fixed-budget, and adaptive sampler behavior remains unchanged unless you supply the new scheme. The additive factory supports only permanent constant-parameter Normal targets, with one covariance per chain fixed before sampling. It includes the prior-density correction for symmetric random walks and uses the existing evidence updates and rejection cleanup. There is no automatic adaptation, global covariance discovery, or new shared-universe thread-safety promise. Exhaustive external matches on the sealed `ProposalScheme` hierarchy may need a fallback for the new internal subtype.
+
+See the [validation report](BLOCKED_PROPOSAL_VALIDATION.md) for comparisons with both default MH and existing joint prior proposals, plus cases where blocking is counterproductive. Earlier checkpoint version numbers below are historical.
+
 ## Stopping-criteria follow-up
 
 The `modernize/stopping-criteria` branch adds [Gaussian TSPRT, categorical KL, and adaptive MCMC precision stopping](STOPPING_CRITERIA.md). Existing fixed-budget APIs and result types remain available. New `runUntilPrecise` treats `drawsPerChain` as a cap and returns an explicit stop reason plus batch-means precision assessments. No historical stopping-parameter tuple is adopted: error probabilities, observation SD, and boundary directions are named explicitly. KL-based MCMC convergence is not claimed or enabled. These changes do not require a Scala, sbt, or JDK upgrade.

@@ -226,3 +226,11 @@ Branch: `modernize/stopping-criteria`, based on the multi-chain milestone; snaps
 The [representative validation report](docs/STOPPING_VALIDATION.md) records 50 paired seeds across seven analytic-target fixtures, with raw data and accuracy/coverage/runtime comparisons. Well-mixing cases save about 83% of retained draws at the chosen tolerance; correlated and trapped cases never report precision success and incur checkpoint overhead. These are limited empirical results, not universal error-rate or speedup guarantees. KL-driven automatic MCMC termination remains outside the supported policy.
 
 CI includes stopping regressions, runnable examples, and a representative-model smoke test. The existing documentation, coverage, packaging, publication, and clean-rebuild reproducibility gates remain in place.
+
+## Stage 10: fixed-covariance Gaussian blocks
+
+Branch: `modernize/blocked-proposals`, based on `731ac977`; snapshot: `6.0.0-modern.6-SNAPSHOT`. The [block-proposal guide](docs/BLOCKED_PROPOSALS.md) documents an opt-in symmetric random walk for permanent constant-parameter Normals, including the prior-density correction, joint evidence updates, and rejection rollback. Defaults and toolchain versions remain unchanged. Online adaptation and arbitrary element types are intentionally outside this milestone.
+
+The [50-seed comparison](docs/BLOCKED_PROPOSAL_VALIDATION.md) includes existing joint prior proposals, diagonal random walks, aligned blocks, and separated-mode counterexamples. The informed aligned block improves median ESS/s over existing joint prior resampling by about 1.72x on the correlated fixture and halves time to the selected precision target. Independent-Normal and multimodal examples demonstrate that blocking can be worse. These are model-specific empirical results, not general speedup or finite-sample coverage guarantees.
+
+CI adds a dedicated block regression gate, all three documented patterns, a two-worker benchmark smoke run, and block regressions under coverage instrumentation. The original stopping and reproducibility gates remain required.

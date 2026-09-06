@@ -79,6 +79,12 @@ jobs:
       - name: Run stopping-criteria examples
         run: sbt "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaExample"
 
+      - name: Verify Gaussian block proposals
+        run: |
+          sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest"
+          sbt "examples / Compile / runMain com.cra.figaro.example.BlockedProposalExample"
+          sbt "examples / Compile / runMain com.cra.figaro.example.BlockedProposalBenchmark 2 4000 2"
+
       - name: Exercise representative stopping models and trapped-chain control
         # Smoke/lifecycle check only; full repeated-seed evidence is documented separately.
         run: sbt "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaValidation 2 4000 2"
@@ -125,13 +131,11 @@ jobs:
           sbt 'figaro / Test / testOnly com.cra.figaro.test.algorithm.sampling.ParImportanceTest -- -z "not suffer from stack overflow with small probability of success"'
 
       - name: Verify coverage plugin and restore non-instrumented build
-        run: >-
-          sbt
-          "set Global / cacheStores := Seq.empty; clean; coverage;
-          figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest
-          com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest
-          com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest;
-          figaro / coverageReport; coverageOff; clean"
+        # Keep tests last in their invocation so later sbt commands cannot mask a failure.
+        run: |
+          sbt "set Global / cacheStores := Seq.empty; clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest"
+          sbt "coverage; figaro / coverageReport"
+          sbt "coverageOff; clean"
 
       - name: Build first reproducibility candidate
         run: >-
@@ -141,8 +145,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.6-SNAPSHOT.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.6-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -159,7 +163,7 @@ jobs:
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.6-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -170,8 +174,8 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.5-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.6-SNAPSHOT.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.6-SNAPSHOT-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.6-SNAPSHOT-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.6-SNAPSHOT-javadoc.jar
           if-no-files-found: error

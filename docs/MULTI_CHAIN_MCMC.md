@@ -64,6 +64,8 @@ Four chains of 10,000 draws retain **40,000 draws**, not 10,000 total. With 1,00
 
 ## API reference
 
+For related parameters that mix poorly, see [Gaussian block proposals](BLOCKED_PROPOSALS.md). Supply a chain-owned fixed-covariance scheme through `Model.proposal`; no runner configuration or default changes are required. Compare with existing joint prior resampling before assuming the new proposal is preferable.
+
 For opt-in adaptive work budgets, see [stopping criteria](STOPPING_CRITERIA.md). `runUntilPrecise(config, precision)(build)` keeps chains alive between coordinated batches and returns an explicit precision-reached or budget-exhausted reason. Existing `run(config)(build)` remains fixed-budget; saved-result persistence and restart remain unsupported.
 
 Import `com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.*` and, for standalone diagnostics, `com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics`. The [compiler-derived reference](api/com.cra.figaro.algorithm.sampling.parallel.md) also lists all generated case-class operations, default accessors, parameter types, return types, and invocation templates.

@@ -220,6 +220,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
 
   private def runStep(state: State, step: ProposalScheme): State =
     step match {
+      case GaussianBlockScheme(block) => proposeBlock(state, block)
       case FinalScheme(elem) => propose(state, elem())
       case TypedScheme(first, rest) =>
         val firstElem = first()
@@ -242,6 +243,29 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
   private def proposeChainCheck(elem: Element[?]): Element[?] = {
     val e = chainCache(elem)
     if (e.isEmpty) elem else e.get.asInstanceOf[Element[?]]
+  }
+
+  private def proposeBlock(state: State, block: GaussianBlockProposal.Block): State = {
+    require(state.oldValues.isEmpty && state.oldRandomness.isEmpty,
+      "Gaussian blocks must be standalone or DisjointScheme choices, not sequential continuations")
+    require(!constraintsBound, "Gaussian blocks do not support constraintsBound early-score optimization")
+    val (proposed, logPriorRatio) = block.prepare(universe)
+    // q(x'|x) = q(x|x'): no proposal-density term. Unlike prior resampling, the prior
+    // does NOT cancel: add its log ratio, then the existing engine adds constraint scores.
+    var current = State(state.oldValues, state.oldRandomness, state.proposalProb,
+      state.modelProb + logPriorRatio, state.dissatisfied, state.reverseVisitOrder)
+    for (i <- block.targets.indices) {
+      val elem = block.targets(i)
+      if (elementsToTrack contains elem) proposalCounts += elem -> (proposalCounts(elem) + 1)
+      val oldRandomness = current.oldRandomness.concat(List(elem -> elem.randomness))
+      elem.randomness = proposed(i)
+      current = State(current.oldValues, oldRandomness, current.proposalProb, current.modelProb,
+        current.dissatisfied, current.reverseVisitOrder)
+      // Mutate one target at a time so early condition rejection can undo every touched
+      // value/randomness; dependent elements are updated only after the complete block.
+      current = attemptChange(current, elem)
+    }
+    current
   }
 
   protected def runScheme(): State = runStep(newState, proposalScheme)

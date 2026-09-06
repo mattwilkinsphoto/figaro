@@ -4965,6 +4965,30 @@ Invocation template:
 receiver.deregisterDependencies()
 ```
 
+## `` com.cra.figaro.algorithm.sampling.GaussianBlockProposal.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianBlockProposal$.html#apply-fffff1aa)
+
+```scala
+def apply(elements: Seq[AtomicNormal], covariance: Seq[Seq[Double]]): ProposalScheme
+```
+
+Build a chain-owned joint proposal. Use as the whole scheme or a DisjointScheme choice.
+
+Type parameters: none.
+
+Parameters, list 1: `` elements: Seq[AtomicNormal] ``; `` covariance: Seq[Seq[Double]] ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Build a chain-owned joint proposal. Use as the whole scheme or a DisjointScheme choice. Value parameters covariance finite exactly symmetric positive-definite increment covariance in element order; diagonal entries are variances, not standard deviations elements nonempty distinct active AtomicNormal instances in one universe; subclasses, observations, interventions, compound Normals, and temporary elements are unsupported Attributes Returns a fixed ProposalScheme that updates every member and makes one joint MH decision Throws IllegalArgumentException for invalid targets/covariance or unrepresentable factorization; execution also rejects foreign/inactive/modified targets and sequential composition Example GaussianBlockProposal(Vector(x, y), Vector(Vector(0.5, 0.49), Vector(0.49, 0.5)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.GaussianBlockProposal.apply(elements, covariance)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.Importance.Reject.addSuppressed ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance$$Reject$.html#addSuppressed-4b8)

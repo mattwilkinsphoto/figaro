@@ -26,6 +26,9 @@ object EmptyProposalScheme extends RuntimeException
  */
 sealed abstract class ProposalScheme
 
+// Internal representation: construction is restricted to the validated public factory.
+private[sampling] final case class GaussianBlockScheme(block: GaussianBlockProposal.Block) extends ProposalScheme
+
 /**
  * A proposal scheme that proposes a first element and optionally continues with another proposal
  * scheme based on the value of the first element.
@@ -85,4 +88,3 @@ object ProposalScheme {
     }
   }
 }
-

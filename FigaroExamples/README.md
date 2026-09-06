@@ -81,4 +81,8 @@ The [stopping-criteria example](src/main/scala/com/cra/figaro/example/StoppingCr
 
 ## Related
 
+The [blocked-proposal guide](../docs/BLOCKED_PROPOSALS.md) has three runnable patterns in `BlockedProposalExample.main(args: Array[String]): Unit`. Arguments must be empty; it prints fixed/default comparisons, a mixed discrete/continuous model, and adaptive stopping results. Example: `BlockedProposalExample.main(Array.empty)`.
+
+`BlockedProposalBenchmark.main(args: Array[String]): Unit` accepts repetitions (positive, default 20), maximum draws per chain (at least 2000, default 12000), and workers (1-4, default 4). It prints `blocked,`-prefixed per-query CSV for fixed/adaptive runs and returns Unit; rounds -2 and -1 are JVM warm-ups. Invalid arguments raise `IllegalArgumentException` (including `NumberFormatException` for malformed integers); leaked workers also fail the run. Example: `BlockedProposalBenchmark.main(Array("50", "12000", "4"))`. See [measured results](../docs/BLOCKED_PROPOSAL_VALIDATION.md) for metric definitions and limitations.
+
 [Library module](../Figaro/README.md) implements the APIs; [build guide](../docs/BUILDING.md) explains tests and documentation generation; [migration guide](../docs/MIGRATION.md) explains changed syntax, dependencies, and remaining risks.
