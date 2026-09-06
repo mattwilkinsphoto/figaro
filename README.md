@@ -52,6 +52,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Higher-dimensional validation](docs/SAMPLING_HIGH_DIMENSIONAL.md): GPSS and quantile research at 8 and 32 dimensions, including hard constraints and asymmetric modes.
 - [Continuous-vector sampling](docs/VECTOR_SLICE_SAMPLING.md): opt-in GPSS/quantile over explicit log densities, with immutable traces, hard budgets, and cooperative cancellation.
 - [Multi-chain vector sampling](docs/MULTI_CHAIN_VECTOR_SAMPLING.md): bounded independent-chain execution, deterministic seeds, complete budget accounting, and aligned coordinate diagnostics.
+- [Vector scaling measurements](docs/VECTOR_SAMPLING_PERFORMANCE.md): matched-trace worker comparisons, effective samples per second, and diagnostic overhead.
 
 - [User guide](docs/USER_GUIDE.md): concepts, common patterns, gotchas, and related modules.
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.

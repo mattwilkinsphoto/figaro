@@ -68,6 +68,7 @@ jobs:
           python3 -B tools/summarize_sampling_research.py docs/sampling-research-results.csv --repetitions 30 --draws 12000
           python3 -B tools/summarize_sampling_budget.py docs/sampling-budget-results.csv --repetitions 30 --cap 100000
           python3 -B tools/summarize_high_dimensional.py docs/sampling-high-dimensional-results.csv --repetitions 20 --cap 300000
+          python3 -B tools/summarize_vector_performance.py docs/vector-sampling-performance-results.csv --repetitions 5
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 
@@ -77,6 +78,8 @@ jobs:
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.VectorSliceSamplingExample"
           sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.MultiChainVectorSliceSamplerRegressionTest"
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.MultiChainVectorSamplingExample"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.VectorSamplingPerformance 1 100 20" > "$RUNNER_TEMP/vector-performance-smoke.log"
+          python3 -B tools/summarize_vector_performance.py "$RUNNER_TEMP/vector-performance-smoke.log" --repetitions 1 --draws 100 --warm-up 20
 
       - name: Run deterministic modernization regressions
         run: >-

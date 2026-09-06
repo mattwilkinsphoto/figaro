@@ -109,6 +109,14 @@ This compares Figaro's actual fixed block sampler with standalone immutable-vect
 
 ## Higher-dimensional validation (experimental)
 
+`VectorSamplingPerformance.main(args: Array[String]): Unit` accepts measured repetitions
+(default 5, 1-100), draws per chain (4000, 4-100000), and discarded warm-up transitions
+(500, 0-100000). It emits quoted CSV for the fixed six-fixture, two-method, three-worker
+grid, including two JVM warm-up rounds. Invalid arguments or worker-dependent output
+throw; runtime failures become explicit rows and interruption aborts.
+Example: `VectorSamplingPerformance.main(Array("1", "100", "20"))`.
+See the [protocol, metrics and results](../docs/VECTOR_SAMPLING_PERFORMANCE.md).
+
 `MultiChainVectorSamplingExample.main(args: Array[String]): Unit` accepts an empty
 array and runs bounded Gaussian chains, capped positive-target chains, and derived-event
 diagnostics. It prints status/estimates and throws for invalid arguments or unmet fixture

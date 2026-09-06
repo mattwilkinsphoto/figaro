@@ -300,3 +300,11 @@ Regression tests compare results exactly with direct single-chain calls across w
 Local compilation, all 143 modernization regressions including 11 new orchestration groups, the three workflows, and 31 documentation/report-tool tests pass. CI adds regression/example execution and coverage instrumentation while retaining publication and reproducible-rebuild gates.
 
 All 11321 generated public-method entries and local links verify. Thin/fat/source/API-documentation artifacts preserve byte-identical legal entries, binary artifacts exclude test/coverage runtimes, and isolated local publication succeeds. Required Linux CI remains the final branch gate.
+
+## Stage 18: fixed-trace vector scheduling measurements
+
+Branch: `modernize/vector-sampling-performance`, based on `92e3b646`; snapshot modern.10 and toolchain remain unchanged. The [protocol and results](docs/VECTOR_SAMPLING_PERFORMANCE.md) record 252 complete runs, including 180 measured runs: six fixtures, two methods, worker counts 1/2/4, four fixed chains, two JVM warm-up rounds and five measured rounds. Protocol/instrumentation commit `46df612b` precedes measurement. Package-private timing separates construction, sampling/joined shutdown, and diagnostics without changing public result types or kernels. Full trace/diagnostic fingerprints agree across worker counts.
+
+Four-worker end-to-end gains range from 1.04x on cheap Gaussian GPSS to 2.18x on dense-likelihood quantile sampling. The latter's sampling phase improves 3.74x; serial diagnostics limit total gain. Four-worker Gaussian GPSS spends about 88-89% of elapsed time in diagnostics. All target errors and warnings remain visible: three quantile mixture rounds have R-hat below 1.001 and no coordinate warnings while coordinate mean error is about 4.50. Apparent ESS/s is not reliable evidence of correct global exploration in those cases.
+
+The study adds complete-record/fingerprint/phase validation, four report-tool tests, a timing-partition regression, and a CI smoke grid. All 144 modernization regressions and 35 documentation/report-tool tests pass locally. Bounded coordinate-diagnostic parallelism is the next recommended performance milestone; it must preserve exact statistics and lifecycle guarantees. This checkpoint introduces no performance optimization or default change.

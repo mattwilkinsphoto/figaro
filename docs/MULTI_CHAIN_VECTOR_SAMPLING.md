@@ -1,5 +1,8 @@
 # Bounded multi-chain continuous-vector sampling
 
+For measured worker scaling, worst-coordinate ESS/s, and diagnostic overhead, see the
+[fixed-trace performance study](VECTOR_SAMPLING_PERFORMANCE.md). The API below is unchanged.
+
 ## Overview: what changed and when to enable it
 
 `MultiChainVectorSliceSampler` runs independent GPSS or quantile chains on a private,
