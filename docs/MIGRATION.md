@@ -1,5 +1,13 @@
 # Migrating to Scala 3 and sbt 2
 
+## MCMC reliability follow-up
+
+`modernize/mcmc-reliability` uses `6.0.0-modern.8-SNAPSHOT`, with the same Scala 3.9.0, sbt 2.0.8, and JDK 17 baseline. Rebuild and recompile consumers. The [reliability guide](MCMC_RELIABILITY.md) explains the changed precision semantics and actionable failure reasons.
+
+`McmcPrecision.evaluate` and `MH.runUntilPrecise` now size intervals with the larger of the existing batch-means and raw-mean ESS-based MCSE estimates, requiring both to be finite and positive. `batchMeansMcse` itself is unchanged; `mcseUsed` exposes the combined estimate. Identical prefixes cannot yield narrower intervals or earlier successful stopping, but runs may now take longer or reach their cap. Configuration and diagnostic thresholds are unchanged. This is an internal consistency safeguard, not a general finite-sample coverage guarantee: [the paired audit](MCMC_RELIABILITY_VALIDATION.md) still finds serious undercoverage on poorly explored curved targets.
+
+`Assessment` adds a final `failureReasons: Vector[FailureReason]` field, defaulting to empty for older constructor calls. Its product/unapply arity changes from seven to eight: update positional pattern matches or prefer named field access. Compiled consumers must be rebuilt; manually constructing/copying an assessment does not validate consistency among fields. Fixed-budget sampling, proposal/calibration arithmetic, random streams, worker ownership, Gaussian TSPRT, and categorical KL are unchanged. Earlier checkpoint descriptions below are historical.
+
 ## Pilot-calibration follow-up
 
 `modernize/proposal-calibration` uses snapshot `6.0.0-modern.7-SNAPSHOT`. The additive [calibration API](PROPOSAL_CALIBRATION.md) estimates a fixed Gaussian block covariance from a separate pilot, discloses shrinkage/scaling and diagnostics, and binds the frozen matrix to fresh production elements by name. The Scala 3.9.0, sbt 2.0.8, and JDK 17 baseline is unchanged; rebuild and recompile consumers against this snapshot.

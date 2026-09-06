@@ -127,7 +127,7 @@ class StoppingCriteriaRegressionTest extends AnyWordSpec with Matchers {
       val loose = McmcPrecision.Config(relativeTolerance = 0.2)
       val a = McmcPrecision.evaluate(traces, loose)
       a.criteriaMet shouldBe true
-      a.fullWidth.get shouldBe (2 * normal.inverseCumulativeProbability(0.975) * a.batchMeansMcse.get +- 1e-12)
+      a.fullWidth.get shouldBe (2 * normal.inverseCumulativeProbability(0.975) * a.mcseUsed.get +- 1e-12)
       McmcPrecision.evaluate(traces, loose, 5).fullWidth.get should be > a.fullWidth.get
       McmcPrecision.evaluate(traces, tight).criteriaMet shouldBe false
       McmcPrecision.evaluate(traces, loose.copy(absoluteTolerance = Some(1e-8))).criteriaMet shouldBe false

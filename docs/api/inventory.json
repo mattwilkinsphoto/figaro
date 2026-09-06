@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 716,
+  "pages": 717,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -53208,6 +53208,20 @@
       "example": "com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics.summarize(chains)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/parallel/McmcDiagnostics$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Assessment",
+      "name": "mcseUsed",
+      "anchor": "mcseUsed-0",
+      "signature": "def mcseUsed: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "Conservative error estimate used for width; unavailable if either constituent is invalid.",
+      "contract": "Conservative error estimate used for width; unavailable if either constituent is invalid. Attributes Returns maximum of positive finite batch-means and raw-mean ESS-based MCSE, or None Example assessment.mcseUsed (compare with assessment.batchMeansMcse and assessment.diagnostics.mcseMean)",
+      "example": "receiver.mcseUsed",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Assessment.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Assessment",

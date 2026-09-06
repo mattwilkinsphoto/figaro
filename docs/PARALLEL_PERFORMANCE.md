@@ -4,7 +4,7 @@
 
 This stage adds an opt-in, blocking importance sampler that owns a bounded thread pool, a separate model universe per worker, and a separate random stream per worker. It exists because the older parallel sampler shares Figaro's global random generator: adding cores can increase contention instead of throughput. Scala 3 and sbt 2 alone do not remove that runtime bottleneck.
 
-This milestone originated on `modernize/parallel-performance` with snapshot `6.0.0-modern.3-SNAPSHOT`, based on the CI-green deprecation checkpoint `55adc816`. It is also included in the current `modernize/proposal-calibration` branch and `6.0.0-modern.7-SNAPSHOT`, using Scala 3.9.0, sbt 2.0.8, and JDK 17. Existing sequential and legacy parallel factories remain available. This stage does not make arbitrary Figaro models or all algorithms thread-safe. The newer [multi-chain MCMC guide](MULTI_CHAIN_MCMC.md) describes the separate supported MH runner; historical measurements below still describe the original importance/benchmark milestone.
+This milestone originated on `modernize/parallel-performance` with snapshot `6.0.0-modern.3-SNAPSHOT`, based on the CI-green deprecation checkpoint `55adc816`. It is also included in the current `modernize/mcmc-reliability` branch and `6.0.0-modern.8-SNAPSHOT`, using Scala 3.9.0, sbt 2.0.8, and JDK 17. Existing sequential and legacy parallel factories remain available. This stage does not make arbitrary Figaro models or all algorithms thread-safe. The newer [multi-chain MCMC guide](MULTI_CHAIN_MCMC.md) describes the separate supported MH runner; historical measurements below still describe the original importance/benchmark milestone.
 
 ## Should I enable this in my application?
 

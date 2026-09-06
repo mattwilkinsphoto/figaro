@@ -77,6 +77,30 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics.summarize(chains)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Assessment.mcseUsed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Assessment.html#mcseUsed-0)
+
+```scala
+def mcseUsed: Option[Double]
+```
+
+Conservative error estimate used for width; unavailable if either constituent is invalid.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Conservative error estimate used for width; unavailable if either constituent is invalid. Attributes Returns maximum of positive finite batch-means and raw-mean ESS-based MCSE, or None Example assessment.mcseUsed (compare with assessment.batchMeansMcse and assessment.diagnostics.mcseMean)
+
+Invocation template:
+
+```scala
+receiver.mcseUsed
+```
+
 ## `` com.cra.figaro.algorithm.sampling.parallel.McmcPrecision.Assessment.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/McmcPrecision$$Assessment.html#productElementNames-0)

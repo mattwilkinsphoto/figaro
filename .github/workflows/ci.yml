@@ -62,8 +62,9 @@ jobs:
         run: |
           sbt "figaro / Compile / doc"
           python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
-          python3 -B -m unittest discover -s tools -p 'test_summarize_calibration.py'
+          python3 -B -m unittest discover -s tools -p 'test_summarize*.py'
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
+          python3 -B tools/summarize_reliability.py docs/mcmc-reliability-results.csv --repetitions 60 --max-draws 48000
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 
@@ -80,6 +81,13 @@ jobs:
 
       - name: Run stopping-criteria examples
         run: sbt "examples / Compile / runMain com.cra.figaro.example.StoppingCriteriaExample"
+
+      - name: Verify reliability safeguards and matched-prefix audit entry point
+        run: |
+          sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.McmcReliabilityRegressionTest"
+          sbt "examples / Compile / runMain com.cra.figaro.example.McmcReliabilityExample"
+          sbt "examples / Compile / runMain com.cra.figaro.example.McmcReliabilityValidation 1 12000 2" > "$RUNNER_TEMP/reliability-smoke.log"
+          python3 -B tools/summarize_reliability.py "$RUNNER_TEMP/reliability-smoke.log" --repetitions 1 --max-draws 12000
 
       - name: Verify Gaussian block proposals
         run: |
@@ -138,7 +146,7 @@ jobs:
       - name: Verify coverage plugin and restore non-instrumented build
         # Keep tests last in their invocation so later sbt commands cannot mask a failure.
         run: |
-          sbt "set Global / cacheStores := Seq.empty; clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest"
+          sbt "set Global / cacheStores := Seq.empty; clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest com.cra.figaro.test.modernization.McmcReliabilityRegressionTest"
           sbt "coverage; figaro / coverageReport"
           sbt "coverageOff; clean"
 
@@ -150,8 +158,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.7-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.7-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.8-SNAPSHOT.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.8-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -168,7 +176,7 @@ jobs:
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.7-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.8-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -179,8 +187,8 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.7-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.7-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.7-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.7-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.8-SNAPSHOT.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.8-SNAPSHOT-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.8-SNAPSHOT-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.8-SNAPSHOT-javadoc.jar
           if-no-files-found: error
