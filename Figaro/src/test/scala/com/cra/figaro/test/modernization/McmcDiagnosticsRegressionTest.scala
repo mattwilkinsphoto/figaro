@@ -31,6 +31,89 @@ class McmcDiagnosticsRegressionTest extends AnyWordSpec with Matchers {
     split.size.toDouble * n / math.max(1, -1 + 2 * monotone.sum)
   }
   "MCMC diagnostics" should {
+    "preserve primitive value and stable index sorting including finite signed zeros" in {
+      val random = new java.util.Random(992103L)
+      val edges = Vector(Array.empty[Double], Array(0.0), Array(-0.0, 0.0, -0.0, 0.0),
+        Array(Double.MaxValue, -Double.MaxValue, java.lang.Double.MIN_VALUE, -java.lang.Double.MIN_VALUE),
+        Array.fill(33)(7.0), Array.tabulate(65)(_.toDouble), Array.tabulate(65)(i => -i.toDouble))
+      val cases = edges ++ (for (n <- Vector(2, 3, 4, 5, 7, 8, 9, 31, 32, 33, 255, 256, 257, 1023, 1024, 1025, 16000);
+        ties <- Vector(false, true)) yield Array.fill(n)(if (ties) random.nextInt(7).toDouble else random.nextGaussian()))
+      cases.foreach { x =>
+        val before = x.map(java.lang.Double.doubleToRawLongBits).toVector
+        McmcDiagnostics.sortedIndices(x).toVector shouldBe x.indices.toArray.sortBy(x(_)).toVector
+        McmcDiagnostics.sortedValues(x).map(java.lang.Double.doubleToRawLongBits).toVector shouldBe
+          x.sorted.map(java.lang.Double.doubleToRawLongBits).toVector
+        x.map(java.lang.Double.doubleToRawLongBits).toVector shouldBe before
+      }
+      // Exhaust all short combinations, including distinct signed-zero bit patterns.
+      val alphabet = Vector(-1.0, -0.0, 0.0, 1.0)
+      for (code <- 0 until 1024) {
+        val x = Array.tabulate(5)(i => alphabet((code >> (2 * i)) & 3))
+        McmcDiagnostics.sortedIndices(x).toVector shouldBe x.indices.toArray.sortBy(x(_)).toVector
+        McmcDiagnostics.sortedValues(x).map(java.lang.Double.doubleToRawLongBits).toVector shouldBe
+          x.sorted.map(java.lang.Double.doubleToRawLongBits).toVector
+      }
+    }
+
+    "preserve the old rank normalization at every position for ties and extreme scales" in {
+      def oldRanks(chains: Array[Array[Double]]): Array[Array[Double]] = {
+        val values = chains.flatten
+        val order = values.indices.toArray.sortBy(values(_))
+        val result = new Array[Double](values.length)
+        val normal = new org.apache.commons.math3.distribution.NormalDistribution(0, 1)
+        var first = 0
+        while (first < order.length) {
+          var end = first + 1
+          while (end < order.length && values(order(end)) == values(order(first))) end += 1
+          val rank = (first + 1.0 + end) / 2.0
+          val score = normal.inverseCumulativeProbability((rank - 0.375) / (values.length + 0.25))
+          (first until end).foreach(i => result(order(i)) = score)
+          first = end
+        }
+        result.grouped(chains.head.length).map(_.toArray).toArray
+      }
+      def bits(x: Array[Array[Double]]) = x.map(_.map(java.lang.Double.doubleToRawLongBits).toVector).toVector
+      val random = new java.util.Random(882090L)
+      for (n <- Vector(4, 5, 7, 8, 9, 31, 32, 33, 255, 256, 257, 1023, 1024, 1025, 2000);
+        kind <- 0 until 4) {
+        val chains = Array.fill(4)(Array.fill(n)(kind match {
+          case 0 => random.nextGaussian()
+          case 1 => random.nextInt(7).toDouble
+          case 2 => if (random.nextBoolean()) -0.0 else 0.0
+          case _ => java.lang.Math.scalb(random.nextGaussian(), if (random.nextBoolean()) -1022 else 1000)
+        }))
+        val before = bits(chains)
+        bits(McmcDiagnostics.rankNormalize(chains)) shouldBe bits(oldRanks(chains))
+        bits(chains) shouldBe before
+      }
+    }
+
+    "isolate ranking buffers between callers and preserve sorting cancellation flags" in {
+      val pool = java.util.concurrent.Executors.newFixedThreadPool(4)
+      val input = Array.tabulate(4)(c => Array.tabulate(1025)(i => ((i * 7 + c) % 31).toDouble))
+      def ranked() = McmcDiagnostics.rankNormalize(input).map(_.toVector).toVector
+      val expected = ranked()
+      try {
+        val futures = Vector.fill(16)(pool.submit(new java.util.concurrent.Callable[Vector[Vector[Double]]] {
+          def call(): Vector[Vector[Double]] = ranked()
+        }))
+        futures.foreach(_.get(10, java.util.concurrent.TimeUnit.SECONDS) shouldBe expected)
+        val mutated = McmcDiagnostics.rankNormalize(input)
+        mutated(0)(0) = -123.0
+        ranked() shouldBe expected
+      } finally {
+        pool.shutdownNow()
+        pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS) shouldBe true
+      }
+      try {
+        Thread.currentThread().interrupt()
+        intercept[InterruptedException](McmcDiagnostics.sortedValues(input(0)))
+        intercept[InterruptedException](McmcDiagnostics.sortedIndices(input(0)))
+        intercept[InterruptedException](McmcDiagnostics.rankNormalize(input))
+        Thread.currentThread().isInterrupted shouldBe true
+      } finally Thread.interrupted()
+    }
+
     "match the former Complex-array autocovariance at every lag without mutating inputs" in {
       def oldAutocovariance(x: Array[Double]): Array[Double] = {
         var length = 1

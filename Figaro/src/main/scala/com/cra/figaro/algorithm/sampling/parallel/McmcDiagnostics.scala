@@ -51,7 +51,7 @@ object McmcDiagnostics {
     val splitRaw = split(raw)
     interrupted()
     val ranked = rankNormalize(splitRaw)
-    val sortedScaled = scaled.sorted
+    val sortedScaled = sortedValues(scaled)
     interrupted()
     val lowerMedian = sortedScaled((flat.length - 1) / 2)
     val upperMedian = sortedScaled(flat.length / 2)
@@ -64,7 +64,7 @@ object McmcDiagnostics {
     val rhats = Vector(rhat(ranked), rhat(rankNormalize(split(folded)))).flatten
     val rh = if (rhats.isEmpty) None else Some(rhats.max)
     val bulk = ess(ranked)
-    val sorted = flat.sorted
+    val sorted = sortedValues(flat)
     interrupted()
     val tails = Vector(0.05, 0.95).map { p =>
       val cut = quantile(sorted, p)
@@ -119,10 +119,67 @@ object McmcDiagnostics {
     // Convex combination avoids overflow in subtracting opposite-sign extreme values.
     sorted(lo) * (1 - weight) + sorted(math.min(lo + 1, sorted.length - 1)) * weight
   }
-  private def rankNormalize(chains: Array[Array[Double]]): Array[Array[Double]] = {
+  // Internal finite-value helpers, package-visible only for exact regression checks.
+  private[figaro] def sortedValues(values: Array[Double]): Array[Double] = {
+    interrupted()
+    val result = values.clone()
+    java.util.Arrays.sort(result)
+    interrupted()
+    result
+  }
+
+  private[figaro] def sortedIndices(values: Array[Double]): Array[Int] = {
+    interrupted()
+    val n = values.length
+    var order = new Array[Int](n)
+    var scratch = new Array[Int](n)
+    var i = 0
+    while (i < n) {
+      if ((i & 1023) == 0) interrupted()
+      order(i) = i
+      i += 1
+    }
+    // Stable bottom-up merge over primitive indices. Choose the left index on
+    // equal keys, matching sortBy's order without boxed indices/comparator keys.
+    // Double.compare retains the existing total ordering of finite signed zeros;
+    // rankNormalize's separate == tie test still groups -0.0 with +0.0.
+    var width = 1
+    while (width < n) {
+      interrupted()
+      var start = 0
+      while (start < n) {
+        val middle = math.min(n.toLong, start.toLong + width).toInt
+        val end = math.min(n.toLong, start.toLong + 2L * width).toInt
+        var left = start
+        var right = middle
+        var out = start
+        while (out < end) {
+          if ((out & 1023) == 0) interrupted()
+          if (left < middle && (right >= end ||
+            java.lang.Double.compare(values(order(left)), values(order(right))) <= 0)) {
+            scratch(out) = order(left)
+            left += 1
+          } else {
+            scratch(out) = order(right)
+            right += 1
+          }
+          out += 1
+        }
+        start = end
+      }
+      val previous = order
+      order = scratch
+      scratch = previous
+      width = math.min(n.toLong, 2L * width).toInt
+    }
+    interrupted()
+    order
+  }
+
+  private[figaro] def rankNormalize(chains: Array[Array[Double]]): Array[Array[Double]] = {
     interrupted()
     val values = chains.flatten
-    val order = values.indices.toArray.sortBy(values(_))
+    val order = sortedIndices(values)
     val result = new Array[Double](values.length)
     val normal = new NormalDistribution(0, 1)
     var first = 0
