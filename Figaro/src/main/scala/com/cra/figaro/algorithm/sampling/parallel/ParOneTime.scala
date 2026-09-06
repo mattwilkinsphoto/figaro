@@ -26,7 +26,7 @@ trait ParOneTime extends ParSamplingAlgorithm with OneTime {
   /**
    * Run the algorithms in parallel, performing their computations to completion.
    */
-  override def run() = parAlgs foreach (_.run())
+  override def run(): Unit = foreachAlgorithm(_.asInstanceOf[OneTime].run())
 
   /** Specify delegation of algorithm management to ParSamplingAlgorithm **/
   override protected[algorithm] def doStart(): Unit = super[ParSamplingAlgorithm].doStart()

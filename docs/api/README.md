@@ -3,7 +3,7 @@
 
 [User guide](../USER_GUIDE.md) · [Practical API guide](../API_GUIDE.md) · [Build instructions](../BUILDING.md)
 
-Compiler-derived inventory: **11233 public method entries** from **693 Scala 3 API pages**. Excluded 748 protected/private method entries. Overloads have separate entries.
+Compiler-derived inventory: **11237 public method entries** from **693 Scala 3 API pages**. Excluded 752 protected/private method entries. Overloads have separate entries.
 
 Scope: every public `def` exposed on the generated `com.cra.figaro` API pages, including abstract methods and compiler-generated methods shown by Scaladoc. Inherited members are included wherever Scaladoc renders them. Fields, type aliases, primary constructor signatures, inheritance diagrams, and members hidden by Scaladoc remain available in the linked full API site; this handbook does not reclassify them as functions.
 
@@ -15,7 +15,7 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 
 ## Packages and owners
 
-- [com.cra.figaro](com.cra.figaro.md) — 21 methods
+- [com.cra.figaro](com.cra.figaro.md) — 22 methods
 - [com.cra.figaro.algorithm](com.cra.figaro.algorithm.md) — 484 methods
 - [com.cra.figaro.algorithm.decision](com.cra.figaro.algorithm.decision.md) — 267 methods
 - [com.cra.figaro.algorithm.decision.index](com.cra.figaro.algorithm.decision.index.md) — 32 methods
@@ -30,7 +30,7 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 - [com.cra.figaro.algorithm.learning](com.cra.figaro.algorithm.learning.md) — 94 methods
 - [com.cra.figaro.algorithm.online](com.cra.figaro.algorithm.online.md) — 8 methods
 - [com.cra.figaro.algorithm.sampling](com.cra.figaro.algorithm.sampling.md) — 532 methods
-- [com.cra.figaro.algorithm.sampling.parallel](com.cra.figaro.algorithm.sampling.parallel.md) — 48 methods
+- [com.cra.figaro.algorithm.sampling.parallel](com.cra.figaro.algorithm.sampling.parallel.md) — 49 methods
 - [com.cra.figaro.algorithm.structured](com.cra.figaro.algorithm.structured.md) — 90 methods
 - [com.cra.figaro.algorithm.structured.algorithm](com.cra.figaro.algorithm.structured.algorithm.md) — 418 methods
 - [com.cra.figaro.algorithm.structured.algorithm.flat](com.cra.figaro.algorithm.structured.algorithm.flat.md) — 100 methods
@@ -46,7 +46,7 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 - [com.cra.figaro.experimental.marginalmap](com.cra.figaro.experimental.marginalmap.md) — 250 methods
 - [com.cra.figaro.experimental.normalproposals](com.cra.figaro.experimental.normalproposals.md) — 365 methods
 - [com.cra.figaro.experimental.particlebp](com.cra.figaro.experimental.particlebp.md) — 76 methods
-- [com.cra.figaro.language](com.cra.figaro.language.md) — 1919 methods
+- [com.cra.figaro.language](com.cra.figaro.language.md) — 1921 methods
 - [com.cra.figaro.library.atomic.continuous](com.cra.figaro.library.atomic.continuous.md) — 1391 methods
 - [com.cra.figaro.library.atomic.discrete](com.cra.figaro.library.atomic.discrete.md) — 718 methods
 - [com.cra.figaro.library.cache](com.cra.figaro.library.cache.md) — 28 methods

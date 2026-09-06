@@ -11,7 +11,7 @@ Prerequisites: Git, JDK 17 on your path, and an sbt runner. sbt downloads the co
 1. Get the Scala 3 branch:
 
    ```sh
-   git clone --branch modernize/deprecation-retirement https://github.com/mattwilkinsphoto/figaro.git
+   git clone --branch modernize/parallel-performance https://github.com/mattwilkinsphoto/figaro.git
    cd figaro
    ```
 
@@ -37,7 +37,7 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.2-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.3-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
@@ -48,7 +48,8 @@ That coordinate resolves only after local publication, unless you separately pub
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.
 - [Complete public-method reference](docs/api/README.md): compiler-derived signatures, parameter lists, returns, and invocation templates, including advanced and experimental APIs.
 - [Migration changes](docs/MIGRATION.md): breaking changes, accepted workarounds, remaining risks, and upgrade checklist.
-- [Deprecation retirement](docs/DEPRECATION_RETIREMENT.md): current API replacements, lazy-collection behavior, and the following parallel-performance investigation.
+- [Deprecation retirement](docs/DEPRECATION_RETIREMENT.md): API replacements and lazy-collection behavior.
+- [Parallel Monte Carlo](docs/PARALLEL_PERFORMANCE.md): opt-in seeded importance sampling, worker ownership, benchmarks, and limitations.
 - [Build and verification](docs/BUILDING.md): sbt 2 commands, tests, coverage, publication, documentation generation, and Windows troubleshooting.
 - [Library module](Figaro/README.md) and [examples module](FigaroExamples/README.md).
 - [Engineering history](MODERNIZATION.md), [dependency inventory](DEPENDENCIES.md), and [JVM integration](CONSUMER_BOUNDARY.md).

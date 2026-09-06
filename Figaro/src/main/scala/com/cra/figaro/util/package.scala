@@ -40,17 +40,26 @@ package object util {
   def setSeed(s: Long): Unit = { seed = s }
 
   def getSeed(): Long = { seed }
-  private var nextHashCode = 0
+  private val nextHashCode = new java.util.concurrent.atomic.AtomicInteger(0)
 
   def getNextHashCode: Int = {
-    nextHashCode += 1
-    nextHashCode %= Int.MaxValue - 1
-    nextHashCode
+    nextHashCode.updateAndGet(n => (n + 1) % (Int.MaxValue - 1))
   }
 
   var seed = System.currentTimeMillis()
 
-  lazy val random = new scala.util.Random(seed)
+  lazy val random: scala.util.Random = RandomContext.global(seed)
+
+  /** Evaluate synchronous code with a fresh, thread-confined random stream.
+   * Nested scopes and exceptions restore the previous stream. Child threads do not inherit it.
+   * Outside this scope, the legacy shared generator and its seed behavior are unchanged.
+   * @param seed seed for this invocation's java.util.Random stream
+   * @param body computation to run on the calling thread; consume lazy random results inside the scope
+   * @return the result of body; exceptions propagate after restoring the prior stream
+   * @example `val draw = withRandomSeed(42L) { random.nextDouble() }`
+   */
+  def withRandomSeed[A](seed: Long)(body: => A): A =
+    RandomContext.withRandom(new java.util.Random(seed))(body)
 
   /**
    * Computes and returns the argument, timing how long it takes to produce the answer and printing
@@ -299,4 +308,3 @@ package object util {
     else
       logp
 }
-

@@ -44,6 +44,9 @@ abstract class Importance(universe: Universe, targets: Element[?]*)
   private var numSamples = 0
   def getSamples() = numSamples
 
+  /** Extension hook invoked for every attempt, including retries after rejected evidence. */
+  protected def checkSamplingInterrupted(): Unit = ()
+
   override protected def resetCounts(): Unit = {
     super.resetCounts()
     numRejections = 0
@@ -63,6 +66,7 @@ abstract class Importance(universe: Universe, targets: Element[?]*)
    * on all elements in the Universe, including those that depend on this element.
    */
   @tailrec final def sample(): Sample = {
+    checkSamplingInterrupted()
     /*
      * We need to recreate the activeElements each sample, because non-temporary elements may have been made active
      * in a previous iteration. See the relevant test in ImportanceTest.

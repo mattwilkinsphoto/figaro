@@ -96,7 +96,7 @@ The proposed investigation will:
 4. Compare independent chains/replicates, bounded worker pools, and batched work where mathematically appropriate. Do not assume steps within a dependent Markov chain can simply run concurrently.
 5. Require repeatable scaling measurements and statistical-equivalence checks before accepting an optimization. Preserve a sequential reference and avoid nested oversubscription.
 
-This records the next investigation; the deprecation stage does not add parallel sampling or change the random-number architecture.
+This records the next investigation; the deprecation stage does not add parallel sampling or change the random-number architecture. Its implementation now has a separate [parallel-performance guide](PARALLEL_PERFORMANCE.md), branch, and opt-in API.
 
 ## Related
 

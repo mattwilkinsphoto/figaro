@@ -62,6 +62,8 @@ Observation, intervention, and direct state assignment have different meanings. 
 
 ## Algorithm factories and lifecycle
 
+For bounded parallel importance sampling and synchronous seed scopes, see the [parallel API reference](PARALLEL_PERFORMANCE.md#api-reference). It covers `ParImportance.seeded`, `withRandomSeed`, and the scoped default-universe accessors, including parameter/return contracts and runnable examples.
+
 Imports: `algorithm.factored.VariableElimination` and `algorithm.sampling.Importance`.
 
 | Entry point | Parameters | Returns | Example |

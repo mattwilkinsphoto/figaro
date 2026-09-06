@@ -504,3 +504,29 @@ Invocation template:
 ```scala
 receiver.upperTriangle[T](list)
 ```
+
+## `` .withRandomSeed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util.html#withRandomSeed-fffffa4e)
+
+```scala
+def withRandomSeed[A](seed: Long)(body: => A): A
+```
+
+Evaluate synchronous code with a fresh, thread-confined random stream. Nested scopes and exceptions restore the previous stream. Child threads do not inherit it. Outside this scope, the legacy shared generator and its seed behavior are unchanged.
+
+Type parameters: `` A ``.
+
+Parameters, list 1: `` seed: Long ``.
+
+Parameters, list 2: `` body: => A ``.
+
+Returns: `` A ``.
+
+Source contract/attributes: Evaluate synchronous code with a fresh, thread-confined random stream. Nested scopes and exceptions restore the previous stream. Child threads do not inherit it. Outside this scope, the legacy shared generator and its seed behavior are unchanged. Value parameters body computation to run on the calling thread; consume lazy random results inside the scope seed seed for this invocation's java.util.Random stream Attributes Returns the result of body; exceptions propagate after restoring the prior stream Example val draw = withRandomSeed(42L) { random.nextDouble() }
+
+Invocation template:
+
+```scala
+receiver.withRandomSeed[A](seed)(body)
+```

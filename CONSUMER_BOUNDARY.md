@@ -8,7 +8,7 @@ Depend on a compiled, versioned Figaro artifact. The coordinates for the current
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.2-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.3-SNAPSHOT"
 ```
 
 Resolve this snapshot by running `sbt "figaro / publishLocal"` in the Figaro checkout, or by publishing it to a configured package repository. Local publication is not a public release. See [building and publication](docs/BUILDING.md) for repository settings and artifact contents.

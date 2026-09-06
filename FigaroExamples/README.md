@@ -45,7 +45,18 @@ val thresholdRisk = CommonPatterns.sampledThreshold(50000)
 
 The [user guide](../docs/USER_GUIDE.md#common-patterns) expands these calls into model-building and inference code, with explanations of the answers.
 
-## Gotchas
+## Parallel-performance examples
+
+Import `com.cra.figaro.example.{ParallelSamplingExample, SamplingBenchmark}`. These are the two public functions added for the performance stage; their helpers are private.
+
+| Public function | Parameters | Returns / side effects | Example |
+| --- | --- | --- | --- |
+| `ParallelSamplingExample.main(args: Array[String]): Unit` | Arguments, ignored | Runs four seeded importance workers, prints a posterior estimate, checks a broad accuracy bound, and disposes the sampler | `ParallelSamplingExample.main(Array.empty)` |
+| `SamplingBenchmark.main(args: Array[String]): Unit` | Workload `coin/evidence/normal/mh/rng`, positive sample count, positive measured repeats, comma-separated worker counts from 1 through sample count, optional `legacy/seeded`; defaults `coin 100000 3 1,2,4,8 legacy` | Prints CSV timings, estimates, and resource diagnostics; invalid input throws `IllegalArgumentException` (numeric parsing may throw its `NumberFormatException` subtype) | `SamplingBenchmark.main(Array("normal", "200000", "5", "1,2,4,8", "seeded"))` |
+
+Run with `sbt "examples / Compile / runMain com.cra.figaro.example.ParallelSamplingExample"`. The [performance guide](../docs/PARALLEL_PERFORMANCE.md) explains benchmark forking, warm-up, metric limitations, and all three common workflows. This benchmark is diagnostic, not a wall-clock CI gate or a general parallel-MCMC API. It uses HotSpot-compatible management beans and should run in a dedicated JVM, not alongside application models.
+
+## Gotchas (all examples)
 
 - Use an explicit `runMain` class name. There are many historical entry points; `run` may prompt you to choose one.
 - Compilation does not establish that every historical example finishes quickly, has its required input files, or matches modern behavior. Some learning examples are very expensive and Swing examples need a graphical environment.

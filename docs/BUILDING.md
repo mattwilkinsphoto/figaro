@@ -33,7 +33,7 @@ Outputs are under `target/out/jvm/scala-3.9.0/figaro/`:
 
 | Artifact suffix | Purpose |
 | --- | --- |
-| `figaro_3-6.0.0-modern.2-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
+| `figaro_3-6.0.0-modern.3-SNAPSHOT.jar` | Thin library JAR; use dependency resolution for its runtime dependencies |
 | `-sources.jar` | Library Scala sources |
 | `-javadoc.jar` | Generated Scala 3 API documentation |
 | `-fat.jar` | Library plus assembled dependencies, **excluding Scala runtime**; not a `java -jar` application |
@@ -72,6 +72,10 @@ sbt "clean; figaro / Compile / packageBin; figaro / assembly"
 This smoke run verifies instrumentation/reporting, not broad coverage. Inspect the reported XML/HTML/Cobertura locations in sbt output. Never publish instrumentation-bearing artifacts.
 
 The clean, cache-bypassed coverage build is intentional: a warmed CI run restored instrumented classes without the required `scoverage-data` directory, causing `FileNotFoundException` before any test could run. Recompiling coverage outputs avoids relying on cached compiler side effects. This is separate from Windows JAR locking; creating an empty directory alone would not establish that report metadata is complete.
+
+## Parallel-performance checks
+
+Run `sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.ParallelPerformanceRegressionTest"` for RNG isolation, worker ownership, exact budget allocation, weighting, failure cleanup, and cooperative cancellation. Run `sbt "examples / Compile / runMain com.cra.figaro.example.ParallelSamplingExample"` for the user-facing example. The [benchmark guide](PARALLEL_PERFORMANCE.md#3-measure-before-choosing-a-worker-count) supplies reproducible performance commands; timings do not gate CI.
 
 ## Build helper reference
 

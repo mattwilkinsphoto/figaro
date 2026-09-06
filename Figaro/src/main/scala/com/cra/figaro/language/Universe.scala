@@ -349,12 +349,35 @@ class Universe(val parentElements: List[Element[?]] = List()) extends ElementCol
 }
 
 object Universe {
-  /**
-   * The current universe.
-   * Most of the time, you don't need to specify the universe and can use the current universe as
-   * default.
+  private class Scope(var value: Universe)
+  private val localUniverse = new ThreadLocal[Scope]
+  @volatile private var defaultUniverse: Universe = new Universe
+
+  /** The implicit default universe: worker-local inside a seeded sampler, otherwise process-wide.
+   * @return the current universe; this getter has no parameters
+   * @example `val current = Universe.universe`
    */
-  implicit var universe: Universe = new Universe
+  implicit def universe: Universe = {
+    val local = localUniverse.get()
+    if (local == null) defaultUniverse else local.value
+  }
+
+  /** Set the current universe; in a worker scope this changes only that thread's default.
+   * @param value the universe to use as the implicit default
+   * @return Unit
+   * @example `Universe.universe = new Universe`
+   */
+  def universe_=(value: Universe): Unit = {
+    val local = localUniverse.get()
+    if (local == null) defaultUniverse = value else local.value = value
+  }
+
+  private[figaro] def withUniverse[A](value: Universe)(body: => A): A = {
+    val previous = localUniverse.get()
+    localUniverse.set(new Scope(value))
+    try body
+    finally { if (previous == null) localUniverse.remove() else localUniverse.set(previous) }
+  }
 
   /**
    * Create a new universe and set it to the default.

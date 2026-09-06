@@ -1,6 +1,17 @@
 # Migrating to Scala 3 and sbt 2
 
-The current follow-up is [deprecation retirement](DEPRECATION_RETIREMENT.md) on `modernize/deprecation-retirement`, with snapshot `6.0.0-modern.2-SNAPSHOT`. It keeps Scala 3.9.0, sbt 2.0.8, and JDK 17 fixed, replaces `Stream` with `LazyList`, and removes the obsolete Figaro entry points listed there. Recompile consumers and use that snapshot for this branch. The tables below describe the earlier upgrade checkpoints.
+The current follow-up is [parallel Monte Carlo performance](PARALLEL_PERFORMANCE.md) on `modernize/parallel-performance`, with snapshot `6.0.0-modern.3-SNAPSHOT`. Scala 3.9.0, sbt 2.0.8, and JDK 17 remain fixed. This includes the earlier [deprecation retirement](DEPRECATION_RETIREMENT.md); obsolete APIs remain removed and deprecations still fail compilation. Recompile consumers and use this snapshot for this branch. The tables below describe earlier upgrade checkpoints.
+
+## Parallel-performance changes
+
+- `ParImportance.seeded` is an opt-in, blocking, one-time sampler with a bounded private executor, worker-local random streams, and scoped default universes. Existing `ParImportance.apply` overloads remain available; they do not acquire the new isolation contract. Put evidence in the seeded model factory; incremental `probabilityOfEvidence` is not part of the new return type.
+- Both one-time factories now use the entire sample budget, distribute remainder samples, and cap workers at the sample count. Invalid worker/sample counts throw `IllegalArgumentException` before constructing models. This intentionally changes results that previously dropped the remainder or created zero-work workers.
+- Parallel lifecycle delegation now calls each child's public `start/stop/resume/kill`, preserving active flags and importance-cache deregistration. Custom subclasses that depended on bypassed public lifecycle overrides need review.
+- `util.random` remains a stable `scala.util.Random`. New `withRandomSeed(seed)(body)` temporarily routes it on the calling thread and restores the previous stream afterward. Unscoped sequences are regression-tested against Scala's RNG; user-created RNGs and asynchronous work are not scoped.
+- `Universe.universe` is now an implicit getter plus setter backed by a process default and private thread scopes. Ordinary reads and assignments retain source spelling, but reflection/TASTy consumers must account for the former `var` becoming accessor methods. Outside the seeded sampler, default-universe mutation remains process-wide. Hash allocation is atomic; that alone does not make universes thread-safe.
+- Cancellation is cooperative, including importance rejection retries. Do not call lifecycle/query methods concurrently; interrupt the thread blocked in `start()` to request cancellation. Uninterruptible user callbacks cannot be forcibly stopped. See the complete [contracts and gotchas](PARALLEL_PERFORMANCE.md#gotchas).
+
+This is not a blanket thread-safety upgrade for every inference, learning, or filtering algorithm. The benchmark demonstrates independent MCMC chains, not concurrent steps within a dependent chain.
 
 ## Overview
 

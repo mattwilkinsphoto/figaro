@@ -186,3 +186,19 @@ Artifact validation:
 Windows build caveat: switching normal and coverage compilation inside one sbt JVM can leave the exported project JAR open and fail replacement with `AccessDeniedException`. Use a fresh sbt invocation for coverage, and another fresh invocation for `clean` plus normal packaging. This does not require disabling forked tests, changing file ownership, or granting administrator membership.
 
 References: [Scala 3.9.0 LTS download](https://www.scala-lang.org/download/), [runtime compatibility](https://docs.scala-lang.org/scala3/guides/migration/compatibility-runtime.html), [migration-mode tooling](https://docs.scala-lang.org/scala3/guides/migration/tooling-migration-mode.html), [higher-kinded wildcard restriction](https://docs.scala-lang.org/scala3/reference/error-codes/E043.html).
+
+## Stage 6: deprecation retirement
+
+The [deprecation-retirement guide](docs/DEPRECATION_RETIREMENT.md) records source/API replacements and verification at `55adc816`. Its [required CI run](https://github.com/mattwilkinsphoto/figaro/actions/runs/33997021717) passed; the separate legacy collection-timing advisory retained a failure. This is the parent checkpoint for the performance work.
+
+## Stage 7: parallel Monte Carlo performance
+
+Branch: `modernize/parallel-performance`; snapshot: `6.0.0-modern.3-SNAPSHOT`. The [performance guide](docs/PARALLEL_PERFORMANCE.md) provides the public contracts, runnable quick start, complete metric definitions, and [sanitized measured rounds](docs/performance-results.csv).
+
+The opt-in `ParImportance.seeded` factory uses bounded worker execution, worker-owned universes and RNG streams, exact sample-budget partitioning, and weight-aware aggregation. Thread scopes restore RNG/default-universe state on exit. Public child lifecycle delegation now preserves activation and importance-cache deregistration. Cooperative cancellation includes rejected-sample retries; factory failures undo registrations already created by that factory. Uninterruptible callbacks, arbitrary shared model state, and other inference algorithms remain outside the isolation guarantee.
+
+Profiling and repeated workload grids support removing shared-RNG contention, but scaling is model-dependent: the final Gaussian grid improves eight-worker sampling from 464.65 ms (legacy median) to 281.34 ms (scoped median); simple coin models plateau near two workers. Independent MH chains are benchmarked without parallelizing dependent chain steps or introducing a general multi-chain API. Allocation/traversal hot spots are the next measured candidates.
+
+Broader statistical check: an initial 233-test selection passed 230 tests, with two legacy importance estimates outside tolerance and a learning-statistics failure. Both importance failures passed isolated repeats without changed tolerances or budgets. `EMWithImportanceTest` failed again on a different learned-statistic check; this stage does not certify that learning test or claim every historical failure is unchanged. The new parallel regression suite passes 16 tests, including nested/global RNG compatibility, scoped callbacks and dynamic models, budgeting, weighted estimates, lifecycle cleanup, construction failures, and interruption of endless rejection.
+
+The maintained 143-test acceptance selection, three user examples, 12 documentation-tool tests, generated-reference freshness, and local links pass. The 19 probability/parallel tests also pass under coverage instrumentation. A fresh non-instrumented build produces thin/fat/source/API JARs with legal entries preserved and no test/coverage runtime in the binary artifacts; isolated local publication succeeds. Required CI repeats acceptance and verifies byte-for-byte fresh binary rebuilds before merge.

@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "pages": 693,
-  "excluded_nonpublic": 748,
+  "excluded_nonpublic": 752,
   "methods": [
     {
       "owner": "com.cra.figaro.algorithm.Abstraction",
@@ -53342,6 +53342,31 @@
       "summary": "Use parallel IS to compute the probability that the given reference element has the given value.",
       "contract": "Use parallel IS to compute the probability that the given reference element has the given value. Attributes",
       "example": "com.cra.figaro.algorithm.sampling.parallel.ParImportance.probability[T](generator, numThreads, target, value)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/ParImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.ParImportance",
+      "name": "seeded",
+      "anchor": "seeded-fffffcf2",
+      "signature": "def seeded(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long, targets: Reference[_]*): ParSampler & ParOneTime",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "generator: () => Universe",
+            "numThreads: Int",
+            "numSamples: Int",
+            "seed: Long",
+            "targets: Reference[_]*"
+          ]
+        }
+      ],
+      "returns": "ParSampler & ParOneTime",
+      "summary": "Create a blocking importance sampler with a bounded private pool and worker-local RNGs. Model factories run serially in isolated default-universe/RNG scopes; sampling runs in parallel. Each worker retains one RNG across lifecycle phases. A fresh factory call replays its seed assignment, not necessarily identical model traversal or floating-point results. Changing worker count changes streams/budgets. Put evidence in generator; this overload does not provide incremental probabilityOfEvidence. Call start, query, then kill in try/finally. Do not concurrently call lifecycle/query methods. Callbacks must cooperate with interruption; arbitrary non-interruptible user code cannot be forcibly stopped.",
+      "contract": "Create a blocking importance sampler with a bounded private pool and worker-local RNGs. Model factories run serially in isolated default-universe/RNG scopes; sampling runs in parallel. Each worker retains one RNG across lifecycle phases. A fresh factory call replays its seed assignment, not necessarily identical model traversal or floating-point results. Changing worker count changes streams/budgets. Put evidence in generator; this overload does not provide incremental probabilityOfEvidence. Call start, query, then kill in try/finally. Do not concurrently call lifecycle/query methods. Callbacks must cooperate with interruption; arbitrary non-interruptible user code cannot be forcibly stopped. Value parameters generator creates a fresh universe with all evidence; never share mutable model nodes between workers numSamples positive total sample budget, including any remainder numThreads positive maximum number of worker threads (capped at numSamples) seed root seed deterministically expanded into one java.util.Random seed per worker targets references resolved separately in each generated universe Attributes Returns a one-time parallel sampler; kill releases its executor and child sampler resources Example val alg = ParImportance.seeded(makeModel, 4, 100000, 42L, \"query\")",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.ParImportance.seeded(generator, numThreads, numSamples, seed, targets*)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/parallel/ParImportance$.html"
     },
@@ -132582,6 +132607,41 @@
     },
     {
       "owner": "com.cra.figaro.language.Universe",
+      "name": "universe_=",
+      "anchor": "universe_=-25c",
+      "signature": "def universe_=(value: Universe): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Universe"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the current universe; in a worker scope this changes only that thread's default.",
+      "contract": "Set the current universe; in a worker scope this changes only that thread's default. Value parameters value the universe to use as the implicit default Attributes Returns Unit Example Universe.universe = new Universe",
+      "example": "com.cra.figaro.language.Universe.universe_=(value)",
+      "object": true,
+      "page": "com/cra/figaro/language/Universe$.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.Universe",
+      "name": "universe",
+      "anchor": "universe-0",
+      "signature": "implicit def universe: Universe",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Universe",
+      "summary": "The implicit default universe: worker-local inside a seeded sampler, otherwise process-wide.",
+      "contract": "The implicit default universe: worker-local inside a seeded sampler, otherwise process-wide. Attributes Returns the current universe; this getter has no parameters Example val current = Universe.universe",
+      "example": "com.cra.figaro.language.Universe.universe",
+      "object": true,
+      "page": "com/cra/figaro/language/Universe$.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.Universe",
       "name": "activeElements",
       "anchor": "activeElements-0",
       "signature": "def activeElements: List[Element[_]]",
@@ -204806,6 +204866,35 @@
       "summary": "Computes all pairs of elements in the list in which the first element appears before the second.",
       "contract": "Computes all pairs of elements in the list in which the first element appears before the second. Attributes",
       "example": "receiver.upperTriangle[T](list)",
+      "object": false,
+      "page": "com/cra/figaro/util.html"
+    },
+    {
+      "owner": "",
+      "name": "withRandomSeed",
+      "anchor": "withRandomSeed-fffffa4e",
+      "signature": "def withRandomSeed[A](seed: Long)(body: => A): A",
+      "type_parameters": [
+        "A"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "seed: Long"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "body: => A"
+          ]
+        }
+      ],
+      "returns": "A",
+      "summary": "Evaluate synchronous code with a fresh, thread-confined random stream. Nested scopes and exceptions restore the previous stream. Child threads do not inherit it. Outside this scope, the legacy shared generator and its seed behavior are unchanged.",
+      "contract": "Evaluate synchronous code with a fresh, thread-confined random stream. Nested scopes and exceptions restore the previous stream. Child threads do not inherit it. Outside this scope, the legacy shared generator and its seed behavior are unchanged. Value parameters body computation to run on the calling thread; consume lazy random results inside the scope seed seed for this invocation's java.util.Random stream Attributes Returns the result of body; exceptions propagate after restoring the prior stream Example val draw = withRandomSeed(42L) { random.nextDouble() }",
+      "example": "receiver.withRandomSeed[A](seed)(body)",
       "object": false,
       "page": "com/cra/figaro/util.html"
     },

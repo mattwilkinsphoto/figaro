@@ -31,14 +31,14 @@ You need JDK 17 and an sbt runner. The repository pins its sbt/compiler/plugin v
 
    ```scala
    scalaVersion := "3.9.0"
-   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.2-SNAPSHOT"
+   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.3-SNAPSHOT"
    ```
 
 3. Compile your application on JDK 17 and use the imports below.
 
 `%%` selects the Scala binary suffix `_3`. Local publication normally uses the user's Ivy local repository; an isolated `sbt.ivy.home` changes that location. Producer and consumer must use the same repository. This snapshot is not promised on Maven Central. An unresolved dependency usually means it was not published into the consumer's repository. For a team/deployment, publish a versioned prerelease to your chosen repository rather than copying source or depending on a workstation path.
 
-Java/Maven consumers use `io.github.mattwilkinsphoto:figaro_3:6.0.0-modern.2-SNAPSHOT` and the POM dependencies. The API is Scala-shaped (functions, contexts, collections); a small Scala facade can provide a simpler Java boundary. A dedicated Java compatibility test has not been performed.
+Java/Maven consumers use `io.github.mattwilkinsphoto:figaro_3:6.0.0-modern.3-SNAPSHOT` and the POM dependencies. The API is Scala-shaped (functions, contexts, collections); a small Scala facade can provide a simpler Java boundary. A dedicated Java compatibility test has not been performed.
 
 Prefer the normal library JAR. The `-fat.jar` bundles non-Scala runtime libraries but deliberately **omits the Scala runtime**, and is not a standalone executable application. Do not put both the thin JAR with its dependencies and the fat JAR on one classpath.
 
@@ -121,8 +121,10 @@ Omitting the sample count (`Importance(target)`) creates an anytime worker that 
 
 ## Gotchas
 
+For concurrent Monte Carlo, start with the opt-in [seeded parallel importance sampler](PARALLEL_PERFORMANCE.md). It owns separate models and random streams per worker. More workers are not always faster; use its tuning workflow before increasing concurrency.
+
 - **Global mutable default universe:** `Universe.createNew()` replaces the default; it does not dispose of every previous model/worker. Finish active algorithms first. Keep model construction and inference in the intended universe. Use explicit universes or dedicated parallel algorithms for independent concurrent models; the worker queue does not make arbitrary external mutation thread-safe.
-- **Names are not values:** `Flip(0.2)("cause", universe)` names a node for references/learning without changing outcomes. Ambiguous repeated names can make reference-based code surprising.
+- **Names are not values:** `Flip(0.2)(using "cause", universe)` names a node for references/learning without changing outcomes. Ambiguous repeated names can make reference-based code surprising.
 - **Probability is not density:** for continuous quantities, ask a predicate such as `t > 21`. Equality to a sampled floating-point value is usually not the desired question.
 - **Normal takes variance, not standard deviation:** `Normal(20, 4)` has standard deviation 2. Validate probabilities, positive variances/shapes, and supported outcomes yourself; early validation is not uniform across legacy constructors.
 - **Impossible evidence cannot define a useful posterior:** zero total mass cannot be normalized. Diagnose the model instead of accepting `NaN`, zero successful samples, or an exception as an answer.

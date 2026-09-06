@@ -24,7 +24,9 @@ trait ParSamplingAlgorithm extends Algorithm {
 
   protected val parAlgs: ParSeq[Algorithm]
 
-  private def call(func: (Algorithm) => Unit) = parAlgs foreach func
+  protected def foreachAlgorithm(func: Algorithm => Unit): Unit = parAlgs.foreach(func)
+
+  private def call(func: Algorithm => Unit): Unit = foreachAlgorithm(func)
 
   /**
    * Calls initialize() on all algorithms.
@@ -36,11 +38,11 @@ trait ParSamplingAlgorithm extends Algorithm {
    */
   override def cleanUp(): Unit = call(_.cleanUp())
 
-  protected[algorithm] def doStart(): Unit = call(_.doStart())
+  protected[algorithm] def doStart(): Unit = call(_.start())
 
-  protected[algorithm] def doStop(): Unit = call(_.doStop())
+  protected[algorithm] def doStop(): Unit = call(_.stop())
 
-  protected[algorithm] def doResume(): Unit = call(_.doResume())
+  protected[algorithm] def doResume(): Unit = call(_.resume())
 
-  protected[algorithm] def doKill(): Unit = call(_.doKill())
+  protected[algorithm] def doKill(): Unit = call(_.kill())
 }

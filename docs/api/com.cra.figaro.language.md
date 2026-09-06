@@ -45633,6 +45633,54 @@ Invocation template:
 com.cra.figaro.language.Universe.createNew()
 ```
 
+## `` com.cra.figaro.language.Universe.universe_= ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/Universe$.html#universe_=-25c)
+
+```scala
+def universe_=(value: Universe): Unit
+```
+
+Set the current universe; in a worker scope this changes only that thread's default.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Universe ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the current universe; in a worker scope this changes only that thread's default. Value parameters value the universe to use as the implicit default Attributes Returns Unit Example Universe.universe = new Universe
+
+Invocation template:
+
+```scala
+com.cra.figaro.language.Universe.universe_=(value)
+```
+
+## `` com.cra.figaro.language.Universe.universe ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/Universe$.html#universe-0)
+
+```scala
+implicit def universe: Universe
+```
+
+The implicit default universe: worker-local inside a seeded sampler, otherwise process-wide.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Universe ``.
+
+Source contract/attributes: The implicit default universe: worker-local inside a seeded sampler, otherwise process-wide. Attributes Returns the current universe; this getter has no parameters Example val current = Universe.universe
+
+Invocation template:
+
+```scala
+com.cra.figaro.language.Universe.universe
+```
+
 ## `` com.cra.figaro.language.Universe.activeElements ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/language/Universe.html#activeElements-0)
