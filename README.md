@@ -49,6 +49,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [MCMC reliability](docs/MCMC_RELIABILITY.md): understand precision failures, compare error estimates, and recognize exploration problems that a stopping rule cannot fix.
 - [Sampling research](docs/SAMPLING_RESEARCH.md): recent literature, isolated quantile/multiproposal slice prototypes, and measured limits; not a new production inference API.
 - [Matched-budget validation](docs/SAMPLING_BUDGET_VALIDATION.md): compare quantile and affine/polar research samplers with initialization-inclusive evaluation caps and explicit coverage checks.
+- [Higher-dimensional validation](docs/SAMPLING_HIGH_DIMENSIONAL.md): GPSS and quantile research at 8 and 32 dimensions, including hard constraints and asymmetric modes.
 
 - [User guide](docs/USER_GUIDE.md): concepts, common patterns, gotchas, and related modules.
 - [API guide](docs/API_GUIDE.md): practical contracts and examples for the main entry points.

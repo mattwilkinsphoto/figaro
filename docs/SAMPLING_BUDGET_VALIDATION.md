@@ -2,6 +2,10 @@
 
 ## Outcome: retain multiple candidates; do not change defaults
 
+Follow-up: [8- and 32-dimensional validation](SAMPLING_HIGH_DIMENSIONAL.md), including
+positive constraints and a harder shared-label asymmetric mixture. The results below
+remain the original two-dimensional study, not a general-purpose sampler ranking.
+
 The 6 September 2026 study completed all **600 target/method/seed experiments**, with no
 numerical/model/search failures and exactly **240 million target evaluations**. Its
 [12000 query records](sampling-budget-results.csv) cover 2400 checkpoint/selected-stop

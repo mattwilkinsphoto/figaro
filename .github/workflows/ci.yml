@@ -67,6 +67,7 @@ jobs:
           python3 -B tools/summarize_reliability.py docs/mcmc-reliability-results.csv --repetitions 60 --max-draws 48000
           python3 -B tools/summarize_sampling_research.py docs/sampling-research-results.csv --repetitions 30 --draws 12000
           python3 -B tools/summarize_sampling_budget.py docs/sampling-budget-results.csv --repetitions 30 --cap 100000
+          python3 -B tools/summarize_high_dimensional.py docs/sampling-high-dimensional-results.csv --repetitions 20 --cap 300000
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 
@@ -113,6 +114,13 @@ jobs:
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.SamplingBudgetValidation check"
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.SamplingBudgetValidation 1 30000" > "$RUNNER_TEMP/sampling-budget-smoke.log"
           python3 -B tools/summarize_sampling_budget.py "$RUNNER_TEMP/sampling-budget-smoke.log" --repetitions 1 --cap 30000
+
+      - name: Verify higher-dimensional kernels and complete budget reports
+        # Analytic invariance controls are not empirical coverage gates.
+        run: |
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.HighDimensionalSamplingValidation check"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.HighDimensionalSamplingValidation 1 20000" > "$RUNNER_TEMP/high-dimensional-smoke.log"
+          python3 -B tools/summarize_high_dimensional.py "$RUNNER_TEMP/high-dimensional-smoke.log" --repetitions 1 --cap 20000
 
       - name: Exercise representative stopping models and trapped-chain control
         # Smoke/lifecycle check only; full repeated-seed evidence is documented separately.
