@@ -1,6 +1,7 @@
 package com.cra.figaro.test.modernization
 
 import com.cra.figaro.algorithm.sampling.parallel.McmcDiagnostics
+import org.apache.commons.math3.distribution.NormalDistribution
 import org.apache.commons.math3.transform.{DftNormalization, FastFourierTransformer, TransformType}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
@@ -110,6 +111,83 @@ class McmcDiagnosticsRegressionTest extends AnyWordSpec with Matchers {
         intercept[InterruptedException](McmcDiagnostics.sortedValues(input(0)))
         intercept[InterruptedException](McmcDiagnostics.sortedIndices(input(0)))
         intercept[InterruptedException](McmcDiagnostics.rankNormalize(input))
+        Thread.currentThread().isInterrupted shouldBe true
+      } finally Thread.interrupted()
+    }
+
+    "preserve stable total ordering across the radix crossover and ordered fallback" in {
+      val random = new java.util.Random(541902L)
+      val edge = Array(-0.0, 0.0, Double.MaxValue, -Double.MaxValue, java.lang.Double.MIN_VALUE,
+        -java.lang.Double.MIN_VALUE, Double.PositiveInfinity, Double.NegativeInfinity, Double.NaN,
+        java.lang.Double.longBitsToDouble(0xfff8000000000001L))
+      for (n <- Vector(15999, 16000, 16001, 32767, 32768, 64000); kind <- 0 until 6) {
+        val x = Array.tabulate(n) { i => kind match {
+          case 0 => java.lang.Double.longBitsToDouble(random.nextLong())
+          case 1 => edge(i % edge.length)
+          case 2 => (i / 3).toDouble
+          case 3 => ((n - i) / 3).toDouble
+          case 4 => 1.0
+          case _ => if (i == n - 2) -100.0 else i.toDouble
+        }}
+        val before = x.map(java.lang.Double.doubleToRawLongBits).toVector
+        val expected = x.indices.toArray.sortWith { (i, j) =>
+          val c = java.lang.Double.compare(x(i), x(j))
+          c < 0 || (c == 0 && i < j)
+        }.toVector
+        McmcDiagnostics.sortedIndices(x).toVector shouldBe expected
+        x.map(java.lang.Double.doubleToRawLongBits).toVector shouldBe before
+      }
+    }
+
+    "preserve exact large-array midrank scores with ties and folded values" in {
+      val rng = new java.util.Random(33017L)
+      def oldRanks(chains: Array[Array[Double]]): Vector[Long] = {
+        val x = chains.flatten
+        val order = x.indices.toArray.sortBy(x(_))
+        val out = new Array[Double](x.length)
+        val normal = new NormalDistribution(0, 1)
+        var first = 0
+        while (first < order.length) {
+          var end = first + 1
+          while (end < order.length && x(order(end)) == x(order(first))) end += 1
+          val rank = (first + 1.0 + end) / 2.0
+          val z = normal.inverseCumulativeProbability((rank - 0.375) / (x.length + 0.25))
+          (first until end).foreach(i => out(order(i)) = z)
+          first = end
+        }
+        out.map(java.lang.Double.doubleToLongBits).toVector
+      }
+      for (n <- Vector(3999, 4000, 4001, 16000); kind <- 0 until 4) {
+        val chains = Array.tabulate(4, n) { (c, i) => kind match {
+          case 0 => rng.nextGaussian()
+          case 1 => if (i % 7 == 0) -0.0 else (rng.nextInt(11) - 5).toDouble
+          case 2 => math.abs(rng.nextGaussian() - 0.5)
+          case _ => (c * n + i).toDouble
+        }}
+        val before = chains.flatten.map(java.lang.Double.doubleToRawLongBits).toVector
+        McmcDiagnostics.rankNormalize(chains).flatten.map(java.lang.Double.doubleToLongBits).toVector shouldBe oldRanks(chains)
+        chains.flatten.map(java.lang.Double.doubleToRawLongBits).toVector shouldBe before
+      }
+    }
+
+    "isolate large radix calls and preserve entry interruption flags" in {
+      val x = Array.tabulate(16000)(i => math.sin(i * 0.171))
+      val expected = McmcDiagnostics.sortedIndices(x).toVector
+      val pool = java.util.concurrent.Executors.newFixedThreadPool(4)
+      try {
+        val results = Vector.fill(16)(pool.submit(new java.util.concurrent.Callable[Array[Int]] {
+          def call(): Array[Int] = McmcDiagnostics.sortedIndices(x)
+        })).map(_.get(10, java.util.concurrent.TimeUnit.SECONDS))
+        results.foreach(_.toVector shouldBe expected)
+        results.head(0) = -1
+        results.tail.foreach(_.toVector shouldBe expected)
+      } finally {
+        pool.shutdownNow()
+        pool.awaitTermination(10, java.util.concurrent.TimeUnit.SECONDS) shouldBe true
+      }
+      try {
+        Thread.currentThread().interrupt()
+        intercept[InterruptedException](McmcDiagnostics.sortedIndices(x))
         Thread.currentThread().isInterrupted shouldBe true
       } finally Thread.interrupted()
     }

@@ -36,6 +36,32 @@ Seek a material end-to-end improvement (roughly 5% or more on affected workloads
 accepting complexity; do not claim a library gain from this isolated study alone.
 
 The example entry point and candidate are investigation code, not a new inference API.
+
+## Production candidate protocol (after isolated screen)
+
+The three-JVM isolated screen completed all 3240 records. On continuous inputs, radix
+sorting gained 4.653x at 16000 values and 5.053x at 64000; full ranks gained 2.340x and
+2.552x. Small and monotone cases regressed, so do not replace every sort unconditionally.
+The production candidate retains the unchanged merge implementation below 16000 pooled
+values and for monotone/constant input. A cancellation-checked monotonicity scan exits
+as soon as both directions are disproved. Only larger nonmonotone input uses stable radix
+sorting. No normal-score, tie, FFT, estimator, sampling or callback expression changes.
+
+The allocation screen observed two index arrays plus approximately 1040 extra bytes
+for the radix counters. This is not a peak-memory guarantee. Guard scanning itself has
+a cost on ordered inputs; the end-to-end study must not hide that cost.
+
+Commit the production implementation, tests and this extension before its measurements.
+Use four balanced fresh-JVM pairs against the study's unchanged-library runtime, the same
+benchmark/dependency jars, 4000 draws, 500 warm-up, all six fixtures, both methods and
+1/2/4 workers. Retain all 2016 records and require every non-timing field/fingerprint to
+match the sorting checkpoint. Do not run builds/tests concurrently with measurement.
+
+The isolated stage labels `mergeSort`/`mergeRank` refer to the production code at
+`eda9ebba`, before this candidate. Reproduce that historical timing study using its pinned
+runtime/revision, not the changed library; otherwise those labels no longer identify a
+merge-only baseline. The `check` mode remains a valid candidate correctness smoke test.
+
 Related: [interleaved audit](INTERLEAVED_PERFORMANCE_AUDIT.md),
 [sorting checkpoint](PRIMITIVE_DIAGNOSTIC_SORTING.md), and
 [allocation profiling](VECTOR_ALLOCATION_PROFILE.md).

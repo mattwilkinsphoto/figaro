@@ -130,6 +130,74 @@ object McmcDiagnostics {
 
   private[figaro] def sortedIndices(values: Array[Double]): Array[Int] = {
     interrupted()
+    // The measured radix crossover is workload-dependent. Keep the existing path
+    // below the smallest validated large size and for monotone/constant inputs.
+    // This scan stops as soon as both monotone possibilities have been disproved.
+    if (values.length < 16000) return mergeSortedIndices(values)
+    var ascending = true
+    var descending = true
+    var i = 1
+    while (i < values.length && (ascending || descending)) {
+      if ((i & 1023) == 0) interrupted()
+      val compared = java.lang.Double.compare(values(i - 1), values(i))
+      if (compared > 0) ascending = false
+      if (compared < 0) descending = false
+      i += 1
+    }
+    if (ascending || descending) mergeSortedIndices(values) else radixSortedIndices(values)
+  }
+
+  private def radixSortedIndices(values: Array[Double]): Array[Int] = {
+    interrupted()
+    val n = values.length
+    var order = new Array[Int](n)
+    var scratch = new Array[Int](n)
+    val counts = new Array[Int](256)
+    var i = 0
+    while (i < n) {
+      if ((i & 1023) == 0) interrupted()
+      order(i) = i; i += 1
+    }
+    // Flip the sign bit for nonnegative values; complement all bits for negative
+    // values. Unsigned key order then matches Double.compare, including signed
+    // zeros and canonical NaNs. Ranking still uses numeric == for tie groups.
+    def bucket(index: Int, shift: Int): Int = {
+      val bits = java.lang.Double.doubleToLongBits(values(index))
+      val key = bits ^ ((bits >> 63) | Long.MinValue)
+      ((key >>> shift) & 255L).toInt
+    }
+    var shift = 0
+    while (shift < 64) {
+      interrupted()
+      java.util.Arrays.fill(counts, 0)
+      i = 0
+      while (i < n) {
+        if ((i & 1023) == 0) interrupted()
+        counts(bucket(order(i), shift)) += 1; i += 1
+      }
+      var total = 0
+      i = 0
+      while (i < counts.length) {
+        val count = counts(i); counts(i) = total; total += count; i += 1
+      }
+      // Stable scatter, least-significant byte first. All buffers belong to this
+      // invocation. Counts fit in Int because their sum is the input array length.
+      i = 0
+      while (i < n) {
+        if ((i & 1023) == 0) interrupted()
+        val index = order(i)
+        val b = bucket(index, shift)
+        scratch(counts(b)) = index; counts(b) += 1; i += 1
+      }
+      val previous = order; order = scratch; scratch = previous
+      shift += 8
+    }
+    interrupted()
+    order
+  }
+
+  private def mergeSortedIndices(values: Array[Double]): Array[Int] = {
+    interrupted()
     val n = values.length
     var order = new Array[Int](n)
     var scratch = new Array[Int](n)
