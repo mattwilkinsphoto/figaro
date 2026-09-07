@@ -1,5 +1,15 @@
 # Migrating to Scala 3 and sbt 2
 
+## Diagnostic hotspot follow-up
+
+`modernize/diagnostic-hotspot-study` retains snapshot modern.10, public signatures,
+dependencies and defaults. Rebuild to use stable radix ordering for nonmonotone rank
+inputs with at least 16000 pooled values; smaller and monotone inputs retain the merge
+sorter. No option, larger sampling budget or consumer source change is required. Exact
+ties, signed zeros, inverse-normal scores, diagnostics and interruption safeguards are
+preserved. See [selection rationale, usage and complete measurements](DIAGNOSTIC_HOTSPOT_STUDY.md).
+This does not add general graph thread safety or resolve statistical undercoverage.
+
 ## Interleaved performance audit follow-up
 
 `modernize/interleaved-performance-audit` adds investigation tools and checked evidence

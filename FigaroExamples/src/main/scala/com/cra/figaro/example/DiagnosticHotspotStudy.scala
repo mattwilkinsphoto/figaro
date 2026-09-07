@@ -174,6 +174,8 @@ object DiagnosticHotspotStudy {
     */
   def main(args: Array[String]): Unit = {
     if (args.toVector == Vector("check")) { check(); return }
+    require(!D.getClass.getDeclaredMethods.exists(_.getName == "radixSortedIndices"),
+      "Full hotspot timings require the pre-integration eda9ebba library runtime; use check on the current library")
     require(args.length <= 2)
     val rounds = args.headOption.map(_.toInt).getOrElse(7)
     val work = args.lift(1).map(_.toInt).getOrElse(64000)

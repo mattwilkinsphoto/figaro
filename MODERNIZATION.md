@@ -492,3 +492,48 @@ and checked-data reconciliation without
 timing thresholds or an eight-JVM benchmark requirement. Next: a bounded diagnostic
 sort/rank-normalization cost investigation with exact numerical oracles and unchanged
 interruption cadence, plus separately labeled application-callback profiling where useful.
+
+## Stage 25: diagnostic hotspot study and hybrid rank sorting
+
+Branch: `modernize/diagnostic-hotspot-study`, based on `2bb0755a`. The preceding audit
+CI passed its new audit gates and modernization checks but failed the legacy anytime
+lifecycle step. Detailed GitHub log access is denied; all four lifecycle tests pass
+locally in this stage, but the original CI failure is not diagnosed or declared fixed.
+No lifecycle test, timeout, tolerance or CI gate is weakened.
+
+Study/protocol commit `eda9ebba` precedes the three-JVM isolated screen. All 3240 records
+are retained, including warm-ups and regressions. Stable radix sorting improves large
+continuous sorter times by 4.65–5.05x and full ranks by 2.34–2.55x. Small and ordered cases
+regress, so unconditional radix replacement is rejected. Score/tie/scatter measurement
+supports addressing sorting before altering inverse-normal calculations. The additional
+sort allocation is approximately 1040 bytes for 256 counters, not a floating-key cache.
+
+Production/protocol commit `c6410392` retains the old merge path below 16000 pooled values
+and for monotone/constant sequences. Larger nonmonotone inputs use stable eight-pass
+radix ordering. Input arrays, signed-zero ordering, stable equal-key indices, numeric
+rank ties, inverse-normal expressions, FFT/ESS calculations and cancellation safeguards
+are preserved. All buffers are invocation-owned. Snapshot modern.10, toolchain,
+dependencies, public signatures, defaults, sampling kernels and callbacks are unchanged.
+
+Compilation and all 163 modernization regressions pass. New controls cover 36 ordering
+cases across the cutoff and large sizes (including nonfinite internal-helper controls),
+16 bit-exact large-rank fixtures, input/output isolation, concurrent calls and interruption.
+The independent study controls cover another 70 sort and 30 rank cases. See the
+[user guide, fixed protocols, full measurements and limitations](docs/DIAGNOSTIC_HOTSPOT_STUDY.md).
+
+The four balanced end-to-end JVM pairs retain all 2016 records with unchanged statistical
+work and fingerprints. Four-worker diagnostic gains are 1.140–1.258x; total gains are
+1.013–1.129x, with five fixture/method medians above roughly 5%. One-worker total gains
+span 1.016–1.221x. Individual regressions remain, including a 0.729x positive-support
+Quantile pair at one/two workers. Its sampling phase slows while diagnostics improve;
+the same slow-sampling pattern occurs in the baseline of another pair. Its cause remains
+unresolved, not dismissed as noise. The hybrid candidate is accepted on the aggregate
+evidence without further threshold tuning; this adverse case carries into the next
+allocation/memory/scaling milestone. No 5x overall inference gain is claimed.
+
+All 53 documentation/report-tool tests, the three vector/graph example workflows and
+the independent study controls pass. The unchanged 11321-entry public reference and
+local links validate; four existing Scaladoc warnings remain. An example-only guard
+added after measurement rejects mislabeled historical timing against the hybrid library;
+the production implementation/tests remain at `c6410392`. CI adds its negative check,
+study controls and both full-dataset validators without timing thresholds.

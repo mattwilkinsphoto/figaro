@@ -84,11 +84,22 @@ jobs:
           java -XX:-UsePerfData tools/VectorProfileAttribution.java --self-test
           python3 -B tools/summarize_interleaved_performance.py check docs/interleaved-performance-results.csv --baseline-csv docs/primitive-fft-performance-results.csv
           python3 -B tools/summarize_vector_attribution.py --csv docs/vector-attribution-results.csv --profile docs/primitive-sorting-profile-results.csv
+          python3 -B tools/summarize_diagnostic_hotspots.py --csv docs/diagnostic-hotspot-results.csv
+          python3 -B tools/summarize_interleaved_performance.py check docs/diagnostic-radix-performance-results.csv --baseline-csv docs/primitive-sorting-performance-results.csv
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py
 
+      - name: Reject mislabeled historical hotspot timings on the hybrid library
+        run: |
+          if sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.DiagnosticHotspotStudy 1 64000" > "$RUNNER_TEMP/diagnostic-hotspot-guard.log" 2>&1; then
+            echo "Historical hotspot timings unexpectedly accepted the hybrid library"
+            exit 1
+          fi
+          python3 -c 'import os; from pathlib import Path; text = (Path(os.environ["RUNNER_TEMP"]) / "diagnostic-hotspot-guard.log").read_text(); assert "Full hotspot timings require the pre-integration eda9ebba library runtime" in text'
+
       - name: Verify continuous-vector sampler contracts and documented patterns
         run: |
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.DiagnosticHotspotStudy check"
           sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.VectorSliceSamplerRegressionTest"
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.VectorSliceSamplingExample"
           sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.MultiChainVectorSliceSamplerRegressionTest"
