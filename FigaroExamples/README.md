@@ -16,10 +16,11 @@ The quick start prints `P(cause | signal) = 0.692308`. Common patterns prints `0
 
 ## Documentation example API reference
 
-These are every public function added for onboarding. Import `com.cra.figaro.example.documentation.{QuickStart, CommonPatterns, ClassicTutorials}`. They reset the default universe and must not run concurrently with models relying on that shared default. They create and dispose their own algorithms; caller-owned universes are not automatically cleared.
+These are every public function added for onboarding. Import `com.cra.figaro.example.documentation.{QuickStart, CommonPatterns, ClassicTutorials, VonMisesExample}`. They reset the default universe and must not run concurrently with models relying on that shared default. They create and dispose their own algorithms; caller-owned universes are not automatically cleared.
 
 | Public function | Parameters | Returns / side effects | Example |
 | --- | --- | --- | --- |
+| `VonMisesExample.main(args: Array[String]): Unit` | Must be empty; otherwise throws `IllegalArgumentException` | Compares circular/arithmetic means, checks conditional angular evidence and isolated parallel inference, cleans up models and prints results; assertion failure signals a regression | `VonMisesExample.main(Array.empty[String])` |
 | `QuickStart.main(args: Array[String]): Unit` | Command-line arguments, ignored | Checks and prints the exact posterior; assertion failure signals an unexpected result | `QuickStart.main(Array.empty[String])` |
 | `ClassicTutorials.main(args: Array[String]): Unit` | Must be empty; otherwise throws `IllegalArgumentException` | Runs Constant/Importance, Select/elimination and Burglary, checks expected probabilities and independent enumeration, cleans up its models and prints results; assertion failure signals a regression | `ClassicTutorials.main(Array.empty[String])` |
 | `CommonPatterns.exactMarginal(): Double` | None | Exact late-delivery probability, `0.2` | `val pLate = CommonPatterns.exactMarginal()` |
@@ -85,6 +86,10 @@ The [stopping-criteria example](src/main/scala/com/cra/figaro/example/StoppingCr
 - These sources are compiled against Scala 3. They are not copy/paste instructions for the old Scala 2 artifact.
 
 ## Related
+
+The [circular von Mises guide](../docs/VON_MISES.md) has three complete usage patterns
+and all public contracts. Run `sbt "examples / Compile / runMain com.cra.figaro.example.documentation.VonMisesExample"`
+for the executable wrap-around, conditional-observation and parallel examples.
 
 The [blocked-proposal guide](../docs/BLOCKED_PROPOSALS.md) has three runnable patterns in `BlockedProposalExample.main(args: Array[String]): Unit`. Arguments must be empty; it prints fixed/default comparisons, a mixed discrete/continuous model, and adaptive stopping results. Example: `BlockedProposalExample.main(Array.empty)`.
 

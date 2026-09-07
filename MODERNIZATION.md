@@ -624,3 +624,27 @@ and expanded link checks protect the bridge. Matthew Wilkins and Codex are credi
 modernization alongside the original contributors. No library algorithm, dependency,
 version or sampling default changes. The previously produced RC1 bundle is unchanged;
 future builds pick up the new attributions. No newly compiled LaTeX PDF is supplied.
+
+## Stage 30: reusable circular von Mises foundation
+
+Branch `modernize/circular-von-mises` adds an immutable numeric distribution, a native
+Figaro element with fixed or element-valued parameters, and circular summary helpers.
+The contract uses radians, canonical samples in `[-pi, pi)` and concentration in
+`[0, 1e8]`. Scaled Bessel calculations and cancellation-aware rejection sampling avoid
+large-concentration overflow without substituting a Gaussian approximation.
+
+The opt-in `HasLogDensity` trait lets likelihood weighting score observations directly
+in log space. Existing HasDensity-only elements retain their prior behavior. This
+addresses premature density underflow, not proposal mismatch or the earlier benchmark
+undercoverage; no throughput improvement is claimed. Legacy MH ratios retain an explicit
+representability limit. The [user guide](docs/VON_MISES.md) records all API contracts,
+three usage patterns and the inference compatibility matrix.
+
+Local verification passes 16 new regressions and all 179 modernization tests, including
+independent high-precision fixtures, quadrature normalization, 550,000 sampled draws,
+actual underflow-tail observation weighting, MH and isolated parallel runs. The runnable
+examples, Scala API generation and thin-library packaging pass. The workflow adds the
+new regression and executable example gates; remote CI is a separate integration gate.
+No runtime dependency, version, default sampler or existing RC1 artifact is changed.
+Joint Horwood-Poore GVM, CDF/quantiles, fitting and broader legacy log-density adoption
+remain follow-up work.

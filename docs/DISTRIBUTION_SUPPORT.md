@@ -2,13 +2,14 @@
 
 ## What exists now
 
-Source inventory at `b99c5d56` (2026-09-07), before the distribution expansion. This is
-an API inventory, not new numerical certification of every existing distribution.
+Initial source inventory at `b99c5d56` (2026-09-07), updated for the circular foundation.
+This is an API inventory, not new numerical certification of every existing distribution.
 The [roadmap](../ROADMAP.md) defines delivery gates; the [wishlist](../WISHLIST.md)
 collects broad families and their later flavors.
 
 | Present native entry points | Source | Scope / caution |
 | --- | --- | --- |
+| VonMises, VonMisesDistribution, CircularStatistics | [Circular foundation](VON_MISES.md) | Native element, independent numeric kernel and equal-weight summaries; radians, finite concentration up to `1e8`; tested evidence and isolated parallel paths, not joint GVM |
 | Bernoulli (`Flip`), categorical (`Select`), point mass (`Constant`) | [Flip](../Figaro/src/main/scala/com/cra/figaro/language/Flip.scala), [Select](../Figaro/src/main/scala/com/cra/figaro/language/Select.scala), [Constant](../Figaro/src/main/scala/com/cra/figaro/language/Constant.scala) | `Flip` is Boolean; `Select` samples one category, not a multinomial count vector |
 | Binomial, Geometric, Poisson | [Discrete elements](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete) | Check each support and parameter convention before adapting another library's call |
 | Discrete Uniform and FromRange | [Uniform](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete/Uniform.scala), [FromRange](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete/FromRange.scala) | Finite discrete choices/ranges; distinguish from continuous Uniform |
@@ -38,9 +39,9 @@ mass/density contract. Factor conversion and learning require additional support
 
 ## Gaps to resolve before claiming broader compatibility
 
-- No first-class von Mises or cylindrical Gauss-von Mises element was found in the core
-  source inventory. Circular means, periodic evidence and angular diagnostics need explicit
-  treatment; arithmetic averaging across the angle boundary is not a sound default.
+- Circular von Mises now supplies periodic evidence and circular summaries. Cylindrical
+  Gauss-von Mises is still planned. Angular diagnostics need explicit treatment;
+  arithmetic averaging across the angle boundary is not a sound default.
 - `MultivariateNormal` supplies an atomic density but its `logp` implementation currently
   returns `Double.NegativeInfinity`. Do not use that method as a valid GVM log-density
   building block. This is a concrete audit item, not evidence that every MVN inference
@@ -48,6 +49,11 @@ mass/density contract. Factor conversion and learning require additional support
 - [HasDensity](../Figaro/src/main/scala/com/cra/figaro/language/HasDensity.scala) documents
   raw density-ratio underflow/overflow risks. New stable log-density calculations do not
   fix all downstream callers automatically. Verify or explicitly restrict those paths.
+- New [HasLogDensity](../Figaro/src/main/scala/com/cra/figaro/language/HasLogDensity.scala)
+  opts into direct log-density likelihood weighting. Von Mises uses it; existing
+  distributions are not silently migrated. Audit their mathematical log densities and
+  actual callers before broader adoption. Extreme legacy MH proposal ratios can still
+  be unrepresentable and the new trait fails explicitly in that case.
 - [Continuous](../Figaro/src/main/scala/com/cra/figaro/language/Continuous.scala) declares
   `logp`; its old observation override is commented out. Implementing this trait alone
   does not establish that the intended likelihood path is used.
@@ -55,8 +61,25 @@ mass/density contract. Factor conversion and learning require additional support
   angular density repeated across the entire real line is not a normalized Euclidean
   target. A branch-cut representation or a manifold-aware method needs its own tests.
 
-These issues are recorded for targeted work, not silently fixed in this documentation
-checkpoint. Do not broaden the modernization's existing validation claims.
+Remaining issues are recorded for targeted work. The circular tests do not broaden
+validation claims for old distributions or unrelated inference algorithms.
+
+### Log-density reliability versus performance
+
+Likelihood weighting already accumulates log weights, but its legacy observed-density
+path first calls `density` and then `log`. A tiny positive density can become zero
+before that conversion. Direct log density preserves distinctions between very small
+likelihoods; it does not fix proposal mismatch or guarantee higher effective sample size.
+Avoiding an exponential/logarithm round trip may also save work, but no speedup has
+been measured for this change.
+
+The historical `SamplingBenchmark` fixtures use unobserved Normal draws or moderate
+Boolean weights. `MultiChainMcmcBenchmark` and `StoppingCriteriaValidation` use direct
+log constraints for their continuous likelihoods. Thus this particular observed-density
+conversion is not an explanation for those timing or undercoverage results. Other
+density-ratio paths require a separate audit; this is not a blanket numerical clearance.
+A future audit should compare direct and legacy scoring on moderate and extreme
+observations, measuring estimates, zero weights, effective sample size and elapsed time.
 
 ## Reuse strategy
 

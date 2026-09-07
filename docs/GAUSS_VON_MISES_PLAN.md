@@ -1,6 +1,8 @@
 # First distribution milestone: von Mises and Gauss-von Mises
 
-Status: **researched proposal, not implemented**. Both the circular and joint families
+Status: **circular foundation implemented and locally validated; joint GVM remains a
+researched proposal**. See the [circular API, examples and tests](VON_MISES.md).
+Both the circular and joint families
 were explicitly requested on 2026-09-07. Parent families: `DIST-01` and
 `DIST-02` in the [wishlist](../WISHLIST.md). See the [delivery roadmap](../ROADMAP.md).
 
@@ -40,7 +42,13 @@ p(x, theta) = Normal_n(x; mu, P) * VonMises(theta; m(x), kappa)
 Setting both coupling terms to zero gives independent Gaussian and circular components.
 This is not the different model obtained by making the Gaussian mean depend on an angle.
 
-## Proposed first increment: reusable circular foundation
+## First increment: reusable circular foundation
+
+The following design goals now have an implementation in `VonMisesDistribution`,
+`VonMises` and `CircularStatistics`, including all four fixed/element parameter
+combinations. The supported concentration range is `0 <= kappa <= 1e8`.
+The [user guide](VON_MISES.md) is the authoritative implemented contract;
+CDF, quantiles and fitting remain deferred.
 
 - An explicitly named `VonMises` element, with constant parameters first and tested
   element-valued parameter composition next. Use radians and one documented canonical
@@ -147,5 +155,6 @@ the existence of an openly readable paper resolves neither automatically.
 
 No third-party implementation has been selected or copied. Prefer a small independently
 written kernel with cited mathematics, or an explicitly compatible licensed implementation
-after review. No changes to current inference defaults or published artifacts occur in
-this planning checkpoint.
+after review. The circular implementation uses independently written mathematics and
+an opt-in log-density likelihood path; legacy HasDensity-only elements keep their
+behavior. Existing published artifacts are unchanged. Joint GVM is not implemented.

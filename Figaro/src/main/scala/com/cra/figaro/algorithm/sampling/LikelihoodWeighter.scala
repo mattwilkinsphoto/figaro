@@ -210,6 +210,13 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
           if (obs.get.asInstanceOf[Boolean]) currentWeight + math.log(f.prob.value)
           else currentWeight + math.log(1 - f.prob.value)
         }
+        case e: HasLogDensity[?] => {
+          setObservation(element, obs)
+          val logDensity = element.asInstanceOf[HasLogDensity[element.Value]].logDensity(obs.get.asInstanceOf[element.Value])
+          require(!logDensity.isNaN && logDensity != Double.PositiveInfinity,
+            "log density must be finite or negative infinity")
+          currentWeight + logDensity
+        }
         case e: HasDensity[_] => {
           setObservation(element, obs)
           val density = element.asInstanceOf[HasDensity[element.Value]].density(obs.asInstanceOf[Option[element.Value]].get)
@@ -235,5 +242,4 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
   private def undoWeight(weight: Double, elem: Element[?]) = weight - computeNextWeight(0.0, elem, elem.observation)
 
 }
-
 

@@ -44,6 +44,8 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Circular von Mises](docs/VON_MISES.md): reusable angular density/sampling, circular summaries, conditional observations and inference limits.
+
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.
 - [Classic tutorials in Scala 3](docs/TUTORIAL.md): the original greeting and Burglary models, with executable checks.

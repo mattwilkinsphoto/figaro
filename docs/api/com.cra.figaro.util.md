@@ -5,6 +5,126 @@
 
 Examples are call templates: supply the named arguments with the declared types. Context parameters are shown explicitly with `using`; defaults may be omitted in real calls. `receiver` denotes an existing instance of the listed owner. Type parameters must be in scope. Abstract members require a concrete implementation. The signature, not a template, is authoritative.
 
+## `` com.cra.figaro.util.CircularStatistics.Summary.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/CircularStatistics$$Summary.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.util.CircularStatistics.Summary.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/CircularStatistics$$Summary.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.util.CircularStatistics.difference ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/CircularStatistics$.html#difference-44b)
+
+```scala
+def difference(angle: Double, reference: Double): Double
+```
+
+Signed shortest displacement from reference to angle, in [-Pi, Pi).
+
+Type parameters: none.
+
+Parameters, list 1: `` angle: Double ``; `` reference: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Signed shortest displacement from reference to angle, in [-Pi, Pi). Value parameters angle finite destination in radians reference finite reference in radians Attributes Returns normalized difference; antipodal ties map to -Pi Example CircularStatistics.difference(-3.1, 3.1)
+
+Invocation template:
+
+```scala
+com.cra.figaro.util.CircularStatistics.difference(angle, reference)
+```
+
+## `` com.cra.figaro.util.CircularStatistics.normalize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/CircularStatistics$.html#normalize-5b2)
+
+```scala
+def normalize(angle: Double): Double
+```
+
+Normalize a finite radian angle to [-Pi, Pi); canonicalize signed zero.
+
+Type parameters: none.
+
+Parameters, list 1: `` angle: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Normalize a finite radian angle to [-Pi, Pi); canonicalize signed zero. Value parameters angle finite radians; very large inputs may already have lost phase precision Attributes Returns equivalent representative; throws IllegalArgumentException for nonfinite input Example CircularStatistics.normalize(3 * math.Pi)
+
+Invocation template:
+
+```scala
+com.cra.figaro.util.CircularStatistics.normalize(angle)
+```
+
+## `` com.cra.figaro.util.CircularStatistics.summarize ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/CircularStatistics$.html#summarize-fffff8e5)
+
+```scala
+def summarize(angles: IterableOnce[Double], minResultant: Double = ...): Summary
+```
+
+Summarize equally weighted angles in one pass with compensated sums.
+
+Type parameters: none.
+
+Parameters, list 1: `` angles: IterableOnce[Double] ``; `` minResultant: Double = ... ``.
+
+Returns: `` Summary ``.
+
+Source contract/attributes: Summarize equally weighted angles in one pass with compensated sums. Value parameters angles nonempty, finite radian observations; consumed once minResultant threshold in [0,1]; direction is None when resultant <= threshold Attributes Returns sample summary, not a confidence/convergence assessment Example CircularStatistics.summarize(Vector(-3.1, 3.1))
+
+Invocation template:
+
+```scala
+com.cra.figaro.util.CircularStatistics.summarize(angles, minResultant)
+```
+
 ## `` com.cra.figaro.util.ColorGradient.buildGradientMap ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/ColorGradient.html#buildGradientMap-0)

@@ -14,14 +14,15 @@ The source remains a development snapshot, not a universally validated stable re
 
 ## Next program: distribution breadth
 
-Planning baseline: `b99c5d56`, reviewed 2026-09-07. No new distribution is shipped by
-this planning checkpoint. The [inventory](docs/DISTRIBUTION_SUPPORT.md) distinguishes
+Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
+implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).
+The [inventory](docs/DISTRIBUTION_SUPPORT.md) distinguishes
 native elements, composition possibilities and missing first-class support.
 
 | Order / milestone | Status | Broad capability before flavors | Exit evidence |
 | --- | --- | --- | --- |
-| D0: distribution contracts | Planned; inventory complete | Shared parameter/support conventions, density/log-density tests, seeded RNG ownership and explicit inference compatibility | Contract tests and capability matrix, initially for the circular milestone; expand incrementally rather than rewrite every old distribution first |
-| D1: circular foundation (`DIST-01`) | Next implementation | Circular angle handling and von Mises; reuse for later wrapped and spherical families | Normalization, periodicity, concentration extremes, independent numerical oracles, seeded sampling and observation tests |
+| D0: distribution contracts | Initial circular contracts implemented; broader adoption remains | Shared parameter/support conventions, density/log-density tests, seeded RNG ownership and explicit inference compatibility | Circular contract tests and capability matrix; extend stable log-density support to existing distributions through a separate audit |
+| D1: circular foundation (`DIST-01`) | Implemented; locally validated | Circular angle handling and von Mises; reuse for later wrapped and spherical families | 16 new regressions, 179 modernization tests and executable examples pass; [numerical evidence and limits](docs/VON_MISES.md) |
 | D2: linear-angular joint models (`DIST-02`) | First requested joint family; design researched | Gauss-von Mises on a real vector plus one angle, built on D1 | Correct coupled density/sampling, limiting cases, independent joint tests, integration and release-review gates in the [milestone plan](docs/GAUSS_VON_MISES_PLAN.md) |
 | D3: common missing scalar/count families | Proposed next tranche | Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; bounded triangular/Kumaraswamy | Select a small representative set across `DIST-03` through `DIST-06`; demonstrate observation/inference, not only random generation |
 | D4: reusable constructions (`DIST-10`) | Proposed; start enabling pieces during D1-D3 | Correct transformations, truncation, mixtures and hurdle/zero-inflated laws | Jacobian/normalizer/mixed-measure checks; avoid one-off implementations of every derived name |

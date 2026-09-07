@@ -40,7 +40,11 @@ jobs:
           sbt --server --batch
           "examples / Compile / runMain com.cra.figaro.example.documentation.QuickStart;
           examples / Compile / runMain com.cra.figaro.example.documentation.CommonPatterns;
-          examples / Compile / runMain com.cra.figaro.example.documentation.ClassicTutorials"
+          examples / Compile / runMain com.cra.figaro.example.documentation.ClassicTutorials;
+          examples / Compile / runMain com.cra.figaro.example.documentation.VonMisesExample"
+
+      - name: Verify circular von Mises foundation and log-density likelihoods
+        run: sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.VonMisesRegressionTest"
 
       - name: Verify seeded parallel sampling and benchmark entry point
         run: >-
