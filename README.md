@@ -44,6 +44,8 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
+- [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.
 - [Classic tutorials in Scala 3](docs/TUTORIAL.md): the original greeting and Burglary models, with executable checks.
 - [Legacy modeling companion](docs/LEGACY_MODELING_GUIDE.md): a bridge to the original advanced modeling, inference and extension material.
 - [Documentation preservation map](docs/DOCUMENTATION_MIGRATION.md): what was superseded, what is archived, and how the LaTeX sources incorporate modernization.

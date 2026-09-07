@@ -22,7 +22,8 @@ def main():
     root = Path(__file__).resolve().parents[2]
     paths = [root / name for name in (
         "README.md", "Figaro/README.md", "FigaroExamples/README.md",
-        "tools/docs/README.md", "MODERNIZATION.md", "DEPENDENCIES.md", "CONSUMER_BOUNDARY.md")]
+        "tools/docs/README.md", "MODERNIZATION.md", "DEPENDENCIES.md", "CONSUMER_BOUNDARY.md",
+        "ROADMAP.md", "WISHLIST.md")]
     paths += sorted((root / "docs").rglob("*.md"))
     paths += sorted((root / "doc").rglob("*.md"))
     paths += sorted((root / "FigaroLaTeX").rglob("*.md"))
