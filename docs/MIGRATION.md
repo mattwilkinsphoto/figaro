@@ -1,5 +1,19 @@
 # Migrating to Scala 3 and sbt 2
 
+## Core performance acceptance
+
+`modernize/core-performance-acceptance` adds acceptance evidence and CI gates, not new
+production code, dependencies, defaults or public library signatures. Snapshot modern.10
+is unchanged. Existing multi-chain vector users get the accumulated diagnostic improvements
+when rebuilding against the current library; no new switch is required. Parallel samplers
+remain opt-in, and ordinary graph models do not become generally thread-safe.
+
+The [acceptance report](CORE_PERFORMANCE_ACCEPTANCE.md) measures the combined diagnostic
+changes directly and documents a separate application compiled against local publication.
+Neither improved throughput nor successful consumer smoke tests establish statistical
+coverage or validate an arbitrary downstream application. Main remains unchanged pending
+integration; there is no new public release.
+
 ## Resource/scaling assessment and lifecycle-test repair
 
 `modernize/resource-scaling-assessment` adds a [resource study](RESOURCE_SCALING_ASSESSMENT.md),

@@ -573,3 +573,24 @@ screen. The earlier mixed-workload positive-Quantile timing anomaly did not recu
 but remains unexplained; graph traversal reproducibility and direct hardware-memory
 counter gaps remain explicit. Comparative acceptance and integration is the next core
 stage; main has not been merged.
+
+## Stage 27: cumulative core acceptance
+
+Branch `modernize/core-performance-acceptance` retains modern.10 and all production
+code, APIs, dependencies and defaults. Protocol commit `0897a60b` preceded eight fresh
+JVMs comparing pre-reduction baseline `0462f1b0` with candidate `71d39cbb`, with identical
+benchmark/dependency JARs. All 2016 records preserve exact work; discarded warm-ups and
+all measured cases remain in the checked dataset. Four-worker complete-inference gains
+span 1.161–2.183x across fixture/method medians, with all four pair estimates improving
+in each case. Diagnostic-phase gains span 2.861–3.446x. These are measured cumulative
+effects, not products of historical stage ratios or universal speed promises.
+
+A standalone consumer compiles against local publication and checks loaded-JAR identity,
+inference, worker isolation, cancellation and stopping safeguards without example/test
+dependencies. It passes locally and in [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34082303985).
+The Windows-compiled consumer also runs against the preceding Linux-built thin JAR.
+All four downloaded CI artifacts pass the new legal/content/bytecode gate. Cross-platform
+class/TASTY byte differences remain undiagnosed; repeat-build evidence is environment-
+specific. See the [acceptance report](docs/CORE_PERFORMANCE_ACCEPTANCE.md) for the complete
+table, reproduction, artifact-tool reference and residual limitations. Main is unchanged
+while the final evidence/gate commit awaits CI and integration.

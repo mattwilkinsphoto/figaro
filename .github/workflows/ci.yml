@@ -63,6 +63,8 @@ jobs:
           sbt --server --batch "figaro / Compile / doc"
           python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
           python3 -B -m unittest discover -s tools -p 'test_summarize*.py'
+          python3 -B -m unittest discover -s tools -p 'test_check_acceptance_artifacts.py'
+          python3 -B tools/summarize_interleaved_performance.py check docs/core-performance-acceptance-results.csv --baseline-csv docs/parallel-vector-diagnostics-results.csv
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
           python3 -B tools/summarize_reliability.py docs/mcmc-reliability-results.csv --repetitions 60 --max-draws 48000
           python3 -B tools/summarize_sampling_research.py docs/sampling-research-results.csv --repetitions 30 --draws 12000
@@ -237,6 +239,9 @@ jobs:
         run: >-
           sbt --server --batch
           "figaro / Compile / packageSrc; figaro / Compile / packageDoc; figaro / publishLocal"
+
+      - name: Verify artifact contents and legal notices
+        run: python3 -B tools/check_acceptance_artifacts.py target/out/jvm/scala-3.9.0/figaro
 
       - name: Verify independently published consumer
         working-directory: tools/acceptance-consumer

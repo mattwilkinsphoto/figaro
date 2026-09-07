@@ -11,7 +11,7 @@ Prerequisites: Git, JDK 17 on your path, and an sbt runner. sbt downloads the co
 1. Get the Scala 3 branch:
 
    ```sh
-   git clone --branch modernize/resource-scaling-assessment https://github.com/mattwilkinsphoto/figaro.git
+   git clone --branch modernize/core-performance-acceptance https://github.com/mattwilkinsphoto/figaro.git
    cd figaro
    ```
 
@@ -44,6 +44,7 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Core performance acceptance](docs/CORE_PERFORMANCE_ACCEPTANCE.md): cumulative measured gains, independent application consumption, artifact checks, and remaining integration boundaries.
 - [Resource and scaling assessment](docs/RESOURCE_SCALING_ASSESSMENT.md): fresh-JVM memory, callback-allocation, longer-trace and overlapping-job controls; no new sampler defaults.
 - [Gaussian block proposals](docs/BLOCKED_PROPOSALS.md): opt-in correlated moves, covariance selection, acceptance rules, and measured counterexamples.
 - [Pilot proposal calibration](docs/PROPOSAL_CALIBRATION.md): estimate an inspectable fixed covariance from discarded pilot chains, then start fresh production sampling; includes rejection rules and pilot-inclusive comparisons.
