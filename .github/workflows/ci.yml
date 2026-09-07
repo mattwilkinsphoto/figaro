@@ -85,6 +85,7 @@ jobs:
           python3 -B tools/summarize_interleaved_performance.py check docs/interleaved-performance-results.csv --baseline-csv docs/primitive-fft-performance-results.csv
           python3 -B tools/summarize_vector_attribution.py --csv docs/vector-attribution-results.csv --profile docs/primitive-sorting-profile-results.csv
           python3 -B tools/summarize_diagnostic_hotspots.py --csv docs/diagnostic-hotspot-results.csv
+          python3 -B tools/summarize_resource_scaling.py check docs/resource-scaling-results.csv
           python3 -B tools/summarize_interleaved_performance.py check docs/diagnostic-radix-performance-results.csv --baseline-csv docs/primitive-sorting-performance-results.csv
           python3 -B tools/docs/build_reference.py --check
           python3 -B tools/docs/check_links.py

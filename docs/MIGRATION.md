@@ -1,5 +1,18 @@
 # Migrating to Scala 3 and sbt 2
 
+## Resource/scaling assessment and lifecycle-test repair
+
+`modernize/resource-scaling-assessment` adds a [resource study](RESOURCE_SCALING_ASSESSMENT.md),
+not a new production sampler or setting. Snapshot modern.10, public library signatures,
+dependencies and defaults remain unchanged. Consumers have nothing new to enable or
+migrate. Study-only loop callbacks and ordered graph proposals are explicitly labeled
+controls, not automatic changes to user models.
+
+The legacy resume regression now waits for an actual sampling step before requiring
+progress. Consecutive queries are allowed to return the same answer; resume does not
+promise a step between each query. The worker implementation and existing timeout are
+unchanged. See the [failure diagnosis and checks](DIAGNOSTIC_HOTSPOT_STUDY.md#verification-and-ci-boundary).
+
 ## Diagnostic hotspot follow-up
 
 `modernize/diagnostic-hotspot-study` retains snapshot modern.10, public signatures,

@@ -11,7 +11,7 @@ Prerequisites: Git, JDK 17 on your path, and an sbt runner. sbt downloads the co
 1. Get the Scala 3 branch:
 
    ```sh
-   git clone --branch modernize/mcmc-reliability https://github.com/mattwilkinsphoto/figaro.git
+   git clone --branch modernize/resource-scaling-assessment https://github.com/mattwilkinsphoto/figaro.git
    cd figaro
    ```
 

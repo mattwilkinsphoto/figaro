@@ -175,8 +175,9 @@ def summary(rows):
             serial, parallel = select(kind,draws,1), select(kind,draws,4)
             if not serial or not parallel: continue
             gains = [float(a['wallSeconds'])/float(b['wallSeconds']) for a,b in zip(serial,parallel)]
+            peak = 'unavailable' if any(x['osPeakSource']=='unavailable' for x in parallel) else f'{median(parallel,"osPeakBytes")/2**20:.1f}'
             print(f'{kind} draws={draws}: W1/W4 median={stats.median(gains):.3f} range={min(gains):.3f}-{max(gains):.3f}; '
-                  f'W4 OS peak MiB={median(parallel,"osPeakBytes")/2**20:.1f}; '
+                  f'W4 OS peak MiB={peak}; '
                   f'retained heap MiB={median(parallel,"heapRetainedBytes")/2**20:.1f}')
     for kind in KINDS:
         a,b=select(kind,4000,4),select(kind,4000,4,'loop')

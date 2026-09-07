@@ -371,6 +371,11 @@ Java 17.0.4 on Windows, not the failing CI runner's Java 17.0.20.1 on Linux. New
 CI status must still be distinguished; this diagnosis does not establish that the full
 historical suite is green.
 
+The repair's [GitHub run](https://github.com/mattwilkinsphoto/figaro/actions/runs/34079373092)
+subsequently passed the lifecycle step and the full required workflow, including coverage,
+reproducible builds, publication and artifact checks. This verifies that checkpoint;
+it is not a claim that every historical test runs in the required workflow.
+
 ## Remaining core scope and stopping point
 
 This is the diagnostic-hotspot milestone, not completion of the entire performance

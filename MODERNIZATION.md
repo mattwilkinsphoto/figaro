@@ -537,3 +537,39 @@ local links validate; four existing Scaladoc warnings remain. An example-only gu
 added after measurement rejects mislabeled historical timing against the hybrid library;
 the production implementation/tests remain at `c6410392`. CI adds its negative check,
 study controls and both full-dataset validators without timing thresholds.
+
+## Stage 26: resource and scaling assessment
+
+Branch `modernize/resource-scaling-assessment` retains modern.10 and the production
+library jar from the preceding checkpoint. Commit `86171e01` repairs the scheduling-
+dependent anytime resume regression with an explicit completed-step latch, 20 cycles,
+and guaranteed cleanup; no worker behavior or timeout changes. All 18 algorithm tests
+and repeated one-processor resume checks pass. The repair's
+[full required GitHub workflow](https://github.com/mattwilkinsphoto/figaro/actions/runs/34079373092)
+is green, including the previously failing lifecycle step and artifact gates.
+
+Protocol/harness commit `c5a09dc8` precedes the full 108-fresh-JVM resource screen.
+All measured cases and 216 discarded warm-ups preserve expected work and result hashes
+across worker counts, callback variants, profiles and independent-job overlap. Raw logs
+and JFR recordings remain local; the complete sanitized aggregate CSV is checked in.
+The graph fixture uses an explicitly ordered joint proposal after the default proposal
+failed the draft's overly strong exact-trace requirement. This is a benchmark control,
+not a new default or a general graph reproducibility fix.
+
+Vector one/four-worker median total ratios span 1.809–2.992x; ordered-joint graph ratios
+are 1.255–1.708x. At 16000 draws, 32-D vector results retain roughly 57 MiB incremental
+heap but have median lifetime process peaks around 1.8–2.1 GiB with this JVM setup. Overlapping
+large Gaussian jobs yields only 1.141x median throughput improvement with higher peak
+memory. The positive-support application callback rewrite gives 1.566x median total
+gain; Gaussian improves little and likelihood does not reliably improve. These callback
+changes are not library gains. See the [full results and user guidance](docs/RESOURCE_SCALING_ASSESSMENT.md).
+
+All 163 modernization regressions, 600 callback numerical controls, worker/overlap
+controls, four smoke JVMs, 60 documentation/report tests, the unchanged 11321-entry
+reference and local links pass. Four existing Scaladoc warnings remain. CI adds a
+lightweight study check and complete aggregate validation, not the long performance
+screen or timing thresholds. No new production optimization is accepted from this
+screen. The earlier mixed-workload positive-Quantile timing anomaly did not recur here
+but remains unexplained; graph traversal reproducibility and direct hardware-memory
+counter gaps remain explicit. Comparative acceptance and integration is the next core
+stage; main has not been merged.
