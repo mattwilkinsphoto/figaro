@@ -8,7 +8,7 @@ Depend on a compiled, versioned Figaro artifact. The coordinates for the current
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.8-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.10-SNAPSHOT"
 ```
 
 Resolve this snapshot by running `sbt "figaro / publishLocal"` in the Figaro checkout, or by publishing it to a configured package repository. Local publication is not a public release. See [building and publication](docs/BUILDING.md) for repository settings and artifact contents.
@@ -25,6 +25,12 @@ Java consumers use the corresponding binary artifact (`figaro_3` for the moderni
 - An SBOM and preserved `LICENSE` / `FigaroAttributions.txt` in the release materials.
 
 ## Compatibility and validation
+
+Run the [independent consumer check](tools/acceptance-consumer/README.md) against the
+exact published artifact before integration. It verifies the loaded jar hash and exercises
+public modeling, sampling, stopping and lifecycle behavior without repository-project
+or example dependencies. See the [core acceptance evidence](docs/CORE_PERFORMANCE_ACCEPTANCE.md)
+for the tested scope and remaining deployment limitations.
 
 The Scala 3 artifact is not a binary-compatible replacement for `figaro_2.13`. Recompile dependent code and validate model construction, evidence, inference results, cleanup, and supported parameter serialization. Focused modernization tests do not certify every model or deployment mode; the full historical test suite is not claimed green.
 

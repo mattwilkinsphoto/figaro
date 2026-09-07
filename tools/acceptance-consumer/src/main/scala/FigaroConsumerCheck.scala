@@ -1,0 +1,89 @@
+import com.cra.figaro.algorithm.factored.VariableElimination
+import com.cra.figaro.algorithm.sampling.{VectorSliceSampler as VS, GaussianBlockProposal}
+import com.cra.figaro.algorithm.sampling.parallel.{ParImportance, MultiChainMetropolisHastings as MH,
+  MultiChainVectorSliceSampler as MC, McmcPrecision, TruncatedSprt}
+import com.cra.figaro.language.*
+import com.cra.figaro.library.atomic.continuous.Normal
+import java.nio.file.{Files, Path}
+import java.security.MessageDigest
+import scala.jdk.CollectionConverters.*
+
+/** Standalone consumer: no source-project or example/test dependency is allowed. */
+object FigaroConsumerCheck {
+  def main(args: Array[String]): Unit = {
+    require(args.isEmpty)
+    val artifact=Path.of(classOf[Universe].getProtectionDomain.getCodeSource.getLocation.toURI)
+    require(artifact.getFileName.toString.endsWith(".jar"), "Figaro must load from the published jar")
+    val sha=java.util.HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(artifact)))
+    val expected=sys.env.getOrElse("FIGARO_EXPECTED_SHA256", throw new IllegalArgumentException("Expected artifact hash required"))
+    require(expected.matches("[0-9a-fA-F]{64}") && sha.equalsIgnoreCase(expected), "Wrong or stale published artifact")
+    for (name <- Vector("org.scalatest.Suite", "scoverage.Invoker", "com.cra.figaro.example.ResourceScalingStudy")) {
+      var absent=false
+      try Class.forName(name, false, getClass.getClassLoader)
+      catch { case _: ClassNotFoundException => absent=true }
+      require(absent, "Consumer unexpectedly resolved a test/example/instrumentation class")
+    }
+    println(s"Published artifact verified: $sha")
+
+    val universe=Universe.createNew()
+    val cause=Flip(0.3)(using "", universe)
+    cause.addConstraint(b => if (b) 0.8 else 0.2)
+    val exact=VariableElimination(cause)
+    try {
+      exact.start()
+      require(math.abs(exact.probability(cause,true)-0.24/0.38)<1e-12)
+    } finally { if(exact.isActive) exact.kill(); universe.clear() }
+
+    val importance=ParImportance.seeded(() => {
+      val u=Universe.createNew()
+      val c=Flip(0.3)(using "cause",u)
+      c.addConstraint(b => if(b) 0.8 else 0.2)
+      u
+    },4,80000,42L,"cause")
+    try {
+      importance.start()
+      require(math.abs(importance.probability[Boolean]("cause",true)-0.24/0.38)<0.02)
+    } finally if(importance.isActive) importance.kill()
+
+    def graph(u: Universe,i: Int): MH.Model = {
+      val x=Normal(0,1)(using "",u)
+      MH.Model(Vector(MH.Observable("x",x)(identity)))
+    }
+    val graphConfig=MH.Config(drawsPerChain=4000,warmUp=500,parallelism=1,seed=913L)
+    val serial=MH.run(graphConfig)(graph)
+    val parallel=MH.run(graphConfig.copy(parallelism=4))(graph)
+    require(serial.chains.map(_.copy(samplingSeconds=0))==parallel.chains.map(_.copy(samplingSeconds=0)))
+    require(math.abs(parallel.diagnostics("x").mean)<0.06)
+
+    def vector(i: Int,seed: Long): MC.Model=MC.Model(Vector(i+0.5,-i-0.5),x => -x.map(v=>v*v).sum/2)
+    val config=MC.Config(VS.Config(VS.Method.GPSS,draws=1000,warmUp=200,seed=9301L),parallelism=1)
+    val a=MC.run(config)(vector); val b=MC.run(config.copy(parallelism=4))(vector)
+    require(a.chains==b.chains && a.diagnostics==b.diagnostics)
+    require(b.chains.forall(_.result.reason==VS.StopReason.DrawsReached))
+    val capped=VS.run(VS.Config(VS.Method.Quantile,draws=1000,warmUp=100,maxEvaluations=20),Vector(1.0,1.0))(
+      x => if(x.forall(_>0)) -x.sum else Double.NegativeInfinity)
+    require(capped.reason==VS.StopReason.MaxEvaluationsReached && capped.evaluations==20)
+
+    val blocked=MH.run(MH.Config(drawsPerChain=100,warmUp=50,parallelism=2)) { (u,i) =>
+      val x=Normal(0,1)(using "",u); val y=Normal(0,1)(using "",u)
+      MH.Model(Vector(MH.Observable("x",x)(identity)),
+        Some(GaussianBlockProposal(Vector(x,y),Vector(Vector(0.5,0.1),Vector(0.1,0.5)))))
+    }
+    require(blocked.chains.forall(c=>c.draws("x").size==100 && c.draws("x").forall(_.isFinite)))
+    require(!McmcPrecision.evaluate(Vector.fill(4)(Vector.fill(1000)(1.0)),McmcPrecision.Config()).criteriaMet)
+    val design=TruncatedSprt.gaussian(0,1,1,falseAlarmRate=0.05,missedDetectionRate=0.10)
+    var state=design.initial
+    while(state.decision==TruncatedSprt.Decision.Continue) state=design.advance(state,1.0)
+    require(state.samples<=design.maxSamples && state.decision!=TruncatedSprt.Decision.Continue)
+
+    var cancelled=false
+    Thread.currentThread().interrupt()
+    try VS.run(VS.Config(VS.Method.GPSS),Vector(1.0,1.0))(x => -x.map(v=>v*v).sum/2)
+    catch { case _: InterruptedException => cancelled=true }
+    finally Thread.interrupted()
+    require(cancelled, "Pre-interrupted caller was not cancelled")
+    require(!Thread.getAllStackTraces.keySet().asScala.exists(t=>t.isAlive &&
+      t.getName.startsWith("figaro-")), "Owned worker leaked")
+    println("Consumer acceptance passed: artifact isolation, exact/importance/graph/vector inference, block proposals, budgets, stopping safeguards, cancellation and cleanup")
+  }
+}

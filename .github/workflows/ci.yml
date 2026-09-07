@@ -238,6 +238,12 @@ jobs:
           sbt --server --batch
           "figaro / Compile / packageSrc; figaro / Compile / packageDoc; figaro / publishLocal"
 
+      - name: Verify independently published consumer
+        working-directory: tools/acceptance-consumer
+        run: |
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.10-SNAPSHOT.jar | cut -d' ' -f1)"
+          sbt --server --batch "runMain FigaroConsumerCheck"
+
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
