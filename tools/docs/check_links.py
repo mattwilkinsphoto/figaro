@@ -24,6 +24,8 @@ def main():
         "README.md", "Figaro/README.md", "FigaroExamples/README.md",
         "tools/docs/README.md", "MODERNIZATION.md", "DEPENDENCIES.md", "CONSUMER_BOUNDARY.md")]
     paths += sorted((root / "docs").rglob("*.md"))
+    paths += sorted((root / "doc").rglob("*.md"))
+    paths += sorted((root / "FigaroLaTeX").rglob("*.md"))
     errors, count = [], 0
     for path in paths:
         for target in local_targets(path.read_text(encoding="utf-8")):

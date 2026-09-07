@@ -39,7 +39,8 @@ jobs:
         run: >-
           sbt --server --batch
           "examples / Compile / runMain com.cra.figaro.example.documentation.QuickStart;
-          examples / Compile / runMain com.cra.figaro.example.documentation.CommonPatterns"
+          examples / Compile / runMain com.cra.figaro.example.documentation.CommonPatterns;
+          examples / Compile / runMain com.cra.figaro.example.documentation.ClassicTutorials"
 
       - name: Verify seeded parallel sampling and benchmark entry point
         run: >-

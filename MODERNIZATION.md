@@ -608,3 +608,19 @@ The [main workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows
 provides the post-integration result for the exact pushed commit. The snapshot remains
 development-only; full historical-suite, shared-graph, coverage, OSGi and cross-platform
 byte-identity limitations in the acceptance and migration guides still apply.
+
+## Stage 29: bridge the historical documentation
+
+The [preservation map](docs/DOCUMENTATION_MIGRATION.md) connects all thirteen original
+tutorial chapters to current guidance without reprinting the books. The four original
+PDFs, including two distinct tutorial editions, are archived byte-for-byte. The original
+Figaro 3 guide source is retained; active LaTeX entry points gain a shared modernization
+preface. Obsolete Scala 2.12/Figaro 5 API JAR and generated `.aux` material are removed
+from the working tree and remain recoverable through Git history.
+
+The classic Constant, Select and Burglary models have a Scala 3 walkthrough and executable
+checks, including independent posterior enumeration, wired into CI. Preservation tests
+and expanded link checks protect the bridge. Matthew Wilkins and Codex are credited for
+modernization alongside the original contributors. No library algorithm, dependency,
+version or sampling default changes. The previously produced RC1 bundle is unchanged;
+future builds pick up the new attributions. No newly compiled LaTeX PDF is supplied.

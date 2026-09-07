@@ -107,6 +107,10 @@ Predicate and expectation APIs also expose curried overloads with a compatibilit
 
 ## Advanced public surface
 
+The [legacy modeling companion](LEGACY_MODELING_GUIDE.md) explains how the original
+tutorial's advanced topics fit these APIs. For checked versions of its introductory
+Constant, Select and Burglary models, see the [classic walkthrough](TUTORIAL.md).
+
 The [full reference](api/README.md) covers filtering, learning, decision policies/indexes, factor/semiring machinery, experimental algorithms, collections, and utilities. These APIs are publicly visible but are not all beginner-level application contracts. For an existing source example, browse [the examples module](../FigaroExamples/README.md).
 
 Changes relevant to extension authors are collected in [migration](MIGRATION.md): `BaseProbQueryAlgorithm[Q, U[_] <: Q]`, correlated `WeightSeen` wrappers, `DistanceConversion[T]` context bounds, unused `TypeTag` removal, and parameterless accessor overrides. Build-only helper functions live in `build.sbt` and are documented in [building](BUILDING.md#build-helper-reference); they are not part of the published Figaro library.

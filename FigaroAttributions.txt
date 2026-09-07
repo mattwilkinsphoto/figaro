@@ -35,3 +35,12 @@ Viliam Simko
 Synapski
 Maciej Szymkiewicz
 Kartik Thakore
+
+Modernization Effort (2026)
+---------------------------
+Matthew Wilkins - modernization direction, requirements, review, and validation.
+Codex (OpenAI) - AI-assisted implementation, testing, performance analysis,
+and documentation, working with Matthew Wilkins.
+
+These credits supplement the original contributors above. The original
+copyright notices and license terms remain unchanged.

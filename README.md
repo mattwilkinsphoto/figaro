@@ -44,6 +44,11 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Classic tutorials in Scala 3](docs/TUTORIAL.md): the original greeting and Burglary models, with executable checks.
+- [Legacy modeling companion](docs/LEGACY_MODELING_GUIDE.md): a bridge to the original advanced modeling, inference and extension material.
+- [Documentation preservation map](docs/DOCUMENTATION_MIGRATION.md): what was superseded, what is archived, and how the LaTeX sources incorporate modernization.
+- [Release notes](docs/RELEASE_NOTES.md): modernization changes alongside preserved historical release notes.
+
 - [Core performance acceptance](docs/CORE_PERFORMANCE_ACCEPTANCE.md): cumulative measured gains, independent application consumption, artifact checks, and remaining integration boundaries.
 - [Resource and scaling assessment](docs/RESOURCE_SCALING_ASSESSMENT.md): fresh-JVM memory, callback-allocation, longer-trace and overlapping-job controls; no new sampler defaults.
 - [Gaussian block proposals](docs/BLOCKED_PROPOSALS.md): opt-in correlated moves, covariance selection, acceptance rules, and measured counterexamples.

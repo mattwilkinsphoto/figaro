@@ -16,11 +16,12 @@ The quick start prints `P(cause | signal) = 0.692308`. Common patterns prints `0
 
 ## Documentation example API reference
 
-These are every public function added for onboarding. Import `com.cra.figaro.example.documentation.{QuickStart, CommonPatterns}`. They reset the default universe and must not run concurrently with models relying on that shared default. They create and dispose their own algorithms; caller-owned universes are not automatically cleared.
+These are every public function added for onboarding. Import `com.cra.figaro.example.documentation.{QuickStart, CommonPatterns, ClassicTutorials}`. They reset the default universe and must not run concurrently with models relying on that shared default. They create and dispose their own algorithms; caller-owned universes are not automatically cleared.
 
 | Public function | Parameters | Returns / side effects | Example |
 | --- | --- | --- | --- |
 | `QuickStart.main(args: Array[String]): Unit` | Command-line arguments, ignored | Checks and prints the exact posterior; assertion failure signals an unexpected result | `QuickStart.main(Array.empty[String])` |
+| `ClassicTutorials.main(args: Array[String]): Unit` | Must be empty; otherwise throws `IllegalArgumentException` | Runs Constant/Importance, Select/elimination and Burglary, checks expected probabilities and independent enumeration, cleans up its models and prints results; assertion failure signals a regression | `ClassicTutorials.main(Array.empty[String])` |
 | `CommonPatterns.exactMarginal(): Double` | None | Exact late-delivery probability, `0.2` | `val pLate = CommonPatterns.exactMarginal()` |
 | `CommonPatterns.bayesianPosterior(): Double` | None | Exact cause probability after a signal, `9.0 / 13.0` | `val posterior = CommonPatterns.bayesianPosterior()` |
 | `CommonPatterns.sampledThreshold(samples: Int): Double` | Positive importance-sample budget; zero/negative throws `IllegalArgumentException` | Estimated probability of temperature above 21 for `Normal(20, 4)`; no error-bound guarantee | `val tail = CommonPatterns.sampledThreshold(50000)` |
@@ -29,6 +30,10 @@ These are every public function added for onboarding. Import `com.cra.figaro.exa
 See [QuickStart source](src/main/scala/com/cra/figaro/example/documentation/QuickStart.scala) and [CommonPatterns source](src/main/scala/com/cra/figaro/example/documentation/CommonPatterns.scala). The library's full API is [referenced separately](../docs/api/README.md). Generate `sbt "examples / Compile / doc"` for the broader examples module's compiler API; historical example entry points are demonstrations, not supported application APIs.
 
 ## Three common patterns, with code
+
+The [classic tutorial bridge](../docs/TUTORIAL.md) also provides three updated original
+models with a complete [runnable source](src/main/scala/com/cra/figaro/example/documentation/ClassicTutorials.scala).
+Run `sbt "examples / Compile / runMain com.cra.figaro.example.documentation.ClassicTutorials"`.
 
 ```scala
 import com.cra.figaro.example.documentation.CommonPatterns

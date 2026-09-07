@@ -151,3 +151,7 @@ For concurrent Monte Carlo, start with the opt-in [seeded parallel importance sa
 | `FigaroExamples` / sbt `examples` | Runnable models depending on core; not a dependency for your application |
 
 The root sbt project aggregates core and examples; publish `figaro`, not the root. See [JVM integration](../CONSUMER_BOUNDARY.md) for the library's dependency contract and release-readiness checklist.
+
+For the original learning path, use the [updated classic models](TUTORIAL.md) and
+[legacy modeling companion](LEGACY_MODELING_GUIDE.md). The [preservation map](DOCUMENTATION_MIGRATION.md)
+connects the complete historical tutorials to current guidance without duplicating them.

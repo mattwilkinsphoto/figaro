@@ -44,6 +44,10 @@ python -B -m unittest discover -s tools/docs -p "test_*.py"
 
 ## Gotchas
 
+- `test_legacy_documentation.py` verifies the four archived PDFs against their original
+  SHA-256 digests, checks the thirteen-chapter bridge and shared LaTeX preface, and
+  protects original and modernization attribution. It writes no files and does not
+  compile LaTeX. `check_links.py` includes maintained Markdown in `doc/` and `FigaroLaTeX/`.
 - Edit contracts in source Scaladoc and explanations in the handwritten guides. Generated call templates are **not runnable examples**: they assume an existing receiver, correctly typed arguments, and in-scope type parameters. The tested complete models live in the examples module. Missing behavioral prose is labeled explicitly; types alone cannot explain undocumented invariants.
 - The extractor consumes Scala 3 HTML structure, so a compiler upgrade can require parser changes. Failures must be investigated, not bypassed by silently omitting methods. Review representative generic, contextual, overloaded, parameterless, varargs, operator, and auxiliary-constructor entries.
 - API pages are ordered by case-sensitive relative-path strings on every platform. Sorting native `Path` objects instead gives a different order on Windows and Linux for names such as `INode` and `Index`, creating false freshness failures without an API change.

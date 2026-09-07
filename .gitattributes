@@ -1,3 +1,6 @@
 # Scala compiler source rewrites require stable line endings on Windows too.
 *.scala text eol=lf
 *.sbt text eol=lf
+
+# Preserve archival document bytes across Windows and Linux checkouts.
+*.pdf binary

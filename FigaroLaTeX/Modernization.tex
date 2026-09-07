@@ -1,0 +1,61 @@
+% Shared by the guide and tutorial; compile from their respective directories.
+\section*{How to use Figaro today}
+Figaro separates a probabilistic model from the algorithms that reason about it.
+The modernized development line uses JDK 17, Scala 3.9.0 LTS and sbt 2.0.8.
+It retains the \texttt{com.cra.figaro} packages, but its Scala 3 artifact is not
+binary compatible with old Scala 2 libraries. This is a development baseline,
+not an announcement of a published stable release.
+
+\section*{Quick start}
+Install JDK 17, Git and an sbt runner. Clone the repository and run its checked
+example from the repository root:
+\begingroup\scriptsize
+\begin{verbatim}
+git clone https://github.com/mattwilkinsphoto/figaro.git
+cd figaro
+sbt "examples / Compile / runMain com.cra.figaro.example.documentation.QuickStart"
+\end{verbatim}
+\endgroup
+The checkout pins sbt and Scala; a separate Scala installation is unnecessary.
+For dependency coordinates and compiled-library integration, use the current
+\href{https://github.com/mattwilkinsphoto/figaro/blob/main/README.md}{README}
+and \href{https://github.com/mattwilkinsphoto/figaro/blob/main/CONSUMER_BOUNDARY.md}{consumer contract}.
+Do not reuse FigaroWork installers, old Scala 2 coordinates, or instructions to
+put a library JAR on the system PATH.
+
+\section*{Keep the foundations; follow the bridge for changes}
+The original tutorial explains representation, evidence, relational models,
+inference, filtering, decisions, learning and extensions in depth. Its chapters
+are retained as historical teaching material, not asserted to be fully ported
+Scala 3 listings. Original notices and authorship remain unchanged.
+The \href{https://github.com/mattwilkinsphoto/figaro/blob/main/docs/DOCUMENTATION_MIGRATION.md}{chapter-by-chapter bridge}
+connects that material to current guidance without reproducing the book.
+The \href{https://github.com/mattwilkinsphoto/figaro/blob/main/docs/TUTORIAL.md}{classic walkthrough}
+provides checked Scala 3 Constant, Select and Burglary examples.
+Use the \href{https://github.com/mattwilkinsphoto/figaro/blob/main/docs/MIGRATION.md}{migration guide}
+for changed syntax, dependencies and accepted workarounds, and the
+\href{https://github.com/mattwilkinsphoto/figaro/blob/main/docs/API_GUIDE.md}{API guide}
+for current contracts. Generate the searchable API using
+\texttt{sbt "figaro / Compile / doc"}; the old Scala 2 API archive is obsolete.
+
+\section*{Optional performance and stopping features}
+Parallel importance sampling and multi-chain MCMC use isolated model instances
+and bounded workers. They are explicit choices, not automatic acceleration of
+existing programs or permission to share a mutable universe across threads.
+Continuous-vector samplers operate on an explicit log density rather than an
+arbitrary Figaro graph. Diagnostics, proposal calibration and stopping criteria
+have distinct assumptions and budgets; passing a precision rule does not prove
+that a chain has explored every important mode.
+See the \href{https://github.com/mattwilkinsphoto/figaro/blob/main/docs/PARALLEL_PERFORMANCE.md}{parallel guide},
+\href{https://github.com/mattwilkinsphoto/figaro/blob/main/docs/MULTI_CHAIN_MCMC.md}{multi-chain guide}
+and \href{https://github.com/mattwilkinsphoto/figaro/blob/main/docs/STOPPING_CRITERIA.md}{stopping guide}.
+Measured gains depend on workload and include overhead; there is no universal
+speedup promise. Some historical tests remain flaky or failing, and OSGi and
+unrestricted shared-graph concurrency remain outside the validated boundary.
+
+\section*{Modernization credits}
+Matthew Wilkins: modernization direction, requirements, review and validation.
+Codex (OpenAI): AI-assisted implementation, testing, performance analysis and
+documentation, working with Matthew Wilkins. These supplement the original
+Figaro contributors; see \texttt{FigaroAttributions.txt}. Copyright and license
+notices are not replaced by these credits.

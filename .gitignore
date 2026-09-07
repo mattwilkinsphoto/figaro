@@ -24,3 +24,13 @@ project/plugins/project/
 
 #IntelliJ
 .idea/
+
+# Generated API archives and LaTeX build intermediates are not source documents.
+/figaro_*-javadoc.jar
+/FigaroLaTeX/**/*.aux
+/FigaroLaTeX/**/*.toc
+/FigaroLaTeX/**/*.out
+/FigaroLaTeX/**/*.synctex.gz
+/FigaroLaTeX/html/
+/FigaroLaTeX/Tutorial/FigaroTutorial.pdf
+/FigaroLaTeX/FigaroGuide/FigaroGuide.pdf
