@@ -14,7 +14,8 @@ a mathematical construction is available but may lack a tested density/evidence 
 **wishlist** = candidate requiring assessment. Native does not mean every algorithm
 or numerical edge case is validated. Family rows below describe expansion work, not
 blanket support for all family members. Circular von Mises is now implemented and
-locally validated; joint GVM and other directional families remain future work.
+validated on main; joint GVM is a locally tested preview awaiting release review,
+and other directional families remain future work.
 
 Use stable `DIST-xx` IDs when moving work into the roadmap. Priorities are P0 (first
 program), P1 (common missing breadth), P2 (subsequent breadth) and P3 (specialist research).
@@ -27,7 +28,7 @@ and special cases attached to their family instead of creating duplicate impleme
 | ID / priority | Family and current expansion status | First useful capability | Later flavors / shared work |
 | --- | --- | --- | --- |
 | DIST-01 / P0 | Circular von Mises native and locally validated; other directional laws researched | [Circular von Mises, angle conventions and circular summaries](docs/VON_MISES.md) | Wrapped normal/Cauchy and other wraps; then von Mises-Fisher, Kent and Bingham with sphere/axis-aware contracts |
-| DIST-02 / P0 | Joint linear-angular; researched | Horwood-Poore Gauss-von Mises using DIST-01 | Mardia-Sutton, GVM mixtures, multiple angles and newer generalized GVM variants; separate quadrature/uncertainty-propagation research, not an automatic filtering claim |
+| DIST-02 / P0 | Joint linear-angular; local implementation validated, release review open | [Fixed-kernel Horwood-Poore Gauss-von Mises](docs/GAUSS_VON_MISES.md) using DIST-01 | Mardia-Sutton, GVM mixtures, multiple angles and newer generalized GVM variants; separate quadrature/uncertainty-propagation research, not an automatic filtering claim |
 | DIST-03 / P1 | Real-line location/scale and heavy tails; wishlist, Normal native | Student t, Cauchy and Laplace | Logistic, skew/noncentral variants, generalized normal, stable and hyperbolic families |
 | DIST-04 / P1 | Finite choices and count laws; partially native | Negative binomial and hypergeometric with explicit count conventions | Overdispersion, beta mixtures, heterogeneous Bernoulli sums, noncentral and zero-truncated flavors |
 | DIST-05 / P1 | Positive-valued scale/lifetime laws; partially native | Lognormal and Weibull; expose reusable Gamma special cases | Inverse Gaussian, Rayleigh/Rice/Nakagami, generalized Gamma, fatigue-life and survival variants |

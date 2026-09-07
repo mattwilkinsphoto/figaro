@@ -1,7 +1,8 @@
 # First distribution milestone: von Mises and Gauss-von Mises
 
-Status: **circular foundation implemented and locally validated; joint GVM remains a
-researched proposal**. See the [circular API, examples and tests](VON_MISES.md).
+Status: **circular foundation integrated with passing CI; fixed-kernel joint GVM locally
+implemented and tested, with public release review open**. See the
+[circular guide](VON_MISES.md) and [joint development preview](GAUSS_VON_MISES.md).
 Both the circular and joint families
 were explicitly requested on 2026-09-07. Parent families: `DIST-01` and
 `DIST-02` in the [wishlist](../WISHLIST.md). See the [delivery roadmap](../ROADMAP.md).
@@ -71,6 +72,11 @@ CDF, quantiles and fitting remain deferred.
   [SciPy reference](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.vonmises.html).
 
 ## Proposed second increment: joint GVM
+
+The fixed-kernel portion is now implemented locally as `GaussVonMisesDistribution`,
+`LinearAngular` and `GaussVonMises`, with 13 focused regressions. The following goals
+remain the design rationale; the preview guide records the implemented API and limits.
+No joint source push, main integration or public artifact is made at this checkpoint.
 
 Start with fixed parameters and an immutable linear-vector/angle result. Separate a
 pure numeric kernel from the mutable Figaro element adapter; proposed public names and
@@ -157,4 +163,5 @@ No third-party implementation has been selected or copied. Prefer a small indepe
 written kernel with cited mathematics, or an explicitly compatible licensed implementation
 after review. The circular implementation uses independently written mathematics and
 an opt-in log-density likelihood path; legacy HasDensity-only elements keep their
-behavior. Existing published artifacts are unchanged. Joint GVM is not implemented.
+behavior. Existing published artifacts are unchanged. Joint GVM remains a local preview;
+the public release-review gate is not resolved by implementation or test success.

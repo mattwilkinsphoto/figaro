@@ -648,3 +648,28 @@ new regression and executable example gates; remote CI is a separate integration
 No runtime dependency, version, default sampler or existing RC1 artifact is changed.
 Joint Horwood-Poore GVM, CDF/quantiles, fitting and broader legacy log-density adoption
 remain follow-up work.
+
+## Stage 31: circular integration and local joint GVM preview
+
+Circular checkpoint `fea8b999` passed the complete
+[Linux workflow](https://github.com/mattwilkinsphoto/figaro/actions/runs/34138540587)
+and was fast-forwarded to main. Joint development is isolated on
+`modernize/gauss-von-mises`; it is not pushed or merged at this checkpoint.
+
+The [joint preview](docs/GAUSS_VON_MISES.md) implements an immutable fixed-parameter
+Horwood-Poore kernel, immutable `LinearAngular` values and a Figaro adapter using direct
+log-density likelihood weighting. The implementation caches a lower Cholesky factor,
+uses triangular solves and log determinants, and samples the exact conditional
+Gaussian/circular construction. No inverse, Gaussian angular approximation, new runtime
+dependency, legacy MVN `logp` dependency or filtering algorithm is introduced.
+
+All 13 new regressions and 192 modernization regressions pass locally. The executable
+three-pattern example, Scala API generation and local thin-library package pass.
+Independent reference values use mpmath 1.3.0 at 80 digits; joint quadrature, 120,000
+prior draws, moment/residual checks, observation weighting, MH and worker-count
+reproducibility cover the implemented scope. These are not performance measurements
+or a blanket validation of extreme conditioning, partial observations or factored inference.
+
+The existing patent-review gate remains open. Public source/artifact distribution of
+the joint milestone is held for maintainer direction; implementation and numerical
+success do not establish legal clearance. Existing RC1 artifacts are untouched.

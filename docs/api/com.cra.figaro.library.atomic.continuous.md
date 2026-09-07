@@ -4941,6 +4941,1144 @@ Invocation template:
 receiver.unset()
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.generateRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#generateRandomness-fffff283)
+
+```scala
+def generateRandomness(): LinearAngular
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` LinearAngular ``.
+
+Source contract/attributes: Attributes Returns independent joint draw using the currently scoped Figaro RNG
+
+Invocation template:
+
+```scala
+receiver.generateRandomness()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.generateValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#generateValue-4c6)
+
+```scala
+def generateValue(rand: LinearAngular): LinearAngular
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: LinearAngular ``.
+
+Returns: `` LinearAngular ``.
+
+Source contract/attributes: Value parameters rand sampled immutable joint randomness Attributes Returns rand unchanged
+
+Invocation template:
+
+```scala
+receiver.generateValue(rand)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#logDensity-f9c)
+
+```scala
+def logDensity(value: LinearAngular): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters value finite joint state of the configured dimension Attributes Returns stable joint log density
+
+Invocation template:
+
+```scala
+receiver.logDensity(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.logp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#logp-f9c)
+
+```scala
+def logp(value: LinearAngular): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters value finite joint state Attributes Returns logDensity(value), the Continuous interface alias
+
+Invocation template:
+
+```scala
+receiver.logp(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.!== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#!==-894)
+
+```scala
+def !==(that: Element[Value])(implicit universe: Universe): Neq[LinearAngular]
+```
+
+The element that tests inequality of this element with another element.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Element[Value] ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Neq[LinearAngular] ``.
+
+Source contract/attributes: The element that tests inequality of this element with another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.!==(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.=== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#===-f71)
+
+```scala
+def ===(that: Value)(implicit universe: Universe): Apply1[LinearAngular, Boolean]
+```
+
+The element that tests whether the value of this element is equal to a particular value.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Value ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Apply1[LinearAngular, Boolean] ``.
+
+Source contract/attributes: The element that tests whether the value of this element is equal to a particular value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.===(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.=== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#===-672)
+
+```scala
+def ===(that: Element[Value])(implicit universe: Universe): Eq[LinearAngular]
+```
+
+The element that tests equality of this element with another element.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Element[Value] ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Eq[LinearAngular] ``.
+
+Source contract/attributes: The element that tests equality of this element with another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.===(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.activate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#activate-94c)
+
+```scala
+def activate(): Unit
+```
+
+Activate the element in its universe.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Activate the element in its universe. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.activate()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.addCondition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#addCondition-fffff9ad)
+
+```scala
+def addCondition(condition: Condition, contingency: Contingency = ...): Unit
+```
+
+Add the given condition to the existing conditions of the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` condition: Condition ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add the given condition to the existing conditions of the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addCondition(condition, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.addConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#addConstraint-fffff9ad)
+
+```scala
+def addConstraint(constraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Add a contingent constraint to the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` constraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addConstraint(constraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.addLogConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#addLogConstraint-fffff9ad)
+
+```scala
+def addLogConstraint(constraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Add a log contingent constraint to the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` constraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a log contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addLogConstraint(constraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.addPragma ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#addPragma-b53)
+
+```scala
+def addPragma(pragma: Pragma[Value]): Unit
+```
+
+Add a pragma to the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` pragma: Pragma[Value] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a pragma to the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addPragma(pragma)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.allConditions ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#allConditions-0)
+
+```scala
+def allConditions: List[(Condition, Contingency)]
+```
+
+All the conditions defined on this element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[(Condition, Contingency)] ``.
+
+Source contract/attributes: All the conditions defined on this element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.allConditions
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.allConstraints ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#allConstraints-0)
+
+```scala
+def allConstraints: List[(Constraint, Contingency)]
+```
+
+The current soft constraints on the element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[(Constraint, Contingency)] ``.
+
+Source contract/attributes: The current soft constraints on the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.allConstraints
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.args ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#args-0)
+
+```scala
+def args: List[Element[_]]
+```
+
+Returns an empty list.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: Returns an empty list. Attributes Inherited from: Atomic
+
+Invocation template:
+
+```scala
+receiver.args
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.clearContext ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#clearContext-94c)
+
+```scala
+def clearContext(): Unit
+```
+
+Clears all the temporary elements associated with this element (all elements created in it's context).
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Clears all the temporary elements associated with this element (all elements created in it's context). Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.clearContext()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.condition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#condition-4ad)
+
+```scala
+def condition(value: Any): Boolean
+```
+
+Tests whether all the element's contingent conditions are satisfied for the given value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Any ``.
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Tests whether all the element's contingent conditions are satisfied for the given value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.condition(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.conditionSatisfied ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#conditionSatisfied-0)
+
+```scala
+def conditionSatisfied: Boolean
+```
+
+Determines whether the condition on the element is satisfied by the current value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Determines whether the condition on the element is satisfied by the current value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.conditionSatisfied
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.constraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#constraint-fffffeac)
+
+```scala
+def constraint(value: Any): Double
+```
+
+Gets the result of all the element's contingent constraints for the given value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Any ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Gets the result of all the element's contingent constraints for the given value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.constraint(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.constraintValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#constraintValue-0)
+
+```scala
+def constraintValue: Double
+```
+
+Determines the value of the constraint on the element applied to the current value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Determines the value of the constraint on the element applied to the current value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.constraintValue
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.context ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#context-0)
+
+```scala
+def context: List[Element[_]]
+```
+
+The elements on which the existence of this element depends.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: The elements on which the existence of this element depends. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.context
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.deactivate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#deactivate-94c)
+
+```scala
+def deactivate(): Unit
+```
+
+Deactivate the element in its universe.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Deactivate the element in its universe. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.deactivate()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#density-fffffeac)
+
+```scala
+override def density(value: LinearAngular): Double
+```
+
+Exponentiate logDensity; small positive densities may round to zero.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity Inherited from: HasLogDensity
+
+Invocation template:
+
+```scala
+receiver.density(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.directContextContents ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#directContextContents-0)
+
+```scala
+def directContextContents: Set[Element[_]]
+```
+
+Returns the set of elements directly created in the context of this element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Set[Element[_]] ``.
+
+Source contract/attributes: Returns the set of elements directly created in the context of this element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.directContextContents
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.elementsIAmContingentOn ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#elementsIAmContingentOn-0)
+
+```scala
+def elementsIAmContingentOn: Set[Element[_]]
+```
+
+Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Set[Element[_]] ``.
+
+Source contract/attributes: Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value. Figaro takes care of handling all this under the hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample those other elements first. This method is supplied to support this use case. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.elementsIAmContingentOn
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.flatMap ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#flatMap-db8)
+
+```scala
+def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` U ``.
+
+Parameters, list 1: `` fn: Value => Element[U] ``.
+
+Context parameters, list 2: `` name: Name[U] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[U] ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.flatMap[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.generate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#generate-94c)
+
+```scala
+final def generate(): Unit
+```
+
+First generate the randomness, then generate the value given the randomness. Store the results in randomness and value.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: First generate the randomness, then generate the value given the randomness. Store the results in randomness and value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.generate()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.intervene ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#intervene-fffff71f)
+
+```scala
+def intervene(v: Value): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` v: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.intervene(v)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.isCachable ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#isCachable-0)
+
+```scala
+def isCachable: Boolean
+```
+
+The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.isCachable
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.isTemporary ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#isTemporary-0)
+
+```scala
+def isTemporary: Boolean
+```
+
+Returns true if this element is temporary, that is, was created in the context of another element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.isTemporary
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.map ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#map-db8)
+
+```scala
+def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` U ``.
+
+Parameters, list 1: `` fn: Value => U ``.
+
+Context parameters, list 2: `` name: Name[U] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[U] ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.nextRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#nextRandomness-fffff446)
+
+```scala
+override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
+```
+
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
+
+Type parameters: none.
+
+Parameters, list 1: `` oldRandomness: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
+
+Invocation template:
+
+```scala
+receiver.nextRandomness(oldRandomness)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.observe ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#observe-fffff71f)
+
+```scala
+def observe(observation: Value): Unit
+```
+
+Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated.
+
+Type parameters: none.
+
+Parameters, list 1: `` observation: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.observe(observation)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.pragmas ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#pragmas-0)
+
+```scala
+def pragmas: List[Pragma[Value]]
+```
+
+The pragmas attached to the element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Pragma[Value]] ``.
+
+Source contract/attributes: The pragmas attached to the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.pragmas
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.removeConditions ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#removeConditions-71e)
+
+```scala
+def removeConditions(contingency: Contingency = ...): Unit
+```
+
+Remove all conditions associated with the given contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove all conditions associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removeConditions(contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.removeConstraints ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#removeConstraints-71e)
+
+```scala
+def removeConstraints(contingency: Contingency = ...): Unit
+```
+
+Remove all constraints associated with the given contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove all constraints associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removeConstraints(contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.removePragma ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#removePragma-b53)
+
+```scala
+def removePragma(pragma: Pragma[Value]): Unit
+```
+
+Remove a pragma from the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` pragma: Pragma[Value] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove a pragma from the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removePragma(pragma)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.score ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#score-fffffdbf)
+
+```scala
+def score(oldValue: Value, newValue: Value): Double
+```
+
+Compute the constraints on the new value divided by the constraints on the old value.
+
+Type parameters: none.
+
+Parameters, list 1: `` oldValue: Value ``; `` newValue: Value ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Compute the constraints on the new value divided by the constraints on the old value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.score(oldValue, newValue)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.set ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#set-fffff71f)
+
+```scala
+def set(newValue: Value): Unit
+```
+
+Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called.
+
+Type parameters: none.
+
+Parameters, list 1: `` newValue: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.set(newValue)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.setCondition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#setCondition-fffff9ad)
+
+```scala
+def setCondition(newCondition: Condition, contingency: Contingency = ...): Unit
+```
+
+Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newCondition: Condition ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setCondition(newCondition, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.setConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#setConstraint-fffff9ad)
+
+```scala
+def setConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newConstraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setConstraint(newConstraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.setLogConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#setLogConstraint-fffff9ad)
+
+```scala
+def setLogConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newConstraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setLogConstraint(newConstraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.setRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#setRandomness-fffff71f)
+
+```scala
+def setRandomness(newRandomness: Randomness): Unit
+```
+
+Set the randomness of this element.
+
+Type parameters: none.
+
+Parameters, list 1: `` newRandomness: Randomness ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the randomness of this element. Will generate its value using the new randomness and propagate the effects to elements that depend on it without changing their randomness. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setRandomness(newRandomness)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.toNameString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#toNameString-0)
+
+```scala
+def toNameString: String
+```
+
+A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.toNameString
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.unintervene ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#unintervene-94c)
+
+```scala
+def unintervene(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unintervene()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.unobserve ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#unobserve-94c)
+
+```scala
+def unobserve(): Unit
+```
+
+Removes conditions on the element and allows different values of the element to be generated.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Removes conditions on the element and allows different values of the element to be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unobserve()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussVonMises.unset ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussVonMises.html#unset-94c)
+
+```scala
+def unset(): Unit
+```
+
+Allows different values of the element to be generated.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Allows different values of the element to be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unset()
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.AtomicInverseGamma.density ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html#density-5b2)
@@ -24095,6 +25233,176 @@ Invocation template:
 receiver.unset()
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMises.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMises$.html#apply-fffffb4a)
+
+```scala
+def apply(distribution: GaussVonMisesDistribution)(using name: Name[LinearAngular], collection: ElementCollection): AtomicGaussVonMises
+```
+
+Register a fixed-parameter joint element; each worker needs its own element/universe.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: GaussVonMisesDistribution ``.
+
+Context parameters, list 2: `` name: Name[LinearAngular] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicGaussVonMises ``.
+
+Source contract/attributes: Register a fixed-parameter joint element; each worker needs its own element/universe. Value parameters collection contextual owning collection distribution non-null immutable validated kernel, safe to reuse across workers name contextual element name Attributes Returns atomic joint element; invalid kernel throws before registration Example GaussVonMises(kernel)(using "state", universe)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMises.apply(distribution)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution$.html#apply-943)
+
+```scala
+def apply(mean: Seq[Double], covariance: Seq[Seq[Double]], alpha: Double, beta: Seq[Double], gamma: Seq[Seq[Double]], kappa: Double): GaussVonMisesDistribution
+```
+
+Validate and snapshot fixed GVM parameters in the paper's lower-Cholesky convention.
+
+Type parameters: none.
+
+Parameters, list 1: `` mean: Seq[Double] ``; `` covariance: Seq[Seq[Double]] ``; `` alpha: Double ``; `` beta: Seq[Double] ``; `` gamma: Seq[Seq[Double]] ``; `` kappa: Double ``.
+
+Returns: `` GaussVonMisesDistribution ``.
+
+Source contract/attributes: Validate and snapshot fixed GVM parameters in the paper's lower-Cholesky convention. Value parameters alpha finite radian angular center at the Gaussian mean beta finite linear coupling in whitened coordinates, same length as mean covariance finite exactly symmetric positive-definite covariance; diagonal is variance gamma finite exactly symmetric quadratic coupling matrix; need not be positive definite kappa circular concentration in [0, VonMisesDistribution.MaxKappa] mean nonempty finite Gaussian mean vector Attributes Returns immutable kernel; invalid/unrepresentable parameters throw IllegalArgumentException Example GaussVonMisesDistribution(Vector(0.0), Vector(Vector(1.0)), 0.0, Vector(0.5), Vector(Vector(0.2)), 4.0)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.apply(mean, covariance, alpha, beta, gamma, kappa)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.conditionalLocation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#conditionalLocation-f10)
+
+```scala
+def conditionalLocation(linear: Vector[Double]): Double
+```
+
+Conditional angular center alpha + beta^T z + 0.5 z^T Gamma z, modulo one turn.
+
+Type parameters: none.
+
+Parameters, list 1: `` linear: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Conditional angular center alpha + beta^T z + 0.5 z^T Gamma z, modulo one turn. Value parameters linear finite vector of the configured dimension Attributes Returns radians in [-Pi,Pi); this is not generally the marginal angular mean Example kernel.conditionalLocation(Vector(0.2))
+
+Invocation template:
+
+```scala
+receiver.conditionalLocation(linear)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#density-f9c)
+
+```scala
+def density(value: LinearAngular): Double
+```
+
+Ordinary joint density; prefer logDensity to avoid overflow/underflow.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Ordinary joint density; prefer logDensity to avoid overflow/underflow. Value parameters value finite state of the configured dimension Attributes Returns exp(logDensity(value)), subject to ordinary exponentiation limits Example kernel.density(LinearAngular(Vector(0.2), 3.1))
+
+Invocation template:
+
+```scala
+receiver.density(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.linearLogDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#linearLogDensity-f10)
+
+```scala
+def linearLogDensity(linear: Vector[Double]): Double
+```
+
+Gaussian marginal log density, using a triangular solve rather than an inverse.
+
+Type parameters: none.
+
+Parameters, list 1: `` linear: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Gaussian marginal log density, using a triangular solve rather than an inverse. Value parameters linear finite vector of the configured dimension Attributes Returns log density per linear-coordinate volume; extreme tails may return -Infinity Example kernel.linearLogDensity(Vector(0.2))
+
+Invocation template:
+
+```scala
+receiver.linearLogDensity(linear)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#logDensity-f9c)
+
+```scala
+def logDensity(value: LinearAngular): Double
+```
+
+Joint density in log space with respect to linear volume times radians.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Joint density in log space with respect to linear volume times radians. Value parameters value non-null state with matching linear dimension and finite coordinates Attributes Returns log Gaussian marginal plus conditional circular log density; may be -Infinity Example kernel.logDensity(LinearAngular(Vector(0.2), 3.1))
+
+Invocation template:
+
+```scala
+receiver.logDensity(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#sample-fffffde3)
+
+```scala
+def sample(rng: Random, maxAttempts: Int = ...): LinearAngular
+```
+
+Independent prior draw: Gaussian vector followed by its conditional circular angle.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``; `` maxAttempts: Int = ... ``.
+
+Returns: `` LinearAngular ``.
+
+Source contract/attributes: Independent prior draw: Gaussian vector followed by its conditional circular angle. Value parameters maxAttempts positive circular rejection budget (default 100000) rng non-null caller-owned RNG, not shared between workers Attributes Returns detached immutable state with canonical angle; no MCMC or approximation Example kernel.sample(new scala.util.Random(42L))
+
+Invocation template:
+
+```scala
+receiver.sample(rng, maxAttempts)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.InverseGamma.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/InverseGamma$.html#apply-fffffc35)
@@ -26373,6 +27681,54 @@ Invocation template:
 
 ```scala
 receiver.unset()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.LinearAngular.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/LinearAngular.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.LinearAngular.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/LinearAngular.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal.toString ``
