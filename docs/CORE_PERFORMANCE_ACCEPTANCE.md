@@ -3,7 +3,8 @@
 ## Scope and pre-measurement protocol
 
 This is acceptance of the accumulated development snapshot, not an immutable production
-release. Main still contains Scala 2.13/sbt 1 baseline `b3431027`; the Scala 3 candidate
+release. Main adopts accepted Scala 3/sbt 2 checkpoint `ed160a67`, preserving the preceding
+Scala 2.13/sbt 1 baseline `b3431027` in history. The measured Scala 3 library candidate
 is `71d39cbb`. The candidate's [full required Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34080838730)
 passes, including resource controls, lifecycle regressions, coverage, repeatable rebuilds,
 publication and artifacts. Local Windows modernization checks also pass. General shared-
@@ -191,20 +192,28 @@ though they came from an identical build environment.
   Support here is ordinary JVM classpath consumption; Java facades/custom loaders and
   arbitrary application models require their own acceptance.
 
-The evidence supports deciding whether to integrate this development baseline. It does
-not authorize silently broadening the supported deployment matrix or treating all
-historical tests as green. Main is not moved while acceptance work is incomplete.
+The evidence supports integration of this development baseline. It does not broaden
+the supported deployment matrix or establish that all historical tests are green.
 
-## Integration checklist
+## Integration record and verification
 
-1. Require successful branch CI including the standalone consumer gate, checked datasets,
-   lifecycle, coverage and artifact/rebuild steps. Review residual risks above explicitly.
-2. Confirm remote main still names `b3431027` and is an ancestor of the accepted branch.
-   Integrate by fast-forward to preserve the baseline/protocol commits referenced by the
-   evidence. Do not squash away that history or force-update a main that has diverged.
-3. Verify main CI and update the documented checkout branch. Integration remains a
-   development-snapshot baseline change; versioning/tagging/public release is a separate
-   decision. Keep the preceding commit available as the rollback reference.
+The accepted checkpoint is `ed160a67`; its required branch workflow is
+[run 34083664890](https://github.com/mattwilkinsphoto/figaro/actions/runs/34083664890).
+Integration fast-forwards main from `b3431027`, retaining the complete baseline,
+protocol and performance history. The accompanying documentation-only commit changes
+checkout instructions to main; it does not change the tested library or CI gates.
+
+Check the [main-branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amain)
+for the exact integration commit's result, including the standalone consumer, datasets,
+lifecycle, coverage, artifacts and clean rebuild. Branch success is not a substitute for
+that post-integration check. Snapshot modern.10 remains unchanged; versioning, tagging
+and public publication require a separate release decision.
+
+The preceding main commit is
+`b3431027c1da5980d41993f4e484620a4baf163c`. It remains reachable in history rather than
+as a separately maintained legacy line. If rollback becomes necessary, first assess
+downstream dependency/source changes and use a reviewed revert or new corrective commit;
+do not force-reset shared main or silently swap Scala 3 dependencies for Scala 2 binaries.
 
 Downstream Scala 2 applications do not acquire these changes automatically: the Scala 3
 artifact has a different binary coordinate and requires recompilation. Do not remove

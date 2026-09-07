@@ -11,8 +11,9 @@ remain opt-in, and ordinary graph models do not become generally thread-safe.
 The [acceptance report](CORE_PERFORMANCE_ACCEPTANCE.md) measures the combined diagnostic
 changes directly and documents a separate application compiled against local publication.
 Neither improved throughput nor successful consumer smoke tests establish statistical
-coverage or validate an arbitrary downstream application. Main remains unchanged pending
-integration; there is no new public release.
+coverage or validate an arbitrary downstream application. Main now includes the accepted
+Scala 3/sbt 2 development baseline; there is no new public release. The preceding main
+commit `b3431027` remains in history for comparison and rollback planning.
 
 ## Resource/scaling assessment and lifecycle-test repair
 

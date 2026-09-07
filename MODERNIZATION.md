@@ -592,5 +592,19 @@ The Windows-compiled consumer also runs against the preceding Linux-built thin J
 All four downloaded CI artifacts pass the new legal/content/bytecode gate. Cross-platform
 class/TASTY byte differences remain undiagnosed; repeat-build evidence is environment-
 specific. See the [acceptance report](docs/CORE_PERFORMANCE_ACCEPTANCE.md) for the complete
-table, reproduction, artifact-tool reference and residual limitations. Main is unchanged
-while the final evidence/gate commit awaits CI and integration.
+table, reproduction, artifact-tool reference and residual limitations. The final
+evidence/gate checkpoint is `ed160a67`.
+
+## Stage 28: integrate the accepted development baseline
+
+Main incorporates `modernize/core-performance-acceptance` at `ed160a67` by fast-forward
+from `b3431027`, preserving the complete modernization and measurement history. The
+acceptance checkpoint's [required CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34083664890)
+is the pre-integration gate. The accompanying documentation-only update points new users
+to main and records the previous commit for rollback planning. No library code, version,
+dependency, sampling default, release tag or public artifact publication changes here.
+
+The [main workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amain)
+provides the post-integration result for the exact pushed commit. The snapshot remains
+development-only; full historical-suite, shared-graph, coverage, OSGi and cross-platform
+byte-identity limitations in the acceptance and migration guides still apply.

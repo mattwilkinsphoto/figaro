@@ -8,10 +8,10 @@ This modernized line uses **Scala 3.9.0 LTS, sbt 2.0.8, and JDK 17**. It keeps t
 
 Prerequisites: Git, JDK 17 on your path, and an sbt runner. sbt downloads the compiler and uses `project/build.properties`; you do not need a separate Scala installation. The first build needs internet access.
 
-1. Get the Scala 3 branch:
+1. Get the Scala 3 baseline on main:
 
    ```sh
-   git clone --branch modernize/core-performance-acceptance https://github.com/mattwilkinsphoto/figaro.git
+   git clone --branch main https://github.com/mattwilkinsphoto/figaro.git
    cd figaro
    ```
 
