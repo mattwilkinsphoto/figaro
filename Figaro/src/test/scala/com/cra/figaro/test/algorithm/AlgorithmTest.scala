@@ -141,16 +141,31 @@ class AlgorithmTest extends AnyWordSpec with Matchers {
       a.kill()
     }
 
-    "have an unstable answer after resuming" in {
+    "make progress after resuming without requiring a step between consecutive queries" in {
       Universe.createNew()
       val c = Flip(0.3)
-      val a = new SimpleAnytime(c)
+      class ProgressAnytime extends SimpleAnytime(c) {
+        @volatile var progress = new java.util.concurrent.CountDownLatch(0)
+        override def runStep(): Unit = {
+          super.runStep()
+          progress.countDown()
+        }
+      }
+      val a = new ProgressAnytime
       a.start()
-      a.stop()
-      a.resume()
-      val x = a.expectation(c, (b: Boolean) => -1.0)
-      a.expectation(c)(b => -1.0) should be > (x)
-      a.kill()
+      try {
+        for (_ <- 0 until 20) {
+          a.stop()
+          val stopped = a.expectation(c, (b: Boolean) => -1.0)
+          // Arm while stopped: only a real post-resume runStep can release this.
+          // Queries are serialized commands; two can legitimately precede a step.
+          a.progress = new java.util.concurrent.CountDownLatch(1)
+          a.resume()
+          a.progress.await(a.messageTimeout.toMillis, java.util.concurrent.TimeUnit.MILLISECONDS) shouldBe true
+          a.stop()
+          a.expectation(c)(b => -1.0) should be > (stopped)
+        }
+      } finally a.kill()
     }
 
     "block on stop, kill or queries" in {

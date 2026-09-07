@@ -352,11 +352,24 @@ the hybrid library, and validates both complete new datasets. No performance thr
 or long benchmark rerun becomes a CI gate. Production library code/tests remain at
 `c6410392`; the subsequent example-only guard prevents misuse of historical labels.
 
-The preceding audit run failed its legacy anytime-lifecycle step after passing the new
-audit and modernization checks. Detailed log retrieval returned HTTP 403. All four
-unchanged lifecycle tests passed locally here; that does not diagnose the previous
-failure or establish that the full historical suite is green. New branch CI status is
-reported separately from these local results.
+The subsequent [diagnostic study CI run](https://github.com/mattwilkinsphoto/figaro/actions/runs/34077072549)
+failed its legacy anytime-lifecycle step after passing the new audit and modernization
+checks. Supplied logs identify the resume assertion: two immediate queries both returned
+7612. The test incorrectly required a sampling step between consecutive queries.
+The anytime worker serializes queries and sampling steps, and acknowledges resume by
+enabling computation; queued queries may legitimately run before its next sampling step.
+Equal consecutive answers therefore do not, by themselves, demonstrate a resume failure.
+
+The regression now arms a completion latch while stopped, resumes, waits for an actual
+completed step using the existing message timeout, stops again, and requires the counter
+to increase. It repeats this check for 20 stop/resume cycles and always kills the worker
+on exit. This is a test repair, not a production scheduling change: no sleep, increased
+timeout, relaxed counter assertion or skipped CI gate is introduced. Local verification
+passed all four lifecycle checks, all 18 tests in `AlgorithmTest`, and ten additional
+resume-test runs with `-XX:ActiveProcessorCount=1` (20 cycles per run). These runs use
+Java 17.0.4 on Windows, not the failing CI runner's Java 17.0.20.1 on Linux. New branch
+CI status must still be distinguished; this diagnosis does not establish that the full
+historical suite is green.
 
 ## Remaining core scope and stopping point
 
