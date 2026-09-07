@@ -45,7 +45,7 @@ That coordinate resolves only after local publication, unless you separately pub
 ## Documentation
 
 - [Circular von Mises](docs/VON_MISES.md): reusable angular density/sampling, circular summaries, conditional observations and inference limits.
-- [Joint Gauss-von Mises preview](docs/GAUSS_VON_MISES.md): locally tested linear-angular distribution; public release review remains open.
+- [Joint Gauss-von Mises preview](docs/GAUSS_VON_MISES.md): tested linear-angular distribution, approved standalone publication scope and inference limits.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.

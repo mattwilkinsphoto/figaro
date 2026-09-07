@@ -1,7 +1,7 @@
 # First distribution milestone: von Mises and Gauss-von Mises
 
 Status: **circular foundation integrated with passing CI; fixed-kernel joint GVM locally
-implemented and tested, with public release review open**. See the
+implemented and tested, with standalone publication approved by the maintainer**. See the
 [circular guide](VON_MISES.md) and [joint development preview](GAUSS_VON_MISES.md).
 Both the circular and joint families
 were explicitly requested on 2026-09-07. Parent families: `DIST-01` and
@@ -76,7 +76,8 @@ CDF, quantiles and fitting remain deferred.
 The fixed-kernel portion is now implemented locally as `GaussVonMisesDistribution`,
 `LinearAngular` and `GaussVonMises`, with 13 focused regressions. The following goals
 remain the design rationale; the preview guide records the implemented API and limits.
-No joint source push, main integration or public artifact is made at this checkpoint.
+The maintainer approved standalone publication on 2026-09-07; normal CI and main
+integration gates remain. This is not a tagged library release.
 
 Start with fixed parameters and an immutable linear-vector/angle result. Separate a
 pure numeric kernel from the mutable Figaro element adapter; proposed public names and
@@ -153,8 +154,10 @@ and 2024 [generalized Bernoulli GVM work](https://doi.org/10.23919/FUSION59988.2
 are later research candidates, not dependencies of the basic circular milestone.
 
 A related patent publication, [US 8,909,586](https://patents.justia.com/patent/8909586),
-describes GVM-based tracking methods. Record a claim/scope/status review before releasing
-the corresponding joint/filtering implementation. This is a due-diligence flag, **not**
+describes GVM-based tracking methods. The maintainer's
+[scope decision](GAUSS_VON_MISES.md#maintainer-scope-decision-2026-09-07) lifts the hold
+for the current standalone distribution. Revisit claim/scope/status before adding report
+ingestion, fusion, filtering or orbit propagation. This is a due-diligence flag, **not**
 a conclusion about infringement, validity, enforceability or whether a standalone
 distribution is covered. Code licensing and patent review are separate questions;
 the existence of an openly readable paper resolves neither automatically.
@@ -163,5 +166,6 @@ No third-party implementation has been selected or copied. Prefer a small indepe
 written kernel with cited mathematics, or an explicitly compatible licensed implementation
 after review. The circular implementation uses independently written mathematics and
 an opt-in log-density likelihood path; legacy HasDensity-only elements keep their
-behavior. Existing published artifacts are unchanged. Joint GVM remains a local preview;
-the public release-review gate is not resolved by implementation or test success.
+behavior. Existing published artifacts are unchanged. Joint GVM remains a development
+preview; publication approval is a maintainer scope decision, not a legal conclusion
+derived from implementation or test success.

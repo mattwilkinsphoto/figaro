@@ -1,7 +1,8 @@
-# Joint Gauss-von Mises: local development preview
+# Joint Gauss-von Mises: development preview
 
-Status: implemented on `modernize/gauss-von-mises`, **not publicly released or merged**.
-The release-review gate below remains open. The circular foundation is separately
+Status: implemented on `modernize/gauss-von-mises`; **standalone publication approved
+by the maintainer on 2026-09-07**, subject to the normal CI/integration gates. This is
+not a tagged release or main integration. The circular foundation is separately
 available on main at `fea8b999`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34138540587).
 
 ## Overview
@@ -25,7 +26,7 @@ implement a GVM filter, orbit propagator, report-fusion algorithm or parameter f
 
 ## Quick start in three steps
 
-1. Use the local development branch with the [Scala 3/JDK 17 build](BUILDING.md).
+1. Use the `modernize/gauss-von-mises` branch with the [Scala 3/JDK 17 build](BUILDING.md).
 2. Run `sbt "examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesExample"`.
 3. Adapt a pattern below, retaining the documented coordinate order and ownership rules.
    Existing RC1 bundles and circular-only main do not include these joint APIs.
@@ -167,7 +168,7 @@ mutable collections are copied; the kernel holds no RNG or mutable scratch array
   lazy inference, learning, annealing, dynamic Create and automatic circular vector-sampler
   adapters are not newly validated. Raw angular averages/stopping criteria are inappropriate.
 
-## Verification and release gate
+## Verification and publication scope
 
 The [13 focused regressions](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GaussVonMisesRegressionTest.scala)
 pass locally: independent 80-digit joint scores, two-dimensional normalization, uncoupled
@@ -175,8 +176,9 @@ and uniform limits, 120,000 prior draws, Gaussian moments and conditional circul
 residuals, disparate units, input snapshots, failure paths, real evidence weighting,
 posterior projections and exact seeded traces across worker counts.
 All 192 modernization regressions, the executable example, Scala API generation and
-local thin-library packaging also pass. Joint remote CI has not run: this branch has
-not been pushed. Existing whole-library historical-suite limits remain unchanged.
+local thin-library packaging also pass. Check the exact source commit in the
+[branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
+before treating remote CI as passed. Existing whole-library historical-suite limits remain unchanged.
 The [optional oracle](../tools/gauss_von_mises_reference.py) prints fixtures using
 `mpmath==1.3.0`; it is not a Figaro runtime dependency. Run it with `python -B` in an
 isolated environment. It uses an explicit known factor and inverse/determinant formulas,
@@ -186,13 +188,25 @@ The mathematical specification was checked against Horwood and Poore,
 [SIAM/ASA JUQ 2 (2014), Definition 3.1](https://doi.org/10.1137/130917296).
 No third-party implementation was copied. No new runtime dependency or RC1 replacement.
 
-Release review remains open. On 2026-09-07, [Google Patents' record for US8909586B2](https://patents.google.com/patent/US8909586B2/en)
-reported active/reinstated status, with an explicit disclaimer that this is not a legal
-conclusion. Its published claims include report fusion constrained by diffeomorphisms.
-This development scope does not implement that workflow, but this distinction is **not
-patent clearance**. A qualified scope/status review or explicit maintainer direction is
-needed before public distribution of this joint milestone. Tracking/filtering remains a
-separate future gate. The circular-only release is not held by this development checkpoint.
+### Maintainer scope decision (2026-09-07)
+
+Matthew Wilkins reviewed the claims of [US8909586B2](https://patents.google.com/patent/US8909586B2/en)
+and approved proceeding with publication of the current standalone distribution milestone.
+This supersedes the engineering publication hold recorded at `0abf616e`. It records a
+maintainer decision, **not a legal opinion, patent clearance or a guarantee for downstream uses**.
+
+The approved implementation constructs a parameterized distribution, generates samples,
+evaluates densities and integrates with ordinary Figaro inference. It has no sensor-report
+or state/covariance-message ingestion, association, frame/epoch reconciliation, orbit
+dynamics, or report-fusion/diffeomorphism workflow. Accepting mean/covariance parameters
+does not itself implement those operations. Synthetic examples combine priors and
+likelihoods; they are not described as doing no Bayesian updating.
+
+The maintainer's domain interpretation is that reports may contain raw sensor products
+or estimated states plus uncertainty. The scope decision does not assume that the word
+"reports" is restricted to raw sensor data. Revisit the claims before adding report
+ingestion, fusion, filtering, or orbit prediction/propagation. This targeted future review
+replaces the blanket hold on the standalone distribution. Numerical and CI gates remain.
 
 Related: [circular foundation](VON_MISES.md), [milestone plan](GAUSS_VON_MISES_PLAN.md),
 [distribution inventory](DISTRIBUTION_SUPPORT.md), [roadmap](../ROADMAP.md),

@@ -673,3 +673,19 @@ or a blanket validation of extreme conditioning, partial observations or factore
 The existing patent-review gate remains open. Public source/artifact distribution of
 the joint milestone is held for maintainer direction; implementation and numerical
 success do not establish legal clearance. Existing RC1 artifacts are untouched.
+
+## Stage 32: approve standalone GVM publication scope
+
+On 2026-09-07 Matthew Wilkins reviewed the patent claims and approved proceeding with
+the standalone distribution milestone. The [recorded scope decision](docs/GAUSS_VON_MISES.md#maintainer-scope-decision-2026-09-07)
+supersedes Stage 31's blanket publication hold; it is not a legal opinion or patent
+clearance. Report ingestion, state association, fusion, filtering and orbit propagation
+retain a targeted future review checkpoint. Generic prior/likelihood examples are not
+represented as a report-fusion/diffeomorphism pipeline.
+
+This follow-up changes documentation only. It retains the `0abf616e` implementation,
+192 passing local modernization regressions, 13 focused joint tests, and existing build
+and artifact gates. The joint branch can now be pushed for remote CI; main integration
+remains subject to that gate. No version, dependency, license or RC1 artifact changes.
+Circular main checkpoint `fea8b999` also passed its
+[post-integration workflow](https://github.com/mattwilkinsphoto/figaro/actions/runs/34166509022).

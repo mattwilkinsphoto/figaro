@@ -20,7 +20,7 @@ These are every public function added for onboarding. Import `com.cra.figaro.exa
 
 | Public function | Parameters | Returns / side effects | Example |
 | --- | --- | --- | --- |
-| `GaussVonMisesExample.main(args: Array[String]): Unit` | Empty arguments; import from `com.cra.figaro.example.documentation` | Local development preview: checks joint prior residuals, full-observation likelihoods and posterior projections; prints results and cleans up models | `GaussVonMisesExample.main(Array.empty[String])` |
+| `GaussVonMisesExample.main(args: Array[String]): Unit` | Empty arguments; import from `com.cra.figaro.example.documentation` | Development preview: checks joint prior residuals, full-observation likelihoods and posterior projections; prints results and cleans up models | `GaussVonMisesExample.main(Array.empty[String])` |
 | `VonMisesExample.main(args: Array[String]): Unit` | Must be empty; otherwise throws `IllegalArgumentException` | Compares circular/arithmetic means, checks conditional angular evidence and isolated parallel inference, cleans up models and prints results; assertion failure signals a regression | `VonMisesExample.main(Array.empty[String])` |
 | `QuickStart.main(args: Array[String]): Unit` | Command-line arguments, ignored | Checks and prints the exact posterior; assertion failure signals an unexpected result | `QuickStart.main(Array.empty[String])` |
 | `ClassicTutorials.main(args: Array[String]): Unit` | Must be empty; otherwise throws `IllegalArgumentException` | Runs Constant/Importance, Select/elimination and Burglary, checks expected probabilities and independent enumeration, cleans up its models and prints results; assertion failure signals a regression | `ClassicTutorials.main(Array.empty[String])` |
@@ -89,7 +89,7 @@ The [stopping-criteria example](src/main/scala/com/cra/figaro/example/StoppingCr
 ## Related
 
 The [joint GVM development preview](../docs/GAUSS_VON_MISES.md) contains three complete
-patterns and the open release-review gate. Its examples are synthetic, not an orbit
+patterns and the approved standalone scope. Its examples are synthetic, not an orbit
 model or a GVM filtering/fusion implementation.
 
 The [circular von Mises guide](../docs/VON_MISES.md) has three complete usage patterns
