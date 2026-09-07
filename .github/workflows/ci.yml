@@ -99,6 +99,7 @@ jobs:
 
       - name: Verify continuous-vector sampler contracts and documented patterns
         run: |
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.ResourceScalingStudy check"
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.DiagnosticHotspotStudy check"
           sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.VectorSliceSamplerRegressionTest"
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.VectorSliceSamplingExample"

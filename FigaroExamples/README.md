@@ -109,6 +109,14 @@ This compares Figaro's actual fixed block sampler with standalone immutable-vect
 
 ## Higher-dimensional validation (experimental)
 
+`ResourceScalingStudy.main(args: Array[String]): Unit` runs `Array("check")` numerical
+and worker/overlap controls, or one configured fresh-JVM resource case. Example:
+`ResourceScalingStudy.main(Array("gaussian32", "reference", "4000", "4", "single", "0", "plain"))`.
+It prints warm-up fingerprints and measured CSV; invalid arguments, incomplete work and
+lossy profiles fail. See the [complete argument reference, three workflows, and measurement
+limitations](../docs/RESOURCE_SCALING_ASSESSMENT.md). The Python runner owns process/peak-memory
+measurement; these are study tools, not production inference APIs.
+
 `VectorSamplingProfile.main(args: Array[String]): Unit` records the unchanged full vector
 benchmark with JDK Flight Recorder and emits sanitized profile aggregates. Supply a new
 JFR path, optional repetitions (5), draws (4000), warm-up (500), and optional Windows

@@ -44,6 +44,7 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Resource and scaling assessment](docs/RESOURCE_SCALING_ASSESSMENT.md): fresh-JVM memory, callback-allocation, longer-trace and overlapping-job controls; no new sampler defaults.
 - [Gaussian block proposals](docs/BLOCKED_PROPOSALS.md): opt-in correlated moves, covariance selection, acceptance rules, and measured counterexamples.
 - [Pilot proposal calibration](docs/PROPOSAL_CALIBRATION.md): estimate an inspectable fixed covariance from discarded pilot chains, then start fresh production sampling; includes rejection rules and pilot-inclusive comparisons.
 - [MCMC reliability](docs/MCMC_RELIABILITY.md): understand precision failures, compare error estimates, and recognize exploration problems that a stopping rule cannot fix.
