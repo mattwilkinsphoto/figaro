@@ -35,6 +35,24 @@ object FigaroConsumerCheck {
       require(sr.provenance(algorithm).contains(algorithm.id))
     }
 
+    {
+      import com.cra.figaro.util.RandomStreams as RS
+      val policy = RS.Config(RS.Allocation.PartitionedV1, 1000000L)
+      for (a <- Vector(sr.Algorithm.Lxm, sr.Algorithm.Xoshiro256PlusPlus, sr.Algorithm.Philox4x64)) {
+        val stream = RS.allocate(42L, 3, a, policy)(2)
+        val replay = stream.descriptor.replay()
+        require(Vector.fill(100)(stream.random.nextGaussian()) == Vector.fill(100)(replay.nextGaussian()))
+      }
+      val config = MC.Config(VS.Config(VS.Method.Quantile, draws=100, seed=42L,
+        randomAlgorithm=sr.Algorithm.Philox4x64), chains=3, parallelism=1, randomStreams=policy)
+      def model(i: Int, seed: Long): MC.Model = MC.Model(Vector(i.toDouble), x => -x.head*x.head/2)
+      val serial = MC.run(config)(model)
+      val parallel = MC.run(config.copy(parallelism=3))(model)
+      require(serial.chains.map(_.result.samples) == parallel.chains.map(_.result.samples))
+      require(serial.chains.forall(_.randomStream.exists(_.config == policy)))
+      println("Published stream API: native allocation, replay and Philox vector-chain scheduling checks passed")
+    }
+
     val gvmP=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),0,
       Vector(0.0),Vector(Vector(0.0)),50)
     val gvmQ=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),math.Pi,

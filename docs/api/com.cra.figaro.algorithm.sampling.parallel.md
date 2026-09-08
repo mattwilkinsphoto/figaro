@@ -1621,6 +1621,30 @@ Invocation template:
 receiver.stop()
 ```
 
+## `` com.cra.figaro.algorithm.sampling.parallel.ParImportance.StreamProvenance.randomStreams ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParImportance$$StreamProvenance.html#randomStreams-0)
+
+```scala
+def randomStreams: Vector[Descriptor]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Vector[Descriptor] ``.
+
+Source contract/attributes: Attributes Returns immutable allocation identities; persist these with model/configuration Example alg.randomStreams.foreach(println)
+
+Invocation template:
+
+```scala
+receiver.randomStreams
+```
+
 ## `` com.cra.figaro.algorithm.sampling.parallel.ParImportance.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParImportance$.html#apply-62f)
@@ -1763,6 +1787,30 @@ Invocation template:
 
 ```scala
 com.cra.figaro.algorithm.sampling.parallel.ParImportance.seededWithAlgorithm(generator, numThreads, numSamples, seed, randomAlgorithm, targets*)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.ParImportance.seededWithStreams ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParImportance$.html#seededWithStreams-ffffffb1)
+
+```scala
+def seededWithStreams(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long, randomAlgorithm: Algorithm, streamConfig: Config, targets: Reference[_]*): ParSampler & ParOneTime & StreamProvenance
+```
+
+Blocking importance with explicit allocation and exposed replay identities. Worker count still changes model copies/sample budgets, even for partitioned streams.
+
+Type parameters: none.
+
+Parameters, list 1: `` generator: () => Universe ``; `` numThreads: Int ``; `` numSamples: Int ``; `` seed: Long ``; `` randomAlgorithm: Algorithm ``; `` streamConfig: Config ``; `` targets: Reference[_]* ``.
+
+Returns: `` ParSampler & ParOneTime & StreamProvenance ``.
+
+Source contract/attributes: Blocking importance with explicit allocation and exposed replay identities. Worker count still changes model copies/sample budgets, even for partitioned streams. Value parameters generator fresh independent universe factory with evidence numSamples positive total sample count numThreads positive worker limit randomAlgorithm named engine compatible with streamConfig seed root seed streamConfig versioned policy and raw-word limit per worker targets references resolved in each worker universe Attributes Returns blocking sampler plus provenance; start/query/kill in try/finally Example seededWithStreams(makeModel, 4, 10000, 42L, SamplingRandom.Algorithm.Lxm, RandomStreams.Config(RandomStreams.Allocation.PartitionedV1), "query")
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.parallel.ParImportance.seededWithStreams(generator, numThreads, numSamples, seed, randomAlgorithm, streamConfig, targets*)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.parallel.ParOneTime.run ``

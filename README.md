@@ -45,7 +45,9 @@ That coordinate resolves only after local publication, unless you separately pub
 ## Documentation
 
 - [Scientific RNG selection and migration](docs/RNG_ASSESSMENT.md): LXM default,
-  Xoshiro256++, PCG and MT alternatives, seeded replay and benchmark evidence.
+  Xoshiro256++, PCG, MT and Philox alternatives, seeded replay and benchmark evidence.
+- [Versioned random streams](docs/RNG_STREAMS.md): opt-in native splitting/jumping,
+  Philox counter ranges, consumption limits and start-of-stream replay descriptors.
 - [Statistical validation](docs/STATISTICAL_VALIDATION.md): independent posterior
   references, false-alarm controls and importance-weight concentration findings.
 

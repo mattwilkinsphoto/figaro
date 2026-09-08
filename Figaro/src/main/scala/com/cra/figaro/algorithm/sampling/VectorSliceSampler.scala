@@ -70,12 +70,19 @@ object VectorSliceSampler {
     * @example `VectorSliceSampler.run(Config(Method.GPSS, draws = 100), Vector(1.0, 1.0))(x => -x.map(v => v*v).sum / 2)`
     */
   def run(config: Config, initial: Vector[Double])(logDensity: Vector[Double] => Double): Result = {
+    require(config != null, "Config required")
+    runWithRandom(config, initial, com.cra.figaro.util.SamplingRandom.seeded(config.seed, config.randomAlgorithm))(logDensity)
+  }
+
+  // Owned runners supply an already allocated stream; never recreate it from its seed label.
+  private[figaro] def runWithRandom(config: Config, initial: Vector[Double], rng: java.util.Random)
+    (logDensity: Vector[Double] => Double): Result = {
     require(config != null && initial != null && logDensity != null, "Config, state and density required")
+    require(rng != null, "Owned RNG required")
     require(initial.nonEmpty && initial.forall(_.isFinite), "Initial coordinates must be finite")
     require(initial.size.toLong <= config.maxStoredValues / config.draws, "Trace exceeds storage limit")
     if (config.method == Method.GPSS)
       require(initial.size >= 2 && norm(initial).isFinite && norm(initial) > 0, "GPSS needs dimension >= 2 and finite nonzero radius")
-    val rng = com.cra.figaro.util.SamplingRandom.seeded(config.seed, config.randomAlgorithm)
     var evaluations = 0L
     var warm = 0
     var retained = 0

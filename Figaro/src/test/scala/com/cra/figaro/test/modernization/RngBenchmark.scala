@@ -48,15 +48,17 @@ object RngBenchmark {
     }
 
   def main(args: Array[String]): Unit = {
-    require(args.length <= 1 && (args.isEmpty || args(0) == "smoke"), "Optional argument: smoke")
-    val smoke = args.nonEmpty
+    require(args.length <= 1 && (args.isEmpty || Set("smoke", "philox").contains(args(0))), "Optional argument: smoke or philox")
+    val smoke = args.headOption.contains("smoke")
+    val selectedAlgorithms = if (args.headOption.contains("philox"))
+      Vector(SR.Algorithm.Lxm, SR.Algorithm.Philox4x64) else algorithms
     val repetitions = if (smoke) 1 else 10
     val primitiveCount = if (smoke) 10000 else 1000000
     val selectedBudgets = if (smoke) Vector(2000) else budgets
     println(s"RNG_ENV,java=${System.getProperty("java.runtime.version")},os=${System.getProperty("os.name")},arch=${System.getProperty("os.arch")},processors=${Runtime.getRuntime.availableProcessors()}")
-    algorithms.foreach(a => println(s"RNG_PROVIDER,${SR.provenance(a)}"))
+    selectedAlgorithms.foreach(a => println(s"RNG_PROVIDER,${SR.provenance(a)}"))
     // Three complete discarded passes precede all measured rows.
-    for (_ <- 0 until (if (smoke) 1 else 3); a <- algorithms) {
+    for (_ <- 0 until (if (smoke) 1 else 3); a <- selectedAlgorithms) {
       primitives(a, 4242, false, primitiveCount)
       primitives(a, 4242, true, primitiveCount)
       inference(a, 4242, 2000)
@@ -64,7 +66,7 @@ object RngBenchmark {
     println("RNG,workload,algorithm,rep,seed,draws,seconds,mean,error,mcse,ess,maxWeight,accurate,covered95")
     for (rep <- 0 until repetitions) {
       val seed = 65537L + 104729L*rep
-      val order = algorithms.drop(rep % algorithms.size) ++ algorithms.take(rep % algorithms.size)
+      val order = selectedAlgorithms.drop(rep % selectedAlgorithms.size) ++ selectedAlgorithms.take(rep % selectedAlgorithms.size)
       for (a <- order; gaussian <- Vector(false, true)) {
         val time = primitives(a, seed, gaussian, primitiveCount)
         val workload = if (gaussian) "gaussian" else "uniform"

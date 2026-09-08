@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 805,
+  "pages": 812,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -54702,6 +54702,20 @@
       "page": "com/cra/figaro/algorithm/sampling/parallel/ParAnytime.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.ParImportance.StreamProvenance",
+      "name": "randomStreams",
+      "anchor": "randomStreams-0",
+      "signature": "def randomStreams: Vector[Descriptor]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[Descriptor]",
+      "summary": "",
+      "contract": "Attributes Returns immutable allocation identities; persist these with model/configuration Example alg.randomStreams.foreach(println)",
+      "example": "receiver.randomStreams",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/ParImportance$$StreamProvenance.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.parallel.ParImportance",
       "name": "apply",
       "anchor": "apply-62f",
@@ -54848,6 +54862,33 @@
       "summary": "Blocking importance with explicit RNG selection; lifecycle and ownership match seeded.",
       "contract": "Blocking importance with explicit RNG selection; lifecycle and ownership match seeded. Value parameters generator factory for a fresh, independent universe with evidence numSamples positive total budget across workers numThreads positive maximum worker count randomAlgorithm named backend; LegacyJava is for historical replay only seed root seed, expanded in worker order targets references resolved in each worker's universe Attributes Returns blocking sampler; call start, query and kill in try/finally Example ParImportance.seededWithAlgorithm(makeModel, 4, 100000, 42L, SamplingRandom.Algorithm.Lxm, \"query\")",
       "example": "com.cra.figaro.algorithm.sampling.parallel.ParImportance.seededWithAlgorithm(generator, numThreads, numSamples, seed, randomAlgorithm, targets*)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/ParImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.ParImportance",
+      "name": "seededWithStreams",
+      "anchor": "seededWithStreams-ffffffb1",
+      "signature": "def seededWithStreams(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long, randomAlgorithm: Algorithm, streamConfig: Config, targets: Reference[_]*): ParSampler & ParOneTime & StreamProvenance",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "generator: () => Universe",
+            "numThreads: Int",
+            "numSamples: Int",
+            "seed: Long",
+            "randomAlgorithm: Algorithm",
+            "streamConfig: Config",
+            "targets: Reference[_]*"
+          ]
+        }
+      ],
+      "returns": "ParSampler & ParOneTime & StreamProvenance",
+      "summary": "Blocking importance with explicit allocation and exposed replay identities. Worker count still changes model copies/sample budgets, even for partitioned streams.",
+      "contract": "Blocking importance with explicit allocation and exposed replay identities. Worker count still changes model copies/sample budgets, even for partitioned streams. Value parameters generator fresh independent universe factory with evidence numSamples positive total sample count numThreads positive worker limit randomAlgorithm named engine compatible with streamConfig seed root seed streamConfig versioned policy and raw-word limit per worker targets references resolved in each worker universe Attributes Returns blocking sampler plus provenance; start/query/kill in try/finally Example seededWithStreams(makeModel, 4, 10000, 42L, SamplingRandom.Algorithm.Lxm, RandomStreams.Config(RandomStreams.Allocation.PartitionedV1), \"query\")",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.ParImportance.seededWithStreams(generator, numThreads, numSamples, seed, randomAlgorithm, streamConfig, targets*)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/parallel/ParImportance$.html"
     },
@@ -235606,6 +235647,383 @@
       "example": "receiver.view(from, until)",
       "object": false,
       "page": "com/cra/figaro/util/PriorityMap.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "addSuppressed",
+      "anchor": "addSuppressed-4b8",
+      "signature": "final def addSuppressed(x$0: Throwable): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.addSuppressed(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "fillInStackTrace",
+      "anchor": "fillInStackTrace-26c",
+      "signature": "def fillInStackTrace(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.fillInStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "getCause",
+      "anchor": "getCause-26c",
+      "signature": "def getCause(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getCause()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "getLocalizedMessage",
+      "anchor": "getLocalizedMessage-665",
+      "signature": "def getLocalizedMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getLocalizedMessage()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "getMessage",
+      "anchor": "getMessage-665",
+      "signature": "def getMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getMessage()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "getStackTrace",
+      "anchor": "getStackTrace-fffffa6d",
+      "signature": "def getStackTrace(): Array[StackTraceElement]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[StackTraceElement]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "getSuppressed",
+      "anchor": "getSuppressed-fffff2ce",
+      "signature": "final def getSuppressed(): Array[Throwable]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[Throwable]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getSuppressed()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "initCause",
+      "anchor": "initCause-fffff080",
+      "signature": "def initCause(x$0: Throwable): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.initCause(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff230",
+      "signature": "def printStackTrace(x$0: PrintWriter): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintWriter"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff0fd",
+      "signature": "def printStackTrace(x$0: PrintStream): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintStream"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-94c",
+      "signature": "def printStackTrace(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "setStackTrace",
+      "anchor": "setStackTrace-f79",
+      "signature": "def setStackTrace(x$0: Array[StackTraceElement]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Array[StackTraceElement]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.setStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",
+      "name": "toString",
+      "anchor": "toString-665",
+      "signature": "def toString(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "Returns a string representation of the object.",
+      "contract": "Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable",
+      "example": "receiver.toString()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$BudgetExceeded.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.Config",
+      "name": "validate",
+      "anchor": "validate-fffff846",
+      "signature": "def validate(algorithm: Algorithm): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "algorithm: Algorithm"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Validate engine/policy compatibility before invoking any model callbacks.",
+      "contract": "Validate engine/policy compatibility before invoking any model callbacks. Value parameters algorithm named backend Attributes Returns Unit; throws IllegalArgumentException for unsupported combinations Example Config(Allocation.PartitionedV1).validate(SamplingRandom.Algorithm.Lxm)",
+      "example": "receiver.validate(algorithm)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.Descriptor",
+      "name": "replay",
+      "anchor": "replay-fffffe83",
+      "signature": "def replay(): Random",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Random",
+      "summary": "Recreate the stream before its first draw. O(index) setup; never resume a consumed stream.",
+      "contract": "Recreate the stream before its first draw. O(index) setup; never resume a consumed stream. Attributes Returns fresh Random; PartitionedV1 rejects reseeding and enforces the raw-word limit Example val fresh = result.chains.head.randomStream.get.replay()",
+      "example": "receiver.replay()",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$Descriptor.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.Descriptor",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$Descriptor.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams.Descriptor",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomStreams$$Descriptor.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomStreams",
+      "name": "allocate",
+      "anchor": "allocate-b3",
+      "signature": "def allocate(rootSeed: Long, count: Int, algorithm: Algorithm, config: Config = ...): Vector[Stream]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rootSeed: Long",
+            "count: Int",
+            "algorithm: Algorithm",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Vector[Stream]",
+      "summary": "Allocate in logical-index order, independently of scheduling or worker count.",
+      "contract": "Allocate in logical-index order, independently of scheduling or worker count. Value parameters algorithm named engine config versioned policy; default preserves old sequences count nonnegative number of logical streams rootSeed root seed; expansion adds no entropy Attributes Returns index-ordered private generators and start-of-stream replay descriptors Example RandomStreams.allocate(42L, 4, SamplingRandom.Algorithm.Philox4x64, Config(Allocation.PartitionedV1))",
+      "example": "com.cra.figaro.util.RandomStreams.allocate(rootSeed, count, algorithm, config)",
+      "object": true,
+      "page": "com/cra/figaro/util/RandomStreams$.html"
     },
     {
       "owner": "com.cra.figaro.util.Resampler",

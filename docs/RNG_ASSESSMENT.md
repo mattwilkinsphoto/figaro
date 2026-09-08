@@ -8,6 +8,11 @@ cross-generator checks. This is not a guarantee against statistical anomalies:
 the [validation study](STATISTICAL_VALIDATION.md) found importance-weight collapse
 that changing RNGs does not cure.
 
+The completed [comparative literature assessment](RNG_LITERATURE_REVIEW.md) reviews
+the exact variants, published limitations and parallel-stream strategies. It
+recommends retaining LXM for current workloads without claiming a universal winner;
+the application timings below are integration evidence, not RNG certification.
+
 | Selection | Exact implementation | Role |
 | --- | --- | --- |
 | `Algorithm.Lxm` | JDK L64X128MixRandom | Production default |
@@ -15,9 +20,11 @@ that changing RNGs does not cure.
 | `Algorithm.PcgRxsMXs64` | Commons RNG 1.7 PCG_RXS_M_XS_64 | Structurally different comparison |
 | `Algorithm.MersenneTwister` | Commons Math 3.6.1 MT19937 | Established comparison/compatibility |
 | `Algorithm.LegacyJava` | JDK java.util.Random | Explicit historical replay only |
+| `Algorithm.Philox4x64` | Commons RNG 1.7 Philox4x64-10 | Counter-based alternative; see [stream guide](RNG_STREAMS.md) |
 
 No custom PRNG algorithm is implemented. MT uses the existing Commons Math dependency.
-PCG adds Commons RNG Simple 1.7 and its Core/Client API transitive dependencies.
+PCG adds Commons RNG Simple 1.7 and its Core/Client API transitive dependencies;
+Philox reuses Core without another dependency.
 This PCG has a 64-bit state recurrence and 64-bit output; it is **not** NumPy's
 128-state-bit PCG64 or PCG64DXSM. These noncryptographic backends are for simulation.
 
@@ -60,8 +67,8 @@ lifecycle remains unchanged. `MultiChainMetropolisHastings.Config` and
 Multi-chain vector sampling carries this through `Config.sampler`.
 
 Adapters provide primitive, bounded, stream, Gaussian/exponential and reseeding methods.
-MT uses Commons Math's Gaussian transform; PCG uses JDK RandomGenerator's default
-Gaussian/exponential transforms over PCG bits. Provider and transform versions matter.
+MT uses Commons Math's Gaussian transform; PCG and Philox use JDK RandomGenerator's
+default Gaussian/exponential transforms over provider bits. Versions matter.
 
 ## Three common patterns
 
@@ -112,10 +119,10 @@ worker count. Importance worker-count changes still change streams and budgets.
   replay is explicit, not a promise to reproduce arbitrary old asynchronous traversal.
 - Every scoped/owned worker has a private instance. Shared fallback draws are synchronized
   per call, but that does not make model graphs or multi-call computations thread-safe.
-- Chain/worker seeds are still assigned serially by SplittableRandom. This is seed
-  derivation, **not native LXM splitting or Xoshiro jumping**, nor a proof of independent,
-  nonoverlapping streams. Native split/jump allocation needs a future versioned replay
-  contract and appropriate raw-draw budgets.
+- Default `SeededV1` assigns chain/worker seeds serially by SplittableRandom, not
+  native splitting/jumping or proven nonoverlap. Opt-in [PartitionedV1](RNG_STREAMS.md)
+  adds native LXM splits, Xoshiro jumps and Philox counter ranges with raw-word caps
+  and replay descriptors. Existing seeded sequences remain unchanged by this addition.
 - PCG expands a Long seed using two consecutive SplittableRandom nextLong calls into
   the provider's native two-Long seed. Provenance calls this mapping
   SplitMix64-to-native-seed-v1. MT uses the Long constructor, which need not match another
@@ -162,9 +169,10 @@ Legacy uniforms were faster; LXM Gaussian draws were about 3.1x faster. Complete
 inference timings were similar. Close modern-backend timings do not establish a
 universal winner. Ten-seed coverage counts cannot establish calibrated 95% coverage.
 
-LXM combines competitive measured performance with a modern larger-state design and
-a supported JDK implementation, so it is the default. Xoshiro and PCG remain useful
-alternatives, and MT needs no new MT dependency. No speedup is claimed for every model.
+LXM remains the default following the [literature assessment](RNG_LITERATURE_REVIEW.md),
+not because this benchmark established statistical superiority. Xoshiro256++ is a
+first-tier alternative. Current PCG timings do not represent PCG64DXSM, and MT is
+retained for historical/reference use. No speedup is claimed for every model.
 
 ```text
 sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.SamplingRandomTest"
@@ -189,6 +197,8 @@ and dependency license/notice files remain. Thin-JAR consumers resolve normal de
 
 ## Research and related modules
 
+- [Comparative literature assessment](RNG_LITERATURE_REVIEW.md): research basis,
+  exact-variant comparison, decision boundaries and remaining integration checks.
 - [Java RNG guidance](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/random/package-summary.html): named algorithms and workload/stream tradeoffs.
 - [Xoshiro authors](https://prng.di.unimi.it/): ++/** versus plain + variants and jump functions.
 - [PCG research](https://www.pcg-random.org/paper.html): permuted designs and stream-independence qualifications.
@@ -196,12 +206,15 @@ and dependency license/notice files remain. Thin-JAR consumers resolve normal de
 - [Apache MT](https://commons.apache.org/proper/commons-math/javadocs/api-3.6.1/org/apache/commons/math3/random/MersenneTwister.html): MT19937 implementation.
 - [Statistical validation](STATISTICAL_VALIDATION.md), [parallel performance](PARALLEL_PERFORMANCE.md), [migration](MIGRATION.md), [roadmap](../ROADMAP.md).
 
-Native split/jump allocation, checkpointing and counter-based Philox/Threefry are
-future work, not hidden capabilities of these adapters.
+The [stream-allocation guide](RNG_STREAMS.md) documents implemented native split/jump
+allocation and Philox, the new API and targeted benchmark. Portable checkpoints,
+per-sample counter addressing and Threefry remain future work. Exact RNG replay does
+not guarantee default graph-proposal replay: hash-dependent selection can change
+draw consumption when graphs are rebuilt.
 
 ## Local acceptance status
 
-375 modernization tests across 34 suites pass, including native-provider agreement,
+The initial backend milestone passed 375 modernization tests across 34 suites, including native-provider agreement,
 reseeding, nested scopes, both owned parallel-chain implementations and blocking
 importance backend selection. The earlier statistical-helper-only control passed
 368 tests before changing the default. No statistical seed or tolerance was changed

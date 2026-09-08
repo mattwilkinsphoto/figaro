@@ -18,8 +18,10 @@ Reliability interlude: [statistical validation](docs/STATISTICAL_VALIDATION.md) 
 [scientific RNG backends](docs/RNG_ASSESSMENT.md) are implemented on the
 `modernize/statistical-validation` branch, with local validation; integration/CI remain
 separate gates. The next substantive inference priority is better proposals for
-concentrated posteriors at matched accuracy. Native split/jump stream allocation and
-portable RNG checkpointing are subsequent work, not delivered by backend selection.
+concentrated posteriors at matched accuracy. [Versioned stream allocation and Philox](docs/RNG_STREAMS.md)
+are now implemented and locally validated on that branch: default seeded replay is
+preserved, native split/jump/counter allocation is opt-in. Portable checkpoints,
+deterministic default graph traversal and per-sample counter addressing remain future work.
 
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).

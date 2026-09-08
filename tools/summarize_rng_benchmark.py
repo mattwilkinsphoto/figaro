@@ -11,10 +11,11 @@ from pathlib import Path
 from statistics import median, mean
 
 ALGORITHMS = ['L64X128MixRandom', 'Xoshiro256PlusPlus', 'PCG_RXS_M_XS_64', 'MT19937', 'Random']
+PHILOX_ALGORITHMS = ['L64X128MixRandom', 'PHILOX_4X64']
 HEADER = 'RNG,workload,algorithm,rep,seed,draws,seconds,mean,error,mcse,ess,maxWeight,accurate,covered95'
 
 
-def parse(text):
+def parse(text, algorithms=ALGORITHMS):
     lines = [x.strip() for x in text.splitlines() if x.startswith('RNG,') and not x.startswith('RNG,workload,')]
     rows = list(csv.DictReader(io.StringIO(HEADER+'\n'+'\n'.join(lines))))
     keys = set()
@@ -46,7 +47,7 @@ def parse(text):
                 r[field] = expected
         elif any(r[f] != 'NA' for f in ('mean', 'error', 'mcse', 'ess', 'maxWeight', 'accurate', 'covered95')):
             raise ValueError('Unexpected primitive diagnostic')
-    expected = {(kind, a, rep, n) for a in ALGORITHMS for rep in range(10)
+    expected = {(kind, a, rep, n) for a in algorithms for rep in range(10)
                 for kind in ('uniform', 'gaussian', 'inference')
                 for n in ([2000, 8000, 32000] if kind == 'inference' else [1000000])}
     if expected != keys:
@@ -54,8 +55,8 @@ def parse(text):
     return rows, lines
 
 
-def summarize(rows):
-    for algorithm in ALGORITHMS:
+def summarize(rows, algorithms=ALGORITHMS):
+    for algorithm in algorithms:
         for kind in ('uniform', 'gaussian', 'inference'):
             for n in ([2000, 8000, 32000] if kind == 'inference' else [1000000]):
                 group = [r for r in rows if (r['algorithm'], r['workload'], r['draws']) == (algorithm, kind, n)]
@@ -72,9 +73,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('input', type=Path)
     parser.add_argument('--export', type=Path)
+    parser.add_argument('--profile', choices=['legacy', 'philox'], default='legacy')
     args = parser.parse_args()
-    rows, lines = parse(args.input.read_text(encoding='utf-8-sig'))
+    algorithms = PHILOX_ALGORITHMS if args.profile == 'philox' else ALGORITHMS
+    rows, lines = parse(args.input.read_text(encoding='utf-8-sig'), algorithms)
     if args.export:
         args.export.write_text(HEADER+'\n'+'\n'.join(lines)+'\n', encoding='utf-8')
     print(f'Validated {len(rows)} complete benchmark rows.')
-    summarize(rows)
+    summarize(rows, algorithms)

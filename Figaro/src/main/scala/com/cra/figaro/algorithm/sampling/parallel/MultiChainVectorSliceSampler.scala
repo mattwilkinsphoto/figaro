@@ -1,6 +1,7 @@
 package com.cra.figaro.algorithm.sampling.parallel
 
 import com.cra.figaro.algorithm.sampling.VectorSliceSampler as VS
+import com.cra.figaro.util.RandomStreams
 import java.util.concurrent.*
 import java.util.concurrent.atomic.{AtomicInteger, AtomicLong}
 import scala.jdk.CollectionConverters.*
@@ -15,12 +16,16 @@ object MultiChainVectorSliceSampler {
     *                    each phase is also capped by chain count; does not affect seeds or traces
     * @param maxStoredValues positive cap on chains * requested draws * dimension, not total heap use
     * @param shutdownTimeoutMillis worker termination/join budget, 1-30000 milliseconds; not a run timeout
+    * @param randomStreams versioned allocation policy, independent of worker count
     */
   final case class Config(sampler: VS.Config, chains: Int = 4, parallelism: Int = 4,
-    maxStoredValues: Long = 40000000L, shutdownTimeoutMillis: Long = 30000L) {
+    maxStoredValues: Long = 40000000L, shutdownTimeoutMillis: Long = 30000L,
+    randomStreams: RandomStreams.Config = RandomStreams.Config()) {
     require(sampler != null && chains >= 2 && parallelism > 0, "Invalid sampler, chain count or parallelism")
     require(maxStoredValues > 0 && sampler.draws.toLong <= maxStoredValues / chains, "Aggregate storage limit exceeded")
     require(shutdownTimeoutMillis > 0 && shutdownTimeoutMillis <= 30000, "Shutdown budget must be 1-30000 ms")
+    require(randomStreams != null, "Stream policy required")
+    randomStreams.validate(sampler.randomAlgorithm)
   }
 
   /** Caller-owned model callbacks/resources; the runner neither mutates nor closes them.
@@ -32,10 +37,12 @@ object MultiChainVectorSliceSampler {
 
   /** One detached chain result.
     * @param index zero-based chain index
-    * @param seed actual seed passed to VectorSliceSampler.run
+    * @param seed historical seed label; use randomStream for partitioned replay
     * @param result unchanged single-chain output, including budget status and all retained vectors
+    * @param randomStream start-of-stream identity, not a checkpoint
     */
-  final case class ChainResult(index: Int, seed: Long, result: VS.Result)
+  final case class ChainResult(index: Int, seed: Long, result: VS.Result,
+    randomStream: Option[RandomStreams.Descriptor] = None)
 
   /** All chain outputs in index order, returned only after owned workers exit.
     * @param chains every chain, including those exhausting their evaluation cap
@@ -77,11 +84,12 @@ object MultiChainVectorSliceSampler {
     var shutdownAttempted = false
     var primary: Throwable = null
     try {
-      val seeds = new java.util.SplittableRandom(config.sampler.seed)
+      val streams = RandomStreams.allocate(config.sampler.seed, config.chains,
+        config.sampler.randomAlgorithm, config.randomStreams)
       var dimension = 0
       val models = Vector.tabulate(config.chains) { index =>
         interrupted()
-        val seed = seeds.nextLong()
+        val seed = streams(index).seed
         val model = try {
           val m = build(index, seed)
           interrupted()
@@ -118,7 +126,8 @@ object MultiChainVectorSliceSampler {
         interrupted()
         completed.submit(new Callable[ChainResult] {
           def call(): ChainResult = try {
-            ChainResult(index, seed, VS.run(config.sampler.copy(seed = seed), model.initial)(model.logDensity))
+            ChainResult(index, seed, VS.runWithRandom(config.sampler.copy(seed = seed), model.initial,
+              streams(index).random)(model.logDensity), Some(streams(index).descriptor))
           } catch {
             case e if NonFatal(e) || e.isInstanceOf[InterruptedException] => throw new ChainFailure(index, e)
           }

@@ -201,6 +201,7 @@ jobs:
           com.cra.figaro.test.modernization.SpecialFunctionsRegressionTest
           com.cra.figaro.test.modernization.StatisticalValidationTest
           com.cra.figaro.test.modernization.SamplingRandomTest
+          com.cra.figaro.test.modernization.RandomStreamsTest
           com.cra.figaro.test.modernization.StoppingCriteriaRegressionTest
           com.cra.figaro.test.learning.SerializationTest"
 

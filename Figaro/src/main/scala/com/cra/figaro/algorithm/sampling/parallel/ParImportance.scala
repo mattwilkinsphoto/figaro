@@ -18,12 +18,19 @@ import scala.collection.parallel.CollectionConverters._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm._
 import com.cra.figaro.language._
-import com.cra.figaro.util.{RandomContext, SamplingRandom}
+import com.cra.figaro.util.{RandomContext, SamplingRandom, RandomStreams}
 import java.util.concurrent.{Callable, CancellationException, ConcurrentLinkedQueue, ExecutionException, ExecutorService, Executors, TimeUnit}
 import scala.jdk.CollectionConverters.*
 import scala.util.control.NonFatal
 
 object ParImportance {
+  /** Start-of-stream descriptors in worker-index order, not mid-run checkpoints. */
+  trait StreamProvenance {
+    /** @return immutable allocation identities; persist these with model/configuration
+      * @example `alg.randomStreams.foreach(println)`
+      */
+    def randomStreams: Vector[RandomStreams.Descriptor]
+  }
   
   /**
    * Create a parallel anytime importance sampler with the given target query references.
@@ -118,15 +125,32 @@ object ParImportance {
    */
   def seededWithAlgorithm(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long,
     randomAlgorithm: SamplingRandom.Algorithm,
-    targets: Reference[?]*): ParSampler & ParOneTime = {
+    targets: Reference[?]*): ParSampler & ParOneTime =
+    seededWithStreams(generator, numThreads, numSamples, seed, randomAlgorithm, RandomStreams.Config(), targets*)
+
+  /** Blocking importance with explicit allocation and exposed replay identities.
+    * Worker count still changes model copies/sample budgets, even for partitioned streams.
+    * @param generator fresh independent universe factory with evidence
+    * @param numThreads positive worker limit
+    * @param numSamples positive total sample count
+    * @param seed root seed
+    * @param randomAlgorithm named engine compatible with streamConfig
+    * @param streamConfig versioned policy and raw-word limit per worker
+    * @param targets references resolved in each worker universe
+    * @return blocking sampler plus provenance; start/query/kill in try/finally
+    * @example `seededWithStreams(makeModel, 4, 10000, 42L, SamplingRandom.Algorithm.Lxm, RandomStreams.Config(RandomStreams.Allocation.PartitionedV1), "query")`
+    */
+  def seededWithStreams(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long,
+    randomAlgorithm: SamplingRandom.Algorithm, streamConfig: RandomStreams.Config,
+    targets: Reference[?]*): ParSampler & ParOneTime & StreamProvenance = {
     require(numThreads > 0 && numSamples > 0, "numThreads and numSamples must be positive")
     require(randomAlgorithm != null, "RNG algorithm is required")
     val count = math.min(numThreads, numSamples)
-    val seeds = new java.util.SplittableRandom(seed)
+    val streams = RandomStreams.allocate(seed, count, randomAlgorithm, streamConfig)
     val seen = new java.util.IdentityHashMap[Universe, java.lang.Boolean]
     val created = scala.collection.mutable.ArrayBuffer.empty[(Importance & OneTimeProbQuerySampler, java.util.Random)]
     val workers = try (0 until count).map { index =>
-      val random = SamplingRandom.seeded(seeds.nextLong(), randomAlgorithm)
+      val random = streams(index).random
       val budget = numSamples / count + (if (index < numSamples % count) 1 else 0)
       val algorithm = RandomContext.withRandom(random) {
         Universe.withUniverse(Universe.universe) {
@@ -157,7 +181,8 @@ object ParImportance {
         }
         throw error
     }
-    new ParSampler(workers.map(_._1), targets*) with ParOneTime {
+    new ParSampler(workers.map(_._1), targets*) with ParOneTime with StreamProvenance {
+      val randomStreams: Vector[RandomStreams.Descriptor] = streams.map(_.descriptor)
       override protected val parAlgs: ParSeq[Importance & OneTimeProbQuerySampler] = workers.map(_._1).par
       private var executor: ExecutorService = null
       private val poolThreads = new ConcurrentLinkedQueue[Thread]

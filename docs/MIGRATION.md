@@ -1,5 +1,25 @@
 # Migrating to Scala 3 and sbt 2
 
+## Versioned stream allocation and Philox
+
+[RandomStreams](RNG_STREAMS.md) adds opt-in `PartitionedV1`: native LXM splitting,
+Xoshiro256++ jumping and Philox4x64-10 counter ranges with per-stream raw-word limits.
+LXM remains the default backend; `SeededV1` remains the allocation default and preserves
+previous root/index sequences. Philox reuses Commons RNG 1.7 already on the classpath.
+
+Recompile consumers: both multi-chain `Config` types add a final `randomStreams` field,
+and both `ChainResult` types add `randomStream: Option[RandomStreams.Descriptor]`.
+Defaults preserve older constructor calls, not binary compatibility or positional
+pattern-match arity. Prefer named fields. `ParImportance.seededWithStreams` is additive;
+existing importance signatures retain `SeededV1` behavior.
+
+In partitioned mode, `seed` in results/factory callbacks is a compatibility label,
+not a standalone engine seed. Retain the descriptor and experiment configuration.
+Replay recreates the start, rejects provider/JDK mismatch, and is not a checkpoint.
+Partitioned generators reject reseeding and throw on raw-word exhaustion. Graph hash
+traversal can still prevent exact trace replay with the default MH proposal; this
+change does not silently replace that proposal. See the guide for explicit proposals.
+
 ## Scientific RNG default and explicit alternatives
 
 The [RNG guide](RNG_ASSESSMENT.md) replaces Figaro-owned Java Random streams with

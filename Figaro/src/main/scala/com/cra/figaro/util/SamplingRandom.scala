@@ -11,6 +11,7 @@ object SamplingRandom {
     case PcgRxsMXs64 extends Algorithm("PCG_RXS_M_XS_64")
     case MersenneTwister extends Algorithm("MT19937")
     case LegacyJava extends Algorithm("Random")
+    case Philox4x64 extends Algorithm("PHILOX_4X64")
   }
 
   /** Default for Figaro-owned sampling streams. Record this name alongside the seed. */
@@ -49,6 +50,7 @@ object SamplingRandom {
     val provider = algorithm match {
       case Algorithm.PcgRxsMXs64 => "Apache Commons RNG 1.7; SplitMix64-to-native-seed-v1"
       case Algorithm.MersenneTwister => "Apache Commons Math 3.6.1; long-seed"
+      case Algorithm.Philox4x64 => "Apache Commons RNG 1.7; Philox4x64-10; SplitMix64-key-v1"
       case _ => "JDK"
     }
     s"${algorithm.id}; $provider; ${System.getProperty("java.vendor")} ${System.getProperty("java.runtime.version")}"
@@ -61,6 +63,11 @@ object SamplingRandom {
   private final class JdkAdapter(seed: Long, algorithm: Algorithm) extends java.util.Random(0L) {
     private var engine: RandomGenerator = create(seed)
     private def create(value: Long): RandomGenerator = algorithm match {
+      case Algorithm.Philox4x64 =>
+        val expansion = new java.util.SplittableRandom(value)
+        val source = new org.apache.commons.rng.core.source64.Philox4x64(
+          Array(expansion.nextLong(), expansion.nextLong(), 0L, 0L, 0L, 0L))
+        new RandomGenerator { override def nextLong(): Long = source.nextLong() }
       case Algorithm.PcgRxsMXs64 =>
         // Supply the provider's native seed shape, with a pinned, explicit expansion.
         val expansion = new java.util.SplittableRandom(value)

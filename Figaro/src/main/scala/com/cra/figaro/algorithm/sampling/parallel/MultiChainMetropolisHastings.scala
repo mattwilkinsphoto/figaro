@@ -3,7 +3,7 @@ package com.cra.figaro.algorithm.sampling.parallel
 import com.cra.figaro.algorithm.OneTime
 import com.cra.figaro.algorithm.sampling.{ForwardWeighter, MetropolisHastings, ProposalScheme}
 import com.cra.figaro.language.*
-import com.cra.figaro.util.{RandomContext, SamplingRandom}
+import com.cra.figaro.util.{RandomContext, SamplingRandom, RandomStreams}
 import java.util.concurrent.*
 import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
 import scala.jdk.CollectionConverters.*
@@ -16,22 +16,26 @@ object MultiChainMetropolisHastings {
     * @param drawsPerChain retained draws per chain, at least four
     * @param warmUp discarded MH transitions per chain, nonnegative
     * @param parallelism maximum simultaneously running chains, positive
-    * @param seed root seed, expanded in chain-index order
+    * @param seed root seed, allocated in chain-index order under randomStreams
     * @param thin transitions per retained draw, positive; use one unless storage requires thinning
     * @param maxInitializationAttempts positive bound on prior initial-state attempts
     * @param maxStoredValues positive cap on chains * draws * scalar observables (not a total heap bound)
     * @param randomAlgorithm named per-chain RNG; LXM by default, LegacyJava for historical replay
+    * @param randomStreams versioned allocation policy; default preserves previous seed expansion
     */
   final case class Config(chains: Int = 4, drawsPerChain: Int = 10000, warmUp: Int = 1000,
     parallelism: Int = 4, seed: Long = 42L, thin: Int = 1,
     maxInitializationAttempts: Int = 1000, maxStoredValues: Long = 10000000L,
-    randomAlgorithm: SamplingRandom.Algorithm = SamplingRandom.defaultAlgorithm) {
+    randomAlgorithm: SamplingRandom.Algorithm = SamplingRandom.defaultAlgorithm,
+    randomStreams: RandomStreams.Config = RandomStreams.Config()) {
     require(chains >= 2 && drawsPerChain >= 4, "Need at least two chains and four draws per chain")
     require(warmUp >= 0 && parallelism > 0 && thin > 0, "Invalid warm-up, parallelism, or thinning")
     require(maxInitializationAttempts > 0 && maxStoredValues > 0, "Limits must be positive")
     require(warmUp.toLong + drawsPerChain.toLong * thin <= Int.MaxValue, "Too many transitions per chain")
     require(chains.toLong * drawsPerChain <= maxStoredValues, "Draw budget exceeds storage limit")
     require(randomAlgorithm != null, "RNG algorithm is required")
+    require(randomStreams != null, "Stream policy required")
+    randomStreams.validate(randomAlgorithm)
   }
 
   /** Named, finite scalar projection; aligned draw indices preserve dependence across observables. */
@@ -60,14 +64,16 @@ object MultiChainMetropolisHastings {
 
   /** Immutable output of one chain, independent of disposed model objects.
     * @param index zero-based chain index
-    * @param seed assigned stream seed, independent of worker count
+    * @param seed historical seed label, independent of worker count; use randomStream for partitioned replay
     * @param draws columns of ordered, post-warm-up scalar draws, including repeated rejected states
     * @param acceptanceRate accepted / attempted post-warm-up transitions, including thinning transitions
     * @param initializationAttempts number of prior draws needed to find an initial state
     * @param samplingSeconds initialization, warm-up, and retained sampling elapsed time for this chain
+    * @param randomStream start-of-stream replay descriptor; seed alone is insufficient for partitioned allocation
     */
   final case class ChainResult(index: Int, seed: Long, draws: Map[String, Vector[Double]],
-    acceptanceRate: Double, initializationAttempts: Int, samplingSeconds: Double)
+    acceptanceRate: Double, initializationAttempts: Int, samplingSeconds: Double,
+    randomStream: Option[RandomStreams.Descriptor] = None)
 
   /** Completed output, returned only if every chain succeeds and workers exit.
     * @param chains chain-index ordered immutable traces and metadata
@@ -114,7 +120,7 @@ object MultiChainMetropolisHastings {
   private def execute(config: Config, precision: Option[McmcPrecision.Config])(build: (Universe, Int) => Model): StoppedResult = {
     require(config != null && build != null, "Config and model factory are required")
     val started = System.nanoTime()
-    val seeds = new java.util.SplittableRandom(config.seed)
+    val streams = RandomStreams.allocate(config.seed, config.chains, config.randomAlgorithm, config.randomStreams)
     val owned = scala.collection.mutable.ArrayBuffer.empty[Owned]
     val threads = new ConcurrentLinkedQueue[Thread]
     val abandoned = new AtomicBoolean(false)
@@ -126,8 +132,9 @@ object MultiChainMetropolisHastings {
       var names = Vector.empty[String]
       for (index <- 0 until config.chains) {
         checkInterrupted()
-        val seed = seeds.nextLong()
-        val entry = new Owned(index, seed, new Universe, SamplingRandom.seeded(seed, config.randomAlgorithm))
+        val stream = streams(index)
+        val seed = stream.seed
+        val entry = new Owned(index, seed, new Universe, stream.random, stream.descriptor)
         owned += entry
         try entry.scoped {
           val model = build(entry.universe, index)
@@ -253,7 +260,8 @@ object MultiChainMetropolisHastings {
     !u.conditionedElements.exists(_.observation.nonEmpty),
     "This MH runner supports conditions and explicit likelihood constraints, not observe(); see MULTI_CHAIN_MCMC.md")
 
-  private final class Owned(val index: Int, val seed: Long, val universe: Universe, random: java.util.Random) {
+  private final class Owned(val index: Int, val seed: Long, val universe: Universe, random: java.util.Random,
+    val descriptor: RandomStreams.Descriptor) {
     var model: Model = null
     var kernel: Kernel = null
     // 0 = constructed, 1 = running, 2 = disposed, 3 = idle between batches.
@@ -304,7 +312,7 @@ object MultiChainMetropolisHastings {
     private var samplingNanos = 0L
     def output: ChainResult = ChainResult(owner.index, owner.seed,
       queries.indices.map(i => queries(i).name -> columns(i).iterator.take(retained).toVector).toMap,
-      accepts.toDouble / (accepts.toLong + rejects), attempts, samplingNanos / 1e9)
+      accepts.toDouble / (accepts.toLong + rejects), attempts, samplingNanos / 1e9, Some(owner.descriptor))
     override protected def mhStep(): MetropolisHastings.State = {
       checkInterrupted()
       val state = super.mhStep()
