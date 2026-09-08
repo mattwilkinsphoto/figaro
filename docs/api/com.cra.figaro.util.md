@@ -21021,6 +21021,222 @@ Invocation template:
 receiver.view(from, until)
 ```
 
+## `` com.cra.figaro.util.RandomSelection.Choice.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$$Choice.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.util.RandomSelection.Choice.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$$Choice.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.util.RandomSelection.Decision.allocate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$$Decision.html#allocate-fffff2f4)
+
+```scala
+def allocate(rootSeed: Long, count: Int): Vector[Stream]
+```
+
+Allocate owned logical streams without selecting again.
+
+Type parameters: none.
+
+Parameters, list 1: `` rootSeed: Long ``; `` count: Int ``.
+
+Returns: `` Vector[Stream] ``.
+
+Source contract/attributes: Allocate owned logical streams without selecting again. Value parameters count nonnegative logical stream count rootSeed experiment root seed Attributes Returns index-ordered owned streams and replay descriptors Example resolve(Purpose.CounterRanges).allocate(42L, 4)
+
+Invocation template:
+
+```scala
+receiver.allocate(rootSeed, count)
+```
+
+## `` com.cra.figaro.util.RandomSelection.Decision.configure ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$$Decision.html#configure-fffff520)
+
+```scala
+def configure(config: Config): Config
+```
+
+Apply both resolved fields to graph-chain settings; all other settings remain unchanged.
+
+Type parameters: none.
+
+Parameters, list 1: `` config: Config ``.
+
+Returns: `` Config ``.
+
+Source contract/attributes: Apply both resolved fields to graph-chain settings; all other settings remain unchanged. Value parameters config existing non-null MH settings; their RNG fields are explicitly replaced Attributes Returns copied config, without allocating streams or invoking callbacks Example resolve(Purpose.FixedChains).configure(MH.Config(chains = 4))
+
+Invocation template:
+
+```scala
+receiver.configure(config)
+```
+
+## `` com.cra.figaro.util.RandomSelection.Decision.configure ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$$Decision.html#configure-f20)
+
+```scala
+def configure(config: Config): Config
+```
+
+Apply both resolved fields to vector-chain settings; work/seed/worker limits remain unchanged.
+
+Type parameters: none.
+
+Parameters, list 1: `` config: Config ``.
+
+Returns: `` Config ``.
+
+Source contract/attributes: Apply both resolved fields to vector-chain settings; work/seed/worker limits remain unchanged. Value parameters config existing non-null vector-chain settings Attributes Returns copied config with copied nested sampler settings Example selection.configure(MC.Config(sampler))
+
+Invocation template:
+
+```scala
+receiver.configure(config)
+```
+
+## `` com.cra.figaro.util.RandomSelection.Decision.importance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$$Decision.html#importance-fffffcf2)
+
+```scala
+def importance(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long, targets: Reference[_]*): ParSampler & ParOneTime & StreamProvenance
+```
+
+Build blocking importance with this resolved pair and existing ownership/lifecycle semantics.
+
+Type parameters: none.
+
+Parameters, list 1: `` generator: () => Universe ``; `` numThreads: Int ``; `` numSamples: Int ``; `` seed: Long ``; `` targets: Reference[_]* ``.
+
+Returns: `` ParSampler & ParOneTime & StreamProvenance ``.
+
+Source contract/attributes: Build blocking importance with this resolved pair and existing ownership/lifecycle semantics. Value parameters generator fresh independent universe factory, called during construction numSamples positive total sample budget numThreads positive maximum worker count; changes still change sample partitions seed experiment root seed targets references resolved independently in each universe Attributes Returns one-time sampler with stream descriptors; start/query/kill in try/finally Example selection.importance(makeModel, 4, 10000, 42L, "query")
+
+Invocation template:
+
+```scala
+receiver.importance(generator, numThreads, numSamples, seed, targets*)
+```
+
+## `` com.cra.figaro.util.RandomSelection.Requirements.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$$Requirements.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.util.RandomSelection.Requirements.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$$Requirements.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.util.RandomSelection.resolve ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomSelection$.html#resolve-fffff3f2)
+
+```scala
+def resolve(purpose: Purpose, preset: Preset = ..., explicit: Option[Choice] = ..., maxRawDraws: Long = ..., requirements: Requirements = ...): Decision
+```
+
+Resolve once before model construction. This is a policy choice, not a fastest/best-RNG proof.
+
+Type parameters: none.
+
+Parameters, list 1: `` purpose: Purpose ``; `` preset: Preset = ... ``; `` explicit: Option[Choice] = ... ``; `` maxRawDraws: Long = ... ``; `` requirements: Requirements = ... ``.
+
+Returns: `` Decision ``.
+
+Source contract/attributes: Resolve once before model construction. This is a policy choice, not a fastest/best-RNG proof. Value parameters explicit optional engine/allocation pair overriding the preset, never hard requirements maxRawDraws positive per-stream raw-word cap; ignored by SeededV1 preset pinned selection-policy version, V1 by default purpose intended execution pattern, not the probability distribution family requirements hard guarantees; unsupported requests throw IllegalArgumentException Attributes Returns immutable decision with resolved pair, reason, override flag and provider/JDK identity Example RandomSelection.resolve(Purpose.CounterRanges, requirements = Requirements(disjointIntervals = true))
+
+Invocation template:
+
+```scala
+com.cra.figaro.util.RandomSelection.resolve(purpose, preset, explicit, maxRawDraws, requirements)
+```
+
 ## `` com.cra.figaro.util.RandomStreams.BudgetExceeded.addSuppressed ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/RandomStreams$$BudgetExceeded.html#addSuppressed-4b8)

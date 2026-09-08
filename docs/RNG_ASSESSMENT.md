@@ -30,6 +30,9 @@ This PCG has a 64-bit state recurrence and 64-bit output; it is **not** NumPy's
 
 ## Quick start: three steps
 
+For automatic purpose-based defaults, use the opt-in [versioned selector](RNG_SELECTION.md).
+The explicit backend API below remains available and unchanged.
+
 1. Import the API:
    ```scala
    import com.cra.figaro.util.{SamplingRandom, withRandomSeed}

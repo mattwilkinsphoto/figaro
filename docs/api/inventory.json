@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 812,
+  "pages": 818,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -235647,6 +235647,176 @@
       "example": "receiver.view(from, until)",
       "object": false,
       "page": "com/cra/figaro/util/PriorityMap.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection.Choice",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomSelection$$Choice.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection.Choice",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomSelection$$Choice.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection.Decision",
+      "name": "allocate",
+      "anchor": "allocate-fffff2f4",
+      "signature": "def allocate(rootSeed: Long, count: Int): Vector[Stream]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rootSeed: Long",
+            "count: Int"
+          ]
+        }
+      ],
+      "returns": "Vector[Stream]",
+      "summary": "Allocate owned logical streams without selecting again.",
+      "contract": "Allocate owned logical streams without selecting again. Value parameters count nonnegative logical stream count rootSeed experiment root seed Attributes Returns index-ordered owned streams and replay descriptors Example resolve(Purpose.CounterRanges).allocate(42L, 4)",
+      "example": "receiver.allocate(rootSeed, count)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomSelection$$Decision.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection.Decision",
+      "name": "configure",
+      "anchor": "configure-fffff520",
+      "signature": "def configure(config: Config): Config",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config"
+          ]
+        }
+      ],
+      "returns": "Config",
+      "summary": "Apply both resolved fields to graph-chain settings; all other settings remain unchanged.",
+      "contract": "Apply both resolved fields to graph-chain settings; all other settings remain unchanged. Value parameters config existing non-null MH settings; their RNG fields are explicitly replaced Attributes Returns copied config, without allocating streams or invoking callbacks Example resolve(Purpose.FixedChains).configure(MH.Config(chains = 4))",
+      "example": "receiver.configure(config)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomSelection$$Decision.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection.Decision",
+      "name": "configure",
+      "anchor": "configure-f20",
+      "signature": "def configure(config: Config): Config",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config"
+          ]
+        }
+      ],
+      "returns": "Config",
+      "summary": "Apply both resolved fields to vector-chain settings; work/seed/worker limits remain unchanged.",
+      "contract": "Apply both resolved fields to vector-chain settings; work/seed/worker limits remain unchanged. Value parameters config existing non-null vector-chain settings Attributes Returns copied config with copied nested sampler settings Example selection.configure(MC.Config(sampler))",
+      "example": "receiver.configure(config)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomSelection$$Decision.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection.Decision",
+      "name": "importance",
+      "anchor": "importance-fffffcf2",
+      "signature": "def importance(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long, targets: Reference[_]*): ParSampler & ParOneTime & StreamProvenance",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "generator: () => Universe",
+            "numThreads: Int",
+            "numSamples: Int",
+            "seed: Long",
+            "targets: Reference[_]*"
+          ]
+        }
+      ],
+      "returns": "ParSampler & ParOneTime & StreamProvenance",
+      "summary": "Build blocking importance with this resolved pair and existing ownership/lifecycle semantics.",
+      "contract": "Build blocking importance with this resolved pair and existing ownership/lifecycle semantics. Value parameters generator fresh independent universe factory, called during construction numSamples positive total sample budget numThreads positive maximum worker count; changes still change sample partitions seed experiment root seed targets references resolved independently in each universe Attributes Returns one-time sampler with stream descriptors; start/query/kill in try/finally Example selection.importance(makeModel, 4, 10000, 42L, \"query\")",
+      "example": "receiver.importance(generator, numThreads, numSamples, seed, targets*)",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomSelection$$Decision.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection.Requirements",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomSelection$$Requirements.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection.Requirements",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/util/RandomSelection$$Requirements.html"
+    },
+    {
+      "owner": "com.cra.figaro.util.RandomSelection",
+      "name": "resolve",
+      "anchor": "resolve-fffff3f2",
+      "signature": "def resolve(purpose: Purpose, preset: Preset = ..., explicit: Option[Choice] = ..., maxRawDraws: Long = ..., requirements: Requirements = ...): Decision",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "purpose: Purpose",
+            "preset: Preset = ...",
+            "explicit: Option[Choice] = ...",
+            "maxRawDraws: Long = ...",
+            "requirements: Requirements = ..."
+          ]
+        }
+      ],
+      "returns": "Decision",
+      "summary": "Resolve once before model construction. This is a policy choice, not a fastest/best-RNG proof.",
+      "contract": "Resolve once before model construction. This is a policy choice, not a fastest/best-RNG proof. Value parameters explicit optional engine/allocation pair overriding the preset, never hard requirements maxRawDraws positive per-stream raw-word cap; ignored by SeededV1 preset pinned selection-policy version, V1 by default purpose intended execution pattern, not the probability distribution family requirements hard guarantees; unsupported requests throw IllegalArgumentException Attributes Returns immutable decision with resolved pair, reason, override flag and provider/JDK identity Example RandomSelection.resolve(Purpose.CounterRanges, requirements = Requirements(disjointIntervals = true))",
+      "example": "com.cra.figaro.util.RandomSelection.resolve(purpose, preset, explicit, maxRawDraws, requirements)",
+      "object": true,
+      "page": "com/cra/figaro/util/RandomSelection$.html"
     },
     {
       "owner": "com.cra.figaro.util.RandomStreams.BudgetExceeded",

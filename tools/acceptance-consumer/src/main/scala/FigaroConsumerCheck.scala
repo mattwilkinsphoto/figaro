@@ -51,6 +51,14 @@ object FigaroConsumerCheck {
       require(serial.chains.map(_.result.samples) == parallel.chains.map(_.result.samples))
       require(serial.chains.forall(_.randomStream.exists(_.config == policy)))
       println("Published stream API: native allocation, replay and Philox vector-chain scheduling checks passed")
+      val selection = com.cra.figaro.util.RandomSelection.resolve(
+        com.cra.figaro.util.RandomSelection.Purpose.CounterRanges)
+      require(selection.algorithm == sr.Algorithm.Philox4x64 && !selection.overridden)
+      require(selection.reason.nonEmpty && selection.provider == sr.provenance(selection.algorithm))
+      val selected = selection.configure(config)
+      require(MC.run(selected)(model).chains.map(_.result.samples) == serial.chains.map(_.result.samples))
+      require(selection.allocate(42L, 3).map(_.descriptor) == MC.run(selected)(model).chains.flatMap(_.randomStream))
+      println("Published purpose selector: resolved metadata, allocation and vector integration passed")
     }
 
     val gvmP=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),0,

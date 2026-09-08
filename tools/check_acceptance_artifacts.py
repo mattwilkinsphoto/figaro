@@ -10,6 +10,7 @@ FAT_LICENSE = 'META-INF/LICENSE_figaro-6.0.0-modern.10-SNAPSHOT'
 REQUIRED = ('com/cra/figaro/language/Universe.class',
             'com/cra/figaro/util/SamplingRandom$.class',
             'com/cra/figaro/util/RandomStreams$.class',
+            'com/cra/figaro/util/RandomSelection$.class',
             'com/cra/figaro/algorithm/sampling/VectorSliceSampler$.class',
             'com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.class',
             'com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$.class',

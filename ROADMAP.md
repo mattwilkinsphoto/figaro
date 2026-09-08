@@ -22,6 +22,9 @@ concentrated posteriors at matched accuracy. [Versioned stream allocation and Ph
 are now implemented and locally validated on that branch: default seeded replay is
 preserved, native split/jump/counter allocation is opt-in. Portable checkpoints,
 deterministic default graph traversal and per-sample counter addressing remain future work.
+The opt-in [purpose selector](docs/RNG_SELECTION.md) now resolves versioned presets,
+overrides and hard requirements before model construction; it does not autotune or
+change existing defaults. Local validation and remote CI remain separate gates.
 
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).

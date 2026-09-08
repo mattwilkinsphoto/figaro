@@ -44,6 +44,9 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Choose an RNG by purpose](docs/RNG_SELECTION.md): versioned execution-pattern
+  presets, explicit overrides, hard requirements and recorded selection reasons.
+
 - [Scientific RNG selection and migration](docs/RNG_ASSESSMENT.md): LXM default,
   Xoshiro256++, PCG, MT and Philox alternatives, seeded replay and benchmark evidence.
 - [Versioned random streams](docs/RNG_STREAMS.md): opt-in native splitting/jumping,

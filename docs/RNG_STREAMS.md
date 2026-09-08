@@ -16,6 +16,9 @@ explains the research basis.
 
 ## Quick start: three steps
 
+Prefer to specify your execution pattern? The opt-in [purpose selector](RNG_SELECTION.md)
+chooses the backend and allocation policy together and explains its decision.
+
 1. Select a policy:
    ```scala
    import com.cra.figaro.util.{RandomStreams as RS, SamplingRandom as SR}

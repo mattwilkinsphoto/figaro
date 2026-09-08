@@ -3,7 +3,7 @@
 
 [User guide](../USER_GUIDE.md) · [Practical API guide](../API_GUIDE.md) · [Build instructions](../BUILDING.md)
 
-Compiler-derived inventory: **11921 public method entries** from **812 Scala 3 API pages**. Excluded 752 protected/private method entries. Overloads have separate entries.
+Compiler-derived inventory: **11930 public method entries** from **818 Scala 3 API pages**. Excluded 752 protected/private method entries. Overloads have separate entries.
 
 Scope: every public `def` exposed on the generated `com.cra.figaro` API pages, including abstract methods and compiler-generated methods shown by Scaladoc. Inherited members are included wherever Scaladoc renders them. Fields, type aliases, primary constructor signatures, inheritance diagrams, and members hidden by Scaladoc remain available in the linked full API site; this handbook does not reclassify them as functions.
 
@@ -55,4 +55,4 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 - [com.cra.figaro.library.compound](com.cra.figaro.library.compound.md) — 948 methods
 - [com.cra.figaro.library.decision](com.cra.figaro.library.decision.md) — 258 methods
 - [com.cra.figaro.patterns.learning](com.cra.figaro.patterns.learning.md) — 35 methods
-- [com.cra.figaro.util](com.cra.figaro.util.md) — 1070 methods
+- [com.cra.figaro.util](com.cra.figaro.util.md) — 1079 methods

@@ -1,5 +1,15 @@
 # Migrating to Scala 3 and sbt 2
 
+## Purpose-based RNG presets
+
+[RandomSelection](RNG_SELECTION.md) adds opt-in V1 presets for general inference,
+fixed chains and counter ranges. Resolve once and apply the decision to a runner
+config or blocking importance construction. Existing API defaults, stream mappings,
+sampler result shapes and dependencies do not change. No automatic re-selection
+occurs on replay; use recorded stream descriptors. Explicit pairs remain subject
+to hard requirement checks; unsupported per-sample addressing is rejected.
+Persist selection metadata separately alongside the unchanged result descriptors.
+
 ## Versioned stream allocation and Philox
 
 [RandomStreams](RNG_STREAMS.md) adds opt-in `PartitionedV1`: native LXM splitting,
