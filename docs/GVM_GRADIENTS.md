@@ -13,9 +13,8 @@ blocks for a separately designed optimization or gradient-aware sampling method.
 They do **not** add parameter fitting, automatic differentiation of a Figaro graph,
 Hamiltonian Monte Carlo, or a faster inference algorithm by themselves.
 
-Status: source-development preview on `modernize/gauss-von-mises`, locally validated
-with its own remote CI/integration gate. The preceding calibration milestone is on
-main at `755eb425`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34176109863).
+Status: source-development preview integrated on main at `141dcc15`, with
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34177381982).
 Neither this addition nor earlier GVM additions change the immutable RC1 bundle.
 
 ## Quick start in three steps
@@ -198,9 +197,9 @@ Gaussian/circular reductions, unit rescaling, angular periodicity/branch cuts, a
 The [optional oracle](../tools/gauss_von_mises_gradient_reference.py) uses `mpmath==1.3.0`
 outside the runtime; run it with `python -B`. No runtime dependency was added.
 
-Remote CI explicitly runs the suite and example. Check the exact development commit's
-[workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
-before calling this increment CI-verified or integrated. Existing historical whole-suite
+Remote CI explicitly runs the suite and example. The exact milestone `141dcc15` passed
+[branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34177381982) and was
+integrated on main. Later increments retain their own gates; historical whole-suite
 limits remain unchanged.
 
 Related: [joint GVM](GAUSS_VON_MISES.md), [score and KL diagnostics](GVM_DIAGNOSTICS.md),

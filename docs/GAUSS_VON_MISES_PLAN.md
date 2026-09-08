@@ -109,7 +109,7 @@ See [GVM diagnostics](GVM_DIAGNOSTICS.md) for the derived formula, runnable exam
 Gaussian/circular reductions, numerical limits and focused regression suite.
 Finite-concentration threshold calibration is a separate [CI-verified increment on main](GVM_SCORE_CALIBRATION.md),
 with direct tails, numerical diagnostics, independent fixtures and modeled-coverage tests.
-[State gradients](GVM_GRADIENTS.md) are the next locally validated development increment:
+[State gradients](GVM_GRADIENTS.md) are a CI-verified increment on main at `141dcc15`:
 physical-coordinate log-density and squared-score derivatives, not fitting or a new
 inference algorithm. [Third-order expectation quadrature](GVM_QUADRATURE.md) is now
 locally validated on the development branch, with independent node/weight fixtures,

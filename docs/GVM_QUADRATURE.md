@@ -19,7 +19,9 @@ function and parameter range against independent integration or Monte Carlo befo
 relying on this low-cost rule. It does not accelerate existing inference automatically.
 
 Status: source-development preview on `modernize/gauss-von-mises`, with separate
-remote CI and main-integration gates. Existing RC1 binaries are unchanged.
+remote CI and main-integration gates. The preceding gradient milestone is on main at
+`141dcc15`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34177381982).
+Existing RC1 binaries are unchanged.
 
 ## Quick start in three steps
 

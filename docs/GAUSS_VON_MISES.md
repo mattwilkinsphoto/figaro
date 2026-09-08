@@ -1,12 +1,11 @@
 # Joint Gauss-von Mises: development preview
 
-Status: the fixed joint kernel, diagnostics, moments and finite-concentration calibration
-are on main at `755eb425`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34176109863).
+Status: the fixed joint kernel, diagnostics, moments, finite-concentration calibration
+and state gradients are on main at `141dcc15`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34177381982).
 **Standalone publication was approved by the maintainer on 2026-09-07.** This is not
-a tagged release or replacement for the RC1 bundle. The added [analytic state
-gradients](GVM_GRADIENTS.md) and [third-order sparse quadrature](GVM_QUADRATURE.md)
-are locally validated on `modernize/gauss-von-mises`
-and await their own remote CI/integration gates. The circular foundation was integrated earlier
+a tagged release or replacement for the RC1 bundle. The added [third-order sparse quadrature](GVM_QUADRATURE.md)
+is locally validated on `modernize/gauss-von-mises`
+and awaits its own remote CI/integration gates. The circular foundation was integrated earlier
 at `fea8b999`.
 
 ## Overview

@@ -181,7 +181,7 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   [CDF, direct survival and squared-score quantiles](docs/GVM_SCORE_CALIBRATION.md),
   with independent fixtures and known-kernel coverage tests. Not a fitted-parameter
   confidence procedure or an operational decision policy.
-- **Analytic state gradients — locally validated, remote CI/integration pending:**
+- **Analytic state gradients — integrated on main at CI-verified `141dcc15`:**
   [Log-density and squared-score derivatives](docs/GVM_GRADIENTS.md), in physical
   coordinates and per radian. Parameter gradients, Hessians and gradient-based inference
   algorithms are not implied.

@@ -222,8 +222,8 @@ The [optional oracle](../tools/gauss_von_mises_moments_reference.py) uses `mpmat
 outside the Figaro runtime and prints fixtures without writing files.
 
 The next increment, [finite-concentration score calibration](GVM_SCORE_CALIBRATION.md),
-is now on main at CI-verified `755eb425`. [State gradients](GVM_GRADIENTS.md) are locally
-validated on the development branch, with their own CI gate. [Third-order sparse
+is now on main at CI-verified `755eb425`. [State gradients](GVM_GRADIENTS.md) are on
+main at CI-verified `141dcc15`. [Third-order sparse
 quadrature](GVM_QUADRATURE.md) is also locally validated; it does not replace supported
 analytic moments. Bhattacharyya divergence
 and mutual information remain lower-priority research. This milestone does not add
