@@ -1,7 +1,9 @@
 # GVM Bhattacharyya divergence: numerical-method assessment
 
-Status: research prototype and 12 local tests, **not a public Scala API**. Reviewed
-2026-09-07. No runtime distribution, inference behavior or compiled release changes.
+Status: research prototype and 12 tests, with [passing CI at `b5da340c`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34185820661).
+This document records the research, **not the public Scala API contract**. The follow-on
+[guarded Scala API](GVM_BHATTACHARYYA.md) now has local acceptance and its own gates.
+Reviewed 2026-09-07. The research itself changes no runtime or compiled release.
 The prototype is independently written; no third-party implementation was copied.
 
 ## Outcome and intended use
@@ -214,7 +216,11 @@ coefficient evaluation. This is a substantial structural opportunity in moderate
 higher dimensions, not an order-of-magnitude benchmark result. Harmonic count depends
 on concentrations and the demanded accuracy; cancellation may dominate either method.
 
-Before a public Scala API:
+The original production gates below now have a first bounded implementation in the
+[Scala API](GVM_BHATTACHARYYA.md). It explicitly limits nonidentity comparisons to
+concentrations through 50 and dimensions through 32, uses estimated rounding allowances
+and can return unresolved outcomes. Wider ranges and certified rounding remain open.
+The original gates remain useful when evaluating extensions:
 
 1. Implement scaled/log-domain Bessel coefficients with tested errors and a hard
    harmonic budget. The elementary tail bound becomes inefficient as concentration
@@ -238,9 +244,10 @@ one eighth of squared Mahalanobis separation; directed Gaussian KL is one half.
 Thus DB=KL/4 in that special case, not generally. This supplies a useful check without
 conflating the two divergences.
 
-Recommended next milestone: a bounded, numerically guarded Scala implementation with
-explicit unresolved outcomes, beginning with exact reductions and a tested finite
-concentration range. Mutual information and report-fusion functionality are not included.
+The first bounded Scala implementation is now locally validated. Next validation work
+is measured matched-accuracy performance, tighter concentration-dependent bounds and
+stronger numerical error accounting. Mutual information and report-fusion functionality
+are not included.
 
 Related: [GVM diagnostics and KL](GVM_DIAGNOSTICS.md), [moments](GVM_MOMENTS.md),
 [tensor reference](GVM_TENSOR_QUADRATURE.md), [order-comparison limitations](GVM_QUADRATURE_COMPARISON.md),

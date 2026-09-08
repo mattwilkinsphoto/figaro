@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 754,
+  "pages": 757,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156253,6 +156253,72 @@
       "example": "com.cra.figaro.library.atomic.continuous.GaussVonMises.apply(distribution)(using name, collection)",
       "object": true,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMises$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyya",
+      "name": "compare",
+      "anchor": "compare-fffff72d",
+      "signature": "def compare(p: GaussVonMisesDistribution, q: GaussVonMisesDistribution, absoluteTolerance: Double = ..., maxHarmonics: Int = ...): GaussVonMisesBhattacharyyaResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: GaussVonMisesDistribution",
+            "q: GaussVonMisesDistribution",
+            "absoluteTolerance: Double = ...",
+            "maxHarmonics: Int = ..."
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesBhattacharyyaResult",
+      "summary": "Compare two fixed GVMs using exact reductions or a bounded Fourier/Gaussian series.",
+      "contract": "Compare two fixed GVMs using exact reductions or a bounded Fourier/Gaussian series. Value parameters absoluteTolerance positive finite requested absolute distance accuracy in nats, default 1e-8 maxHarmonics largest positive harmonic permitted in [0,512], default 256; analytic shortcuts ignore this budget p non-null fixed distribution q non-null distribution with the same linear dimension and coordinate conventions Attributes Returns immutable resolved/unresolved diagnostics; no distance on budget, range or numerical failure Example GaussVonMisesBhattacharyya.compare(p, q, absoluteTolerance = 1e-7)",
+      "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyya.compare(p, q, absoluteTolerance, maxHarmonics)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesBhattacharyya$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyyaResult",
+      "name": "coefficient",
+      "anchor": "coefficient-0",
+      "signature": "def coefficient: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "Resolved affinity between zero and one; very small values can underflow to zero.",
+      "contract": "Resolved affinity between zero and one; very small values can underflow to zero. Attributes Returns exponential of logCoefficient, or None when unresolved Example println(result.coefficient)",
+      "example": "receiver.coefficient",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesBhattacharyyaResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyyaResult",
+      "name": "logCoefficient",
+      "anchor": "logCoefficient-0",
+      "signature": "def logCoefficient: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "Log of the resolved affinity, retaining widely separated Gaussian comparisons.",
+      "contract": "Log of the resolved affinity, retaining widely separated Gaussian comparisons. Attributes Returns Some(-distance), or None when unresolved Example println(result.logCoefficient)",
+      "example": "receiver.logCoefficient",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesBhattacharyyaResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyyaResult",
+      "name": "resolved",
+      "anchor": "resolved-0",
+      "signature": "def resolved: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Whether the requested absolute distance accuracy passed the numerical estimates.",
+      "contract": "Whether the requested absolute distance accuracy passed the numerical estimates. Attributes Returns true only for Resolved; not a proof of accuracy Example if (result.resolved) println(result.distance.get)",
+      "example": "receiver.resolved",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesBhattacharyyaResult.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",

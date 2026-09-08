@@ -6,6 +6,10 @@ are on main at `4f90f815`, with [passing branch CI](https://github.com/mattwilki
 a tagged release or replacement for the RC1 bundle. The circular foundation was integrated earlier
 at `fea8b999`.
 
+The development branch additionally contains the first [guarded Bhattacharyya API](GVM_BHATTACHARYYA.md),
+with local acceptance and separate remote CI/integration gates. Its numerical limits
+are narrower than the fixed GVM kernel's limits.
+
 ## Overview
 
 Use this distribution when a real vector and an angle are dependent. Ordinary
@@ -147,8 +151,9 @@ of baseline/refined Gaussian and angular orders. It reports per-output changes a
 agreement without treating these as certified error bounds or automatic stopping rules.
 
 [Bhattacharyya method research](GVM_BHATTACHARYYA_RESEARCH.md) evaluates an
-angular-reduced Fourier/Gaussian series with independent checks. It is not yet a public
-Scala divergence API; cancellation and concentration-dependent cost remain release gates.
+angular-reduced Fourier/Gaussian series with independent checks. The first
+[guarded Scala API](GVM_BHATTACHARYYA.md) now implements bounded comparisons with
+explicit unresolved outcomes; wider concentration support and stronger certification remain separate.
 
 Import `com.cra.figaro.library.atomic.continuous.*`. All methods below are handwritten;
 the [compiler reference](api/README.md) also records inherited/generated functions.

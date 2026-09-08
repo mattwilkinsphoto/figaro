@@ -25259,6 +25259,102 @@ Invocation template:
 com.cra.figaro.library.atomic.continuous.GaussVonMises.apply(distribution)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyya.compare ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesBhattacharyya$.html#compare-fffff72d)
+
+```scala
+def compare(p: GaussVonMisesDistribution, q: GaussVonMisesDistribution, absoluteTolerance: Double = ..., maxHarmonics: Int = ...): GaussVonMisesBhattacharyyaResult
+```
+
+Compare two fixed GVMs using exact reductions or a bounded Fourier/Gaussian series.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: GaussVonMisesDistribution ``; `` q: GaussVonMisesDistribution ``; `` absoluteTolerance: Double = ... ``; `` maxHarmonics: Int = ... ``.
+
+Returns: `` GaussVonMisesBhattacharyyaResult ``.
+
+Source contract/attributes: Compare two fixed GVMs using exact reductions or a bounded Fourier/Gaussian series. Value parameters absoluteTolerance positive finite requested absolute distance accuracy in nats, default 1e-8 maxHarmonics largest positive harmonic permitted in [0,512], default 256; analytic shortcuts ignore this budget p non-null fixed distribution q non-null distribution with the same linear dimension and coordinate conventions Attributes Returns immutable resolved/unresolved diagnostics; no distance on budget, range or numerical failure Example GaussVonMisesBhattacharyya.compare(p, q, absoluteTolerance = 1e-7)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyya.compare(p, q, absoluteTolerance, maxHarmonics)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyyaResult.coefficient ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesBhattacharyyaResult.html#coefficient-0)
+
+```scala
+def coefficient: Option[Double]
+```
+
+Resolved affinity between zero and one; very small values can underflow to zero.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Resolved affinity between zero and one; very small values can underflow to zero. Attributes Returns exponential of logCoefficient, or None when unresolved Example println(result.coefficient)
+
+Invocation template:
+
+```scala
+receiver.coefficient
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyyaResult.logCoefficient ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesBhattacharyyaResult.html#logCoefficient-0)
+
+```scala
+def logCoefficient: Option[Double]
+```
+
+Log of the resolved affinity, retaining widely separated Gaussian comparisons.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Log of the resolved affinity, retaining widely separated Gaussian comparisons. Attributes Returns Some(-distance), or None when unresolved Example println(result.logCoefficient)
+
+Invocation template:
+
+```scala
+receiver.logCoefficient
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesBhattacharyyaResult.resolved ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesBhattacharyyaResult.html#resolved-0)
+
+```scala
+def resolved: Boolean
+```
+
+Whether the requested absolute distance accuracy passed the numerical estimates.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Whether the requested absolute distance accuracy passed the numerical estimates. Attributes Returns true only for Resolved; not a proof of accuracy Example if (result.resolved) println(result.distance.get)
+
+Invocation template:
+
+```scala
+receiver.resolved
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution$.html#apply-943)

@@ -152,5 +152,28 @@ def main():
                       'distanceInterval',tuple(mp.nstr(v,24) for v in comparison.distance_interval(terms)),flush=True)
 
 
+def scala_fixtures():
+    """Reproduce the general Scala regression fixtures with 60-digit arithmetic."""
+    with mp.workdps(60):
+        cases = []
+        for k in ('.01','1','10','50'):
+            cases.append(('curved-k'+k,scalar('.3','1.1','.2','.7','.3',k),
+                          scalar('-.4','.8','-.5','-.2','-.15',k)))
+        cases.append(('two-dimensional',
+            Kernel(mat([[0],[0]]),mp.eye(2),mp.mpf('.2'),mat([[.2],[-.1]]),
+                   mat([[.1,.04],[.04,-.05]]),mp.mpf(2)),
+            Kernel(mat([[.2],[-.1]]),mat([[1.1,0],[.1,.9]]),mp.mpf('-.1'),
+                   mat([[-.1],[.2]]),mat([[0,0],[0,.1]]),mp.mpf(3))))
+        for n,b,g,k in [(6,mp.mpf('.2'),0,4),(8,0,2,2)]:
+            cases.append((str(n)+'-dimensional',
+                Kernel(mp.zeros(n,1),mp.eye(n),0,mp.matrix([b]*n),g*mp.eye(n),mp.mpf(k)),
+                Kernel(mp.zeros(n,1),mp.eye(n),0,mp.matrix([-b]*n),mp.zeros(n),mp.mpf(k))))
+        for name,p,q in cases:
+            c = Comparison(p,q)
+            value,_ = c.series(128)
+            print(name,'distance',mp.nstr(c.gaussian_distance-mp.log(value),40),flush=True)
+
+
 if __name__ == '__main__':
     main()
+    scala_fixtures()

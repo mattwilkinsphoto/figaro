@@ -69,12 +69,22 @@ This sequence is a proposed priority order, not a calendar estimate.
    modernization regressions across 22 suites, seven GVM examples, Scala API generation
    and thin-library packaging pass. Parameter gradients and Hessians remain separate.
 8. [Bhattacharyya numerical-method assessment](docs/GVM_BHATTACHARYYA_RESEARCH.md):
-   research prototype with 12 local tests; no public Scala API. Exact angular elimination
+   research prototype with 12 tests and [passing CI at `b5da340c`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34185820661);
+   the research tool itself is not a public Scala API. Exact angular elimination
    and an analytic Fourier/Gaussian series avoid tensor-grid growth. Truncation bounds
    are derived, but cancellation and high-concentration efficiency require production
-   safeguards. Next: a bounded Scala implementation with exact reductions and explicit
-   unresolved results, after defining its tested numerical range. Research CI pending.
-9. Linear-angular mutual information: lower-priority research requested 2026-09-07.
+   safeguards; see the bounded implementation below.
+9. [Guarded Scala Bhattacharyya comparison](docs/GVM_BHATTACHARYYA.md): locally validated
+   on the development branch; remote CI/integration pending. Nonidentity comparisons
+   support concentrations through 50 and at most 32 linear dimensions, subject to
+   conditioning/phase checks. Explicit status and optional distance keep unresolved
+   results visible; truncation bounds and heuristic rounding estimates remain distinct.
+   Acceptance: 16 focused Scala tests, all 297 modernization regressions across 23 suites,
+   eight GVM examples, API generation and thin-library packaging. The six-dimensional
+   matched-error example compares five harmonics with 31,250 tensor callbacks at a
+   1e-6-nat error target; this is not a measured wall-clock speedup. Next: measured
+   performance and broader concentration/error validation, not unchecked range expansion.
+10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;
    see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.
 
