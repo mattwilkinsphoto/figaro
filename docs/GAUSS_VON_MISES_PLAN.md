@@ -1,8 +1,7 @@
 # First distribution milestone: von Mises and Gauss-von Mises
 
-Status: **circular foundation and fixed-kernel joint GVM extensions through tensor
-quadrature integrated on main with passing branch CI at `9cbcce00`; budgeted
-order comparison locally validated, awaiting its own CI/integration**.
+Status: **circular foundation and fixed-kernel joint GVM extensions through budgeted
+order comparison integrated on main with passing branch CI at `4f90f815`**.
 Standalone publication is approved by the maintainer. See the
 [circular guide](VON_MISES.md) and [joint development preview](GAUSS_VON_MISES.md).
 Both the circular and joint families
@@ -115,8 +114,10 @@ physical-coordinate log-density and squared-score derivatives, not fitting or a 
 inference algorithm. [Third-order expectation quadrature](GVM_QUADRATURE.md) is now
 on main at CI-verified `b06e957f`, with independent node/weight fixtures,
 exactness-class checks and negative-weight failure examples. The [positive-weight
-tensor reference](GVM_TENSOR_QUADRATURE.md) is locally validated on the development
-branch with order/cost comparisons. Automatic refinement diagnostics remain separate.
+tensor reference](GVM_TENSOR_QUADRATURE.md) is integrated on main at `9cbcce00`,
+with order/cost comparisons. [Budgeted order diagnostics](GVM_QUADRATURE_COMPARISON.md)
+are integrated at CI-verified `4f90f815`; automatic refinement and certified error
+bounds remain separate, unimplemented capabilities.
 Analytic marginal circular and physical first/second linear-angular mixed moments,
 plus the exact angular conditional given the full linear vector, are now a separate
 [CI-verified increment on main](GVM_MOMENTS.md). Its tests include complex-matrix
@@ -168,8 +169,8 @@ Specific follow-on checks from the paper:
 
 Quadrature was separate from the initial sampling/density delivery. The
 [sparse rule](GVM_QUADRATURE.md) and [positive-weight tensor reference](GVM_TENSOR_QUADRATURE.md)
-are now integrated on main; the [budgeted order comparison](GVM_QUADRATURE_COMPARISON.md)
-has local acceptance, with remote CI/integration pending. These provide generic
+and [budgeted order comparison](GVM_QUADRATURE_COMPARISON.md) are now integrated on
+main through CI-verified `4f90f815`. These provide generic
 expectations and sensitivity diagnostics, not rigorous error certificates or transformed
 GVM reconstruction. Generic uncertainty propagation remains separate research: compare
 against independent Monte Carlo and simpler Gaussian baselines on controlled curved

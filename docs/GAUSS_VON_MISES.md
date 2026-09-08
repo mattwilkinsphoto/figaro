@@ -1,11 +1,9 @@
 # Joint Gauss-von Mises: development preview
 
-Status: the fixed joint kernel and extensions through positive-weight tensor quadrature
-are on main at `9cbcce00`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34179606111).
+Status: the fixed joint kernel and extensions through [budgeted order comparison](GVM_QUADRATURE_COMPARISON.md)
+are on main at `4f90f815`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34181640610).
 **Standalone publication was approved by the maintainer on 2026-09-07.** This is not
-a tagged release or replacement for the RC1 bundle. The added [budgeted order comparison](GVM_QUADRATURE_COMPARISON.md)
-is locally validated on `modernize/gauss-von-mises`
-and awaits its own remote CI/integration gates. The circular foundation was integrated earlier
+a tagged release or replacement for the RC1 bundle. The circular foundation was integrated earlier
 at `fea8b999`.
 
 ## Overview
@@ -209,9 +207,8 @@ The diagnostics milestone passed 205 modernization regressions and remote CI at
 `3615e26e`; moments passed CI at `df5a7bf4`, and calibration at `755eb425`. With the
 [13 order-comparison tests](GVM_QUADRATURE_COMPARISON.md), all 281 modernization regressions,
 seven expanded executable examples, Scala API generation and local thin-library
-packaging pass. Check the exact source commit in the
-[branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
-before treating remote CI as passed. Existing whole-library historical-suite limits remain unchanged.
+packaging pass. The [exact comparison commit's CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34181640610)
+also passed before integration into main. Existing whole-library historical-suite limits remain unchanged.
 The [optional oracle](../tools/gauss_von_mises_reference.py) prints fixtures using
 `mpmath==1.3.0`; it is not a Figaro runtime dependency. Run it with `python -B` in an
 isolated environment. It uses an explicit known factor and inverse/determinant formulas,

@@ -224,8 +224,8 @@ See the [focused suite](../Figaro/src/test/scala/com/cra/figaro/test/modernizati
 and [passing CI at `9cbcce00`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34179606111).
 This tensor milestone is integrated on main. Historical whole-suite limits remain.
 
-The follow-on [budgeted order-comparison helper](GVM_QUADRATURE_COMPARISON.md) now has
-local acceptance, with its remote CI/integration gates still separate. It checks four
+The follow-on [budgeted order-comparison helper](GVM_QUADRATURE_COMPARISON.md) is now
+integrated on main at CI-verified `4f90f815`. It checks four
 order combinations and labels differences as diagnostics rather than rigorous error bounds.
 See its analytic false-agreement control before interpreting a tolerance flag. This milestone
 does not itself validate Bhattacharyya divergence, mutual information or other entropy

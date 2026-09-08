@@ -218,7 +218,10 @@ cancellation, mixed-order interaction, the analytic false-agreement control, tol
 overflow, budgets, input failures, cancellation and concurrent reuse. The executable
 example checks the three user patterns rather than only printing them.
 
-Local acceptance and remote CI status are recorded in the [roadmap](../ROADMAP.md).
+Integrated on main at `4f90f815`, after [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34181640610).
+Local acceptance included all 281 modernization tests across 22 suites (13 focused
+comparison tests), seven GVM examples, Scala API generation and library packaging.
+The [roadmap](../ROADMAP.md) records the broader milestone sequence.
 This addition does not replace the immutable RC1 library bundle or declare a tagged release.
 Next useful research is to select a concrete lower-priority entropy/divergence statistic
 and validate its integrand and independent accuracy controls; this helper alone does
