@@ -89,6 +89,26 @@ final class GaussVonMisesDistribution private (
     */
   def conditionalLocation(linear: Vector[Double]): Double = center(whiten(linear))
 
+  /** Exact angular conditional distribution given the entire linear vector.
+    * @param linear finite vector of the configured dimension, in physical coordinates
+    * @return immutable VonMisesDistribution with this concentration and conditional center;
+    *         at kappa=0 the irrelevant location is set to zero
+    * @example `kernel.conditionalAngle(Vector(0.2)).sample(new scala.util.Random(42L))`
+    */
+  def conditionalAngle(linear: Vector[Double]): VonMisesDistribution = {
+    require(linear != null && linear.size == dimension && linear.forall(_.isFinite), "linear dimensions/entries invalid")
+    checkInterrupted()
+    if (kappa == 0) circular else VonMisesDistribution(conditionalLocation(linear),kappa)
+  }
+
+  /** Analytic marginal circular and first/second linear-angular mixed moments.
+    * @return immutable physical-coordinate expectations, without sampling; numeric overflow throws
+    *         ArithmeticException and eigensolver failures propagate
+    * @example `kernel.moments.meanDirection` is the marginal direction, not generally alpha
+    */
+  def moments: GaussVonMisesMoments = GvmMomentCalculation.compute(mean,lower,alpha,beta,gamma,kappa,
+    circular.meanResultantLength)
+
   /** Gaussian marginal log density, using a triangular solve rather than an inverse.
     * @param linear finite vector of the configured dimension
     * @return log density per linear-coordinate volume; extreme tails may return -Infinity

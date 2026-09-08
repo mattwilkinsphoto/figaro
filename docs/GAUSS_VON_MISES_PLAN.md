@@ -1,7 +1,8 @@
 # First distribution milestone: von Mises and Gauss-von Mises
 
-Status: **circular foundation integrated with passing CI; fixed-kernel joint GVM locally
-implemented and tested, with standalone publication approved by the maintainer**. See the
+Status: **circular foundation, fixed-kernel joint GVM and KL/residual diagnostics integrated
+on main with passing branch CI at `3615e26e`; moments/conditionals locally validated,
+awaiting their own CI/integration**. Standalone publication is approved by the maintainer. See the
 [circular guide](VON_MISES.md) and [joint development preview](GAUSS_VON_MISES.md).
 Both the circular and joint families
 were explicitly requested on 2026-09-07. Parent families: `DIST-01` and
@@ -73,11 +74,11 @@ CDF, quantiles and fitting remain deferred.
 
 ## Proposed second increment: joint GVM
 
-The fixed-kernel portion is now implemented locally as `GaussVonMisesDistribution`,
+The fixed-kernel portion is now integrated on main as `GaussVonMisesDistribution`,
 `LinearAngular` and `GaussVonMises`, with 13 focused regressions. The following goals
 remain the design rationale; the preview guide records the implemented API and limits.
-The maintainer approved standalone publication on 2026-09-07; normal CI and main
-integration gates remain. This is not a tagged library release.
+The maintainer approved standalone publication on 2026-09-07; CI passed and main was
+fast-forwarded to `3615e26e`. Further extensions need their own gates. This is not a tagged library release.
 
 Start with fixed parameters and an immutable linear-vector/angle result. Separate a
 pure numeric kernel from the mutable Figaro element adapter; proposed public names and
@@ -107,6 +108,10 @@ Mahalanobis-von-Mises scoring and analytic directed KL with a component breakdow
 See [GVM diagnostics](GVM_DIAGNOSTICS.md) for the derived formula, runnable examples,
 Gaussian/circular reductions, numerical limits and focused regression suite.
 Finite-concentration threshold calibration remains separate from computing the score.
+Analytic marginal circular and physical first/second linear-angular mixed moments,
+plus the exact angular conditional given the full linear vector, are now a separate
+[implemented development increment](GVM_MOMENTS.md). Its tests include complex-matrix
+fixtures, quadrature, sampling and an explicit hierarchical model with angular evidence.
 Bhattacharyya divergence and linear-angular mutual information are explicitly lower
 priority research items; the [wishlist](../WISHLIST.md) records their validation gates.
 

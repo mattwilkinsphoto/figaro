@@ -204,8 +204,9 @@ direct joint-density quadrature, an eight-dimensional complex-branch trap, 80-di
 non-diagonal fixtures, concentration extremes, small perturbations, concurrent reuse,
 invalid inputs, overflow and cancellation. CI explicitly includes this suite.
 Local acceptance includes 205 modernization regressions (13 diagnostic tests), the
-expanded executable example, Scala API generation and thin-library packaging. These
-are local results, not a claim that remote CI or the entire historical suite passed.
+expanded executable example, Scala API generation and thin-library packaging.
+The exact milestone `3615e26e` subsequently passed [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34172281823)
+and was integrated on main. This does not certify the entire historical suite or later extensions.
 The optional [reference generator](../tools/gauss_von_mises_kl_reference.py) requires
 `mpmath==1.3.0`, prints results without writing files, and is not a runtime dependency.
 
@@ -219,8 +220,9 @@ Lower-priority research items, not implemented APIs:
   not a distance between two GVMs. Conditional entropy is analytic; investigate Fourier
   evaluation of the angular marginal and validated entropy integration. Require zero
   for uncoupled/uniform cases, nonnegativity and independent numerical checks.
-- Finite-concentration score thresholds, analytic circular/mixed moments, additional
-  conditionals and gradients remain separate increments. Generic quadrature needs its
+- [Analytic circular/mixed moments and the exact angular conditional](GVM_MOMENTS.md)
+  are now implemented in the development branch. Finite-concentration score thresholds,
+  additional conditionals and gradients remain separate increments. Generic quadrature needs its
   own approximation/negative-weight assessment. No fusion or propagation scope is added.
 
 Related: [joint GVM](GAUSS_VON_MISES.md), [circular foundation](VON_MISES.md),

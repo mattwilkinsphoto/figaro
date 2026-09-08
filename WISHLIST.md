@@ -172,8 +172,12 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
 
 ## DIST-02 diagnostic extensions (2026-09-07)
 
-- **KL and canonical/Mahalanobis utilities — locally validated, remote CI/integration pending:** the current
-  development increment; see [diagnostic contracts](docs/GVM_DIAGNOSTICS.md).
+- **KL and canonical/Mahalanobis utilities — validated, integrated on main at `3615e26e`:**
+  see [diagnostic contracts](docs/GVM_DIAGNOSTICS.md).
+- **Circular/mixed moments and exact angular conditionals — locally validated, remote CI/integration pending:**
+  [physical-coordinate summaries and hierarchical examples](docs/GVM_MOMENTS.md).
+  Reverse conditionals, general posterior moments and finite-concentration score
+  thresholds are not implied by this support.
 - **Bhattacharyya divergence — research wishlist, lower priority:** symmetric comparison
   of complete GVM distributions. Assess analytic angular integration plus a controlled
   numerical linear integral; validate Gaussian reductions, symmetry and identical laws.

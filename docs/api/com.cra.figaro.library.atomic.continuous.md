@@ -25307,6 +25307,30 @@ Invocation template:
 receiver.canonicalResidual(value)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.conditionalAngle ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#conditionalAngle-fffff937)
+
+```scala
+def conditionalAngle(linear: Vector[Double]): VonMisesDistribution
+```
+
+Exact angular conditional distribution given the entire linear vector.
+
+Type parameters: none.
+
+Parameters, list 1: `` linear: Vector[Double] ``.
+
+Returns: `` VonMisesDistribution ``.
+
+Source contract/attributes: Exact angular conditional distribution given the entire linear vector. Value parameters linear finite vector of the configured dimension, in physical coordinates Attributes Returns immutable VonMisesDistribution with this concentration and conditional center; at kappa=0 the irrelevant location is set to zero Example kernel.conditionalAngle(Vector(0.2)).sample(new scala.util.Random(42L))
+
+Invocation template:
+
+```scala
+receiver.conditionalAngle(linear)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.conditionalLocation ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#conditionalLocation-f10)
@@ -25497,6 +25521,30 @@ Invocation template:
 
 ```scala
 receiver.mahalanobisSquared(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.moments ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#moments-0)
+
+```scala
+def moments: GaussVonMisesMoments
+```
+
+Analytic marginal circular and first/second linear-angular mixed moments.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` GaussVonMisesMoments ``.
+
+Source contract/attributes: Analytic marginal circular and first/second linear-angular mixed moments. Attributes Returns immutable physical-coordinate expectations, without sampling; numeric overflow throws ArithmeticException and eigensolver failures propagate Example kernel.moments.meanDirection is the marginal direction, not generally alpha
+
+Invocation template:
+
+```scala
+receiver.moments
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.sample ``

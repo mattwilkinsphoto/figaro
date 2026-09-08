@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 742,
+  "pages": 743,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156303,6 +156303,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "conditionalAngle",
+      "anchor": "conditionalAngle-fffff937",
+      "signature": "def conditionalAngle(linear: Vector[Double]): VonMisesDistribution",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "linear: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "VonMisesDistribution",
+      "summary": "Exact angular conditional distribution given the entire linear vector.",
+      "contract": "Exact angular conditional distribution given the entire linear vector. Value parameters linear finite vector of the configured dimension, in physical coordinates Attributes Returns immutable VonMisesDistribution with this concentration and conditional center; at kappa=0 the irrelevant location is set to zero Example kernel.conditionalAngle(Vector(0.2)).sample(new scala.util.Random(42L))",
+      "example": "receiver.conditionalAngle(linear)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
       "name": "conditionalLocation",
       "anchor": "conditionalLocation-f10",
       "signature": "def conditionalLocation(linear: Vector[Double]): Double",
@@ -156466,6 +156487,20 @@
       "summary": "Squared Mahalanobis-von-Mises score ||z||^2 + 4 kappa sin(delta/2)^2.",
       "contract": "Squared Mahalanobis-von-Mises score ||z||^2 + 4 kappa sin(delta/2)^2. Value parameters value non-null finite state of this kernel's dimension Attributes Returns nonnegative score (possibly +Infinity in extreme tails), not a p-value Example kernel.mahalanobisSquared(LinearAngular(Vector(0.2), 3.1))",
       "example": "receiver.mahalanobisSquared(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "moments",
+      "anchor": "moments-0",
+      "signature": "def moments: GaussVonMisesMoments",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "GaussVonMisesMoments",
+      "summary": "Analytic marginal circular and first/second linear-angular mixed moments.",
+      "contract": "Analytic marginal circular and first/second linear-angular mixed moments. Attributes Returns immutable physical-coordinate expectations, without sampling; numeric overflow throws ArithmeticException and eigensolver failures propagate Example kernel.moments.meanDirection is the marginal direction, not generally alpha",
+      "example": "receiver.moments",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
     },

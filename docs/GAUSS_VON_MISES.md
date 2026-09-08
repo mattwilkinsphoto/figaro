@@ -1,9 +1,12 @@
 # Joint Gauss-von Mises: development preview
 
-Status: implemented on `modernize/gauss-von-mises`; **standalone publication approved
-by the maintainer on 2026-09-07**, subject to the normal CI/integration gates. This is
-not a tagged release or main integration. The circular foundation is separately
-available on main at `fea8b999`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34138540587).
+Status: the fixed joint kernel and KL/residual diagnostics are integrated on main at
+`3615e26e`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34172281823).
+**Standalone publication was approved by the maintainer on 2026-09-07.** This is not
+a tagged release or replacement for the RC1 bundle. The added [moments/conditional
+helpers](GVM_MOMENTS.md) are locally validated on `modernize/gauss-von-mises` and await
+their own remote CI/integration gates. The circular foundation was integrated earlier
+at `fea8b999`.
 
 ## Overview
 
@@ -118,6 +121,10 @@ automatic performance gain. For several chains use separate elements/universes w
 
 ## Public API reference
 
+Analytic circular/mixed moments and the exact angular conditional now have a
+[dedicated guide](GVM_MOMENTS.md), including every result field, numerical limits,
+sampling comparisons and an executable hierarchical model with angular evidence.
+
 Canonical residuals/inversion, squared Mahalanobis-von-Mises scores and analytic KL
 are documented with all added APIs, three examples and numerical limits in the
 [GVM diagnostics guide](GVM_DIAGNOSTICS.md). These are deterministic kernel utilities,
@@ -180,8 +187,9 @@ pass locally: independent 80-digit joint scores, two-dimensional normalization, 
 and uniform limits, 120,000 prior draws, Gaussian moments and conditional circular
 residuals, disparate units, input snapshots, failure paths, real evidence weighting,
 posterior projections and exact seeded traces across worker counts.
-With the [13 added diagnostics tests](GVM_DIAGNOSTICS.md), all 205 modernization
-regressions, the expanded executable example, Scala API generation and
+The diagnostics milestone passed 205 modernization regressions and remote CI at
+`3615e26e`. With the [15 moments tests](GVM_MOMENTS.md), all 220 modernization
+regressions, both expanded executable examples, Scala API generation and
 local thin-library packaging also pass. Check the exact source commit in the
 [branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
 before treating remote CI as passed. Existing whole-library historical-suite limits remain unchanged.

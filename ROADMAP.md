@@ -23,7 +23,7 @@ native elements, composition possibilities and missing first-class support.
 | --- | --- | --- | --- |
 | D0: distribution contracts | Initial circular contracts implemented; broader adoption remains | Shared parameter/support conventions, density/log-density tests, seeded RNG ownership and explicit inference compatibility | Circular contract tests and capability matrix; extend stable log-density support to existing distributions through a separate audit |
 | D1: circular foundation (`DIST-01`) | Integrated on main at `fea8b999`; CI passed | Circular angle handling and von Mises; reuse for later wrapped and spherical families | 16 new regressions, 179 modernization tests and executable examples pass; [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34138540587) |
-| D2: linear-angular joint models (`DIST-02`) | Locally validated; standalone publication approved, remote CI/integration remain | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | 13 new regressions; [scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); separate future review for report ingestion/fusion/filtering/propagation |
+| D2: linear-angular joint models (`DIST-02`) | Kernel and KL/residuals on main at `3615e26e`, branch CI passed; moments/conditionals locally validated, awaiting CI | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
 | D3: common missing scalar/count families | Proposed next tranche | Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; bounded triangular/Kumaraswamy | Select a small representative set across `DIST-03` through `DIST-06`; demonstrate observation/inference, not only random generation |
 | D4: reusable constructions (`DIST-10`) | Proposed; start enabling pieces during D1-D3 | Correct transformations, truncation, mixtures and hurdle/zero-inflated laws | Jacobian/normalizer/mixed-measure checks; avoid one-off implementations of every derived name |
 | D5: multivariate, tail and matrix breadth | Wishlist; not scheduled | Multivariate t, joint counts, extreme-value, covariance/correlation and directional manifolds | Dedicated dimension/geometry/factorization and inference tests before specialized flavors |
@@ -41,11 +41,14 @@ This sequence is a proposed priority order, not a calendar estimate.
 ## D2 diagnostic follow-on priorities
 
 1. Canonical residual/inverse, squared Mahalanobis-von-Mises score and analytic directed
-   KL with component breakdown: implemented in the development branch; see
-   [contracts and validation](docs/GVM_DIAGNOSTICS.md). Remote CI/main integration
-   remain separate gates. Validate exact Gaussian/Mahalanobis and circular reductions.
-2. Finite-concentration score calibration, circular/mixed moments and conditional helpers:
-   subsequent increments, not included in the score/KL implementation.
+   KL with component breakdown: integrated on main at `3615e26e`, with passing branch CI;
+   see [contracts and validation](docs/GVM_DIAGNOSTICS.md). Exact Gaussian/Mahalanobis
+   and circular reductions are tested. No replacement compiled release is declared.
+2. Analytic circular/mixed moments and exact angle-given-linear conditional: implemented
+   in the development branch with independent fixtures and hierarchical examples; see
+   [moments contracts](docs/GVM_MOMENTS.md). Finite-concentration score calibration is
+   the next implementation increment. Gradients and deterministic expectation quadrature
+   follow separately, with their own accuracy and approximation contracts.
 3. Bhattacharyya divergence and linear-angular mutual information: lower-priority research
    requested 2026-09-07. Establish numerical methods, special cases and error contracts
    before exposing APIs. No general closed-form guarantee; see [wishlist](WISHLIST.md).
