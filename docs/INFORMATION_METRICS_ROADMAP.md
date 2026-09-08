@@ -31,7 +31,7 @@ transformations within each variable block. For background see the
 | --- | --- | --- |
 | KL | [Analytic Gaussian/angular decomposition](GVM_DIAGNOSTICS.md) | Fixed matching-coordinate laws, with documented numeric safeguards. |
 | Bhattacharyya | [Guarded Fourier method](GVM_BHATTACHARYYA.md), plus [opt-in positive scalar method](GVM_SCALAR_BHATTACHARYYA.md) | Bounded ranges/work, explicit numerical refusals; no certified generic integration. |
-| MI | [New linear-vector/angle diagnostic](GVM_MUTUAL_INFORMATION.md), implementation and validation milestone | One fixed law; full vector versus single angle; estimated numerical errors and initial parameter caps. |
+| MI | [Linear-vector/angle diagnostic](GVM_MUTUAL_INFORMATION.md), integrated with D3 | One fixed law; full vector versus single angle; estimated numerical errors and initial parameter caps. |
 | Mahalanobis-style score | [Canonical residual score](GVM_DIAGNOSTICS.md) and [finite-concentration calibration](GVM_SCORE_CALIBRATION.md) | GVM-specific geometry; not universally chi-square at finite concentration. |
 
 This table is not a complete audit of metrics elsewhere in Figaro. The initial GVM MI
@@ -48,9 +48,10 @@ This advances INFO-02 through INFO-04; it does not finish their full cross-famil
 Partitioned multivariate Gaussian MI, comparisons between unlike families, existing-family
 adapter audits and sample-based estimators remain separate work.
 
-1. **INFO-01: complete the GVM representative.** Add MI with mathematical reduction,
-   independent numerical controls, caller-visible limits, examples, packaging and CI.
-   Keep the result contract distinct from two-law divergence APIs.
+1. **INFO-01: GVM representative delivered.** MI includes mathematical reduction,
+   independent numerical controls, caller-visible limits, examples, packaging and passing CI.
+   Its result contract remains distinct from two-law divergence APIs; numerical extensions
+   beyond the initial bounds still require their own validation.
 2. **INFO-02: inventory and shared conventions.** For each family in the
    [distribution inventory](DISTRIBUTION_SUPPORT.md), record existing/native/composable
    support, analytic versus numerical methods, compatible measures and missing operations.

@@ -23,8 +23,8 @@ native elements, composition possibilities and missing first-class support.
 | --- | --- | --- | --- |
 | D0: distribution contracts | Initial circular contracts implemented; broader adoption remains | Shared parameter/support conventions, density/log-density tests, seeded RNG ownership and explicit inference compatibility | Circular contract tests and capability matrix; extend stable log-density support to existing distributions through a separate audit |
 | D1: circular foundation (`DIST-01`) | Integrated on main at `fea8b999`; CI passed | Circular angle handling and von Mises; reuse for later wrapped and spherical families | 16 new regressions, 179 modernization tests and executable examples pass; [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34138540587) |
-| D2: linear-angular joint models (`DIST-02`) | Through guarded Bhattacharyya comparison on main at CI-verified `251f9540` | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
-| D3: common missing scalar/count families | Implemented; local acceptance passed, remote integration gate pending | All nine representatives: Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; triangular/Kumaraswamy; appropriate information measures | [Milestone evidence](docs/COMMON_DISTRIBUTIONS_ACCEPTANCE.md): density/tail oracles, observation and MCMC checks, isolated multi-chain determinism, divergence references and independent published consumer |
+| D2: linear-angular joint models (`DIST-02`) | Through mutual information, integrated with D3 at CI-verified `e78a6f0e` | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
+| D3: common missing scalar/count families | Complete on main; source CI verified at `e78a6f0e` | All nine representatives: Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; triangular/Kumaraswamy; appropriate information measures | [Milestone evidence](docs/COMMON_DISTRIBUTIONS_ACCEPTANCE.md): density/tail oracles, observation and MCMC checks, isolated multi-chain determinism, divergence references and independent published consumer |
 | D4: reusable constructions (`DIST-10`) | Proposed; start enabling pieces during D1-D3 | Correct transformations, truncation, mixtures and hurdle/zero-inflated laws | Jacobian/normalizer/mixed-measure checks; avoid one-off implementations of every derived name |
 | D5: multivariate, tail and matrix breadth | Wishlist; not scheduled | Multivariate t, joint counts, extreme-value, covariance/correlation and directional manifolds | Dedicated dimension/geometry/factorization and inference tests before specialized flavors |
 | D6: specialist families | Research backlog | Quantile-defined, singular, physical scattering, phase-type and niche empirical laws | Concrete use case, primary definition, viable numerical method and maintained dependency/license evidence |
@@ -143,11 +143,12 @@ This sequence is a proposed priority order, not a calendar estimate.
    consumer rebuilds; no additional scalar micro-optimization is scheduled here.
    Stronger rounding analysis and
    multidimensional alternatives remain separate work; no automatic method switch.
-10. [Linear-angular mutual information](docs/GVM_MUTUAL_INFORMATION.md): approved next
-   milestone, now implemented as an opt-in guarded diagnostic on the development branch.
+10. [Linear-angular mutual information](docs/GVM_MUTUAL_INFORMATION.md): implemented
+   as an opt-in guarded diagnostic and integrated on main with the D3 milestone.
    Analytic conditional entropy and Fourier marginal entropy reduce integration to one
    angular dimension; independent high-precision fixtures and explicit work/accuracy
-   refusals accompany the API. Main promotion still requires the integration gates.
+   refusals accompany the API. Its own branch CI and the complete D3 integration CI pass;
+   see [acceptance evidence](docs/COMMON_DISTRIBUTIONS_ACCEPTANCE.md).
    The [cross-family metrics roadmap](docs/INFORMATION_METRICS_ROADMAP.md) carries KL,
    Bhattacharyya and MI forward to other broad distribution families, with distinct
    applicability and numerical contracts rather than an assumed universal API.

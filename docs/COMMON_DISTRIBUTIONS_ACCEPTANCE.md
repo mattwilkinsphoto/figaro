@@ -8,11 +8,30 @@ Each has an immutable numeric kernel, named Figaro factory and reusable fixed/dy
 adapter. Same-family KL/Bhattacharyya follow the base distributions; explicit finite
 probability tables supply categorical divergences and joint-table mutual information.
 
-Implementation branch: `modernize/common-distributions`. Local acceptance below passed
-on 2026-09-08; final remote CI and main promotion remain pending. The branch includes
+Implemented on `modernize/common-distributions` and integrated on main. Production source
+commit `e78a6f0e023a96ffbb3ea5626d50f0a88f2c624b` passed the
+[complete Linux CI workflow](https://github.com/mattwilkinsphoto/figaro/actions/runs/34243740997)
+on 2026-09-08, including clean compilation, all mandatory regression gates, coverage
+instrumentation/restoration, byte-for-byte clean rebuilds, classifier publication,
+legal/artifact validation and independent published-consumer acceptance. Local acceptance
+below also passes. The milestone includes
 the preceding GVM MI implementation, whose [full CI passed at `fc4d23e8`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34235233397).
 This is a development snapshot, not a new stable release or replacement of the immutable
 `6.0.0-modern.10-rc.1` bundle. No runtime dependency or inference default changes.
+
+The [CI library bundle](https://github.com/mattwilkinsphoto/figaro/actions/runs/34243740997/artifacts/10063681442)
+contains the built artifacts (subject to GitHub sign-in/retention). Alternatively, pull
+main and run `figaro / publishLocal` to build the snapshot in your own local repository.
+The final local thin JAR was independently consumed with SHA-256
+`cdd5be44085c1400510953c768b3ee60a6af7ee3e597e44fa9ed030a3d37e56e`;
+this identifies that Windows build, not a promised cross-platform artifact hash.
+
+**Advisory exception:** the successful branch workflow reports one annotation from
+`Observe legacy collection timing checks (advisory)`, which is explicitly non-blocking.
+`SelectableSetTest.scala:160` failed its wall-clock enumeration-ratio assertion
+(11.3568 was not below 1.1); 19 other checks in that step passed. This historical timing
+test is not changed by D3 and is not represented as a passing test. All mandatory
+correctness/integration gates passed; no new speedup claim relies on that advisory result.
 
 ## Reproduce the checks
 
@@ -58,7 +77,7 @@ The CI workflow runs these controls alongside all existing modernization gates.
   valid uniform table; numerical MI still retains its explicit error allowance.
 - Six new Python oracle checks, seven artifact-validator tests and 18 documentation
   tooling tests pass. Compiler-generated documentation contains 11,758 public method
-  entries; freshness and 12,887 local link targets in 116 Markdown files are verified.
+  entries; freshness and local link targets in 116 Markdown files are verified.
 
 The full historical Figaro test suite is not declared green; existing compatibility
 limitations remain. New elements do not acquire exact factor conversion, conjugate

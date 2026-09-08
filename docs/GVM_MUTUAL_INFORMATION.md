@@ -15,8 +15,8 @@ Mutual information is symmetric in its two random-variable blocks, but is not a 
 between two laws. See the [cross-family metrics roadmap](INFORMATION_METRICS_ROADMAP.md).
 
 Status: the guarded implementation passed [full branch CI at `fc4d23e8`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34235233397).
-It is included in the [common-family integration milestone](COMMON_DISTRIBUTIONS_ACCEPTANCE.md);
-consult that record for main promotion. Local validation and publication checks are below.
+It is integrated on main with the [CI-verified common-family milestone](COMMON_DISTRIBUTIONS_ACCEPTANCE.md).
+Local validation and publication checks are below.
 Older immutable library bundles do not contain this API; rebuild a commit containing it.
 
 ## Quick start: three steps
