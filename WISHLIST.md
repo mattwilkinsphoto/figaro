@@ -240,9 +240,13 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   [Positive cell-minimum bounds](docs/GVM_SCALAR_TAIL_ASSESSMENT.md) reduce the candidate
   radius in 49 of 84 fixtures; the curved fixture's initial partition falls from 4,650
   to 1,494 panels while the difficult tiny-overlap case retains its wide radius.
-  Seven tests include oracle validation and evidence freshness. Next: a test-only JVM
-  candidate accounting for bound/preprocessing uncertainty, bounded setup and cancellation,
-  followed by full-call timing. No production radius change or measured speedup yet.
+  Seven tests include oracle validation and evidence freshness. The follow-on
+  [test-only JVM candidate](docs/GVM_SCALAR_TAIL_JVM.md) now has outward-rounded cell
+  arithmetic, independent phase-bound controls and setup-inclusive timings: about 2.54x
+  on the costly curved fixture, little change on four others. Thirteen new Scala tests
+  pass with the full 325-test modernization gate; seven Python tests protect provenance,
+  oracles and timing evidence. Next: held-out radius/screen controls and public integration
+  with artifact/consumer validation. No production radius change yet; CI pending.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.

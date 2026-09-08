@@ -128,8 +128,12 @@ This sequence is a proposed priority order, not a calendar estimate.
    The [tail-radius assessment](docs/GVM_SCALAR_TAIL_ASSESSMENT.md) now tests a stronger
    affinity lower bound across 84 scalar cases: 49 smaller radii, with initial panels
    reduced from 4,650 to 1,494 on the curved fixture. This is research work, not measured
-   throughput. Next: a test-only JVM candidate with conservative bound arithmetic,
-   bounded setup/cancellation, unchanged final tail checks and setup-inclusive timings.
+   throughput. The [test-only JVM candidate](docs/GVM_SCALAR_TAIL_JVM.md) now retains
+   conservative bound arithmetic, bounded setup/cancellation and unchanged final tail
+   checks. Three-JVM full-call timings show about 2.54x on the costly curved fixture,
+   little change on four others; all 325 modernization tests pass locally. CI pending.
+   Next: held-out radius/screen-boundary controls, then public integration with explicit
+   setup-budget documentation, artifact/consumer checks and a paired performance gate.
    Stronger rounding analysis and
    multidimensional alternatives remain separate work; no automatic method switch.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.

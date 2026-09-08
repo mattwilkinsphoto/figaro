@@ -1,12 +1,17 @@
 # Scalar GVM tail-radius assessment
 
 Status: research-only high-precision component study. No library behavior changes.
+Integrated on main at `b726fe4f` after
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34205631150).
 The preceding [audited-totals optimization](GVM_SCALAR_AUDITED_TOTALS.md) is integrated
 on main at CI-verified `213aa587`. This assessment identifies a possible next improvement;
 it does not establish a new production radius policy or a measured speedup.
 Local validation passes all 58 GVM research/evidence tests, 18 documentation-tool
 tests, public-reference freshness and local links. The existing CI scalar-research
 test discovery includes these seven new tests automatically.
+Follow-on: the [test-only JVM prototype](GVM_SCALAR_TAIL_JVM.md) now measures complete
+comparisons, including conservative setup arithmetic: about 2.54x on the curved fixture,
+with little change on four other fixtures. Its production integration remains pending.
 
 ## Overview
 
