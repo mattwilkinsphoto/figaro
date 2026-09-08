@@ -34,6 +34,10 @@ first for ordinary coupled cases: it was about 39–69x faster on three such fix
 and about 2,626x faster on a heavily curved case. Positive integration recovered the
 two tested tiny-overlap refusals at about 0.25–0.43 ms. Analytic scalar shortcuts are
 cheaper, but that is not an integration speedup. These are bounded workload results.
+Those numbers describe the original implementation. A development-branch
+[audited-totals optimization](GVM_SCALAR_AUDITED_TOTALS.md), with its own CI gate,
+improves positive integration by about 2.9–7.75x on three matched-control fixtures.
+It requires no API changes and does not reverse the Fourier-first recommendation.
 
 ## Quick start in three steps
 

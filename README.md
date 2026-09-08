@@ -60,6 +60,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Positive scalar GVM overlap research](docs/GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md): bounded positive integration for cancellation-sensitive cases; research-only, not an automatic fallback.
 - [Opt-in scalar GVM comparison](docs/GVM_SCALAR_BHATTACHARYYA.md): positive integration for cancellation-sensitive scalar overlaps, analytic shortcuts, estimated-error diagnostics and hard work budgets; integrated on main at CI-verified `21269b97`.
 - [Scalar comparison performance](docs/GVM_SCALAR_PERFORMANCE.md): matched-accuracy timings of both APIs; Fourier first for ordinary coupled cases, positive integration for eligible unresolved overlaps, and explicit refusal-cost accounting.
+- [Audited scalar integration totals](docs/GVM_SCALAR_AUDITED_TOTALS.md): profile-driven 2.9–7.75x positive-integrator improvements on three fixtures, retaining fresh final error checks; development optimization, CI/integration pending.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.

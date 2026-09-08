@@ -1,4 +1,8 @@
-package com.cra.figaro.library.atomic.continuous
+// Frozen full-resummation control from 21269b97 (unchanged through 42d4ec1f).
+// Test-only, excluded from library artifacts. Do not optimize this independent control.
+package com.cra.figaro.test.modernization
+
+import com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution
 
 import java.util.concurrent.CancellationException
 import org.apache.commons.math3.special.Erf
@@ -7,7 +11,7 @@ import scala.collection.mutable
 /** Opt-in positive scalar integration; independent of the Fourier comparison API.
   * All numerical intervals are estimates, not certified bounds. No random sampling is used.
   */
-object GaussVonMisesScalarBhattacharyya {
+private[modernization] object GvmScalarFullSumBaseline {
   /** Estimated exposes a distance; all other outcomes require caller attention. */
   enum Status { case Estimated, BudgetExhausted, NumericallyUnresolved, UnsupportedRange }
   import Status.*
@@ -191,32 +195,9 @@ object GaussVonMisesScalarBhattacharyya {
         }
         finite(total+correction)
       }
-      // Incremental totals guide refinement only. Rebuild from current positive
-      // panels every 64 splits and before ANY published numerical decision.
-      // Thus subtracting a retired panel never supplies the final error estimate.
-      class RunningSum {
-        private var total=0.0
-        private var correction=0.0
-        def reset(value: Double): Unit = { total=value; correction=0.0 }
-        def add(value: Double): Unit = {
-          val updated=total+value
-          correction += (if(math.abs(total) >= math.abs(value)) (total-updated)+value else (value-updated)+total)
-          total=updated
-        }
-        def value: Double = finite(total+correction)
-      }
-      val valueSum=new RunningSum
-      val errorSum=new RunningSum
-      var splitsSinceAudit=64
-      def audit(): Unit = {
-        valueSum.reset(compensated(heap.iterator.map(_.value)))
-        errorSum.reset(compensated(heap.iterator.map(_.error)))
-        splitsSinceAudit=0
-      }
       while (true) {
         interrupted()
-        if(splitsSinceAudit >= 64) audit()
-        val value=valueSum.value; val error=errorSum.value
+        val value=compensated(heap.iterator.map(_.value)); val error=compensated(heap.iterator.map(_.error))
         val rounding=finite(64*math.ulp(1.0)*(evaluations+1)*(1+math.abs(phase.c)+math.abs(phase.l)+math.abs(phase.q))*value)
         val allowance=error+rounding
         val low=math.max(0,value-allowance); val high=math.min(1,value+allowance+tail)
@@ -228,22 +209,12 @@ object GaussVonMisesScalarBhattacharyya {
         val floorDominates=error <= rounding || logAllowance >= tolerance
         val status=if(ok) Estimated else if(floorDominates) NumericallyUnresolved else BudgetExhausted
         val result=Result(status,if(ok) estimate else None,interval,evaluations,radius,tail,error,rounding,preprocessing)
-        if(ok || floorDominates || evaluations+4 > maxEvaluations) {
-          if(splitsSinceAudit == 0) return result
-          // Re-enter the stopping test with fresh full sums, even for budget/precision
-          // refusals. An optimistic incremental estimate cannot publish a distance.
-          audit()
-        } else {
-          val parent=heap.dequeue(); val mid=(parent.left+parent.right)/2
-          if(mid == parent.left || mid == parent.right) return unavailable(NumericallyUnresolved,evaluations,radius,tail)
-          valueSum.add(-parent.value); errorSum.add(-parent.error)
-          for ((left,right,old) <- Vector((parent.left,mid,parent.values.take(3)),(mid,parent.right,parent.values.drop(2)))) {
-            val values=Vector(old(0),integrand(left+(right-left)/4),old(1),integrand(left+3*(right-left)/4),old(2))
-            val child=panel(left,right,values)
-            heap.enqueue(child)
-            valueSum.add(child.value); errorSum.add(child.error)
-          }
-          splitsSinceAudit += 1
+        if(ok || floorDominates || evaluations+4 > maxEvaluations) return result
+        val parent=heap.dequeue(); val mid=(parent.left+parent.right)/2
+        if(mid == parent.left || mid == parent.right) return unavailable(NumericallyUnresolved,evaluations,radius,tail)
+        for ((left,right,old) <- Vector((parent.left,mid,parent.values.take(3)),(mid,parent.right,parent.values.drop(2)))) {
+          val values=Vector(old(0),integrand(left+(right-left)/4),old(1),integrand(left+3*(right-left)/4),old(2))
+          heap.enqueue(panel(left,right,values))
         }
       }
       throw new AssertionError("unreachable")

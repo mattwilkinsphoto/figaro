@@ -117,9 +117,15 @@ This sequence is a proposed priority order, not a calendar estimate.
    timing rounds retained. Fourier is about 39–69x faster on ordinary coupled fixtures
    and 2,626x faster on the high-curvature fixture; positive integration recovers the
    two tiny-overlap refusals at about 0.25–0.43 ms. Analytic shortcuts are treated separately.
-   Thirteen evidence/oracle checks and an untimed Scala gate validate the study; its
-   CI/integration is pending. Next: profile the high-work positive case before making
-   algorithmic refinement/bookkeeping changes. Stronger rounding analysis and
+   Thirteen evidence/oracle checks and an untimed Scala gate validate the study;
+   it is integrated on main through CI-verified `42d4ec1f`.
+   The follow-on [audited-totals optimization](docs/GVM_SCALAR_AUDITED_TOTALS.md) targets
+   the full-panel scans identified by JFR: compensated incremental totals with periodic
+   rebuilds and mandatory final audits. The curved case improves about 7.75x, and two
+   smaller cases about 3x in three fresh JVMs. All diagnostics and work counts match
+   the frozen control on 299 differential comparisons. Optimization CI/integration
+   pending. Next: verify that gate; any further scalar performance work should assess
+   residual integrand/initial-panel costs while retaining the safeguards. Stronger rounding analysis and
    multidimensional alternatives remain separate work; no automatic method switch.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;

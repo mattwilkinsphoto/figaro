@@ -225,12 +225,17 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   oracle grid, preprocessing-error estimates, budgets, interruption and concurrency
   controls, and adds analytic shortcuts, near-limit tests and executable user examples.
   `Estimated` is not a certified bound; no automatic Fourier fallback or multidimensional extension.
-- **Scalar method-selection evidence — locally validated, CI/integration pending:**
+- **Scalar method-selection evidence — integrated on main through CI-verified `42d4ec1f`:**
   The [matched-accuracy study](docs/GVM_SCALAR_PERFORMANCE.md) retains three fresh JVMs,
   eight fixtures and 336 rounds at a 1e-8-nat target, with 13 evidence/oracle checks.
   Fourier is the starting choice for ordinary coupled cases; positive integration
-  recovers the tested eligible tiny-overlap refusals. Next: profile the high-work
-  positive case and assess algorithmic improvements without weakening numerical contracts.
+  recovers the tested eligible tiny-overlap refusals.
+- **Audited scalar totals — locally validated, CI/integration pending:**
+  [Profile-driven bookkeeping improvement](docs/GVM_SCALAR_AUDITED_TOTALS.md) retains
+  mandatory fresh final sums, matches the frozen control on 299 differential comparisons,
+  and improves three fixtures by about 2.9–7.75x across three JVMs. Six evidence/provenance
+  tests protect the 126 timing records and frozen control. Residual integrand and
+  initial-panel work are the next performance candidates, not relaxed error safeguards.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.

@@ -1,0 +1,141 @@
+GVM_AUDIT_ENV pid=29164 java=17.0.4 rounds=7 tolerance=1e-8
+GVM_AUDIT_CHECK case=ordinary identical=true evaluations=712 error=3.852829166817173E-11
+GVM_AUDIT_TIMING case=ordinary method=full round=0 batch=128 nsPerCall=235555.46875
+GVM_AUDIT_TIMING case=ordinary method=audited round=0 batch=256 nsPerCall=84091.796875
+GVM_AUDIT_TIMING case=ordinary method=audited round=1 batch=256 nsPerCall=84184.765625
+GVM_AUDIT_TIMING case=ordinary method=full round=1 batch=128 nsPerCall=233447.65625
+GVM_AUDIT_TIMING case=ordinary method=full round=2 batch=128 nsPerCall=245043.75
+GVM_AUDIT_TIMING case=ordinary method=audited round=2 batch=256 nsPerCall=83921.484375
+GVM_AUDIT_TIMING case=ordinary method=audited round=3 batch=256 nsPerCall=82410.9375
+GVM_AUDIT_TIMING case=ordinary method=full round=3 batch=128 nsPerCall=230300.0
+GVM_AUDIT_TIMING case=ordinary method=full round=4 batch=128 nsPerCall=245930.46875
+GVM_AUDIT_TIMING case=ordinary method=audited round=4 batch=256 nsPerCall=80862.890625
+GVM_AUDIT_TIMING case=ordinary method=audited round=5 batch=256 nsPerCall=80785.9375
+GVM_AUDIT_TIMING case=ordinary method=full round=5 batch=128 nsPerCall=227095.3125
+GVM_AUDIT_TIMING case=ordinary method=full round=6 batch=128 nsPerCall=251359.375
+GVM_AUDIT_TIMING case=ordinary method=audited round=6 batch=256 nsPerCall=93987.109375
+GVM_AUDIT_CHECK case=opposed identical=true evaluations=764 error=2.9810109936079243E-10
+GVM_AUDIT_TIMING case=opposed method=full round=0 batch=128 nsPerCall=235635.9375
+GVM_AUDIT_TIMING case=opposed method=audited round=0 batch=512 nsPerCall=80082.6171875
+GVM_AUDIT_TIMING case=opposed method=audited round=1 batch=512 nsPerCall=76588.0859375
+GVM_AUDIT_TIMING case=opposed method=full round=1 batch=128 nsPerCall=239097.65625
+GVM_AUDIT_TIMING case=opposed method=full round=2 batch=128 nsPerCall=248964.84375
+GVM_AUDIT_TIMING case=opposed method=audited round=2 batch=512 nsPerCall=77720.3125
+GVM_AUDIT_TIMING case=opposed method=audited round=3 batch=512 nsPerCall=75718.75
+GVM_AUDIT_TIMING case=opposed method=full round=3 batch=128 nsPerCall=244535.15625
+GVM_AUDIT_TIMING case=opposed method=full round=4 batch=128 nsPerCall=235454.6875
+GVM_AUDIT_TIMING case=opposed method=audited round=4 batch=512 nsPerCall=75504.8828125
+GVM_AUDIT_TIMING case=opposed method=audited round=5 batch=512 nsPerCall=77923.828125
+GVM_AUDIT_TIMING case=opposed method=full round=5 batch=128 nsPerCall=236972.65625
+GVM_AUDIT_TIMING case=opposed method=full round=6 batch=128 nsPerCall=234439.0625
+GVM_AUDIT_TIMING case=opposed method=audited round=6 batch=512 nsPerCall=77847.8515625
+GVM_AUDIT_CHECK case=curved identical=true evaluations=25098 error=7.69628805130651E-11
+GVM_AUDIT_TIMING case=curved method=full round=0 batch=1 nsPerCall=2.54947E7
+GVM_AUDIT_TIMING case=curved method=audited round=0 batch=8 nsPerCall=3206412.5
+GVM_AUDIT_TIMING case=curved method=audited round=1 batch=8 nsPerCall=3207562.5
+GVM_AUDIT_TIMING case=curved method=full round=1 batch=1 nsPerCall=2.65999E7
+GVM_AUDIT_TIMING case=curved method=full round=2 batch=1 nsPerCall=2.61787E7
+GVM_AUDIT_TIMING case=curved method=audited round=2 batch=8 nsPerCall=3183725.0
+GVM_AUDIT_TIMING case=curved method=audited round=3 batch=8 nsPerCall=3078625.0
+GVM_AUDIT_TIMING case=curved method=full round=3 batch=1 nsPerCall=2.47914E7
+GVM_AUDIT_TIMING case=curved method=full round=4 batch=1 nsPerCall=2.45638E7
+GVM_AUDIT_TIMING case=curved method=audited round=4 batch=8 nsPerCall=3725225.0
+GVM_AUDIT_TIMING case=curved method=audited round=5 batch=8 nsPerCall=3318025.0
+GVM_AUDIT_TIMING case=curved method=full round=5 batch=1 nsPerCall=2.47813E7
+GVM_AUDIT_TIMING case=curved method=full round=6 batch=1 nsPerCall=2.46542E7
+GVM_AUDIT_TIMING case=curved method=audited round=6 batch=8 nsPerCall=3141112.5
+GVM_AUDIT_COMPLETE cases=3 methods=6 rounds=7 sinkFinite=true
+GVM_AUDIT_ENV pid=48876 java=17.0.4 rounds=7 tolerance=1e-8
+GVM_AUDIT_CHECK case=ordinary identical=true evaluations=712 error=3.852829166817173E-11
+GVM_AUDIT_TIMING case=ordinary method=full round=0 batch=128 nsPerCall=223038.28125
+GVM_AUDIT_TIMING case=ordinary method=audited round=0 batch=256 nsPerCall=80526.953125
+GVM_AUDIT_TIMING case=ordinary method=audited round=1 batch=256 nsPerCall=80483.984375
+GVM_AUDIT_TIMING case=ordinary method=full round=1 batch=128 nsPerCall=217702.34375
+GVM_AUDIT_TIMING case=ordinary method=full round=2 batch=128 nsPerCall=234017.1875
+GVM_AUDIT_TIMING case=ordinary method=audited round=2 batch=256 nsPerCall=80087.890625
+GVM_AUDIT_TIMING case=ordinary method=audited round=3 batch=256 nsPerCall=79863.28125
+GVM_AUDIT_TIMING case=ordinary method=full round=3 batch=128 nsPerCall=217317.96875
+GVM_AUDIT_TIMING case=ordinary method=full round=4 batch=128 nsPerCall=231464.0625
+GVM_AUDIT_TIMING case=ordinary method=audited round=4 batch=256 nsPerCall=80107.03125
+GVM_AUDIT_TIMING case=ordinary method=audited round=5 batch=256 nsPerCall=79332.8125
+GVM_AUDIT_TIMING case=ordinary method=full round=5 batch=128 nsPerCall=214333.59375
+GVM_AUDIT_TIMING case=ordinary method=full round=6 batch=128 nsPerCall=230878.125
+GVM_AUDIT_TIMING case=ordinary method=audited round=6 batch=256 nsPerCall=79759.765625
+GVM_AUDIT_CHECK case=opposed identical=true evaluations=764 error=2.9810109936079243E-10
+GVM_AUDIT_TIMING case=opposed method=full round=0 batch=128 nsPerCall=221978.125
+GVM_AUDIT_TIMING case=opposed method=audited round=0 batch=512 nsPerCall=74660.3515625
+GVM_AUDIT_TIMING case=opposed method=audited round=1 batch=512 nsPerCall=76094.7265625
+GVM_AUDIT_TIMING case=opposed method=full round=1 batch=128 nsPerCall=222703.90625
+GVM_AUDIT_TIMING case=opposed method=full round=2 batch=128 nsPerCall=222261.71875
+GVM_AUDIT_TIMING case=opposed method=audited round=2 batch=512 nsPerCall=75891.796875
+GVM_AUDIT_TIMING case=opposed method=audited round=3 batch=512 nsPerCall=74069.921875
+GVM_AUDIT_TIMING case=opposed method=full round=3 batch=128 nsPerCall=222936.71875
+GVM_AUDIT_TIMING case=opposed method=full round=4 batch=128 nsPerCall=229621.09375
+GVM_AUDIT_TIMING case=opposed method=audited round=4 batch=512 nsPerCall=76490.8203125
+GVM_AUDIT_TIMING case=opposed method=audited round=5 batch=512 nsPerCall=74475.0
+GVM_AUDIT_TIMING case=opposed method=full round=5 batch=128 nsPerCall=231266.40625
+GVM_AUDIT_TIMING case=opposed method=full round=6 batch=128 nsPerCall=218864.0625
+GVM_AUDIT_TIMING case=opposed method=audited round=6 batch=512 nsPerCall=74146.09375
+GVM_AUDIT_CHECK case=curved identical=true evaluations=25098 error=7.69628805130651E-11
+GVM_AUDIT_TIMING case=curved method=full round=0 batch=1 nsPerCall=2.52212E7
+GVM_AUDIT_TIMING case=curved method=audited round=0 batch=8 nsPerCall=3215862.5
+GVM_AUDIT_TIMING case=curved method=audited round=1 batch=8 nsPerCall=3199075.0
+GVM_AUDIT_TIMING case=curved method=full round=1 batch=1 nsPerCall=2.56425E7
+GVM_AUDIT_TIMING case=curved method=full round=2 batch=1 nsPerCall=2.99685E7
+GVM_AUDIT_TIMING case=curved method=audited round=2 batch=8 nsPerCall=3680037.5
+GVM_AUDIT_TIMING case=curved method=audited round=3 batch=8 nsPerCall=3174537.5
+GVM_AUDIT_TIMING case=curved method=full round=3 batch=1 nsPerCall=2.48607E7
+GVM_AUDIT_TIMING case=curved method=full round=4 batch=1 nsPerCall=2.46742E7
+GVM_AUDIT_TIMING case=curved method=audited round=4 batch=8 nsPerCall=3157012.5
+GVM_AUDIT_TIMING case=curved method=audited round=5 batch=8 nsPerCall=3509575.0
+GVM_AUDIT_TIMING case=curved method=full round=5 batch=1 nsPerCall=2.48166E7
+GVM_AUDIT_TIMING case=curved method=full round=6 batch=1 nsPerCall=2.43155E7
+GVM_AUDIT_TIMING case=curved method=audited round=6 batch=8 nsPerCall=3152625.0
+GVM_AUDIT_COMPLETE cases=3 methods=6 rounds=7 sinkFinite=true
+GVM_AUDIT_ENV pid=26088 java=17.0.4 rounds=7 tolerance=1e-8
+GVM_AUDIT_CHECK case=ordinary identical=true evaluations=712 error=3.852829166817173E-11
+GVM_AUDIT_TIMING case=ordinary method=full round=0 batch=128 nsPerCall=251114.84375
+GVM_AUDIT_TIMING case=ordinary method=audited round=0 batch=256 nsPerCall=82078.515625
+GVM_AUDIT_TIMING case=ordinary method=audited round=1 batch=256 nsPerCall=80312.109375
+GVM_AUDIT_TIMING case=ordinary method=full round=1 batch=128 nsPerCall=230023.4375
+GVM_AUDIT_TIMING case=ordinary method=full round=2 batch=128 nsPerCall=243600.0
+GVM_AUDIT_TIMING case=ordinary method=audited round=2 batch=256 nsPerCall=83021.09375
+GVM_AUDIT_TIMING case=ordinary method=audited round=3 batch=256 nsPerCall=80951.171875
+GVM_AUDIT_TIMING case=ordinary method=full round=3 batch=128 nsPerCall=228803.90625
+GVM_AUDIT_TIMING case=ordinary method=full round=4 batch=128 nsPerCall=274677.34375
+GVM_AUDIT_TIMING case=ordinary method=audited round=4 batch=256 nsPerCall=84387.5
+GVM_AUDIT_TIMING case=ordinary method=audited round=5 batch=256 nsPerCall=78961.71875
+GVM_AUDIT_TIMING case=ordinary method=full round=5 batch=128 nsPerCall=230133.59375
+GVM_AUDIT_TIMING case=ordinary method=full round=6 batch=128 nsPerCall=249779.6875
+GVM_AUDIT_TIMING case=ordinary method=audited round=6 batch=256 nsPerCall=79796.484375
+GVM_AUDIT_CHECK case=opposed identical=true evaluations=764 error=2.9810109936079243E-10
+GVM_AUDIT_TIMING case=opposed method=full round=0 batch=128 nsPerCall=236173.4375
+GVM_AUDIT_TIMING case=opposed method=audited round=0 batch=512 nsPerCall=75410.15625
+GVM_AUDIT_TIMING case=opposed method=audited round=1 batch=512 nsPerCall=76725.390625
+GVM_AUDIT_TIMING case=opposed method=full round=1 batch=128 nsPerCall=235701.5625
+GVM_AUDIT_TIMING case=opposed method=full round=2 batch=128 nsPerCall=236051.5625
+GVM_AUDIT_TIMING case=opposed method=audited round=2 batch=512 nsPerCall=77419.7265625
+GVM_AUDIT_TIMING case=opposed method=audited round=3 batch=512 nsPerCall=79252.5390625
+GVM_AUDIT_TIMING case=opposed method=full round=3 batch=128 nsPerCall=235701.5625
+GVM_AUDIT_TIMING case=opposed method=full round=4 batch=128 nsPerCall=249053.125
+GVM_AUDIT_TIMING case=opposed method=audited round=4 batch=512 nsPerCall=74975.9765625
+GVM_AUDIT_TIMING case=opposed method=audited round=5 batch=512 nsPerCall=76639.2578125
+GVM_AUDIT_TIMING case=opposed method=full round=5 batch=128 nsPerCall=237723.4375
+GVM_AUDIT_TIMING case=opposed method=full round=6 batch=128 nsPerCall=236592.96875
+GVM_AUDIT_TIMING case=opposed method=audited round=6 batch=512 nsPerCall=78586.71875
+GVM_AUDIT_CHECK case=curved identical=true evaluations=25098 error=7.69628805130651E-11
+GVM_AUDIT_TIMING case=curved method=full round=0 batch=1 nsPerCall=2.57384E7
+GVM_AUDIT_TIMING case=curved method=audited round=0 batch=8 nsPerCall=3957575.0
+GVM_AUDIT_TIMING case=curved method=audited round=1 batch=8 nsPerCall=3895950.0
+GVM_AUDIT_TIMING case=curved method=full round=1 batch=1 nsPerCall=2.67611E7
+GVM_AUDIT_TIMING case=curved method=full round=2 batch=1 nsPerCall=2.71774E7
+GVM_AUDIT_TIMING case=curved method=audited round=2 batch=8 nsPerCall=4750787.5
+GVM_AUDIT_TIMING case=curved method=audited round=3 batch=8 nsPerCall=4283012.5
+GVM_AUDIT_TIMING case=curved method=full round=3 batch=1 nsPerCall=2.53345E7
+GVM_AUDIT_TIMING case=curved method=full round=4 batch=1 nsPerCall=2.51803E7
+GVM_AUDIT_TIMING case=curved method=audited round=4 batch=8 nsPerCall=4535825.0
+GVM_AUDIT_TIMING case=curved method=audited round=5 batch=8 nsPerCall=4336375.0
+GVM_AUDIT_TIMING case=curved method=full round=5 batch=1 nsPerCall=2.62441E7
+GVM_AUDIT_TIMING case=curved method=full round=6 batch=1 nsPerCall=2.65932E7
+GVM_AUDIT_TIMING case=curved method=audited round=6 batch=8 nsPerCall=4217737.5
+GVM_AUDIT_COMPLETE cases=3 methods=6 rounds=7 sinkFinite=true

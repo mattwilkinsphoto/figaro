@@ -1,13 +1,17 @@
 # Scalar GVM comparison: accuracy, cost and method selection
 
-Status: locally validated study on the GVM development branch; its CI/integration
-gate is pending. The measured public library is commit `21269b97`, now integrated
+Status: integrated on main through `42d4ec1f` after
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34198268203).
+The measured public library is commit `21269b97`, now integrated
 on main after [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34196804703). This milestone
 adds measurements, evidence checks and guidance, not a new integrator, automatic
 method selection, wider numerical limits or replacement release bundle.
 Local acceptance passes all 309 modernization tests across 25 suites, the untimed
 Scala study, 45 GVM research/evidence tests (including 13 new study checks), 18
 documentation-tool tests, generated-reference freshness and local-link checks.
+These timings describe the **pre-optimization baseline**. The follow-on
+[audited-totals study](GVM_SCALAR_AUDITED_TOTALS.md) reduces positive-integrator cost
+without changing the checked numerical outputs. The original evidence remains intact.
 
 ## Overview: what users should do
 
