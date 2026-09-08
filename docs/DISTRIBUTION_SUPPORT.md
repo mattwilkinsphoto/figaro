@@ -2,7 +2,7 @@
 
 ## What exists now
 
-Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-08 for the common-family milestone.
+Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-08 for the common-family and construction/GMM milestones.
 This is an API inventory, not new numerical certification of every existing distribution.
 The [roadmap](../ROADMAP.md) defines delivery gates; the [wishlist](../WISHLIST.md)
 collects broad families and their later flavors.

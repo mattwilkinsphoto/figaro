@@ -19,6 +19,9 @@ It is not a product of evidence densities, a fusion operation, or a Gaussian obt
 by averaging means/covariances. Even a mixture of independent-coordinate Gaussians
 can have dependent coordinates through its shared component label.
 
+Do not confuse a GMM with [Gauss-von Mises (GVM)](GAUSS_VON_MISES.md): a GMM here is
+a mixture on real-vector coordinates; GVM is a separate joint linear-angular family.
+
 ## Quick start: three steps
 
 1. Build/use the modern Scala 3 library as described in the [user guide](USER_GUIDE.md).
@@ -262,7 +265,7 @@ legacy public Apache `distribution` member remains for source compatibility; dir
 calls through it bypass the new kernel/scoped-RNG contract and are not recommended.
 Scalar `Normal`'s variance convention and proposal behavior are unchanged.
 
-The branch's acceptance suite is `DistributionConstructionsTest`. Independent 70-digit
+The milestone's acceptance suite is `DistributionConstructionsTest`. Independent 70-digit
 inverse/determinant controls, direct scalar integrals, normalized count checks and
 between-mode moments live in `tools/test_common_constructions_reference.py`; this
 uses research-only mpmath and adds no runtime dependency. The runnable example and

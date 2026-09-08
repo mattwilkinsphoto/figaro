@@ -2,8 +2,11 @@
 
 ## Scope and status
 
-Implementation is on `modernize/distribution-constructions`, based on main `465cbfa5`.
-Acceptance is in progress; this page records completed evidence, not a future CI claim.
+The initial D4 milestone is complete and integrated on main from
+`modernize/distribution-constructions`, based on the previous main `465cbfa5`.
+Final production source **`79615111153e2f6e9e9b203cd2dce8c757971439`** passed
+[Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34256474108), including
+the final narrow-interval normalizer safeguard. The integration closeout changes documentation only.
 No new stable release, immutable bundle, Maven Central publication or default sampler
 change is included. The [user guide](DISTRIBUTION_CONSTRUCTIONS.md) defines the API limits.
 
@@ -47,9 +50,21 @@ not implemented. No Gaussian approximation is substituted for a mixture metric.
   independent consumer; all four artifact classifiers passed content/legal checks.
 - Public reference freshness verified: **11,895 public-method entries / 43 files**;
   documentation tests **18/18** and **13,058 local links / 118 Markdown files** passed.
-  The preceding candidate `1abd5f33` passed [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34254817073),
-  including clean reproducibility and its published consumer. The final narrow-interval
-  normalizer safeguard is awaiting its own source CI; local evidence is not a substitute.
+  Final source [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34256474108)
+  passed both jobs, including clean byte-for-byte reproducibility, source/API classifiers,
+  legal contents, an independently published consumer and SBOM generation.
+
+The [verified source JVM artifacts](https://github.com/mattwilkinsphoto/figaro/actions/runs/34256474108/artifacts/10068604925)
+contain the CI-built library/classifiers. CI downloads may require GitHub sign-in and
+are retention-limited, not an immutable stable release. Pin the source commit and
+publish into a controlled artifact repository for long-term reproducibility.
+
+The successful source run retained a **non-blocking legacy timing advisory**:
+`SelectableSetTest` search ratio 2.6253 exceeded 2.4 and enumeration ratio 1.7316
+exceeded 1.1. These checks were already `continue-on-error`; no tolerances, exclusions
+or collection implementation were changed here. The resulting error annotation does
+not mean a required job failed, and a successful workflow does not imply those timing
+checks passed. The prior `1abd5f33` run also had an enumeration timing advisory.
 
 ## Exploratory legacy statistical suite
 
