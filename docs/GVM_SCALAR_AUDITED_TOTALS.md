@@ -1,6 +1,7 @@
 # Faster scalar GVM integration with audited totals
 
-Status: development implementation and local evidence; CI/integration pending.
+Status: integrated on main at `213aa587` after
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34204059402).
 The preceding performance baseline is integrated on main through `42d4ec1f` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34198268203).
 This change affects the opt-in positive scalar comparison only. Fourier behavior,
@@ -144,6 +145,9 @@ invalid timings, JVM reuse and frozen-reference provenance.
   worst-case quadratic scan cost. A tree of positive partial sums would be a separate
   design requiring its own numerical controls, not an automatic next replacement.
 - The residual profile points toward integrand evaluation and initial panel work.
+  The [tail-radius assessment](GVM_SCALAR_TAIL_ASSESSMENT.md) finds a promising
+  reduction in initial panels using a stronger affinity lower bound; it remains
+  research-only pending conservative JVM arithmetic and end-to-end timing.
   Any further optimization should preserve small-overlap accuracy and aliasing guards;
   do not loosen tolerance or erase coupling to obtain a faster answer.
 - No wider dimensions/concentrations, automatic Fourier fallback, new threading mode,

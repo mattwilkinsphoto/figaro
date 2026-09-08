@@ -123,9 +123,14 @@ This sequence is a proposed priority order, not a calendar estimate.
    the full-panel scans identified by JFR: compensated incremental totals with periodic
    rebuilds and mandatory final audits. The curved case improves about 7.75x, and two
    smaller cases about 3x in three fresh JVMs. All diagnostics and work counts match
-   the frozen control on 299 differential comparisons. Optimization CI/integration
-   pending. Next: verify that gate; any further scalar performance work should assess
-   residual integrand/initial-panel costs while retaining the safeguards. Stronger rounding analysis and
+   the frozen control on 299 differential comparisons. Integrated on main at `213aa587`
+   after [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34204059402).
+   The [tail-radius assessment](docs/GVM_SCALAR_TAIL_ASSESSMENT.md) now tests a stronger
+   affinity lower bound across 84 scalar cases: 49 smaller radii, with initial panels
+   reduced from 4,650 to 1,494 on the curved fixture. This is research work, not measured
+   throughput. Next: a test-only JVM candidate with conservative bound arithmetic,
+   bounded setup/cancellation, unchanged final tail checks and setup-inclusive timings.
+   Stronger rounding analysis and
    multidimensional alternatives remain separate work; no automatic method switch.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;

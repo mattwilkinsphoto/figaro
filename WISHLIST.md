@@ -230,12 +230,19 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   eight fixtures and 336 rounds at a 1e-8-nat target, with 13 evidence/oracle checks.
   Fourier is the starting choice for ordinary coupled cases; positive integration
   recovers the tested eligible tiny-overlap refusals.
-- **Audited scalar totals — locally validated, CI/integration pending:**
+- **Audited scalar totals — integrated on main at CI-verified `213aa587`:**
   [Profile-driven bookkeeping improvement](docs/GVM_SCALAR_AUDITED_TOTALS.md) retains
   mandatory fresh final sums, matches the frozen control on 299 differential comparisons,
   and improves three fixtures by about 2.9–7.75x across three JVMs. Six evidence/provenance
   tests protect the 126 timing records and frozen control. Residual integrand and
   initial-panel work are the next performance candidates, not relaxed error safeguards.
+- **Scalar tail-radius selection — research-only assessment complete:**
+  [Positive cell-minimum bounds](docs/GVM_SCALAR_TAIL_ASSESSMENT.md) reduce the candidate
+  radius in 49 of 84 fixtures; the curved fixture's initial partition falls from 4,650
+  to 1,494 panels while the difficult tiny-overlap case retains its wide radius.
+  Seven tests include oracle validation and evidence freshness. Next: a test-only JVM
+  candidate accounting for bound/preprocessing uncertainty, bounded setup and cancellation,
+  followed by full-call timing. No production radius change or measured speedup yet.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.
