@@ -40,7 +40,9 @@ not implemented. No Gaussian approximation is substituted for a mixture metric.
   Scaladoc warnings remain. The independent published-JAR consumer passed all new
   construction/GMM/Gaussian-metric checks and its existing inference/lifecycle checks.
   Verified local thin-JAR SHA-256:
-  `7248adee2abc3f241acf503e2f849e708eef51d001c83d96569c29422d0a2b79`.
+  `9f1807d527e657b228aae63dfa15625a29240483826e7eaba0034b047fede05e`.
+  The final candidate includes direct base-draw affine/exp sampling; all 362
+  modernization tests, the runnable example and the published consumer were rerun.
 - Public reference freshness verified: **11,895 public-method entries / 43 files**;
   documentation tests **18/18** and **13,058 local links / 118 Markdown files** passed.
   Linux CI is pending; local evidence is not a substitute for that gate.

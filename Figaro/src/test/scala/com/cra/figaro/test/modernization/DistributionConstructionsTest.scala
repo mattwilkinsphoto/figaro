@@ -37,6 +37,9 @@ class DistributionConstructionsTest extends AnyWordSpec with Matchers {
       e.logDensity(0) shouldBe Double.NegativeInfinity
       intercept[IllegalArgumentException](AffineDistribution(normal,0,0))
       intercept[ArithmeticException](ExpDistribution(GaussianDistribution(1000,1)).quantile(.5))
+      a.sample(new scala.util.Random(42)) shouldBe (3-2*normal.sample(new scala.util.Random(42)))
+      e.sample(new scala.util.Random(42)) shouldBe math.exp(GaussianDistribution(.3,.8).sample(new scala.util.Random(42)))
+      intercept[ArithmeticException](ExpDistribution(GaussianDistribution(1000,1)).sample(new scala.util.Random(42)))
     }
     "normalize truncation using direct tails and refuse unresolved intervals" in {
       val t=TruncatedDistribution(normal,-1,2)

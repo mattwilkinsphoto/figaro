@@ -101,6 +101,30 @@ Invocation template:
 receiver.quantile(p)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#sample-fffffec0)
+
+```scala
+override def sample(rng: Random): Double
+```
+
+Transform a base draw directly, without repeatedly evaluating a CDF.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Transform a base draw directly, without repeatedly evaluating a CDF. Value parameters rng non-null caller-owned RNG Attributes Returns finite transformed draw; unrepresentable values throw, never retry selectively Example AffineDistribution(GaussianDistribution(0,1),3,-2).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.support ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#support-0)
@@ -243,30 +267,6 @@ Invocation template:
 
 ```scala
 receiver.productIterator
-```
-
-## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.sample ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#sample-fffffec0)
-
-```scala
-def sample(rng: Random): Double
-```
-
-Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
-
-Type parameters: none.
-
-Parameters, list 1: `` rng: Random ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution
-
-Invocation template:
-
-```scala
-receiver.sample(rng)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.MAPValue ``
@@ -24567,6 +24567,30 @@ Invocation template:
 receiver.quantile(p)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#sample-fffffec0)
+
+```scala
+override def sample(rng: Random): Double
+```
+
+Transform a base draw directly; no inverse-CDF search or representability retry.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Transform a base draw directly; no inverse-CDF search or representability retry. Value parameters rng non-null caller-owned RNG Attributes Returns finite positive draw Example ExpDistribution(GaussianDistribution(0,1)).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.support ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#support-0)
@@ -24709,30 +24733,6 @@ Invocation template:
 
 ```scala
 receiver.productIterator
-```
-
-## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.sample ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#sample-fffffec0)
-
-```scala
-def sample(rng: Random): Double
-```
-
-Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
-
-Type parameters: none.
-
-Parameters, list 1: `` rng: Random ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution
-
-Invocation template:
-
-```scala
-receiver.sample(rng)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.Exponential.apply ``

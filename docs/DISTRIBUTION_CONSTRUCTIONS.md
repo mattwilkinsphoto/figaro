@@ -84,7 +84,7 @@ The count wrapper implements `CountDistribution` and works with `CountElement`.
 | `quantile(p)` | Finite probability [0,1] | Inverse CDF; endpoints give support limits. Infinite-support count `p=1` and unrepresentable scalar interior quantiles throw. `bounded.quantile(.95)` |
 | `support` | None | Scalar `(infimum,supremum)` or count `(minimum,Option[maximum])`; a mixture's scalar pair is a bounding interval and can contain gaps |
 | `mean` / `variance` | None | Scalar `Option[Double]`, count `Double`; scalar `None` means undefined **or not implemented**. Generic exp/truncated moments are not implemented; mixture variance includes between-mode variation |
-| `sample(rng)` | Non-null caller-owned `scala.util.Random` | One supported draw; `model.sample(new scala.util.Random(42))`. Mixtures draw a component and then its value rather than invert the mixture CDF |
+| `sample(rng)` | Non-null caller-owned `scala.util.Random` | One supported draw; `model.sample(new scala.util.Random(42))`. Affine/exp laws transform base draws directly; mixtures draw a component then its value; neither path numerically inverts a mixture/transformed CDF |
 | `retainedProbability` | Truncated law only; no arguments | Base probability of the retained interval; `bounded.retainedProbability` is about 6.22e-16 for a standard Gaussian on [8,9] |
 | `responsibilities(x)` | Scalar-mixture observation with finite log density | `Vector[Double]` membership probabilities in component order, including zero entries for zero weights; `scalarMixture.responsibilities(2)` |
 

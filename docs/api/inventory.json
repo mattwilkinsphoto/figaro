@@ -135996,6 +135996,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.AffineDistribution",
+      "name": "sample",
+      "anchor": "sample-fffffec0",
+      "signature": "override def sample(rng: Random): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Transform a base draw directly, without repeatedly evaluating a CDF.",
+      "contract": "Transform a base draw directly, without repeatedly evaluating a CDF. Value parameters rng non-null caller-owned RNG Attributes Returns finite transformed draw; unrepresentable values throw, never retry selectively Example AffineDistribution(GaussianDistribution(0,1),3,-2).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AffineDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AffineDistribution",
       "name": "support",
       "anchor": "support-0",
       "signature": "def support: (Double, Double)",
@@ -136089,27 +136110,6 @@
       "summary": "An iterator over all the elements of this product.",
       "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
       "example": "receiver.productIterator",
-      "object": false,
-      "page": "com/cra/figaro/library/atomic/continuous/AffineDistribution.html"
-    },
-    {
-      "owner": "com.cra.figaro.library.atomic.continuous.AffineDistribution",
-      "name": "sample",
-      "anchor": "sample-fffffec0",
-      "signature": "def sample(rng: Random): Double",
-      "type_parameters": [],
-      "parameter_lists": [
-        {
-          "contextual": false,
-          "parameters": [
-            "rng: Random"
-          ]
-        }
-      ],
-      "returns": "Double",
-      "summary": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.",
-      "contract": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution",
-      "example": "receiver.sample(rng)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AffineDistribution.html"
     },
@@ -155745,6 +155745,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.ExpDistribution",
+      "name": "sample",
+      "anchor": "sample-fffffec0",
+      "signature": "override def sample(rng: Random): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Transform a base draw directly; no inverse-CDF search or representability retry.",
+      "contract": "Transform a base draw directly; no inverse-CDF search or representability retry. Value parameters rng non-null caller-owned RNG Attributes Returns finite positive draw Example ExpDistribution(GaussianDistribution(0,1)).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/ExpDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.ExpDistribution",
       "name": "support",
       "anchor": "support-0",
       "signature": "def support: (Double, Double)",
@@ -155838,27 +155859,6 @@
       "summary": "An iterator over all the elements of this product.",
       "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
       "example": "receiver.productIterator",
-      "object": false,
-      "page": "com/cra/figaro/library/atomic/continuous/ExpDistribution.html"
-    },
-    {
-      "owner": "com.cra.figaro.library.atomic.continuous.ExpDistribution",
-      "name": "sample",
-      "anchor": "sample-fffffec0",
-      "signature": "def sample(rng: Random): Double",
-      "type_parameters": [],
-      "parameter_lists": [
-        {
-          "contextual": false,
-          "parameters": [
-            "rng: Random"
-          ]
-        }
-      ],
-      "returns": "Double",
-      "summary": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.",
-      "contract": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution",
-      "example": "receiver.sample(rng)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/ExpDistribution.html"
     },

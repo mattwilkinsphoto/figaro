@@ -25,6 +25,16 @@ final case class AffineDistribution(base: ScalarDistribution, offset: Double, mu
   }
   def mean: Option[Double] = base.mean.map(x => offset+multiplier*x)
   def variance: Option[Double] = base.variance.map(x => multiplier*multiplier*x)
+  /** Transform a base draw directly, without repeatedly evaluating a CDF.
+    * @param rng non-null caller-owned RNG
+    * @return finite transformed draw; unrepresentable values throw, never retry selectively
+    * @example `AffineDistribution(GaussianDistribution(0,1),3,-2).sample(new scala.util.Random(42))`
+    */
+  override def sample(rng: scala.util.Random): Double = {
+    val x=offset+multiplier*base.sample(rng)
+    if(!x.isFinite || !logDensity(x).isFinite) throw new ArithmeticException("affine sample outside finite-density numeric support")
+    x
+  }
 }
 
 /** Y = exp(X), with the inverse-Jacobian -log(y) included in its log density.
@@ -44,6 +54,16 @@ final case class ExpDistribution(base: ScalarDistribution) extends ScalarDistrib
   /** No generic moment-generating function is assumed; None also means not implemented. */
   def mean: Option[Double] = None
   def variance: Option[Double] = None
+  /** Transform a base draw directly; no inverse-CDF search or representability retry.
+    * @param rng non-null caller-owned RNG
+    * @return finite positive draw
+    * @example `ExpDistribution(GaussianDistribution(0,1)).sample(new scala.util.Random(42))`
+    */
+  override def sample(rng: scala.util.Random): Double = {
+    val x=math.exp(base.sample(rng))
+    if(!x.isFinite || x == 0 || !logDensity(x).isFinite) throw new ArithmeticException("exponential sample outside finite-density numeric support")
+    x
+  }
 }
 
 /** Conditional scalar law on [lower,upper], not censoring or clipping.
