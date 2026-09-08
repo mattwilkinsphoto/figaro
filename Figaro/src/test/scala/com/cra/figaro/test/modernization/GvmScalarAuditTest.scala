@@ -9,7 +9,7 @@ class GvmScalarAuditTest extends AnyWordSpec with Matchers {
     GaussVonMisesDistribution(Vector(mu),Vector(Vector(sd*sd)),a,Vector(b),Vector(Vector(g)),k)
   private def identical(p: GaussVonMisesDistribution,q: GaussVonMisesDistribution,t: Double=1e-8,b: Int=50000): Unit = {
     val old=GvmScalarFullSumBaseline.compare(p,q,t,b)
-    val current=GaussVonMisesScalarBhattacharyya.compare(p,q,t,b)
+    val current=GvmScalarAuditedBaseline.compare(p,q,t,b)
     // Status enum types differ; all remaining diagnostic fields compare directly.
     current.status.toString shouldBe old.status.toString
     current.productIterator.drop(1).toVector shouldBe old.productIterator.drop(1).toVector

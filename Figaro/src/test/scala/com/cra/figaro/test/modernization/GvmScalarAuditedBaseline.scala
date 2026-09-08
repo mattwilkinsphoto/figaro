@@ -1,5 +1,4 @@
-// Test-only copy of the audited scalar integrator at 213aa587.
-// Only package/object visibility and the marked radius-selection block differ.
+// Frozen audited scalar baseline from 213aa587, retained only for differential/performance controls.
 package com.cra.figaro.test.modernization
 
 import com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution
@@ -11,7 +10,7 @@ import scala.collection.mutable
 /** Opt-in positive scalar integration; independent of the Fourier comparison API.
   * All numerical intervals are estimates, not certified bounds. No random sampling is used.
   */
-private[modernization] object GvmScalarTailCandidate {
+private[modernization] object GvmScalarAuditedBaseline {
   /** Estimated exposes a distance; all other outcomes require caller attention. */
   enum Status { case Estimated, BudgetExhausted, NumericallyUnresolved, UnsupportedRange }
   import Status.*
@@ -133,21 +132,10 @@ private[modernization] object GvmScalarTailCandidate {
         finite(cp._4+cq._4),finite(cp._5+cq._5),finite(cp._6+cq._6),contrast)
       if (Vector(phase.c,phase.l,phase.q).exists(x => math.abs(x) > 1e4) || gaussian > 1e4)
         return unavailable(UnsupportedRange)
-      var minimum=math.exp(logI0(math.abs(a-b))-logDen)
+      val minimum=math.exp(logI0(math.abs(a-b))-logDen)
       radius=4
       def gaussianTail = Erf.erfc(radius/math.sqrt(2))
       while (gaussianTail > tolerance*minimum/16 && radius < 16) { interrupted(); radius += 1 }
-      // BEGIN TEST-ONLY CELL-BOUND CANDIDATE
-      // Skip cheap/narrow domains and near-constant phases. The prepass has a
-      // separate fixed cap: maxEvaluations still counts integrand calls only.
-      if(radius >= 8 && math.abs(phase.l)*radius+math.abs(phase.q)*radius*radius > 4) {
-        val cellLower=GvmScalarCellBound.lower(phase.c,phase.l,phase.q,p.kappa,q.kappa,
-          () => { interrupted(); false })
-        minimum=math.max(minimum,cellLower)
-        radius=4
-        while (gaussianTail > tolerance*minimum/16 && radius < 16) { interrupted(); radius += 1 }
-      }
-      // END TEST-ONLY CELL-BOUND CANDIDATE
       tail=gaussianTail
       if (tail > tolerance*minimum/16) return unavailable(NumericallyUnresolved,0,radius,tail)
       // Heuristic operand-sensitive phase allowance over the entire truncated domain.

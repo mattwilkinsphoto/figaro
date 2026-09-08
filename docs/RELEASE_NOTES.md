@@ -12,6 +12,12 @@ cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
 
+- Development-branch [scalar GVM bounded-tail selection](GVM_SCALAR_TAIL_PRODUCTION.md)
+  reduces costly curved positive comparisons by about 2.53x in the paired study, with
+  unchanged API signatures and retained tail/error checks. Other fixtures change little.
+  Setup has a documented fixed cap outside the integrand budget. CI/main integration
+  is pending; existing immutable bundles are not replaced.
+
 - Java/Scala/build migration and retirement of deprecated APIs; native Scala 3 dependencies,
   Scala `LazyList`, direct `Creatable` invocation, and a JDK-based anytime worker replace
   the former Scala 2/Akka assumptions. See [migration](MIGRATION.md).

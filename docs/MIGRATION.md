@@ -1,5 +1,19 @@
 # Migrating to Scala 3 and sbt 2
 
+## Scalar GVM bounded-tail integration
+
+The [bounded-tail policy](GVM_SCALAR_TAIL_PRODUCTION.md) changes the implementation of
+`GaussVonMisesScalarBhattacharyya.compare`, not its signature, result shape or dependency
+coordinate. Existing scalar callers need only rebuild the new snapshot; there is no
+new switch. Fourier and inference defaults remain unchanged. CI/main integration pending.
+
+Radius, evaluation count, last distance digits and error diagnostics may differ at the
+same tolerance. `maxEvaluations` and `Result.evaluations` count integrand calls, excluding
+the optional fixed 64-cell/2,304-term tail-selection prepass. Do not interpret a zero
+evaluation count as zero setup cost or a work budget as a wall-clock timeout. Existing
+precision/refusal checks remain; no accuracy certification or wider supported range
+is implied. The immutable RC1 bundle is unchanged.
+
 ## Core performance acceptance
 
 `modernize/core-performance-acceptance` adds acceptance evidence and CI gates, not new

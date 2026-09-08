@@ -15,7 +15,7 @@ object GaussVonMisesScalarBhattacharyya {
     * @param status numerical outcome; Estimated is not an accuracy certificate
     * @param distance symmetric Bhattacharyya distance in nats, only when estimates meet tolerance
     * @param interval estimated distance interval in nats; upper endpoint can be infinite
-    * @param evaluations positive integrand evaluations; zero for shortcuts or preflight refusal
+    * @param evaluations positive integrand evaluations, excluding bounded tail-selection setup; zero for shortcuts or preflight refusal
     * @param radius truncated standard-normal radius; zero for analytic shortcuts
     * @param gaussianTailBound omitted Gaussian mass, in angular-affinity units; infinity if unavailable
     * @param quadratureErrorEstimate summed Simpson differences, in angular-affinity units; heuristic
@@ -37,7 +37,7 @@ object GaussVonMisesScalarBhattacharyya {
     * @param p non-null fixed GVM with one linear coordinate and concentration at most 50
     * @param q non-null GVM in the same physical coordinates and units, with matching dimension
     * @param tolerance positive finite absolute distance tolerance in nats; default 1e-8
-    * @param maxEvaluations integrand work budget in [5,200000], default 50000; not a time limit
+    * @param maxEvaluations integrand work budget in [5,200000], default 50000; excludes optional 64-cell/2304-term tail setup; not a time limit
     * @param cancelled cooperative cancellation predicate, default always false; must be non-null
     * @return immutable estimated/unavailable diagnostics; never a distance on numerical failure
     * @example `GaussVonMisesScalarBhattacharyya.compare(p, q, tolerance = 1e-7)`
@@ -129,10 +129,21 @@ object GaussVonMisesScalarBhattacharyya {
         finite(cp._4+cq._4),finite(cp._5+cq._5),finite(cp._6+cq._6),contrast)
       if (Vector(phase.c,phase.l,phase.q).exists(x => math.abs(x) > 1e4) || gaussian > 1e4)
         return unavailable(UnsupportedRange)
-      val minimum=math.exp(logI0(math.abs(a-b))-logDen)
+      var minimum=math.exp(logI0(math.abs(a-b))-logDen)
       radius=4
       def gaussianTail = Erf.erfc(radius/math.sqrt(2))
       while (gaussianTail > tolerance*minimum/16 && radius < 16) { interrupted(); radius += 1 }
+      // BEGIN BOUNDED CELL-TAIL POLICY
+      // Skip cheap/narrow domains and near-constant phases. The prepass has a
+      // separate fixed cap: maxEvaluations still counts integrand calls only.
+      if(radius >= 8 && math.abs(phase.l)*radius+math.abs(phase.q)*radius*radius > 4) {
+        val cellLower=GaussVonMisesScalarCellBound.lower(phase.c,phase.l,phase.q,p.kappa,q.kappa,
+          () => { interrupted(); false })
+        minimum=math.max(minimum,cellLower)
+        radius=4
+        while (gaussianTail > tolerance*minimum/16 && radius < 16) { interrupted(); radius += 1 }
+      }
+      // END BOUNDED CELL-TAIL POLICY
       tail=gaussianTail
       if (tail > tolerance*minimum/16) return unavailable(NumericallyUnresolved,0,radius,tail)
       // Heuristic operand-sensitive phase allowance over the entire truncated domain.

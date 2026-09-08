@@ -147,7 +147,8 @@ invalid timings, JVM reuse and frozen-reference provenance.
 - The residual profile points toward integrand evaluation and initial panel work.
   The [tail-radius assessment](GVM_SCALAR_TAIL_ASSESSMENT.md) finds a promising
   reduction in initial panels using a stronger affinity lower bound; it remains
-  research-only pending conservative JVM arithmetic and end-to-end timing.
+  preserved as research evidence. Its [production follow-on](GVM_SCALAR_TAIL_PRODUCTION.md)
+  adds conservative JVM arithmetic, held-out controls and end-to-end timing.
   Any further optimization should preserve small-overlap accuracy and aliasing guards;
   do not loosen tolerance or erase coupling to obtain a faster answer.
 - No wider dimensions/concentrations, automatic Fourier fallback, new threading mode,

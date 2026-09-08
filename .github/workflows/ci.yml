@@ -89,7 +89,7 @@ jobs:
         run: >-
           sbt --server --batch
           "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussVonMisesScalarBhattacharyyaTest;
-          figaro / Test / testOnly com.cra.figaro.test.modernization.GvmScalarAuditTest com.cra.figaro.test.modernization.GvmScalarCellBoundTest com.cra.figaro.test.modernization.GvmScalarTailCandidateTest;
+          figaro / Test / testOnly com.cra.figaro.test.modernization.GvmScalarAuditTest com.cra.figaro.test.modernization.GvmScalarCellBoundTest com.cra.figaro.test.modernization.GvmScalarTailPolicyTest;
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesScalarBhattacharyyaExample;
           examples / Compile / runMain com.cra.figaro.example.GaussVonMisesScalarPerformance check"
 

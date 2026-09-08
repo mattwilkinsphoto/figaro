@@ -34,7 +34,16 @@ object FigaroConsumerCheck {
     require(overlap.status == ScalarOverlap.Status.Estimated &&
       overlap.distance.exists(d => math.abs(d-47.1275754862468045) <= 1e-8))
     require(ScalarOverlap.compare(gvmP,gvmQ,maxEvaluations=5).distance.isEmpty)
-    println("Published scalar GVM API: positive overlap and work-budget refusal passed")
+    val curvedP=GaussVonMisesDistribution(Vector(.5),Vector(Vector(1.0)),.25,
+      Vector(.5),Vector(Vector(.25)),50)
+    val curvedQ=GaussVonMisesDistribution(Vector(-.5),Vector(Vector(.25)),-.5,
+      Vector(-.25),Vector(Vector(2.0)),50)
+    val curved=ScalarOverlap.compare(curvedP,curvedQ)
+    require(curved.status == ScalarOverlap.Status.Estimated && curved.radius == 7 &&
+      curved.evaluations <= 10000 && curved.distance.exists(d => math.abs(d-1.3162805891364138) <= 1e-8))
+    require(curved.gaussianTailBound > 0 && curved.interval.exists((lo,hi) => lo <= 1.3162805891364138 && hi >= 1.3162805891364138))
+    require(ScalarOverlap.compare(curvedP,curvedQ,maxEvaluations=5).distance.isEmpty)
+    println("Published scalar GVM API: positive overlap, bounded-tail curvature and work-budget refusals passed")
 
     val universe=Universe.createNew()
     val cause=Flip(0.3)(using "", universe)

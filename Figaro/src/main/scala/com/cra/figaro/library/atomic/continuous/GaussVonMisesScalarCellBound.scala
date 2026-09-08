@@ -1,13 +1,13 @@
-package com.cra.figaro.test.modernization
+package com.cra.figaro.library.atomic.continuous
 
 import java.util.concurrent.CancellationException
 
-/** Test-only lower bound for the computed Double phase, not a physical-input certificate.
+/** Internal lower bound for the computed Double phase, not a physical-input certificate.
   * Basic operations expand one representable value outward. Math transcendental
   * results expand four ulps (Java 17 specifies at most one ulp for cos/exp).
   * The production integrator's separate preprocessing/error estimates remain necessary.
   */
-private[modernization] object GvmScalarCellBound {
+private[figaro] object GaussVonMisesScalarCellBound {
   private def down(x: Double): Double = Math.nextDown(x)
   private def up(x: Double): Double = Math.nextUp(x)
   private case class Interval(lo: Double,hi: Double) {
@@ -29,7 +29,7 @@ private[modernization] object GvmScalarCellBound {
     * At most two 128-term Bessel upper bounds and 64 positive 32-term partial sums.
     * Cancellation is checked at entry, each cell and every Bessel term; failures propagate.
     */
-  def lower(c: Double,l: Double,q: Double,kp: Double,kq: Double,cancelled: () => Boolean=() => false): Double = {
+  private[figaro] def lower(c: Double,l: Double,q: Double,kp: Double,kq: Double,cancelled: () => Boolean=() => false): Double = {
     require(Vector(c,l,q,kp,kq).forall(_.isFinite) && kp >= 0 && kq >= 0 && kp <= 50 && kq <= 50)
     require(cancelled != null)
     def check(): Unit = if(Thread.currentThread().isInterrupted || cancelled())

@@ -131,9 +131,13 @@ This sequence is a proposed priority order, not a calendar estimate.
    throughput. The [test-only JVM candidate](docs/GVM_SCALAR_TAIL_JVM.md) now retains
    conservative bound arithmetic, bounded setup/cancellation and unchanged final tail
    checks. Three-JVM full-call timings show about 2.54x on the costly curved fixture,
-   little change on four others; all 325 modernization tests pass locally. CI pending.
-   Next: held-out radius/screen-boundary controls, then public integration with explicit
-   setup-budget documentation, artifact/consumer checks and a paired performance gate.
+   little change on four others; its original 325-test gate passed locally.
+   [Production integration](docs/GVM_SCALAR_TAIL_PRODUCTION.md) now passes 319 distinct
+   modernization tests after retiring duplicate prototype tests and adding held-out
+   radius/screen controls (44 physical fixtures, both directions). Setup budgets are
+   explicit; repeated full-call timings retain about 2.53x on the curved fixture.
+   The rebuilt library passes artifact and separate published-consumer checks.
+   Next: CI/main promotion, completing this targeted scalar performance milestone.
    Stronger rounding analysis and
    multidimensional alternatives remain separate work; no automatic method switch.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.

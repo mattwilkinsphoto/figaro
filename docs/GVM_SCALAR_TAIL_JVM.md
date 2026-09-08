@@ -1,8 +1,11 @@
 # Scalar GVM tail bounds: JVM prototype and timings
 
-Status: test-only implementation, locally validated; CI/integration pending.
-No production sources, public signatures, inference defaults or release coordinates
-change. Users cannot enable this candidate in the compiled Figaro library yet.
+Status: historical test-only prototype and its original timing evidence.
+The prototype is integrated on main at `44b6b73f` after
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34207249603).
+The candidate has moved into the [public scalar implementation](GVM_SCALAR_TAIL_PRODUCTION.md),
+with a separate production validation/CI gate. This report preserves the prototype
+measurements; use the production guide for current behavior and setup-budget semantics.
 
 ## Overview: what this adds
 
@@ -16,7 +19,7 @@ On the expensive curved fixture, complete comparisons improve from **2.895 ms to
 The other four fixtures show little change. The result supports targeted production
 work, not a general promise that every GVM comparison gets faster.
 
-The public [scalar comparison](GVM_SCALAR_BHATTACHARYYA.md) remains unchanged. Continue
+At the prototype milestone, the public [scalar comparison](GVM_SCALAR_BHATTACHARYYA.md) remained unchanged. Continue
 trying [Fourier first for ordinary coupled laws](GVM_SCALAR_PERFORMANCE.md); this
 prototype is not an automatic fallback and does not change the recommendation.
 
@@ -27,7 +30,7 @@ Use JDK 17 and the repository's sbt version. All Scala code here is in the test 
 1. Run the independent-bound and candidate contract tests:
 
    ```sh
-   sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.GvmScalarCellBoundTest com.cra.figaro.test.modernization.GvmScalarTailCandidateTest"
+   sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.GvmScalarCellBoundTest com.cra.figaro.test.modernization.GvmScalarTailPolicyTest com.cra.figaro.test.modernization.GaussVonMisesScalarBhattacharyyaTest"
    ```
 
 2. Measure complete calls in three fresh JVMs. Run this command three times and retain
@@ -45,6 +48,8 @@ Use JDK 17 and the repository's sbt version. All Scala code here is in the test 
    Substitute `docs/GVM_SCALAR_TAIL_JVM_RUNS.txt` to reproduce the checked-in table.
 
 Timing is advisory. There is no speed threshold in CI.
+The benchmark now compares the frozen audited control with the integrated public
+policy; its historical `candidate` log label is retained for evidence compatibility.
 
 ## Results and measurement protocol
 
@@ -121,8 +126,10 @@ Analytic shortcuts still bypass the prepass and integration entirely.
 
 ## Test-only API and helper reference
 
-These are not supported application entry points. Scala helpers are scoped to the
-`com.cra.figaro.test.modernization` package except the executable benchmark class.
+The first two rows below describe retired/internal prototype entry points, not
+supported application APIs. `GvmScalarTailCandidate` was removed after integration;
+use the public scalar API instead. The cell helper moved into the library as an internal
+implementation detail. The benchmark and Python tooling remain maintainer tools.
 
 | Entry point | Parameters, return and example |
 | --- | --- |
@@ -137,8 +144,8 @@ These are not supported application entry points. Scala helpers are scoped to th
 
 ## Three common patterns
 
-1. **Use Figaro today:** keep the supported call unchanged. Rebuilding this branch
-   does not place the candidate in the published JAR.
+1. **Use Figaro today:** keep the supported call unchanged. The integrated bounded-tail
+   policy now runs inside this public entry point; there is no separate candidate API.
 
    ```scala
    val result = GaussVonMisesScalarBhattacharyya.compare(p, q)
@@ -149,15 +156,15 @@ These are not supported application entry points. Scala helpers are scoped to th
    inspect both numerical results, not just elapsed time.
 
    ```scala
-   val before = GaussVonMisesScalarBhattacharyya.compare(p, q)
-   val after = GvmScalarTailCandidate.compare(p, q)
+   val before = GvmScalarAuditedBaseline.compare(p, q)
+   val after = GaussVonMisesScalarBhattacharyya.compare(p, q)
    println((before.radius, after.radius, before.evaluations, after.evaluations))
    println((before.interval, after.interval))
    // Strong curved fixture: (12,7,25098,9102); weak opposed fixture stays (12,12,764,764).
    ```
 
 3. **Verify evidence before proposing production changes:** regenerate the independent
-   phase oracles and check that only the radius-selection block differs from production.
+   phase oracles and check that only the radius-selection block differs from the frozen control.
 
    ```sh
    python -B -m unittest discover -s tools -p 'test_gvm_scalar_tail_jvm.py' -v
@@ -165,26 +172,27 @@ These are not supported application entry points. Scala helpers are scoped to th
 
 ## Validation, limitations and next step
 
-Thirteen new Scala tests run alongside the existing modernization suites: **325 tests
+At the prototype milestone, thirteen new Scala tests ran alongside the existing modernization suites: **325 tests
 across 28 suites pass locally**. Candidate contracts include the full 168-comparison
 bidirectional physical-input grid, unequal concentrations, unit changes, precision and
 budget refusals, shortcuts, interruption and concurrent calls. Independent lower-bound
 controls cover 108 phase fixtures in both directions, including phase-wrap neighbors,
 quadratic vertices and large phases. Maximum candidate grid error is `3.44e-10` nats.
 
-Seven Python tests verify generated-oracle freshness, complete 210-round evidence,
+At the prototype milestone, seven Python tests verified generated-oracle freshness, complete 210-round evidence,
 malformed-evidence rejection and source provenance: the candidate is identical to the
 public audited implementation except its package/object and marked radius block, and
-it runs every public scalar contract test. Production source files are unchanged.
+it ran every public scalar contract test. Production source files were unchanged at that milestone.
 All **65 GVM research/evidence tests**, 18 documentation-tool tests, public-reference
 freshness and local-link checks pass locally. The preceding high-precision assessment
 is integrated on main at `b726fe4f` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34205631150).
 
-Next: pass CI, add held-out radius/screen-boundary controls, then integrate the bounded
-policy into the public scalar implementation with published setup-budget semantics,
-artifact/consumer checks and a final paired performance gate. Avoid letting the test
-copy become a second independently maintained integrator. This prototype does not add
+Follow-on: [production integration](GVM_SCALAR_TAIL_PRODUCTION.md) adds held-out
+radius/screen-boundary controls, published setup-budget semantics, artifact/consumer
+checks and a repeated paired performance gate. The duplicate candidate integrator and
+its duplicate contract suite were removed; both remain recoverable in Git history.
+This work does not add
 multidimensional support, automatic Fourier fallback, fusion or application-specific processing.
 
 Related: [tail assessment](GVM_SCALAR_TAIL_ASSESSMENT.md),

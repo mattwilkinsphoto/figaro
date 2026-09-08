@@ -62,7 +62,8 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Scalar comparison performance](docs/GVM_SCALAR_PERFORMANCE.md): matched-accuracy timings of both APIs; Fourier first for ordinary coupled cases, positive integration for eligible unresolved overlaps, and explicit refusal-cost accounting.
 - [Audited scalar integration totals](docs/GVM_SCALAR_AUDITED_TOTALS.md): profile-driven 2.9–7.75x positive-integrator improvements on three fixtures, retaining fresh final error checks; integrated on main at CI-verified `213aa587`.
 - [Scalar tail-radius assessment](docs/GVM_SCALAR_TAIL_ASSESSMENT.md): research-only lower-bound strategy reducing initial panel work on curved fixtures; not yet a library change or measured speedup.
-- [Scalar tail-bound JVM prototype](docs/GVM_SCALAR_TAIL_JVM.md): conservative test-only candidate, independent bound controls and setup-inclusive three-JVM timings; about 2.54x on the costly curved fixture, little change on four others.
+- [Scalar bounded-tail integration](docs/GVM_SCALAR_TAIL_PRODUCTION.md): automatic within the opt-in scalar API, explicit setup-budget semantics, held-out controls and about 2.53x on the costly curved fixture; development implementation, CI/main promotion pending.
+- [Scalar tail-bound JVM prototype](docs/GVM_SCALAR_TAIL_JVM.md): preserved prototype evidence and derivation; superseded by the integrated policy.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.

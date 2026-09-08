@@ -243,10 +243,12 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   Seven tests include oracle validation and evidence freshness. The follow-on
   [test-only JVM candidate](docs/GVM_SCALAR_TAIL_JVM.md) now has outward-rounded cell
   arithmetic, independent phase-bound controls and setup-inclusive timings: about 2.54x
-  on the costly curved fixture, little change on four others. Thirteen new Scala tests
-  pass with the full 325-test modernization gate; seven Python tests protect provenance,
-  oracles and timing evidence. Next: held-out radius/screen controls and public integration
-  with artifact/consumer validation. No production radius change yet; CI pending.
+  on the costly curved fixture, little change on four others. Its original 325-test
+  milestone is preserved in the report. [Production integration](docs/GVM_SCALAR_TAIL_PRODUCTION.md)
+  now retires duplicate prototype code, adds 44 held-out/boundary fixtures and passes
+  319 distinct modernization tests, artifact checks and the published consumer.
+  A repeated timing study retains about 2.53x on the curved fixture. Next: CI/main
+  promotion; no further scalar micro-optimization is scheduled in this milestone.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.

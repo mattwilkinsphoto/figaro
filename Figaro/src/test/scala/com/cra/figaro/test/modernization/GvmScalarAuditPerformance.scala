@@ -2,7 +2,7 @@ package com.cra.figaro.test.modernization
 
 import com.cra.figaro.library.atomic.continuous.*
 
-/** Test-only matched-input control: frozen full scans versus the current audited totals. */
+/** Test-only matched-input control: frozen full scans versus the frozen audited totals. */
 object GvmScalarAuditPerformance {
   @volatile private var sink=0.0
   def main(args: Array[String]): Unit = {
@@ -15,13 +15,13 @@ object GvmScalarAuditPerformance {
     println(s"GVM_AUDIT_ENV pid=${ProcessHandle.current().pid()} java=${System.getProperty("java.version")} rounds=7 tolerance=1e-8")
     for((name,p,q,oracle) <- cases) {
       val before=GvmScalarFullSumBaseline.compare(p,q)
-      val after=GaussVonMisesScalarBhattacharyya.compare(p,q)
+      val after=GvmScalarAuditedBaseline.compare(p,q)
       require(before.status.toString == "Estimated" && after.status.toString == "Estimated")
       require(before.productIterator.drop(1).toVector == after.productIterator.drop(1).toVector)
       require(math.abs(after.distance.get-oracle) <= 1e-8)
       println(s"GVM_AUDIT_CHECK case=$name identical=true evaluations=${after.evaluations} error=${math.abs(after.distance.get-oracle)}")
       val methods=Vector("full" -> (() => GvmScalarFullSumBaseline.compare(p,q).distance.get),
-        "audited" -> (() => GaussVonMisesScalarBhattacharyya.compare(p,q).distance.get))
+        "audited" -> (() => GvmScalarAuditedBaseline.compare(p,q).distance.get))
       def batch(index: Int,count: Int): Double = {
         val start=System.nanoTime()
         for(_ <- 0 until count) {

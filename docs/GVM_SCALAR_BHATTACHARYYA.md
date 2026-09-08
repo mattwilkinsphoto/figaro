@@ -4,6 +4,8 @@ Status: public source API integrated on main at `21269b97` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34196804703).
 This is an addition to the modernization snapshot, not a replacement release bundle.
 The preceding test-only prototype is integrated on main at CI-verified `a54d665e`.
+The development branch also contains [bounded tail selection](GVM_SCALAR_TAIL_PRODUCTION.md),
+with no signature change; its CI/main integration is pending.
 
 ## Overview: when to choose it
 
@@ -38,6 +40,8 @@ Those numbers describe the original implementation. The
 [audited-totals optimization](GVM_SCALAR_AUDITED_TOTALS.md), integrated on main at CI-verified `213aa587`,
 improves positive integration by about 2.9–7.75x on three matched-control fixtures.
 It requires no API changes and does not reverse the Fourier-first recommendation.
+The subsequent bounded-tail policy measures about 2.53x over that audited implementation
+on the costly curved fixture; the other tested cases change only a few percent.
 
 ## Quick start in three steps
 
@@ -80,7 +84,7 @@ GaussVonMisesScalarBhattacharyya.compare(
 | --- | --- |
 | `p`, `q` | Non-null fixed kernels, matching dimension and coordinate convention; this API requires dimension 1 and each concentration at most 50 |
 | `tolerance` | Positive finite absolute distance target in nats, not relative affinity accuracy or a statistical confidence level |
-| `maxEvaluations` | Integer 5..200,000, default 50,000; bounds integrand evaluations, not every operation or elapsed time; analytic shortcuts use zero |
+| `maxEvaluations` | Integer 5..200,000, default 50,000; bounds integrand evaluations, not every operation or elapsed time; excludes optional 64-cell/2,304-Bessel-term tail setup; analytic shortcuts use zero |
 | `cancelled` | Non-null cooperative predicate; true aborts with `CancellationException`; keep it cheap, thread-safe if shared, and free of side effects |
 
 Malformed arguments (including mismatched dimensions) throw `IllegalArgumentException`.
@@ -98,7 +102,7 @@ result returned by `compare`, rather than manufacturing an `Estimated` outcome.
 | `status` | Nested `Status` enum: `Estimated`, `BudgetExhausted`, `NumericallyUnresolved`, `UnsupportedRange` |
 | `distance` | `Option[Double]` in nats; `Some` only when numerical estimates meet the requested tolerance |
 | `interval` | Optional estimated `(lower, upper)` distance interval in nats; upper can be infinite; not a certified enclosure |
-| `evaluations` | Actual integrand count; zero may mean an analytic shortcut or preflight refusal |
+| `evaluations` | Actual integrand count, excluding bounded tail-selection setup; zero may mean an analytic shortcut or preflight refusal |
 | `radius` | Truncation radius in the standardized Gaussian coordinate; zero for shortcuts |
 | `gaussianTailBound` | Omitted Gaussian mass bound, evaluated in Double; units are angular affinity, not distance |
 | `quadratureErrorEstimate` | Sum of panel Simpson differences, in angular-affinity units; heuristic |
@@ -173,7 +177,8 @@ respect numerical precision checks; only exact stored identity has a zero-width 
   coefficients are limited to absolute value 10,000. Tail radius is capped at 16.
   These conservative work/range controls are not mathematically intrinsic GVM limits.
 - Phase-aware prepartitioning may exhaust the evaluation budget before evaluating
-  the integrand. Counts do not include Bessel calculations or queue bookkeeping.
+  the integrand. Counts do not include Bessel calculations, optional bounded tail
+  setup or queue bookkeeping. Tail setup can run before a low-budget refusal.
 - Extreme means, underflowed covariance inputs and nearly cancelled large operands
   can cause a numerical refusal. Common unit rescaling of 1e-100 and 1e100 is tested,
   not a guarantee for every parameter combination. Kernels must themselves be valid.
@@ -183,7 +188,7 @@ respect numerical precision checks; only exact stored identity has a zero-width 
 
 ## Validation and related modules
 
-Local validation passes all **309 modernization tests across 25 suites**, the executable
+The original API milestone passed all **309 modernization tests across 25 suites**, the executable
 example, 32 high-precision research/report tests, seven artifact-validator tests and
 18 documentation-tool tests. The thin Java 17 artifact contains the new API and excludes
 test/example/instrumentation classes. Generated API reference and local links also pass.
@@ -191,12 +196,13 @@ The separate [published consumer](../tools/acceptance-consumer/README.md) passed
 the just-published JAR, verified by SHA-256, including this API's positive overlap and
 budget-refusal checks. CI additionally requires the runtime class in both thin and
 assembled artifacts; the full remote publication/reproducibility gate passed at `21269b97`.
-The follow-on performance study has its own CI/integration gate.
+The [bounded-tail integration](GVM_SCALAR_TAIL_PRODUCTION.md) has its own CI/integration
+gate and passes 319 distinct modernization tests locally, including held-out controls.
 
 The inherited high-precision grid checks 84 scalar pairs in both directions (168
 comparisons), plus ten unequal-concentration pairs in both directions. The public
-implementation's observed maximum main-grid error is 3.51e-10 nats at a requested
-1e-8, with at most 25,098 evaluations. These fixture observations are not universal
+implementation's observed maximum main-grid error after bounded-tail integration is
+3.44e-10 nats at a requested 1e-8, with at most 9,102 evaluations. These fixture observations are not universal
 error bounds. Tests also cover analytic shortcuts, near-equal variances, extreme
 units, conditioning thresholds, work limits, cancellation and concurrent calls.
 

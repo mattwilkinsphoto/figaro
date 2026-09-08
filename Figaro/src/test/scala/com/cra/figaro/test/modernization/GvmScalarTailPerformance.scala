@@ -2,7 +2,7 @@ package com.cra.figaro.test.modernization
 
 import com.cra.figaro.library.atomic.continuous.*
 
-/** Test-only full-call comparison: public audited implementation versus cell-bound candidate. */
+/** Test-only full-call comparison: frozen audited implementation versus public bounded-tail policy. */
 object GvmScalarTailPerformance {
   @volatile private var sink=0.0
   def main(args: Array[String]): Unit = {
@@ -16,14 +16,14 @@ object GvmScalarTailPerformance {
       ("curved",kernel(.5,1,.25,.5,.25,50),kernel(-.5,.5,-.5,-.25,2,50),1.3162805891364138))
     println(s"GVM_TAIL_JVM_ENV pid=${ProcessHandle.current().pid()} java=${System.getProperty("java.version")} rounds=7 tolerance=1e-8 processors=${Runtime.getRuntime.availableProcessors} maxHeap=${Runtime.getRuntime.maxMemory}")
     for((name,p,q,oracle) <- cases) {
-      val before=GaussVonMisesScalarBhattacharyya.compare(p,q)
-      val after=GvmScalarTailCandidate.compare(p,q)
+      val before=GvmScalarAuditedBaseline.compare(p,q)
+      val after=GaussVonMisesScalarBhattacharyya.compare(p,q)
       require(before.status.toString == "Estimated" && after.status.toString == "Estimated")
       require(math.abs(before.distance.get-oracle) <= 1e-8)
       require(math.abs(after.distance.get-oracle) <= 1e-8)
       println(s"GVM_TAIL_JVM_CHECK case=$name beforeWork=${before.evaluations} afterWork=${after.evaluations} beforeRadius=${before.radius} afterRadius=${after.radius} beforeError=${math.abs(before.distance.get-oracle)} afterError=${math.abs(after.distance.get-oracle)}")
-      val methods=Vector("audited" -> (() => GaussVonMisesScalarBhattacharyya.compare(p,q).distance.get),
-        "candidate" -> (() => GvmScalarTailCandidate.compare(p,q).distance.get))
+      val methods=Vector("audited" -> (() => GvmScalarAuditedBaseline.compare(p,q).distance.get),
+        "candidate" -> (() => GaussVonMisesScalarBhattacharyya.compare(p,q).distance.get))
       def batch(index: Int,count: Int): Double = {
         val start=System.nanoTime()
         for(_ <- 0 until count) {
@@ -46,8 +46,8 @@ object GvmScalarTailPerformance {
         val elapsed=batch(i,counts(i))
         println(s"GVM_TAIL_JVM_TIMING case=$name method=${methods(i)._1} round=$round batch=${counts(i)} nsPerCall=${elapsed/counts(i)}")
       }
-      require(GaussVonMisesScalarBhattacharyya.compare(p,q) == before)
-      require(GvmScalarTailCandidate.compare(p,q) == after)
+      require(GvmScalarAuditedBaseline.compare(p,q) == before)
+      require(GaussVonMisesScalarBhattacharyya.compare(p,q) == after)
     }
     println(s"GVM_TAIL_JVM_COMPLETE cases=5 methods=10 rounds=7 sinkFinite=${sink.isFinite}")
   }
