@@ -223,8 +223,11 @@ for a separate implementation's distinction between truncated and ordinary count
   cancellation; they are not rigorous certificates or sampling confidence intervals.
   A covariance may be valid for density/sampling while a metric refuses its requested tolerance.
 - Truncation currently requires **finite** bounds and a resolvable base probability
-  difference. It selects a lower- or upper-tail difference and rejects a result at
-  <=64 ulps of the larger operand. It does not extrapolate missing tail precision.
+  difference. It selects a lower- or upper-tail difference. The constructor requires
+  the retained mass to exceed 1e8 ulps of the larger operand, because relative error
+  in that normalizer affects every density. Subinterval CDF/survival queries reject
+  differences at <=64 ulps. These roundoff guards do not certify the underlying
+  CDF's accuracy, and no missing tail precision is extrapolated.
   Very narrow intervals, tiny subinterval CDF queries, or extreme quantiles can throw
   `ArithmeticException`. Generic truncated/exp moments are `None`, not zero.
 - Scalar mixture quantiles use component quantile brackets and at most 2048 bisections.

@@ -52,6 +52,10 @@ class DistributionConstructionsTest extends AnyWordSpec with Matchers {
       tail.cdf(tail.quantile(.4)) shouldBe (.4 +- 1e-12)
       intercept[ArithmeticException](TruncatedDistribution(normal,40,41))
       intercept[ArithmeticException](TruncatedDistribution(normal,1,math.nextUp(1.0)))
+      // A nonzero CDF difference can still be a poor density normalizer.
+      intercept[ArithmeticException](TruncatedDistribution(normal,1,1+1e-10))
+      val narrow=TruncatedDistribution(normal,1,1.0001)
+      integrate(narrow,1,1.0001) shouldBe (1.0 +- 1e-10)
       intercept[IllegalArgumentException](TruncatedDistribution(normal,1,-1))
       t.quantile(0) shouldBe -1.0; t.quantile(1) shouldBe 2.0
     }

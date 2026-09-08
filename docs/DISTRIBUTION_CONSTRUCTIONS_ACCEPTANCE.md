@@ -40,12 +40,16 @@ not implemented. No Gaussian approximation is substituted for a mixture metric.
   Scaladoc warnings remain. The independent published-JAR consumer passed all new
   construction/GMM/Gaussian-metric checks and its existing inference/lifecycle checks.
   Verified local thin-JAR SHA-256:
-  `9f1807d527e657b228aae63dfa15625a29240483826e7eaba0034b047fede05e`.
+  `2c08085e1aa21f04fb629d360329b2a21322de6ede38d01cf0f956ced3e78294`.
   The final candidate includes direct base-draw affine/exp sampling; all 362
   modernization tests, the runnable example and the published consumer were rerun.
+  The subsequent normalizer-cancellation safeguard also passed all 362 tests and the
+  independent consumer; all four artifact classifiers passed content/legal checks.
 - Public reference freshness verified: **11,895 public-method entries / 43 files**;
   documentation tests **18/18** and **13,058 local links / 118 Markdown files** passed.
-  Linux CI is pending; local evidence is not a substitute for that gate.
+  The preceding candidate `1abd5f33` passed [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34254817073),
+  including clean reproducibility and its published consumer. The final narrow-interval
+  normalizer safeguard is awaiting its own source CI; local evidence is not a substitute.
 
 ## Exploratory legacy statistical suite
 

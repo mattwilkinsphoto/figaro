@@ -75,17 +75,22 @@ final case class ExpDistribution(base: ScalarDistribution) extends ScalarDistrib
 final case class TruncatedDistribution(base: ScalarDistribution,lower: Double,upper: Double) extends ScalarDistribution {
   require(base != null && lower.isFinite && upper.isFinite && lower < upper,"finite ordered bounds required")
   require(lower >= base.support._1 && upper <= base.support._2,"bounds must lie inside base support")
-  private def interval(a: Double,b: Double): Double = {
+  private def interval(a: Double,b: Double,normalizing: Boolean=false): Double = {
     if(a == b) return 0
     val fa=base.cdf(a); val fb=base.cdf(b); val sa=base.survival(a); val sb=base.survival(b)
     val (large,small)=if(fb <= sa) (fb,fa) else (sa,sb)
     val mass=large-small
-    if(!mass.isFinite || mass <= 0 || mass <= 64*math.ulp(large))
+    // A barely nonzero difference is not a usable normalizer: its relative
+    // error multiplies every density. Keep a much larger cancellation margin
+    // there than for a small subinterval CDF query. This is a roundoff guard,
+    // not a certificate of the base law's CDF accuracy.
+    val margin=if(normalizing) 1e8 else 64.0
+    if(!mass.isFinite || mass <= 0 || mass <= margin*math.ulp(large))
       throw new ArithmeticException("truncation interval mass is numerically unresolved")
     mass
   }
   /** Retained probability under the original law, not a fitted parameter. */
-  val retainedProbability: Double = interval(lower,upper)
+  val retainedProbability: Double = interval(lower,upper,normalizing=true)
   def logDensity(x: Double): Double = { N.argument(x); if(x < lower || x > upper) Double.NegativeInfinity else base.logDensity(x)-math.log(retainedProbability) }
   def cdf(x: Double): Double = { N.argument(x); if(x <= lower) 0 else if(x >= upper) 1 else interval(lower,x)/retainedProbability }
   def survival(x: Double): Double = { N.argument(x); if(x <= lower) 1 else if(x >= upper) 0 else interval(x,upper)/retainedProbability }
