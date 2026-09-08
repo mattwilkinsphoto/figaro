@@ -25499,6 +25499,30 @@ Invocation template:
 receiver.logDensity(value)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.logDensityGradient ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#logDensityGradient-fffffc6d)
+
+```scala
+def logDensityGradient(value: LinearAngular): GaussVonMisesStateGradient
+```
+
+Analytic state gradient of logDensity, with all distribution parameters held fixed.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` GaussVonMisesStateGradient ``.
+
+Source contract/attributes: Analytic state gradient of logDensity, with all distribution parameters held fixed. Value parameters value non-null finite state of the configured dimension, in physical units/radians Attributes Returns immutable linear partials and angular derivative; no angle normalization of derivatives; nonrepresentable intermediate results throw ArithmeticException Example kernel.logDensityGradient(LinearAngular(Vector(0.2), 3.1)).linear
+
+Invocation template:
+
+```scala
+receiver.logDensityGradient(value)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.mahalanobisSquared ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#mahalanobisSquared-f9c)
@@ -25521,6 +25545,30 @@ Invocation template:
 
 ```scala
 receiver.mahalanobisSquared(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.mahalanobisSquaredGradient ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#mahalanobisSquaredGradient-fffffc6d)
+
+```scala
+def mahalanobisSquaredGradient(value: LinearAngular): GaussVonMisesStateGradient
+```
+
+Analytic state gradient of the squared Mahalanobis-von-Mises score.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` GaussVonMisesStateGradient ``.
+
+Source contract/attributes: Analytic state gradient of the squared Mahalanobis-von-Mises score. Value parameters value non-null finite state of the configured dimension Attributes Returns -2 times logDensityGradient(value), in physical coordinate units and per radian; this is not a derivative of the score's square root or tail probability Example kernel.mahalanobisSquaredGradient(LinearAngular(Vector(0.2), 3.1)).angular
+
+Invocation template:
+
+```scala
+receiver.mahalanobisSquaredGradient(value)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.moments ``

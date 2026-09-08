@@ -225,8 +225,9 @@ Lower-priority research items, not implemented APIs:
 
 [Analytic circular/mixed moments and the exact angular conditional](GVM_MOMENTS.md)
 are integrated on main at CI-verified `df5a7bf4`. [Finite-concentration score thresholds](GVM_SCORE_CALIBRATION.md)
-are now implemented on the development branch, with independent calibration tests.
-Additional conditionals and gradients remain separate increments. Generic quadrature needs
+are on main at CI-verified `755eb425`, with independent calibration tests.
+[State gradients](GVM_GRADIENTS.md) are locally validated on the development branch.
+Additional conditionals and parameter gradients remain separate increments. Generic quadrature needs
 its own approximation/negative-weight assessment. No fusion or propagation scope is added.
 
 Related: [joint GVM](GAUSS_VON_MISES.md), [circular foundation](VON_MISES.md),

@@ -107,8 +107,11 @@ The next diagnostic increment adds canonical residuals/inversion, squared
 Mahalanobis-von-Mises scoring and analytic directed KL with a component breakdown.
 See [GVM diagnostics](GVM_DIAGNOSTICS.md) for the derived formula, runnable examples,
 Gaussian/circular reductions, numerical limits and focused regression suite.
-Finite-concentration threshold calibration is a separate [implemented development increment](GVM_SCORE_CALIBRATION.md),
+Finite-concentration threshold calibration is a separate [CI-verified increment on main](GVM_SCORE_CALIBRATION.md),
 with direct tails, numerical diagnostics, independent fixtures and modeled-coverage tests.
+[State gradients](GVM_GRADIENTS.md) are the next locally validated development increment:
+physical-coordinate log-density and squared-score derivatives, not fitting or a new
+inference algorithm. Deterministic expectation quadrature follows separately.
 Analytic marginal circular and physical first/second linear-angular mixed moments,
 plus the exact angular conditional given the full linear vector, are now a separate
 [CI-verified increment on main](GVM_MOMENTS.md). Its tests include complex-matrix

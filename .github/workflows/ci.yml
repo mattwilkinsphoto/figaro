@@ -49,10 +49,11 @@ jobs:
       - name: Verify joint Gauss-von Mises contracts and examples
         run: >-
           sbt --server --batch
-          "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussVonMisesRegressionTest com.cra.figaro.test.modernization.GaussVonMisesDiagnosticsTest com.cra.figaro.test.modernization.GaussVonMisesMomentsTest com.cra.figaro.test.modernization.GaussVonMisesScoreTest;
+          "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussVonMisesRegressionTest com.cra.figaro.test.modernization.GaussVonMisesDiagnosticsTest com.cra.figaro.test.modernization.GaussVonMisesMomentsTest com.cra.figaro.test.modernization.GaussVonMisesScoreTest com.cra.figaro.test.modernization.GaussVonMisesGradientTest;
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesExample;
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesMomentsExample;
-          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesScoreExample"
+          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesScoreExample;
+          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesGradientExample"
 
       - name: Verify seeded parallel sampling and benchmark entry point
         run: >-

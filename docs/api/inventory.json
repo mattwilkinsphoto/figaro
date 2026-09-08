@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 746,
+  "pages": 747,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156471,6 +156471,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "logDensityGradient",
+      "anchor": "logDensityGradient-fffffc6d",
+      "signature": "def logDensityGradient(value: LinearAngular): GaussVonMisesStateGradient",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: LinearAngular"
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesStateGradient",
+      "summary": "Analytic state gradient of logDensity, with all distribution parameters held fixed.",
+      "contract": "Analytic state gradient of logDensity, with all distribution parameters held fixed. Value parameters value non-null finite state of the configured dimension, in physical units/radians Attributes Returns immutable linear partials and angular derivative; no angle normalization of derivatives; nonrepresentable intermediate results throw ArithmeticException Example kernel.logDensityGradient(LinearAngular(Vector(0.2), 3.1)).linear",
+      "example": "receiver.logDensityGradient(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
       "name": "mahalanobisSquared",
       "anchor": "mahalanobisSquared-f9c",
       "signature": "def mahalanobisSquared(value: LinearAngular): Double",
@@ -156487,6 +156508,27 @@
       "summary": "Squared Mahalanobis-von-Mises score ||z||^2 + 4 kappa sin(delta/2)^2.",
       "contract": "Squared Mahalanobis-von-Mises score ||z||^2 + 4 kappa sin(delta/2)^2. Value parameters value non-null finite state of this kernel's dimension Attributes Returns nonnegative score (possibly +Infinity in extreme tails), not a p-value Example kernel.mahalanobisSquared(LinearAngular(Vector(0.2), 3.1))",
       "example": "receiver.mahalanobisSquared(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "mahalanobisSquaredGradient",
+      "anchor": "mahalanobisSquaredGradient-fffffc6d",
+      "signature": "def mahalanobisSquaredGradient(value: LinearAngular): GaussVonMisesStateGradient",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: LinearAngular"
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesStateGradient",
+      "summary": "Analytic state gradient of the squared Mahalanobis-von-Mises score.",
+      "contract": "Analytic state gradient of the squared Mahalanobis-von-Mises score. Value parameters value non-null finite state of the configured dimension Attributes Returns -2 times logDensityGradient(value), in physical coordinate units and per radian; this is not a derivative of the score's square root or tail probability Example kernel.mahalanobisSquaredGradient(LinearAngular(Vector(0.2), 3.1)).angular",
+      "example": "receiver.mahalanobisSquaredGradient(value)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
     },

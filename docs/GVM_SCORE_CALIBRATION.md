@@ -13,10 +13,9 @@ region, or validating simulated draws. It does not fit parameters, calculate KL,
 assess MCMC convergence, or implement report ingestion, fusion, filtering or propagation.
 Calibration is numerical, not a new sampling strategy or a speedup to Figaro inference.
 
-Source-development preview on `modernize/gauss-von-mises`; this increment needs its
-own remote CI and main integration. It is not in the immutable RC1 library bundle.
-The preceding moments milestone is on main at `df5a7bf4`, with
-[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34173645295).
+Source-development preview integrated on main at `755eb425`, with
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34176109863).
+It is not in the immutable RC1 library bundle. Later increments retain their own gates.
 
 ## Quick start in three steps
 
@@ -202,9 +201,9 @@ budget is not a total quantile budget: inversion can evaluate many probabilities
 
 Local acceptance: 14 focused tests, all 234 modernization regressions across 18 suites,
 three GVM executable examples, Scala API generation and thin-library packaging.
-Remote CI explicitly includes the score suite and example; check the exact commit's
-[branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
-before declaring this increment CI-verified or integrated.
+Remote CI explicitly includes the score suite and example. The exact milestone
+`755eb425` passed [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34176109863)
+and was integrated on main; this does not certify later extensions.
 
 The [focused tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GaussVonMisesScoreTest.scala)
 compare independent 80-digit angular-quadrature fixtures, the exact n=2 exponential
@@ -218,6 +217,7 @@ outside the runtime and writes no files; run with `python -B`.
 Related: [joint GVM](GAUSS_VON_MISES.md), [score and KL diagnostics](GVM_DIAGNOSTICS.md),
 [moments and conditionals](GVM_MOMENTS.md), [circular foundation](VON_MISES.md),
 [roadmap](../ROADMAP.md), [support inventory](DISTRIBUTION_SUPPORT.md),
-[compiler API reference](api/README.md). Gradients and deterministic expectation
-quadrature remain next increments; Bhattacharyya divergence and mutual information
+[compiler API reference](api/README.md). [State gradients](GVM_GRADIENTS.md) are now
+locally validated on the development branch. Deterministic expectation quadrature
+remains next; Bhattacharyya divergence and mutual information
 remain lower-priority research. No fusion or propagation scope is added.

@@ -222,8 +222,9 @@ The [optional oracle](../tools/gauss_von_mises_moments_reference.py) uses `mpmat
 outside the Figaro runtime and prints fixtures without writing files.
 
 The next increment, [finite-concentration score calibration](GVM_SCORE_CALIBRATION.md),
-is now locally validated on the development branch, with its own remote CI gate.
-Gradients and general quadrature remain separate increments. Bhattacharyya divergence
+is now on main at CI-verified `755eb425`. [State gradients](GVM_GRADIENTS.md) are locally
+validated on the development branch, with their own CI gate. General quadrature remains
+the next increment. Bhattacharyya divergence
 and mutual information remain lower-priority research. This milestone does not add
 report ingestion, fusion, filtering or propagation.
 

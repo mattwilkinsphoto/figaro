@@ -1,11 +1,11 @@
 # Joint Gauss-von Mises: development preview
 
-Status: the fixed joint kernel, KL/residual diagnostics and moments/conditionals are on
-main at `df5a7bf4`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34173645295).
+Status: the fixed joint kernel, diagnostics, moments and finite-concentration calibration
+are on main at `755eb425`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34176109863).
 **Standalone publication was approved by the maintainer on 2026-09-07.** This is not
-a tagged release or replacement for the RC1 bundle. The added [finite-concentration
-score calibration](GVM_SCORE_CALIBRATION.md) is locally validated on `modernize/gauss-von-mises`
-and awaits its own remote CI/integration gates. The circular foundation was integrated earlier
+a tagged release or replacement for the RC1 bundle. The added [analytic state
+gradients](GVM_GRADIENTS.md) are locally validated on `modernize/gauss-von-mises`
+and await their own remote CI/integration gates. The circular foundation was integrated earlier
 at `fea8b999`.
 
 ## Overview
@@ -132,6 +132,10 @@ not new inference algorithms. The separate [score calibration guide](GVM_SCORE_C
 adds modeled probability thresholds for fixed kernels, with numerical error contracts
 and comparisons against the chi-square approximation.
 
+[State gradients](GVM_GRADIENTS.md) provide analytic linear/angular derivatives of log
+density and squared score. They hold distribution parameters fixed and do not enable
+gradient-based inference automatically.
+
 Import `com.cra.figaro.library.atomic.continuous.*`. All methods below are handwritten;
 the [compiler reference](api/README.md) also records inherited/generated functions.
 
@@ -190,9 +194,9 @@ and uniform limits, 120,000 prior draws, Gaussian moments and conditional circul
 residuals, disparate units, input snapshots, failure paths, real evidence weighting,
 posterior projections and exact seeded traces across worker counts.
 The diagnostics milestone passed 205 modernization regressions and remote CI at
-`3615e26e`; the moments increment passed CI at `df5a7bf4`. With the
-[14 calibration tests](GVM_SCORE_CALIBRATION.md), all 234 modernization regressions,
-three expanded executable examples, Scala API generation and local thin-library
+`3615e26e`; moments passed CI at `df5a7bf4`, and calibration at `755eb425`. With the
+[11 gradient tests](GVM_GRADIENTS.md), all 245 modernization regressions,
+four expanded executable examples, Scala API generation and local thin-library
 packaging pass. Check the exact source commit in the
 [branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
 before treating remote CI as passed. Existing whole-library historical-suite limits remain unchanged.

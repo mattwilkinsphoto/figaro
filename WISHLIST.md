@@ -177,10 +177,14 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
 - **Circular/mixed moments and exact angular conditionals — integrated on main at CI-verified `df5a7bf4`:**
   [physical-coordinate summaries and hierarchical examples](docs/GVM_MOMENTS.md).
   Reverse conditionals and general posterior moments are not implied by this support.
-- **Finite-concentration score calibration — locally validated, remote CI/integration pending:**
+- **Finite-concentration score calibration — integrated on main at CI-verified `755eb425`:**
   [CDF, direct survival and squared-score quantiles](docs/GVM_SCORE_CALIBRATION.md),
   with independent fixtures and known-kernel coverage tests. Not a fitted-parameter
   confidence procedure or an operational decision policy.
+- **Analytic state gradients — locally validated, remote CI/integration pending:**
+  [Log-density and squared-score derivatives](docs/GVM_GRADIENTS.md), in physical
+  coordinates and per radian. Parameter gradients, Hessians and gradient-based inference
+  algorithms are not implied; deterministic expectation quadrature is next.
 - **Bhattacharyya divergence — research wishlist, lower priority:** symmetric comparison
   of complete GVM distributions. Assess analytic angular integration plus a controlled
   numerical linear integral; validate Gaussian reductions, symmetry and identical laws.

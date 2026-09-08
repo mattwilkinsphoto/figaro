@@ -146,6 +146,54 @@ final class GaussVonMisesDistribution private (
     */
   def density(value: LinearAngular): Double = math.exp(logDensity(value))
 
+  /** Analytic state gradient of logDensity, with all distribution parameters held fixed.
+    * @param value non-null finite state of the configured dimension, in physical units/radians
+    * @return immutable linear partials and angular derivative; no angle normalization of derivatives;
+    *         nonrepresentable intermediate results throw ArithmeticException
+    * @example `kernel.logDensityGradient(LinearAngular(Vector(0.2), 3.1)).linear`
+    */
+  def logDensityGradient(value: LinearAngular): GaussVonMisesStateGradient = {
+    require(value != null, "value must be non-null")
+    checkInterrupted()
+    val z = whiten(value.linear)
+    // The uniform branch must not evaluate irrelevant, potentially overflowing coupling.
+    val angularWeight = if (kappa == 0) 0.0 else
+      kappa * math.sin(CircularStatistics.difference(value.angle,center(z)))
+    val dz = new Array[Double](dimension)
+    for (i <- 0 until dimension) {
+      checkInterrupted()
+      if (angularWeight == 0) dz(i) = -z(i)
+      else {
+        var slope = beta(i)
+        for (j <- 0 until dimension) slope = finite(slope + finite(gamma(i)(j)*z(j)))
+        dz(i) = finite(-z(i) + finite(angularWeight*slope))
+      }
+    }
+    // Chain rule: grad_x = A^(-T) grad_z. Back substitution avoids an explicit inverse.
+    val dx = new Array[Double](dimension)
+    var i = dimension-1
+    while (i >= 0) {
+      checkInterrupted()
+      var residual = dz(i)
+      for (j <- i+1 until dimension) residual = finite(residual-finite(lower(j)(i)*dx(j)))
+      dx(i) = finite(residual/lower(i)(i))
+      i -= 1
+    }
+    new GaussVonMisesStateGradient(dx.toVector,-angularWeight)
+  }
+
+  /** Analytic state gradient of the squared Mahalanobis-von-Mises score.
+    * @param value non-null finite state of the configured dimension
+    * @return -2 times logDensityGradient(value), in physical coordinate units and per radian;
+    *         this is not a derivative of the score's square root or tail probability
+    * @example `kernel.mahalanobisSquaredGradient(LinearAngular(Vector(0.2), 3.1)).angular`
+    */
+  def mahalanobisSquaredGradient(value: LinearAngular): GaussVonMisesStateGradient = {
+    val gradient = logDensityGradient(value)
+    val linear = gradient.linear.map { v => checkInterrupted(); finite(-2*v) }
+    new GaussVonMisesStateGradient(linear,finite(-2*gradient.angular))
+  }
+
   /** Standardize a point to independent Gaussian coordinates and a circular residual.
     * @param value non-null finite state of this kernel's dimension
     * @return LinearAngular(z, delta), with delta in [-Pi,Pi); not scaled by kappa
