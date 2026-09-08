@@ -48,6 +48,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Joint Gauss-von Mises preview](docs/GAUSS_VON_MISES.md): tested linear-angular distribution, approved standalone publication scope and inference limits.
 - [GVM diagnostics](docs/GVM_DIAGNOSTICS.md): canonical residuals, squared Mahalanobis scoring and analytic directed KL with Gaussian/circular checks.
 - [GVM moments and conditionals](docs/GVM_MOMENTS.md): analytic circular/mixed moments and an exact angular conditional for hierarchical models.
+- [GVM score calibration](docs/GVM_SCORE_CALIBRATION.md): finite-concentration probabilities and squared-score thresholds, with explicit comparisons against the chi-square approximation.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.

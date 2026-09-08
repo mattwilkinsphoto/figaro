@@ -109,6 +109,16 @@ final class GaussVonMisesDistribution private (
   def moments: GaussVonMisesMoments = GvmMomentCalculation.compute(mean,lower,alpha,beta,gamma,kappa,
     circular.meanResultantLength)
 
+  /** Calibrate this kernel's squared Mahalanobis-von-Mises score at finite concentration.
+    * @param absoluteTolerance probability integration tolerance in [1e-12,1e-4], default 1e-10
+    * @param maxEvaluations per-probability integrand budget, default 100000
+    * @return immutable reusable score distribution; supports up to 10000 linear coordinates
+    * @example `kernel.scoreDistribution().inverseSurvival(0.05)`
+    */
+  def scoreDistribution(absoluteTolerance: Double = 1e-10,
+    maxEvaluations: Int = 100000): GaussVonMisesScoreDistribution =
+    GaussVonMisesScoreDistribution(dimension,kappa,absoluteTolerance,maxEvaluations)
+
   /** Gaussian marginal log density, using a triangular solve rather than an inverse.
     * @param linear finite vector of the configured dimension
     * @return log density per linear-coordinate volume; extreme tails may return -Infinity

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 743,
+  "pages": 746,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156527,6 +156527,28 @@
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "scoreDistribution",
+      "anchor": "scoreDistribution-37",
+      "signature": "def scoreDistribution(absoluteTolerance: Double = ..., maxEvaluations: Int = ...): GaussVonMisesScoreDistribution",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "absoluteTolerance: Double = ...",
+            "maxEvaluations: Int = ..."
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesScoreDistribution",
+      "summary": "Calibrate this kernel's squared Mahalanobis-von-Mises score at finite concentration.",
+      "contract": "Calibrate this kernel's squared Mahalanobis-von-Mises score at finite concentration. Value parameters absoluteTolerance probability integration tolerance in [1e-12,1e-4], default 1e-10 maxEvaluations per-probability integrand budget, default 100000 Attributes Returns immutable reusable score distribution; supports up to 10000 linear coordinates Example kernel.scoreDistribution().inverseSurvival(0.05)",
+      "example": "receiver.scoreDistribution(absoluteTolerance, maxEvaluations)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesKL",
       "name": "productElementNames",
       "anchor": "productElementNames-0",
@@ -156553,6 +156575,156 @@
       "example": "receiver.productIterator",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesKL.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",
+      "name": "apply",
+      "anchor": "apply-fffff677",
+      "signature": "def apply(linearDimension: Int, kappa: Double, absoluteTolerance: Double = ..., maxEvaluations: Int = ...): GaussVonMisesScoreDistribution",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "linearDimension: Int",
+            "kappa: Double",
+            "absoluteTolerance: Double = ...",
+            "maxEvaluations: Int = ..."
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesScoreDistribution",
+      "summary": "Build reusable finite-concentration score calibration, independent of means/coupling.",
+      "contract": "Build reusable finite-concentration score calibration, independent of means/coupling. Value parameters absoluteTolerance probability integration tolerance in [1e-12,1e-4], default 1e-10 kappa concentration in [0,1e8] linearDimension number of Gaussian coordinates, in [1,10000] maxEvaluations integrand budget per probability call in [32,1000000], default 100000 Attributes Returns immutable calibrator; invalid arguments throw IllegalArgumentException Example GaussVonMisesScoreDistribution(2, 4.5).quantile(0.95)",
+      "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.apply(linearDimension, kappa, absoluteTolerance, maxEvaluations)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",
+      "name": "cdf",
+      "anchor": "cdf-5b2",
+      "signature": "def cdf(score: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "score: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Cumulative probability P(M <= score) for a draw from the specified fixed GVM law.",
+      "contract": "Cumulative probability P(M <= score) for a draw from the specified fixed GVM law. Value parameters score squared score; negative values and infinities are allowed, NaN is rejected Attributes Returns probability in [0,1], with numerical rather than statistical error Example calibration.cdf(5.0)",
+      "example": "receiver.cdf(score)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",
+      "name": "cdfEstimate",
+      "anchor": "cdfEstimate-7cd",
+      "signature": "def cdfEstimate(score: Double): GaussVonMisesScoreProbability",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "score: Double"
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesScoreProbability",
+      "summary": "CDF with numerical diagnostics; see cdf for the score contract.",
+      "contract": "CDF with numerical diagnostics; see cdf for the score contract. Value parameters score squared score, including +/-Infinity but not NaN Attributes Returns immutable estimate, error estimate, truncation bound and evaluation count Example calibration.cdfEstimate(5.0).estimatedAbsoluteError",
+      "example": "receiver.cdfEstimate(score)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",
+      "name": "inverseSurvival",
+      "anchor": "inverseSurvival-5b2",
+      "signature": "def inverseSurvival(tailProbability: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "tailProbability: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Squared-score threshold exceeded with the specified modeled upper-tail probability.",
+      "contract": "Squared-score threshold exceeded with the specified modeled upper-tail probability. Value parameters tailProbability in [0,1]; interior smaller tail must be >=100*absoluteTolerance Attributes Returns threshold; +Infinity at tail 0 and zero at tail 1 Example calibration.inverseSurvival(0.05)",
+      "example": "receiver.inverseSurvival(tailProbability)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",
+      "name": "quantile",
+      "anchor": "quantile-5b2",
+      "signature": "def quantile(probability: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "probability: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Squared-score threshold containing the requested modeled probability mass.",
+      "contract": "Squared-score threshold containing the requested modeled probability mass. Value parameters probability in [0,1]; interior smaller tail must be >=100*absoluteTolerance Attributes Returns threshold; 0 at probability 0, +Infinity at 1; not a parameter confidence interval Example calibration.quantile(0.95)",
+      "example": "receiver.quantile(probability)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",
+      "name": "survival",
+      "anchor": "survival-5b2",
+      "signature": "def survival(score: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "score: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Direct upper-tail probability P(M > score), avoiding subtraction from one.",
+      "contract": "Direct upper-tail probability P(M > score), avoiding subtraction from one. Value parameters score squared score, not its square root; NaN is rejected Attributes Returns upper-tail probability in [0,1]; very small probabilities may underflow Example calibration.survival(kernel.mahalanobisSquared(point))",
+      "example": "receiver.survival(score)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",
+      "name": "survivalEstimate",
+      "anchor": "survivalEstimate-7cd",
+      "signature": "def survivalEstimate(score: Double): GaussVonMisesScoreProbability",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "score: Double"
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesScoreProbability",
+      "summary": "Direct survival probability with numerical diagnostics.",
+      "contract": "Direct survival probability with numerical diagnostics. Value parameters score squared score, including +/-Infinity but not NaN Attributes Returns immutable numerical estimate; no chi-square approximation at finite concentration Example calibration.survivalEstimate(10.0).value",
+      "example": "receiver.survivalEstimate(score)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.InverseGamma",

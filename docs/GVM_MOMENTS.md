@@ -209,8 +209,9 @@ avoiding a potentially wrong principal square root of a complex determinant.
 
 Local acceptance: 15 focused moment/conditional tests, all 220 modernization regressions
 across 17 suites, both GVM executable examples, Scala API generation and thin-library
-packaging pass. The previous kernel/KL milestone is on main at CI-verified `3615e26e`;
-this new increment still needs its own remote CI and main integration.
+packaging pass. This moments increment subsequently passed
+[remote CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34173645295) at
+`df5a7bf4` and was integrated on main. Later increments retain their own CI gates.
 
 The [focused suite](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GaussVonMisesMomentsTest.scala)
 checks independent 80-digit complex-matrix fixtures, joint-density integration,
@@ -220,7 +221,8 @@ calls, cancellation, overflow and exact conditional factorization/sampling.
 The [optional oracle](../tools/gauss_von_mises_moments_reference.py) uses `mpmath==1.3.0`
 outside the Figaro runtime and prints fixtures without writing files.
 
-Next: finite-concentration calibration for [Mahalanobis-von-Mises scores](GVM_DIAGNOSTICS.md).
+The next increment, [finite-concentration score calibration](GVM_SCORE_CALIBRATION.md),
+is now locally validated on the development branch, with its own remote CI gate.
 Gradients and general quadrature remain separate increments. Bhattacharyya divergence
 and mutual information remain lower-priority research. This milestone does not add
 report ingestion, fusion, filtering or propagation.

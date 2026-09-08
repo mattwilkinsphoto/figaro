@@ -1,11 +1,11 @@
 # Joint Gauss-von Mises: development preview
 
-Status: the fixed joint kernel and KL/residual diagnostics are integrated on main at
-`3615e26e`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34172281823).
+Status: the fixed joint kernel, KL/residual diagnostics and moments/conditionals are on
+main at `df5a7bf4`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34173645295).
 **Standalone publication was approved by the maintainer on 2026-09-07.** This is not
-a tagged release or replacement for the RC1 bundle. The added [moments/conditional
-helpers](GVM_MOMENTS.md) are locally validated on `modernize/gauss-von-mises` and await
-their own remote CI/integration gates. The circular foundation was integrated earlier
+a tagged release or replacement for the RC1 bundle. The added [finite-concentration
+score calibration](GVM_SCORE_CALIBRATION.md) is locally validated on `modernize/gauss-von-mises`
+and awaits its own remote CI/integration gates. The circular foundation was integrated earlier
 at `fea8b999`.
 
 ## Overview
@@ -128,7 +128,9 @@ sampling comparisons and an executable hierarchical model with angular evidence.
 Canonical residuals/inversion, squared Mahalanobis-von-Mises scores and analytic KL
 are documented with all added APIs, three examples and numerical limits in the
 [GVM diagnostics guide](GVM_DIAGNOSTICS.md). These are deterministic kernel utilities,
-not new inference algorithms or calibrated decision thresholds.
+not new inference algorithms. The separate [score calibration guide](GVM_SCORE_CALIBRATION.md)
+adds modeled probability thresholds for fixed kernels, with numerical error contracts
+and comparisons against the chi-square approximation.
 
 Import `com.cra.figaro.library.atomic.continuous.*`. All methods below are handwritten;
 the [compiler reference](api/README.md) also records inherited/generated functions.
@@ -188,9 +190,10 @@ and uniform limits, 120,000 prior draws, Gaussian moments and conditional circul
 residuals, disparate units, input snapshots, failure paths, real evidence weighting,
 posterior projections and exact seeded traces across worker counts.
 The diagnostics milestone passed 205 modernization regressions and remote CI at
-`3615e26e`. With the [15 moments tests](GVM_MOMENTS.md), all 220 modernization
-regressions, both expanded executable examples, Scala API generation and
-local thin-library packaging also pass. Check the exact source commit in the
+`3615e26e`; the moments increment passed CI at `df5a7bf4`. With the
+[14 calibration tests](GVM_SCORE_CALIBRATION.md), all 234 modernization regressions,
+three expanded executable examples, Scala API generation and local thin-library
+packaging pass. Check the exact source commit in the
 [branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
 before treating remote CI as passed. Existing whole-library historical-suite limits remain unchanged.
 The [optional oracle](../tools/gauss_von_mises_reference.py) prints fixtures using

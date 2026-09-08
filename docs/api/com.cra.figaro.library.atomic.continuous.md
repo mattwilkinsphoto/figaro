@@ -25571,6 +25571,30 @@ Invocation template:
 receiver.sample(rng, maxAttempts)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.scoreDistribution ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#scoreDistribution-37)
+
+```scala
+def scoreDistribution(absoluteTolerance: Double = ..., maxEvaluations: Int = ...): GaussVonMisesScoreDistribution
+```
+
+Calibrate this kernel's squared Mahalanobis-von-Mises score at finite concentration.
+
+Type parameters: none.
+
+Parameters, list 1: `` absoluteTolerance: Double = ... ``; `` maxEvaluations: Int = ... ``.
+
+Returns: `` GaussVonMisesScoreDistribution ``.
+
+Source contract/attributes: Calibrate this kernel's squared Mahalanobis-von-Mises score at finite concentration. Value parameters absoluteTolerance probability integration tolerance in [1e-12,1e-4], default 1e-10 maxEvaluations per-probability integrand budget, default 100000 Attributes Returns immutable reusable score distribution; supports up to 10000 linear coordinates Example kernel.scoreDistribution().inverseSurvival(0.05)
+
+Invocation template:
+
+```scala
+receiver.scoreDistribution(absoluteTolerance, maxEvaluations)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesKL.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesKL.html#productElementNames-0)
@@ -25617,6 +25641,174 @@ Invocation template:
 
 ```scala
 receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution$.html#apply-fffff677)
+
+```scala
+def apply(linearDimension: Int, kappa: Double, absoluteTolerance: Double = ..., maxEvaluations: Int = ...): GaussVonMisesScoreDistribution
+```
+
+Build reusable finite-concentration score calibration, independent of means/coupling.
+
+Type parameters: none.
+
+Parameters, list 1: `` linearDimension: Int ``; `` kappa: Double ``; `` absoluteTolerance: Double = ... ``; `` maxEvaluations: Int = ... ``.
+
+Returns: `` GaussVonMisesScoreDistribution ``.
+
+Source contract/attributes: Build reusable finite-concentration score calibration, independent of means/coupling. Value parameters absoluteTolerance probability integration tolerance in [1e-12,1e-4], default 1e-10 kappa concentration in [0,1e8] linearDimension number of Gaussian coordinates, in [1,10000] maxEvaluations integrand budget per probability call in [32,1000000], default 100000 Attributes Returns immutable calibrator; invalid arguments throw IllegalArgumentException Example GaussVonMisesScoreDistribution(2, 4.5).quantile(0.95)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.apply(linearDimension, kappa, absoluteTolerance, maxEvaluations)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html#cdf-5b2)
+
+```scala
+def cdf(score: Double): Double
+```
+
+Cumulative probability P(M <= score) for a draw from the specified fixed GVM law.
+
+Type parameters: none.
+
+Parameters, list 1: `` score: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Cumulative probability P(M <= score) for a draw from the specified fixed GVM law. Value parameters score squared score; negative values and infinities are allowed, NaN is rejected Attributes Returns probability in [0,1], with numerical rather than statistical error Example calibration.cdf(5.0)
+
+Invocation template:
+
+```scala
+receiver.cdf(score)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.cdfEstimate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html#cdfEstimate-7cd)
+
+```scala
+def cdfEstimate(score: Double): GaussVonMisesScoreProbability
+```
+
+CDF with numerical diagnostics; see cdf for the score contract.
+
+Type parameters: none.
+
+Parameters, list 1: `` score: Double ``.
+
+Returns: `` GaussVonMisesScoreProbability ``.
+
+Source contract/attributes: CDF with numerical diagnostics; see cdf for the score contract. Value parameters score squared score, including +/-Infinity but not NaN Attributes Returns immutable estimate, error estimate, truncation bound and evaluation count Example calibration.cdfEstimate(5.0).estimatedAbsoluteError
+
+Invocation template:
+
+```scala
+receiver.cdfEstimate(score)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.inverseSurvival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html#inverseSurvival-5b2)
+
+```scala
+def inverseSurvival(tailProbability: Double): Double
+```
+
+Squared-score threshold exceeded with the specified modeled upper-tail probability.
+
+Type parameters: none.
+
+Parameters, list 1: `` tailProbability: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Squared-score threshold exceeded with the specified modeled upper-tail probability. Value parameters tailProbability in [0,1]; interior smaller tail must be >=100*absoluteTolerance Attributes Returns threshold; +Infinity at tail 0 and zero at tail 1 Example calibration.inverseSurvival(0.05)
+
+Invocation template:
+
+```scala
+receiver.inverseSurvival(tailProbability)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html#quantile-5b2)
+
+```scala
+def quantile(probability: Double): Double
+```
+
+Squared-score threshold containing the requested modeled probability mass.
+
+Type parameters: none.
+
+Parameters, list 1: `` probability: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Squared-score threshold containing the requested modeled probability mass. Value parameters probability in [0,1]; interior smaller tail must be >=100*absoluteTolerance Attributes Returns threshold; 0 at probability 0, +Infinity at 1; not a parameter confidence interval Example calibration.quantile(0.95)
+
+Invocation template:
+
+```scala
+receiver.quantile(probability)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html#survival-5b2)
+
+```scala
+def survival(score: Double): Double
+```
+
+Direct upper-tail probability P(M > score), avoiding subtraction from one.
+
+Type parameters: none.
+
+Parameters, list 1: `` score: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Direct upper-tail probability P(M > score), avoiding subtraction from one. Value parameters score squared score, not its square root; NaN is rejected Attributes Returns upper-tail probability in [0,1]; very small probabilities may underflow Example calibration.survival(kernel.mahalanobisSquared(point))
+
+Invocation template:
+
+```scala
+receiver.survival(score)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.survivalEstimate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html#survivalEstimate-7cd)
+
+```scala
+def survivalEstimate(score: Double): GaussVonMisesScoreProbability
+```
+
+Direct survival probability with numerical diagnostics.
+
+Type parameters: none.
+
+Parameters, list 1: `` score: Double ``.
+
+Returns: `` GaussVonMisesScoreProbability ``.
+
+Source contract/attributes: Direct survival probability with numerical diagnostics. Value parameters score squared score, including +/-Infinity but not NaN Attributes Returns immutable numerical estimate; no chi-square approximation at finite concentration Example calibration.survivalEstimate(10.0).value
+
+Invocation template:
+
+```scala
+receiver.survivalEstimate(score)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.InverseGamma.apply ``

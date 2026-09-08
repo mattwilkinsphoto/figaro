@@ -126,7 +126,8 @@ delta = wrap(theta - m(x))
 
 The score itself is exact, not a Gaussian-angle approximation. Its null distribution
 is not generally chi-square with n+1 degrees of freedom: at kappa=0 it is chi-square
-with n degrees of freedom. Finite-concentration threshold calibration is deferred.
+with n degrees of freedom. The separate [finite-concentration calibration module](GVM_SCORE_CALIBRATION.md)
+now supplies numerical CDFs, direct upper tails and thresholds for a known fixed kernel.
 
 For two GVMs P and Q, the KL chain rule gives the following derived expression:
 
@@ -193,8 +194,9 @@ Per-call scratch arrays are private, so immutable kernels can be shared between 
 - At kappa=0, scoring and KL ignore irrelevant angular coupling. Canonical conversion
   deliberately still uses the specified center, so extreme irrelevant parameters can
   overflow that conversion even when density/scoring remain usable.
-- No operational thresholds, finite-kappa confidence regions, or speedup claims are
-  supplied by this milestone. Those require separate calibration and benchmarks.
+- This score/KL milestone alone does not supply probability thresholds or speedup claims.
+  The separate [calibration module](GVM_SCORE_CALIBRATION.md) adds modeled score regions,
+  not fitted-parameter confidence regions or operational decision policies.
 
 ## Verification and follow-on work
 
@@ -220,10 +222,12 @@ Lower-priority research items, not implemented APIs:
   not a distance between two GVMs. Conditional entropy is analytic; investigate Fourier
   evaluation of the angular marginal and validated entropy integration. Require zero
   for uncoupled/uniform cases, nonnegativity and independent numerical checks.
-- [Analytic circular/mixed moments and the exact angular conditional](GVM_MOMENTS.md)
-  are now implemented in the development branch. Finite-concentration score thresholds,
-  additional conditionals and gradients remain separate increments. Generic quadrature needs its
-  own approximation/negative-weight assessment. No fusion or propagation scope is added.
+
+[Analytic circular/mixed moments and the exact angular conditional](GVM_MOMENTS.md)
+are integrated on main at CI-verified `df5a7bf4`. [Finite-concentration score thresholds](GVM_SCORE_CALIBRATION.md)
+are now implemented on the development branch, with independent calibration tests.
+Additional conditionals and gradients remain separate increments. Generic quadrature needs
+its own approximation/negative-weight assessment. No fusion or propagation scope is added.
 
 Related: [joint GVM](GAUSS_VON_MISES.md), [circular foundation](VON_MISES.md),
 [roadmap](../ROADMAP.md), [wishlist](../WISHLIST.md), [milestone plan](GAUSS_VON_MISES_PLAN.md).
