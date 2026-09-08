@@ -20,6 +20,7 @@ These are every public function added for onboarding. Import `com.cra.figaro.exa
 
 | Public function | Parameters | Returns / side effects | Example |
 | --- | --- | --- | --- |
+| `DistributionConstructionsExample.main(args: Array[String]): Unit` | Empty arguments; documentation package | Checks transformed/truncated laws, hierarchical full-covariance GMM inference, Gaussian information and zero-adjusted counts; cleans up its model | `DistributionConstructionsExample.main(Array.empty[String])` |
 | `GaussVonMisesExample.main(args: Array[String]): Unit` | Empty arguments; import from `com.cra.figaro.example.documentation` | Development preview: checks prior residuals, full-observation likelihoods, posterior projections, canonical inversion, Mahalanobis scoring and analytic KL; prints results and cleans up models | `GaussVonMisesExample.main(Array.empty[String])` |
 | `GaussVonMisesMomentsExample.main(args: Array[String]): Unit` | Empty arguments; same documentation package | Compares analytic/sample moments, factors a conditional density and checks an explicit hierarchical angular-evidence model against quadrature; prints results and cleans up | `GaussVonMisesMomentsExample.main(Array.empty[String])` |
 | `GaussVonMisesScoreExample.main(args: Array[String]): Unit` | Empty arguments; same documentation package | Compares finite-concentration and approximate thresholds, evaluates a direct score tail and checks known-kernel sample coverage; no model/global RNG | `GaussVonMisesScoreExample.main(Array.empty[String])` |

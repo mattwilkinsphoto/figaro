@@ -5,9 +5,10 @@ import org.apache.commons.math3.special.{Gamma as G, Beta as B, Erf}
 import org.apache.commons.math3.distribution.NormalDistribution
 
 /** Immutable scalar law in Lebesgue measure; no RNG or universe is retained.
-  * All seven implementations are documented in docs/COMMON_DISTRIBUTIONS.md.
+  * Kernels must provide continuous (not mixed/atomic) probability laws, consistent
+  * CDF/direct survival and quantiles. See docs/DISTRIBUTION_CONSTRUCTIONS.md.
   */
-sealed trait ScalarDistribution {
+trait ScalarDistribution {
   /** @param x real argument (NaN rejected)
     * @return natural-log density; a singular finite boundary can return positive infinity
     * @example `StudentTDistribution(5).logDensity(2)`
@@ -35,16 +36,16 @@ sealed trait ScalarDistribution {
   def quantile(p: Double): Double
   /** @return support infimum and supremum; endpoint density conventions are family-specific */
   def support: (Double,Double)
-  /** @return None if undefined; Some(infinity) can indicate moment overflow */
+  /** @return None if undefined or not implemented; Some(infinity) can indicate moment overflow */
   def mean: Option[Double]
-  /** @return None if undefined; Some(infinity) for infinite variance or numeric overflow */
+  /** @return None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow */
   def variance: Option[Double]
   /** Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
     * @param rng non-null caller-owned RNG; do not share it concurrently
     * @return finite supported draw; numeric collapse to a singular endpoint throws
     * @example `StudentTDistribution(5).sample(new scala.util.Random(42))`
     */
-  final def sample(rng: scala.util.Random): Double = {
+  def sample(rng: scala.util.Random): Double = {
     val x=quantile(N.open(rng))
     if(!x.isFinite || !logDensity(x).isFinite) throw new ArithmeticException("sample collapsed outside finite-density support")
     x

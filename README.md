@@ -44,6 +44,7 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Distribution constructions and Gaussian mixtures](docs/DISTRIBUTION_CONSTRUCTIONS.md): transformations, truncation, scalar/vector mixtures, zero-adjusted counts, Gaussian KL/Bhattacharyya and partitioned Gaussian MI; [acceptance status](docs/DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md).
 - [Common distribution families](docs/COMMON_DISTRIBUTIONS.md): Student t, Cauchy, Laplace, lognormal, Weibull, triangular, Kumaraswamy, negative binomial and hypergeometric, with observation-ready adapters and parameter conventions.
 - [Common information measures](docs/COMMON_INFORMATION_METRICS.md): same-family KL/Bhattacharyya and explicit finite-table mutual information, with analytic reductions, work budgets and numerical refusals.
 - [Circular von Mises](docs/VON_MISES.md): reusable angular density/sampling, circular summaries, conditional observations and inference limits.

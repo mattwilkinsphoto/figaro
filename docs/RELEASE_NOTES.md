@@ -12,6 +12,16 @@ cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
 
+- [Distribution constructions and GMMs](DISTRIBUTION_CONSTRUCTIONS.md): affine/exp laws,
+  finite truncation, continuous scalar mixtures, full-covariance Gaussian mixtures and
+  zero-adjusted count laws. Includes Gaussian KL/Bhattacharyya and partition MI,
+  transformation invariance and same-base zero-adjustment metric reductions, stable
+  observation likelihoods and scoped draws. The existing multivariate Normal atomic
+  adapter now uses stable log likelihoods and explicit Gaussian numeric limits;
+  [migration notes](MIGRATION.md) describe seeded-sequence and validation changes.
+  GMM fitting and generic mixture information estimators are not included. See
+  [actual acceptance status](DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md).
+
 - [Nine common distribution families](COMMON_DISTRIBUTIONS.md): Student t, Cauchy,
   Laplace, lognormal, Weibull, triangular, Kumaraswamy, negative binomial and
   hypergeometric. Immutable kernels supply log density/mass, CDF, direct survival,

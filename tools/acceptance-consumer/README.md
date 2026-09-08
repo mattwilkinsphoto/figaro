@@ -6,6 +6,9 @@ test classpath leakage that an in-repository example could miss.
 
 ## Quick start
 
+The current check includes [distribution constructions and GMMs](../../docs/DISTRIBUTION_CONSTRUCTIONS.md),
+Gaussian KL/Bhattacharyya/partition MI, and observation-ready scalar/count/vector adapters.
+
 1. From the Figaro root run `sbt "figaro / publishLocal"`.
 2. Set `FIGARO_EXPECTED_SHA256` to the SHA-256 of the built thin Figaro jar.
 3. From this directory run `sbt "runMain FigaroConsumerCheck"` with the same JDK/local repository settings.

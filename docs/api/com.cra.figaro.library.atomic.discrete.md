@@ -19420,3 +19420,267 @@ Invocation template:
 ```scala
 com.cra.figaro.library.atomic.discrete.Util.generateGeometric(probFail)
 ```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#cdf-640)
+
+```scala
+def cdf(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X<=k) Example NegativeBinomialDistribution(2,.5).cdf(4)
+
+Invocation template:
+
+```scala
+receiver.cdf(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.logProbability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#logProbability-640)
+
+```scala
+def logProbability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count (negative integers are outside these supports) Attributes Returns natural log probability mass, or negative infinity outside support Example NegativeBinomialDistribution(2.5,.4).logProbability(3)
+
+Invocation template:
+
+```scala
+receiver.logProbability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#mean-0)
+
+```scala
+def mean: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical mean in count units
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#quantile-fffff1ae)
+
+```scala
+def quantile(p: Double): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns smallest supported count with CDF>=p; unbounded p=1 and Int overflow throw Example HypergeometricDistribution(20,7,5).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#support-0)
+
+```scala
+def support: (Int, Option[Int])
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Int, Option[Int]) ``.
+
+Source contract/attributes: Attributes Returns minimum count and optional finite maximum; None means mathematically unbounded
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#survival-640)
+
+```scala
+def survival(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X>k), evaluated directly Example NegativeBinomialDistribution(2,.5).survival(4)
+
+Invocation template:
+
+```scala
+receiver.survival(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#variance-0)
+
+```scala
+def variance: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical variance in squared count units
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.probability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#probability-640)
+
+```scala
+final def probability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns mass, subject to exponential underflow Example HypergeometricDistribution(20,7,5).probability(2) Inherited from: CountDistribution
+
+Invocation template:
+
+```scala
+receiver.probability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.discrete.ZeroAdjustedDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ZeroAdjustedDistribution.html#sample-360)
+
+```scala
+final def sample(rng: Random): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters rng non-null caller-owned RNG Attributes Returns count from inverse transform; out-of-Int tail draws throw, never clip Example NegativeBinomialDistribution(2,.5).sample(new scala.util.Random(42)) Inherited from: CountDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```

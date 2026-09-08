@@ -48,6 +48,18 @@ object ScalarDivergence {
     check()
     if(p.getClass != q.getClass) return M.unavailable(Unsupported)
     if(p == q) return M.identity
+    (p,q) match {
+      case (a: AffineDistribution,b: AffineDistribution) if a.offset == b.offset && a.multiplier == b.multiplier =>
+        return compare(a.base,b.base,overlap,tol,budget,cancelled).copy(method="common affine transform")
+      case (a: ExpDistribution,b: ExpDistribution) =>
+        return compare(a.base,b.base,overlap,tol,budget,cancelled).copy(method="common exponential transform")
+      case (a: GaussianDistribution,b: GaussianDistribution) =>
+        return if(overlap) GaussianInformation.bhattacharyya(GaussianInformation.scalar(a),GaussianInformation.scalar(b),tol)
+          else GaussianInformation.kl(GaussianInformation.scalar(a),GaussianInformation.scalar(b),tol)
+      case (_: StudentTDistribution | _: CauchyDistribution | _: LaplaceDistribution | _: LogNormalDistribution |
+            _: WeibullDistribution | _: TriangularDistribution | _: KumaraswamyDistribution,_) => ()
+      case _ => return M.unavailable(Unsupported)
+    }
     if(!overlap && (p.support._1 < q.support._1 || p.support._2 > q.support._2)) return M.infinite
     if(overlap && math.max(p.support._1,q.support._1) >= math.min(p.support._2,q.support._2)) return M.infinite
     def logCosh(x: Double): Double = { val a=math.abs(x); a+math.log1p(math.exp(-2*a))-math.log(2) }

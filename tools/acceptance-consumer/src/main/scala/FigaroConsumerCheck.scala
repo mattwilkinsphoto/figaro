@@ -76,6 +76,33 @@ object FigaroConsumerCheck {
       println("Published common-family APIs: nine adapters, scalar/count divergences and joint-table MI passed")
     }
 
+    {
+      import com.cra.figaro.library.atomic.continuous.*
+      import com.cra.figaro.library.atomic.discrete.*
+      val gaussian=GaussianDistribution(0,1)
+      val truncated=TruncatedDistribution(gaussian,8,9)
+      require(math.abs(truncated.cdf(truncated.quantile(.4))-.4) < 1e-10)
+      require(AffineDistribution(gaussian,2,-1).quantile(.5) == 2)
+      require(ExpDistribution(gaussian).quantile(.5) == 1)
+      val vector=MultivariateGaussianDistribution(Vector(0.0,1.0),Vector(Vector(2.0,.3),Vector(.3,1.0)))
+      val other=MultivariateGaussianDistribution(Vector(1.0,-1.0),Vector(Vector(1.0,-.2),Vector(-.2,3.0)))
+      val mixture=GaussianMixtureDistribution(Vector(.25,.75),Vector(vector,other))
+      require(math.abs(mixture.logDensity(Vector(.2,-.4))+2.8382108120770378) < 1e-12)
+      require(math.abs(GaussianInformation.kl(vector,other).value.get-1.4690430131387152) < 1e-12)
+      require(math.abs(GaussianInformation.bhattacharyya(vector,other).value.get-.45776780271643533) < 1e-12)
+      require(math.abs(GaussianInformation.mutualInformation(vector,Vector(0)).value.get-.0230219692507034) < 1e-12)
+      val constructionUniverse=new Universe
+      try {
+        val scalar=ScalarElement(ScalarMixtureDistribution(Vector(.4,.6),Vector(gaussian,GaussianDistribution(2,1))))(using "scalar",constructionUniverse)
+        require(scalar.logDensity(100).isFinite)
+        val counts=CountElement(ZeroAdjustedDistribution(NegativeBinomialDistribution(2,.5),.3,true))(using "counts",constructionUniverse)
+        require(math.abs(counts.logDensity(0)-math.log(.3)) < 1e-12)
+        val element=GaussianMixture(mixture)(using "mixture",constructionUniverse)
+        require(element.logDensity(Vector(.2,-.4)).isFinite)
+      } finally constructionUniverse.clear()
+      println("Published construction APIs: transformations, truncation, zero adjustment, GMM and Gaussian information passed")
+    }
+
     val universe=Universe.createNew()
     val cause=Flip(0.3)(using "", universe)
     cause.addConstraint(b => if (b) 0.8 else 0.2)

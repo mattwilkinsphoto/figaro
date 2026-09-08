@@ -93,6 +93,11 @@ jobs:
           "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussVonMisesMutualInformationTest;
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesMutualInformationExample"
 
+      - name: Verify distribution constructions, Gaussian mixtures and Gaussian information
+        run: |
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.DistributionConstructionsTest"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.documentation.DistributionConstructionsExample"
+
       - name: Verify common families and information measures
         run: >-
           sbt --server --batch

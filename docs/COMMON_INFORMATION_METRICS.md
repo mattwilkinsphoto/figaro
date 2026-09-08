@@ -13,6 +13,14 @@ by `math.log(2)` for bits. None is a replacement for a calibrated Mahalanobis sc
 Existing [GVM diagnostics](GVM_DIAGNOSTICS.md) and [GVM MI](GVM_MUTUAL_INFORMATION.md)
 remain separate, unchanged entry points.
 
+The [Gaussian and construction extension](DISTRIBUTION_CONSTRUCTIONS.md#gaussian-information)
+adds scalar/full-covariance Gaussian KL/Bhattacharyya and partitioned joint-Gaussian MI.
+`ScalarDivergence` also reuses exact invariance under a common affine or exponential
+transformation; `CountDivergence` reduces zero-adjusted laws sharing the same base to
+their zero/positive category probabilities. Non-identical mixtures, truncated laws,
+unmatched transformations and differently based zero adjustments remain unsupported.
+GMM kernels do not imply that Gaussian-only formulas apply to an entire mixture.
+
 ## Quick start: three steps
 
 1. Construct two laws in the same units:

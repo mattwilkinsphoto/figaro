@@ -5,6 +5,270 @@
 
 Examples are call templates: supply the named arguments with the declared types. Context parameters are shown explicitly with `using`; defaults may be omitted in real calls. `receiver` denotes an existing instance of the listed owner. Type parameters must be in scope. Abstract members require a concrete implementation. The signature, not a template, is authoritative.
 
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#cdf-5b2)
+
+```scala
+def cdf(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)
+
+Invocation template:
+
+```scala
+receiver.cdf(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#mean-0)
+
+```scala
+def mean: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#quantile-5b2)
+
+```scala
+def quantile(p: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#support-0)
+
+```scala
+def support: (Double, Double)
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Double, Double) ``.
+
+Source contract/attributes: Attributes Returns support infimum and supremum; endpoint density conventions are family-specific
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#survival-5b2)
+
+```scala
+def survival(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)
+
+Invocation template:
+
+```scala
+receiver.survival(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#variance-0)
+
+```scala
+def variance: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#density-5b2)
+
+```scala
+final def density(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AffineDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AffineDistribution.html#sample-fffffec0)
+
+```scala
+def sample(rng: Random): Double
+```
+
+Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.MAPValue ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#MAPValue-0)
@@ -6079,6 +6343,1144 @@ Invocation template:
 receiver.unset()
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.generateRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#generateRandomness-fffffff7)
+
+```scala
+def generateRandomness(): Vector[Double]
+```
+
+Generate the randomness content.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Generate the randomness content. Attributes
+
+Invocation template:
+
+```scala
+receiver.generateRandomness()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.generateValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#generateValue-ae0)
+
+```scala
+def generateValue(value: Vector[Double]): Vector[Double]
+```
+
+Generate the value of the element deterministically given its randomness and the values of its arguments.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Vector[Double] ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes
+
+Invocation template:
+
+```scala
+receiver.generateValue(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#logDensity-f10)
+
+```scala
+def logDensity(value: Vector[Double]): Double
+```
+
+Evaluate log density in the element's reference measure.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Evaluate log density in the element's reference measure. Value parameters value value to score Attributes Returns finite log density or negative infinity for zero density; reject malformed inputs
+
+Invocation template:
+
+```scala
+receiver.logDensity(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.logp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#logp-f10)
+
+```scala
+def logp(value: Vector[Double]): Double
+```
+
+Log-likelihood of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Log-likelihood of a value. Attributes
+
+Invocation template:
+
+```scala
+receiver.logp(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.!== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#!==-894)
+
+```scala
+def !==(that: Element[Value])(implicit universe: Universe): Neq[Vector[Double]]
+```
+
+The element that tests inequality of this element with another element.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Element[Value] ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Neq[Vector[Double]] ``.
+
+Source contract/attributes: The element that tests inequality of this element with another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.!==(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.=== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#===-f71)
+
+```scala
+def ===(that: Value)(implicit universe: Universe): Apply1[Vector[Double], Boolean]
+```
+
+The element that tests whether the value of this element is equal to a particular value.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Value ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Apply1[Vector[Double], Boolean] ``.
+
+Source contract/attributes: The element that tests whether the value of this element is equal to a particular value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.===(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.=== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#===-672)
+
+```scala
+def ===(that: Element[Value])(implicit universe: Universe): Eq[Vector[Double]]
+```
+
+The element that tests equality of this element with another element.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Element[Value] ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Eq[Vector[Double]] ``.
+
+Source contract/attributes: The element that tests equality of this element with another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.===(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.activate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#activate-94c)
+
+```scala
+def activate(): Unit
+```
+
+Activate the element in its universe.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Activate the element in its universe. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.activate()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.addCondition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#addCondition-fffff9ad)
+
+```scala
+def addCondition(condition: Condition, contingency: Contingency = ...): Unit
+```
+
+Add the given condition to the existing conditions of the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` condition: Condition ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add the given condition to the existing conditions of the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addCondition(condition, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.addConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#addConstraint-fffff9ad)
+
+```scala
+def addConstraint(constraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Add a contingent constraint to the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` constraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addConstraint(constraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.addLogConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#addLogConstraint-fffff9ad)
+
+```scala
+def addLogConstraint(constraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Add a log contingent constraint to the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` constraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a log contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addLogConstraint(constraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.addPragma ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#addPragma-b53)
+
+```scala
+def addPragma(pragma: Pragma[Value]): Unit
+```
+
+Add a pragma to the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` pragma: Pragma[Value] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a pragma to the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addPragma(pragma)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.allConditions ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#allConditions-0)
+
+```scala
+def allConditions: List[(Condition, Contingency)]
+```
+
+All the conditions defined on this element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[(Condition, Contingency)] ``.
+
+Source contract/attributes: All the conditions defined on this element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.allConditions
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.allConstraints ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#allConstraints-0)
+
+```scala
+def allConstraints: List[(Constraint, Contingency)]
+```
+
+The current soft constraints on the element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[(Constraint, Contingency)] ``.
+
+Source contract/attributes: The current soft constraints on the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.allConstraints
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.args ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#args-0)
+
+```scala
+def args: List[Element[_]]
+```
+
+Returns an empty list.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: Returns an empty list. Attributes Inherited from: Atomic
+
+Invocation template:
+
+```scala
+receiver.args
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.clearContext ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#clearContext-94c)
+
+```scala
+def clearContext(): Unit
+```
+
+Clears all the temporary elements associated with this element (all elements created in it's context).
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Clears all the temporary elements associated with this element (all elements created in it's context). Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.clearContext()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.condition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#condition-4ad)
+
+```scala
+def condition(value: Any): Boolean
+```
+
+Tests whether all the element's contingent conditions are satisfied for the given value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Any ``.
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Tests whether all the element's contingent conditions are satisfied for the given value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.condition(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.conditionSatisfied ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#conditionSatisfied-0)
+
+```scala
+def conditionSatisfied: Boolean
+```
+
+Determines whether the condition on the element is satisfied by the current value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Determines whether the condition on the element is satisfied by the current value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.conditionSatisfied
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.constraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#constraint-fffffeac)
+
+```scala
+def constraint(value: Any): Double
+```
+
+Gets the result of all the element's contingent constraints for the given value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Any ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Gets the result of all the element's contingent constraints for the given value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.constraint(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.constraintValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#constraintValue-0)
+
+```scala
+def constraintValue: Double
+```
+
+Determines the value of the constraint on the element applied to the current value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Determines the value of the constraint on the element applied to the current value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.constraintValue
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.context ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#context-0)
+
+```scala
+def context: List[Element[_]]
+```
+
+The elements on which the existence of this element depends.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: The elements on which the existence of this element depends. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.context
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.deactivate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#deactivate-94c)
+
+```scala
+def deactivate(): Unit
+```
+
+Deactivate the element in its universe.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Deactivate the element in its universe. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.deactivate()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#density-fffffeac)
+
+```scala
+override def density(value: Vector[Double]): Double
+```
+
+Exponentiate logDensity; small positive densities may round to zero.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity Inherited from: HasLogDensity
+
+Invocation template:
+
+```scala
+receiver.density(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.directContextContents ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#directContextContents-0)
+
+```scala
+def directContextContents: Set[Element[_]]
+```
+
+Returns the set of elements directly created in the context of this element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Set[Element[_]] ``.
+
+Source contract/attributes: Returns the set of elements directly created in the context of this element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.directContextContents
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.elementsIAmContingentOn ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#elementsIAmContingentOn-0)
+
+```scala
+def elementsIAmContingentOn: Set[Element[_]]
+```
+
+Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Set[Element[_]] ``.
+
+Source contract/attributes: Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value. Figaro takes care of handling all this under the hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample those other elements first. This method is supplied to support this use case. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.elementsIAmContingentOn
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.flatMap ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#flatMap-db8)
+
+```scala
+def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` U ``.
+
+Parameters, list 1: `` fn: Value => Element[U] ``.
+
+Context parameters, list 2: `` name: Name[U] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[U] ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.flatMap[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.generate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#generate-94c)
+
+```scala
+final def generate(): Unit
+```
+
+First generate the randomness, then generate the value given the randomness. Store the results in randomness and value.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: First generate the randomness, then generate the value given the randomness. Store the results in randomness and value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.generate()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.intervene ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#intervene-fffff71f)
+
+```scala
+def intervene(v: Value): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` v: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.intervene(v)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.isCachable ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#isCachable-0)
+
+```scala
+def isCachable: Boolean
+```
+
+The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.isCachable
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.isTemporary ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#isTemporary-0)
+
+```scala
+def isTemporary: Boolean
+```
+
+Returns true if this element is temporary, that is, was created in the context of another element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.isTemporary
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.map ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#map-db8)
+
+```scala
+def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` U ``.
+
+Parameters, list 1: `` fn: Value => U ``.
+
+Context parameters, list 2: `` name: Name[U] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[U] ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.nextRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#nextRandomness-fffff446)
+
+```scala
+override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
+```
+
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
+
+Type parameters: none.
+
+Parameters, list 1: `` oldRandomness: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
+
+Invocation template:
+
+```scala
+receiver.nextRandomness(oldRandomness)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.observe ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#observe-fffff71f)
+
+```scala
+def observe(observation: Value): Unit
+```
+
+Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated.
+
+Type parameters: none.
+
+Parameters, list 1: `` observation: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.observe(observation)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.pragmas ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#pragmas-0)
+
+```scala
+def pragmas: List[Pragma[Value]]
+```
+
+The pragmas attached to the element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Pragma[Value]] ``.
+
+Source contract/attributes: The pragmas attached to the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.pragmas
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.removeConditions ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#removeConditions-71e)
+
+```scala
+def removeConditions(contingency: Contingency = ...): Unit
+```
+
+Remove all conditions associated with the given contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove all conditions associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removeConditions(contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.removeConstraints ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#removeConstraints-71e)
+
+```scala
+def removeConstraints(contingency: Contingency = ...): Unit
+```
+
+Remove all constraints associated with the given contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove all constraints associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removeConstraints(contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.removePragma ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#removePragma-b53)
+
+```scala
+def removePragma(pragma: Pragma[Value]): Unit
+```
+
+Remove a pragma from the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` pragma: Pragma[Value] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove a pragma from the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removePragma(pragma)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.score ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#score-fffffdbf)
+
+```scala
+def score(oldValue: Value, newValue: Value): Double
+```
+
+Compute the constraints on the new value divided by the constraints on the old value.
+
+Type parameters: none.
+
+Parameters, list 1: `` oldValue: Value ``; `` newValue: Value ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Compute the constraints on the new value divided by the constraints on the old value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.score(oldValue, newValue)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.set ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#set-fffff71f)
+
+```scala
+def set(newValue: Value): Unit
+```
+
+Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called.
+
+Type parameters: none.
+
+Parameters, list 1: `` newValue: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.set(newValue)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.setCondition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#setCondition-fffff9ad)
+
+```scala
+def setCondition(newCondition: Condition, contingency: Contingency = ...): Unit
+```
+
+Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newCondition: Condition ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setCondition(newCondition, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.setConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#setConstraint-fffff9ad)
+
+```scala
+def setConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newConstraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setConstraint(newConstraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.setLogConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#setLogConstraint-fffff9ad)
+
+```scala
+def setLogConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newConstraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setLogConstraint(newConstraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.setRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#setRandomness-fffff71f)
+
+```scala
+def setRandomness(newRandomness: Randomness): Unit
+```
+
+Set the randomness of this element.
+
+Type parameters: none.
+
+Parameters, list 1: `` newRandomness: Randomness ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the randomness of this element. Will generate its value using the new randomness and propagate the effects to elements that depend on it without changing their randomness. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setRandomness(newRandomness)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.toNameString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#toNameString-0)
+
+```scala
+def toNameString: String
+```
+
+A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.toNameString
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.unintervene ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#unintervene-94c)
+
+```scala
+def unintervene(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unintervene()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.unobserve ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#unobserve-94c)
+
+```scala
+def unobserve(): Unit
+```
+
+Removes conditions on the element and allows different values of the element to be generated.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Removes conditions on the element and allows different values of the element to be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unobserve()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGaussianMixture.unset ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGaussianMixture.html#unset-94c)
+
+```scala
+def unset(): Unit
+```
+
+Allows different values of the element to be generated.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Allows different values of the element to be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unset()
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.AtomicInverseGamma.density ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html#density-5b2)
@@ -7222,7 +8624,7 @@ receiver.unset()
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicMultivariateNormal.html#density-fffffaeb)
 
 ```scala
-def density(d: List[Double]): Double
+override def density(d: List[Double]): Double
 ```
 
 Density of a value.
@@ -7233,7 +8635,7 @@ Parameters, list 1: `` d: List[Double] ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Density of a value. Attributes
+Source contract/attributes: Density of a value. Attributes Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -7287,6 +8689,54 @@ Invocation template:
 
 ```scala
 receiver.generateValue(rand)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicMultivariateNormal.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicMultivariateNormal.html#logDensity-fffffaeb)
+
+```scala
+def logDensity(value: List[Double]): Double
+```
+
+Evaluate log density in the element's reference measure.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: List[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Evaluate log density in the element's reference measure. Value parameters value value to score Attributes Returns finite log density or negative infinity for zero density; reject malformed inputs
+
+Invocation template:
+
+```scala
+receiver.logDensity(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicMultivariateNormal.logp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicMultivariateNormal.html#logp-fffffaeb)
+
+```scala
+override def logp(value: List[Double]): Double
+```
+
+Log-likelihood of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: List[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Log-likelihood of a value. Attributes Definition Classes MultivariateNormal -> Continuous
+
+Invocation template:
+
+```scala
+receiver.logp(value)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicMultivariateNormal.toString ``
@@ -7921,30 +9371,6 @@ Invocation template:
 receiver.isTemporary
 ```
 
-## `` com.cra.figaro.library.atomic.continuous.AtomicMultivariateNormal.logp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicMultivariateNormal.html#logp-fffffaeb)
-
-```scala
-def logp(value: List[Double]): Double
-```
-
-Log-likelihood of a value.
-
-Type parameters: none.
-
-Parameters, list 1: `` value: List[Double] ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Log-likelihood of a value. Attributes Inherited from: MultivariateNormal
-
-Invocation template:
-
-```scala
-receiver.logp(value)
-```
-
 ## `` com.cra.figaro.library.atomic.continuous.AtomicMultivariateNormal.map ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicMultivariateNormal.html#map-db8)
@@ -7979,7 +9405,7 @@ receiver.map[U](fn)(using name, collection)
 override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
 ```
 
-Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
 
 Type parameters: none.
 
@@ -7987,7 +9413,7 @@ Parameters, list 1: `` oldRandomness: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
 
 Invocation template:
 
@@ -14375,7 +15801,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) can indicate moment overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
 
 Invocation template:
 
@@ -14471,7 +15897,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) for infinite variance or numeric overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
 
 Invocation template:
 
@@ -14556,7 +15982,7 @@ receiver.productIterator
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/CauchyDistribution.html#sample-fffffec0)
 
 ```scala
-final def sample(rng: Random): Double
+def sample(rng: Random): Double
 ```
 
 Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
@@ -23045,6 +24471,270 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#cdf-5b2)
+
+```scala
+def cdf(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)
+
+Invocation template:
+
+```scala
+receiver.cdf(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#mean-0)
+
+```scala
+def mean: Option[Double]
+```
+
+No generic moment-generating function is assumed; None also means not implemented.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: No generic moment-generating function is assumed; None also means not implemented. Attributes
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#quantile-5b2)
+
+```scala
+def quantile(p: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#support-0)
+
+```scala
+def support: (Double, Double)
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Double, Double) ``.
+
+Source contract/attributes: Attributes Returns support infimum and supremum; endpoint density conventions are family-specific
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#survival-5b2)
+
+```scala
+def survival(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)
+
+Invocation template:
+
+```scala
+receiver.survival(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#variance-0)
+
+```scala
+def variance: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#density-5b2)
+
+```scala
+final def density(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ExpDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ExpDistribution.html#sample-fffffec0)
+
+```scala
+def sample(rng: Random): Double
+```
+
+Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.Exponential.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/Exponential$.html#apply-fffff2e0)
@@ -27821,6 +29511,630 @@ Invocation template:
 receiver.expectationVector(outputDimension)(f)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#cdf-5b2)
+
+```scala
+def cdf(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)
+
+Invocation template:
+
+```scala
+receiver.cdf(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#mean-0)
+
+```scala
+def mean: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#quantile-5b2)
+
+```scala
+def quantile(p: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#sample-fffffec0)
+
+```scala
+override def sample(rng: Random): Double
+```
+
+Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#support-0)
+
+```scala
+def support: (Double, Double)
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Double, Double) ``.
+
+Source contract/attributes: Attributes Returns support infimum and supremum; endpoint density conventions are family-specific
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#survival-5b2)
+
+```scala
+def survival(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)
+
+Invocation template:
+
+```scala
+receiver.survival(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#variance-0)
+
+```scala
+def variance: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#density-5b2)
+
+```scala
+final def density(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianInformation.bhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianInformation$.html#bhattacharyya-a3b)
+
+```scala
+def bhattacharyya(p: MultivariateGaussianDistribution, q: MultivariateGaussianDistribution, tolerance: Double = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: MultivariateGaussianDistribution ``; `` q: MultivariateGaussianDistribution ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters p first full-rank Gaussian q second full-rank Gaussian tolerance positive absolute numeric allowance in nats (default 1e-8) Attributes Returns symmetric negative log Bhattacharyya coefficient; equal covariances give Mahalanobis squared / 8 Example GaussianInformation.bhattacharyya(p,q)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussianInformation.bhattacharyya(p, q, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianInformation.kl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianInformation$.html#kl-a3b)
+
+```scala
+def kl(p: MultivariateGaussianDistribution, q: MultivariateGaussianDistribution, tolerance: Double = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: MultivariateGaussianDistribution ``; `` q: MultivariateGaussianDistribution ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters p source Gaussian q reference Gaussian in the same coordinates/units tolerance positive absolute floating-point allowance (default 1e-8), not a statistical confidence level Attributes Returns directed KL(P||Q); equal covariances reduce to half the squared Mahalanobis separation Example GaussianInformation.kl(p,q)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussianInformation.kl(p, q, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianInformation.mutualInformation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianInformation$.html#mutualInformation-a74)
+
+```scala
+def mutualInformation(joint: MultivariateGaussianDistribution, first: Vector[Int], tolerance: Double = ...): InformationMetricResult
+```
+
+MI between a selected coordinate block and its complement in ONE joint Gaussian.
+
+Type parameters: none.
+
+Parameters, list 1: `` joint: MultivariateGaussianDistribution ``; `` first: Vector[Int] ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: MI between a selected coordinate block and its complement in ONE joint Gaussian. Value parameters first nonempty distinct valid indices; must not select the whole vector joint full-rank joint Gaussian tolerance positive absolute numeric allowance in nats (default 1e-8) Attributes Returns I(X_first;X_complement); means do not affect this diagnostic Example GaussianInformation.mutualInformation(joint,Vector(0))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussianInformation.mutualInformation(joint, first, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianInformation.scalar ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianInformation$.html#scalar-fffff197)
+
+```scala
+def scalar(law: GaussianDistribution): MultivariateGaussianDistribution
+```
+
+Convert a scalar kernel to a dimension-one Gaussian for the same metric API.
+
+Type parameters: none.
+
+Parameters, list 1: `` law: GaussianDistribution ``.
+
+Returns: `` MultivariateGaussianDistribution ``.
+
+Source contract/attributes: Convert a scalar kernel to a dimension-one Gaussian for the same metric API. Value parameters law scalar Gaussian (second parameter is standard deviation) Attributes Returns equivalent vector kernel Example GaussianInformation.kl(GaussianInformation.scalar(p),GaussianInformation.scalar(q))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussianInformation.scalar(law)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixture.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixture$.html#apply-3ca)
+
+```scala
+def apply(distribution: GaussianMixtureDistribution)(using name: Name[Vector[Double]], collection: ElementCollection): AtomicGaussianMixture
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: GaussianMixtureDistribution ``.
+
+Context parameters, list 2: `` name: Name[Vector[Double]] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicGaussianMixture ``.
+
+Source contract/attributes: Value parameters collection owning collection distribution immutable validated GMM name contextual name Attributes Returns atomic GMM with stable observation likelihoods Example GaussianMixture(kernel)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussianMixture.apply(distribution)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixture.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixture$.html#apply-bc9)
+
+```scala
+def apply(distribution: Element[GaussianMixtureDistribution])(using name: Name[Vector[Double]], collection: ElementCollection): Element[Vector[Double]]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: Element[GaussianMixtureDistribution] ``.
+
+Context parameters, list 2: `` name: Name[Vector[Double]] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[Vector[Double]] ``.
+
+Source contract/attributes: Value parameters collection owning collection distribution element producing validated GMM kernels name contextual name Attributes Returns non-caching chain; invalid dynamic parameters fail at evaluation Example GaussianMixture(Apply(weight, (w: Double) => GaussianMixtureDistribution(Vector(w,1-w),components)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussianMixture.apply(distribution)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.covariance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#covariance-0)
+
+```scala
+def covariance: Vector[Vector[Double]]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Vector[Vector[Double]] ``.
+
+Source contract/attributes: Attributes Returns within-component PLUS between-component covariance; overflow throws
+
+Invocation template:
+
+```scala
+receiver.covariance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#density-f10)
+
+```scala
+def density(x: Vector[Double]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#logDensity-f10)
+
+```scala
+def logDensity(x: Vector[Double]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x finite coordinate vector Attributes Returns stable log-sum-exp mixture density Example gmm.logDensity(Vector(0.0,1.0))
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.marginal ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#marginal-fffffef6)
+
+```scala
+def marginal(indices: Vector[Int]): GaussianMixtureDistribution
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` indices: Vector[Int] ``.
+
+Returns: `` GaussianMixtureDistribution ``.
+
+Source contract/attributes: Value parameters indices distinct valid coordinate indices Attributes Returns exact mixture marginal, retaining component weights/order Example gmm.marginal(Vector(0))
+
+Invocation template:
+
+```scala
+receiver.marginal(indices)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#mean-0)
+
+```scala
+def mean: Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Attributes Returns total mean, including all positive-weight modes
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.responsibilities ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#responsibilities-ae0)
+
+```scala
+def responsibilities(x: Vector[Double]): Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Vector[Double] ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Value parameters x finite coordinate vector Attributes Returns posterior component membership probabilities; this does not fit or update the model Example gmm.responsibilities(Vector(0.0,1.0))
+
+Invocation template:
+
+```scala
+receiver.responsibilities(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#sample-930)
+
+```scala
+def sample(rng: Random): Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Vector[Double] ``.
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussianMixtureDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.InverseGamma.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/InverseGamma$.html#apply-fffffc35)
@@ -30191,7 +32505,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) can indicate moment overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
 
 Invocation template:
 
@@ -30287,7 +32601,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) for infinite variance or numeric overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
 
 Invocation template:
 
@@ -30372,7 +32686,7 @@ receiver.productIterator
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/KumaraswamyDistribution.html#sample-fffffec0)
 
 ```scala
-final def sample(rng: Random): Double
+def sample(rng: Random): Double
 ```
 
 Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
@@ -30481,7 +32795,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) can indicate moment overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
 
 Invocation template:
 
@@ -30577,7 +32891,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) for infinite variance or numeric overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
 
 Invocation template:
 
@@ -30662,7 +32976,7 @@ receiver.productIterator
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/LaplaceDistribution.html#sample-fffffec0)
 
 ```scala
-final def sample(rng: Random): Double
+def sample(rng: Random): Double
 ```
 
 Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
@@ -30819,7 +33133,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) can indicate moment overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
 
 Invocation template:
 
@@ -30915,7 +33229,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) for infinite variance or numeric overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
 
 Invocation template:
 
@@ -31000,7 +33314,7 @@ receiver.productIterator
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/LogNormalDistribution.html#sample-fffffec0)
 
 ```scala
-final def sample(rng: Random): Double
+def sample(rng: Random): Double
 ```
 
 Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
@@ -32179,6 +34493,172 @@ Invocation template:
 
 ```scala
 receiver.unset()
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateGaussianDistribution.html#density-f10)
+
+```scala
+def density(x: Vector[Double]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateGaussianDistribution.html#logDensity-f10)
+
+```scala
+def logDensity(x: Vector[Double]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x finite coordinate vector Attributes Returns natural-log Lebesgue density (ordinary density may underflow) Example gaussian.logDensity(Vector(0.0,0.0))
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution.mahalanobisSquared ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateGaussianDistribution.html#mahalanobisSquared-f10)
+
+```scala
+def mahalanobisSquared(x: Vector[Double]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x finite coordinate vector Attributes Returns squared Mahalanobis distance; overflow throws Example gaussian.mahalanobisSquared(Vector(1.0,0.0))
+
+Invocation template:
+
+```scala
+receiver.mahalanobisSquared(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution.marginal ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateGaussianDistribution.html#marginal-139)
+
+```scala
+def marginal(indices: Vector[Int]): MultivariateGaussianDistribution
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` indices: Vector[Int] ``.
+
+Returns: `` MultivariateGaussianDistribution ``.
+
+Source contract/attributes: Value parameters indices nonempty distinct valid coordinate indices, in desired output order Attributes Returns exact Gaussian marginal (not conditioning) Example gaussian.marginal(Vector(1))
+
+Invocation template:
+
+```scala
+receiver.marginal(indices)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateGaussianDistribution.html#sample-930)
+
+```scala
+def sample(rng: Random): Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Value parameters rng non-null caller-owned generator Attributes Returns draw in physical coordinates; no mutable RNG retained Example gaussian.sample(new scala.util.Random(42))
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateGaussianDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateGaussianDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.MultivariateNormal.apply ``
@@ -38261,7 +40741,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) can indicate moment overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
 
 Invocation template:
 
@@ -38357,7 +40837,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) for infinite variance or numeric overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
 
 Invocation template:
 
@@ -38394,7 +40874,7 @@ receiver.density(x)
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarDistribution.html#sample-fffffec0)
 
 ```scala
-final def sample(rng: Random): Double
+def sample(rng: Random): Double
 ```
 
 Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
@@ -38513,6 +40993,294 @@ Invocation template:
 com.cra.figaro.library.atomic.continuous.ScalarElement.apply[D](distribution)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#cdf-5b2)
+
+```scala
+def cdf(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)
+
+Invocation template:
+
+```scala
+receiver.cdf(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#mean-0)
+
+```scala
+def mean: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#quantile-5b2)
+
+```scala
+def quantile(p: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.responsibilities ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#responsibilities-fffffd7e)
+
+```scala
+def responsibilities(x: Double): Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Value parameters x finite-density observation Attributes Returns component membership probabilities, in original order; undefined observations throw Example mixture.responsibilities(0.2)
+
+Invocation template:
+
+```scala
+receiver.responsibilities(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#sample-fffffec0)
+
+```scala
+override def sample(rng: Random): Double
+```
+
+Draw component then value, avoiding a mixture inverse-CDF search. Uses only caller RNG.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Draw component then value, avoiding a mixture inverse-CDF search. Uses only caller RNG. Attributes Definition Classes ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#support-0)
+
+```scala
+def support: (Double, Double)
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Double, Double) ``.
+
+Source contract/attributes: Attributes Returns support infimum and supremum; endpoint density conventions are family-specific
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#survival-5b2)
+
+```scala
+def survival(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)
+
+Invocation template:
+
+```scala
+receiver.survival(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#variance-0)
+
+```scala
+def variance: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#density-5b2)
+
+```scala
+final def density(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ScalarMixtureDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ScalarMixtureDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.StudentT.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/StudentT$.html#apply-fffff9a3)
@@ -38603,7 +41371,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) can indicate moment overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
 
 Invocation template:
 
@@ -38699,7 +41467,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) for infinite variance or numeric overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
 
 Invocation template:
 
@@ -38784,7 +41552,7 @@ receiver.productIterator
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/StudentTDistribution.html#sample-fffffec0)
 
 ```scala
-final def sample(rng: Random): Double
+def sample(rng: Random): Double
 ```
 
 Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
@@ -38893,7 +41661,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) can indicate moment overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
 
 Invocation template:
 
@@ -38989,7 +41757,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) for infinite variance or numeric overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
 
 Invocation template:
 
@@ -39074,7 +41842,271 @@ receiver.productIterator
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TriangularDistribution.html#sample-fffffec0)
 
 ```scala
-final def sample(rng: Random): Double
+def sample(rng: Random): Double
+```
+
+Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#cdf-5b2)
+
+```scala
+def cdf(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)
+
+Invocation template:
+
+```scala
+receiver.cdf(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#mean-0)
+
+```scala
+def mean: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#quantile-5b2)
+
+```scala
+def quantile(p: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#support-0)
+
+```scala
+def support: (Double, Double)
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Double, Double) ``.
+
+Source contract/attributes: Attributes Returns support infimum and supremum; endpoint density conventions are family-specific
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#survival-5b2)
+
+```scala
+def survival(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)
+
+Invocation template:
+
+```scala
+receiver.survival(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#variance-0)
+
+```scala
+def variance: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#density-5b2)
+
+```scala
+final def density(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.TruncatedDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/TruncatedDistribution.html#sample-fffffec0)
+
+```scala
+def sample(rng: Random): Double
 ```
 
 Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
@@ -40717,7 +43749,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) can indicate moment overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
 
 Invocation template:
 
@@ -40813,7 +43845,7 @@ Parameters: none (parameterless member; do not append `()`).
 
 Returns: `` Option[Double] ``.
 
-Source contract/attributes: Attributes Returns None if undefined; Some(infinity) for infinite variance or numeric overflow
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
 
 Invocation template:
 
@@ -40898,7 +43930,7 @@ receiver.productIterator
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WeibullDistribution.html#sample-fffffec0)
 
 ```scala
-final def sample(rng: Random): Double
+def sample(rng: Random): Double
 ```
 
 Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.

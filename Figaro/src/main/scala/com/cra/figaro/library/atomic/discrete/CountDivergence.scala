@@ -39,6 +39,17 @@ object CountDivergence {
     if(p.getClass != q.getClass) return M.unavailable(Unsupported)
     if(p == q) return M.identity
     (p,q) match {
+      case (a: ZeroAdjustedDistribution,b: ZeroAdjustedDistribution) if a.base == b.base =>
+        val pa=Vector(a.probability(0),a.survival(0)); val pb=Vector(b.probability(0),b.survival(0))
+        return if(overlap) com.cra.figaro.library.atomic.DiscreteInformation.bhattacharyya(pa,pb,tol)
+          else com.cra.figaro.library.atomic.DiscreteInformation.kl(pa,pb,tol)
+      case _ => ()
+    }
+    p match {
+      case _: NegativeBinomialDistribution | _: HypergeometricDistribution => ()
+      case _ => return M.unavailable(Unsupported)
+    }
+    (p,q) match {
       case (a: NegativeBinomialDistribution,b: NegativeBinomialDistribution) =>
         if(a.successProbability == 1) return M.analytic(-b.logProbability(0)*(if(overlap) .5 else 1),tol)
         if(b.successProbability == 1) return if(overlap) M.analytic(-.5*a.logProbability(0),tol) else M.infinite

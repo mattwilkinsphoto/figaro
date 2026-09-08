@@ -1,5 +1,19 @@
 # Migrating to Scala 3 and sbt 2
 
+## Distribution constructions and Gaussian likelihoods
+
+The [D4 guide](DISTRIBUTION_CONSTRUCTIONS.md) adds opt-in transformations, truncation,
+mixtures, zero-adjusted counts and Gaussian information metrics. The existing
+List-valued `MultivariateNormal` atomic adapter now supplies stable `HasLogDensity`
+likelihoods and draws through a validated Gaussian kernel with the scoped Figaro RNG.
+Its previous `logp` placeholder is removed for atomic instances. Kernel limits now
+apply to density/sampling: dimension 1..128, symmetric full-rank covariance, bounded
+parameters and resolved correlation conditioning. Seeded samples differ from the
+former Apache sampling path. The public legacy Apache distribution member is retained
+for compatibility but bypasses the new contract when called directly. Scalar `Normal`
+still takes variance; the new `GaussianDistribution` takes standard deviation.
+No inference default, stable release version or historical bundle changes.
+
 ## Scalar GVM bounded-tail integration
 
 The [bounded-tail policy](GVM_SCALAR_TAIL_PRODUCTION.md) changes the implementation of

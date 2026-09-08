@@ -5,8 +5,10 @@
 This milestone adds nine missing first-class families: **Student t, Cauchy, Laplace,
 lognormal, Weibull, triangular, Kumaraswamy, negative binomial and hypergeometric**.
 They cover robust real-valued models, positive/skewed quantities, bounded proportions,
-overdispersed counts and sampling without replacement. Specialized multivariate,
-mixture, truncated and zero-inflated variants remain later work.
+overdispersed counts and sampling without replacement. The follow-on
+[construction/GMM milestone](DISTRIBUTION_CONSTRUCTIONS.md) supplies initial mixture,
+finite-truncation and zero-adjustment wrappers plus Gaussian kernels. Specialized
+multivariate versions of the nine families remain later work.
 
 Each family has an immutable numeric kernel (`StudentTDistribution`, for example)
 and a named Figaro factory (`StudentT`). Kernels work without a Universe and retain

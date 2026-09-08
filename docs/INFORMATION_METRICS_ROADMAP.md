@@ -45,8 +45,11 @@ plus finite categorical KL/Bhattacharyya and explicit joint-table MI. Shared res
 conventions distinguish mathematical infinity from numerical refusal. See
 [acceptance evidence](COMMON_DISTRIBUTIONS_ACCEPTANCE.md) for integration status.
 This advances INFO-02 through INFO-04; it does not finish their full cross-family scope.
-Partitioned multivariate Gaussian MI, comparisons between unlike families, existing-family
-adapter audits and sample-based estimators remain separate work.
+The D4 [Gaussian extension](DISTRIBUTION_CONSTRUCTIONS.md) implements scalar/vector Gaussian
+KL/Bhattacharyya and partitioned multivariate Gaussian MI; see its
+[acceptance status](DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md). It also adds GMM kernels,
+but not divergences/MI between or within mixtures. Comparisons between unlike families,
+the remaining existing-family adapter audits and sample-based estimators remain work.
 
 1. **INFO-01: GVM representative delivered.** MI includes mathematical reduction,
    independent numerical controls, caller-visible limits, examples, packaging and passing CI.

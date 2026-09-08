@@ -5,7 +5,7 @@ import org.apache.commons.math3.special.Beta as B
 import org.apache.commons.math3.distribution.{HypergeometricDistribution as Hypergeom}
 
 /** Immutable integer-count law; no RNG or universe is retained. */
-sealed trait CountDistribution {
+trait CountDistribution {
   /** @param k count (negative integers are outside these supports)
     * @return natural log probability mass, or negative infinity outside support
     * @example `NegativeBinomialDistribution(2.5,.4).logProbability(3)`

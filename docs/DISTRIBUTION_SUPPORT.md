@@ -9,6 +9,9 @@ collects broad families and their later flavors.
 
 | Present native entry points | Source | Scope / caution |
 | --- | --- | --- |
+| AffineDistribution, ExpDistribution, TruncatedDistribution, ScalarMixtureDistribution, ZeroAdjustedDistribution | [Construction guide](DISTRIBUTION_CONSTRUCTIONS.md) | Initial reusable transformations, finite-interval conditioning, continuous mixtures and count-only hurdle/zero inflation; explicit numeric refusals, no general mixed measure |
+| GaussianDistribution, MultivariateGaussianDistribution, GaussianMixtureDistribution, GaussianMixture | [GMM and Gaussian guide](DISTRIBUTION_CONSTRUCTIONS.md) | Scalar and full-covariance vector kernels, GMM likelihoods/draws/moments/responsibilities/marginals; fixed/dynamic Figaro GMM adapters, not EM fitting |
+| GaussianInformation | [Gaussian information API](DISTRIBUTION_CONSTRUCTIONS.md#gaussian-information) | Analytic Gaussian KL/Bhattacharyya and MI between blocks of one joint Gaussian; not mixture divergence or mixture MI |
 | StudentT, Cauchy, Laplace, LogNormal, Weibull, Triangular, Kumaraswamy | [Common-family guide](COMMON_DISTRIBUTIONS.md) | Immutable numeric kernels plus fixed/dynamic observation-ready adapters; direct log densities, CDF/survival/quantiles, scoped RNG and tested importance/MCMC paths; not exact factors or fitting |
 | NegativeBinomial, Hypergeometric | [Count conventions](COMMON_DISTRIBUTIONS.md) | Real positive shape/failure count and finite-population draws respectively; explicit Int-range and work limits |
 | ScalarDivergence, CountDivergence, DiscreteInformation | [Information measures](COMMON_INFORMATION_METRICS.md) | Same-family KL/Bhattacharyya and explicit finite-joint-table MI; analytic or guarded estimated results, not arbitrary cross-family/joint-model inference |

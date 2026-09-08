@@ -23,7 +23,13 @@ import org.apache.commons.math3.random.RandomGenerator
  * A multivariate normal distribution in which the means and variance-covariances are constants.
  */
 class AtomicMultivariateNormal(name: Name[List[Double]], val means: List[Double], val covariances: List[List[Double]], collection: ElementCollection)
-  extends Element[List[Double]](name, collection) with Atomic[List[Double]] with MultivariateNormal {
+  extends Element[List[Double]](name, collection) with Atomic[List[Double]] with MultivariateNormal with HasLogDensity[List[Double]] {
+
+  /** Validated full-rank kernel used for stable observation likelihoods and scoped draws. */
+  lazy val kernel = MultivariateGaussianDistribution(means.toVector,covariances.map(_.toVector).toVector)
+
+  def logDensity(value: List[Double]): Double = kernel.logDensity(value.toVector)
+  override def logp(value: List[Double]): Double = logDensity(value)
 
   /*
    * Class to wrap the Figaro RNG around the apache math RNG so we can use the apache math multivariate normal 
@@ -54,7 +60,7 @@ class AtomicMultivariateNormal(name: Name[List[Double]], val means: List[Double]
   type Randomness = List[Double]
 
   def generateRandomness(): List[Double] = {
-    distribution.sample.toList
+    kernel.sample(com.cra.figaro.util.random).toList
   }
 
   def generateValue(rand: Randomness) = rand
@@ -62,8 +68,8 @@ class AtomicMultivariateNormal(name: Name[List[Double]], val means: List[Double]
   /**
    * Density of a value.
    */
-  def density(d: List[Double]) = {
-    distribution.density(d.toArray)
+  override def density(d: List[Double]) = {
+    math.exp(logDensity(d))
   }
 
   override def toString = "MultivariateNormal(" + means + ",\n" + covariances + ")"
