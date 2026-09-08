@@ -12,6 +12,14 @@ cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
 
+- [GVM mutual information](GVM_MUTUAL_INFORMATION.md): new guarded diagnostic for
+  dependence between the full linear vector and angle of a fixed joint law. Uses
+  analytic conditional entropy and one-dimensional numerical marginal entropy, with
+  estimated-error intervals, exact independence shortcuts and explicit refusals.
+  Initial implementation on the development branch; check its guide for integration
+  status. The [cross-family roadmap](INFORMATION_METRICS_ROADMAP.md) records broader
+  information-measure support as continuing work, not blanket current availability.
+
 - [Scalar GVM bounded-tail selection](GVM_SCALAR_TAIL_PRODUCTION.md), integrated on main
   at CI-verified `f4884cfb`,
   reduces costly curved positive comparisons by about 2.53x in the paired study, with

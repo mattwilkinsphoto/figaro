@@ -143,9 +143,14 @@ This sequence is a proposed priority order, not a calendar estimate.
    consumer rebuilds; no additional scalar micro-optimization is scheduled here.
    Stronger rounding analysis and
    multidimensional alternatives remain separate work; no automatic method switch.
-10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
-   Establish numerical methods, special cases and error contracts before exposing APIs;
-   see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.
+10. [Linear-angular mutual information](docs/GVM_MUTUAL_INFORMATION.md): approved next
+   milestone, now implemented as an opt-in guarded diagnostic on the development branch.
+   Analytic conditional entropy and Fourier marginal entropy reduce integration to one
+   angular dimension; independent high-precision fixtures and explicit work/accuracy
+   refusals accompany the API. Main promotion still requires the integration gates.
+   The [cross-family metrics roadmap](docs/INFORMATION_METRICS_ROADMAP.md) carries KL,
+   Bhattacharyya and MI forward to other broad distribution families, with distinct
+   applicability and numerical contracts rather than an assumed universal API.
 
 No report ingestion, fusion, filtering, or propagation is added by these diagnostics.
 
@@ -168,6 +173,9 @@ No report ingestion, fusion, filtering, or propagation is added by these diagnos
 6. Publish beginner-facing examples, all public API contracts, limitations, sources and
    license/provenance notes. Update the inventory, wishlist status, generated reference
    and CI. A release item needs passing gates and a commit link, not just a checked box.
+7. Assess information-metric support using the [cross-family checklist](docs/INFORMATION_METRICS_ROADMAP.md).
+   Record analytic, numerical, unavailable or inapplicable operations; a new family does
+   not need every metric on day one, but gaps must be explicit.
 
 ## Maintaining the plan
 

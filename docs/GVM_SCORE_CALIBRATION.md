@@ -220,5 +220,6 @@ Related: [joint GVM](GAUSS_VON_MISES.md), [score and KL diagnostics](GVM_DIAGNOS
 [compiler API reference](api/README.md). [State gradients](GVM_GRADIENTS.md) are now
 on main at CI-verified `141dcc15`. [Third-order expectation quadrature](GVM_QUADRATURE.md)
 is on main at CI-verified `b06e957f`, with its own exactness/negative-weight limitations;
-Bhattacharyya divergence and mutual information
-remain lower-priority research. No fusion or propagation scope is added.
+separate [Bhattacharyya](GVM_BHATTACHARYYA.md) and
+[mutual-information](GVM_MUTUAL_INFORMATION.md) guides describe later diagnostics.
+No fusion or propagation scope is added.

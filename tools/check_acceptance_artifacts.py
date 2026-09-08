@@ -12,7 +12,8 @@ REQUIRED = ('com/cra/figaro/language/Universe.class',
             'com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.class',
             'com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$.class',
             'com/cra/figaro/algorithm/sampling/parallel/McmcDiagnostics$.class',
-            'com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$.class')
+            'com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$.class',
+            'com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$.class')
 
 
 def validate(archive, kind, legal):

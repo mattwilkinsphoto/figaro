@@ -250,10 +250,17 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   A repeated timing study retains about 2.53x on the curved fixture. Integrated on main
   at CI-verified `f4884cfb`; this targeted milestone is complete, with no further scalar
   micro-optimization scheduled here.
-- **Mutual information — research wishlist, lower priority:** begin with dependence
-  between the Gaussian vector and angle within one GVM. Investigate analytic conditional
-  entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.
-  This is not the same operation as comparing two GVMs with KL.
+- **Mutual information — approved implementation milestone:** the
+  [guarded GVM diagnostic](docs/GVM_MUTUAL_INFORMATION.md) uses analytic conditional
+  entropy and one-dimensional Fourier marginal integration, with independence controls,
+  high-precision oracles and numerical refusal statuses. It measures the full linear
+  vector versus angle within one law, not the difference between two GVMs.
+- **Cross-family information measures — approved continuing direction:** retain KL,
+  Bhattacharyya and MI in the capability assessment for all broad distribution families.
+  Follow [INFO-01 through INFO-05](docs/INFORMATION_METRICS_ROADMAP.md): inventory and
+  conventions, exact finite-discrete/Gaussian representatives, guarded numerical methods,
+  then specialized variants. Keep Mahalanobis scoring separate and applicable geometry
+  explicit. This is a roadmap, not current blanket support or an immediate universal API.
 
 These additions retain the domain-independent scope and do not authorize a report-fusion,
 tracking or propagation implementation. They follow the KL/residual milestone.

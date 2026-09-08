@@ -1,0 +1,85 @@
+# Cross-family information and divergence roadmap
+
+## Intent
+
+User-approved direction: carry KL, Bhattacharyya and mutual information forward as
+capabilities across Figaro's distribution families, not isolated GVM conveniences.
+Preserve Mahalanobis-style scoring where its geometry is meaningful. Start with broad
+families and validated representative laws, then add specialized variants.
+
+This is a capability roadmap, not a claim that every existing distribution already
+supports every operation. Do not add a universal method returning misleading numbers
+for incompatible supports or a generic estimator without a tested error contract.
+
+## Distinct questions, distinct contracts
+
+| Capability | Inputs and question | Required distinctions |
+| --- | --- | --- |
+| Directed KL | Two laws P,Q: expected log density ratio under P | Direction matters; support mismatch can give genuine positive infinity. State the common reference measure. |
+| Bhattacharyya divergence | Two laws: negative log integral/sum of square-root density product | Symmetric; zero overlap can give infinity. Affinity is in [0,1]; divergence is not generally a metric with a triangle inequality. |
+| Mutual information | One joint law and an explicit partition A,B: KL of joint versus product of marginals | Dependence within the joint model, not distance between arbitrary laws. A scalar marginal alone does not specify MI. |
+| Mahalanobis-style score | State/residual and valid covariance or family-specific geometry | Not an interchangeable information divergence; document square versus square root and degeneracy. |
+
+Use natural logarithms/nats as the default, with explicit conversion to bits. Entropy
+uses a specified measure/coordinate convention; MI is invariant under invertible
+transformations within each variable block. For background see the
+[MIT information-measure lectures](https://ocw.mit.edu/courses/6-441-information-theory-spring-2016/pages/lecture-notes/).
+
+## Current representative: joint Gauss-von Mises
+
+| Operation | Current support | Remaining limits |
+| --- | --- | --- |
+| KL | [Analytic Gaussian/angular decomposition](GVM_DIAGNOSTICS.md) | Fixed matching-coordinate laws, with documented numeric safeguards. |
+| Bhattacharyya | [Guarded Fourier method](GVM_BHATTACHARYYA.md), plus [opt-in positive scalar method](GVM_SCALAR_BHATTACHARYYA.md) | Bounded ranges/work, explicit numerical refusals; no certified generic integration. |
+| MI | [New linear-vector/angle diagnostic](GVM_MUTUAL_INFORMATION.md), implementation and validation milestone | One fixed law; full vector versus single angle; estimated numerical errors and initial parameter caps. |
+| Mahalanobis-style score | [Canonical residual score](GVM_DIAGNOSTICS.md) and [finite-concentration calibration](GVM_SCORE_CALIBRATION.md) | GVM-specific geometry; not universally chi-square at finite concentration. |
+
+This table is not a complete audit of metrics elsewhere in Figaro. The initial GVM MI
+implementation does not introduce sample-based estimators or generalized fusion.
+
+## Delivery sequence
+
+1. **INFO-01: complete the GVM representative.** Add MI with mathematical reduction,
+   independent numerical controls, caller-visible limits, examples, packaging and CI.
+   Keep the result contract distinct from two-law divergence APIs.
+2. **INFO-02: inventory and shared conventions.** For each family in the
+   [distribution inventory](DISTRIBUTION_SUPPORT.md), record existing/native/composable
+   support, analytic versus numerical methods, compatible measures and missing operations.
+   Identify genuinely reusable primitives after at least two families need them; avoid
+   forcing every distribution into an unsuitable base trait.
+3. **INFO-03: broad exact representatives.** Prioritize finite discrete laws and
+   Gaussian families for KL/Bhattacharyya; use explicit joint probability tables and
+   partitioned multivariate Gaussians for MI. Audit existing APIs before adding duplicates.
+   Circular and common exponential-family specializations follow the family-first plan.
+4. **INFO-04: guarded numerical extensions.** Add integration/Monte Carlo approaches
+   only where analytic reductions are unavailable. Specify convergence checks, bias,
+   dependence assumptions, support matching, cancellation and work budgets. Keep
+   sample-estimated uncertainty separate from deterministic quadrature error estimates.
+5. **INFO-05: specialized forms.** Mixtures, copulas, directional/higher-dimensional
+   joint laws and conditional MI need separate mathematical and computational contracts.
+   They are later variants, not automatically covered by a scalar family's support.
+
+## Acceptance checklist for every family
+
+- Specify support/reference measure, units, variable partition (MI), parameterization,
+  finite/singular cases, incompatible inputs and whether positive infinity is legitimate.
+- Separate a mathematically infinite divergence from overflow or unresolved arithmetic.
+  Never replace a refusal with zero. Report analytic versus estimated status honestly.
+- Check identity/independence, direction or symmetry, nonnegativity, coordinate
+  invariance where applicable, disjoint support, and relevant limiting families.
+- Use independent oracles and test the complete published API, not just a formula
+  copied into both implementation and expected-value code.
+- For same-covariance Gaussians, check `KL = squared Mahalanobis / 2` and
+  `Bhattacharyya = squared Mahalanobis / 8`; these are restricted reductions, not
+  statements that every KL or MI “is Mahalanobis.” For a nonsingular Gaussian partition,
+  check `MI = log(det(Sigma_A)*det(Sigma_B)/det(Sigma_AB))/2`, computed using stable
+  factorizations rather than raw determinants.
+- Document every public operation, three practical patterns, limitations and how to
+  choose the appropriate quantity. Add reproducible tests, artifacts and CI coverage.
+
+## Related and exclusions
+
+[Family-first roadmap](../ROADMAP.md), [wishlist](../WISHLIST.md),
+[GVM MI guide](GVM_MUTUAL_INFORMATION.md), and [support inventory](DISTRIBUTION_SUPPORT.md).
+This work remains domain-independent probability software. No report ingestion,
+data-fusion, tracking, filtering or propagation implementation is authorized by this plan.

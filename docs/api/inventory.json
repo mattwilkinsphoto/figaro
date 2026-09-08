@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 760,
+  "pages": 763,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156727,6 +156727,59 @@
       "example": "receiver.productIterator",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesKL.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation",
+      "name": "compute",
+      "anchor": "compute-34c",
+      "signature": "def compute(kernel: GaussVonMisesDistribution, tolerance: Double = ..., maxHarmonics: Int = ..., maxEvaluations: Int = ..., cancelled: () => Boolean = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "kernel: GaussVonMisesDistribution",
+            "tolerance: Double = ...",
+            "maxHarmonics: Int = ...",
+            "maxEvaluations: Int = ...",
+            "cancelled: () => Boolean = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Estimate I(X;theta), not a distance between two distributions. Invalid arguments throw IllegalArgumentException. Cancellation throws CancellationException; caller predicate exceptions propagate and thread interruption is not cleared. No random numbers or shared mutable state are used.",
+      "contract": "Estimate I(X;theta), not a distance between two distributions. Invalid arguments throw IllegalArgumentException. Cancellation throws CancellationException; caller predicate exceptions propagate and thread interruption is not cleared. No random numbers or shared mutable state are used. Value parameters cancelled non-null cooperative cancellation predicate, default always false kernel non-null fixed GVM; numerical path supports dimension <=32, kappa <=50, and absolute canonical beta/Gamma entries <=1000; exact independence bypasses these caps maxEvaluations total angular evaluations in [1,131072], default 16384; excludes bounded eigendecomposition/Bessel setup and is not a time limit maxHarmonics coefficient budget in [1,256], default 128 tolerance positive finite absolute error target in nats, default 1e-8; not a certificate Attributes Returns immutable diagnostics; no value on failure, and no exact-zero shortcut for weak coupling Example GaussVonMisesMutualInformation.compute(kernel, tolerance = 1e-7)",
+      "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.compute(kernel, tolerance, maxHarmonics, maxEvaluations, cancelled)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadrature",

@@ -249,7 +249,8 @@ within the concentration/dimension caps does not guarantee resolution.
 See the [roadmap](../ROADMAP.md) for acceptance/CI status. Next work is
 tighter high-concentration bounds and stronger numerical
 certification, without extending this API to report ingestion, fusion or filtering.
-Mutual information remains separate research.
+[Mutual information](GVM_MUTUAL_INFORMATION.md) is a separate guarded diagnostic
+of dependence within one law, not an extension of this two-law comparison API.
 
 Related: [joint GVM](GAUSS_VON_MISES.md), [KL and residuals](GVM_DIAGNOSTICS.md),
 [analytic moments](GVM_MOMENTS.md), [tensor reference](GVM_TENSOR_QUADRATURE.md),

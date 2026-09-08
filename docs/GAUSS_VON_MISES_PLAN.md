@@ -122,8 +122,10 @@ Analytic marginal circular and physical first/second linear-angular mixed moment
 plus the exact angular conditional given the full linear vector, are now a separate
 [CI-verified increment on main](GVM_MOMENTS.md). Its tests include complex-matrix
 fixtures, quadrature, sampling and an explicit hierarchical model with angular evidence.
-Bhattacharyya divergence and linear-angular mutual information are explicitly lower
-priority research items; the [wishlist](../WISHLIST.md) records their validation gates.
+Follow-on [Bhattacharyya divergence](GVM_BHATTACHARYYA.md) and
+[linear-angular mutual information](GVM_MUTUAL_INFORMATION.md) have separate guarded
+implementations. Their guides record validation and integration status; the
+[cross-family roadmap](INFORMATION_METRICS_ROADMAP.md) carries these capabilities forward.
 
 | Check / example | Independent evidence required |
 | --- | --- |

@@ -21,6 +21,8 @@ jobs:
         run: python3 -m pip install --disable-pip-version-check mpmath==1.3.0
       - name: Verify Bhattacharyya derivation and independent controls
         run: python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_research.py' -v
+      - name: Verify mutual-information oracles and independent positive marginal
+        run: python3 -B -m unittest discover -s tools -p 'test_gvm_mutual_information.py' -v
       - name: Verify complete matched-accuracy timing evidence
         run: |
           python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_performance.py' -v
@@ -82,6 +84,12 @@ jobs:
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesQuadratureComparisonExample;
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesBhattacharyyaExample;
           examples / Compile / runMain com.cra.figaro.example.GaussVonMisesBhattacharyyaPerformance check"
+
+      - name: Verify GVM mutual information
+        run: >-
+          sbt --server --batch
+          "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussVonMisesMutualInformationTest;
+          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesMutualInformationExample"
 
       - name: Verify opt-in positive scalar GVM comparison
         # Independent public entry point; the Fourier API never selects it automatically.

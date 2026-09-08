@@ -212,16 +212,15 @@ and was integrated on main. This does not certify the entire historical suite or
 The optional [reference generator](../tools/gauss_von_mises_kl_reference.py) requires
 `mpmath==1.3.0`, prints results without writing files, and is not a runtime dependency.
 
-Lower-priority research items, not implemented APIs:
+Follow-on information diagnostics (separate numerical contracts):
 
-- **Bhattacharyya divergence:** symmetric overlap comparison between two GVMs. Integrate
-  the conditional angular overlap analytically, then assess the remaining Gaussian-weighted
-  integral. Require identical-law, symmetry and Gaussian special-case checks. Do not
-  promise a general finite closed form or label a quadrature estimate exact.
-- **Linear-angular mutual information:** `I(X;theta) = h(theta)-h(theta|X)` within one GVM,
-  not a distance between two GVMs. Conditional entropy is analytic; investigate Fourier
-  evaluation of the angular marginal and validated entropy integration. Require zero
-  for uncoupled/uniform cases, nonnegativity and independent numerical checks.
+- **[Bhattacharyya divergence](GVM_BHATTACHARYYA.md):** symmetric overlap comparison
+  between two GVMs, now available with guarded Fourier and opt-in positive scalar APIs.
+  Quadrature estimates are not general exact closed forms.
+- **[Linear-angular mutual information](GVM_MUTUAL_INFORMATION.md):**
+  `I(X;theta) = h(theta)-h(theta|X)` within one GVM, not a distance between two GVMs.
+  The new guarded API combines analytic conditional entropy and numerical marginal
+  entropy; its guide records independent controls, limitations and integration status.
 
 [Analytic circular/mixed moments and the exact angular conditional](GVM_MOMENTS.md)
 are integrated on main at CI-verified `df5a7bf4`. [Finite-concentration score thresholds](GVM_SCORE_CALIBRATION.md)

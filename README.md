@@ -47,6 +47,8 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Circular von Mises](docs/VON_MISES.md): reusable angular density/sampling, circular summaries, conditional observations and inference limits.
 - [Joint Gauss-von Mises preview](docs/GAUSS_VON_MISES.md): tested linear-angular distribution, approved standalone publication scope and inference limits.
 - [GVM diagnostics](docs/GVM_DIAGNOSTICS.md): canonical residuals, squared Mahalanobis scoring and analytic directed KL with Gaussian/circular checks.
+- [GVM mutual information](docs/GVM_MUTUAL_INFORMATION.md): opt-in dependence between a fixed law's linear vector and angle, with deterministic integration and explicit numerical limits.
+- [Cross-family information metrics](docs/INFORMATION_METRICS_ROADMAP.md): continuing KL, Bhattacharyya and MI support across distribution families, with applicability and validation gates.
 - [GVM moments and conditionals](docs/GVM_MOMENTS.md): analytic circular/mixed moments and an exact angular conditional for hierarchical models.
 - [GVM score calibration](docs/GVM_SCORE_CALIBRATION.md): finite-concentration probabilities and squared-score thresholds, with explicit comparisons against the chi-square approximation.
 - [GVM state gradients](docs/GVM_GRADIENTS.md): analytic log-density and squared-score sensitivities in physical coordinates, with finite-difference comparisons and directional examples.

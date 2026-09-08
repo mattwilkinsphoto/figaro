@@ -92,6 +92,12 @@ observations, measuring estimates, zero weights, effective sample size and elaps
 
 ## Reuse strategy
 
+Information metrics are a parallel capability track, not implied by density/sampling
+support. See the [cross-family roadmap](INFORMATION_METRICS_ROADMAP.md) for KL,
+Bhattacharyya and MI applicability and acceptance criteria. The initial
+[GVM MI diagnostic](GVM_MUTUAL_INFORMATION.md) concerns one complete linear vector
+and one angle; it does not provide generic MI for every scalar distribution.
+
 First inspect the already-used [Apache Commons Math distribution APIs](https://commons.apache.org/proper/commons-math/javadocs/api-3.6.1/org/apache/commons/math3/distribution/package-summary.html).
 They offer potential implementations for Student t, Cauchy, Laplace, Weibull, lognormal,
 hypergeometric and other common scalar laws. A wrapper still needs parameter translation,

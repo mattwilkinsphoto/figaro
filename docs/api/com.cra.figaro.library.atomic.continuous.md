@@ -25835,6 +25835,78 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.compute ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$.html#compute-34c)
+
+```scala
+def compute(kernel: GaussVonMisesDistribution, tolerance: Double = ..., maxHarmonics: Int = ..., maxEvaluations: Int = ..., cancelled: () => Boolean = ...): Result
+```
+
+Estimate I(X;theta), not a distance between two distributions. Invalid arguments throw IllegalArgumentException. Cancellation throws CancellationException; caller predicate exceptions propagate and thread interruption is not cleared. No random numbers or shared mutable state are used.
+
+Type parameters: none.
+
+Parameters, list 1: `` kernel: GaussVonMisesDistribution ``; `` tolerance: Double = ... ``; `` maxHarmonics: Int = ... ``; `` maxEvaluations: Int = ... ``; `` cancelled: () => Boolean = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Estimate I(X;theta), not a distance between two distributions. Invalid arguments throw IllegalArgumentException. Cancellation throws CancellationException; caller predicate exceptions propagate and thread interruption is not cleared. No random numbers or shared mutable state are used. Value parameters cancelled non-null cooperative cancellation predicate, default always false kernel non-null fixed GVM; numerical path supports dimension <=32, kappa <=50, and absolute canonical beta/Gamma entries <=1000; exact independence bypasses these caps maxEvaluations total angular evaluations in [1,131072], default 16384; excludes bounded eigendecomposition/Bessel setup and is not a time limit maxHarmonics coefficient budget in [1,256], default 128 tolerance positive finite absolute error target in nats, default 1e-8; not a certificate Attributes Returns immutable diagnostics; no value on failure, and no exact-zero shortcut for weak coupling Example GaussVonMisesMutualInformation.compute(kernel, tolerance = 1e-7)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.compute(kernel, tolerance, maxHarmonics, maxEvaluations, cancelled)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadrature.thirdOrder ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadrature$.html#thirdOrder-fffff3ad)

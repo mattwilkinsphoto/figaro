@@ -4,7 +4,7 @@ import com.cra.figaro.algorithm.sampling.parallel.{ParImportance, MultiChainMetr
   MultiChainVectorSliceSampler as MC, McmcPrecision, TruncatedSprt}
 import com.cra.figaro.language.*
 import com.cra.figaro.library.atomic.continuous.{Normal, GaussVonMisesDistribution,
-  GaussVonMisesScalarBhattacharyya as ScalarOverlap}
+  GaussVonMisesScalarBhattacharyya as ScalarOverlap, GaussVonMisesMutualInformation as MI}
 import java.nio.file.{Files, Path}
 import java.security.MessageDigest
 import scala.jdk.CollectionConverters.*
@@ -44,6 +44,13 @@ object FigaroConsumerCheck {
     require(curved.gaussianTailBound > 0 && curved.interval.exists((lo,hi) => lo <= 1.3162805891364138 && hi >= 1.3162805891364138))
     require(ScalarOverlap.compare(curvedP,curvedQ,maxEvaluations=5).distance.isEmpty)
     println("Published scalar GVM API: positive overlap, bounded-tail curvature and work-budget refusals passed")
+
+    val dependent=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),0,Vector(.4),Vector(Vector(0.0)),2)
+    val information=MI.compute(dependent)
+    require(information.status == MI.Status.Estimated && information.value.exists(v => math.abs(v-.09772189838645959) < 1e-8))
+    require(information.interval.exists((lo,hi) => lo <= .09772189838645959 && hi >= .09772189838645959))
+    require(MI.compute(dependent,maxEvaluations=1).value.isEmpty)
+    println("Published GVM mutual information: dependence oracle, estimated interval and budget refusal passed")
 
     val universe=Universe.createNew()
     val cause=Flip(0.3)(using "", universe)

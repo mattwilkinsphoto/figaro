@@ -206,6 +206,7 @@ Related: [joint GVM](GAUSS_VON_MISES.md), [score and KL diagnostics](GVM_DIAGNOS
 [score calibration](GVM_SCORE_CALIBRATION.md), [moments/conditionals](GVM_MOMENTS.md),
 [roadmap](../ROADMAP.md), [API reference](api/README.md). [Third-order expectation
 quadrature](GVM_QUADRATURE.md) is now on main at CI-verified `b06e957f`,
-with signed-weight and exactness limitations. Bhattacharyya divergence and mutual information
-remain lower-priority research; no report ingestion, fusion, filtering or propagation
+with signed-weight and exactness limitations. Separate [Bhattacharyya](GVM_BHATTACHARYYA.md)
+and [mutual-information](GVM_MUTUAL_INFORMATION.md) guides describe later diagnostics;
+no report ingestion, fusion, filtering or propagation
 is implemented by these derivatives.

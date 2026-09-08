@@ -225,8 +225,9 @@ The next increment, [finite-concentration score calibration](GVM_SCORE_CALIBRATI
 is now on main at CI-verified `755eb425`. [State gradients](GVM_GRADIENTS.md) are on
 main at CI-verified `141dcc15`. [Third-order sparse
 quadrature](GVM_QUADRATURE.md) is on main at CI-verified `b06e957f`; it does not replace supported
-analytic moments. Bhattacharyya divergence
-and mutual information remain lower-priority research. This milestone does not add
+analytic moments. Subsequent milestones add [Bhattacharyya comparison](GVM_BHATTACHARYYA.md)
+and [linear-angular mutual information](GVM_MUTUAL_INFORMATION.md), with their own
+numerical limits and integration status. This milestone does not add
 report ingestion, fusion, filtering or propagation.
 
 Related: [joint GVM guide](GAUSS_VON_MISES.md), [circular API](VON_MISES.md),
