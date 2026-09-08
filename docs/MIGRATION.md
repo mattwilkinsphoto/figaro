@@ -5,7 +5,8 @@
 The [bounded-tail policy](GVM_SCALAR_TAIL_PRODUCTION.md) changes the implementation of
 `GaussVonMisesScalarBhattacharyya.compare`, not its signature, result shape or dependency
 coordinate. Existing scalar callers need only rebuild the new snapshot; there is no
-new switch. Fourier and inference defaults remain unchanged. CI/main integration pending.
+new switch. Fourier and inference defaults remain unchanged. Integrated on main at
+`f4884cfb` after [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34209082583).
 
 Radius, evaluation count, last distance digits and error diagnostics may differ at the
 same tolerance. `maxEvaluations` and `Result.evaluations` count integrand calls, excluding

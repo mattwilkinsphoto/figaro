@@ -1,6 +1,7 @@
 # Bounded tail selection in the scalar GVM API
 
-Status: implemented in the development branch; CI/main integration pending.
+Status: integrated on main at `f4884cfb` after
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34209082583).
 This is a change to the existing modernization snapshot, not a new tagged release or
 replacement of an immutable library bundle.
 The preceding test-only prototype is integrated on main at `44b6b73f` after
@@ -25,8 +26,8 @@ still applies, and `Estimated` still means estimated accuracy, not a certified b
 
 ## Quick start in three steps
 
-1. Build the development snapshot containing the change with `sbt "figaro / publishLocal"`.
-   Until CI promotion, use `modernize/gauss-von-mises`, not an older main checkout or RC1 bundle.
+1. Update your checkout to current `main`, then build the snapshot with
+   `sbt "figaro / publishLocal"`. The older immutable RC1 bundle does not contain this change.
 2. Construct the curved scalar pair (one linear coordinate and one angle):
 
    ```scala
@@ -197,7 +198,7 @@ was introduced. Local publication is not a remote release or a replacement RC bu
 Precision estimates, supported scalar range and concentration caps have not become
 certified or broader. No multidimensional extension, automatic Fourier fallback,
 new threading behavior, report ingestion, fusion or domain-specific processing is added.
-After CI promotion, this completes the targeted scalar tail optimization; stronger
+This completes the targeted scalar tail optimization; stronger
 numerical certification and broader GVM capabilities remain separate roadmap decisions.
 
 Related: [scalar API](GVM_SCALAR_BHATTACHARYYA.md), [migration](MIGRATION.md),

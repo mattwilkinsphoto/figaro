@@ -137,7 +137,10 @@ This sequence is a proposed priority order, not a calendar estimate.
    radius/screen controls (44 physical fixtures, both directions). Setup budgets are
    explicit; repeated full-call timings retain about 2.53x on the curved fixture.
    The rebuilt library passes artifact and separate published-consumer checks.
-   Next: CI/main promotion, completing this targeted scalar performance milestone.
+   Integrated on main at `f4884cfb` after
+   [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34209082583),
+   completing this targeted scalar performance milestone. Current main is ready for
+   consumer rebuilds; no additional scalar micro-optimization is scheduled here.
    Stronger rounding analysis and
    multidimensional alternatives remain separate work; no automatic method switch.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.

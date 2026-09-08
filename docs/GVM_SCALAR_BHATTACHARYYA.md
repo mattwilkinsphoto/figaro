@@ -4,8 +4,8 @@ Status: public source API integrated on main at `21269b97` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34196804703).
 This is an addition to the modernization snapshot, not a replacement release bundle.
 The preceding test-only prototype is integrated on main at CI-verified `a54d665e`.
-The development branch also contains [bounded tail selection](GVM_SCALAR_TAIL_PRODUCTION.md),
-with no signature change; its CI/main integration is pending.
+Main also contains [bounded tail selection](GVM_SCALAR_TAIL_PRODUCTION.md),
+with no signature change, integrated at CI-verified `f4884cfb`.
 
 ## Overview: when to choose it
 

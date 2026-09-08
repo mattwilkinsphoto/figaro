@@ -12,8 +12,8 @@ test discovery includes these seven new tests automatically.
 Follow-on: the [test-only JVM prototype](GVM_SCALAR_TAIL_JVM.md) now measures complete
 comparisons, including conservative setup arithmetic: about 2.54x on the curved fixture,
 with little change on four other fixtures. The [production integration](GVM_SCALAR_TAIL_PRODUCTION.md)
-now adds held-out controls, consumer verification and a repeated timing gate; CI/main
-promotion is pending.
+adds held-out controls, consumer verification and a repeated timing gate; it is
+integrated on main at CI-verified `f4884cfb`.
 
 ## Overview
 

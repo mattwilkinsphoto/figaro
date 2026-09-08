@@ -247,8 +247,9 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   milestone is preserved in the report. [Production integration](docs/GVM_SCALAR_TAIL_PRODUCTION.md)
   now retires duplicate prototype code, adds 44 held-out/boundary fixtures and passes
   319 distinct modernization tests, artifact checks and the published consumer.
-  A repeated timing study retains about 2.53x on the curved fixture. Next: CI/main
-  promotion; no further scalar micro-optimization is scheduled in this milestone.
+  A repeated timing study retains about 2.53x on the curved fixture. Integrated on main
+  at CI-verified `f4884cfb`; this targeted milestone is complete, with no further scalar
+  micro-optimization scheduled here.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.
