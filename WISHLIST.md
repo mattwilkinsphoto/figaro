@@ -219,7 +219,7 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   tests cover accuracy, budgets, cancellation and range/precision refusals.
   [CI passed at `70b083f4`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34194233164).
   Integrated on main through CI-verified `a54d665e`. No automatic fallback or wider caps.
-- **Positive scalar Scala comparison — public opt-in API, CI/integration pending:**
+- **Positive scalar Scala comparison — public opt-in API, integrated on main at `21269b97`:**
   The [physical-kernel prototype](docs/GVM_POSITIVE_SCALAR_PROTOTYPE.md) has moved into
   the [public scalar comparison](docs/GVM_SCALAR_BHATTACHARYYA.md). It retains the
   oracle grid, preprocessing-error estimates, budgets, interruption and concurrency

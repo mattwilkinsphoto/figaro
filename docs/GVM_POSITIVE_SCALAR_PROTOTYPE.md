@@ -1,7 +1,7 @@
 # Positive scalar GVM overlap: prototype history and preprocessing
 
 The test-only Scala prototype at `a54d665e` passed [CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34195275750)
-and is integrated on main. On the development branch it has been moved into the explicit
+and is integrated on main. It has since been moved into the explicit
 [public scalar API](GVM_SCALAR_BHATTACHARYYA.md). Its regression suite moved with it;
 there is no duplicate test-only implementation to maintain. This page preserves the
 preprocessing rationale. Use the public guide for current commands, parameters,
@@ -12,7 +12,7 @@ unequal-concentration pairs in both directions. Maximum observed main-grid error
 was 3.51e-10 nats at tolerance 1e-8, with at most 25,098 integrand evaluations.
 Its full local gate passed 307 modernization tests; these are historical fixture
 results, not a universal accuracy guarantee. The public successor adds analytic
-shortcuts and near-limit tests and has its own CI/integration gate.
+shortcuts and near-limit tests and is integrated on main at CI-verified `21269b97`.
 
 ## What the preprocessing does
 

@@ -1,6 +1,7 @@
 # Opt-in scalar GVM Bhattacharyya comparison
 
-Status: public source API on the GVM development branch; CI/integration pending.
+Status: public source API integrated on main at `21269b97` after
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34196804703).
 This is an addition to the modernization snapshot, not a replacement release bundle.
 The preceding test-only prototype is integrated on main at CI-verified `a54d665e`.
 
@@ -185,7 +186,8 @@ test/example/instrumentation classes. Generated API reference and local links al
 The separate [published consumer](../tools/acceptance-consumer/README.md) passed using
 the just-published JAR, verified by SHA-256, including this API's positive overlap and
 budget-refusal checks. CI additionally requires the runtime class in both thin and
-assembled artifacts; the full remote publication/reproducibility gate remains pending.
+assembled artifacts; the full remote publication/reproducibility gate passed at `21269b97`.
+The follow-on performance study has its own CI/integration gate.
 
 The inherited high-precision grid checks 84 scalar pairs in both directions (168
 comparisons), plus ten unequal-concentration pairs in both directions. The public

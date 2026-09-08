@@ -58,7 +58,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [GVM matched-accuracy timings](docs/GVM_BHATTACHARYYA_PERFORMANCE.md): measured tensor-grid savings, fresh/reused rule comparisons and faster problem-specific reduction counterexamples.
 - [GVM numerical reliability](docs/GVM_BHATTACHARYYA_RELIABILITY.md): high-precision concentration/cancellation stress grid, unresolved-result guidance and remaining numerical limits.
 - [Positive scalar GVM overlap research](docs/GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md): bounded positive integration for cancellation-sensitive cases; research-only, not an automatic fallback.
-- [Opt-in scalar GVM comparison](docs/GVM_SCALAR_BHATTACHARYYA.md): positive integration for cancellation-sensitive scalar overlaps, analytic shortcuts, estimated-error diagnostics and hard work budgets; development API, CI/integration pending.
+- [Opt-in scalar GVM comparison](docs/GVM_SCALAR_BHATTACHARYYA.md): positive integration for cancellation-sensitive scalar overlaps, analytic shortcuts, estimated-error diagnostics and hard work budgets; integrated on main at CI-verified `21269b97`.
 - [Scalar comparison performance](docs/GVM_SCALAR_PERFORMANCE.md): matched-accuracy timings of both APIs; Fourier first for ordinary coupled cases, positive integration for eligible unresolved overlaps, and explicit refusal-cost accounting.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.

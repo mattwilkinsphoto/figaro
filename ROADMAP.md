@@ -109,8 +109,9 @@ This sequence is a proposed priority order, not a calendar estimate.
    The implementation and tests now move into an [explicit public scalar API](docs/GVM_SCALAR_BHATTACHARYYA.md)
    with identity/Gaussian/uniform/constant-angle shortcuts, near-limit controls,
    a user guide and executable examples. All 309 modernization tests pass locally.
-   The Fourier API remains unchanged;
-   public-API CI/integration pending. The [matched-accuracy scalar study](docs/GVM_SCALAR_PERFORMANCE.md)
+   The Fourier API remains unchanged. The public API is integrated on main at `21269b97`
+   after [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34196804703).
+   The [matched-accuracy scalar study](docs/GVM_SCALAR_PERFORMANCE.md)
    now compares eight physical-kernel pairs at 1e-8 nats in three fresh JVMs: 14 accepted
    method/case combinations and two explicitly labeled Fourier refusals, with all 336
    timing rounds retained. Fourier is about 39–69x faster on ordinary coupled fixtures

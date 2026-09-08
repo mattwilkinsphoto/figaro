@@ -1,7 +1,8 @@
 # Scalar GVM comparison: accuracy, cost and method selection
 
 Status: locally validated study on the GVM development branch; its CI/integration
-gate is pending. The measured public library is commit `21269b97`. This milestone
+gate is pending. The measured public library is commit `21269b97`, now integrated
+on main after [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34196804703). This milestone
 adds measurements, evidence checks and guidance, not a new integrator, automatic
 method selection, wider numerical limits or replacement release bundle.
 Local acceptance passes all 309 modernization tests across 25 suites, the untimed
