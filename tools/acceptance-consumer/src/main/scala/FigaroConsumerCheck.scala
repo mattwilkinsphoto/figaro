@@ -52,6 +52,30 @@ object FigaroConsumerCheck {
     require(MI.compute(dependent,maxEvaluations=1).value.isEmpty)
     println("Published GVM mutual information: dependence oracle, estimated interval and budget refusal passed")
 
+    {
+      import com.cra.figaro.library.atomic.continuous.*
+      import com.cra.figaro.library.atomic.discrete.{NegativeBinomial,Hypergeometric,NegativeBinomialDistribution,CountDivergence}
+      import com.cra.figaro.library.atomic.{DiscreteInformation,InformationMetricStatus}
+      val familyUniverse=new Universe
+      try {
+        val elements=Vector(StudentT(5)(using "t",familyUniverse),Cauchy(0,1)(using "c",familyUniverse),
+          Laplace(0,1)(using "l",familyUniverse),LogNormal(0,1)(using "ln",familyUniverse),
+          Weibull(2,1)(using "w",familyUniverse),Triangular(0,.3,1)(using "tr",familyUniverse),
+          Kumaraswamy(2,3)(using "k",familyUniverse))
+        elements.foreach(e => require(e.logDensity(e.distribution.quantile(.4)).isFinite))
+        require(NegativeBinomial(2,.4)(using "nb",familyUniverse).density(2) > 0)
+        require(Hypergeometric(20,7,5)(using "hg",familyUniverse).density(2) > 0)
+      } finally familyUniverse.clear()
+      val kl=ScalarDivergence.kl(StudentTDistribution(5),StudentTDistribution(8,.4,1.2))
+      require(kl.status == InformationMetricStatus.Estimated && math.abs(kl.value.get-.0599146463826821) < 1e-6)
+      val b=ScalarDivergence.bhattacharyya(WeibullDistribution(2,1),WeibullDistribution(2,3))
+      require(b.status == InformationMetricStatus.Analytic && math.abs(b.value.get-math.log(5.0/3)) < 1e-12)
+      val count=CountDivergence.kl(NegativeBinomialDistribution(2.5,.4),NegativeBinomialDistribution(3.2,.6))
+      require(count.status == InformationMetricStatus.Estimated && math.abs(count.value.get-.2796974092865718) < 1e-8)
+      require(math.abs(DiscreteInformation.mutualInformation(Vector(Vector(.5,0.0),Vector(0.0,.5))).value.get-math.log(2)) < 1e-12)
+      println("Published common-family APIs: nine adapters, scalar/count divergences and joint-table MI passed")
+    }
+
     val universe=Universe.createNew()
     val cause=Flip(0.3)(using "", universe)
     cause.addConstraint(b => if (b) 0.8 else 0.2)

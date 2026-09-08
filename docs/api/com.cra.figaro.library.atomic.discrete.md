@@ -1167,6 +1167,1120 @@ Invocation template:
 receiver.unset()
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.generateRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#generateRandomness-ffffff27)
+
+```scala
+def generateRandomness(): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Int ``.
+
+Source contract/attributes: Attributes Returns independent count draw from the scoped Figaro RNG
+
+Invocation template:
+
+```scala
+receiver.generateRandomness()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.generateValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#generateValue-fffffbe0)
+
+```scala
+def generateValue(rand: Int): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Int ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters rand sampled count randomness Attributes Returns rand unchanged
+
+Invocation template:
+
+```scala
+receiver.generateValue(rand)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#logDensity-640)
+
+```scala
+def logDensity(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count to score Attributes Returns natural-log probability mass, also used by likelihood weighting
+
+Invocation template:
+
+```scala
+receiver.logDensity(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.!== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#!==-894)
+
+```scala
+def !==(that: Element[Value])(implicit universe: Universe): Neq[Int]
+```
+
+The element that tests inequality of this element with another element.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Element[Value] ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Neq[Int] ``.
+
+Source contract/attributes: The element that tests inequality of this element with another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.!==(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.=== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#===-f71)
+
+```scala
+def ===(that: Value)(implicit universe: Universe): Apply1[Int, Boolean]
+```
+
+The element that tests whether the value of this element is equal to a particular value.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Value ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Apply1[Int, Boolean] ``.
+
+Source contract/attributes: The element that tests whether the value of this element is equal to a particular value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.===(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.=== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#===-672)
+
+```scala
+def ===(that: Element[Value])(implicit universe: Universe): Eq[Int]
+```
+
+The element that tests equality of this element with another element.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Element[Value] ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Eq[Int] ``.
+
+Source contract/attributes: The element that tests equality of this element with another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.===(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.activate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#activate-94c)
+
+```scala
+def activate(): Unit
+```
+
+Activate the element in its universe.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Activate the element in its universe. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.activate()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.addCondition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#addCondition-fffff9ad)
+
+```scala
+def addCondition(condition: Condition, contingency: Contingency = ...): Unit
+```
+
+Add the given condition to the existing conditions of the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` condition: Condition ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add the given condition to the existing conditions of the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addCondition(condition, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.addConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#addConstraint-fffff9ad)
+
+```scala
+def addConstraint(constraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Add a contingent constraint to the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` constraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addConstraint(constraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.addLogConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#addLogConstraint-fffff9ad)
+
+```scala
+def addLogConstraint(constraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Add a log contingent constraint to the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` constraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a log contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addLogConstraint(constraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.addPragma ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#addPragma-b53)
+
+```scala
+def addPragma(pragma: Pragma[Value]): Unit
+```
+
+Add a pragma to the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` pragma: Pragma[Value] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a pragma to the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addPragma(pragma)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.allConditions ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#allConditions-0)
+
+```scala
+def allConditions: List[(Condition, Contingency)]
+```
+
+All the conditions defined on this element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[(Condition, Contingency)] ``.
+
+Source contract/attributes: All the conditions defined on this element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.allConditions
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.allConstraints ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#allConstraints-0)
+
+```scala
+def allConstraints: List[(Constraint, Contingency)]
+```
+
+The current soft constraints on the element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[(Constraint, Contingency)] ``.
+
+Source contract/attributes: The current soft constraints on the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.allConstraints
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.args ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#args-0)
+
+```scala
+def args: List[Element[_]]
+```
+
+Returns an empty list.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: Returns an empty list. Attributes Inherited from: Atomic
+
+Invocation template:
+
+```scala
+receiver.args
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.clearContext ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#clearContext-94c)
+
+```scala
+def clearContext(): Unit
+```
+
+Clears all the temporary elements associated with this element (all elements created in it's context).
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Clears all the temporary elements associated with this element (all elements created in it's context). Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.clearContext()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.condition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#condition-4ad)
+
+```scala
+def condition(value: Any): Boolean
+```
+
+Tests whether all the element's contingent conditions are satisfied for the given value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Any ``.
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Tests whether all the element's contingent conditions are satisfied for the given value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.condition(value)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.conditionSatisfied ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#conditionSatisfied-0)
+
+```scala
+def conditionSatisfied: Boolean
+```
+
+Determines whether the condition on the element is satisfied by the current value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Determines whether the condition on the element is satisfied by the current value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.conditionSatisfied
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.constraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#constraint-fffffeac)
+
+```scala
+def constraint(value: Any): Double
+```
+
+Gets the result of all the element's contingent constraints for the given value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Any ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Gets the result of all the element's contingent constraints for the given value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.constraint(value)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.constraintValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#constraintValue-0)
+
+```scala
+def constraintValue: Double
+```
+
+Determines the value of the constraint on the element applied to the current value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Determines the value of the constraint on the element applied to the current value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.constraintValue
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.context ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#context-0)
+
+```scala
+def context: List[Element[_]]
+```
+
+The elements on which the existence of this element depends.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: The elements on which the existence of this element depends. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.context
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.deactivate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#deactivate-94c)
+
+```scala
+def deactivate(): Unit
+```
+
+Deactivate the element in its universe.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Deactivate the element in its universe. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.deactivate()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#density-fffffeac)
+
+```scala
+override def density(value: Int): Double
+```
+
+Exponentiate logDensity; small positive densities may round to zero.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity Inherited from: HasLogDensity
+
+Invocation template:
+
+```scala
+receiver.density(value)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.directContextContents ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#directContextContents-0)
+
+```scala
+def directContextContents: Set[Element[_]]
+```
+
+Returns the set of elements directly created in the context of this element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Set[Element[_]] ``.
+
+Source contract/attributes: Returns the set of elements directly created in the context of this element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.directContextContents
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.elementsIAmContingentOn ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#elementsIAmContingentOn-0)
+
+```scala
+def elementsIAmContingentOn: Set[Element[_]]
+```
+
+Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Set[Element[_]] ``.
+
+Source contract/attributes: Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value. Figaro takes care of handling all this under the hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample those other elements first. This method is supplied to support this use case. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.elementsIAmContingentOn
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.flatMap ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#flatMap-db8)
+
+```scala
+def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` U ``.
+
+Parameters, list 1: `` fn: Value => Element[U] ``.
+
+Context parameters, list 2: `` name: Name[U] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[U] ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.flatMap[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.generate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#generate-94c)
+
+```scala
+final def generate(): Unit
+```
+
+First generate the randomness, then generate the value given the randomness. Store the results in randomness and value.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: First generate the randomness, then generate the value given the randomness. Store the results in randomness and value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.generate()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.intervene ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#intervene-fffff71f)
+
+```scala
+def intervene(v: Value): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` v: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.intervene(v)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.isCachable ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#isCachable-0)
+
+```scala
+def isCachable: Boolean
+```
+
+The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.isCachable
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.isTemporary ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#isTemporary-0)
+
+```scala
+def isTemporary: Boolean
+```
+
+Returns true if this element is temporary, that is, was created in the context of another element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.isTemporary
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.map ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#map-db8)
+
+```scala
+def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` U ``.
+
+Parameters, list 1: `` fn: Value => U ``.
+
+Context parameters, list 2: `` name: Name[U] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[U] ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.nextRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#nextRandomness-fffff446)
+
+```scala
+override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
+```
+
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
+
+Type parameters: none.
+
+Parameters, list 1: `` oldRandomness: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
+
+Invocation template:
+
+```scala
+receiver.nextRandomness(oldRandomness)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.observe ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#observe-fffff71f)
+
+```scala
+def observe(observation: Value): Unit
+```
+
+Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated.
+
+Type parameters: none.
+
+Parameters, list 1: `` observation: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.observe(observation)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.pragmas ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#pragmas-0)
+
+```scala
+def pragmas: List[Pragma[Value]]
+```
+
+The pragmas attached to the element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Pragma[Value]] ``.
+
+Source contract/attributes: The pragmas attached to the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.pragmas
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.removeConditions ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#removeConditions-71e)
+
+```scala
+def removeConditions(contingency: Contingency = ...): Unit
+```
+
+Remove all conditions associated with the given contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove all conditions associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removeConditions(contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.removeConstraints ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#removeConstraints-71e)
+
+```scala
+def removeConstraints(contingency: Contingency = ...): Unit
+```
+
+Remove all constraints associated with the given contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove all constraints associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removeConstraints(contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.removePragma ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#removePragma-b53)
+
+```scala
+def removePragma(pragma: Pragma[Value]): Unit
+```
+
+Remove a pragma from the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` pragma: Pragma[Value] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove a pragma from the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removePragma(pragma)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.score ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#score-fffffdbf)
+
+```scala
+def score(oldValue: Value, newValue: Value): Double
+```
+
+Compute the constraints on the new value divided by the constraints on the old value.
+
+Type parameters: none.
+
+Parameters, list 1: `` oldValue: Value ``; `` newValue: Value ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Compute the constraints on the new value divided by the constraints on the old value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.score(oldValue, newValue)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.set ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#set-fffff71f)
+
+```scala
+def set(newValue: Value): Unit
+```
+
+Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called.
+
+Type parameters: none.
+
+Parameters, list 1: `` newValue: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.set(newValue)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.setCondition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#setCondition-fffff9ad)
+
+```scala
+def setCondition(newCondition: Condition, contingency: Contingency = ...): Unit
+```
+
+Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newCondition: Condition ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setCondition(newCondition, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.setConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#setConstraint-fffff9ad)
+
+```scala
+def setConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newConstraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setConstraint(newConstraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.setLogConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#setLogConstraint-fffff9ad)
+
+```scala
+def setLogConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newConstraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setLogConstraint(newConstraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.setRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#setRandomness-fffff71f)
+
+```scala
+def setRandomness(newRandomness: Randomness): Unit
+```
+
+Set the randomness of this element.
+
+Type parameters: none.
+
+Parameters, list 1: `` newRandomness: Randomness ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the randomness of this element. Will generate its value using the new randomness and propagate the effects to elements that depend on it without changing their randomness. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setRandomness(newRandomness)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.toNameString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#toNameString-0)
+
+```scala
+def toNameString: String
+```
+
+A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.toNameString
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.unintervene ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#unintervene-94c)
+
+```scala
+def unintervene(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unintervene()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.unobserve ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#unobserve-94c)
+
+```scala
+def unobserve(): Unit
+```
+
+Removes conditions on the element and allows different values of the element to be generated.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Removes conditions on the element and allows different values of the element to be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unobserve()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.unset ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#unset-94c)
+
+```scala
+def unset(): Unit
+```
+
+Allows different values of the element to be generated.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Allows different values of the element to be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unset()
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.AtomicGeometric.density ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicGeometric.html#density-640)
@@ -12553,6 +13667,322 @@ Invocation template:
 receiver.unset()
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#cdf-640)
+
+```scala
+def cdf(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X<=k) Example NegativeBinomialDistribution(2,.5).cdf(4)
+
+Invocation template:
+
+```scala
+receiver.cdf(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.logProbability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#logProbability-640)
+
+```scala
+def logProbability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count (negative integers are outside these supports) Attributes Returns natural log probability mass, or negative infinity outside support Example NegativeBinomialDistribution(2.5,.4).logProbability(3)
+
+Invocation template:
+
+```scala
+receiver.logProbability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#mean-0)
+
+```scala
+def mean: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical mean in count units
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#quantile-fffff1ae)
+
+```scala
+def quantile(p: Double): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns smallest supported count with CDF>=p; unbounded p=1 and Int overflow throw Example HypergeometricDistribution(20,7,5).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#support-0)
+
+```scala
+def support: (Int, Option[Int])
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Int, Option[Int]) ``.
+
+Source contract/attributes: Attributes Returns minimum count and optional finite maximum; None means mathematically unbounded
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#survival-640)
+
+```scala
+def survival(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X>k), evaluated directly Example NegativeBinomialDistribution(2,.5).survival(4)
+
+Invocation template:
+
+```scala
+receiver.survival(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#variance-0)
+
+```scala
+def variance: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical variance in squared count units
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.probability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#probability-640)
+
+```scala
+final def probability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns mass, subject to exponential underflow Example HypergeometricDistribution(20,7,5).probability(2)
+
+Invocation template:
+
+```scala
+receiver.probability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDistribution.html#sample-360)
+
+```scala
+final def sample(rng: Random): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters rng non-null caller-owned RNG Attributes Returns count from inverse transform; out-of-Int tail draws throw, never clip Example NegativeBinomialDistribution(2,.5).sample(new scala.util.Random(42))
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDivergence.bhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDivergence$.html#bhattacharyya-74c)
+
+```scala
+def bhattacharyya(p: CountDistribution, q: CountDistribution, tolerance: Double = ..., maxTerms: Int = ..., cancelled: () => Boolean = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: CountDistribution ``; `` q: CountDistribution ``; `` tolerance: Double = ... ``; `` maxTerms: Int = ... ``; `` cancelled: () => Boolean = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters cancelled non-null cooperative callback maxTerms maximum count terms in [1,100000], default 10000 p first count law q second law of the same family tolerance positive finite absolute target in nats, default 1e-8 Attributes Returns symmetric negative log affinity; infinity means mathematically zero overlap Example CountDivergence.bhattacharyya(HypergeometricDistribution(20,7,5),HypergeometricDistribution(20,9,5))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.CountDivergence.bhattacharyya(p, q, tolerance, maxTerms, cancelled)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountDivergence.kl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountDivergence$.html#kl-74c)
+
+```scala
+def kl(p: CountDistribution, q: CountDistribution, tolerance: Double = ..., maxTerms: Int = ..., cancelled: () => Boolean = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: CountDistribution ``; `` q: CountDistribution ``; `` tolerance: Double = ... ``; `` maxTerms: Int = ... ``; `` cancelled: () => Boolean = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters cancelled non-null cooperative cancellation callback; exceptions propagate maxTerms maximum count terms in [1,100000], default 10000 p source count law q comparison law of the same family and count convention tolerance positive finite absolute target in nats, default 1e-8 Attributes Returns directed KL, genuine support infinity, or explicit refusal Example CountDivergence.kl(NegativeBinomialDistribution(2,.4),NegativeBinomialDistribution(3,.6))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.CountDivergence.kl(p, q, tolerance, maxTerms, cancelled)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountElement.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountElement$.html#apply-ffffff0a)
+
+```scala
+def apply(distribution: CountDistribution)(using name: Name[Int], collection: ElementCollection): AtomicCount
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: CountDistribution ``.
+
+Context parameters, list 2: `` name: Name[Int] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicCount ``.
+
+Source contract/attributes: Value parameters collection owning universe/collection distribution non-null immutable count law name contextual name Attributes Returns atomic count with direct log-mass evidence Example CountElement(NegativeBinomialDistribution(2.5,.4))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.CountElement.apply(distribution)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountElement.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountElement$.html#apply-1f8)
+
+```scala
+def apply[D <: CountDistribution](distribution: Element[D])(using name: Name[Int], collection: ElementCollection): Element[Int]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` D <: CountDistribution ``.
+
+Parameters, list 1: `` distribution: Element[D] ``.
+
+Context parameters, list 2: `` name: Name[Int] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[Int] ``.
+
+Source contract/attributes: Value parameters collection owning universe/collection distribution element producing validated count kernels name contextual name Attributes Returns non-caching conditional count law Example CountElement(Apply(Constant(.4), (p: Double) => NegativeBinomialDistribution(2,p)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.CountElement.apply[D](distribution)(using name, collection)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.FromRange.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FromRange$.html#apply-b3c)
@@ -13767,6 +15197,586 @@ Invocation template:
 
 ```scala
 com.cra.figaro.library.atomic.discrete.Geometric.create(args)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.Hypergeometric.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/Hypergeometric$.html#apply-ba6)
+
+```scala
+def apply(population: Int, successes: Int, draws: Int)(using name: Name[Int], collection: ElementCollection): AtomicCount
+```
+
+Register a fixed-parameter element; parameters are validated before registration.
+
+Type parameters: none.
+
+Parameters, list 1: `` population: Int ``; `` successes: Int ``; `` draws: Int ``.
+
+Context parameters, list 2: `` name: Name[Int] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicCount ``.
+
+Source contract/attributes: Register a fixed-parameter element; parameters are validated before registration. Value parameters collection owning universe/collection draws integer in [0,population] name contextual name population integer in [1,100000] successes integer in [0,population] Attributes Returns AtomicCount backed by HypergeometricDistribution Example Hypergeometric(20,7,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.Hypergeometric.apply(population, successes, draws)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#cdf-640)
+
+```scala
+def cdf(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X<=k) Example NegativeBinomialDistribution(2,.5).cdf(4)
+
+Invocation template:
+
+```scala
+receiver.cdf(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.logProbability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#logProbability-640)
+
+```scala
+def logProbability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count (negative integers are outside these supports) Attributes Returns natural log probability mass, or negative infinity outside support Example NegativeBinomialDistribution(2.5,.4).logProbability(3)
+
+Invocation template:
+
+```scala
+receiver.logProbability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#mean-0)
+
+```scala
+def mean: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical mean in count units
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#quantile-fffff1ae)
+
+```scala
+def quantile(p: Double): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns smallest supported count with CDF>=p; unbounded p=1 and Int overflow throw Example HypergeometricDistribution(20,7,5).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#support-0)
+
+```scala
+def support: (Int, Option[Int])
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Int, Option[Int]) ``.
+
+Source contract/attributes: Attributes Returns minimum count and optional finite maximum; None means mathematically unbounded
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#survival-640)
+
+```scala
+def survival(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X>k), evaluated directly Example NegativeBinomialDistribution(2,.5).survival(4)
+
+Invocation template:
+
+```scala
+receiver.survival(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#variance-0)
+
+```scala
+def variance: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical variance in squared count units
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.probability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#probability-640)
+
+```scala
+final def probability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns mass, subject to exponential underflow Example HypergeometricDistribution(20,7,5).probability(2) Inherited from: CountDistribution
+
+Invocation template:
+
+```scala
+receiver.probability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.discrete.HypergeometricDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html#sample-360)
+
+```scala
+final def sample(rng: Random): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters rng non-null caller-owned RNG Attributes Returns count from inverse transform; out-of-Int tail draws throw, never clip Example NegativeBinomialDistribution(2,.5).sample(new scala.util.Random(42)) Inherited from: CountDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomial.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomial$.html#apply-db)
+
+```scala
+def apply(successes: Double, successProbability: Double)(using name: Name[Int], collection: ElementCollection): AtomicCount
+```
+
+Register a fixed-parameter element; parameters are validated before registration.
+
+Type parameters: none.
+
+Parameters, list 1: `` successes: Double ``; `` successProbability: Double ``.
+
+Context parameters, list 2: `` name: Name[Int] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicCount ``.
+
+Source contract/attributes: Register a fixed-parameter element; parameters are validated before registration. Value parameters collection owning universe/collection name contextual name successProbability probability in [1e-6,1]; one gives a point mass at zero successes positive real shape in [0.001,1e6] Attributes Returns AtomicCount backed by NegativeBinomialDistribution Example NegativeBinomial(2.5,.4)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.NegativeBinomial.apply(successes, successProbability)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#cdf-640)
+
+```scala
+def cdf(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X<=k) Example NegativeBinomialDistribution(2,.5).cdf(4)
+
+Invocation template:
+
+```scala
+receiver.cdf(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.logProbability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#logProbability-640)
+
+```scala
+def logProbability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count (negative integers are outside these supports) Attributes Returns natural log probability mass, or negative infinity outside support Example NegativeBinomialDistribution(2.5,.4).logProbability(3)
+
+Invocation template:
+
+```scala
+receiver.logProbability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#mean-0)
+
+```scala
+def mean: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical mean in count units
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#quantile-fffff1ae)
+
+```scala
+def quantile(p: Double): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns smallest supported count with CDF>=p; unbounded p=1 and Int overflow throw Example HypergeometricDistribution(20,7,5).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.support ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#support-0)
+
+```scala
+def support: (Int, Option[Int])
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Int, Option[Int]) ``.
+
+Source contract/attributes: Attributes Returns minimum count and optional finite maximum; None means mathematically unbounded
+
+Invocation template:
+
+```scala
+receiver.support
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#survival-640)
+
+```scala
+def survival(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X>k), evaluated directly Example NegativeBinomialDistribution(2,.5).survival(4)
+
+Invocation template:
+
+```scala
+receiver.survival(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#variance-0)
+
+```scala
+def variance: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical variance in squared count units
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.probability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#probability-640)
+
+```scala
+final def probability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns mass, subject to exponential underflow Example HypergeometricDistribution(20,7,5).probability(2) Inherited from: CountDistribution
+
+Invocation template:
+
+```scala
+receiver.probability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.discrete.NegativeBinomialDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.html#sample-360)
+
+```scala
+final def sample(rng: Random): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters rng non-null caller-owned RNG Attributes Returns count from inverse transform; out-of-Int tail draws throw, never clip Example NegativeBinomialDistribution(2,.5).sample(new scala.util.Random(42)) Inherited from: CountDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.OneShifter.shiftOne ``

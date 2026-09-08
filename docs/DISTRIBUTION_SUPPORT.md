@@ -2,13 +2,17 @@
 
 ## What exists now
 
-Initial source inventory at `b99c5d56` (2026-09-07), updated for the circular foundation.
+Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-08 for the common-family milestone.
 This is an API inventory, not new numerical certification of every existing distribution.
 The [roadmap](../ROADMAP.md) defines delivery gates; the [wishlist](../WISHLIST.md)
 collects broad families and their later flavors.
 
 | Present native entry points | Source | Scope / caution |
 | --- | --- | --- |
+| StudentT, Cauchy, Laplace, LogNormal, Weibull, Triangular, Kumaraswamy | [Common-family guide](COMMON_DISTRIBUTIONS.md) | Immutable numeric kernels plus fixed/dynamic observation-ready adapters; direct log densities, CDF/survival/quantiles, scoped RNG and tested importance/MCMC paths; not exact factors or fitting |
+| NegativeBinomial, Hypergeometric | [Count conventions](COMMON_DISTRIBUTIONS.md) | Real positive shape/failure count and finite-population draws respectively; explicit Int-range and work limits |
+| ScalarDivergence, CountDivergence, DiscreteInformation | [Information measures](COMMON_INFORMATION_METRICS.md) | Same-family KL/Bhattacharyya and explicit finite-joint-table MI; analytic or guarded estimated results, not arbitrary cross-family/joint-model inference |
+| GVM mutual information | [MI guide](GVM_MUTUAL_INFORMATION.md) | Fixed complete linear vector versus angle; passing branch CI, separate from generic marginal comparisons |
 | GaussVonMises, GaussVonMisesDistribution, LinearAngular (development preview) | [Joint guide](GAUSS_VON_MISES.md) | Fixed kernel and complete joint observations on main at CI-verified `3615e26e`; standalone publication approved, no replacement tagged library release |
 | GVM canonical residuals, squared Mahalanobis score, analytic KL | [Diagnostics guide](GVM_DIAGNOSTICS.md) | Individual fixed GVMs, same coordinate meanings; deterministic kernel utilities, not calibrated gates or mixture/posterior fitting |
 | GVM analytic circular/mixed moments and conditionalAngle | [Moments guide](GVM_MOMENTS.md) | Fixed-kernel physical-coordinate first/second mixed moments and exact angle given the full linear vector; no general posterior moments or Gaussian reverse-conditional claim |
@@ -37,8 +41,10 @@ first-class multinomial count-vector law.
 
 Examples of mathematical reuse opportunities are a Rademacher law using `Select`,
 arcsine using Beta(1/2, 1/2), Erlang/chi-squared using Gamma with appropriate parameters,
-beta-binomial via a random success probability, and lognormal using `exp` of a Normal.
+and beta-binomial via a random success probability.
 These are candidate constructions, not new tested APIs supplied here.
+Lognormal now has a native observation-ready element; use it instead of assuming that
+`Apply(normal, math.exp)` supplies the transformed observation likelihood automatically.
 
 An `Apply` transformation can generate the right prior samples without furnishing the
 right likelihood for an exactly observed transformed continuous node. A monotone change
@@ -59,7 +65,8 @@ mass/density contract. Factor conversion and learning require additional support
   raw density-ratio underflow/overflow risks. New stable log-density calculations do not
   fix all downstream callers automatically. Verify or explicitly restrict those paths.
 - New [HasLogDensity](../Figaro/src/main/scala/com/cra/figaro/language/HasLogDensity.scala)
-  opts into direct log-density likelihood weighting. Von Mises uses it; existing
+  opts into direct log-density likelihood weighting. Von Mises, GVM and the nine new
+  common-family adapters use it; other existing
   distributions are not silently migrated. Audit their mathematical log densities and
   actual callers before broader adoption. Extreme legacy MH proposal ratios can still
   be unrepresentable and the new trait fails explicitly in that case.
@@ -99,10 +106,10 @@ Bhattacharyya and MI applicability and acceptance criteria. The initial
 and one angle; it does not provide generic MI for every scalar distribution.
 
 First inspect the already-used [Apache Commons Math distribution APIs](https://commons.apache.org/proper/commons-math/javadocs/api-3.6.1/org/apache/commons/math3/distribution/package-summary.html).
-They offer potential implementations for Student t, Cauchy, Laplace, Weibull, lognormal,
-hypergeometric and other common scalar laws. A wrapper still needs parameter translation,
-Figaro-owned RNG integration, density checks and inference tests. Avoid adding a large
-runtime dependency just to wrap one existing algorithm.
+The new common families reuse this existing dependency's special functions, normal inverse
+and hypergeometric probabilities, with independently checked formulas, bounded inverses
+and caller-owned randomness. They add no runtime dependency. A future wrapper still needs
+parameter translation, Figaro-owned RNG integration, density checks and inference tests.
 
 For circular numerical cross-checks, [SciPy's von Mises API](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.vonmises.html)
 is a candidate independent oracle, not a proposed Python runtime dependency. Pin its

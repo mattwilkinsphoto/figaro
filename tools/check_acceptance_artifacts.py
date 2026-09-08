@@ -13,7 +13,19 @@ REQUIRED = ('com/cra/figaro/language/Universe.class',
             'com/cra/figaro/algorithm/sampling/parallel/MultiChainVectorSliceSampler$.class',
             'com/cra/figaro/algorithm/sampling/parallel/McmcDiagnostics$.class',
             'com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$.class',
-            'com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$.class')
+            'com/cra/figaro/library/atomic/continuous/GaussVonMisesMutualInformation$.class',
+            'com/cra/figaro/library/atomic/continuous/StudentTDistribution.class',
+            'com/cra/figaro/library/atomic/continuous/CauchyDistribution.class',
+            'com/cra/figaro/library/atomic/continuous/LaplaceDistribution.class',
+            'com/cra/figaro/library/atomic/continuous/LogNormalDistribution.class',
+            'com/cra/figaro/library/atomic/continuous/WeibullDistribution.class',
+            'com/cra/figaro/library/atomic/continuous/TriangularDistribution.class',
+            'com/cra/figaro/library/atomic/continuous/KumaraswamyDistribution.class',
+            'com/cra/figaro/library/atomic/discrete/NegativeBinomialDistribution.class',
+            'com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.class',
+            'com/cra/figaro/library/atomic/continuous/ScalarDivergence$.class',
+            'com/cra/figaro/library/atomic/discrete/CountDivergence$.class',
+            'com/cra/figaro/library/atomic/DiscreteInformation$.class')
 
 
 def validate(archive, kind, legal):

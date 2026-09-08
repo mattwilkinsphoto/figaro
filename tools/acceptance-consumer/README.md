@@ -25,6 +25,10 @@ Its individual checks are ordinary application calls, not additions to Figaro's 
 The check also exercises the opt-in [scalar GVM comparison](../../docs/GVM_SCALAR_BHATTACHARYYA.md)
 from the published jar, including cancellation-sensitive overlap, the bounded-tail
 curved case (radius 7 with retained error/tail checks), and budget refusal.
+It checks [GVM mutual information](../../docs/GVM_MUTUAL_INFORMATION.md), all nine
+[common-family adapters](../../docs/COMMON_DISTRIBUTIONS.md), scalar/count divergences
+and explicit joint-table MI from that same verified JAR. These additions need a newly
+published snapshot; the older immutable integration bundle does not contain them.
 The check covers representative API/linkage/lifecycle behavior, not exhaustive statistical
 coverage, OSGi, arbitrary graphs, Java facades, memory ceilings or performance. It uses
 no test framework dependency. `run` forks so sbt's own libraries do not satisfy missing

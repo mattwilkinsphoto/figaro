@@ -44,6 +44,8 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Common distribution families](docs/COMMON_DISTRIBUTIONS.md): Student t, Cauchy, Laplace, lognormal, Weibull, triangular, Kumaraswamy, negative binomial and hypergeometric, with observation-ready adapters and parameter conventions.
+- [Common information measures](docs/COMMON_INFORMATION_METRICS.md): same-family KL/Bhattacharyya and explicit finite-table mutual information, with analytic reductions, work budgets and numerical refusals.
 - [Circular von Mises](docs/VON_MISES.md): reusable angular density/sampling, circular summaries, conditional observations and inference limits.
 - [Joint Gauss-von Mises preview](docs/GAUSS_VON_MISES.md): tested linear-angular distribution, approved standalone publication scope and inference limits.
 - [GVM diagnostics](docs/GVM_DIAGNOSTICS.md): canonical residuals, squared Mahalanobis scoring and analytic directed KL with Gaussian/circular checks.

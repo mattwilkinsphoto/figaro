@@ -23,6 +23,8 @@ jobs:
         run: python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_research.py' -v
       - name: Verify mutual-information oracles and independent positive marginal
         run: python3 -B -m unittest discover -s tools -p 'test_gvm_mutual_information.py' -v
+      - name: Verify common-family and divergence reference oracles
+        run: python3 -B -m unittest discover -s tools -p 'test_common_*reference.py' -v
       - name: Verify complete matched-accuracy timing evidence
         run: |
           python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_performance.py' -v
@@ -90,6 +92,12 @@ jobs:
           sbt --server --batch
           "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussVonMisesMutualInformationTest;
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesMutualInformationExample"
+
+      - name: Verify common families and information measures
+        run: >-
+          sbt --server --batch
+          "figaro / Test / testOnly com.cra.figaro.test.modernization.CommonDistributionsTest com.cra.figaro.test.modernization.CommonInformationMetricsTest;
+          examples / Compile / runMain com.cra.figaro.example.documentation.CommonDistributionsExample"
 
       - name: Verify opt-in positive scalar GVM comparison
         # Independent public entry point; the Fourier API never selects it automatically.

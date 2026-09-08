@@ -39,6 +39,15 @@ implementation does not introduce sample-based estimators or generalized fusion.
 
 ## Delivery sequence
 
+Delivered representative expansion: [common-family information measures](COMMON_INFORMATION_METRICS.md)
+now cover all nine D3 kernels through same-family analytic/guarded KL and Bhattacharyya,
+plus finite categorical KL/Bhattacharyya and explicit joint-table MI. Shared result/status
+conventions distinguish mathematical infinity from numerical refusal. See
+[acceptance evidence](COMMON_DISTRIBUTIONS_ACCEPTANCE.md) for integration status.
+This advances INFO-02 through INFO-04; it does not finish their full cross-family scope.
+Partitioned multivariate Gaussian MI, comparisons between unlike families, existing-family
+adapter audits and sample-based estimators remain separate work.
+
 1. **INFO-01: complete the GVM representative.** Add MI with mathematical reduction,
    independent numerical controls, caller-visible limits, examples, packaging and CI.
    Keep the result contract distinct from two-law divergence APIs.

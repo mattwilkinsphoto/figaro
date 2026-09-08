@@ -29,10 +29,10 @@ and special cases attached to their family instead of creating duplicate impleme
 | --- | --- | --- | --- |
 | DIST-01 / P0 | Circular von Mises native and locally validated; other directional laws researched | [Circular von Mises, angle conventions and circular summaries](docs/VON_MISES.md) | Wrapped normal/Cauchy and other wraps; then von Mises-Fisher, Kent and Bingham with sphere/axis-aware contracts |
 | DIST-02 / P0 | Joint linear-angular; through guarded Bhattacharyya comparison integrated on main at CI-verified `251f9540` | [Fixed-kernel Horwood-Poore Gauss-von Mises](docs/GAUSS_VON_MISES.md) using DIST-01 | Mardia-Sutton, GVM mixtures, multiple angles and newer generalized GVM variants; separate quadrature/uncertainty-propagation research and application-level review, not an automatic filtering claim |
-| DIST-03 / P1 | Real-line location/scale and heavy tails; wishlist, Normal native | Student t, Cauchy and Laplace | Logistic, skew/noncentral variants, generalized normal, stable and hyperbolic families |
-| DIST-04 / P1 | Finite choices and count laws; partially native | Negative binomial and hypergeometric with explicit count conventions | Overdispersion, beta mixtures, heterogeneous Bernoulli sums, noncentral and zero-truncated flavors |
-| DIST-05 / P1 | Positive-valued scale/lifetime laws; partially native | Lognormal and Weibull; expose reusable Gamma special cases | Inverse Gaussian, Rayleigh/Rice/Nakagami, generalized Gamma, fatigue-life and survival variants |
-| DIST-06 / P1 | Bounded scalar laws; Beta/Uniform native | Triangular and Kumaraswamy; correct bounded transforms | PERT, trapezoidal, raised cosine, logit-normal and continuous Bernoulli/binomial |
+| DIST-03 / P1 | Real-line location/scale and heavy tails; Student t/Cauchy/Laplace now native, Normal already native | [Three new location/scale representatives](docs/COMMON_DISTRIBUTIONS.md), with KL/Bhattacharyya support | Logistic, skew/noncentral variants, generalized normal, stable and hyperbolic families |
+| DIST-04 / P1 | Finite choices and count laws; negative binomial/hypergeometric now native | Real-shape failure counts and finite-population draws; count divergences and explicit finite-table MI | Beta mixtures, heterogeneous Bernoulli sums, noncentral and zero-truncated flavors |
+| DIST-05 / P1 | Positive-valued scale/lifetime laws; lognormal/Weibull now native | Observation-ready kernels and analytic/guarded divergences; Gamma special-case conveniences remain | Inverse Gaussian, Rayleigh/Rice/Nakagami, generalized Gamma, fatigue-life and survival variants |
+| DIST-06 / P1 | Bounded scalar laws; triangular/Kumaraswamy now native alongside Beta/Uniform | Kernels, adapters and guarded divergences; reusable bounded transforms remain | PERT, trapezoidal, raised cosine, logit-normal and continuous Bernoulli/binomial |
 | DIST-07 / P2 | Extreme-value and power-law families; wishlist | Generalized extreme value and generalized Pareto with parameter-dependent support | Gumbel, Frechet, Lomax, Zipf-Mandelbrot, tail/truncation variants |
 | DIST-08 / P2 | Joint vector/simplex/count laws; MVN/Dirichlet native | Multivariate t and multinomial count vectors | Negative multinomial, Dirichlet count mixtures, joint survival and continuous-categorical |
 | DIST-09 / P2 | Matrix/correlation/manifold laws; wishlist | Wishart/inverse-Wishart and LKJ, following matrix validation contracts | Matrix normal/t/beta, matrix Langevin, Stiefel-uniform; positive-definite versus orthonormal support differs |
@@ -43,6 +43,8 @@ and special cases attached to their family instead of creating duplicate impleme
 | DIST-14 / P3 | Process-derived and niche discrete families; wishlist | A reusable phase-type/compound-count representation when justified | Absorption-time, branching, occupancy/partition and specialized empirical laws |
 
 The first implementation plan is [von Mises and GVM](docs/GAUSS_VON_MISES_PLAN.md).
+The nine D3 representatives have [local acceptance evidence](docs/COMMON_DISTRIBUTIONS_ACCEPTANCE.md);
+consult that record for CI/main integration status and numerical/inference limits.
 Underlying libraries already offer some scalar laws; see the inventory before writing
 new kernels or adding dependencies. First-class support includes likelihood/inference
 semantics, not merely calling another library's random-number generator.

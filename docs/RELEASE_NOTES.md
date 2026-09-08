@@ -12,6 +12,15 @@ cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
 
+- [Nine common distribution families](COMMON_DISTRIBUTIONS.md): Student t, Cauchy,
+  Laplace, lognormal, Weibull, triangular, Kumaraswamy, negative binomial and
+  hypergeometric. Immutable kernels supply log density/mass, CDF, direct survival,
+  quantiles and caller-owned sampling; named and hierarchical adapters use stable
+  observed log likelihoods. [Information measures](COMMON_INFORMATION_METRICS.md)
+  add same-family KL/Bhattacharyya and explicit finite-table MI with analytic reductions,
+  numerical safeguards and work budgets. See [acceptance status](COMMON_DISTRIBUTIONS_ACCEPTANCE.md).
+  No runtime dependency, sampler default, historical bundle or stable version is changed.
+
 - [GVM mutual information](GVM_MUTUAL_INFORMATION.md): new guarded diagnostic for
   dependence between the full linear vector and angle of a fixed joint law. Uses
   analytic conditional entropy and one-dimensional numerical marginal entropy, with

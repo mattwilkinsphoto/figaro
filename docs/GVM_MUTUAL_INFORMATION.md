@@ -14,8 +14,9 @@ resolved a positive dependence at that accuracy, not that independence has been 
 Mutual information is symmetric in its two random-variable blocks, but is not a distance
 between two laws. See the [cross-family metrics roadmap](INFORMATION_METRICS_ROADMAP.md).
 
-Status: initial guarded implementation on the GVM development branch; local validation
-and publication checks are recorded below. Remote CI/main promotion is a separate gate.
+Status: the guarded implementation passed [full branch CI at `fc4d23e8`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34235233397).
+It is included in the [common-family integration milestone](COMMON_DISTRIBUTIONS_ACCEPTANCE.md);
+consult that record for main promotion. Local validation and publication checks are below.
 Older immutable library bundles do not contain this API; rebuild a commit containing it.
 
 ## Quick start: three steps
