@@ -219,6 +219,11 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   tests cover accuracy, budgets, cancellation and range/precision refusals. Its CI gate
   is pending; end-to-end Scala preprocessing and honest estimated-error contracts are
   required before public API exposure. No automatic fallback or wider caps.
+- **Positive scalar Scala comparison — test-only end-to-end prototype locally validated:**
+  [Physical-kernel prototype](docs/GVM_POSITIVE_SCALAR_PROTOTYPE.md) passes the scalar
+  high-precision grid, including separate preprocessing-error estimates, hard budgets,
+  unit changes, interruption and concurrent calls. It is excluded from library artifacts;
+  public API promotion and its CI gate remain separate.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.

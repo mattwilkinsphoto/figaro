@@ -3,6 +3,8 @@
 Status: research-only Python prototype, locally validated; its own CI/integration
 gate is pending. No Scala library API, automatic fallback, numerical-cap change,
 dependency change or compiled release is introduced.
+The follow-on [test-only Scala prototype](GVM_POSITIVE_SCALAR_PROTOTYPE.md) now validates
+physical-kernel preprocessing and positive integration end to end, with its own gate.
 
 ## Outcome and purpose
 
@@ -165,9 +167,9 @@ is necessarily so large.
 - No source licenses, patents or application-specific permissions are inferred from
   these mathematical tests. The scope is fixed-law numerical comparison only.
 
-Recommendation: proceed to an **explicit opt-in scalar Scala prototype** with validated
+The [explicit scalar Scala prototype](GVM_POSITIVE_SCALAR_PROTOTYPE.md) now exercises
 Gaussian/phase preprocessing, hard budgets, interruption checks and honest estimated
-error semantics. Keep the existing Fourier method and its unresolved results unchanged.
+error semantics in test sources. Keep the existing Fourier method and its unresolved results unchanged.
 Require end-to-end independent oracles, adversarial aliasing/conditioning controls,
 documentation and CI before making any new public API available. Certified quadrature
 and broader dimensions remain separate gates.

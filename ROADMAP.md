@@ -99,8 +99,13 @@ This sequence is a proposed priority order, not a calendar estimate.
    including the 12 previously unresolved pairs, plus ten unequal-concentration controls.
    It uses high-precision research preprocessing and heuristic quadrature errors;
    this is not end-to-end Scala validation or a certified fallback. Research CI/integration
-   pending. Next: explicit scalar Scala prototype with validated preprocessing and
-   budget/interruption contracts; retain stronger rounding analysis as a separate gate.
+   pending. The follow-on [test-only scalar Scala prototype](docs/GVM_POSITIVE_SCALAR_PROTOTYPE.md)
+   is now locally validated end to end: 168 main-grid comparisons and ten additional
+   unequal-concentration pairs in both directions, preprocessing/units controls,
+   budgets, interruption and concurrency. All 307 modernization tests pass. No public
+   API or production source changes; CI/integration pending. Next: explicit public
+   scalar API design/promotion gates, including analytic reductions and near-limit
+   numerical controls; retain stronger rounding analysis as a separate gate.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;
    see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.

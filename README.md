@@ -58,6 +58,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [GVM matched-accuracy timings](docs/GVM_BHATTACHARYYA_PERFORMANCE.md): measured tensor-grid savings, fresh/reused rule comparisons and faster problem-specific reduction counterexamples.
 - [GVM numerical reliability](docs/GVM_BHATTACHARYYA_RELIABILITY.md): high-precision concentration/cancellation stress grid, unresolved-result guidance and remaining numerical limits.
 - [Positive scalar GVM overlap research](docs/GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md): bounded positive integration for cancellation-sensitive cases; research-only, not an automatic fallback.
+- [End-to-end scalar Scala prototype](docs/GVM_POSITIVE_SCALAR_PROTOTYPE.md): test-only physical-kernel comparison with preprocessing, accuracy, budget and interruption controls; not a public library API.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.
