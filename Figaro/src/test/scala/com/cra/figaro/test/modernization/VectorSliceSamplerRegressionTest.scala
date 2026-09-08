@@ -211,7 +211,7 @@ class VectorSliceSamplerRegressionTest extends AnyWordSpec with Matchers {
         (x: Vector[Double]) => -0.5 * (x(0) * x(0) + math.pow(x(1) - 0.4 * (x(0) * x(0) - 1), 2) / 0.25),
         (x: Vector[Double]) => -0.5 * (x(0) * x(0) - 1.8 * x(0) * x(1) + x(1) * x(1)) / 0.19)
       for (target <- targets; seed <- 1L to 5L) {
-        val r = new java.util.Random(seed)
+        val r = com.cra.figaro.util.SamplingRandom.seeded(seed)
         var state = start
         val actual = VS.run(VS.Config(VS.Method.GPSS, draws = 100, warmUp = 0, seed = seed), start)(target)
         for (point <- actual.samples) {
@@ -224,7 +224,7 @@ class VectorSliceSamplerRegressionTest extends AnyWordSpec with Matchers {
     "match independent inverse-CDF draws when the quantile target equals its reference" in {
       val reference = new CauchyDistribution(0, 2)
       val seed = 105L
-      val rng = new java.util.Random(seed)
+      val rng = com.cra.figaro.util.SamplingRandom.seeded(seed)
       val actual = VS.run(VS.Config(VS.Method.Quantile, draws = 500, warmUp = 0, seed = seed), Vector(0.0))(
         x => -math.log1p(x.head * x.head / 4))
       actual.samples.foreach { x =>

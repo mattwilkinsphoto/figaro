@@ -52,14 +52,24 @@ package object util {
 
   /** Evaluate synchronous code with a fresh, thread-confined random stream.
    * Nested scopes and exceptions restore the previous stream. Child threads do not inherit it.
-   * Outside this scope, the legacy shared generator and its seed behavior are unchanged.
-   * @param seed seed for this invocation's java.util.Random stream
+   * Outside this scope, the shared LXM generator is used. Seeded sequences changed with the LXM migration.
+   * @param seed seed for this invocation's L64X128MixRandom stream
    * @param body computation to run on the calling thread; consume lazy random results inside the scope
    * @return the result of body; exceptions propagate after restoring the prior stream
    * @example `val draw = withRandomSeed(42L) { random.nextDouble() }`
    */
   def withRandomSeed[A](seed: Long)(body: => A): A =
-    RandomContext.withRandom(new java.util.Random(seed))(body)
+    withRandomSeed(seed, SamplingRandom.defaultAlgorithm)(body)
+
+  /** Evaluate synchronous code with an explicitly selected, owned RNG backend.
+   * @param seed seed for the named algorithm
+   * @param algorithm LXM or explicit LegacyJava historical replay
+   * @param body computation; consume lazy random values inside the scope
+   * @return body result; exceptions propagate after restoring the previous scope
+   * @example `withRandomSeed(42L, SamplingRandom.Algorithm.LegacyJava) { random.nextDouble() }`
+   */
+  def withRandomSeed[A](seed: Long, algorithm: SamplingRandom.Algorithm)(body: => A): A =
+    RandomContext.withRandom(SamplingRandom.seeded(seed, algorithm))(body)
 
   /**
    * Computes and returns the argument, timing how long it takes to produce the answer and printing

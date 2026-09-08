@@ -26,6 +26,15 @@ object FigaroConsumerCheck {
     }
     println(s"Published artifact verified: $sha")
 
+    // All named backends must resolve transitively from the published thin library.
+    val sr = com.cra.figaro.util.SamplingRandom
+    for (algorithm <- sr.Algorithm.values) {
+      val first = sr.scalaRandom(481L, algorithm)
+      val second = sr.scalaRandom(481L, algorithm)
+      require(Vector.fill(100)(first.nextGaussian()) == Vector.fill(100)(second.nextGaussian()))
+      require(sr.provenance(algorithm).contains(algorithm.id))
+    }
+
     val gvmP=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),0,
       Vector(0.0),Vector(Vector(0.0)),50)
     val gvmQ=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),math.Pi,

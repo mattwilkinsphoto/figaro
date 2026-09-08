@@ -44,6 +44,11 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Scientific RNG selection and migration](docs/RNG_ASSESSMENT.md): LXM default,
+  Xoshiro256++, PCG and MT alternatives, seeded replay and benchmark evidence.
+- [Statistical validation](docs/STATISTICAL_VALIDATION.md): independent posterior
+  references, false-alarm controls and importance-weight concentration findings.
+
 - [Distribution constructions and Gaussian mixtures](docs/DISTRIBUTION_CONSTRUCTIONS.md): transformations, truncation, scalar/vector mixtures, zero-adjusted counts, Gaussian KL/Bhattacharyya and partitioned Gaussian MI; [acceptance status](docs/DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md).
 - [Common distribution families](docs/COMMON_DISTRIBUTIONS.md): Student t, Cauchy, Laplace, lognormal, Weibull, triangular, Kumaraswamy, negative binomial and hypergeometric, with observation-ready adapters and parameter conventions.
 - [Common information measures](docs/COMMON_INFORMATION_METRICS.md): same-family KL/Bhattacharyya and explicit finite-table mutual information, with analytic reductions, work budgets and numerical refusals.

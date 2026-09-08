@@ -18,7 +18,7 @@ import scala.collection.parallel.CollectionConverters._
 import com.cra.figaro.algorithm.sampling._
 import com.cra.figaro.algorithm._
 import com.cra.figaro.language._
-import com.cra.figaro.util.RandomContext
+import com.cra.figaro.util.{RandomContext, SamplingRandom}
 import java.util.concurrent.{Callable, CancellationException, ConcurrentLinkedQueue, ExecutionException, ExecutorService, Executors, TimeUnit}
 import scala.jdk.CollectionConverters.*
 import scala.util.control.NonFatal
@@ -97,20 +97,36 @@ object ParImportance {
    * @param generator creates a fresh universe with all evidence; never share mutable model nodes between workers
    * @param numThreads positive maximum number of worker threads (capped at numSamples)
    * @param numSamples positive total sample budget, including any remainder
-   * @param seed root seed deterministically expanded into one java.util.Random seed per worker
+   * @param seed root seed deterministically expanded into one LXM seed per worker
    * @param targets references resolved separately in each generated universe
    * @return a one-time parallel sampler; kill releases its executor and child sampler resources
    * @example `val alg = ParImportance.seeded(makeModel, 4, 100000, 42L, "query")`
    */
   def seeded(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long,
+    targets: Reference[?]*): ParSampler & ParOneTime =
+    seededWithAlgorithm(generator, numThreads, numSamples, seed, SamplingRandom.defaultAlgorithm, targets*)
+
+  /** Blocking importance with explicit RNG selection; lifecycle and ownership match seeded.
+   * @param generator factory for a fresh, independent universe with evidence
+   * @param numThreads positive maximum worker count
+   * @param numSamples positive total budget across workers
+   * @param seed root seed, expanded in worker order
+   * @param randomAlgorithm named backend; LegacyJava is for historical replay only
+   * @param targets references resolved in each worker's universe
+   * @return blocking sampler; call start, query and kill in try/finally
+   * @example `ParImportance.seededWithAlgorithm(makeModel, 4, 100000, 42L, SamplingRandom.Algorithm.Lxm, "query")`
+   */
+  def seededWithAlgorithm(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long,
+    randomAlgorithm: SamplingRandom.Algorithm,
     targets: Reference[?]*): ParSampler & ParOneTime = {
     require(numThreads > 0 && numSamples > 0, "numThreads and numSamples must be positive")
+    require(randomAlgorithm != null, "RNG algorithm is required")
     val count = math.min(numThreads, numSamples)
     val seeds = new java.util.SplittableRandom(seed)
     val seen = new java.util.IdentityHashMap[Universe, java.lang.Boolean]
     val created = scala.collection.mutable.ArrayBuffer.empty[(Importance & OneTimeProbQuerySampler, java.util.Random)]
     val workers = try (0 until count).map { index =>
-      val random = new java.util.Random(seeds.nextLong())
+      val random = SamplingRandom.seeded(seeds.nextLong(), randomAlgorithm)
       val budget = numSamples / count + (if (index < numSamples % count) 1 else 0)
       val algorithm = RandomContext.withRandom(random) {
         Universe.withUniverse(Universe.universe) {

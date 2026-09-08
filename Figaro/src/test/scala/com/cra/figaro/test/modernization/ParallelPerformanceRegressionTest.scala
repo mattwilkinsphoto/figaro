@@ -3,7 +3,7 @@ package com.cra.figaro.test.modernization
 import com.cra.figaro.algorithm.Algorithm
 import com.cra.figaro.algorithm.sampling.parallel.ParImportance
 import com.cra.figaro.language.*
-import com.cra.figaro.util.{random, withRandomSeed}
+import com.cra.figaro.util.{random, withRandomSeed, SamplingRandom}
 import java.util.concurrent.{ConcurrentLinkedQueue, CountDownLatch, Executors, TimeUnit}
 import java.util.concurrent.atomic.AtomicReference
 import org.scalatest.matchers.should.Matchers
@@ -25,21 +25,21 @@ class ParallelPerformanceRegressionTest extends AnyWordSpec with Matchers {
     .filter(_.getName.startsWith("figaro-importance-worker-")).toSet
 
   "Scoped randomness" should {
-    "preserve the unscoped Scala Random sequence and stable random reference" in {
+    "use the named default unscoped sequence and stable random reference" in {
       random.setSeed(912L)
-      draws(random) shouldBe draws(new scala.util.Random(912L))
+      draws(random) shouldBe draws(SamplingRandom.scalaRandom(912L))
       val captured = random
       withRandomSeed(17L) {
         random should be theSameInstanceAs captured
-        draws(captured) shouldBe draws(new scala.util.Random(17L))
+        draws(captured) shouldBe draws(SamplingRandom.scalaRandom(17L))
       }
     }
     "restore nested scopes and the global Gaussian cache after exceptions" in {
       random.setSeed(91L)
-      val expected = new scala.util.Random(91L)
+      val expected = SamplingRandom.scalaRandom(91L)
       random.nextGaussian() shouldBe expected.nextGaussian()
       withRandomSeed(41L) {
-        val local = new scala.util.Random(41L)
+        val local = SamplingRandom.scalaRandom(41L)
         random.nextDouble() shouldBe local.nextDouble()
         intercept[IllegalStateException] {
           withRandomSeed(12L) { random.nextGaussian(); throw new IllegalStateException("expected") }
@@ -56,14 +56,14 @@ class ParallelPerformanceRegressionTest extends AnyWordSpec with Matchers {
         val futures = (0 until 4).map { index => executor.submit(new java.util.concurrent.Callable[List[Any]] {
           def call(): List[Any] = withRandomSeed(index.toLong) { draws(random) }
         }) }
-        futures.zipWithIndex.foreach { case (future, index) => future.get() shouldBe draws(new scala.util.Random(index.toLong)) }
+        futures.zipWithIndex.foreach { case (future, index) => future.get() shouldBe draws(SamplingRandom.scalaRandom(index.toLong)) }
       } finally { executor.shutdown(); executor.awaitTermination(5, TimeUnit.SECONDS) }
-      random.nextDouble() shouldBe new scala.util.Random(812L).nextDouble()
+      random.nextDouble() shouldBe SamplingRandom.scalaRandom(812L).nextDouble()
     }
     "route explicit reseeding only to the current scope" in {
       random.setSeed(13L)
-      withRandomSeed(14L) { random.setSeed(15L); draws(random) shouldBe draws(new scala.util.Random(15L)) }
-      draws(random) shouldBe draws(new scala.util.Random(13L))
+      withRandomSeed(14L) { random.setSeed(15L); draws(random) shouldBe draws(SamplingRandom.scalaRandom(15L)) }
+      draws(random) shouldBe draws(SamplingRandom.scalaRandom(13L))
     }
   }
 

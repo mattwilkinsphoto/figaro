@@ -14,6 +14,13 @@ The source remains a development snapshot, not a universally validated stable re
 
 ## Next program: distribution breadth
 
+Reliability interlude: [statistical validation](docs/STATISTICAL_VALIDATION.md) and
+[scientific RNG backends](docs/RNG_ASSESSMENT.md) are implemented on the
+`modernize/statistical-validation` branch, with local validation; integration/CI remain
+separate gates. The next substantive inference priority is better proposals for
+concentrated posteriors at matched accuracy. Native split/jump stream allocation and
+portable RNG checkpointing are subsequent work, not delivered by backend selection.
+
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).
 The [inventory](docs/DISTRIBUTION_SUPPORT.md) distinguishes

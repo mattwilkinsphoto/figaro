@@ -12,6 +12,14 @@ cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
 
+- [Scientific RNG backends](RNG_ASSESSMENT.md): LXM becomes the Figaro-owned default,
+  with explicit Xoshiro256++, PCG RXS-M-XS-64, MT19937 and legacy replay options.
+  Seeded sequences change; recompile consumers and record backend/provider provenance.
+  Includes complete timing and cross-generator evidence, not a universal speedup claim.
+- [Statistical validation](STATISTICAL_VALIDATION.md): corrected printed standard
+  error, fixed-data posterior references and evidence of importance-weight collapse.
+  Legacy significance thresholds and tests remain in place.
+
 - [Distribution constructions and GMMs](DISTRIBUTION_CONSTRUCTIONS.md): affine/exp laws,
   finite truncation, continuous scalar mixtures, full-covariance Gaussian mixtures and
   zero-adjusted count laws. Includes Gaussian KL/Bhattacharyya and partition MI,

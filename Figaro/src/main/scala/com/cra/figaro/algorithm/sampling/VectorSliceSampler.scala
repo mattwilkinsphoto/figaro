@@ -17,16 +17,19 @@ object VectorSliceSampler {
     * @param method explicit kernel, never selected automatically
     * @param draws positive requested number of retained complete transitions
     * @param warmUp nonnegative discarded complete transitions
-    * @param seed private java.util.Random seed, unaffected by other runs
+    * @param seed private named-generator seed, unaffected by other runs
     * @param maxEvaluations positive cap on all log-density calls, including initialization and unfinished work
     * @param maxSearch positive proposal limit per GPSS transition or per quantile coordinate
     * @param maxStoredValues positive bound on draws * dimension, not a total heap bound
+    * @param randomAlgorithm named RNG backend; LXM by default, LegacyJava for historical replay
     */
   final case class Config(method: Method, draws: Int = 10000, warmUp: Int = 1000,
     seed: Long = 42L, maxEvaluations: Long = 1000000L, maxSearch: Int = 10000,
-    maxStoredValues: Long = 10000000L) {
+    maxStoredValues: Long = 10000000L,
+    randomAlgorithm: com.cra.figaro.util.SamplingRandom.Algorithm = com.cra.figaro.util.SamplingRandom.defaultAlgorithm) {
     require(method != null && draws > 0 && warmUp >= 0, "Invalid method or transition counts")
     require(maxEvaluations > 0 && maxSearch > 0 && maxStoredValues > 0, "Limits must be positive")
+    require(randomAlgorithm != null, "RNG algorithm is required")
   }
 
   /** DrawsReached means requested work completed, NOT that precision or convergence was established. */
@@ -72,7 +75,7 @@ object VectorSliceSampler {
     require(initial.size.toLong <= config.maxStoredValues / config.draws, "Trace exceeds storage limit")
     if (config.method == Method.GPSS)
       require(initial.size >= 2 && norm(initial).isFinite && norm(initial) > 0, "GPSS needs dimension >= 2 and finite nonzero radius")
-    val rng = new java.util.Random(config.seed)
+    val rng = com.cra.figaro.util.SamplingRandom.seeded(config.seed, config.randomAlgorithm)
     var evaluations = 0L
     var warm = 0
     var retained = 0

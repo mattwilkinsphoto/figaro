@@ -21045,6 +21045,78 @@ Invocation template:
 receiver.resample()
 ```
 
+## `` com.cra.figaro.util.SamplingRandom.provenance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/SamplingRandom$.html#provenance-1df)
+
+```scala
+def provenance(algorithm: Algorithm): String
+```
+
+Describe the backend implementation for experiment provenance.
+
+Type parameters: none.
+
+Parameters, list 1: `` algorithm: Algorithm ``.
+
+Returns: `` String ``.
+
+Source contract/attributes: Describe the backend implementation for experiment provenance. Value parameters algorithm selected backend Attributes Returns algorithm, provider/version and JVM runtime description (not a serialized RNG state) Example SamplingRandom.provenance(SamplingRandom.defaultAlgorithm)
+
+Invocation template:
+
+```scala
+com.cra.figaro.util.SamplingRandom.provenance(algorithm)
+```
+
+## `` com.cra.figaro.util.SamplingRandom.scalaRandom ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/SamplingRandom$.html#scalaRandom-fffff2b1)
+
+```scala
+def scalaRandom(seed: Long, algorithm: Algorithm = ...): Random
+```
+
+Create a Scala Random for explicit distribution-kernel calls.
+
+Type parameters: none.
+
+Parameters, list 1: `` seed: Long ``; `` algorithm: Algorithm = ... ``.
+
+Returns: `` Random ``.
+
+Source contract/attributes: Create a Scala Random for explicit distribution-kernel calls. Value parameters algorithm named backend, LXM by default seed reproducible seed Attributes Returns fresh Scala wrapper owning its generator Example val rng = SamplingRandom.scalaRandom(42L)
+
+Invocation template:
+
+```scala
+com.cra.figaro.util.SamplingRandom.scalaRandom(seed, algorithm)
+```
+
+## `` com.cra.figaro.util.SamplingRandom.seeded ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/SamplingRandom$.html#seeded-fffffa39)
+
+```scala
+def seeded(seed: Long, algorithm: Algorithm = ...): Random
+```
+
+Create an owned, reseedable Java/Scala-compatible generator.
+
+Type parameters: none.
+
+Parameters, list 1: `` seed: Long ``; `` algorithm: Algorithm = ... ``.
+
+Returns: `` Random ``.
+
+Source contract/attributes: Create an owned, reseedable Java/Scala-compatible generator. Value parameters algorithm LXM by default; LegacyJava reproduces java.util.Random method sequences seed reproducible seed for the explicitly named JDK algorithm Attributes Returns fresh generator; prefer one instance per logical worker/chain Example val rng = SamplingRandom.seeded(42L)
+
+Invocation template:
+
+```scala
+com.cra.figaro.util.SamplingRandom.seeded(seed, algorithm)
+```
+
 ## `` com.cra.figaro.util.SelectableSet.select ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/util/SelectableSet.html#select-993)

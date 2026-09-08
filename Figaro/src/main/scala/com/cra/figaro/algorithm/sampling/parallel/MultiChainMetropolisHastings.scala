@@ -3,7 +3,7 @@ package com.cra.figaro.algorithm.sampling.parallel
 import com.cra.figaro.algorithm.OneTime
 import com.cra.figaro.algorithm.sampling.{ForwardWeighter, MetropolisHastings, ProposalScheme}
 import com.cra.figaro.language.*
-import com.cra.figaro.util.RandomContext
+import com.cra.figaro.util.{RandomContext, SamplingRandom}
 import java.util.concurrent.*
 import java.util.concurrent.atomic.{AtomicBoolean, AtomicInteger}
 import scala.jdk.CollectionConverters.*
@@ -20,15 +20,18 @@ object MultiChainMetropolisHastings {
     * @param thin transitions per retained draw, positive; use one unless storage requires thinning
     * @param maxInitializationAttempts positive bound on prior initial-state attempts
     * @param maxStoredValues positive cap on chains * draws * scalar observables (not a total heap bound)
+    * @param randomAlgorithm named per-chain RNG; LXM by default, LegacyJava for historical replay
     */
   final case class Config(chains: Int = 4, drawsPerChain: Int = 10000, warmUp: Int = 1000,
     parallelism: Int = 4, seed: Long = 42L, thin: Int = 1,
-    maxInitializationAttempts: Int = 1000, maxStoredValues: Long = 10000000L) {
+    maxInitializationAttempts: Int = 1000, maxStoredValues: Long = 10000000L,
+    randomAlgorithm: SamplingRandom.Algorithm = SamplingRandom.defaultAlgorithm) {
     require(chains >= 2 && drawsPerChain >= 4, "Need at least two chains and four draws per chain")
     require(warmUp >= 0 && parallelism > 0 && thin > 0, "Invalid warm-up, parallelism, or thinning")
     require(maxInitializationAttempts > 0 && maxStoredValues > 0, "Limits must be positive")
     require(warmUp.toLong + drawsPerChain.toLong * thin <= Int.MaxValue, "Too many transitions per chain")
     require(chains.toLong * drawsPerChain <= maxStoredValues, "Draw budget exceeds storage limit")
+    require(randomAlgorithm != null, "RNG algorithm is required")
   }
 
   /** Named, finite scalar projection; aligned draw indices preserve dependence across observables. */
@@ -124,7 +127,7 @@ object MultiChainMetropolisHastings {
       for (index <- 0 until config.chains) {
         checkInterrupted()
         val seed = seeds.nextLong()
-        val entry = new Owned(index, seed, new Universe, new java.util.Random(seed))
+        val entry = new Owned(index, seed, new Universe, SamplingRandom.seeded(seed, config.randomAlgorithm))
         owned += entry
         try entry.scoped {
           val model = build(entry.universe, index)

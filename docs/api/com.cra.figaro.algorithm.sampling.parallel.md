@@ -1733,12 +1733,36 @@ Parameters, list 1: `` generator: () => Universe ``; `` numThreads: Int ``; `` n
 
 Returns: `` ParSampler & ParOneTime ``.
 
-Source contract/attributes: Create a blocking importance sampler with a bounded private pool and worker-local RNGs. Model factories run serially in isolated default-universe/RNG scopes; sampling runs in parallel. Each worker retains one RNG across lifecycle phases. A fresh factory call replays its seed assignment, not necessarily identical model traversal or floating-point results. Changing worker count changes streams/budgets. Put evidence in generator; this overload does not provide incremental probabilityOfEvidence. Call start, query, then kill in try/finally. Do not concurrently call lifecycle/query methods. Callbacks must cooperate with interruption; arbitrary non-interruptible user code cannot be forcibly stopped. Value parameters generator creates a fresh universe with all evidence; never share mutable model nodes between workers numSamples positive total sample budget, including any remainder numThreads positive maximum number of worker threads (capped at numSamples) seed root seed deterministically expanded into one java.util.Random seed per worker targets references resolved separately in each generated universe Attributes Returns a one-time parallel sampler; kill releases its executor and child sampler resources Example val alg = ParImportance.seeded(makeModel, 4, 100000, 42L, "query")
+Source contract/attributes: Create a blocking importance sampler with a bounded private pool and worker-local RNGs. Model factories run serially in isolated default-universe/RNG scopes; sampling runs in parallel. Each worker retains one RNG across lifecycle phases. A fresh factory call replays its seed assignment, not necessarily identical model traversal or floating-point results. Changing worker count changes streams/budgets. Put evidence in generator; this overload does not provide incremental probabilityOfEvidence. Call start, query, then kill in try/finally. Do not concurrently call lifecycle/query methods. Callbacks must cooperate with interruption; arbitrary non-interruptible user code cannot be forcibly stopped. Value parameters generator creates a fresh universe with all evidence; never share mutable model nodes between workers numSamples positive total sample budget, including any remainder numThreads positive maximum number of worker threads (capped at numSamples) seed root seed deterministically expanded into one LXM seed per worker targets references resolved separately in each generated universe Attributes Returns a one-time parallel sampler; kill releases its executor and child sampler resources Example val alg = ParImportance.seeded(makeModel, 4, 100000, 42L, "query")
 
 Invocation template:
 
 ```scala
 com.cra.figaro.algorithm.sampling.parallel.ParImportance.seeded(generator, numThreads, numSamples, seed, targets*)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.ParImportance.seededWithAlgorithm ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/ParImportance$.html#seededWithAlgorithm-fffff920)
+
+```scala
+def seededWithAlgorithm(generator: () => Universe, numThreads: Int, numSamples: Int, seed: Long, randomAlgorithm: Algorithm, targets: Reference[_]*): ParSampler & ParOneTime
+```
+
+Blocking importance with explicit RNG selection; lifecycle and ownership match seeded.
+
+Type parameters: none.
+
+Parameters, list 1: `` generator: () => Universe ``; `` numThreads: Int ``; `` numSamples: Int ``; `` seed: Long ``; `` randomAlgorithm: Algorithm ``; `` targets: Reference[_]* ``.
+
+Returns: `` ParSampler & ParOneTime ``.
+
+Source contract/attributes: Blocking importance with explicit RNG selection; lifecycle and ownership match seeded. Value parameters generator factory for a fresh, independent universe with evidence numSamples positive total budget across workers numThreads positive maximum worker count randomAlgorithm named backend; LegacyJava is for historical replay only seed root seed, expanded in worker order targets references resolved in each worker's universe Attributes Returns blocking sampler; call start, query and kill in try/finally Example ParImportance.seededWithAlgorithm(makeModel, 4, 100000, 42L, SamplingRandom.Algorithm.Lxm, "query")
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.parallel.ParImportance.seededWithAlgorithm(generator, numThreads, numSamples, seed, randomAlgorithm, targets*)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.parallel.ParOneTime.run ``

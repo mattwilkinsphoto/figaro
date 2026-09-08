@@ -1,5 +1,22 @@
 # Migrating to Scala 3 and sbt 2
 
+## Scientific RNG default and explicit alternatives
+
+The [RNG guide](RNG_ASSESSMENT.md) replaces Figaro-owned Java Random streams with
+L64X128MixRandom by default. Historical seeds yield different samples. Explicit
+LegacyJava mode remains for synchronous/owned-runner replay; Xoshiro256++, PCG
+RXS-M-XS-64 and MT19937 are selectable. Recompile consumers: MH/vector Config case
+classes gain a final randomAlgorithm field. Positional pattern matches must be updated.
+Commons RNG Simple 1.7 is a new transitive runtime dependency; MT uses existing Commons
+Math. Normal Maven/sbt dependency resolution brings it in automatically. Manually managed
+thin-JAR classpaths must include Commons RNG Simple, Core and Client API 1.7.
+Caller-supplied Scala Random objects retain their own backend. See the guide for
+scopes, stream allocation, provenance and limits on cross-version replay.
+
+The [statistical study](STATISTICAL_VALIDATION.md) corrects a test's printed standard
+error and supplies posterior-reference checks; it does not loosen statistical tolerances
+or claim that RNG replacement cures concentrated-posterior importance sampling.
+
 ## Distribution constructions and Gaussian likelihoods
 
 The [D4 guide](DISTRIBUTION_CONSTRUCTIONS.md) adds opt-in transformations, truncation,

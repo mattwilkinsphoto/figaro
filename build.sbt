@@ -102,9 +102,19 @@ lazy val figaro = project
     assembly / packageOptions += Package.FixedTimestamp(Some(reproducibleTimestamp)),
     assembly / assemblyJarName := s"figaro_${scalaBinaryVersion.value}-${version.value}-fat.jar",
     assembly / assemblyOption := (assembly / assemblyOption).value.withIncludeScala(false),
+    assembly / assemblyMergeStrategy := {
+      val previous = (assembly / assemblyMergeStrategy).value
+      {
+        // A classpath assembly cannot retain several dependencies' JPMS module descriptors.
+        // Keep multi-release implementation classes and all dependency legal notices.
+        case path if path == "module-info.class" || path.matches("META-INF/versions/[0-9]+/module-info.class") => MergeStrategy.discard
+        case path => previous(path)
+      }
+    },
     logBuffered := false,
     libraryDependencies ++= Seq(
       "org.apache.commons" % "commons-math3" % "3.6.1",
+      "org.apache.commons" % "commons-rng-simple" % "1.7",
       "io.github.argonaut-io" %% "argonaut" % "6.3.13",
       "org.scala-lang.modules" %% "scala-swing" % "3.0.0",
       "org.scala-lang.modules" %% "scala-parallel-collections" % "1.2.0",

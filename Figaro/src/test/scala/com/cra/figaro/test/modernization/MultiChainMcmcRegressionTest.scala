@@ -125,7 +125,7 @@ class MultiChainMcmcRegressionTest extends AnyWordSpec with Matchers {
       runMcmc(small) { (u, i) => models.add(u); coin(u, i) }
       models.asScala.foreach(_.activeElements shouldBe empty)
       Universe.universe should be theSameInstanceAs original
-      random.nextDouble() shouldBe new scala.util.Random(726L).nextDouble()
+      random.nextDouble() shouldBe com.cra.figaro.util.SamplingRandom.scalaRandom(726L).nextDouble()
       workers shouldBe empty
     }
     "clean every constructed model when a later factory fails" in {
