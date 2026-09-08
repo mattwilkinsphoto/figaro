@@ -50,6 +50,9 @@ The CI workflow runs these controls alongside all existing modernization gates.
 - The executable example and independent published consumer pass. The latter loads
   all nine named adapters and checks scalar/count divergences and joint-table MI from
   the verified thin library. Thin, fat, source and Scala API JARs build successfully.
+- Maximum-size (100,000-cell) finite probability tables are tested. Compensated
+  normalization and marginal totals prevent accumulated rounding from rejecting a
+  valid uniform table; numerical MI still retains its explicit error allowance.
 - Six new Python oracle checks, seven artifact-validator tests and 18 documentation
   tooling tests pass. Compiler-generated documentation contains 11,758 public method
   entries; freshness and 12,887 local link targets in 116 Markdown files are verified.

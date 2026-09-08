@@ -6,11 +6,20 @@ package com.cra.figaro.library.atomic
   */
 object DiscreteInformation {
   import InformationMetricStatus.*
+  private def sum(values: IterableOnce[Double]): Double = {
+    var total=0.0; var correction=0.0
+    values.iterator.foreach { value =>
+      DistributionNumerics.check()
+      val add=value-correction; val next=total+add
+      correction=(next-total)-add; total=next
+    }
+    total
+  }
   private def probabilities(values: scala.collection.Seq[Double]): Vector[Double] = {
     require(values != null,"non-null probabilities required")
     val copy=values.iterator.take(100001).map { x => DistributionNumerics.check(); require(x.isFinite && x >= 0,"finite nonnegative probabilities required"); x }.toVector
     require(copy.nonEmpty && copy.size <= 100000,"table size must be in [1,100000]")
-    val total=copy.sum
+    val total=sum(copy)
     require(math.abs(total-1) <= 1e-12,"probabilities must sum to one within 1e-12")
     copy.map(_/total)
   }
@@ -32,7 +41,7 @@ object DiscreteInformation {
     if(a == b) return MetricCalculation.identity
     if(a.indices.exists(i => a(i) > 0 && b(i) == 0)) return MetricCalculation.infinite
     val terms=a.indices.map { i => DistributionNumerics.check(); if(a(i) == 0) 0.0 else a(i)*(math.log(a(i))-math.log(b(i))) }
-    result(terms.sum,a.size,tolerance,terms.map(math.abs).sum)
+    result(sum(terms),a.size,tolerance,sum(terms.map(math.abs)))
   }
   /** @param p first finite probability table
     * @param q second table in matching category order
@@ -46,7 +55,7 @@ object DiscreteInformation {
     if(a == b) return MetricCalculation.identity
     val logs=a.indices.filter(i => a(i) > 0 && b(i) > 0).map { i => DistributionNumerics.check(); .5*(math.log(a(i))+math.log(b(i))) }
     if(logs.isEmpty) return MetricCalculation.infinite
-    val maximum=logs.max; val distance= -maximum-math.log(logs.map(x => math.exp(x-maximum)).sum)
+    val maximum=logs.max; val distance= -maximum-math.log(sum(logs.map(x => math.exp(x-maximum))))
     result(distance,a.size,tolerance,math.abs(distance))
   }
   /** MI between the row and column variables of an explicit finite JOINT table.
@@ -68,11 +77,15 @@ object DiscreteInformation {
     }
     require(rows.nonEmpty,"nonempty joint table required")
     val flat=probabilities(rows.flatten.toVector); val matrix=flat.grouped(width).toVector
-    val rowMass=matrix.map(_.sum); val colMass=Vector.tabulate(width)(j => matrix.map(_(j)).sum)
-    var total=0.0; var absolute=0.0
+    val rowMass=matrix.map(row => sum(row)); val colMass=Vector.tabulate(width)(j => sum(matrix.iterator.map(_(j))))
+    var total=0.0; var correction=0.0; var absolute=0.0
     for(i <- matrix.indices;j <- 0 until width) {
       DistributionNumerics.check(); val p=matrix(i)(j)
-      if(p > 0) { val term=p*(math.log(p)-math.log(rowMass(i))-math.log(colMass(j))); total += term; absolute += math.abs(term) }
+      if(p > 0) {
+        val term=p*(math.log(p)-math.log(rowMass(i))-math.log(colMass(j)))
+        val add=term-correction; val next=total+add; correction=(next-total)-add; total=next
+        absolute += math.abs(term)
+      }
     }
     result(total,cells,tolerance,absolute)
   }

@@ -58,14 +58,14 @@ Count kernels/factories are in `com.cra.figaro.library.atomic.discrete`.
 
 | Factory / kernel constructor | Parameters and support | When to use it |
 | --- | --- | --- |
-| `StudentT(df, location=0, scale=1)` / `StudentTDistribution(...)` | Real-valued; df is degrees of freedom, scale is **not** variance or standard deviation | Heavy-tailed residuals and robust uncertainty |
+| `StudentT(degreesOfFreedom, location=0, scale=1)` / `StudentTDistribution(...)` | Real-valued; df is degrees of freedom, scale is **not** variance or standard deviation | Heavy-tailed residuals and robust uncertainty |
 | `Cauchy(location, scale)` / `CauchyDistribution(...)` | Real-valued location-scale law; no mean or variance | Very heavy tails; Student t with df=1 |
 | `Laplace(location, scale)` / `LaplaceDistribution(...)` | Real-valued; variance `2*scale^2` | Sharper central peak and exponential tails |
 | `LogNormal(logMean, logStandardDeviation)` / `LogNormalDistribution(...)` | Positive; parameters are mean and **standard deviation of log(X)** | Multiplicative variation; not symmetric additive error |
 | `Weibull(shape, scale)` / `WeibullDistribution(...)` | Nonnegative Weibull minimum/lifetime law, no location shift | Lifetimes, durations and flexible positive tails |
 | `Triangular(lower, mode, upper)` / `TriangularDistribution(...)` | `lower < mode < upper`; bounded real value | Known range and interior most-likely value |
 | `Kumaraswamy(a,b)` / `KumaraswamyDistribution(...)` | [0,1], two positive shapes | Beta-like bounded proportions with explicit inverse CDF |
-| `NegativeBinomial(successes,p)` / `NegativeBinomialDistribution(...)` | Failure count k=0,1,... before r successes; **r may be real** | Variance greater than mean; not total trial count |
+| `NegativeBinomial(successes,successProbability)` / `NegativeBinomialDistribution(...)` | Failure count k=0,1,... before r successes; **r may be real** | Variance greater than mean; not total trial count |
 | `Hypergeometric(population,successes,draws)` / `HypergeometricDistribution(...)` | Successes in n draws without replacement from N containing K successes | Finite-population sampling, not independent binomial trials |
 
 All named factories validate fixed parameters before registering an element. They

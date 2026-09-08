@@ -94,6 +94,11 @@ class CommonInformationMetricsTest extends AnyWordSpec with Matchers {
       checked(DiscreteInformation.kl(p,q),.4*math.log(.8)+.6*math.log(1.2),1e-8)
       checked(DiscreteInformation.bhattacharyya(p,q),-math.log(math.sqrt(.2)+math.sqrt(.3)),1e-8)
       DiscreteInformation.kl(p,p).value shouldBe Some(0.0)
+      // Naive repeated addition misclassifies this valid maximum-size table as
+      // unnormalized; probability validation must use a stable total as well.
+      val uniform=Vector.fill(100000)(1e-5)
+      DiscreteInformation.kl(uniform,uniform).value shouldBe Some(0.0)
+      checked(DiscreteInformation.mutualInformation(uniform.grouped(1000).toVector),0,1e-8)
       DiscreteInformation.kl(Vector(0.0,1.0),Vector(1.0,0.0)).status shouldBe Infinite
       DiscreteInformation.bhattacharyya(Vector(0.0,1.0),Vector(1.0,0.0)).status shouldBe Infinite
       checked(DiscreteInformation.bhattacharyya(Vector(1.0,1e-300,0.0),Vector(0.0,1e-300,1.0)),-math.log(1e-300),1e-8)
