@@ -4,7 +4,10 @@ Status: research prototype and 12 tests, with [passing CI at `b5da340c`](https:/
 This document records the research, **not the public Scala API contract**. The follow-on
 [guarded Scala API](GVM_BHATTACHARYYA.md) is now on main at CI-verified `251f9540`.
 The [timing study](GVM_BHATTACHARYYA_PERFORMANCE.md) extends the research suite to 13 tests
-with benchmark oracles and retains its own CI/integration gate.
+with benchmark oracles and is integrated on main through `e30c8b03`, alongside the
+[reliability grid](GVM_BHATTACHARYYA_RELIABILITY.md). A separate
+[positive scalar integration study](GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md) addresses
+cancellation without changing the production API.
 Reviewed 2026-09-07. The research itself changes no runtime or compiled release.
 The prototype is independently written; no third-party implementation was copied.
 

@@ -206,13 +206,19 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   outcomes, initially for nonidentity concentrations through 50 and dimensions through
   32. A [matched-accuracy timing study](docs/GVM_BHATTACHARYYA_PERFORMANCE.md) now records
   substantial six-dimensional tensor-grid savings and faster reduced/reused counterexamples;
-  study CI/integration remains pending. Wider concentration
+  study is integrated on main through CI-verified `e30c8b03`. Wider concentration
   support and rigorous rounding-error certification remain separate work.
-- **Bhattacharyya numerical reliability — stress grid locally validated; CI/integration pending:**
+- **Bhattacharyya numerical reliability — stress grid on main at CI-verified `e30c8b03`:**
   [96 fixed pairs at three tolerances in both directions](docs/GVM_BHATTACHARYYA_RELIABILITY.md),
   with high-precision oracles and representative independent positive integration controls.
   All 460 resolved comparisons meet requested accuracy; 116 remain explicitly unresolved.
   This does not broaden concentration/dimension caps or establish a statistical success rate.
+- **Positive scalar Bhattacharyya integration — research prototype locally validated:**
+  [Positive-integrand assessment](docs/GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md) avoids signed-series
+  cancellation on 84 scalar fixtures and checks ten unequal-concentration pairs. Seven
+  tests cover accuracy, budgets, cancellation and range/precision refusals. Its CI gate
+  is pending; end-to-end Scala preprocessing and honest estimated-error contracts are
+  required before public API exposure. No automatic fallback or wider caps.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.

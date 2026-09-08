@@ -83,18 +83,24 @@ This sequence is a proposed priority order, not a calendar estimate.
    eight GVM examples, API generation and thin-library packaging. The six-dimensional
    matched-error example compares five harmonics with 31,250 tensor callbacks at a
    1e-6-nat error target. The follow-on [matched-accuracy timing study](docs/GVM_BHATTACHARYYA_PERFORMANCE.md)
-   is locally validated with four fixtures, 18 method combinations and three fresh JVMs:
+   is integrated on main through `e30c8b03`, with [passing study CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34189533727).
+   Four fixtures, 18 method combinations and three fresh JVMs:
    about 326x faster than fresh tensor construction/evaluation in the six-dimensional case,
    but a reused problem-specific scalar reduction is about 5.3x faster than the guarded call.
    These are bounded workload results, not universal inference speedups. Eight report
-   validation tests and 13 high-precision research tests pass; study CI/integration pending.
+   validation tests and 13 high-precision research tests pass.
    The follow-on [concentration/cancellation grid](docs/GVM_BHATTACHARYYA_RELIABILITY.md)
-   is locally validated: 96 pairs in both directions at three tolerances, 460 resolved
+   is on main at `e30c8b03`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34190326556):
+   96 pairs in both directions at three tolerances, 460 resolved
    results all meeting oracle accuracy and 116 explicit numerical refusals; four
-   high-precision oracle checks and three Scala regression tests. Its CI/integration
-   gate is separate. No numerical limits or production code changed. Next: assess an
-   explicit positive-integration alternative for low-dimensional cancellation, alongside
-   unequal-concentration stress tests and stronger rounding analysis; no silent fallback.
+   high-precision oracle checks and three Scala regression tests. No numerical limits or
+   production code changed. The [positive scalar integration assessment](docs/GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md)
+   is locally validated with seven tests: all 84 scalar fixtures meet a 1e-8 target,
+   including the 12 previously unresolved pairs, plus ten unequal-concentration controls.
+   It uses high-precision research preprocessing and heuristic quadrature errors;
+   this is not end-to-end Scala validation or a certified fallback. Research CI/integration
+   pending. Next: explicit scalar Scala prototype with validated preprocessing and
+   budget/interruption contracts; retain stronger rounding analysis as a separate gate.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;
    see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.

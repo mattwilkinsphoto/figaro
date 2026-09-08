@@ -1,7 +1,8 @@
 # GVM Bhattacharyya: concentration and cancellation reliability
 
-Status: bounded local validation on the development branch, 2026-09-08;
-CI/integration pending. Production comparison code, numerical limits, dependencies
+Status: integrated on main at `e30c8b03`, after
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34190326556).
+Production comparison code, numerical limits, dependencies
 and compiled releases are unchanged. This follows the
 [matched-accuracy timing assessment](GVM_BHATTACHARYYA_PERFORMANCE.md).
 Local acceptance: all 300 modernization regressions across 24 Scala suites, four
@@ -168,9 +169,9 @@ method. This release supplies no automatic positive-quadrature or arbitrary-prec
 - Resolution counts depend on this deliberate stress grid and tolerance; they are
   not an application reliability score or a reason to discard difficult cases.
 
-The next substantive numerical candidate is an **explicit, bounded positive-integration
-alternative for cancellation-dominated low-dimensional comparisons**, with independent
-accuracy checks and budget/failure contracts. It requires a separate assessment before
+The [positive scalar integration assessment](GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md)
+now tests a research-only candidate for cancellation-dominated comparisons, with
+independent accuracy checks and budget/failure controls. It requires end-to-end Scala validation before
 exposure as an API; it must not quietly replace `None` with an unchecked quadrature
 estimate. Tighter multidimensional roundoff analysis and unequal-concentration stress
 testing remain useful alongside it. Mutual information remains separate research.

@@ -1,6 +1,7 @@
 # GVM Bhattacharyya: matched-accuracy performance
 
-Status: bounded local assessment on the development branch, 2026-09-08. This adds an
+Status: integrated on main through `e30c8b03`; the study commit `4de2c9f8` has
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34189533727). This adds an
 executable study and regression gates, not a new library algorithm, wider numerical
 range or compiled release. The measured library is the guarded implementation at
 `251f9540`; the study source and raw evidence accompany this document.

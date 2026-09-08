@@ -6,9 +6,11 @@ are on main at `251f9540`, with [passing branch CI](https://github.com/mattwilki
 a tagged release or replacement for the RC1 bundle. The circular foundation was integrated earlier
 at `fea8b999`.
 
-The development branch additionally contains a [matched-accuracy performance study](GVM_BHATTACHARYYA_PERFORMANCE.md),
-with local acceptance and separate remote CI/integration gates. The guarded API's
-numerical limits remain narrower than the fixed GVM kernel's limits.
+The [matched-accuracy performance study](GVM_BHATTACHARYYA_PERFORMANCE.md) and
+[numerical reliability grid](GVM_BHATTACHARYYA_RELIABILITY.md) are now also on main
+through CI-verified `e30c8b03`. The development branch adds research-only
+[positive scalar integration](GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md), not a new public API.
+The guarded API's numerical limits remain narrower than the fixed GVM kernel's limits.
 
 ## Overview
 

@@ -27,6 +27,8 @@ jobs:
           python3 -B tools/summarize_gvm_bhattacharyya_performance.py docs/GVM_BHATTACHARYYA_PERFORMANCE_RUNS.txt
       - name: Verify concentration and cancellation reliability oracles
         run: python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_reliability.py' -v
+      - name: Verify research-only positive scalar integration
+        run: python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_positive.py' -v
 
   build:
     runs-on: ubuntu-latest

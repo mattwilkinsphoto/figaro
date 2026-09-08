@@ -226,7 +226,8 @@ This addition does not replace the immutable RC1 library bundle or declare a tag
 The follow-on [Bhattacharyya assessment](GVM_BHATTACHARYYA_RESEARCH.md) now supplies
 an angular-reduced integral, analytic series and independent accuracy controls. Its
 [first guarded Scala API](GVM_BHATTACHARYYA.md) is now on main at CI-verified `251f9540`;
-the follow-on [timing study](GVM_BHATTACHARYYA_PERFORMANCE.md) has its own gate.
+the follow-on [timing study](GVM_BHATTACHARYYA_PERFORMANCE.md) is also on main through
+CI-verified `e30c8b03`.
 This order-comparison helper alone does not establish a Bhattacharyya or
 mutual-information API contract. Broader parameter
 gradients and Hessians remain separate work, not prerequisites for this comparison helper.

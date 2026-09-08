@@ -57,6 +57,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [Guarded GVM Bhattacharyya API](docs/GVM_BHATTACHARYYA.md): symmetric fixed-law comparison with exact reductions, bounded Fourier work and explicit unresolved outcomes; initial concentration limit 50.
 - [GVM matched-accuracy timings](docs/GVM_BHATTACHARYYA_PERFORMANCE.md): measured tensor-grid savings, fresh/reused rule comparisons and faster problem-specific reduction counterexamples.
 - [GVM numerical reliability](docs/GVM_BHATTACHARYYA_RELIABILITY.md): high-precision concentration/cancellation stress grid, unresolved-result guidance and remaining numerical limits.
+- [Positive scalar GVM overlap research](docs/GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md): bounded positive integration for cancellation-sensitive cases; research-only, not an automatic fallback.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.
