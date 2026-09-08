@@ -223,9 +223,10 @@ Local acceptance included all 281 modernization tests across 22 suites (13 focus
 comparison tests), seven GVM examples, Scala API generation and library packaging.
 The [roadmap](../ROADMAP.md) records the broader milestone sequence.
 This addition does not replace the immutable RC1 library bundle or declare a tagged release.
-Next useful research is to select a concrete lower-priority entropy/divergence statistic
-and validate its integrand and independent accuracy controls; this helper alone does
-not establish a Bhattacharyya or mutual-information API contract. Broader parameter
+The follow-on [Bhattacharyya assessment](GVM_BHATTACHARYYA_RESEARCH.md) now supplies
+an angular-reduced integral, analytic series and independent accuracy controls. It is
+research, not a public API. This helper alone does not establish a Bhattacharyya or
+mutual-information API contract. Broader parameter
 gradients and Hessians remain separate work, not prerequisites for this comparison helper.
 
 Related: [tensor-rule numerical contracts](GVM_TENSOR_QUADRATURE.md),

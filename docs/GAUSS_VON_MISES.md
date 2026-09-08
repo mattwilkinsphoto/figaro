@@ -146,6 +146,10 @@ exponential in dimension, and positive weights do not certify approximation accu
 of baseline/refined Gaussian and angular orders. It reports per-output changes and
 agreement without treating these as certified error bounds or automatic stopping rules.
 
+[Bhattacharyya method research](GVM_BHATTACHARYYA_RESEARCH.md) evaluates an
+angular-reduced Fourier/Gaussian series with independent checks. It is not yet a public
+Scala divergence API; cancellation and concentration-dependent cost remain release gates.
+
 Import `com.cra.figaro.library.atomic.continuous.*`. All methods below are handwritten;
 the [compiler reference](api/README.md) also records inherited/generated functions.
 

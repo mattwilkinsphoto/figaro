@@ -68,9 +68,15 @@ This sequence is a proposed priority order, not a calendar estimate.
    analytic false-agreement controls are tested. Acceptance: 13 focused tests, all 281
    modernization regressions across 22 suites, seven GVM examples, Scala API generation
    and thin-library packaging pass. Parameter gradients and Hessians remain separate.
-8. Bhattacharyya divergence and linear-angular mutual information: lower-priority research
-   requested 2026-09-07. Establish numerical methods, special cases and error contracts
-   before exposing APIs. No general closed-form guarantee; see [wishlist](WISHLIST.md).
+8. [Bhattacharyya numerical-method assessment](docs/GVM_BHATTACHARYYA_RESEARCH.md):
+   research prototype with 12 local tests; no public Scala API. Exact angular elimination
+   and an analytic Fourier/Gaussian series avoid tensor-grid growth. Truncation bounds
+   are derived, but cancellation and high-concentration efficiency require production
+   safeguards. Next: a bounded Scala implementation with exact reductions and explicit
+   unresolved results, after defining its tested numerical range. Research CI pending.
+9. Linear-angular mutual information: lower-priority research requested 2026-09-07.
+   Establish numerical methods, special cases and error contracts before exposing APIs;
+   see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.
 
 No report ingestion, fusion, filtering, or propagation is added by these diagnostics.
 

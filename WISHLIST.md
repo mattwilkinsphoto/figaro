@@ -198,9 +198,12 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   total callback-budget preflight, per-output tolerance flags and directional changes.
   Explicit false-agreement tests prevent treating these diagnostics as certified error
   bounds or automatic stopping criteria. No new sampler or parallel execution mode.
-- **Bhattacharyya divergence — research wishlist, lower priority:** symmetric comparison
-  of complete GVM distributions. Assess analytic angular integration plus a controlled
-  numerical linear integral; validate Gaussian reductions, symmetry and identical laws.
+- **Bhattacharyya divergence — method assessment locally validated; no public API:**
+  [Exact angular reduction and Fourier/Gaussian series](docs/GVM_BHATTACHARYYA_RESEARCH.md)
+  with 12 research tests, independent positive integration and an analytic truncation
+  bound. Promising non-tensor cost, not a measured speedup. Production needs scaled
+  Bessel evaluation, rounding/cancellation guards and efficient concentration-dependent
+  bounds before a bounded Scala API; research CI pending.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.
