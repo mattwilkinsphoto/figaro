@@ -88,7 +88,13 @@ This sequence is a proposed priority order, not a calendar estimate.
    but a reused problem-specific scalar reduction is about 5.3x faster than the guarded call.
    These are bounded workload results, not universal inference speedups. Eight report
    validation tests and 13 high-precision research tests pass; study CI/integration pending.
-   Next: broader concentration/error validation, not unchecked range expansion.
+   The follow-on [concentration/cancellation grid](docs/GVM_BHATTACHARYYA_RELIABILITY.md)
+   is locally validated: 96 pairs in both directions at three tolerances, 460 resolved
+   results all meeting oracle accuracy and 116 explicit numerical refusals; four
+   high-precision oracle checks and three Scala regression tests. Its CI/integration
+   gate is separate. No numerical limits or production code changed. Next: assess an
+   explicit positive-integration alternative for low-dimensional cancellation, alongside
+   unequal-concentration stress tests and stronger rounding analysis; no silent fallback.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;
    see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.

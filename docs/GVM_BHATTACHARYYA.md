@@ -237,6 +237,9 @@ research suite retains direct angular and positive linear integration controls.
 
 The [matched-accuracy timing study](GVM_BHATTACHARYYA_PERFORMANCE.md) now measures both
 fresh and reused tensor rules, including a faster problem-specific reduced-rule control.
+The [96-pair reliability grid](GVM_BHATTACHARYYA_RELIABILITY.md) now checks concentration,
+opposition, unequal Gaussian marginals and dimension at three tolerances. Eligibility
+within the concentration/dimension caps does not guarantee resolution.
 See the [roadmap](../ROADMAP.md) for acceptance/CI status. Next work is
 tighter high-concentration bounds and stronger numerical
 certification, without extending this API to report ingestion, fusion or filtering.

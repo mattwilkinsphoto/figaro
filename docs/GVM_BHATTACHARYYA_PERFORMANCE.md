@@ -173,6 +173,8 @@ Use a single measurement session; process IDs can be recycled across unrelated s
   A faster divergence cannot be translated directly into a whole-application speedup.
 - The next substantive gate is broader numerical reliability, particularly concentration
   and cancellation—not tuning away microseconds or expanding the support cap unchecked.
+  The follow-on [96-pair reliability grid](GVM_BHATTACHARYYA_RELIABILITY.md) now records
+  this first stress assessment, including where the current guard declines to resolve.
   Mutual information remains a separate, lower-priority research milestone.
 
 ## Verification and related modules

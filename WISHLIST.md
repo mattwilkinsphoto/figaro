@@ -208,6 +208,11 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   substantial six-dimensional tensor-grid savings and faster reduced/reused counterexamples;
   study CI/integration remains pending. Wider concentration
   support and rigorous rounding-error certification remain separate work.
+- **Bhattacharyya numerical reliability — stress grid locally validated; CI/integration pending:**
+  [96 fixed pairs at three tolerances in both directions](docs/GVM_BHATTACHARYYA_RELIABILITY.md),
+  with high-precision oracles and representative independent positive integration controls.
+  All 460 resolved comparisons meet requested accuracy; 116 remain explicitly unresolved.
+  This does not broaden concentration/dimension caps or establish a statistical success rate.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.
