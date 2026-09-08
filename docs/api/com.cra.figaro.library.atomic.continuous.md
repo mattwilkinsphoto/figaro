@@ -26007,6 +26007,78 @@ Invocation template:
 receiver.ordersAgree
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScalarBhattacharyya.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScalarBhattacharyya.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScalarBhattacharyya.compare ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$.html#compare-fffff7e3)
+
+```scala
+def compare(p: GaussVonMisesDistribution, q: GaussVonMisesDistribution, tolerance: Double = ..., maxEvaluations: Int = ..., cancelled: () => Boolean = ...): Result
+```
+
+Compare fixed scalar GVM laws using analytic reductions or positive adaptive integration. Invalid arguments throw IllegalArgumentException; interruption/cancellation throws CancellationException without clearing the thread interrupt flag. Per-call work is isolated.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: GaussVonMisesDistribution ``; `` q: GaussVonMisesDistribution ``; `` tolerance: Double = ... ``; `` maxEvaluations: Int = ... ``; `` cancelled: () => Boolean = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Compare fixed scalar GVM laws using analytic reductions or positive adaptive integration. Invalid arguments throw IllegalArgumentException; interruption/cancellation throws CancellationException without clearing the thread interrupt flag. Per-call work is isolated. Value parameters cancelled cooperative cancellation predicate, default always false; must be non-null maxEvaluations integrand work budget in [5,200000], default 50000; not a time limit p non-null fixed GVM with one linear coordinate and concentration at most 50 q non-null GVM in the same physical coordinates and units, with matching dimension tolerance positive finite absolute distance tolerance in nats; default 1e-8 Attributes Returns immutable estimated/unavailable diagnostics; never a distance on numerical failure Example GaussVonMisesScalarBhattacharyya.compare(p, q, tolerance = 1e-7)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesScalarBhattacharyya.compare(p, q, tolerance, maxEvaluations, cancelled)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution$.html#apply-fffff677)

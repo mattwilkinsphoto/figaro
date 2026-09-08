@@ -22,6 +22,8 @@ Its individual checks are ordinary application calls, not additions to Figaro's 
 - **After a dependency upgrade:** update `build.sbt`, republish the exact coordinate, and
   rerun the check. Do not accept an older jar merely because it uses the same snapshot name.
 
+The check also exercises the opt-in [scalar GVM comparison](../../docs/GVM_SCALAR_BHATTACHARYYA.md)
+from the published jar, including cancellation-sensitive overlap and budget refusal.
 The check covers representative API/linkage/lifecycle behavior, not exhaustive statistical
 coverage, OSGi, arbitrary graphs, Java facades, memory ceilings or performance. It uses
 no test framework dependency. `run` forks so sbt's own libraries do not satisfy missing

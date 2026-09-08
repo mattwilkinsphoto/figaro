@@ -1,10 +1,11 @@
 # Positive scalar GVM overlap: numerical-method assessment
 
-Status: research-only Python prototype, locally validated; its own CI/integration
-gate is pending. No Scala library API, automatic fallback, numerical-cap change,
-dependency change or compiled release is introduced.
-The follow-on [test-only Scala prototype](GVM_POSITIVE_SCALAR_PROTOTYPE.md) now validates
-physical-kernel preprocessing and positive integration end to end, with its own gate.
+Status: research-only Python prototype with [passing CI at `70b083f4`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34194233164),
+integrated on main through `a54d665e`.
+This research component introduced no library API or compiled release.
+The follow-on [Scala prototype](GVM_POSITIVE_SCALAR_PROTOTYPE.md) validated physical-kernel
+preprocessing end to end and has now moved into an [explicit public scalar API](GVM_SCALAR_BHATTACHARYYA.md),
+with separate CI/integration status. The Fourier API still has no automatic fallback.
 
 ## Outcome and purpose
 

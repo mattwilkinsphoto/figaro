@@ -98,14 +98,21 @@ This sequence is a proposed priority order, not a calendar estimate.
    is locally validated with seven tests: all 84 scalar fixtures meet a 1e-8 target,
    including the 12 previously unresolved pairs, plus ten unequal-concentration controls.
    It uses high-precision research preprocessing and heuristic quadrature errors;
-   this is not end-to-end Scala validation or a certified fallback. Research CI/integration
-   pending. The follow-on [test-only scalar Scala prototype](docs/GVM_POSITIVE_SCALAR_PROTOTYPE.md)
-   is now locally validated end to end: 168 main-grid comparisons and ten additional
+   this is not end-to-end Scala validation or a certified fallback. Research
+   [CI passed at `70b083f4`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34194233164).
+   The follow-on [scalar Scala prototype](docs/GVM_POSITIVE_SCALAR_PROTOTYPE.md)
+   validated end to end: 168 main-grid comparisons and ten additional
    unequal-concentration pairs in both directions, preprocessing/units controls,
-   budgets, interruption and concurrency. All 307 modernization tests pass. No public
-   API or production source changes; CI/integration pending. Next: explicit public
-   scalar API design/promotion gates, including analytic reductions and near-limit
-   numerical controls; retain stronger rounding analysis as a separate gate.
+   budgets, interruption and concurrency; its local 307-test gate passed.
+   Both research and prototype are integrated on main through `a54d665e` after
+   [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34195275750).
+   The implementation and tests now move into an [explicit public scalar API](docs/GVM_SCALAR_BHATTACHARYYA.md)
+   with identity/Gaussian/uniform/constant-angle shortcuts, near-limit controls,
+   a user guide and executable examples. All 309 modernization tests pass locally.
+   The Fourier API remains unchanged;
+   public-API CI/integration pending. Next: verify that gate and assess matched-accuracy
+   end-to-end scalar work before recommending method-selection policies. Stronger
+   rounding analysis and multidimensional alternatives remain separate work.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;
    see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.

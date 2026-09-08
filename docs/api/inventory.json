@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 757,
+  "pages": 760,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156889,6 +156889,59 @@
       "example": "receiver.ordersAgree",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparisonResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScalarBhattacharyya.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScalarBhattacharyya.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScalarBhattacharyya",
+      "name": "compare",
+      "anchor": "compare-fffff7e3",
+      "signature": "def compare(p: GaussVonMisesDistribution, q: GaussVonMisesDistribution, tolerance: Double = ..., maxEvaluations: Int = ..., cancelled: () => Boolean = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: GaussVonMisesDistribution",
+            "q: GaussVonMisesDistribution",
+            "tolerance: Double = ...",
+            "maxEvaluations: Int = ...",
+            "cancelled: () => Boolean = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Compare fixed scalar GVM laws using analytic reductions or positive adaptive integration. Invalid arguments throw IllegalArgumentException; interruption/cancellation throws CancellationException without clearing the thread interrupt flag. Per-call work is isolated.",
+      "contract": "Compare fixed scalar GVM laws using analytic reductions or positive adaptive integration. Invalid arguments throw IllegalArgumentException; interruption/cancellation throws CancellationException without clearing the thread interrupt flag. Per-call work is isolated. Value parameters cancelled cooperative cancellation predicate, default always false; must be non-null maxEvaluations integrand work budget in [5,200000], default 50000; not a time limit p non-null fixed GVM with one linear coordinate and concentration at most 50 q non-null GVM in the same physical coordinates and units, with matching dimension tolerance positive finite absolute distance tolerance in nats; default 1e-8 Attributes Returns immutable estimated/unavailable diagnostics; never a distance on numerical failure Example GaussVonMisesScalarBhattacharyya.compare(p, q, tolerance = 1e-7)",
+      "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScalarBhattacharyya.compare(p, q, tolerance, maxEvaluations, cancelled)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScalarBhattacharyya$.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",

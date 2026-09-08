@@ -213,17 +213,19 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   with high-precision oracles and representative independent positive integration controls.
   All 460 resolved comparisons meet requested accuracy; 116 remain explicitly unresolved.
   This does not broaden concentration/dimension caps or establish a statistical success rate.
-- **Positive scalar Bhattacharyya integration — research prototype locally validated:**
+- **Positive scalar Bhattacharyya integration — research CI passed:**
   [Positive-integrand assessment](docs/GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md) avoids signed-series
   cancellation on 84 scalar fixtures and checks ten unequal-concentration pairs. Seven
-  tests cover accuracy, budgets, cancellation and range/precision refusals. Its CI gate
-  is pending; end-to-end Scala preprocessing and honest estimated-error contracts are
-  required before public API exposure. No automatic fallback or wider caps.
-- **Positive scalar Scala comparison — test-only end-to-end prototype locally validated:**
-  [Physical-kernel prototype](docs/GVM_POSITIVE_SCALAR_PROTOTYPE.md) passes the scalar
-  high-precision grid, including separate preprocessing-error estimates, hard budgets,
-  unit changes, interruption and concurrent calls. It is excluded from library artifacts;
-  public API promotion and its CI gate remain separate.
+  tests cover accuracy, budgets, cancellation and range/precision refusals.
+  [CI passed at `70b083f4`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34194233164).
+  Integrated on main through CI-verified `a54d665e`. No automatic fallback or wider caps.
+- **Positive scalar Scala comparison — public opt-in API, CI/integration pending:**
+  The [physical-kernel prototype](docs/GVM_POSITIVE_SCALAR_PROTOTYPE.md) has moved into
+  the [public scalar comparison](docs/GVM_SCALAR_BHATTACHARYYA.md). It retains the
+  oracle grid, preprocessing-error estimates, budgets, interruption and concurrency
+  controls, and adds analytic shortcuts, near-limit tests and executable user examples.
+  `Estimated` is not a certified bound. Next: CI promotion and matched-accuracy scalar
+  work assessment; no automatic Fourier fallback or multidimensional extension.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.

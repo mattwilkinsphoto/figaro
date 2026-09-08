@@ -3,7 +3,8 @@ import com.cra.figaro.algorithm.sampling.{VectorSliceSampler as VS, GaussianBloc
 import com.cra.figaro.algorithm.sampling.parallel.{ParImportance, MultiChainMetropolisHastings as MH,
   MultiChainVectorSliceSampler as MC, McmcPrecision, TruncatedSprt}
 import com.cra.figaro.language.*
-import com.cra.figaro.library.atomic.continuous.Normal
+import com.cra.figaro.library.atomic.continuous.{Normal, GaussVonMisesDistribution,
+  GaussVonMisesScalarBhattacharyya as ScalarOverlap}
 import java.nio.file.{Files, Path}
 import java.security.MessageDigest
 import scala.jdk.CollectionConverters.*
@@ -24,6 +25,16 @@ object FigaroConsumerCheck {
       require(absent, "Consumer unexpectedly resolved a test/example/instrumentation class")
     }
     println(s"Published artifact verified: $sha")
+
+    val gvmP=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),0,
+      Vector(0.0),Vector(Vector(0.0)),50)
+    val gvmQ=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),math.Pi,
+      Vector(1e-5),Vector(Vector(0.0)),50)
+    val overlap=ScalarOverlap.compare(gvmP,gvmQ)
+    require(overlap.status == ScalarOverlap.Status.Estimated &&
+      overlap.distance.exists(d => math.abs(d-47.1275754862468045) <= 1e-8))
+    require(ScalarOverlap.compare(gvmP,gvmQ,maxEvaluations=5).distance.isEmpty)
+    println("Published scalar GVM API: positive overlap and work-budget refusal passed")
 
     val universe=Universe.createNew()
     val cause=Flip(0.3)(using "", universe)

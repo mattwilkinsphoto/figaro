@@ -78,12 +78,13 @@ jobs:
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesBhattacharyyaExample;
           examples / Compile / runMain com.cra.figaro.example.GaussVonMisesBhattacharyyaPerformance check"
 
-      - name: Verify test-only end-to-end positive scalar GVM prototype
-        # Test-only numerical prototype: this does not add a public library fallback.
+      - name: Verify opt-in positive scalar GVM comparison
+        # Independent public entry point; the Fourier API never selects it automatically.
         # Its focused suite also runs under the full modernization wildcard below.
         run: >-
           sbt --server --batch
-          "figaro / Test / testOnly com.cra.figaro.test.modernization.GvmPositiveScalarPrototypeTest"
+          "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussVonMisesScalarBhattacharyyaTest;
+          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesScalarBhattacharyyaExample"
 
       - name: Verify seeded parallel sampling and benchmark entry point
         run: >-

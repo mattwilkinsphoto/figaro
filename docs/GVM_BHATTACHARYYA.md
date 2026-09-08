@@ -4,8 +4,9 @@ Status: first bounded Scala implementation integrated on main at `251f9540` afte
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34188404684).
 This does not replace the RC1 bundle or declare a tagged release. Follow-on performance
 and reliability assessments are now integrated on main through CI-verified `e30c8b03`.
-The [positive scalar integration research](GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md)
-remains separate and is not an automatic fallback or public Scala API.
+The separate [opt-in scalar positive API](GVM_SCALAR_BHATTACHARYYA.md) is now implemented
+on the development branch, with its own CI/integration gate. It is never selected
+automatically by this Fourier entry point.
 
 ## Overview: what it does and when to use it
 

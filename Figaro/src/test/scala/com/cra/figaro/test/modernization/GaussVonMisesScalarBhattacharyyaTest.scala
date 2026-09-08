@@ -5,8 +5,8 @@ import java.util.concurrent.{Callable,CancellationException,Executors,TimeUnit}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
-class GvmPositiveScalarPrototypeTest extends AnyWordSpec with Matchers {
-  import GvmPositiveScalarPrototype.{compare,Status}
+class GaussVonMisesScalarBhattacharyyaTest extends AnyWordSpec with Matchers {
+  import GaussVonMisesScalarBhattacharyya.{compare,Status}
   private def scalar(mu: Double=0,sd: Double=1,alpha: Double=0,beta: Double=0,gamma: Double=0,k: Double=0) =
     GaussVonMisesDistribution(Vector(mu),Vector(Vector(sd*sd)),alpha,Vector(beta),Vector(Vector(gamma)),k)
   private def checked(p: GaussVonMisesDistribution,q: GaussVonMisesDistribution,expected: Double,tolerance: Double=1e-8) = {
@@ -21,11 +21,58 @@ class GvmPositiveScalarPrototypeTest extends AnyWordSpec with Matchers {
       expected should be <= (hi+8*math.ulp(expected))
       math.max(r.distance.get-lo,hi-r.distance.get) should be <= tolerance
       r.evaluations should be <= 50000
-      r.preprocessingErrorEstimate should be > 0.0
+      r.preprocessingErrorEstimate should be >= 0.0
     }
     r
   }
-  "The test-only scalar positive GVM prototype" should {
+  "The opt-in scalar positive GVM comparison" should {
+    "use zero-evaluation analytic shortcuts without erasing weak coupling" in {
+      val p=scalar(k=50)
+      val identity=compare(p,p,tolerance=java.lang.Double.MIN_VALUE,maxEvaluations=5)
+      identity.method shouldBe "identity"; identity.distance shouldBe Some(0.0)
+      identity.interval shouldBe Some((0.0,0.0)); identity.evaluations shouldBe 0
+      val gaussian=checked(scalar(),scalar(mu=2),.5)
+      gaussian.method shouldBe "gaussian"; gaussian.evaluations shouldBe 0
+      // Angular coupling is irrelevant when the other conditional is uniform.
+      val uniform=checked(scalar(beta=1e200),scalar(beta=1e200,k=50),1.08705974593665853275)
+      uniform.method shouldBe "one-uniform"; uniform.evaluations shouldBe 0
+      val constant=checked(p,scalar(alpha=math.Pi,k=50),47.1275755018718045)
+      constant.method shouldBe "constant-angular"; constant.evaluations shouldBe 0
+      val weak=checked(p,scalar(alpha=math.Pi,beta=1e-5,k=50),47.1275754862468045)
+      weak.method shouldBe "positive-integration"; weak.evaluations should be > 0
+      constant.distance.get-weak.distance.get should be > 1e-8
+      val common=checked(scalar(beta=1e200,k=50),scalar(alpha=math.Pi,beta=1e200,k=50),constant.distance.get)
+      common.method shouldBe "constant-angular"
+    }
+    "handle near-equal variances and enforce limits without making accuracy promises" in {
+      val sd=1.0+1e-7
+      val expected=math.log1p(math.pow(sd*sd-1,2)/(4*sd*sd))/4
+      val near=compare(scalar(),scalar(sd=sd))
+      near.distance.get should be > 0.0
+      math.abs(near.distance.get-expected) should be < 1e-22
+      checked(scalar(),scalar(mu=100),1250).distance.map(d => math.exp(-d)) shouldBe Some(0.0)
+      compare(scalar(),scalar(sd=1e-4)).status shouldBe Status.NumericallyUnresolved
+      compare(scalar(),scalar(sd=1e-4),tolerance=.01).status shouldBe Status.Estimated
+      compare(scalar(),scalar(sd=.999e-4),tolerance=.01).status shouldBe Status.NumericallyUnresolved
+      compare(scalar(k=50),scalar(k=50.00001)).status shouldBe Status.UnsupportedRange
+      val outside=scalar(k=50.00001)
+      compare(outside,outside).status shouldBe Status.UnsupportedRange
+      compare(scalar(k=1),scalar(beta=10000,k=1),maxEvaluations=5).status shouldBe Status.BudgetExhausted
+      compare(scalar(k=1),scalar(beta=10000.0001,k=1),maxEvaluations=5).status shouldBe Status.UnsupportedRange
+      val almost=compare(scalar(k=50),scalar(alpha=math.Pi,beta=1e-5,k=50),tolerance=1e-12)
+      almost.status shouldBe Status.NumericallyUnresolved; almost.distance shouldBe None
+      var calls=0
+      intercept[CancellationException] { compare(scalar(),scalar(),cancelled=() => { calls += 1; true }) }
+      calls shouldBe 1
+      var checkpoints=0
+      val callerFailure=new ArithmeticException("caller predicate failure")
+      val propagated=intercept[ArithmeticException] { compare(scalar(k=50),scalar(beta=1,k=50),cancelled=() => {
+        checkpoints += 1
+        if(checkpoints == 10) throw callerFailure
+        false
+      }) }
+      (propagated eq callerFailure) shouldBe true
+    }
     "meet all scalar grid oracles in both directions from physical kernel inputs" in {
       val fixtures=GvmBhattacharyyaReliabilityFixtures.all.filter(_.n == 1)
       fixtures.size shouldBe 84
@@ -42,7 +89,7 @@ class GvmPositiveScalarPrototypeTest extends AnyWordSpec with Matchers {
         }
       }
       count shouldBe 168
-      println(s"GVM_SCALAR_PROTOTYPE comparisons=$count maxError=$maxError maxEvaluations=$maxWork")
+      println(s"GVM_SCALAR_POSITIVE comparisons=$count maxError=$maxError maxEvaluations=$maxWork")
     }
     "match high precision unequal-concentration fixtures in both directions" in {
       // 80-digit general Comparison.series(128), using binary64 phase inputs;
@@ -123,8 +170,8 @@ class GvmPositiveScalarPrototypeTest extends AnyWordSpec with Matchers {
       val expected=compare(p,q)
       val pool=Executors.newFixedThreadPool(4)
       try {
-        val tasks=Vector.fill(8)(pool.submit(new Callable[GvmPositiveScalarPrototype.Result] {
-          def call(): GvmPositiveScalarPrototype.Result = compare(p,q)
+        val tasks=Vector.fill(8)(pool.submit(new Callable[GaussVonMisesScalarBhattacharyya.Result] {
+          def call(): GaussVonMisesScalarBhattacharyya.Result = compare(p,q)
         }))
         tasks.foreach(t => t.get(30,TimeUnit.SECONDS) shouldBe expected)
       } finally { pool.shutdownNow() }
