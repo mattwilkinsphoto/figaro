@@ -23,7 +23,7 @@ native elements, composition possibilities and missing first-class support.
 | --- | --- | --- | --- |
 | D0: distribution contracts | Initial circular contracts implemented; broader adoption remains | Shared parameter/support conventions, density/log-density tests, seeded RNG ownership and explicit inference compatibility | Circular contract tests and capability matrix; extend stable log-density support to existing distributions through a separate audit |
 | D1: circular foundation (`DIST-01`) | Integrated on main at `fea8b999`; CI passed | Circular angle handling and von Mises; reuse for later wrapped and spherical families | 16 new regressions, 179 modernization tests and executable examples pass; [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34138540587) |
-| D2: linear-angular joint models (`DIST-02`) | Through third-order sparse quadrature on main at CI-verified `b06e957f`; positive-weight tensor reference locally validated, awaiting CI/integration | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
+| D2: linear-angular joint models (`DIST-02`) | Through positive-weight tensor quadrature on main at CI-verified `9cbcce00`; budgeted order comparison locally validated, awaiting CI/integration | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
 | D3: common missing scalar/count families | Proposed next tranche | Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; bounded triangular/Kumaraswamy | Select a small representative set across `DIST-03` through `DIST-06`; demonstrate observation/inference, not only random generation |
 | D4: reusable constructions (`DIST-10`) | Proposed; start enabling pieces during D1-D3 | Correct transformations, truncation, mixtures and hurdle/zero-inflated laws | Jacobian/normalizer/mixed-measure checks; avoid one-off implementations of every derived name |
 | D5: multivariate, tail and matrix breadth | Wishlist; not scheduled | Multivariate t, joint counts, extreme-value, covariance/correlation and directional manifolds | Dedicated dimension/geometry/factorization and inference tests before specialized flavors |
@@ -57,12 +57,18 @@ This sequence is a proposed priority order, not a calendar estimate.
 5. [Third-order deterministic expectation quadrature](docs/GVM_QUADRATURE.md): integrated
    on main at `b06e957f`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34178437678).
    Uses 2n+3 signed-weight nodes; exactness and failure cases are explicit.
-6. [Positive-weight tensor reference](docs/GVM_TENSOR_QUADRATURE.md): locally validated
-   on the development branch with 11 focused tests, all 268 modernization regressions,
-   and accuracy/callback-cost comparisons. CI/integration pending. Adjustable orders,
+6. [Positive-weight tensor reference](docs/GVM_TENSOR_QUADRATURE.md): integrated on main
+   at `9cbcce00`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34179606111),
+   11 focused tests and accuracy/callback-cost comparisons. Adjustable orders,
    streamed points and a hard node guard; exponential cost and no certified error bound.
-   Next: budgeted order-comparison diagnostics. Parameter gradients and Hessians remain separate.
-7. Bhattacharyya divergence and linear-angular mutual information: lower-priority research
+7. [Budgeted order comparison](docs/GVM_QUADRATURE_COMPARISON.md): locally validated on
+   `modernize/gauss-von-mises`; remote CI/integration pending. Four-corner comparisons
+   isolate Gaussian/angular sensitivity with total callback preflight and per-output
+   tolerances. Agreement is not an accuracy certificate: diagonal cancellation and
+   analytic false-agreement controls are tested. Acceptance: 13 focused tests, all 281
+   modernization regressions across 22 suites, seven GVM examples, Scala API generation
+   and thin-library packaging pass. Parameter gradients and Hessians remain separate.
+8. Bhattacharyya divergence and linear-angular mutual information: lower-priority research
    requested 2026-09-07. Establish numerical methods, special cases and error contracts
    before exposing APIs. No general closed-form guarantee; see [wishlist](WISHLIST.md).
 

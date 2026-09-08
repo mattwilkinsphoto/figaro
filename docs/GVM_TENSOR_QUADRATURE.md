@@ -221,11 +221,13 @@ use analytic Gaussian integrals, independent analytic GVM mixed moments and circ
 moments, including kappa=1e8. They also check refinement failures, positivity without
 accuracy, callback counts, budgets, cancellation, exceptions and concurrent reuse.
 See the [focused suite](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GaussVonMisesTensorQuadratureTest.scala)
-and the exact commit's [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
-before declaring remote validation or integration. Historical whole-suite limits remain.
+and [passing CI at `9cbcce00`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34179606111).
+This tensor milestone is integrated on main. Historical whole-suite limits remain.
 
-Next: a budgeted order-comparison helper and broader accuracy-versus-cost cases, with
-differences labeled as diagnostics rather than rigorous error bounds. This milestone
+The follow-on [budgeted order-comparison helper](GVM_QUADRATURE_COMPARISON.md) now has
+local acceptance, with its remote CI/integration gates still separate. It checks four
+order combinations and labels differences as diagnostics rather than rigorous error bounds.
+See its analytic false-agreement control before interpreting a tolerance flag. This milestone
 does not itself validate Bhattacharyya divergence, mutual information or other entropy
 integrals. Those remain separate research/acceptance work.
 

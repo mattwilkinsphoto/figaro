@@ -25813,6 +25813,104 @@ Invocation template:
 receiver.expectationVector(outputDimension)(f)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparison.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparison$.html#apply-656)
+
+```scala
+def apply(kernel: GaussVonMisesDistribution, gaussianOrder: Int = ..., refinedGaussianOrder: Int = ..., angularOrder: Int = ..., refinedAngularOrder: Int = ..., maxEvaluations: Int = ...): GaussVonMisesQuadratureComparison
+```
+
+Preflight the entire callback budget, then construct all four tensor rules before evaluation.
+
+Type parameters: none.
+
+Parameters, list 1: `` kernel: GaussVonMisesDistribution ``; `` gaussianOrder: Int = ... ``; `` refinedGaussianOrder: Int = ... ``; `` angularOrder: Int = ... ``; `` refinedAngularOrder: Int = ... ``; `` maxEvaluations: Int = ... ``.
+
+Returns: `` GaussVonMisesQuadratureComparison ``.
+
+Source contract/attributes: Preflight the entire callback budget, then construct all four tensor rules before evaluation. Value parameters angularOrder baseline angular order in [2,255], default 64 gaussianOrder baseline Gaussian order in [1,31], default 5 kernel non-null fixed GVM with n linear dimensions maxEvaluations total callback guard in [1,1000000], default 100000; must cover (G^n+Gref^n)*(A+Aref) refinedAngularOrder strictly larger angular order, at most 256; default 128 refinedGaussianOrder strictly larger Gaussian order, at most 32; default 9 Attributes Returns immutable comparison plan; any rule's failed angular mass check rejects the whole plan Example GaussVonMisesQuadratureComparison(kernel, 3, 7, 64, 128)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparison.apply(kernel, gaussianOrder, refinedGaussianOrder, angularOrder, refinedAngularOrder, maxEvaluations)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparison.compare ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparison.html#compare-ffffff84)
+
+```scala
+def compare(f: LinearAngular => Double, absoluteTolerance: Double = ..., relativeTolerance: Double = ...): GaussVonMisesQuadratureComparisonResult
+```
+
+Compare a scalar expectation at all four order combinations.
+
+Type parameters: none.
+
+Parameters, list 1: `` f: LinearAngular => Double ``; `` absoluteTolerance: Double = ... ``; `` relativeTolerance: Double = ... ``.
+
+Returns: `` GaussVonMisesQuadratureComparisonResult ``.
+
+Source contract/attributes: Compare a scalar expectation at all four order combinations. Value parameters absoluteTolerance finite nonnegative tolerance in output units; default 1e-6 f non-null deterministic callback, finite at every evaluated point relativeTolerance finite tolerance in [0,1]; default 1e-4; at least one tolerance must be positive Attributes Returns one-component estimates and diagnostics; agreement is not an error bound Example plan.compare(p => math.exp(-p.linear(0)*p.linear(0)))
+
+Invocation template:
+
+```scala
+receiver.compare(f, absoluteTolerance, relativeTolerance)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparison.compareVector ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparison.html#compareVector-fffffdd9)
+
+```scala
+def compareVector(outputDimension: Int, absoluteTolerance: Double = ..., relativeTolerance: Double = ...)(f: LinearAngular => Vector[Double]): GaussVonMisesQuadratureComparisonResult
+```
+
+Compare several expectations with one callback per point per rule. Each edge requires an absolute difference at most absoluteTolerance plus relativeTolerance times the larger absolute estimate on that edge.
+
+Type parameters: none.
+
+Parameters, list 1: `` outputDimension: Int ``; `` absoluteTolerance: Double = ... ``; `` relativeTolerance: Double = ... ``.
+
+Parameters, list 2: `` f: LinearAngular => Vector[Double] ``.
+
+Returns: `` GaussVonMisesQuadratureComparisonResult ``.
+
+Source contract/attributes: Compare several expectations with one callback per point per rule. Each edge requires an absolute difference at most absoluteTolerance plus relativeTolerance times the larger absolute estimate on that edge. Value parameters absoluteTolerance finite nonnegative tolerance shared by every output; default 1e-6 f non-null deterministic callback returning a non-null finite vector of the requested length outputDimension required vector length in [1,10000] relativeTolerance finite tolerance in [0,1]; default 1e-4; at least one tolerance must be positive Attributes Returns immutable estimates and diagnostics; callback/cancellation/arithmetic failures return no partial result Example plan.compareVector(2)(p => Vector(p.linear(0), math.cos(p.angle)))
+
+Invocation template:
+
+```scala
+receiver.compareVector(outputDimension, absoluteTolerance, relativeTolerance)(f)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparisonResult.ordersAgree ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparisonResult.html#ordersAgree-0)
+
+```scala
+def ordersAgree: Boolean
+```
+
+Whether every component passes all four pairwise tolerance checks.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Whether every component passes all four pairwise tolerance checks. Attributes Returns true means observed agreement only; even exact agreement can hide large integration error Example println(result.ordersAgree)
+
+Invocation template:
+
+```scala
+receiver.ordersAgree
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution$.html#apply-fffff677)

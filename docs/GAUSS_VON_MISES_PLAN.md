@@ -1,8 +1,9 @@
 # First distribution milestone: von Mises and Gauss-von Mises
 
-Status: **circular foundation, fixed-kernel joint GVM and KL/residual diagnostics integrated
-on main with passing branch CI at `3615e26e`; moments/conditionals locally validated,
-awaiting their own CI/integration**. Standalone publication is approved by the maintainer. See the
+Status: **circular foundation and fixed-kernel joint GVM extensions through tensor
+quadrature integrated on main with passing branch CI at `9cbcce00`; budgeted
+order comparison locally validated, awaiting its own CI/integration**.
+Standalone publication is approved by the maintainer. See the
 [circular guide](VON_MISES.md) and [joint development preview](GAUSS_VON_MISES.md).
 Both the circular and joint families
 were explicitly requested on 2026-09-07. Parent families: `DIST-01` and
@@ -165,10 +166,14 @@ Specific follow-on checks from the paper:
   assumption and application-specific simplifications must not silently become a generic
   Figaro transformation/filtering guarantee. General transforms need their Jacobians.
 
-Quadrature, transformed expectations and generic uncertainty propagation are later
-`DIST-02` research milestones, not part of the initial sampling/density delivery. Their
-acceptance should compare against independent Monte Carlo and simpler Gaussian baselines
-on controlled curved linear-angular examples. Domain orbit dynamics remain separate.
+Quadrature was separate from the initial sampling/density delivery. The
+[sparse rule](GVM_QUADRATURE.md) and [positive-weight tensor reference](GVM_TENSOR_QUADRATURE.md)
+are now integrated on main; the [budgeted order comparison](GVM_QUADRATURE_COMPARISON.md)
+has local acceptance, with remote CI/integration pending. These provide generic
+expectations and sensitivity diagnostics, not rigorous error certificates or transformed
+GVM reconstruction. Generic uncertainty propagation remains separate research: compare
+against independent Monte Carlo and simpler Gaussian baselines on controlled curved
+linear-angular examples. Domain orbit dynamics remain separate.
 
 The 2016 [measurement-update paper](https://doi.org/10.1016/j.procs.2016.07.380)
 and 2024 [generalized Bernoulli GVM work](https://doi.org/10.23919/FUSION59988.2024.10706337)

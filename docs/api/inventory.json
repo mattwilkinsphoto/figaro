@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 751,
+  "pages": 754,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156731,6 +156731,98 @@
       "example": "receiver.expectationVector(outputDimension)(f)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadrature.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparison",
+      "name": "apply",
+      "anchor": "apply-656",
+      "signature": "def apply(kernel: GaussVonMisesDistribution, gaussianOrder: Int = ..., refinedGaussianOrder: Int = ..., angularOrder: Int = ..., refinedAngularOrder: Int = ..., maxEvaluations: Int = ...): GaussVonMisesQuadratureComparison",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "kernel: GaussVonMisesDistribution",
+            "gaussianOrder: Int = ...",
+            "refinedGaussianOrder: Int = ...",
+            "angularOrder: Int = ...",
+            "refinedAngularOrder: Int = ...",
+            "maxEvaluations: Int = ..."
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesQuadratureComparison",
+      "summary": "Preflight the entire callback budget, then construct all four tensor rules before evaluation.",
+      "contract": "Preflight the entire callback budget, then construct all four tensor rules before evaluation. Value parameters angularOrder baseline angular order in [2,255], default 64 gaussianOrder baseline Gaussian order in [1,31], default 5 kernel non-null fixed GVM with n linear dimensions maxEvaluations total callback guard in [1,1000000], default 100000; must cover (G^n+Gref^n)*(A+Aref) refinedAngularOrder strictly larger angular order, at most 256; default 128 refinedGaussianOrder strictly larger Gaussian order, at most 32; default 9 Attributes Returns immutable comparison plan; any rule's failed angular mass check rejects the whole plan Example GaussVonMisesQuadratureComparison(kernel, 3, 7, 64, 128)",
+      "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparison.apply(kernel, gaussianOrder, refinedGaussianOrder, angularOrder, refinedAngularOrder, maxEvaluations)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparison$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparison",
+      "name": "compare",
+      "anchor": "compare-ffffff84",
+      "signature": "def compare(f: LinearAngular => Double, absoluteTolerance: Double = ..., relativeTolerance: Double = ...): GaussVonMisesQuadratureComparisonResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "f: LinearAngular => Double",
+            "absoluteTolerance: Double = ...",
+            "relativeTolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesQuadratureComparisonResult",
+      "summary": "Compare a scalar expectation at all four order combinations.",
+      "contract": "Compare a scalar expectation at all four order combinations. Value parameters absoluteTolerance finite nonnegative tolerance in output units; default 1e-6 f non-null deterministic callback, finite at every evaluated point relativeTolerance finite tolerance in [0,1]; default 1e-4; at least one tolerance must be positive Attributes Returns one-component estimates and diagnostics; agreement is not an error bound Example plan.compare(p => math.exp(-p.linear(0)*p.linear(0)))",
+      "example": "receiver.compare(f, absoluteTolerance, relativeTolerance)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparison.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparison",
+      "name": "compareVector",
+      "anchor": "compareVector-fffffdd9",
+      "signature": "def compareVector(outputDimension: Int, absoluteTolerance: Double = ..., relativeTolerance: Double = ...)(f: LinearAngular => Vector[Double]): GaussVonMisesQuadratureComparisonResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "outputDimension: Int",
+            "absoluteTolerance: Double = ...",
+            "relativeTolerance: Double = ..."
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "f: LinearAngular => Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesQuadratureComparisonResult",
+      "summary": "Compare several expectations with one callback per point per rule. Each edge requires an absolute difference at most absoluteTolerance plus relativeTolerance times the larger absolute estimate on that edge.",
+      "contract": "Compare several expectations with one callback per point per rule. Each edge requires an absolute difference at most absoluteTolerance plus relativeTolerance times the larger absolute estimate on that edge. Value parameters absoluteTolerance finite nonnegative tolerance shared by every output; default 1e-6 f non-null deterministic callback returning a non-null finite vector of the requested length outputDimension required vector length in [1,10000] relativeTolerance finite tolerance in [0,1]; default 1e-4; at least one tolerance must be positive Attributes Returns immutable estimates and diagnostics; callback/cancellation/arithmetic failures return no partial result Example plan.compareVector(2)(p => Vector(p.linear(0), math.cos(p.angle)))",
+      "example": "receiver.compareVector(outputDimension, absoluteTolerance, relativeTolerance)(f)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparison.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadratureComparisonResult",
+      "name": "ordersAgree",
+      "anchor": "ordersAgree-0",
+      "signature": "def ordersAgree: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Whether every component passes all four pairwise tolerance checks.",
+      "contract": "Whether every component passes all four pairwise tolerance checks. Attributes Returns true means observed agreement only; even exact agreement can hide large integration error Example println(result.ordersAgree)",
+      "example": "receiver.ordersAgree",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadratureComparisonResult.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution",

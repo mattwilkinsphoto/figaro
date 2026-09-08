@@ -1,9 +1,9 @@
 # Joint Gauss-von Mises: development preview
 
-Status: the fixed joint kernel and extensions through third-order sparse quadrature
-are on main at `b06e957f`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34178437678).
+Status: the fixed joint kernel and extensions through positive-weight tensor quadrature
+are on main at `9cbcce00`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34179606111).
 **Standalone publication was approved by the maintainer on 2026-09-07.** This is not
-a tagged release or replacement for the RC1 bundle. The added [positive-weight tensor reference](GVM_TENSOR_QUADRATURE.md)
+a tagged release or replacement for the RC1 bundle. The added [budgeted order comparison](GVM_QUADRATURE_COMPARISON.md)
 is locally validated on `modernize/gauss-von-mises`
 and awaits its own remote CI/integration gates. The circular foundation was integrated earlier
 at `fea8b999`.
@@ -144,6 +144,10 @@ canonical exactness class, not a general accuracy or positivity guarantee.
 low-dimensional reference with streamed points and a hard callback budget. It is
 exponential in dimension, and positive weights do not certify approximation accuracy.
 
+[Budgeted order comparison](GVM_QUADRATURE_COMPARISON.md) checks all four combinations
+of baseline/refined Gaussian and angular orders. It reports per-output changes and
+agreement without treating these as certified error bounds or automatic stopping rules.
+
 Import `com.cra.figaro.library.atomic.continuous.*`. All methods below are handwritten;
 the [compiler reference](api/README.md) also records inherited/generated functions.
 
@@ -203,8 +207,8 @@ residuals, disparate units, input snapshots, failure paths, real evidence weight
 posterior projections and exact seeded traces across worker counts.
 The diagnostics milestone passed 205 modernization regressions and remote CI at
 `3615e26e`; moments passed CI at `df5a7bf4`, and calibration at `755eb425`. With the
-[11 tensor-rule tests](GVM_TENSOR_QUADRATURE.md), all 268 modernization regressions,
-six expanded executable examples, Scala API generation and local thin-library
+[13 order-comparison tests](GVM_QUADRATURE_COMPARISON.md), all 281 modernization regressions,
+seven expanded executable examples, Scala API generation and local thin-library
 packaging pass. Check the exact source commit in the
 [branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
 before treating remote CI as passed. Existing whole-library historical-suite limits remain unchanged.

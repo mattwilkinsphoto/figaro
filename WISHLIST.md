@@ -14,7 +14,7 @@ a mathematical construction is available but may lack a tested density/evidence 
 **wishlist** = candidate requiring assessment. Native does not mean every algorithm
 or numerical edge case is validated. Family rows below describe expansion work, not
 blanket support for all family members. Circular von Mises is now implemented and
-validated on main; joint GVM is a locally tested preview approved for standalone publication,
+validated on main; joint GVM is a development preview integrated through tensor quadrature,
 and other directional families remain future work.
 
 Use stable `DIST-xx` IDs when moving work into the roadmap. Priorities are P0 (first
@@ -28,7 +28,7 @@ and special cases attached to their family instead of creating duplicate impleme
 | ID / priority | Family and current expansion status | First useful capability | Later flavors / shared work |
 | --- | --- | --- | --- |
 | DIST-01 / P0 | Circular von Mises native and locally validated; other directional laws researched | [Circular von Mises, angle conventions and circular summaries](docs/VON_MISES.md) | Wrapped normal/Cauchy and other wraps; then von Mises-Fisher, Kent and Bingham with sphere/axis-aware contracts |
-| DIST-02 / P0 | Joint linear-angular; locally validated, standalone publication approved, CI/integration remain | [Fixed-kernel Horwood-Poore Gauss-von Mises](docs/GAUSS_VON_MISES.md) using DIST-01 | Mardia-Sutton, GVM mixtures, multiple angles and newer generalized GVM variants; separate quadrature/uncertainty-propagation research and application-level review, not an automatic filtering claim |
+| DIST-02 / P0 | Joint linear-angular; through tensor reference integrated on main; order-comparison extension locally validated pending CI/integration | [Fixed-kernel Horwood-Poore Gauss-von Mises](docs/GAUSS_VON_MISES.md) using DIST-01 | Mardia-Sutton, GVM mixtures, multiple angles and newer generalized GVM variants; separate quadrature/uncertainty-propagation research and application-level review, not an automatic filtering claim |
 | DIST-03 / P1 | Real-line location/scale and heavy tails; wishlist, Normal native | Student t, Cauchy and Laplace | Logistic, skew/noncentral variants, generalized normal, stable and hyperbolic families |
 | DIST-04 / P1 | Finite choices and count laws; partially native | Negative binomial and hypergeometric with explicit count conventions | Overdispersion, beta mixtures, heterogeneous Bernoulli sums, noncentral and zero-truncated flavors |
 | DIST-05 / P1 | Positive-valued scale/lifetime laws; partially native | Lognormal and Weibull; expose reusable Gamma special cases | Inverse Gaussian, Rayleigh/Rice/Nakagami, generalized Gamma, fatigue-life and survival variants |
@@ -189,10 +189,15 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   [Scalar/vector expectations](docs/GVM_QUADRATURE.md) with 2n+3 signed-weight nodes,
   a specified canonical exactness class and explicit failure examples. No automatic
   error bound or refinement; not a filtering implementation.
-- **Positive-weight tensor reference — locally validated, remote CI/integration pending:**
+- **Positive-weight tensor reference — on main at CI-verified `9cbcce00`:**
   [Adjustable Gaussian/angular order](docs/GVM_TENSOR_QUADRATURE.md), streamed points,
   exponential callback-budget guard and analytic accuracy-versus-cost cases. Positivity
-  is not accuracy; automatic order comparison remains follow-on work.
+  is not accuracy.
+- **Budgeted order-comparison diagnostics — locally validated, remote CI/integration pending:**
+  [Four-corner Gaussian/angular comparisons](docs/GVM_QUADRATURE_COMPARISON.md),
+  total callback-budget preflight, per-output tolerance flags and directional changes.
+  Explicit false-agreement tests prevent treating these diagnostics as certified error
+  bounds or automatic stopping criteria. No new sampler or parallel execution mode.
 - **Bhattacharyya divergence — research wishlist, lower priority:** symmetric comparison
   of complete GVM distributions. Assess analytic angular integration plus a controlled
   numerical linear integral; validate Gaussian reductions, symmetry and identical laws.
