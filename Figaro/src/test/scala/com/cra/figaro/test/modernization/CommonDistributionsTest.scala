@@ -53,6 +53,26 @@ class CommonDistributionsTest extends AnyWordSpec with Matchers {
       LaplaceDistribution(0,1).cdf(100) shouldBe 1.0
       LaplaceDistribution(0,1).survival(100) should be > 0.0
       LogNormalDistribution(0,1).survival(math.exp(10)) should be > 0.0
+      // Probability-coordinate inverses must not lose a representable result in
+      // an intermediate product, reciprocal, or subtraction from one.
+      val lognormal=LogNormalDistribution(0,1)
+      for(p <- Vector(1e-8,1e-12,1e-100,1e-250)) lognormal.cdf(lognormal.quantile(p))/p shouldBe (1.0 +- 2e-11)
+      // Independent 100-digit mpmath erfc inversion, not the Scala CDF round trip.
+      lognormal.quantile(1e-100) shouldBe (5.7684151320867909669e-10 +- 2e-23)
+      lognormal.quantile(1e-250) shouldBe (2.0942389594866970489e-15 +- 1e-28)
+      val cauchy=CauchyDistribution(0,1e-100)
+      cauchy.cdf(cauchy.quantile(1e-250))/1e-250 shouldBe (1.0 +- 2e-13)
+      val triangle=TriangularDistribution(0,.5,1)
+      triangle.quantile(1e-300) shouldBe (math.sqrt(.5)*1e-150 +- 1e-164)
+      val skewTriangle=TriangularDistribution(0,1e-200,1)
+      skewTriangle.quantile(1e-100)/1e-100 shouldBe (.5 +- 1e-14)
+      val bounded=KumaraswamyDistribution(2,1e6)
+      bounded.cdf(bounded.quantile(1e-320)) shouldBe (1e-320 +- 1e-323)
+      for(d <- Vector[CountDistribution](NegativeBinomialDistribution(2.5,.4),HypergeometricDistribution(100,50,50))) {
+        val p=math.nextDown(1.0); val k=d.quantile(p)
+        d.survival(k) should be <= (1-p); d.survival(k-1) should be > (1-p)
+      }
+      HypergeometricDistribution(100,50,50).quantile(1) shouldBe 50
     }
     "honor special cases, moment existence and endpoint singularities" in {
       for(x <- Vector(-100.0,-1.0,0.0,1.0,100.0)) {

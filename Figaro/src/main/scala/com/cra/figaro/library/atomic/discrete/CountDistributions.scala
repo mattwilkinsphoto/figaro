@@ -62,9 +62,10 @@ final case class NegativeBinomialDistribution(successes: Double,successProbabili
   def quantile(p: Double): Int = {
     N.probability(p)
     if(p == 0 || successProbability == 1) return 0
-    if(p == 1 || cdf(Int.MaxValue) < p) throw new ArithmeticException("negative-binomial quantile exceeds Int support representation")
+    def reached(k: Int): Boolean = if(p > .5) survival(k) <= 1-p else cdf(k) >= p
+    if(p == 1 || !reached(Int.MaxValue)) throw new ArithmeticException("negative-binomial quantile exceeds Int support representation")
     var lo = -1L; var hi=Int.MaxValue.toLong
-    while(hi-lo > 1) { N.check(); val middle=(hi+lo)/2; if(cdf(middle.toInt) >= p) hi=middle else lo=middle }
+    while(hi-lo > 1) { N.check(); val middle=(hi+lo)/2; if(reached(middle.toInt)) hi=middle else lo=middle }
     hi.toInt
   }
   def support = (0,if(successProbability == 1) Some(0) else None)
@@ -87,7 +88,10 @@ final case class HypergeometricDistribution(population: Int,successes: Int,draws
   def survival(k: Int): Double = { N.check(); if(k < lower) 1 else if(k >= upper) 0 else engine.upperCumulativeProbability(k+1) }
   def quantile(p: Double): Int = { N.probability(p); var lo=lower.toLong-1; var hi=upper.toLong
     if(p == 0) return lower
-    while(hi-lo > 1) { N.check(); val mid=(hi+lo)/2; if(cdf(mid.toInt) >= p) hi=mid else lo=mid }; hi.toInt }
+    if(p == 1) return upper
+    while(hi-lo > 1) { N.check(); val mid=(hi+lo)/2
+      val reached=if(p > .5) survival(mid.toInt) <= 1-p else cdf(mid.toInt) >= p
+      if(reached) hi=mid else lo=mid }; hi.toInt }
   def support = (lower,Some(upper))
   def mean = draws.toDouble*successes/population
   def variance = if(population == 1) 0 else mean*(1-successes.toDouble/population)*(population-draws)/(population-1)

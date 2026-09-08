@@ -104,7 +104,7 @@ final case class CauchyDistribution(location: Double,scale: Double) extends Scal
   private def tail(x: Double): Double = math.atan(scale/math.abs(x-location))/math.Pi
   def cdf(x: Double): Double = { N.argument(x); if(x == location) .5 else if(x < location) tail(x) else 1-tail(x) }
   def survival(x: Double): Double = { N.argument(x); if(x == location) .5 else if(x > location) tail(x) else 1-tail(x) }
-  def quantile(p: Double): Double = { N.probability(p); val z=if(p < .5) -1/math.tan(math.Pi*p) else 1/math.tan(math.Pi*(1-p)); N.interior(p,if(p == .5) location else location+scale*z) }
+  def quantile(p: Double): Double = { N.probability(p); val displacement=if(p < .5) -scale/math.tan(math.Pi*p) else scale/math.tan(math.Pi*(1-p)); N.interior(p,if(p == .5) location else location+displacement) }
   def support = (Double.NegativeInfinity,Double.PositiveInfinity)
   def mean = None
   def variance = None
@@ -137,7 +137,23 @@ final case class LogNormalDistribution(logMean: Double,logStandardDeviation: Dou
     val l=math.log(x); val z=(l-logMean)/logStandardDeviation; -l-math.log(logStandardDeviation)-.5*math.log(2*math.Pi)-.5*z*z } }
   def cdf(x: Double): Double = { N.argument(x); if(x <= 0) 0 else .5*Erf.erfc((logMean-math.log(x))/logStandardDeviation/math.sqrt(2)) }
   def survival(x: Double): Double = { N.argument(x); if(x <= 0) 1 else .5*Erf.erfc((math.log(x)-logMean)/logStandardDeviation/math.sqrt(2)) }
-  def quantile(p: Double): Double = { N.probability(p); val x=N.interior(p,math.exp(logMean+logStandardDeviation*standard.inverseCumulativeProbability(p))); if(p > 0 && x == 0) throw new ArithmeticException("positive quantile underflow"); x }
+  def quantile(p: Double): Double = {
+    N.probability(p)
+    // The backend's erfInv(2*p-1) loses tiny lower-tail probabilities. Invert the
+    // direct complementary error function there, with a fixed iteration budget.
+    val z=if(p > 0 && p < 1e-4) {
+      var lo=0.0; var hi=40.0; var iteration=0
+      while(iteration < 100) {
+        N.check(); val mid=(lo+hi)/2
+        if(Erf.erfc(mid/math.sqrt(2)) > 2*p) lo=mid else hi=mid
+        iteration += 1
+      }
+      -(lo+hi)/2
+    } else standard.inverseCumulativeProbability(p)
+    val x=N.interior(p,math.exp(logMean+logStandardDeviation*z))
+    if(p > 0 && x == 0) throw new ArithmeticException("positive quantile underflow")
+    x
+  }
   def support = (0.0,Double.PositiveInfinity)
   def mean = Some(math.exp(logMean+.5*logStandardDeviation*logStandardDeviation))
   def variance = { val v=logStandardDeviation*logStandardDeviation; Some(math.exp(2*logMean+v+N.logExpm1(v))) }
@@ -181,7 +197,16 @@ final case class TriangularDistribution(lower: Double,mode: Double,upper: Double
     math.log(2)-math.log(width)+(if(x <= mode) math.log(x-lower)-math.log(mode-lower) else math.log(upper-x)-math.log(upper-mode)) }
   def cdf(x: Double): Double = { N.argument(x); if(x <= lower) 0 else if(x >= upper) 1 else if(x <= mode) ((x-lower)/width)*((x-lower)/(mode-lower)) else 1-((upper-x)/width)*((upper-x)/(upper-mode)) }
   def survival(x: Double): Double = { N.argument(x); if(x <= lower) 1 else if(x >= upper) 0 else if(x >= mode) ((upper-x)/width)*((upper-x)/(upper-mode)) else 1-((x-lower)/width)*((x-lower)/(mode-lower)) }
-  def quantile(p: Double): Double = { N.probability(p); if(p <= split) lower+width*math.sqrt(p*split) else upper-width*math.sqrt((1-p)*(1-split)) }
+  def quantile(p: Double): Double = {
+    N.probability(p)
+    if(p == 0) return lower
+    if(p == 1) return upper
+    if(p <= split) lower+math.sqrt(p)*math.sqrt(width)*math.sqrt(mode-lower)
+    else {
+      val z=math.sqrt(1-p)*math.sqrt(1-split)
+      if(z > .5) lower+width*((p+split-p*split)/(1+z)) else upper-width*z
+    }
+  }
   def support = (lower,upper)
   def mean = Some(lower+(width+mode-lower)/3)
   def variance = Some(width*width*(1+split*split-split)/18)
@@ -197,9 +222,22 @@ final case class KumaraswamyDistribution(a: Double,b: Double) extends ScalarDist
     else if(x == 0) { if(a == 1) math.log(b) else if(a < 1) Double.PositiveInfinity else Double.NegativeInfinity }
     else if(x == 1) { if(b == 1) math.log(a) else if(b < 1) Double.PositiveInfinity else Double.NegativeInfinity }
     else math.log(a)+math.log(b)+(a-1)*math.log(x)+(b-1)*N.log1mexp(a*math.log(x)) }
-  def cdf(x: Double): Double = { N.argument(x); if(x <= 0) 0 else if(x >= 1) 1 else -math.expm1(b*N.log1mexp(a*math.log(x))) }
-  def survival(x: Double): Double = { N.argument(x); if(x <= 0) 1 else if(x >= 1) 0 else math.exp(b*N.log1mexp(a*math.log(x))) }
-  def quantile(p: Double): Double = { N.probability(p); val x=math.exp(N.log1mexp(math.log1p(-p)/b)/a); if(p > 0 && p < 1 && (x == 0 || x == 1)) throw new ArithmeticException("bounded quantile collapsed to endpoint"); x }
+  private def logSurvival(x: Double): Double = {
+    val l=a*math.log(x)
+    // For exp(l)<2.4e-16, log(1-exp(l))=-exp(l) to working precision.
+    // Combine b in log space before exponentiation to retain subnormal CDFs.
+    if(l < -36) -math.exp(math.log(b)+l) else b*N.log1mexp(l)
+  }
+  def cdf(x: Double): Double = { N.argument(x); if(x <= 0) 0 else if(x >= 1) 1 else -math.expm1(logSurvival(x)) }
+  def survival(x: Double): Double = { N.argument(x); if(x <= 0) 1 else if(x >= 1) 0 else math.exp(logSurvival(x)) }
+  def quantile(p: Double): Double = {
+    N.probability(p)
+    val logV=math.log(-math.log1p(-p))-math.log(b)
+    val logPower=if(logV < -36) logV else N.log1mexp(-math.exp(logV))
+    val x=math.exp(logPower/a)
+    if(p > 0 && p < 1 && (x == 0 || x == 1)) throw new ArithmeticException("bounded quantile collapsed to endpoint")
+    x
+  }
   def support = (0.0,1.0)
   private def logMoment(order: Int) = math.log(b)+B.logBeta(1+order.toDouble/a,b)
   def mean = Some(math.exp(logMoment(1)))

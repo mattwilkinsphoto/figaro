@@ -40,6 +40,9 @@ The CI workflow runs these controls alongside all existing modernization gates.
   formulas. Student t checks include very small degrees of freedom and extreme finite
   arguments. Quantile round trips, family reductions, moments, endpoint singularities,
   invalid parameters, unrepresentable outputs and interruption are exercised.
+  Tail-inverse controls include 100-digit lognormal quantiles at probabilities `1e-100`
+  and `1e-250`, subnormal Kumaraswamy probabilities, narrow-mode triangular laws,
+  scaled Cauchy tails and upper count quantiles within one ULP of probability one.
 - Inference tests cover every new family: conditional posterior odds against direct
   likelihood calculations, constrained Metropolis-Hastings, seeded isolated multi-chain
   serial/parallel equality, and log-density importance weighting after raw-density underflow.

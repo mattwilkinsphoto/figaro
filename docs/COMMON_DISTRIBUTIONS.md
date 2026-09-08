@@ -235,6 +235,10 @@ for upper tails; `1-cdf(x)` can lose a small positive probability through roundi
 Student t and negative-binomial incomplete-beta evaluations are capped at 10,000
 continued-fraction iterations per call. Failure raises `ArithmeticException`, never
 a fabricated zero tail; interruption is checked before and after each such call.
+Lognormal probabilities below `1e-4` use 100-step direct-tail inversion to avoid
+cancellation in the backend's inverse-error-function argument. Count upper quantiles
+compare direct survival probabilities, and finite endpoint quantiles are explicit.
+Triangular and Kumaraswamy inverses avoid premature small-probability underflow.
 
 Definitions follow the [NIST distribution gallery](https://www.itl.nist.gov/div898/handbook/eda/section3/eda366.htm),
 the primary [SciPy lognormal](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html)
