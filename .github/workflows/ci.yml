@@ -21,6 +21,10 @@ jobs:
         run: python3 -m pip install --disable-pip-version-check mpmath==1.3.0
       - name: Verify Bhattacharyya derivation and independent controls
         run: python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_research.py' -v
+      - name: Verify complete matched-accuracy timing evidence
+        run: |
+          python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_performance.py' -v
+          python3 -B tools/summarize_gvm_bhattacharyya_performance.py docs/GVM_BHATTACHARYYA_PERFORMANCE_RUNS.txt
 
   build:
     runs-on: ubuntu-latest
@@ -67,7 +71,8 @@ jobs:
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesQuadratureExample;
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesTensorQuadratureExample;
           examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesQuadratureComparisonExample;
-          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesBhattacharyyaExample"
+          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesBhattacharyyaExample;
+          examples / Compile / runMain com.cra.figaro.example.GaussVonMisesBhattacharyyaPerformance check"
 
       - name: Verify seeded parallel sampling and benchmark entry point
         run: >-

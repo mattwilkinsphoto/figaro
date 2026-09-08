@@ -2,7 +2,9 @@
 
 Status: research prototype and 12 tests, with [passing CI at `b5da340c`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34185820661).
 This document records the research, **not the public Scala API contract**. The follow-on
-[guarded Scala API](GVM_BHATTACHARYYA.md) now has local acceptance and its own gates.
+[guarded Scala API](GVM_BHATTACHARYYA.md) is now on main at CI-verified `251f9540`.
+The [timing study](GVM_BHATTACHARYYA_PERFORMANCE.md) extends the research suite to 13 tests
+with benchmark oracles and retains its own CI/integration gate.
 Reviewed 2026-09-07. The research itself changes no runtime or compiled release.
 The prototype is independently written; no third-party implementation was copied.
 

@@ -1,7 +1,9 @@
 # Guarded GVM Bhattacharyya comparison
 
-Status: first bounded Scala implementation on the development branch; CI/integration
-gates remain separate. This does not replace the RC1 bundle or declare a tagged release.
+Status: first bounded Scala implementation integrated on main at `251f9540` after
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34188404684).
+This does not replace the RC1 bundle or declare a tagged release. The follow-on
+performance study retains its separate CI/integration gate.
 
 ## Overview: what it does and when to use it
 
@@ -233,8 +235,10 @@ input, cancellation, conditioning and concurrent calls. The
 fixtures at 60 digits using `mpmath==1.3.0`; run it with `python -B`. The separate Python
 research suite retains direct angular and positive linear integration controls.
 
-See the [roadmap](../ROADMAP.md) for acceptance/CI status. Next work is measured
-matched-accuracy performance, tighter high-concentration bounds and stronger numerical
+The [matched-accuracy timing study](GVM_BHATTACHARYYA_PERFORMANCE.md) now measures both
+fresh and reused tensor rules, including a faster problem-specific reduced-rule control.
+See the [roadmap](../ROADMAP.md) for acceptance/CI status. Next work is
+tighter high-concentration bounds and stronger numerical
 certification, without extending this API to report ingestion, fusion or filtering.
 Mutual information remains separate research.
 

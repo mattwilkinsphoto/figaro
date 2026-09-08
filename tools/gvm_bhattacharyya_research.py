@@ -174,6 +174,22 @@ def scala_fixtures():
             print(name,'distance',mp.nstr(c.gaussian_distance-mp.log(value),40),flush=True)
 
 
+def performance_fixtures():
+    """Reproduce fixed benchmark oracles; not timed code or a production dependency."""
+    with mp.workdps(60):
+        for n,curved in [(1,False),(2,False),(2,True),(6,False)]:
+            gamma = mat([['.1','.04'],['.04','-.05']]) if curved else mp.zeros(n)
+            p = Kernel(mp.zeros(n,1),mp.eye(n),mp.mpf('.3') if curved else 0,
+                       mp.matrix([mp.mpf('.2')]*n),gamma,mp.mpf(4))
+            q = Kernel(mp.zeros(n,1),mp.eye(n),mp.mpf('-.1') if curved else 0,
+                       mp.matrix([mp.mpf('-.2')]*n),mp.zeros(n),mp.mpf(4))
+            c = Comparison(p,q)
+            value,tail = c.series(128)
+            print('curved' if curved else 'linear',n,'distance',mp.nstr(-mp.log(value),40),
+                  'tail',mp.nstr(tail,8),flush=True)
+
+
 if __name__ == '__main__':
     main()
     scala_fixtures()
+    performance_fixtures()

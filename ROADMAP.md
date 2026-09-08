@@ -23,7 +23,7 @@ native elements, composition possibilities and missing first-class support.
 | --- | --- | --- | --- |
 | D0: distribution contracts | Initial circular contracts implemented; broader adoption remains | Shared parameter/support conventions, density/log-density tests, seeded RNG ownership and explicit inference compatibility | Circular contract tests and capability matrix; extend stable log-density support to existing distributions through a separate audit |
 | D1: circular foundation (`DIST-01`) | Integrated on main at `fea8b999`; CI passed | Circular angle handling and von Mises; reuse for later wrapped and spherical families | 16 new regressions, 179 modernization tests and executable examples pass; [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34138540587) |
-| D2: linear-angular joint models (`DIST-02`) | Through budgeted order comparison on main at CI-verified `4f90f815` | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
+| D2: linear-angular joint models (`DIST-02`) | Through guarded Bhattacharyya comparison on main at CI-verified `251f9540` | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
 | D3: common missing scalar/count families | Proposed next tranche | Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; bounded triangular/Kumaraswamy | Select a small representative set across `DIST-03` through `DIST-06`; demonstrate observation/inference, not only random generation |
 | D4: reusable constructions (`DIST-10`) | Proposed; start enabling pieces during D1-D3 | Correct transformations, truncation, mixtures and hurdle/zero-inflated laws | Jacobian/normalizer/mixed-measure checks; avoid one-off implementations of every derived name |
 | D5: multivariate, tail and matrix breadth | Wishlist; not scheduled | Multivariate t, joint counts, extreme-value, covariance/correlation and directional manifolds | Dedicated dimension/geometry/factorization and inference tests before specialized flavors |
@@ -74,16 +74,21 @@ This sequence is a proposed priority order, not a calendar estimate.
    and an analytic Fourier/Gaussian series avoid tensor-grid growth. Truncation bounds
    are derived, but cancellation and high-concentration efficiency require production
    safeguards; see the bounded implementation below.
-9. [Guarded Scala Bhattacharyya comparison](docs/GVM_BHATTACHARYYA.md): locally validated
-   on the development branch; remote CI/integration pending. Nonidentity comparisons
+9. [Guarded Scala Bhattacharyya comparison](docs/GVM_BHATTACHARYYA.md): integrated on main
+   at `251f9540`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34188404684). Nonidentity comparisons
    support concentrations through 50 and at most 32 linear dimensions, subject to
    conditioning/phase checks. Explicit status and optional distance keep unresolved
    results visible; truncation bounds and heuristic rounding estimates remain distinct.
    Acceptance: 16 focused Scala tests, all 297 modernization regressions across 23 suites,
    eight GVM examples, API generation and thin-library packaging. The six-dimensional
    matched-error example compares five harmonics with 31,250 tensor callbacks at a
-   1e-6-nat error target; this is not a measured wall-clock speedup. Next: measured
-   performance and broader concentration/error validation, not unchecked range expansion.
+   1e-6-nat error target. The follow-on [matched-accuracy timing study](docs/GVM_BHATTACHARYYA_PERFORMANCE.md)
+   is locally validated with four fixtures, 18 method combinations and three fresh JVMs:
+   about 326x faster than fresh tensor construction/evaluation in the six-dimensional case,
+   but a reused problem-specific scalar reduction is about 5.3x faster than the guarded call.
+   These are bounded workload results, not universal inference speedups. Eight report
+   validation tests and 13 high-precision research tests pass; study CI/integration pending.
+   Next: broader concentration/error validation, not unchecked range expansion.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;
    see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.

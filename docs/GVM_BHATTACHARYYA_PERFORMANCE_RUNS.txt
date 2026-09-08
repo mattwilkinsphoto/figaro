@@ -1,0 +1,522 @@
+GVM_ENV pid=58076 java=17.0.4 vm=OpenJDK 64-Bit Server VM os=Windows 11 arch=amd64 processors=32 maxHeap=6442450944 tolerance=1.0E-6 rounds=7 timed=true
+GVM_SERIES case=linear-1d harmonics=5 error=2.7303213787077674E-8
+GVM_ACCURACY case=linear-1d order=3 calls=6 error=3.788164063838334E-4 accepted=false
+GVM_ACCURACY case=linear-1d order=5 calls=10 error=2.7628216016511997E-6 accepted=false
+GVM_ACCURACY case=linear-1d order=7 calls=14 error=2.4064790438149686E-8 accepted=true
+GVM_ACCURACY case=linear-1d-reduced order=3 calls=6 error=3.788164063838334E-4 accepted=false
+GVM_ACCURACY case=linear-1d-reduced order=5 calls=10 error=2.7628216016511997E-6 accepted=false
+GVM_ACCURACY case=linear-1d-reduced order=7 calls=14 error=2.4064790438149686E-8 accepted=true
+GVM_METHOD case=linear-1d method=guarded work=5
+GVM_METHOD case=linear-1d method=tensor-build-evaluate work=14
+GVM_METHOD case=linear-1d method=tensor-reuse work=14
+GVM_METHOD case=linear-1d method=reduced-build-evaluate work=14
+GVM_METHOD case=linear-1d method=reduced-reuse work=14
+GVM_TIMING case=linear-1d method=guarded round=0 batch=1024 nsPerCall=16530.37109375
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=0 batch=512 nsPerCall=13670.1171875
+GVM_TIMING case=linear-1d method=tensor-reuse round=0 batch=4096 nsPerCall=2410.05859375
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=0 batch=2048 nsPerCall=13555.224609375
+GVM_TIMING case=linear-1d method=reduced-reuse round=0 batch=4096 nsPerCall=2617.96875
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=1 batch=512 nsPerCall=13575.390625
+GVM_TIMING case=linear-1d method=tensor-reuse round=1 batch=4096 nsPerCall=2178.5888671875
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=1 batch=2048 nsPerCall=13320.80078125
+GVM_TIMING case=linear-1d method=reduced-reuse round=1 batch=4096 nsPerCall=2333.056640625
+GVM_TIMING case=linear-1d method=guarded round=1 batch=1024 nsPerCall=12035.83984375
+GVM_TIMING case=linear-1d method=tensor-reuse round=2 batch=4096 nsPerCall=2632.9833984375
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=2 batch=2048 nsPerCall=12745.263671875
+GVM_TIMING case=linear-1d method=reduced-reuse round=2 batch=4096 nsPerCall=1909.716796875
+GVM_TIMING case=linear-1d method=guarded round=2 batch=1024 nsPerCall=9799.8046875
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=2 batch=512 nsPerCall=14268.9453125
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=3 batch=2048 nsPerCall=12870.21484375
+GVM_TIMING case=linear-1d method=reduced-reuse round=3 batch=4096 nsPerCall=1947.7294921875
+GVM_TIMING case=linear-1d method=guarded round=3 batch=1024 nsPerCall=8186.328125
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=3 batch=512 nsPerCall=12558.0078125
+GVM_TIMING case=linear-1d method=tensor-reuse round=3 batch=4096 nsPerCall=2099.3896484375
+GVM_TIMING case=linear-1d method=reduced-reuse round=4 batch=4096 nsPerCall=1908.9111328125
+GVM_TIMING case=linear-1d method=guarded round=4 batch=1024 nsPerCall=8305.76171875
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=4 batch=512 nsPerCall=12739.2578125
+GVM_TIMING case=linear-1d method=tensor-reuse round=4 batch=4096 nsPerCall=2271.630859375
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=4 batch=2048 nsPerCall=13105.76171875
+GVM_TIMING case=linear-1d method=guarded round=5 batch=1024 nsPerCall=6454.4921875
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=5 batch=512 nsPerCall=11603.90625
+GVM_TIMING case=linear-1d method=tensor-reuse round=5 batch=4096 nsPerCall=1554.00390625
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=5 batch=2048 nsPerCall=11448.4375
+GVM_TIMING case=linear-1d method=reduced-reuse round=5 batch=4096 nsPerCall=1357.32421875
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=6 batch=512 nsPerCall=11272.265625
+GVM_TIMING case=linear-1d method=tensor-reuse round=6 batch=4096 nsPerCall=1499.560546875
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=6 batch=2048 nsPerCall=11248.6328125
+GVM_TIMING case=linear-1d method=reduced-reuse round=6 batch=4096 nsPerCall=1371.09375
+GVM_TIMING case=linear-1d method=guarded round=6 batch=1024 nsPerCall=6690.52734375
+GVM_SERIES case=linear-2d harmonics=5 error=1.6127019997203007E-9
+GVM_ACCURACY case=linear-2d order=3 calls=18 error=4.771386417119078E-4 accepted=false
+GVM_ACCURACY case=linear-2d order=5 calls=50 error=2.3567313860856087E-6 accepted=false
+GVM_ACCURACY case=linear-2d order=7 calls=98 error=1.3517263974804905E-8 accepted=true
+GVM_ACCURACY case=linear-2d-reduced order=3 calls=6 error=0.0024825524183413605 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=5 calls=10 error=5.973201876456613E-5 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=7 calls=14 error=1.6747195913241475E-6 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=9 calls=18 error=5.313036631482415E-8 accepted=true
+GVM_METHOD case=linear-2d method=guarded work=5
+GVM_METHOD case=linear-2d method=tensor-build-evaluate work=98
+GVM_METHOD case=linear-2d method=tensor-reuse work=98
+GVM_METHOD case=linear-2d method=reduced-build-evaluate work=18
+GVM_METHOD case=linear-2d method=reduced-reuse work=18
+GVM_TIMING case=linear-2d method=guarded round=0 batch=2048 nsPerCall=8217.138671875
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=0 batch=1024 nsPerCall=21853.22265625
+GVM_TIMING case=linear-2d method=tensor-reuse round=0 batch=2048 nsPerCall=11908.154296875
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=0 batch=1024 nsPerCall=23177.24609375
+GVM_TIMING case=linear-2d method=reduced-reuse round=0 batch=4096 nsPerCall=1731.5185546875
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=1 batch=1024 nsPerCall=21633.203125
+GVM_TIMING case=linear-2d method=tensor-reuse round=1 batch=2048 nsPerCall=11757.71484375
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=1 batch=1024 nsPerCall=23085.7421875
+GVM_TIMING case=linear-2d method=reduced-reuse round=1 batch=4096 nsPerCall=1687.4755859375
+GVM_TIMING case=linear-2d method=guarded round=1 batch=2048 nsPerCall=8025.146484375
+GVM_TIMING case=linear-2d method=tensor-reuse round=2 batch=2048 nsPerCall=11967.236328125
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=2 batch=1024 nsPerCall=25403.61328125
+GVM_TIMING case=linear-2d method=reduced-reuse round=2 batch=4096 nsPerCall=1723.095703125
+GVM_TIMING case=linear-2d method=guarded round=2 batch=2048 nsPerCall=8076.318359375
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=2 batch=1024 nsPerCall=21725.87890625
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=3 batch=1024 nsPerCall=22956.4453125
+GVM_TIMING case=linear-2d method=reduced-reuse round=3 batch=4096 nsPerCall=1751.0009765625
+GVM_TIMING case=linear-2d method=guarded round=3 batch=2048 nsPerCall=7921.533203125
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=3 batch=1024 nsPerCall=21335.05859375
+GVM_TIMING case=linear-2d method=tensor-reuse round=3 batch=2048 nsPerCall=11672.705078125
+GVM_TIMING case=linear-2d method=reduced-reuse round=4 batch=4096 nsPerCall=1697.1435546875
+GVM_TIMING case=linear-2d method=guarded round=4 batch=2048 nsPerCall=7906.103515625
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=4 batch=1024 nsPerCall=21373.53515625
+GVM_TIMING case=linear-2d method=tensor-reuse round=4 batch=2048 nsPerCall=11680.810546875
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=4 batch=1024 nsPerCall=23086.03515625
+GVM_TIMING case=linear-2d method=guarded round=5 batch=2048 nsPerCall=8992.236328125
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=5 batch=1024 nsPerCall=21255.95703125
+GVM_TIMING case=linear-2d method=tensor-reuse round=5 batch=2048 nsPerCall=11716.943359375
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=5 batch=1024 nsPerCall=22932.12890625
+GVM_TIMING case=linear-2d method=reduced-reuse round=5 batch=4096 nsPerCall=1696.484375
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=6 batch=1024 nsPerCall=21271.6796875
+GVM_TIMING case=linear-2d method=tensor-reuse round=6 batch=2048 nsPerCall=11835.107421875
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=6 batch=1024 nsPerCall=22977.5390625
+GVM_TIMING case=linear-2d method=reduced-reuse round=6 batch=4096 nsPerCall=1722.0703125
+GVM_TIMING case=linear-2d method=guarded round=6 batch=2048 nsPerCall=7969.3359375
+GVM_SERIES case=curved-2d harmonics=5 error=3.205380516568823E-9
+GVM_ACCURACY case=curved-2d order=3 calls=18 error=2.727412831290965E-5 accepted=false
+GVM_ACCURACY case=curved-2d order=5 calls=50 error=9.874572897278222E-6 accepted=false
+GVM_ACCURACY case=curved-2d order=7 calls=98 error=1.6954283890702193E-7 accepted=true
+GVM_METHOD case=curved-2d method=guarded work=5
+GVM_METHOD case=curved-2d method=tensor-build-evaluate work=98
+GVM_METHOD case=curved-2d method=tensor-reuse work=98
+GVM_TIMING case=curved-2d method=guarded round=0 batch=4096 nsPerCall=8191.3330078125
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=0 batch=1024 nsPerCall=21469.140625
+GVM_TIMING case=curved-2d method=tensor-reuse round=0 batch=2048 nsPerCall=11713.4765625
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=1 batch=1024 nsPerCall=21629.8828125
+GVM_TIMING case=curved-2d method=tensor-reuse round=1 batch=2048 nsPerCall=12729.6875
+GVM_TIMING case=curved-2d method=guarded round=1 batch=4096 nsPerCall=8177.2216796875
+GVM_TIMING case=curved-2d method=tensor-reuse round=2 batch=2048 nsPerCall=11644.82421875
+GVM_TIMING case=curved-2d method=guarded round=2 batch=4096 nsPerCall=8135.7421875
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=2 batch=1024 nsPerCall=21445.01953125
+GVM_TIMING case=curved-2d method=guarded round=3 batch=4096 nsPerCall=8139.6240234375
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=3 batch=1024 nsPerCall=21621.2890625
+GVM_TIMING case=curved-2d method=tensor-reuse round=3 batch=2048 nsPerCall=11636.23046875
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=4 batch=1024 nsPerCall=24176.3671875
+GVM_TIMING case=curved-2d method=tensor-reuse round=4 batch=2048 nsPerCall=11757.470703125
+GVM_TIMING case=curved-2d method=guarded round=4 batch=4096 nsPerCall=8200.29296875
+GVM_TIMING case=curved-2d method=tensor-reuse round=5 batch=2048 nsPerCall=11701.953125
+GVM_TIMING case=curved-2d method=guarded round=5 batch=4096 nsPerCall=8185.1318359375
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=5 batch=1024 nsPerCall=21267.3828125
+GVM_TIMING case=curved-2d method=guarded round=6 batch=4096 nsPerCall=8135.2783203125
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=6 batch=1024 nsPerCall=21220.703125
+GVM_TIMING case=curved-2d method=tensor-reuse round=6 batch=2048 nsPerCall=12945.99609375
+GVM_SERIES case=linear-6d harmonics=5 error=1.9539925233402755E-14
+GVM_ACCURACY case=linear-6d order=3 calls=1458 error=3.718551357292932E-4 accepted=false
+GVM_ACCURACY case=linear-6d order=5 calls=31250 error=6.916906942211476E-7 accepted=true
+GVM_ACCURACY case=linear-6d-reduced order=3 calls=6 error=0.03395982246020157 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=5 calls=10 error=0.004044653574238555 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=7 calls=14 error=5.25100026448122E-4 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=9 calls=18 error=7.376013218668431E-5 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=13 calls=26 error=1.7686251588822088E-6 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=17 calls=34 error=5.193136654035868E-8 accepted=true
+GVM_METHOD case=linear-6d method=guarded work=5
+GVM_METHOD case=linear-6d method=tensor-build-evaluate work=31250
+GVM_METHOD case=linear-6d method=tensor-reuse work=31250
+GVM_METHOD case=linear-6d method=reduced-build-evaluate work=34
+GVM_METHOD case=linear-6d method=reduced-reuse work=34
+GVM_TIMING case=linear-6d method=guarded round=0 batch=2048 nsPerCall=20026.123046875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=0 batch=4 nsPerCall=5862475.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=0 batch=4 nsPerCall=5786625.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=0 batch=128 nsPerCall=160060.9375
+GVM_TIMING case=linear-6d method=reduced-reuse round=0 batch=4096 nsPerCall=3222.998046875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=1 batch=4 nsPerCall=5835575.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=1 batch=4 nsPerCall=5800050.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=1 batch=128 nsPerCall=160142.1875
+GVM_TIMING case=linear-6d method=reduced-reuse round=1 batch=4096 nsPerCall=3231.3232421875
+GVM_TIMING case=linear-6d method=guarded round=1 batch=2048 nsPerCall=19834.27734375
+GVM_TIMING case=linear-6d method=tensor-reuse round=2 batch=4 nsPerCall=5818900.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=2 batch=128 nsPerCall=159696.875
+GVM_TIMING case=linear-6d method=reduced-reuse round=2 batch=4096 nsPerCall=3246.8505859375
+GVM_TIMING case=linear-6d method=guarded round=2 batch=2048 nsPerCall=18399.853515625
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=2 batch=4 nsPerCall=5843400.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=3 batch=128 nsPerCall=160081.25
+GVM_TIMING case=linear-6d method=reduced-reuse round=3 batch=4096 nsPerCall=3276.2939453125
+GVM_TIMING case=linear-6d method=guarded round=3 batch=2048 nsPerCall=18665.91796875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=3 batch=4 nsPerCall=6386975.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=3 batch=4 nsPerCall=5827975.0
+GVM_TIMING case=linear-6d method=reduced-reuse round=4 batch=4096 nsPerCall=3229.1748046875
+GVM_TIMING case=linear-6d method=guarded round=4 batch=2048 nsPerCall=18712.548828125
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=4 batch=4 nsPerCall=5847050.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=4 batch=4 nsPerCall=5759675.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=4 batch=128 nsPerCall=160395.3125
+GVM_TIMING case=linear-6d method=guarded round=5 batch=2048 nsPerCall=19786.279296875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=5 batch=4 nsPerCall=5850100.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=5 batch=4 nsPerCall=5779450.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=5 batch=128 nsPerCall=160238.28125
+GVM_TIMING case=linear-6d method=reduced-reuse round=5 batch=4096 nsPerCall=3305.859375
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=6 batch=4 nsPerCall=5846700.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=6 batch=4 nsPerCall=5791675.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=6 batch=128 nsPerCall=159828.90625
+GVM_TIMING case=linear-6d method=reduced-reuse round=6 batch=4096 nsPerCall=3234.716796875
+GVM_TIMING case=linear-6d method=guarded round=6 batch=2048 nsPerCall=19133.447265625
+GVM_COMPLETE fixtures=4 methods=18 rounds=7 sinkFinite=true
+GVM_ENV pid=28308 java=17.0.4 vm=OpenJDK 64-Bit Server VM os=Windows 11 arch=amd64 processors=32 maxHeap=6442450944 tolerance=1.0E-6 rounds=7 timed=true
+GVM_SERIES case=linear-1d harmonics=5 error=2.7303213787077674E-8
+GVM_ACCURACY case=linear-1d order=3 calls=6 error=3.788164063838334E-4 accepted=false
+GVM_ACCURACY case=linear-1d order=5 calls=10 error=2.7628216016511997E-6 accepted=false
+GVM_ACCURACY case=linear-1d order=7 calls=14 error=2.4064790438149686E-8 accepted=true
+GVM_ACCURACY case=linear-1d-reduced order=3 calls=6 error=3.788164063838334E-4 accepted=false
+GVM_ACCURACY case=linear-1d-reduced order=5 calls=10 error=2.7628216016511997E-6 accepted=false
+GVM_ACCURACY case=linear-1d-reduced order=7 calls=14 error=2.4064790438149686E-8 accepted=true
+GVM_METHOD case=linear-1d method=guarded work=5
+GVM_METHOD case=linear-1d method=tensor-build-evaluate work=14
+GVM_METHOD case=linear-1d method=tensor-reuse work=14
+GVM_METHOD case=linear-1d method=reduced-build-evaluate work=14
+GVM_METHOD case=linear-1d method=reduced-reuse work=14
+GVM_TIMING case=linear-1d method=guarded round=0 batch=1024 nsPerCall=17465.8203125
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=0 batch=512 nsPerCall=40990.234375
+GVM_TIMING case=linear-1d method=tensor-reuse round=0 batch=4096 nsPerCall=2870.01953125
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=0 batch=512 nsPerCall=14951.953125
+GVM_TIMING case=linear-1d method=reduced-reuse round=0 batch=4096 nsPerCall=3136.962890625
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=1 batch=512 nsPerCall=17534.5703125
+GVM_TIMING case=linear-1d method=tensor-reuse round=1 batch=4096 nsPerCall=3222.4609375
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=1 batch=512 nsPerCall=14649.609375
+GVM_TIMING case=linear-1d method=reduced-reuse round=1 batch=4096 nsPerCall=2628.0029296875
+GVM_TIMING case=linear-1d method=guarded round=1 batch=1024 nsPerCall=10529.19921875
+GVM_TIMING case=linear-1d method=tensor-reuse round=2 batch=4096 nsPerCall=2883.6181640625
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=2 batch=512 nsPerCall=14291.796875
+GVM_TIMING case=linear-1d method=reduced-reuse round=2 batch=4096 nsPerCall=3126.3427734375
+GVM_TIMING case=linear-1d method=guarded round=2 batch=1024 nsPerCall=12195.80078125
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=2 batch=512 nsPerCall=15578.125
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=3 batch=512 nsPerCall=14729.1015625
+GVM_TIMING case=linear-1d method=reduced-reuse round=3 batch=4096 nsPerCall=3138.8916015625
+GVM_TIMING case=linear-1d method=guarded round=3 batch=1024 nsPerCall=9368.5546875
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=3 batch=512 nsPerCall=14597.8515625
+GVM_TIMING case=linear-1d method=tensor-reuse round=3 batch=4096 nsPerCall=2700.8056640625
+GVM_TIMING case=linear-1d method=reduced-reuse round=4 batch=4096 nsPerCall=3232.8857421875
+GVM_TIMING case=linear-1d method=guarded round=4 batch=1024 nsPerCall=7000.87890625
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=4 batch=512 nsPerCall=12471.875
+GVM_TIMING case=linear-1d method=tensor-reuse round=4 batch=4096 nsPerCall=1700.8056640625
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=4 batch=512 nsPerCall=12727.34375
+GVM_TIMING case=linear-1d method=guarded round=5 batch=1024 nsPerCall=6386.42578125
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=5 batch=512 nsPerCall=12574.21875
+GVM_TIMING case=linear-1d method=tensor-reuse round=5 batch=4096 nsPerCall=1614.94140625
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=5 batch=512 nsPerCall=12160.7421875
+GVM_TIMING case=linear-1d method=reduced-reuse round=5 batch=4096 nsPerCall=1813.427734375
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=6 batch=512 nsPerCall=12104.296875
+GVM_TIMING case=linear-1d method=tensor-reuse round=6 batch=4096 nsPerCall=1593.212890625
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=6 batch=512 nsPerCall=12114.2578125
+GVM_TIMING case=linear-1d method=reduced-reuse round=6 batch=4096 nsPerCall=1665.9423828125
+GVM_TIMING case=linear-1d method=guarded round=6 batch=1024 nsPerCall=6462.5
+GVM_SERIES case=linear-2d harmonics=5 error=1.6127019997203007E-9
+GVM_ACCURACY case=linear-2d order=3 calls=18 error=4.771386417119078E-4 accepted=false
+GVM_ACCURACY case=linear-2d order=5 calls=50 error=2.3567313860856087E-6 accepted=false
+GVM_ACCURACY case=linear-2d order=7 calls=98 error=1.3517263974804905E-8 accepted=true
+GVM_ACCURACY case=linear-2d-reduced order=3 calls=6 error=0.0024825524183413605 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=5 calls=10 error=5.973201876456613E-5 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=7 calls=14 error=1.6747195913241475E-6 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=9 calls=18 error=5.313036631482415E-8 accepted=true
+GVM_METHOD case=linear-2d method=guarded work=5
+GVM_METHOD case=linear-2d method=tensor-build-evaluate work=98
+GVM_METHOD case=linear-2d method=tensor-reuse work=98
+GVM_METHOD case=linear-2d method=reduced-build-evaluate work=18
+GVM_METHOD case=linear-2d method=reduced-reuse work=18
+GVM_TIMING case=linear-2d method=guarded round=0 batch=2048 nsPerCall=8591.30859375
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=0 batch=512 nsPerCall=22196.484375
+GVM_TIMING case=linear-2d method=tensor-reuse round=0 batch=2048 nsPerCall=11769.53125
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=0 batch=1024 nsPerCall=23474.31640625
+GVM_TIMING case=linear-2d method=reduced-reuse round=0 batch=4096 nsPerCall=2098.583984375
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=1 batch=512 nsPerCall=22045.703125
+GVM_TIMING case=linear-2d method=tensor-reuse round=1 batch=2048 nsPerCall=13558.984375
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=1 batch=1024 nsPerCall=23376.5625
+GVM_TIMING case=linear-2d method=reduced-reuse round=1 batch=4096 nsPerCall=2123.2666015625
+GVM_TIMING case=linear-2d method=guarded round=1 batch=2048 nsPerCall=8384.765625
+GVM_TIMING case=linear-2d method=tensor-reuse round=2 batch=2048 nsPerCall=11945.068359375
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=2 batch=1024 nsPerCall=23678.125
+GVM_TIMING case=linear-2d method=reduced-reuse round=2 batch=4096 nsPerCall=2138.96484375
+GVM_TIMING case=linear-2d method=guarded round=2 batch=2048 nsPerCall=8275.927734375
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=2 batch=512 nsPerCall=22230.46875
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=3 batch=1024 nsPerCall=23338.8671875
+GVM_TIMING case=linear-2d method=reduced-reuse round=3 batch=4096 nsPerCall=1991.8212890625
+GVM_TIMING case=linear-2d method=guarded round=3 batch=2048 nsPerCall=8194.189453125
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=3 batch=512 nsPerCall=22563.28125
+GVM_TIMING case=linear-2d method=tensor-reuse round=3 batch=2048 nsPerCall=12999.51171875
+GVM_TIMING case=linear-2d method=reduced-reuse round=4 batch=4096 nsPerCall=2030.5908203125
+GVM_TIMING case=linear-2d method=guarded round=4 batch=2048 nsPerCall=8226.46484375
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=4 batch=512 nsPerCall=21734.765625
+GVM_TIMING case=linear-2d method=tensor-reuse round=4 batch=2048 nsPerCall=11734.86328125
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=4 batch=1024 nsPerCall=23271.6796875
+GVM_TIMING case=linear-2d method=guarded round=5 batch=2048 nsPerCall=8137.20703125
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=5 batch=512 nsPerCall=21502.9296875
+GVM_TIMING case=linear-2d method=tensor-reuse round=5 batch=2048 nsPerCall=11694.970703125
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=5 batch=1024 nsPerCall=25561.62109375
+GVM_TIMING case=linear-2d method=reduced-reuse round=5 batch=4096 nsPerCall=2043.75
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=6 batch=512 nsPerCall=21417.96875
+GVM_TIMING case=linear-2d method=tensor-reuse round=6 batch=2048 nsPerCall=11918.896484375
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=6 batch=1024 nsPerCall=23457.32421875
+GVM_TIMING case=linear-2d method=reduced-reuse round=6 batch=4096 nsPerCall=2051.025390625
+GVM_TIMING case=linear-2d method=guarded round=6 batch=2048 nsPerCall=8217.96875
+GVM_SERIES case=curved-2d harmonics=5 error=3.205380516568823E-9
+GVM_ACCURACY case=curved-2d order=3 calls=18 error=2.727412831290965E-5 accepted=false
+GVM_ACCURACY case=curved-2d order=5 calls=50 error=9.874572897278222E-6 accepted=false
+GVM_ACCURACY case=curved-2d order=7 calls=98 error=1.6954283890702193E-7 accepted=true
+GVM_METHOD case=curved-2d method=guarded work=5
+GVM_METHOD case=curved-2d method=tensor-build-evaluate work=98
+GVM_METHOD case=curved-2d method=tensor-reuse work=98
+GVM_TIMING case=curved-2d method=guarded round=0 batch=4096 nsPerCall=8409.423828125
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=0 batch=1024 nsPerCall=21413.18359375
+GVM_TIMING case=curved-2d method=tensor-reuse round=0 batch=2048 nsPerCall=11684.9609375
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=1 batch=1024 nsPerCall=25441.30859375
+GVM_TIMING case=curved-2d method=tensor-reuse round=1 batch=2048 nsPerCall=11693.45703125
+GVM_TIMING case=curved-2d method=guarded round=1 batch=4096 nsPerCall=8343.9453125
+GVM_TIMING case=curved-2d method=tensor-reuse round=2 batch=2048 nsPerCall=11842.28515625
+GVM_TIMING case=curved-2d method=guarded round=2 batch=4096 nsPerCall=8410.9619140625
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=2 batch=1024 nsPerCall=21429.58984375
+GVM_TIMING case=curved-2d method=guarded round=3 batch=4096 nsPerCall=8899.755859375
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=3 batch=1024 nsPerCall=21576.46484375
+GVM_TIMING case=curved-2d method=tensor-reuse round=3 batch=2048 nsPerCall=12005.2734375
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=4 batch=1024 nsPerCall=21467.87109375
+GVM_TIMING case=curved-2d method=tensor-reuse round=4 batch=2048 nsPerCall=11881.787109375
+GVM_TIMING case=curved-2d method=guarded round=4 batch=4096 nsPerCall=8468.0908203125
+GVM_TIMING case=curved-2d method=tensor-reuse round=5 batch=2048 nsPerCall=13417.7734375
+GVM_TIMING case=curved-2d method=guarded round=5 batch=4096 nsPerCall=8407.9345703125
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=5 batch=1024 nsPerCall=21455.95703125
+GVM_TIMING case=curved-2d method=guarded round=6 batch=4096 nsPerCall=8435.3515625
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=6 batch=1024 nsPerCall=21474.70703125
+GVM_TIMING case=curved-2d method=tensor-reuse round=6 batch=2048 nsPerCall=11809.765625
+GVM_SERIES case=linear-6d harmonics=5 error=1.9539925233402755E-14
+GVM_ACCURACY case=linear-6d order=3 calls=1458 error=3.718551357292932E-4 accepted=false
+GVM_ACCURACY case=linear-6d order=5 calls=31250 error=6.916906942211476E-7 accepted=true
+GVM_ACCURACY case=linear-6d-reduced order=3 calls=6 error=0.03395982246020157 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=5 calls=10 error=0.004044653574238555 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=7 calls=14 error=5.25100026448122E-4 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=9 calls=18 error=7.376013218668431E-5 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=13 calls=26 error=1.7686251588822088E-6 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=17 calls=34 error=5.193136654035868E-8 accepted=true
+GVM_METHOD case=linear-6d method=guarded work=5
+GVM_METHOD case=linear-6d method=tensor-build-evaluate work=31250
+GVM_METHOD case=linear-6d method=tensor-reuse work=31250
+GVM_METHOD case=linear-6d method=reduced-build-evaluate work=34
+GVM_METHOD case=linear-6d method=reduced-reuse work=34
+GVM_TIMING case=linear-6d method=guarded round=0 batch=1024 nsPerCall=20071.38671875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=0 batch=4 nsPerCall=6257575.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=0 batch=4 nsPerCall=6197975.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=0 batch=128 nsPerCall=160535.9375
+GVM_TIMING case=linear-6d method=reduced-reuse round=0 batch=4096 nsPerCall=3685.205078125
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=1 batch=4 nsPerCall=6214075.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=1 batch=4 nsPerCall=6966450.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=1 batch=128 nsPerCall=160255.46875
+GVM_TIMING case=linear-6d method=reduced-reuse round=1 batch=4096 nsPerCall=3757.2509765625
+GVM_TIMING case=linear-6d method=guarded round=1 batch=1024 nsPerCall=19237.6953125
+GVM_TIMING case=linear-6d method=tensor-reuse round=2 batch=4 nsPerCall=6274350.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=2 batch=128 nsPerCall=161005.46875
+GVM_TIMING case=linear-6d method=reduced-reuse round=2 batch=4096 nsPerCall=3720.9228515625
+GVM_TIMING case=linear-6d method=guarded round=2 batch=1024 nsPerCall=19371.6796875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=2 batch=4 nsPerCall=6181600.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=3 batch=128 nsPerCall=159978.90625
+GVM_TIMING case=linear-6d method=reduced-reuse round=3 batch=4096 nsPerCall=4082.861328125
+GVM_TIMING case=linear-6d method=guarded round=3 batch=1024 nsPerCall=19345.41015625
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=3 batch=4 nsPerCall=6235125.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=3 batch=4 nsPerCall=6396150.0
+GVM_TIMING case=linear-6d method=reduced-reuse round=4 batch=4096 nsPerCall=3834.423828125
+GVM_TIMING case=linear-6d method=guarded round=4 batch=1024 nsPerCall=19756.0546875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=4 batch=4 nsPerCall=6175700.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=4 batch=4 nsPerCall=6517425.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=4 batch=128 nsPerCall=160901.5625
+GVM_TIMING case=linear-6d method=guarded round=5 batch=1024 nsPerCall=19489.2578125
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=5 batch=4 nsPerCall=6364650.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=5 batch=4 nsPerCall=6202900.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=5 batch=128 nsPerCall=160400.78125
+GVM_TIMING case=linear-6d method=reduced-reuse round=5 batch=4096 nsPerCall=3754.2236328125
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=6 batch=4 nsPerCall=6532400.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=6 batch=4 nsPerCall=6295425.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=6 batch=128 nsPerCall=160733.59375
+GVM_TIMING case=linear-6d method=reduced-reuse round=6 batch=4096 nsPerCall=3722.3876953125
+GVM_TIMING case=linear-6d method=guarded round=6 batch=1024 nsPerCall=19638.96484375
+GVM_COMPLETE fixtures=4 methods=18 rounds=7 sinkFinite=true
+GVM_ENV pid=56664 java=17.0.4 vm=OpenJDK 64-Bit Server VM os=Windows 11 arch=amd64 processors=32 maxHeap=6442450944 tolerance=1.0E-6 rounds=7 timed=true
+GVM_SERIES case=linear-1d harmonics=5 error=2.7303213787077674E-8
+GVM_ACCURACY case=linear-1d order=3 calls=6 error=3.788164063838334E-4 accepted=false
+GVM_ACCURACY case=linear-1d order=5 calls=10 error=2.7628216016511997E-6 accepted=false
+GVM_ACCURACY case=linear-1d order=7 calls=14 error=2.4064790438149686E-8 accepted=true
+GVM_ACCURACY case=linear-1d-reduced order=3 calls=6 error=3.788164063838334E-4 accepted=false
+GVM_ACCURACY case=linear-1d-reduced order=5 calls=10 error=2.7628216016511997E-6 accepted=false
+GVM_ACCURACY case=linear-1d-reduced order=7 calls=14 error=2.4064790438149686E-8 accepted=true
+GVM_METHOD case=linear-1d method=guarded work=5
+GVM_METHOD case=linear-1d method=tensor-build-evaluate work=14
+GVM_METHOD case=linear-1d method=tensor-reuse work=14
+GVM_METHOD case=linear-1d method=reduced-build-evaluate work=14
+GVM_METHOD case=linear-1d method=reduced-reuse work=14
+GVM_TIMING case=linear-1d method=guarded round=0 batch=1024 nsPerCall=14865.234375
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=0 batch=512 nsPerCall=15652.9296875
+GVM_TIMING case=linear-1d method=tensor-reuse round=0 batch=4096 nsPerCall=2963.5009765625
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=0 batch=512 nsPerCall=15244.140625
+GVM_TIMING case=linear-1d method=reduced-reuse round=0 batch=4096 nsPerCall=2914.6484375
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=1 batch=512 nsPerCall=15117.578125
+GVM_TIMING case=linear-1d method=tensor-reuse round=1 batch=4096 nsPerCall=3051.9775390625
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=1 batch=512 nsPerCall=14740.8203125
+GVM_TIMING case=linear-1d method=reduced-reuse round=1 batch=4096 nsPerCall=2964.599609375
+GVM_TIMING case=linear-1d method=guarded round=1 batch=1024 nsPerCall=10946.09375
+GVM_TIMING case=linear-1d method=tensor-reuse round=2 batch=4096 nsPerCall=3141.2841796875
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=2 batch=512 nsPerCall=15193.75
+GVM_TIMING case=linear-1d method=reduced-reuse round=2 batch=4096 nsPerCall=3552.5146484375
+GVM_TIMING case=linear-1d method=guarded round=2 batch=1024 nsPerCall=9970.80078125
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=2 batch=512 nsPerCall=15520.5078125
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=3 batch=512 nsPerCall=14826.3671875
+GVM_TIMING case=linear-1d method=reduced-reuse round=3 batch=4096 nsPerCall=2729.9560546875
+GVM_TIMING case=linear-1d method=guarded round=3 batch=1024 nsPerCall=8911.5234375
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=3 batch=512 nsPerCall=14643.1640625
+GVM_TIMING case=linear-1d method=tensor-reuse round=3 batch=4096 nsPerCall=2684.47265625
+GVM_TIMING case=linear-1d method=reduced-reuse round=4 batch=4096 nsPerCall=2680.5908203125
+GVM_TIMING case=linear-1d method=guarded round=4 batch=1024 nsPerCall=7084.27734375
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=4 batch=512 nsPerCall=13181.4453125
+GVM_TIMING case=linear-1d method=tensor-reuse round=4 batch=4096 nsPerCall=1769.189453125
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=4 batch=512 nsPerCall=12926.171875
+GVM_TIMING case=linear-1d method=guarded round=5 batch=1024 nsPerCall=6565.0390625
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=5 batch=512 nsPerCall=12600.9765625
+GVM_TIMING case=linear-1d method=tensor-reuse round=5 batch=4096 nsPerCall=1771.240234375
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=5 batch=512 nsPerCall=12645.8984375
+GVM_TIMING case=linear-1d method=reduced-reuse round=5 batch=4096 nsPerCall=1624.1455078125
+GVM_TIMING case=linear-1d method=tensor-build-evaluate round=6 batch=512 nsPerCall=12782.03125
+GVM_TIMING case=linear-1d method=tensor-reuse round=6 batch=4096 nsPerCall=1697.65625
+GVM_TIMING case=linear-1d method=reduced-build-evaluate round=6 batch=512 nsPerCall=12539.6484375
+GVM_TIMING case=linear-1d method=reduced-reuse round=6 batch=4096 nsPerCall=1629.58984375
+GVM_TIMING case=linear-1d method=guarded round=6 batch=1024 nsPerCall=6523.53515625
+GVM_SERIES case=linear-2d harmonics=5 error=1.6127019997203007E-9
+GVM_ACCURACY case=linear-2d order=3 calls=18 error=4.771386417119078E-4 accepted=false
+GVM_ACCURACY case=linear-2d order=5 calls=50 error=2.3567313860856087E-6 accepted=false
+GVM_ACCURACY case=linear-2d order=7 calls=98 error=1.3517263974804905E-8 accepted=true
+GVM_ACCURACY case=linear-2d-reduced order=3 calls=6 error=0.0024825524183413605 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=5 calls=10 error=5.973201876456613E-5 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=7 calls=14 error=1.6747195913241475E-6 accepted=false
+GVM_ACCURACY case=linear-2d-reduced order=9 calls=18 error=5.313036631482415E-8 accepted=true
+GVM_METHOD case=linear-2d method=guarded work=5
+GVM_METHOD case=linear-2d method=tensor-build-evaluate work=98
+GVM_METHOD case=linear-2d method=tensor-reuse work=98
+GVM_METHOD case=linear-2d method=reduced-build-evaluate work=18
+GVM_METHOD case=linear-2d method=reduced-reuse work=18
+GVM_TIMING case=linear-2d method=guarded round=0 batch=2048 nsPerCall=8811.767578125
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=0 batch=512 nsPerCall=23041.015625
+GVM_TIMING case=linear-2d method=tensor-reuse round=0 batch=2048 nsPerCall=12396.728515625
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=0 batch=1024 nsPerCall=23367.87109375
+GVM_TIMING case=linear-2d method=reduced-reuse round=0 batch=4096 nsPerCall=1901.1962890625
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=1 batch=512 nsPerCall=21971.875
+GVM_TIMING case=linear-2d method=tensor-reuse round=1 batch=2048 nsPerCall=13378.759765625
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=1 batch=1024 nsPerCall=23491.796875
+GVM_TIMING case=linear-2d method=reduced-reuse round=1 batch=4096 nsPerCall=1890.9912109375
+GVM_TIMING case=linear-2d method=guarded round=1 batch=2048 nsPerCall=8233.154296875
+GVM_TIMING case=linear-2d method=tensor-reuse round=2 batch=2048 nsPerCall=12320.361328125
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=2 batch=1024 nsPerCall=23371.77734375
+GVM_TIMING case=linear-2d method=reduced-reuse round=2 batch=4096 nsPerCall=1923.6572265625
+GVM_TIMING case=linear-2d method=guarded round=2 batch=2048 nsPerCall=8172.802734375
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=2 batch=512 nsPerCall=22055.859375
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=3 batch=1024 nsPerCall=23241.30859375
+GVM_TIMING case=linear-2d method=reduced-reuse round=3 batch=4096 nsPerCall=1881.2255859375
+GVM_TIMING case=linear-2d method=guarded round=3 batch=2048 nsPerCall=8145.99609375
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=3 batch=512 nsPerCall=26873.828125
+GVM_TIMING case=linear-2d method=tensor-reuse round=3 batch=2048 nsPerCall=12160.302734375
+GVM_TIMING case=linear-2d method=reduced-reuse round=4 batch=4096 nsPerCall=2039.4287109375
+GVM_TIMING case=linear-2d method=guarded round=4 batch=2048 nsPerCall=8106.298828125
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=4 batch=512 nsPerCall=22674.609375
+GVM_TIMING case=linear-2d method=tensor-reuse round=4 batch=2048 nsPerCall=12175.29296875
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=4 batch=1024 nsPerCall=23329.58984375
+GVM_TIMING case=linear-2d method=guarded round=5 batch=2048 nsPerCall=8106.640625
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=5 batch=512 nsPerCall=22450.0
+GVM_TIMING case=linear-2d method=tensor-reuse round=5 batch=2048 nsPerCall=13303.076171875
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=5 batch=1024 nsPerCall=23487.20703125
+GVM_TIMING case=linear-2d method=reduced-reuse round=5 batch=4096 nsPerCall=1896.19140625
+GVM_TIMING case=linear-2d method=tensor-build-evaluate round=6 batch=512 nsPerCall=22419.140625
+GVM_TIMING case=linear-2d method=tensor-reuse round=6 batch=2048 nsPerCall=12191.259765625
+GVM_TIMING case=linear-2d method=reduced-build-evaluate round=6 batch=1024 nsPerCall=23267.28515625
+GVM_TIMING case=linear-2d method=reduced-reuse round=6 batch=4096 nsPerCall=1896.533203125
+GVM_TIMING case=linear-2d method=guarded round=6 batch=2048 nsPerCall=8239.794921875
+GVM_SERIES case=curved-2d harmonics=5 error=3.205380516568823E-9
+GVM_ACCURACY case=curved-2d order=3 calls=18 error=2.727412831290965E-5 accepted=false
+GVM_ACCURACY case=curved-2d order=5 calls=50 error=9.874572897278222E-6 accepted=false
+GVM_ACCURACY case=curved-2d order=7 calls=98 error=1.6954283890702193E-7 accepted=true
+GVM_METHOD case=curved-2d method=guarded work=5
+GVM_METHOD case=curved-2d method=tensor-build-evaluate work=98
+GVM_METHOD case=curved-2d method=tensor-reuse work=98
+GVM_TIMING case=curved-2d method=guarded round=0 batch=4096 nsPerCall=8275.6103515625
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=0 batch=1024 nsPerCall=21956.73828125
+GVM_TIMING case=curved-2d method=tensor-reuse round=0 batch=2048 nsPerCall=13333.251953125
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=1 batch=1024 nsPerCall=21990.72265625
+GVM_TIMING case=curved-2d method=tensor-reuse round=1 batch=2048 nsPerCall=12102.1484375
+GVM_TIMING case=curved-2d method=guarded round=1 batch=4096 nsPerCall=8289.501953125
+GVM_TIMING case=curved-2d method=tensor-reuse round=2 batch=2048 nsPerCall=12100.537109375
+GVM_TIMING case=curved-2d method=guarded round=2 batch=4096 nsPerCall=8309.228515625
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=2 batch=1024 nsPerCall=24312.98828125
+GVM_TIMING case=curved-2d method=guarded round=3 batch=4096 nsPerCall=8333.9111328125
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=3 batch=1024 nsPerCall=21896.19140625
+GVM_TIMING case=curved-2d method=tensor-reuse round=3 batch=2048 nsPerCall=12101.46484375
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=4 batch=1024 nsPerCall=22108.3984375
+GVM_TIMING case=curved-2d method=tensor-reuse round=4 batch=2048 nsPerCall=12117.822265625
+GVM_TIMING case=curved-2d method=guarded round=4 batch=4096 nsPerCall=9087.6708984375
+GVM_TIMING case=curved-2d method=tensor-reuse round=5 batch=2048 nsPerCall=12122.16796875
+GVM_TIMING case=curved-2d method=guarded round=5 batch=4096 nsPerCall=8256.25
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=5 batch=1024 nsPerCall=21856.73828125
+GVM_TIMING case=curved-2d method=guarded round=6 batch=4096 nsPerCall=8302.5390625
+GVM_TIMING case=curved-2d method=tensor-build-evaluate round=6 batch=1024 nsPerCall=21952.1484375
+GVM_TIMING case=curved-2d method=tensor-reuse round=6 batch=2048 nsPerCall=13166.943359375
+GVM_SERIES case=linear-6d harmonics=5 error=1.9539925233402755E-14
+GVM_ACCURACY case=linear-6d order=3 calls=1458 error=3.718551357292932E-4 accepted=false
+GVM_ACCURACY case=linear-6d order=5 calls=31250 error=6.916906942211476E-7 accepted=true
+GVM_ACCURACY case=linear-6d-reduced order=3 calls=6 error=0.03395982246020157 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=5 calls=10 error=0.004044653574238555 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=7 calls=14 error=5.25100026448122E-4 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=9 calls=18 error=7.376013218668431E-5 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=13 calls=26 error=1.7686251588822088E-6 accepted=false
+GVM_ACCURACY case=linear-6d-reduced order=17 calls=34 error=5.193136654035868E-8 accepted=true
+GVM_METHOD case=linear-6d method=guarded work=5
+GVM_METHOD case=linear-6d method=tensor-build-evaluate work=31250
+GVM_METHOD case=linear-6d method=tensor-reuse work=31250
+GVM_METHOD case=linear-6d method=reduced-build-evaluate work=34
+GVM_METHOD case=linear-6d method=reduced-reuse work=34
+GVM_TIMING case=linear-6d method=guarded round=0 batch=2048 nsPerCall=19112.548828125
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=0 batch=4 nsPerCall=6477875.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=0 batch=4 nsPerCall=7241175.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=0 batch=128 nsPerCall=164800.0
+GVM_TIMING case=linear-6d method=reduced-reuse round=0 batch=4096 nsPerCall=3602.4658203125
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=1 batch=4 nsPerCall=6424975.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=1 batch=4 nsPerCall=6399950.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=1 batch=128 nsPerCall=160245.3125
+GVM_TIMING case=linear-6d method=reduced-reuse round=1 batch=4096 nsPerCall=3588.18359375
+GVM_TIMING case=linear-6d method=guarded round=1 batch=2048 nsPerCall=19682.03125
+GVM_TIMING case=linear-6d method=tensor-reuse round=2 batch=4 nsPerCall=6750750.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=2 batch=128 nsPerCall=160867.1875
+GVM_TIMING case=linear-6d method=reduced-reuse round=2 batch=4096 nsPerCall=3540.6005859375
+GVM_TIMING case=linear-6d method=guarded round=2 batch=2048 nsPerCall=18985.15625
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=2 batch=4 nsPerCall=6494200.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=3 batch=128 nsPerCall=160585.15625
+GVM_TIMING case=linear-6d method=reduced-reuse round=3 batch=4096 nsPerCall=3554.4189453125
+GVM_TIMING case=linear-6d method=guarded round=3 batch=2048 nsPerCall=19141.11328125
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=3 batch=4 nsPerCall=6586450.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=3 batch=4 nsPerCall=6419950.0
+GVM_TIMING case=linear-6d method=reduced-reuse round=4 batch=4096 nsPerCall=3573.2421875
+GVM_TIMING case=linear-6d method=guarded round=4 batch=2048 nsPerCall=19096.875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=4 batch=4 nsPerCall=6608500.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=4 batch=4 nsPerCall=6463025.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=4 batch=128 nsPerCall=160325.0
+GVM_TIMING case=linear-6d method=guarded round=5 batch=2048 nsPerCall=19027.5390625
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=5 batch=4 nsPerCall=6597000.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=5 batch=4 nsPerCall=6395550.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=5 batch=128 nsPerCall=160419.53125
+GVM_TIMING case=linear-6d method=reduced-reuse round=5 batch=4096 nsPerCall=3878.1982421875
+GVM_TIMING case=linear-6d method=tensor-build-evaluate round=6 batch=4 nsPerCall=6526450.0
+GVM_TIMING case=linear-6d method=tensor-reuse round=6 batch=4 nsPerCall=6490025.0
+GVM_TIMING case=linear-6d method=reduced-build-evaluate round=6 batch=128 nsPerCall=161375.0
+GVM_TIMING case=linear-6d method=reduced-reuse round=6 batch=4096 nsPerCall=3586.865234375
+GVM_TIMING case=linear-6d method=guarded round=6 batch=2048 nsPerCall=19170.99609375
+GVM_COMPLETE fixtures=4 methods=18 rounds=7 sinkFinite=true

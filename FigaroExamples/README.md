@@ -173,3 +173,11 @@ Example: `VectorSliceSamplingExample.main(Array.empty)`.
 `HighDimensionalSamplingValidation.main(args: Array[String]): Unit` runs `Array("check")` controls or accepts repetitions (20, positive), a per-chain density-evaluation cap (300000, 20000-1000000 and divisible by four), and first round (0, nonnegative). Example: `HighDimensionalSamplingValidation.main(Array("1", "20000"))`. It returns Unit and prints quoted CSV for GPSS/quantile samplers across six targets at dimensions 8 and 32. Invalid arguments throw; model/numerical/search failures are explicit failed rows; interruption aborts. A successful process exit is not proof of precision or successful execution of every chain. See the [full API, protocol, reproduction examples, and limitations](../docs/SAMPLING_HIGH_DIMENSIONAL.md). All kernels remain private and no production API changes.
 
 [Library module](../Figaro/README.md) implements the APIs; [build guide](../docs/BUILDING.md) explains tests and documentation generation; [migration guide](../docs/MIGRATION.md) explains changed syntax, dependencies, and remaining risks.
+
+`GaussVonMisesBhattacharyyaPerformance.main(args: Array[String]): Unit` accepts
+`Array("check")` for untimed accuracy checks or `Array("measure", "7")` for timings
+(optional rounds 3–31, default 7). It prints work/error records and optional nanoseconds;
+invalid arguments, unresolved comparisons or failed accuracy throw. Example:
+`GaussVonMisesBhattacharyyaPerformance.main(Array("check"))`. See the
+[matched-accuracy study](../docs/GVM_BHATTACHARYYA_PERFORMANCE.md) for three workflows,
+fresh-JVM commands, full argument/output contracts, results and counterexamples.

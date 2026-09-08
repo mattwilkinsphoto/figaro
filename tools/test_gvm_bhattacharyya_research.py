@@ -134,6 +134,27 @@ class BhattacharyyaResearchTest(unittest.TestCase):
             self.assertGreater(abs(value/exact-1),10)
             self.assertLess(tail,mp.mpf('1e-150'))
 
+    def test_performance_linear_projection_and_curved_oracles(self):
+        for n,expected in [(1,'.06387735648997029028485409595318461855683'),
+                           (2,'.1192948144207666012358738093531004731091'),
+                           (6,'.2886679589491771038675967423398820798992')]:
+            p = Kernel(mp.zeros(n,1),mp.eye(n),0,mp.matrix([mp.mpf('.2')]*n),mp.zeros(n),mp.mpf(4))
+            q = Kernel(mp.zeros(n,1),mp.eye(n),0,mp.matrix([mp.mpf('-.2')]*n),mp.zeros(n),mp.mpf(4))
+            c = Comparison(p,q)
+            value,_ = c.series(64)
+            self.close(-mp.log(value),mp.mpf(expected),'1e-39')
+            reduced = Comparison(scalar(beta=mp.mpf('.2')*mp.sqrt(n),kappa=4),
+                                 scalar(beta=-mp.mpf('.2')*mp.sqrt(n),kappa=4))
+            self.close(value,reduced.series(64)[0])
+            self.close(value,reduced.quadrature(64),'1e-14')
+        p = Kernel(mp.zeros(2,1),mp.eye(2),mp.mpf('.3'),mat([['.2'],['.2']]),
+                   mat([['.1','.04'],['.04','-.05']]),mp.mpf(4))
+        q = Kernel(mp.zeros(2,1),mp.eye(2),mp.mpf('-.1'),mat([['-.2'],['-.2']]),mp.zeros(2),mp.mpf(4))
+        c = Comparison(p,q)
+        value,_ = c.series(64)
+        self.close(-mp.log(value),mp.mpf('.1727350009432398629118580202897124128865'),'1e-39')
+        self.close(value,c.quadrature(32),'1e-12')
+
     def test_budgets_and_basic_invalid_dimensions(self):
         c = Comparison(*self.curved())
         for terms in [-1,1001,1.5,True]:

@@ -28,7 +28,7 @@ and special cases attached to their family instead of creating duplicate impleme
 | ID / priority | Family and current expansion status | First useful capability | Later flavors / shared work |
 | --- | --- | --- | --- |
 | DIST-01 / P0 | Circular von Mises native and locally validated; other directional laws researched | [Circular von Mises, angle conventions and circular summaries](docs/VON_MISES.md) | Wrapped normal/Cauchy and other wraps; then von Mises-Fisher, Kent and Bingham with sphere/axis-aware contracts |
-| DIST-02 / P0 | Joint linear-angular; through budgeted order comparison integrated on main at CI-verified `4f90f815` | [Fixed-kernel Horwood-Poore Gauss-von Mises](docs/GAUSS_VON_MISES.md) using DIST-01 | Mardia-Sutton, GVM mixtures, multiple angles and newer generalized GVM variants; separate quadrature/uncertainty-propagation research and application-level review, not an automatic filtering claim |
+| DIST-02 / P0 | Joint linear-angular; through guarded Bhattacharyya comparison integrated on main at CI-verified `251f9540` | [Fixed-kernel Horwood-Poore Gauss-von Mises](docs/GAUSS_VON_MISES.md) using DIST-01 | Mardia-Sutton, GVM mixtures, multiple angles and newer generalized GVM variants; separate quadrature/uncertainty-propagation research and application-level review, not an automatic filtering claim |
 | DIST-03 / P1 | Real-line location/scale and heavy tails; wishlist, Normal native | Student t, Cauchy and Laplace | Logistic, skew/noncentral variants, generalized normal, stable and hyperbolic families |
 | DIST-04 / P1 | Finite choices and count laws; partially native | Negative binomial and hypergeometric with explicit count conventions | Overdispersion, beta mixtures, heterogeneous Bernoulli sums, noncentral and zero-truncated flavors |
 | DIST-05 / P1 | Positive-valued scale/lifetime laws; partially native | Lognormal and Weibull; expose reusable Gamma special cases | Inverse Gaussian, Rayleigh/Rice/Nakagami, generalized Gamma, fatigue-life and survival variants |
@@ -198,13 +198,15 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   total callback-budget preflight, per-output tolerance flags and directional changes.
   Explicit false-agreement tests prevent treating these diagnostics as certified error
   bounds or automatic stopping criteria. No new sampler or parallel execution mode.
-- **Bhattacharyya divergence — bounded Scala API locally validated; CI/integration pending:**
+- **Bhattacharyya divergence — bounded Scala API on main at CI-verified `251f9540`:**
   [Exact angular reduction and Fourier/Gaussian series](docs/GVM_BHATTACHARYYA_RESEARCH.md)
   with 12 research tests and passing CI at `b5da340c`, independent positive integration
   and an analytic truncation bound. The [guarded Scala API](docs/GVM_BHATTACHARYYA.md)
   now adds scaled coefficient evaluation, exact reductions and explicit unresolved
   outcomes, initially for nonidentity concentrations through 50 and dimensions through
-  32. Promising non-tensor work counts, not a measured speedup. Wider concentration
+  32. A [matched-accuracy timing study](docs/GVM_BHATTACHARYYA_PERFORMANCE.md) now records
+  substantial six-dimensional tensor-grid savings and faster reduced/reused counterexamples;
+  study CI/integration remains pending. Wider concentration
   support and rigorous rounding-error certification remain separate work.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional

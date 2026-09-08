@@ -1,14 +1,14 @@
 # Joint Gauss-von Mises: development preview
 
-Status: the fixed joint kernel and extensions through [budgeted order comparison](GVM_QUADRATURE_COMPARISON.md)
-are on main at `4f90f815`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34181640610).
+Status: the fixed joint kernel and extensions through [guarded Bhattacharyya comparison](GVM_BHATTACHARYYA.md)
+are on main at `251f9540`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34188404684).
 **Standalone publication was approved by the maintainer on 2026-09-07.** This is not
 a tagged release or replacement for the RC1 bundle. The circular foundation was integrated earlier
 at `fea8b999`.
 
-The development branch additionally contains the first [guarded Bhattacharyya API](GVM_BHATTACHARYYA.md),
-with local acceptance and separate remote CI/integration gates. Its numerical limits
-are narrower than the fixed GVM kernel's limits.
+The development branch additionally contains a [matched-accuracy performance study](GVM_BHATTACHARYYA_PERFORMANCE.md),
+with local acceptance and separate remote CI/integration gates. The guarded API's
+numerical limits remain narrower than the fixed GVM kernel's limits.
 
 ## Overview
 

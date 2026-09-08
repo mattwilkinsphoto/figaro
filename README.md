@@ -55,6 +55,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [GVM order-comparison diagnostics](docs/GVM_QUADRATURE_COMPARISON.md): budgeted four-corner Gaussian/angular refinement checks, with per-output sensitivity and explicit false-agreement examples.
 - [GVM Bhattacharyya research](docs/GVM_BHATTACHARYYA_RESEARCH.md): tested numerical-method assessment and remaining production gates; not a public API.
 - [Guarded GVM Bhattacharyya API](docs/GVM_BHATTACHARYYA.md): symmetric fixed-law comparison with exact reductions, bounded Fourier work and explicit unresolved outcomes; initial concentration limit 50.
+- [GVM matched-accuracy timings](docs/GVM_BHATTACHARYYA_PERFORMANCE.md): measured tensor-grid savings, fresh/reused rule comparisons and faster problem-specific reduction counterexamples.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.
