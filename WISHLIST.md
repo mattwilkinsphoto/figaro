@@ -185,11 +185,14 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   [Log-density and squared-score derivatives](docs/GVM_GRADIENTS.md), in physical
   coordinates and per radian. Parameter gradients, Hessians and gradient-based inference
   algorithms are not implied.
-- **Third-order sparse quadrature — locally validated, remote CI/integration pending:**
+- **Third-order sparse quadrature — on main at CI-verified `b06e957f`:**
   [Scalar/vector expectations](docs/GVM_QUADRATURE.md) with 2n+3 signed-weight nodes,
   a specified canonical exactness class and explicit failure examples. No automatic
-  error bound or refinement. Higher-order/positive-weight reference methods and
-  accuracy-versus-cost comparisons remain follow-on work, not a filtering implementation.
+  error bound or refinement; not a filtering implementation.
+- **Positive-weight tensor reference — locally validated, remote CI/integration pending:**
+  [Adjustable Gaussian/angular order](docs/GVM_TENSOR_QUADRATURE.md), streamed points,
+  exponential callback-budget guard and analytic accuracy-versus-cost cases. Positivity
+  is not accuracy; automatic order comparison remains follow-on work.
 - **Bhattacharyya divergence — research wishlist, lower priority:** symmetric comparison
   of complete GVM distributions. Assess analytic angular integration plus a controlled
   numerical linear integral; validate Gaussian reductions, symmetry and identical laws.

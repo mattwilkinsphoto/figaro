@@ -228,7 +228,7 @@ are integrated on main at CI-verified `df5a7bf4`. [Finite-concentration score th
 are on main at CI-verified `755eb425`, with independent calibration tests.
 [State gradients](GVM_GRADIENTS.md) are on main at CI-verified `141dcc15`.
 Additional conditionals and parameter gradients remain separate increments. [Third-order
-sparse quadrature](GVM_QUADRATURE.md) is locally validated with explicit approximation
+sparse quadrature](GVM_QUADRATURE.md) is on main at CI-verified `b06e957f`, with explicit approximation
 and negative-weight failure cases; it does not by itself validate divergence/entropy
 integration. No fusion or propagation scope is added.
 

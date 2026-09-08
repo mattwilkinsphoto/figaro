@@ -18,9 +18,9 @@ guarantee.** Use analytic moments when available; otherwise validate the particu
 function and parameter range against independent integration or Monte Carlo before
 relying on this low-cost rule. It does not accelerate existing inference automatically.
 
-Status: source-development preview on `modernize/gauss-von-mises`, with separate
-remote CI and main-integration gates. The preceding gradient milestone is on main at
-`141dcc15`, with [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34177381982).
+Status: source-development preview integrated on main at `b06e957f`, with
+[passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34178437678).
+Later extensions retain separate remote CI and main-integration gates.
 Existing RC1 binaries are unchanged.
 
 ## Quick start in three steps
@@ -240,13 +240,14 @@ overflow, cancellation and concurrent reuse. The optional
 [reference script](../tools/gauss_von_mises_quadrature_reference.py) uses `mpmath==1.3.0`
 outside the Figaro runtime; run it with `python -B`.
 
-Check the exact commit's [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
-before declaring remote validation or main integration. Whole-library historical-suite
+The milestone passed [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34178437678)
+at `b06e957f` and was integrated on main. Whole-library historical-suite
 limits and existing release artifacts are unchanged.
 
-Next quadrature work should provide a higher-order or positive-weight reference method
-and compare accuracy versus function-evaluation cost, before using general numerical
-expectations inside further divergence/entropy APIs. Bhattacharyya divergence and mutual
+An adjustable-order [positive-weight tensor reference](GVM_TENSOR_QUADRATURE.md) is now
+locally validated on the development branch with accuracy-versus-callback-cost cases.
+It has exponential cost and is not an error certificate. Further validation is required
+before using numerical expectations inside divergence/entropy APIs. Bhattacharyya divergence and mutual
 information remain separate lower-priority research; this rule alone does not validate them.
 
 Related: [joint GVM](GAUSS_VON_MISES.md), [analytic moments](GVM_MOMENTS.md),

@@ -51,6 +51,7 @@ That coordinate resolves only after local publication, unless you separately pub
 - [GVM score calibration](docs/GVM_SCORE_CALIBRATION.md): finite-concentration probabilities and squared-score thresholds, with explicit comparisons against the chi-square approximation.
 - [GVM state gradients](docs/GVM_GRADIENTS.md): analytic log-density and squared-score sensitivities in physical coordinates, with finite-difference comparisons and directional examples.
 - [GVM sparse quadrature](docs/GVM_QUADRATURE.md): deterministic expectations with 2n+3 function evaluations, including exactness limits, negative weights and analytic/Monte Carlo comparisons.
+- [GVM positive-weight reference](docs/GVM_TENSOR_QUADRATURE.md): adjustable-order streamed tensor expectations, with explicit accuracy-versus-cost comparisons and exponential node-budget guards.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.

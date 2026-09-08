@@ -127,6 +127,17 @@ final class GaussVonMisesDistribution private (
   def thirdOrderQuadrature(maxNodes: Int = 1001): GaussVonMisesQuadrature =
     GaussVonMisesQuadrature.thirdOrder(this,maxNodes)
 
+  /** Positive-weight tensor expectation reference; callback cost grows exponentially in dimension.
+    * @param gaussianOrder points per linear coordinate in [1,32], default 5
+    * @param angularOrder angular points in [2,256], default 64
+    * @param maxNodes callback-count guard in [1,1000000], default 100000
+    * @return immutable streamed rule; angular resolution is checked, general integration error is not certified
+    * @example `kernel.tensorQuadrature(9, 64).expectation(p => math.cos(p.angle))`
+    */
+  def tensorQuadrature(gaussianOrder: Int=5, angularOrder: Int=64,
+    maxNodes: Int=100000): GaussVonMisesTensorQuadrature =
+    GaussVonMisesTensorQuadrature(this,gaussianOrder,angularOrder,maxNodes)
+
   /** Gaussian marginal log density, using a triangular solve rather than an inverse.
     * @param linear finite vector of the configured dimension
     * @return log density per linear-coordinate volume; extreme tails may return -Infinity

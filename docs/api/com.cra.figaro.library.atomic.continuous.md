@@ -25643,6 +25643,30 @@ Invocation template:
 receiver.scoreDistribution(absoluteTolerance, maxEvaluations)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.tensorQuadrature ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#tensorQuadrature-fffffd1b)
+
+```scala
+def tensorQuadrature(gaussianOrder: Int = ..., angularOrder: Int = ..., maxNodes: Int = ...): GaussVonMisesTensorQuadrature
+```
+
+Positive-weight tensor expectation reference; callback cost grows exponentially in dimension.
+
+Type parameters: none.
+
+Parameters, list 1: `` gaussianOrder: Int = ... ``; `` angularOrder: Int = ... ``; `` maxNodes: Int = ... ``.
+
+Returns: `` GaussVonMisesTensorQuadrature ``.
+
+Source contract/attributes: Positive-weight tensor expectation reference; callback cost grows exponentially in dimension. Value parameters angularOrder angular points in [2,256], default 64 gaussianOrder points per linear coordinate in [1,32], default 5 maxNodes callback-count guard in [1,1000000], default 100000 Attributes Returns immutable streamed rule; angular resolution is checked, general integration error is not certified Example kernel.tensorQuadrature(9, 64).expectation(p => math.cos(p.angle))
+
+Invocation template:
+
+```scala
+receiver.tensorQuadrature(gaussianOrder, angularOrder, maxNodes)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.thirdOrderQuadrature ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#thirdOrderQuadrature-9c2)
@@ -25955,6 +25979,80 @@ Invocation template:
 
 ```scala
 receiver.survivalEstimate(score)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesTensorQuadrature.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesTensorQuadrature$.html#apply-606)
+
+```scala
+def apply(kernel: GaussVonMisesDistribution, gaussianOrder: Int = ..., angularOrder: Int = ..., maxNodes: Int = ...): GaussVonMisesTensorQuadrature
+```
+
+Build an adjustable-order positive-weight reference; does not automatically refine.
+
+Type parameters: none.
+
+Parameters, list 1: `` kernel: GaussVonMisesDistribution ``; `` gaussianOrder: Int = ... ``; `` angularOrder: Int = ... ``; `` maxNodes: Int = ... ``.
+
+Returns: `` GaussVonMisesTensorQuadrature ``.
+
+Source contract/attributes: Build an adjustable-order positive-weight reference; does not automatically refine. Value parameters angularOrder points on the angular interval in [2,256], default 64 gaussianOrder points per Gaussian coordinate in [1,32], default 5 kernel non-null fixed GVM maxNodes callback-count guard in [1,1000000], default 100000; must cover angularOrder*gaussianOrder^dimension Attributes Returns immutable streamed rule; rejects angular normalization error above 1e-8 Example GaussVonMisesTensorQuadrature(kernel, 9, 64).expectation(p => math.cos(p.angle))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesTensorQuadrature.apply(kernel, gaussianOrder, angularOrder, maxNodes)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesTensorQuadrature.expectation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesTensorQuadrature.html#expectation-caa)
+
+```scala
+def expectation(f: LinearAngular => Double): Double
+```
+
+Approximate a scalar expectation using nonnegative normalized product weights.
+
+Type parameters: none.
+
+Parameters, list 1: `` f: LinearAngular => Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Approximate a scalar expectation using nonnegative normalized product weights. Value parameters f non-null deterministic callback with finite output at every point Attributes Returns compensated sum; not an error-certified integral; tiny products may underflow Example rule.expectation(p => math.exp(-p.linear(0)*p.linear(0)))
+
+Invocation template:
+
+```scala
+receiver.expectation(f)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesTensorQuadrature.expectationVector ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesTensorQuadrature.html#expectationVector-6ad)
+
+```scala
+def expectationVector(outputDimension: Int)(f: LinearAngular => Vector[Double]): Vector[Double]
+```
+
+Evaluate several expectations together, with one callback per tensor point.
+
+Type parameters: none.
+
+Parameters, list 1: `` outputDimension: Int ``.
+
+Parameters, list 2: `` f: LinearAngular => Vector[Double] ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Evaluate several expectations together, with one callback per tensor point. Value parameters f non-null deterministic callback returning a non-null finite vector of that length outputDimension required output length in [1,10000] Attributes Returns immutable estimates; callback exceptions propagate and no partial result is returned Example rule.expectationVector(2)(p => Vector(p.linear(0), math.cos(p.angle)))
+
+Invocation template:
+
+```scala
+receiver.expectationVector(outputDimension)(f)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.InverseGamma.apply ``

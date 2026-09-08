@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 749,
+  "pages": 751,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156592,6 +156592,29 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "tensorQuadrature",
+      "anchor": "tensorQuadrature-fffffd1b",
+      "signature": "def tensorQuadrature(gaussianOrder: Int = ..., angularOrder: Int = ..., maxNodes: Int = ...): GaussVonMisesTensorQuadrature",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "gaussianOrder: Int = ...",
+            "angularOrder: Int = ...",
+            "maxNodes: Int = ..."
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesTensorQuadrature",
+      "summary": "Positive-weight tensor expectation reference; callback cost grows exponentially in dimension.",
+      "contract": "Positive-weight tensor expectation reference; callback cost grows exponentially in dimension. Value parameters angularOrder angular points in [2,256], default 64 gaussianOrder points per linear coordinate in [1,32], default 5 maxNodes callback-count guard in [1,1000000], default 100000 Attributes Returns immutable streamed rule; angular resolution is checked, general integration error is not certified Example kernel.tensorQuadrature(9, 64).expectation(p => math.cos(p.angle))",
+      "example": "receiver.tensorQuadrature(gaussianOrder, angularOrder, maxNodes)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
       "name": "thirdOrderQuadrature",
       "anchor": "thirdOrderQuadrature-9c2",
       "signature": "def thirdOrderQuadrature(maxNodes: Int = ...): GaussVonMisesQuadrature",
@@ -156858,6 +156881,78 @@
       "example": "receiver.survivalEstimate(score)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesScoreDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesTensorQuadrature",
+      "name": "apply",
+      "anchor": "apply-606",
+      "signature": "def apply(kernel: GaussVonMisesDistribution, gaussianOrder: Int = ..., angularOrder: Int = ..., maxNodes: Int = ...): GaussVonMisesTensorQuadrature",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "kernel: GaussVonMisesDistribution",
+            "gaussianOrder: Int = ...",
+            "angularOrder: Int = ...",
+            "maxNodes: Int = ..."
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesTensorQuadrature",
+      "summary": "Build an adjustable-order positive-weight reference; does not automatically refine.",
+      "contract": "Build an adjustable-order positive-weight reference; does not automatically refine. Value parameters angularOrder points on the angular interval in [2,256], default 64 gaussianOrder points per Gaussian coordinate in [1,32], default 5 kernel non-null fixed GVM maxNodes callback-count guard in [1,1000000], default 100000; must cover angularOrder*gaussianOrder^dimension Attributes Returns immutable streamed rule; rejects angular normalization error above 1e-8 Example GaussVonMisesTensorQuadrature(kernel, 9, 64).expectation(p => math.cos(p.angle))",
+      "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesTensorQuadrature.apply(kernel, gaussianOrder, angularOrder, maxNodes)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesTensorQuadrature$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesTensorQuadrature",
+      "name": "expectation",
+      "anchor": "expectation-caa",
+      "signature": "def expectation(f: LinearAngular => Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "f: LinearAngular => Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Approximate a scalar expectation using nonnegative normalized product weights.",
+      "contract": "Approximate a scalar expectation using nonnegative normalized product weights. Value parameters f non-null deterministic callback with finite output at every point Attributes Returns compensated sum; not an error-certified integral; tiny products may underflow Example rule.expectation(p => math.exp(-p.linear(0)*p.linear(0)))",
+      "example": "receiver.expectation(f)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesTensorQuadrature.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesTensorQuadrature",
+      "name": "expectationVector",
+      "anchor": "expectationVector-6ad",
+      "signature": "def expectationVector(outputDimension: Int)(f: LinearAngular => Vector[Double]): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "outputDimension: Int"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "f: LinearAngular => Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "Evaluate several expectations together, with one callback per tensor point.",
+      "contract": "Evaluate several expectations together, with one callback per tensor point. Value parameters f non-null deterministic callback returning a non-null finite vector of that length outputDimension required output length in [1,10000] Attributes Returns immutable estimates; callback exceptions propagate and no partial result is returned Example rule.expectationVector(2)(p => Vector(p.linear(0), math.cos(p.angle)))",
+      "example": "receiver.expectationVector(outputDimension)(f)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesTensorQuadrature.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.InverseGamma",

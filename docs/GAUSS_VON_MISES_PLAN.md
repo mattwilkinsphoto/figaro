@@ -112,9 +112,10 @@ with direct tails, numerical diagnostics, independent fixtures and modeled-cover
 [State gradients](GVM_GRADIENTS.md) are a CI-verified increment on main at `141dcc15`:
 physical-coordinate log-density and squared-score derivatives, not fitting or a new
 inference algorithm. [Third-order expectation quadrature](GVM_QUADRATURE.md) is now
-locally validated on the development branch, with independent node/weight fixtures,
-exactness-class checks and negative-weight failure examples. Higher-order refinement
-and positive-weight reference integration remain separate.
+on main at CI-verified `b06e957f`, with independent node/weight fixtures,
+exactness-class checks and negative-weight failure examples. The [positive-weight
+tensor reference](GVM_TENSOR_QUADRATURE.md) is locally validated on the development
+branch with order/cost comparisons. Automatic refinement diagnostics remain separate.
 Analytic marginal circular and physical first/second linear-angular mixed moments,
 plus the exact angular conditional given the full linear vector, are now a separate
 [CI-verified increment on main](GVM_MOMENTS.md). Its tests include complex-matrix
