@@ -7,7 +7,7 @@ import com.cra.figaro.util.{CircularStatistics as Circular, withRandomSeed}
 
 /** Synthetic distribution examples, not an orbit model or a GVM filtering algorithm. */
 object GaussVonMisesExample {
-  /** Demonstrate coupled prior draws, complete observations and posterior projections.
+  /** Demonstrate draws, observations, posterior projections and deterministic diagnostics.
     * @param args empty string array
     * @return Unit; prints results, checks illustrative bounds and cleans up its models
     * @example `GaussVonMisesExample.main(Array.empty[String])`
@@ -24,6 +24,24 @@ object GaussVonMisesExample {
     assert(math.abs(residual.meanDirection.get) < 0.05)
     println(f"Conditional residual resultant: ${residual.meanResultantLength}%.4f (expected 0.8803)")
     println(f"Conditional centers at x=-1 and x=1: ${d.conditionalLocation(Vector(-1.0))}%.4f, ${d.conditionalLocation(Vector(1.0))}%.4f radians")
+
+    // Point diagnostics retain the conditional angular center, not just alpha.
+    val point = LinearAngular(Vector(1.0),3.1)
+    val canonical = d.canonicalResidual(point)
+    val restored = d.fromCanonical(canonical)
+    assert(math.abs(canonical.angle + 0.8) < 1e-14)
+    assert(math.abs(restored.linear.head-point.linear.head) < 1e-14)
+    assert(math.abs(Circular.difference(restored.angle,point.angle)) < 1e-14)
+    println(f"Squared Mahalanobis-von-Mises score: ${d.mahalanobisSquared(point)}%.6f")
+    val independent = GaussVonMisesDistribution(d.mean,d.covariance,d.alpha,Vector(0.0),Vector(Vector(0.0)),d.kappa)
+    val loss = d.klDivergenceComponents(independent)
+    assert(loss.gaussian == 0 && loss.conditionalAngular > 0)
+    println(f"KL to uncoupled kernel: ${loss.total}%.6f nats; reverse: ${independent.klDivergence(d)}%.6f")
+    def shifted(mu: Double) = GaussVonMisesDistribution(Vector(mu),Vector(Vector(4.0)),
+      3.0,Vector(0.0),Vector(Vector(0.0)),7.0)
+    val left=shifted(1.0); val right=shifted(5.0)
+    assert(left.klDivergence(right) == 2.0)
+    assert(right.mahalanobisSquared(LinearAngular(left.mean,3.0)) == 4.0)
 
     withRandomSeed(245L) {
       val u = Universe.createNew()

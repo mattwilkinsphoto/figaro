@@ -38,6 +38,20 @@ can evaluate GVM quadrature and generic uncertainty propagation, with separate a
 coverage and release gates; domain-specific orbit dynamics remain outside the core.
 This sequence is a proposed priority order, not a calendar estimate.
 
+## D2 diagnostic follow-on priorities
+
+1. Canonical residual/inverse, squared Mahalanobis-von-Mises score and analytic directed
+   KL with component breakdown: implemented in the development branch; see
+   [contracts and validation](docs/GVM_DIAGNOSTICS.md). Remote CI/main integration
+   remain separate gates. Validate exact Gaussian/Mahalanobis and circular reductions.
+2. Finite-concentration score calibration, circular/mixed moments and conditional helpers:
+   subsequent increments, not included in the score/KL implementation.
+3. Bhattacharyya divergence and linear-angular mutual information: lower-priority research
+   requested 2026-09-07. Establish numerical methods, special cases and error contracts
+   before exposing APIs. No general closed-form guarantee; see [wishlist](WISHLIST.md).
+
+No report ingestion, fusion, filtering, or propagation is added by these diagnostics.
+
 ## Definition of done for a distribution
 
 1. Specify support, units, parameterization, invalid-input behavior, degenerate limits

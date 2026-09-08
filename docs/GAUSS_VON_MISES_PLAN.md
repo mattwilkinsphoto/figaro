@@ -102,6 +102,14 @@ is excluded initially, with an explicit error rather than silent regularization.
 
 ## Acceptance tests and user examples
 
+The next diagnostic increment adds canonical residuals/inversion, squared
+Mahalanobis-von-Mises scoring and analytic directed KL with a component breakdown.
+See [GVM diagnostics](GVM_DIAGNOSTICS.md) for the derived formula, runnable examples,
+Gaussian/circular reductions, numerical limits and focused regression suite.
+Finite-concentration threshold calibration remains separate from computing the score.
+Bhattacharyya divergence and linear-angular mutual information are explicitly lower
+priority research items; the [wishlist](../WISHLIST.md) records their validation gates.
+
 | Check / example | Independent evidence required |
 | --- | --- |
 | Circular wrap-around, e.g. observations near -179 and +179 degrees | Radian conversion, equivalent-angle density, a mean near the shared boundary rather than zero |

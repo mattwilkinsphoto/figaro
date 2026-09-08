@@ -118,6 +118,11 @@ automatic performance gain. For several chains use separate elements/universes w
 
 ## Public API reference
 
+Canonical residuals/inversion, squared Mahalanobis-von-Mises scores and analytic KL
+are documented with all added APIs, three examples and numerical limits in the
+[GVM diagnostics guide](GVM_DIAGNOSTICS.md). These are deterministic kernel utilities,
+not new inference algorithms or calibrated decision thresholds.
+
 Import `com.cra.figaro.library.atomic.continuous.*`. All methods below are handwritten;
 the [compiler reference](api/README.md) also records inherited/generated functions.
 
@@ -175,7 +180,8 @@ pass locally: independent 80-digit joint scores, two-dimensional normalization, 
 and uniform limits, 120,000 prior draws, Gaussian moments and conditional circular
 residuals, disparate units, input snapshots, failure paths, real evidence weighting,
 posterior projections and exact seeded traces across worker counts.
-All 192 modernization regressions, the executable example, Scala API generation and
+With the [13 added diagnostics tests](GVM_DIAGNOSTICS.md), all 205 modernization
+regressions, the expanded executable example, Scala API generation and
 local thin-library packaging also pass. Check the exact source commit in the
 [branch workflow](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amodernize%2Fgauss-von-mises)
 before treating remote CI as passed. Existing whole-library historical-suite limits remain unchanged.

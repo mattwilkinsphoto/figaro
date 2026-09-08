@@ -10,6 +10,7 @@ collects broad families and their later flavors.
 | Present native entry points | Source | Scope / caution |
 | --- | --- | --- |
 | GaussVonMises, GaussVonMisesDistribution, LinearAngular (development preview) | [Joint guide](GAUSS_VON_MISES.md) | Fixed kernel and complete joint observations tested locally; standalone publication approved, remote CI/main integration remain |
+| GVM canonical residuals, squared Mahalanobis score, analytic KL | [Diagnostics guide](GVM_DIAGNOSTICS.md) | Individual fixed GVMs, same coordinate meanings; deterministic kernel utilities, not calibrated gates or mixture/posterior fitting |
 | VonMises, VonMisesDistribution, CircularStatistics | [Circular foundation](VON_MISES.md) | Native element, independent numeric kernel and equal-weight summaries; radians, finite concentration up to `1e8`; tested evidence and isolated parallel paths, not joint GVM |
 | Bernoulli (`Flip`), categorical (`Select`), point mass (`Constant`) | [Flip](../Figaro/src/main/scala/com/cra/figaro/language/Flip.scala), [Select](../Figaro/src/main/scala/com/cra/figaro/language/Select.scala), [Constant](../Figaro/src/main/scala/com/cra/figaro/language/Constant.scala) | `Flip` is Boolean; `Select` samples one category, not a multinomial count vector |
 | Binomial, Geometric, Poisson | [Discrete elements](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete) | Check each support and parameter convention before adapting another library's call |

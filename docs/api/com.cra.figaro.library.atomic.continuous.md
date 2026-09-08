@@ -25283,6 +25283,30 @@ Invocation template:
 com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.apply(mean, covariance, alpha, beta, gamma, kappa)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.canonicalResidual ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#canonicalResidual-4c6)
+
+```scala
+def canonicalResidual(value: LinearAngular): LinearAngular
+```
+
+Standardize a point to independent Gaussian coordinates and a circular residual.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` LinearAngular ``.
+
+Source contract/attributes: Standardize a point to independent Gaussian coordinates and a circular residual. Value parameters value non-null finite state of this kernel's dimension Attributes Returns LinearAngular(z, delta), with delta in [-Pi,Pi); not scaled by kappa Example kernel.canonicalResidual(LinearAngular(Vector(0.2), 3.1))
+
+Invocation template:
+
+```scala
+receiver.canonicalResidual(value)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.conditionalLocation ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#conditionalLocation-f10)
@@ -25329,6 +25353,78 @@ Invocation template:
 
 ```scala
 receiver.density(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.fromCanonical ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#fromCanonical-4c6)
+
+```scala
+def fromCanonical(residual: LinearAngular): LinearAngular
+```
+
+Invert canonicalResidual, up to angular wrapping and floating-point rounding.
+
+Type parameters: none.
+
+Parameters, list 1: `` residual: LinearAngular ``.
+
+Returns: `` LinearAngular ``.
+
+Source contract/attributes: Invert canonicalResidual, up to angular wrapping and floating-point rounding. Value parameters residual finite standardized vector z and angular residual in radians Attributes Returns physical state with angle normalized to [-Pi,Pi) Example kernel.fromCanonical(LinearAngular(Vector(0.0), 0.0))
+
+Invocation template:
+
+```scala
+receiver.fromCanonical(residual)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.klDivergence ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#klDivergence-bce)
+
+```scala
+def klDivergence(other: GaussVonMisesDistribution): Double
+```
+
+Analytic directed divergence D_KL(this || other), in nats; no sampling.
+
+Type parameters: none.
+
+Parameters, list 1: `` other: GaussVonMisesDistribution ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Analytic directed divergence D_KL(this || other), in nats; no sampling. Value parameters other non-null GVM on the same coordinates and dimension Attributes Returns finite nonnegative divergence; numeric overflow throws ArithmeticException Example kernel.klDivergence(kernel) returns zero
+
+Invocation template:
+
+```scala
+receiver.klDivergence(other)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.klDivergenceComponents ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#klDivergenceComponents-867)
+
+```scala
+def klDivergenceComponents(other: GaussVonMisesDistribution): GaussVonMisesKL
+```
+
+Split KL into Gaussian marginal and expected conditional angular contributions. Uses Gaussian quadratic characteristic functions, not a Gaussian approximation.
+
+Type parameters: none.
+
+Parameters, list 1: `` other: GaussVonMisesDistribution ``.
+
+Returns: `` GaussVonMisesKL ``.
+
+Source contract/attributes: Split KL into Gaussian marginal and expected conditional angular contributions. Uses Gaussian quadratic characteristic functions, not a Gaussian approximation. Value parameters other non-null GVM with matching dimension and coordinate meanings Attributes Returns immutable contributions and total in nats; invalid input throws IllegalArgumentException Example kernel.klDivergenceComponents(kernel).conditionalAngular returns zero
+
+Invocation template:
+
+```scala
+receiver.klDivergenceComponents(other)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.linearLogDensity ``
@@ -25379,6 +25475,30 @@ Invocation template:
 receiver.logDensity(value)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.mahalanobisSquared ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#mahalanobisSquared-f9c)
+
+```scala
+def mahalanobisSquared(value: LinearAngular): Double
+```
+
+Squared Mahalanobis-von-Mises score ||z||^2 + 4 kappa sin(delta/2)^2.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: LinearAngular ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Squared Mahalanobis-von-Mises score ||z||^2 + 4 kappa sin(delta/2)^2. Value parameters value non-null finite state of this kernel's dimension Attributes Returns nonnegative score (possibly +Infinity in extreme tails), not a p-value Example kernel.mahalanobisSquared(LinearAngular(Vector(0.2), 3.1))
+
+Invocation template:
+
+```scala
+receiver.mahalanobisSquared(value)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.sample ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#sample-fffffde3)
@@ -25401,6 +25521,54 @@ Invocation template:
 
 ```scala
 receiver.sample(rng, maxAttempts)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesKL.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesKL.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesKL.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesKL.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.InverseGamma.apply ``

@@ -170,6 +170,21 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
 - Related classification resources named by the source: relationships among
   distributions and ProbOnto. These are possible catalog aids, not distribution APIs.
 
+## DIST-02 diagnostic extensions (2026-09-07)
+
+- **KL and canonical/Mahalanobis utilities — locally validated, remote CI/integration pending:** the current
+  development increment; see [diagnostic contracts](docs/GVM_DIAGNOSTICS.md).
+- **Bhattacharyya divergence — research wishlist, lower priority:** symmetric comparison
+  of complete GVM distributions. Assess analytic angular integration plus a controlled
+  numerical linear integral; validate Gaussian reductions, symmetry and identical laws.
+- **Mutual information — research wishlist, lower priority:** begin with dependence
+  between the Gaussian vector and angle within one GVM. Investigate analytic conditional
+  entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.
+  This is not the same operation as comparing two GVMs with KL.
+
+These additions retain the domain-independent scope and do not authorize a report-fusion,
+tracking or propagation implementation. They follow the KL/residual milestone.
+
 ## Promotion record template
 
 For a new item record: `ID`, `family`, `status`, `priority`, `user problem`,

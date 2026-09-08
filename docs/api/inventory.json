@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 741,
+  "pages": 742,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -156282,6 +156282,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "canonicalResidual",
+      "anchor": "canonicalResidual-4c6",
+      "signature": "def canonicalResidual(value: LinearAngular): LinearAngular",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: LinearAngular"
+          ]
+        }
+      ],
+      "returns": "LinearAngular",
+      "summary": "Standardize a point to independent Gaussian coordinates and a circular residual.",
+      "contract": "Standardize a point to independent Gaussian coordinates and a circular residual. Value parameters value non-null finite state of this kernel's dimension Attributes Returns LinearAngular(z, delta), with delta in [-Pi,Pi); not scaled by kappa Example kernel.canonicalResidual(LinearAngular(Vector(0.2), 3.1))",
+      "example": "receiver.canonicalResidual(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
       "name": "conditionalLocation",
       "anchor": "conditionalLocation-f10",
       "signature": "def conditionalLocation(linear: Vector[Double]): Double",
@@ -156319,6 +156340,69 @@
       "summary": "Ordinary joint density; prefer logDensity to avoid overflow/underflow.",
       "contract": "Ordinary joint density; prefer logDensity to avoid overflow/underflow. Value parameters value finite state of the configured dimension Attributes Returns exp(logDensity(value)), subject to ordinary exponentiation limits Example kernel.density(LinearAngular(Vector(0.2), 3.1))",
       "example": "receiver.density(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "fromCanonical",
+      "anchor": "fromCanonical-4c6",
+      "signature": "def fromCanonical(residual: LinearAngular): LinearAngular",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "residual: LinearAngular"
+          ]
+        }
+      ],
+      "returns": "LinearAngular",
+      "summary": "Invert canonicalResidual, up to angular wrapping and floating-point rounding.",
+      "contract": "Invert canonicalResidual, up to angular wrapping and floating-point rounding. Value parameters residual finite standardized vector z and angular residual in radians Attributes Returns physical state with angle normalized to [-Pi,Pi) Example kernel.fromCanonical(LinearAngular(Vector(0.0), 0.0))",
+      "example": "receiver.fromCanonical(residual)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "klDivergence",
+      "anchor": "klDivergence-bce",
+      "signature": "def klDivergence(other: GaussVonMisesDistribution): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "other: GaussVonMisesDistribution"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Analytic directed divergence D_KL(this || other), in nats; no sampling.",
+      "contract": "Analytic directed divergence D_KL(this || other), in nats; no sampling. Value parameters other non-null GVM on the same coordinates and dimension Attributes Returns finite nonnegative divergence; numeric overflow throws ArithmeticException Example kernel.klDivergence(kernel) returns zero",
+      "example": "receiver.klDivergence(other)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "klDivergenceComponents",
+      "anchor": "klDivergenceComponents-867",
+      "signature": "def klDivergenceComponents(other: GaussVonMisesDistribution): GaussVonMisesKL",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "other: GaussVonMisesDistribution"
+          ]
+        }
+      ],
+      "returns": "GaussVonMisesKL",
+      "summary": "Split KL into Gaussian marginal and expected conditional angular contributions. Uses Gaussian quadratic characteristic functions, not a Gaussian approximation.",
+      "contract": "Split KL into Gaussian marginal and expected conditional angular contributions. Uses Gaussian quadratic characteristic functions, not a Gaussian approximation. Value parameters other non-null GVM with matching dimension and coordinate meanings Attributes Returns immutable contributions and total in nats; invalid input throws IllegalArgumentException Example kernel.klDivergenceComponents(kernel).conditionalAngular returns zero",
+      "example": "receiver.klDivergenceComponents(other)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
     },
@@ -156366,6 +156450,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
+      "name": "mahalanobisSquared",
+      "anchor": "mahalanobisSquared-f9c",
+      "signature": "def mahalanobisSquared(value: LinearAngular): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: LinearAngular"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Squared Mahalanobis-von-Mises score ||z||^2 + 4 kappa sin(delta/2)^2.",
+      "contract": "Squared Mahalanobis-von-Mises score ||z||^2 + 4 kappa sin(delta/2)^2. Value parameters value non-null finite state of this kernel's dimension Attributes Returns nonnegative score (possibly +Infinity in extreme tails), not a p-value Example kernel.mahalanobisSquared(LinearAngular(Vector(0.2), 3.1))",
+      "example": "receiver.mahalanobisSquared(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution",
       "name": "sample",
       "anchor": "sample-fffffde3",
       "signature": "def sample(rng: Random, maxAttempts: Int = ...): LinearAngular",
@@ -156385,6 +156490,34 @@
       "example": "receiver.sample(rng, maxAttempts)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesKL",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesKL.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesKL",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesKL.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.InverseGamma",
