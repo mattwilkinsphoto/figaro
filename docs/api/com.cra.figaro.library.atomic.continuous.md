@@ -25643,6 +25643,30 @@ Invocation template:
 receiver.scoreDistribution(absoluteTolerance, maxEvaluations)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesDistribution.thirdOrderQuadrature ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.html#thirdOrderQuadrature-9c2)
+
+```scala
+def thirdOrderQuadrature(maxNodes: Int = ...): GaussVonMisesQuadrature
+```
+
+Deterministic third-order sparse expectation rule; retain it to reuse its nodes.
+
+Type parameters: none.
+
+Parameters, list 1: `` maxNodes: Int = ... ``.
+
+Returns: `` GaussVonMisesQuadrature ``.
+
+Source contract/attributes: Deterministic third-order sparse expectation rule; retain it to reuse its nodes. Value parameters maxNodes node-count guard in [5,10001], default 1001; requires 2*dimension+3 Attributes Returns immutable signed-weight rule; not IID draws or a general error-certified integral Example kernel.thirdOrderQuadrature().expectation(p => p.linear(0))
+
+Invocation template:
+
+```scala
+receiver.thirdOrderQuadrature(maxNodes)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesKL.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesKL.html#productElementNames-0)
@@ -25689,6 +25713,80 @@ Invocation template:
 
 ```scala
 receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadrature.thirdOrder ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadrature$.html#thirdOrder-fffff3ad)
+
+```scala
+def thirdOrder(kernel: GaussVonMisesDistribution, maxNodes: Int = ...): GaussVonMisesQuadrature
+```
+
+Construct the paper's 2n+3-node third-order sparse rule for a fixed kernel.
+
+Type parameters: none.
+
+Parameters, list 1: `` kernel: GaussVonMisesDistribution ``; `` maxNodes: Int = ... ``.
+
+Returns: `` GaussVonMisesQuadrature ``.
+
+Source contract/attributes: Construct the paper's 2n+3-node third-order sparse rule for a fixed kernel. Value parameters kernel non-null immutable GVM, with n linear coordinates maxNodes allocation/evaluation-count guard in [5,10001], default 1001; must cover 2n+3 Attributes Returns immutable physical nodes and signed weights; no automatic error estimate or refinement Example GaussVonMisesQuadrature.thirdOrder(kernel).expectation(p => p.linear(0))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadrature.thirdOrder(kernel, maxNodes)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadrature.expectation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadrature.html#expectation-caa)
+
+```scala
+def expectation(f: LinearAngular => Double): Double
+```
+
+Approximate a scalar expectation using the stored signed rule, without randomness.
+
+Type parameters: none.
+
+Parameters, list 1: `` f: LinearAngular => Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Approximate a scalar expectation using the stored signed rule, without randomness. Value parameters f non-null deterministic callback; must return a finite value at every node Attributes Returns compensated weighted sum, not an error-certified estimate or probability Example rule.expectation(point => point.linear(0)*point.linear(0))
+
+Invocation template:
+
+```scala
+receiver.expectation(f)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesQuadrature.expectationVector ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesQuadrature.html#expectationVector-6ad)
+
+```scala
+def expectationVector(outputDimension: Int)(f: LinearAngular => Vector[Double]): Vector[Double]
+```
+
+Approximate several expectations in one traversal, evaluating the callback once per node.
+
+Type parameters: none.
+
+Parameters, list 1: `` outputDimension: Int ``.
+
+Parameters, list 2: `` f: LinearAngular => Vector[Double] ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Approximate several expectations in one traversal, evaluating the callback once per node. Value parameters f non-null deterministic callback returning a non-null finite vector of that length outputDimension required output vector length in [1,10000] Attributes Returns immutable vector of compensated weighted sums; callback exceptions propagate Example rule.expectationVector(2)(p => Vector(p.linear(0), math.sin(p.angle)))
+
+Invocation template:
+
+```scala
+receiver.expectationVector(outputDimension)(f)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesScoreDistribution.apply ``

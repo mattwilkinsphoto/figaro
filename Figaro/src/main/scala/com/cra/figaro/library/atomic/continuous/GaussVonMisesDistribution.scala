@@ -119,6 +119,14 @@ final class GaussVonMisesDistribution private (
     maxEvaluations: Int = 100000): GaussVonMisesScoreDistribution =
     GaussVonMisesScoreDistribution(dimension,kappa,absoluteTolerance,maxEvaluations)
 
+  /** Deterministic third-order sparse expectation rule; retain it to reuse its nodes.
+    * @param maxNodes node-count guard in [5,10001], default 1001; requires 2*dimension+3
+    * @return immutable signed-weight rule; not IID draws or a general error-certified integral
+    * @example `kernel.thirdOrderQuadrature().expectation(p => p.linear(0))`
+    */
+  def thirdOrderQuadrature(maxNodes: Int = 1001): GaussVonMisesQuadrature =
+    GaussVonMisesQuadrature.thirdOrder(this,maxNodes)
+
   /** Gaussian marginal log density, using a triangular solve rather than an inverse.
     * @param linear finite vector of the configured dimension
     * @return log density per linear-coordinate volume; extreme tails may return -Infinity

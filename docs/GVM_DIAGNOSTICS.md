@@ -227,8 +227,10 @@ Lower-priority research items, not implemented APIs:
 are integrated on main at CI-verified `df5a7bf4`. [Finite-concentration score thresholds](GVM_SCORE_CALIBRATION.md)
 are on main at CI-verified `755eb425`, with independent calibration tests.
 [State gradients](GVM_GRADIENTS.md) are locally validated on the development branch.
-Additional conditionals and parameter gradients remain separate increments. Generic quadrature needs
-its own approximation/negative-weight assessment. No fusion or propagation scope is added.
+Additional conditionals and parameter gradients remain separate increments. [Third-order
+sparse quadrature](GVM_QUADRATURE.md) is locally validated with explicit approximation
+and negative-weight failure cases; it does not by itself validate divergence/entropy
+integration. No fusion or propagation scope is added.
 
 Related: [joint GVM](GAUSS_VON_MISES.md), [circular foundation](VON_MISES.md),
 [roadmap](../ROADMAP.md), [wishlist](../WISHLIST.md), [milestone plan](GAUSS_VON_MISES_PLAN.md).

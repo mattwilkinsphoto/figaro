@@ -111,7 +111,10 @@ Finite-concentration threshold calibration is a separate [CI-verified increment 
 with direct tails, numerical diagnostics, independent fixtures and modeled-coverage tests.
 [State gradients](GVM_GRADIENTS.md) are the next locally validated development increment:
 physical-coordinate log-density and squared-score derivatives, not fitting or a new
-inference algorithm. Deterministic expectation quadrature follows separately.
+inference algorithm. [Third-order expectation quadrature](GVM_QUADRATURE.md) is now
+locally validated on the development branch, with independent node/weight fixtures,
+exactness-class checks and negative-weight failure examples. Higher-order refinement
+and positive-weight reference integration remain separate.
 Analytic marginal circular and physical first/second linear-angular mixed moments,
 plus the exact angular conditional given the full linear vector, are now a separate
 [CI-verified increment on main](GVM_MOMENTS.md). Its tests include complex-matrix

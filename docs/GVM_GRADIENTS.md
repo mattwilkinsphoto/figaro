@@ -205,7 +205,8 @@ limits remain unchanged.
 
 Related: [joint GVM](GAUSS_VON_MISES.md), [score and KL diagnostics](GVM_DIAGNOSTICS.md),
 [score calibration](GVM_SCORE_CALIBRATION.md), [moments/conditionals](GVM_MOMENTS.md),
-[roadmap](../ROADMAP.md), [API reference](api/README.md). Deterministic expectation
-quadrature is the next separate milestone. Bhattacharyya divergence and mutual information
+[roadmap](../ROADMAP.md), [API reference](api/README.md). [Third-order expectation
+quadrature](GVM_QUADRATURE.md) is now locally validated on the development branch,
+with signed-weight and exactness limitations. Bhattacharyya divergence and mutual information
 remain lower-priority research; no report ingestion, fusion, filtering or propagation
 is implemented by these derivatives.
