@@ -28,6 +28,11 @@ for your fixed scalar workload. No algorithm switches methods behind your back.
 This is an accuracy/range alternative, **not a demonstrated general speedup** over
 Fourier. Positive panels can require thousands of evaluations. Neither eligibility
 nor an `Estimated` result is a certified accuracy guarantee.
+The [matched-accuracy scalar study](GVM_SCALAR_PERFORMANCE.md) supports trying Fourier
+first for ordinary coupled cases: it was about 39–69x faster on three such fixtures,
+and about 2,626x faster on a heavily curved case. Positive integration recovered the
+two tested tiny-overlap refusals at about 0.25–0.43 ms. Analytic scalar shortcuts are
+cheaper, but that is not an integration speedup. These are bounded workload results.
 
 ## Quick start in three steps
 

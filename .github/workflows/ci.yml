@@ -29,6 +29,10 @@ jobs:
         run: python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_reliability.py' -v
       - name: Verify research-only positive scalar integration
         run: python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_positive.py' -v
+      - name: Verify scalar matched-accuracy evidence and physical-input oracles
+        run: |
+          python3 -B -m unittest discover -s tools -p 'test_gvm_scalar_*.py' -v
+          python3 -B tools/summarize_gvm_scalar_performance.py docs/GVM_SCALAR_PERFORMANCE_RUNS.txt
 
   build:
     runs-on: ubuntu-latest
@@ -84,7 +88,8 @@ jobs:
         run: >-
           sbt --server --batch
           "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussVonMisesScalarBhattacharyyaTest;
-          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesScalarBhattacharyyaExample"
+          examples / Compile / runMain com.cra.figaro.example.documentation.GaussVonMisesScalarBhattacharyyaExample;
+          examples / Compile / runMain com.cra.figaro.example.GaussVonMisesScalarPerformance check"
 
       - name: Verify seeded parallel sampling and benchmark entry point
         run: >-

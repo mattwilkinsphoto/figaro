@@ -1,0 +1,390 @@
+GVM_SCALAR_ENV pid=38364 java=17.0.4 os=Windows_11 arch=amd64 processors=32 maxHeap=6442450944 tolerance=1.0E-8 rounds=7 timed=true warmupMs=500 calibrationTargetMs=20 maxBatch=65536
+GVM_SCALAR_METHOD case=gaussian method=fourier status=Resolved distance=0.5 oracle=0.5 error=0.0 work=0 unit=harmonics path=gaussian
+GVM_SCALAR_METHOD case=gaussian method=positive status=Estimated distance=0.5 oracle=0.5 error=0.0 work=0 unit=evaluations path=gaussian
+GVM_SCALAR_TIMING case=gaussian method=fourier round=0 batch=16384 nsPerCall=1873.858642578125
+GVM_SCALAR_TIMING case=gaussian method=positive round=0 batch=65536 nsPerCall=35.5010986328125
+GVM_SCALAR_TIMING case=gaussian method=positive round=1 batch=65536 nsPerCall=32.50579833984375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=1 batch=16384 nsPerCall=1865.7958984375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=2 batch=16384 nsPerCall=1934.02099609375
+GVM_SCALAR_TIMING case=gaussian method=positive round=2 batch=65536 nsPerCall=34.16290283203125
+GVM_SCALAR_TIMING case=gaussian method=positive round=3 batch=65536 nsPerCall=114.349365234375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=3 batch=16384 nsPerCall=1961.29150390625
+GVM_SCALAR_TIMING case=gaussian method=fourier round=4 batch=16384 nsPerCall=1932.99560546875
+GVM_SCALAR_TIMING case=gaussian method=positive round=4 batch=65536 nsPerCall=35.1409912109375
+GVM_SCALAR_TIMING case=gaussian method=positive round=5 batch=65536 nsPerCall=35.35919189453125
+GVM_SCALAR_TIMING case=gaussian method=fourier round=5 batch=16384 nsPerCall=1969.720458984375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=6 batch=16384 nsPerCall=1959.393310546875
+GVM_SCALAR_TIMING case=gaussian method=positive round=6 batch=65536 nsPerCall=34.2010498046875
+GVM_SCALAR_METHOD case=constant-opposed method=fourier status=Resolved distance=47.1275755018718 oracle=47.1275755018718 error=0.0 work=0 unit=harmonics path=constant-angular
+GVM_SCALAR_METHOD case=constant-opposed method=positive status=Estimated distance=47.1275755018718 oracle=47.1275755018718 error=0.0 work=0 unit=evaluations path=constant-angular
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=0 batch=16384 nsPerCall=2003.973388671875
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=0 batch=65536 nsPerCall=168.59893798828125
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=1 batch=65536 nsPerCall=168.63861083984375
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=1 batch=16384 nsPerCall=2025.994873046875
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=2 batch=16384 nsPerCall=1993.6279296875
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=2 batch=65536 nsPerCall=168.7591552734375
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=3 batch=65536 nsPerCall=169.95086669921875
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=3 batch=16384 nsPerCall=2288.629150390625
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=4 batch=16384 nsPerCall=1988.677978515625
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=4 batch=65536 nsPerCall=170.831298828125
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=5 batch=65536 nsPerCall=168.9697265625
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=5 batch=16384 nsPerCall=1991.705322265625
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=6 batch=16384 nsPerCall=2026.507568359375
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=6 batch=65536 nsPerCall=171.3134765625
+GVM_SCALAR_METHOD case=linear-moderate method=fourier status=Resolved distance=0.06387735667970504 oracle=0.0638773564899703 error=1.8973474180672412E-10 work=6 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=linear-moderate method=positive status=Estimated distance=0.06387735652849859 oracle=0.0638773564899703 error=3.852829166817173E-11 work=712 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=0 batch=4096 nsPerCall=6996.1669921875
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=0 batch=128 nsPerCall=262302.34375
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=1 batch=128 nsPerCall=314913.28125
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=1 batch=4096 nsPerCall=6924.51171875
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=2 batch=4096 nsPerCall=6943.8720703125
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=2 batch=128 nsPerCall=256590.625
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=3 batch=128 nsPerCall=260590.625
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=3 batch=4096 nsPerCall=6935.302734375
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=4 batch=4096 nsPerCall=6958.056640625
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=4 batch=128 nsPerCall=264844.53125
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=5 batch=128 nsPerCall=259095.3125
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=5 batch=4096 nsPerCall=8147.6318359375
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=6 batch=4096 nsPerCall=7019.970703125
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=6 batch=128 nsPerCall=283717.96875
+GVM_SCALAR_METHOD case=curved-unequal method=fourier status=Resolved distance=0.3555099130903499 oracle=0.35550991284058314 error=2.49766762827619E-10 work=5 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=curved-unequal method=positive status=Estimated distance=0.3555099128661029 oracle=0.35550991284058314 error=2.5519752977487542E-11 work=849 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=0 batch=4096 nsPerCall=6902.1240234375
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=0 batch=128 nsPerCall=294262.5
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=1 batch=128 nsPerCall=340439.84375
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=1 batch=4096 nsPerCall=6794.677734375
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=2 batch=4096 nsPerCall=6731.5185546875
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=2 batch=128 nsPerCall=286377.34375
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=3 batch=128 nsPerCall=285712.5
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=3 batch=4096 nsPerCall=6661.4990234375
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=4 batch=4096 nsPerCall=6881.884765625
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=4 batch=128 nsPerCall=333635.15625
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=5 batch=128 nsPerCall=370333.59375
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=5 batch=4096 nsPerCall=6890.6494140625
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=6 batch=4096 nsPerCall=6940.3076171875
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=6 batch=128 nsPerCall=293007.8125
+GVM_SCALAR_METHOD case=linear-concentrated method=fourier status=Resolved distance=1.2944204724041075 oracle=1.2944204724041122 error=4.6629367034256575E-15 work=21 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=linear-concentrated method=positive status=Estimated distance=1.294420472061491 oracle=1.2944204724041122 error=3.4262126469286613E-10 work=1800 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=0 batch=2048 nsPerCall=10674.70703125
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=0 batch=32 nsPerCall=762637.5
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=1 batch=32 nsPerCall=704221.875
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=1 batch=2048 nsPerCall=10661.328125
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=2 batch=2048 nsPerCall=13074.21875
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=2 batch=32 nsPerCall=1402812.5
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=3 batch=32 nsPerCall=705646.875
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=3 batch=2048 nsPerCall=10635.595703125
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=4 batch=2048 nsPerCall=10434.814453125
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=4 batch=32 nsPerCall=712271.875
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=5 batch=32 nsPerCall=709137.5
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=5 batch=2048 nsPerCall=10480.46875
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=6 batch=2048 nsPerCall=10595.5078125
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=6 batch=32 nsPerCall=709828.125
+GVM_SCALAR_METHOD case=opposed-weak method=fourier status=NumericallyUnresolved distance=none oracle=47.127575486246805 error=none work=25 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=opposed-weak method=positive status=Estimated distance=47.127575485948704 oracle=47.127575486246805 error=2.9810109936079243E-10 work=764 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=0 batch=2048 nsPerCall=13599.169921875
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=0 batch=128 nsPerCall=281075.78125
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=1 batch=128 nsPerCall=266624.21875
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=1 batch=2048 nsPerCall=11395.654296875
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=2 batch=2048 nsPerCall=11598.583984375
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=2 batch=128 nsPerCall=262989.84375
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=3 batch=128 nsPerCall=261109.375
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=3 batch=2048 nsPerCall=11259.765625
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=4 batch=2048 nsPerCall=11151.220703125
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=4 batch=128 nsPerCall=290285.15625
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=5 batch=128 nsPerCall=264695.3125
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=5 batch=2048 nsPerCall=11526.513671875
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=6 batch=2048 nsPerCall=11514.94140625
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=6 batch=128 nsPerCall=271932.8125
+GVM_SCALAR_METHOD case=opposed-moderate method=fourier status=NumericallyUnresolved distance=none oracle=45.0461096112954 error=none work=25 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=opposed-moderate method=positive status=Estimated distance=45.04610961111882 oracle=45.0461096112954 error=1.765769752637425E-10 work=1012 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=0 batch=2048 nsPerCall=11445.751953125
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=0 batch=64 nsPerCall=470925.0
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=1 batch=64 nsPerCall=472909.375
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=1 batch=2048 nsPerCall=11363.818359375
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=2 batch=2048 nsPerCall=11398.92578125
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=2 batch=64 nsPerCall=476028.125
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=3 batch=64 nsPerCall=494967.1875
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=3 batch=2048 nsPerCall=11534.375
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=4 batch=2048 nsPerCall=11491.552734375
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=4 batch=64 nsPerCall=472268.75
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=5 batch=64 nsPerCall=473845.3125
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=5 batch=2048 nsPerCall=11594.43359375
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=6 batch=2048 nsPerCall=11535.498046875
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=6 batch=64 nsPerCall=499792.1875
+GVM_SCALAR_METHOD case=curved-concentrated method=fourier status=Resolved distance=1.316280588783481 oracle=1.3162805891364138 error=3.5293279410097966E-10 work=21 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=curved-concentrated method=positive status=Estimated distance=1.316280589059451 oracle=1.3162805891364138 error=7.69628805130651E-11 work=25098 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=0 batch=2048 nsPerCall=11762.01171875
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=0 batch=1 nsPerCall=3.01287E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=1 batch=1 nsPerCall=3.02083E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=1 batch=2048 nsPerCall=13725.341796875
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=2 batch=2048 nsPerCall=14678.369140625
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=2 batch=1 nsPerCall=3.54407E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=3 batch=1 nsPerCall=2.97703E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=3 batch=2048 nsPerCall=11638.818359375
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=4 batch=2048 nsPerCall=11568.75
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=4 batch=1 nsPerCall=3.16332E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=5 batch=1 nsPerCall=2.96731E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=5 batch=2048 nsPerCall=11692.08984375
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=6 batch=2048 nsPerCall=11516.40625
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=6 batch=1 nsPerCall=2.97769E7
+GVM_SCALAR_COMPLETE fixtures=8 methods=16 accepted=14 refused=2 rounds=7 sinkFinite=true
+GVM_SCALAR_ENV pid=56308 java=17.0.4 os=Windows_11 arch=amd64 processors=32 maxHeap=6442450944 tolerance=1.0E-8 rounds=7 timed=true warmupMs=500 calibrationTargetMs=20 maxBatch=65536
+GVM_SCALAR_METHOD case=gaussian method=fourier status=Resolved distance=0.5 oracle=0.5 error=0.0 work=0 unit=harmonics path=gaussian
+GVM_SCALAR_METHOD case=gaussian method=positive status=Estimated distance=0.5 oracle=0.5 error=0.0 work=0 unit=evaluations path=gaussian
+GVM_SCALAR_TIMING case=gaussian method=fourier round=0 batch=16384 nsPerCall=1521.795654296875
+GVM_SCALAR_TIMING case=gaussian method=positive round=0 batch=65536 nsPerCall=29.59442138671875
+GVM_SCALAR_TIMING case=gaussian method=positive round=1 batch=65536 nsPerCall=29.40521240234375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=1 batch=16384 nsPerCall=2068.7744140625
+GVM_SCALAR_TIMING case=gaussian method=fourier round=2 batch=16384 nsPerCall=1506.121826171875
+GVM_SCALAR_TIMING case=gaussian method=positive round=2 batch=65536 nsPerCall=29.55474853515625
+GVM_SCALAR_TIMING case=gaussian method=positive round=3 batch=65536 nsPerCall=29.38079833984375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=3 batch=16384 nsPerCall=1558.673095703125
+GVM_SCALAR_TIMING case=gaussian method=fourier round=4 batch=16384 nsPerCall=1515.264892578125
+GVM_SCALAR_TIMING case=gaussian method=positive round=4 batch=65536 nsPerCall=29.4525146484375
+GVM_SCALAR_TIMING case=gaussian method=positive round=5 batch=65536 nsPerCall=29.46014404296875
+GVM_SCALAR_TIMING case=gaussian method=fourier round=5 batch=16384 nsPerCall=1516.522216796875
+GVM_SCALAR_TIMING case=gaussian method=fourier round=6 batch=16384 nsPerCall=1525.164794921875
+GVM_SCALAR_TIMING case=gaussian method=positive round=6 batch=65536 nsPerCall=29.47235107421875
+GVM_SCALAR_METHOD case=constant-opposed method=fourier status=Resolved distance=47.1275755018718 oracle=47.1275755018718 error=0.0 work=0 unit=harmonics path=constant-angular
+GVM_SCALAR_METHOD case=constant-opposed method=positive status=Estimated distance=47.1275755018718 oracle=47.1275755018718 error=0.0 work=0 unit=evaluations path=constant-angular
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=0 batch=16384 nsPerCall=1726.171875
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=0 batch=65536 nsPerCall=152.5146484375
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=1 batch=65536 nsPerCall=152.21405029296875
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=1 batch=16384 nsPerCall=2263.2080078125
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=2 batch=16384 nsPerCall=1739.34326171875
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=2 batch=65536 nsPerCall=152.45819091796875
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=3 batch=65536 nsPerCall=152.3162841796875
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=3 batch=16384 nsPerCall=1848.199462890625
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=4 batch=16384 nsPerCall=1729.1259765625
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=4 batch=65536 nsPerCall=153.19061279296875
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=5 batch=65536 nsPerCall=152.9266357421875
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=5 batch=16384 nsPerCall=1752.252197265625
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=6 batch=16384 nsPerCall=1743.06640625
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=6 batch=65536 nsPerCall=152.0843505859375
+GVM_SCALAR_METHOD case=linear-moderate method=fourier status=Resolved distance=0.06387735667970504 oracle=0.0638773564899703 error=1.8973474180672412E-10 work=6 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=linear-moderate method=positive status=Estimated distance=0.06387735652849859 oracle=0.0638773564899703 error=3.852829166817173E-11 work=712 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=0 batch=4096 nsPerCall=6054.345703125
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=0 batch=128 nsPerCall=323039.84375
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=1 batch=128 nsPerCall=267400.0
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=1 batch=4096 nsPerCall=6036.62109375
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=2 batch=4096 nsPerCall=6019.775390625
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=2 batch=128 nsPerCall=224538.28125
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=3 batch=128 nsPerCall=227598.4375
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=3 batch=4096 nsPerCall=6039.16015625
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=4 batch=4096 nsPerCall=5988.7451171875
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=4 batch=128 nsPerCall=226391.40625
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=5 batch=128 nsPerCall=304757.03125
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=5 batch=4096 nsPerCall=6051.5625
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=6 batch=4096 nsPerCall=6063.1591796875
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=6 batch=128 nsPerCall=223545.3125
+GVM_SCALAR_METHOD case=curved-unequal method=fourier status=Resolved distance=0.3555099130903499 oracle=0.35550991284058314 error=2.49766762827619E-10 work=5 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=curved-unequal method=positive status=Estimated distance=0.3555099128661029 oracle=0.35550991284058314 error=2.5519752977487542E-11 work=849 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=0 batch=4096 nsPerCall=6005.2490234375
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=0 batch=128 nsPerCall=254650.0
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=1 batch=128 nsPerCall=257053.90625
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=1 batch=4096 nsPerCall=5998.583984375
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=2 batch=4096 nsPerCall=5965.966796875
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=2 batch=128 nsPerCall=253828.90625
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=3 batch=128 nsPerCall=303164.0625
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=3 batch=4096 nsPerCall=5995.166015625
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=4 batch=4096 nsPerCall=5994.3115234375
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=4 batch=128 nsPerCall=253374.21875
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=5 batch=128 nsPerCall=253639.84375
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=5 batch=4096 nsPerCall=6645.1171875
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=6 batch=4096 nsPerCall=6004.8828125
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=6 batch=128 nsPerCall=255000.0
+GVM_SCALAR_METHOD case=linear-concentrated method=fourier status=Resolved distance=1.2944204724041075 oracle=1.2944204724041122 error=4.6629367034256575E-15 work=21 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=linear-concentrated method=positive status=Estimated distance=1.294420472061491 oracle=1.2944204724041122 error=3.4262126469286613E-10 work=1800 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=0 batch=4096 nsPerCall=9210.44921875
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=0 batch=64 nsPerCall=611650.0
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=1 batch=64 nsPerCall=641420.3125
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=1 batch=4096 nsPerCall=9286.4990234375
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=2 batch=4096 nsPerCall=9333.59375
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=2 batch=64 nsPerCall=620476.5625
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=3 batch=64 nsPerCall=625631.25
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=3 batch=4096 nsPerCall=9250.2197265625
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=4 batch=4096 nsPerCall=9296.2890625
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=4 batch=64 nsPerCall=656514.0625
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=5 batch=64 nsPerCall=628303.125
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=5 batch=4096 nsPerCall=9321.1181640625
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=6 batch=4096 nsPerCall=9239.16015625
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=6 batch=64 nsPerCall=614137.5
+GVM_SCALAR_METHOD case=opposed-weak method=fourier status=NumericallyUnresolved distance=none oracle=47.127575486246805 error=none work=25 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=opposed-weak method=positive status=Estimated distance=47.127575485948704 oracle=47.127575486246805 error=2.9810109936079243E-10 work=764 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=0 batch=2048 nsPerCall=9986.181640625
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=0 batch=128 nsPerCall=230289.84375
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=1 batch=128 nsPerCall=231673.4375
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=1 batch=2048 nsPerCall=9946.240234375
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=2 batch=2048 nsPerCall=9927.685546875
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=2 batch=128 nsPerCall=236775.0
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=3 batch=128 nsPerCall=228739.84375
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=3 batch=2048 nsPerCall=10031.787109375
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=4 batch=2048 nsPerCall=9912.98828125
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=4 batch=128 nsPerCall=230504.6875
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=5 batch=128 nsPerCall=229883.59375
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=5 batch=2048 nsPerCall=9957.861328125
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=6 batch=2048 nsPerCall=9998.681640625
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=6 batch=128 nsPerCall=229561.71875
+GVM_SCALAR_METHOD case=opposed-moderate method=fourier status=NumericallyUnresolved distance=none oracle=45.0461096112954 error=none work=25 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=opposed-moderate method=positive status=Estimated distance=45.04610961111882 oracle=45.0461096112954 error=1.765769752637425E-10 work=1012 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=0 batch=2048 nsPerCall=9943.798828125
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=0 batch=64 nsPerCall=409889.0625
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=1 batch=64 nsPerCall=427262.5
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=1 batch=2048 nsPerCall=9941.796875
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=2 batch=2048 nsPerCall=9900.87890625
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=2 batch=64 nsPerCall=406601.5625
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=3 batch=64 nsPerCall=407339.0625
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=3 batch=2048 nsPerCall=9943.65234375
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=4 batch=2048 nsPerCall=9860.64453125
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=4 batch=64 nsPerCall=407904.6875
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=5 batch=64 nsPerCall=408267.1875
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=5 batch=2048 nsPerCall=9922.021484375
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=6 batch=2048 nsPerCall=9874.8046875
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=6 batch=64 nsPerCall=423571.875
+GVM_SCALAR_METHOD case=curved-concentrated method=fourier status=Resolved distance=1.316280588783481 oracle=1.3162805891364138 error=3.5293279410097966E-10 work=21 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=curved-concentrated method=positive status=Estimated distance=1.316280589059451 oracle=1.3162805891364138 error=7.69628805130651E-11 work=25098 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=0 batch=2048 nsPerCall=10011.1328125
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=0 batch=1 nsPerCall=2.60989E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=1 batch=1 nsPerCall=2.6335E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=1 batch=2048 nsPerCall=10055.56640625
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=2 batch=2048 nsPerCall=9971.044921875
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=2 batch=1 nsPerCall=2.62234E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=3 batch=1 nsPerCall=2.61291E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=3 batch=2048 nsPerCall=9986.71875
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=4 batch=2048 nsPerCall=9947.4609375
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=4 batch=1 nsPerCall=2.61488E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=5 batch=1 nsPerCall=2.68949E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=5 batch=2048 nsPerCall=10045.556640625
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=6 batch=2048 nsPerCall=9945.41015625
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=6 batch=1 nsPerCall=2.74761E7
+GVM_SCALAR_COMPLETE fixtures=8 methods=16 accepted=14 refused=2 rounds=7 sinkFinite=true
+GVM_SCALAR_ENV pid=50328 java=17.0.4 os=Windows_11 arch=amd64 processors=32 maxHeap=6442450944 tolerance=1.0E-8 rounds=7 timed=true warmupMs=500 calibrationTargetMs=20 maxBatch=65536
+GVM_SCALAR_METHOD case=gaussian method=fourier status=Resolved distance=0.5 oracle=0.5 error=0.0 work=0 unit=harmonics path=gaussian
+GVM_SCALAR_METHOD case=gaussian method=positive status=Estimated distance=0.5 oracle=0.5 error=0.0 work=0 unit=evaluations path=gaussian
+GVM_SCALAR_TIMING case=gaussian method=fourier round=0 batch=16384 nsPerCall=1544.64111328125
+GVM_SCALAR_TIMING case=gaussian method=positive round=0 batch=65536 nsPerCall=33.8043212890625
+GVM_SCALAR_TIMING case=gaussian method=positive round=1 batch=65536 nsPerCall=33.831787109375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=1 batch=16384 nsPerCall=1510.3515625
+GVM_SCALAR_TIMING case=gaussian method=fourier round=2 batch=16384 nsPerCall=1535.55908203125
+GVM_SCALAR_TIMING case=gaussian method=positive round=2 batch=65536 nsPerCall=33.9263916015625
+GVM_SCALAR_TIMING case=gaussian method=positive round=3 batch=65536 nsPerCall=33.8714599609375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=3 batch=16384 nsPerCall=2118.10302734375
+GVM_SCALAR_TIMING case=gaussian method=fourier round=4 batch=16384 nsPerCall=1529.144287109375
+GVM_SCALAR_TIMING case=gaussian method=positive round=4 batch=65536 nsPerCall=30.10101318359375
+GVM_SCALAR_TIMING case=gaussian method=positive round=5 batch=65536 nsPerCall=29.742431640625
+GVM_SCALAR_TIMING case=gaussian method=fourier round=5 batch=16384 nsPerCall=1508.642578125
+GVM_SCALAR_TIMING case=gaussian method=fourier round=6 batch=16384 nsPerCall=1511.376953125
+GVM_SCALAR_TIMING case=gaussian method=positive round=6 batch=65536 nsPerCall=30.2581787109375
+GVM_SCALAR_METHOD case=constant-opposed method=fourier status=Resolved distance=47.1275755018718 oracle=47.1275755018718 error=0.0 work=0 unit=harmonics path=constant-angular
+GVM_SCALAR_METHOD case=constant-opposed method=positive status=Estimated distance=47.1275755018718 oracle=47.1275755018718 error=0.0 work=0 unit=evaluations path=constant-angular
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=0 batch=16384 nsPerCall=1739.434814453125
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=0 batch=65536 nsPerCall=155.98297119140625
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=1 batch=65536 nsPerCall=153.2440185546875
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=1 batch=16384 nsPerCall=1761.4501953125
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=2 batch=16384 nsPerCall=1750.653076171875
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=2 batch=65536 nsPerCall=153.90167236328125
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=3 batch=65536 nsPerCall=152.9510498046875
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=3 batch=16384 nsPerCall=1753.948974609375
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=4 batch=16384 nsPerCall=2280.56640625
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=4 batch=65536 nsPerCall=155.00946044921875
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=5 batch=65536 nsPerCall=152.96478271484375
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=5 batch=16384 nsPerCall=1753.79638671875
+GVM_SCALAR_TIMING case=constant-opposed method=fourier round=6 batch=16384 nsPerCall=1739.16015625
+GVM_SCALAR_TIMING case=constant-opposed method=positive round=6 batch=65536 nsPerCall=153.10516357421875
+GVM_SCALAR_METHOD case=linear-moderate method=fourier status=Resolved distance=0.06387735667970504 oracle=0.0638773564899703 error=1.8973474180672412E-10 work=6 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=linear-moderate method=positive status=Estimated distance=0.06387735652849859 oracle=0.0638773564899703 error=3.852829166817173E-11 work=712 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=0 batch=2048 nsPerCall=6040.869140625
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=0 batch=128 nsPerCall=253645.3125
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=1 batch=128 nsPerCall=234480.46875
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=1 batch=2048 nsPerCall=6011.81640625
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=2 batch=2048 nsPerCall=6017.919921875
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=2 batch=128 nsPerCall=235228.90625
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=3 batch=128 nsPerCall=236240.625
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=3 batch=2048 nsPerCall=11407.12890625
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=4 batch=2048 nsPerCall=5977.685546875
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=4 batch=128 nsPerCall=233839.84375
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=5 batch=128 nsPerCall=235237.5
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=5 batch=2048 nsPerCall=6092.3828125
+GVM_SCALAR_TIMING case=linear-moderate method=fourier round=6 batch=2048 nsPerCall=6093.84765625
+GVM_SCALAR_TIMING case=linear-moderate method=positive round=6 batch=128 nsPerCall=234975.78125
+GVM_SCALAR_METHOD case=curved-unequal method=fourier status=Resolved distance=0.3555099130903499 oracle=0.35550991284058314 error=2.49766762827619E-10 work=5 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=curved-unequal method=positive status=Estimated distance=0.3555099128661029 oracle=0.35550991284058314 error=2.5519752977487542E-11 work=849 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=0 batch=4096 nsPerCall=8419.4580078125
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=0 batch=128 nsPerCall=270659.375
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=1 batch=128 nsPerCall=270449.21875
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=1 batch=4096 nsPerCall=6083.544921875
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=2 batch=4096 nsPerCall=6047.119140625
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=2 batch=128 nsPerCall=269858.59375
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=3 batch=128 nsPerCall=270474.21875
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=3 batch=4096 nsPerCall=6051.7578125
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=4 batch=4096 nsPerCall=6052.8564453125
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=4 batch=128 nsPerCall=339742.96875
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=5 batch=128 nsPerCall=291913.28125
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=5 batch=4096 nsPerCall=6203.7109375
+GVM_SCALAR_TIMING case=curved-unequal method=fourier round=6 batch=4096 nsPerCall=6117.6025390625
+GVM_SCALAR_TIMING case=curved-unequal method=positive round=6 batch=128 nsPerCall=287027.34375
+GVM_SCALAR_METHOD case=linear-concentrated method=fourier status=Resolved distance=1.2944204724041075 oracle=1.2944204724041122 error=4.6629367034256575E-15 work=21 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=linear-concentrated method=positive status=Estimated distance=1.294420472061491 oracle=1.2944204724041122 error=3.4262126469286613E-10 work=1800 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=0 batch=4096 nsPerCall=9206.8603515625
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=0 batch=32 nsPerCall=633553.125
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=1 batch=32 nsPerCall=633946.875
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=1 batch=4096 nsPerCall=9234.130859375
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=2 batch=4096 nsPerCall=9304.2724609375
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=2 batch=32 nsPerCall=651428.125
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=3 batch=32 nsPerCall=640075.0
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=3 batch=4096 nsPerCall=9274.658203125
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=4 batch=4096 nsPerCall=9231.591796875
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=4 batch=32 nsPerCall=636162.5
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=5 batch=32 nsPerCall=690565.625
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=5 batch=4096 nsPerCall=9213.427734375
+GVM_SCALAR_TIMING case=linear-concentrated method=fourier round=6 batch=4096 nsPerCall=9212.4755859375
+GVM_SCALAR_TIMING case=linear-concentrated method=positive round=6 batch=32 nsPerCall=681106.25
+GVM_SCALAR_METHOD case=opposed-weak method=fourier status=NumericallyUnresolved distance=none oracle=47.127575486246805 error=none work=25 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=opposed-weak method=positive status=Estimated distance=47.127575485948704 oracle=47.127575486246805 error=2.9810109936079243E-10 work=764 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=0 batch=2048 nsPerCall=9947.0703125
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=0 batch=128 nsPerCall=247362.5
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=1 batch=128 nsPerCall=244695.3125
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=1 batch=2048 nsPerCall=10190.576171875
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=2 batch=2048 nsPerCall=9851.07421875
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=2 batch=128 nsPerCall=248804.6875
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=3 batch=128 nsPerCall=258687.5
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=3 batch=2048 nsPerCall=10099.70703125
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=4 batch=2048 nsPerCall=9948.828125
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=4 batch=128 nsPerCall=257731.25
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=5 batch=128 nsPerCall=246225.78125
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=5 batch=2048 nsPerCall=10121.484375
+GVM_SCALAR_TIMING case=opposed-weak method=fourier round=6 batch=2048 nsPerCall=10057.861328125
+GVM_SCALAR_TIMING case=opposed-weak method=positive round=6 batch=128 nsPerCall=249978.90625
+GVM_SCALAR_METHOD case=opposed-moderate method=fourier status=NumericallyUnresolved distance=none oracle=45.0461096112954 error=none work=25 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=opposed-moderate method=positive status=Estimated distance=45.04610961111882 oracle=45.0461096112954 error=1.765769752637425E-10 work=1012 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=0 batch=2048 nsPerCall=10016.30859375
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=0 batch=64 nsPerCall=437842.1875
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=1 batch=64 nsPerCall=426010.9375
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=1 batch=2048 nsPerCall=10340.869140625
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=2 batch=2048 nsPerCall=9974.951171875
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=2 batch=64 nsPerCall=426792.1875
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=3 batch=64 nsPerCall=431340.625
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=3 batch=2048 nsPerCall=9950.68359375
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=4 batch=2048 nsPerCall=9898.388671875
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=4 batch=64 nsPerCall=442445.3125
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=5 batch=64 nsPerCall=422740.625
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=5 batch=2048 nsPerCall=9969.62890625
+GVM_SCALAR_TIMING case=opposed-moderate method=fourier round=6 batch=2048 nsPerCall=9880.56640625
+GVM_SCALAR_TIMING case=opposed-moderate method=positive round=6 batch=64 nsPerCall=445012.5
+GVM_SCALAR_METHOD case=curved-concentrated method=fourier status=Resolved distance=1.316280588783481 oracle=1.3162805891364138 error=3.5293279410097966E-10 work=21 unit=harmonics path=fourier
+GVM_SCALAR_METHOD case=curved-concentrated method=positive status=Estimated distance=1.316280589059451 oracle=1.3162805891364138 error=7.69628805130651E-11 work=25098 unit=evaluations path=positive-integration
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=0 batch=2048 nsPerCall=9938.37890625
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=0 batch=1 nsPerCall=2.57815E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=1 batch=1 nsPerCall=2.56991E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=1 batch=2048 nsPerCall=9916.845703125
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=2 batch=2048 nsPerCall=9911.083984375
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=2 batch=1 nsPerCall=2.60003E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=3 batch=1 nsPerCall=2.63317E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=3 batch=2048 nsPerCall=9968.5546875
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=4 batch=2048 nsPerCall=9882.373046875
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=4 batch=1 nsPerCall=2.58447E7
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=5 batch=1 nsPerCall=2.70323E7
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=5 batch=2048 nsPerCall=9981.396484375
+GVM_SCALAR_TIMING case=curved-concentrated method=fourier round=6 batch=2048 nsPerCall=9878.3203125
+GVM_SCALAR_TIMING case=curved-concentrated method=positive round=6 batch=1 nsPerCall=2.63413E7
+GVM_SCALAR_COMPLETE fixtures=8 methods=16 accepted=14 refused=2 rounds=7 sinkFinite=true

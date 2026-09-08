@@ -168,12 +168,14 @@ is necessarily so large.
 - No source licenses, patents or application-specific permissions are inferred from
   these mathematical tests. The scope is fixed-law numerical comparison only.
 
-The [explicit scalar Scala prototype](GVM_POSITIVE_SCALAR_PROTOTYPE.md) now exercises
-Gaussian/phase preprocessing, hard budgets, interruption checks and honest estimated
-error semantics in test sources. Keep the existing Fourier method and its unresolved results unchanged.
-Require end-to-end independent oracles, adversarial aliasing/conditioning controls,
-documentation and CI before making any new public API available. Certified quadrature
-and broader dimensions remain separate gates.
+The [explicit scalar Scala prototype](GVM_POSITIVE_SCALAR_PROTOTYPE.md) supplied the
+end-to-end preprocessing, budget, interruption and estimated-error controls. It has
+since moved into the [opt-in public API](GVM_SCALAR_BHATTACHARYYA.md), which adds analytic
+shortcuts and near-limit tests. Follow that guide for current CI/integration status.
+The [scalar timing study](GVM_SCALAR_PERFORMANCE.md) compares complete public calls;
+the Python component alone establishes no end-to-end speedup. The existing Fourier
+method and its unresolved results remain unchanged. Certified quadrature and broader
+dimensions remain separate gates.
 
 Related: [prototype](../tools/gvm_bhattacharyya_positive.py),
 [seven acceptance tests](../tools/test_gvm_bhattacharyya_positive.py),

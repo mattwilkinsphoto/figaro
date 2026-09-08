@@ -110,9 +110,16 @@ This sequence is a proposed priority order, not a calendar estimate.
    with identity/Gaussian/uniform/constant-angle shortcuts, near-limit controls,
    a user guide and executable examples. All 309 modernization tests pass locally.
    The Fourier API remains unchanged;
-   public-API CI/integration pending. Next: verify that gate and assess matched-accuracy
-   end-to-end scalar work before recommending method-selection policies. Stronger
-   rounding analysis and multidimensional alternatives remain separate work.
+   public-API CI/integration pending. The [matched-accuracy scalar study](docs/GVM_SCALAR_PERFORMANCE.md)
+   now compares eight physical-kernel pairs at 1e-8 nats in three fresh JVMs: 14 accepted
+   method/case combinations and two explicitly labeled Fourier refusals, with all 336
+   timing rounds retained. Fourier is about 39–69x faster on ordinary coupled fixtures
+   and 2,626x faster on the high-curvature fixture; positive integration recovers the
+   two tiny-overlap refusals at about 0.25–0.43 ms. Analytic shortcuts are treated separately.
+   Thirteen evidence/oracle checks and an untimed Scala gate validate the study; its
+   CI/integration is pending. Next: profile the high-work positive case before making
+   algorithmic refinement/bookkeeping changes. Stronger rounding analysis and
+   multidimensional alternatives remain separate work; no automatic method switch.
 10. Linear-angular mutual information: lower-priority research requested 2026-09-07.
    Establish numerical methods, special cases and error contracts before exposing APIs;
    see [wishlist](WISHLIST.md). The Bhattacharyya assessment does not implement MI.

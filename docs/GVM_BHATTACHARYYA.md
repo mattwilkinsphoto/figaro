@@ -240,6 +240,9 @@ research suite retains direct angular and positive linear integration controls.
 
 The [matched-accuracy timing study](GVM_BHATTACHARYYA_PERFORMANCE.md) now measures both
 fresh and reused tensor rules, including a faster problem-specific reduced-rule control.
+The follow-on [scalar API timing study](GVM_SCALAR_PERFORMANCE.md), at a tighter 1e-8-nat
+target, favors Fourier for ordinary coupled scalar cases; positive integration remains
+an explicit recovery option for eligible tiny-overlap refusals, not an automatic fallback.
 The [96-pair reliability grid](GVM_BHATTACHARYYA_RELIABILITY.md) now checks concentration,
 opposition, unequal Gaussian marginals and dimension at three tolerances. Eligibility
 within the concentration/dimension caps does not guarantee resolution.

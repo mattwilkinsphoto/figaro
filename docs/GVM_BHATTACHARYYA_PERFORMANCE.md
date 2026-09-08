@@ -5,6 +5,9 @@ Status: integrated on main through `e30c8b03`; the study commit `4de2c9f8` has
 executable study and regression gates, not a new library algorithm, wider numerical
 range or compiled release. The measured library is the guarded implementation at
 `251f9540`; the study source and raw evidence accompany this document.
+For the later positive scalar API, see the separate
+[1e-8-nat scalar comparison study](GVM_SCALAR_PERFORMANCE.md). Its timings use different
+fixtures/protocol and must not be mixed into this study's 1e-6-nat speed ratios.
 
 ## Overview: what changed and why it matters
 

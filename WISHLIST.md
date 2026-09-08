@@ -224,8 +224,13 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
   the [public scalar comparison](docs/GVM_SCALAR_BHATTACHARYYA.md). It retains the
   oracle grid, preprocessing-error estimates, budgets, interruption and concurrency
   controls, and adds analytic shortcuts, near-limit tests and executable user examples.
-  `Estimated` is not a certified bound. Next: CI promotion and matched-accuracy scalar
-  work assessment; no automatic Fourier fallback or multidimensional extension.
+  `Estimated` is not a certified bound; no automatic Fourier fallback or multidimensional extension.
+- **Scalar method-selection evidence — locally validated, CI/integration pending:**
+  The [matched-accuracy study](docs/GVM_SCALAR_PERFORMANCE.md) retains three fresh JVMs,
+  eight fixtures and 336 rounds at a 1e-8-nat target, with 13 evidence/oracle checks.
+  Fourier is the starting choice for ordinary coupled cases; positive integration
+  recovers the tested eligible tiny-overlap refusals. Next: profile the high-work
+  positive case and assess algorithmic improvements without weakening numerical contracts.
 - **Mutual information — research wishlist, lower priority:** begin with dependence
   between the Gaussian vector and angle within one GVM. Investigate analytic conditional
   entropy and Fourier/numerical marginal entropy; validate uncoupled and uniform limits.
