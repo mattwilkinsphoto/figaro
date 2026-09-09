@@ -158,14 +158,15 @@ object RareEventImportance {
     require(maxScoreEvaluations>0 && maxStoredValues>0 && maxStoredValues<=10000000 && streams!=null)
     streams.validate(randomAlgorithm)
   }
-  enum FitStatus { case Fitted, RoundBudgetReached, ScoreBudgetReached, InsufficientElite, NumericalFailure }
+  enum FitStatus { case Fitted, RoundBudgetReached, ScoreBudgetReached, InsufficientElite, NumericalFailure, MixtureFitFailure }
   /** Each round's actual threshold, effective elite count and observed event hits. */
   final case class Round(level: Double,eliteEss: Double,eventHits: Int)
   /** No pilot draw contributes to a production estimate; proposal exists only for Fitted.
     * densityEvaluations counts base/full-proposal calls, not nested component calls.
     */
   final case class FitResult(status: FitStatus,proposal: Option[Frozen],rounds: Vector[Round],
-    scoreEvaluations: Int,densityEvaluations: Long,randomStream: RandomStreams.Descriptor,message: String)
+    scoreEvaluations: Int,densityEvaluations: Long,randomStream: RandomStreams.Descriptor,message: String,
+    componentDensityEvaluations: Long=0)
 
   /** Fit weighted elite moments toward score(x)>=threshold, then freeze the proposal.
     * @param base normalized prior law; sampling/density callbacks must be mutually consistent
@@ -175,14 +176,35 @@ object RareEventImportance {
     * @return one defensive Gaussian or explicit fit refusal; not automatic mixture fitting/mode discovery
     * @example `RareEventImportance.fitGaussian(base,x => x.head,5.0)` */
   def fitGaussian(base: VectorImportance.Proposal,score: Vector[Double] => Double,threshold: Double,config: FitConfig=FitConfig()): FitResult = {
+    fit(base,score,threshold,config,None)
+  }
+
+  /** Event-weighted, explicit-component Gaussian mixture CE; all pilot samples are discarded.
+    * @param base normalized continuous vector law
+    * @param score pure finite score; event is score>=threshold
+    * @param threshold finite event boundary
+    * @param config pilot score, storage, RNG and defensive-weight policy
+    * @param mixture weighted EM policy; ridge/inflation come from THIS policy, not config;
+    * its density cap is shared across all rounds and component minimum is weighted ESS
+    * @return frozen defensive mixture only after threshold and numerical fit success
+    * @example `fitMixture(base,_.head,5,FitConfig(),GaussianMixtureProposal.Config(components=2))`
+    */
+  def fitMixture(base: VectorImportance.Proposal,score: Vector[Double] => Double,threshold: Double,
+    config: FitConfig=FitConfig(),mixture: GaussianMixtureProposal.Config=GaussianMixtureProposal.Config()): FitResult = {
+    require(mixture!=null); fit(base,score,threshold,config,Some(mixture))
+  }
+
+  private def fit(base: VectorImportance.Proposal,score: Vector[Double] => Double,threshold: Double,
+    config: FitConfig,mixture: Option[GaussianMixtureProposal.Config]): FitResult = {
     validate(base); require(score!=null && threshold.isFinite && config!=null)
     val d=base.dimension; val n=config.drawsPerRound
     require(n.toLong*(d+4)<=config.maxStoredValues,"Pilot storage budget exceeded")
+    mixture.foreach(m => require(n.toLong*(2*d+m.components+5)<=config.maxStoredValues,"Combined CE and EM storage budget exceeded"))
     require(config.diagonalRidge.isEmpty || config.diagonalRidge.size==d)
     val allocated=stream(config.seed,config.randomAlgorithm,config.streams,0)
     val rng=new scala.util.Random(allocated.random)
-    var current=prior(base); var history=Vector.empty[Round]; var calls=0; var previous=Double.NegativeInfinity
-    def result(s: FitStatus,p: Option[Frozen],message: String)=FitResult(s,p,history,calls,2L*calls,allocated.descriptor,message)
+    var current=prior(base); var history=Vector.empty[Round]; var calls=0; var previous=Double.NegativeInfinity; var emCalls=0L
+    def result(s: FitStatus,p: Option[Frozen],message: String)=FitResult(s,p,history,calls,2L*calls,allocated.descriptor,message,emCalls)
     var round=0
     while(round<config.maxRounds) {
       if(n>config.maxScoreEvaluations-calls) return result(FitStatus.ScoreBudgetReached,None,"No partial pilot batch started")
@@ -206,9 +228,19 @@ object RareEventImportance {
         val v=elite.indices.map(k => weights(k)*(elite(k)._1(a)-mean(a))*(elite(k)._1(b)-mean(b))).sum
         (v+(if(i==j && config.diagonalRidge.nonEmpty) config.diagonalRidge(i) else 0))*config.covarianceInflation
       }
-      val candidate=try VectorImportance.Gaussian(G(mean,covariance))
-        catch { case _: IllegalArgumentException | _: ArithmeticException | _: org.apache.commons.math3.exception.MathIllegalArgumentException =>
-          return result(FitStatus.NumericalFailure,None,"Weighted elite covariance is numerically unresolved") }
+      val candidate: VectorImportance.Proposal=mixture match {
+        case None =>
+          try VectorImportance.Gaussian(G(mean,covariance))
+          catch { case _: IllegalArgumentException | _: ArithmeticException | _: org.apache.commons.math3.exception.MathIllegalArgumentException =>
+            return result(FitStatus.NumericalFailure,None,"Weighted elite covariance is numerically unresolved") }
+        case Some(policy) =>
+          if(emCalls>=policy.maxDensityEvaluations) return result(FitStatus.MixtureFitFailure,None,"Weighted EM aggregate density cap reached")
+          val fitted=GaussianMixtureProposal.fitWeighted(elite.map(_._1),elite.map(_._3),
+            policy.copy(maxDensityEvaluations=policy.maxDensityEvaluations-emCalls))
+          emCalls+=fitted.densityEvaluations
+          if(fitted.proposal.isEmpty) return result(FitStatus.MixtureFitFailure,None,s"${fitted.status}: ${fitted.message}")
+          fitted.proposal.get
+      }
       current=defensive(base,candidate,config.priorWeight)
       if(level==threshold) return result(FitStatus.Fitted,Some(current),"Pilot threshold reached; independent production and region checks still required")
       round+=1

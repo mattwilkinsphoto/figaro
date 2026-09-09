@@ -5,12 +5,21 @@
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The source default is
-`6.0.0-modern.21-SNAPSHOT`; it requires local publication or an explicitly configured
+`6.0.0-modern.22-SNAPSHOT`; it requires local publication or an explicitly configured
 artifact repository. A locally distributed `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
+
+- `6.0.0-modern.22-SNAPSHOT` implements the approved three-priority expansion:
+  [weighted event-mixture fitting](WEIGHTED_RARE_EVENT_MIXTURES.md),
+  [frozen root proposals in restricted static graphs](STATIC_GRAPH_PROPOSALS.md),
+  and [extended scalar/count constructions and information measures](EXTENDED_CONSTRUCTIONS.md).
+  [Complete evidence](CAPABILITY_EXPANSION_ACCEPTANCE.md) retains failures, slower
+  controls and all training/setup work. Rebuild consumers for additive result fields
+  and enum cases; inference defaults remain unchanged. GVM-mixture comparison is
+  a [research backlog item](GVM_MIXTURE_RESEARCH_PLAN.md), not a tracking implementation.
 
 - `6.0.0-modern.21-SNAPSHOT` adds [query-aware rare-event proposals](RARE_EVENT_PROPOSALS.md):
   explicit defensive mixtures, pilot-only weighted Gaussian CE fitting, independent

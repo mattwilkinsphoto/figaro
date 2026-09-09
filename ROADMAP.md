@@ -12,16 +12,16 @@ on main. See [acceptance evidence](docs/CORE_PERFORMANCE_ACCEPTANCE.md),
 [release notes](docs/RELEASE_NOTES.md) and [migration limitations](docs/MIGRATION.md).
 The source remains a development snapshot, not a universally validated stable release.
 
-## Next program: distribution breadth
+## Completed program: distribution breadth
 
-The next approved sequence is:
+The completed sequence is:
 
 1. [Legacy-distribution consolidation](docs/LEGACY_DISTRIBUTION_CONTRACTS.md)
    (modern.19, integrated on main at CI-verified `acaecb98`): consistent sampling/log likelihoods, support contracts,
    analytic information measures and inference-path regressions.
 2. [Covariance modeling](docs/COVARIANCE_PRIORS.md) (modern.20, integrated on main at CI-verified `59f63f57`): LKJ correlation priors and inverse-Wishart, with explicit
    correlation/scale/covariance semantics and independent numerical checks.
-3. [Query-aware rare-event proposals](docs/RARE_EVENT_PROPOSALS.md) (modern.21, locally validated; remote CI required before integration): literature-led design, discarded pilot costs
+3. [Query-aware rare-event proposals](docs/RARE_EVENT_PROPOSALS.md) (modern.21, integrated on main at CI-verified `751579be`): literature-led design, discarded pilot costs
    included in [complete comparisons](docs/RARE_EVENT_ACCEPTANCE.md), held-out accuracy
    and explicit missing-mode limitations. The bounded API supplies ordinary normalized-base
    probability estimation and single-Gaussian CE fitting; automatic weighted mixtures,
@@ -30,13 +30,39 @@ The next approved sequence is:
 Each stage requires its own validation and versioned integration. None promises
 universal stopping, discovery of unspecified modes, or arbitrary shared-graph safety.
 
+## Capability expansion (modern.22; approved 2026-09-09)
+
+The following three capabilities are implemented and locally release-validated for
+modern.22: 539 modernization tests, independent published consumer and all artifact
+and documentation gates pass. Source promotion to main requires passing CI on the
+exact commit. See [acceptance evidence](docs/CAPABILITY_EXPANSION_ACCEPTANCE.md).
+
+1. [Event-weighted multi-component Gaussian fitting](docs/WEIGHTED_RARE_EVENT_MIXTURES.md): explicit component count, weighted
+   EM with component-ESS safeguards, independent production and complete pilot-inclusive
+   comparisons against single-Gaussian, supplied-mixture and prior controls.
+2. [Broader restricted graph execution](docs/STATIC_GRAPH_PROPOSALS.md): explicit frozen joint-root proposals in the
+   callback-free static executor, hierarchical downstream likelihood weighting, and
+   additional scalar stochastic nodes. Preserve per-invocation state, full proposal
+   corrections, worker-count replay and measured total-cost comparisons.
+3. [Reusable constructions](docs/EXTENDED_CONSTRUCTIONS.md): caller-specified monotone transforms, half-infinite
+   truncation, folding, a first wrapped representative and count mixtures. Extend
+   information comparisons only with valid measure/support/error contracts.
+
+These are bounded milestones, not automatic graph compilation, automatic component
+selection or generic certified integration. Each requires tests, user/API documentation,
+packaged-consumer validation and CI before integration.
+
+High-interest research backlog: [GVM mixtures versus Gaussian mixtures](docs/GVM_MIXTURE_RESEARCH_PLAN.md).
+Representation quality, angular topology, information measures and total cost come
+before any application-level tracking or report-fusion implementation.
+
 The approved [three-stage follow-on](docs/INFERENCE_NEXT_STAGES.md) now has
 [end-to-end cost evidence](docs/GRAPH_COST_ACCEPTANCE.md), explicit
 [conditional/joint proposals](docs/JOINT_PROPOSALS.md), a full-rank
 [multivariate Student t](docs/MULTIVARIATE_STUDENT_T.md), and cross-family
 [Monte Carlo KL/Bhattacharyya/MI](docs/MONTE_CARLO_INFORMATION.md).
-These form the modern.14 milestone, with the local clean-build/445-test/consumer
-gate recorded in the cost assessment and remote CI required for main integration.
+These form the modern.14 milestone, now integrated on main. Its historical local
+clean-build/445-test/consumer gate is recorded in the cost assessment.
 The modern.15 follow-on implements [bounded IID precision and declared-region
 coverage](docs/BOUNDED_IID_RELIABILITY.md), with explicit assumptions, outward
 arithmetic and work budgets. The [restricted graph ownership design](docs/OWNED_GRAPH_EXECUTION_DESIGN.md)
@@ -112,7 +138,7 @@ native elements, composition possibilities and missing first-class support.
 | D2: linear-angular joint models (`DIST-02`) | Through mutual information, integrated with D3 at CI-verified `e78a6f0e` | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
 | D3: common missing scalar/count families | Complete on main; source CI verified at `e78a6f0e` | All nine representatives: Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; triangular/Kumaraswamy; appropriate information measures | [Milestone evidence](docs/COMMON_DISTRIBUTIONS_ACCEPTANCE.md): density/tail oracles, observation and MCMC checks, isolated multi-chain determinism, divergence references and independent published consumer |
 | D4: reusable constructions (`DIST-10`) | Initial milestone complete on main; source CI verified at `79615111` | Affine/exp transformations, finite truncation, scalar mixtures, full-covariance Gaussian mixture models, hurdle/zero-inflated counts; Gaussian KL/Bhattacharyya and partition MI | [Guide](docs/DISTRIBUTION_CONSTRUCTIONS.md) and [acceptance evidence](docs/DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md): 362 modernization tests, independent oracles/consumer and clean CI reproducibility; no generic mixed-measure law; pilot-only fitting arrived in modern.12 and numerical mixture metrics in modern.14 |
-| D5: multivariate, tail and matrix breadth | Multivariate t plus five selected representatives implemented | Multinomial, GEV, GPD, restricted full-rank Wishart and S2 von Mises-Fisher; KL/Bhattacharyya plus complementary count-block MI | [New contracts and verification](docs/DISTRIBUTION_BREADTH.md); inverse-Wishart/LKJ, other directional dimensions and specialized variants remain wishlist |
+| D5: multivariate, tail and matrix breadth | Multivariate t, five selected representatives and covariance priors integrated | Multinomial, GEV, GPD, restricted full-rank Wishart, inverse-Wishart, LKJ and S2 von Mises-Fisher; appropriate KL/Bhattacharyya and count-block MI | [Breadth](docs/DISTRIBUTION_BREADTH.md) and [covariance verification](docs/COVARIANCE_PRIORS.md); other directional dimensions and specialized variants remain wishlist |
 | D6: specialist families | Research backlog | Quantile-defined, singular, physical scattering, phase-type and niche empirical laws | Concrete use case, primary definition, viable numerical method and maintained dependency/license evidence |
 
 D1 comes first even when the ultimate target is D2. Ordinary circular von Mises and

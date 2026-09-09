@@ -68,12 +68,12 @@ final case class ExpDistribution(base: ScalarDistribution) extends ScalarDistrib
 
 /** Conditional scalar law on [lower,upper], not censoring or clipping.
   * @param base continuous law, without point masses
-  * @param lower finite lower endpoint inside the base support
-  * @param upper finite upper endpoint greater than lower and inside the base support
+  * @param lower lower endpoint inside the base support; negative infinity allowed
+  * @param upper upper endpoint greater than lower and inside the base support; positive infinity allowed
   * Normalizers unresolved at binary64 precision are refused. Moments are not computed.
   */
 final case class TruncatedDistribution(base: ScalarDistribution,lower: Double,upper: Double) extends ScalarDistribution {
-  require(base != null && lower.isFinite && upper.isFinite && lower < upper,"finite ordered bounds required")
+  require(base != null && !lower.isNaN && !upper.isNaN && lower < upper,"ordered non-NaN bounds required")
   require(lower >= base.support._1 && upper <= base.support._2,"bounds must lie inside base support")
   private def interval(a: Double,b: Double,normalizing: Boolean=false): Double = {
     if(a == b) return 0
@@ -94,7 +94,8 @@ final case class TruncatedDistribution(base: ScalarDistribution,lower: Double,up
   def logDensity(x: Double): Double = { N.argument(x); if(x < lower || x > upper) Double.NegativeInfinity else base.logDensity(x)-math.log(retainedProbability) }
   def cdf(x: Double): Double = { N.argument(x); if(x <= lower) 0 else if(x >= upper) 1 else interval(lower,x)/retainedProbability }
   def survival(x: Double): Double = { N.argument(x); if(x <= lower) 1 else if(x >= upper) 0 else interval(x,upper)/retainedProbability }
-  def quantile(p: Double): Double = { N.probability(p); if(p == 0) lower else if(p == 1) upper else ConstructionMath.bisect(this,p,lower,upper) }
+  def quantile(p: Double): Double = { N.probability(p); if(p == 0) lower else if(p == 1) upper else
+    if(lower.isFinite && upper.isFinite) ConstructionMath.bisect(this,p,lower,upper) else ConstructionMath.inverse(this,p) }
   def support: (Double,Double) = (lower,upper)
   def mean: Option[Double] = None
   def variance: Option[Double] = None

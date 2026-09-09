@@ -3,7 +3,7 @@
 
 [User guide](../USER_GUIDE.md) · [Practical API guide](../API_GUIDE.md) · [Build instructions](../BUILDING.md)
 
-Compiler-derived inventory: **12476 public method entries** from **924 Scala 3 API pages**. Excluded 752 protected/private method entries. Overloads have separate entries.
+Compiler-derived inventory: **12547 public method entries** from **937 Scala 3 API pages**. Excluded 752 protected/private method entries. Overloads have separate entries.
 
 Scope: every public `def` exposed on the generated `com.cra.figaro` API pages, including abstract methods and compiler-generated methods shown by Scaladoc. Inherited members are included wherever Scaladoc renders them. Fields, type aliases, primary constructor signatures, inheritance diagrams, and members hidden by Scaladoc remain available in the linked full API site; this handbook does not reclassify them as functions.
 
@@ -29,7 +29,7 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 - [com.cra.figaro.algorithm.lazyfactored.factory](com.cra.figaro.algorithm.lazyfactored.factory.md) — 37 methods
 - [com.cra.figaro.algorithm.learning](com.cra.figaro.algorithm.learning.md) — 94 methods
 - [com.cra.figaro.algorithm.online](com.cra.figaro.algorithm.online.md) — 8 methods
-- [com.cra.figaro.algorithm.sampling](com.cra.figaro.algorithm.sampling.md) — 707 methods
+- [com.cra.figaro.algorithm.sampling](com.cra.figaro.algorithm.sampling.md) — 720 methods
 - [com.cra.figaro.algorithm.sampling.parallel](com.cra.figaro.algorithm.sampling.parallel.md) — 113 methods
 - [com.cra.figaro.algorithm.structured](com.cra.figaro.algorithm.structured.md) — 90 methods
 - [com.cra.figaro.algorithm.structured.algorithm](com.cra.figaro.algorithm.structured.algorithm.md) — 418 methods
@@ -48,8 +48,8 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 - [com.cra.figaro.experimental.particlebp](com.cra.figaro.experimental.particlebp.md) — 76 methods
 - [com.cra.figaro.language](com.cra.figaro.language.md) — 1967 methods
 - [com.cra.figaro.library.atomic](com.cra.figaro.library.atomic.md) — 19 methods
-- [com.cra.figaro.library.atomic.continuous](com.cra.figaro.library.atomic.continuous.md) — 2134 methods
-- [com.cra.figaro.library.atomic.discrete](com.cra.figaro.library.atomic.discrete.md) — 873 methods
+- [com.cra.figaro.library.atomic.continuous](com.cra.figaro.library.atomic.continuous.md) — 2178 methods
+- [com.cra.figaro.library.atomic.discrete](com.cra.figaro.library.atomic.discrete.md) — 887 methods
 - [com.cra.figaro.library.cache](com.cra.figaro.library.cache.md) — 28 methods
 - [com.cra.figaro.library.collection](com.cra.figaro.library.collection.md) — 191 methods
 - [com.cra.figaro.library.compound](com.cra.figaro.library.compound.md) — 948 methods

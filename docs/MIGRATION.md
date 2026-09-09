@@ -1,5 +1,17 @@
 # Migrating to Scala 3 and sbt 2
 
+## Capability expansion (modern.22)
+
+The [three new capabilities](CAPABILITY_EXPANSION_ACCEPTANCE.md) are opt-in. Rebuild
+consumers: `RareEventImportance.FitResult` and `StaticGraphImportance.Result` gain
+work-accounting fields; `FitStatus` gains `MixtureFitFailure`; the sealed static
+node vocabulary gains five variants. Exhaustive client matches may need new cases.
+`TruncatedDistribution` now accepts infinite endpoints within base support. Some
+previously unsupported scalar comparisons now return guarded numerical results.
+Unweighted mixture fitting, single-Gaussian fitting and inference defaults retain
+their existing contracts. No automatic graph rewriting or model-selection policy
+is introduced. Read the new guides before enabling a proposal or custom transform.
+
 ## Query-aware rare events (modern.21)
 
 [RareEventImportance](RARE_EVENT_PROPOSALS.md) is additive and explicitly opt-in.

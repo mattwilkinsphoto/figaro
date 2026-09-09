@@ -9,7 +9,9 @@ arrays and RNG streams; no mutable `Element` or `Universe` is shared.
 
 Use it when graph construction/evaluation dominates a model expressible with the
 operations below. Keep ordinary Elements, `GraphProposalImportance`, or multi-chain
-MH for dynamic graphs, user functions, fitted proposals or MCMC. This is not an
+MH for dynamic graphs, user functions or MCMC. The modern.22
+[frozen-root proposal extension](STATIC_GRAPH_PROPOSALS.md) supports restricted
+Gaussian/t mixtures, including fitted proposals, plus additional scalar nodes. This is not an
 automatic compiler for existing Figaro models, nor arbitrary-graph thread safety.
 
 ## Quick start: three steps

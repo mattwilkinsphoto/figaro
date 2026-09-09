@@ -48,17 +48,36 @@ object ScalarDivergence {
     check()
     if(p.getClass != q.getClass) return M.unavailable(Unsupported)
     if(p == q) return M.identity
+    // Interval endpoints alone cannot establish positivity for arbitrary callbacks or mixtures with gaps.
+    def positiveInterval(d: ScalarDistribution): Boolean=d match {
+      case _: GaussianDistribution | _: StudentTDistribution | _: CauchyDistribution | _: LaplaceDistribution |
+           _: LogNormalDistribution | _: WeibullDistribution | _: TriangularDistribution | _: KumaraswamyDistribution => true
+      case a: AffineDistribution => positiveInterval(a.base)
+      case a: ExpDistribution => positiveInterval(a.base)
+      case _ => false
+    }
+    if(Vector(p,q).exists {
+      case a: TruncatedDistribution => !positiveInterval(a.base)
+      case a: FoldedDistribution => !positiveInterval(a.base)
+      case _ => false
+    }) return M.unavailable(Unsupported)
     (p,q) match {
       case (a: AffineDistribution,b: AffineDistribution) if a.offset == b.offset && a.multiplier == b.multiplier =>
         return compare(a.base,b.base,overlap,tol,budget,cancelled).copy(method="common affine transform")
       case (a: ExpDistribution,b: ExpDistribution) =>
         return compare(a.base,b.base,overlap,tol,budget,cancelled).copy(method="common exponential transform")
+      case (a: MonotoneDistribution,b: MonotoneDistribution) if a.transform eq b.transform =>
+        return compare(a.base,b.base,overlap,tol,budget,cancelled).copy(method="common declared bijection")
+      case (a: WrappedCauchyDistribution,b: WrappedCauchyDistribution) if !overlap =>
+        val numerator=math.pow(a.rho-b.rho,2)+4*a.rho*b.rho*math.pow(math.sin((a.location-b.location)/2),2)
+        return M.analytic(math.log1p(numerator/((1-a.rho*a.rho)*(1-b.rho*b.rho))),tol,method="wrapped Cauchy Poisson-kernel KL")
       case (a: GaussianDistribution,b: GaussianDistribution) =>
         return if(overlap) GaussianInformation.bhattacharyya(GaussianInformation.scalar(a),GaussianInformation.scalar(b),tol)
           else GaussianInformation.kl(GaussianInformation.scalar(a),GaussianInformation.scalar(b),tol)
       case (_: StudentTDistribution | _: CauchyDistribution | _: LaplaceDistribution | _: LogNormalDistribution |
             _: WeibullDistribution | _: TriangularDistribution | _: KumaraswamyDistribution |
-            _: GeneralizedExtremeValueDistribution | _: GeneralizedParetoDistribution,_) => ()
+            _: GeneralizedExtremeValueDistribution | _: GeneralizedParetoDistribution |
+            _: TruncatedDistribution | _: FoldedDistribution | _: WrappedCauchyDistribution,_) => ()
       case _ => return M.unavailable(Unsupported)
     }
     if(!overlap && (p.support._1 < q.support._1 || p.support._2 > q.support._2)) return M.infinite

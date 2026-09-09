@@ -15169,6 +15169,342 @@ Invocation template:
 com.cra.figaro.library.atomic.discrete.CountElement.apply[D](distribution)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#cdf-640)
+
+```scala
+def cdf(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X<=k) Example NegativeBinomialDistribution(2,.5).cdf(4)
+
+Invocation template:
+
+```scala
+receiver.cdf(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.logProbability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#logProbability-640)
+
+```scala
+def logProbability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count (negative integers are outside these supports) Attributes Returns natural log probability mass, or negative infinity outside support Example NegativeBinomialDistribution(2.5,.4).logProbability(3)
+
+Invocation template:
+
+```scala
+receiver.logProbability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#mean-0)
+
+```scala
+def mean: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical mean in count units
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#quantile-fffff1ae)
+
+```scala
+def quantile(p: Double): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns smallest supported count with CDF>=p; unbounded p=1 and Int overflow throw Example HypergeometricDistribution(20,7,5).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.responsibilities ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#responsibilities-1b0)
+
+```scala
+def responsibilities(k: Int): Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Value parameters k count with positive representable mixture mass Attributes Returns membership probabilities in original component order Example law.responsibilities(3)
+
+Invocation template:
+
+```scala
+receiver.responsibilities(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#survival-640)
+
+```scala
+def survival(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns P(X>k), evaluated directly Example NegativeBinomialDistribution(2,.5).survival(4)
+
+Invocation template:
+
+```scala
+receiver.survival(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#variance-0)
+
+```scala
+def variance: Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Attributes Returns theoretical variance in squared count units
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.probability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#probability-640)
+
+```scala
+final def probability(k: Int): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters k count Attributes Returns mass, subject to exponential underflow Example HypergeometricDistribution(20,7,5).probability(2) Inherited from: CountDistribution
+
+Invocation template:
+
+```scala
+receiver.probability(k)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#sample-360)
+
+```scala
+final def sample(rng: Random): Int
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Int ``.
+
+Source contract/attributes: Value parameters rng non-null caller-owned RNG Attributes Returns count from inverse transform; out-of-Int tail draws throw, never clip Example NegativeBinomialDistribution(2,.5).sample(new scala.util.Random(42)) Inherited from: CountDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureInformation.bhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureInformation$.html#bhattacharyya-fffff38c)
+
+```scala
+def bhattacharyya(p: CountDistribution, q: CountDistribution, tolerance: Double = ..., maxTerms: Int = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: CountDistribution ``; `` q: CountDistribution ``; `` tolerance: Double = ... ``; `` maxTerms: Int = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters maxTerms union-support count cap p first finite-support count law q second law tolerance numerical allowance in nats Attributes Returns full-law Bhattacharyya divergence Example CountMixtureInformation.bhattacharyya(p,q)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.CountMixtureInformation.bhattacharyya(p, q, tolerance, maxTerms)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureInformation.componentMutualInformation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureInformation$.html#componentMutualInformation-5bb)
+
+```scala
+def componentMutualInformation(law: CountMixtureDistribution, tolerance: Double = ..., maxTerms: Int = ...): InformationMetricResult
+```
+
+MI of the explicitly defined component label and count, NOT MI between two mixtures.
+
+Type parameters: none.
+
+Parameters, list 1: `` law: CountMixtureDistribution ``; `` tolerance: Double = ... ``; `` maxTerms: Int = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: MI of the explicitly defined component label and count, NOT MI between two mixtures. Value parameters law finite-support count mixture maxTerms total component-by-count cells, 1..100000 tolerance numerical allowance in nats Attributes Returns I(component;count), or refusal without truncating an infinite tail Example CountMixtureInformation.componentMutualInformation(law)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.CountMixtureInformation.componentMutualInformation(law, tolerance, maxTerms)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CountMixtureInformation.kl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureInformation$.html#kl-fffff38c)
+
+```scala
+def kl(p: CountDistribution, q: CountDistribution, tolerance: Double = ..., maxTerms: Int = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: CountDistribution ``; `` q: CountDistribution ``; `` tolerance: Double = ... ``; `` maxTerms: Int = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters maxTerms maximum union-support counts, 1..100000 p source count law with finite support q comparison law, same integer measure tolerance numerical allowance in nats Attributes Returns full-law KL; Unsupported for nonidentical unbounded laws Example CountMixtureInformation.kl(p,q)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.CountMixtureInformation.kl(p, q, tolerance, maxTerms)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.FromRange.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FromRange$.html#apply-b3c)

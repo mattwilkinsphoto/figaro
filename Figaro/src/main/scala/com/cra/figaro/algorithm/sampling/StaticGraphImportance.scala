@@ -23,6 +23,11 @@ object StaticGraphImportance {
     case Indicator(boolean: Int)
     case Exp(value: Int)
     case Sigmoid(value: Int)
+    case Uniform(lower: Int,upper: Int)
+    case Exponential(rate: Int)
+    case Log(value: Int)
+    case Abs(value: Int)
+    case GreaterThan(left: Int,right: Int)
   }
   /** Opaque compiled tables; there is no public mutable execution-state handle. */
   final class Model private[StaticGraphImportance](val nodes: Vector[Node],val kinds: Vector[Kind],
@@ -59,6 +64,16 @@ object StaticGraphImportance {
         case Node.Indicator(b) => ref(b,Kind.Boolean); ops(i)=6; first(i)=b
         case Node.Exp(v) => real(v); ops(i)=7; first(i)=v
         case Node.Sigmoid(v) => real(v); ops(i)=8; first(i)=v
+        case Node.Uniform(a,b) =>
+          real(a); real(b)
+          (nodes(a),nodes(b)) match { case (Node.Constant(lo),Node.Constant(hi)) => require(hi>lo && (hi-lo).isFinite); case _ => () }
+          ops(i)=9; first(i)=a; second(i)=b
+        case Node.Exponential(r) =>
+          real(r); nodes(r) match { case Node.Constant(v) => require(v>0); case _ => () }
+          ops(i)=10; first(i)=r
+        case Node.Log(v) => real(v); ops(i)=11; first(i)=v
+        case Node.Abs(v) => real(v); ops(i)=12; first(i)=v
+        case Node.GreaterThan(a,b) => real(a); real(b); ops(i)=13; first(i)=a; second(i)=b; kinds(i)=Kind.Boolean
       }
     }
     new Model(nodes,kinds.toVector,ops,first,second,third,constants)
@@ -85,7 +100,7 @@ object StaticGraphImportance {
     */
   final case class Result(logWeights: Vector[Double],values: Vector[Vector[Double]],queries: Vector[Int],
     health: Vector[InferenceHealth.ImportanceReport],observations: Map[Int,Double],nodeEvaluations: Long,
-    streams: Vector[RandomStreams.Descriptor],config: Config)
+    streams: Vector[RandomStreams.Descriptor],config: Config,proposalDensityEvaluations: Long=0)
   private val workerIds=new AtomicLong(0)
 
   /** Evaluate a fresh likelihood-weighting run over a shared immutable definition.
@@ -97,28 +112,78 @@ object StaticGraphImportance {
     * @example `run(model,Vector(2),Map(3 -> 1.0),Config(draws=10000))`
     */
   def run(model: Model,queries: Vector[Int],observations: Map[Int,Double]=Map.empty,config: Config=Config()): Result = {
+    execute(model,queries,observations,config,None)
+  }
+
+  /** Replace independent constant-parameter Normal roots with a frozen joint proposal.
+    * @param model compiled immutable graph
+    * @param roots distinct unobserved Normal node IDs; proposal coordinates follow this order
+    * @param proposal immutable Gaussian/elliptical Student-t or nested mixtures of those;
+    * custom callbacks, bounded-support proposals and conditional proposals are refused
+    * @param queries result node IDs
+    * @param observations downstream stochastic evidence
+    * @param config invocation-owned work/RNG policy
+    * @return likelihood-weighted result with full joint prior/proposal correction
+    * @example `runWithProposal(model,Vector(2),frozen.proposal,Vector(2),Map(4 -> 3.0))`
+    */
+  def runWithProposal(model: Model,roots: Vector[Int],proposal: VectorImportance.Proposal,
+    queries: Vector[Int],observations: Map[Int,Double]=Map.empty,config: Config=Config()): Result = {
+    ParetoTail.interrupted(); require(model!=null && roots!=null && proposal!=null && observations!=null)
+    require(roots.nonEmpty && roots.size==proposal.dimension && roots.distinct.size==roots.size)
+    roots.foreach { i =>
+      require(i>=0 && i<model.nodeCount && model.ops(i)==2 && !observations.contains(i),"Proposal roots must be unobserved Normal nodes")
+      require(model.ops(model.first(i))==0 && model.ops(model.second(i))==0,"Proposal roots must have constant parameters")
+    }
+    var kernels=0
+    def allowed(p: VectorImportance.Proposal,depth: Int): Unit = {
+      require(depth<=4,"Proposal nesting exceeds four levels"); kernels+=1; require(kernels<=256)
+      p match {
+        case _: VectorImportance.Gaussian | _: VectorImportance.StudentT => ()
+        case m: VectorImportance.Mixture => m.components.foreach(allowed(_,depth+1))
+        case _ => throw new IllegalArgumentException("Only immutable full-support Gaussian/t mixture proposals are supported")
+      }
+    }
+    allowed(proposal,0); execute(model,queries,observations,config,Some((roots,proposal)))
+  }
+
+  private def execute(model: Model,queries: Vector[Int],observations: Map[Int,Double],config: Config,
+    rootProposal: Option[(Vector[Int],VectorImportance.Proposal)]): Result = {
     ParetoTail.interrupted(); require(model!=null && queries!=null && observations!=null && config!=null)
     require(queries.nonEmpty && queries.size<=128 && queries.distinct.size==queries.size && queries.forall(i => i>=0 && i<model.nodeCount))
     require(config.draws.toLong*(queries.size+1)<=config.maxStoredValues,"Stored-value budget exceeded")
     require(config.draws.toLong*model.nodeCount<=config.maxNodeEvaluations,"Node-evaluation budget exceeded")
     val observed=Array.fill(model.nodeCount)(false); val evidence=new Array[Double](model.nodeCount)
     observations.foreach { (i,x) =>
-      require(i>=0 && i<model.nodeCount && x.isFinite && (model.ops(i)==1 || model.ops(i)==2),"Only stochastic-node observations supported")
+      require(i>=0 && i<model.nodeCount && x.isFinite && Set(1,2,9,10).contains(model.ops(i)),"Only stochastic-node observations supported")
       if(model.ops(i)==1) require(x==0 || x==1,"Bernoulli observations must be 0/1")
       observed(i)=true; evidence(i)=x
     }
     val count=math.min(config.batches,config.draws)
+    val rootSlot=Array.fill(model.nodeCount)(-1)
+    rootProposal.foreach((ids,_) => ids.zipWithIndex.foreach((id,slot) => rootSlot(id)=slot))
     val streams=RandomStreams.allocate(config.seed,count,config.randomAlgorithm,config.randomStreams)
     val logs=new Array[Double](config.draws)
     val values=Array.fill(queries.size)(new Array[Double](config.draws))
     def batch(index: Int): Unit = {
       val state=new Array[Double](model.nodeCount)
       val rng=streams(index).random
+      val scalaRng=new scala.util.Random(rng)
+      def open(): Double = {
+        var attempts=0
+        while(attempts<128) { ParetoTail.interrupted(); val u=rng.nextDouble(); if(u>0 && u<1) return u; attempts+=1 }
+        throw new ArithmeticException("Open-uniform RNG budget exhausted")
+      }
       val from=(config.draws.toLong*index/count).toInt
       val until=(config.draws.toLong*(index+1)/count).toInt
       var draw=from
       while(draw<until) {
         ParetoTail.interrupted(); var logWeight=0.0; var impossible=false; var i=0
+        val rootDraw=rootProposal.map { (_,p) =>
+          val x=p.sample(scalaRng); ParetoTail.interrupted()
+          require(x.size==p.dimension && x.forall(_.isFinite))
+          val logq=p.logDensity(x); require(logq.isFinite,"Invalid joint proposal density")
+          logWeight= -logq; x
+        }
         while(i<model.nodeCount) {
           if((i & 127)==0) ParetoTail.interrupted()
           val a=model.first(i); val b=model.second(i)
@@ -134,10 +199,11 @@ object StaticGraphImportance {
               x
             case 2 =>
               val m=state(a); val sd=state(b); require(sd>0 && sd.isFinite,"Dynamic standard deviation must be positive finite")
-              if(observed(i)) {
-                val z=(evidence(i)-m)/sd; val logp= -.5*math.log(2*math.Pi)-math.log(sd)-.5*z*z
+              if(observed(i) || rootSlot(i)>=0) {
+                val value=if(observed(i)) evidence(i) else rootDraw.get(rootSlot(i))
+                val z=(value-m)/sd; val logp= -.5*math.log(2*math.Pi)-math.log(sd)-.5*z*z
                 if(!logp.isFinite) throw new ArithmeticException("Normal observation log density outside numeric range")
-                logWeight+=logp; evidence(i)
+                logWeight+=logp; value
               } else m+sd*rng.nextGaussian()
             case 3 => state(a)+state(b)
             case 4 => state(a)*state(b)
@@ -145,6 +211,25 @@ object StaticGraphImportance {
             case 6 => state(a)
             case 7 => math.exp(state(a))
             case 8 => val x=state(a); if(x>=0) 1/(1+math.exp(-x)) else { val e=math.exp(x); e/(1+e) }
+            case 9 =>
+              val lo=state(a); val hi=state(b); val width=hi-lo
+              require(width>0 && width.isFinite,"Uniform bounds require positive finite width")
+              if(observed(i)) {
+                val x=evidence(i); if(x<lo || x>hi) impossible=true else logWeight-=math.log(width); x
+              } else lo+width*rng.nextDouble()
+            case 10 =>
+              val rate=state(a); require(rate>0 && rate.isFinite,"Exponential rate must be positive finite")
+              if(observed(i)) {
+                val x=evidence(i)
+                if(x<0) impossible=true else {
+                  val lp=math.log(rate)-rate*x
+                  if(!lp.isFinite) throw new ArithmeticException("Exponential log density outside numeric range")
+                  logWeight+=lp
+                }; x
+              } else -math.log(open())/rate
+            case 11 => require(state(a)>0,"Log requires a positive value"); math.log(state(a))
+            case 12 => math.abs(state(a))
+            case 13 => if(state(a)>state(b)) 1.0 else 0.0
             case _ => throw new IllegalStateException("Invalid compiled opcode")
           }
           if(!x.isFinite) throw new ArithmeticException(s"Nonfinite value at static node $i")
@@ -202,6 +287,6 @@ object StaticGraphImportance {
     val weights=logs.toVector; val columns=values.iterator.map(_.toVector).toVector
     val health=columns.map(v => InferenceHealth.importance(weights,true,Some(v)))
     Result(weights,columns,queries,health,observations,config.draws.toLong*model.nodeCount,
-      streams.map(_.descriptor).toVector,config)
+      streams.map(_.descriptor).toVector,config,if(rootProposal.isDefined) config.draws.toLong else 0L)
   }
 }

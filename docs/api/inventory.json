@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 924,
+  "pages": 937,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -46923,6 +46923,29 @@
       "page": "com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal",
+      "name": "fitWeighted",
+      "anchor": "fitWeighted-a7b",
+      "signature": "def fitWeighted(points: Vector[Vector[Double]], logWeights: Vector[Double], config: Config = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "points: Vector[Vector[Double]]",
+            "logWeights: Vector[Double]",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Fit a normalized weighted empirical pilot law using regularized EM.",
+      "contract": "Fit a normalized weighted empirical pilot law using regularized EM. Value parameters config explicit components/work policy; minComponentDraws means component ESS here logWeights matching log masses; -Infinity ignores a point; at least one positive mass points discarded finite vectors of dimension 1..32 Attributes Returns numerical fit or refusal; arbitrary additive shifts of logWeights do not change the fit Example fitWeighted(points,logWeights,Config(components=2))",
+      "example": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fitWeighted(points, logWeights, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.Config",
       "name": "productElementNames",
       "anchor": "productElementNames-0",
@@ -53294,6 +53317,31 @@
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance",
+      "name": "fitMixture",
+      "anchor": "fitMixture-fffff997",
+      "signature": "def fitMixture(base: Proposal, score: Vector[Double] => Double, threshold: Double, config: FitConfig = ..., mixture: Config = ...): FitResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "base: Proposal",
+            "score: Vector[Double] => Double",
+            "threshold: Double",
+            "config: FitConfig = ...",
+            "mixture: Config = ..."
+          ]
+        }
+      ],
+      "returns": "FitResult",
+      "summary": "Event-weighted, explicit-component Gaussian mixture CE; all pilot samples are discarded.",
+      "contract": "Event-weighted, explicit-component Gaussian mixture CE; all pilot samples are discarded. Value parameters base normalized continuous vector law config pilot score, storage, RNG and defensive-weight policy mixture weighted EM policy; ridge/inflation come from THIS policy, not config; its density cap is shared across all rounds and component minimum is weighted ESS score pure finite score; event is score>=threshold threshold finite event boundary Attributes Returns frozen defensive mixture only after threshold and numerical fit success Example fitMixture(base,_.head,5,FitConfig(),GaussianMixtureProposal.Config(components=2))",
+      "example": "com.cra.figaro.algorithm.sampling.RareEventImportance.fitMixture(base, score, threshold, config, mixture)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance",
       "name": "prior",
       "anchor": "prior-fffff869",
       "signature": "def prior(base: Proposal): Frozen",
@@ -53558,6 +53606,34 @@
       "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Config.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Abs",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Abs.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Abs",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Abs.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Add",
       "name": "productElementNames",
       "anchor": "productElementNames-0",
@@ -53698,6 +53774,62 @@
       "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Exp.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Exponential",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Exponential.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Exponential",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Exponential.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.GreaterThan",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$GreaterThan.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.GreaterThan",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$GreaterThan.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Indicator",
       "name": "productElementNames",
       "anchor": "productElementNames-0",
@@ -53724,6 +53856,34 @@
       "example": "receiver.productIterator",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Indicator.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Log",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Log.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Log",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Log.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Multiply",
@@ -53808,6 +53968,34 @@
       "example": "receiver.productIterator",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Sigmoid.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Uniform",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Uniform.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Uniform",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Uniform.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.Result",
@@ -53879,6 +54067,32 @@
       "summary": "Evaluate a fresh likelihood-weighting run over a shared immutable definition.",
       "contract": "Evaluate a fresh likelihood-weighting run over a shared immutable definition. Value parameters config work limits and private stream allocation model compiled static model, never an existing mutable Element graph observations immutable map of Bernoulli (0/1) or Normal observations; deterministic evidence is unsupported queries 1..128 distinct node IDs, in result-column order Attributes Returns detached results, including all zero-weight attempts; failures/cancellation never return partial success Example run(model,Vector(2),Map(3 -> 1.0),Config(draws=10000))",
       "example": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.run(model, queries, observations, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.StaticGraphImportance",
+      "name": "runWithProposal",
+      "anchor": "runWithProposal-8fb",
+      "signature": "def runWithProposal(model: Model, roots: Vector[Int], proposal: Proposal, queries: Vector[Int], observations: Map[Int, Double] = ..., config: Config = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "model: Model",
+            "roots: Vector[Int]",
+            "proposal: Proposal",
+            "queries: Vector[Int]",
+            "observations: Map[Int, Double] = ...",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Replace independent constant-parameter Normal roots with a frozen joint proposal.",
+      "contract": "Replace independent constant-parameter Normal roots with a frozen joint proposal. Value parameters config invocation-owned work/RNG policy model compiled immutable graph observations downstream stochastic evidence proposal immutable Gaussian/elliptical Student-t or nested mixtures of those; custom callbacks, bounded-support proposals and conditional proposals are refused queries result node IDs roots distinct unobserved Normal node IDs; proposal coordinates follow this order Attributes Returns likelihood-weighted result with full joint prior/proposal correction Example runWithProposal(model,Vector(2),frozen.proposal,Vector(2),Map(4 -> 3.0))",
+      "example": "com.cra.figaro.algorithm.sampling.StaticGraphImportance.runWithProposal(model, roots, proposal, queries, observations, config)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$.html"
     },
@@ -164476,6 +164690,188 @@
       "page": "com/cra/figaro/library/atomic/continuous/Exponential.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "cdf",
+      "anchor": "cdf-5b2",
+      "signature": "def cdf(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)",
+      "example": "receiver.cdf(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "quantile",
+      "anchor": "quantile-5b2",
+      "signature": "def quantile(p: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)",
+      "example": "receiver.quantile(p)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "sample",
+      "anchor": "sample-fffffec0",
+      "signature": "override def sample(rng: Random): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.",
+      "contract": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "survival",
+      "anchor": "survival-5b2",
+      "signature": "def survival(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)",
+      "example": "receiver.survival(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "variance",
+      "anchor": "variance-0",
+      "signature": "def variance: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow",
+      "example": "receiver.variance",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "density",
+      "anchor": "density-5b2",
+      "signature": "final def density(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution",
+      "example": "receiver.density(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.FoldedDistribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/FoldedDistribution.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.continuous.Gamma",
       "name": "apply",
       "anchor": "apply-b89",
@@ -171506,6 +171902,391 @@
       "example": "receiver.sample(rng)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/LogNormalDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "cdf",
+      "anchor": "cdf-5b2",
+      "signature": "def cdf(y: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "y: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)",
+      "example": "receiver.cdf(y)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(y: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "y: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)",
+      "example": "receiver.logDensity(y)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "quantile",
+      "anchor": "quantile-5b2",
+      "signature": "def quantile(p: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)",
+      "example": "receiver.quantile(p)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "sample",
+      "anchor": "sample-fffffec0",
+      "signature": "override def sample(rng: Random): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.",
+      "contract": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "survival",
+      "anchor": "survival-5b2",
+      "signature": "def survival(y: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "y: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)",
+      "example": "receiver.survival(y)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "variance",
+      "anchor": "variance-0",
+      "signature": "def variance: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow",
+      "example": "receiver.variance",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "density",
+      "anchor": "density-5b2",
+      "signature": "final def density(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution",
+      "example": "receiver.density(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneDistribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log",
+      "name": "forward",
+      "anchor": "forward-5b2",
+      "signature": "def forward(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "",
+      "example": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.forward(x)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log",
+      "name": "inverse",
+      "anchor": "inverse-5b2",
+      "signature": "def inverse(y: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "y: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "",
+      "example": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.inverse(y)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log",
+      "name": "logInverseJacobian",
+      "anchor": "logInverseJacobian-5b2",
+      "signature": "def logInverseJacobian(y: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "y: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Natural log of the absolute inverse derivative, evaluated in output coordinates.",
+      "contract": "Natural log of the absolute inverse derivative, evaluated in output coordinates. Attributes",
+      "example": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.logInverseJacobian(y)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log",
+      "name": "fromProduct",
+      "anchor": "fromProduct-de7",
+      "signature": "def fromProduct(p: Product): MirroredMonoType",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: Product"
+          ]
+        }
+      ],
+      "returns": "MirroredMonoType",
+      "summary": "Creates a new instance of type T with elements taken from product p.",
+      "contract": "Creates a new instance of type T with elements taken from product p. Attributes Inherited from: Singleton",
+      "example": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.fromProduct(p)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.productElementNames",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.productIterator",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform",
+      "name": "domain",
+      "anchor": "domain-0",
+      "signature": "def domain: (Double, Double)",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "(Double, Double)",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.domain",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform",
+      "name": "forward",
+      "anchor": "forward-5b2",
+      "signature": "def forward(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.forward(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform",
+      "name": "increasing",
+      "anchor": "increasing-0",
+      "signature": "def increasing: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.increasing",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform",
+      "name": "inverse",
+      "anchor": "inverse-5b2",
+      "signature": "def inverse(y: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "y: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.inverse(y)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MonotoneTransform",
+      "name": "logInverseJacobian",
+      "anchor": "logInverseJacobian-5b2",
+      "signature": "def logInverseJacobian(y: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "y: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Natural log of the absolute inverse derivative, evaluated in output coordinates.",
+      "contract": "Natural log of the absolute inverse derivative, evaluated in output coordinates. Attributes",
+      "example": "receiver.logInverseJacobian(y)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MonotoneTransform.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal",
@@ -180802,6 +181583,237 @@
       "example": "com.cra.figaro.library.atomic.continuous.WishartInformation.kl(p, q, tolerance)",
       "object": true,
       "page": "com/cra/figaro/library/atomic/continuous/WishartInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "angularLogDensity",
+      "anchor": "angularLogDensity-5b2",
+      "signature": "def angularLogDensity(angle: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "angle: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters angle any finite angle in radians Attributes Returns periodic log density after canonical wrapping; unlike chart-based logDensity Example law.angularLogDensity(3*math.Pi)",
+      "example": "receiver.angularLogDensity(angle)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "cdf",
+      "anchor": "cdf-5b2",
+      "signature": "def cdf(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)",
+      "example": "receiver.cdf(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "circularMean",
+      "anchor": "circularMean-0",
+      "signature": "def circularMean: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "Circular mean direction; None for the uniform law.",
+      "contract": "Circular mean direction; None for the uniform law. Attributes",
+      "example": "receiver.circularMean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "circularVariance",
+      "anchor": "circularVariance-0",
+      "signature": "def circularVariance: Double",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Double",
+      "summary": "Circular variance, not variance of the principal-chart real coordinate.",
+      "contract": "Circular variance, not variance of the principal-chart real coordinate. Attributes",
+      "example": "receiver.circularVariance",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "quantile",
+      "anchor": "quantile-5b2",
+      "signature": "def quantile(p: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)",
+      "example": "receiver.quantile(p)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "sample",
+      "anchor": "sample-fffffec0",
+      "signature": "override def sample(rng: Random): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.",
+      "contract": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "survival",
+      "anchor": "survival-5b2",
+      "signature": "def survival(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)",
+      "example": "receiver.survival(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "variance",
+      "anchor": "variance-0",
+      "signature": "def variance: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow",
+      "example": "receiver.variance",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "density",
+      "anchor": "density-5b2",
+      "signature": "final def density(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution",
+      "example": "receiver.density(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicBinomial",
@@ -193149,6 +194161,280 @@
       "example": "com.cra.figaro.library.atomic.discrete.CountElement.apply[D](distribution)(using name, collection)",
       "object": true,
       "page": "com/cra/figaro/library/atomic/discrete/CountElement$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "cdf",
+      "anchor": "cdf-640",
+      "signature": "def cdf(k: Int): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "k: Int"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters k count Attributes Returns P(X<=k) Example NegativeBinomialDistribution(2,.5).cdf(4)",
+      "example": "receiver.cdf(k)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "logProbability",
+      "anchor": "logProbability-640",
+      "signature": "def logProbability(k: Int): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "k: Int"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters k count (negative integers are outside these supports) Attributes Returns natural log probability mass, or negative infinity outside support Example NegativeBinomialDistribution(2.5,.4).logProbability(3)",
+      "example": "receiver.logProbability(k)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Double",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Attributes Returns theoretical mean in count units",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "quantile",
+      "anchor": "quantile-fffff1ae",
+      "signature": "def quantile(p: Double): Int",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: Double"
+          ]
+        }
+      ],
+      "returns": "Int",
+      "summary": "",
+      "contract": "Value parameters p probability in [0,1] Attributes Returns smallest supported count with CDF>=p; unbounded p=1 and Int overflow throw Example HypergeometricDistribution(20,7,5).quantile(.5)",
+      "example": "receiver.quantile(p)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "responsibilities",
+      "anchor": "responsibilities-1b0",
+      "signature": "def responsibilities(k: Int): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "k: Int"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Value parameters k count with positive representable mixture mass Attributes Returns membership probabilities in original component order Example law.responsibilities(3)",
+      "example": "receiver.responsibilities(k)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "survival",
+      "anchor": "survival-640",
+      "signature": "def survival(k: Int): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "k: Int"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters k count Attributes Returns P(X>k), evaluated directly Example NegativeBinomialDistribution(2,.5).survival(4)",
+      "example": "receiver.survival(k)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "variance",
+      "anchor": "variance-0",
+      "signature": "def variance: Double",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Attributes Returns theoretical variance in squared count units",
+      "example": "receiver.variance",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "probability",
+      "anchor": "probability-640",
+      "signature": "final def probability(k: Int): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "k: Int"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters k count Attributes Returns mass, subject to exponential underflow Example HypergeometricDistribution(20,7,5).probability(2) Inherited from: CountDistribution",
+      "example": "receiver.probability(k)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureDistribution",
+      "name": "sample",
+      "anchor": "sample-360",
+      "signature": "final def sample(rng: Random): Int",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Int",
+      "summary": "",
+      "contract": "Value parameters rng non-null caller-owned RNG Attributes Returns count from inverse transform; out-of-Int tail draws throw, never clip Example NegativeBinomialDistribution(2,.5).sample(new scala.util.Random(42)) Inherited from: CountDistribution",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureInformation",
+      "name": "bhattacharyya",
+      "anchor": "bhattacharyya-fffff38c",
+      "signature": "def bhattacharyya(p: CountDistribution, q: CountDistribution, tolerance: Double = ..., maxTerms: Int = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: CountDistribution",
+            "q: CountDistribution",
+            "tolerance: Double = ...",
+            "maxTerms: Int = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters maxTerms union-support count cap p first finite-support count law q second law tolerance numerical allowance in nats Attributes Returns full-law Bhattacharyya divergence Example CountMixtureInformation.bhattacharyya(p,q)",
+      "example": "com.cra.figaro.library.atomic.discrete.CountMixtureInformation.bhattacharyya(p, q, tolerance, maxTerms)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureInformation",
+      "name": "componentMutualInformation",
+      "anchor": "componentMutualInformation-5bb",
+      "signature": "def componentMutualInformation(law: CountMixtureDistribution, tolerance: Double = ..., maxTerms: Int = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "law: CountMixtureDistribution",
+            "tolerance: Double = ...",
+            "maxTerms: Int = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "MI of the explicitly defined component label and count, NOT MI between two mixtures.",
+      "contract": "MI of the explicitly defined component label and count, NOT MI between two mixtures. Value parameters law finite-support count mixture maxTerms total component-by-count cells, 1..100000 tolerance numerical allowance in nats Attributes Returns I(component;count), or refusal without truncating an infinite tail Example CountMixtureInformation.componentMutualInformation(law)",
+      "example": "com.cra.figaro.library.atomic.discrete.CountMixtureInformation.componentMutualInformation(law, tolerance, maxTerms)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.CountMixtureInformation",
+      "name": "kl",
+      "anchor": "kl-fffff38c",
+      "signature": "def kl(p: CountDistribution, q: CountDistribution, tolerance: Double = ..., maxTerms: Int = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: CountDistribution",
+            "q: CountDistribution",
+            "tolerance: Double = ...",
+            "maxTerms: Int = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters maxTerms maximum union-support counts, 1..100000 p source count law with finite support q comparison law, same integer measure tolerance numerical allowance in nats Attributes Returns full-law KL; Unsupported for nonidentical unbounded laws Example CountMixtureInformation.kl(p,q)",
+      "example": "com.cra.figaro.library.atomic.discrete.CountMixtureInformation.kl(p, q, tolerance, maxTerms)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/CountMixtureInformation$.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.FromRange",

@@ -4,6 +4,85 @@ import com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution
 
 /** Deterministic, bounded pilot-only Gaussian mixture fitting. No production adaptation. */
 object GaussianMixtureProposal {
+  /** Fit a normalized weighted empirical pilot law using regularized EM.
+    * @param points discarded finite vectors of dimension 1..32
+    * @param logWeights matching log masses; -Infinity ignores a point; at least one positive mass
+    * @param config explicit components/work policy; minComponentDraws means component ESS here
+    * @return numerical fit or refusal; arbitrary additive shifts of logWeights do not change the fit
+    * @example `fitWeighted(points,logWeights,Config(components=2))`
+    */
+  def fitWeighted(points: Vector[Vector[Double]],logWeights: Vector[Double],config: Config=Config()): Result = {
+    def check(): Unit=ParetoTail.interrupted()
+    check(); require(config!=null && points!=null && logWeights!=null && points.nonEmpty && points.size==logWeights.size)
+    require(points.forall(_!=null))
+    val d=points.head.size; val n=points.size; val k=config.components
+    require(d>=1 && d<=32 && points.forall(x => x!=null && x.size==d && x.forall(_.isFinite)))
+    require(n.toLong*(d+k+1)<=config.maxStoredValues,"Weighted pilot storage cap exceeded")
+    require(logWeights.forall(x => x.isFinite || x==Double.NegativeInfinity) && logWeights.exists(_.isFinite))
+    require(config.diagonalRidge.isEmpty || config.diagonalRidge.size==d)
+    var iterations=0; var evaluations=0L; var history=Vector.empty[Double]
+    def refuse(s: Status,m: String)=Result(s,None,iterations,evaluations,history,config,m)
+    val peak=logWeights.max; val raw=logWeights.map(x => math.exp(x-peak)); val total=raw.sum
+    val u=raw.map(_/total); val ess=1/u.map(x => x*x).sum
+    if(ess<k*config.minComponentDraws) return refuse(Status.InsufficientPilot,"Weighted pilot ESS below requested component information")
+    def moments(w: Vector[Double]): G = {
+      check(); val mass=w.sum
+      val m=Vector.tabulate(d)(a => points.indices.iterator.filter(w(_)>0).map(i => (w(i)/mass)*points(i)(a)).sum)
+      val c=Vector.tabulate(d,d) { (a,b) =>
+        val x=math.min(a,b); val y=math.max(a,b)
+        points.indices.iterator.filter(w(_)>0).map(i => (w(i)/mass)*(points(i)(x)-m(x))*(points(i)(y)-m(y))).sum+
+          (if(a==b && config.diagonalRidge.nonEmpty) config.diagonalRidge(a) else 0)
+      }
+      G(m,c)
+    }
+    try {
+      val global=moments(u)
+      def distance(x: Vector[Double],y: Vector[Double]): Double=
+        x.indices.map(a => math.pow((x(a)-y(a))/math.sqrt(global.covariance(a)(a)),2)).sum
+      val active=points.indices.filter(u(_)>0).toVector
+      var centers=Vector(active.maxBy(i => u(i)*distance(points(i),global.mean)))
+      while(centers.size<k) {
+        check(); val next=active.maxBy(i => u(i)*centers.map(j => distance(points(i),points(j))).min)
+        if(centers.exists(j => points(j)==points(next))) return refuse(Status.DegeneratePilot,"Insufficient distinct weighted centers")
+        centers :+= next
+      }
+      var laws=centers.map(i => G(points(i),global.covariance)); var weights=Vector.fill(k)(1.0/k)
+      val r=Array.ofDim[Double](n,k)
+      while(iterations<config.maxIterations) {
+        check()
+        if(n.toLong*k>config.maxDensityEvaluations-evaluations) return refuse(Status.EvaluationLimit,"Weighted EM density budget exhausted")
+        var objective=0.0
+        for(i <- points.indices) {
+          check()
+          if(u(i)>0) {
+            val logs=Vector.tabulate(k)(j => { evaluations+=1; math.log(weights(j))+laws(j).logDensity(points(i)) })
+            val m=logs.max; val shifted=logs.map(x => math.exp(x-m)); val sum=shifted.sum
+            val lm=m+math.log(sum); require(lm.isFinite)
+            objective+=u(i)*lm
+            for(j <- 0 until k) r(i)(j)=u(i)*shifted(j)/sum
+          }
+        }
+        iterations+=1; require(objective.isFinite)
+        val converged=history.lastOption.exists(p => math.abs(objective-p)<=config.tolerance*(1+math.abs(p)))
+        history :+= objective
+        val masses=Vector.tabulate(k)(j => points.indices.iterator.map(i => r(i)(j)).sum)
+        val effective=Vector.tabulate(k)(j => masses(j)*masses(j)/points.indices.iterator.map(i => r(i)(j)*r(i)(j)).sum)
+        if(effective.exists(x => !x.isFinite || x<config.minComponentDraws) || masses.exists(_<=0))
+          return refuse(Status.InsufficientComponent,"A weighted component has insufficient ESS; no pruning or reseeding")
+        if(converged) {
+          val inflated=laws.map(g => VectorImportance.Gaussian(G(g.mean,g.covariance.map(_.map(_*config.covarianceInflation)))))
+          return Result(Status.Fitted,Some(VectorImportance.Mixture(weights,inflated)),iterations,evaluations,history,config,
+            "Weighted numerical fit only; no event-region discovery certificate")
+        }
+        if(iterations<config.maxIterations) {
+          laws=Vector.tabulate(k)(j => moments(points.indices.map(i => r(i)(j)).toVector))
+          weights=masses.map(_/masses.sum)
+        }
+      }
+      refuse(Status.IterationLimit,"Weighted EM sweep cap reached")
+    } catch { case _: IllegalArgumentException | _: ArithmeticException => refuse(Status.NumericalFailure,"Weighted covariance/objective unresolved") }
+  }
+
   enum Status { case Fitted, InsufficientPilot, DegeneratePilot, InsufficientComponent, NumericalFailure, IterationLimit, EvaluationLimit }
   /** @param components explicit component count, 1..8; no automatic selection
     * @param maxIterations maximum complete density sweeps, at least 2

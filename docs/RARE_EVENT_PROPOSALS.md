@@ -10,7 +10,9 @@ diagnostics look excellent.
 
 This opt-in API draws more often near the event and corrects every contribution
 using the full proposal density. It can accept a proposal you specify, or fit one
-Gaussian using discarded cross-entropy (CE) pilot rounds. Existing `Importance`,
+Gaussian using discarded cross-entropy (CE) pilot rounds. Modern.22 adds
+[event-weighted multi-component fitting](WEIGHTED_RARE_EVENT_MIXTURES.md), with explicit
+component count and independent production. Existing `Importance`,
 `VectorImportance`, graph samplers and stopping policies are unchanged.
 
 Do not enable it merely because a model is large. It is not a replacement for

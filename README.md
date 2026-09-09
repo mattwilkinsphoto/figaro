@@ -33,11 +33,16 @@ Prerequisites: Git, JDK 17 on your path, and an sbt runner. sbt downloads the co
 
 ## Use Figaro in your application
 
+The latest capability expansion includes [event-weighted mixtures](docs/WEIGHTED_RARE_EVENT_MIXTURES.md),
+[static graph proposals](docs/STATIC_GRAPH_PROPOSALS.md) and
+[extended distribution constructions](docs/EXTENDED_CONSTRUCTIONS.md), with
+[complete cost comparisons and limitations](docs/CAPABILITY_EXPANSION_ACCEPTANCE.md).
+
 From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala application's `build.sbt`:
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.21-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.22-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.

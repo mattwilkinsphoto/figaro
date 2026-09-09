@@ -9,6 +9,11 @@ kernels, Gaussian mixture models (GMMs), and analytic Gaussian information diagn
 They implement D4's initial reusable building blocks, not every possible transformation
 or mixed-measure construction. See the [roadmap](../ROADMAP.md).
 
+Modern.22 [extends these constructions](EXTENDED_CONSTRUCTIONS.md) with general
+declared bijections, infinite truncation endpoints, folding, a wrapped representative
+and count mixtures. That guide supersedes the initial finite-only and unsupported-
+comparison limitations below where it explicitly documents new coverage.
+
 Figaro already has `Apply`, `Chain`, and `Dist`. Those remain useful for composing
 models. The new kernels additionally expose explicit normalized densities, log
 likelihoods, support, and sampling contracts. A transformation's Jacobian or a

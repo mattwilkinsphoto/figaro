@@ -5715,6 +5715,30 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fit(chains, config)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fitWeighted ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$.html#fitWeighted-a7b)
+
+```scala
+def fitWeighted(points: Vector[Vector[Double]], logWeights: Vector[Double], config: Config = ...): Result
+```
+
+Fit a normalized weighted empirical pilot law using regularized EM.
+
+Type parameters: none.
+
+Parameters, list 1: `` points: Vector[Vector[Double]] ``; `` logWeights: Vector[Double] ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Fit a normalized weighted empirical pilot law using regularized EM. Value parameters config explicit components/work policy; minComponentDraws means component ESS here logWeights matching log masses; -Infinity ignores a point; at least one positive mass points discarded finite vectors of dimension 1..32 Attributes Returns numerical fit or refusal; arbitrary additive shifts of logWeights do not change the fit Example fitWeighted(points,logWeights,Config(components=2))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fitWeighted(points, logWeights, config)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.Config.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Config.html#productElementNames-0)
@@ -13477,6 +13501,30 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.RareEventImportance.fitGaussian(base, score, threshold, config)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.fitMixture ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$.html#fitMixture-fffff997)
+
+```scala
+def fitMixture(base: Proposal, score: Vector[Double] => Double, threshold: Double, config: FitConfig = ..., mixture: Config = ...): FitResult
+```
+
+Event-weighted, explicit-component Gaussian mixture CE; all pilot samples are discarded.
+
+Type parameters: none.
+
+Parameters, list 1: `` base: Proposal ``; `` score: Vector[Double] => Double ``; `` threshold: Double ``; `` config: FitConfig = ... ``; `` mixture: Config = ... ``.
+
+Returns: `` FitResult ``.
+
+Source contract/attributes: Event-weighted, explicit-component Gaussian mixture CE; all pilot samples are discarded. Value parameters base normalized continuous vector law config pilot score, storage, RNG and defensive-weight policy mixture weighted EM policy; ridge/inflation come from THIS policy, not config; its density cap is shared across all rounds and component minimum is weighted ESS score pure finite score; event is score>=threshold threshold finite event boundary Attributes Returns frozen defensive mixture only after threshold and numerical fit success Example fitMixture(base,_.head,5,FitConfig(),GaussianMixtureProposal.Config(components=2))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.RareEventImportance.fitMixture(base, score, threshold, config, mixture)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.RareEventImportance.prior ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$.html#prior-fffff869)
@@ -13813,6 +13861,54 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Abs.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Abs.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Abs.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Abs.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Add.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Add.html#productElementNames-0)
@@ -14053,6 +14149,102 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Exponential.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Exponential.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Exponential.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Exponential.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.GreaterThan.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$GreaterThan.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.GreaterThan.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$GreaterThan.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Indicator.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Indicator.html#productElementNames-0)
@@ -14080,6 +14272,54 @@ receiver.productElementNames
 ## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Indicator.productIterator ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Indicator.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Log.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Log.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Log.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Log.html#productIterator-0)
 
 ```scala
 def productIterator: Iterator[Any]
@@ -14245,6 +14485,54 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Uniform.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Uniform.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Uniform.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Node$$Uniform.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.Result.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$$Result.html#productElementNames-0)
@@ -14339,6 +14627,30 @@ Invocation template:
 
 ```scala
 com.cra.figaro.algorithm.sampling.StaticGraphImportance.run(model, queries, observations, config)
+```
+
+## `` com.cra.figaro.algorithm.sampling.StaticGraphImportance.runWithProposal ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/StaticGraphImportance$.html#runWithProposal-8fb)
+
+```scala
+def runWithProposal(model: Model, roots: Vector[Int], proposal: Proposal, queries: Vector[Int], observations: Map[Int, Double] = ..., config: Config = ...): Result
+```
+
+Replace independent constant-parameter Normal roots with a frozen joint proposal.
+
+Type parameters: none.
+
+Parameters, list 1: `` model: Model ``; `` roots: Vector[Int] ``; `` proposal: Proposal ``; `` queries: Vector[Int] ``; `` observations: Map[Int, Double] = ... ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Replace independent constant-parameter Normal roots with a frozen joint proposal. Value parameters config invocation-owned work/RNG policy model compiled immutable graph observations downstream stochastic evidence proposal immutable Gaussian/elliptical Student-t or nested mixtures of those; custom callbacks, bounded-support proposals and conditional proposals are refused queries result node IDs roots distinct unobserved Normal node IDs; proposal coordinates follow this order Attributes Returns likelihood-weighted result with full joint prior/proposal correction Example runWithProposal(model,Vector(2),frozen.proposal,Vector(2),Map(4 -> 3.0))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.StaticGraphImportance.runWithProposal(model, roots, proposal, queries, observations, config)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.SwitchScheme.productElementNames ``

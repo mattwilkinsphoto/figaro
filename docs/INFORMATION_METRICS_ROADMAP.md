@@ -39,6 +39,13 @@ implementation does not introduce sample-based estimators or generalized fusion.
 
 ## Delivery sequence
 
+Modern.22 adds [construction-aware comparisons](EXTENDED_CONSTRUCTIONS.md): common
+declared-bijection invariance, analytic wrapped-Cauchy KL, guarded folded/truncated
+and wrapped overlap, finite full-count-mixture KL/Bhattacharyya and component/count
+MI. Unbounded count tails, arbitrary gapped kernels and generic wrapped sums are
+not silently approximated. [GVM mixture comparisons](GVM_MIXTURE_RESEARCH_PLAN.md)
+are a high-interest research follow-on, not delivered full-mixture GVM metrics.
+
 Modern.20 adds same-order [LKJ and inverse-Wishart KL/Bhattacharyya](COVARIANCE_PRIORS.md)
 with explicit matrix/factor measures and numerical refusals. Matrix-entry MI remains
 unimplemented; Gaussian partition MI is not substituted for it.

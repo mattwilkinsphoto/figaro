@@ -2,13 +2,14 @@
 
 ## What exists now
 
-Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-09 through the selected D5 breadth milestone.
+Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-09 through the modern.22 construction expansion.
 This is an API inventory, not new numerical certification of every existing distribution.
 The [roadmap](../ROADMAP.md) defines delivery gates; the [wishlist](../WISHLIST.md)
 collects broad families and their later flavors.
 
 | Present native entry points | Source | Scope / caution |
 | --- | --- | --- |
+| MonotoneDistribution, FoldedDistribution, WrappedCauchyDistribution, CountMixtureDistribution | [Extended constructions](EXTENDED_CONSTRUCTIONS.md) | Explicit Jacobians, half-infinite truncation, folding, principal-chart wrapped Cauchy and integer mixtures; guarded scalar comparisons and finite count/component MI; no generic wrapped sum or mixed measure |
 | LKJ, InverseWishart | [Covariance modeling](COVARIANCE_PRIORS.md) | Full-rank correlation/covariance priors, lower-factor draws and Jacobian-aware densities, fixed/dynamic elements and KL/Bhattacharyya; no matrix-entry MI or fitting |
 | Multinomial, GeneralizedExtremeValue, GeneralizedPareto, Wishart, VonMisesFisher3 | [Selected D5 breadth](DISTRIBUTION_BREADTH.md) | Joint count vectors, maxima/excess tails, restricted full-rank matrices and unit S2 directions; kernels, fixed/dynamic adapters, KL/Bhattacharyya and complementary multinomial-block MI; not all D5 flavors or reference measures |
 | AffineDistribution, ExpDistribution, TruncatedDistribution, ScalarMixtureDistribution, ZeroAdjustedDistribution | [Construction guide](DISTRIBUTION_CONSTRUCTIONS.md) | Initial reusable transformations, finite-interval conditioning, continuous mixtures and count-only hurdle/zero inflation; explicit numeric refusals, no general mixed measure |

@@ -31687,6 +31687,246 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#cdf-5b2)
+
+```scala
+def cdf(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)
+
+Invocation template:
+
+```scala
+receiver.cdf(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#mean-0)
+
+```scala
+def mean: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#quantile-5b2)
+
+```scala
+def quantile(p: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#sample-fffffec0)
+
+```scala
+override def sample(rng: Random): Double
+```
+
+Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#survival-5b2)
+
+```scala
+def survival(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)
+
+Invocation template:
+
+```scala
+receiver.survival(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#variance-0)
+
+```scala
+def variance: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#density-5b2)
+
+```scala
+final def density(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.FoldedDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/FoldedDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.Gamma.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/Gamma$.html#apply-b89)
@@ -40305,6 +40545,498 @@ Invocation template:
 
 ```scala
 receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#cdf-5b2)
+
+```scala
+def cdf(y: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` y: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)
+
+Invocation template:
+
+```scala
+receiver.cdf(y)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#logDensity-5b2)
+
+```scala
+def logDensity(y: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` y: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)
+
+Invocation template:
+
+```scala
+receiver.logDensity(y)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#mean-0)
+
+```scala
+def mean: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#quantile-5b2)
+
+```scala
+def quantile(p: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#sample-fffffec0)
+
+```scala
+override def sample(rng: Random): Double
+```
+
+Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#survival-5b2)
+
+```scala
+def survival(y: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` y: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)
+
+Invocation template:
+
+```scala
+receiver.survival(y)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#variance-0)
+
+```scala
+def variance: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#density-5b2)
+
+```scala
+final def density(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.forward ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html#forward-5b2)
+
+```scala
+def forward(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.forward(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.inverse ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html#inverse-5b2)
+
+```scala
+def inverse(y: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` y: Double ``.
+
+Returns: `` Double ``.
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.inverse(y)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.logInverseJacobian ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html#logInverseJacobian-5b2)
+
+```scala
+def logInverseJacobian(y: Double): Double
+```
+
+Natural log of the absolute inverse derivative, evaluated in output coordinates.
+
+Type parameters: none.
+
+Parameters, list 1: `` y: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Natural log of the absolute inverse derivative, evaluated in output coordinates. Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.logInverseJacobian(y)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.fromProduct ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html#fromProduct-de7)
+
+```scala
+def fromProduct(p: Product): MirroredMonoType
+```
+
+Creates a new instance of type T with elements taken from product p.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Product ``.
+
+Returns: `` MirroredMonoType ``.
+
+Source contract/attributes: Creates a new instance of type T with elements taken from product p. Attributes Inherited from: Singleton
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.fromProduct(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform$$Log$.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.MonotoneTransform.Log.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.domain ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform.html#domain-0)
+
+```scala
+def domain: (Double, Double)
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` (Double, Double) ``.
+
+Invocation template:
+
+```scala
+receiver.domain
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.forward ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform.html#forward-5b2)
+
+```scala
+def forward(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Invocation template:
+
+```scala
+receiver.forward(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.increasing ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform.html#increasing-0)
+
+```scala
+def increasing: Boolean
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Invocation template:
+
+```scala
+receiver.increasing
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.inverse ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform.html#inverse-5b2)
+
+```scala
+def inverse(y: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` y: Double ``.
+
+Returns: `` Double ``.
+
+Invocation template:
+
+```scala
+receiver.inverse(y)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.MonotoneTransform.logInverseJacobian ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MonotoneTransform.html#logInverseJacobian-5b2)
+
+```scala
+def logInverseJacobian(y: Double): Double
+```
+
+Natural log of the absolute inverse derivative, evaluated in output coordinates.
+
+Type parameters: none.
+
+Parameters, list 1: `` y: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Natural log of the absolute inverse derivative, evaluated in output coordinates. Attributes
+
+Invocation template:
+
+```scala
+receiver.logInverseJacobian(y)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal.logp ``
@@ -51677,4 +52409,316 @@ Invocation template:
 
 ```scala
 com.cra.figaro.library.atomic.continuous.WishartInformation.kl(p, q, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.angularLogDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#angularLogDensity-5b2)
+
+```scala
+def angularLogDensity(angle: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` angle: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters angle any finite angle in radians Attributes Returns periodic log density after canonical wrapping; unlike chart-based logDensity Example law.angularLogDensity(3*math.Pi)
+
+Invocation template:
+
+```scala
+receiver.angularLogDensity(angle)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.cdf ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#cdf-5b2)
+
+```scala
+def cdf(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)
+
+Invocation template:
+
+```scala
+receiver.cdf(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.circularMean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#circularMean-0)
+
+```scala
+def circularMean: Option[Double]
+```
+
+Circular mean direction; None for the uniform law.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Circular mean direction; None for the uniform law. Attributes
+
+Invocation template:
+
+```scala
+receiver.circularMean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.circularVariance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#circularVariance-0)
+
+```scala
+def circularVariance: Double
+```
+
+Circular variance, not variance of the principal-chart real coordinate.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Circular variance, not variance of the principal-chart real coordinate. Attributes
+
+Invocation template:
+
+```scala
+receiver.circularVariance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#mean-0)
+
+```scala
+def mean: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.quantile ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#quantile-5b2)
+
+```scala
+def quantile(p: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)
+
+Invocation template:
+
+```scala
+receiver.quantile(p)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#sample-fffffec0)
+
+```scala
+override def sample(rng: Random): Double
+```
+
+Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Definition Classes ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.survival ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#survival-5b2)
+
+```scala
+def survival(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)
+
+Invocation template:
+
+```scala
+receiver.survival(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.variance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#variance-0)
+
+```scala
+def variance: Option[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Double] ``.
+
+Source contract/attributes: Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow
+
+Invocation template:
+
+```scala
+receiver.variance
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#density-5b2)
+
+```scala
+final def density(x: Double): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution
+
+Invocation template:
+
+```scala
+receiver.density(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WrappedCauchyDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WrappedCauchyDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
 ```

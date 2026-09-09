@@ -316,6 +316,24 @@ object FigaroConsumerCheck {
       com.cra.figaro.algorithm.sampling.RareEventImportance.prior(eventBase),_.head,.75)
     require(math.abs(eventResult.probability.get-.25)<.02 && eventResult.scoreEvaluations==10000)
     println("Published breadth, covariance priors, rare-event and legacy information contracts passed")
+    locally {
+      import com.cra.figaro.algorithm.sampling.{RareEventImportance as RE,GaussianMixtureProposal as WM,VectorImportance as VP,StaticGraphImportance as SG}
+      import com.cra.figaro.library.atomic.continuous.*
+      import com.cra.figaro.library.atomic.discrete.{CountMixtureDistribution,CountMixtureInformation,HypergeometricDistribution}
+      val base=VP.Gaussian(MultivariateGaussianDistribution(Vector(0.0),Vector(Vector(1.0))))
+      val fit=RE.fitMixture(base,x => math.abs(x.head),4,RE.FitConfig(seed=94001),WM.Config(components=2,diagonalRidge=Vector(.25)))
+      require(fit.proposal.isDefined && fit.componentDensityEvaluations>0)
+      val graph=SG.runWithProposal(staticModel,Vector(2),fit.proposal.get.proposal,Vector(2),config=SG.Config(draws=100))
+      require(graph.proposalDensityEvaluations==100)
+      val half=TruncatedDistribution(GaussianDistribution(0,1),0,Double.PositiveInfinity)
+      require(math.abs(half.cdf(half.quantile(.5))-.5)<1e-12)
+      require(MonotoneDistribution(LogNormalDistribution(0,1),MonotoneTransform.Log).logDensity(0).isFinite)
+      require(FoldedDistribution(GaussianDistribution(1,1)).density(1)>0)
+      require(ScalarDivergence.kl(WrappedCauchyDistribution(0,.5),WrappedCauchyDistribution(1,.3)).value.exists(_>0))
+      val counts=CountMixtureDistribution(Vector(.5,.5),Vector(HypergeometricDistribution(10,0,1),HypergeometricDistribution(10,10,1)))
+      require(math.abs(CountMixtureInformation.componentMutualInformation(counts).value.get-math.log(2))<1e-12)
+      println("Published weighted-event, static-proposal and extended-construction APIs passed")
+    }
 
     var cancelled=false
     Thread.currentThread().interrupt()
