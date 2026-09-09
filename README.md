@@ -37,13 +37,15 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.10-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.11-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
 
 ## Documentation
 
+- [Uncertainty calibration and robustness](docs/IMPORTANCE_CALIBRATION.md): complete
+  repeated-seed evidence, rare-event proposal improvements and interval limitations.
 - [Frozen vector proposal API](docs/VECTOR_IMPORTANCE.md): opt-in explicit-density
   importance sampling, caller-supplied or pilot-fitted proposals, separate budgets
   and query-specific health reports; locally validated on the statistical-validation branch.

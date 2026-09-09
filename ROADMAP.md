@@ -42,6 +42,12 @@ acceptance evidence. It does not alter graph samplers or stopping rules. Remote 
 and integration remain separate gates. Next: broader model/rare-event and MCSE
 coverage calibration; automatic proposal replacement is not part of this milestone.
 
+The [6,600-trial calibration assessment](docs/IMPORTANCE_CALIBRATION.md) is complete
+locally. It rejects batch intervals and a diagnostic-selection filter as general
+coverage repairs; rare-event and nonlinear limits remain explicit. Proceed next
+with bounded multi-component proposal fitting, then ownership-safe graph integration.
+Automatic stopping remains deferred rather than declaring these limits solved.
+
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).
 The [inventory](docs/DISTRIBUTION_SUPPORT.md) distinguishes

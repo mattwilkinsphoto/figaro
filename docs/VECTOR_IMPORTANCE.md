@@ -338,6 +338,8 @@ These are local checks of this branch build, not a new release publication.
 
 ## Related and next work
 
+- [Calibration and robustness](IMPORTANCE_CALIBRATION.md): 6,600 fresh-seed trials,
+  interval coverage, sparse-event controls and why automatic stopping remains deferred.
 - [Inference health](INFERENCE_HEALTH.md): ESS, weight tails, query MCSE and warnings.
 - [Multi-chain vector sampling](MULTI_CHAIN_VECTOR_SAMPLING.md): pilot callbacks,
   execution policies, retained chains, diagnostics and cleanup.
