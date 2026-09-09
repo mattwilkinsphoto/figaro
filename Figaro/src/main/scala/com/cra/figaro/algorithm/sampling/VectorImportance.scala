@@ -1,7 +1,7 @@
 package com.cra.figaro.algorithm.sampling
 
 import com.cra.figaro.algorithm.sampling.parallel.MultiChainVectorSliceSampler as MC
-import com.cra.figaro.library.atomic.continuous.{MultivariateGaussianDistribution, StudentTDistribution}
+import com.cra.figaro.library.atomic.continuous.{MultivariateGaussianDistribution, MultivariateStudentTDistribution, StudentTDistribution}
 import com.cra.figaro.util.{SamplingRandom, RandomStreams}
 
 /** Opt-in self-normalized importance sampling of explicit vector densities.
@@ -59,6 +59,52 @@ object VectorImportance {
     val dimension: Int = law.dimension
     def sample(rng: scala.util.Random): Vector[Double] = law.sample(rng)
     def logDensity(x: Vector[Double]): Double = law.logDensity(x)
+  }
+  /** Elliptical multivariate t adapter; all coordinates share the SAME random scale. */
+  final case class StudentT(law: MultivariateStudentTDistribution) extends Proposal {
+    require(law != null)
+    val dimension: Int=law.dimension
+    def sample(rng: scala.util.Random): Vector[Double]=law.sample(rng)
+    def logDensity(x: Vector[Double]): Double=law.logDensity(x)
+  }
+  /** Explicit hierarchical joint proposal q(x,z)=q(x)q(z|x), in concatenated coordinates.
+    * The conditional callback must be pure: no fitting/adaptation or retained mutable RNG.
+    * @param prefix normalized proposal for the leading coordinate block
+    * @param tailDimension number of conditional coordinates; total dimension must be 1..128
+    * @param conditional returns a normalized fixed-dimensional proposal given a finite prefix
+    * @example `Conditional(qTheta,1,x => Gaussian(G(Vector(x.head),Vector(Vector(.1)))))`
+    */
+  final case class Conditional(prefix: Proposal, tailDimension: Int,
+    conditional: Vector[Double] => Proposal) extends Proposal {
+    require(prefix != null && conditional != null && tailDimension > 0 && tailDimension <= 128)
+    VectorImportance.dimension(prefix.dimension)
+    val dimension: Int = prefix.dimension + tailDimension
+    VectorImportance.dimension(dimension)
+    private def tail(x: Vector[Double]): Proposal = {
+      check(); val q=conditional(x); check()
+      require(q != null && q.dimension == tailDimension, "Conditional proposal dimension changed")
+      q
+    }
+    def sample(rng: scala.util.Random): Vector[Double] = {
+      require(rng != null); check()
+      val x=prefix.sample(rng); check(); point(x,prefix.dimension)
+      val z=tail(x).sample(rng); check(); point(z,tailDimension)
+      x ++ z
+    }
+    def logDensity(x: Vector[Double]): Double = {
+      check(); point(x,dimension)
+      val a=x.take(prefix.dimension); val first=prefix.logDensity(a); check()
+      require(first.isFinite || first == Double.NegativeInfinity, "Invalid prefix density")
+      // Off prefix support, the joint is zero; a conditional may not exist there.
+      if(first == Double.NegativeInfinity) first
+      else {
+        val last=tail(a).logDensity(x.drop(prefix.dimension)); check()
+        require(last.isFinite || last == Double.NegativeInfinity, "Invalid conditional density")
+        val result=first+last
+        require(result.isFinite || last == Double.NegativeInfinity, "Conditional log density overflow")
+        result
+      }
+    }
   }
   /** Independent Student-t coordinates; NOT an elliptical multivariate Student t.
     * @param location finite coordinate locations

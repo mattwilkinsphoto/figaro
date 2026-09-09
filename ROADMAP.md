@@ -14,17 +14,28 @@ The source remains a development snapshot, not a universally validated stable re
 
 ## Next program: distribution breadth
 
+The approved [three-stage follow-on](docs/INFERENCE_NEXT_STAGES.md) now has
+[end-to-end cost evidence](docs/GRAPH_COST_ACCEPTANCE.md), explicit
+[conditional/joint proposals](docs/JOINT_PROPOSALS.md), a full-rank
+[multivariate Student t](docs/MULTIVARIATE_STUDENT_T.md), and cross-family
+[Monte Carlo KL/Bhattacharyya/MI](docs/MONTE_CARLO_INFORMATION.md).
+These form the modern.14 milestone, with the local clean-build/445-test/consumer
+gate recorded in the cost assessment and remote CI required for main integration.
+The [follow-on assessment](docs/RELIABILITY_LIMITS_ASSESSMENT.md) identifies narrower
+implementable contracts; universal precision, mode-discovery and arbitrary
+shared-graph safety are not claimed or marked complete.
+
 Reliability interlude: [statistical validation](docs/STATISTICAL_VALIDATION.md) and
 [scientific RNG backends](docs/RNG_ASSESSMENT.md) are implemented on the
-`modernize/statistical-validation` branch, with local validation; integration/CI remain
-separate gates. The next substantive inference priority is better proposals for
+`modernize/statistical-validation` branch and integrated on main as modern.11
+with passing CI. The next substantive inference priority is better proposals for
 concentrated posteriors at matched accuracy. [Versioned stream allocation and Philox](docs/RNG_STREAMS.md)
 are now implemented and locally validated on that branch: default seeded replay is
 preserved, native split/jump/counter allocation is opt-in. Portable checkpoints,
 deterministic default graph traversal and per-sample counter addressing remain future work.
 The opt-in [purpose selector](docs/RNG_SELECTION.md) now resolves versioned presets,
 overrides and hard requirements before model construction; it does not autotune or
-change existing defaults. Local validation and remote CI remain separate gates.
+change existing defaults. These changes are included in the modern.11 integration.
 
 The opt-in [inference-health assessment](docs/INFERENCE_HEALTH.md) adds explicit
 insufficient-evidence/warning/danger states, raw-weight ESS and Pareto-tail diagnostics,
@@ -36,10 +47,10 @@ broader held-out warning calibration and dependence-aware importance diagnostics
 now evaluates that proposal priority against prior importance and existing Quantile
 slice sampling, including discarded training costs, new datasets and a fresh-seed
 coverage batch. The additive [public frozen-proposal API](docs/VECTOR_IMPORTANCE.md)
-is now implemented and locally validated on this branch, with supplied proposals,
+is now integrated on main as modern.11, with supplied proposals,
 discarded pilot training, explicit fit refusals and 210-trial boundary/multimodal/tail
-acceptance evidence. It does not alter graph samplers or stopping rules. Remote CI
-and integration remain separate gates. Next: broader model/rare-event and MCSE
+acceptance evidence. It does not alter graph samplers or stopping rules. Its branch
+and main CI passed. Next: broader model/rare-event and MCSE
 coverage calibration; automatic proposal replacement is not part of this milestone.
 
 The [6,600-trial calibration assessment](docs/IMPORTANCE_CALIBRATION.md) is integrated
@@ -54,8 +65,8 @@ regularized EM, frozen production and 1,200 paired acceptance rows. It improves
 effective sampling on the tested separated-mode models without claiming automatic
 mode discovery or calibrated stopping.
 
-The [owned graph proposal bridge](docs/GRAPH_PROPOSALS.md) is implemented on
-`modernize/graph-proposal-integration` for modern.13 integration after verification.
+The [owned graph proposal bridge](docs/GRAPH_PROPOSALS.md) is integrated on main as
+modern.13 through `f2efe95c`, with verified branch CI.
 It supports explicit joint priors/proposals with ordinary graph evidence, owned
 cleanup and a graph-MCMC-pilot-to-mixture workflow. The 600-run comparison shows
 that root-only improvements do not remove all hierarchical sampling bottlenecks.
@@ -74,8 +85,8 @@ native elements, composition possibilities and missing first-class support.
 | D1: circular foundation (`DIST-01`) | Integrated on main at `fea8b999`; CI passed | Circular angle handling and von Mises; reuse for later wrapped and spherical families | 16 new regressions, 179 modernization tests and executable examples pass; [Linux CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34138540587) |
 | D2: linear-angular joint models (`DIST-02`) | Through mutual information, integrated with D3 at CI-verified `e78a6f0e` | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
 | D3: common missing scalar/count families | Complete on main; source CI verified at `e78a6f0e` | All nine representatives: Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; triangular/Kumaraswamy; appropriate information measures | [Milestone evidence](docs/COMMON_DISTRIBUTIONS_ACCEPTANCE.md): density/tail oracles, observation and MCMC checks, isolated multi-chain determinism, divergence references and independent published consumer |
-| D4: reusable constructions (`DIST-10`) | Initial milestone complete on main; source CI verified at `79615111` | Affine/exp transformations, finite truncation, scalar mixtures, full-covariance Gaussian mixture models, hurdle/zero-inflated counts; Gaussian KL/Bhattacharyya and partition MI | [Guide](docs/DISTRIBUTION_CONSTRUCTIONS.md) and [acceptance evidence](docs/DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md): 362 modernization tests, independent oracles/consumer and clean CI reproducibility; no generic mixed-measure law, EM fitter or mixture-divergence shortcut |
-| D5: multivariate, tail and matrix breadth | Wishlist; not scheduled | Multivariate t, joint counts, extreme-value, covariance/correlation and directional manifolds | Dedicated dimension/geometry/factorization and inference tests before specialized flavors |
+| D4: reusable constructions (`DIST-10`) | Initial milestone complete on main; source CI verified at `79615111` | Affine/exp transformations, finite truncation, scalar mixtures, full-covariance Gaussian mixture models, hurdle/zero-inflated counts; Gaussian KL/Bhattacharyya and partition MI | [Guide](docs/DISTRIBUTION_CONSTRUCTIONS.md) and [acceptance evidence](docs/DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md): 362 modernization tests, independent oracles/consumer and clean CI reproducibility; no generic mixed-measure law; pilot-only fitting arrived in modern.12 and numerical mixture metrics in modern.14 |
+| D5: multivariate, tail and matrix breadth | First representative implemented for modern.14 validation | Full-rank elliptical multivariate Student t and numerical information metrics; joint counts, extreme-value, matrix and directional laws remain wishlist | [Contracts and verification](docs/MULTIVARIATE_STUDENT_T.md); broader D5 is not complete |
 | D6: specialist families | Research backlog | Quantile-defined, singular, physical scattering, phase-type and niche empirical laws | Concrete use case, primary definition, viable numerical method and maintained dependency/license evidence |
 
 D1 comes first even when the ultimate target is D2. Ordinary circular von Mises and

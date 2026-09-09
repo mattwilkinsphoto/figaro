@@ -8647,6 +8647,174 @@ Invocation template:
 receiver.test(numSamples, predicates, elementsToTrack)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.MonteCarloInformation.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MonteCarloInformation$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.MonteCarloInformation.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MonteCarloInformation$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.MonteCarloInformation.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MonteCarloInformation$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.MonteCarloInformation.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MonteCarloInformation$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.MonteCarloInformation.bhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MonteCarloInformation$.html#bhattacharyya-65b)
+
+```scala
+def bhattacharyya(p: Proposal, q: Proposal, config: Config = ...): Result
+```
+
+Sample the equal mixture (p+q)/2; the affinity integrand 2sqrt(pq)/(p+q) is bounded by one.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Proposal ``; `` q: Proposal ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Sample the equal mixture (p+q)/2; the affinity integrand 2sqrt(pq)/(p+q) is bounded by one. Value parameters config fixed draws and private RNG p first normalized law q second normalized law Attributes Returns negative log estimated affinity with delta MCSE; unresolved/zero overlap is not infinity Example bhattacharyya(VectorImportance.Gaussian(p),VectorImportance.StudentT(t))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.MonteCarloInformation.bhattacharyya(p, q, config)
+```
+
+## `` com.cra.figaro.algorithm.sampling.MonteCarloInformation.kl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MonteCarloInformation$.html#kl-65b)
+
+```scala
+def kl(p: Proposal, q: Proposal, config: Config = ...): Result
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: Proposal ``; `` q: Proposal ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Value parameters config fixed work and RNG policy p normalized first law; samples are drawn from p q normalized comparison law, positive wherever p contributes Attributes Returns estimate of E_p[log p-log q]; finite-variance MCSE is an assumption, not verified Example kl(VectorImportance.Gaussian(p),VectorImportance.Gaussian(q))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.MonteCarloInformation.kl(p, q, config)
+```
+
+## `` com.cra.figaro.algorithm.sampling.MonteCarloInformation.mutualInformation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/MonteCarloInformation$.html#mutualInformation-ffffff2b)
+
+```scala
+def mutualInformation(joint: Proposal, first: Proposal, second: Proposal, config: Config = ...): Result
+```
+
+MI is KL of a joint law to the product of its EXACT marginals, in concatenated coordinates.
+
+Type parameters: none.
+
+Parameters, list 1: `` joint: Proposal ``; `` first: Proposal ``; `` second: Proposal ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: MI is KL of a joint law to the product of its EXACT marginals, in concatenated coordinates. Value parameters config fixed work/RNG policy first exact leading-block marginal, not a conditional or independently fitted approximation joint normalized joint law second exact remaining-block marginal Attributes Returns signed noisy MI estimate; the library cannot prove supplied laws are the true marginals Example mutualInformation(joint,firstMarginal,secondMarginal)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.MonteCarloInformation.mutualInformation(joint, first, second, config)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.OneTimeElementSampler.run ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/OneTimeElementSampler.html#run-94c)
@@ -13547,6 +13715,102 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.algorithm.sampling.VectorImportance.Conditional.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$Conditional.html#logDensity-f10)
+
+```scala
+def logDensity(x: Vector[Double]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x finite vector of matching dimension Attributes Returns normalized log proposal density; -Infinity is allowed off support
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.algorithm.sampling.VectorImportance.Conditional.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$Conditional.html#sample-930)
+
+```scala
+def sample(rng: Random): Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Value parameters rng exclusively owned run RNG; do not retain it or use another RNG Attributes Returns a finite vector drawn from this normalized proposal
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.algorithm.sampling.VectorImportance.Conditional.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$Conditional.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.VectorImportance.Conditional.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$Conditional.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.sampling.VectorImportance.Config.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$Config.html#productElementNames-0)
@@ -14168,6 +14432,102 @@ receiver.productElementNames
 ## `` com.cra.figaro.algorithm.sampling.VectorImportance.Result.productIterator ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.VectorImportance.StudentT.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$StudentT.html#logDensity-f10)
+
+```scala
+def logDensity(x: Vector[Double]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters x finite vector of matching dimension Attributes Returns normalized log proposal density; -Infinity is allowed off support
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.algorithm.sampling.VectorImportance.StudentT.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$StudentT.html#sample-930)
+
+```scala
+def sample(rng: Random): Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Value parameters rng exclusively owned run RNG; do not retain it or use another RNG Attributes Returns a finite vector drawn from this normalized proposal
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.algorithm.sampling.VectorImportance.StudentT.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$StudentT.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.VectorImportance.StudentT.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/VectorImportance$$StudentT.html#productIterator-0)
 
 ```scala
 def productIterator: Iterator[Any]

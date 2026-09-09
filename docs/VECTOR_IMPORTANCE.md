@@ -338,6 +338,11 @@ These are local checks of this branch build, not a new release publication.
 
 ## Related and next work
 
+Modern.14 adds `StudentT(law)` for an [elliptical multivariate t](MULTIVARIATE_STUDENT_T.md)
+and `Conditional(prefix,tailDimension,conditional)` for [explicit dependent joint
+blocks](JOINT_PROPOSALS.md). These use the same full-density correction and ownership
+contract, and are distinct from independent `ProductStudentT` coordinates.
+
 - [Calibration and robustness](IMPORTANCE_CALIBRATION.md): 6,600 fresh-seed trials,
   interval coverage, sparse-event controls and why automatic stopping remains deferred.
 - [Inference health](INFERENCE_HEALTH.md): ESS, weight tails, query MCSE and warnings.
@@ -349,5 +354,7 @@ These are local checks of this branch build, not a new release publication.
   [RNG selection](RNG_SELECTION.md): proposal laws and explicit backend choices.
 
 Next priorities are broader geometry/rare-event evidence and query-MCSE coverage
-calibration before automatic stopping. Graph proposal integration, mixture fitting,
-adaptive production and automatic sampler selection remain separate milestones.
+calibration before automatic stopping. [Graph proposal integration](GRAPH_PROPOSALS.md)
+and [mixture fitting](MIXTURE_PROPOSALS.md) are delivered; adaptive production and
+automatic sampler selection remain separate milestones. See the [current cost and
+query evidence](GRAPH_COST_ACCEPTANCE.md) and [reliability limits](RELIABILITY_LIMITS_ASSESSMENT.md).

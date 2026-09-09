@@ -27,6 +27,25 @@ object FigaroConsumerCheck {
     println(s"Published artifact verified: $sha")
 
     {
+      import com.cra.figaro.algorithm.sampling.{VectorImportance as V,MonteCarloInformation as I,GraphProposalImportance as P}
+      import com.cra.figaro.library.atomic.continuous.{MultivariateGaussianDistribution as G,MultivariateStudentTDistribution as T,MultivariateStudentT}
+      val t=T(5,Vector(0.0,0.0),Vector(Vector(1.0,.3),Vector(.3,1.0)))
+      require(t.covariance.get(0)(0)==5.0/3)
+      val q=V.StudentT(t)
+      require(I.kl(q,q,I.Config(draws=100)).value.contains(0.0))
+      require(I.mutualInformation(q,V.StudentT(t.marginal(Vector(0))),V.StudentT(t.marginal(Vector(1))),I.Config(draws=100)).value.nonEmpty)
+      def g(m: Double,v: Double)=V.Gaussian(G(Vector(m),Vector(Vector(v))))
+      val joint=V.Conditional(g(0,1),1,x => g(x.head,.1))
+      val result=P.run(P.Config(draws=100,maxAttempts=100),joint,joint.logDensity) { (u,root) =>
+        MultivariateStudentT(t)(using "",u).observe(Vector(0.0,0.0))
+        root.map(_.head)(using "",u)
+      }
+      require(result.attempts==100 && result.health.diagnostics.mean.nonEmpty)
+      val mixture=V.Mixture(Vector(.3,.7),Vector(g(-4,1),g(4,1)))
+      require(I.bhattacharyya(mixture,mixture,I.Config(draws=100)).value.contains(0.0))
+    }
+
+    {
       import com.cra.figaro.algorithm.sampling.{GraphProposalImportance as P, VectorImportance as V}
       import com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution as G
       val prior=G(Vector(0.0),Vector(Vector(1.0)))

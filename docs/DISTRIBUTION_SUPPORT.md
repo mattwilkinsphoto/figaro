@@ -2,7 +2,7 @@
 
 ## What exists now
 
-Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-08 for the common-family and construction/GMM milestones.
+Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-09 through the multivariate-t/numerical-information milestone.
 This is an API inventory, not new numerical certification of every existing distribution.
 The [roadmap](../ROADMAP.md) defines delivery gates; the [wishlist](../WISHLIST.md)
 collects broad families and their later flavors.
@@ -13,6 +13,7 @@ collects broad families and their later flavors.
 | GaussianDistribution, MultivariateGaussianDistribution, GaussianMixtureDistribution, GaussianMixture | [GMM and Gaussian guide](DISTRIBUTION_CONSTRUCTIONS.md) | Scalar and full-covariance vector kernels, GMM likelihoods/draws/moments/responsibilities/marginals; fixed/dynamic Figaro GMM adapters, not EM fitting |
 | GaussianInformation | [Gaussian information API](DISTRIBUTION_CONSTRUCTIONS.md#gaussian-information) | Analytic Gaussian KL/Bhattacharyya and MI between blocks of one joint Gaussian; not mixture divergence or mixture MI |
 | StudentT, Cauchy, Laplace, LogNormal, Weibull, Triangular, Kumaraswamy | [Common-family guide](COMMON_DISTRIBUTIONS.md) | Immutable numeric kernels plus fixed/dynamic observation-ready adapters; direct log densities, CDF/survival/quantiles, scoped RNG and tested importance/MCMC paths; not exact factors or fitting |
+| MultivariateStudentT | [Elliptical vector t](MULTIVARIATE_STUDENT_T.md) | Full-rank kernel, exact marginals, fixed/dynamic graph elements, explicit proposals and numerical information metrics; no singular density, multivariate CDF or analytic general t divergence |
 | NegativeBinomial, Hypergeometric | [Count conventions](COMMON_DISTRIBUTIONS.md) | Real positive shape/failure count and finite-population draws respectively; explicit Int-range and work limits |
 | ScalarDivergence, CountDivergence, DiscreteInformation | [Information measures](COMMON_INFORMATION_METRICS.md) | Same-family KL/Bhattacharyya and explicit finite-joint-table MI; analytic or guarded estimated results, not arbitrary cross-family/joint-model inference |
 | GVM mutual information | [MI guide](GVM_MUTUAL_INFORMATION.md) | Fixed complete linear vector versus angle; integrated on main with D3, separate from generic marginal comparisons |

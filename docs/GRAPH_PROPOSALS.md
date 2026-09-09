@@ -276,7 +276,7 @@ python -B tools/summarize_graph_proposals.py docs/graph-proposal-results.csv
 
 [Vector proposals](VECTOR_IMPORTANCE.md), [mixture fitting](MIXTURE_PROPOSALS.md),
 [graph multi-chain MCMC](MULTI_CHAIN_MCMC.md), [inference health](INFERENCE_HEALTH.md)
-and [the roadmap](../ROADMAP.md). Further candidates are matched-total-cost graph
-benchmarks, explicit joint-block designs for difficult hierarchical models, and
-query-aware rare-event proposals. Automatic model rewriting, adaptive production
+and [the roadmap](../ROADMAP.md). Modern.14 adds [calibrated-total-cost graph
+benchmarks](GRAPH_COST_ACCEPTANCE.md), [explicit joint blocks and query-aware
+rare-event proposals](JOINT_PROPOSALS.md). Automatic model rewriting, adaptive production
 and precision stopping require separate research and validation milestones.

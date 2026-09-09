@@ -25,6 +25,8 @@ jobs:
         run: python3 -B -m unittest discover -s tools -p 'test_gvm_mutual_information.py' -v
       - name: Verify common-family and divergence reference oracles
         run: python3 -B -m unittest discover -s tools -p 'test_common_*reference.py' -v
+      - name: Verify multivariate t independent references
+        run: python3 -B -m unittest discover -s tools -p 'test_multivariate_t_reference.py' -v
       - name: Verify independent statistical-validation posterior references
         run: |
           python3 -m pip install --disable-pip-version-check numpy==2.3.5
@@ -157,6 +159,9 @@ jobs:
           python3 -B tools/summarize_importance_calibration.py docs/importance-calibration-results.csv
           python3 -B tools/summarize_mixture_proposals.py docs/mixture-proposal-results.csv
           python3 -B tools/summarize_graph_proposals.py docs/graph-proposal-results.csv
+          python3 -B tools/summarize_graph_cost.py docs/graph-cost-results.csv
+          python3 -B tools/summarize_graph_cost.py docs/graph-matched-cost-results.csv --matched
+          python3 -B tools/summarize_joint_proposals.py docs/joint-proposal-results.csv
           python3 -B -m unittest discover -s tools -p 'test_check_acceptance_artifacts.py'
           python3 -B tools/summarize_interleaved_performance.py check docs/core-performance-acceptance-results.csv --baseline-csv docs/parallel-vector-diagnostics-results.csv
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
@@ -209,6 +214,8 @@ jobs:
 
       - name: Verify owned graph proposal integration
         run: |
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.ConditionalProposalTest com.cra.figaro.test.modernization.MultivariateStudentTTest com.cra.figaro.test.modernization.MonteCarloInformationTest"
+          sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.JointProposalStudy smoke"
           sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.GraphProposalImportanceTest"
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.documentation.GraphProposalExample"
           sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.GraphProposalStudy full" > "$RUNNER_TEMP/graph-proposals.log"
@@ -348,8 +355,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.13-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.13-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.14-SNAPSHOT.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.14-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -372,13 +379,13 @@ jobs:
       - name: Verify independently published consumer
         working-directory: tools/acceptance-consumer
         run: |
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.13-SNAPSHOT.jar | cut -d' ' -f1)"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.14-SNAPSHOT.jar | cut -d' ' -f1)"
           sbt --server --batch "runMain FigaroConsumerCheck"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.13-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.14-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -389,8 +396,8 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.13-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.13-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.13-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.13-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.14-SNAPSHOT.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.14-SNAPSHOT-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.14-SNAPSHOT-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.14-SNAPSHOT-javadoc.jar
           if-no-files-found: error

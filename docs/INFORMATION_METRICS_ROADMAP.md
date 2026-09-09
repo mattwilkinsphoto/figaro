@@ -48,8 +48,13 @@ This advances INFO-02 through INFO-04; it does not finish their full cross-famil
 The D4 [Gaussian extension](DISTRIBUTION_CONSTRUCTIONS.md) implements scalar/vector Gaussian
 KL/Bhattacharyya and partitioned multivariate Gaussian MI; see its
 [acceptance status](DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md). It also adds GMM kernels,
-but not divergences/MI between or within mixtures. Comparisons between unlike families,
-the remaining existing-family adapter audits and sample-based estimators remain work.
+but originally not divergences/MI between or within mixtures. The modern.14
+[fixed-budget Monte Carlo extension](MONTE_CARLO_INFORMATION.md) now implements
+full-law mixture KL/Bhattacharyya and exact-marginal partition MI through normalized
+vector adapters, including unlike compatible continuous families. Its MCSE is
+explicitly distinct from deterministic numerical error or a calibrated confidence
+bound. Existing-family adapter audits, analytic mixture bounds and more efficient
+specialized estimators remain work.
 
 1. **INFO-01: GVM representative delivered.** MI includes mathematical reduction,
    independent numerical controls, caller-visible limits, examples, packaging and passing CI.

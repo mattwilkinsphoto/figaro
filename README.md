@@ -37,7 +37,7 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.13-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.14-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
@@ -70,6 +70,7 @@ That coordinate resolves only after local publication, unless you separately pub
 
 - [Distribution constructions and Gaussian mixtures](docs/DISTRIBUTION_CONSTRUCTIONS.md): transformations, truncation, scalar/vector mixtures, zero-adjusted counts, Gaussian KL/Bhattacharyya and partitioned Gaussian MI; [acceptance status](docs/DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md).
 - [Common distribution families](docs/COMMON_DISTRIBUTIONS.md): Student t, Cauchy, Laplace, lognormal, Weibull, triangular, Kumaraswamy, negative binomial and hypergeometric, with observation-ready adapters and parameter conventions.
+- [Elliptical multivariate t](docs/MULTIVARIATE_STUDENT_T.md), [joint proposals](docs/JOINT_PROPOSALS.md), and [numerical KL/Bhattacharyya/MI](docs/MONTE_CARLO_INFORMATION.md): opt-in broad-family tools, including Gaussian mixtures; see [end-to-end cost evidence](docs/GRAPH_COST_ACCEPTANCE.md) before choosing a proposal.
 - [Common information measures](docs/COMMON_INFORMATION_METRICS.md): same-family KL/Bhattacharyya and explicit finite-table mutual information, with analytic reductions, work budgets and numerical refusals.
 - [Circular von Mises](docs/VON_MISES.md): reusable angular density/sampling, circular summaries, conditional observations and inference limits.
 - [Joint Gauss-von Mises preview](docs/GAUSS_VON_MISES.md): tested linear-angular distribution, approved standalone publication scope and inference limits.
