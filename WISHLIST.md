@@ -24,10 +24,13 @@ and [LKJ/inverse-Wishart covariance modeling](docs/COVARIANCE_PRIORS.md). The bo
 on main at CI-verified `751579be`. See the [ordered delivery plan](ROADMAP.md); these priorities do not
 mark the remaining family flavors or generic inference guarantees complete.
 
-The next approved sequence adds weighted event mixtures, restricted static root
-proposals and extended reusable constructions. The high-interest
-[GVM-mixture versus GMM research plan](docs/GVM_MIXTURE_RESEARCH_PLAN.md) is retained
-as research, not as delivered tracking or fusion functionality.
+Weighted event mixtures, restricted static root proposals and extended reusable
+constructions are integrated as modern.22 at `742061bd`, with passing main CI.
+Modern.23 adds [observation semantics](docs/OBSERVATION_MODELS.md),
+[mixed scalar measures](docs/MIXED_MEASURES.md), [fixed GVM mixtures](docs/GVM_MIXTURES.md)
+and [continuous copulas](docs/COPULAS.md). The [GVM/GMM comparison](docs/GVM_MIXTURE_RESEARCH_PLAN.md)
+continues beyond its initial controlled experiment; production fitting, stronger
+representation controls and application tracking/fusion are not delivered by it.
 
 Use stable `DIST-xx` IDs when moving work into the roadmap. Priorities are P0 (first
 program), P1 (common missing breadth), P2 (subsequent breadth) and P3 (specialist research).
@@ -48,7 +51,7 @@ and special cases attached to their family instead of creating duplicate impleme
 | DIST-07 / P2 | GEV/GPD implemented for modern.18 | [Parameter-dependent support and tail APIs](docs/DISTRIBUTION_BREADTH.md), including zero-shape Gumbel/exponential limits | Convenience Frechet/Lomax aliases, Zipf-Mandelbrot and further tail/truncation variants |
 | DIST-08 / P2 | MVN/Dirichlet native; multivariate t and multinomial count vectors implemented | [Joint counts and complementary-block MI](docs/DISTRIBUTION_BREADTH.md), alongside elliptical t | Negative multinomial, Dirichlet count mixtures, joint survival and continuous-categorical |
 | DIST-09 / P2 | Restricted Wishart, inverse-Wishart and LKJ integrated through modern.20 | [Covariance priors and KL/Bhattacharyya](docs/COVARIANCE_PRIORS.md) | Near-singular df, matrix normal/t/beta, matrix Langevin, Stiefel-uniform; support measures differ |
-| DIST-10 / P1 | Initial construction/GMM kernels implemented; [acceptance](docs/DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md) | Affine/exp Jacobians, finite truncation, scalar mixtures, full-covariance GMMs and zero-adjusted counts | Log/general monotone transforms, half-infinite truncation, count mixtures, folded/wrapped/rectified, compound Poisson-Gamma, spike-and-slab, convolutions/censoring; separately scoped GMM fitting/selection and mixture-information estimators |
+| DIST-10 / P1 | Construction/GMM kernels and bounded modern.23 mixed measures implemented | Affine/exp/monotone transforms, finite/half-infinite truncation, folding, wrapped Cauchy, count/scalar/GVM mixtures, GMMs, zero-adjusted counts, atoms/slabs, clipping and censoring evidence | Generic wrapped sums, compound Poisson-Gamma, mixed convolutions; production GVM fitting, component selection and broader mixture information |
 | DIST-11 / P3 | Flexible systems and quantile-defined laws; wishlist | Valid parameter/monotonicity contracts before fitting APIs | Pearson, Johnson, metalog, quantile-parameterized, Tukey lambda and Wakeby |
 | DIST-12 / P3 | Singular/degenerate and nonnumeric measures; Constant/Select native | Explicit distinction between atoms, densities and singular laws | Cantor, circular point masses; no fabricated Lebesgue PDF for a singular law |
 | DIST-13 / P3 | Physical/scattering and random-matrix spectral laws; wishlist | Verify domain, reference measure and normalization first | Henyey-Greenstein, Mie, Marchenko-Pastur, Wigner, Tracy-Widom and other specialist laws |

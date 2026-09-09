@@ -42,12 +42,17 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.22-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.23-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
 
 ## Documentation
+
+- [Observation models](docs/OBSERVATION_MODELS.md): exact, rounded and censored likelihoods and measurement error.
+- [Mixed measures](docs/MIXED_MEASURES.md): atoms plus continuous slabs, clipping and full-law information comparisons.
+- [GVM mixtures](docs/GVM_MIXTURES.md): fixed joint linear-angular mixtures and an initial GMM representation comparison.
+- [Continuous copulas](docs/COPULAS.md): Gaussian/t dependence with non-Gaussian marginals.
 
 - [Query-aware rare events](docs/RARE_EVENT_PROPOSALS.md): discarded CE pilots, supplied defensive mixtures and ordinary probability estimates, with matched-total-cost evidence and explicit failure cases.
 - [Covariance priors](docs/COVARIANCE_PRIORS.md): LKJ correlation and inverse-Wishart covariance modeling, Cholesky sampling and analytic information measures.

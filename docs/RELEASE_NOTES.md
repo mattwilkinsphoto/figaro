@@ -5,12 +5,20 @@
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The source default is
-`6.0.0-modern.22-SNAPSHOT`; it requires local publication or an explicitly configured
+`6.0.0-modern.23-SNAPSHOT`; it requires local publication or an explicitly configured
 artifact repository. A locally distributed `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
+
+- `6.0.0-modern.23-SNAPSHOT` adds [observation semantics](OBSERVATION_MODELS.md),
+  [finite atom/slab laws](MIXED_MEASURES.md), [fixed GVM mixtures](GVM_MIXTURES.md)
+  and [continuous Gaussian/t copulas](COPULAS.md). Full likelihood/measure contracts,
+  appropriate information metrics and explicit numerical refusals accompany each.
+  [Acceptance evidence](MODELING_CAPABILITIES_ACCEPTANCE.md) includes an initial
+  held-out GVM/GMM comparison; the fitter is research-only, not a production API.
+  Existing inference defaults and runtime dependencies are unchanged.
 
 - `6.0.0-modern.22-SNAPSHOT` implements the approved three-priority expansion:
   [weighted event-mixture fitting](WEIGHTED_RARE_EVENT_MIXTURES.md),

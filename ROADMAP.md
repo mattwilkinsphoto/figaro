@@ -32,10 +32,10 @@ universal stopping, discovery of unspecified modes, or arbitrary shared-graph sa
 
 ## Capability expansion (modern.22; approved 2026-09-09)
 
-The following three capabilities are implemented and locally release-validated for
-modern.22: 539 modernization tests, independent published consumer and all artifact
-and documentation gates pass. Source promotion to main requires passing CI on the
-exact commit. See [acceptance evidence](docs/CAPABILITY_EXPANSION_ACCEPTANCE.md).
+The following three capabilities are integrated on main at `742061bd` as modern.22:
+539 modernization tests, independent published consumer and all artifact/documentation
+gates passed. [Main CI passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34397852232).
+See [acceptance evidence](docs/CAPABILITY_EXPANSION_ACCEPTANCE.md).
 
 1. [Event-weighted multi-component Gaussian fitting](docs/WEIGHTED_RARE_EVENT_MIXTURES.md): explicit component count, weighted
    EM with component-ESS safeguards, independent production and complete pilot-inclusive
@@ -52,9 +52,24 @@ These are bounded milestones, not automatic graph compilation, automatic compone
 selection or generic certified integration. Each requires tests, user/API documentation,
 packaged-consumer validation and CI before integration.
 
-High-interest research backlog: [GVM mixtures versus Gaussian mixtures](docs/GVM_MIXTURE_RESEARCH_PLAN.md).
-Representation quality, angular topology, information measures and total cost come
-before any application-level tracking or report-fusion implementation.
+## Modeling capabilities (modern.23; approved 2026-09-09)
+
+The four approved priorities have bounded implementations and a shared release gate:
+
+1. [Observation semantics](docs/OBSERVATION_MODELS.md): exact/interval/censored/rounded
+   likelihoods and explicit hierarchical measurement-error factors.
+2. [Mixed scalar measures](docs/MIXED_MEASURES.md): atoms plus continuous slabs,
+   clipping/rectification, observation adapters and full-law KL/Bhattacharyya.
+3. [GVM mixtures](docs/GVM_MIXTURES.md): fixed mixture kernels, responsibilities,
+   normalized vector charts and information comparisons; test-only fitting comparison.
+4. [Continuous copulas](docs/COPULAS.md): Gaussian and Student-t latent dependence,
+   scalar marginal transforms, graph evidence and appropriate information measures.
+
+[Acceptance and research evidence](docs/MODELING_CAPABILITIES_ACCEPTANCE.md) separates
+delivered contracts from continuing work. Production GVM-mixture fitting, full-mixture
+linear/angle MI, stronger GMM controls, mixed/count copulas and compound/convolved mixed
+laws remain follow-ons. Generic laws do not implement tracking, propagation or report fusion.
+The [GVM/GMM research plan](docs/GVM_MIXTURE_RESEARCH_PLAN.md) retains that application boundary.
 
 The approved [three-stage follow-on](docs/INFERENCE_NEXT_STAGES.md) now has
 [end-to-end cost evidence](docs/GRAPH_COST_ACCEPTANCE.md), explicit

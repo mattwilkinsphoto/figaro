@@ -39,12 +39,17 @@ implementation does not introduce sample-based estimators or generalized fusion.
 
 ## Delivery sequence
 
+Modern.23 adds [mixed atom/slab comparisons](MIXED_MEASURES.md),
+[full GVM-mixture Monte Carlo KL/Bhattacharyya and label/state MI](GVM_MIXTURES.md),
+and [continuous copula vector adapters and Gaussian partition MI](COPULAS.md).
+GVM-mixture linear/angle MI remains separate; component MI does not substitute for it.
+
 Modern.22 adds [construction-aware comparisons](EXTENDED_CONSTRUCTIONS.md): common
 declared-bijection invariance, analytic wrapped-Cauchy KL, guarded folded/truncated
 and wrapped overlap, finite full-count-mixture KL/Bhattacharyya and component/count
 MI. Unbounded count tails, arbitrary gapped kernels and generic wrapped sums are
 not silently approximated. [GVM mixture comparisons](GVM_MIXTURE_RESEARCH_PLAN.md)
-are a high-interest research follow-on, not delivered full-mixture GVM metrics.
+continue through the modern.23 bounded implementation and research follow-ons.
 
 Modern.20 adds same-order [LKJ and inverse-Wishart KL/Bhattacharyya](COVARIANCE_PRIORS.md)
 with explicit matrix/factor measures and numerical refusals. Matrix-entry MI remains

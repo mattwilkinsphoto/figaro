@@ -1,5 +1,15 @@
 # Migrating to Scala 3 and sbt 2
 
+## Modeling capabilities (modern.23)
+
+The [four modeling capabilities](MODELING_CAPABILITIES_ACCEPTANCE.md) are additive;
+existing sampling and observation defaults are unchanged. Rebuild against the versioned
+artifact to use them. Exact observations remain exact: interval/censoring semantics
+must be selected explicitly. Mixed laws use a separate atom-plus-Lebesgue contract,
+not `ScalarDistribution`. GVM mixtures need one angular chart in vector algorithms.
+Copula correlations are latent-scale parameters, not generally physical correlations.
+No new runtime dependency, automatic fitter, tracking or report-fusion pipeline is added.
+
 ## Capability expansion (modern.22)
 
 The [three new capabilities](CAPABILITY_EXPANSION_ACCEPTANCE.md) are opt-in. Rebuild

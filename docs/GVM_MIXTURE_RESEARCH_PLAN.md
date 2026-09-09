@@ -1,9 +1,11 @@
 # GVM mixtures versus Gaussian mixtures: research backlog
 
-Status: high-interest, user-requested research; no GVM-mixture implementation or
-application tracking system is delivered by this plan. Do not assume novelty or
-superiority before a literature assessment. Existing Gaussian mixture kernels and
-fixed-kernel Gauss-von Mises laws provide the starting point.
+Status: modern.23 delivers the [fixed mixture kernel](GVM_MIXTURES.md), a focused
+literature baseline and an [initial controlled GMM comparison](MODELING_CAPABILITIES_ACCEPTANCE.md).
+Production parameter fitting, stronger matched-accuracy/parameter-budget studies and
+application tracking systems remain research. Neither novelty nor broad superiority
+has been established. The initial comparison's GVM-generated truths and simple fitters
+must not be mistaken for a conclusive application study.
 
 ## Scientific question
 

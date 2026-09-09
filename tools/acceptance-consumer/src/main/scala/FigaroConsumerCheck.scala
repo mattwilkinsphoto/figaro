@@ -335,6 +335,22 @@ object FigaroConsumerCheck {
       println("Published weighted-event, static-proposal and extended-construction APIs passed")
     }
 
+    locally {
+      import com.cra.figaro.library.atomic.continuous.*
+      val gaussian=GaussianDistribution(0,1)
+      require(math.abs(ObservationLikelihood.logInterval(gaussian,40,41)+804.6084420137538)<1e-10)
+      val mixed=MixedScalarDistribution.spikeAndSlab(0,.2,gaussian)
+      require(MixedScalarElement(mixed).logDensity(0)==math.log(.2))
+      require(MixedScalarInformation.kl(mixed,mixed).value.exists(math.abs(_)<1e-12))
+      val kernel=GaussVonMisesDistribution(Vector(0.0),Vector(Vector(1.0)),0,Vector(.2),Vector(Vector(.1)),5)
+      val mixture=GaussVonMisesMixtureDistribution(Vector(.5,.5),Vector(kernel,kernel))
+      require(mixture.asProposal().logDensity(Vector(0,0)).isFinite)
+      require(GaussVonMisesMixture(mixture).logDensity(LinearAngular(Vector(0),0)).isFinite)
+      val copula=CopulaDistribution(Vector(WeibullDistribution(2,3),LogNormalDistribution(0,1)),Vector(Vector(1.0,.6),Vector(.6,1.0)))
+      require(math.abs(copula.gaussianPartitionMutualInformation(Vector(0))-.22314355131420976)<1e-12)
+      require(CopulaElement(copula).logDensity(Vector(1,1)).isFinite)
+      println("Published observation, mixed-measure, GVM-mixture and copula APIs passed")
+    }
     var cancelled=false
     Thread.currentThread().interrupt()
     try VS.run(VS.Config(VS.Method.GPSS),Vector(1.0,1.0))(x => -x.map(v=>v*v).sum/2)
