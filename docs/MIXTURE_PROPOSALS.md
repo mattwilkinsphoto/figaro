@@ -201,7 +201,11 @@ passed; all four archives passed legal/runtime/Java-17 checks. The generated
 handbook contains 11,988 method entries; local links pass. Four pre-existing
 Scaladoc warnings remain. The verified thin-JAR SHA-256 is
 `0364fcef276aacd44eb6cbde826fbc529568dd4b1e01bd42e833d7035620cad8`.
-Remote CI and main integration remain separate gates from these local results.
+The corrected branch [CI run passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34319065112),
+and modern.12 was fast-forwarded to main at `3f2a69da`. The NumPy oracle belongs in
+the NumPy-provisioned research job; an initial misplaced invocation failed and was
+corrected without weakening its assertions. Subsequent modern.13 build hardening
+strengthens the [cold-build verification](BUILDING.md) beyond the earlier cache-setting check.
 
 ```sh
 sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussianMixtureProposalTest"

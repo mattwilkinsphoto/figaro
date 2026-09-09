@@ -48,11 +48,11 @@ intervals and a diagnostic-selection filter as general coverage repairs;
 rare-event and nonlinear limits remain explicit.
 Automatic stopping remains deferred rather than declaring these limits solved.
 
-The [multi-component proposal fitter](docs/MIXTURE_PROPOSALS.md) is implemented on
-`modernize/multi-component-proposals`, with explicit component counts, bounded
+The [multi-component proposal fitter](docs/MIXTURE_PROPOSALS.md) is integrated on
+main as modern.12 at CI-verified `3f2a69da`, with explicit component counts, bounded
 regularized EM, frozen production and 1,200 paired acceptance rows. It improves
 effective sampling on the tested separated-mode models without claiming automatic
-mode discovery or calibrated stopping. CI/main integration remain separate gates.
+mode discovery or calibrated stopping.
 
 The [owned graph proposal bridge](docs/GRAPH_PROPOSALS.md) is implemented on
 `modernize/graph-proposal-integration` for modern.13 integration after verification.

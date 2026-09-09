@@ -250,8 +250,19 @@ Local modern.13 acceptance passed: all 433 modernization tests, 76 evidence-tool
 tests, seven artifact-checker tests, the executable example and the independent
 published-JAR consumer. All four archives passed runtime/legal/Java-17 checks.
 The compiler-derived handbook has 12,008 method entries; freshness and local links
-pass. Four pre-existing Scaladoc warnings remain. Verified thin-JAR SHA-256:
-`a4465b2f33537c2ada155ed5527a9389917936f4ff801f1283586552cf33eb85`.
+pass. Four pre-existing Scaladoc warnings remain. The initial incremental thin-JAR
+hash was `a4465b2f33537c2ada155ed5527a9389917936f4ff801f1283586552cf33eb85`.
+Two independent cold builds, each compiling all 318 library sources with a new
+action-cache directory, instead reproducibly produce thin-JAR SHA-256
+`bbff9f84f9082b2a54742ee3f660f16919a1b072dc1c0a7702998a3744869a14`
+and fat-JAR SHA-256
+`0ac231517f16d75c89fa113a5830cf4b922f9c930ccd4a9d052066e92ab20eaa`.
+All 433 modernization tests and the independent published-JAR consumer also pass
+against these clean-build library bytes; all four clean archives pass artifact checks.
+Use the clean artifacts for distribution; see the corrected [cache-isolation
+instructions](BUILDING.md). Hashes describe this toolchain, not an assumed
+cross-JDK byte identity. Source and documentation archive hashes were unchanged
+between incremental and clean builds; no sampling source was modified for this check.
 Remote branch CI and main integration are separate gates, not implied by these
 local checks.
 

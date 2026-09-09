@@ -333,14 +333,17 @@ jobs:
       - name: Verify coverage plugin and restore non-instrumented build
         # Keep tests last in their invocation so later sbt commands cannot mask a failure.
         run: |
-          sbt --server --batch "set Global / cacheStores := Seq.empty; clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest com.cra.figaro.test.modernization.McmcReliabilityRegressionTest com.cra.figaro.test.modernization.VectorSliceSamplerRegressionTest com.cra.figaro.test.modernization.MultiChainVectorSliceSamplerRegressionTest"
-          sbt --server --batch "coverage; figaro / coverageReport"
+          test ! -e "$RUNNER_TEMP/figaro-coverage-cold"
+          sbt --server --batch -Dsbt.global.localcache="$RUNNER_TEMP/figaro-coverage-cold" "clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest com.cra.figaro.test.modernization.GaussianBlockCalibrationRegressionTest com.cra.figaro.test.modernization.McmcReliabilityRegressionTest com.cra.figaro.test.modernization.VectorSliceSamplerRegressionTest com.cra.figaro.test.modernization.MultiChainVectorSliceSamplerRegressionTest"
+          sbt --server --batch -Dsbt.global.localcache="$RUNNER_TEMP/figaro-coverage-cold" "coverage; figaro / coverageReport"
           sbt --server --batch "coverageOff; clean"
 
       - name: Build first reproducibility candidate
-        run: >-
-          sbt --server --batch
-          "figaro / Compile / packageBin; figaro / assembly"
+        run: |
+          set -o pipefail
+          test ! -e "$RUNNER_TEMP/figaro-repro-a"
+          sbt --server --batch -Dsbt.global.localcache="$RUNNER_TEMP/figaro-repro-a" "clean; figaro / Compile / packageBin; figaro / assembly" | tee "$RUNNER_TEMP/figaro-repro-a.log"
+          grep -E 'compiling [1-9][0-9]* Scala sources to .*figaro/classes' "$RUNNER_TEMP/figaro-repro-a.log"
 
       - name: Record artifact checksums
         run: |
@@ -351,13 +354,16 @@ jobs:
 
       - name: Verify clean rebuild is byte-for-byte reproducible
         run: |
-          # Bypass sbt 2's artifact cache: restoring the first JAR is not a rebuild.
-          sbt --server --batch "set Global / cacheStores := Seq.empty; clean; figaro / Compile / packageBin; figaro / assembly"
+          # Independent empty action caches plus clean outputs force both compilations.
+          set -o pipefail
+          test ! -e "$RUNNER_TEMP/figaro-repro-b"
+          sbt --server --batch -Dsbt.global.localcache="$RUNNER_TEMP/figaro-repro-b" "clean; figaro / Compile / packageBin; figaro / assembly" | tee "$RUNNER_TEMP/figaro-repro-b.log"
+          grep -E 'compiling [1-9][0-9]* Scala sources to .*figaro/classes' "$RUNNER_TEMP/figaro-repro-b.log"
           sha256sum --check "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Build classifiers and verify local Maven publication
         run: >-
-          sbt --server --batch
+          sbt --server --batch -Dsbt.global.localcache="$RUNNER_TEMP/figaro-repro-b"
           "figaro / Compile / packageSrc; figaro / Compile / packageDoc; figaro / publishLocal"
 
       - name: Verify artifact contents and legal notices

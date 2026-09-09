@@ -10,6 +10,12 @@ its graph, returns detached scalar weighted evidence, retains rejected attempts,
 and forbids observed/intervened roots or cross-Universe dependencies. It does not
 rewrite existing models, automatically fit proposals, or enable precision stopping.
 
+Modern.13 also corrects the reproducibility/coverage build procedure: an empty
+`Global / cacheStores` setting did not suppress disk hits in the installed sbt 2.0.8.
+Use new isolated action caches and verify actual compiler execution as described in
+[building](BUILDING.md). Previously tested incremental JAR hashes can differ from
+clean builds; distribute the independently verified clean artifacts.
+
 ## Pilot-only mixture fitting
 
 [GaussianMixtureProposal](MIXTURE_PROPOSALS.md) adds a pure, bounded fitter returning

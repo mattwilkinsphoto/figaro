@@ -50,13 +50,30 @@ Outputs are under `target/out/jvm/scala-3.9.0/figaro/`:
 
 `publishLocal` writes to sbt's local Ivy repository using Maven-style metadata. It does not publish to Maven Central or a shared server. The consumer must run as the same user with the same local repository settings. Source/doc/thin JARs carry the project's license and attribution under `META-INF`; assembly preserves them too, renaming the project's license to avoid collisions. Do not strip dependency notices.
 
-For a genuine reproducibility comparison, record thin/fat JAR SHA-256 hashes, then bypass the sbt 2 action cache for the second build:
+For a genuine reproducibility comparison, use two **new, empty action-cache
+directories** and clean outputs for both builds. Example POSIX shell commands:
 
 ```sh
-sbt "set Global / cacheStores := Seq.empty; clean; figaro / Compile / packageBin; figaro / assembly"
+test ! -e /tmp/figaro-repro-a && test ! -e /tmp/figaro-repro-b
+sbt -Dsbt.global.localcache=/tmp/figaro-repro-a "clean; figaro / Compile / packageBin; figaro / assembly"
+# Record the thin/fat JAR SHA-256 hashes before the second build.
+sbt -Dsbt.global.localcache=/tmp/figaro-repro-b "clean; figaro / Compile / packageBin; figaro / assembly"
 ```
 
-Compare both new hashes with the originals. A cache-restored JAR alone is not evidence of a fresh reproducible build. CI implements this comparison.
+Choose unused task-specific paths on your system (on Windows, quote an absolute
+directory under your workspace). Do not delete a shared cache to run this check.
+Compare both hashes and require the logs to show actual compilation in each build.
+CI uses separate runner-temporary caches and explicitly checks those compile lines.
+
+The earlier `set Global / cacheStores := Seq.empty` instruction was insufficient in
+sbt 2.0.8: it left disk cache hits enabled. A cache-restored JAR is not fresh-build
+evidence. The [sbt 2.0.8 cache-path implementation](https://github.com/sbt/sbt/blob/v2.0.8/main/src/main/scala/sbt/internal/SysProp.scala)
+supports `sbt.global.localcache`; this redirects only the action cache, not the
+dependency download cache. The [sbt caching guide](https://www.scala-sbt.org/2.x/docs/en/concepts/caching.html)
+explains machine-wide task caching. Incremental and clean compilation can produce
+different class/TASTy bytes: use clean artifacts for distribution and compare
+like-for-like toolchains. Historical cache-disabled reproducibility claims should
+not be read as proof of two independent compilations unless the logs establish it.
 
 ### 3. Update documentation or measure coverage
 
@@ -75,7 +92,8 @@ Open `target/out/jvm/scala-3.9.0/figaro/api/index.html` locally. Edit public con
 Coverage is a separate workflow. On Windows especially, start it in a **fresh sbt process**, then exit before normal packaging:
 
 ```sh
-sbt "set Global / cacheStores := Seq.empty; clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest; figaro / coverageReport; coverageOff"
+test ! -e /tmp/figaro-coverage-cold
+sbt -Dsbt.global.localcache=/tmp/figaro-coverage-cold "clean; coverage; figaro / Test / testOnly com.cra.figaro.test.modernization.ProbabilityRegressionTest; figaro / coverageReport; coverageOff"
 sbt "clean; figaro / Compile / packageBin; figaro / assembly"
 ```
 
