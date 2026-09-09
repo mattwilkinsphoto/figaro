@@ -46,6 +46,8 @@ That coordinate resolves only after local publication, unless you separately pub
 
 - [Inference health and warnings](docs/INFERENCE_HEALTH.md): opt-in weight-tail,
   effective-sample-size, MCMC convergence and query-precision assessments, with explicit limitations.
+- [Defensive importance research](docs/DEFENSIVE_IMPORTANCE_RESEARCH.md): pilot-inclusive
+  proposal comparisons on concentrated posteriors; a tested prototype, not a new public sampler.
 
 - [Choose an RNG by purpose](docs/RNG_SELECTION.md): versioned execution-pattern
   presets, explicit overrides, hard requirements and recorded selection reasons.

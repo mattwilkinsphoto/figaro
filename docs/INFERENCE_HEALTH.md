@@ -293,3 +293,6 @@ python -B -m unittest discover -s tools -p 'test_inference_health_reference.py'
 Next work is improved importance proposals at matched accuracy, held-out calibration
 across model geometries and rare-event targets, and dependence-aware diagnostics.
 Automatic remedies or stopping decisions require separate validation and approval.
+The first [pilot-fitted defensive-proposal assessment](DEFENSIVE_IMPORTANCE_RESEARCH.md)
+now provides a research-only candidate, pilot-inclusive comparisons and fresh-seed
+coverage evidence; it has not changed this warning policy or a public sampler.

@@ -23,20 +23,20 @@ class FixtureRandom:
         return sum(-math.log1p(-self.uniform()) for _ in range(shape))
 
 
-def observations():
-    g, d = FixtureRandom(104729), FixtureRandom(130363)
+def observations(seed_offset=0):
+    g, d = FixtureRandom(104729 + seed_offset), FixtureRandom(130363 + seed_offset)
     gamma = np.array([2 * g.gamma_integer(2) for _ in range(200)])
     rows = np.array([[d.gamma_integer(a) for a in (1, 2, 3)] for _ in range(200)])
     return gamma, rows / rows.sum(axis=1)[:, None]
 
 
-def posterior(family, order):
+def posterior(family, order, seed_offset=0):
     """Tensor Gauss-Legendre integral over the COMPLETE Uniform(0,10) prior box.
 
     Returns posterior mean and SD; increasing-order agreement is not a certificate.
     Slices the third dimension to bound peak memory. Omits constant prior density.
     """
-    gamma, dirichlet = observations()
+    gamma, dirichlet = observations(seed_offset)
     x, w = np.polynomial.legendre.leggauss(order)
     x, w = 5 * (x + 1), 5 * w
     lg = np.vectorize(math.lgamma)

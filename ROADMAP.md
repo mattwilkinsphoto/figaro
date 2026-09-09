@@ -32,6 +32,12 @@ query-specific MCSE and existing multi-chain diagnostics. This is a warning laye
 not adaptive inference or automatic stopping. Next: better proposals at matched accuracy,
 broader held-out warning calibration and dependence-aware importance diagnostics.
 
+[Pilot-fitted defensive importance research](docs/DEFENSIVE_IMPORTANCE_RESEARCH.md)
+now evaluates that proposal priority against prior importance and existing Quantile
+slice sampling, including discarded training costs, new datasets and a fresh-seed
+coverage batch. Promotion remains separate from this research milestone; no automatic
+proposal replacement or public sampler is delivered by the prototype.
+
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).
 The [inventory](docs/DISTRIBUTION_SUPPORT.md) distinguishes

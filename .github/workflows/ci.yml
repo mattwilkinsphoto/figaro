@@ -81,6 +81,12 @@ jobs:
       - name: Verify inference health on fixed concentrated-posterior workloads
         run: sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.InferenceHealthStudy"
 
+      - name: Verify research-only defensive proposal contracts and smoke entry point
+        run: >-
+          sbt --server --batch
+          "figaro / Test / testOnly com.cra.figaro.test.modernization.DefensiveImportanceTest;
+          figaro / Test / runMain com.cra.figaro.test.modernization.DefensiveImportanceStudy smoke"
+
       - name: Verify joint Gauss-von Mises contracts and examples
         run: >-
           sbt --server --batch
@@ -144,6 +150,8 @@ jobs:
           sbt --server --batch "figaro / Compile / doc"
           python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
           python3 -B -m unittest discover -s tools -p 'test_summarize*.py'
+          python3 -B tools/summarize_defensive_importance.py docs/defensive-importance-results.csv
+          python3 -B tools/summarize_defensive_importance.py docs/defensive-importance-coverage.csv --coverage
           python3 -B -m unittest discover -s tools -p 'test_check_acceptance_artifacts.py'
           python3 -B tools/summarize_interleaved_performance.py check docs/core-performance-acceptance-results.csv --baseline-csv docs/parallel-vector-diagnostics-results.csv
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
