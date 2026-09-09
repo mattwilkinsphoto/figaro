@@ -32,6 +32,10 @@ separately in the [roadmap](../ROADMAP.md).
 
 ## 4. Assumption-bounded reliability and concurrency
 
+Modern.15 supplies [bounded IID stopping and declared-region checks](BOUNDED_IID_RELIABILITY.md).
+The [static graph ownership design](OWNED_GRAPH_EXECUTION_DESIGN.md) is complete
+as a design only; a new executor remains future work. Existing samplers are unchanged.
+
 The requested universal endpoints cannot be accepted literally:
 
 - **Precision stopping:** bounded independent observations admit time-uniform

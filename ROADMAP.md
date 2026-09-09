@@ -21,9 +21,13 @@ The approved [three-stage follow-on](docs/INFERENCE_NEXT_STAGES.md) now has
 [Monte Carlo KL/Bhattacharyya/MI](docs/MONTE_CARLO_INFORMATION.md).
 These form the modern.14 milestone, with the local clean-build/445-test/consumer
 gate recorded in the cost assessment and remote CI required for main integration.
-The [follow-on assessment](docs/RELIABILITY_LIMITS_ASSESSMENT.md) identifies narrower
-implementable contracts; universal precision, mode-discovery and arbitrary
-shared-graph safety are not claimed or marked complete.
+The modern.15 follow-on implements [bounded IID precision and declared-region
+coverage](docs/BOUNDED_IID_RELIABILITY.md), with explicit assumptions, outward
+arithmetic and work budgets. The [restricted graph ownership design](docs/OWNED_GRAPH_EXECUTION_DESIGN.md)
+is documented, but its proposed static executor is not implemented. Next:
+variance-adaptive bounded confidence sequences and the restricted executor's
+semantic/concurrency/scaling gates. Universal precision, unknown-mode discovery
+and arbitrary shared-graph safety are not claimed or marked complete.
 
 Reliability interlude: [statistical validation](docs/STATISTICAL_VALIDATION.md) and
 [scientific RNG backends](docs/RNG_ASSESSMENT.md) are implemented on the

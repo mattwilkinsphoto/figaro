@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 861,
+  "pages": 873,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -45729,6 +45729,288 @@
       "example": "receiver.stop()",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/BaseUnweightedSampler.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.BoundedIidPrecision.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/BoundedIidPrecision$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.BoundedIidPrecision.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/BoundedIidPrecision$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.BoundedIidPrecision.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/BoundedIidPrecision$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.BoundedIidPrecision.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/BoundedIidPrecision$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.BoundedIidPrecision",
+      "name": "run",
+      "anchor": "run-cf6",
+      "signature": "def run(config: Config)(sample: Random => Double): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "sample: Random => Double"
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Draw until the outward interval meets absoluteError or the budget is exhausted.",
+      "contract": "Draw until the outward interval meets absoluteError or the budget is exhausted. Value parameters config known support, precision, work and RNG policy, fixed before sampling sample pure IID scalar draw using only the supplied private RNG; must return promptly Attributes Returns detached sample mean, confidence sequence interval and explicit stopping reason Example run(Config(0,1,0.02))(rng => if(rng.nextDouble()&lt;0.3) 1.0 else 0.0)",
+      "example": "com.cra.figaro.algorithm.sampling.BoundedIidPrecision.run(config)(sample)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/BoundedIidPrecision$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.MassAssumption",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$MassAssumption.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.MassAssumption",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$MassAssumption.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.MissBound",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$MissBound.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.MissBound",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$MissBound.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.Occupancy",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$Occupancy.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.Occupancy",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$Occupancy.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.Region",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$Region.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.Region",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$Region.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage",
+      "name": "run",
+      "anchor": "run-6a7",
+      "signature": "def run[A](config: Config, regions: Vector[Region[A]], massAssumption: Option[MassAssumption] = ...)(sample: Random => A): Result",
+      "type_parameters": [
+        "A"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config",
+            "regions: Vector[Region[A]]",
+            "massAssumption: Option[MassAssumption] = ..."
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "sample: Random => A"
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Count visits to fixed regions without retaining draws or automatically changing sampling strategy.",
+      "contract": "Count visits to fixed regions without retaining draws or automatically changing sampling strategy. Value parameters config fixed sample count, sampling-law identity and RNG massAssumption optional externally justified minimum sampling probability per region regions 1..128 distinct named predicates, chosen before drawing sample pure IID draw with the supplied RNG; callbacks must return promptly Attributes Returns observed/unobserved inventory and optional conditional, fixed-budget union bound Example run(Config(\"uniform\"),Vector(Region[Double](\"left\",_ &lt; 0.5)))(_.nextDouble())",
+      "example": "com.cra.figaro.algorithm.sampling.DeclaredRegionCoverage.run[A](config, regions, massAssumption)(sample)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/DeclaredRegionCoverage$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.DisjointScheme",

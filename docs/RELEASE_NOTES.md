@@ -5,12 +5,21 @@
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The source default is
-`6.0.0-modern.14-SNAPSHOT`; it requires local publication or an explicitly configured
+`6.0.0-modern.15-SNAPSHOT`; it requires local publication or an explicitly configured
 artifact repository. A locally distributed `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
+
+- `6.0.0-modern.15-SNAPSHOT` adds [bounded IID reliability](BOUNDED_IID_RELIABILITY.md):
+  time-uniform conservative mean intervals with absolute precision/budget outcomes,
+  and fixed-budget declared-region occupancy with optional external mass assumptions.
+  Exact accumulation and outward rounding protect the post-callback arithmetic.
+  These do not extend finite-run guarantees to MCMC or self-normalized importance.
+  The [restricted graph ownership design](OWNED_GRAPH_EXECUTION_DESIGN.md) documents
+  the proposed static executor; that executor is not implemented. Existing defaults
+  and graph behavior are unchanged. Rebuild consumers at the new snapshot coordinate.
 
 - `6.0.0-modern.14-SNAPSHOT` adds [conditional joint proposals](JOINT_PROPOSALS.md),
   [elliptical multivariate Student t](MULTIVARIATE_STUDENT_T.md), and fixed-budget

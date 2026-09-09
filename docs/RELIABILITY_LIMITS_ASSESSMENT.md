@@ -2,7 +2,10 @@
 
 This is the follow-on assessment requested after the modern.14 proposal/distribution
 stages. The first three stages have concrete implementation and evidence; the
-three universal endpoints below are **not completed features**. Replacing them
+three universal endpoints below are **not completed features**. The approved
+modern.15 follow-on now provides [bounded IID APIs](BOUNDED_IID_RELIABILITY.md)
+and a [restricted graph design](OWNED_GRAPH_EXECUTION_DESIGN.md), not those
+universal endpoints. Replacing them
 with apparently reassuring tests would weaken the inference contract.
 
 ## 1. Automatic precision stopping
@@ -92,10 +95,11 @@ existing graphs become parallel-safe without restrictions or migration.
 
 ## Decision
 
-Do not ship a universal precision/mode/safety claim. The next implementable work
-requires choosing and accepting these narrower public contracts. Keep existing
-stopping defaults and graph ownership rules unchanged until those contracts have
-their own research, tests, documentation and versioned integration gate.
+Do not ship a universal precision/mode/safety claim. The narrower contracts were
+approved and implemented as opt-in bounded IID precision and fixed-budget
+declared-region checks for modern.15. The graph ownership deliverable is an
+accepted design, not a new executor. Existing stopping defaults and graph ownership
+rules remain unchanged. See the new guides for research, tests, limits and next gates.
 
 Related: [staged plan](INFERENCE_NEXT_STAGES.md), [inference health](INFERENCE_HEALTH.md),
 [multi-chain MCMC](MULTI_CHAIN_MCMC.md), [graph proposals](GRAPH_PROPOSALS.md),

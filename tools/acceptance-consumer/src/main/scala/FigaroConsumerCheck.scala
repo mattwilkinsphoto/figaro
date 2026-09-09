@@ -27,6 +27,17 @@ object FigaroConsumerCheck {
     println(s"Published artifact verified: $sha")
 
     {
+      import com.cra.figaro.algorithm.sampling.{BoundedIidPrecision as B,DeclaredRegionCoverage as R}
+      val bounded=B.run(B.Config(0,1,.1,maxDraws=10000))(_.nextDouble())
+      require(bounded.reason==B.StopReason.PrecisionReached && bounded.errorBound<=.1)
+      val regions=Vector(R.Region[Double]("left",_ < .5),R.Region[Double]("right",_ >= .5))
+      val occupancy=R.run(R.Config("uniform [0,1)",draws=100),regions,
+        Some(R.MassAssumption(.5,"each uniform half")))(_.nextDouble())
+      require(occupancy.status==R.Status.DeclaredInventoryObserved && occupancy.missBound.nonEmpty)
+      println("Bounded IID precision and declared-region published APIs verified")
+    }
+
+    {
       import com.cra.figaro.algorithm.sampling.{VectorImportance as V,MonteCarloInformation as I,GraphProposalImportance as P}
       import com.cra.figaro.library.atomic.continuous.{MultivariateGaussianDistribution as G,MultivariateStudentTDistribution as T,MultivariateStudentT}
       val t=T(5,Vector(0.0,0.0),Vector(Vector(1.0,.3),Vector(.3,1.0)))
