@@ -219,7 +219,8 @@ rates. All four packaged JARs passed content/legal checks; the binary SHA-256 is
 `19ad8c519136680521a3f6b0c0455be1e34558c716b3c2e2fbaf45bcc174a635`.
 The independent consumer passed against that exact binary. Generated documentation
 freshness (12462 public method entries), 13894 local-link checks and 18 documentation
-tool tests passed. Remote CI remains required before main integration.
+tool tests passed. [Remote CI passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34380872349)
+at `59f63f57`, integrated on main as modern.20.
 
 Related: [legacy contracts](LEGACY_DISTRIBUTION_CONTRACTS.md), [Wishart and other breadth](DISTRIBUTION_BREADTH.md),
 [Gaussian kernels/metrics](DISTRIBUTION_CONSTRUCTIONS.md), [multi-chain MCMC](MULTI_CHAIN_MCMC.md),

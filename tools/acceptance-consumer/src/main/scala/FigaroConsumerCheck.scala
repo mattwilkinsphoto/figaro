@@ -311,7 +311,11 @@ object FigaroConsumerCheck {
     val correlationPrior=com.cra.figaro.library.atomic.continuous.LKJDistribution(2,2)
     require(correlationPrior.logDensity(correlationPrior.mean).isFinite)
     require(com.cra.figaro.library.atomic.continuous.LKJInformation.kl(correlationPrior,correlationPrior.copy(shape=1)).value.exists(_>0))
-    println("Published breadth, covariance priors and legacy log-density/information contracts passed")
+    val eventBase=com.cra.figaro.algorithm.sampling.VectorImportance.Box(Vector(0.0),Vector(1.0))
+    val eventResult=com.cra.figaro.algorithm.sampling.RareEventImportance.run(
+      com.cra.figaro.algorithm.sampling.RareEventImportance.prior(eventBase),_.head,.75)
+    require(math.abs(eventResult.probability.get-.25)<.02 && eventResult.scoreEvaluations==10000)
+    println("Published breadth, covariance priors, rare-event and legacy information contracts passed")
 
     var cancelled=false
     Thread.currentThread().interrupt()

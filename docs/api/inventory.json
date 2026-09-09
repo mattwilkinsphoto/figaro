@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 915,
+  "pages": 924,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -53104,6 +53104,238 @@
       "example": "com.cra.figaro.algorithm.sampling.ProposalScheme.default(using universe)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/ProposalScheme$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.FitConfig",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$FitConfig.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.FitConfig",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$FitConfig.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.FitResult",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$FitResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.FitResult",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$FitResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.Round",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$Round.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance.Round",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$$Round.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance",
+      "name": "defensive",
+      "anchor": "defensive-fffffaa0",
+      "signature": "def defensive(base: Proposal, candidate: Proposal, priorWeight: Double = ...): Frozen",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "base: Proposal",
+            "candidate: Proposal",
+            "priorWeight: Double = ..."
+          ]
+        }
+      ],
+      "returns": "Frozen",
+      "summary": "",
+      "contract": "Value parameters base normalized target/prior law candidate normalized fixed proposal (may itself be a supplied mixture) priorWeight retained base mass in [1e-6,1); not annealed during production Attributes Returns full-density defensive mixture; does not certify discovery of every event region Example RareEventImportance.defensive(base,shiftedGaussian,.1)",
+      "example": "com.cra.figaro.algorithm.sampling.RareEventImportance.defensive(base, candidate, priorWeight)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance",
+      "name": "fitGaussian",
+      "anchor": "fitGaussian-fffff9a9",
+      "signature": "def fitGaussian(base: Proposal, score: Vector[Double] => Double, threshold: Double, config: FitConfig = ...): FitResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "base: Proposal",
+            "score: Vector[Double] => Double",
+            "threshold: Double",
+            "config: FitConfig = ..."
+          ]
+        }
+      ],
+      "returns": "FitResult",
+      "summary": "Fit weighted elite moments toward score(x)>=threshold, then freeze the proposal.",
+      "contract": "Fit weighted elite moments toward score(x)>=threshold, then freeze the proposal. Value parameters base normalized prior law; sampling/density callbacks must be mutually consistent config explicit pilot limits and regularization; production is separate score pure finite event score; higher means nearer/in the event threshold finite boundary, equality included Attributes Returns one defensive Gaussian or explicit fit refusal; not automatic mixture fitting/mode discovery Example RareEventImportance.fitGaussian(base,x => x.head,5.0)",
+      "example": "com.cra.figaro.algorithm.sampling.RareEventImportance.fitGaussian(base, score, threshold, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance",
+      "name": "prior",
+      "anchor": "prior-fffff869",
+      "signature": "def prior(base: Proposal): Frozen",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "base: Proposal"
+          ]
+        }
+      ],
+      "returns": "Frozen",
+      "summary": "",
+      "contract": "Value parameters base normalized prior law Attributes Returns frozen direct Monte Carlo control, with weight bound one Example RareEventImportance.prior(base)",
+      "example": "com.cra.figaro.algorithm.sampling.RareEventImportance.prior(base)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.RareEventImportance",
+      "name": "run",
+      "anchor": "run-fffff94c",
+      "signature": "def run(law: Frozen, score: Vector[Double] => Double, threshold: Double, config: Config = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "law: Frozen",
+            "score: Vector[Double] => Double",
+            "threshold: Double",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "",
+      "contract": "Value parameters config production-only work/RNG settings law frozen normalized base/proposal pair score pure finite deterministic score callback threshold finite event boundary; event includes equality Attributes Returns streaming probability and diagnostic estimates; callback failures publish no partial result Example RareEventImportance.run(frozen,x => x.head,5.0)",
+      "example": "com.cra.figaro.algorithm.sampling.RareEventImportance.run(law, score, threshold, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/RareEventImportance$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.Sampler",

@@ -1,5 +1,13 @@
 # Migrating to Scala 3 and sbt 2
 
+## Query-aware rare events (modern.21)
+
+[RareEventImportance](RARE_EVENT_PROPOSALS.md) is additive and explicitly opt-in.
+It requires a normalized base law and uses ordinary event contributions, unlike
+the existing self-normalized `VectorImportance` API. Do not pass an unnormalized
+posterior density or interpret empirical MCSE as an automatic stopping guarantee.
+Pilot/production work and RNG lanes are separate; no existing default or dependency changes.
+
 ## Covariance priors (modern.20)
 
 [LKJ and inverse-Wishart](COVARIANCE_PRIORS.md) are additive APIs. Rebuild consumers

@@ -19,10 +19,13 @@ The next approved sequence is:
 1. [Legacy-distribution consolidation](docs/LEGACY_DISTRIBUTION_CONTRACTS.md)
    (modern.19, integrated on main at CI-verified `acaecb98`): consistent sampling/log likelihoods, support contracts,
    analytic information measures and inference-path regressions.
-2. [Covariance modeling](docs/COVARIANCE_PRIORS.md) (modern.20, implementing): LKJ correlation priors and inverse-Wishart, with explicit
+2. [Covariance modeling](docs/COVARIANCE_PRIORS.md) (modern.20, integrated on main at CI-verified `59f63f57`): LKJ correlation priors and inverse-Wishart, with explicit
    correlation/scale/covariance semantics and independent numerical checks.
-3. Query-aware rare-event proposals: literature-led design, discarded pilot costs
-   included in comparisons, held-out accuracy and explicit missing-mode limitations.
+3. [Query-aware rare-event proposals](docs/RARE_EVENT_PROPOSALS.md) (modern.21, locally validated; remote CI required before integration): literature-led design, discarded pilot costs
+   included in [complete comparisons](docs/RARE_EVENT_ACCEPTANCE.md), held-out accuracy
+   and explicit missing-mode limitations. The bounded API supplies ordinary normalized-base
+   probability estimation and single-Gaussian CE fitting; automatic weighted mixtures,
+   graph rewriting and unknown-mode guarantees are not claimed.
 
 Each stage requires its own validation and versioned integration. None promises
 universal stopping, discovery of unspecified modes, or arbitrary shared-graph safety.

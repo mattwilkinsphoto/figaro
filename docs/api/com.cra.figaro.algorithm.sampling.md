@@ -13189,6 +13189,342 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.ProposalScheme.default(using universe)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.FitConfig.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$FitConfig.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.FitConfig.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$FitConfig.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.FitResult.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$FitResult.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.FitResult.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$FitResult.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.Round.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$Round.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.Round.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$$Round.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.defensive ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$.html#defensive-fffffaa0)
+
+```scala
+def defensive(base: Proposal, candidate: Proposal, priorWeight: Double = ...): Frozen
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` base: Proposal ``; `` candidate: Proposal ``; `` priorWeight: Double = ... ``.
+
+Returns: `` Frozen ``.
+
+Source contract/attributes: Value parameters base normalized target/prior law candidate normalized fixed proposal (may itself be a supplied mixture) priorWeight retained base mass in [1e-6,1); not annealed during production Attributes Returns full-density defensive mixture; does not certify discovery of every event region Example RareEventImportance.defensive(base,shiftedGaussian,.1)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.RareEventImportance.defensive(base, candidate, priorWeight)
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.fitGaussian ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$.html#fitGaussian-fffff9a9)
+
+```scala
+def fitGaussian(base: Proposal, score: Vector[Double] => Double, threshold: Double, config: FitConfig = ...): FitResult
+```
+
+Fit weighted elite moments toward score(x)>=threshold, then freeze the proposal.
+
+Type parameters: none.
+
+Parameters, list 1: `` base: Proposal ``; `` score: Vector[Double] => Double ``; `` threshold: Double ``; `` config: FitConfig = ... ``.
+
+Returns: `` FitResult ``.
+
+Source contract/attributes: Fit weighted elite moments toward score(x)>=threshold, then freeze the proposal. Value parameters base normalized prior law; sampling/density callbacks must be mutually consistent config explicit pilot limits and regularization; production is separate score pure finite event score; higher means nearer/in the event threshold finite boundary, equality included Attributes Returns one defensive Gaussian or explicit fit refusal; not automatic mixture fitting/mode discovery Example RareEventImportance.fitGaussian(base,x => x.head,5.0)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.RareEventImportance.fitGaussian(base, score, threshold, config)
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.prior ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$.html#prior-fffff869)
+
+```scala
+def prior(base: Proposal): Frozen
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` base: Proposal ``.
+
+Returns: `` Frozen ``.
+
+Source contract/attributes: Value parameters base normalized prior law Attributes Returns frozen direct Monte Carlo control, with weight bound one Example RareEventImportance.prior(base)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.RareEventImportance.prior(base)
+```
+
+## `` com.cra.figaro.algorithm.sampling.RareEventImportance.run ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/RareEventImportance$.html#run-fffff94c)
+
+```scala
+def run(law: Frozen, score: Vector[Double] => Double, threshold: Double, config: Config = ...): Result
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` law: Frozen ``; `` score: Vector[Double] => Double ``; `` threshold: Double ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Value parameters config production-only work/RNG settings law frozen normalized base/proposal pair score pure finite deterministic score callback threshold finite event boundary; event includes equality Attributes Returns streaming probability and diagnostic estimates; callback failures publish no partial result Example RareEventImportance.run(frozen,x => x.head,5.0)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.RareEventImportance.run(law, score, threshold, config)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.Sampler.cleanUp ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Sampler.html#cleanUp-94c)

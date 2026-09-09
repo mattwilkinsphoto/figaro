@@ -18,9 +18,10 @@ validated on main; joint GVM is a development preview integrated through mutual 
 The nine D3 common-family representatives are also integrated; specialized variants
 and other directional families remain future work.
 
-The approved follow-on consolidates [legacy numerical contracts](docs/LEGACY_DISTRIBUTION_CONTRACTS.md),
-then adds LKJ/inverse-Wishart covariance modeling, then query-aware rare-event
-proposals. See the [ordered delivery plan](ROADMAP.md); these priorities do not
+The approved follow-on has integrated [legacy numerical contracts](docs/LEGACY_DISTRIBUTION_CONTRACTS.md)
+and [LKJ/inverse-Wishart covariance modeling](docs/COVARIANCE_PRIORS.md). The bounded
+[query-aware rare-event proposal](docs/RARE_EVENT_PROPOSALS.md) milestone is locally
+validated, with remote CI required before integration. See the [ordered delivery plan](ROADMAP.md); these priorities do not
 mark the remaining family flavors or generic inference guarantees complete.
 
 Use stable `DIST-xx` IDs when moving work into the roadmap. Priorities are P0 (first
