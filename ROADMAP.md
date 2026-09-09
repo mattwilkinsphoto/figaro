@@ -17,9 +17,9 @@ The source remains a development snapshot, not a universally validated stable re
 The next approved sequence is:
 
 1. [Legacy-distribution consolidation](docs/LEGACY_DISTRIBUTION_CONTRACTS.md)
-   (modern.19, implementing): consistent sampling/log likelihoods, support contracts,
+   (modern.19, integrated on main at CI-verified `acaecb98`): consistent sampling/log likelihoods, support contracts,
    analytic information measures and inference-path regressions.
-2. Covariance modeling: LKJ correlation priors and inverse-Wishart, with explicit
+2. [Covariance modeling](docs/COVARIANCE_PRIORS.md) (modern.20, implementing): LKJ correlation priors and inverse-Wishart, with explicit
    correlation/scale/covariance semantics and independent numerical checks.
 3. Query-aware rare-event proposals: literature-led design, discarded pilot costs
    included in comparisons, held-out accuracy and explicit missing-mode limitations.

@@ -1,5 +1,13 @@
 # Migrating to Scala 3 and sbt 2
 
+## Covariance priors (modern.20)
+
+[LKJ and inverse-Wishart](COVARIANCE_PRIORS.md) are additive APIs. Rebuild consumers
+against the new snapshot. They preserve existing RNG defaults and add no runtime
+dependency. Covariance scales, standard deviations and Cholesky densities are
+explicitly distinct. Wishart density now rejects a wrong-sized observation before
+matrix arithmetic, rather than potentially ignoring coordinates or indexing past bounds.
+
 ## Legacy distribution consolidation (modern.19)
 
 Read [legacy distribution contracts](LEGACY_DISTRIBUTION_CONTRACTS.md) before upgrading:

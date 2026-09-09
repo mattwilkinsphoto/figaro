@@ -200,7 +200,8 @@ All four JAR content/legal checks passed; an independent consumer loaded the exa
 published binary (SHA-256 `6e2677b9618227d607a8fc4c303a7cd451b7f29522829a20d1ab12da6cd991b6`)
 and passed its inference, metric, lifecycle and isolation checks. The generated
 reference has 12344 public method entries; freshness and 13762 local-link checks
-passed. Remote CI remains the gate for main integration.
+passed. [Remote CI passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34378798563)
+at `acaecb98`, which is integrated on main as modern.19.
 
 The initial broad run exposed genuine contract problems (an off-simplex Dirichlet
 density fixture and discarded observed-prior draws) that were corrected, not excused

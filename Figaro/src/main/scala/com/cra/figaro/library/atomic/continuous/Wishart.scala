@@ -35,7 +35,7 @@ final case class WishartDistribution(degreesOfFreedom: Double,scale: Vector[Vect
     * @example `law.logDensity(Vector(Vector(4.0,1.0),Vector(1.0,3.0)))`
     */
   def logDensity(value: Vector[Vector[Double]]): Double = {
-    N.check(); val x=MultivariateGaussianDistribution(Vector.fill(dimension)(0.0),value)
+    N.check(); val x=CovarianceNumerics.matrix(value,dimension)
     val trace=WishartInformation.traceRatio(x,gaussian)
     val out=.5*(degreesOfFreedom-dimension-1)*x.logDeterminant-.5*trace-logPartition
     if(!out.isFinite) throw new ArithmeticException("Wishart log density outside numeric range")

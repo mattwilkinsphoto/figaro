@@ -306,7 +306,12 @@ object FigaroConsumerCheck {
     require(math.abs(com.cra.figaro.library.atomic.LegacyInformation.gammaKl(2,3,4,5).value.get-2.1894932940950835)<1e-12)
     val inverseGamma=com.cra.figaro.library.atomic.continuous.InverseGamma(4,7)
     require(inverseGamma.generateValue(2)==3.5 && inverseGamma.logp(.001).isFinite)
-    println("Published breadth and legacy log-density/information contracts passed")
+    val covariancePrior=com.cra.figaro.library.atomic.continuous.InverseWishartDistribution(8,Vector(Vector(14.0)))
+    require(math.abs(covariancePrior.mean.get(0)(0)-7.0/3)<1e-12)
+    val correlationPrior=com.cra.figaro.library.atomic.continuous.LKJDistribution(2,2)
+    require(correlationPrior.logDensity(correlationPrior.mean).isFinite)
+    require(com.cra.figaro.library.atomic.continuous.LKJInformation.kl(correlationPrior,correlationPrior.copy(shape=1)).value.exists(_>0))
+    println("Published breadth, covariance priors and legacy log-density/information contracts passed")
 
     var cancelled=false
     Thread.currentThread().interrupt()

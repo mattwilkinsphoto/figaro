@@ -9,6 +9,7 @@ collects broad families and their later flavors.
 
 | Present native entry points | Source | Scope / caution |
 | --- | --- | --- |
+| LKJ, InverseWishart | [Covariance modeling](COVARIANCE_PRIORS.md) | Full-rank correlation/covariance priors, lower-factor draws and Jacobian-aware densities, fixed/dynamic elements and KL/Bhattacharyya; no matrix-entry MI or fitting |
 | Multinomial, GeneralizedExtremeValue, GeneralizedPareto, Wishart, VonMisesFisher3 | [Selected D5 breadth](DISTRIBUTION_BREADTH.md) | Joint count vectors, maxima/excess tails, restricted full-rank matrices and unit S2 directions; kernels, fixed/dynamic adapters, KL/Bhattacharyya and complementary multinomial-block MI; not all D5 flavors or reference measures |
 | AffineDistribution, ExpDistribution, TruncatedDistribution, ScalarMixtureDistribution, ZeroAdjustedDistribution | [Construction guide](DISTRIBUTION_CONSTRUCTIONS.md) | Initial reusable transformations, finite-interval conditioning, continuous mixtures and count-only hurdle/zero inflation; explicit numeric refusals, no general mixed measure |
 | GaussianDistribution, MultivariateGaussianDistribution, GaussianMixtureDistribution, GaussianMixture | [GMM and Gaussian guide](DISTRIBUTION_CONSTRUCTIONS.md) | Scalar and full-covariance vector kernels, GMM likelihoods/draws/moments/responsibilities/marginals; fixed/dynamic Figaro GMM adapters, not EM fitting |

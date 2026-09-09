@@ -39,6 +39,10 @@ implementation does not introduce sample-based estimators or generalized fusion.
 
 ## Delivery sequence
 
+Modern.20 adds same-order [LKJ and inverse-Wishart KL/Bhattacharyya](COVARIANCE_PRIORS.md)
+with explicit matrix/factor measures and numerical refusals. Matrix-entry MI remains
+unimplemented; Gaussian partition MI is not substituted for it.
+
 Modern.19 adds [LegacyInformation](LEGACY_DISTRIBUTION_CONTRACTS.md): analytic
 Gamma, inverse-Gamma, Beta, Dirichlet, Poisson, Geometric and common-trial-count
 Binomial KL/Bhattacharyya. Gaussian metrics already exist; Exponential reduces to
