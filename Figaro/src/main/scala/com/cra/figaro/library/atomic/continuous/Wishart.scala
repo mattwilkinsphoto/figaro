@@ -94,7 +94,7 @@ object WishartInformation {
       var conditioning=d*math.max(p.gaussian.conditionNumber,q.gaussian.conditionNumber)
       var magnitude=1+math.abs(p.logPartition)+math.abs(q.logPartition)+(n+m)*d
       val value=if(!bh) {
-        val elog=d*math.log(2)+p.gaussian.logDeterminant+(0 until d).map(i => Gamma.digamma((n-i)/2)).sum
+        val elog=d*math.log(2)+p.gaussian.logDeterminant+(0 until d).map(i => N.digammaPositive((n-i)/2)).sum
         val trace=traceRatio(p.gaussian,q.gaussian)
         magnitude+=math.abs((n-m)*elog)+n*(trace+d)
         .5*(n-m)*elog+.5*n*(trace-d)+q.logPartition-p.logPartition

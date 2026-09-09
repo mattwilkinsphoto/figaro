@@ -27,7 +27,8 @@ import scala.math.log
  * A continuous uniform distribution in which the parameters are constants.
  */
 class AtomicUniform(name: Name[Double], val lower: Double, val upper: Double, collection: ElementCollection)
-  extends Element[Double](name, collection) with Atomic[Double] with Uniform {
+  extends Element[Double](name, collection) with Atomic[Double] with Uniform with HasLogDensity[Double] {
+  require(lower.isFinite && upper.isFinite && upper>lower && (upper-lower).isFinite)
   type Randomness = Double
   
   def lowerValue: Double = lower
@@ -42,7 +43,8 @@ class AtomicUniform(name: Name[Double], val lower: Double, val upper: Double, co
 
   private lazy val constantDensity = 1.0 / diff
 
-  def density(d: Double) = if (d >= lower && d < upper) constantDensity; else 0.0
+  def logDensity(d: Double): Double = logp(d)
+  override def density(d: Double) = math.exp(logDensity(d))
 
   override def toString = "Uniform(" + lower + ", " + upper + ")"
 }
@@ -80,12 +82,7 @@ trait Uniform extends Continuous[Double] {
    */
   def upperValue: Double
 
-  def logp(value: Double) =
-    bound (
-      -log(upperValue - lowerValue),
-      lowerValue > 0,
-      upperValue > 0
-    )
+  def logp(value: Double) = com.cra.figaro.library.atomic.LegacyDensity.uniform(lowerValue,upperValue,value)
 
 }
 

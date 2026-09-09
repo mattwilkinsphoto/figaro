@@ -84,6 +84,8 @@ class MultivariateNormalCompoundMean(name: Name[List[Double]], val means: Elemen
     means,
     (m: List[Double]) => new AtomicMultivariateNormal("", m, covariances, collection),
     collection) with MultivariateNormal {
+  override def logp(value: List[Double]): Double =
+    MultivariateGaussianDistribution(means.value.toVector,covariances.map(_.toVector).toVector).logDensity(value.toVector)
   override def toString = "Normal(" + means + ",\n " + covariances + ")"
 }
 
@@ -100,11 +102,13 @@ class MultivariateCompoundNormal(name: Name[List[Double]], val mean: Element[Lis
       (v: List[List[Double]]) => new AtomicMultivariateNormal("", m, v, collection),
       collection),
     collection) with MultivariateNormal {
+  override def logp(value: List[Double]): Double =
+    MultivariateGaussianDistribution(mean.value.toVector,variance.value.map(_.toVector).toVector).logDensity(value.toVector)
   override def toString = "Normal(" + mean + ", " + variance + ")"
 }
 
 trait MultivariateNormal extends Continuous[List[Double]] {
-  def logp(value: List[Double]) = Double.NegativeInfinity
+  def logp(value: List[Double]): Double = throw new UnsupportedOperationException("MultivariateNormal subclass must implement logp")
 }
 
 object MultivariateNormal extends Creatable {

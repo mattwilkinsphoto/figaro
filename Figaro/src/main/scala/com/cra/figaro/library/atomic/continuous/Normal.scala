@@ -27,7 +27,9 @@ import scala.math._
  * A normal distribution in which the mean and variance are constants.
  */
 class AtomicNormal(name: Name[Double], val mean: Double, val variance: Double, collection: ElementCollection)
-  extends Element[Double](name, collection) with Atomic[Double] with Normal {
+  extends Element[Double](name, collection) with Atomic[Double] with Normal with HasLogDensity[Double] {
+  require(mean.isFinite)
+  com.cra.figaro.library.atomic.LegacyDensity.positive(variance)
   lazy val standardDeviation = sqrt(variance)
 
   type Randomness = Double
@@ -37,7 +39,7 @@ class AtomicNormal(name: Name[Double], val mean: Double, val variance: Double, c
   def varianceValue: Double = variance
   
   def generateRandomness() = {
-    val u1 = random.nextDouble()
+    val u1 = com.cra.figaro.library.atomic.DistributionNumerics.open(random)
     val u2 = random.nextDouble()
     val w = sqrt(-2.0 * log(u1))
     val x = 2.0 * Pi * u2
@@ -54,7 +56,8 @@ class AtomicNormal(name: Name[Double], val mean: Double, val variance: Double, c
   /**
    * Density of a value.
    */
-  def density(d: Double) = Normal.density(mean, variance, normalizer)(d)
+  def logDensity(d: Double): Double = logp(d)
+  override def density(d: Double) = math.exp(logDensity(d))
 
   override def toString = "Normal(" + mean + ", " + variance + ")"
 }
@@ -127,11 +130,7 @@ trait Normal extends Continuous[Double] {
    */
   def varianceValue: Double
 
-  def logp(value: Double) =
-    bound(
-      (- (value - meanValue) * (value - meanValue) / varianceValue + log(1 / Pi / 2.0 / varianceValue)) / 2.0,
-      varianceValue > 0
-    )
+  def logp(value: Double) = com.cra.figaro.library.atomic.LegacyDensity.normal(meanValue,varianceValue,value)
 
 }
 

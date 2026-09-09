@@ -1373,13 +1373,14 @@ class ContinuousTest extends AnyWordSpec with Matchers {
       val a1 = 0.5
       val elem = Dirichlet(a0, a1)
       val x0 = 0.3
-      val x1 = 0.6
+      val x1 = 0.7 // Dirichlet density is defined on the simplex, not arbitrary pairs.
       val normalizer = gamma(a0 + a1) / (gamma(a0) * gamma(a1))
       val pow0 = pow(x0, a0 - 1)
       val pow1 = pow(x1, a1 - 1)
       val target = normalizer * pow(x0, a0 - 1) * pow(x1, a1 - 1)
       val result = elem.density(Array(x0, x1))
       result should be(target +- 0.00001)
+      elem.density(Array(0.3,0.6)) shouldBe 0.0
     }
 
     "convert to the correct string" in {

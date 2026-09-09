@@ -124,3 +124,339 @@ Invocation template:
 ```scala
 receiver.productIterator
 ```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.betaBhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#betaBhattacharyya-fffffb57)
+
+```scala
+def betaBhattacharyya(alphaP: Double, betaP: Double, alphaQ: Double, betaQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Same shapes/tolerance as betaKl; symmetric negative log affinity.
+
+Type parameters: none.
+
+Parameters, list 1: `` alphaP: Double ``; `` betaP: Double ``; `` alphaQ: Double ``; `` betaQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Same shapes/tolerance as betaKl; symmetric negative log affinity. Attributes Example LegacyInformation.betaBhattacharyya(2,3,4,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.betaBhattacharyya(alphaP, betaP, alphaQ, betaQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.betaKl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#betaKl-fffffb57)
+
+```scala
+def betaKl(alphaP: Double, betaP: Double, alphaQ: Double, betaQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Positive shape pairs alphaP,betaP and alphaQ,betaQ in [.001,1e6]; positive tolerance in nats.
+
+Type parameters: none.
+
+Parameters, list 1: `` alphaP: Double ``; `` betaP: Double ``; `` alphaQ: Double ``; `` betaQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Positive shape pairs alphaP,betaP and alphaQ,betaQ in [.001,1e6]; positive tolerance in nats. Attributes Returns beta KL through the two-category Dirichlet identity Example LegacyInformation.betaKl(2,3,4,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.betaKl(alphaP, betaP, alphaQ, betaQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.binomialBhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#binomialBhattacharyya-fffff782)
+
+```scala
+def binomialBhattacharyya(trials: Int, successP: Double, successQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Same trials/probabilities/tolerance as binomialKl; symmetric negative log affinity.
+
+Type parameters: none.
+
+Parameters, list 1: `` trials: Int ``; `` successP: Double ``; `` successQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Same trials/probabilities/tolerance as binomialKl; symmetric negative log affinity. Attributes Example LegacyInformation.binomialBhattacharyya(10,.2,.4)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.binomialBhattacharyya(trials, successP, successQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.binomialKl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#binomialKl-fffff782)
+
+```scala
+def binomialKl(trials: Int, successP: Double, successQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Nonnegative common trials, success probabilities p,q in [0,1], positive tolerance in nats.
+
+Type parameters: none.
+
+Parameters, list 1: `` trials: Int ``; `` successP: Double ``; `` successQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Nonnegative common trials, success probabilities p,q in [0,1], positive tolerance in nats. Attributes Returns directed equal-trial binomial KL; unequal-trial laws are not accepted by this API Example LegacyInformation.binomialKl(10,.2,.4)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.binomialKl(trials, successP, successQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.dirichletBhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#dirichletBhattacharyya-fffff55b)
+
+```scala
+def dirichletBhattacharyya(alphaP: Vector[Double], alphaQ: Vector[Double], tolerance: Double = ...): InformationMetricResult
+```
+
+Same parameters as dirichletKl; symmetric negative log affinity.
+
+Type parameters: none.
+
+Parameters, list 1: `` alphaP: Vector[Double] ``; `` alphaQ: Vector[Double] ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Same parameters as dirichletKl; symmetric negative log affinity. Attributes Example LegacyInformation.dirichletBhattacharyya(Vector(2,3),Vector(3,4))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.dirichletBhattacharyya(alphaP, alphaQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.dirichletKl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#dirichletKl-fffff55b)
+
+```scala
+def dirichletKl(alphaP: Vector[Double], alphaQ: Vector[Double], tolerance: Double = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` alphaP: Vector[Double] ``; `` alphaQ: Vector[Double] ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters alphaP source concentration vector, length 2..128, entries [.001,1e6] alphaQ comparison concentrations in the same category order tolerance positive numerical allowance in nats Attributes Returns directed KL in the simplex measure, or refusal Example LegacyInformation.dirichletKl(Vector(2,3,4),Vector(3,4,5))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.dirichletKl(alphaP, alphaQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.gammaBhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#gammaBhattacharyya-fffffb57)
+
+```scala
+def gammaBhattacharyya(shapeP: Double, scaleP: Double, shapeQ: Double, scaleQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Same parameters as gammaKl; returns symmetric negative log affinity, or refusal.
+
+Type parameters: none.
+
+Parameters, list 1: `` shapeP: Double ``; `` scaleP: Double ``; `` shapeQ: Double ``; `` scaleQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Same parameters as gammaKl; returns symmetric negative log affinity, or refusal. Attributes Example LegacyInformation.gammaBhattacharyya(2,3,4,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.gammaBhattacharyya(shapeP, scaleP, shapeQ, scaleQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.gammaKl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#gammaKl-fffffb57)
+
+```scala
+def gammaKl(shapeP: Double, scaleP: Double, shapeQ: Double, scaleQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` shapeP: Double ``; `` scaleP: Double ``; `` shapeQ: Double ``; `` scaleQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters scaleP source scale in [1e-100,1e100] scaleQ comparison scale (not rate) shapeP source shape in [.001,1e6] shapeQ comparison shape tolerance positive numerical allowance in nats Attributes Returns directed KL or numerical refusal Example LegacyInformation.gammaKl(2,3,4,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.gammaKl(shapeP, scaleP, shapeQ, scaleQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.geometricBhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#geometricBhattacharyya-4c9)
+
+```scala
+def geometricBhattacharyya(failureP: Double, failureQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Same failure probabilities/tolerance as geometricKl; symmetric negative log affinity.
+
+Type parameters: none.
+
+Parameters, list 1: `` failureP: Double ``; `` failureQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Same failure probabilities/tolerance as geometricKl; symmetric negative log affinity. Attributes Example LegacyInformation.geometricBhattacharyya(.2,.6)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.geometricBhattacharyya(failureP, failureQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.geometricKl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#geometricKl-4c9)
+
+```scala
+def geometricKl(failureP: Double, failureQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Failure probabilities in [0,1), trials-until-first-success support 1,2,...; positive tolerance.
+
+Type parameters: none.
+
+Parameters, list 1: `` failureP: Double ``; `` failureQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Failure probabilities in [0,1), trials-until-first-success support 1,2,...; positive tolerance. Attributes Returns directed KL, or support infinity/numerical refusal Example LegacyInformation.geometricKl(.2,.6)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.geometricKl(failureP, failureQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.inverseGammaBhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#inverseGammaBhattacharyya-fffffb57)
+
+```scala
+def inverseGammaBhattacharyya(shapeP: Double, scaleP: Double, shapeQ: Double, scaleQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+InverseGamma parameters as above; symmetric negative log affinity in nats.
+
+Type parameters: none.
+
+Parameters, list 1: `` shapeP: Double ``; `` scaleP: Double ``; `` shapeQ: Double ``; `` scaleQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: InverseGamma parameters as above; symmetric negative log affinity in nats. Attributes Example LegacyInformation.inverseGammaBhattacharyya(2,3,4,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.inverseGammaBhattacharyya(shapeP, scaleP, shapeQ, scaleQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.inverseGammaKl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#inverseGammaKl-fffffb57)
+
+```scala
+def inverseGammaKl(shapeP: Double, scaleP: Double, shapeQ: Double, scaleQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Shapes/scales as in InverseGamma (density contains exp(-scale/x)); directed KL in nats.
+
+Type parameters: none.
+
+Parameters, list 1: `` shapeP: Double ``; `` scaleP: Double ``; `` shapeQ: Double ``; `` scaleQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Shapes/scales as in InverseGamma (density contains exp(-scale/x)); directed KL in nats. Attributes Example LegacyInformation.inverseGammaKl(2,3,4,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.inverseGammaKl(shapeP, scaleP, shapeQ, scaleQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.poissonBhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#poissonBhattacharyya-4c9)
+
+```scala
+def poissonBhattacharyya(rateP: Double, rateQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Same rates/tolerance as poissonKl; symmetric negative log affinity.
+
+Type parameters: none.
+
+Parameters, list 1: `` rateP: Double ``; `` rateQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Same rates/tolerance as poissonKl; symmetric negative log affinity. Attributes Example LegacyInformation.poissonBhattacharyya(2,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.poissonBhattacharyya(rateP, rateQ, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.LegacyInformation.poissonKl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/LegacyInformation$.html#poissonKl-4c9)
+
+```scala
+def poissonKl(rateP: Double, rateQ: Double, tolerance: Double = ...): InformationMetricResult
+```
+
+Rates in [0,1e8], source then comparison; positive numerical tolerance in nats.
+
+Type parameters: none.
+
+Parameters, list 1: `` rateP: Double ``; `` rateQ: Double ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Rates in [0,1e8], source then comparison; positive numerical tolerance in nats. Attributes Returns directed KL, with true support infinity at q=0<p Example LegacyInformation.poissonKl(2,5)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.LegacyInformation.poissonKl(rateP, rateQ, tolerance)
+```

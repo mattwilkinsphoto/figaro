@@ -35,7 +35,9 @@ import argonaut._, Argonaut._
  * @param b The prior beta parameter
  */
 class AtomicBeta(name: Name[Double], a: Double, b: Double, collection: ElementCollection)
-  extends Element[Double](name, collection) with Atomic[Double] with DoubleParameter  with Beta{
+  extends Element[Double](name, collection) with Atomic[Double] with DoubleParameter with Beta with HasLogDensity[Double] {
+  com.cra.figaro.library.atomic.LegacyDensity.positive(a)
+  com.cra.figaro.library.atomic.LegacyDensity.positive(b)
   type Randomness = Double
 
   /**
@@ -60,7 +62,9 @@ class AtomicBeta(name: Name[Double], a: Double, b: Double, collection: ElementCo
   /**
    * Density of a value.
    */
-  def density(x: Double) = pow(x, a - 1) * pow(1 - x, b - 1) * normalizer
+  def logDensity(x: Double): Double = com.cra.figaro.library.atomic.LegacyDensity.beta(a,b,x)
+  override def logp(x: Double): Double = logDensity(x)
+  override def density(x: Double) = math.exp(logDensity(x))
 
   /**
    * Returns an empty sufficient statistics vector.
@@ -137,12 +141,7 @@ trait Beta extends Continuous[Double] {
    */
   def bValue: Double
 
-  def logp(value: Double) =
-    bound(
-      logGamma(aValue + bValue) - logGamma(aValue) - logGamma(bValue) +
-        (aValue - 1) * log(value) + (bValue - 1) * log(1 - value),
-      aValue > 0,
-      bValue > 0)
+  def logp(value: Double) = com.cra.figaro.library.atomic.LegacyDensity.beta(aValue,bValue,value)
 
 }
 

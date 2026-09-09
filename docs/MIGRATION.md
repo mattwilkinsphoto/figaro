@@ -1,5 +1,16 @@
 # Migrating to Scala 3 and sbt 2
 
+## Legacy distribution consolidation (modern.19)
+
+Read [legacy distribution contracts](LEGACY_DISTRIBUTION_CONTRACTS.md) before upgrading:
+non-unit-scale inverse-Gamma sampling now agrees with its density; Beta/Dirichlet
+`logp` describes the sampling prior rather than learned summary parameters. Invalid
+parameters fail earlier. Direct log-likelihood scoring avoids underflow and no longer
+generates discarded prior draws for observed `HasLogDensity` elements. Count samplers
+and owned proposal traversal also change random-number consumption. Rebaseline seeded
+sequences; do not expect bitwise replay of pre-modern.19 runs. No runtime dependency
+was added, and no arbitrary shared-graph safety or new stopping guarantee is implied.
+
 ## Explicit graph proposal integration
 
 [GraphProposalImportance](GRAPH_PROPOSALS.md) adds an opt-in fresh-Universe bridge

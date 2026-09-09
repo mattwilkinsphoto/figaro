@@ -57,10 +57,10 @@ class GaussianBlockProposalRegressionTest extends AnyWordSpec with Matchers {
       }
       val observed = Normal(0, 1)(using "", u); observed.observe(0.0)
       val intervened = Normal(0, 1)(using "", u); intervened.intervene(0.0)
-      val invalid = Normal(0, 0)(using "", u)
+      intercept[IllegalArgumentException](Normal(0, 0)(using "", u))
       val subclass = new AtomicNormal("", 0, 1, u) {}
       val inactive = Normal(0, 1)(using "", u); inactive.deactivate()
-      Vector(observed, intervened, invalid, subclass, inactive).foreach { e =>
+      Vector(observed, intervened, subclass, inactive).foreach { e =>
         intercept[IllegalArgumentException](GaussianBlockProposal(Vector(e), Vector(Vector(1.0))))
       }
     }

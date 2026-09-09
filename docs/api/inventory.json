@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 906,
+  "pages": 907,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -138271,6 +138271,342 @@
       "page": "com/cra/figaro/library/atomic/InformationMetricResult.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "betaBhattacharyya",
+      "anchor": "betaBhattacharyya-fffffb57",
+      "signature": "def betaBhattacharyya(alphaP: Double, betaP: Double, alphaQ: Double, betaQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "alphaP: Double",
+            "betaP: Double",
+            "alphaQ: Double",
+            "betaQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Same shapes/tolerance as betaKl; symmetric negative log affinity.",
+      "contract": "Same shapes/tolerance as betaKl; symmetric negative log affinity. Attributes Example LegacyInformation.betaBhattacharyya(2,3,4,5)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.betaBhattacharyya(alphaP, betaP, alphaQ, betaQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "betaKl",
+      "anchor": "betaKl-fffffb57",
+      "signature": "def betaKl(alphaP: Double, betaP: Double, alphaQ: Double, betaQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "alphaP: Double",
+            "betaP: Double",
+            "alphaQ: Double",
+            "betaQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Positive shape pairs alphaP,betaP and alphaQ,betaQ in [.001,1e6]; positive tolerance in nats.",
+      "contract": "Positive shape pairs alphaP,betaP and alphaQ,betaQ in [.001,1e6]; positive tolerance in nats. Attributes Returns beta KL through the two-category Dirichlet identity Example LegacyInformation.betaKl(2,3,4,5)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.betaKl(alphaP, betaP, alphaQ, betaQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "binomialBhattacharyya",
+      "anchor": "binomialBhattacharyya-fffff782",
+      "signature": "def binomialBhattacharyya(trials: Int, successP: Double, successQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "trials: Int",
+            "successP: Double",
+            "successQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Same trials/probabilities/tolerance as binomialKl; symmetric negative log affinity.",
+      "contract": "Same trials/probabilities/tolerance as binomialKl; symmetric negative log affinity. Attributes Example LegacyInformation.binomialBhattacharyya(10,.2,.4)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.binomialBhattacharyya(trials, successP, successQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "binomialKl",
+      "anchor": "binomialKl-fffff782",
+      "signature": "def binomialKl(trials: Int, successP: Double, successQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "trials: Int",
+            "successP: Double",
+            "successQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Nonnegative common trials, success probabilities p,q in [0,1], positive tolerance in nats.",
+      "contract": "Nonnegative common trials, success probabilities p,q in [0,1], positive tolerance in nats. Attributes Returns directed equal-trial binomial KL; unequal-trial laws are not accepted by this API Example LegacyInformation.binomialKl(10,.2,.4)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.binomialKl(trials, successP, successQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "dirichletBhattacharyya",
+      "anchor": "dirichletBhattacharyya-fffff55b",
+      "signature": "def dirichletBhattacharyya(alphaP: Vector[Double], alphaQ: Vector[Double], tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "alphaP: Vector[Double]",
+            "alphaQ: Vector[Double]",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Same parameters as dirichletKl; symmetric negative log affinity.",
+      "contract": "Same parameters as dirichletKl; symmetric negative log affinity. Attributes Example LegacyInformation.dirichletBhattacharyya(Vector(2,3),Vector(3,4))",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.dirichletBhattacharyya(alphaP, alphaQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "dirichletKl",
+      "anchor": "dirichletKl-fffff55b",
+      "signature": "def dirichletKl(alphaP: Vector[Double], alphaQ: Vector[Double], tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "alphaP: Vector[Double]",
+            "alphaQ: Vector[Double]",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters alphaP source concentration vector, length 2..128, entries [.001,1e6] alphaQ comparison concentrations in the same category order tolerance positive numerical allowance in nats Attributes Returns directed KL in the simplex measure, or refusal Example LegacyInformation.dirichletKl(Vector(2,3,4),Vector(3,4,5))",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.dirichletKl(alphaP, alphaQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "gammaBhattacharyya",
+      "anchor": "gammaBhattacharyya-fffffb57",
+      "signature": "def gammaBhattacharyya(shapeP: Double, scaleP: Double, shapeQ: Double, scaleQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "shapeP: Double",
+            "scaleP: Double",
+            "shapeQ: Double",
+            "scaleQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Same parameters as gammaKl; returns symmetric negative log affinity, or refusal.",
+      "contract": "Same parameters as gammaKl; returns symmetric negative log affinity, or refusal. Attributes Example LegacyInformation.gammaBhattacharyya(2,3,4,5)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.gammaBhattacharyya(shapeP, scaleP, shapeQ, scaleQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "gammaKl",
+      "anchor": "gammaKl-fffffb57",
+      "signature": "def gammaKl(shapeP: Double, scaleP: Double, shapeQ: Double, scaleQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "shapeP: Double",
+            "scaleP: Double",
+            "shapeQ: Double",
+            "scaleQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters scaleP source scale in [1e-100,1e100] scaleQ comparison scale (not rate) shapeP source shape in [.001,1e6] shapeQ comparison shape tolerance positive numerical allowance in nats Attributes Returns directed KL or numerical refusal Example LegacyInformation.gammaKl(2,3,4,5)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.gammaKl(shapeP, scaleP, shapeQ, scaleQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "geometricBhattacharyya",
+      "anchor": "geometricBhattacharyya-4c9",
+      "signature": "def geometricBhattacharyya(failureP: Double, failureQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "failureP: Double",
+            "failureQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Same failure probabilities/tolerance as geometricKl; symmetric negative log affinity.",
+      "contract": "Same failure probabilities/tolerance as geometricKl; symmetric negative log affinity. Attributes Example LegacyInformation.geometricBhattacharyya(.2,.6)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.geometricBhattacharyya(failureP, failureQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "geometricKl",
+      "anchor": "geometricKl-4c9",
+      "signature": "def geometricKl(failureP: Double, failureQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "failureP: Double",
+            "failureQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Failure probabilities in [0,1), trials-until-first-success support 1,2,...; positive tolerance.",
+      "contract": "Failure probabilities in [0,1), trials-until-first-success support 1,2,...; positive tolerance. Attributes Returns directed KL, or support infinity/numerical refusal Example LegacyInformation.geometricKl(.2,.6)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.geometricKl(failureP, failureQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "inverseGammaBhattacharyya",
+      "anchor": "inverseGammaBhattacharyya-fffffb57",
+      "signature": "def inverseGammaBhattacharyya(shapeP: Double, scaleP: Double, shapeQ: Double, scaleQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "shapeP: Double",
+            "scaleP: Double",
+            "shapeQ: Double",
+            "scaleQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "InverseGamma parameters as above; symmetric negative log affinity in nats.",
+      "contract": "InverseGamma parameters as above; symmetric negative log affinity in nats. Attributes Example LegacyInformation.inverseGammaBhattacharyya(2,3,4,5)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.inverseGammaBhattacharyya(shapeP, scaleP, shapeQ, scaleQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "inverseGammaKl",
+      "anchor": "inverseGammaKl-fffffb57",
+      "signature": "def inverseGammaKl(shapeP: Double, scaleP: Double, shapeQ: Double, scaleQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "shapeP: Double",
+            "scaleP: Double",
+            "shapeQ: Double",
+            "scaleQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Shapes/scales as in InverseGamma (density contains exp(-scale/x)); directed KL in nats.",
+      "contract": "Shapes/scales as in InverseGamma (density contains exp(-scale/x)); directed KL in nats. Attributes Example LegacyInformation.inverseGammaKl(2,3,4,5)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.inverseGammaKl(shapeP, scaleP, shapeQ, scaleQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "poissonBhattacharyya",
+      "anchor": "poissonBhattacharyya-4c9",
+      "signature": "def poissonBhattacharyya(rateP: Double, rateQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rateP: Double",
+            "rateQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Same rates/tolerance as poissonKl; symmetric negative log affinity.",
+      "contract": "Same rates/tolerance as poissonKl; symmetric negative log affinity. Attributes Example LegacyInformation.poissonBhattacharyya(2,5)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.poissonBhattacharyya(rateP, rateQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.LegacyInformation",
+      "name": "poissonKl",
+      "anchor": "poissonKl-4c9",
+      "signature": "def poissonKl(rateP: Double, rateQ: Double, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rateP: Double",
+            "rateQ: Double",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "Rates in [0,1e8], source then comparison; positive numerical tolerance in nats.",
+      "contract": "Rates in [0,1e8], source then comparison; positive numerical tolerance in nats. Attributes Returns directed KL, with true support infinity at q=0<p Example LegacyInformation.poissonKl(2,5)",
+      "example": "com.cra.figaro.library.atomic.LegacyInformation.poissonKl(rateP, rateQ, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/LegacyInformation$.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.continuous.AffineDistribution",
       "name": "cdf",
       "anchor": "cdf-5b2",
@@ -138512,7 +138848,7 @@
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicBeta",
       "name": "density",
       "anchor": "density-5b2",
-      "signature": "def density(x: Double): Double",
+      "signature": "override def density(x: Double): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -138523,8 +138859,8 @@
         }
       ],
       "returns": "Double",
-      "summary": "Density of a value.",
-      "contract": "Density of a value. Attributes",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(x)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicBeta.html"
@@ -138580,6 +138916,48 @@
       "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
       "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes",
       "example": "receiver.generateValue(rand)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicBeta.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicBeta",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Density of a value.",
+      "contract": "Density of a value. Attributes",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicBeta.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicBeta",
+      "name": "logp",
+      "anchor": "logp-5b2",
+      "signature": "override def logp(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Log-likelihood of a value.",
+      "contract": "Log-likelihood of a value. Attributes Definition Classes Beta -> Continuous",
+      "example": "receiver.logp(x)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicBeta.html"
     },
@@ -139134,27 +139512,6 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicBeta",
-      "name": "logp",
-      "anchor": "logp-5b2",
-      "signature": "def logp(value: Double): Double",
-      "type_parameters": [],
-      "parameter_lists": [
-        {
-          "contextual": false,
-          "parameters": [
-            "value: Double"
-          ]
-        }
-      ],
-      "returns": "Double",
-      "summary": "Log-likelihood of a value.",
-      "contract": "Log-likelihood of a value. Attributes Inherited from: Beta",
-      "example": "receiver.logp(value)",
-      "object": false,
-      "page": "com/cra/figaro/library/atomic/continuous/AtomicBeta.html"
-    },
-    {
-      "owner": "com.cra.figaro.library.atomic.continuous.AtomicBeta",
       "name": "map",
       "anchor": "map-db8",
       "signature": "def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]",
@@ -139198,8 +139555,8 @@
         }
       ],
       "returns": "(Randomness, Double, Double)",
-      "summary": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:",
-      "contract": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
       "example": "receiver.nextRandomness(oldRandomness)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicBeta.html"
@@ -139535,7 +139892,7 @@
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicDirichlet",
       "name": "density",
       "anchor": "density-bd4",
-      "signature": "def density(xs: Array[Double]): Double",
+      "signature": "override def density(xs: Array[Double]): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -139546,8 +139903,8 @@
         }
       ],
       "returns": "Double",
-      "summary": "Density of a value.",
-      "contract": "Density of a value. Attributes",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(xs)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html"
@@ -139603,6 +139960,48 @@
       "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
       "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes",
       "example": "receiver.generateValue(rand)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicDirichlet",
+      "name": "logDensity",
+      "anchor": "logDensity-bd4",
+      "signature": "def logDensity(xs: Array[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "xs: Array[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Density of a value.",
+      "contract": "Density of a value. Attributes",
+      "example": "receiver.logDensity(xs)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicDirichlet",
+      "name": "logp",
+      "anchor": "logp-bd4",
+      "signature": "override def logp(xs: Array[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "xs: Array[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Log-likelihood of a value.",
+      "contract": "Log-likelihood of a value. Attributes Definition Classes Dirichlet -> Continuous",
+      "example": "receiver.logp(xs)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html"
     },
@@ -140157,27 +140556,6 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicDirichlet",
-      "name": "logp",
-      "anchor": "logp-bd4",
-      "signature": "def logp(values: Array[Double]): Double",
-      "type_parameters": [],
-      "parameter_lists": [
-        {
-          "contextual": false,
-          "parameters": [
-            "values: Array[Double]"
-          ]
-        }
-      ],
-      "returns": "Double",
-      "summary": "Log-likelihood of a value.",
-      "contract": "Log-likelihood of a value. Attributes Inherited from: Dirichlet",
-      "example": "receiver.logp(values)",
-      "object": false,
-      "page": "com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html"
-    },
-    {
-      "owner": "com.cra.figaro.library.atomic.continuous.AtomicDirichlet",
       "name": "map",
       "anchor": "map-db8",
       "signature": "def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]",
@@ -140221,8 +140599,8 @@
         }
       ],
       "returns": "(Randomness, Double, Double)",
-      "summary": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:",
-      "contract": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
       "example": "receiver.nextRandomness(oldRandomness)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html"
@@ -140530,7 +140908,7 @@
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicExponential",
       "name": "density",
       "anchor": "density-5b2",
-      "signature": "def density(d: Double): Double",
+      "signature": "override def density(d: Double): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -140541,8 +140919,8 @@
         }
       ],
       "returns": "Double",
-      "summary": "Density of a value.",
-      "contract": "Density of a value. Attributes",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(d)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicExponential.html"
@@ -140598,6 +140976,27 @@
       "summary": "Current lambda value.",
       "contract": "Current lambda value. Attributes",
       "example": "receiver.lambdaValue",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicExponential.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicExponential",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(d: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "d: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Density of a value.",
+      "contract": "Density of a value. Attributes",
+      "example": "receiver.logDensity(d)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicExponential.html"
     },
@@ -141158,8 +141557,8 @@
         }
       ],
       "returns": "(Randomness, Double, Double)",
-      "summary": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:",
-      "contract": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
       "example": "receiver.nextRandomness(oldRandomness)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicExponential.html"
@@ -141467,7 +141866,7 @@
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicGamma",
       "name": "density",
       "anchor": "density-5b2",
-      "signature": "def density(x: Double): Double",
+      "signature": "override def density(x: Double): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -141479,7 +141878,7 @@
       ],
       "returns": "Double",
       "summary": "Density of a value.",
-      "contract": "Density of a value. Attributes",
+      "contract": "Density of a value. Attributes Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(x)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicGamma.html"
@@ -141535,6 +141934,27 @@
       "summary": "Current k value.",
       "contract": "Current k value. Attributes",
       "example": "receiver.kValue",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicGamma.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicGamma",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "The normalizing factor.",
+      "contract": "The normalizing factor. Attributes",
+      "example": "receiver.logDensity(x)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicGamma.html"
     },
@@ -142109,8 +142529,8 @@
         }
       ],
       "returns": "(Randomness, Double, Double)",
-      "summary": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:",
-      "contract": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
       "example": "receiver.nextRandomness(oldRandomness)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicGamma.html"
@@ -144278,7 +144698,7 @@
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicInverseGamma",
       "name": "density",
       "anchor": "density-5b2",
-      "signature": "def density(x: Double): Double",
+      "signature": "override def density(x: Double): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -144290,7 +144710,7 @@
       ],
       "returns": "Double",
       "summary": "Density of a value.",
-      "contract": "Density of a value. Attributes",
+      "contract": "Density of a value. Attributes Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(x)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html"
@@ -144332,6 +144752,48 @@
       "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
       "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes",
       "example": "receiver.generateValue(rand)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicInverseGamma",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "The normalizing factor.",
+      "contract": "The normalizing factor. Attributes",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicInverseGamma",
+      "name": "logp",
+      "anchor": "logp-5b2",
+      "signature": "override def logp(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Log-likelihood of a value.",
+      "contract": "Log-likelihood of a value. Attributes Definition Classes InverseGamma -> Continuous",
+      "example": "receiver.logp(x)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html"
     },
@@ -144828,27 +145290,6 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicInverseGamma",
-      "name": "logp",
-      "anchor": "logp-5b2",
-      "signature": "def logp(value: Double): Double",
-      "type_parameters": [],
-      "parameter_lists": [
-        {
-          "contextual": false,
-          "parameters": [
-            "value: Double"
-          ]
-        }
-      ],
-      "returns": "Double",
-      "summary": "Log-likelihood of a value.",
-      "contract": "Log-likelihood of a value. Attributes Inherited from: InverseGamma",
-      "example": "receiver.logp(value)",
-      "object": false,
-      "page": "com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html"
-    },
-    {
-      "owner": "com.cra.figaro.library.atomic.continuous.AtomicInverseGamma",
       "name": "map",
       "anchor": "map-db8",
       "signature": "def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]",
@@ -144892,8 +145333,8 @@
         }
       ],
       "returns": "(Randomness, Double, Double)",
-      "summary": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:",
-      "contract": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
       "example": "receiver.nextRandomness(oldRandomness)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html"
@@ -147075,7 +147516,7 @@
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicNormal",
       "name": "density",
       "anchor": "density-5b2",
-      "signature": "def density(d: Double): Double",
+      "signature": "override def density(d: Double): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -147086,8 +147527,8 @@
         }
       ],
       "returns": "Double",
-      "summary": "Density of a value.",
-      "contract": "Density of a value. Attributes",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(d)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicNormal.html"
@@ -147129,6 +147570,27 @@
       "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
       "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes",
       "example": "receiver.generateValue(rand)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicNormal.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicNormal",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(d: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "d: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Density of a value.",
+      "contract": "Density of a value. Attributes",
+      "example": "receiver.logDensity(d)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicNormal.html"
     },
@@ -147717,8 +148179,8 @@
         }
       ],
       "returns": "(Randomness, Double, Double)",
-      "summary": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:",
-      "contract": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
       "example": "receiver.nextRandomness(oldRandomness)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicNormal.html"
@@ -148956,7 +149418,7 @@
       "owner": "com.cra.figaro.library.atomic.continuous.AtomicUniform",
       "name": "density",
       "anchor": "density-5b2",
-      "signature": "def density(d: Double): Double",
+      "signature": "override def density(d: Double): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -148967,8 +149429,8 @@
         }
       ],
       "returns": "Double",
-      "summary": "The probability density of a value.",
-      "contract": "The probability density of a value. Attributes",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(d)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicUniform.html"
@@ -149010,6 +149472,27 @@
       "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
       "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes",
       "example": "receiver.generateValue(rand)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicUniform.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicUniform",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(d: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "d: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Evaluate log density in the element's reference measure.",
+      "contract": "Evaluate log density in the element's reference measure. Value parameters value value to score Attributes Returns finite log density or negative infinity for zero density; reject malformed inputs",
+      "example": "receiver.logDensity(d)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicUniform.html"
     },
@@ -149598,8 +150081,8 @@
         }
       ],
       "returns": "(Randomness, Double, Double)",
-      "summary": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:",
-      "contract": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
       "example": "receiver.nextRandomness(oldRandomness)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/AtomicUniform.html"
@@ -168442,6 +168925,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal",
+      "name": "logp",
+      "anchor": "logp-fffffaeb",
+      "signature": "override def logp(value: List[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: List[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Log-likelihood of a value.",
+      "contract": "Log-likelihood of a value. Attributes Definition Classes MultivariateNormal -> Continuous",
+      "example": "receiver.logp(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MultivariateCompoundNormal.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal",
       "name": "toString",
       "anchor": "toString-0",
       "signature": "override def toString: String",
@@ -169008,27 +169512,6 @@
       "summary": "Returns true if this element is temporary, that is, was created in the context of another element.",
       "contract": "Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element",
       "example": "receiver.isTemporary",
-      "object": false,
-      "page": "com/cra/figaro/library/atomic/continuous/MultivariateCompoundNormal.html"
-    },
-    {
-      "owner": "com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal",
-      "name": "logp",
-      "anchor": "logp-fffffaeb",
-      "signature": "def logp(value: List[Double]): Double",
-      "type_parameters": [],
-      "parameter_lists": [
-        {
-          "contextual": false,
-          "parameters": [
-            "value: List[Double]"
-          ]
-        }
-      ],
-      "returns": "Double",
-      "summary": "Log-likelihood of a value.",
-      "contract": "Log-likelihood of a value. Attributes Inherited from: MultivariateNormal",
-      "example": "receiver.logp(value)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/MultivariateCompoundNormal.html"
     },
@@ -170513,6 +170996,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.MultivariateNormalCompoundMean",
+      "name": "logp",
+      "anchor": "logp-fffffaeb",
+      "signature": "override def logp(value: List[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: List[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Log-likelihood of a value.",
+      "contract": "Log-likelihood of a value. Attributes Definition Classes MultivariateNormal -> Continuous",
+      "example": "receiver.logp(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/MultivariateNormalCompoundMean.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.MultivariateNormalCompoundMean",
       "name": "toString",
       "anchor": "toString-0",
       "signature": "override def toString: String",
@@ -171079,27 +171583,6 @@
       "summary": "Returns true if this element is temporary, that is, was created in the context of another element.",
       "contract": "Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element",
       "example": "receiver.isTemporary",
-      "object": false,
-      "page": "com/cra/figaro/library/atomic/continuous/MultivariateNormalCompoundMean.html"
-    },
-    {
-      "owner": "com.cra.figaro.library.atomic.continuous.MultivariateNormalCompoundMean",
-      "name": "logp",
-      "anchor": "logp-fffffaeb",
-      "signature": "def logp(value: List[Double]): Double",
-      "type_parameters": [],
-      "parameter_lists": [
-        {
-          "contextual": false,
-          "parameters": [
-            "value: List[Double]"
-          ]
-        }
-      ],
-      "returns": "Double",
-      "summary": "Log-likelihood of a value.",
-      "contract": "Log-likelihood of a value. Attributes Inherited from: MultivariateNormal",
-      "example": "receiver.logp(value)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/MultivariateNormalCompoundMean.html"
     },
@@ -177740,7 +178223,7 @@
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicBinomial",
       "name": "density",
       "anchor": "density-640",
-      "signature": "def density(k: Int): Double",
+      "signature": "override def density(k: Int): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -177751,8 +178234,8 @@
         }
       ],
       "returns": "Double",
-      "summary": "Probability of a value.",
-      "contract": "Probability of a value. Attributes",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(k)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/discrete/AtomicBinomial.html"
@@ -177799,6 +178282,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicBinomial",
+      "name": "logDensity",
+      "anchor": "logDensity-640",
+      "signature": "def logDensity(k: Int): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "k: Int"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Probability of a value.",
+      "contract": "Probability of a value. Attributes",
+      "example": "receiver.logDensity(k)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicBinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicBinomial",
       "name": "makeValues",
       "anchor": "makeValues-6da",
       "signature": "def makeValues(depth: Int): ValueSet[Int]",
@@ -177834,7 +178338,7 @@
       ],
       "returns": "(Randomness, Double, Double)",
       "summary": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1.",
-      "contract": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasDensity -> Element",
+      "contract": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasLogDensity -> HasDensity -> Element",
       "example": "receiver.nextRandomness(rand)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/discrete/AtomicBinomial.html"
@@ -179593,7 +180097,7 @@
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicGeometric",
       "name": "density",
       "anchor": "density-640",
-      "signature": "def density(x: Int): Double",
+      "signature": "override def density(x: Int): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -179604,8 +180108,8 @@
         }
       ],
       "returns": "Double",
-      "summary": "Probability of a value.",
-      "contract": "Probability of a value. Attributes",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(x)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/discrete/AtomicGeometric.html"
@@ -179652,6 +180156,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicGeometric",
+      "name": "logDensity",
+      "anchor": "logDensity-640",
+      "signature": "def logDensity(x: Int): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Int"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Probability of a value.",
+      "contract": "Probability of a value. Attributes",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicGeometric.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicGeometric",
       "name": "nextRandomness",
       "anchor": "nextRandomness-fffffbda",
       "signature": "override def nextRandomness(rand: Randomness): (Randomness, Double, Double)",
@@ -179666,7 +180191,7 @@
       ],
       "returns": "(Randomness, Double, Double)",
       "summary": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1.",
-      "contract": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasDensity -> Element",
+      "contract": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasLogDensity -> HasDensity -> Element",
       "example": "receiver.nextRandomness(rand)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/discrete/AtomicGeometric.html"
@@ -181425,7 +181950,7 @@
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicPoisson",
       "name": "density",
       "anchor": "density-640",
-      "signature": "def density(k: Int): Double",
+      "signature": "override def density(k: Int): Double",
       "type_parameters": [],
       "parameter_lists": [
         {
@@ -181436,8 +181961,8 @@
         }
       ],
       "returns": "Double",
-      "summary": "Probability of a value.",
-      "contract": "Probability of a value. Attributes",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity",
       "example": "receiver.density(k)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/discrete/AtomicPoisson.html"
@@ -181484,6 +182009,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicPoisson",
+      "name": "logDensity",
+      "anchor": "logDensity-640",
+      "signature": "def logDensity(k: Int): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "k: Int"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Probability of a value.",
+      "contract": "Probability of a value. Attributes",
+      "example": "receiver.logDensity(k)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicPoisson.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicPoisson",
       "name": "nextRandomness",
       "anchor": "nextRandomness-fffffbda",
       "signature": "override def nextRandomness(rand: Randomness): (Randomness, Double, Double)",
@@ -181498,7 +182044,7 @@
       ],
       "returns": "(Randomness, Double, Double)",
       "summary": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1.",
-      "contract": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasDensity -> Element",
+      "contract": "The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasLogDensity -> HasDensity -> Element",
       "example": "receiver.nextRandomness(rand)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/discrete/AtomicPoisson.html"

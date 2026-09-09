@@ -27,7 +27,8 @@ import scala.math.{ log, exp }
  * An exponential distribution in which the parameter is a constant.
  */
 class AtomicExponential(name: Name[Double], val lambda: Double, collection: ElementCollection)
-  extends Element[Double](name, collection) with Atomic[Double] with Exponential {
+  extends Element[Double](name, collection) with Atomic[Double] with Exponential with HasLogDensity[Double] {
+  com.cra.figaro.library.atomic.LegacyDensity.positive(lambda)
   type Randomness = Double
 
   def lambdaValue = lambda
@@ -39,7 +40,8 @@ class AtomicExponential(name: Name[Double], val lambda: Double, collection: Elem
   /**
    * Density of a value.
    */
-  def density(d: Double) = if (d < 0.0) 0.0 else lambda * exp(-lambda * d)
+  def logDensity(d: Double): Double = logp(d)
+  override def density(d: Double) = math.exp(logDensity(d))
 
   override def toString = "Exponential(" + lambda + ")"
 }
@@ -67,11 +69,7 @@ trait Exponential extends Continuous[Double] {
    */
   def lambdaValue: Double
 
-  def logp(value: Double) =
-    bound(
-      log(lambdaValue) - lambdaValue * value,
-      lambdaValue > 0
-    )
+  def logp(value: Double) = com.cra.figaro.library.atomic.LegacyDensity.exponential(lambdaValue,value)
 }
 
 object Exponential extends Creatable {

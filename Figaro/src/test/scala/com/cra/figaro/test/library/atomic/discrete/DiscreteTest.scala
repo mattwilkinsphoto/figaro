@@ -105,12 +105,17 @@ class DiscreteTest extends AnyWordSpec with Matchers {
       }
 
     "produce the correct result under Metropolis-Hastings" in {
-      Universe.createNew()
-      val elem = Geometric(0.9)
-      val alg = MetropolisHastings(50000, ProposalScheme.default, elem)
-      alg.start()
+      // Neighbor proposals mix slowly at failure probability .9. Pool independently
+      // seeded fixed-budget chains; retain the original probability tolerance.
+      val estimates=(0 until 8).map { i => com.cra.figaro.util.withRandomSeed(12000+i) {
+        val u=Universe.createNew()
+        val elem = Geometric(0.9)
+        val alg = MetropolisHastings(100000, ProposalScheme.default, 1000, elem)
+        try { alg.start(); alg.probability(elem)(_ == 3) }
+        finally { if(alg.isActive) alg.kill(); u.clear() }
+      } }
       val targetProb = 0.9 * 0.9 * 0.1
-      alg.probability(elem)(_ == 3) should be(targetProb +- 0.01)
+      estimates.sum/estimates.size should be(targetProb +- 0.01)
     }
 
     "have the correct density" in {

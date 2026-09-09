@@ -106,7 +106,9 @@ object GraphProposalImportance {
           check(); rootState()
           var attemptFailure: Throwable=null
           try {
-            val weight=try weighter.computeWeight(root :: owned.activeElements.filterNot(_ eq root))
+            // Element hashes are assigned in creation order. Sorting this owned
+            // snapshot avoids hash-bucket-dependent revisit counts on replay.
+            val weight=try weighter.computeWeight(root :: owned.activeElements.filterNot(_ eq root).sortBy(_.hashCode))
               catch { case Importance.Reject => Double.NegativeInfinity }
             check(); require(weight.isFinite || weight==Double.NegativeInfinity,"Invalid final graph weight")
             val value=if(weight==Double.NegativeInfinity) { rejected+=1; 0.0 } else query.value

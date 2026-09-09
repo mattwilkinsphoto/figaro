@@ -154,8 +154,13 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
               traverse(remainingArgs ::: currentStack, elementsToVisit, currentWeight, visited)
             } else {
               // else, we can now process this element and move on to the next item
-              currElem.randomness = currElem.generateRandomness()
-              currElem.value = currElem.generateValue(currElem.randomness)
+              // An observed log-density element is scored at its observation below.
+              // Sampling a discarded prior value can fail at an unrepresentable
+              // tail even when the observed likelihood is perfectly well defined.
+              if(currObs.isEmpty || !currElem.isInstanceOf[HasLogDensity[?]]) {
+                currElem.randomness = currElem.generateRandomness()
+                currElem.value = currElem.generateValue(currElem.randomness)
+              }
               val nextWeight = computeNextWeight(currentWeight, currElem, currObs)
               traverse(currentStack.tail, elementsToVisit, nextWeight, visited += currElem)
             }
@@ -242,4 +247,3 @@ class LikelihoodWeighter(universe: Universe, cache: Cache) {
   private def undoWeight(weight: Double, elem: Element[?]) = weight - computeNextWeight(0.0, elem, elem.observation)
 
 }
-

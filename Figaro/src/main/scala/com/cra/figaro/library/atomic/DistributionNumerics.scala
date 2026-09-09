@@ -3,6 +3,16 @@ package com.cra.figaro.library.atomic
 import java.util.concurrent.CancellationException
 
 private[atomic] object DistributionNumerics {
+  // DLMF 5.5.2 recurrence and 5.11.2 asymptotic expansion. Shift to x>=16;
+  // the first omitted Bernoulli term is <1.2e-19 there (positive real axis).
+  // This avoids Commons Math 3's several-e-9 digamma error at small integers.
+  def digammaPositive(value: Double): Double = {
+    check(); require(value.isFinite && value>0)
+    var x=value; var correction=0.0
+    while(x<16) { correction-=1/x; x+=1 }
+    val z=1/x/x
+    correction+math.log(x)-.5/x-z*(1.0/12-z*(1.0/120-z*(1.0/252-z*(1.0/240-z*(1.0/132-z*(691.0/32760))))))
+  }
   def check(): Unit = if(Thread.currentThread().isInterrupted) throw new CancellationException("distribution operation interrupted")
   def argument(x: Double): Unit = { check(); require(!x.isNaN,"NaN argument") }
   def probability(p: Double): Unit = { check(); require(p.isFinite && p >= 0 && p <= 1,"probability must be in [0,1]") }

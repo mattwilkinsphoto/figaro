@@ -10,10 +10,10 @@ Examples are call templates: supply the named arguments with the declared types.
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicBinomial.html#density-640)
 
 ```scala
-def density(k: Int): Double
+override def density(k: Int): Double
 ```
 
-Probability of a value.
+Exponentiate logDensity; small positive densities may round to zero.
 
 Type parameters: none.
 
@@ -21,7 +21,7 @@ Parameters, list 1: `` k: Int ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Probability of a value. Attributes
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -77,6 +77,30 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.AtomicBinomial.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicBinomial.html#logDensity-640)
+
+```scala
+def logDensity(k: Int): Double
+```
+
+Probability of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Probability of a value. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(k)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.AtomicBinomial.makeValues ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicBinomial.html#makeValues-6da)
@@ -117,7 +141,7 @@ Parameters, list 1: `` rand: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasDensity -> Element
+Source contract/attributes: The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasLogDensity -> HasDensity -> Element
 
 Invocation template:
 
@@ -2286,10 +2310,10 @@ receiver.unset()
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicGeometric.html#density-640)
 
 ```scala
-def density(x: Int): Double
+override def density(x: Int): Double
 ```
 
-Probability of a value.
+Exponentiate logDensity; small positive densities may round to zero.
 
 Type parameters: none.
 
@@ -2297,7 +2321,7 @@ Parameters, list 1: `` x: Int ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Probability of a value. Attributes
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -2353,6 +2377,30 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.AtomicGeometric.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicGeometric.html#logDensity-640)
+
+```scala
+def logDensity(x: Int): Double
+```
+
+Probability of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Probability of a value. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.AtomicGeometric.nextRandomness ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicGeometric.html#nextRandomness-fffffbda)
@@ -2369,7 +2417,7 @@ Parameters, list 1: `` rand: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasDensity -> Element
+Source contract/attributes: The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasLogDensity -> HasDensity -> Element
 
 Invocation template:
 
@@ -4538,10 +4586,10 @@ receiver.unset()
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicPoisson.html#density-640)
 
 ```scala
-def density(k: Int): Double
+override def density(k: Int): Double
 ```
 
-Probability of a value.
+Exponentiate logDensity; small positive densities may round to zero.
 
 Type parameters: none.
 
@@ -4549,7 +4597,7 @@ Parameters, list 1: `` k: Int ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Probability of a value. Attributes
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -4605,6 +4653,30 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.AtomicPoisson.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicPoisson.html#logDensity-640)
+
+```scala
+def logDensity(k: Int): Double
+```
+
+Probability of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` k: Int ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Probability of a value. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(k)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.AtomicPoisson.nextRandomness ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicPoisson.html#nextRandomness-fffffbda)
@@ -4621,7 +4693,7 @@ Parameters, list 1: `` rand: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasDensity -> Element
+Source contract/attributes: The Metropolis-Hastings proposal is to increase or decrease the value of by 1. Attributes Definition Classes HasLogDensity -> HasDensity -> Element
 
 Invocation template:
 

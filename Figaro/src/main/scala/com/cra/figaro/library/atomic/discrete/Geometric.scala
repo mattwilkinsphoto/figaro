@@ -22,7 +22,8 @@ import scala.math.{ log, ceil, pow }
  * which is a constant, represents the probability of failure of a trial.
  */
 class AtomicGeometric(name: Name[Int], probFail: Double, collection: ElementCollection)
-  extends Element[Int](name, collection) with Atomic[Int] with OneShifter with Cacheable[Int] {
+  extends Element[Int](name, collection) with Atomic[Int] with OneShifter with Cacheable[Int] with HasLogDensity[Int] {
+  require(probFail.isFinite && probFail>=0 && probFail<1)
   protected lazy val lowerBound = 1
   protected lazy val upperBound = Int.MaxValue
 
@@ -30,7 +31,7 @@ class AtomicGeometric(name: Name[Int], probFail: Double, collection: ElementColl
   private lazy val logProbFailInverse = 1 / log(probFail)
 
   // see Devroye, Non-Uniform Random Variate Generation, p. 500
-  def generateRandomness() = ceil(log(random.nextDouble()) * logProbFailInverse).toInt
+  def generateRandomness() = Util.generateGeometric(probFail)
 
   def generateValue(rand: Randomness) = rand
 
@@ -42,7 +43,8 @@ class AtomicGeometric(name: Name[Int], probFail: Double, collection: ElementColl
   /**
    * Probability of a value.
    */
-  def density(x: Int) = if (x < lowerBound) 0.0 else pow(probFail, x - 1) * probSuccess
+  def logDensity(x: Int): Double = com.cra.figaro.library.atomic.LegacyDensity.geometric(probFail,x)
+  override def density(x: Int) = math.exp(logDensity(x))
 
   override def toString = "Geometric(" + probFail + ")"
 }

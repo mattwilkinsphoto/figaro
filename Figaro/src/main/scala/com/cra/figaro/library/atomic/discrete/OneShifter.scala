@@ -49,6 +49,10 @@ trait OneShifter extends Atomic[Int] {
    * Ensures that the randomness remains between the lower and upper bound.
    */
   def shiftOne(rand: Int): (Int, Double, Double) = {
+    this match {
+      case logLaw: HasLogDensity[?] => return stableShift(rand,logLaw.asInstanceOf[HasLogDensity[Int]])
+      case _ => () // Preserve compatibility for external HasDensity-only implementations.
+    }
     if (rand == lowerBound) {
       (lowerBound + 1, prob10, density1 / density0) // automatically go up
     } else if (rand == lowerBound + 1) {
@@ -80,5 +84,32 @@ trait OneShifter extends Atomic[Int] {
         (rand - 1, proposalProb, modelProb)
       }
     }
+  }
+
+  private def stableShift(old: Int,law: HasLogDensity[Int]): (Int,Double,Double) = {
+    com.cra.figaro.library.atomic.DistributionNumerics.check()
+    require(old>=lowerBound && old<=upperBound)
+    val oldLog=law.logDensity(old)
+    if(!oldLog.isFinite) throw new ArithmeticException("Count MH requires supported initialization")
+    def neighbors(x: Int): Vector[(Int,Double)] = {
+      val ids=(if(x>lowerBound) Vector(x-1) else Vector.empty) ++ (if(x<upperBound) Vector(x+1) else Vector.empty)
+      val terms=ids.map(i => (i,law.logDensity(i))).filter(_._2!=Double.NegativeInfinity)
+      if(terms.exists(t => !t._2.isFinite)) throw new ArithmeticException("Count MH log density unresolved")
+      terms
+    }
+    def logTotal(xs: Vector[(Int,Double)]): Double = {
+      val m=xs.map(_._2).max; m+math.log(xs.map(t => math.exp(t._2-m)).sum)
+    }
+    val from=neighbors(old)
+    if(from.isEmpty) return (old,1.0,1.0)
+    val total=logTotal(from)
+    val chosen=if(from.size==1 || random.nextDouble()<math.exp(from.head._2-total)) from.head else from.last
+    val back=neighbors(chosen._1)
+    val delta=chosen._2-oldLog
+    val proposal=math.exp(oldLog-logTotal(back)-chosen._2+total)
+    val model=math.exp(delta)
+    if(!proposal.isFinite || !model.isFinite || proposal<=0 || model<=0)
+      throw new ArithmeticException("Count MH ratios outside representable range")
+    (chosen._1,proposal,model)
   }
 }

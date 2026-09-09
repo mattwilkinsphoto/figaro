@@ -28,29 +28,30 @@ import com.cra.figaro.util.SpecialFunctions.gamma
  * Theta defaults to 1.
  */
 class AtomicInverseGamma(name: Name[Double], shape: Double, scale: Double = 1.0, collection: ElementCollection)
-  extends Element[Double](name, collection) with Atomic[Double] with InverseGamma {
+  extends Element[Double](name, collection) with Atomic[Double] with InverseGamma with HasLogDensity[Double] {
+  com.cra.figaro.library.atomic.LegacyDensity.positive(shape)
+  com.cra.figaro.library.atomic.LegacyDensity.positive(scale)
 
   type Randomness = Double
 
   def generateRandomness() = Util.generateGamma(shape)
 
-  def generateValue(rand: Randomness) = 1.0 / (rand * scale) // due to scaling property of Gamma
+  def generateValue(rand: Randomness) = {
+    val value=scale/rand
+    if(!value.isFinite || value<=0) throw new ArithmeticException("InverseGamma draw outside numeric range")
+    value
+  }
 
   /**
    * The normalizing factor.
    */
-  private val normalizer = pow(scale, shape) / (gamma(shape))
+  def logDensity(x: Double): Double = com.cra.figaro.library.atomic.LegacyDensity.inverseGamma(shape,scale,x)
+  override def logp(x: Double): Double = logDensity(x)
 
   /**
    * Density of a value.
    */
-  def density(x: Double) = {
-    if (x < 0.0) 0.0 else {
-      //Convert to logarithms if this is too large.
-      val numer = pow(x, -1.0 * shape - 1) * exp(-1.0 * scale / x)
-      numer * normalizer
-    }
-  }
+  override def density(x: Double) = math.exp(logDensity(x))
 
   override def toString =
     if (scale == 1.0) "InverseGamma(" + shape + ")"
@@ -58,8 +59,8 @@ class AtomicInverseGamma(name: Name[Double], shape: Double, scale: Double = 1.0,
 }
 
 trait InverseGamma extends Continuous[Double] {
-  // TODO implement appropriate log transform
-  def logp(value: Double) = Double.NegativeInfinity
+  // Custom subclasses must supply their own parameterization, not a zero likelihood.
+  def logp(value: Double): Double = throw new UnsupportedOperationException("InverseGamma subclass must implement logp")
 }
 
 object InverseGamma {

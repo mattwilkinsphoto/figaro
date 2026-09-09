@@ -39,6 +39,11 @@ implementation does not introduce sample-based estimators or generalized fusion.
 
 ## Delivery sequence
 
+Modern.19 adds [LegacyInformation](LEGACY_DISTRIBUTION_CONTRACTS.md): analytic
+Gamma, inverse-Gamma, Beta, Dirichlet, Poisson, Geometric and common-trial-count
+Binomial KL/Bhattacharyya. Gaussian metrics already exist; Exponential reduces to
+shape-one Gamma. A scalar marginal alone still does not define mutual information.
+
 Modern.18 adds [selected D5 information support](DISTRIBUTION_BREADTH.md):
 GEV/GPD analytic and guarded scalar comparisons, multinomial category reductions,
 Wishart normalizer comparisons and spherical S2 von Mises-Fisher comparisons.

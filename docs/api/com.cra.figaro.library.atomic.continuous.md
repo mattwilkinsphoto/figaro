@@ -346,10 +346,10 @@ receiver.bValue
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#density-5b2)
 
 ```scala
-def density(x: Double): Double
+override def density(x: Double): Double
 ```
 
-Density of a value.
+Exponentiate logDensity; small positive densities may round to zero.
 
 Type parameters: none.
 
@@ -357,7 +357,7 @@ Parameters, list 1: `` x: Double ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Density of a value. Attributes
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -435,6 +435,54 @@ Invocation template:
 
 ```scala
 receiver.generateValue(rand)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+Density of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Density of a value. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.logp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#logp-5b2)
+
+```scala
+override def logp(x: Double): Double
+```
+
+Log-likelihood of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Log-likelihood of a value. Attributes Definition Classes Beta -> Continuous
+
+Invocation template:
+
+```scala
+receiver.logp(x)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.maximize ``
@@ -1141,30 +1189,6 @@ Invocation template:
 receiver.isTemporary
 ```
 
-## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.logp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#logp-5b2)
-
-```scala
-def logp(value: Double): Double
-```
-
-Log-likelihood of a value.
-
-Type parameters: none.
-
-Parameters, list 1: `` value: Double ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Log-likelihood of a value. Attributes Inherited from: Beta
-
-Invocation template:
-
-```scala
-receiver.logp(value)
-```
-
 ## `` com.cra.figaro.library.atomic.continuous.AtomicBeta.map ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicBeta.html#map-db8)
@@ -1199,7 +1223,7 @@ receiver.map[U](fn)(using name, collection)
 override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
 ```
 
-Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
 
 Type parameters: none.
 
@@ -1207,7 +1231,7 @@ Parameters, list 1: `` oldRandomness: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
 
 Invocation template:
 
@@ -1628,10 +1652,10 @@ receiver.alphaValues
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html#density-bd4)
 
 ```scala
-def density(xs: Array[Double]): Double
+override def density(xs: Array[Double]): Double
 ```
 
-Density of a value.
+Exponentiate logDensity; small positive densities may round to zero.
 
 Type parameters: none.
 
@@ -1639,7 +1663,7 @@ Parameters, list 1: `` xs: Array[Double] ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Density of a value. Attributes
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -1717,6 +1741,54 @@ Invocation template:
 
 ```scala
 receiver.generateValue(rand)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html#logDensity-bd4)
+
+```scala
+def logDensity(xs: Array[Double]): Double
+```
+
+Density of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` xs: Array[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Density of a value. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(xs)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.logp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html#logp-bd4)
+
+```scala
+override def logp(xs: Array[Double]): Double
+```
+
+Log-likelihood of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` xs: Array[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Log-likelihood of a value. Attributes Definition Classes Dirichlet -> Continuous
+
+Invocation template:
+
+```scala
+receiver.logp(xs)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.maximize ``
@@ -2423,30 +2495,6 @@ Invocation template:
 receiver.isTemporary
 ```
 
-## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.logp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html#logp-bd4)
-
-```scala
-def logp(values: Array[Double]): Double
-```
-
-Log-likelihood of a value.
-
-Type parameters: none.
-
-Parameters, list 1: `` values: Array[Double] ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Log-likelihood of a value. Attributes Inherited from: Dirichlet
-
-Invocation template:
-
-```scala
-receiver.logp(values)
-```
-
 ## `` com.cra.figaro.library.atomic.continuous.AtomicDirichlet.map ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicDirichlet.html#map-db8)
@@ -2481,7 +2529,7 @@ receiver.map[U](fn)(using name, collection)
 override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
 ```
 
-Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
 
 Type parameters: none.
 
@@ -2489,7 +2537,7 @@ Parameters, list 1: `` oldRandomness: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
 
 Invocation template:
 
@@ -2862,10 +2910,10 @@ receiver.unset()
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicExponential.html#density-5b2)
 
 ```scala
-def density(d: Double): Double
+override def density(d: Double): Double
 ```
 
-Density of a value.
+Exponentiate logDensity; small positive densities may round to zero.
 
 Type parameters: none.
 
@@ -2873,7 +2921,7 @@ Parameters, list 1: `` d: Double ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Density of a value. Attributes
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -2951,6 +2999,30 @@ Invocation template:
 
 ```scala
 receiver.lambdaValue
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicExponential.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicExponential.html#logDensity-5b2)
+
+```scala
+def logDensity(d: Double): Double
+```
+
+Density of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` d: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Density of a value. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(d)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicExponential.toString ``
@@ -3643,7 +3715,7 @@ receiver.map[U](fn)(using name, collection)
 override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
 ```
 
-Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
 
 Type parameters: none.
 
@@ -3651,7 +3723,7 @@ Parameters, list 1: `` oldRandomness: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
 
 Invocation template:
 
@@ -4024,7 +4096,7 @@ receiver.unset()
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGamma.html#density-5b2)
 
 ```scala
-def density(x: Double): Double
+override def density(x: Double): Double
 ```
 
 Density of a value.
@@ -4035,7 +4107,7 @@ Parameters, list 1: `` x: Double ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Density of a value. Attributes
+Source contract/attributes: Density of a value. Attributes Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -4113,6 +4185,30 @@ Invocation template:
 
 ```scala
 receiver.kValue
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicGamma.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicGamma.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+The normalizing factor.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: The normalizing factor. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicGamma.thetaValue ``
@@ -4829,7 +4925,7 @@ receiver.map[U](fn)(using name, collection)
 override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
 ```
 
-Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
 
 Type parameters: none.
 
@@ -4837,7 +4933,7 @@ Parameters, list 1: `` oldRandomness: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
 
 Invocation template:
 
@@ -7486,7 +7582,7 @@ receiver.unset()
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html#density-5b2)
 
 ```scala
-def density(x: Double): Double
+override def density(x: Double): Double
 ```
 
 Density of a value.
@@ -7497,7 +7593,7 @@ Parameters, list 1: `` x: Double ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Density of a value. Attributes
+Source contract/attributes: Density of a value. Attributes Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -7551,6 +7647,54 @@ Invocation template:
 
 ```scala
 receiver.generateValue(rand)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicInverseGamma.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html#logDensity-5b2)
+
+```scala
+def logDensity(x: Double): Double
+```
+
+The normalizing factor.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: The normalizing factor. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(x)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicInverseGamma.logp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html#logp-5b2)
+
+```scala
+override def logp(x: Double): Double
+```
+
+Log-likelihood of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` x: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Log-likelihood of a value. Attributes Definition Classes InverseGamma -> Continuous
+
+Invocation template:
+
+```scala
+receiver.logp(x)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicInverseGamma.toString ``
@@ -8185,30 +8329,6 @@ Invocation template:
 receiver.isTemporary
 ```
 
-## `` com.cra.figaro.library.atomic.continuous.AtomicInverseGamma.logp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html#logp-5b2)
-
-```scala
-def logp(value: Double): Double
-```
-
-Log-likelihood of a value.
-
-Type parameters: none.
-
-Parameters, list 1: `` value: Double ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Log-likelihood of a value. Attributes Inherited from: InverseGamma
-
-Invocation template:
-
-```scala
-receiver.logp(value)
-```
-
 ## `` com.cra.figaro.library.atomic.continuous.AtomicInverseGamma.map ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicInverseGamma.html#map-db8)
@@ -8243,7 +8363,7 @@ receiver.map[U](fn)(using name, collection)
 override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
 ```
 
-Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
 
 Type parameters: none.
 
@@ -8251,7 +8371,7 @@ Parameters, list 1: `` oldRandomness: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
 
 Invocation template:
 
@@ -10924,10 +11044,10 @@ receiver.unset()
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicNormal.html#density-5b2)
 
 ```scala
-def density(d: Double): Double
+override def density(d: Double): Double
 ```
 
-Density of a value.
+Exponentiate logDensity; small positive densities may round to zero.
 
 Type parameters: none.
 
@@ -10935,7 +11055,7 @@ Parameters, list 1: `` d: Double ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: Density of a value. Attributes
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -10989,6 +11109,30 @@ Invocation template:
 
 ```scala
 receiver.generateValue(rand)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicNormal.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicNormal.html#logDensity-5b2)
+
+```scala
+def logDensity(d: Double): Double
+```
+
+Density of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` d: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Density of a value. Attributes
+
+Invocation template:
+
+```scala
+receiver.logDensity(d)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicNormal.meanValue ``
@@ -11729,7 +11873,7 @@ receiver.map[U](fn)(using name, collection)
 override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
 ```
 
-Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
 
 Type parameters: none.
 
@@ -11737,7 +11881,7 @@ Parameters, list 1: `` oldRandomness: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
 
 Invocation template:
 
@@ -13248,10 +13392,10 @@ receiver.unset()
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicUniform.html#density-5b2)
 
 ```scala
-def density(d: Double): Double
+override def density(d: Double): Double
 ```
 
-The probability density of a value.
+Exponentiate logDensity; small positive densities may round to zero.
 
 Type parameters: none.
 
@@ -13259,7 +13403,7 @@ Parameters, list 1: `` d: Double ``.
 
 Returns: `` Double ``.
 
-Source contract/attributes: The probability density of a value. Attributes
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity
 
 Invocation template:
 
@@ -13313,6 +13457,30 @@ Invocation template:
 
 ```scala
 receiver.generateValue(rand)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.AtomicUniform.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/AtomicUniform.html#logDensity-5b2)
+
+```scala
+def logDensity(d: Double): Double
+```
+
+Evaluate log density in the element's reference measure.
+
+Type parameters: none.
+
+Parameters, list 1: `` d: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Evaluate log density in the element's reference measure. Value parameters value value to score Attributes Returns finite log density or negative infinity for zero density; reject malformed inputs
+
+Invocation template:
+
+```scala
+receiver.logDensity(d)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.AtomicUniform.lowerValue ``
@@ -14053,7 +14221,7 @@ receiver.map[U](fn)(using name, collection)
 override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
 ```
 
-Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
 
 Type parameters: none.
 
@@ -14061,7 +14229,7 @@ Parameters, list 1: `` oldRandomness: Randomness ``.
 
 Returns: `` (Randomness, Double, Double) ``.
 
-Source contract/attributes: Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) This implementation produces a sample using generateRandomness, which means that: P(new -> old) / P(old -> new) = P(old) / P(new) We use the fact that this element can compute densities for values to compute P(new) and P(old) explicitly. Note that the two returned ratios will still multiply to 1. This does not affect normal Metropolis-Hastings, but helps the Metropolis-Hastings annealer find maxima. Attributes Definition Classes HasDensity -> Element Inherited from: HasDensity
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
 
 Invocation template:
 
@@ -37279,6 +37447,30 @@ Invocation template:
 receiver.sample(rng)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal.logp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateCompoundNormal.html#logp-fffffaeb)
+
+```scala
+override def logp(value: List[Double]): Double
+```
+
+Log-likelihood of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: List[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Log-likelihood of a value. Attributes Definition Classes MultivariateNormal -> Continuous
+
+Invocation template:
+
+```scala
+receiver.logp(value)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal.toString ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateCompoundNormal.html#toString-0)
@@ -38005,30 +38197,6 @@ Invocation template:
 
 ```scala
 receiver.isTemporary
-```
-
-## `` com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal.logp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateCompoundNormal.html#logp-fffffaeb)
-
-```scala
-def logp(value: List[Double]): Double
-```
-
-Log-likelihood of a value.
-
-Type parameters: none.
-
-Parameters, list 1: `` value: List[Double] ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Log-likelihood of a value. Attributes Inherited from: MultivariateNormal
-
-Invocation template:
-
-```scala
-receiver.logp(value)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.MultivariateCompoundNormal.map ``
@@ -39799,6 +39967,30 @@ Invocation template:
 receiver.generateValue(rand)
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.MultivariateNormalCompoundMean.logp ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateNormalCompoundMean.html#logp-fffffaeb)
+
+```scala
+override def logp(value: List[Double]): Double
+```
+
+Log-likelihood of a value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: List[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Log-likelihood of a value. Attributes Definition Classes MultivariateNormal -> Continuous
+
+Invocation template:
+
+```scala
+receiver.logp(value)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.MultivariateNormalCompoundMean.toString ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateNormalCompoundMean.html#toString-0)
@@ -40525,30 +40717,6 @@ Invocation template:
 
 ```scala
 receiver.isTemporary
-```
-
-## `` com.cra.figaro.library.atomic.continuous.MultivariateNormalCompoundMean.logp ``
-
-[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/MultivariateNormalCompoundMean.html#logp-fffffaeb)
-
-```scala
-def logp(value: List[Double]): Double
-```
-
-Log-likelihood of a value.
-
-Type parameters: none.
-
-Parameters, list 1: `` value: List[Double] ``.
-
-Returns: `` Double ``.
-
-Source contract/attributes: Log-likelihood of a value. Attributes Inherited from: MultivariateNormal
-
-Invocation template:
-
-```scala
-receiver.logp(value)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.MultivariateNormalCompoundMean.map ``

@@ -5,13 +5,18 @@
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The source default is
-`6.0.0-modern.18-SNAPSHOT`; it requires local publication or an explicitly configured
+`6.0.0-modern.19-SNAPSHOT`; it requires local publication or an explicitly configured
 artifact repository. A locally distributed `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
 
+- `6.0.0-modern.19-SNAPSHOT` consolidates [legacy distribution contracts](LEGACY_DISTRIBUTION_CONTRACTS.md):
+  stable observed log likelihoods, corrected non-unit-scale inverse-Gamma draws,
+  prior-versus-learned Beta/Dirichlet semantics, robust count sampling/proposals,
+  and analytic KL/Bhattacharyya via `LegacyInformation`. Invalid parameter checks
+  and seeded sequences change; read the migration notes before upgrading.
 - `6.0.0-modern.18-SNAPSHOT` adds [five distribution representatives](DISTRIBUTION_BREADTH.md):
   multinomial count vectors, GEV/GPD, restricted full-rank Wishart and spherical
   von Mises-Fisher. Kernels, graph adapters, appropriate KL/Bhattacharyya and

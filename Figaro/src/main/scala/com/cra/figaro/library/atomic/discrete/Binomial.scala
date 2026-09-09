@@ -18,30 +18,24 @@ import com.cra.figaro.algorithm.lazyfactored.ValueSet
 import com.cra.figaro.algorithm.factored.factors._
 import com.cra.figaro.language._
 import com.cra.figaro.library.atomic.continuous._
-import annotation.tailrec
 
 /**
  * A binomial distribution in which the parameters are constants.
  */
 class AtomicBinomial(name: Name[Int], val numTrials: Int, val probSuccess: Double, collection: ElementCollection)
   extends Element[Int](name, collection) with Atomic[Int] with ValuesMaker[Int] with Cacheable[Int]
-  with OneShifter {
+  with OneShifter with HasLogDensity[Int] {
+  require(numTrials>=0)
+  com.cra.figaro.library.atomic.DistributionNumerics.probability(probSuccess)
   protected lazy val lowerBound = 0
   protected lazy val upperBound = numTrials
 
-  private lazy val q = 1 - probSuccess
-
-  // Devroye, p. 525
-  @tailrec
-  private def generateHelper(x: Int, sum: Int): Int = {
-    val g = com.cra.figaro.library.atomic.discrete.Util.generateGeometric(1 - probSuccess)
-    val newSum = sum + g
-    val newX = x + 1
-    if (newSum <= numTrials) generateHelper(newX, newSum)
-    else newX
+  // Commons Math inverse-CDF sampling, driven exclusively by the scoped Figaro RNG.
+  def generateRandomness() = {
+    com.cra.figaro.library.atomic.DistributionNumerics.check()
+    if(probSuccess==0 || numTrials==0) 0 else if(probSuccess==1) numTrials
+    else new org.apache.commons.math3.distribution.BinomialDistribution(LegacyCountRandom.adapter(),numTrials,probSuccess).sample()
   }
-
-  def generateRandomness() = if (probSuccess <= 0) 0; else if (probSuccess < 1) generateHelper(-1, 0); else numTrials
 
   /**
    * The Metropolis-Hastings proposal is to increase or decrease the value of by 1.
@@ -53,10 +47,8 @@ class AtomicBinomial(name: Name[Int], val numTrials: Int, val probSuccess: Doubl
   /**
    * Probability of a value.
    */
-  def density(k: Int) = {
-    if (k < 0 || k > numTrials) 0.0 else
-    com.cra.figaro.library.atomic.discrete.Util.binomialDensity(numTrials, probSuccess, k)
-  }
+  def logDensity(k: Int): Double = com.cra.figaro.library.atomic.LegacyDensity.binomial(numTrials,probSuccess,k)
+  override def density(k: Int) = math.exp(logDensity(k))
 
   /**
    * Return the range of values of the element.

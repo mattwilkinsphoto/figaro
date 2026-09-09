@@ -20,8 +20,15 @@ object Util {
   /**
    * Generate a geometric distributed random variable.
    */
-  def generateGeometric(probFail: Double) =
-    ceil(log(random.nextDouble()) / log(probFail)).toInt
+  def generateGeometric(probFail: Double) = {
+    com.cra.figaro.library.atomic.DistributionNumerics.check()
+    require(probFail.isFinite && probFail>=0 && probFail<1)
+    if(probFail==0) 1 else {
+      val x=ceil(log(com.cra.figaro.library.atomic.DistributionNumerics.open(random))/log(probFail))
+      if(!x.isFinite || x<1 || x>Int.MaxValue) throw new ArithmeticException("Geometric draw outside Int range")
+      x.toInt
+    }
+  }
 
   /**
    * Density of the given number of positive outcomes under a binomial random variable with the given number of trials.
@@ -29,17 +36,7 @@ object Util {
    * an approximation algorithm when the number of trials is sufficiently large.
    */  
   def binomialDensity(numTrials: Int, probSuccess: Double, numPositive: Int): Double = {
-    val q = 1 - probSuccess
-    if (numTrials > 10) {
-      val logNFact = SpecialFunctions.logFactorial(numTrials)
-      val logKFact = SpecialFunctions.logFactorial(numPositive)
-      val logNMinusKFact = SpecialFunctions.logFactorial(numTrials-numPositive)
-      val logBinomialCoefficient = logNFact - (logKFact + logNMinusKFact)
-      val result = logBinomialCoefficient + (numPositive*Math.log(probSuccess) + ((numTrials-numPositive)*Math.log(q)))
-      Math.exp(result)
-    } else {
-      SpecialFunctions.binomial(numTrials, numPositive) * math.pow(probSuccess, numPositive) * math.pow(q, numTrials - numPositive)
-    }
+    math.exp(com.cra.figaro.library.atomic.LegacyDensity.binomial(numTrials,probSuccess,numPositive))
   }
 }
 

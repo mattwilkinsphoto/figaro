@@ -37,13 +37,14 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.18-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.19-SNAPSHOT"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
 
 ## Documentation
 
+- [Legacy distribution contracts](docs/LEGACY_DISTRIBUTION_CONTRACTS.md): stable log likelihoods, inverse-Gamma migration, count proposals and analytic KL/Bhattacharyya.
 - [Variance-adaptive bounded precision](docs/ADAPTIVE_BOUNDED_PRECISION.md): predictable empirical-Bernstein stopping, with sample-cost comparisons and explicit slowdown cases.
 - [Bounded IID reliability](docs/BOUNDED_IID_RELIABILITY.md): opt-in absolute precision stopping and declared-region occupancy, with explicit assumptions and budgets.
 - [Static graph executor](docs/STATIC_GRAPH_EXECUTION.md): reusable immutable scalar DAGs with isolated parallel importance runs; not blanket thread safety for existing shared graphs.

@@ -14,6 +14,19 @@ The source remains a development snapshot, not a universally validated stable re
 
 ## Next program: distribution breadth
 
+The next approved sequence is:
+
+1. [Legacy-distribution consolidation](docs/LEGACY_DISTRIBUTION_CONTRACTS.md)
+   (modern.19, implementing): consistent sampling/log likelihoods, support contracts,
+   analytic information measures and inference-path regressions.
+2. Covariance modeling: LKJ correlation priors and inverse-Wishart, with explicit
+   correlation/scale/covariance semantics and independent numerical checks.
+3. Query-aware rare-event proposals: literature-led design, discarded pilot costs
+   included in comparisons, held-out accuracy and explicit missing-mode limitations.
+
+Each stage requires its own validation and versioned integration. None promises
+universal stopping, discovery of unspecified modes, or arbitrary shared-graph safety.
+
 The approved [three-stage follow-on](docs/INFERENCE_NEXT_STAGES.md) now has
 [end-to-end cost evidence](docs/GRAPH_COST_ACCEPTANCE.md), explicit
 [conditional/joint proposals](docs/JOINT_PROPOSALS.md), a full-rank

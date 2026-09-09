@@ -30,7 +30,9 @@ import com.cra.figaro.util.SpecialFunctions.{ gamma, logGamma }
  * Theta defaults to 1.
  */
 class AtomicGamma(name: Name[Double], k: Double, theta: Double = 1.0, collection: ElementCollection)
-  extends Element[Double](name, collection) with Atomic[Double] with Gamma {
+  extends Element[Double](name, collection) with Atomic[Double] with Gamma with HasLogDensity[Double] {
+  com.cra.figaro.library.atomic.LegacyDensity.positive(k)
+  com.cra.figaro.library.atomic.LegacyDensity.positive(theta)
   type Randomness = Double
 
   def kValue = k
@@ -38,23 +40,21 @@ class AtomicGamma(name: Name[Double], k: Double, theta: Double = 1.0, collection
   
   def generateRandomness() = Util.generateGamma(k)
 
-  def generateValue(rand: Randomness) =
-    rand * theta // due to scaling property of Gamma
+  def generateValue(rand: Randomness) = {
+    val x=rand*theta
+    if(!x.isFinite || x<=0) throw new ArithmeticException("Gamma draw outside numeric range")
+    x
+  }
 
   /**
    * The normalizing factor.
    */
-  private val normalizer = 1.0 / (gamma(k) * pow(theta, k))
+  def logDensity(x: Double): Double = logp(x)
 
   /**
    * Density of a value.
    */
-  def density(x: Double) = {
-    if (x < 0.0) 0.0 else {
-      val numer = pow(x, k - 1) * exp(-x / theta)
-      numer * normalizer
-    }
-  }
+  override def density(x: Double) = math.exp(logDensity(x))
 
   override def toString =
     if (theta == 1.0) "Gamma(" + k + ")"
@@ -113,12 +113,7 @@ trait Gamma extends Continuous[Double] {
    */
   def thetaValue: Double
 
-  def logp(value: Double) =
-    bound(
-      -logGamma(kValue) + kValue * log(1 / thetaValue) - value / thetaValue + (kValue - 1) * log(value),
-      kValue > 0,
-      thetaValue > 0
-    )
+  def logp(value: Double) = com.cra.figaro.library.atomic.LegacyDensity.gamma(kValue,thetaValue,value)
 
 }
 

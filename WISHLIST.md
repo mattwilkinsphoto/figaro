@@ -18,6 +18,11 @@ validated on main; joint GVM is a development preview integrated through mutual 
 The nine D3 common-family representatives are also integrated; specialized variants
 and other directional families remain future work.
 
+The approved follow-on consolidates [legacy numerical contracts](docs/LEGACY_DISTRIBUTION_CONTRACTS.md),
+then adds LKJ/inverse-Wishart covariance modeling, then query-aware rare-event
+proposals. See the [ordered delivery plan](ROADMAP.md); these priorities do not
+mark the remaining family flavors or generic inference guarantees complete.
+
 Use stable `DIST-xx` IDs when moving work into the roadmap. Priorities are P0 (first
 program), P1 (common missing breadth), P2 (subsequent breadth) and P3 (specialist research).
 Record a source, concrete use case, representative first member, dependencies, numerical

@@ -29,7 +29,7 @@ collects broad families and their later flavors.
 | GVM Bhattacharyya comparison | [Guarded API](GVM_BHATTACHARYYA.md) | Symmetric fixed-law overlap; exact reductions and bounded series with unresolved statuses; initial nonidentity concentration limit 50 and dimension limit 32 |
 | VonMises, VonMisesDistribution, CircularStatistics | [Circular foundation](VON_MISES.md) | Native element, independent numeric kernel and equal-weight summaries; radians, finite concentration up to `1e8`; tested evidence and isolated parallel paths, not joint GVM |
 | Bernoulli (`Flip`), categorical (`Select`), point mass (`Constant`) | [Flip](../Figaro/src/main/scala/com/cra/figaro/language/Flip.scala), [Select](../Figaro/src/main/scala/com/cra/figaro/language/Select.scala), [Constant](../Figaro/src/main/scala/com/cra/figaro/language/Constant.scala) | `Flip` is Boolean; `Select` samples one category, not a multinomial count vector |
-| Binomial, Geometric, Poisson | [Discrete elements](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete) | Check each support and parameter convention before adapting another library's call |
+| Binomial, Geometric, Poisson | [Legacy contracts](LEGACY_DISTRIBUTION_CONTRACTS.md) | Direct log masses, bounded scoped sampling, log-space neighboring MH proposals; Geometric counts trials through first success, argument is failure probability |
 | Discrete Uniform and FromRange | [Uniform](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete/Uniform.scala), [FromRange](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete/FromRange.scala) | Finite discrete choices/ranges; distinguish from continuous Uniform |
 | Beta, Gamma, InverseGamma, Exponential, Normal, continuous Uniform | [Continuous elements](../Figaro/src/main/scala/com/cra/figaro/library/atomic/continuous) | `Normal` takes variance; Gamma uses shape/scale. Existing element-specific parameter overloads are not uniform across the library |
 | Dirichlet, MultivariateNormal | [Dirichlet](../Figaro/src/main/scala/com/cra/figaro/library/atomic/continuous/Dirichlet.scala), [MultivariateNormal](../Figaro/src/main/scala/com/cra/figaro/library/atomic/continuous/MultivariateNormal.scala) | Simplex and vector outputs; not generic matrix/manifold distributions |
@@ -62,18 +62,19 @@ mass/density contract. Factor conversion and learning require additional support
 - Circular von Mises now supplies periodic evidence and circular summaries. Cylindrical
   Gauss-von Mises has a locally tested preview approved for standalone publication. Angular diagnostics need explicit treatment;
   arithmetic averaging across the angle boundary is not a sound default.
-- `MultivariateNormal` supplies an atomic density but its `logp` implementation currently
-  returns `Double.NegativeInfinity`. Do not use that method as a valid GVM log-density
-  building block. This is a concrete audit item, not evidence that every MVN inference
-  path fails: inspect the actual method used by each algorithm.
+- `MultivariateNormal` now supplies a stable atomic log density and direct `logp`
+  for its fixed/dynamic constructors. Dynamic direct calls require initialized parent
+  values. See [legacy contracts](LEGACY_DISTRIBUTION_CONTRACTS.md) for the audit,
+  including the corrected non-unit-scale inverse-Gamma sampling law.
 - [HasDensity](../Figaro/src/main/scala/com/cra/figaro/language/HasDensity.scala) documents
   raw density-ratio underflow/overflow risks. New stable log-density calculations do not
   fix all downstream callers automatically. Verify or explicitly restrict those paths.
 - New [HasLogDensity](../Figaro/src/main/scala/com/cra/figaro/language/HasLogDensity.scala)
-  opts into direct log-density likelihood weighting. Von Mises, GVM and the nine new
-  common-family adapters use it; other existing
-  distributions are not silently migrated. Audit their mathematical log densities and
-  actual callers before broader adoption. Extreme legacy MH proposal ratios can still
+  opts into direct log-density likelihood weighting. Von Mises, GVM, new common-family
+  adapters and the audited Normal/Gamma/InverseGamma/Beta/Dirichlet/Exponential/Uniform
+  and Poisson/Binomial/Geometric atomics use it. Observed opt-in elements no longer
+  generate a discarded prior draw. Unlisted custom elements still require an audit.
+  Extreme legacy MH proposal ratios can still
   be unrepresentable and the new trait fails explicitly in that case.
 - [Continuous](../Figaro/src/main/scala/com/cra/figaro/language/Continuous.scala) declares
   `logp`; its old observation override is commented out. Implementing this trait alone

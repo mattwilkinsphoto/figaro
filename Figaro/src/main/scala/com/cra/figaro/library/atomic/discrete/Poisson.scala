@@ -23,22 +23,19 @@ import com.cra.figaro.util.SpecialFunctions.{ factorial, logFactorial }
  * A Poisson distribution in which the parameter is constant.
  */
 class AtomicPoisson(name: Name[Int], lambda: Double, collection: ElementCollection)
-  extends Element[Int](name, collection) with Atomic[Int] with OneShifter with Cacheable[Int] {
+  extends Element[Int](name, collection) with Atomic[Int] with OneShifter with Cacheable[Int] with HasLogDensity[Int] {
+  require(lambda.isFinite && lambda>=0 && lambda<=1e8,"Poisson rate must be in [0,1e8] for Int-valued draws")
   protected lazy val lowerBound = 0
   protected lazy val upperBound = Int.MaxValue
 
-  private lazy val expMinusLambda = exp(-lambda)
-
-  // Devroye, Non Uniform Random Variate Generation, p. 505
+  // Commons Math Poisson sampler, with bounded requests to the scoped Figaro RNG.
   def generateRandomness() = {
-    @tailrec
-    def generateHelper(x: Int, prod: Double): Int = {
-      val newProd = prod * random.nextDouble()
-      if (newProd > expMinusLambda) generateHelper(x + 1, newProd)
-      else x
+    com.cra.figaro.library.atomic.DistributionNumerics.check()
+    if(lambda==0) 0 else {
+      val x=new org.apache.commons.math3.distribution.PoissonDistribution(LegacyCountRandom.adapter(),lambda,1e-12,10000).sample()
+      if(x==Int.MaxValue) throw new ArithmeticException("Poisson draw outside Int range")
+      x
     }
-
-    generateHelper(0, 1)
   }
 
   /**
@@ -51,17 +48,8 @@ class AtomicPoisson(name: Name[Int], lambda: Double, collection: ElementCollecti
   /**
    * Probability of a value.
    */
-  def density(k: Int) = {
-    if (k < lowerBound) 0.0 else {
-      if (lambda > 10 || k > 10) { //Use approximation
-        val logLambdaToK = k * Math.log(lambda)
-        val logKFact = logFactorial(k)
-        exp((logLambdaToK - logKFact) - lambda)
-      } else { //Use exact
-        pow(lambda, k) / factorial(k) * expMinusLambda
-      }
-    }
-  }
+  def logDensity(k: Int): Double = com.cra.figaro.library.atomic.LegacyDensity.poisson(lambda,k)
+  override def density(k: Int) = math.exp(logDensity(k))
   override def toString = "Poisson(" + lambda + ")"
 }
 

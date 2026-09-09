@@ -39,7 +39,9 @@ import argonaut.Argonaut._
  * @param alphas the prior concentration parameters
  */
 class AtomicDirichlet(name: Name[Array[Double]], val alphas: Array[Double], collection: ElementCollection)
-    extends Element[Array[Double]](name, collection) with Atomic[Array[Double]] with ArrayParameter with Dirichlet {
+    extends Element[Array[Double]](name, collection) with Atomic[Array[Double]] with ArrayParameter with Dirichlet with HasLogDensity[Array[Double]] {
+  require(alphas!=null && alphas.length>=2 && alphas.forall(a => a.isFinite && a>0) && alphas.sum.isFinite)
+  private val samplingAlphas=alphas.clone()
 
   /**
    * The number of concentration parameters in the Dirichlet distribution.
@@ -49,9 +51,12 @@ class AtomicDirichlet(name: Name[Array[Double]], val alphas: Array[Double], coll
   type Randomness = Array[Double]
 
   def generateRandomness(): Array[Double] = {
-    val gs = alphas map (Util.generateGamma(_))
-    val sum = gs reduceLeft (_ + _)
-    gs map (_ / sum)
+    val gs = samplingAlphas map (Util.generateGamma(_))
+    val maximum=gs.max
+    val scaled=gs.map(_/maximum); val sum=scaled.sum
+    val value=scaled.map(_/sum)
+    if(value.exists(x => !x.isFinite || x<=0 || x>=1)) throw new ArithmeticException("Dirichlet draw collapsed to boundary")
+    value
   }
 
   def generateValue(rand: Randomness) = rand
@@ -69,8 +74,9 @@ class AtomicDirichlet(name: Name[Array[Double]], val alphas: Array[Double], coll
   /**
    * Density of a value.
    */
-  def density(xs: Array[Double]) =
-    ((xs zip alphas)).foldLeft(1.0)(_ * onePow(_)) * normalizer
+  def logDensity(xs: Array[Double]): Double = com.cra.figaro.library.atomic.LegacyDensity.dirichlet(samplingAlphas,xs)
+  override def logp(xs: Array[Double]): Double = logDensity(xs)
+  override def density(xs: Array[Double]) = math.exp(logDensity(xs))
 
   /**
    * The learned concentration parameters of the Dirichlet distribution
@@ -166,13 +172,7 @@ trait Dirichlet extends Continuous[Array[Double]] {
    */
   private def normalizer = sumAlphasLogGamma - prodGammasLog
 
-  def logp(values: Array[Double]) =
-    bound(
-      alphaValues.zip(values).map { v =>
-        val (a, x) = v
-        (a - 1) * log(x)
-      }.sum + normalizer,
-      alphaValues.map(_ > 0)*)
+  def logp(values: Array[Double]) = com.cra.figaro.library.atomic.LegacyDensity.dirichlet(alphaValues,values)
 
 }
 
