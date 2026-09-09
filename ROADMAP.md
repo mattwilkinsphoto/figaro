@@ -42,17 +42,26 @@ acceptance evidence. It does not alter graph samplers or stopping rules. Remote 
 and integration remain separate gates. Next: broader model/rare-event and MCSE
 coverage calibration; automatic proposal replacement is not part of this milestone.
 
-The [6,600-trial calibration assessment](docs/IMPORTANCE_CALIBRATION.md) is complete
-locally. It rejects batch intervals and a diagnostic-selection filter as general
-coverage repairs; rare-event and nonlinear limits remain explicit. Proceed next
-with bounded multi-component proposal fitting, then ownership-safe graph integration.
+The [6,600-trial calibration assessment](docs/IMPORTANCE_CALIBRATION.md) is integrated
+on main as modern.11 at `448f591b`, with passing branch and main CI. It rejects batch
+intervals and a diagnostic-selection filter as general coverage repairs;
+rare-event and nonlinear limits remain explicit.
 Automatic stopping remains deferred rather than declaring these limits solved.
 
 The [multi-component proposal fitter](docs/MIXTURE_PROPOSALS.md) is implemented on
 `modernize/multi-component-proposals`, with explicit component counts, bounded
 regularized EM, frozen production and 1,200 paired acceptance rows. It improves
 effective sampling on the tested separated-mode models without claiming automatic
-mode discovery or calibrated stopping. Next: ownership-safe explicit graph integration.
+mode discovery or calibrated stopping. CI/main integration remain separate gates.
+
+The [owned graph proposal bridge](docs/GRAPH_PROPOSALS.md) is implemented on
+`modernize/graph-proposal-integration` for modern.13 integration after verification.
+It supports explicit joint priors/proposals with ordinary graph evidence, owned
+cleanup and a graph-MCMC-pilot-to-mixture workflow. The 600-run comparison shows
+that root-only improvements do not remove all hierarchical sampling bottlenecks.
+Next candidates: matched-total-cost graph workloads and explicit larger joint
+blocks, then query-aware rare-event proposals. Automatic graph rewriting,
+adaptation during production and precision stopping are not delivered by this work.
 
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).

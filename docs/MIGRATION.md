@@ -1,5 +1,15 @@
 # Migrating to Scala 3 and sbt 2
 
+## Explicit graph proposal integration
+
+[GraphProposalImportance](GRAPH_PROPOSALS.md) adds an opt-in fresh-Universe bridge
+for a caller-supplied joint prior/proposal and ordinary graph evidence. Existing
+sampler APIs and defaults are unchanged; there is no new runtime dependency.
+Rebuild consumers against the incremented snapshot. The bridge owns and clears
+its graph, returns detached scalar weighted evidence, retains rejected attempts,
+and forbids observed/intervened roots or cross-Universe dependencies. It does not
+rewrite existing models, automatically fit proposals, or enable precision stopping.
+
 ## Pilot-only mixture fitting
 
 [GaussianMixtureProposal](MIXTURE_PROPOSALS.md) adds a pure, bounded fitter returning

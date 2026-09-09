@@ -5205,6 +5205,488 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fit(chains, config)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.addSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#addSuppressed-4b8)
+
+```scala
+final def addSuppressed(x$0: Throwable): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.addSuppressed(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.fillInStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#fillInStackTrace-26c)
+
+```scala
+def fillInStackTrace(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.fillInStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.getCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#getCause-26c)
+
+```scala
+def getCause(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getCause()
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.getLocalizedMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#getLocalizedMessage-665)
+
+```scala
+def getLocalizedMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getLocalizedMessage()
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.getMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#getMessage-665)
+
+```scala
+def getMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getMessage()
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.getStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#getStackTrace-fffffa6d)
+
+```scala
+def getStackTrace(): Array[StackTraceElement]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[StackTraceElement] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.getSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#getSuppressed-fffff2ce)
+
+```scala
+final def getSuppressed(): Array[Throwable]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[Throwable] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getSuppressed()
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.initCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#initCause-fffff080)
+
+```scala
+def initCause(x$0: Throwable): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.initCause(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#printStackTrace-fffff230)
+
+```scala
+def printStackTrace(x$0: PrintWriter): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintWriter ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#printStackTrace-fffff0fd)
+
+```scala
+def printStackTrace(x$0: PrintStream): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintStream ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#printStackTrace-94c)
+
+```scala
+def printStackTrace(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.setStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#setStackTrace-f79)
+
+```scala
+def setStackTrace(x$0: Array[StackTraceElement]): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Array[StackTraceElement] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.setStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit.toString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html#toString-665)
+
+```scala
+def toString(): String
+```
+
+Returns a string representation of the object.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.toString()
+```
+
+## `` com.cra.figaro.algorithm.sampling.GraphProposalImportance.run ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GraphProposalImportance$.html#run-6a)
+
+```scala
+def run(config: Config, proposal: Proposal, logPrior: Vector[Double] => Double)(model: (Universe, Element[Vector[Double]]) => Element[Double]): Result
+```
+
+Build a fresh graph around one explicit proposed joint root and estimate one scalar query.
+
+Type parameters: none.
+
+Parameters, list 1: `` config: Config ``; `` proposal: Proposal ``; `` logPrior: Vector[Double] => Double ``.
+
+Parameters, list 2: `` model: (Universe, Element[Vector[Double]]) => Element[Double] ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Build a fresh graph around one explicit proposed joint root and estimate one scalar query. Value parameters config attempt/traversal/storage/RNG policy logPrior pure unnormalized ORIGINAL joint prior density for the root, not the posterior likelihood model callback receiving the owned universe and joint root; returns an owned scalar query proposal frozen normalized joint proposal; every draw must be valid for the model Attributes Returns detached result after graph cleanup; callbacks must not retain/mutate owned elements or start algorithms Example run(Config(), proposal, logPrior)((u, root) => root.map(_.head))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.GraphProposalImportance.run(config, proposal, logPrior)(model)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.Importance.Reject.addSuppressed ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance$$Reject$.html#addSuppressed-4b8)

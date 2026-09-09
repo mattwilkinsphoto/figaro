@@ -216,6 +216,7 @@ python -B tools/mixture_fit_reference.py
 Use with [VectorImportance](VECTOR_IMPORTANCE.md),
 [multi-chain vector pilots](MULTI_CHAIN_VECTOR_SAMPLING.md),
 [Gaussian distribution constructions](DISTRIBUTION_CONSTRUCTIONS.md) and
-[inference health](INFERENCE_HEALTH.md). The next milestone is explicit graph-model
-integration with controlled ownership and correct proposal correction, without
-automatic coordinate discovery, graph rewriting, or new stopping claims.
+[inference health](INFERENCE_HEALTH.md). The subsequent [graph bridge](GRAPH_PROPOSALS.md)
+connects frozen proposals to an explicitly constructed owned graph, without automatic
+coordinate discovery, graph rewriting, or new stopping claims. Its executable example
+also shows how to assemble unweighted graph MCMC traces for this fitter.

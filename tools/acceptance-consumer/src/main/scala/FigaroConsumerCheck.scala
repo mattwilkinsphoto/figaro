@@ -27,6 +27,27 @@ object FigaroConsumerCheck {
     println(s"Published artifact verified: $sha")
 
     {
+      import com.cra.figaro.algorithm.sampling.{GraphProposalImportance as P, VectorImportance as V}
+      import com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution as G
+      val prior=G(Vector(0.0),Vector(Vector(1.0)))
+      val proposal=V.Gaussian(G(Vector(.8),Vector(Vector(.3))))
+      val result=P.run(P.Config(seed=43),proposal,prior.logDensity) { (u,root) =>
+        val theta=root.map(_.head)(using "",u)
+        Normal(theta,.25)(using "",u).observe(1.0)
+        theta
+      }
+      require(math.abs(result.health.diagnostics.mean.get-.8)<.025)
+      require(result.attempts==10000 && result.priorEvaluations==10000)
+      val rejected=P.run(P.Config(draws=200,maxAttempts=123),proposal,prior.logDensity) { (u,root) =>
+        root.addCondition(_ => false)
+        root.map(_.head)(using "",u)
+      }
+      require(rejected.rejected==123 && rejected.proposalDraws==123 && rejected.health.diagnostics.mean.isEmpty)
+      require(rejected.reason==P.StopReason.MaxAttemptsReached)
+      println("Published graph proposals: observed posterior, attempt cap and zero-weight accounting passed")
+    }
+
+    {
       import com.cra.figaro.algorithm.sampling.GaussianMixtureProposal as M
       val traces=Vector.tabulate(4)(_ => Vector.tabulate(100)(i => Vector((if(i<75) -6 else 6)+(i%5-2)*.1)))
       val fitted=M.fit(traces)

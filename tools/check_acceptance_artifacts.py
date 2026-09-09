@@ -7,7 +7,7 @@ from zipfile import ZipFile
 
 LEGAL = {'META-INF/LICENSE': 'LICENSE', 'META-INF/FigaroAttributions.txt': 'FigaroAttributions.txt',
          'META-INF/ArviZ-LICENSE.txt': 'ArviZ-LICENSE.txt'}
-FAT_LICENSE = 'META-INF/LICENSE_figaro-6.0.0-modern.12-SNAPSHOT'
+FAT_LICENSE = 'META-INF/LICENSE_figaro-6.0.0-modern.13-SNAPSHOT'
 REQUIRED = ('com/cra/figaro/language/Universe.class',
             'com/cra/figaro/util/SamplingRandom$.class',
             'com/cra/figaro/util/RandomStreams$.class',
@@ -15,6 +15,7 @@ REQUIRED = ('com/cra/figaro/language/Universe.class',
             'com/cra/figaro/algorithm/sampling/InferenceHealth$.class',
             'com/cra/figaro/algorithm/sampling/VectorImportance$.class',
             'com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$.class',
+            'com/cra/figaro/algorithm/sampling/GraphProposalImportance$.class',
             'com/cra/figaro/algorithm/sampling/ParetoTail$.class',
             'com/cra/figaro/algorithm/sampling/VectorSliceSampler$.class',
             'com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.class',
@@ -90,7 +91,7 @@ def main():
     args = parser.parse_args()
     legal = {key: (args.legal_root / value).read_bytes() for key, value in LEGAL.items()}
     for kind, suffix in (('thin',''),('fat','-fat'),('sources','-sources'),('javadoc','-javadoc')):
-        path = args.directory / f'figaro_3-6.0.0-modern.12-SNAPSHOT{suffix}.jar'
+        path = args.directory / f'figaro_3-6.0.0-modern.13-SNAPSHOT{suffix}.jar'
         with ZipFile(path) as archive:
             entries = validate(archive,kind,legal)
         print(json.dumps({'artifact':path.name,'entries':entries,

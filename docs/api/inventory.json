@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 847,
+  "pages": 852,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -46584,6 +46584,376 @@
       "example": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fit(chains, config)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "addSuppressed",
+      "anchor": "addSuppressed-4b8",
+      "signature": "final def addSuppressed(x$0: Throwable): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.addSuppressed(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "fillInStackTrace",
+      "anchor": "fillInStackTrace-26c",
+      "signature": "def fillInStackTrace(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.fillInStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "getCause",
+      "anchor": "getCause-26c",
+      "signature": "def getCause(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getCause()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "getLocalizedMessage",
+      "anchor": "getLocalizedMessage-665",
+      "signature": "def getLocalizedMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getLocalizedMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "getMessage",
+      "anchor": "getMessage-665",
+      "signature": "def getMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "getStackTrace",
+      "anchor": "getStackTrace-fffffa6d",
+      "signature": "def getStackTrace(): Array[StackTraceElement]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[StackTraceElement]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "getSuppressed",
+      "anchor": "getSuppressed-fffff2ce",
+      "signature": "final def getSuppressed(): Array[Throwable]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[Throwable]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getSuppressed()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "initCause",
+      "anchor": "initCause-fffff080",
+      "signature": "def initCause(x$0: Throwable): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.initCause(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff230",
+      "signature": "def printStackTrace(x$0: PrintWriter): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintWriter"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff0fd",
+      "signature": "def printStackTrace(x$0: PrintStream): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintStream"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-94c",
+      "signature": "def printStackTrace(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "setStackTrace",
+      "anchor": "setStackTrace-f79",
+      "signature": "def setStackTrace(x$0: Array[StackTraceElement]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Array[StackTraceElement]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.setStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.TraversalLimit",
+      "name": "toString",
+      "anchor": "toString-665",
+      "signature": "def toString(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "Returns a string representation of the object.",
+      "contract": "Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable",
+      "example": "receiver.toString()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$$TraversalLimit.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GraphProposalImportance",
+      "name": "run",
+      "anchor": "run-6a",
+      "signature": "def run(config: Config, proposal: Proposal, logPrior: Vector[Double] => Double)(model: (Universe, Element[Vector[Double]]) => Element[Double]): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config",
+            "proposal: Proposal",
+            "logPrior: Vector[Double] => Double"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "model: (Universe, Element[Vector[Double]]) => Element[Double]"
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Build a fresh graph around one explicit proposed joint root and estimate one scalar query.",
+      "contract": "Build a fresh graph around one explicit proposed joint root and estimate one scalar query. Value parameters config attempt/traversal/storage/RNG policy logPrior pure unnormalized ORIGINAL joint prior density for the root, not the posterior likelihood model callback receiving the owned universe and joint root; returns an owned scalar query proposal frozen normalized joint proposal; every draw must be valid for the model Attributes Returns detached result after graph cleanup; callbacks must not retain/mutate owned elements or start algorithms Example run(Config(), proposal, logPrior)((u, root) => root.map(_.head))",
+      "example": "com.cra.figaro.algorithm.sampling.GraphProposalImportance.run(config, proposal, logPrior)(model)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/GraphProposalImportance$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.Importance.Reject",
