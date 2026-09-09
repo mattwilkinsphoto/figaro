@@ -157,6 +157,16 @@ class DistributionBreadthTest extends AnyWordSpec with Matchers {
       intercept[IllegalArgumentException](north.copy(concentration= -1))
     }
     "sample on the sphere with correct mean direction from uniform to concentrated" in {
+      // Same uniforms must approach the same sphere point, even at subnormal k.
+      // This catches polar quantization that a mean-only stochastic test misses.
+      for(k <- Vector(java.lang.Double.MIN_VALUE,1e-310,1e-20)) {
+        val uniformRng=rng; val tinyRng=rng
+        for(_ <- 0 until 1000) {
+          val expected=north.copy(concentration=0).sample(uniformRng)
+          val actual=north.copy(concentration=k).sample(tinyRng)
+          actual.zip(expected).foreach((a,b) => a shouldBe (b +- 1e-14))
+        }
+      }
       for(k <- Vector(0.0,1e-8,.001,3.0,1000.0,1e6)) {
         val d=north.copy(concentration=k); val r=rng; val values=Vector.fill(10000)(d.sample(r))
         all(values.map(x => math.abs(x.map(v => v*v).sum-1)<1e-12)) shouldBe true

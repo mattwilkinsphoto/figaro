@@ -53,7 +53,9 @@ final case class VonMisesFisher3Distribution(direction: Vector[Double],concentra
     */
   def sample(rng: scala.util.Random): Vector[Double] = {
     val u=N.open(rng); val k=concentration
-    val w=if(k==0) 2*u-1 else if(k<.5) -1+math.log1p(u*math.expm1(2*k))/k
+    // Expand before dividing by k: subnormal k would quantize the polar draw.
+    // The omitted O(k^2) term is below binary64 absolute roundoff at this cutoff.
+    val w=if(k<1e-8) 2*u-1+2*k*u*(1-u) else if(k<.5) -1+math.log1p(u*math.expm1(2*k))/k
       else 1+math.log(u+(1-u)*math.exp(-2*k))/k
     if(!w.isFinite || w< -1-1e-14 || w>1+1e-14) throw new ArithmeticException("Spherical polar draw unresolved")
     val z=math.max(-1.0,math.min(1.0,w)); val radius=math.sqrt((1-z)*(1+z))

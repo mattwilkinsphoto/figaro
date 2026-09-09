@@ -214,7 +214,7 @@ Local acceptance on Java 17.0.4 / Scala 3.9.0 / sbt 2.0.8:
 - Clean compilation of 328 library sources and all 496 modernization tests passed.
 - The final condition-aware Wishart allowance passed the 18-test breadth suite;
   all 71 tests in the separate legacy collection/factor group also passed.
-- All five independent Python reference tests and the executable examples passed.
+- All six independent Python reference tests and the executable examples passed.
 - Thin, fat, source and Scaladoc JARs passed artifact checks; the separate published
   consumer resolved the new coordinate and exercised the new public APIs.
 - The generated reference contains 12320 public method entries; 13721 local
@@ -232,8 +232,10 @@ a larger-budget, unchanged-tolerance sampling check; see
 Eighteen focused Scala tests cover 48 independent scalar fixtures, count support
 enumeration, chi-square and spherical integrals, moments, zero/large concentration,
 tail underflow, divergence controls, hierarchical evidence, all five ordinary MH
-paths, isolated multi-chain replay and cancellation. Five Python oracle tests use
-mpmath at up to 80 digits. The [executable example](../FigaroExamples/src/main/scala/com/cra/figaro/example/documentation/DistributionBreadthExample.scala)
+paths, isolated multi-chain replay and cancellation. Six Python oracle tests use
+mpmath at up to 500 digits, including the spherical inverse CDF at subnormal
+concentrations; deterministic paired-stream tests also check its uniform limit.
+The [executable example](../FigaroExamples/src/main/scala/com/cra/figaro/example/documentation/DistributionBreadthExample.scala)
 exercises these patterns. Full clean build and independent published-consumer gates
 are required for integration. Fixed seeded tests validate these workloads, not all
 possible model graphs or universal convergence. Exact factored inference and

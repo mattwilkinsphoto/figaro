@@ -54,5 +54,19 @@ class BreadthReferenceTest(unittest.TestCase):
             self.assertLess(abs(kl-metric_values()['vmfKl']),mp.mpf('1e-35'))
             self.assertLess(abs(-mp.log(affinity)-metric_values()['vmfBh']),mp.mpf('1e-35'))
 
+    def test_spherical_near_zero_polar_inverse(self):
+        # Resolve even the smallest binary64 concentration in the exact inverse.
+        with mp.workdps(500):
+            for k in (math.ulp(0.0),1e-310,1e-20,1e-12,math.nextafter(1e-8,0)):
+                for u in (2**-53,.001,.13,.25,.5,.9,1-2**-53):
+                    kk,uu=mp.mpf(k),mp.mpf(u)
+                    exact=-1+mp.log((1-uu)+uu*mp.exp(2*kk))/kk
+                    actual=2*u-1+2*k*u*(1-u)
+                    self.assertLess(abs(mp.mpf(actual)-exact),mp.mpf('3e-16'))
+            # Old binary64 arithmetic quantized w=-0.5 to a pole at this input.
+            k=math.ulp(0.0); u=.25
+            old=-1+math.log1p(u*math.expm1(2*k))/k
+            self.assertGreater(abs(old-(2*u-1)),.1)
+
 
 if __name__=='__main__': unittest.main()
