@@ -5,12 +5,17 @@
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The source default is
-`6.0.0-modern.16-SNAPSHOT`; it requires local publication or an explicitly configured
+`6.0.0-modern.17-SNAPSHOT`; it requires local publication or an explicitly configured
 artifact repository. A locally distributed `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
+
+- `6.0.0-modern.17-SNAPSHOT` adds the opt-in [static graph executor](STATIC_GRAPH_EXECUTION.md):
+  immutable callback-free scalar DAGs, isolated evidence/RNG state, deterministic
+  worker-count replay and bounded lifecycle handling. Eleven focused tests and
+  1440 timing rows cover the first vocabulary. Existing Element runners are unchanged.
 
 - `6.0.0-modern.16-SNAPSHOT` adds opt-in [predictable empirical-Bernstein
   precision stopping](ADAPTIVE_BOUNDED_PRECISION.md), with a distinct weighted

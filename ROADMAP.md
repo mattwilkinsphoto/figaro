@@ -24,10 +24,11 @@ gate recorded in the cost assessment and remote CI required for main integration
 The modern.15 follow-on implements [bounded IID precision and declared-region
 coverage](docs/BOUNDED_IID_RELIABILITY.md), with explicit assumptions, outward
 arithmetic and work budgets. The [restricted graph ownership design](docs/OWNED_GRAPH_EXECUTION_DESIGN.md)
-is documented, but its proposed static executor is not implemented. Modern.16 adds
+is documented. Modern.16 adds
 [variance-adaptive bounded confidence sequences](docs/ADAPTIVE_BOUNDED_PRECISION.md),
-including total-cost counterexamples. Next: the restricted executor's
-semantic/concurrency/scaling gates, then selected joint-count, extreme-value,
+including total-cost counterexamples. Modern.17 implements the first
+[restricted static executor](docs/STATIC_GRAPH_EXECUTION.md), with semantic,
+concurrency and scaling evidence. Next: selected joint-count, extreme-value,
 matrix and directional representatives. Universal precision, unknown-mode discovery
 and arbitrary shared-graph safety are not claimed or marked complete.
 

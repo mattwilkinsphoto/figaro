@@ -1,6 +1,8 @@
 # Restricted graph ownership: execution-model decision
 
-Status: **accepted design, not a new executor or arbitrary-graph thread-safety feature**.
+Status: **accepted design; first restricted executor implemented in modern.17**.
+See [static graph execution](STATIC_GRAPH_EXECUTION.md) for the supported public
+vocabulary, lifecycle tests and measured costs. This is not arbitrary-graph thread safety.
 The modern.15 reliability milestone documents this boundary alongside the two
 [bounded IID APIs](BOUNDED_IID_RELIABILITY.md). Existing owned runners are unchanged.
 
@@ -33,7 +35,7 @@ checks and concurrent isolated replay. These are **boundary checks**, not a proo
 that arbitrary closures obey the ownership contract. A stalled callback is still
 not forcibly preempted.
 
-## Proposed static-model boundary (not yet public API)
+## Static-model boundary
 
 | Component | Shareable data | Mutable state and restrictions |
 | --- | --- | --- |
@@ -93,8 +95,11 @@ more strongly, at serialization and orchestration cost; it is not this milestone
 
 ## Scope remaining
 
-The design decision is complete; the static definition/compiler/executor is **not
-implemented**. It remains an explicit roadmap item with the gates above. Existing
-owned-universe multi-chain execution is the available production path now.
+The first static definition/compiler/executor is implemented with scalar normal,
+Bernoulli and closed arithmetic nodes. Tests and total-cost evidence address the
+gates above for that restricted vocabulary. No mutable context handle is exposed:
+each call creates a fresh context, so concurrent reuse cannot advance one context
+twice. Dynamic graphs, arbitrary callbacks, learning and interventions remain
+separate work. Existing owned-universe multi-chain execution remains available.
 See [reliability assessment](RELIABILITY_LIMITS_ASSESSMENT.md),
 [resource scaling](RESOURCE_SCALING_ASSESSMENT.md), and [roadmap](../ROADMAP.md).

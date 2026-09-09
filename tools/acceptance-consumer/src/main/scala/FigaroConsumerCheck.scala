@@ -287,6 +287,13 @@ object FigaroConsumerCheck {
     while(state.decision==TruncatedSprt.Decision.Continue) state=design.advance(state,1.0)
     require(state.samples<=design.maxSamples && state.decision!=TruncatedSprt.Decision.Continue)
 
+    val staticModel=com.cra.figaro.algorithm.sampling.StaticGraphImportance.compile(Vector(
+      com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Constant(0),
+      com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Constant(1),
+      com.cra.figaro.algorithm.sampling.StaticGraphImportance.Node.Normal(0,1)))
+    val staticResult=com.cra.figaro.algorithm.sampling.StaticGraphImportance.run(staticModel,Vector(2))
+    require(staticResult.values.head.size==10000 && staticResult.nodeEvaluations==30000)
+
     var cancelled=false
     Thread.currentThread().interrupt()
     try VS.run(VS.Config(VS.Method.GPSS),Vector(1.0,1.0))(x => -x.map(v=>v*v).sum/2)
