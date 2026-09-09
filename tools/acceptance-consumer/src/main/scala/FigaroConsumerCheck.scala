@@ -30,6 +30,8 @@ object FigaroConsumerCheck {
       import com.cra.figaro.algorithm.sampling.{BoundedIidPrecision as B,DeclaredRegionCoverage as R}
       val bounded=B.run(B.Config(0,1,.1,maxDraws=10000))(_.nextDouble())
       require(bounded.reason==B.StopReason.PrecisionReached && bounded.errorBound<=.1)
+      val adaptive=com.cra.figaro.algorithm.sampling.EmpiricalBernsteinPrecision.run(B.Config(0,1,.02))(_ => .5)
+      require(adaptive.reason==B.StopReason.PrecisionReached && adaptive.errorBound<=.02)
       val regions=Vector(R.Region[Double]("left",_ < .5),R.Region[Double]("right",_ >= .5))
       val occupancy=R.run(R.Config("uniform [0,1)",draws=100),regions,
         Some(R.MassAssumption(.5,"each uniform half")))(_.nextDouble())

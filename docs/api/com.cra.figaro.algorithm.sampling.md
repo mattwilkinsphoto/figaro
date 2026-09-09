@@ -4849,6 +4849,80 @@ Invocation template:
 receiver.stop()
 ```
 
+## `` com.cra.figaro.algorithm.sampling.EmpiricalBernsteinPrecision.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/EmpiricalBernsteinPrecision$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.EmpiricalBernsteinPrecision.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/EmpiricalBernsteinPrecision$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.EmpiricalBernsteinPrecision.run ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/EmpiricalBernsteinPrecision$.html#run-fffff1a9)
+
+```scala
+def run(config: Config)(sample: Random => Double): Result
+```
+
+Adaptive bounded-IID mean estimation with time-uniform, outward-rounded intervals.
+
+Type parameters: none.
+
+Parameters, list 1: `` config: Config ``.
+
+Parameters, list 2: `` sample: Random => Double ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Adaptive bounded-IID mean estimation with time-uniform, outward-rounded intervals. Value parameters config same known support/absolute-error/budget contract as BoundedIidPrecision; chosen before sampling sample pure IID draw using only the provided private RNG; must return promptly Attributes Returns weighted estimate and interval, ordinary sample mean, and explicit stop reason Example run(BoundedIidPrecision.Config(0,1,.02))(_.nextDouble())
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.EmpiricalBernsteinPrecision.run(config)(sample)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.EmptyProposalScheme.addSuppressed ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/EmptyProposalScheme$.html#addSuppressed-4b8)

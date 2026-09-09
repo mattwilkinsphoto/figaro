@@ -256,6 +256,7 @@ Scaladoc warnings remain; no new documentation warnings were introduced.
 [RNG policy](RNG_ASSESSMENT.md), [inference health](INFERENCE_HEALTH.md),
 [importance calibration](IMPORTANCE_CALIBRATION.md), [information metrics](MONTE_CARLO_INFORMATION.md),
 [owned graph design](OWNED_GRAPH_EXECUTION_DESIGN.md), and [reliability limits](RELIABILITY_LIMITS_ASSESSMENT.md).
-Next efficiency work is variance-adaptive bounded confidence sequences. Bounded
+The opt-in [variance-adaptive runner](ADAPTIVE_BOUNDED_PRECISION.md) now provides
+that next efficiency step, with measured benefits and slowdown cases. Bounded
 importance numerator/denominator inference and dependent-chain finite-run bounds
 remain separate research/API projects, not automatic extensions of this contract.
