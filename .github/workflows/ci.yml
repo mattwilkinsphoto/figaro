@@ -30,6 +30,7 @@ jobs:
           python3 -m pip install --disable-pip-version-check numpy==2.3.5
           python3 -B -m unittest discover -s tools -p 'test_statistical_validation_reference.py' -v
           python3 -B -m unittest discover -s tools -p 'test_inference_health_reference.py' -v
+          python3 -B -m unittest discover -s tools -p 'test_mixture_fit_reference.py' -v
       - name: Verify complete matched-accuracy timing evidence
         run: |
           python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_performance.py' -v
@@ -155,7 +156,6 @@ jobs:
           python3 -B tools/summarize_vector_importance.py docs/vector-importance-results.csv
           python3 -B tools/summarize_importance_calibration.py docs/importance-calibration-results.csv
           python3 -B tools/summarize_mixture_proposals.py docs/mixture-proposal-results.csv
-          python3 -B -m unittest discover -s tools -p 'test_mixture_fit_reference.py'
           python3 -B -m unittest discover -s tools -p 'test_check_acceptance_artifacts.py'
           python3 -B tools/summarize_interleaved_performance.py check docs/core-performance-acceptance-results.csv --baseline-csv docs/parallel-vector-diagnostics-results.csv
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
