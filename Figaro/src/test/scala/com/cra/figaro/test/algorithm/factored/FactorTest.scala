@@ -1161,7 +1161,30 @@ class FactorTest extends AnyWordSpec with Matchers {
   }
 
   "Making a factor for a dependent universe" should {
-    "produce a correct dependent factor" in {
+    "wire every parent assignment to its exact dependent probability" in {
+      Universe.createNew()
+      val x = Flip(0.1)
+      val y = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)
+      Values()(x)
+      Values()(y)
+      val dependentUniverse = new Universe(List(x, y))
+      val visited = ListBuffer.empty[(Boolean, Int)]
+      val xVar = Variable(x)
+      val yVar = Variable(y)
+      val factor = Factory.makeDependentFactor(Variable.cc, Universe.universe, dependentUniverse, () => {
+        visited += ((x.value, y.value))
+        if (x.value || y.value < 2) 0.5 else 0.25
+      })
+      factor.variables.toSet should equal(Set(xVar, yVar))
+      visited.toList.sorted should equal((for (b <- List(false, true); i <- List(1, 2, 3)) yield (b, i)).sorted)
+      for (b <- List(false, true); i <- List(1, 2, 3)) {
+        val indices = factor.variables.map(v =>
+          if (v == xVar) xVar.range.indexOf(Regular(b)) else yVar.range.indexOf(Regular(i)))
+        factor.get(indices) should equal(if (b || i < 2) 0.5 else 0.25)
+      }
+    }
+
+    "estimate dependent probabilities with the evidence sampler" in com.cra.figaro.util.withRandomSeed(42L) {
       Universe.createNew()
       val x = Flip(0.1)
       val y = Select(0.2 -> 1, 0.3 -> 2, 0.5 -> 3)
@@ -1175,8 +1198,12 @@ class FactorTest extends AnyWordSpec with Matchers {
       val evidence = List(NamedEvidence("a", Condition((d: Double) => d < 0.5)))
       Universe.universe.activeElements.foreach(Variable(_))
       dependentUniverse.activeElements.foreach(Variable(_))
+      // Six Bernoulli estimates, unchanged absolute tolerance 0.01. At n = 100000,
+      // Hoeffding + union bound gives at most 12 * exp(-20) < 2.5e-8 for any miss
+      // under independent forward sampling (no independence between cells needed).
+      // Seed fixed in advance for replay, not selected by rerunning failing seeds.
       val factor =
-        Factory.makeDependentFactor(Variable.cc, Universe.universe, dependentUniverse, () => ProbEvidenceSampler.computeProbEvidence(20000, evidence)(using dependentUniverse))
+        Factory.makeDependentFactor(Variable.cc, Universe.universe, dependentUniverse, () => ProbEvidenceSampler.computeProbEvidence(100000, evidence)(using dependentUniverse))
       val xVar = Variable(x)
       val yVar = Variable(y)
       val variables = factor.variables

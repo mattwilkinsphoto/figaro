@@ -294,6 +294,17 @@ object FigaroConsumerCheck {
     val staticResult=com.cra.figaro.algorithm.sampling.StaticGraphImportance.run(staticModel,Vector(2))
     require(staticResult.values.head.size==10000 && staticResult.nodeEvaluations==30000)
 
+    val breadthCounts=com.cra.figaro.library.atomic.discrete.MultinomialDistribution(4,Vector(.2,.3,.5))
+    require(com.cra.figaro.library.atomic.discrete.MultinomialInformation.mutualInformation(breadthCounts,Vector(0)).value.exists(_>0))
+    val breadthTail=com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution(.2)
+    require(math.abs(breadthTail.survival(breadthTail.quantile(.99))-.01)<1e-12)
+    require(com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution(0).quantile(.5).isFinite)
+    val breadthMatrix=com.cra.figaro.library.atomic.continuous.WishartDistribution(4,Vector(Vector(1.0)))
+    require(com.cra.figaro.library.atomic.continuous.WishartInformation.kl(breadthMatrix,breadthMatrix.copy(degreesOfFreedom=5)).value.exists(_>0))
+    val breadthSphere=com.cra.figaro.library.atomic.continuous.VonMisesFisher3Distribution(Vector(0,0,1),3)
+    require(com.cra.figaro.library.atomic.continuous.VonMisesFisher3Information.bhattacharyya(breadthSphere,breadthSphere.copy(concentration=4)).value.exists(_>0))
+    println("Published D5 breadth: joint counts, tail, matrix and spherical metrics passed")
+
     var cancelled=false
     Thread.currentThread().interrupt()
     try VS.run(VS.Config(VS.Method.GPSS),Vector(1.0,1.0))(x => -x.map(v=>v*v).sum/2)

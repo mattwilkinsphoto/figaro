@@ -3419,6 +3419,1120 @@ Invocation template:
 receiver.unset()
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.generateRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#generateRandomness-fffffff7)
+
+```scala
+def generateRandomness(): Vector[Int]
+```
+
+Generate the randomness content.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Vector[Int] ``.
+
+Source contract/attributes: Generate the randomness content. Attributes
+
+Invocation template:
+
+```scala
+receiver.generateRandomness()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.generateValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#generateValue-ae0)
+
+```scala
+def generateValue(value: Vector[Int]): Vector[Int]
+```
+
+Generate the value of the element deterministically given its randomness and the values of its arguments.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Vector[Int] ``.
+
+Returns: `` Vector[Int] ``.
+
+Source contract/attributes: Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes
+
+Invocation template:
+
+```scala
+receiver.generateValue(value)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#logDensity-f10)
+
+```scala
+def logDensity(value: Vector[Int]): Double
+```
+
+Evaluate log density in the element's reference measure.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Vector[Int] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Evaluate log density in the element's reference measure. Value parameters value value to score Attributes Returns finite log density or negative infinity for zero density; reject malformed inputs
+
+Invocation template:
+
+```scala
+receiver.logDensity(value)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.!== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#!==-894)
+
+```scala
+def !==(that: Element[Value])(implicit universe: Universe): Neq[Vector[Int]]
+```
+
+The element that tests inequality of this element with another element.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Element[Value] ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Neq[Vector[Int]] ``.
+
+Source contract/attributes: The element that tests inequality of this element with another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.!==(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.=== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#===-f71)
+
+```scala
+def ===(that: Value)(implicit universe: Universe): Apply1[Vector[Int], Boolean]
+```
+
+The element that tests whether the value of this element is equal to a particular value.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Value ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Apply1[Vector[Int], Boolean] ``.
+
+Source contract/attributes: The element that tests whether the value of this element is equal to a particular value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.===(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.=== ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#===-672)
+
+```scala
+def ===(that: Element[Value])(implicit universe: Universe): Eq[Vector[Int]]
+```
+
+The element that tests equality of this element with another element.
+
+Type parameters: none.
+
+Parameters, list 1: `` that: Element[Value] ``.
+
+Context parameters, list 2: `` universe: Universe ``.
+
+Returns: `` Eq[Vector[Int]] ``.
+
+Source contract/attributes: The element that tests equality of this element with another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.===(that)(using universe)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.activate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#activate-94c)
+
+```scala
+def activate(): Unit
+```
+
+Activate the element in its universe.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Activate the element in its universe. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.activate()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.addCondition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#addCondition-fffff9ad)
+
+```scala
+def addCondition(condition: Condition, contingency: Contingency = ...): Unit
+```
+
+Add the given condition to the existing conditions of the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` condition: Condition ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add the given condition to the existing conditions of the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addCondition(condition, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.addConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#addConstraint-fffff9ad)
+
+```scala
+def addConstraint(constraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Add a contingent constraint to the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` constraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addConstraint(constraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.addLogConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#addLogConstraint-fffff9ad)
+
+```scala
+def addLogConstraint(constraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Add a log contingent constraint to the element. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` constraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a log contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addLogConstraint(constraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.addPragma ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#addPragma-b53)
+
+```scala
+def addPragma(pragma: Pragma[Value]): Unit
+```
+
+Add a pragma to the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` pragma: Pragma[Value] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Add a pragma to the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.addPragma(pragma)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.allConditions ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#allConditions-0)
+
+```scala
+def allConditions: List[(Condition, Contingency)]
+```
+
+All the conditions defined on this element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[(Condition, Contingency)] ``.
+
+Source contract/attributes: All the conditions defined on this element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.allConditions
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.allConstraints ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#allConstraints-0)
+
+```scala
+def allConstraints: List[(Constraint, Contingency)]
+```
+
+The current soft constraints on the element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[(Constraint, Contingency)] ``.
+
+Source contract/attributes: The current soft constraints on the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.allConstraints
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.args ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#args-0)
+
+```scala
+def args: List[Element[_]]
+```
+
+Returns an empty list.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: Returns an empty list. Attributes Inherited from: Atomic
+
+Invocation template:
+
+```scala
+receiver.args
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.clearContext ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#clearContext-94c)
+
+```scala
+def clearContext(): Unit
+```
+
+Clears all the temporary elements associated with this element (all elements created in it's context).
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Clears all the temporary elements associated with this element (all elements created in it's context). Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.clearContext()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.condition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#condition-4ad)
+
+```scala
+def condition(value: Any): Boolean
+```
+
+Tests whether all the element's contingent conditions are satisfied for the given value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Any ``.
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Tests whether all the element's contingent conditions are satisfied for the given value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.condition(value)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.conditionSatisfied ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#conditionSatisfied-0)
+
+```scala
+def conditionSatisfied: Boolean
+```
+
+Determines whether the condition on the element is satisfied by the current value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Determines whether the condition on the element is satisfied by the current value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.conditionSatisfied
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.constraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#constraint-fffffeac)
+
+```scala
+def constraint(value: Any): Double
+```
+
+Gets the result of all the element's contingent constraints for the given value.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Any ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Gets the result of all the element's contingent constraints for the given value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.constraint(value)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.constraintValue ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#constraintValue-0)
+
+```scala
+def constraintValue: Double
+```
+
+Determines the value of the constraint on the element applied to the current value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Determines the value of the constraint on the element applied to the current value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.constraintValue
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.context ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#context-0)
+
+```scala
+def context: List[Element[_]]
+```
+
+The elements on which the existence of this element depends.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Element[_]] ``.
+
+Source contract/attributes: The elements on which the existence of this element depends. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.context
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.deactivate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#deactivate-94c)
+
+```scala
+def deactivate(): Unit
+```
+
+Deactivate the element in its universe.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Deactivate the element in its universe. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.deactivate()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.density ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#density-fffffeac)
+
+```scala
+override def density(value: Vector[Int]): Double
+```
+
+Exponentiate logDensity; small positive densities may round to zero.
+
+Type parameters: none.
+
+Parameters, list 1: `` value: Vector[Int] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity Inherited from: HasLogDensity
+
+Invocation template:
+
+```scala
+receiver.density(value)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.directContextContents ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#directContextContents-0)
+
+```scala
+def directContextContents: Set[Element[_]]
+```
+
+Returns the set of elements directly created in the context of this element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Set[Element[_]] ``.
+
+Source contract/attributes: Returns the set of elements directly created in the context of this element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.directContextContents
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.elementsIAmContingentOn ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#elementsIAmContingentOn-0)
+
+```scala
+def elementsIAmContingentOn: Set[Element[_]]
+```
+
+Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Set[Element[_]] ``.
+
+Source contract/attributes: Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value. Figaro takes care of handling all this under the hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample those other elements first. This method is supplied to support this use case. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.elementsIAmContingentOn
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.flatMap ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#flatMap-db8)
+
+```scala
+def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` U ``.
+
+Parameters, list 1: `` fn: Value => Element[U] ``.
+
+Context parameters, list 2: `` name: Name[U] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[U] ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.flatMap[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.generate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#generate-94c)
+
+```scala
+final def generate(): Unit
+```
+
+First generate the randomness, then generate the value given the randomness. Store the results in randomness and value.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: First generate the randomness, then generate the value given the randomness. Store the results in randomness and value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.generate()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.intervene ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#intervene-fffff71f)
+
+```scala
+def intervene(v: Value): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` v: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.intervene(v)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.isCachable ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#isCachable-0)
+
+```scala
+def isCachable: Boolean
+```
+
+The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.isCachable
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.isTemporary ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#isTemporary-0)
+
+```scala
+def isTemporary: Boolean
+```
+
+Returns true if this element is temporary, that is, was created in the context of another element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Boolean ``.
+
+Source contract/attributes: Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.isTemporary
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.map ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#map-db8)
+
+```scala
+def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: `` U ``.
+
+Parameters, list 1: `` fn: Value => U ``.
+
+Context parameters, list 2: `` name: Name[U] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[U] ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.nextRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#nextRandomness-fffff446)
+
+```scala
+override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)
+```
+
+Prior proposal with ratios formed from log densities, preserving annealer semantics.
+
+Type parameters: none.
+
+Parameters, list 1: `` oldRandomness: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity
+
+Invocation template:
+
+```scala
+receiver.nextRandomness(oldRandomness)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.observe ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#observe-fffff71f)
+
+```scala
+def observe(observation: Value): Unit
+```
+
+Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated.
+
+Type parameters: none.
+
+Parameters, list 1: `` observation: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.observe(observation)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.pragmas ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#pragmas-0)
+
+```scala
+def pragmas: List[Pragma[Value]]
+```
+
+The pragmas attached to the element.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` List[Pragma[Value]] ``.
+
+Source contract/attributes: The pragmas attached to the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.pragmas
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.removeConditions ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#removeConditions-71e)
+
+```scala
+def removeConditions(contingency: Contingency = ...): Unit
+```
+
+Remove all conditions associated with the given contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove all conditions associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removeConditions(contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.removeConstraints ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#removeConstraints-71e)
+
+```scala
+def removeConstraints(contingency: Contingency = ...): Unit
+```
+
+Remove all constraints associated with the given contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove all constraints associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removeConstraints(contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.removePragma ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#removePragma-b53)
+
+```scala
+def removePragma(pragma: Pragma[Value]): Unit
+```
+
+Remove a pragma from the element.
+
+Type parameters: none.
+
+Parameters, list 1: `` pragma: Pragma[Value] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Remove a pragma from the element. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.removePragma(pragma)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.score ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#score-fffffdbf)
+
+```scala
+def score(oldValue: Value, newValue: Value): Double
+```
+
+Compute the constraints on the new value divided by the constraints on the old value.
+
+Type parameters: none.
+
+Parameters, list 1: `` oldValue: Value ``; `` newValue: Value ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Compute the constraints on the new value divided by the constraints on the old value. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.score(oldValue, newValue)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.set ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#set-fffff71f)
+
+```scala
+def set(newValue: Value): Unit
+```
+
+Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called.
+
+Type parameters: none.
+
+Parameters, list 1: `` newValue: Value ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.set(newValue)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.setCondition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#setCondition-fffff9ad)
+
+```scala
+def setCondition(newCondition: Condition, contingency: Contingency = ...): Unit
+```
+
+Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newCondition: Condition ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setCondition(newCondition, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.setConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#setConstraint-fffff9ad)
+
+```scala
+def setConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newConstraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setConstraint(newConstraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.setLogConstraint ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#setLogConstraint-fffff9ad)
+
+```scala
+def setLogConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit
+```
+
+Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.
+
+Type parameters: none.
+
+Parameters, list 1: `` newConstraint: Constraint ``; `` contingency: Contingency = ... ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setLogConstraint(newConstraint, contingency)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.setRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#setRandomness-fffff71f)
+
+```scala
+def setRandomness(newRandomness: Randomness): Unit
+```
+
+Set the randomness of this element.
+
+Type parameters: none.
+
+Parameters, list 1: `` newRandomness: Randomness ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Set the randomness of this element. Will generate its value using the new randomness and propagate the effects to elements that depend on it without changing their randomness. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.setRandomness(newRandomness)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.toNameString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#toNameString-0)
+
+```scala
+def toNameString: String
+```
+
+A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.toNameString
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.unintervene ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#unintervene-94c)
+
+```scala
+def unintervene(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unintervene()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.unobserve ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#unobserve-94c)
+
+```scala
+def unobserve(): Unit
+```
+
+Removes conditions on the element and allows different values of the element to be generated.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Removes conditions on the element and allows different values of the element to be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unobserve()
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.unset ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#unset-94c)
+
+```scala
+def unset(): Unit
+```
+
+Allows different values of the element to be generated.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Allows different values of the element to be generated. Attributes Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.unset()
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.AtomicPoisson.density ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicPoisson.html#density-640)
@@ -15487,6 +16601,298 @@ Invocation template:
 
 ```scala
 receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.Multinomial.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/Multinomial$.html#apply-b0a)
+
+```scala
+def apply(distribution: MultinomialDistribution)(using name: Name[Vector[Int]], collection: ElementCollection): AtomicMultinomial
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: MultinomialDistribution ``.
+
+Context parameters, list 2: `` name: Name[Vector[Int]] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicMultinomial ``.
+
+Source contract/attributes: Value parameters collection owning collection distribution validated count kernel name contextual name Attributes Returns observation-ready vector-count element Example Multinomial(MultinomialDistribution(10,Vector(.2,.8)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.Multinomial.apply(distribution)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.Multinomial.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/Multinomial$.html#apply-bc9)
+
+```scala
+def apply(distribution: Element[MultinomialDistribution])(using name: Name[Vector[Int]], collection: ElementCollection): Element[Vector[Int]]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: Element[MultinomialDistribution] ``.
+
+Context parameters, list 2: `` name: Name[Vector[Int]] ``; `` collection: ElementCollection ``.
+
+Returns: `` Element[Vector[Int]] ``.
+
+Source contract/attributes: Value parameters collection owning collection distribution element producing validated kernels name contextual name Attributes Returns hierarchical non-caching count element Example Multinomial(probabilities.map(p => MultinomialDistribution(10,p)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.Multinomial.apply(distribution)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.covariance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html#covariance-0)
+
+```scala
+def covariance: Vector[Vector[Double]]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Vector[Vector[Double]] ``.
+
+Source contract/attributes: Attributes Returns covariance n*(diag(p)-p*p^T), singular because total is fixed
+
+Invocation template:
+
+```scala
+receiver.covariance
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.logProbability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html#logProbability-f10)
+
+```scala
+def logProbability(counts: Vector[Int]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` counts: Vector[Int] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters counts matching count vector Attributes Returns log probability; negative counts, wrong total or impossible categories give -Infinity Example MultinomialDistribution(4,Vector(.2,.3,.5)).logProbability(Vector(1,1,2))
+
+Invocation template:
+
+```scala
+receiver.logProbability(counts)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.mean ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html#mean-0)
+
+```scala
+def mean: Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Attributes Returns expected category counts n*p
+
+Invocation template:
+
+```scala
+receiver.mean
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.probability ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html#probability-f10)
+
+```scala
+def probability(counts: Vector[Int]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` counts: Vector[Int] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters counts matching vector Attributes Returns probability mass, possibly underflowing Example law.probability(Vector(1,1,2))
+
+Invocation template:
+
+```scala
+receiver.probability(counts)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html#sample-930)
+
+```scala
+def sample(rng: Random): Vector[Int]
+```
+
+Sequential conditional binomial draws; work does not loop once per trial.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Vector[Int] ``.
+
+Source contract/attributes: Sequential conditional binomial draws; work does not loop once per trial. Value parameters rng private caller-owned generator, not retained Attributes Returns supported count vector; interruption/numeric failure throws, no retry filtering Example law.sample(com.cra.figaro.util.SamplingRandom.scalaRandom(42))
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialInformation.bhattacharyya ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialInformation$.html#bhattacharyya-291)
+
+```scala
+def bhattacharyya(p: MultinomialDistribution, q: MultinomialDistribution, tolerance: Double = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: MultinomialDistribution ``; `` q: MultinomialDistribution ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters p first law q second law in matching category order tolerance positive numerical target in nats Attributes Returns negative log count-vector affinity Example MultinomialInformation.bhattacharyya(p,q)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.MultinomialInformation.bhattacharyya(p, q, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialInformation.kl ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialInformation$.html#kl-291)
+
+```scala
+def kl(p: MultinomialDistribution, q: MultinomialDistribution, tolerance: Double = ...): InformationMetricResult
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` p: MultinomialDistribution ``; `` q: MultinomialDistribution ``; `` tolerance: Double = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: Value parameters p source counts q comparison counts in the same category order; unequal totals imply disjoint support tolerance positive numerical target in nats Attributes Returns n times categorical directed KL, with propagated numerical allowance/refusal Example MultinomialInformation.kl(p,q)
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.MultinomialInformation.kl(p, q, tolerance)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialInformation.mutualInformation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialInformation$.html#mutualInformation-888)
+
+```scala
+def mutualInformation(law: MultinomialDistribution, first: Vector[Int], tolerance: Double = ..., maxTerms: Int = ...): InformationMetricResult
+```
+
+The complementary blocks are independent given their total count; each determines that total.
+
+Type parameters: none.
+
+Parameters, list 1: `` law: MultinomialDistribution ``; `` first: Vector[Int] ``; `` tolerance: Double = ... ``; `` maxTerms: Int = ... ``.
+
+Returns: `` InformationMetricResult ``.
+
+Source contract/attributes: The complementary blocks are independent given their total count; each determines that total. Value parameters first nonempty distinct category indices; complement must also be nonempty law one joint count law maxTerms integer in [1,100000]; n+1 terms required except deterministic totals tolerance positive numerical allowance in nats Attributes Returns I(counts(first);counts(complement)) = entropy of their binomial subtotal; no omitted-tail approximation Example MultinomialInformation.mutualInformation(law,Vector(0))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.MultinomialInformation.mutualInformation(law, first, tolerance, maxTerms)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.NegativeBinomial.apply ``

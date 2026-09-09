@@ -28,8 +28,11 @@ is documented. Modern.16 adds
 [variance-adaptive bounded confidence sequences](docs/ADAPTIVE_BOUNDED_PRECISION.md),
 including total-cost counterexamples. Modern.17 implements the first
 [restricted static executor](docs/STATIC_GRAPH_EXECUTION.md), with semantic,
-concurrency and scaling evidence. Next: selected joint-count, extreme-value,
-matrix and directional representatives. Universal precision, unknown-mode discovery
+concurrency and scaling evidence. Modern.18 adds selected [joint-count, extreme-value,
+matrix and directional representatives](docs/DISTRIBUTION_BREADTH.md): multinomial,
+GEV, GPD, Wishart and spherical von Mises-Fisher, with appropriate information
+metrics and explicit numerical restrictions. These complete the approved bounded
+three-milestone sequence, not all D5 wishlist flavors. Universal precision, unknown-mode discovery
 and arbitrary shared-graph safety are not claimed or marked complete.
 
 Reliability interlude: [statistical validation](docs/STATISTICAL_VALIDATION.md) and
@@ -93,7 +96,7 @@ native elements, composition possibilities and missing first-class support.
 | D2: linear-angular joint models (`DIST-02`) | Through mutual information, integrated with D3 at CI-verified `e78a6f0e` | Fixed-kernel Gauss-von Mises on a real vector plus one angle, built on D1 | [Scope approval, evidence and boundaries](docs/GAUSS_VON_MISES.md); each extension retains its own CI/integration gate and separate future review for report ingestion/fusion/filtering/propagation |
 | D3: common missing scalar/count families | Complete on main; source CI verified at `e78a6f0e` | All nine representatives: Student t/Cauchy/Laplace; negative binomial/hypergeometric; lognormal/Weibull; triangular/Kumaraswamy; appropriate information measures | [Milestone evidence](docs/COMMON_DISTRIBUTIONS_ACCEPTANCE.md): density/tail oracles, observation and MCMC checks, isolated multi-chain determinism, divergence references and independent published consumer |
 | D4: reusable constructions (`DIST-10`) | Initial milestone complete on main; source CI verified at `79615111` | Affine/exp transformations, finite truncation, scalar mixtures, full-covariance Gaussian mixture models, hurdle/zero-inflated counts; Gaussian KL/Bhattacharyya and partition MI | [Guide](docs/DISTRIBUTION_CONSTRUCTIONS.md) and [acceptance evidence](docs/DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md): 362 modernization tests, independent oracles/consumer and clean CI reproducibility; no generic mixed-measure law; pilot-only fitting arrived in modern.12 and numerical mixture metrics in modern.14 |
-| D5: multivariate, tail and matrix breadth | First representative implemented for modern.14 validation | Full-rank elliptical multivariate Student t and numerical information metrics; joint counts, extreme-value, matrix and directional laws remain wishlist | [Contracts and verification](docs/MULTIVARIATE_STUDENT_T.md); broader D5 is not complete |
+| D5: multivariate, tail and matrix breadth | Multivariate t plus five selected representatives implemented | Multinomial, GEV, GPD, restricted full-rank Wishart and S2 von Mises-Fisher; KL/Bhattacharyya plus complementary count-block MI | [New contracts and verification](docs/DISTRIBUTION_BREADTH.md); inverse-Wishart/LKJ, other directional dimensions and specialized variants remain wishlist |
 | D6: specialist families | Research backlog | Quantile-defined, singular, physical scattering, phase-type and niche empirical laws | Concrete use case, primary definition, viable numerical method and maintained dependency/license evidence |
 
 D1 comes first even when the ultimate target is D2. Ordinary circular von Mises and

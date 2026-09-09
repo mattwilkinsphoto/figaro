@@ -5,12 +5,20 @@
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The source default is
-`6.0.0-modern.17-SNAPSHOT`; it requires local publication or an explicitly configured
+`6.0.0-modern.18-SNAPSHOT`; it requires local publication or an explicitly configured
 artifact repository. A locally distributed `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.
 
 ## Changes users can use
+
+- `6.0.0-modern.18-SNAPSHOT` adds [five distribution representatives](DISTRIBUTION_BREADTH.md):
+  multinomial count vectors, GEV/GPD, restricted full-rank Wishart and spherical
+  von Mises-Fisher. Kernels, graph adapters, appropriate KL/Bhattacharyya and
+  complementary count-block MI have independent reference and inference tests.
+  Explicit support/measure limits remain; no new runtime dependency or default change.
+  The legacy dependent-factor test now separates exact wiring from seeded,
+  larger-budget sampling checks, retaining its original statistical tolerance.
 
 - `6.0.0-modern.17-SNAPSHOT` adds the opt-in [static graph executor](STATIC_GRAPH_EXECUTION.md):
   immutable callback-free scalar DAGs, isolated evidence/RNG state, deterministic

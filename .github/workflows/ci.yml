@@ -31,6 +31,8 @@ jobs:
         run: python3 -B -m unittest discover -s tools -p 'test_bounded_iid_reference.py' -v
       - name: Verify adaptive bounded precision references
         run: python3 -B -m unittest discover -s tools -p 'test_empirical_bernstein_reference.py' -v
+      - name: Verify independent selected D5 distribution references
+        run: python3 -B -m unittest discover -s tools -p 'test_breadth_reference.py' -v
       - name: Verify independent statistical-validation posterior references
         run: |
           python3 -m pip install --disable-pip-version-check numpy==2.3.5
@@ -232,6 +234,11 @@ jobs:
           sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.StaticGraphImportanceTest"
           python3 -B tools/summarize_static_graph.py docs/STATIC_GRAPH_RUNS.csv
 
+      - name: Verify selected distribution breadth and documented examples
+        run: |
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.DistributionBreadthTest"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.documentation.DistributionBreadthExample"
+
       - name: Verify continuous-vector sampler contracts and documented patterns
         run: |
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.ResourceScalingStudy check"
@@ -366,8 +373,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.17-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.17-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.18-SNAPSHOT.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.18-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -390,13 +397,13 @@ jobs:
       - name: Verify independently published consumer
         working-directory: tools/acceptance-consumer
         run: |
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.17-SNAPSHOT.jar | cut -d' ' -f1)"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.18-SNAPSHOT.jar | cut -d' ' -f1)"
           sbt --server --batch "runMain FigaroConsumerCheck"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.17-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.18-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -407,8 +414,8 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.17-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.17-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.17-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.17-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.18-SNAPSHOT.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.18-SNAPSHOT-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.18-SNAPSHOT-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.18-SNAPSHOT-javadoc.jar
           if-no-files-found: error

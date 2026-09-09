@@ -49,7 +49,33 @@ inside one reported test case. The suite's number of ScalaTest cases is not its 
 of independent statistical tests. A 5% individual rejection rate does not mean a 5%
 suite-level false-alarm rate. [NIST multiple-comparison guidance](https://www.itl.nist.gov/div898/handbook/prc/section4/prc47.htm).
 
-## Fixed-data posterior references
+## Dependent-universe factor CI regression (modern.18)
+
+The modern.16 main-branch run failed one legacy factor assertion: an estimate of
+`0.48965` was compared with `0.50 +/- 0.01`. This test used six separate forward
+sampling estimates with 20,000 evidence draws per cell, not six exact factor
+probabilities. For a true probability of 0.5, the nominal standard error is
+`sqrt(0.5 * 0.5 / 20000) = 0.003536`; the observed miss is about 2.93 standard
+errors. That is compatible with sampling noise. A passing rerun alone would not
+establish correctness, and this observation does not implicate the RNG.
+
+`FactorTest` now separates two responsibilities:
+
+- An exact callback verifies every parent assignment is visited exactly once and
+  every factor cell equals the analytic probability, with no tolerance or sampling.
+- The real Uniform/Chain/evidence-sampler integration remains. Its tolerance stays
+  at 0.01, but its evidence budget is 100,000 draws per cell and its scoped seed is
+  fixed at 42 for replay. The seed was specified before testing, not searched for.
+
+Under independent forward sampling of the Bernoulli evidence indicators,
+Hoeffding's bound and a union bound give a probability of any of the six estimates
+missing by at least 0.01 of at most `12 * exp(-20) < 2.5e-8` (apart from numerical
+roundoff). This does not require independence **between** cells. The baseline has
+no pre-existing conditions/constraints and therefore has probability one; this
+calculation is not valid for arbitrary weighted evidence or correlated MCMC.
+No retries, discarded seeds, sampler change, or relaxed assertion are used.
+
+## Fixed-data posterior references (Gamma and Dirichlet)
 
 Two new, fixed, synthetic datasets are defined by integer-shape gamma generation as
 sums of exponential variates. Gamma data use seed 104729, shape 2, scale 2; Dirichlet

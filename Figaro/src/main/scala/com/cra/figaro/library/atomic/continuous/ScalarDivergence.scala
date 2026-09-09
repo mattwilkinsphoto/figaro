@@ -57,7 +57,8 @@ object ScalarDivergence {
         return if(overlap) GaussianInformation.bhattacharyya(GaussianInformation.scalar(a),GaussianInformation.scalar(b),tol)
           else GaussianInformation.kl(GaussianInformation.scalar(a),GaussianInformation.scalar(b),tol)
       case (_: StudentTDistribution | _: CauchyDistribution | _: LaplaceDistribution | _: LogNormalDistribution |
-            _: WeibullDistribution | _: TriangularDistribution | _: KumaraswamyDistribution,_) => ()
+            _: WeibullDistribution | _: TriangularDistribution | _: KumaraswamyDistribution |
+            _: GeneralizedExtremeValueDistribution | _: GeneralizedParetoDistribution,_) => ()
       case _ => return M.unavailable(Unsupported)
     }
     if(!overlap && (p.support._1 < q.support._1 || p.support._2 > q.support._2)) return M.infinite
@@ -65,6 +66,12 @@ object ScalarDivergence {
     def logCosh(x: Double): Double = { val a=math.abs(x); a+math.log1p(math.exp(-2*a))-math.log(2) }
     def analytic(v: Double,m: Double=1) = M.analytic(v,tol,m)
     (p,q) match {
+      case (a: GeneralizedExtremeValueDistribution,b: GeneralizedExtremeValueDistribution) if a.shape==0 && b.shape==0 && a.scale==b.scale =>
+        val delta=(a.location-b.location)/a.scale
+        return if(overlap) analytic(logCosh(.5*delta)) else analytic(delta+math.expm1(-delta),math.abs(delta)+math.exp(-delta))
+      case (a: GeneralizedParetoDistribution,b: GeneralizedParetoDistribution) if a.shape==0 && b.shape==0 && a.location==b.location =>
+        val l=math.log(a.scale)-math.log(b.scale)
+        return if(overlap) analytic(logCosh(.5*l)) else analytic(math.expm1(l)-l,math.exp(l)+math.abs(l))
       case (a: LogNormalDistribution,b: LogNormalDistribution) =>
         val logRatio=math.log(b.logStandardDeviation/a.logStandardDeviation)
         val d=a.logMean-b.logMean

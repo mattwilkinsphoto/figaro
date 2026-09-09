@@ -2,13 +2,14 @@
 
 ## What exists now
 
-Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-09 through the multivariate-t/numerical-information milestone.
+Initial source inventory at `b99c5d56` (2026-09-07), updated 2026-09-09 through the selected D5 breadth milestone.
 This is an API inventory, not new numerical certification of every existing distribution.
 The [roadmap](../ROADMAP.md) defines delivery gates; the [wishlist](../WISHLIST.md)
 collects broad families and their later flavors.
 
 | Present native entry points | Source | Scope / caution |
 | --- | --- | --- |
+| Multinomial, GeneralizedExtremeValue, GeneralizedPareto, Wishart, VonMisesFisher3 | [Selected D5 breadth](DISTRIBUTION_BREADTH.md) | Joint count vectors, maxima/excess tails, restricted full-rank matrices and unit S2 directions; kernels, fixed/dynamic adapters, KL/Bhattacharyya and complementary multinomial-block MI; not all D5 flavors or reference measures |
 | AffineDistribution, ExpDistribution, TruncatedDistribution, ScalarMixtureDistribution, ZeroAdjustedDistribution | [Construction guide](DISTRIBUTION_CONSTRUCTIONS.md) | Initial reusable transformations, finite-interval conditioning, continuous mixtures and count-only hurdle/zero inflation; explicit numeric refusals, no general mixed measure |
 | GaussianDistribution, MultivariateGaussianDistribution, GaussianMixtureDistribution, GaussianMixture | [GMM and Gaussian guide](DISTRIBUTION_CONSTRUCTIONS.md) | Scalar and full-covariance vector kernels, GMM likelihoods/draws/moments/responsibilities/marginals; fixed/dynamic Figaro GMM adapters, not EM fitting |
 | GaussianInformation | [Gaussian information API](DISTRIBUTION_CONSTRUCTIONS.md#gaussian-information) | Analytic Gaussian KL/Bhattacharyya and MI between blocks of one joint Gaussian; not mixture divergence or mixture MI |

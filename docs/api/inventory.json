@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 890,
+  "pages": 906,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -150834,6 +150834,1824 @@
       "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMises.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "generateRandomness",
+      "anchor": "generateRandomness-fffffff7",
+      "signature": "def generateRandomness(): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "Generate the randomness content.",
+      "contract": "Generate the randomness content. Attributes",
+      "example": "receiver.generateRandomness()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "generateValue",
+      "anchor": "generateValue-ae0",
+      "signature": "def generateValue(value: Vector[Double]): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
+      "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes",
+      "example": "receiver.generateValue(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(value: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Evaluate log density in the element's reference measure.",
+      "contract": "Evaluate log density in the element's reference measure. Value parameters value value to score Attributes Returns finite log density or negative infinity for zero density; reject malformed inputs",
+      "example": "receiver.logDensity(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "!==",
+      "anchor": "!==-894",
+      "signature": "def !==(that: Element[Value])(implicit universe: Universe): Neq[Vector[Double]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Element[Value]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Neq[Vector[Double]]",
+      "summary": "The element that tests inequality of this element with another element.",
+      "contract": "The element that tests inequality of this element with another element. Attributes Inherited from: Element",
+      "example": "receiver.!==(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "===",
+      "anchor": "===-f71",
+      "signature": "def ===(that: Value)(implicit universe: Universe): Apply1[Vector[Double], Boolean]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Value"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Apply1[Vector[Double], Boolean]",
+      "summary": "The element that tests whether the value of this element is equal to a particular value.",
+      "contract": "The element that tests whether the value of this element is equal to a particular value. Attributes Inherited from: Element",
+      "example": "receiver.===(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "===",
+      "anchor": "===-672",
+      "signature": "def ===(that: Element[Value])(implicit universe: Universe): Eq[Vector[Double]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Element[Value]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Eq[Vector[Double]]",
+      "summary": "The element that tests equality of this element with another element.",
+      "contract": "The element that tests equality of this element with another element. Attributes Inherited from: Element",
+      "example": "receiver.===(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "activate",
+      "anchor": "activate-94c",
+      "signature": "def activate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Activate the element in its universe.",
+      "contract": "Activate the element in its universe. Attributes Inherited from: Element",
+      "example": "receiver.activate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "addCondition",
+      "anchor": "addCondition-fffff9ad",
+      "signature": "def addCondition(condition: Condition, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "condition: Condition",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add the given condition to the existing conditions of the element. By default, the contingency is empty.",
+      "contract": "Add the given condition to the existing conditions of the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addCondition(condition, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "addConstraint",
+      "anchor": "addConstraint-fffff9ad",
+      "signature": "def addConstraint(constraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "constraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a contingent constraint to the element. By default, the contingency is empty.",
+      "contract": "Add a contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addConstraint(constraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "addLogConstraint",
+      "anchor": "addLogConstraint-fffff9ad",
+      "signature": "def addLogConstraint(constraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "constraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a log contingent constraint to the element. By default, the contingency is empty.",
+      "contract": "Add a log contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addLogConstraint(constraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "addPragma",
+      "anchor": "addPragma-b53",
+      "signature": "def addPragma(pragma: Pragma[Value]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pragma: Pragma[Value]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a pragma to the element.",
+      "contract": "Add a pragma to the element. Attributes Inherited from: Element",
+      "example": "receiver.addPragma(pragma)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "allConditions",
+      "anchor": "allConditions-0",
+      "signature": "def allConditions: List[(Condition, Contingency)]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[(Condition, Contingency)]",
+      "summary": "All the conditions defined on this element.",
+      "contract": "All the conditions defined on this element. Attributes Inherited from: Element",
+      "example": "receiver.allConditions",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "allConstraints",
+      "anchor": "allConstraints-0",
+      "signature": "def allConstraints: List[(Constraint, Contingency)]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[(Constraint, Contingency)]",
+      "summary": "The current soft constraints on the element.",
+      "contract": "The current soft constraints on the element. Attributes Inherited from: Element",
+      "example": "receiver.allConstraints",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "args",
+      "anchor": "args-0",
+      "signature": "def args: List[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Element[_]]",
+      "summary": "Returns an empty list.",
+      "contract": "Returns an empty list. Attributes Inherited from: Atomic",
+      "example": "receiver.args",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "clearContext",
+      "anchor": "clearContext-94c",
+      "signature": "def clearContext(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Clears all the temporary elements associated with this element (all elements created in it's context).",
+      "contract": "Clears all the temporary elements associated with this element (all elements created in it's context). Attributes Inherited from: Element",
+      "example": "receiver.clearContext()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "condition",
+      "anchor": "condition-4ad",
+      "signature": "def condition(value: Any): Boolean",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Any"
+          ]
+        }
+      ],
+      "returns": "Boolean",
+      "summary": "Tests whether all the element's contingent conditions are satisfied for the given value.",
+      "contract": "Tests whether all the element's contingent conditions are satisfied for the given value. Attributes Inherited from: Element",
+      "example": "receiver.condition(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "conditionSatisfied",
+      "anchor": "conditionSatisfied-0",
+      "signature": "def conditionSatisfied: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Determines whether the condition on the element is satisfied by the current value.",
+      "contract": "Determines whether the condition on the element is satisfied by the current value. Attributes Inherited from: Element",
+      "example": "receiver.conditionSatisfied",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "constraint",
+      "anchor": "constraint-fffffeac",
+      "signature": "def constraint(value: Any): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Any"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Gets the result of all the element's contingent constraints for the given value.",
+      "contract": "Gets the result of all the element's contingent constraints for the given value. Attributes Inherited from: Element",
+      "example": "receiver.constraint(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "constraintValue",
+      "anchor": "constraintValue-0",
+      "signature": "def constraintValue: Double",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Double",
+      "summary": "Determines the value of the constraint on the element applied to the current value.",
+      "contract": "Determines the value of the constraint on the element applied to the current value. Attributes Inherited from: Element",
+      "example": "receiver.constraintValue",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "context",
+      "anchor": "context-0",
+      "signature": "def context: List[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Element[_]]",
+      "summary": "The elements on which the existence of this element depends.",
+      "contract": "The elements on which the existence of this element depends. Attributes Inherited from: Element",
+      "example": "receiver.context",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "deactivate",
+      "anchor": "deactivate-94c",
+      "signature": "def deactivate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Deactivate the element in its universe.",
+      "contract": "Deactivate the element in its universe. Attributes Inherited from: Element",
+      "example": "receiver.deactivate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "density",
+      "anchor": "density-fffffeac",
+      "signature": "override def density(value: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity Inherited from: HasLogDensity",
+      "example": "receiver.density(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "directContextContents",
+      "anchor": "directContextContents-0",
+      "signature": "def directContextContents: Set[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Set[Element[_]]",
+      "summary": "Returns the set of elements directly created in the context of this element.",
+      "contract": "Returns the set of elements directly created in the context of this element. Attributes Inherited from: Element",
+      "example": "receiver.directContextContents",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "elementsIAmContingentOn",
+      "anchor": "elementsIAmContingentOn-0",
+      "signature": "def elementsIAmContingentOn: Set[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Set[Element[_]]",
+      "summary": "Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value.",
+      "contract": "Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value. Figaro takes care of handling all this under the hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample those other elements first. This method is supplied to support this use case. Attributes Inherited from: Element",
+      "example": "receiver.elementsIAmContingentOn",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "flatMap",
+      "anchor": "flatMap-db8",
+      "signature": "def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U]",
+      "type_parameters": [
+        "U"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "fn: Value => Element[U]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[U]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[U]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.flatMap[U](fn)(using name, collection)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "generate",
+      "anchor": "generate-94c",
+      "signature": "final def generate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "First generate the randomness, then generate the value given the randomness. Store the results in randomness and value.",
+      "contract": "First generate the randomness, then generate the value given the randomness. Store the results in randomness and value. Attributes Inherited from: Element",
+      "example": "receiver.generate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "intervene",
+      "anchor": "intervene-fffff71f",
+      "signature": "def intervene(v: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "v: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.intervene(v)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "isCachable",
+      "anchor": "isCachable-0",
+      "signature": "def isCachable: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable.",
+      "contract": "The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable. Attributes Inherited from: Element",
+      "example": "receiver.isCachable",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "isTemporary",
+      "anchor": "isTemporary-0",
+      "signature": "def isTemporary: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Returns true if this element is temporary, that is, was created in the context of another element.",
+      "contract": "Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element",
+      "example": "receiver.isTemporary",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "map",
+      "anchor": "map-db8",
+      "signature": "def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]",
+      "type_parameters": [
+        "U"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "fn: Value => U"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[U]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[U]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.map[U](fn)(using name, collection)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "nextRandomness",
+      "anchor": "nextRandomness-fffff446",
+      "signature": "override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "oldRandomness: Randomness"
+          ]
+        }
+      ],
+      "returns": "(Randomness, Double, Double)",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
+      "example": "receiver.nextRandomness(oldRandomness)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "observe",
+      "anchor": "observe-fffff71f",
+      "signature": "def observe(observation: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "observation: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated.",
+      "contract": "Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated. Attributes Inherited from: Element",
+      "example": "receiver.observe(observation)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "pragmas",
+      "anchor": "pragmas-0",
+      "signature": "def pragmas: List[Pragma[Value]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Pragma[Value]]",
+      "summary": "The pragmas attached to the element.",
+      "contract": "The pragmas attached to the element. Attributes Inherited from: Element",
+      "example": "receiver.pragmas",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "removeConditions",
+      "anchor": "removeConditions-71e",
+      "signature": "def removeConditions(contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove all conditions associated with the given contingency. By default, the contingency is empty.",
+      "contract": "Remove all conditions associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.removeConditions(contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "removeConstraints",
+      "anchor": "removeConstraints-71e",
+      "signature": "def removeConstraints(contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove all constraints associated with the given contingency. By default, the contingency is empty.",
+      "contract": "Remove all constraints associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.removeConstraints(contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "removePragma",
+      "anchor": "removePragma-b53",
+      "signature": "def removePragma(pragma: Pragma[Value]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pragma: Pragma[Value]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove a pragma from the element.",
+      "contract": "Remove a pragma from the element. Attributes Inherited from: Element",
+      "example": "receiver.removePragma(pragma)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "score",
+      "anchor": "score-fffffdbf",
+      "signature": "def score(oldValue: Value, newValue: Value): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "oldValue: Value",
+            "newValue: Value"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Compute the constraints on the new value divided by the constraints on the old value.",
+      "contract": "Compute the constraints on the new value divided by the constraints on the old value. Attributes Inherited from: Element",
+      "example": "receiver.score(oldValue, newValue)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "set",
+      "anchor": "set-fffff71f",
+      "signature": "def set(newValue: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newValue: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called.",
+      "contract": "Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called. Attributes Inherited from: Element",
+      "example": "receiver.set(newValue)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "setCondition",
+      "anchor": "setCondition-fffff9ad",
+      "signature": "def setCondition(newCondition: Condition, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newCondition: Condition",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setCondition(newCondition, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "setConstraint",
+      "anchor": "setConstraint-fffff9ad",
+      "signature": "def setConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newConstraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setConstraint(newConstraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "setLogConstraint",
+      "anchor": "setLogConstraint-fffff9ad",
+      "signature": "def setLogConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newConstraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setLogConstraint(newConstraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "setRandomness",
+      "anchor": "setRandomness-fffff71f",
+      "signature": "def setRandomness(newRandomness: Randomness): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newRandomness: Randomness"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the randomness of this element.",
+      "contract": "Set the randomness of this element. Will generate its value using the new randomness and propagate the effects to elements that depend on it without changing their randomness. Attributes Inherited from: Element",
+      "example": "receiver.setRandomness(newRandomness)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "toNameString",
+      "anchor": "toNameString-0",
+      "signature": "def toNameString: String",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "String",
+      "summary": "A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString.",
+      "contract": "A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString. Attributes Inherited from: Element",
+      "example": "receiver.toNameString",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "unintervene",
+      "anchor": "unintervene-94c",
+      "signature": "def unintervene(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.unintervene()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "unobserve",
+      "anchor": "unobserve-94c",
+      "signature": "def unobserve(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Removes conditions on the element and allows different values of the element to be generated.",
+      "contract": "Removes conditions on the element and allows different values of the element to be generated. Attributes Inherited from: Element",
+      "example": "receiver.unobserve()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicVonMisesFisher3",
+      "name": "unset",
+      "anchor": "unset-94c",
+      "signature": "def unset(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Allows different values of the element to be generated.",
+      "contract": "Allows different values of the element to be generated. Attributes Inherited from: Element",
+      "example": "receiver.unset()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicVonMisesFisher3.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "generateRandomness",
+      "anchor": "generateRandomness-fffffff7",
+      "signature": "def generateRandomness(): Vector[Vector[Double]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Vector[Vector[Double]]",
+      "summary": "Generate the randomness content.",
+      "contract": "Generate the randomness content. Attributes",
+      "example": "receiver.generateRandomness()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "generateValue",
+      "anchor": "generateValue-ae0",
+      "signature": "def generateValue(value: Vector[Vector[Double]]): Vector[Vector[Double]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Vector[Double]]"
+          ]
+        }
+      ],
+      "returns": "Vector[Vector[Double]]",
+      "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
+      "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes",
+      "example": "receiver.generateValue(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(value: Vector[Vector[Double]]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Vector[Double]]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Evaluate log density in the element's reference measure.",
+      "contract": "Evaluate log density in the element's reference measure. Value parameters value value to score Attributes Returns finite log density or negative infinity for zero density; reject malformed inputs",
+      "example": "receiver.logDensity(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "!==",
+      "anchor": "!==-894",
+      "signature": "def !==(that: Element[Value])(implicit universe: Universe): Neq[Vector[Vector[Double]]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Element[Value]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Neq[Vector[Vector[Double]]]",
+      "summary": "The element that tests inequality of this element with another element.",
+      "contract": "The element that tests inequality of this element with another element. Attributes Inherited from: Element",
+      "example": "receiver.!==(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "===",
+      "anchor": "===-f71",
+      "signature": "def ===(that: Value)(implicit universe: Universe): Apply1[Vector[Vector[Double]], Boolean]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Value"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Apply1[Vector[Vector[Double]], Boolean]",
+      "summary": "The element that tests whether the value of this element is equal to a particular value.",
+      "contract": "The element that tests whether the value of this element is equal to a particular value. Attributes Inherited from: Element",
+      "example": "receiver.===(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "===",
+      "anchor": "===-672",
+      "signature": "def ===(that: Element[Value])(implicit universe: Universe): Eq[Vector[Vector[Double]]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Element[Value]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Eq[Vector[Vector[Double]]]",
+      "summary": "The element that tests equality of this element with another element.",
+      "contract": "The element that tests equality of this element with another element. Attributes Inherited from: Element",
+      "example": "receiver.===(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "activate",
+      "anchor": "activate-94c",
+      "signature": "def activate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Activate the element in its universe.",
+      "contract": "Activate the element in its universe. Attributes Inherited from: Element",
+      "example": "receiver.activate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "addCondition",
+      "anchor": "addCondition-fffff9ad",
+      "signature": "def addCondition(condition: Condition, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "condition: Condition",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add the given condition to the existing conditions of the element. By default, the contingency is empty.",
+      "contract": "Add the given condition to the existing conditions of the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addCondition(condition, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "addConstraint",
+      "anchor": "addConstraint-fffff9ad",
+      "signature": "def addConstraint(constraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "constraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a contingent constraint to the element. By default, the contingency is empty.",
+      "contract": "Add a contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addConstraint(constraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "addLogConstraint",
+      "anchor": "addLogConstraint-fffff9ad",
+      "signature": "def addLogConstraint(constraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "constraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a log contingent constraint to the element. By default, the contingency is empty.",
+      "contract": "Add a log contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addLogConstraint(constraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "addPragma",
+      "anchor": "addPragma-b53",
+      "signature": "def addPragma(pragma: Pragma[Value]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pragma: Pragma[Value]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a pragma to the element.",
+      "contract": "Add a pragma to the element. Attributes Inherited from: Element",
+      "example": "receiver.addPragma(pragma)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "allConditions",
+      "anchor": "allConditions-0",
+      "signature": "def allConditions: List[(Condition, Contingency)]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[(Condition, Contingency)]",
+      "summary": "All the conditions defined on this element.",
+      "contract": "All the conditions defined on this element. Attributes Inherited from: Element",
+      "example": "receiver.allConditions",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "allConstraints",
+      "anchor": "allConstraints-0",
+      "signature": "def allConstraints: List[(Constraint, Contingency)]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[(Constraint, Contingency)]",
+      "summary": "The current soft constraints on the element.",
+      "contract": "The current soft constraints on the element. Attributes Inherited from: Element",
+      "example": "receiver.allConstraints",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "args",
+      "anchor": "args-0",
+      "signature": "def args: List[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Element[_]]",
+      "summary": "Returns an empty list.",
+      "contract": "Returns an empty list. Attributes Inherited from: Atomic",
+      "example": "receiver.args",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "clearContext",
+      "anchor": "clearContext-94c",
+      "signature": "def clearContext(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Clears all the temporary elements associated with this element (all elements created in it's context).",
+      "contract": "Clears all the temporary elements associated with this element (all elements created in it's context). Attributes Inherited from: Element",
+      "example": "receiver.clearContext()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "condition",
+      "anchor": "condition-4ad",
+      "signature": "def condition(value: Any): Boolean",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Any"
+          ]
+        }
+      ],
+      "returns": "Boolean",
+      "summary": "Tests whether all the element's contingent conditions are satisfied for the given value.",
+      "contract": "Tests whether all the element's contingent conditions are satisfied for the given value. Attributes Inherited from: Element",
+      "example": "receiver.condition(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "conditionSatisfied",
+      "anchor": "conditionSatisfied-0",
+      "signature": "def conditionSatisfied: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Determines whether the condition on the element is satisfied by the current value.",
+      "contract": "Determines whether the condition on the element is satisfied by the current value. Attributes Inherited from: Element",
+      "example": "receiver.conditionSatisfied",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "constraint",
+      "anchor": "constraint-fffffeac",
+      "signature": "def constraint(value: Any): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Any"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Gets the result of all the element's contingent constraints for the given value.",
+      "contract": "Gets the result of all the element's contingent constraints for the given value. Attributes Inherited from: Element",
+      "example": "receiver.constraint(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "constraintValue",
+      "anchor": "constraintValue-0",
+      "signature": "def constraintValue: Double",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Double",
+      "summary": "Determines the value of the constraint on the element applied to the current value.",
+      "contract": "Determines the value of the constraint on the element applied to the current value. Attributes Inherited from: Element",
+      "example": "receiver.constraintValue",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "context",
+      "anchor": "context-0",
+      "signature": "def context: List[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Element[_]]",
+      "summary": "The elements on which the existence of this element depends.",
+      "contract": "The elements on which the existence of this element depends. Attributes Inherited from: Element",
+      "example": "receiver.context",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "deactivate",
+      "anchor": "deactivate-94c",
+      "signature": "def deactivate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Deactivate the element in its universe.",
+      "contract": "Deactivate the element in its universe. Attributes Inherited from: Element",
+      "example": "receiver.deactivate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "density",
+      "anchor": "density-fffffeac",
+      "signature": "override def density(value: Vector[Vector[Double]]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Vector[Double]]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity Inherited from: HasLogDensity",
+      "example": "receiver.density(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "directContextContents",
+      "anchor": "directContextContents-0",
+      "signature": "def directContextContents: Set[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Set[Element[_]]",
+      "summary": "Returns the set of elements directly created in the context of this element.",
+      "contract": "Returns the set of elements directly created in the context of this element. Attributes Inherited from: Element",
+      "example": "receiver.directContextContents",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "elementsIAmContingentOn",
+      "anchor": "elementsIAmContingentOn-0",
+      "signature": "def elementsIAmContingentOn: Set[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Set[Element[_]]",
+      "summary": "Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value.",
+      "contract": "Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value. Figaro takes care of handling all this under the hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample those other elements first. This method is supplied to support this use case. Attributes Inherited from: Element",
+      "example": "receiver.elementsIAmContingentOn",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "flatMap",
+      "anchor": "flatMap-db8",
+      "signature": "def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U]",
+      "type_parameters": [
+        "U"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "fn: Value => Element[U]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[U]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[U]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.flatMap[U](fn)(using name, collection)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "generate",
+      "anchor": "generate-94c",
+      "signature": "final def generate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "First generate the randomness, then generate the value given the randomness. Store the results in randomness and value.",
+      "contract": "First generate the randomness, then generate the value given the randomness. Store the results in randomness and value. Attributes Inherited from: Element",
+      "example": "receiver.generate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "intervene",
+      "anchor": "intervene-fffff71f",
+      "signature": "def intervene(v: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "v: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.intervene(v)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "isCachable",
+      "anchor": "isCachable-0",
+      "signature": "def isCachable: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable.",
+      "contract": "The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable. Attributes Inherited from: Element",
+      "example": "receiver.isCachable",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "isTemporary",
+      "anchor": "isTemporary-0",
+      "signature": "def isTemporary: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Returns true if this element is temporary, that is, was created in the context of another element.",
+      "contract": "Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element",
+      "example": "receiver.isTemporary",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "map",
+      "anchor": "map-db8",
+      "signature": "def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]",
+      "type_parameters": [
+        "U"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "fn: Value => U"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[U]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[U]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.map[U](fn)(using name, collection)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "nextRandomness",
+      "anchor": "nextRandomness-fffff446",
+      "signature": "override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "oldRandomness: Randomness"
+          ]
+        }
+      ],
+      "returns": "(Randomness, Double, Double)",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
+      "example": "receiver.nextRandomness(oldRandomness)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "observe",
+      "anchor": "observe-fffff71f",
+      "signature": "def observe(observation: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "observation: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated.",
+      "contract": "Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated. Attributes Inherited from: Element",
+      "example": "receiver.observe(observation)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "pragmas",
+      "anchor": "pragmas-0",
+      "signature": "def pragmas: List[Pragma[Value]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Pragma[Value]]",
+      "summary": "The pragmas attached to the element.",
+      "contract": "The pragmas attached to the element. Attributes Inherited from: Element",
+      "example": "receiver.pragmas",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "removeConditions",
+      "anchor": "removeConditions-71e",
+      "signature": "def removeConditions(contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove all conditions associated with the given contingency. By default, the contingency is empty.",
+      "contract": "Remove all conditions associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.removeConditions(contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "removeConstraints",
+      "anchor": "removeConstraints-71e",
+      "signature": "def removeConstraints(contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove all constraints associated with the given contingency. By default, the contingency is empty.",
+      "contract": "Remove all constraints associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.removeConstraints(contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "removePragma",
+      "anchor": "removePragma-b53",
+      "signature": "def removePragma(pragma: Pragma[Value]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pragma: Pragma[Value]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove a pragma from the element.",
+      "contract": "Remove a pragma from the element. Attributes Inherited from: Element",
+      "example": "receiver.removePragma(pragma)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "score",
+      "anchor": "score-fffffdbf",
+      "signature": "def score(oldValue: Value, newValue: Value): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "oldValue: Value",
+            "newValue: Value"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Compute the constraints on the new value divided by the constraints on the old value.",
+      "contract": "Compute the constraints on the new value divided by the constraints on the old value. Attributes Inherited from: Element",
+      "example": "receiver.score(oldValue, newValue)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "set",
+      "anchor": "set-fffff71f",
+      "signature": "def set(newValue: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newValue: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called.",
+      "contract": "Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called. Attributes Inherited from: Element",
+      "example": "receiver.set(newValue)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "setCondition",
+      "anchor": "setCondition-fffff9ad",
+      "signature": "def setCondition(newCondition: Condition, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newCondition: Condition",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setCondition(newCondition, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "setConstraint",
+      "anchor": "setConstraint-fffff9ad",
+      "signature": "def setConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newConstraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setConstraint(newConstraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "setLogConstraint",
+      "anchor": "setLogConstraint-fffff9ad",
+      "signature": "def setLogConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newConstraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setLogConstraint(newConstraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "setRandomness",
+      "anchor": "setRandomness-fffff71f",
+      "signature": "def setRandomness(newRandomness: Randomness): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newRandomness: Randomness"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the randomness of this element.",
+      "contract": "Set the randomness of this element. Will generate its value using the new randomness and propagate the effects to elements that depend on it without changing their randomness. Attributes Inherited from: Element",
+      "example": "receiver.setRandomness(newRandomness)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "toNameString",
+      "anchor": "toNameString-0",
+      "signature": "def toNameString: String",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "String",
+      "summary": "A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString.",
+      "contract": "A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString. Attributes Inherited from: Element",
+      "example": "receiver.toNameString",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "unintervene",
+      "anchor": "unintervene-94c",
+      "signature": "def unintervene(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.unintervene()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "unobserve",
+      "anchor": "unobserve-94c",
+      "signature": "def unobserve(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Removes conditions on the element and allows different values of the element to be generated.",
+      "contract": "Removes conditions on the element and allows different values of the element to be generated. Attributes Inherited from: Element",
+      "example": "receiver.unobserve()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.AtomicWishart",
+      "name": "unset",
+      "anchor": "unset-94c",
+      "signature": "def unset(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Allows different values of the element to be generated.",
+      "contract": "Allows different values of the element to be generated. Attributes Inherited from: Element",
+      "example": "receiver.unset()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/AtomicWishart.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.continuous.Beta",
       "name": "apply",
       "anchor": "apply-9ce",
@@ -163599,6 +165417,458 @@
       "page": "com/cra/figaro/library/atomic/continuous/GaussianMixtureDistribution.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValue",
+      "name": "apply",
+      "anchor": "apply-fffff9a3",
+      "signature": "def apply(shape: Double, location: Double = ..., scale: Double = ...)(using name: Name[Double], collection: ElementCollection): AtomicScalar",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "shape: Double",
+            "location: Double = ...",
+            "scale: Double = ..."
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Double]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "AtomicScalar",
+      "summary": "",
+      "contract": "Value parameters collection owning collection location center name contextual name scale positive scale shape maxima xi, zero or absolute value in [1e-8,2] Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedExtremeValue(.2,0,1)",
+      "example": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValue.apply(shape, location, scale)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValue$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "cdf",
+      "anchor": "cdf-5b2",
+      "signature": "def cdf(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)",
+      "example": "receiver.cdf(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "quantile",
+      "anchor": "quantile-5b2",
+      "signature": "def quantile(p: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)",
+      "example": "receiver.quantile(p)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "support",
+      "anchor": "support-0",
+      "signature": "def support: (Double, Double)",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "(Double, Double)",
+      "summary": "",
+      "contract": "Attributes Returns support infimum and supremum; endpoint density conventions are family-specific",
+      "example": "receiver.support",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "survival",
+      "anchor": "survival-5b2",
+      "signature": "def survival(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)",
+      "example": "receiver.survival(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "variance",
+      "anchor": "variance-0",
+      "signature": "def variance: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow",
+      "example": "receiver.variance",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "density",
+      "anchor": "density-5b2",
+      "signature": "final def density(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution",
+      "example": "receiver.density(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValueDistribution",
+      "name": "sample",
+      "anchor": "sample-fffffec0",
+      "signature": "def sample(rng: Random): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.",
+      "contract": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValueDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedPareto",
+      "name": "apply",
+      "anchor": "apply-fffff9a3",
+      "signature": "def apply(shape: Double, location: Double = ..., scale: Double = ...)(using name: Name[Double], collection: ElementCollection): AtomicScalar",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "shape: Double",
+            "location: Double = ...",
+            "scale: Double = ..."
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Double]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "AtomicScalar",
+      "summary": "",
+      "contract": "Value parameters collection owning collection location threshold name contextual name scale positive scale shape excess-tail xi, zero or absolute value in [1e-8,2] Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedPareto(.2,0,1)",
+      "example": "com.cra.figaro.library.atomic.continuous.GeneralizedPareto.apply(shape, location, scale)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedPareto$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "cdf",
+      "anchor": "cdf-5b2",
+      "signature": "def cdf(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X <= x), rounded to binary64 Example WeibullDistribution(2,3).cdf(3)",
+      "example": "receiver.cdf(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "logDensity",
+      "anchor": "logDensity-5b2",
+      "signature": "def logDensity(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument (NaN rejected) Attributes Returns natural-log density; a singular finite boundary can return positive infinity Example StudentTDistribution(5).logDensity(2)",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) can indicate moment overflow",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "quantile",
+      "anchor": "quantile-5b2",
+      "signature": "def quantile(p: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters p probability in [0,1] Attributes Returns inverse CDF; endpoints return support limits; unrepresentable interior values throw Example CauchyDistribution(0,1).quantile(.5)",
+      "example": "receiver.quantile(p)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "support",
+      "anchor": "support-0",
+      "signature": "def support: (Double, Double)",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "(Double, Double)",
+      "summary": "",
+      "contract": "Attributes Returns support infimum and supremum; endpoint density conventions are family-specific",
+      "example": "receiver.support",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "survival",
+      "anchor": "survival-5b2",
+      "signature": "def survival(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns P(X > x), evaluated directly rather than subtracting a rounded CDF Example LogNormalDistribution(0,1).survival(100)",
+      "example": "receiver.survival(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "variance",
+      "anchor": "variance-0",
+      "signature": "def variance: Option[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Double]",
+      "summary": "",
+      "contract": "Attributes Returns None if undefined or not implemented; Some(infinity) for infinite variance or numeric overflow",
+      "example": "receiver.variance",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "density",
+      "anchor": "density-5b2",
+      "signature": "final def density(x: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x real argument Attributes Returns density, with ordinary exponential underflow/overflow Example LaplaceDistribution(0,1).density(0) Inherited from: ScalarDistribution",
+      "example": "receiver.density(x)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GeneralizedParetoDistribution",
+      "name": "sample",
+      "anchor": "sample-fffffec0",
+      "signature": "def sample(rng: Random): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput.",
+      "contract": "Inverse-transform draw using only the caller RNG; not optimized for bulk throughput. Value parameters rng non-null caller-owned RNG; do not share it concurrently Attributes Returns finite supported draw; numeric collapse to a singular endpoint throws Example StudentTDistribution(5).sample(new scala.util.Random(42)) Inherited from: ScalarDistribution",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GeneralizedParetoDistribution.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.continuous.InverseGamma",
       "name": "apply",
       "anchor": "apply-fffffc35",
@@ -174804,6 +177074,213 @@
       "page": "com/cra/figaro/library/atomic/continuous/VonMisesDistribution.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3",
+      "name": "apply",
+      "anchor": "apply-fffff4aa",
+      "signature": "def apply(distribution: VonMisesFisher3Distribution)(using name: Name[Vector[Double]], collection: ElementCollection): AtomicVonMisesFisher3",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "distribution: VonMisesFisher3Distribution"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Vector[Double]]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "AtomicVonMisesFisher3",
+      "summary": "",
+      "contract": "Value parameters collection owning collection distribution validated S2 kernel name contextual name Attributes Returns spherical observation-ready element Example VonMisesFisher3(VonMisesFisher3Distribution(Vector(0,0,1),10))",
+      "example": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3.apply(distribution)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3",
+      "name": "apply",
+      "anchor": "apply-bc9",
+      "signature": "def apply(distribution: Element[VonMisesFisher3Distribution])(using name: Name[Vector[Double]], collection: ElementCollection): Element[Vector[Double]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "distribution: Element[VonMisesFisher3Distribution]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Vector[Double]]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[Vector[Double]]",
+      "summary": "",
+      "contract": "Value parameters collection owning collection distribution element producing S2 kernels name contextual name Attributes Returns non-caching hierarchical spherical element Example VonMisesFisher3(kappa.map(k => VonMisesFisher3Distribution(Vector(0,0,1),k)))",
+      "example": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3.apply(distribution)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Distribution",
+      "name": "density",
+      "anchor": "density-f10",
+      "signature": "def density(value: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters value unit vector Attributes Returns surface-area density, possibly underflowing Example law.density(Vector(1.0,0.0,0.0))",
+      "example": "receiver.density(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3Distribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Distribution",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(value: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters value unit vector within 1e-12 (rounding normalized); not an arbitrary spatial point Attributes Returns natural log surface-area density; finite even for tiny opposite-direction likelihood Example law.logDensity(Vector(0.0,0.0,1.0))",
+      "example": "receiver.logDensity(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3Distribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Distribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Attributes Returns expected vector A3(kappa)*meanDirection; its length is generally below one",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3Distribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Distribution",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "Stable inverse polar CDF plus uniform azimuth; no rejection sampler or shared RNG.",
+      "contract": "Stable inverse polar CDF plus uniform azimuth; no rejection sampler or shared RNG. Value parameters rng private caller-owned generator, not retained Attributes Returns unit vector on S2 Example law.sample(com.cra.figaro.util.SamplingRandom.scalaRandom(42))",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3Distribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Distribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3Distribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Distribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3Distribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Information",
+      "name": "bhattacharyya",
+      "anchor": "bhattacharyya-fffffc6b",
+      "signature": "def bhattacharyya(p: VonMisesFisher3Distribution, q: VonMisesFisher3Distribution, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: VonMisesFisher3Distribution",
+            "q: VonMisesFisher3Distribution",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters p first spherical law q second spherical law in matching axes tolerance positive absolute numerical target in nats Attributes Returns analytic negative log affinity, with uniform/opposite-direction limits Example VonMisesFisher3Information.bhattacharyya(p,q)",
+      "example": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Information.bhattacharyya(p, q, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3Information$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Information",
+      "name": "kl",
+      "anchor": "kl-fffffc6b",
+      "signature": "def kl(p: VonMisesFisher3Distribution, q: VonMisesFisher3Distribution, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: VonMisesFisher3Distribution",
+            "q: VonMisesFisher3Distribution",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters p source spherical law q comparison law using the same coordinate axes tolerance positive absolute numerical target in nats Attributes Returns analytic directed KL or explicit numerical refusal Example VonMisesFisher3Information.kl(p,q)",
+      "example": "com.cra.figaro.library.atomic.continuous.VonMisesFisher3Information.kl(p, q, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/VonMisesFisher3Information$.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.continuous.Weibull",
       "name": "apply",
       "anchor": "apply-44a",
@@ -175027,6 +177504,237 @@
       "example": "receiver.sample(rng)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/WeibullDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.Wishart",
+      "name": "apply",
+      "anchor": "apply-cea",
+      "signature": "def apply(distribution: WishartDistribution)(using name: Name[Vector[Vector[Double]]], collection: ElementCollection): AtomicWishart",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "distribution: WishartDistribution"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Vector[Vector[Double]]]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "AtomicWishart",
+      "summary": "",
+      "contract": "Value parameters collection owning collection distribution validated full-rank matrix kernel name contextual name Attributes Returns observation-ready Wishart element Example Wishart(WishartDistribution(5,Vector(Vector(1.0))))",
+      "example": "com.cra.figaro.library.atomic.continuous.Wishart.apply(distribution)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/Wishart$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.Wishart",
+      "name": "apply",
+      "anchor": "apply-bc9",
+      "signature": "def apply(distribution: Element[WishartDistribution])(using name: Name[Vector[Vector[Double]]], collection: ElementCollection): Element[Vector[Vector[Double]]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "distribution: Element[WishartDistribution]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Vector[Vector[Double]]]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[Vector[Vector[Double]]]",
+      "summary": "",
+      "contract": "Value parameters collection owning collection distribution element producing matrix kernels name contextual name Attributes Returns hierarchical non-caching matrix element Example Wishart(df.map(n => WishartDistribution(n,scale)))",
+      "example": "com.cra.figaro.library.atomic.continuous.Wishart.apply(distribution)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/Wishart$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
+      "name": "covariance",
+      "anchor": "covariance-959",
+      "signature": "def covariance(i: Int, j: Int, k: Int, l: Int): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "i: Int",
+            "j: Int",
+            "k: Int",
+            "l: Int"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters i first row index j first column index k second row index l second column index Attributes Returns Cov(Xij,Xkl)=df*(SikSjl+SilSjk) Example law.covariance(0,0,1,1)",
+      "example": "receiver.covariance(i, j, k, l)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
+      "name": "density",
+      "anchor": "density-f10",
+      "signature": "def density(value: Vector[Vector[Double]]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Vector[Double]]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters value positive-definite matrix Attributes Returns density, possibly under/overflowing after a finite log density Example law.density(law.mean)",
+      "example": "receiver.density(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(value: Vector[Vector[Double]]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Vector[Double]]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters value exactly symmetric, finite positive-definite matrix in the Gaussian numeric range Attributes Returns log density in independent symmetric coordinates; invalid/ill-conditioned matrices throw, not zero likelihood Example law.logDensity(Vector(Vector(4.0,1.0),Vector(1.0,3.0)))",
+      "example": "receiver.logDensity(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Vector[Vector[Double]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[Vector[Double]]",
+      "summary": "",
+      "contract": "Attributes Returns mean matrix df*scale",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Vector[Double]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Vector[Double]]",
+      "summary": "Bartlett decomposition with caller-owned Gaussian/chi-square randomness.",
+      "contract": "Bartlett decomposition with caller-owned Gaussian/chi-square randomness. Value parameters rng private caller RNG, never retained Attributes Returns symmetric positive-definite matrix; numeric singularity throws without resampling Example law.sample(com.cra.figaro.util.SamplingRandom.scalaRandom(42))",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartInformation",
+      "name": "bhattacharyya",
+      "anchor": "bhattacharyya-fffff2af",
+      "signature": "def bhattacharyya(p: WishartDistribution, q: WishartDistribution, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: WishartDistribution",
+            "q: WishartDistribution",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters p first Wishart law q second law in matching coordinates tolerance positive numerical target in nats Attributes Returns analytic negative log affinity or numerical refusal Example WishartInformation.bhattacharyya(p,q)",
+      "example": "com.cra.figaro.library.atomic.continuous.WishartInformation.bhattacharyya(p, q, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartInformation",
+      "name": "kl",
+      "anchor": "kl-fffff2af",
+      "signature": "def kl(p: WishartDistribution, q: WishartDistribution, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: WishartDistribution",
+            "q: WishartDistribution",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters p source Wishart law q matching-dimension comparison law tolerance positive numerical target in nats Attributes Returns directed analytic KL or numerical refusal; no estimated sampling interval Example WishartInformation.kl(p,q)",
+      "example": "com.cra.figaro.library.atomic.continuous.WishartInformation.kl(p, q, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartInformation$.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicBinomial",
@@ -177803,6 +180511,915 @@
       "example": "receiver.unset()",
       "object": false,
       "page": "com/cra/figaro/library/atomic/discrete/AtomicGeometric.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "generateRandomness",
+      "anchor": "generateRandomness-fffffff7",
+      "signature": "def generateRandomness(): Vector[Int]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Vector[Int]",
+      "summary": "Generate the randomness content.",
+      "contract": "Generate the randomness content. Attributes",
+      "example": "receiver.generateRandomness()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "generateValue",
+      "anchor": "generateValue-ae0",
+      "signature": "def generateValue(value: Vector[Int]): Vector[Int]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Int]"
+          ]
+        }
+      ],
+      "returns": "Vector[Int]",
+      "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
+      "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes",
+      "example": "receiver.generateValue(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(value: Vector[Int]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Int]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Evaluate log density in the element's reference measure.",
+      "contract": "Evaluate log density in the element's reference measure. Value parameters value value to score Attributes Returns finite log density or negative infinity for zero density; reject malformed inputs",
+      "example": "receiver.logDensity(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "!==",
+      "anchor": "!==-894",
+      "signature": "def !==(that: Element[Value])(implicit universe: Universe): Neq[Vector[Int]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Element[Value]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Neq[Vector[Int]]",
+      "summary": "The element that tests inequality of this element with another element.",
+      "contract": "The element that tests inequality of this element with another element. Attributes Inherited from: Element",
+      "example": "receiver.!==(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "===",
+      "anchor": "===-f71",
+      "signature": "def ===(that: Value)(implicit universe: Universe): Apply1[Vector[Int], Boolean]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Value"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Apply1[Vector[Int], Boolean]",
+      "summary": "The element that tests whether the value of this element is equal to a particular value.",
+      "contract": "The element that tests whether the value of this element is equal to a particular value. Attributes Inherited from: Element",
+      "example": "receiver.===(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "===",
+      "anchor": "===-672",
+      "signature": "def ===(that: Element[Value])(implicit universe: Universe): Eq[Vector[Int]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Element[Value]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Eq[Vector[Int]]",
+      "summary": "The element that tests equality of this element with another element.",
+      "contract": "The element that tests equality of this element with another element. Attributes Inherited from: Element",
+      "example": "receiver.===(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "activate",
+      "anchor": "activate-94c",
+      "signature": "def activate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Activate the element in its universe.",
+      "contract": "Activate the element in its universe. Attributes Inherited from: Element",
+      "example": "receiver.activate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "addCondition",
+      "anchor": "addCondition-fffff9ad",
+      "signature": "def addCondition(condition: Condition, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "condition: Condition",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add the given condition to the existing conditions of the element. By default, the contingency is empty.",
+      "contract": "Add the given condition to the existing conditions of the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addCondition(condition, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "addConstraint",
+      "anchor": "addConstraint-fffff9ad",
+      "signature": "def addConstraint(constraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "constraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a contingent constraint to the element. By default, the contingency is empty.",
+      "contract": "Add a contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addConstraint(constraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "addLogConstraint",
+      "anchor": "addLogConstraint-fffff9ad",
+      "signature": "def addLogConstraint(constraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "constraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a log contingent constraint to the element. By default, the contingency is empty.",
+      "contract": "Add a log contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addLogConstraint(constraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "addPragma",
+      "anchor": "addPragma-b53",
+      "signature": "def addPragma(pragma: Pragma[Value]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pragma: Pragma[Value]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a pragma to the element.",
+      "contract": "Add a pragma to the element. Attributes Inherited from: Element",
+      "example": "receiver.addPragma(pragma)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "allConditions",
+      "anchor": "allConditions-0",
+      "signature": "def allConditions: List[(Condition, Contingency)]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[(Condition, Contingency)]",
+      "summary": "All the conditions defined on this element.",
+      "contract": "All the conditions defined on this element. Attributes Inherited from: Element",
+      "example": "receiver.allConditions",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "allConstraints",
+      "anchor": "allConstraints-0",
+      "signature": "def allConstraints: List[(Constraint, Contingency)]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[(Constraint, Contingency)]",
+      "summary": "The current soft constraints on the element.",
+      "contract": "The current soft constraints on the element. Attributes Inherited from: Element",
+      "example": "receiver.allConstraints",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "args",
+      "anchor": "args-0",
+      "signature": "def args: List[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Element[_]]",
+      "summary": "Returns an empty list.",
+      "contract": "Returns an empty list. Attributes Inherited from: Atomic",
+      "example": "receiver.args",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "clearContext",
+      "anchor": "clearContext-94c",
+      "signature": "def clearContext(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Clears all the temporary elements associated with this element (all elements created in it's context).",
+      "contract": "Clears all the temporary elements associated with this element (all elements created in it's context). Attributes Inherited from: Element",
+      "example": "receiver.clearContext()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "condition",
+      "anchor": "condition-4ad",
+      "signature": "def condition(value: Any): Boolean",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Any"
+          ]
+        }
+      ],
+      "returns": "Boolean",
+      "summary": "Tests whether all the element's contingent conditions are satisfied for the given value.",
+      "contract": "Tests whether all the element's contingent conditions are satisfied for the given value. Attributes Inherited from: Element",
+      "example": "receiver.condition(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "conditionSatisfied",
+      "anchor": "conditionSatisfied-0",
+      "signature": "def conditionSatisfied: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Determines whether the condition on the element is satisfied by the current value.",
+      "contract": "Determines whether the condition on the element is satisfied by the current value. Attributes Inherited from: Element",
+      "example": "receiver.conditionSatisfied",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "constraint",
+      "anchor": "constraint-fffffeac",
+      "signature": "def constraint(value: Any): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Any"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Gets the result of all the element's contingent constraints for the given value.",
+      "contract": "Gets the result of all the element's contingent constraints for the given value. Attributes Inherited from: Element",
+      "example": "receiver.constraint(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "constraintValue",
+      "anchor": "constraintValue-0",
+      "signature": "def constraintValue: Double",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Double",
+      "summary": "Determines the value of the constraint on the element applied to the current value.",
+      "contract": "Determines the value of the constraint on the element applied to the current value. Attributes Inherited from: Element",
+      "example": "receiver.constraintValue",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "context",
+      "anchor": "context-0",
+      "signature": "def context: List[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Element[_]]",
+      "summary": "The elements on which the existence of this element depends.",
+      "contract": "The elements on which the existence of this element depends. Attributes Inherited from: Element",
+      "example": "receiver.context",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "deactivate",
+      "anchor": "deactivate-94c",
+      "signature": "def deactivate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Deactivate the element in its universe.",
+      "contract": "Deactivate the element in its universe. Attributes Inherited from: Element",
+      "example": "receiver.deactivate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "density",
+      "anchor": "density-fffffeac",
+      "signature": "override def density(value: Vector[Int]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Vector[Int]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Exponentiate logDensity; small positive densities may round to zero.",
+      "contract": "Exponentiate logDensity; small positive densities may round to zero. Value parameters value value to score Attributes Returns density, with ordinary floating-point exponentiation limits Definition Classes HasLogDensity -> HasDensity Inherited from: HasLogDensity",
+      "example": "receiver.density(value)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "directContextContents",
+      "anchor": "directContextContents-0",
+      "signature": "def directContextContents: Set[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Set[Element[_]]",
+      "summary": "Returns the set of elements directly created in the context of this element.",
+      "contract": "Returns the set of elements directly created in the context of this element. Attributes Inherited from: Element",
+      "example": "receiver.directContextContents",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "elementsIAmContingentOn",
+      "anchor": "elementsIAmContingentOn-0",
+      "signature": "def elementsIAmContingentOn: Set[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Set[Element[_]]",
+      "summary": "Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value.",
+      "contract": "Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value. Figaro takes care of handling all this under the hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample those other elements first. This method is supplied to support this use case. Attributes Inherited from: Element",
+      "example": "receiver.elementsIAmContingentOn",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "flatMap",
+      "anchor": "flatMap-db8",
+      "signature": "def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U]",
+      "type_parameters": [
+        "U"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "fn: Value => Element[U]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[U]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[U]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.flatMap[U](fn)(using name, collection)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "generate",
+      "anchor": "generate-94c",
+      "signature": "final def generate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "First generate the randomness, then generate the value given the randomness. Store the results in randomness and value.",
+      "contract": "First generate the randomness, then generate the value given the randomness. Store the results in randomness and value. Attributes Inherited from: Element",
+      "example": "receiver.generate()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "intervene",
+      "anchor": "intervene-fffff71f",
+      "signature": "def intervene(v: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "v: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.intervene(v)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "isCachable",
+      "anchor": "isCachable-0",
+      "signature": "def isCachable: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable.",
+      "contract": "The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable. Attributes Inherited from: Element",
+      "example": "receiver.isCachable",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "isTemporary",
+      "anchor": "isTemporary-0",
+      "signature": "def isTemporary: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Returns true if this element is temporary, that is, was created in the context of another element.",
+      "contract": "Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element",
+      "example": "receiver.isTemporary",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "map",
+      "anchor": "map-db8",
+      "signature": "def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]",
+      "type_parameters": [
+        "U"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "fn: Value => U"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[U]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[U]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.map[U](fn)(using name, collection)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "nextRandomness",
+      "anchor": "nextRandomness-fffff446",
+      "signature": "override def nextRandomness(oldRandomness: Randomness): (Randomness, Double, Double)",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "oldRandomness: Randomness"
+          ]
+        }
+      ],
+      "returns": "(Randomness, Double, Double)",
+      "summary": "Prior proposal with ratios formed from log densities, preserving annealer semantics.",
+      "contract": "Prior proposal with ratios formed from log densities, preserving annealer semantics. Value parameters oldRandomness previous randomness with finite log density Attributes Returns (new randomness, reverse/forward proposal ratio, new/old density ratio) Throws java.lang.ArithmeticException if the legacy ratio interface cannot represent both ratios Definition Classes HasLogDensity -> HasDensity -> Element Inherited from: HasLogDensity",
+      "example": "receiver.nextRandomness(oldRandomness)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "observe",
+      "anchor": "observe-fffff71f",
+      "signature": "def observe(observation: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "observation: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated.",
+      "contract": "Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated. Attributes Inherited from: Element",
+      "example": "receiver.observe(observation)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "pragmas",
+      "anchor": "pragmas-0",
+      "signature": "def pragmas: List[Pragma[Value]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Pragma[Value]]",
+      "summary": "The pragmas attached to the element.",
+      "contract": "The pragmas attached to the element. Attributes Inherited from: Element",
+      "example": "receiver.pragmas",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "removeConditions",
+      "anchor": "removeConditions-71e",
+      "signature": "def removeConditions(contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove all conditions associated with the given contingency. By default, the contingency is empty.",
+      "contract": "Remove all conditions associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.removeConditions(contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "removeConstraints",
+      "anchor": "removeConstraints-71e",
+      "signature": "def removeConstraints(contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove all constraints associated with the given contingency. By default, the contingency is empty.",
+      "contract": "Remove all constraints associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.removeConstraints(contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "removePragma",
+      "anchor": "removePragma-b53",
+      "signature": "def removePragma(pragma: Pragma[Value]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pragma: Pragma[Value]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove a pragma from the element.",
+      "contract": "Remove a pragma from the element. Attributes Inherited from: Element",
+      "example": "receiver.removePragma(pragma)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "score",
+      "anchor": "score-fffffdbf",
+      "signature": "def score(oldValue: Value, newValue: Value): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "oldValue: Value",
+            "newValue: Value"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Compute the constraints on the new value divided by the constraints on the old value.",
+      "contract": "Compute the constraints on the new value divided by the constraints on the old value. Attributes Inherited from: Element",
+      "example": "receiver.score(oldValue, newValue)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "set",
+      "anchor": "set-fffff71f",
+      "signature": "def set(newValue: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newValue: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called.",
+      "contract": "Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called. Attributes Inherited from: Element",
+      "example": "receiver.set(newValue)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "setCondition",
+      "anchor": "setCondition-fffff9ad",
+      "signature": "def setCondition(newCondition: Condition, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newCondition: Condition",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setCondition(newCondition, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "setConstraint",
+      "anchor": "setConstraint-fffff9ad",
+      "signature": "def setConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newConstraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setConstraint(newConstraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "setLogConstraint",
+      "anchor": "setLogConstraint-fffff9ad",
+      "signature": "def setLogConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newConstraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setLogConstraint(newConstraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "setRandomness",
+      "anchor": "setRandomness-fffff71f",
+      "signature": "def setRandomness(newRandomness: Randomness): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newRandomness: Randomness"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the randomness of this element.",
+      "contract": "Set the randomness of this element. Will generate its value using the new randomness and propagate the effects to elements that depend on it without changing their randomness. Attributes Inherited from: Element",
+      "example": "receiver.setRandomness(newRandomness)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "toNameString",
+      "anchor": "toNameString-0",
+      "signature": "def toNameString: String",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "String",
+      "summary": "A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString.",
+      "contract": "A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString. Attributes Inherited from: Element",
+      "example": "receiver.toNameString",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "unintervene",
+      "anchor": "unintervene-94c",
+      "signature": "def unintervene(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.unintervene()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "unobserve",
+      "anchor": "unobserve-94c",
+      "signature": "def unobserve(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Removes conditions on the element and allows different values of the element to be generated.",
+      "contract": "Removes conditions on the element and allows different values of the element to be generated. Attributes Inherited from: Element",
+      "example": "receiver.unobserve()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.AtomicMultinomial",
+      "name": "unset",
+      "anchor": "unset-94c",
+      "signature": "def unset(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Allows different values of the element to be generated.",
+      "contract": "Allows different values of the element to be generated. Attributes Inherited from: Element",
+      "example": "receiver.unset()",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.AtomicPoisson",
@@ -187636,6 +191253,251 @@
       "example": "receiver.sample(rng)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/discrete/HypergeometricDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.Multinomial",
+      "name": "apply",
+      "anchor": "apply-b0a",
+      "signature": "def apply(distribution: MultinomialDistribution)(using name: Name[Vector[Int]], collection: ElementCollection): AtomicMultinomial",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "distribution: MultinomialDistribution"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Vector[Int]]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "AtomicMultinomial",
+      "summary": "",
+      "contract": "Value parameters collection owning collection distribution validated count kernel name contextual name Attributes Returns observation-ready vector-count element Example Multinomial(MultinomialDistribution(10,Vector(.2,.8)))",
+      "example": "com.cra.figaro.library.atomic.discrete.Multinomial.apply(distribution)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/Multinomial$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.Multinomial",
+      "name": "apply",
+      "anchor": "apply-bc9",
+      "signature": "def apply(distribution: Element[MultinomialDistribution])(using name: Name[Vector[Int]], collection: ElementCollection): Element[Vector[Int]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "distribution: Element[MultinomialDistribution]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Vector[Int]]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[Vector[Int]]",
+      "summary": "",
+      "contract": "Value parameters collection owning collection distribution element producing validated kernels name contextual name Attributes Returns hierarchical non-caching count element Example Multinomial(probabilities.map(p => MultinomialDistribution(10,p)))",
+      "example": "com.cra.figaro.library.atomic.discrete.Multinomial.apply(distribution)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/Multinomial$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",
+      "name": "covariance",
+      "anchor": "covariance-0",
+      "signature": "def covariance: Vector[Vector[Double]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[Vector[Double]]",
+      "summary": "",
+      "contract": "Attributes Returns covariance n*(diag(p)-p*p^T), singular because total is fixed",
+      "example": "receiver.covariance",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",
+      "name": "logProbability",
+      "anchor": "logProbability-f10",
+      "signature": "def logProbability(counts: Vector[Int]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "counts: Vector[Int]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters counts matching count vector Attributes Returns log probability; negative counts, wrong total or impossible categories give -Infinity Example MultinomialDistribution(4,Vector(.2,.3,.5)).logProbability(Vector(1,1,2))",
+      "example": "receiver.logProbability(counts)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",
+      "name": "mean",
+      "anchor": "mean-0",
+      "signature": "def mean: Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Attributes Returns expected category counts n*p",
+      "example": "receiver.mean",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",
+      "name": "probability",
+      "anchor": "probability-f10",
+      "signature": "def probability(counts: Vector[Int]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "counts: Vector[Int]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters counts matching vector Attributes Returns probability mass, possibly underflowing Example law.probability(Vector(1,1,2))",
+      "example": "receiver.probability(counts)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Int]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Int]",
+      "summary": "Sequential conditional binomial draws; work does not loop once per trial.",
+      "contract": "Sequential conditional binomial draws; work does not loop once per trial. Value parameters rng private caller-owned generator, not retained Attributes Returns supported count vector; interruption/numeric failure throws, no retry filtering Example law.sample(com.cra.figaro.util.SamplingRandom.scalaRandom(42))",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialInformation",
+      "name": "bhattacharyya",
+      "anchor": "bhattacharyya-291",
+      "signature": "def bhattacharyya(p: MultinomialDistribution, q: MultinomialDistribution, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: MultinomialDistribution",
+            "q: MultinomialDistribution",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters p first law q second law in matching category order tolerance positive numerical target in nats Attributes Returns negative log count-vector affinity Example MultinomialInformation.bhattacharyya(p,q)",
+      "example": "com.cra.figaro.library.atomic.discrete.MultinomialInformation.bhattacharyya(p, q, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialInformation",
+      "name": "kl",
+      "anchor": "kl-291",
+      "signature": "def kl(p: MultinomialDistribution, q: MultinomialDistribution, tolerance: Double = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "p: MultinomialDistribution",
+            "q: MultinomialDistribution",
+            "tolerance: Double = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "",
+      "contract": "Value parameters p source counts q comparison counts in the same category order; unequal totals imply disjoint support tolerance positive numerical target in nats Attributes Returns n times categorical directed KL, with propagated numerical allowance/refusal Example MultinomialInformation.kl(p,q)",
+      "example": "com.cra.figaro.library.atomic.discrete.MultinomialInformation.kl(p, q, tolerance)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialInformation",
+      "name": "mutualInformation",
+      "anchor": "mutualInformation-888",
+      "signature": "def mutualInformation(law: MultinomialDistribution, first: Vector[Int], tolerance: Double = ..., maxTerms: Int = ...): InformationMetricResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "law: MultinomialDistribution",
+            "first: Vector[Int]",
+            "tolerance: Double = ...",
+            "maxTerms: Int = ..."
+          ]
+        }
+      ],
+      "returns": "InformationMetricResult",
+      "summary": "The complementary blocks are independent given their total count; each determines that total.",
+      "contract": "The complementary blocks are independent given their total count; each determines that total. Value parameters first nonempty distinct category indices; complement must also be nonempty law one joint count law maxTerms integer in [1,100000]; n+1 terms required except deterministic totals tolerance positive numerical allowance in nats Attributes Returns I(counts(first);counts(complement)) = entropy of their binomial subtotal; no omitted-tail approximation Example MultinomialInformation.mutualInformation(law,Vector(0))",
+      "example": "com.cra.figaro.library.atomic.discrete.MultinomialInformation.mutualInformation(law, first, tolerance, maxTerms)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialInformation$.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.NegativeBinomial",

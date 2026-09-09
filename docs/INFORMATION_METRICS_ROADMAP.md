@@ -39,6 +39,13 @@ implementation does not introduce sample-based estimators or generalized fusion.
 
 ## Delivery sequence
 
+Modern.18 adds [selected D5 information support](DISTRIBUTION_BREADTH.md):
+GEV/GPD analytic and guarded scalar comparisons, multinomial category reductions,
+Wishart normalizer comparisons and spherical S2 von Mises-Fisher comparisons.
+MI between complementary multinomial category-count blocks uses their binomial
+subtotal entropy. Matrix-block and spherical-coordinate MI remain open work;
+neither is silently substituted with a generic Lebesgue-density estimator.
+
 Delivered representative expansion: [common-family information measures](COMMON_INFORMATION_METRICS.md)
 now cover all nine D3 kernels through same-family analytic/guarded KL and Bhattacharyya,
 plus finite categorical KL/Bhattacharyya and explicit joint-table MI. Shared result/status
