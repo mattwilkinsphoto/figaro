@@ -152,6 +152,7 @@ jobs:
           python3 -B -m unittest discover -s tools -p 'test_summarize*.py'
           python3 -B tools/summarize_defensive_importance.py docs/defensive-importance-results.csv
           python3 -B tools/summarize_defensive_importance.py docs/defensive-importance-coverage.csv --coverage
+          python3 -B tools/summarize_vector_importance.py docs/vector-importance-results.csv
           python3 -B -m unittest discover -s tools -p 'test_check_acceptance_artifacts.py'
           python3 -B tools/summarize_interleaved_performance.py check docs/core-performance-acceptance-results.csv --baseline-csv docs/parallel-vector-diagnostics-results.csv
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
@@ -188,6 +189,14 @@ jobs:
             exit 1
           fi
           python3 -c 'import os; from pathlib import Path; text = (Path(os.environ["RUNNER_TEMP"]) / "diagnostic-hotspot-guard.log").read_text(); assert "Full hotspot timings require the pre-integration eda9ebba library runtime" in text'
+
+      - name: Verify opt-in frozen vector proposals
+        # Accuracy outcomes are recorded, not hidden by retries or warning-based exclusions.
+        run: |
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.VectorImportanceTest"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.documentation.VectorImportanceExample"
+          sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.VectorImportanceAcceptance full" > "$RUNNER_TEMP/vector-importance.log"
+          python3 -B tools/summarize_vector_importance.py "$RUNNER_TEMP/vector-importance.log"
 
       - name: Verify continuous-vector sampler contracts and documented patterns
         run: |

@@ -296,3 +296,8 @@ Automatic remedies or stopping decisions require separate validation and approva
 The first [pilot-fitted defensive-proposal assessment](DEFENSIVE_IMPORTANCE_RESEARCH.md)
 now provides a research-only candidate, pilot-inclusive comparisons and fresh-seed
 coverage evidence; it has not changed this warning policy or a public sampler.
+The follow-on [VectorImportance API](VECTOR_IMPORTANCE.md) now lets callers opt into
+frozen proposals for explicit densities, including discarded pilot fitting. This is
+an additional inference tool, not an automatic response to warnings, and does not
+change existing samplers or health thresholds. See its guide for fit refusal,
+support obligations and the remaining MCSE-coverage limitations.

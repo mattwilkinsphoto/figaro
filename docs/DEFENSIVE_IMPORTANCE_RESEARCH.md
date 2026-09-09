@@ -4,6 +4,11 @@ This milestone evaluates a better proposal for concentrated posteriors. It does 
 change a public sampler, defaults, warning thresholds, or stopping policy. Prototype
 code remains in test sources and is not shipped in the library.
 
+Follow-on: the [public frozen-proposal API](VECTOR_IMPORTANCE.md) now provides an
+opt-in implementation and separate multimodal/boundary/heavy-tail acceptance grid.
+The historical protocol, prototype and results below remain unchanged; their
+research-only boundary describes that prototype, not the new library entry point.
+
 **Outcome:** the unchanged prototype substantially improves point accuracy on these
 low-dimensional, concentrated unimodal posteriors once enough pilot work is available.
 It is not a suitable automatic replacement at small budgets, nor a demonstrated
@@ -213,3 +218,6 @@ skew/boundary concentration and heavier tails, with mean and event-probability
 references. Keep training separate, retain the original comparison evidence and
 examine MCSE calibration before adding automatic precision-based stopping. This
 study supports pursuing that milestone; it does not complete those production gates.
+The subsequent [API milestone](VECTOR_IMPORTANCE.md#acceptance-evidence-and-reproduction)
+records its own implementation and local validation; automatic precision stopping
+remains deferred pending further coverage calibration.

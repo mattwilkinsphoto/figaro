@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 830,
+  "pages": 843,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -52959,6 +52959,584 @@
       "example": "receiver.sample()",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/UnweightedSampler.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Box",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(x: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x finite vector of matching dimension Attributes Returns normalized log proposal density; -Infinity is allowed off support",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Box.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Box",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Value parameters rng exclusively owned run RNG; do not retain it or use another RNG Attributes Returns a finite vector drawn from this normalized proposal",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Box.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Box",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Box.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Box",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Box.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.FitConfig",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$FitConfig.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.FitConfig",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$FitConfig.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.FitResult",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$FitResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.FitResult",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$FitResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Gaussian",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(x: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x finite vector of matching dimension Attributes Returns normalized log proposal density; -Infinity is allowed off support",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Gaussian.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Gaussian",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Value parameters rng exclusively owned run RNG; do not retain it or use another RNG Attributes Returns a finite vector drawn from this normalized proposal",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Gaussian.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Gaussian",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Gaussian.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Gaussian",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Gaussian.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Mixture",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(x: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x finite vector of matching dimension Attributes Returns normalized log proposal density; -Infinity is allowed off support",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Mixture.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Mixture",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Value parameters rng exclusively owned run RNG; do not retain it or use another RNG Attributes Returns a finite vector drawn from this normalized proposal",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Mixture.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Mixture",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Mixture.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Mixture",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Mixture.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.PilotRun",
+      "name": "pilotEvaluations",
+      "anchor": "pilotEvaluations-0",
+      "signature": "def pilotEvaluations: Long",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Long",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.pilotEvaluations",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$PilotRun.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.PilotRun",
+      "name": "totalEvaluations",
+      "anchor": "totalEvaluations-0",
+      "signature": "def totalEvaluations: Long",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Long",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.totalEvaluations",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$PilotRun.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.PilotRun",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$PilotRun.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.PilotRun",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$PilotRun.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.ProductStudentT",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(x: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x finite vector of matching dimension Attributes Returns normalized log proposal density; -Infinity is allowed off support",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$ProductStudentT.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.ProductStudentT",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Value parameters rng exclusively owned run RNG; do not retain it or use another RNG Attributes Returns a finite vector drawn from this normalized proposal",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$ProductStudentT.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.ProductStudentT",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$ProductStudentT.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.ProductStudentT",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$ProductStudentT.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Proposal",
+      "name": "dimension",
+      "anchor": "dimension-0",
+      "signature": "def dimension: Int",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Int",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.dimension",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Proposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Proposal",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(x: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters x finite vector of matching dimension Attributes Returns normalized log proposal density; -Infinity is allowed off support",
+      "example": "receiver.logDensity(x)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Proposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Proposal",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Value parameters rng exclusively owned run RNG; do not retain it or use another RNG Attributes Returns a finite vector drawn from this normalized proposal",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Proposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance",
+      "name": "fitGaussian",
+      "anchor": "fitGaussian-fffff232",
+      "signature": "def fitGaussian(chains: Vector[Vector[Vector[Double]]], config: FitConfig = ...): FitResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "chains: Vector[Vector[Vector[Double]]]",
+            "config: FitConfig = ..."
+          ]
+        }
+      ],
+      "returns": "FitResult",
+      "summary": "Fit unweighted post-warm-up pilot chains; these draws must not be reused in production estimates.",
+      "contract": "Fit unweighted post-warm-up pilot chains; these draws must not be reused in production estimates. Value parameters chains immutable, finite vector traces, possibly unequal lengths; empty/short input returns refusal config explicit covariance regularization and bounded fitting policy Attributes Returns fitted immutable Gaussian or explicit refusal; no hidden ridge or prior fallback Example fitGaussian(pilot.chains.map(_.result.samples), FitConfig())",
+      "example": "com.cra.figaro.algorithm.sampling.VectorImportance.fitGaussian(chains, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance",
+      "name": "run",
+      "anchor": "run-6cb",
+      "signature": "def run(config: Config, proposal: Proposal, logTarget: Vector[Double] => Double, project: Vector[Double] => Double): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config",
+            "proposal: Proposal",
+            "logTarget: Vector[Double] => Double",
+            "project: Vector[Double] => Double"
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Run one frozen proposal synchronously. No resampling/retries for zero target density.",
+      "contract": "Run one frozen proposal synchronously. No resampling/retries for zero target density. Value parameters config production-only budgets and RNG/health policies logTarget pure unnormalized log Lebesgue density; -Infinity means outside support project pure finite scalar query, including a 0/1 event indicator proposal normalized immutable proposal covering target support Attributes Returns detached draws and health report; exceptions publish no partial result Example run(Config(), proposal, logTarget, x => x.head)",
+      "example": "com.cra.figaro.algorithm.sampling.VectorImportance.run(config, proposal, logTarget, project)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.VectorImportance",
+      "name": "runWithPilot",
+      "anchor": "runWithPilot-6f",
+      "signature": "def runWithPilot(pilotConfig: Config, initialStates: Vector[Vector[Double]], defensive: Proposal, productionConfig: Config, logTarget: Vector[Double] => Double, project: Vector[Double] => Double, fitConfig: FitConfig = ..., defensiveWeight: Double = ...): PilotRun",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pilotConfig: Config",
+            "initialStates: Vector[Vector[Double]]",
+            "defensive: Proposal",
+            "productionConfig: Config",
+            "logTarget: Vector[Double] => Double",
+            "project: Vector[Double] => Double",
+            "fitConfig: FitConfig = ...",
+            "defensiveWeight: Double = ..."
+          ]
+        }
+      ],
+      "returns": "PilotRun",
+      "summary": "Train using existing isolated slice chains, freeze a defensive mixture, then use fresh production draws.",
+      "contract": "Train using existing isolated slice chains, freeze a defensive mixture, then use fresh production draws. Value parameters defensive normalized broad component; caller establishes target-support coverage defensiveWeight strictly between zero and one, default 0.1 fitConfig explicit fitting requirements; default has no diagonal ridge initialStates one dispersed, finite vector per pilot chain logTarget pure joint log density, safe to call concurrently during pilot training pilotConfig existing multi-chain policy; owns the entire pilot evaluation budget productionConfig separate production budget and distinct root seed project pure finite production scalar query Attributes Returns pilot/fit diagnostics and optional production; no automatic fallback or precision stopping Example runWithPilot(pilotConfig, starts, broad, Config(seed = 43), logTarget, _.head)",
+      "example": "com.cra.figaro.algorithm.sampling.VectorImportance.runWithPilot(pilotConfig, initialStates, defensive, productionConfig, logTarget, project, fitConfig, defensiveWeight)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/VectorImportance$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.VectorSliceSampler.Config",

@@ -35,8 +35,12 @@ broader held-out warning calibration and dependence-aware importance diagnostics
 [Pilot-fitted defensive importance research](docs/DEFENSIVE_IMPORTANCE_RESEARCH.md)
 now evaluates that proposal priority against prior importance and existing Quantile
 slice sampling, including discarded training costs, new datasets and a fresh-seed
-coverage batch. Promotion remains separate from this research milestone; no automatic
-proposal replacement or public sampler is delivered by the prototype.
+coverage batch. The additive [public frozen-proposal API](docs/VECTOR_IMPORTANCE.md)
+is now implemented and locally validated on this branch, with supplied proposals,
+discarded pilot training, explicit fit refusals and 210-trial boundary/multimodal/tail
+acceptance evidence. It does not alter graph samplers or stopping rules. Remote CI
+and integration remain separate gates. Next: broader model/rare-event and MCSE
+coverage calibration; automatic proposal replacement is not part of this milestone.
 
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).

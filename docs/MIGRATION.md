@@ -1,5 +1,16 @@
 # Migrating to Scala 3 and sbt 2
 
+## Opt-in explicit vector proposals
+
+[VectorImportance](VECTOR_IMPORTANCE.md) adds frozen normalized proposals, full-density
+importance ratios and optional discarded pilot fitting. It accepts explicit continuous
+vector densities, not arbitrary graph models. Existing samplers, defaults and stopping
+policies are unchanged; there is no runtime dependency addition. Insufficient or invalid
+fits produce no production estimate, rather than an implicit prior fallback. Rebuild
+and publish the branch snapshot before use; verify the artifact hash when consuming an
+unchanged snapshot coordinate. See the guide for callback/support contracts, separate
+pilot/production budgets, replay metadata and empirical coverage limitations.
+
 ## Opt-in inference health
 
 [InferenceHealth and ParetoTail](INFERENCE_HEALTH.md) add detached reports for raw

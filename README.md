@@ -44,10 +44,13 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Frozen vector proposal API](docs/VECTOR_IMPORTANCE.md): opt-in explicit-density
+  importance sampling, caller-supplied or pilot-fitted proposals, separate budgets
+  and query-specific health reports; locally validated on the statistical-validation branch.
 - [Inference health and warnings](docs/INFERENCE_HEALTH.md): opt-in weight-tail,
   effective-sample-size, MCMC convergence and query-precision assessments, with explicit limitations.
 - [Defensive importance research](docs/DEFENSIVE_IMPORTANCE_RESEARCH.md): pilot-inclusive
-  proposal comparisons on concentrated posteriors; a tested prototype, not a new public sampler.
+  proposal comparisons on concentrated posteriors; historical evidence behind the opt-in API.
 
 - [Choose an RNG by purpose](docs/RNG_SELECTION.md): versioned execution-pattern
   presets, explicit overrides, hard requirements and recorded selection reasons.

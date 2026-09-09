@@ -27,6 +27,24 @@ object FigaroConsumerCheck {
     println(s"Published artifact verified: $sha")
 
     {
+      import com.cra.figaro.algorithm.sampling.VectorImportance as V
+      val broad = V.Box(Vector(-5.0),Vector(5.0))
+      val target: Vector[Double] => Double = x => if (math.abs(x.head)<5) -x.head*x.head/2 else Double.NegativeInfinity
+      val pilot = MC.Config(VS.Config(VS.Method.Quantile,draws=100,warmUp=50,maxEvaluations=3000,seed=42),parallelism=2)
+      val starts = Vector(-2.0,-.5,.5,2.0).map(Vector(_))
+      val trained = V.runWithPilot(pilot,starts,broad,V.Config(draws=1000,maxEvaluations=1000,seed=43),target,_.head)
+      require(trained.fit.status == V.FitStatus.Fitted)
+      require(trained.production.get.samples.size == 1000)
+      require(trained.totalEvaluations == trained.pilotEvaluations + 1000)
+      val fixed = V.Mixture(Vector(.1,.9),Vector(broad,trained.fit.proposal.get))
+      val event = V.run(V.Config(draws=1000,maxEvaluations=500,seed=44),fixed,target,x => if(x.head>1) 1.0 else 0.0)
+      require(event.reason == V.StopReason.MaxEvaluationsReached && event.samples.size == 500)
+      require(event.logWeights == event.samples.map(x => target(x)-fixed.logDensity(x)))
+      val refused = V.runWithPilot(pilot.copy(sampler=pilot.sampler.copy(maxEvaluations=1)),starts,broad,V.Config(seed=45),target,_.head)
+      require(refused.production.isEmpty && refused.totalEvaluations == 4)
+    }
+
+    {
       import com.cra.figaro.algorithm.sampling.{InferenceHealth as H, ParetoTail}
       val logs = Vector.tabulate(2000)(i => math.log(1 + (i + .5)/2000))
       require(H.importance(logs, true).status == H.Status.ChecksPassed)
