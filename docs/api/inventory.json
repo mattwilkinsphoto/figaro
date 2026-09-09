@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 843,
+  "pages": 847,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -46506,6 +46506,84 @@
       "example": "com.cra.figaro.algorithm.sampling.GaussianBlockProposal.apply(elements, covariance)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/GaussianBlockProposal$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal",
+      "name": "fit",
+      "anchor": "fit-5d2",
+      "signature": "def fit(chains: Vector[Vector[Vector[Double]]], config: Config = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "chains: Vector[Vector[Vector[Double]]]",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Fit unweighted, discarded pilot traces with regularized EM and deterministic farthest-point starts.",
+      "contract": "Fit unweighted, discarded pilot traces with regularized EM and deterministic farthest-point starts. Value parameters chains finite post-warm-up vector traces; at least four chains with five draws each config explicit dimension/work/regularization policy; dimensions 1..32 Attributes Returns fitted normalized mixture or explicit refusal; never a partial production proposal Example GaussianMixtureProposal.fit(pilot.chains.map(_.result.samples), Config(components=2))",
+      "example": "com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fit(chains, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.Importance.Reject",

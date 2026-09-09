@@ -27,6 +27,15 @@ object FigaroConsumerCheck {
     println(s"Published artifact verified: $sha")
 
     {
+      import com.cra.figaro.algorithm.sampling.GaussianMixtureProposal as M
+      val traces=Vector.tabulate(4)(_ => Vector.tabulate(100)(i => Vector((if(i<75) -6 else 6)+(i%5-2)*.1)))
+      val fitted=M.fit(traces)
+      require(fitted.status==M.Status.Fitted && fitted.proposal.get.components.size==2)
+      require(M.fit(traces,M.Config(maxDensityEvaluations=1)).proposal.isEmpty)
+      println("Published mixture fitting: frozen components and explicit budget refusal passed")
+    }
+
+    {
       import com.cra.figaro.algorithm.sampling.VectorImportance as V
       val broad = V.Box(Vector(-5.0),Vector(5.0))
       val target: Vector[Double] => Double = x => if (math.abs(x.head)<5) -x.head*x.head/2 else Double.NegativeInfinity

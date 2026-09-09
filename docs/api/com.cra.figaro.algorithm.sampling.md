@@ -5085,6 +5085,126 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.GaussianBlockProposal.apply(elements, covariance)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fit ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/GaussianMixtureProposal$.html#fit-5d2)
+
+```scala
+def fit(chains: Vector[Vector[Vector[Double]]], config: Config = ...): Result
+```
+
+Fit unweighted, discarded pilot traces with regularized EM and deterministic farthest-point starts.
+
+Type parameters: none.
+
+Parameters, list 1: `` chains: Vector[Vector[Vector[Double]]] ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Fit unweighted, discarded pilot traces with regularized EM and deterministic farthest-point starts. Value parameters chains finite post-warm-up vector traces; at least four chains with five draws each config explicit dimension/work/regularization policy; dimensions 1..32 Attributes Returns fitted normalized mixture or explicit refusal; never a partial production proposal Example GaussianMixtureProposal.fit(pilot.chains.map(_.result.samples), Config(components=2))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.GaussianMixtureProposal.fit(chains, config)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.Importance.Reject.addSuppressed ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/Importance$$Reject$.html#addSuppressed-4b8)

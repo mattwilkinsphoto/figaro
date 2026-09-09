@@ -48,6 +48,12 @@ coverage repairs; rare-event and nonlinear limits remain explicit. Proceed next
 with bounded multi-component proposal fitting, then ownership-safe graph integration.
 Automatic stopping remains deferred rather than declaring these limits solved.
 
+The [multi-component proposal fitter](docs/MIXTURE_PROPOSALS.md) is implemented on
+`modernize/multi-component-proposals`, with explicit component counts, bounded
+regularized EM, frozen production and 1,200 paired acceptance rows. It improves
+effective sampling on the tested separated-mode models without claiming automatic
+mode discovery or calibrated stopping. Next: ownership-safe explicit graph integration.
+
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).
 The [inventory](docs/DISTRIBUTION_SUPPORT.md) distinguishes

@@ -154,6 +154,8 @@ jobs:
           python3 -B tools/summarize_defensive_importance.py docs/defensive-importance-coverage.csv --coverage
           python3 -B tools/summarize_vector_importance.py docs/vector-importance-results.csv
           python3 -B tools/summarize_importance_calibration.py docs/importance-calibration-results.csv
+          python3 -B tools/summarize_mixture_proposals.py docs/mixture-proposal-results.csv
+          python3 -B -m unittest discover -s tools -p 'test_mixture_fit_reference.py'
           python3 -B -m unittest discover -s tools -p 'test_check_acceptance_artifacts.py'
           python3 -B tools/summarize_interleaved_performance.py check docs/core-performance-acceptance-results.csv --baseline-csv docs/parallel-vector-diagnostics-results.csv
           python3 -B tools/summarize_calibration.py docs/proposal-calibration-results.csv --repetitions 30
@@ -198,6 +200,11 @@ jobs:
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.documentation.VectorImportanceExample"
           sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.VectorImportanceAcceptance full" > "$RUNNER_TEMP/vector-importance.log"
           python3 -B tools/summarize_vector_importance.py "$RUNNER_TEMP/vector-importance.log"
+
+      - name: Verify pilot-only multi-component proposals
+        run: |
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.GaussianMixtureProposalTest"
+          sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.documentation.MixtureProposalExample"
 
       - name: Verify continuous-vector sampler contracts and documented patterns
         run: |
@@ -330,8 +337,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.11-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.11-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.12-SNAPSHOT.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.12-SNAPSHOT-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -351,13 +358,13 @@ jobs:
       - name: Verify independently published consumer
         working-directory: tools/acceptance-consumer
         run: |
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.11-SNAPSHOT.jar | cut -d' ' -f1)"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.12-SNAPSHOT.jar | cut -d' ' -f1)"
           sbt --server --batch "runMain FigaroConsumerCheck"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.11-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.12-SNAPSHOT-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -368,8 +375,8 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.11-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.11-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.11-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.11-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.12-SNAPSHOT.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.12-SNAPSHOT-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.12-SNAPSHOT-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.12-SNAPSHOT-javadoc.jar
           if-no-files-found: error

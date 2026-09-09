@@ -1,5 +1,13 @@
 # Migrating to Scala 3 and sbt 2
 
+## Pilot-only mixture fitting
+
+[GaussianMixtureProposal](MIXTURE_PROPOSALS.md) adds a pure, bounded fitter returning
+an immutable `VectorImportance.Mixture`. Existing single-Gaussian fitting and graph
+samplers are unchanged. This addition has no runtime dependency; rebuild consumers
+against the incremented snapshot when integrated. Component count, ridge, fitting
+limits and separate production remain explicit; no automatic fitting fallback occurs.
+
 ## Opt-in explicit vector proposals
 
 [VectorImportance](VECTOR_IMPORTANCE.md) adds frozen normalized proposals, full-density
