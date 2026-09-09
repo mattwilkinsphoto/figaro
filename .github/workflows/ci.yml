@@ -29,6 +29,7 @@ jobs:
         run: |
           python3 -m pip install --disable-pip-version-check numpy==2.3.5
           python3 -B -m unittest discover -s tools -p 'test_statistical_validation_reference.py' -v
+          python3 -B -m unittest discover -s tools -p 'test_inference_health_reference.py' -v
       - name: Verify complete matched-accuracy timing evidence
         run: |
           python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_performance.py' -v
@@ -76,6 +77,9 @@ jobs:
 
       - name: Verify circular von Mises foundation and log-density likelihoods
         run: sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.VonMisesRegressionTest"
+
+      - name: Verify inference health on fixed concentrated-posterior workloads
+        run: sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.InferenceHealthStudy"
 
       - name: Verify joint Gauss-von Mises contracts and examples
         run: >-
@@ -203,6 +207,7 @@ jobs:
           com.cra.figaro.test.modernization.SamplingRandomTest
           com.cra.figaro.test.modernization.RandomStreamsTest
           com.cra.figaro.test.modernization.RandomSelectionTest
+          com.cra.figaro.test.modernization.InferenceHealthTest
           com.cra.figaro.test.modernization.StoppingCriteriaRegressionTest
           com.cra.figaro.test.learning.SerializationTest"
 

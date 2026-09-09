@@ -27,7 +27,8 @@ def readManifest(path: String): java.util.jar.Manifest = {
 
 def legalMappings(repositoryRoot: File, converter: xsbti.FileConverter): Seq[(xsbti.HashedVirtualFileRef, String)] = Seq(
   repositoryRoot / "LICENSE" -> "META-INF/LICENSE",
-  repositoryRoot / "FigaroAttributions.txt" -> "META-INF/FigaroAttributions.txt"
+  repositoryRoot / "FigaroAttributions.txt" -> "META-INF/FigaroAttributions.txt",
+  repositoryRoot / "ArviZ-LICENSE.txt" -> "META-INF/ArviZ-LICENSE.txt"
 ).map { case (source, destination) => converter.toVirtualFile(source.toPath) -> destination }
 
 // Read external legal/manifest inputs on each invocation; parent package tasks

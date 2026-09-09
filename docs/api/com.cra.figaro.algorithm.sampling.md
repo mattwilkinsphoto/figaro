@@ -6177,6 +6177,384 @@ Invocation template:
 receiver.variance(target)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.ImportanceReport.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$ImportanceReport.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.ImportanceReport.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$ImportanceReport.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.Issue.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$Issue.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.Issue.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$Issue.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.McmcReport.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$McmcReport.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.McmcReport.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$McmcReport.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.Report.issues ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$Report.html#issues-0)
+
+```scala
+def issues: Vector[Issue]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Vector[Issue] ``.
+
+Invocation template:
+
+```scala
+receiver.issues
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.Report.policy ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$Report.html#policy-0)
+
+```scala
+def policy: Config
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Config ``.
+
+Invocation template:
+
+```scala
+receiver.policy
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.Report.status ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$Report.html#status-0)
+
+```scala
+def status: Status
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Status ``.
+
+Invocation template:
+
+```scala
+receiver.status
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.WeightSummary.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$WeightSummary.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.WeightSummary.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$$WeightSummary.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.importance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$.html#importance-b58)
+
+```scala
+def importance(logWeights: Seq[Double], independentDraws: Boolean, values: Option[Seq[Double]] = ..., config: Config = ...): ImportanceReport
+```
+
+Assess raw per-draw weights, optionally for one aligned scalar observable.
+
+Type parameters: none.
+
+Parameters, list 1: `` logWeights: Seq[Double] ``; `` independentDraws: Boolean ``; `` values: Option[Seq[Double]] = ... ``; `` config: Config = ... ``.
+
+Returns: `` ImportanceReport ``.
+
+Source contract/attributes: Assess raw per-draw weights, optionally for one aligned scalar observable. Value parameters config warning policy and bounded input size independentDraws caller assertion of independent proposal draws; false disables tail/error assessment logWeights log importance ratios BEFORE aggregation, normalization or resampling values optional finite scalar values, exactly one per raw weight; event indicators are allowed Attributes Returns report retaining all reasons; passed checks never certify missed-mode coverage Example InferenceHealth.importance(logWeights, independentDraws = true, values = Some(samples))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.InferenceHealth.importance(logWeights, independentDraws, values, config)
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.mcmc ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$.html#mcmc-fffffc29)
+
+```scala
+def mcmc(chains: Seq[Seq[Double]], config: Config = ...): McmcReport
+```
+
+Assess one observable's ordered chains using existing rank/folded R-hat and ESS.
+
+Type parameters: none.
+
+Parameters, list 1: `` chains: Seq[Seq[Double]] ``; `` config: Config = ... ``.
+
+Returns: `` McmcReport ``.
+
+Source contract/attributes: Assess one observable's ordered chains using existing rank/folded R-hat and ESS. Value parameters chains finite rectangular traces; fewer than two chains/four draws returns insufficient evidence config warning thresholds, optional absolute mean-MCSE target and aggregate draw cap Attributes Returns diagnostic report; does not alter McmcPrecision or any stopping decision Example InferenceHealth.mcmc(result.chains.map(_.draws("query")))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.InferenceHealth.mcmc(chains, config)
+```
+
+## `` com.cra.figaro.algorithm.sampling.InferenceHealth.runImportance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/InferenceHealth$.html#runImportance-fffff4bc)
+
+```scala
+def runImportance[T](numSamples: Int, target: Element[T], project: T => Double, config: Config = ...): ImportanceReport
+```
+
+Run an opt-in, blocking Importance sampler and retain raw per-draw diagnostics for one query.
+
+Type parameters: `` T ``.
+
+Parameters, list 1: `` numSamples: Int ``; `` target: Element[T] ``; `` project: T => Double ``; `` config: Config = ... ``.
+
+Returns: `` ImportanceReport ``.
+
+Source contract/attributes: Run an opt-in, blocking Importance sampler and retain raw per-draw diagnostics for one query. Value parameters config assessment policy; reports warnings without changing samples or stopping early numSamples positive draw budget within config.maxSamples; memory is O(numSamples) project deterministic finite scalar projection of the query (e.g. an event indicator) target caller-owned active element; its universe is not cleared Attributes Returns detached report after owned algorithm cleanup; caller controls RNG scoping Example InferenceHealth.runImportance(10000, coin, (b: Boolean) => if (b) 1.0 else 0.0)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.InferenceHealth.runImportance[T](numSamples, target, project, config)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.LikelihoodWeighter.clearCache ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/LikelihoodWeighter.html#clearCache-94c)
@@ -10557,6 +10935,78 @@ Invocation template:
 
 ```scala
 receiver.stop()
+```
+
+## `` com.cra.figaro.algorithm.sampling.ParetoTail.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/ParetoTail$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.ParetoTail.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/ParetoTail$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.ParetoTail.fit ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/ParetoTail$.html#fit-fffffccf)
+
+```scala
+def fit(logWeights: Seq[Double], maxSamples: Int = ...): Result
+```
+
+Fit the upper tail without modifying or smoothing the supplied weights.
+
+Type parameters: none.
+
+Parameters, list 1: `` logWeights: Seq[Double] ``; `` maxSamples: Int = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Fit the upper tail without modifying or smoothing the supplied weights. Value parameters logWeights raw per-draw log importance ratios; negative infinity means zero weight maxSamples positive input-size cap, default one million Attributes Returns empirical-Bayes k and finite-sample warning threshold, or explicit unavailable state Example ParetoTail.fit(Vector.tabulate(1000)(i => -0.3 * math.log((i + 0.5) / 1000)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.ParetoTail.fit(logWeights, maxSamples)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.ProbEvidenceSampler.apply ``

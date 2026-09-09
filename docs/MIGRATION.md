@@ -1,5 +1,16 @@
 # Migrating to Scala 3 and sbt 2
 
+## Opt-in inference health
+
+[InferenceHealth and ParetoTail](INFERENCE_HEALTH.md) add detached reports for raw
+independent importance draws and ordered MCMC chains, plus a blocking single-query
+Importance collector. Existing sampler signatures, results, RNG selection and stopping
+rules do not change. Warnings are returned, not printed or acted on automatically.
+This is a diagnostic policy, not a posterior-correctness or confidence-coverage certificate.
+The licensed ArviZ tail-fit adaptation adds `META-INF/ArviZ-LICENSE.txt` to all four
+library artifacts; it adds no runtime dependency. Rebuild/publish the branch snapshot
+before using the new API; the unchanged snapshot coordinate alone does not identify it.
+
 ## Purpose-based RNG presets
 
 [RandomSelection](RNG_SELECTION.md) adds opt-in V1 presets for general inference,

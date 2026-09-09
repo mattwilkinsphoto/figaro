@@ -44,3 +44,16 @@ and documentation, working with Matthew Wilkins.
 
 These credits supplement the original contributors above. The original
 copyright notices and license terms remain unchanged.
+
+Inference-health Pareto diagnostic
+---------------------------------
+The empirical-Bayes generalized Pareto fit and tail-selection convention in
+ParetoTail.scala are adapted from ArviZ v0.22.0, arviz/stats/stats.py
+(_gpdfit and _psislw), copyright ArviZ developers, Apache License 2.0.
+https://github.com/arviz-devs/arviz/tree/v0.22.0
+See ArviZ-LICENSE.txt (also included in binary/source/API artifacts).
+Changes: Scala diagnostic-only port, stable candidate-weight normalization,
+bounded input, interruption checks and explicit unavailable-result handling.
+The unchanged upstream _gpdfit function is retained in the research-only
+tools/inference_health_reference.py for deterministic reference checks.
+No ArviZ runtime dependency or PSIS weight smoothing is included.

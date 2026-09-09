@@ -26,6 +26,22 @@ object FigaroConsumerCheck {
     }
     println(s"Published artifact verified: $sha")
 
+    {
+      import com.cra.figaro.algorithm.sampling.{InferenceHealth as H, ParetoTail}
+      val logs = Vector.tabulate(2000)(i => math.log(1 + (i + .5)/2000))
+      require(H.importance(logs, true).status == H.Status.ChecksPassed)
+      require(ParetoTail.fit(logs).status == ParetoTail.Status.Estimated)
+      require(H.importance(Vector.fill(2000)(0.0), true).status == H.Status.InsufficientEvidence)
+      require(H.importance(Vector(0.0, Double.NegativeInfinity), true).status == H.Status.Danger)
+      val u = new Universe
+      val x = Normal(0, 1)(using "health", u)
+      try {
+        val r = H.runImportance(200, x, (v: Double) => v)
+        require(r.diagnostics.samples == 200 && r.diagnostics.mean.exists(_.isFinite) && x.active)
+      } finally u.clear()
+      println("Published inference health: raw weights, explicit unavailable/danger states and owned sampler passed")
+    }
+
     // All named backends must resolve transitively from the published thin library.
     val sr = com.cra.figaro.util.SamplingRandom
     for (algorithm <- sr.Algorithm.values) {
@@ -167,6 +183,8 @@ object FigaroConsumerCheck {
     val parallel=MH.run(graphConfig.copy(parallelism=4))(graph)
     require(serial.chains.map(_.copy(samplingSeconds=0))==parallel.chains.map(_.copy(samplingSeconds=0)))
     require(math.abs(parallel.diagnostics("x").mean)<0.06)
+    val health = com.cra.figaro.algorithm.sampling.InferenceHealth.mcmc(parallel.chains.map(_.draws("x")))
+    require(health.diagnostics.contains(parallel.diagnostics("x")))
 
     def vector(i: Int,seed: Long): MC.Model=MC.Model(Vector(i+0.5,-i-0.5),x => -x.map(v=>v*v).sum/2)
     val config=MC.Config(VS.Config(VS.Method.GPSS,draws=1000,warmUp=200,seed=9301L),parallelism=1)

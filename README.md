@@ -44,6 +44,9 @@ That coordinate resolves only after local publication, unless you separately pub
 
 ## Documentation
 
+- [Inference health and warnings](docs/INFERENCE_HEALTH.md): opt-in weight-tail,
+  effective-sample-size, MCMC convergence and query-precision assessments, with explicit limitations.
+
 - [Choose an RNG by purpose](docs/RNG_SELECTION.md): versioned execution-pattern
   presets, explicit overrides, hard requirements and recorded selection reasons.
 

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 818,
+  "pages": 830,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -47458,6 +47458,260 @@
       "page": "com/cra/figaro/algorithm/sampling/Importance.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.ImportanceReport",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$ImportanceReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.ImportanceReport",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$ImportanceReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.Issue",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$Issue.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.Issue",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$Issue.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.McmcReport",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$McmcReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.McmcReport",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$McmcReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.Report",
+      "name": "issues",
+      "anchor": "issues-0",
+      "signature": "def issues: Vector[Issue]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[Issue]",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.issues",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$Report.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.Report",
+      "name": "policy",
+      "anchor": "policy-0",
+      "signature": "def policy: Config",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Config",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.policy",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$Report.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.Report",
+      "name": "status",
+      "anchor": "status-0",
+      "signature": "def status: Status",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Status",
+      "summary": "",
+      "contract": "",
+      "example": "receiver.status",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$Report.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.WeightSummary",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$WeightSummary.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth.WeightSummary",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$$WeightSummary.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth",
+      "name": "importance",
+      "anchor": "importance-b58",
+      "signature": "def importance(logWeights: Seq[Double], independentDraws: Boolean, values: Option[Seq[Double]] = ..., config: Config = ...): ImportanceReport",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logWeights: Seq[Double]",
+            "independentDraws: Boolean",
+            "values: Option[Seq[Double]] = ...",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "ImportanceReport",
+      "summary": "Assess raw per-draw weights, optionally for one aligned scalar observable.",
+      "contract": "Assess raw per-draw weights, optionally for one aligned scalar observable. Value parameters config warning policy and bounded input size independentDraws caller assertion of independent proposal draws; false disables tail/error assessment logWeights log importance ratios BEFORE aggregation, normalization or resampling values optional finite scalar values, exactly one per raw weight; event indicators are allowed Attributes Returns report retaining all reasons; passed checks never certify missed-mode coverage Example InferenceHealth.importance(logWeights, independentDraws = true, values = Some(samples))",
+      "example": "com.cra.figaro.algorithm.sampling.InferenceHealth.importance(logWeights, independentDraws, values, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth",
+      "name": "mcmc",
+      "anchor": "mcmc-fffffc29",
+      "signature": "def mcmc(chains: Seq[Seq[Double]], config: Config = ...): McmcReport",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "chains: Seq[Seq[Double]]",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "McmcReport",
+      "summary": "Assess one observable's ordered chains using existing rank/folded R-hat and ESS.",
+      "contract": "Assess one observable's ordered chains using existing rank/folded R-hat and ESS. Value parameters chains finite rectangular traces; fewer than two chains/four draws returns insufficient evidence config warning thresholds, optional absolute mean-MCSE target and aggregate draw cap Attributes Returns diagnostic report; does not alter McmcPrecision or any stopping decision Example InferenceHealth.mcmc(result.chains.map(_.draws(\"query\")))",
+      "example": "com.cra.figaro.algorithm.sampling.InferenceHealth.mcmc(chains, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.InferenceHealth",
+      "name": "runImportance",
+      "anchor": "runImportance-fffff4bc",
+      "signature": "def runImportance[T](numSamples: Int, target: Element[T], project: T => Double, config: Config = ...): ImportanceReport",
+      "type_parameters": [
+        "T"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "numSamples: Int",
+            "target: Element[T]",
+            "project: T => Double",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "ImportanceReport",
+      "summary": "Run an opt-in, blocking Importance sampler and retain raw per-draw diagnostics for one query.",
+      "contract": "Run an opt-in, blocking Importance sampler and retain raw per-draw diagnostics for one query. Value parameters config assessment policy; reports warnings without changing samples or stopping early numSamples positive draw budget within config.maxSamples; memory is O(numSamples) project deterministic finite scalar projection of the query (e.g. an event indicator) target caller-owned active element; its universe is not cleared Attributes Returns detached report after owned algorithm cleanup; caller controls RNG scoping Example InferenceHealth.runImportance(10000, coin, (b: Boolean) => if (b) 1.0 else 0.0)",
+      "example": "com.cra.figaro.algorithm.sampling.InferenceHealth.runImportance[T](numSamples, target, project, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/InferenceHealth$.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.LikelihoodWeighter",
       "name": "clearCache",
       "anchor": "clearCache-94c",
@@ -51113,6 +51367,56 @@
       "example": "receiver.stop()",
       "object": false,
       "page": "com/cra/figaro/algorithm/sampling/OneTimeSampler.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.ParetoTail.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/ParetoTail$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.ParetoTail.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/ParetoTail$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.ParetoTail",
+      "name": "fit",
+      "anchor": "fit-fffffccf",
+      "signature": "def fit(logWeights: Seq[Double], maxSamples: Int = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logWeights: Seq[Double]",
+            "maxSamples: Int = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Fit the upper tail without modifying or smoothing the supplied weights.",
+      "contract": "Fit the upper tail without modifying or smoothing the supplied weights. Value parameters logWeights raw per-draw log importance ratios; negative infinity means zero weight maxSamples positive input-size cap, default one million Attributes Returns empirical-Bayes k and finite-sample warning threshold, or explicit unavailable state Example ParetoTail.fit(Vector.tabulate(1000)(i => -0.3 * math.log((i + 0.5) / 1000)))",
+      "example": "com.cra.figaro.algorithm.sampling.ParetoTail.fit(logWeights, maxSamples)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/ParetoTail$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.ProbEvidenceSampler",

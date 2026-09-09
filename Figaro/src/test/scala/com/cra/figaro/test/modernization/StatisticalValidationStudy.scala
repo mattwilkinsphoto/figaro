@@ -163,7 +163,8 @@ object StatisticalValidationStudy {
     println("SV,mode,family,rng,seed,draws,parameter,mean,error,mcse,ess,maxWeight,covered95,withinPointOnePosteriorSd,seconds,underflows")
     val selectedSeeds = if (args(0) == "smoke") seeds.take(1) else if (args(0) == "graph") seeds.take(3) else seeds
     val selectedBudgets = if (Set("kernel", "backends").contains(args(0))) budgets else Vector(2000)
-    val selectedRngs = if (args(0) == "backends") com.cra.figaro.util.SamplingRandom.Algorithm.values.map(_.id).toVector
+    // Freeze the published five-backend experiment; new providers need a separately declared study.
+    val selectedRngs = if (args(0) == "backends") Vector("L64X128MixRandom", "Xoshiro256PlusPlus", "PCG_RXS_M_XS_64", "MT19937", "Random")
       else if (args(0) == "graph") Vector("Random") else Vector("Random", "L64X128MixRandom")
     for (seed <- selectedSeeds; family <- Vector("gamma", "dirichlet"); count <- selectedBudgets;
          rng <- selectedRngs) {

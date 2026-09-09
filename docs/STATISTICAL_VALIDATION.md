@@ -200,6 +200,8 @@ coverage claims. No adaptive proposal or automatic sampler switch is delivered h
 
 ## Related and migration implications
 
+- [Inference health](INFERENCE_HEALTH.md): opt-in per-run warnings, licensed Pareto-tail
+  fitting, raw MCSE limitations and a complete 60-run detection regression on these fixtures.
 - [RNG assessment](RNG_ASSESSMENT.md): replacement recommendation and compatibility gates.
 - [Parallel performance](PARALLEL_PERFORMANCE.md): worker isolation is not a remedy for weight collapse.
 - [Distribution constructions acceptance](DISTRIBUTION_CONSTRUCTIONS_ACCEPTANCE.md): original legacy observations.

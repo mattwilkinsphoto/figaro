@@ -26,6 +26,12 @@ The opt-in [purpose selector](docs/RNG_SELECTION.md) now resolves versioned pres
 overrides and hard requirements before model construction; it does not autotune or
 change existing defaults. Local validation and remote CI remain separate gates.
 
+The opt-in [inference-health assessment](docs/INFERENCE_HEALTH.md) adds explicit
+insufficient-evidence/warning/danger states, raw-weight ESS and Pareto-tail diagnostics,
+query-specific MCSE and existing multi-chain diagnostics. This is a warning layer,
+not adaptive inference or automatic stopping. Next: better proposals at matched accuracy,
+broader held-out warning calibration and dependence-aware importance diagnostics.
+
 Planning baseline: `b99c5d56`, reviewed 2026-09-07. The circular foundation is now
 implemented and locally validated; see its [guide and evidence](docs/VON_MISES.md).
 The [inventory](docs/DISTRIBUTION_SUPPORT.md) distinguishes
