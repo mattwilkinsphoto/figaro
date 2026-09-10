@@ -8,7 +8,8 @@ libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
 // When testing the release bundle, exclude Ivy local so a cached publishLocal
 // cannot hide a broken Maven layout or POM.
 externalResolvers ~= { defaults =>
-  sys.env.get("FIGARO_RELEASE_MAVEN_ROOT").map { path =>
+  if (sys.env.get("FIGARO_CENTRAL_ONLY").contains("true")) Seq(Resolver.mavenCentral)
+  else sys.env.get("FIGARO_RELEASE_MAVEN_ROOT").map { path =>
     require(file(path).isDirectory, "Release Maven directory does not exist")
     Seq("figaro-release" at file(path).toURI.toString, Resolver.mavenCentral)
   }.getOrElse(defaults)

@@ -1,0 +1,85 @@
+name: Maven Central release
+
+on:
+  push:
+    branches: [main, 'release/**']
+    paths:
+      - '.github/workflows/maven-central.yml'
+      - 'tools/*central*'
+  pull_request:
+    paths:
+      - '.github/workflows/maven-central.yml'
+      - 'tools/*central*'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Stage for validation, publish an approved deployment, or verify Central'
+        type: choice
+        options: [stage, publish, verify]
+        default: stage
+      deployment:
+        description: 'Exact deployment UUID from the successful stage run (publish only)'
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: maven-central-release
+  cancel-in-progress: false
+
+jobs:
+  tooling-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - run: python3 -B tools/test_central_release.py
+
+  release:
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    needs: tooling-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Validate signing and stage or publish the approved release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_ACTION: ${{ inputs.action }}
+          DEPLOYMENT: ${{ inputs.deployment }}
+          MAVEN_CENTRAL_USERNAME: ${{ inputs.action != 'verify' && secrets.MAVEN_CENTRAL_USERNAME || '' }}
+          MAVEN_CENTRAL_PASSWORD: ${{ inputs.action != 'verify' && secrets.MAVEN_CENTRAL_PASSWORD || '' }}
+          GPG_PRIVATE_KEY: ${{ inputs.action == 'stage' && secrets.GPG_PRIVATE_KEY || '' }}
+          GPG_PASSPHRASE: ${{ inputs.action == 'stage' && secrets.GPG_PASSPHRASE || '' }}
+          GPG_FINGERPRINT: ${{ inputs.action == 'stage' && secrets.GPG_FINGERPRINT || '' }}
+        run: python3 -B tools/central_release.py "$RELEASE_ACTION" --deployment "$DEPLOYMENT" --output "$RUNNER_TEMP/central-release"
+      - name: Preserve public bundle and deployment receipt, including validation failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: central-release-record
+          path: |
+            ${{ runner.temp }}/central-release/deployment.json
+            ${{ runner.temp }}/central-release/central-bundle.zip
+          if-no-files-found: ignore
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        if: inputs.action != 'stage'
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: sbt/setup-sbt@cee6d9f81dbca69db8dad7a6ef83ce99cbd539f7 # v1
+        if: inputs.action != 'stage'
+      - name: Resolve and run an independent consumer from Central only
+        if: inputs.action != 'stage'
+        working-directory: tools/acceptance-consumer
+        env:
+          FIGARO_CENTRAL_ONLY: 'true'
+          FIGARO_EXPECTED_SHA256: 2c09685ccfee6ac64157e36c486477722bfe9022fdf1971345ec2d70e365970b
+          JAVA_OPTS: -Xms256M -Xmx2G -Xss6M
+        run: sbt --server --batch "runMain FigaroConsumerCheck"

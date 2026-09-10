@@ -42,6 +42,9 @@ For a compiled dependency without building Figaro yourself, use the
 The Maven-layout ZIP includes the library, sources, API documentation, dependency
 POM and installation instructions. Verify its checksum before extracting it.
 
+[Maven Central publication](docs/MAVEN_CENTRAL.md) describes the signed release
+workflow and how to use the dependency after Central availability is confirmed.
+
 The latest capability expansion includes [event-weighted mixtures](docs/WEIGHTED_RARE_EVENT_MIXTURES.md),
 [static graph proposals](docs/STATIC_GRAPH_PROPOSALS.md) and
 [extended distribution constructions](docs/EXTENDED_CONSTRUCTIONS.md), with
