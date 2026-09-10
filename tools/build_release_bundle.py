@@ -62,9 +62,10 @@ def main():
     def git(*arguments):
         return subprocess.check_output(['git', '-c', 'safe.directory='+root.as_posix(), '-C', str(root), *arguments], text=True).strip()
     revision = git('rev-parse', 'HEAD')
-    dirty = bool(git('status', '--porcelain'))
+    source_status = git('status', '--porcelain', '--untracked-files=all')
+    dirty = bool(source_status)
     if not re.fullmatch('[0-9a-f]{40}', revision) or (dirty and not args.candidate):
-        raise ValueError('Final bundle requires a clean, committed source tree')
+        raise ValueError('Final bundle requires a clean, committed source tree. Git status:\n'+source_status)
     payload = {}
     legal = {name: (root / path).read_bytes() for name, path in LEGAL.items()}
     for kind, suffix in (('thin', ''), ('fat', '-fat'), ('sources', '-sources'), ('javadoc', '-javadoc')):

@@ -13,6 +13,36 @@ permissions:
   contents: read
 
 jobs:
+  release-packaging-preflight:
+    # Catch publication/layout failures independently of the longer inference gate.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      JAVA_OPTS: -Xms1G -Xmx6G -Xss6M -XX:ReservedCodeCacheSize=256M -Dfile.encoding=UTF-8
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: sbt
+      - uses: sbt/setup-sbt@v1
+      - name: Inspect source baseline
+        run: git status --porcelain --untracked-files=all
+      - name: Build release artifacts
+        run: sbt --server --batch "figaro / packageBin; figaro / assembly; figaro / packageSrc; figaro / packageDoc; figaro / makePom"
+      - name: Check source integrity and Maven layout
+        run: |
+          git status --porcelain --untracked-files=all
+          python3 -B tools/test_build_release_bundle.py
+          python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/release61-preflight
+      - name: Consume the release layout without Ivy local
+        working-directory: tools/acceptance-consumer
+        run: |
+          export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/release61-preflight/maven"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0.jar | cut -d' ' -f1)"
+          sbt --server --batch "runMain FigaroConsumerCheck"
+
   gvm-bhattacharyya-research:
     runs-on: ubuntu-latest
     timeout-minutes: 10
