@@ -2,6 +2,11 @@
 
 ## Intent
 
+Current status: representative metrics described below are included in 6.1.0.
+The delivery sequence is a history of completed increments; missing measures or
+families are optional backlog candidates. The [current roadmap](../ROADMAP.md)
+governs promotion based on concrete model needs, not a universal-metric mandate.
+
 User-approved direction: carry KL, Bhattacharyya and mutual information forward as
 capabilities across Figaro's distribution families, not isolated GVM conveniences.
 Preserve Mahalanobis-style scoring where its geometry is meaningful. Start with broad

@@ -12,9 +12,9 @@ moments analytically. `kernel.conditionalAngle(x)` returns the exact von Mises l
 of the angle given the **entire** linear vector. Neither call creates a Figaro element
 or consumes randomness. Sampling a returned conditional kernel uses your supplied RNG.
 
-The APIs belong to the current source development preview. They are not present in
-the earlier immutable RC1 integration bundle. See [building](BUILDING.md), the
-[joint guide](GAUSS_VON_MISES.md) and [roadmap](../ROADMAP.md) for integration status.
+These APIs ship in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md). They are not
+present in the earlier immutable RC1 bundle. See the [joint guide](GAUSS_VON_MISES.md)
+and [current roadmap](../ROADMAP.md) for scope and optional follow-ons.
 
 ## Quick start in three steps
 

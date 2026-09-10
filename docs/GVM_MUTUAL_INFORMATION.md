@@ -17,7 +17,8 @@ between two laws. See the [cross-family metrics roadmap](INFORMATION_METRICS_ROA
 Status: the guarded implementation passed [full branch CI at `fc4d23e8`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34235233397).
 It is integrated on main with the [CI-verified common-family milestone](COMMON_DISTRIBUTIONS_ACCEPTANCE.md).
 Local validation and publication checks are below.
-Older immutable library bundles do not contain this API; rebuild a commit containing it.
+This API is shipped in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md).
+Older bundles may not contain it; normal consumption no longer requires a local rebuild.
 
 ## Quick start: three steps
 

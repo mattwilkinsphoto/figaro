@@ -18,7 +18,12 @@ multimodal uncertainty more economically than traditional Gaussian mixtures?
 Space situational awareness and space-object tracking motivate the comparison,
 but generic density representation and inference are the initial library scope.
 
-## Proposed order
+## Original research sequence and remaining candidates
+
+Steps 1-4 below have bounded implementations/evidence through 6.1 as summarized
+above; they are not a request to repeat the completed kernel, scalar fitter or MI
+milestones. Higher-dimensional fitting, stronger comparisons and step 5 require
+separate scope and application-driven prioritization under the [current roadmap](../ROADMAP.md).
 
 1. Literature baseline: Horwood-Poore and subsequent cylindrical/directional mixture
    work, Gaussian-mixture uncertainty representations, fitting and identifiability.

@@ -13,7 +13,7 @@ blocks for a separately designed optimization or gradient-aware sampling method.
 They do **not** add parameter fitting, automatic differentiation of a Figaro graph,
 Hamiltonian Monte Carlo, or a faster inference algorithm by themselves.
 
-Status: source-development preview integrated on main at `141dcc15`, with
+Status: shipped in [Figaro 6.1.0](MAVEN_CENTRAL.md); originally integrated at `141dcc15`, with
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34177381982).
 Neither this addition nor earlier GVM additions change the immutable RC1 bundle.
 

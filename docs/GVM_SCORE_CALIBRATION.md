@@ -13,7 +13,7 @@ region, or validating simulated draws. It does not fit parameters, calculate KL,
 assess MCMC convergence, or implement report ingestion, fusion, filtering or propagation.
 Calibration is numerical, not a new sampling strategy or a speedup to Figaro inference.
 
-Source-development preview integrated on main at `755eb425`, with
+Shipped in [Figaro 6.1.0](MAVEN_CENTRAL.md); originally integrated at `755eb425`, with
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34176109863).
 It is not in the immutable RC1 library bundle. Later increments retain their own gates.
 

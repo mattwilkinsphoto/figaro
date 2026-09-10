@@ -8,6 +8,11 @@ and joint linear-angular Gauss-von Mises**, as requested on 2026-09-07.
 
 ## How to read and extend this list
 
+This is an **optional capability backlog**, not a queue of adoption blockers.
+The [current roadmap](ROADMAP.md) puts 6.1.0 in application-driven maintenance.
+Promote an item only for a demonstrated model requirement or measured bottleneck;
+historical P0/P1 family labels below do not schedule another modernization stage.
+
 Figaro 6.1 adds exact-coordinate copula conditioning/partial evidence, public
 scalar-linear GVM-mixture fitting and full-mixture linear/angular MI. See the
 [release record](docs/RELEASE_6_1.md) for bounded contracts and validation.
@@ -20,7 +25,8 @@ a mathematical construction is available but may lack a tested density/evidence 
 **wishlist** = candidate requiring assessment. Native does not mean every algorithm
 or numerical edge case is validated. Family rows below describe expansion work, not
 blanket support for all family members. Circular von Mises is now implemented and
-validated on main; joint GVM is a development preview integrated through mutual information.
+validated on main; joint GVM and its documented diagnostics/information APIs ship in
+the [6.1.0 Central release](docs/MAVEN_CENTRAL.md).
 The nine D3 common-family representatives are also integrated; specialized variants
 and other directional families remain future work.
 
@@ -39,8 +45,10 @@ now includes the 6.1 bounded scalar-linear fitter and stronger representation co
 Higher-dimensional fitting, optimized wrapped-model controls and automatic component
 selection remain open; application tracking/fusion is outside this library milestone.
 
-Use stable `DIST-xx` IDs when moving work into the roadmap. Priorities are P0 (first
-program), P1 (common missing breadth), P2 (subsequent breadth) and P3 (specialist research).
+Use stable `DIST-xx` IDs when moving work into the roadmap. Historical family ordering
+was P0 (first program), P1 (common missing breadth), P2 (subsequent breadth) and P3
+(specialist research). These labels describe the original expansion sequence, not
+the present urgency of unimplemented flavors within an already delivered family.
 Record a source, concrete use case, representative first member, dependencies, numerical
 and inference tests, and acceptance evidence when promoting a candidate. Keep aliases
 and special cases attached to their family instead of creating duplicate implementations.
@@ -50,7 +58,7 @@ and special cases attached to their family instead of creating duplicate impleme
 | ID / priority | Family and current expansion status | First useful capability | Later flavors / shared work |
 | --- | --- | --- | --- |
 | DIST-01 / P0 | Circular von Mises native; S2 von Mises-Fisher implemented for modern.18 | [Spherical kernel and divergences](docs/DISTRIBUTION_BREADTH.md), alongside circular angle conventions | Other vMF dimensions, wrapped normal/Cauchy, Kent and Bingham with sphere/axis-aware contracts |
-| DIST-02 / P0 | Joint linear-angular; through mutual information integrated with D3 at CI-verified `e78a6f0e` | [Fixed-kernel Horwood-Poore Gauss-von Mises](docs/GAUSS_VON_MISES.md) using DIST-01 | Mardia-Sutton, GVM mixtures, multiple angles and newer generalized GVM variants; separate quadrature/uncertainty-propagation research and application-level review, not an automatic filtering claim |
+| DIST-02 / P0 | Joint linear-angular kernels and diagnostics shipped; 6.1 also includes bounded mixture fitting/MI | [Fixed-kernel Horwood-Poore Gauss-von Mises](docs/GAUSS_VON_MISES.md) using DIST-01 | Mardia-Sutton, multiple angles, higher-dimensional mixture fitting and newer generalized GVM variants; broader quadrature/uncertainty-propagation research requires separate review, not an automatic filtering claim |
 | DIST-03 / P1 | Real-line location/scale and heavy tails; Student t/Cauchy/Laplace now native, Normal already native | [Three new location/scale representatives](docs/COMMON_DISTRIBUTIONS.md), with KL/Bhattacharyya support | Logistic, skew/noncentral variants, generalized normal, stable and hyperbolic families |
 | DIST-04 / P1 | Finite choices and count laws; negative binomial/hypergeometric now native | Real-shape failure counts and finite-population draws; count divergences and explicit finite-table MI | Beta mixtures, heterogeneous Bernoulli sums, noncentral and zero-truncated flavors |
 | DIST-05 / P1 | Positive-valued scale/lifetime laws; lognormal/Weibull now native | Observation-ready kernels and analytic/guarded divergences; Gamma special-case conveniences remain | Inverse Gaussian, Rayleigh/Rice/Nakagami, generalized Gamma, fatigue-life and survival variants |

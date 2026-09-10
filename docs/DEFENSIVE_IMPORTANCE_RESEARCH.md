@@ -202,7 +202,7 @@ first-coordinate ESS and median time. `NA` means unavailable, not zero error; a 
 run without sufficient retained chains counts as unsuccessful accuracy/coverage.
 Repeated per-coordinate timing/work fields describe one trial and must not be summed.
 
-## Delivery boundary and next milestone
+## Historical delivery boundary and subsequent implementation
 
 Promotion requires favorable replicated accuracy/coverage evidence and an API design
 for explicit densities/proposals, callback ownership, support, resource budgets and
@@ -211,7 +211,7 @@ EM/multi-component fitting, normalizing flows and automatic sampler switching ar
 outside this initial experiment. See [inference health](INFERENCE_HEALTH.md) and
 [statistical validation](STATISTICAL_VALIDATION.md) for the motivating evidence.
 
-Recommended next milestone: design an opt-in **explicit-vector frozen-proposal**
+The original recommendation was to design an opt-in **explicit-vector frozen-proposal**
 interface, with pilot and production budgets reported separately, full proposal
 densities and caller-visible fit failure. Validate it first on separated modes,
 skew/boundary concentration and heavier tails, with mean and event-probability
@@ -219,5 +219,9 @@ references. Keep training separate, retain the original comparison evidence and
 examine MCSE calibration before adding automatic precision-based stopping. This
 study supports pursuing that milestone; it does not complete those production gates.
 The subsequent [API milestone](VECTOR_IMPORTANCE.md#acceptance-evidence-and-reproduction)
-records its own implementation and local validation; automatic precision stopping
-remains deferred pending further coverage calibration.
+records its own implementation and validation and is included in 6.1.0.
+[Calibration](IMPORTANCE_CALIBRATION.md), [multi-component fitting](MIXTURE_PROPOSALS.md)
+and [graph integration](GRAPH_PROPOSALS.md) subsequently shipped as bounded follow-ons.
+This experiment remains research evidence, not an active implementation queue.
+Generic importance-sampling precision stopping remains unclaimed; the separate
+[bounded IID APIs](BOUNDED_IID_RELIABILITY.md) have different assumptions.

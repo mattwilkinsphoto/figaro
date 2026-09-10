@@ -30,9 +30,9 @@ model probability, p-value, or automatically calibrated decision threshold.
 3. Compare distributions: `p.klDivergenceComponents(q)`. Read `.gaussian`,
    `.conditionalAngular` and `.total`; all are in **nats** (natural logarithms).
 
-The added diagnostics are part of the source development preview, not a replacement
-for the previously published RC1 library. Compile this revision to use them. See
-[building](BUILDING.md) and the [joint distribution guide](GAUSS_VON_MISES.md).
+These diagnostics ship in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md);
+no local compilation is needed for normal consumption. The older RC1 bundle is
+unchanged. See the [joint distribution guide](GAUSS_VON_MISES.md) for scope.
 
 ## Public API reference
 

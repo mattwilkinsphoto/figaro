@@ -1,8 +1,16 @@
 # Inference and distribution delivery stages
 
-Approved sequence, 2026-09-09. These are bounded milestones, not promises of
-unconditional statistical guarantees. Each integration needs tests, evidence,
-documentation, a version increment, and an explicit commit/CI record.
+Historical approved sequence, 2026-09-09; **the bounded stages are delivered in
+6.1.0**, not the current queue. See the [current roadmap](../ROADMAP.md) for
+application-driven maintenance and optional backlog work. The original goals below
+are retained alongside their completion records, not universal statistical guarantees.
+
+| Original stage | Delivered evidence |
+| --- | --- |
+| End-to-end graph cost | [Cost assessment](GRAPH_COST_ACCEPTANCE.md), modern.14 |
+| Joint blocks and query-aware proposals | [Joint proposals](JOINT_PROPOSALS.md), [rare-event proposals](RARE_EVENT_PROPOSALS.md) and [weighted mixtures](WEIGHTED_RARE_EVENT_MIXTURES.md) |
+| Distribution breadth and mixture metrics | [Multivariate t](MULTIVARIATE_STUDENT_T.md), [Monte Carlo information](MONTE_CARLO_INFORMATION.md) and [selected breadth](DISTRIBUTION_BREADTH.md) |
+| Assumption-bounded reliability and concurrency | [Bounded IID APIs](BOUNDED_IID_RELIABILITY.md), [adaptive bounds](ADAPTIVE_BOUNDED_PRECISION.md), [static executor](STATIC_GRAPH_EXECUTION.md) and [static proposals](STATIC_GRAPH_PROPOSALS.md) |
 
 ## 1. End-to-end graph cost
 
@@ -33,8 +41,10 @@ separately in the [roadmap](../ROADMAP.md).
 ## 4. Assumption-bounded reliability and concurrency
 
 Modern.15 supplies [bounded IID stopping and declared-region checks](BOUNDED_IID_RELIABILITY.md).
-The [static graph ownership design](OWNED_GRAPH_EXECUTION_DESIGN.md) is complete
-as a design only; a new executor remains future work. Existing samplers are unchanged.
+The [static graph ownership design](OWNED_GRAPH_EXECUTION_DESIGN.md) led to the
+shipped [restricted static executor](STATIC_GRAPH_EXECUTION.md) in modern.17 and
+[static proposals](STATIC_GRAPH_PROPOSALS.md) in modern.22. This does not make
+arbitrary existing shared graphs thread-safe.
 
 The requested universal endpoints cannot be accepted literally:
 
@@ -69,7 +79,7 @@ the source audit, mathematical limits and specific narrower acceptance gates.
   multimodality can defeat conventional convergence diagnostics.
 - [SciPy multivariate t reference](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.multivariate_t.html):
   independent implementation reference for location, shape and degrees-of-freedom
-  conventions. Shape is not covariance; the new Figaro kernel will initially
+  conventions. Shape is not covariance; the shipped Figaro kernel does
   require positive definiteness, not singular pseudo-density support.
 
 No new dependency or external source code is adopted by this assessment.

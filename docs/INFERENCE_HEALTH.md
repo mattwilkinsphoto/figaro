@@ -13,8 +13,9 @@ mismatch and poor exploration are not specific to Gamma or Dirichlet.
 The layer does **not** repair a proposal, choose an RNG, smooth weights, stop a run,
 change an estimate, print a warning, or certify that all modes were found. Existing
 samplers and stopping policies behave exactly as before. Applications decide how to
-display or act on the returned issues. This is available on the modernization
-branch; local acceptance is not a remote CI or release claim.
+display or act on the returned issues. This API ships in
+[Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md); its warning semantics and
+assumption limits are unchanged by release consolidation.
 
 ## Quick start in three steps
 
@@ -290,8 +291,10 @@ python -B -m unittest discover -s tools -p 'test_inference_health_reference.py'
 - [Multi-chain vector sampling](MULTI_CHAIN_VECTOR_SAMPLING.md): ordered traces for assessment.
 - [RNG selection](RNG_SELECTION.md): reproducible random-stream choices, not a cure for weight collapse.
 
-Next work is improved importance proposals at matched accuracy, held-out calibration
-across model geometries and rare-event targets, and dependence-aware diagnostics.
+The former proposal/calibration follow-ons now have [mixture proposals](MIXTURE_PROPOSALS.md),
+[held-out calibration evidence](IMPORTANCE_CALIBRATION.md), [owned graph integration](GRAPH_PROPOSALS.md)
+and [query-aware rare-event support](RARE_EVENT_PROPOSALS.md). Broader calibration
+and dependence-aware diagnostics remain optional, application-driven work.
 Automatic remedies or stopping decisions require separate validation and approval.
 The first [pilot-fitted defensive-proposal assessment](DEFENSIVE_IMPORTANCE_RESEARCH.md)
 now provides a research-only candidate, pilot-inclusive comparisons and fresh-seed

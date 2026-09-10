@@ -217,5 +217,7 @@ python -B tools/summarize_rng_benchmark.py docs/rng-philox-benchmark-results.csv
 [Backend selection](RNG_ASSESSMENT.md), [migration](MIGRATION.md),
 [vector chains](MULTI_CHAIN_VECTOR_SAMPLING.md), [blocking importance](PARALLEL_PERFORMANCE.md)
 and [roadmap](../ROADMAP.md). Portable checkpoints, deterministic default graph
-traversal and per-sample counter addressing remain separate work. Better proposals
-for concentrated posteriors remain the next substantive inference-performance priority.
+traversal and per-sample counter addressing remain optional backlog work. The former
+proposal priority was addressed by [frozen proposals](VECTOR_IMPORTANCE.md),
+[mixture fitting](MIXTURE_PROPOSALS.md) and [query-aware rare-event proposals](RARE_EVENT_PROPOSALS.md).
+Further RNG or sampling changes should follow a demonstrated application need.

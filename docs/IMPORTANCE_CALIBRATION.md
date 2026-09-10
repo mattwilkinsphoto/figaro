@@ -119,9 +119,10 @@ python -B -m unittest discover -s tools -p 'test_summarize_importance_calibratio
 The study is test-only and adds no library runtime or dependency. CI checks the
 saved complete evidence and deterministic formulas; the full 200-seed study remains
 an explicit reproducible assessment, not a stochastic pass/fail gate. Commit,
-remote CI and main integration are separate delivery steps. The next milestone is
-bounded multi-component pilot fitting with independent production, followed by
-explicit, ownership-safe graph integration—not automatic graph rewriting.
+remote CI and main integration were separate delivery steps. This assessment and
+its follow-ons are included in 6.1.0: [bounded multi-component pilot fitting](MIXTURE_PROPOSALS.md)
+with independent production, then [ownership-safe graph integration](GRAPH_PROPOSALS.md).
+Those are delivered APIs, not outstanding milestones or automatic graph rewriting.
 
 Local modern.11 candidate validation: 417 modernization tests passed, including
 the two new formula/protocol regressions; all 70 evidence-tool tests and seven

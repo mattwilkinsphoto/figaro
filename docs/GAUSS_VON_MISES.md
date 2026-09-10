@@ -1,15 +1,16 @@
-# Joint Gauss-von Mises: development preview
+# Joint Gauss-von Mises
 
-Status: the fixed joint kernel and extensions through [guarded Bhattacharyya comparison](GVM_BHATTACHARYYA.md)
-are on main at `251f9540`, with [passing branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34188404684).
-**Standalone publication was approved by the maintainer on 2026-09-07.** This is not
-a tagged release or replacement for the RC1 bundle. The circular foundation was integrated earlier
-at `fea8b999`.
+Status: the fixed joint kernel, diagnostics, moments, quadrature and documented
+information helpers ship in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md).
+The [release record](RELEASE_6_1.md) defines the current artifact and acceptance
+scope; [roadmap history](ROADMAP_HISTORY.md) preserves the earlier source milestones.
+The older RC1 bundle remains unchanged and does not define current availability.
 
 The [matched-accuracy performance study](GVM_BHATTACHARYYA_PERFORMANCE.md) and
 [numerical reliability grid](GVM_BHATTACHARYYA_RELIABILITY.md) are now also on main
-through CI-verified `e30c8b03`. The development branch adds research-only
-[positive scalar integration](GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md), not a new public API.
+through CI-verified `e30c8b03`. The original research-only
+[positive scalar integration](GVM_BHATTACHARYYA_POSITIVE_RESEARCH.md) was followed
+by the shipped, opt-in [positive scalar API](GVM_SCALAR_BHATTACHARYYA.md).
 The guarded API's numerical limits remain narrower than the fixed GVM kernel's limits.
 
 ## Overview

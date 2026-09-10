@@ -159,6 +159,14 @@ Kernel checks cover invalid parameters, NaN/positive-infinite densities, exhaust
 
 Remaining gaps: fixed-dimensional vectors only; no general graph/evidence integration, discrete variables, production cancellation/lifecycle ownership, candidate parallelism, fitted references, gradients, or online adaptation. No numerical library/package was installed to run another ecosystem's sampler. Existing independent-chain MCSE checks can still miss unexplored structure; a stop label is not a theorem. High-dimensional, constrained, heavy-tailed, asymmetric curved, and more difficult multimodal targets remain untested.
 
-The next milestone should compare quantile sampling and a geometry-adaptive candidate (AGESS or PATT/GPSS) with more targets and predeclared comparable evaluation budgets, separately evaluating initialization cost and stopped coverage. Only then choose a native production integration. A distinct LHS/RQMC importance track remains worthwhile; mixing it into the current MCMC RNG interface would obscure the statistical assumptions.
+The original research recommendation was a broader comparison of quantile sampling
+and a geometry-adaptive candidate (AGESS or PATT/GPSS), with predeclared budgets,
+initialization costs and stopped coverage. Subsequent bounded production work is
+documented in [vector slice sampling](VECTOR_SLICE_SAMPLING.md) and
+[multi-chain vector sampling](MULTI_CHAIN_VECTOR_SAMPLING.md); those shipped APIs
+do not close every gap in this research experiment. Further candidate comparisons
+and a distinct LHS/RQMC importance track remain optional research, not a scheduled
+modernization stage. Mixing those designs into the MCMC RNG interface would obscure
+their statistical assumptions. See the [current roadmap](../ROADMAP.md).
 
 Related: [reliability guide](MCMC_RELIABILITY.md), [reliability audit](MCMC_RELIABILITY_VALIDATION.md), [parallel-performance guide](PARALLEL_PERFORMANCE.md), and [pilot calibration](PROPOSAL_CALIBRATION.md).

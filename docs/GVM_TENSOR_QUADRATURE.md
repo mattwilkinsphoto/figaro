@@ -21,9 +21,9 @@ For n linear coordinates, Gaussian order G and angular order A, each evaluation 
 dimensions, not a universal replacement for the sparse rule or sampling. Physical
 points are streamed instead of storing the whole tensor product.
 
-Source-development preview on `modernize/gauss-von-mises`, with its own CI/integration
-gate. Main's verified baseline is recorded in the [roadmap](../ROADMAP.md). Existing RC1
-binaries are unchanged. There is no fitting, output-distribution reconstruction, report
+Shipped in [Figaro 6.1.0](MAVEN_CENTRAL.md), following the original development
+milestone recorded in [roadmap history](ROADMAP_HISTORY.md). Existing RC1 binaries
+are unchanged. There is no fitting, output-distribution reconstruction, report
 ingestion, fusion, filtering or propagation algorithm here.
 
 ## Quick start in three steps

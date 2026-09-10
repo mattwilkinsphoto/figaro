@@ -58,6 +58,11 @@ The build resolves Figaro and its runtime dependencies from Central. Use `publis
 
 ## Documentation
 
+Figaro is in application-driven maintenance. The [current roadmap](ROADMAP.md)
+separates routine maintenance and optional future capabilities from the completed
+modernization program; [historical milestones](docs/ROADMAP_HISTORY.md) retain the
+original acceptance evidence.
+
 - [Observation models](docs/OBSERVATION_MODELS.md): exact, rounded and censored likelihoods and measurement error.
 - [Mixed measures](docs/MIXED_MEASURES.md): atoms plus continuous slabs, clipping and full-law information comparisons.
 - [GVM mixtures](docs/GVM_MIXTURES.md): fixed joint linear-angular mixtures and an initial GMM representation comparison.

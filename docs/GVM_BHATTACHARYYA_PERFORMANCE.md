@@ -175,11 +175,13 @@ Use a single measurement session; process IDs can be recycled across unrelated s
   inputs and application-level throughput remain unmeasured here. No range limits changed.
 - This is not a Monte Carlo ESS, coverage, posterior-quality or memory-scaling study.
   A faster divergence cannot be translated directly into a whole-application speedup.
-- The next substantive gate is broader numerical reliability, particularly concentration
+- The subsequent gate was broader numerical reliability, particularly concentration
   and cancellation—not tuning away microseconds or expanding the support cap unchecked.
   The follow-on [96-pair reliability grid](GVM_BHATTACHARYYA_RELIABILITY.md) now records
   this first stress assessment, including where the current guard declines to resolve.
-  Mutual information remains a separate, lower-priority research milestone.
+  [Single-kernel mutual information](GVM_MUTUAL_INFORMATION.md) and
+  [full-mixture partition MI](GVM_MIXTURE_MI.md) subsequently shipped in the 6.1 line;
+  they do not expand the accuracy claims of this original timing study.
 
 ## Verification and related modules
 

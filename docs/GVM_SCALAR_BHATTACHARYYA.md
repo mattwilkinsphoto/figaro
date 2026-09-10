@@ -2,7 +2,8 @@
 
 Status: public source API integrated on main at `21269b97` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34196804703).
-This is an addition to the modernization snapshot, not a replacement release bundle.
+This API is shipped in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md).
+The commit and CI links record its original acceptance; older bundles are unchanged.
 The preceding test-only prototype is integrated on main at CI-verified `a54d665e`.
 Main also contains [bounded tail selection](GVM_SCALAR_TAIL_PRODUCTION.md),
 with no signature change, integrated at CI-verified `f4884cfb`.
@@ -45,7 +46,7 @@ on the costly curved fixture; the other tested cases change only a few percent.
 
 ## Quick start in three steps
 
-1. Build a snapshot containing this API (the earlier immutable RC1 does not contain it).
+1. Add [the Figaro 6.1.0 dependency](MAVEN_CENTRAL.md) (the earlier RC1 does not contain this API).
 2. Construct fixed kernels in the same coordinates and units:
    ```scala
    import com.cra.figaro.library.atomic.continuous.*

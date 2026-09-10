@@ -1,9 +1,12 @@
 # First distribution milestone: von Mises and Gauss-von Mises
 
-Status: **circular foundation and fixed-kernel joint GVM extensions through budgeted
-order comparison integrated on main with passing branch CI at `4f90f815`**.
-Standalone publication is approved by the maintainer. See the
-[circular guide](VON_MISES.md) and [joint development preview](GAUSS_VON_MISES.md).
+This is the **historical design plan**, not the active work queue. Circular and
+joint GVM kernels, diagnostics, quadrature and documented information helpers now
+ship in [Figaro 6.1.0](MAVEN_CENTRAL.md), with bounded mixture fitting/MI described
+in the [release record](RELEASE_6_1.md). Design-time future tense below records the
+original sequence, not outstanding release gates. See the
+[circular guide](VON_MISES.md), [joint guide](GAUSS_VON_MISES.md) and
+[current roadmap](../ROADMAP.md) for delivered contracts and optional follow-ons.
 Both the circular and joint families
 were explicitly requested on 2026-09-07. Parent families: `DIST-01` and
 `DIST-02` in the [wishlist](../WISHLIST.md). See the [delivery roadmap](../ROADMAP.md).

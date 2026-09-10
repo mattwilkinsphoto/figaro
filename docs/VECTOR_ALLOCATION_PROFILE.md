@@ -94,7 +94,11 @@ snapshots was 1253699072 bytes (about 1.17 GiB); maximum observed after-GC use w
 does not establish absence of leaks in other workloads or quantify concurrent collector
 cost. Pause time alone is too small to explain the dominant diagnostic execution here.
 
-### Recommended next milestone: primitive diagnostic reductions
+### Historical recommendation: primitive diagnostic reductions
+
+This recommendation was subsequently implemented: see [primitive reductions](PRIMITIVE_DIAGNOSTIC_REDUCTIONS.md),
+[FFT autocovariance](PRIMITIVE_FFT_AUTOCOVARIANCE.md) and [diagnostic sorting](PRIMITIVE_DIAGNOSTIC_SORTING.md).
+The original decision below is retained as evidence, not a new optimization queue.
 
 First replace allocation-heavy mean/variance and related scalar reductions with
 primitive-array loops, keeping the existing numerical summation behavior, traversal

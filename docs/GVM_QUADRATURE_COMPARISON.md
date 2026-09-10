@@ -222,7 +222,8 @@ Integrated on main at `4f90f815`, after [passing CI](https://github.com/mattwilk
 Local acceptance included all 281 modernization tests across 22 suites (13 focused
 comparison tests), seven GVM examples, Scala API generation and library packaging.
 The [roadmap](../ROADMAP.md) records the broader milestone sequence.
-This addition does not replace the immutable RC1 library bundle or declare a tagged release.
+This helper is shipped in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md);
+the original acceptance above did not change the older immutable RC1 bundle.
 The follow-on [Bhattacharyya assessment](GVM_BHATTACHARYYA_RESEARCH.md) now supplies
 an angular-reduced integral, analytic series and independent accuracy controls. Its
 [first guarded Scala API](GVM_BHATTACHARYYA.md) is now on main at CI-verified `251f9540`;

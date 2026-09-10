@@ -18,9 +18,10 @@ guarantee.** Use analytic moments when available; otherwise validate the particu
 function and parameter range against independent integration or Monte Carlo before
 relying on this low-cost rule. It does not accelerate existing inference automatically.
 
-Status: source-development preview integrated on main at `b06e957f`, with
+Status: shipped in [Figaro 6.1.0](MAVEN_CENTRAL.md); originally integrated at `b06e957f`, with
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34178437678).
-Later extensions retain separate remote CI and main-integration gates.
+Additional extensions require their own validation; existing shipped follow-ons
+are listed in the [roadmap history](ROADMAP_HISTORY.md).
 Existing RC1 binaries are unchanged.
 
 ## Quick start in three steps

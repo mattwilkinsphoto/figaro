@@ -2,8 +2,8 @@
 
 Status: integrated on main at `f4884cfb` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34209082583).
-This is a change to the existing modernization snapshot, not a new tagged release or
-replacement of an immutable library bundle.
+This policy is shipped in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md).
+The commit and CI links record its original acceptance; older bundles are unchanged.
 The preceding test-only prototype is integrated on main at `44b6b73f` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34207249603).
 
@@ -14,8 +14,8 @@ domains. It uses a stronger angular-affinity lower bound when a bounded setup pa
 worthwhile. The method still integrates positive panels and includes the omitted Gaussian
 tail in its final estimated distance interval.
 
-There is **no new switch** and no signature change. After rebuilding a snapshot containing
-this change, existing callers of the scalar API receive the new policy automatically.
+There is **no new switch** and no signature change. Callers using Figaro 6.1.0
+receive the new policy automatically through the scalar API.
 Calling the separate Fourier API does not invoke it. This improves the implementation of
 the explicitly selected scalar method; it is not an automatic inference-method fallback.
 
@@ -26,8 +26,8 @@ still applies, and `Estimated` still means estimated accuracy, not a certified b
 
 ## Quick start in three steps
 
-1. Update your checkout to current `main`, then build the snapshot with
-   `sbt "figaro / publishLocal"`. The older immutable RC1 bundle does not contain this change.
+1. Add [the Figaro 6.1.0 dependency](MAVEN_CENTRAL.md) to your application.
+   The older immutable RC1 bundle does not contain this change.
 2. Construct the curved scalar pair (one linear coordinate and one angle):
 
    ```scala
