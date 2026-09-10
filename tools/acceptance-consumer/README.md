@@ -8,10 +8,18 @@ test classpath leakage that an in-repository example could miss.
 
 The current check includes [distribution constructions and GMMs](../../docs/DISTRIBUTION_CONSTRUCTIONS.md),
 Gaussian KL/Bhattacharyya/partition MI, and observation-ready scalar/count/vector adapters.
+Figaro 6.1 additionally checks exact-coordinate conditional copulas, bounded GVM
+mixture fitting and full-mixture linear/angular mutual information.
 
 1. From the Figaro root run `sbt "figaro / publishLocal"`.
 2. Set `FIGARO_EXPECTED_SHA256` to the SHA-256 of the built thin Figaro jar.
 3. From this directory run `sbt "runMain FigaroConsumerCheck"` with the same JDK/local repository settings.
+
+To test a downloaded release instead, extract its Maven-layout ZIP and set
+`FIGARO_RELEASE_MAVEN_ROOT` to the extracted `maven` directory. Set the expected
+hash from that bundle's thin JAR, then run `sbt "clean; runMain FigaroConsumerCheck"`.
+This mode excludes Ivy local and uses the bundle plus Maven Central for dependencies;
+it cannot pass by silently loading an earlier `publishLocal` artifact.
 
 ## API and common patterns
 
@@ -31,12 +39,13 @@ curved case (radius 7 with retained error/tail checks), and budget refusal.
 It checks [GVM mutual information](../../docs/GVM_MUTUAL_INFORMATION.md), all nine
 [common-family adapters](../../docs/COMMON_DISTRIBUTIONS.md), scalar/count divergences
 and explicit joint-table MI from that same verified JAR. These additions need a newly
-published snapshot; the older immutable integration bundle does not contain them.
+published artifact; the older immutable integration bundle does not contain them.
 The check covers representative API/linkage/lifecycle behavior, not exhaustive statistical
 coverage, OSGi, arbitrary graphs, Java facades, memory ceilings or performance. It uses
 no test framework dependency. `run` forks so sbt's own libraries do not satisfy missing
 application dependencies accidentally. Producer and consumer must see the same local
-Ivy repository; custom `sbt.ivy.home` settings must agree.
+Ivy repository in the default local-publication mode; custom `sbt.ivy.home` settings
+must agree. The explicit Maven-layout mode does not use Ivy local.
 
 Related: [acceptance protocol and evidence](../../docs/CORE_PERFORMANCE_ACCEPTANCE.md),
 [JVM consumer contract](../../CONSUMER_BOUNDARY.md), and [building](../../docs/BUILDING.md).

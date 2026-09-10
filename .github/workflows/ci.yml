@@ -28,7 +28,9 @@ jobs:
           cache: sbt
       - uses: sbt/setup-sbt@v1
       - name: Inspect source baseline
-        run: git status --porcelain --untracked-files=all
+        run: |
+          git status --porcelain --untracked-files=all
+          git diff --exit-code HEAD
       - name: Build release artifacts
         run: sbt --server --batch "figaro / packageBin; figaro / assembly; figaro / packageSrc; figaro / packageDoc; figaro / makePom"
       - name: Check source integrity and Maven layout
