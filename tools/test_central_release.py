@@ -97,6 +97,15 @@ class CentralTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             central.NoRedirect().redirect_request(None, None, 302, '', {}, 'https://other.example/')
 
+    def test_post_publication_coordinates_may_be_unavailable(self):
+        for state in ('PUBLISHING', 'PUBLISHED'):
+            for missing in (None, []):
+                central.check_deployment(dict(deploymentId=ID, deploymentName=central.DEPLOYMENT_NAME,
+                                              deploymentState=state, purls=missing), ID)
+            with self.assertRaises(ValueError):
+                central.check_deployment(dict(deploymentId=ID, deploymentName=central.DEPLOYMENT_NAME,
+                                              deploymentState=state, purls=['pkg:maven/wrong/x@1']), ID)
+
     def test_validation_failure_stops_without_publish(self):
         with patch.object(central, 'status_of', return_value={'deploymentState': 'FAILED', 'errors': {'test': ['invalid signature']}}), patch.object(central.time, 'sleep') as sleep:
             with self.assertRaises(RuntimeError):

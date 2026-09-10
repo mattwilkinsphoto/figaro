@@ -91,6 +91,10 @@ of the human workflow; publishing never requires exposing a private key to chat.
   inspect the existing deployment instead of creating another one.
 - A `PUBLISHED` response can precede download availability. Polling is bounded;
   a later **verify** run can complete the consumer gate after propagation.
+- Coordinate metadata is required before publishing. If the Portal omits it
+  during/after publication, the workflow still checks deployment identity and
+  independently compares all four public artifact hashes; omission is not treated
+  as proof of a different artifact. Any supplied conflicting coordinates fail.
 - A wrong/expired key or missing public-keyserver record is a release blocker,
   not a reason to omit signatures. Signing passphrase errors are deliberately
   reported without echoing private subprocess output.

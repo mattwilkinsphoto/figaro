@@ -125,13 +125,20 @@ def deployment_id(value):
 def check_deployment(status, expected_id):
     if status.get('deploymentId') != expected_id or status.get('deploymentName') != DEPLOYMENT_NAME:
         raise ValueError('Deployment identity mismatch')
-    if status.get('deploymentState') in ('VALIDATED', 'PUBLISHING', 'PUBLISHED'):
-        if set(status.get('purls', [])) != {PURL}:
+    state = status.get('deploymentState')
+    coordinates = status.get('purls') or []
+    # The Portal can omit purls during/after publication. Require them before
+    # issuing publish; afterwards any supplied coordinates must still match,
+    # and verify_central checks the actual bytes independently of this metadata.
+    if state == 'VALIDATED' or (state in ('PUBLISHING', 'PUBLISHED') and coordinates):
+        if set(coordinates) != {PURL}:
             raise ValueError('Deployment coordinates mismatch')
 
 
 def status_of(identifier, token):
     value = json.loads(portal_request('status?id='+deployment_id(identifier), token))
+    print('Portal status metadata: '+json.dumps({key: value.get(key) for key in
+          ('deploymentId', 'deploymentState', 'purls')}), flush=True)
     check_deployment(value, identifier)
     return value
 
