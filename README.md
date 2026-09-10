@@ -37,6 +37,11 @@ Figaro 6.1 adds [partial/conditional copula workflows](docs/COPULAS.md),
 [GVM-mixture fitting](docs/GVM_MIXTURE_FITTING.md) and [full-mixture partition
 MI](docs/GVM_MIXTURE_MI.md). See [installation and release gates](docs/RELEASE_6_1.md).
 
+For a compiled dependency without building Figaro yourself, use the
+[6.1.0 release assets](https://github.com/mattwilkinsphoto/figaro/releases/tag/v6.1.0).
+The Maven-layout ZIP includes the library, sources, API documentation, dependency
+POM and installation instructions. Verify its checksum before extracting it.
+
 The latest capability expansion includes [event-weighted mixtures](docs/WEIGHTED_RARE_EVENT_MIXTURES.md),
 [static graph proposals](docs/STATIC_GRAPH_PROPOSALS.md) and
 [extended distribution constructions](docs/EXTENDED_CONSTRUCTIONS.md), with

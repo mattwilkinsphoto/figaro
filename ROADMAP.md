@@ -7,7 +7,7 @@ Keep this plan Figaro-specific; application models and project details belong el
 
 ## Current baseline
 
-The next integrated feature release is **6.1.0**, beyond the 6.0 modernization
+The integrated feature release is **6.1.0**, beyond the 6.0 modernization
 baseline. Its [release record](docs/RELEASE_6_1.md) covers consumable release
 consolidation, exact-coordinate copula workflows, and bounded GVM-mixture fitting,
 information and comparative research. Grammar/framework-selection work belongs to

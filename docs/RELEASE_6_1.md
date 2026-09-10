@@ -19,10 +19,13 @@ Release candidates must complete the gates below before tagging/publishing.
 
 ## Installation and artifact contract
 
-Use the tagged release or its compiled Maven-layout bundle. The coordinates are:
+Use the tagged release or its compiled Maven-layout bundle. Download the ZIP and
+its checksum from the [6.1.0 release](https://github.com/mattwilkinsphoto/figaro/releases/tag/v6.1.0),
+verify and extract it, then configure the extracted Maven directory:
 
 ```scala
 scalaVersion := "3.9.0"
+resolvers += "figaro-release" at file("/absolute/path/to/extracted/maven").toURI.toString
 libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
 ```
 
@@ -48,8 +51,8 @@ the supported integration is ordinary JVM dependency resolution.
 - Two empty-action-cache clean builds produced identical thin/fat JARs locally.
 - All four artifacts passed class-content/legal/Java-17 checks.
 - The independent consumer compiled against and hash-checked the published JAR,
-  including the new conditional, fitting and information APIs. CI additionally
-  exercises the Maven-layout bundle with Ivy local excluded.
+  including the new conditional, fitting and information APIs. The Maven-layout
+  bundle also passed locally with Ivy local excluded; CI repeats both consumer paths.
 - Generated API freshness (12,748 public method entries), local links, 18
   documentation-tool tests, seven artifact-validator tests, four bundle-tool tests,
   and six independent numerical/evidence tests passed.
@@ -118,6 +121,11 @@ components improves both GVM and wrapped GMM to about -2.387. Increasing to four
 components does not consistently improve held-out scores; many GVM fits reach
 their iteration limit and some GMM fits are refused. At higher budgets, reporting
 only averages over returned GMM candidates would hide those refusals.
+
+Per JVM, 32 of 75 GVM fits reported convergence and 43 reported an iteration limit.
+Each GMM control returned 54 candidates and refused 21 fits (8 insufficient-component
+and 13 iteration-limit outcomes). Those counts repeat across JVMs and are not
+independent replications. No refused fit is imputed a score.
 
 This is not a speedup claim: for the curved fixture, median total fit times across
 the fifteen repeated timings were about 8.2 ms (one-component GVM) versus 1.1 ms
