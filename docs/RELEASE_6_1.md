@@ -56,7 +56,10 @@ the supported integration is ordinary JVM dependency resolution.
 - Generated API freshness (12,748 public method entries), local links, 18
   documentation-tool tests, seven artifact-validator tests, four bundle-tool tests,
   and six independent numerical/evidence tests passed.
-- Branch and main CI must pass on the integrated source before release publication.
+- [Release-branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34435163932)
+  passed all three jobs on `9b4f24d8`, including the complete build and independent
+  packaging preflight. The final main-branch CI must also pass before publication;
+  the GitHub release records that run and carries its compiled artifacts.
 
 No full historical stochastic-suite or every-platform certification is claimed.
 
@@ -64,9 +67,14 @@ Local reproducibility hashes (the release bundle records the actual published
 artifact hashes; cross-platform byte identity is not assumed):
 
 ```text
-c49180e76cca306c0e88e29754449ab303d0ed8d7c10470c424404035e22f629  figaro_3-6.1.0.jar
-4efa0d70e71c2ff435eb38d3d9a473bddd99c18bfbcc9248593e1efd3dddca06  figaro_3-6.1.0-fat.jar
+60c50c9c8dac1b61064500ba25f5e1a9a7506b91d757e1abfd052bc2009e29c1  figaro_3-6.1.0.jar
+63e2abfe072992cf3825f700895ff1f632bb56edd6a99840fff4d0e19173bc37  figaro_3-6.1.0-fat.jar
 ```
+
+The release gate also caught three legacy Scala files committed with CRLF/mixed
+line endings despite the repository's LF policy. Their line endings were normalized
+without semantic edits. Fresh-checkout integrity is checked before packaging; the
+guard was not bypassed. The hashes above are from two new clean builds after that repair.
 
 ## Stronger representation study
 
