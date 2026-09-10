@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - modernize/**
+      - release/**
   pull_request:
   workflow_dispatch:
 
@@ -45,6 +46,9 @@ jobs:
           python3 -B tools/test_capability_expansion_evidence.py
           python3 -B tools/test_modeling_reference.py
           python3 -B tools/test_modeling_evidence.py
+          python3 -B tools/test_release61_reference.py
+          python3 -B tools/test_release61_evidence.py
+          python3 -B tools/test_build_release_bundle.py
       - name: Verify independent statistical-validation posterior references
         run: |
           python3 -m pip install --disable-pip-version-check numpy==2.3.5
@@ -98,6 +102,9 @@ jobs:
 
       - name: Verify circular von Mises foundation and log-density likelihoods
         run: sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.VonMisesRegressionTest"
+
+      - name: Verify 6.1 conditional models and fitted mixture contracts
+        run: sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.Release61ModelingTest"
 
       - name: Verify inference health on fixed concentrated-posterior workloads
         run: sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.InferenceHealthStudy"
@@ -387,8 +394,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.23-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.23-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -411,13 +418,23 @@ jobs:
       - name: Verify independently published consumer
         working-directory: tools/acceptance-consumer
         run: |
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.23-SNAPSHOT.jar | cut -d' ' -f1)"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0.jar | cut -d' ' -f1)"
           sbt --server --batch "runMain FigaroConsumerCheck"
+
+      - name: Build Maven-layout release bundle
+        run: python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/release61-bundle
+
+      - name: Verify release-bundle consumer without Ivy local
+        working-directory: tools/acceptance-consumer
+        run: |
+          export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/release61-bundle/maven"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0.jar | cut -d' ' -f1)"
+          sbt --server --batch "clean; runMain FigaroConsumerCheck"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.23-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -428,8 +445,11 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.23-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.23-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.23-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.0.0-modern.23-SNAPSHOT-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-6.1.0.pom
+            target/release61-bundle/figaro-6.1.0-maven.zip
+            target/release61-bundle/figaro-6.1.0-maven.zip.sha256
           if-no-files-found: error

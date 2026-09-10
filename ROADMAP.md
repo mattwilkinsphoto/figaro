@@ -7,10 +7,16 @@ Keep this plan Figaro-specific; application models and project details belong el
 
 ## Current baseline
 
+The next integrated feature release is **6.1.0**, beyond the 6.0 modernization
+baseline. Its [release record](docs/RELEASE_6_1.md) covers consumable release
+consolidation, exact-coordinate copula workflows, and bounded GVM-mixture fitting,
+information and comparative research. Grammar/framework-selection work belongs to
+a separate project, not this roadmap.
+
 The Java 17 / Scala 3 / sbt 2 modernization and core performance milestones are integrated
 on main. See [acceptance evidence](docs/CORE_PERFORMANCE_ACCEPTANCE.md),
 [release notes](docs/RELEASE_NOTES.md) and [migration limitations](docs/MIGRATION.md).
-The source remains a development snapshot, not a universally validated stable release.
+The 6.1 release is scoped by its acceptance record, not a universally validated inference guarantee.
 
 ## Completed program: distribution breadth
 
@@ -66,8 +72,8 @@ The four approved priorities have bounded implementations and a shared release g
    scalar marginal transforms, graph evidence and appropriate information measures.
 
 [Acceptance and research evidence](docs/MODELING_CAPABILITIES_ACCEPTANCE.md) separates
-delivered contracts from continuing work. Production GVM-mixture fitting, full-mixture
-linear/angle MI, stronger GMM controls, mixed/count copulas and compound/convolved mixed
+delivered contracts from continuing work. Higher-dimensional GVM-mixture fitting,
+mixed/count copulas and compound/convolved mixed
 laws remain follow-ons. Generic laws do not implement tracking, propagation or report fusion.
 The [GVM/GMM research plan](docs/GVM_MIXTURE_RESEARCH_PLAN.md) retains that application boundary.
 

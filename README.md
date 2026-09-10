@@ -2,7 +2,7 @@
 
 Figaro lets you describe uncertain quantities, their relationships, and observed evidence as Scala objects. Its inference algorithms answer questions such as “given this observation, how likely is that explanation?” You supply a model without implementing an inference engine yourself.
 
-This modernized line uses **Scala 3.9.0 LTS, sbt 2.0.8, and JDK 17**. It keeps the `com.cra.figaro` packages but is a new Scala 3 artifact, not a binary-compatible replacement for `figaro_2.13`. It is a development snapshot, not a published stable release.
+This modernized line uses **Scala 3.9.0 LTS, sbt 2.0.8, and JDK 17**. It keeps the `com.cra.figaro` packages but is a new Scala 3 artifact, not a binary-compatible replacement for `figaro_2.13`. The [6.1 release record](docs/RELEASE_6_1.md) describes the consumable library and its validated scope.
 
 ## Quick start: three steps
 
@@ -33,6 +33,10 @@ Prerequisites: Git, JDK 17 on your path, and an sbt runner. sbt downloads the co
 
 ## Use Figaro in your application
 
+Figaro 6.1 adds [partial/conditional copula workflows](docs/COPULAS.md),
+[GVM-mixture fitting](docs/GVM_MIXTURE_FITTING.md) and [full-mixture partition
+MI](docs/GVM_MIXTURE_MI.md). See [installation and release gates](docs/RELEASE_6_1.md).
+
 The latest capability expansion includes [event-weighted mixtures](docs/WEIGHTED_RARE_EVENT_MIXTURES.md),
 [static graph proposals](docs/STATIC_GRAPH_PROPOSALS.md) and
 [extended distribution constructions](docs/EXTENDED_CONSTRUCTIONS.md), with
@@ -42,7 +46,7 @@ From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala appli
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.23-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
 ```
 
 That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.

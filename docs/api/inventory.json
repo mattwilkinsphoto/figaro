@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 955,
+  "pages": 965,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -165242,6 +165242,70 @@
       "page": "com/cra/figaro/library/atomic/continuous/CompoundUniform.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.continuous.ConditionalCopulaDistribution",
+      "name": "logDensity",
+      "anchor": "logDensity-f10",
+      "signature": "def logDensity(values: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "values: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "",
+      "contract": "Value parameters values finite physical values in remainingIndices order Attributes Returns conditional Lebesgue log density including the ORIGINAL marginal-transform Jacobian Example conditional.logDensity(Vector(0.2))",
+      "example": "receiver.logDensity(values)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/ConditionalCopulaDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.ConditionalCopulaDistribution",
+      "name": "sample",
+      "anchor": "sample-930",
+      "signature": "def sample(rng: Random): Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rng: Random"
+          ]
+        }
+      ],
+      "returns": "Vector[Double]",
+      "summary": "",
+      "contract": "Value parameters rng caller-owned random stream @return draw in remainingIndices order Attributes Example conditional.sample(com.cra.figaro.util.SamplingRandom.scalaRandom(42))",
+      "example": "receiver.sample(rng)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/ConditionalCopulaDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.CopulaDistribution",
+      "name": "condition",
+      "anchor": "condition-fffff9d6",
+      "signature": "def condition(indices: Vector[Int], values: Vector[Double]): ConditionalCopulaDistribution",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "indices: Vector[Int]",
+            "values: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "ConditionalCopulaDistribution",
+      "summary": "Condition on exact physical coordinates; omitted coordinates retain original index order.",
+      "contract": "Condition on exact physical coordinates; omitted coordinates retain original index order. Value parameters indices nonempty proper subset of distinct coordinates values finite observations matching indices; finite positive marginal density required Attributes Returns immutable normalized conditional sampler/log-density and the marginal evidence score Example law.condition(Vector(0), Vector(1.0)).sample(rng)",
+      "example": "receiver.condition(indices, values)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/CopulaDistribution.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.continuous.CopulaDistribution",
       "name": "gaussianPartitionMutualInformation",
       "anchor": "gaussianPartitionMutualInformation-f10",
@@ -165301,6 +165365,28 @@
       "summary": "",
       "contract": "Value parameters indices nonempty distinct valid coordinates in desired order Attributes Returns exact marginal copula law; this is not a conditional distribution Example law.marginal(Vector(0))",
       "example": "receiver.marginal(indices)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/CopulaDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.CopulaDistribution",
+      "name": "partialLogDensity",
+      "anchor": "partialLogDensity-479",
+      "signature": "def partialLogDensity(indices: Vector[Int], values: Vector[Double]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "indices: Vector[Int]",
+            "values: Vector[Double]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Score exact observed coordinates, integrating all omitted coordinates out.",
+      "contract": "Score exact observed coordinates, integrating all omitted coordinates out. Value parameters indices distinct observed coordinate indices, in the order of values; empty allowed values finite exact observations in physical units Attributes Returns marginal log density, or zero for no observations; not an interval probability Example law.partialLogDensity(Vector(1), Vector(2.0))",
+      "example": "receiver.partialLogDensity(indices, values)",
       "object": false,
       "page": "com/cra/figaro/library/atomic/continuous/CopulaDistribution.html"
     },
@@ -165378,6 +165464,35 @@
       "summary": "",
       "contract": "Value parameters distribution fixed continuous copula @param name name @param collection owning graph Attributes Returns observation-ready vector element; not mixed-marginal or missing-coordinate integration Example CopulaElement(law)",
       "example": "com.cra.figaro.library.atomic.continuous.CopulaElement.apply(distribution)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/CopulaElement$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.CopulaElement",
+      "name": "observedMarginal",
+      "anchor": "observedMarginal-fffff605",
+      "signature": "def observedMarginal(distribution: CopulaDistribution, indices: Vector[Int])(using name: Name[Vector[Double]], collection: ElementCollection): AtomicCopula",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "distribution: CopulaDistribution",
+            "indices: Vector[Int]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Vector[Double]]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "AtomicCopula",
+      "summary": "Build a marginal element for exact partial evidence without pretending that omitted coordinates were observed. Use Chain for parameter-dependent laws.",
+      "contract": "Build a marginal element for exact partial evidence without pretending that omitted coordinates were observed. Use Chain for parameter-dependent laws. Value parameters distribution full fixed law @param indices nonempty distinct observed coordinates name element name @param collection owning graph Attributes Returns element whose observe call scores the exact marginal density Example CopulaElement.observedMarginal(law, Vector(0)).observe(Vector(1.0))",
+      "example": "com.cra.figaro.library.atomic.continuous.CopulaElement.observedMarginal(distribution, indices)(using name, collection)",
       "object": true,
       "page": "com/cra/figaro/library/atomic/continuous/CopulaElement$.html"
     },
@@ -170437,6 +170552,112 @@
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureDistribution.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Attempt",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Attempt.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Attempt",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Attempt.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit",
+      "name": "fit",
+      "anchor": "fit-6ce",
+      "signature": "def fit(data: Vector[LinearAngular], config: Config = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "data: Vector[LinearAngular]",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "Fit supplied IID training observations; use independent data for quality assessment.",
+      "contract": "Fit supplied IID training observations; use independent data for quality assessment. Value parameters config bounded fitting settings; initialization and optimizer costs included data 30..100000 finite observations, each with exactly one linear coordinate, absolute linear magnitude <=1e50; fixed component counts require enough data Attributes Returns best locally fitted immutable law plus explicit per-restart diagnostics Example GaussVonMisesMixtureFit.fit(points, GaussVonMisesMixtureFit.Config(components=2)) Invalid data/config throws; interruption propagates without clearing the interrupt flag.",
+      "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.fit(data, config)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureInformation",
       "name": "bhattacharyya",
       "anchor": "bhattacharyya-41b",
@@ -170503,6 +170724,84 @@
       "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureInformation.kl(p, q, config)",
       "object": true,
       "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureInformation$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.Result",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.Result",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$$Result.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation",
+      "name": "compute",
+      "anchor": "compute-fffff708",
+      "signature": "def compute(law: GaussVonMisesMixtureDistribution, config: Config = ...): Result",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "law: GaussVonMisesMixtureDistribution",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Result",
+      "summary": "",
+      "contract": "Value parameters config fixed sample/Fourier budget, not an automatic stopping criterion law immutable joint mixture, 1..32 linear coordinates; active components require kappa<=50 and canonical coupling magnitudes<=1000 on the numerical path Attributes Returns full-mixture partition MI estimate and separate sampling/numerical diagnostics Example GaussVonMisesMixtureMutualInformation.compute(law) Invalid arguments throw; cancellation propagates; unsupported/numerical cases expose no value.",
+      "example": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.compute(law, config)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.Result",

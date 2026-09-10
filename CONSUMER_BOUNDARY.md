@@ -4,14 +4,14 @@ Figaro provides a probabilistic modeling language and inference algorithms as a 
 
 ## Dependency contract
 
-Depend on a compiled, versioned Figaro artifact. The coordinates for the current development snapshot are:
+Depend on a compiled, versioned Figaro artifact. The coordinates for the 6.1 release line are:
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.0.0-modern.23-SNAPSHOT"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
 ```
 
-Resolve this snapshot by running `sbt "figaro / publishLocal"` in the Figaro checkout, or by publishing it to a configured package repository. Local publication is not a public release. See [building and publication](docs/BUILDING.md) for repository settings and artifact contents.
+Resolve it using the [6.1 Maven-layout release bundle](docs/RELEASE_6_1.md), or run `sbt "figaro / publishLocal"` in the matching tagged checkout. This coordinate is not published to Maven Central. See [building and publication](docs/BUILDING.md) for repository settings and artifact contents.
 
 Java consumers use the corresponding binary artifact (`figaro_3` for the modernized line) together with its declared Scala/runtime dependencies. The POM is the dependency contract. The API is Scala-shaped; Java interoperability and any facade require application-level validation. The fat JAR excludes the Scala runtime and is not a standalone executable.
 
@@ -34,4 +34,4 @@ for the tested scope and remaining deployment limitations.
 
 The Scala 3 artifact is not a binary-compatible replacement for `figaro_2.13`. Recompile dependent code and validate model construction, evidence, inference results, cleanup, and supported parameter serialization. Focused modernization tests do not certify every model or deployment mode; the full historical test suite is not claimed green.
 
-Use an immutable release for deployment once available. Until then, use a locally published snapshot for development or an explicitly versioned prerelease from a package repository. See [migration changes](docs/MIGRATION.md) for source adaptations and remaining limitations.
+Pin the immutable release/tag and verify bundle checksums before deployment. See [migration changes](docs/MIGRATION.md) for source adaptations and remaining limitations.

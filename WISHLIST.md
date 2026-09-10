@@ -8,6 +8,12 @@ and joint linear-angular Gauss-von Mises**, as requested on 2026-09-07.
 
 ## How to read and extend this list
 
+Figaro 6.1 adds exact-coordinate copula conditioning/partial evidence, public
+scalar-linear GVM-mixture fitting and full-mixture linear/angular MI. See the
+[release record](docs/RELEASE_6_1.md) for bounded contracts and validation.
+Higher-dimensional fitting, automatic component selection and mixed/count copulas
+remain candidates. Temporal grammar work is outside this library program.
+
 Status meanings: **native** = a current named Figaro element exists; **composable** =
 a mathematical construction is available but may lack a tested density/evidence API;
 **researched** = definition/method investigated, no shipped implementation implied;
@@ -29,8 +35,9 @@ constructions are integrated as modern.22 at `742061bd`, with passing main CI.
 Modern.23 adds [observation semantics](docs/OBSERVATION_MODELS.md),
 [mixed scalar measures](docs/MIXED_MEASURES.md), [fixed GVM mixtures](docs/GVM_MIXTURES.md)
 and [continuous copulas](docs/COPULAS.md). The [GVM/GMM comparison](docs/GVM_MIXTURE_RESEARCH_PLAN.md)
-continues beyond its initial controlled experiment; production fitting, stronger
-representation controls and application tracking/fusion are not delivered by it.
+now includes the 6.1 bounded scalar-linear fitter and stronger representation controls.
+Higher-dimensional fitting, optimized wrapped-model controls and automatic component
+selection remain open; application tracking/fusion is outside this library milestone.
 
 Use stable `DIST-xx` IDs when moving work into the roadmap. Priorities are P0 (first
 program), P1 (common missing breadth), P2 (subsequent breadth) and P3 (specialist research).
@@ -51,7 +58,7 @@ and special cases attached to their family instead of creating duplicate impleme
 | DIST-07 / P2 | GEV/GPD implemented for modern.18 | [Parameter-dependent support and tail APIs](docs/DISTRIBUTION_BREADTH.md), including zero-shape Gumbel/exponential limits | Convenience Frechet/Lomax aliases, Zipf-Mandelbrot and further tail/truncation variants |
 | DIST-08 / P2 | MVN/Dirichlet native; multivariate t and multinomial count vectors implemented | [Joint counts and complementary-block MI](docs/DISTRIBUTION_BREADTH.md), alongside elliptical t | Negative multinomial, Dirichlet count mixtures, joint survival and continuous-categorical |
 | DIST-09 / P2 | Restricted Wishart, inverse-Wishart and LKJ integrated through modern.20 | [Covariance priors and KL/Bhattacharyya](docs/COVARIANCE_PRIORS.md) | Near-singular df, matrix normal/t/beta, matrix Langevin, Stiefel-uniform; support measures differ |
-| DIST-10 / P1 | Construction/GMM kernels and bounded modern.23 mixed measures implemented | Affine/exp/monotone transforms, finite/half-infinite truncation, folding, wrapped Cauchy, count/scalar/GVM mixtures, GMMs, zero-adjusted counts, atoms/slabs, clipping and censoring evidence | Generic wrapped sums, compound Poisson-Gamma, mixed convolutions; production GVM fitting, component selection and broader mixture information |
+| DIST-10 / P1 | Construction/GMM kernels, mixed measures and bounded 6.1 GVM fitting/MI implemented | Affine/exp/monotone transforms, finite/half-infinite truncation, folding, wrapped Cauchy, count/scalar/GVM mixtures, GMMs, zero-adjusted counts, atoms/slabs, clipping and censoring evidence | Generic wrapped sums, compound Poisson-Gamma, mixed convolutions; higher-dimensional GVM fitting, component selection and broader mixture information |
 | DIST-11 / P3 | Flexible systems and quantile-defined laws; wishlist | Valid parameter/monotonicity contracts before fitting APIs | Pearson, Johnson, metalog, quantile-parameterized, Tukey lambda and Wakeby |
 | DIST-12 / P3 | Singular/degenerate and nonnumeric measures; Constant/Select native | Explicit distinction between atoms, densities and singular laws | Cantor, circular point masses; no fabricated Lebesgue PDF for a singular law |
 | DIST-13 / P3 | Physical/scattering and random-matrix spectral laws; wishlist | Verify domain, reference measure and normalization first | Henyey-Greenstein, Mie, Marchenko-Pastur, Wigner, Tracy-Widom and other specialist laws |

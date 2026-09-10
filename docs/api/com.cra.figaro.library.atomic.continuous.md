@@ -32365,6 +32365,78 @@ Invocation template:
 receiver.unset()
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.ConditionalCopulaDistribution.logDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ConditionalCopulaDistribution.html#logDensity-f10)
+
+```scala
+def logDensity(values: Vector[Double]): Double
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` values: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Value parameters values finite physical values in remainingIndices order Attributes Returns conditional Lebesgue log density including the ORIGINAL marginal-transform Jacobian Example conditional.logDensity(Vector(0.2))
+
+Invocation template:
+
+```scala
+receiver.logDensity(values)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.ConditionalCopulaDistribution.sample ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/ConditionalCopulaDistribution.html#sample-930)
+
+```scala
+def sample(rng: Random): Vector[Double]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` rng: Random ``.
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Value parameters rng caller-owned random stream @return draw in remainingIndices order Attributes Example conditional.sample(com.cra.figaro.util.SamplingRandom.scalaRandom(42))
+
+Invocation template:
+
+```scala
+receiver.sample(rng)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.CopulaDistribution.condition ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/CopulaDistribution.html#condition-fffff9d6)
+
+```scala
+def condition(indices: Vector[Int], values: Vector[Double]): ConditionalCopulaDistribution
+```
+
+Condition on exact physical coordinates; omitted coordinates retain original index order.
+
+Type parameters: none.
+
+Parameters, list 1: `` indices: Vector[Int] ``; `` values: Vector[Double] ``.
+
+Returns: `` ConditionalCopulaDistribution ``.
+
+Source contract/attributes: Condition on exact physical coordinates; omitted coordinates retain original index order. Value parameters indices nonempty proper subset of distinct coordinates values finite observations matching indices; finite positive marginal density required Attributes Returns immutable normalized conditional sampler/log-density and the marginal evidence score Example law.condition(Vector(0), Vector(1.0)).sample(rng)
+
+Invocation template:
+
+```scala
+receiver.condition(indices, values)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.CopulaDistribution.gaussianPartitionMutualInformation ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/CopulaDistribution.html#gaussianPartitionMutualInformation-f10)
@@ -32435,6 +32507,30 @@ Invocation template:
 
 ```scala
 receiver.marginal(indices)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.CopulaDistribution.partialLogDensity ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/CopulaDistribution.html#partialLogDensity-479)
+
+```scala
+def partialLogDensity(indices: Vector[Int], values: Vector[Double]): Double
+```
+
+Score exact observed coordinates, integrating all omitted coordinates out.
+
+Type parameters: none.
+
+Parameters, list 1: `` indices: Vector[Int] ``; `` values: Vector[Double] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Score exact observed coordinates, integrating all omitted coordinates out. Value parameters indices distinct observed coordinate indices, in the order of values; empty allowed values finite exact observations in physical units Attributes Returns marginal log density, or zero for no observations; not an interval probability Example law.partialLogDensity(Vector(1), Vector(2.0))
+
+Invocation template:
+
+```scala
+receiver.partialLogDensity(indices, values)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.CopulaDistribution.sample ``
@@ -32533,6 +32629,32 @@ Invocation template:
 
 ```scala
 com.cra.figaro.library.atomic.continuous.CopulaElement.apply(distribution)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.CopulaElement.observedMarginal ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/CopulaElement$.html#observedMarginal-fffff605)
+
+```scala
+def observedMarginal(distribution: CopulaDistribution, indices: Vector[Int])(using name: Name[Vector[Double]], collection: ElementCollection): AtomicCopula
+```
+
+Build a marginal element for exact partial evidence without pretending that omitted coordinates were observed. Use Chain for parameter-dependent laws.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: CopulaDistribution ``; `` indices: Vector[Int] ``.
+
+Context parameters, list 2: `` name: Name[Vector[Double]] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicCopula ``.
+
+Source contract/attributes: Build a marginal element for exact partial evidence without pretending that omitted coordinates were observed. Use Chain for parameter-dependent laws. Value parameters distribution full fixed law @param indices nonempty distinct observed coordinates name element name @param collection owning graph Attributes Returns element whose observe call scores the exact marginal density Example CopulaElement.observedMarginal(law, Vector(0)).observe(Vector(1.0))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.CopulaElement.observedMarginal(distribution, indices)(using name, collection)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.Dirichlet.apply ``
@@ -38733,6 +38855,174 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Attempt.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Attempt.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Attempt.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Attempt.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.fit ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit$.html#fit-6ce)
+
+```scala
+def fit(data: Vector[LinearAngular], config: Config = ...): Result
+```
+
+Fit supplied IID training observations; use independent data for quality assessment.
+
+Type parameters: none.
+
+Parameters, list 1: `` data: Vector[LinearAngular] ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Fit supplied IID training observations; use independent data for quality assessment. Value parameters config bounded fitting settings; initialization and optimizer costs included data 30..100000 finite observations, each with exactly one linear coordinate, absolute linear magnitude <=1e50; fixed component counts require enough data Attributes Returns best locally fitted immutable law plus explicit per-restart diagnostics Example GaussVonMisesMixtureFit.fit(points, GaussVonMisesMixtureFit.Config(components=2)) Invalid data/config throws; interruption propagates without clearing the interrupt flag.
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureFit.fit(data, config)
+```
+
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureInformation.bhattacharyya ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureInformation$.html#bhattacharyya-41b)
@@ -38803,6 +39093,126 @@ Invocation template:
 
 ```scala
 com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureInformation.kl(p, q, config)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.Result.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$$Result.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.Result.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$$Result.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.compute ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureMutualInformation$.html#compute-fffff708)
+
+```scala
+def compute(law: GaussVonMisesMixtureDistribution, config: Config = ...): Result
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` law: GaussVonMisesMixtureDistribution ``; `` config: Config = ... ``.
+
+Returns: `` Result ``.
+
+Source contract/attributes: Value parameters config fixed sample/Fourier budget, not an automatic stopping criterion law immutable joint mixture, 1..32 linear coordinates; active components require kappa<=50 and canonical coupling magnitudes<=1000 on the numerical path Attributes Returns full-mixture partition MI estimate and separate sampling/numerical diagnostics Example GaussVonMisesMixtureMutualInformation.compute(law) Invalid arguments throw; cancellation propagates; unsupported/numerical cases expose no value.
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.continuous.GaussVonMisesMixtureMutualInformation.compute(law, config)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.GaussVonMisesMutualInformation.Result.productElementNames ``

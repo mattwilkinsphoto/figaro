@@ -39,10 +39,14 @@ implementation does not introduce sample-based estimators or generalized fusion.
 
 ## Delivery sequence
 
+Figaro 6.1 adds [full-mixture linear/angular MI](GVM_MIXTURE_MI.md), with an analytic
+Fourier angular-marginal reduction, IID log-ratio estimation and separate numerical/MCSE
+diagnostics. This is not component-label MI or certified stopping.
+
 Modern.23 adds [mixed atom/slab comparisons](MIXED_MEASURES.md),
 [full GVM-mixture Monte Carlo KL/Bhattacharyya and label/state MI](GVM_MIXTURES.md),
 and [continuous copula vector adapters and Gaussian partition MI](COPULAS.md).
-GVM-mixture linear/angle MI remains separate; component MI does not substitute for it.
+At modern.23 linear/angle MI remained separate; 6.1 adds it as described above.
 
 Modern.22 adds [construction-aware comparisons](EXTENDED_CONSTRUCTIONS.md): common
 declared-bijection invariance, analytic wrapped-Cauchy KL, guarded folded/truncated

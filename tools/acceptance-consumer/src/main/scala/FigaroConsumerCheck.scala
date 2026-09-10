@@ -3,6 +3,7 @@ import com.cra.figaro.algorithm.sampling.{VectorSliceSampler as VS, GaussianBloc
 import com.cra.figaro.algorithm.sampling.parallel.{ParImportance, MultiChainMetropolisHastings as MH,
   MultiChainVectorSliceSampler as MC, McmcPrecision, TruncatedSprt}
 import com.cra.figaro.language.*
+import com.cra.figaro.util.SamplingRandom
 import com.cra.figaro.library.atomic.continuous.{Normal, GaussVonMisesDistribution,
   GaussVonMisesScalarBhattacharyya as ScalarOverlap, GaussVonMisesMutualInformation as MI}
 import java.nio.file.{Files, Path}
@@ -25,6 +26,21 @@ object FigaroConsumerCheck {
       require(absent, "Consumer unexpectedly resolved a test/example/instrumentation class")
     }
     println(s"Published artifact verified: $sha")
+
+    {
+      import com.cra.figaro.library.atomic.continuous.*
+      val law=CopulaDistribution(Vector.fill(2)(GaussianDistribution(0,1)),Vector(Vector(1.0,.6),Vector(.6,1.0)))
+      val conditional=law.condition(Vector(0),Vector(1))
+      require(math.abs(conditional.logDensity(Vector(.2))-GaussianDistribution(.6,.8).logDensity(.2))<1e-12)
+      require(law.partialLogDensity(Vector.empty,Vector.empty)==0)
+      val g=GaussVonMisesDistribution(Vector(0),Vector(Vector(1.0)),.1,Vector(.4),Vector(Vector(.3)),4)
+      val rng=SamplingRandom.scalaRandom(610100)
+      val fitted=GaussVonMisesMixtureFit.fit(Vector.fill(100)(g.sample(rng)),GaussVonMisesMixtureFit.Config(restarts=1,maxIterations=4))
+      require(fitted.distribution.nonEmpty)
+      val mi=GaussVonMisesMixtureMutualInformation.compute(fitted.distribution.get,GaussVonMisesMixtureMutualInformation.Config(draws=500))
+      require(mi.value.nonEmpty && mi.mcse.nonEmpty)
+      println("6.1 conditional copula, GVM fitting and mixture partition MI verified")
+    }
 
     {
       import com.cra.figaro.algorithm.sampling.{BoundedIidPrecision as B,DeclaredRegionCoverage as R}

@@ -5,7 +5,9 @@
 The immutable mixture combines fixed Horwood-Poore GVM components on a real vector
 plus one circle. It represents several possible linear-angular states without
 collapsing them into one component. This is a probability-law API, not a filter,
-PDF-fusion algorithm, orbit propagator or production parameter fitter.
+PDF-fusion algorithm or orbit propagator. A separate [6.1 bounded fitter](GVM_MIXTURE_FITTING.md)
+estimates scalar-linear mixture parameters; this kernel also supports fixed
+higher-dimensional components.
 
 ## Quick start
 
@@ -77,7 +79,8 @@ println(GaussVonMisesMixtureInformation.componentMutualInformation(law, config))
   Signed noisy KL/MI estimates are retained; MCSE is not a certified error bound or
   guaranteed stopping criterion. Zero overlap estimates can be unresolved.
 - Label/state MI is NOT linear/angle MI. The existing single-GVM MI method cannot
-  simply be averaged to obtain mixture partition MI. That extension remains open.
+  simply be averaged to obtain mixture partition MI. Use the separate [6.1 full-mixture
+  partition diagnostic](GVM_MIXTURE_MI.md), with numerical/MCSE diagnostics.
 - More components do not automatically mean more accuracy; parameter estimation,
   phase unwrapping, label ambiguity and rare components create additional risks.
 - Fixed kernels are reusable across threads; elements and RNGs require separate
@@ -85,6 +88,9 @@ println(GaussVonMisesMixtureInformation.componentMutualInformation(law, config))
   inherited automatically from its components.
 
 ## Related
+
+[Public scalar-linear fitting](GVM_MIXTURE_FITTING.md) and [full-mixture partition
+MI](GVM_MIXTURE_MI.md) are additive 6.1 capabilities.
 
 [Research and initial GMM comparison](MODELING_CAPABILITIES_ACCEPTANCE.md),
 [GVM kernel](GAUSS_VON_MISES.md), [long-term research plan](GVM_MIXTURE_RESEARCH_PLAN.md),

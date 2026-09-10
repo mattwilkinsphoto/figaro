@@ -2,10 +2,15 @@
 
 ## Current development line
 
+The current feature release line is **6.1.0**, beyond the 6.0 modernization baseline.
+It adds exact-coordinate copula conditioning, public bounded scalar-linear GVM-mixture
+fitting and full-mixture linear/angular MI. See [6.1 installation, acceptance and
+comparison limits](RELEASE_6_1.md). All modern.* entries below describe historical milestones.
+
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The source default is
-`6.0.0-modern.23-SNAPSHOT`; it requires local publication or an explicitly configured
+`6.1.0`; it requires the release bundle, local publication or an explicitly configured
 artifact repository. A locally distributed `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.

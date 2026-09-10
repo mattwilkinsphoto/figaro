@@ -2,7 +2,11 @@
 
 Status: modern.23 delivers the [fixed mixture kernel](GVM_MIXTURES.md), a focused
 literature baseline and an [initial controlled GMM comparison](MODELING_CAPABILITIES_ACCEPTANCE.md).
-Production parameter fitting, stronger matched-accuracy/parameter-budget studies and
+The 6.1 follow-on adds [public bounded scalar-linear fitting](GVM_MIXTURE_FITTING.md),
+[full-mixture partition MI](GVM_MIXTURE_MI.md) and a stronger study with Gaussian-
+generated truths, EM GMM controls, wrapped controls and common parameter ceilings.
+See [6.1 acceptance](RELEASE_6_1.md); the original experiment below remains historical.
+Higher-dimensional parameter fitting, optimized wrapped-likelihood fitting and
 application tracking systems remain research. Neither novelty nor broad superiority
 has been established. The initial comparison's GVM-generated truths and simple fitters
 must not be mistaken for a conclusive application study.

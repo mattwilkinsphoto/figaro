@@ -1,0 +1,140 @@
+# Figaro 6.1 release and acceptance
+
+## Scope
+
+6.0 is the modernization baseline. **6.1.0** consolidates subsequent additive
+modeling/inference work and closes three bounded milestones:
+
+1. A versioned consumable library, classifiers/POM, reproducible build, independent
+   consumer and release checksums; not an application-specific runtime.
+2. [Exact-coordinate partial copula evidence and conditional draws](COPULAS.md),
+   including Gaussian/t latent conditioning and original-transform Jacobians.
+3. [Public scalar-linear GVM-mixture fitting](GVM_MIXTURE_FITTING.md), [full-mixture
+   linear/angular MI](GVM_MIXTURE_MI.md) and stronger GMM representation controls.
+
+Existing packages, inference defaults and runtime dependency versions are retained.
+Recompile consumers previously using modern.* snapshots. The 6.1 version denotes an
+additive feature release, not proof of universal inference accuracy or thread safety.
+Release candidates must complete the gates below before tagging/publishing.
+
+## Installation and artifact contract
+
+Use the tagged release or its compiled Maven-layout bundle. The coordinates are:
+
+```scala
+scalaVersion := "3.9.0"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
+```
+
+These coordinates are NOT a Maven Central publication. Either publish the tagged
+source locally with `sbt "figaro / publishLocal"`, or configure the extracted
+release bundle's Maven directory as a file repository. Its POM resolves runtime
+dependencies normally; do not use a thin JAR without dependencies. See the bundle's
+installation README for the exact resolver. The fat JAR excludes the Scala runtime
+and is neither an executable nor a substitute for a tested dependency setup.
+
+The old modern.10-rc.1 bundle remains immutable. No replacement of its bytes or
+historical evidence is implied. OSGi deployment is not a validated release target;
+the supported integration is ordinary JVM dependency resolution.
+
+## Validation gates
+
+- All 571 modernization tests across 58 suites passed locally on 2026-09-09.
+  Sixteen new 6.1 tests include graph evidence, Gaussian/t density identities and
+  seeded moments, non-Gaussian Jacobians, work limits, cancellation, circular seam
+  handling, monotone accepted fitting traces, concentration/variance constraints,
+  single-component MI reductions, multidimensional MI and independent positive
+  physical-coordinate integration for mixture-induced dependence.
+- Two empty-action-cache clean builds produced identical thin/fat JARs locally.
+- All four artifacts passed class-content/legal/Java-17 checks.
+- The independent consumer compiled against and hash-checked the published JAR,
+  including the new conditional, fitting and information APIs. CI additionally
+  exercises the Maven-layout bundle with Ivy local excluded.
+- Generated API freshness (12,748 public method entries), local links, 18
+  documentation-tool tests, seven artifact-validator tests, four bundle-tool tests,
+  and six independent numerical/evidence tests passed.
+- Branch and main CI must pass on the integrated source before release publication.
+
+No full historical stochastic-suite or every-platform certification is claimed.
+
+Local reproducibility hashes (the release bundle records the actual published
+artifact hashes; cross-platform byte identity is not assumed):
+
+```text
+c49180e76cca306c0e88e29754449ab303d0ed8d7c10470c424404035e22f629  figaro_3-6.1.0.jar
+4efa0d70e71c2ff435eb38d3d9a473bddd99c18bfbcc9248593e1efd3dddca06  figaro_3-6.1.0-fat.jar
+```
+
+## Stronger representation study
+
+`Release61RepresentationStudy` uses five fixtures (three GVM-generated, two
+Gaussian-generated), five independent training/evaluation seeds, three parameter
+ceilings (6,13,27), and three methods: periodic-likelihood GVM EM, chart-conditioned
+GMM EM, and a wrapped GMM control. This is 225 attempted comparisons per JVM.
+Each trial has 800 training and 3000 held-out points, plus 3000 independent candidate
+draws. Repeated JVMs repeat those datasets; they are not additional independent trials.
+
+All candidate construction, chart selection and normalization are timed. Common
+source-data generation is excluded. Fitting, scoring and sampling are reported
+separately. Every refusal and nonconverged candidate remains in the record. GVM
+initialization uses three restarts; GMM uses its existing deterministic EM initializer.
+Training sample counts and parameter ceilings match, not exact optimizer work or
+wall-clock budgets. Parameter slack and actual counts are reported.
+
+The wrapped control wraps draws exactly; its density sums Gaussian images spanning
+at least twelve conditional angular standard deviations, with a normalization test.
+It fits EM in a declared training-selected chart, NOT by optimizing a wrapped
+likelihood. This is a stronger control than raw chart moments but not an optimal
+wrapped-model comparison. GVM candidates with iteration-limit status are scored as
+such; the existing GMM fitter refuses its unconverged candidates. Compare status
+counts as well as scores rather than treating these output contracts as equivalent.
+
+The comparison does not establish GVM-mixture novelty, general superiority,
+operational accuracy, or an application-specific filtering capability. Further
+research includes higher-dimensional fitting and optimized wrapped-likelihood controls.
+
+### Recorded results
+
+The complete records are [JVM A](release61-representation-a.csv),
+[JVM B](release61-representation-b.csv), and [JVM C](release61-representation-c.csv).
+All non-timing fields replay identically across the three JVMs. These are five
+independent data seeds, **not fifteen**; do not pool repeated rows for uncertainty.
+The implementation is preserved in this release's source tag.
+
+Mean held-out log density (nats/observation; higher is better), averaged over all
+five seeds at the six-parameter ceiling where all methods returned candidates:
+
+| Fixture | GVM | Chart GMM | Wrapped GMM |
+|---|---:|---:|---:|
+| Curved GVM | -1.354 | -2.846 | -2.834 |
+| Angular-seam GVM | -1.503 | -1.957 | -1.903 |
+| Separated GVM components | -2.646 | -2.641 | -2.645 |
+| Local Gaussian | -1.054 | -1.053 | -1.053 |
+| Broad wrapped Gaussian | -3.132 | -3.210 | -3.165 |
+
+The curved fixture benefits substantially from the GVM representation. The local
+Gaussian fixture does not. On the separated fixture, moving from one to two
+components improves both GVM and wrapped GMM to about -2.387. Increasing to four
+components does not consistently improve held-out scores; many GVM fits reach
+their iteration limit and some GMM fits are refused. At higher budgets, reporting
+only averages over returned GMM candidates would hide those refusals.
+
+This is not a speedup claim: for the curved fixture, median total fit times across
+the fifteen repeated timings were about 8.2 ms (one-component GVM) versus 1.1 ms
+(one-component wrapped GMM), and 477 ms versus 39 ms at four components. Timings
+are environment-specific and include warmup variation. The useful tradeoff here
+is representation quality per parameter, with explicit optimizer cost and status.
+
+## Reproduction
+
+```sh
+sbt "figaro / Test / testOnly com.cra.figaro.test.modernization.Release61ModelingTest"
+sbt "figaro / Test / runMain com.cra.figaro.test.modernization.Release61RepresentationStudy 5"
+python -B tools/test_release61_reference.py
+python -B tools/test_release61_evidence.py
+```
+
+The JVM study runs forked, so repeating `runMain` launches fresh JVMs. Existing
+source-independent numerical tools use research-only mpmath, not a runtime dependency.
+
+Related: [roadmap](../ROADMAP.md), [migration](MIGRATION.md), [consumer boundary](../CONSUMER_BOUNDARY.md).

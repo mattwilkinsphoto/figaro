@@ -1,5 +1,19 @@
 # Migrating to Scala 3 and sbt 2
 
+## Feature release 6.1.0
+
+Update the dependency version from a modern.* snapshot to `6.1.0` and recompile.
+Package names, Java/Scala requirements, runtime dependencies and inference defaults
+are unchanged relative to modern.23. New public APIs are additive. The old Scala 2
+binary remains incompatible. The historical modern.10-rc.1 bundle is not modified.
+
+Use [conditional copulas](COPULAS.md) for exact partial evidence and missing-coordinate
+draws; do not retain the old assumption that only full-vector evidence is supported.
+[GVM fitting](GVM_MIXTURE_FITTING.md) is a bounded scalar-linear public API, not the
+old test-only unwrapped regression. Inspect every fit status before deployment.
+[Mixture partition MI](GVM_MIXTURE_MI.md) is distinct from label/state MI; it has
+separate Fourier-range and numerical-error restrictions. See [release gates](RELEASE_6_1.md).
+
 ## Modeling capabilities (modern.23)
 
 The [four modeling capabilities](MODELING_CAPABILITIES_ACCEPTANCE.md) are additive;

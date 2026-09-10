@@ -60,6 +60,45 @@ println(law.gaussianPartitionMutualInformation(Vector(0)))
 println(I.mutualInformation(tLaw,tLaw.marginal(Vector(0)),tLaw.marginal(Vector(1))))
 ```
 
+## Partial observations and conditional draws (6.1)
+
+Omitted coordinates are integrated out, not filled with a mean or zero. Exact
+observations supply density evidence, not an interval probability. Missing-not-at-
+random data require a separate missingness model.
+
+```scala
+// 1. Score only coordinate 1, integrating coordinate 0 out.
+println(law.partialLogDensity(Vector(1), Vector(2.0)))
+// 2. Draw the missing coordinates, conditional on that exact observation.
+val conditional = law.condition(Vector(1), Vector(2.0))
+println(conditional.remainingIndices)
+println(conditional.sample(com.cra.figaro.util.SamplingRandom.scalaRandom(42)))
+// 3. Apply exact partial evidence in a graph; use Chain for parameter-dependent laws.
+val partial = CopulaElement.observedMarginal(law, Vector(1))
+partial.observe(Vector(2.0))
+```
+
+| Public API | Parameters | Return / semantics |
+| --- | --- | --- |
+| `partialLogDensity(indices, values)` | Distinct valid indices and matching finite values; empty allowed | Exact marginal log density; no evidence returns 0 |
+| `condition(indices, values)` | Nonempty proper subset, finite positive marginal density | Immutable `ConditionalCopulaDistribution` |
+| `conditional.logDensity(values)` | Physical values in `remainingIndices` order | Normalized conditional log density, including the original-transform Jacobian |
+| `conditional.sample(rng)` | Caller-owned stream | Missing-coordinate draw in `remainingIndices` order |
+| `CopulaElement.observedMarginal(law, indices)` | Fixed law, nonempty observed subset, contextual name/collection | Observation-ready marginal vector Element |
+
+Conditional metadata: `joint`, `observedIndices`, `observedValues`, `remainingIndices`,
+`dimension`, and `logEvidence` (observed marginal log density). Gaussian conditioning
+uses a Cholesky solve and Schur complement. Student t adds the observed dimension to
+df and scales the Schur complement by `(df + observed squared Mahalanobis distance)/
+(df + observed dimension)`. The physical transform still uses the ORIGINAL t CDF.
+See [Ding (2016)](https://arxiv.org/abs/1604.00561). These conditional laws do not
+generally retain the original physical marginals.
+
+This is not interval conditioning or general rectangle integration. Empty/full
+observation sets use the original law/evidence score, not zero-dimensional conditional
+objects. Near-singular Schur complements and conditional df beyond the underlying
+kernel's 1e6 cap are refused. There is no implicit jitter, clipping or redraw.
+
 ## Gotchas
 
 - Correlation is on the latent scale, not generally output Pearson correlation.
@@ -72,8 +111,8 @@ println(I.mutualInformation(tLaw,tLaw.marginal(Vector(0)),tLaw.marginal(Vector(1
   In particular, these are not arbitrarily extreme-tail copula implementations.
 - Custom continuous kernels must have consistent CDF/survival/quantile/density.
   The library cannot prove callback correctness. Marginal quantile restrictions remain.
-- No count/mixed marginals, arbitrary copula family, correlation fitting, missing-coordinate
-  likelihood integration or conditional sampler is added. Those need different contracts.
+- No count/mixed marginals, arbitrary copula family, correlation fitting, interval-
+  conditional sampler or general rectangle likelihood is added. Those need different contracts.
 - MI under a Gaussian copula is invariant to invertible marginal transforms; it is
   not computed from a physical covariance matrix. For numerical MI, supply exact
   marginals in the same concatenated block order expected by the existing API.
