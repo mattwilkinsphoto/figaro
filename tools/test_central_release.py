@@ -107,7 +107,7 @@ class CentralTests(unittest.TestCase):
                                               deploymentState=state, purls=['pkg:maven/wrong/x@1']), ID)
 
     def test_validation_failure_stops_without_publish(self):
-        with patch.object(central, 'status_of', return_value={'deploymentState': 'FAILED', 'errors': {'test': ['invalid signature']}}), patch.object(central.time, 'sleep') as sleep:
+        with patch.object(central, 'status_of', return_value={'deploymentState': 'FAILED', 'errors': {'test': ['invalid signature']}}), patch.object(central.time, 'sleep') as sleep, patch('builtins.print'):
             with self.assertRaises(RuntimeError):
                 central.wait_status(ID, 'not-a-token', {'VALIDATED'})
             sleep.assert_not_called()
@@ -119,7 +119,7 @@ class CentralTests(unittest.TestCase):
             self.assertEqual(status.call_count, 40)
 
     def test_verified_bytes_from_central(self):
-        with patch.object(central.urllib.request, 'urlopen', return_value=io.BytesIO(b'jar')):
+        with patch.object(central.urllib.request, 'urlopen', return_value=io.BytesIO(b'jar')), patch('builtins.print'):
             central.verify_central({'group/file.jar': b'jar'})
         with patch.object(central.urllib.request, 'urlopen', return_value=io.BytesIO(b'wrong')):
             with self.assertRaises(RuntimeError):

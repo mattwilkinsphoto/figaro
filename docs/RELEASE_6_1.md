@@ -19,7 +19,15 @@ Release candidates must complete the gates below before tagging/publishing.
 
 ## Installation and artifact contract
 
-Use the tagged release or its compiled Maven-layout bundle. Download the ZIP and
+Figaro 6.1.0 is now published to Maven Central. Normal consumers need only:
+
+```scala
+scalaVersion := "3.9.0"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
+```
+
+See the [Central publication record](MAVEN_CENTRAL.md). For the supplemental
+compiled Maven-layout bundle instead, download the ZIP and
 its checksum from the [6.1.0 release](https://github.com/mattwilkinsphoto/figaro/releases/tag/v6.1.0),
 verify and extract it, then configure the extracted Maven directory:
 
@@ -29,9 +37,9 @@ resolvers += "figaro-release" at file("/absolute/path/to/extracted/maven").toURI
 libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
 ```
 
-These coordinates are NOT a Maven Central publication. Either publish the tagged
-source locally with `sbt "figaro / publishLocal"`, or configure the extracted
-release bundle's Maven directory as a file repository. Its POM resolves runtime
+The file resolver above is only needed for the downloaded-bundle option, not for
+normal Central consumption. The original archive predates Central publication;
+its bytes and embedded distribution note remain unchanged. Its POM resolves runtime
 dependencies normally; do not use a thin JAR without dependencies. See the bundle's
 installation README for the exact resolver. The fat JAR excludes the Scala runtime
 and is neither an executable nor a substitute for a tested dependency setup.

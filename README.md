@@ -37,27 +37,24 @@ Figaro 6.1 adds [partial/conditional copula workflows](docs/COPULAS.md),
 [GVM-mixture fitting](docs/GVM_MIXTURE_FITTING.md) and [full-mixture partition
 MI](docs/GVM_MIXTURE_MI.md). See [installation and release gates](docs/RELEASE_6_1.md).
 
-For a compiled dependency without building Figaro yourself, use the
-[6.1.0 release assets](https://github.com/mattwilkinsphoto/figaro/releases/tag/v6.1.0).
-The Maven-layout ZIP includes the library, sources, API documentation, dependency
-POM and installation instructions. Verify its checksum before extracting it.
-
-[Maven Central publication](docs/MAVEN_CENTRAL.md) describes the signed release
-workflow and how to use the dependency after Central availability is confirmed.
+The compiled library is available from Maven Central; no Figaro checkout or
+local publication is required. The supplemental [6.1.0 release assets](https://github.com/mattwilkinsphoto/figaro/releases/tag/v6.1.0)
+remain available with sources, API documentation, POM and checksums.
+See [Maven Central publication](docs/MAVEN_CENTRAL.md) for the release workflow and evidence.
 
 The latest capability expansion includes [event-weighted mixtures](docs/WEIGHTED_RARE_EVENT_MIXTURES.md),
 [static graph proposals](docs/STATIC_GRAPH_PROPOSALS.md) and
 [extended distribution constructions](docs/EXTENDED_CONSTRUCTIONS.md), with
 [complete cost comparisons and limitations](docs/CAPABILITY_EXPANSION_ACCEPTANCE.md).
 
-From this checkout, run `sbt "figaro / publishLocal"`. In a separate Scala application's `build.sbt`:
+In your Scala application's `build.sbt`:
 
 ```scala
 scalaVersion := "3.9.0"
 libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
 ```
 
-That coordinate resolves only after local publication, unless you separately publish it to a repository. Local publication is per user and machine. Producer and consumer must use the same local repository. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
+The build resolves Figaro and its runtime dependencies from Central. Use `publishLocal` only for testing your own source changes, with an appropriately distinct development version. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.
 
 ## Documentation
 

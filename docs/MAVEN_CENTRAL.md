@@ -4,9 +4,22 @@
 
 The Central release workflow distributes Figaro as a normal Maven dependency,
 without asking applications to compile Figaro or configure a downloaded file
-repository. Publication infrastructure is prepared; availability must be confirmed
-by a successful **publish** or **verify** workflow run before relying on Central.
-The existing GitHub 6.1.0 bundle remains usable independently.
+repository. Version **6.1.0 is available on Maven Central**. All four public
+artifacts match the original GitHub release bytes. The existing GitHub 6.1.0 bundle
+remains usable independently.
+
+- [Signed staging and Sonatype validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/34442400348)
+- [Central byte checks and standalone consumer](https://github.com/mattwilkinsphoto/figaro/actions/runs/34442608897)
+- [Successful same-deployment continuation: PUBLISHED and consumer passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/34442733153)
+- [Artifact directory on Central](https://repo.maven.apache.org/maven2/io/github/mattwilkinsphoto/figaro_3/6.1.0/)
+
+The initial publish request was accepted, but its workflow stopped when the Portal
+omitted coordinate metadata during status polling. No second bundle was uploaded.
+The separate read-only verification checks actual public artifacts independently
+of Portal metadata. The status handler now accepts unavailable post-publication
+metadata while retaining strict pre-publication and artifact identity checks.
+The successful continuation confirmed `PUBLISHED` with an empty `purls` array,
+then passed the byte comparisons and Central-only consumer again.
 
 The first publication reuses the exact 6.1.0 thin JAR, sources, documentation and
 POM from the tested GitHub release. It does not rebuild them, change the POM under
@@ -14,7 +27,7 @@ an existing version, move the tag, or publish the supplemental fat JAR. The exis
 POM preserves the original contributor metadata. Maintainer metadata improvements
 belong in the next version rather than silently changing released bytes.
 
-## Consumer quick start (after publication)
+## Consumer quick start
 
 1. Use JDK 17+ and Scala 3.9.0.
 2. Add to `build.sbt`:

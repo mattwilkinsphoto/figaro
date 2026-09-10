@@ -11,6 +11,14 @@ Gaussian KL/Bhattacharyya/partition MI, and observation-ready scalar/count/vecto
 Figaro 6.1 additionally checks exact-coordinate conditional copulas, bounded GVM
 mixture fitting and full-mixture linear/angular mutual information.
 
+To test Maven Central in a fresh environment, set `FIGARO_CENTRAL_ONLY=true` and
+`FIGARO_EXPECTED_SHA256=2c09685ccfee6ac64157e36c486477722bfe9022fdf1971345ec2d70e365970b`,
+then run `sbt "runMain FigaroConsumerCheck"` here. This mode excludes Ivy local and
+the downloaded file repository. The [Central workflow](../../docs/MAVEN_CENTRAL.md)
+runs it on a fresh runner without restoring dependency caches.
+
+For local producer testing instead:
+
 1. From the Figaro root run `sbt "figaro / publishLocal"`.
 2. Set `FIGARO_EXPECTED_SHA256` to the SHA-256 of the built thin Figaro jar.
 3. From this directory run `sbt "runMain FigaroConsumerCheck"` with the same JDK/local repository settings.

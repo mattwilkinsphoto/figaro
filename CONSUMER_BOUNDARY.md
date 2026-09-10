@@ -11,7 +11,7 @@ scalaVersion := "3.9.0"
 libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
 ```
 
-Resolve it using the [6.1 Maven-layout release bundle](docs/RELEASE_6_1.md), or run `sbt "figaro / publishLocal"` in the matching tagged checkout. This coordinate is not published to Maven Central. See [building and publication](docs/BUILDING.md) for repository settings and artifact contents.
+Resolve it directly from Maven Central: no source checkout, custom Figaro resolver or `publishLocal` is required. The [6.1 Maven-layout release bundle](docs/RELEASE_6_1.md) remains an alternative distribution. See the [Central publication record](docs/MAVEN_CENTRAL.md) and [building and publication](docs/BUILDING.md) for verification, repository settings and artifact contents.
 
 Java consumers use the corresponding binary artifact (`figaro_3` for the modernized line) together with its declared Scala/runtime dependencies. The POM is the dependency contract. The API is Scala-shaped; Java interoperability and any facade require application-level validation. The fat JAR excludes the Scala runtime and is not a standalone executable.
 
