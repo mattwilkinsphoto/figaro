@@ -36,6 +36,10 @@ precision or performance for every application model.
 There is no automatic commitment to another feature release. Documentation-only
 cleanup does not change the library version or replace published artifacts.
 Runtime fixes or features require an appropriate new version and release gates.
+The [consumer-impact release policy](CONTRIBUTING.md#consumer-impact-release-policy)
+requires a cumulative release-eligibility assessment and maintainer notification
+when warranted at each merge to `main`, not after a fixed number of commits or on
+a recurring schedule. Eligibility does not itself authorize publication.
 
 ## Completed work that previously appeared as “next”
 

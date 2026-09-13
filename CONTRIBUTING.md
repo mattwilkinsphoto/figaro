@@ -1,5 +1,50 @@
 # Contributing to Figaro
 
+## Consumer-impact release policy
+
+Release eligibility is determined by consumer impact, not the number of commits,
+merges or elapsed days. A merge to `main` is not itself a published release.
+
+| Accumulated changes since the latest published release | Release decision |
+| --- | --- |
+| Validated correctness, security or compatibility fix | Recommend a prompt patch release; one consequential fix is sufficient |
+| Compatible new public functionality or public API deprecation | Recommend a minor release when the bounded milestone is complete |
+| Breaking public API or supported compatibility contract | Recommend a major release and document migration requirements |
+| Meaningful validated performance or consumer packaging/dependency improvement | Recommend a release when consumers benefit; select patch/minor/major according to compatibility and API impact |
+| Repository-only documentation, references, CI or publication-tooling housekeeping | No release solely for these changes, unless they correct a consumer-facing defect in published artifacts |
+
+Routine compatible improvements may be batched. Do not defer an important fix merely
+to accumulate more changes. Evaluate actual behavior and delivered artifacts, not
+just changed filenames. Correcting an already published JAR, POM, sources or API
+documentation artifact requires a new version; never overwrite released artifacts
+or move their tags. Version categories follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+### Assessment and notification at each merge to main
+
+The contributor performing a merge to `main` must assess the cumulative difference
+from the latest verified published release, including earlier unreleased merges.
+Record the assessment in the merge handoff and notify the maintainer there when a
+new release is warranted. This is a merge-time obligation, not a recurring poll.
+For changes merged elsewhere, perform the same assessment when reviewing that merge;
+these instructions alone do not install an automatic GitHub notification service.
+
+The handoff must state:
+
+- Published baseline version/tag and resulting `main` commit.
+- Whether a release is warranted, the concrete consumer benefit and affected commits.
+- Recommended version category and urgency, or a specific reason no release is needed.
+- Validation completed and outstanding gates; distinguish **eligible** from **ready**.
+
+For an already reported recommendation, identify any material change in scope,
+urgency or readiness rather than presenting it as a new finding. A tag, draft release
+or build version alone is not evidence that publication succeeded.
+
+Before publishing, require applicable regression/numerical checks, passing CI,
+packaged-consumer verification, updated release notes and documentation, and explicit
+publication approval. Once runtime work toward a release starts, use an appropriate
+next-version `-SNAPSHOT` to distinguish development builds from the immutable release.
+Documentation-only merges need not change the library version.
+
 ## Maintain scientific provenance with the implementation
 
 The [research references and code map](docs/RESEARCH_REFERENCES.md) is the maintained

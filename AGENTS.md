@@ -1,5 +1,22 @@
 # Figaro contributor instructions
 
+## Assess release eligibility at each merge to main
+
+Follow the [consumer-impact release policy](CONTRIBUTING.md#consumer-impact-release-policy).
+At every merge to `main`, assess all changes since the latest verified published
+release, not just the current branch. In the merge handoff, state the baseline and
+resulting commit, whether a release is warranted, consumer impact, recommended
+version and urgency, and validation completed or still required. Notify the
+maintainer when a release is warranted; distinguish eligibility from readiness.
+For an existing recommendation, explain material changes rather than issuing a
+duplicate alert. If no release is warranted, give the specific reason.
+
+This is part of the merge workflow, not a scheduled recurring check. For externally
+performed merges, assess when reviewing them; this rule is not an installed GitHub
+notification service. Do not publish merely because a merge occurred or a release
+is eligible; publication requires explicit approval. Never overwrite released bytes
+or move release tags. Preserve the library version for repository-only housekeeping.
+
 ## Scientific references are part of the change
 
 Before adding or changing a method, scientific claim, distribution, diagnostic,
