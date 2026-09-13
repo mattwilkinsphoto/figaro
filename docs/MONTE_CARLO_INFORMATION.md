@@ -1,5 +1,7 @@
 # Fixed-budget numerical information metrics
 
+Research provenance: [MET-01](RESEARCH_REFERENCES.md#met-01).
+
 ## Overview: when to use this
 
 `MonteCarloInformation` estimates directed KL, Bhattacharyya divergence and mutual

@@ -1,5 +1,7 @@
 # Stopping-policy validation
 
+Research provenance: [STP-01](RESEARCH_REFERENCES.md#stp-01).
+
 This report tests whether Figaro's opt-in mean-precision stopping policy saves useful work without silently treating poorly mixed chains as successful. It accompanies the `6.0.0-modern.5-SNAPSHOT` stopping milestone. It is empirical evidence for these fixtures, not certification of arbitrary models or exact finite-sample coverage.
 
 ## Reproduce in three steps

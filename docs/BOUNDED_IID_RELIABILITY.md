@@ -1,5 +1,7 @@
 # Bounded independent precision and declared-region coverage
 
+Research provenance: [STP-03](RESEARCH_REFERENCES.md#stp-03), [STP-05](RESEARCH_REFERENCES.md#stp-05).
+
 ## Overview: when to enable these APIs
 
 Use `BoundedIidPrecision` when you can draw **independent, identically distributed

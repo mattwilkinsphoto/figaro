@@ -1,5 +1,7 @@
 # GVM mixtures versus Gaussian mixtures: research backlog
 
+Research provenance: [GVM-04](RESEARCH_REFERENCES.md#gvm-04).
+
 Status: modern.23 delivers the [fixed mixture kernel](GVM_MIXTURES.md), a focused
 literature baseline and an [initial controlled GMM comparison](MODELING_CAPABILITIES_ACCEPTANCE.md).
 The 6.1 follow-on adds [public bounded scalar-linear fitting](GVM_MIXTURE_FITTING.md),

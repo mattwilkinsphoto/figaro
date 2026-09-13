@@ -1,5 +1,7 @@
 # Reproducible logical random streams
 
+Research provenance: [RNG-02](RESEARCH_REFERENCES.md#rng-02), [RNG-04](RESEARCH_REFERENCES.md#rng-04).
+
 ## Overview
 
 `RandomStreams` assigns an owned generator to each logical chain or importance

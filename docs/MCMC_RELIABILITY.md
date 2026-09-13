@@ -1,5 +1,7 @@
 # Understanding MCMC precision and reliability
 
+Research provenance: [DIA-01](RESEARCH_REFERENCES.md#dia-01), [STP-02](RESEARCH_REFERENCES.md#stp-02).
+
 ## Overview
 
 This milestone hardens Figaro's existing `McmcPrecision` policy; it does not introduce a different sampler. The previous policy sized intervals using batch-means MCSE alone, although Figaro also computed an ESS-based error estimate for the same scalar mean. Those estimates can disagree. A query could pass the width test even when the second estimate implied that more work was needed.

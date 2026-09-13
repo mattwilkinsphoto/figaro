@@ -1,5 +1,7 @@
 # Matched-density-budget sampling validation
 
+Research provenance: [SAM-03](RESEARCH_REFERENCES.md#sam-03).
+
 ## Outcome: retain multiple candidates; do not change defaults
 
 Follow-up: [8- and 32-dimensional validation](SAMPLING_HIGH_DIMENSIONAL.md), including

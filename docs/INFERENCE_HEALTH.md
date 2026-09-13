@@ -1,5 +1,7 @@
 # Inference health and warnings
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#dia-02).
+
 `InferenceHealth` answers: **does this particular inference run show signs that its
 answer is unreliable or insufficiently precise?** It is an opt-in assessment layer
 for independent importance samples and ordered MCMC chains. It retains the numbers

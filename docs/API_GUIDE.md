@@ -1,5 +1,7 @@
 # Practical API reference
 
+For the scientific basis behind these APIs, see the [research references and code map](RESEARCH_REFERENCES.md).
+
 This is the guided part of the reference, covering the entry points most new users need. The [complete public-method reference](api/README.md) supplies every compiler-documented public method's exact signature, overloads, type/context/value parameters, return type, available contract, and call template. The searchable generated Scala 3 site additionally covers fields, type aliases, primary constructors, and inheritance.
 
 The tables below use simplified result supertypes for readability; use the complete reference for exact subtype/refinement signatures. Examples assume imports from `com.cra.figaro.language.*` and the packages noted in each section. A `T` is an ordinary Scala outcome type, such as `Boolean`, `Double`, or `String`. `Element[T]` is a model node over that type, not a value to cast into `T`.

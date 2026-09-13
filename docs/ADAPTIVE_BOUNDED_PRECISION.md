@@ -1,5 +1,7 @@
 # Variance-adaptive bounded precision
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#stp-04).
+
 ## Overview and when to use it
 
 `EmpiricalBernsteinPrecision` estimates a bounded IID mean with a time-uniform

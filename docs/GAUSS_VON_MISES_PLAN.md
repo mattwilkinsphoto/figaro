@@ -1,5 +1,7 @@
 # First distribution milestone: von Mises and Gauss-von Mises
 
+Research provenance: [GVM-02](RESEARCH_REFERENCES.md#gvm-02).
+
 This is the **historical design plan**, not the active work queue. Circular and
 joint GVM kernels, diagnostics, quadrature and documented information helpers now
 ship in [Figaro 6.1.0](MAVEN_CENTRAL.md), with bounded mixture fitting/MI described

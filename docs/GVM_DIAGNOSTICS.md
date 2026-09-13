@@ -1,5 +1,7 @@
 # GVM residuals, Mahalanobis scoring and KL divergence
 
+Research provenance: [GVM-02](RESEARCH_REFERENCES.md#gvm-02).
+
 ## Overview
 
 These deterministic utilities help you inspect a point under a Gauss-von Mises (GVM)

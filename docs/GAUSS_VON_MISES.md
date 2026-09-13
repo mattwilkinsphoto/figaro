@@ -1,5 +1,7 @@
 # Joint Gauss-von Mises
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#gvm-02).
+
 Status: the fixed joint kernel, diagnostics, moments, quadrature and documented
 information helpers ship in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md).
 The [release record](RELEASE_6_1.md) defines the current artifact and acceptance

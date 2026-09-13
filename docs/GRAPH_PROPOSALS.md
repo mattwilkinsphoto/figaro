@@ -1,5 +1,7 @@
 # Frozen proposals inside Figaro graphs
 
+Research provenance: [INF-02](RESEARCH_REFERENCES.md#inf-02).
+
 ## Overview: when to enable this
 
 `GraphProposalImportance` connects a caller-supplied joint proposal to ordinary

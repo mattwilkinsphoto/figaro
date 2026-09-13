@@ -1,5 +1,7 @@
 # Scientific RNG literature assessment
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#rng-01).
+
 Reviewed: 2026-09-08. Scope: noncryptographic sampling in Figaro on Java 17,
 including independent Monte Carlo samples, MCMC chains and future parallel work.
 

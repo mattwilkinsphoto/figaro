@@ -1,5 +1,7 @@
 # GVM Bhattacharyya divergence: numerical-method assessment
 
+Research provenance: [GVM-03](RESEARCH_REFERENCES.md#gvm-03).
+
 Status: research prototype and 12 tests, with [passing CI at `b5da340c`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34185820661).
 This document records the research, **not the public Scala API contract**. The follow-on
 [guarded Scala API](GVM_BHATTACHARYYA.md) is now on main at CI-verified `251f9540`.

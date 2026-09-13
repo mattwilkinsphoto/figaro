@@ -8,6 +8,12 @@ The reference contains every public `def` exposed on the library's `com.cra.figa
 
 ## Quick start
 
+Scientific provenance is maintained separately from the generated API inventory.
+Follow [CONTRIBUTING.md](../../CONTRIBUTING.md) and run
+`python -B tools/docs/check_research_references.py` for reference registration,
+metadata, local mappings and reciprocal guide links. This read-only check performs
+no network requests and does not assess scientific correctness.
+
 Run from the repository root:
 
 1. `sbt "figaro / Compile / doc"`

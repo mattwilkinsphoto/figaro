@@ -1,5 +1,7 @@
 # Multi-chain Metropolis–Hastings
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#dia-01).
+
 ## Overview
 
 `MultiChainMetropolisHastings` runs several independent MH chains, retains their ordered scalar draws, and reports diagnostics that help you judge whether those draws are useful. It adds a supported, blocking API around Figaro's existing transition kernel: you no longer need to write an executor, manage each sampler's lifecycle, collect traces yourself, or invent a convergence check.

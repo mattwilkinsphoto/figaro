@@ -1,5 +1,7 @@
 # GVM mutual information
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#met-01).
+
 ## Overview
 
 `GaussVonMisesMutualInformation.compute(kernel)` measures how much dependence a fixed

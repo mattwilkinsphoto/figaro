@@ -1,5 +1,7 @@
 # Positive scalar GVM overlap: numerical-method assessment
 
+Research provenance: [GVM-03](RESEARCH_REFERENCES.md#gvm-03).
+
 Status: research-only Python prototype with [passing CI at `70b083f4`](https://github.com/mattwilkinsphoto/figaro/actions/runs/34194233164),
 integrated on main through `a54d665e`.
 This research component introduced no library API or compiled release.

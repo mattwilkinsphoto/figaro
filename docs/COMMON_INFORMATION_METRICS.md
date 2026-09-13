@@ -1,5 +1,7 @@
 # Information metrics across common families
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#met-01).
+
 ## Overview
 
 `ScalarDivergence` compares two new scalar kernels, `CountDivergence` compares two new

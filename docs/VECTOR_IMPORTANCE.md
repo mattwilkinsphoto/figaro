@@ -1,5 +1,7 @@
 # Opt-in frozen vector proposals
 
+Research provenance: [INF-01](RESEARCH_REFERENCES.md#inf-01).
+
 ## Overview: when to use this
 
 `VectorImportance` estimates expectations and event probabilities from an explicit

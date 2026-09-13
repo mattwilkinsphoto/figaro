@@ -1,5 +1,7 @@
 # Fitting GVM mixtures
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#gvm-04).
+
 ## Overview
 
 Figaro 6.1 adds `GaussVonMisesMixtureFit`: a bounded public fitter for a real scalar

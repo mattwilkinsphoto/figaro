@@ -1,5 +1,7 @@
 # Continuous Gaussian and Student-t copulas
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#mod-01).
+
 ## Overview
 
 Copulas separate marginal distributions from dependence. A vector can have Weibull

@@ -1,5 +1,7 @@
 # Higher-dimensional GPSS and quantile validation
 
+Research provenance: [SAM-01](RESEARCH_REFERENCES.md#sam-01).
+
 Implementation follow-up: [continuous-vector sampling](VECTOR_SLICE_SAMPLING.md) adds
 a scoped, opt-in execution interface. The results and recommendation below record the
 preceding research checkpoint; no historical data have been regenerated or changed.

@@ -1,5 +1,7 @@
 # Exact, interval, censored and rounded observations
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#mod-02).
+
 ## Overview
 
 A reported number is not always an exact value. This module scores what was actually

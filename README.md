@@ -58,6 +58,8 @@ The build resolves Figaro and its runtime dependencies from Central. Use `publis
 
 ## Documentation
 
+- [Research references and code map](docs/RESEARCH_REFERENCES.md): consolidated scientific sources, their implementation or research-only role, code links, validation and topic guides.
+
 Figaro is in application-driven maintenance. The [current roadmap](ROADMAP.md)
 separates routine maintenance and optional future capabilities from the completed
 modernization program; [historical milestones](docs/ROADMAP_HISTORY.md) retain the

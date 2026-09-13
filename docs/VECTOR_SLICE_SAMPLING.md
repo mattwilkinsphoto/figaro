@@ -1,5 +1,7 @@
 # Continuous-vector slice sampling
 
+Research provenance: [SAM-01](RESEARCH_REFERENCES.md#sam-01), [SAM-02](RESEARCH_REFERENCES.md#sam-02).
+
 For a managed pool of independent chains with combined coordinate diagnostics, use the
 additive [multi-chain wrapper](MULTI_CHAIN_VECTOR_SAMPLING.md). The single-chain API
 and contracts described below remain unchanged.
