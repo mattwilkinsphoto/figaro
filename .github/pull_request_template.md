@@ -2,6 +2,12 @@
 
 Describe the change and its supported scope.
 
+## Release impact
+
+- [ ] Assess cumulative changes against the latest verified published release using [the release policy](../CONTRIBUTING.md#consumer-impact-release-policy).
+- [ ] Record consumer impact, release eligibility, proposed version/urgency, and outstanding validation (or why no release is needed).
+- [ ] At merge to `main`, include the resulting commit and notify the maintainer in the merge handoff if a release is warranted. Eligibility is not publication approval.
+
 ## Research-reference impact
 
 Affected reference IDs and changes (or a specific reason no update is needed):
