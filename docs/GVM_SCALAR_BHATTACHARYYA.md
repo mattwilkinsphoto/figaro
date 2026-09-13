@@ -1,5 +1,7 @@
 # Opt-in scalar GVM Bhattacharyya comparison
 
+Research provenance: [GVM-03](RESEARCH_REFERENCES.md#gvm-03).
+
 Status: public source API integrated on main at `21269b97` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34196804703).
 This API is shipped in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md).

@@ -1,5 +1,7 @@
 # Sampling research: recent methods and a bounded implementation screen
 
+Research provenance: [SAM-02](RESEARCH_REFERENCES.md#sam-02), [SAM-03](RESEARCH_REFERENCES.md#sam-03).
+
 Research date: 6 September 2026. Branch: `modernize/sampling-research`, based on reliability commit `0c8732b7`. This is an experimental examples/reporting milestone. The production Figaro library, modern.8 version, existing samplers, precision policy, and toolchain are unchanged.
 
 ## Overview and decision

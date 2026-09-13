@@ -1,5 +1,7 @@
 # Stopping criteria: decisions versus estimation precision
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#stp-01).
+
 ## Overview
 
 This module answers two different questions:

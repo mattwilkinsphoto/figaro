@@ -1,5 +1,7 @@
 # Pilot-fitted defensive importance sampling: assessment and protocol
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#inf-01).
+
 This milestone evaluates a better proposal for concentrated posteriors. It does not
 change a public sampler, defaults, warning thresholds, or stopping policy. Prototype
 code remains in test sources and is not shipped in the library.

@@ -1,5 +1,7 @@
 # Distribution support: present capability and gaps
 
+Research provenance: [DIST-01](RESEARCH_REFERENCES.md#dist-01).
+
 ## What exists now
 
 Initial source inventory at `b99c5d56` (2026-09-07), updated through the 6.1 modeling expansion.

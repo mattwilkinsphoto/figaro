@@ -1,5 +1,7 @@
 # Scientific RNG backends and benchmark decision
 
+Research provenance: [RNG-03](RESEARCH_REFERENCES.md#rng-03).
+
 ## Overview
 
 Figaro-owned sampling now defaults to **L64X128MixRandom (LXM)** rather than Java's

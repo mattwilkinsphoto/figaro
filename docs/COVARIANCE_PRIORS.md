@@ -1,5 +1,7 @@
 # Covariance modeling: LKJ and inverse-Wishart
 
+Research provenance: [sources, implementation and validation map](RESEARCH_REFERENCES.md#dist-02).
+
 ## Overview
 
 These priors describe uncertainty about a multivariate model's dependence, not

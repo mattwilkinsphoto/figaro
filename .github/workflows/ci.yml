@@ -13,6 +13,17 @@ permissions:
   contents: read
 
 jobs:
+  research-reference-integrity:
+    # Fail provenance/navigation checks early, independently of the Scala build.
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check scientific reference mappings and documentation tooling
+        run: |
+          python3 -B tools/docs/check_research_references.py
+          python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
+
   release-packaging-preflight:
     # Catch publication/layout failures independently of the longer inference gate.
     runs-on: ubuntu-latest

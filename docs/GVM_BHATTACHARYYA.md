@@ -1,5 +1,7 @@
 # Guarded GVM Bhattacharyya comparison
 
+Research provenance: [GVM-03](RESEARCH_REFERENCES.md#gvm-03).
+
 Status: first bounded Scala implementation integrated on main at `251f9540` after
 [passing CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/34188404684).
 This API is shipped in [Figaro 6.1.0 on Maven Central](MAVEN_CENTRAL.md).

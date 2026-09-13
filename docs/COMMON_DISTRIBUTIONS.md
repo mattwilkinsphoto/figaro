@@ -1,5 +1,7 @@
 # Common scalar and count distributions
 
+Research provenance: [DIST-01](RESEARCH_REFERENCES.md#dist-01).
+
 ## Overview
 
 This milestone adds nine missing first-class families: **Student t, Cauchy, Laplace,

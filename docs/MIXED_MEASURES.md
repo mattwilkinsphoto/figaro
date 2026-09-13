@@ -1,5 +1,7 @@
 # Finite atoms plus continuous uncertainty
 
+Research provenance: [MOD-02](RESEARCH_REFERENCES.md#mod-02).
+
 ## Overview
 
 `MixedScalarDistribution` models a finite set of exact point masses plus an optional

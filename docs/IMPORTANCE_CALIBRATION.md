@@ -1,5 +1,7 @@
 # Importance uncertainty calibration and robustness
 
+Research provenance: [INF-01](RESEARCH_REFERENCES.md#inf-01).
+
 ## Literature baseline and predeclared protocol
 
 This study tests uncertainty estimates, not just posterior point accuracy. It does

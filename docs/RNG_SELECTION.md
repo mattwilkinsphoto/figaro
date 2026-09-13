@@ -1,5 +1,7 @@
 # Choose an RNG by purpose
 
+Research provenance: [RNG-01](RESEARCH_REFERENCES.md#rng-01), [RNG-04](RESEARCH_REFERENCES.md#rng-04).
+
 ## Overview
 
 `RandomSelection` lets you state the execution pattern instead of choosing an RNG

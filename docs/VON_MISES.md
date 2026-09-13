@@ -1,5 +1,7 @@
 # Circular von Mises foundation
 
+Research provenance: [GVM-01](RESEARCH_REFERENCES.md#gvm-01).
+
 ## Overview
 
 Use von Mises for uncertainty in a direction: headings, bearings, phase or orientation

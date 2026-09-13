@@ -1,5 +1,7 @@
 # Linear/angular mutual information of a GVM mixture
 
+Research provenance: [MET-01](RESEARCH_REFERENCES.md#met-01).
+
 ## Overview
 
 `GaussVonMisesMixtureMutualInformation` estimates dependence between the **entire

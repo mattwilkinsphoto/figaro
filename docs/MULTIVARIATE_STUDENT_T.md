@@ -1,5 +1,7 @@
 # Elliptical multivariate Student t
 
+Research provenance: [DIST-01](RESEARCH_REFERENCES.md#dist-01).
+
 ## Overview
 
 `MultivariateStudentTDistribution` adds a full-rank heavy-tailed vector law. Unlike

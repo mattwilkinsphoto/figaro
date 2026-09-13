@@ -1,5 +1,7 @@
 # Statistical validation: correctness, Monte Carlo accuracy, and false alarms
 
+Research provenance: [DIA-02](RESEARCH_REFERENCES.md#dia-02).
+
 ## Overview
 
 This test/research milestone investigates intermittent legacy continuous-distribution

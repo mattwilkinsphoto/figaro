@@ -1,5 +1,7 @@
 # Pilot-fitted Gaussian mixture proposals
 
+Research provenance: [INF-02](RESEARCH_REFERENCES.md#inf-02).
+
 ## Overview
 
 `GaussianMixtureProposal.fit` learns a frozen, full-covariance Gaussian mixture
