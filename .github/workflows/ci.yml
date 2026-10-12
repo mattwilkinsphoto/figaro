@@ -60,6 +60,8 @@ jobs:
           git status --porcelain --untracked-files=all
           python3 -B tools/test_build_release_bundle.py
           python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/capability-preflight --version "$FIGARO_VERSION" --candidate
+      - name: Verify local publication in preflight
+        run: sbt --server --batch "figaro / publishLocal"
       - name: Consume the release layout without Ivy local
         working-directory: tools/acceptance-consumer
         run: |

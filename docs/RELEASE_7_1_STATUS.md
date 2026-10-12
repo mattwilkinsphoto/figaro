@@ -104,5 +104,12 @@ independent Python check: the new oracle preceded installation of its pinned
 a fast ordering regression test. This did not change numerical acceptance criteria
 or the already published 7.1.0 library.
 
+The second adviser CI run passed numerical controls, regressions and clean-build
+reproducibility, but caught an overbroad build resolver change at `publishLocal`.
+MiMa now uses its dedicated `mimaDependencyResolution` hook to the isolated
+Central-only tooling project; the library's normal publishing resolver is retained.
+Local publication was also added to the early packaging preflight. No runtime
+algorithm or numerical tolerance changed in either CI correction.
+
 General likelihood-weighted bounded filtering remains at the discussion gate.
 No implementation, automatic cutover or arbitrary-graph support is claimed.

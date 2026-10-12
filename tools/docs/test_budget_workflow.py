@@ -4,6 +4,11 @@ import unittest
 
 
 class BudgetWorkflowTest(unittest.TestCase):
+    def test_preflight_checks_local_publication(self):
+        text = (Path(__file__).resolve().parents[2] / '.github/workflows/ci.yml').read_text(encoding='utf-8')
+        preflight = text.split('  release-packaging-preflight:',1)[1].split('  gvm-bhattacharyya-research:',1)[0]
+        self.assertIn('run: sbt --server --batch "figaro / publishLocal"', preflight)
+
     def test_oracle_dependency_precedes_both_consumers(self):
         workflow = (Path(__file__).resolve().parents[2] / '.github/workflows/ci.yml')
         # parents[2] is tools' parent: repository root.

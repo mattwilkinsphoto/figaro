@@ -92,8 +92,8 @@ lazy val figaro = project
   .settings(figaroSettings)
   .settings(legalSettings)
   .settings(
-    // Compatibility baselines must resolve published bytes, never an earlier publishLocal.
-    externalResolvers := Seq(Resolver.mavenCentral),
+    // Isolate baseline resolution without removing publishLocal's library resolver.
+    mimaDependencyResolution := (compatibility / dependencyResolution).value,
     mimaPreviousArtifacts := Set("io.github.mattwilkinsphoto" %% "figaro" % "7.0.0",
       "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0"),
     Test / fork := true,
