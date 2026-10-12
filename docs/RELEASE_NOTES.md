@@ -1,10 +1,10 @@
 # Modernization release notes
 
-## Current development line
+## Current release
 
-### 7.0.0 release candidate
+### 7.0.0
 
-The candidate adds log-space particle filtering and MH proposal ratios, bounded
+The release adds log-space particle filtering and MH proposal ratios, bounded
 observation support in owned multi-chain MH, exact finite-count tables, opt-in
 support-aware proposals and selectively wider numerical ranges. Read the
 [old/new examples and rationale](INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage)
@@ -18,23 +18,25 @@ bridged, but native log hooks are needed to avoid intermediate ratio overflow.
 These contract changes warrant a major version. Dependencies and Java/Scala baseline
 are unchanged. There is no universal inference, mixing or shared-graph safety promise.
 
-Local integration, regression, documentation and consumer gates passed; remote CI,
-clean release qualification and publication are tracked in the
-[execution record](INFERENCE_INTEGRATION_STATUS.md). The source candidate version is
-7.0.0, not yet a statement that Central publication has succeeded.
+Local checks, all four main CI jobs, independent clean-build reproducibility,
+artifact checks and packaged consumers passed. The signed release is published
+on Maven Central; all four Central artifacts match the approved bytes and both
+Central-only consumers passed. See the [execution record](INFERENCE_INTEGRATION_STATUS.md)
+and [publication evidence](MAVEN_CENTRAL.md), including the initial publication-wait
+timeout and successful continuation of the same deployment.
 
 ### Previously published 6.1.0
 
-The current feature release line is **6.1.0**, beyond the 6.0 modernization baseline.
-It adds exact-coordinate copula conditioning, public bounded scalar-linear GVM-mixture
+The preceding **6.1.0** feature release extended the 6.0 modernization baseline.
+It added exact-coordinate copula conditioning, public bounded scalar-linear GVM-mixture
 fitting and full-mixture linear/angular MI. See [6.1 installation, acceptance and
 comparison limits](RELEASE_6_1.md). All modern.* entries below describe historical milestones.
 
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
-`io.github.mattwilkinsphoto:figaro_3`. The source default is
-`6.1.0`; it requires the release bundle, local publication or an explicitly configured
-artifact repository. A locally distributed `6.0.0-modern.10-rc.1` integration bundle
+`io.github.mattwilkinsphoto:figaro_3`. The current source version is
+`7.0.0`, available directly from Maven Central. A locally distributed
+`6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.
 

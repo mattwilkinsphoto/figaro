@@ -43,7 +43,7 @@ fail during evaluation, rather than silently changing the model.
 | `WishartDistribution(degreesOfFreedom, scale)` | Dimension 1–16; real df in [dimension,1e6]; exactly symmetric SPD scale, diagonal [1e-100,1e100], correlation condition ≤1e10 | Positive-definite symmetric matrices; density in independent symmetric-entry coordinates; mean is df*scale, not scale |
 | `VonMisesFisher3Distribution(direction, concentration)` | Three finite unit coordinates within 1e-12; kappa in [0,1e6] | Unit sphere S2 in R3; **surface-area measure**, not 3D Lebesgue density; kappa=0 uniform |
 
-Expanded development limits are validated in [inference integration](INFERENCE_INTEGRATION.md).
+Expanded 7.0 limits are validated in [inference integration](INFERENCE_INTEGRATION.md).
 Nonzero extreme-value shapes closer to zero than 1e-14 are deliberately refused;
 use zero when the intended model is the limiting law, not an automatic substitution.
 Finite support endpoints must be representable and distinct from location.

@@ -5,14 +5,17 @@ contains optional candidates; [roadmap history](docs/ROADMAP_HISTORY.md) preserv
 the completed milestones and their original evidence. Historical priorities are
 not an active queue.
 
-## Current baseline: use 6.1.0
+## Current baseline: use 7.0.0
 
-**Figaro 6.1.0 is the adoption baseline and is published on Maven Central.**
+**Figaro 7.0.0 is the adoption baseline and is published on Maven Central.**
 The Java 17 / Scala 3 / sbt 2 modernization and approved core performance,
 distribution and modeling milestones are integrated. See the
-[release scope](docs/RELEASE_6_1.md), [installation and publication](docs/MAVEN_CENTRAL.md),
+[release scope](docs/INFERENCE_INTEGRATION.md), [installation and publication](docs/MAVEN_CENTRAL.md),
 [distribution inventory](docs/DISTRIBUTION_SUPPORT.md) and
 [migration limitations](docs/MIGRATION.md).
+
+The [6.1 release record](docs/RELEASE_6_1.md) preserves the preceding baseline's
+scope and acceptance evidence; it is history, not the current dependency version.
 
 The current phase is **application-driven maintenance**, not another scheduled
 modernization campaign. No remaining modernization milestone is a known adoption
@@ -21,15 +24,15 @@ precision or performance for every application model.
 
 ## Active priorities
 
-Approved distribution/inference integration is being completed on the
-`codex/distribution-inference-integration` development branch (`7.0.0-SNAPSHOT`),
-not yet merged or published. Its five stages cover stable filtering/MH ratios,
+Approved distribution/inference integration is complete and released in **7.0.0**.
+Its five stages cover stable filtering/MH ratios,
 owned multi-chain observations, exact finite counts, support-aware proposals and
 selective numerical ranges. See the [user/migration guide](docs/INFERENCE_INTEGRATION.md)
 and [requirements and executed gates](docs/INFERENCE_INTEGRATION_STATUS.md).
-The major development version reflects the approved strict particle-failure
-default and filtering extension-hook migration. Released 6.1.0 remains the
-consumer baseline until a separately approved release passes its gates.
+The major version reflects the approved strict particle-failure default and
+filtering extension-hook migration. Clean reproducibility, packaged consumers,
+main CI and Central-only consumer checks passed. Broader numerical/graph support
+remains explicitly bounded; this does not activate a new universal-support milestone.
 
 1. **Validate real application models.** Pin the released dependency, establish
    known-answer or simulated-data controls, assess inference health, and measure

@@ -4,14 +4,14 @@ Figaro provides a probabilistic modeling language and inference algorithms as a 
 
 ## Dependency contract
 
-Depend on a compiled, versioned Figaro artifact. The coordinates for the 6.1 release line are:
+Depend on a compiled, versioned Figaro artifact. The coordinates for the 7.0 release line are:
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.0.0"
 ```
 
-Resolve it directly from Maven Central: no source checkout, custom Figaro resolver or `publishLocal` is required. The [6.1 Maven-layout release bundle](docs/RELEASE_6_1.md) remains an alternative distribution. See the [Central publication record](docs/MAVEN_CENTRAL.md) and [building and publication](docs/BUILDING.md) for verification, repository settings and artifact contents.
+Resolve it directly from Maven Central: no source checkout, custom Figaro resolver or `publishLocal` is required. The [7.0.0 Maven-layout release bundle](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.0.0) remains an alternative distribution. See the [Central publication record](docs/MAVEN_CENTRAL.md) and [building and publication](docs/BUILDING.md) for verification, repository settings and artifact contents.
 
 Java consumers use the corresponding binary artifact (`figaro_3` for the modernized line) together with its declared Scala/runtime dependencies. The POM is the dependency contract. The API is Scala-shaped; Java interoperability and any facade require application-level validation. The fat JAR excludes the Scala runtime and is not a standalone executable.
 

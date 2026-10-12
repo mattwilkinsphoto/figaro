@@ -1,7 +1,7 @@
 # Distribution and inference integration
 
-7.0.0 release preparation, not yet a publication announcement. Track remaining gates
-in the [execution record](INFERENCE_INTEGRATION_STATUS.md).
+Available in Figaro **7.0.0**, published on Maven Central. Validation and release
+evidence are in the [execution record](INFERENCE_INTEGRATION_STATUS.md).
 Research provenance: [INF-04](RESEARCH_REFERENCES.md#inf-04),
 [INF-05](RESEARCH_REFERENCES.md#inf-05).
 
@@ -172,7 +172,7 @@ reinterpreted as a log weight. Built-in filters now use `LogWeightedParticle` an
 the protected `makeLogWeightedParticle`, `initialLogWeightedParticle` and
 `addLogWeightedParticle` hooks. Subclasses overriding the old ordinary-weight
 hooks must port those overrides to the log hooks. This extension-contract change,
-along with the strict failure default, is tracked as major-version development.
+along with the strict failure default, is the reason for the 7.0 major version.
 
 ## Stable MH proposal interface
 
@@ -328,7 +328,7 @@ fixtures do not predict speedups for arbitrary applications.
 
 ## Selective numerical-range expansion
 
-| Family | New development range | Retained boundary |
+| Family | Supported 7.0 range | Retained boundary |
 | --- | --- | --- |
 | Hypergeometric | Population up to 1e9, support width at most 100000 | Width guard bounds cumulative work; not unrestricted billion-state enumeration |
 | GEV / GPD | Shape zero or absolute shape in `[1e-14,2]` | Existing scale, endpoint and singular-density checks; SciPy GEV has opposite shape sign |

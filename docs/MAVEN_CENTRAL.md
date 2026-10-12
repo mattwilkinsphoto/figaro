@@ -2,6 +2,34 @@
 
 ## Overview and current status
 
+**Figaro 7.0.0 is published and verified on Maven Central.** The thin JAR,
+sources, Scaladoc and POM match the approved GitHub release bytes. Both the
+baseline consumer and the new integration consumer passed on a fresh runner
+using Central only, with the loaded JAR SHA-256 checked explicitly.
+
+- [Release and immutable assets](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.0.0)
+- [All four main CI jobs, clean reproducibility and packaged consumers](https://github.com/mattwilkinsphoto/figaro/actions/runs/38202501464)
+- [Signing and Sonatype validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/38204303085)
+- [PUBLISHED, four artifact byte matches and both Central-only consumers](https://github.com/mattwilkinsphoto/figaro/actions/runs/38205220510)
+- [7.0.0 artifact directory](https://repo.maven.apache.org/maven2/io/github/mattwilkinsphoto/figaro_3/7.0.0/)
+
+Source: `9468aacb9a16be34178b31dfc1abf6dc263767f3`.
+Bundle SHA-256: `f26043a59b6741ee7c2372ce694253e2bc48c65bd51aa46a10aa94a6cd4a6ac6`.
+Thin JAR SHA-256: `3d6806de0c895b432c1fc699cf3226df9ec0f8c8ad021479005e5838538a4eb4`.
+
+The [first publication wait](https://github.com/mattwilkinsphoto/figaro/actions/runs/38204433317)
+timed out with Sonatype still reporting `PUBLISHING`. The successful continuation
+used the same deployment, `54dd64e7-80b0-4bf5-bfd2-a19422aac56c`, without another
+upload or a repeated publish request while publishing. A timeout was not treated
+as proof of a failed deployment. Verification completed on 2026-10-12 UTC.
+The bundle's `mavenCentralPublication: false` records its creation before Central
+publication; its bytes remain immutable. This record tracks the later publication.
+
+Read the [old/new modernization bridge](INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage)
+before adopting the changed particle-failure and filtering extension contracts.
+
+### Historical 6.1.0 publication
+
 The Central release workflow distributes Figaro as a normal Maven dependency,
 without asking applications to compile Figaro or configure a downloaded file
 repository. Version **6.1.0 is available on Maven Central**. All four public
@@ -34,7 +62,7 @@ belong in the next version rather than silently changing released bytes.
 
    ```scala
    scalaVersion := "3.9.0"
-   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
+   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.0.0"
    ```
 
 3. Compile and run the application normally. No `publishLocal`, local Figaro
@@ -66,7 +94,7 @@ they do not stage or publish anything. Actions are pinned to commit hashes.
    exercises the integration checks. Choose **verify** to repeat these read-only
    availability and consumer checks later.
 
-The current release approval is deliberately pinned to 6.1.0 in
+The current release approval is deliberately pinned to 7.0.0 in
 `tools/central_release.py`. A new version requires reviewing and updating the
 version, source revision, bundle checksum and expected consumer hash together;
 an arbitrary tag or user-supplied download URL is not accepted.
@@ -119,6 +147,8 @@ of the human workflow; publishing never requires exposing a private key to chat.
   Central availability without rewriting the original archive.
 
 ## Related
+
+- [Release 7.0 scope and acceptance](INFERENCE_INTEGRATION_STATUS.md)
 
 - [Release 6.1 scope and validation](RELEASE_6_1.md)
 - [Standalone consumer](../tools/acceptance-consumer/README.md)

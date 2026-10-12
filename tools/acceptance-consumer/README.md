@@ -11,19 +11,21 @@ Gaussian KL/Bhattacharyya/partition MI, and observation-ready scalar/count/vecto
 Figaro 6.1 additionally checks exact-coordinate conditional copulas, bounded GVM
 mixture fitting and full-mixture linear/angular mutual information.
 
-To test Maven Central in a fresh environment, set `FIGARO_CENTRAL_ONLY=true` and
-`FIGARO_EXPECTED_SHA256=2c09685ccfee6ac64157e36c486477722bfe9022fdf1971345ec2d70e365970b`,
-then run `sbt "runMain FigaroConsumerCheck"` here. This mode excludes Ivy local and
+To test Maven Central in a fresh environment, set `FIGARO_CENTRAL_ONLY=true`,
+`FIGARO_VERSION=7.0.0`, and
+`FIGARO_EXPECTED_SHA256=3d6806de0c895b432c1fc699cf3226df9ec0f8c8ad021479005e5838538a4eb4`,
+then run `sbt "runMain FigaroConsumerCheck"` and
+`sbt "runMain IntegrationConsumerCheck"` here. This mode excludes Ivy local and
 the downloaded file repository. The [Central workflow](../../docs/MAVEN_CENTRAL.md)
 runs it on a fresh runner without restoring dependency caches.
 
 For local producer testing instead:
 
-For the 7.0 release candidate set `FIGARO_VERSION=7.0.0` (or the exact snapshot
+For the 7.0 release set `FIGARO_VERSION=7.0.0` (or the exact snapshot
 coordinate when checking a development build).
 This opts into the separate `src/integration/scala` packaged-API check; after the
 ordinary check, run `runMain IntegrationConsumerCheck`. Leaving the variable unset
-continues to target the immutable 6.1.0 Central baseline. The development check
+continues to target the immutable 6.1.0 Central baseline. The integration check
 exercises log filtering, exact counts, observed multi-chain likelihoods and
 support-aware proposals from the verified JAR, not from producer classes.
 

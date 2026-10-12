@@ -1,6 +1,7 @@
 # Distribution and inference integration: execution record
 
-Status: implemented, merged, and undergoing release qualification; not yet published. Baseline: main `269f9086`, published
+Status: **verified complete and released as 7.0.0 on GitHub and Maven Central**.
+Baseline: main `269f9086`, published
 6.1.0. All five stages below were approved on 2026-10-11. No release publication
 was authorized by the original implementation plan. The maintainer subsequently
 authorized documentation-bridge examples, commit/push, remote CI, a clean release
@@ -17,21 +18,42 @@ Research provenance: [INF-04](RESEARCH_REFERENCES.md#inf-04).
   existing-user migration review is required by the maintainer.
 - [x] Commit scoped work and pass remote branch CI (0c6dffb8; runs 38200042513 and 38200082636).
 - [x] Pass clean-checkout, independent empty-cache reproducibility and packaged-consumer gates on the branch.
-- [ ] Merge to main, record consumer-impact release eligibility, and pass main CI.
-- [ ] Pin the verified source/bundle in the signing workflow; tag and publish 7.0.0.
-- [ ] Verify Central bytes and independent Central-only consumers; record receipts.
+- [x] Merge to main, record consumer-impact release eligibility, and pass main CI.
+- [x] Pin the verified source/bundle in the signing workflow; tag and publish 7.0.0.
+- [x] Verify Central bytes and independent Central-only consumers; record receipts.
 
 ### Feature implementation
 
-The feature branch merged through PR #3 at `13dd276b`. Main CI and publication
-are still pending. Before freezing the bundle, its installation README was clarified:
+The feature branch merged through PR #3 at `13dd276b`. Final release source
+`9468aacb` passed all four [main CI jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/38202501464),
+including clean byte-reproducible JARs and both independent consumers. The immutable
+[GitHub 7.0.0 release](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.0.0) is available.
+Before freezing the bundle, its installation README was clarified:
 bundle creation is not a publication action; Central availability must be verified
 separately. The previously published baseline is 6.1.0; consumer impact warrants
-the approved 7.0.0 major release once its remaining gates pass.
+the approved 7.0.0 major release. Its required release gates have now passed.
 The final source also corrects the bridge's log-particle return expression to the
 case-class constructor and includes both old/new expressions in the standalone
 consumer compile check. That check compiled and ran against the verified local
-candidate; the final-source remote/packaged checks must still pass.
+candidate and in the final-source remote packaged checks.
+
+Central staging [passed signature and Sonatype validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/38204303085).
+Deployment `54dd64e7-80b0-4bf5-bfd2-a19422aac56c` was submitted for publication.
+The [first publish wait](https://github.com/mattwilkinsphoto/figaro/actions/runs/38204433317)
+timed out while the Portal still reported `PUBLISHING`, not `FAILED`.
+The [same-deployment continuation](https://github.com/mattwilkinsphoto/figaro/actions/runs/38205220510)
+does not upload another bundle or repeat a publish request while it is `PUBLISHING`.
+That continuation confirmed `PUBLISHED`, matched all four Central artifact hashes
+to the original release, and passed both Central-only consumers on 2026-10-12 UTC.
+No deployment was re-uploaded and no release tag or artifact was replaced.
+The two earlier main runs (38201661393 and 38201811585) were superseded/cancelled
+after documentation refinements; the final source completed its own full gate.
+
+Released thin JAR SHA-256:
+`3d6806de0c895b432c1fc699cf3226df9ec0f8c8ad021479005e5838538a4eb4`.
+Bundle SHA-256:
+`f26043a59b6741ee7c2372ce694253e2bc48c65bd51aa46a10aa94a6cd4a6ac6`.
+See the [publication record](MAVEN_CENTRAL.md) for coordinates and source/signing evidence.
 
 - [x] Stage 1: reproduce particle-weight underflow and MH ratio overflow; implement
   stable log-domain paths with compatibility controls. Verify finite/extreme weights,
@@ -142,20 +164,22 @@ those runs, not current blockers. See **Final local acceptance** for their resol
   passed from the final Maven-layout candidate with Ivy local excluded. Thin JAR
   SHA-256: `d3b115cd7aa60c3c90be7976fd6961ca7cb2aef435d0a6dc18677ccb5e9c0516`.
   Four packaging tests and seven artifact-validator tests passed. No Central upload.
-- **Not performed:** remote CI, a clean-checkout reproducible rebuild, commit, push,
+- **Not performed at this local checkpoint (completed later above):** remote CI, a clean-checkout reproducible rebuild, commit, push,
   merge, release tagging or public publication. CI now includes the new suites and
   development-version candidate consumer checks; remote execution is not implied.
 
 ## Consumer impact and release decision
 
 Published baseline is 6.1.0 (source `85a12fd559dee4e1cc1233036fd2bbaa06331a65`).
-This branch starts at main `269f9086ae0162e7dc53093225b6000a5c8d71be`; no resulting
-merge commit exists yet. A new release is warranted when this runtime work is
-integrated: stable extreme-likelihood filtering, explicit failed-filter semantics,
+The branch started at main `269f9086ae0162e7dc53093225b6000a5c8d71be` and merged
+at `13dd276b1ec172ce901a1b95772ec61a3964cb0d`. A new release was warranted:
+stable extreme-likelihood filtering, explicit failed-filter semantics,
 new observation/enumeration/proposal APIs and wider numerical ranges affect consumers.
-Recommended version: **7.0.0**, because strict zero-particle failure and protected
-filter hook migration change contracts; current artifact is **7.0.0-SNAPSHOT**.
-Prioritize validation/release for consumers affected by silent zero-weight fallback,
-but do not replace the stable adoption baseline automatically. Release eligibility
-is not readiness: remote CI, clean-source/reproducibility gates, migration review
-and explicit publication approval remain release steps, not unfinished feature code.
+Approved and published version: **7.0.0**, because strict zero-particle failure and
+protected filter hook migration change contracts. Final source is `9468aacb`;
+later publication-configuration/documentation commits do not change released bytes.
+Consumers affected by silent zero-weight fallback should prioritize adoption after
+reading the explicit old/new bridge examples. The maintainer requested those examples
+instead of a separate existing-user migration review. CI, clean-source/reproducibility,
+signing, publication and Central-only consumer gates are complete. No additional
+version increment is warranted solely for the release-record documentation follow-up.

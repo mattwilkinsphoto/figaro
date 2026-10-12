@@ -87,7 +87,7 @@ values; `copy` constructs and revalidates a new law. No inference state is copie
 - Hypergeometric population: integer `[1,1e9]`; successes and draws: `[0,N]`.
   Deterministic cases such as zero draws, zero successes or drawing the full population
   are supported. A separate support-width cap of 100000 bounds cumulative-sum work.
-  These expanded development limits and exact finite-count factories are documented
+  These expanded 7.0 limits and exact finite-count factories are documented
   in [inference integration](INFERENCE_INTEGRATION.md).
 
 Eligible parameters do not guarantee every tail quantile or moment fits in a Double

@@ -69,10 +69,10 @@ mass/density contract. Factor conversion and learning require additional support
 ## Gaps to resolve before claiming broader compatibility
 
 The [distribution/inference integration guide](INFERENCE_INTEGRATION.md) records
-development support for log-space filtering and MH hooks, validated owned-chain
+released 7.0.0 support for log-space filtering and MH hooks, validated owned-chain
 observations, explicit exact finite-count tables and support-aware proposals.
-It also lists retained restrictions. These changes are not in the published 6.1.0
-artifact; consult the execution record before adopting a development build.
+It also lists retained restrictions. These changes are not in the older 6.1.0
+artifact; use 7.0.0 and consult the execution record and old/new examples.
 
 - Circular von Mises now supplies periodic evidence and circular summaries. Cylindrical
   Gauss-von Mises has a locally tested preview approved for standalone publication. Angular diagnostics need explicit treatment;
