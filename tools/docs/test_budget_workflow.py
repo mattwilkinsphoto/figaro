@@ -1,9 +1,28 @@
 """Fast regression for the independent numerical-oracle dependency order."""
 from pathlib import Path
+import ast
+import re
+import shlex
 import unittest
 
 
 class BudgetWorkflowTest(unittest.TestCase):
+    def test_changed_packaging_commands_use_declared_cli_options(self):
+        root = Path(__file__).resolve().parents[2]
+        text = (root / '.github/workflows/ci.yml').read_text(encoding='utf-8')
+        for script in ('tools/check_acceptance_artifacts.py', 'tools/build_release_bundle.py'):
+            tree = ast.parse((root / script).read_text(encoding='utf-8'))
+            declared = {'--help'}
+            for node in ast.walk(tree):
+                if isinstance(node,ast.Call) and isinstance(node.func,ast.Attribute) and node.func.attr=='add_argument':
+                    declared.update(arg.value for arg in node.args if isinstance(arg,ast.Constant)
+                                    and isinstance(arg.value,str) and arg.value.startswith('--'))
+            commands = [line for line in text.splitlines() if re.search(r'python3\s+-B\s+'+re.escape(script)+r'\s',line)]
+            self.assertTrue(commands, script)
+            for line in commands:
+                flags = {word.split('=',1)[0] for word in shlex.split(line) if word.startswith('--')}
+                self.assertFalse(flags-declared, f'{script}: unknown options {flags-declared}')
+
     def test_preflight_checks_local_publication(self):
         text = (Path(__file__).resolve().parents[2] / '.github/workflows/ci.yml').read_text(encoding='utf-8')
         preflight = text.split('  release-packaging-preflight:',1)[1].split('  gvm-bhattacharyya-research:',1)[0]

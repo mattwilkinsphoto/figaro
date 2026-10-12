@@ -497,7 +497,7 @@ jobs:
           "figaro / Compile / packageSrc; figaro / Compile / packageDoc; figaro / publishLocal"
 
       - name: Verify artifact contents and legal notices
-        run: python3 -B tools/check_acceptance_artifacts.py target/out/jvm/scala-3.9.0/figaro --version "$FIGARO_VERSION" --candidate
+        run: python3 -B tools/check_acceptance_artifacts.py target/out/jvm/scala-3.9.0/figaro --version "$FIGARO_VERSION"
 
       - name: Verify independently published consumer
         working-directory: tools/acceptance-consumer

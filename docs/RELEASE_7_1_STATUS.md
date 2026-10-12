@@ -111,5 +111,12 @@ Central-only tooling project; the library's normal publishing resolver is retain
 Local publication was also added to the early packaging preflight. No runtime
 algorithm or numerical tolerance changed in either CI correction.
 
+The third adviser run passed local publication but rejected an unsupported
+`--candidate` option on the artifact checker (that option belongs only to the
+bundle builder). All changed workflow commands were audited against their actual
+interfaces; a fast test now compares packaging CLI flags with parser declarations.
+The corrected packaging sequence was then exercised locally end to end. The
+original failed workflow logs and source revisions are retained as evidence.
+
 General likelihood-weighted bounded filtering remains at the discussion gate.
 No implementation, automatic cutover or arbitrary-graph support is claimed.
