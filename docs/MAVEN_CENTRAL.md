@@ -2,6 +2,28 @@
 
 ## Overview and current status
 
+**Figaro 7.1.0 is published and verified on Maven Central.** All four artifacts
+match the approved release bytes, and all three Central-only consumers passed.
+
+- [Immutable release](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.1.0)
+- [All four main CI jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/38272596410)
+- [Signed staging and validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/38275122583)
+- [PUBLISHED, byte checks and three consumers](https://github.com/mattwilkinsphoto/figaro/actions/runs/38276722116)
+- [7.1.0 artifact directory](https://repo.maven.apache.org/maven2/io/github/mattwilkinsphoto/figaro_3/7.1.0/)
+
+Source: `ad22068d9d47dfca2be9e35ff44696c7be9faeef`.
+Bundle SHA-256: `7028044a441594d94a8c7d28b206edc71830d823ee28a10c41aee70fcf128a4d`.
+Thin JAR SHA-256: `324f6a640e6b0c0e802aa1ab39821b46135f21ef23c2c1dc38da29f6605c3f35`.
+
+The [initial publication wait](https://github.com/mattwilkinsphoto/figaro/actions/runs/38275398200)
+timed out while Sonatype reported `PUBLISHING`. The successful continuation reused
+deployment `e110b032-f444-47a6-b5ad-c30b628ee768`, without another upload or duplicate
+publish request. Verification completed on 2026-10-12 UTC. The bundle's
+`mavenCentralPublication: false` describes its creation time; released bytes were
+not rewritten after publication. See the [readiness record](RELEASE_7_1_STATUS.md).
+
+### Historical 7.0.0 publication
+
 **Figaro 7.0.0 is published and verified on Maven Central.** The thin JAR,
 sources, Scaladoc and POM match the approved GitHub release bytes. Both the
 baseline consumer and the new integration consumer passed on a fresh runner
@@ -62,7 +84,7 @@ belong in the next version rather than silently changing released bytes.
 
    ```scala
    scalaVersion := "3.9.0"
-   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.0.0"
+   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0"
    ```
 
 3. Compile and run the application normally. No `publishLocal`, local Figaro
@@ -94,7 +116,7 @@ they do not stage or publish anything. Actions are pinned to commit hashes.
    exercises the integration checks. Choose **verify** to repeat these read-only
    availability and consumer checks later.
 
-The current release approval is deliberately pinned to 7.0.0 in
+The current release approval is deliberately pinned to 7.1.0 in
 `tools/central_release.py`. A new version requires reviewing and updating the
 version, source revision, bundle checksum and expected consumer hash together;
 an arbitrary tag or user-supplied download URL is not accepted.

@@ -1,7 +1,7 @@
 # Capability expansion after 7.0.0
 
-Prepared for **7.1.0**, pending [release verification](RELEASE_7_1_STATUS.md), not functionality in the published 7.0.0
-artifact. [Execution status](CAPABILITY_EXPANSION_STATUS.md) distinguishes completed
+Released in **7.1.0** with [publication verified](RELEASE_7_1_STATUS.md); not in 7.0.0.
+[Execution status](CAPABILITY_EXPANSION_STATUS.md) distinguishes completed
 checks from pending work. Research provenance: [INF-04](RESEARCH_REFERENCES.md#inf-04),
 [INF-05](RESEARCH_REFERENCES.md#inf-05), [INF-06](RESEARCH_REFERENCES.md#inf-06),
 [INF-07](RESEARCH_REFERENCES.md#inf-07).

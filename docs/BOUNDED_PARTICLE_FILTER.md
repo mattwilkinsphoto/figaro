@@ -1,6 +1,6 @@
 # Bounded-adaptive indicator particle filtering
 
-API prepared for **7.1.0**, not in published 7.0.0. See the
+Released in **7.1.0**, not in 7.0.0. See the
 [release-readiness record](RELEASE_7_1_STATUS.md) for publication status.
 [Research provenance](RESEARCH_REFERENCES.md#inf-07).
 

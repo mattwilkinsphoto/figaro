@@ -2,7 +2,7 @@
 
 Figaro lets you describe uncertain quantities, their relationships, and observed evidence as Scala objects. Its inference algorithms answer questions such as “given this observation, how likely is that explanation?” You supply a model without implementing an inference engine yourself.
 
-This modernized line uses **Scala 3.9.0 LTS, sbt 2.0.8, and JDK 17**. It keeps the `com.cra.figaro` packages but is a new Scala 3 artifact, not a binary-compatible replacement for `figaro_2.13`. The [7.0 release record](docs/INFERENCE_INTEGRATION_STATUS.md) describes the consumable library and its validated scope.
+This modernized line uses **Scala 3.9.0 LTS, sbt 2.0.8, and JDK 17**. It keeps the `com.cra.figaro` packages but is a new Scala 3 artifact, not a binary-compatible replacement for `figaro_2.13`. The [7.1 release record](docs/RELEASE_7_1_STATUS.md) describes the consumable library and its validated scope.
 
 ## Quick start: three steps
 
@@ -33,7 +33,11 @@ Prerequisites: Git, JDK 17 on your path, and an sbt runner. sbt downloads the co
 
 ## Use Figaro in your application
 
-Figaro 7.0.0 adds [stable filtering, owned-chain observations, exact count tables
+Figaro 7.1.0 adds [bounded indicator filtering](docs/BOUNDED_PARTICLE_FILTER.md),
+health reports, nested owned observations, proposal tuning and selected numerical
+extensions. See [capability scope](docs/CAPABILITY_EXPANSION.md).
+
+Figaro 7.0.0 added [stable filtering, owned-chain observations, exact count tables
 and support-aware proposals](docs/INFERENCE_INTEGRATION.md). Read the
 [old/new modernization examples](docs/INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage)
 for the changed failure and extension contracts.
@@ -43,7 +47,7 @@ The preceding 6.1 release added [partial/conditional copula workflows](docs/COPU
 MI](docs/GVM_MIXTURE_MI.md). See [installation and release gates](docs/RELEASE_6_1.md).
 
 The compiled library is available from Maven Central; no Figaro checkout or
-local publication is required. The supplemental [7.0.0 release assets](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.0.0)
+local publication is required. The supplemental [7.1.0 release assets](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.1.0)
 remain available with sources, API documentation, POM and checksums.
 See [Maven Central publication](docs/MAVEN_CENTRAL.md) for the release workflow and evidence.
 
@@ -56,7 +60,7 @@ In your Scala application's `build.sbt`:
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.0.0"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0"
 ```
 
 The build resolves Figaro and its runtime dependencies from Central. Use `publishLocal` only for testing your own source changes, with an appropriately distinct development version. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.

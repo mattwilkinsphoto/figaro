@@ -202,10 +202,10 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 
 **Guide:** [INFERENCE INTEGRATION](INFERENCE_INTEGRATION.md); [INFERENCE INTEGRATION STATUS](INFERENCE_INTEGRATION_STATUS.md); [CAPABILITY EXPANSION](CAPABILITY_EXPANSION.md).
 
-Development follow-up: [HasLogRandomnessProposal.scala](../Figaro/src/main/scala/com/cra/figaro/language/HasLogRandomnessProposal.scala)
+Released in 7.1.0: [HasLogRandomnessProposal.scala](../Figaro/src/main/scala/com/cra/figaro/language/HasLogRandomnessProposal.scala)
 adds an explicit randomness-measure custom hook and ratio constructor. No third-party
 proposal is automatically reinterpreted. [CapabilityExpansionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/CapabilityExpansionTest.scala)
-checks asymmetric extreme ratios and invalid inputs; this is not in published 7.0.0.
+checks asymmetric extreme ratios and invalid inputs; this addition is not in 7.0.0.
 
 <a id="inf-05"></a>
 
@@ -221,7 +221,7 @@ checks asymmetric extreme ratios and invalid inputs; this is not in published 7.
 
 **Guide:** [INFERENCE INTEGRATION](INFERENCE_INTEGRATION.md); [INFERENCE INTEGRATION STATUS](INFERENCE_INTEGRATION_STATUS.md); [CAPABILITY EXPANSION](CAPABILITY_EXPANSION.md); [CAPABILITY EXPANSION STATUS](CAPABILITY_EXPANSION_STATUS.md).
 
-Development follow-up: nested owned likelihood spines, explicit scalar randomness
+Released in 7.1.0: nested owned likelihood spines, explicit scalar randomness
 adapters, tiny-shape stable ratios and direct Cholesky-entry densities reuse the
 listed code. Multinomial aggregation uses the probability-generating-function
 category reduction; [University of Washington STAT 512 notes](https://faculty.washington.edu/yenchic/20A_stat512/Lec7_Multinomial.html)
@@ -230,7 +230,7 @@ are an inspected teaching/formula reference, not a copied implementation.
 provides small exhaustive controls; [CapabilityNumericalStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/CapabilityNumericalStudy.scala)
 and [independent high-precision comparison](../tools/capability_reference.py) compare
 actual library output, including rounded-singular Gram cases. Expanded support is
-development-only and does not change the published 7.0.0 contract.
+released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 
 <a id="inf-06"></a>
 
@@ -238,7 +238,7 @@ development-only and does not change the published 7.0.0 contract.
 
 **Source:** Garthwaite, Fan and Sisson, *Adaptive Optimal Scaling of Metropolis-Hastings Algorithms Using the Robbins-Monro Process*, [2010 preprint](https://arxiv.org/pdf/1006.3690), section 2 inspected. [Stan warm-up and fixed sampling](https://mc-stan.org/docs/cmdstan-guide/mcmc-intro.html) is a maintained implementation-policy comparison, not the source of random-walk formulas. Inspected 2026-10-12; publisher full-text retrieval failed, so no claim of reading the final journal version.
 
-**Role:** Independent development adaptation, not the paper's optimal-steplength algorithm or Stan HMC. Bounded log-scale update uses `(iteration+10)^(-0.6)` times acceptance deviation, then freezes. Acceptance targeting is not a precision or efficiency guarantee. Only one latent scalar is supported initially; existing public constructor contracts remain intact.
+**Role:** Independent adaptation shipped in 7.1.0, not the paper's optimal-steplength algorithm or Stan HMC. Bounded log-scale update uses `(iteration+10)^(-0.6)` times acceptance deviation, then freezes. Acceptance targeting is not a precision or efficiency guarantee. Only one latent scalar is supported initially; existing public constructor contracts remain intact.
 
 **Code:** [SupportAwareProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/SupportAwareProposal.scala), `tune` and `Tuning`; [MultiChainMetropolisHastings.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings.scala), `runTuned`.
 
@@ -252,7 +252,7 @@ development-only and does not change the published 7.0.0 contract.
 
 **Source:** Jasra, Lee, Yau and Zhang, [The Alive Particle Filter](https://arxiv.org/abs/1304.0151) (preprint; historical background, detailed review pending). Sherlock, Golightly and Lee, [Robust, partially alive particle Metropolis-Hastings via The Frankenfilter](https://arxiv.org/html/2601.23173v1) (2026 preprint v1), sections 1–2, Algorithms 2–5 and Appendix A's exchangeability/induction argument inspected 2026-10-12. Doucet and Johansen, [A Tutorial on Particle Filtering and Smoothing](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF.pdf) (2008 revision), pre-resampling ESS and distinction between weighting and resampling.
 
-**Role:** Independent development implementation of the binary-weight specialization, not shipped in 7.0.0. Retains the corrected variable-size success population and samples ancestors directly; no generic mutable-snapshot retry or general-weight success rule. Figaro adds owned RNG, immutable-state callback contracts, fresh fixed-graph adapters, explicit terminal failure and engineering diagnostics. ESS thresholds are warnings, not precision guarantees. The source theorem depends on valid callbacks and model assumptions; finite local controls do not certify arbitrary programs. No paper performance figure is a Figaro measurement and no external code was copied.
+**Role:** Independent implementation of the binary-weight specialization shipped in 7.1.0. Retains the corrected variable-size success population and samples ancestors directly; no generic mutable-snapshot retry or general-weight success rule. Figaro adds owned RNG, immutable-state callback contracts, fresh fixed-graph adapters, explicit terminal failure and engineering diagnostics. ESS thresholds are warnings, not precision guarantees. The source theorem depends on valid callbacks and model assumptions; finite local controls do not certify arbitrary programs. No paper performance figure is a Figaro measurement and no external code was copied.
 
 **Code:** [BoundedParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/BoundedParticleFilter.scala); [ParticleFilterHealth.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/ParticleFilterHealth.scala); [ParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/ParticleFilter.scala). Existing strict failure and opt-in legacy policy are unchanged.
 

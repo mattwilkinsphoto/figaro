@@ -1,8 +1,8 @@
 # Capability expansion after 7.0.0
 
-Status: **all six bounded extensions implemented and locally verified, including
-the approved bounded-adaptive indicator workflow. Committed and pushed; all four
-branch CI jobs passed. Main CI and release publication remain pending.**
+Status: **all six bounded extensions released in 7.1.0, including the approved
+bounded-adaptive indicator workflow. Branch/main CI, Central artifact verification
+and all three Central-only consumers passed.**
 Baseline: published 7.0.0, main `9dee7a74`. The approved scope is the six
 remaining capability limits below, not removal of mathematical or machine limits.
 

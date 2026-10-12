@@ -12,7 +12,7 @@ checks below. A development version or Git tag is not evidence of publication.
 - [x] Final remote regression, independent numerical, documentation and packaged-consumer gates.
 - [x] Clean-build reproducibility and branch/main remote CI.
 - [x] Release notes, scoped commit and merge; preserve unrelated local work.
-- [ ] Immutable GitHub release, validated signed Central deployment, publication
+- [x] Immutable GitHub release, validated signed Central deployment, publication
   and Central-only consumer verification for 7.1.0.
 - [ ] After publication: research, implement and verify an advisory independent-pilot
   budget helper. Do not silently tune production stopping from its own outcomes.
@@ -23,7 +23,8 @@ checks below. A development version or Git tag is not evidence of publication.
 
 The six capability extensions have prior local test and numerical evidence in
 [the capability status record](CAPABILITY_EXPANSION_STATUS.md). Release-specific
-checks above are pending; no release or remote CI success is yet claimed.
+checks and publication are complete. The following paragraphs preserve the sequence
+of checks, including issues found and corrected before release.
 
 Compatibility tools are assessment aids, not behavior proofs. MiMa checks JVM
 linkage; Scala 3 TASTy compatibility is a separate concern. Sources inspected:
@@ -46,7 +47,7 @@ did not alter Figaro's published dependencies or suppress a compatibility findin
 The clean 7.1.0 build with a fresh action cache compiled 349 library sources,
 83 example sources and 259 test sources and built thin/assembly/source/API/POM
 artifacts. Existing compiler/Scaladoc warnings are retained. Local publication is
-only to an isolated development repository; public publication is still pending.
+only to an isolated development repository; public verification is recorded below.
 
 All three separate application consumers passed against the clean 7.1.0 thin JAR,
 SHA-256 `feb3fa1aade82910864890d34c3168a32ef63f2ba2a0a06ed8118368326d80bc`.
@@ -58,7 +59,7 @@ retained privately. Unrelated documentation edits remain excluded from this rele
 All four [branch CI jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/38269359687)
 passed for `be8e23a49e38a5b976e6313c6c1f81b5cbaafbe0`, including clean-build
 reproducibility and packaged consumers. The 7.0.0-compiled custom filter extension
-also executed with the new JAR. Main CI and public publication remain pending.
+also executed with the new JAR. Main CI and publication subsequently passed.
 The main gate additionally selects bash explicitly so `tee` cannot hide a failing
 study. No regression or compatibility exclusions were added.
 
@@ -71,4 +72,10 @@ Approved release thin JAR SHA-256:
 `324f6a640e6b0c0e802aa1ab39821b46135f21ef23c2c1dc38da29f6605c3f35`.
 These are the CI release bytes, not the earlier local Windows build. Reproducibility
 was checked between independent clean builds in the same CI environment; no
-cross-platform byte-identity claim is made. Central publication remains pending.
+cross-platform byte-identity claim is made.
+
+Central publication completed on 2026-10-12. The signed deployment validated;
+the first publication wait timed out in `PUBLISHING`, and a same-deployment
+continuation confirmed `PUBLISHED`. All four public artifacts match the approved
+bytes and all three Central-only consumer programs passed. The [publication record](MAVEN_CENTRAL.md)
+links the actual successful and timed-out workflows. No duplicate upload was made.

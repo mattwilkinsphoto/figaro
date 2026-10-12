@@ -5,9 +5,9 @@ contains optional candidates; [roadmap history](docs/ROADMAP_HISTORY.md) preserv
 the completed milestones and their original evidence. Historical priorities are
 not an active queue.
 
-## Current baseline: use 7.0.0
+## Current baseline: use 7.1.0
 
-**Figaro 7.0.0 is the adoption baseline and is published on Maven Central.**
+**Figaro 7.1.0 is the adoption baseline and is published on Maven Central.**
 The Java 17 / Scala 3 / sbt 2 modernization and approved core performance,
 distribution and modeling milestones are integrated. See the
 [release scope](docs/INFERENCE_INTEGRATION.md), [installation and publication](docs/MAVEN_CENTRAL.md),
@@ -24,18 +24,17 @@ precision or performance for every application model.
 
 ## Active priorities
 
-A subsequent **capability-expansion milestone is now authorized and in development**:
+A subsequent **capability-expansion milestone is released in 7.1.0**:
 [scope and execution checklist](docs/CAPABILITY_EXPANSION_STATUS.md),
-[development API guide](docs/CAPABILITY_EXPANSION.md). It addresses the remaining
-observation, count, proposal, numerical and particle-recovery limits. Published
-7.0.0 remains the adoption baseline; development claims are not release claims.
+[API guide](docs/CAPABILITY_EXPANSION.md). It expands bounded observation, count,
+proposal, numerical and particle-recovery support; it does not remove all limits.
 The approved recovery workflow now has an opt-in
 [bounded-adaptive indicator filter](docs/BOUNDED_PARTICLE_FILTER.md), plus
 fixed-budget health reports and recommendations. Automatic general-likelihood
 recovery and arbitrary graph support are not part of this bounded contract.
 
-The approved sequence is now [7.1.0 readiness and release](docs/RELEASE_7_1_STATUS.md),
-then an independently piloted budget-selection adviser. General likelihood-weighted
+The [7.1.0 readiness and release](docs/RELEASE_7_1_STATUS.md) is complete.
+Next is an independently piloted budget-selection adviser. General likelihood-weighted
 bounded filtering remains a design discussion, not an approved implementation step.
 
 Approved distribution/inference integration is complete and released in **7.0.0**.

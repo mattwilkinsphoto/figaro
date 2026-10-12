@@ -2,10 +2,10 @@
 
 ## Current release
 
-### 7.1.0 — release preparation
+### 7.1.0 — published
 
-Publication is pending the [readiness gates](RELEASE_7_1_STATUS.md). The immutable
-7.0.0 release remains available until publication is verified.
+Published and verified on Maven Central. All [readiness gates](RELEASE_7_1_STATUS.md),
+four artifact byte comparisons and three Central-only consumers passed.
 
 - Opt-in bounded-work **indicator** particle filtering, with corrected stopping
   estimates, retained ancestry, explicit work caps and actionable health reports.
@@ -58,7 +58,7 @@ comparison limits](RELEASE_6_1.md). All modern.* entries below describe historic
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The current source version is
-`7.0.0`, available directly from Maven Central. A locally distributed
+`7.1.0`, available directly from Maven Central. A locally distributed
 `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.
