@@ -98,5 +98,11 @@ passed without exclusions. Original failed logs are retained in the private evid
 record. See [branch CI](https://github.com/mattwilkinsphoto/figaro/actions?query=branch%3Acodex%2Fparticle-budget-adviser)
 for subsequent remote gate results; this paragraph records locally executed results.
 
+The first adviser branch CI run passed its Scala tests but stopped before the
+independent Python check: the new oracle preceded installation of its pinned
+`mpmath` dependency. Installation was moved before both numerical oracles, with
+a fast ordering regression test. This did not change numerical acceptance criteria
+or the already published 7.1.0 library.
+
 General likelihood-weighted bounded filtering remains at the discussion gate.
 No implementation, automatic cutover or arbitrary-graph support is claimed.

@@ -334,12 +334,12 @@ jobs:
 
       - name: Verify capability expansion and independent numerical controls
         run: |
+          python3 -m pip install --disable-pip-version-check mpmath==1.3.0
           sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.CapabilityExpansionTest com.cra.figaro.test.modernization.BoundedParticleFilterTest com.cra.figaro.test.modernization.BoundedParticleBudgetTest"
           sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.BoundedParticleBudgetStudy" | tee "$RUNNER_TEMP/budget-study.log"
           python3 -B tools/budget_reference.py "$RUNNER_TEMP/budget-study.log"
           sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.BoundedParticleFilterStudy" | tee "$RUNNER_TEMP/bounded-filter-study.log"
           sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.CapabilityNumericalStudy" > "$RUNNER_TEMP/capability-numerical.log"
-          python3 -m pip install --disable-pip-version-check mpmath==1.3.0
           python3 -B tools/capability_reference.py "$RUNNER_TEMP/capability-numerical.log" > "$RUNNER_TEMP/capability-reference.json"
 
       - name: Verify continuous-vector sampler contracts and documented patterns
