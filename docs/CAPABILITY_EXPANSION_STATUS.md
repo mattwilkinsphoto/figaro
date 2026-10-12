@@ -1,10 +1,13 @@
 # Capability expansion after 7.0.0
 
 Status: **all six bounded extensions implemented and locally verified, including
-the approved bounded-adaptive indicator workflow. Remote CI/release gates remain
-pending. No commit, push, merge or new public release claimed.**
+the approved bounded-adaptive indicator workflow. Committed and pushed; all four
+branch CI jobs passed. Main CI and release publication remain pending.**
 Baseline: published 7.0.0, main `9dee7a74`. The approved scope is the six
 remaining capability limits below, not removal of mathematical or machine limits.
+
+The dated entries below preserve the development history, including then-pending
+checks. Current release progress is in the [7.1 checklist](RELEASE_7_1_STATUS.md).
 
 Research provenance: [INF-05](RESEARCH_REFERENCES.md#inf-05),
 [INF-06](RESEARCH_REFERENCES.md#inf-06), [INF-07](RESEARCH_REFERENCES.md#inf-07).

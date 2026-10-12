@@ -13,6 +13,11 @@ on:
 permissions:
   contents: read
 
+# Explicit bash enables pipefail as well as -e: tee must not hide a failed study.
+defaults:
+  run:
+    shell: bash
+
 env:
   FIGARO_VERSION: 7.1.0
   FIGARO_CAPABILITY_CHECK: 'true'

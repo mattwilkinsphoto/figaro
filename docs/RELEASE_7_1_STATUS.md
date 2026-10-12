@@ -54,3 +54,10 @@ Local research-reference checks, 38 documentation tests and 13063 generated publ
 method entries passed. A bridge-file CRLF whitespace check failure was corrected
 by normalizing that edited file, not by excluding it. The original failure log is
 retained privately. Unrelated documentation edits remain excluded from this release.
+
+All four [branch CI jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/38269359687)
+passed for `be8e23a49e38a5b976e6313c6c1f81b5cbaafbe0`, including clean-build
+reproducibility and packaged consumers. The 7.0.0-compiled custom filter extension
+also executed with the new JAR. Main CI and public publication remain pending.
+The main gate additionally selects bash explicitly so `tee` cannot hide a failing
+study. No regression or compatibility exclusions were added.
