@@ -14,8 +14,13 @@ Development milestone in 7.2.0-SNAPSHOT, separate from the immutable 7.1.0 relea
   the Kalman log evidence and first/second moments within 1e-12.
 - [x] Local documentation and packaging: 41 tooling tests, regenerated API reference,
   four independent consumers and MiMa compatibility checks passed.
-- [ ] Full source-specific remote CI (branch workflow records the current result).
-- [ ] Exact-source reproducibility record and final handoff.
+- [x] All four [source-specific remote jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/38291565136)
+  passed for implementation commit `4e5f88792626b6efe340c22db4b89f16d71fee83`,
+  including Scala/JVM compatibility, numerical controls, clean byte reproducibility,
+  artifact checks and isolated Maven-bundle consumers.
+- [x] Exact-source private reproducibility archive verified: 18 files with SHA-256
+  manifests, actual local/remote logs, numerical inputs/results and rerun instructions.
+  This status update changes documentation only, not the validated implementation.
 
 No third-party implementation code was copied. The inspected author implementation
 uses R/C++ and had no declared repository license; no code or dataset assets were
