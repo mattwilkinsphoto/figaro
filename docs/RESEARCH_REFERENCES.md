@@ -39,6 +39,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Observation integration, finite enumeration, support-aware proposals and range checks | [INF-05](#inf-05) |
 | Warm-up-only scalar proposal tuning | [INF-06](#inf-06) |
 | Bounded-work particle recovery assessment | [INF-07](#inf-07) |
+| Independent-pilot indicator budget advice | [INF-08](#inf-08) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -259,6 +260,20 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 **Validation:** [BoundedParticleFilterTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/BoundedParticleFilterTest.scala): exhaustive one/two-step finite controls, exact-cap stopping, zero evidence, work bounds, RNG/lifecycle/ownership and unsupported evidence refusal. [BoundedParticleFilterStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/BoundedParticleFilterStudy.scala): separate-pilot, near-matched-work synthetic HMM comparison with all zero outcomes retained. Execution status is recorded separately; no universal accuracy or performance guarantee.
 
 **Guide:** [BOUNDED PARTICLE FILTER](BOUNDED_PARTICLE_FILTER.md); [CAPABILITY EXPANSION](CAPABILITY_EXPANSION.md); [CAPABILITY EXPANSION STATUS](CAPABILITY_EXPANSION_STATUS.md).
+
+<a id="inf-08"></a>
+
+### INF-08: Fixed-pilot binomial budget advice
+
+**Source:** [NIST exact binomial confidence limits](https://itl.nist.gov/div898/software/dataplot/refman2/auxillar/exacbino.htm), inspected 2026-10-12: binomial-CDF inversion and small-count limitations of symmetric normal intervals. This is an official method reference, not a full-text review of the original Clopper–Pearson paper. [Commons Math 3.6.1 BetaDistribution](https://commons.apache.org/proper/commons-math/javadocs/api-3.6.1/org/apache/commons/math3/distribution/BetaDistribution.html) and [BinomialDistribution](https://commons.apache.org/proper/commons-math/javadocs/api-3.6.1/org/apache/commons/math3/distribution/BinomialDistribution.html) document the reused numerical backend. INF-07 supplies the target/excluded-final-success filtering context.
+
+**Role:** Independent advisory implementation in 7.2.0-SNAPSHOT, not in 7.1.0. Conservative fixed-size IID pilot intervals feed a single-step binomial target-miss calculation. Expected capped waiting time is an elementary independent derivation, not the Frankenfilter paper's general partial-observation variance theorem. No posterior precision, full-sequence guarantee, optional-stopping pilot validity or automatic recovery is claimed. Existing Commons Math dependency reused; no external source code copied.
+
+**Code:** [BoundedParticleBudget.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/BoundedParticleBudget.scala).
+
+**Validation:** [BoundedParticleBudgetTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/BoundedParticleBudgetTest.scala) has exhaustive small-count coverage and stopping-tree controls, explicit refusals, fixed pilot cost and RNG/error semantics. [BoundedParticleBudgetStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/BoundedParticleBudgetStudy.scala) emits actual numerical output for the independent [80-digit oracle](../tools/budget_reference.py). Execution status is tracked separately, not implied by this bibliography.
+
+**Guide:** [PARTICLE BUDGET ADVISER](PARTICLE_BUDGET_ADVISER.md); [BOUNDED PARTICLE FILTER](BOUNDED_PARTICLE_FILTER.md).
 
 <a id="dia-01"></a>
 

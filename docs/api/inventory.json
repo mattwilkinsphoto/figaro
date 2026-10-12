@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 996,
+  "pages": 1003,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -36052,6 +36052,234 @@
       "example": "com.cra.figaro.algorithm.factored.gibbs.WalkSAT.apply[T](factors, variables, semiring, chainMapper, prob, maxIterations)",
       "object": true,
       "page": "com/cra/figaro/algorithm/factored/gibbs/WalkSAT$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Advice",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Advice.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Advice",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Advice.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Interval",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Interval.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Interval",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Interval.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Pilot",
+      "name": "estimate",
+      "anchor": "estimate-0",
+      "signature": "def estimate: Double",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Double",
+      "summary": "Empirical survival fraction; zero does not establish impossible evidence.",
+      "contract": "Empirical survival fraction; zero does not establish impossible evidence. Attributes",
+      "example": "receiver.estimate",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Pilot.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Pilot",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Pilot.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Pilot",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Pilot.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Plan",
+      "name": "config",
+      "anchor": "config-657",
+      "signature": "def config(seed: Long, algorithm: Algorithm = ..., health: Config = ...): Config",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "seed: Long",
+            "algorithm: Algorithm = ...",
+            "health: Config = ..."
+          ]
+        }
+      ],
+      "returns": "Config",
+      "summary": "Explicit opt-in conversion; choose a production seed/stream distinct from the pilot. Example: advice.plan.get.config(seed = 202).",
+      "contract": "Explicit opt-in conversion; choose a production seed/stream distinct from the pilot. Example: advice.plan.get.config(seed = 202). Attributes",
+      "example": "receiver.config(seed, algorithm, health)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Plan.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Plan",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Plan.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Plan",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Plan.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Request",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Request.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Request",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Request.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget",
+      "name": "advise",
+      "anchor": "advise-ffffff93",
+      "signature": "def advise(pilot: Pilot, request: Request): Advice",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pilot: Pilot",
+            "request: Request"
+          ]
+        }
+      ],
+      "returns": "Advice",
+      "summary": "Return a conservative single-step work plan from a separate pilot; never executes production. Example: advise(Pilot(2000, 200), Request(maxCandidates = 10000)). Invalid inputs throw IllegalArgumentException; unresolved numerical calculations throw ArithmeticException (no plan). Default target 101 accounts for the discarded final success.",
+      "contract": "Return a conservative single-step work plan from a separate pilot; never executes production. Example: advise(Pilot(2000, 200), Request(maxCandidates = 10000)). Invalid inputs throw IllegalArgumentException; unresolved numerical calculations throw ArithmeticException (no plan). Default target 101 accounts for the discarded final success. Attributes",
+      "example": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.advise(pilot, request)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget",
+      "name": "runPilot",
+      "anchor": "runPilot-ad3",
+      "signature": "def runPilot(attempts: Int, seed: Long, algorithm: Algorithm = ...)(draw: () => Boolean): Pilot",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "attempts: Int",
+            "seed: Long",
+            "algorithm: Algorithm = ..."
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "draw: () => Boolean"
+          ]
+        }
+      ],
+      "returns": "Pilot",
+      "summary": "Execute exactly attempts Boolean draws using an owned RNG scope; callbacks must be IID. Uses util.random; never seeds or consumes the caller's ambient stream. Errors/interruption propagate without a partial Pilot. Example: runPilot(2000, 101)(() => random.nextDouble() &lt; .1).",
+      "contract": "Execute exactly attempts Boolean draws using an owned RNG scope; callbacks must be IID. Uses util.random; never seeds or consumes the caller's ambient stream. Errors/interruption propagate without a partial Pilot. Example: runPilot(2000, 101)(() => random.nextDouble() &lt; .1). Attributes",
+      "example": "com.cra.figaro.algorithm.filtering.BoundedParticleBudget.runPilot(attempts, seed, algorithm)(draw)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleBudget$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Config",

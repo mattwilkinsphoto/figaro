@@ -1,5 +1,12 @@
 # Modernization release notes
 
+## In development: 7.2.0-SNAPSHOT
+
+The [independent-pilot budget adviser](PARTICLE_BUDGET_ADVISER.md) makes bounded
+indicator-filter configuration easier without silently retuning production.
+This additive API is not in 7.1.0; general likelihood-weighted bounded filtering
+remains a separate design discussion, not an implemented feature.
+
 ## Current release
 
 ### 7.1.0 — published
@@ -57,7 +64,7 @@ comparison limits](RELEASE_6_1.md). All modern.* entries below describe historic
 
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
-`io.github.mattwilkinsphoto:figaro_3`. The current source version is
+`io.github.mattwilkinsphoto:figaro_3`. The current published version is
 `7.1.0`, available directly from Maven Central. A locally distributed
 `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation

@@ -5,6 +5,344 @@
 
 Examples are call templates: supply the named arguments with the declared types. Context parameters are shown explicitly with `using`; defaults may be omitted in real calls. `receiver` denotes an existing instance of the listed owner. Type parameters must be in scope. Abstract members require a concrete implementation. The signature, not a template, is authoritative.
 
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Advice.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Advice.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Advice.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Advice.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Interval.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Interval.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Interval.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Interval.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Pilot.estimate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Pilot.html#estimate-0)
+
+```scala
+def estimate: Double
+```
+
+Empirical survival fraction; zero does not establish impossible evidence.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Double ``.
+
+Source contract/attributes: Empirical survival fraction; zero does not establish impossible evidence. Attributes
+
+Invocation template:
+
+```scala
+receiver.estimate
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Pilot.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Pilot.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Pilot.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Pilot.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Plan.config ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Plan.html#config-657)
+
+```scala
+def config(seed: Long, algorithm: Algorithm = ..., health: Config = ...): Config
+```
+
+Explicit opt-in conversion; choose a production seed/stream distinct from the pilot. Example: advice.plan.get.config(seed = 202).
+
+Type parameters: none.
+
+Parameters, list 1: `` seed: Long ``; `` algorithm: Algorithm = ... ``; `` health: Config = ... ``.
+
+Returns: `` Config ``.
+
+Source contract/attributes: Explicit opt-in conversion; choose a production seed/stream distinct from the pilot. Example: advice.plan.get.config(seed = 202). Attributes
+
+Invocation template:
+
+```scala
+receiver.config(seed, algorithm, health)
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Plan.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Plan.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Plan.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Plan.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Request.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Request.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Request.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Request.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.advise ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$.html#advise-ffffff93)
+
+```scala
+def advise(pilot: Pilot, request: Request): Advice
+```
+
+Return a conservative single-step work plan from a separate pilot; never executes production. Example: advise(Pilot(2000, 200), Request(maxCandidates = 10000)). Invalid inputs throw IllegalArgumentException; unresolved numerical calculations throw ArithmeticException (no plan). Default target 101 accounts for the discarded final success.
+
+Type parameters: none.
+
+Parameters, list 1: `` pilot: Pilot ``; `` request: Request ``.
+
+Returns: `` Advice ``.
+
+Source contract/attributes: Return a conservative single-step work plan from a separate pilot; never executes production. Example: advise(Pilot(2000, 200), Request(maxCandidates = 10000)). Invalid inputs throw IllegalArgumentException; unresolved numerical calculations throw ArithmeticException (no plan). Default target 101 accounts for the discarded final success. Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.BoundedParticleBudget.advise(pilot, request)
+```
+
+## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.runPilot ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$.html#runPilot-ad3)
+
+```scala
+def runPilot(attempts: Int, seed: Long, algorithm: Algorithm = ...)(draw: () => Boolean): Pilot
+```
+
+Execute exactly attempts Boolean draws using an owned RNG scope; callbacks must be IID. Uses util.random; never seeds or consumes the caller's ambient stream. Errors/interruption propagate without a partial Pilot. Example: runPilot(2000, 101)(() => random.nextDouble() &lt; .1).
+
+Type parameters: none.
+
+Parameters, list 1: `` attempts: Int ``; `` seed: Long ``; `` algorithm: Algorithm = ... ``.
+
+Parameters, list 2: `` draw: () => Boolean ``.
+
+Returns: `` Pilot ``.
+
+Source contract/attributes: Execute exactly attempts Boolean draws using an owned RNG scope; callbacks must be IID. Uses util.random; never seeds or consumes the caller's ambient stream. Errors/interruption propagate without a partial Pilot. Example: runPilot(2000, 101)(() => random.nextDouble() &lt; .1). Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.BoundedParticleBudget.runPilot(attempts, seed, algorithm)(draw)
+```
+
 ## `` com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Config.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$Config.html#productElementNames-0)

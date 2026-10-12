@@ -34,7 +34,8 @@ fixed-budget health reports and recommendations. Automatic general-likelihood
 recovery and arbitrary graph support are not part of this bounded contract.
 
 The [7.1.0 readiness and release](docs/RELEASE_7_1_STATUS.md) is complete.
-Next is an independently piloted budget-selection adviser. General likelihood-weighted
+The independently piloted [budget-selection adviser](docs/PARTICLE_BUDGET_ADVISER.md)
+is being validated separately in 7.2.0-SNAPSHOT. General likelihood-weighted
 bounded filtering remains a design discussion, not an approved implementation step.
 
 Approved distribution/inference integration is complete and released in **7.0.0**.

@@ -140,7 +140,10 @@ as statistically valid zero estimates.
 - Known hard constraints, rare events and earlier collapses identify elevated risk.
   If independent compatibility probability p is known, `(1-p)^N` gives the conditional
   probability of zero survivors in N candidates. A pilot estimate is uncertain;
-  zero pilot successes do not establish p=0. Figaro does not infer p or tune budgets.
+  zero pilot successes do not establish p=0. Published 7.1.0 does not infer p or tune budgets.
+  The separate [budget adviser](PARTICLE_BUDGET_ADVISER.md), in 7.2.0-SNAPSHOT,
+  suggests a frozen configuration from an independent fixed-size pilot; it never
+  silently adapts production. [Adviser provenance](RESEARCH_REFERENCES.md#inf-08).
 - Counts cannot certify missing modes. Repeated exhaustion should prompt proposal
   or model review; more effort cannot recover unreachable states lost previously.
 

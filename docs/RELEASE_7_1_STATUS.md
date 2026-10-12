@@ -14,7 +14,7 @@ checks below. A development version or Git tag is not evidence of publication.
 - [x] Release notes, scoped commit and merge; preserve unrelated local work.
 - [x] Immutable GitHub release, validated signed Central deployment, publication
   and Central-only consumer verification for 7.1.0.
-- [ ] After publication: research, implement and verify an advisory independent-pilot
+- [x] After publication: research, implement and verify an advisory independent-pilot
   budget helper. Do not silently tune production stopping from its own outcomes.
 - [ ] Stop for design discussion before implementing general likelihood-weighted
   bounded filtering.
@@ -79,3 +79,24 @@ the first publication wait timed out in `PUBLISHING`, and a same-deployment
 continuation confirmed `PUBLISHED`. All four public artifacts match the approved
 bytes and all three Central-only consumer programs passed. The [publication record](MAVEN_CENTRAL.md)
 links the actual successful and timed-out workflows. No duplicate upload was made.
+
+## Post-release budget adviser
+
+The [budget adviser](PARTICLE_BUDGET_ADVISER.md) is implemented separately in
+7.2.0-SNAPSHOT, not added to the immutable 7.1.0 artifacts. Local validation passed:
+50 focused tests, 20 actual-output high-precision numerical rows, independent cap
+minimality checks, packaged consumer, and Scala compatibility against the
+hash-verified Central 7.1.0 baseline. Documentation checks passed: 38 tooling tests,
+13077 generated public method entries and 15137 local link targets.
+
+The first boundary test caught avoidable beta-inverse error for shape one; closed-form
+boundary quantiles fixed it without relaxing the tolerance. An initial documentation
+check ran while Scaladoc was being regenerated; its post-build rerun passed. The
+compatibility fixture refused a local 7.1.0 test artifact; Central-only resolvers plus
+a fresh tooling action cache resolved the published baseline, and the SHA-256 gate
+passed without exclusions. Original failed logs are retained in the private evidence
+record. See [branch CI](https://github.com/mattwilkinsphoto/figaro/actions?query=branch%3Acodex%2Fparticle-budget-adviser)
+for subsequent remote gate results; this paragraph records locally executed results.
+
+General likelihood-weighted bounded filtering remains at the discussion gate.
+No implementation, automatic cutover or arbitrary-graph support is claimed.

@@ -45,7 +45,7 @@ lazy val legalSettings = Seq(
 lazy val figaroSettings = Seq(
   organization := "io.github.mattwilkinsphoto",
   description := "Figaro: a language for probabilistic programming",
-  version := "7.1.0",
+  version := "7.2.0-SNAPSHOT",
   scalaVersion := "3.9.0",
   crossScalaVersions := Seq("3.9.0"),
   crossPaths := true,
@@ -92,7 +92,10 @@ lazy val figaro = project
   .settings(figaroSettings)
   .settings(legalSettings)
   .settings(
-    mimaPreviousArtifacts := Set("io.github.mattwilkinsphoto" %% "figaro" % "7.0.0"),
+    // Compatibility baselines must resolve published bytes, never an earlier publishLocal.
+    externalResolvers := Seq(Resolver.mavenCentral),
+    mimaPreviousArtifacts := Set("io.github.mattwilkinsphoto" %% "figaro" % "7.0.0",
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0"),
     Test / fork := true,
     Test / javaOptions += "-Xmx6G",
     Compile / run / fork := true,
@@ -138,10 +141,11 @@ lazy val examples = project
 // The official sbt-tasty-mima plugin is sbt 1-only; invoke its maintained core API.
 lazy val compatibility = project.in(file("tools/compatibility"))
   .settings(
+    externalResolvers := Seq(Resolver.mavenCentral),
     scalaVersion := "3.9.0",
     publish / skip := true,
     libraryDependencies ++= Seq(
-      "io.github.mattwilkinsphoto" %% "figaro" % "7.0.0",
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0",
       ("ch.epfl.scala" %% "tasty-mima" % "1.4.1").exclude("ch.epfl.scala", "tasty-query_3"),
       "ch.epfl.scala" %% "tasty-query" % "1.9.0"
     ),
