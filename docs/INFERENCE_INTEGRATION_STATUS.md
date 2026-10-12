@@ -15,13 +15,19 @@ Research provenance: [INF-04](RESEARCH_REFERENCES.md#inf-04).
 
 - [x] Add old/new examples and rationale to the documentation bridge; no separate
   existing-user migration review is required by the maintainer.
-- [ ] Commit scoped work and pass remote branch CI.
-- [ ] Pass clean-checkout, independent empty-cache reproducibility and packaged-consumer gates.
+- [x] Commit scoped work and pass remote branch CI (0c6dffb8; runs 38200042513 and 38200082636).
+- [x] Pass clean-checkout, independent empty-cache reproducibility and packaged-consumer gates on the branch.
 - [ ] Merge to main, record consumer-impact release eligibility, and pass main CI.
 - [ ] Pin the verified source/bundle in the signing workflow; tag and publish 7.0.0.
 - [ ] Verify Central bytes and independent Central-only consumers; record receipts.
 
 ### Feature implementation
+
+The feature branch merged through PR #3 at `13dd276b`. Main CI and publication
+are still pending. Before freezing the bundle, its installation README was clarified:
+bundle creation is not a publication action; Central availability must be verified
+separately. The previously published baseline is 6.1.0; consumer impact warrants
+the approved 7.0.0 major release once its remaining gates pass.
 
 - [x] Stage 1: reproduce particle-weight underflow and MH ratio overflow; implement
   stable log-domain paths with compatibility controls. Verify finite/extreme weights,

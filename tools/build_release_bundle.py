@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Package verified Figaro 6.1 artifacts as a deterministic, offline Maven layout.
+"""Package verified Figaro artifacts as a deterministic, offline Maven layout.
 
 Dependencies are not vendored: Maven Central/network or a populated dependency
 cache is still required. The output directory must be new. Use --candidate only
@@ -110,7 +110,10 @@ libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "{VERSION}"
 
 3. Run your usual compile and tests. No local Figaro source checkout is needed.
 
-These coordinates are not published to Maven Central. The bundled POM resolves
+Creating this bundle does not itself publish to Maven Central. Check the current
+publication record at https://github.com/mattwilkinsphoto/figaro/blob/main/docs/MAVEN_CENTRAL.md
+for verified availability; after publication, no file resolver is needed.
+The bundled POM resolves
 Scala and other runtime dependencies from normal repositories; network access or
 a populated dependency cache is required. Do not also add the supplemental fat
 JAR: it excludes the Scala runtime, is not executable, and can duplicate dependencies.
