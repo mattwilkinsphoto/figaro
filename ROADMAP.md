@@ -35,10 +35,13 @@ recovery and arbitrary graph support are not part of this bounded contract.
 
 The [7.1.0 readiness and release](docs/RELEASE_7_1_STATUS.md) is complete.
 The independently piloted [budget-selection adviser](docs/PARTICLE_BUDGET_ADVISER.md)
-passed its local and remote gates separately in 7.2.0-SNAPSHOT. The next approved
-milestone is [likelihood-weighted bounded bootstrap filtering](docs/WEIGHTED_BOUNDED_FILTER.md),
-with [explicit acceptance gates](docs/WEIGHTED_FILTER_STATUS.md). Neither extension
-is in the published 7.1.0 artifacts. Broader proposals and automatic tuning remain deferred.
+passed its local and remote gates separately in 7.2.0-SNAPSHOT, as did
+[likelihood-weighted bounded bootstrap filtering](docs/WEIGHTED_BOUNDED_FILTER.md)
+with its [acceptance gates](docs/WEIGHTED_FILTER_STATUS.md). The next approved
+extension is [split-pilot score/work calibration and observation-informed proposals](docs/CALIBRATED_GUIDED_FILTER.md),
+with [separate validation](docs/CALIBRATED_GUIDED_STATUS.md). None is in the published
+7.1.0 artifacts. Auxiliary ancestor proposals, arbitrary-graph adaptation and
+automatic posterior-precision selection remain deferred.
 
 Approved distribution/inference integration is complete and released in **7.0.0**.
 Its five stages cover stable filtering/MH ratios,

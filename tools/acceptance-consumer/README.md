@@ -48,6 +48,11 @@ directory; leave the flag unset when testing immutable 7.0.0 or 6.1.0 artifacts.
 The new check exercises grouped counts, native log ratios, automatic scalar moves,
 discarded/frozen tuning, tiny-shape density and Cholesky-entry density APIs.
 
+For post-7.1 development builds, additionally set `FIGARO_BUDGET_CHECK=true`
+and run `runMain BudgetConsumerCheck`. This checks the indicator budget adviser,
+weighted bounded filtering and [calibrated observation-informed proposals](../../docs/CALIBRATED_GUIDED_FILTER.md)
+from the same hash-verified JAR. Leave this flag unset for immutable 7.1.0 artifacts.
+
 `FigaroConsumerCheck.main(args: Array[String]): Unit` accepts an empty array and requires
 the environment variable above. It prints the loaded jar hash and a completion line;
 missing/incorrect hashes, non-jar resolution or any failed model/lifecycle check throw.

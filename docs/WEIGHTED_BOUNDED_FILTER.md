@@ -11,6 +11,11 @@ a difficult observation, up to a hard cap, using a separate score policy fixed b
 that step. It does not change ordinary `ParticleFilter`, retry a failed graph, tune
 proposals, or promise a particular posterior precision.
 
+This guide describes the original bootstrap/manual-policy path. The subsequent
+opt-in [calibration and guided-proposal extension](CALIBRATED_GUIDED_FILTER.md)
+adds independent pilot score/work selection and explicit observation-informed
+proposal corrections. It does not change the defaults described here.
+
 Ordinary likelihood-weighted filtering already exists in Figaro. The addition here
 is bounded adaptive work with corrected evidence estimation and ancestor selection.
 Use it when observation difficulty varies and a fixed candidate count is inconvenient.
@@ -138,16 +143,17 @@ correctness for arbitrary callbacks. No particle-MCMC driver is provided.
 - A score can numerically underflow to zero without changing the inference weight.
   That affects work allocation and may force the cap. Near-threshold floating-point
   sums are not exact real arithmetic.
-- Callbacks must implement the true prior/transition laws; custom proposals need
-  density-ratio correction and are outside this first version. Likelihood constants
-  matter for evidence. A callback cannot silently omit them.
+- On the bootstrap path, callbacks must implement the true prior/transition laws.
+  Custom draws require the explicit [guided density-ratio API](CALIBRATED_GUIDED_FILTER.md),
+  not a silent change to these callbacks. Likelihood constants matter for evidence.
 - Use `util.random` for owned seeded replay. Mutable states, external RNGs, shared
   graphs, reentrant calls and cross-thread use are unsupported. Invalid callbacks,
   interruption and numerical failures invalidate the posterior; interruption is not
   a completed capped estimate. Caps count candidates, not runtime inside callbacks.
 - Extra current-step draws do not recover extinct histories or certify missing modes.
-  No automatic fallback, pilot selection, score fitting or weighted budget adviser
-  is implemented. The Boolean adviser cannot be reinterpreted as one.
+  The manual path performs no score fitting or automatic fallback. The separate
+  [split-pilot extension](CALIBRATED_GUIDED_FILTER.md) calibrates bounded continuous
+  scores; the Boolean adviser cannot be reinterpreted as that extension.
 
 ## Validation and related modules
 

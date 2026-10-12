@@ -8,7 +8,10 @@ The [weighted bounded bootstrap filter](WEIGHTED_BOUNDED_FILTER.md) adds general
 log-likelihood observations, separately declared score policies and weighted
 ancestor selection within hard candidate limits. Both additive APIs are absent
 from 7.1.0. See [weighted-filter acceptance](WEIGHTED_FILTER_STATUS.md) for current
-validation; no automatic recovery, proposal tuning or weighted budget adviser is implied.
+validation. A subsequent [calibrated guided-filter extension](CALIBRATED_GUIDED_FILTER.md)
+adds split-pilot score/work selection, explicit observation-informed proposals and
+defensive mixtures; see its [separate acceptance record](CALIBRATED_GUIDED_STATUS.md).
+Neither API implies automatic recovery, auxiliary ancestor reweighting or precision guarantees.
 
 ## Current release
 

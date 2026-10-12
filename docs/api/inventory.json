@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 1011,
+  "pages": 1018,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -40079,6 +40079,51 @@
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "advance",
+      "anchor": "advance-fffff156",
+      "signature": "def advance(evidence: Evidence[S], proposal: Kernel[S]): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "evidence: Evidence[S]",
+            "proposal: Kernel[S]"
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Advance with weighted ancestors and a frozen guided transition kernel.",
+      "contract": "Advance with weighted ancestors and a frozen guided transition kernel. Attributes",
+      "example": "receiver.advance(evidence, proposal)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "advanceCalibrated",
+      "anchor": "advanceCalibrated-7db",
+      "signature": "def advanceCalibrated(logLikelihood: S => Double, request: Request, proposal: Option[Kernel[S]] = ...): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logLikelihood: S => Double",
+            "request: Request",
+            "proposal: Option[Kernel[S]] = ..."
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Calibrate afresh for this observation and the CURRENT frozen ancestor population. Same parameters/result as startCalibrated; pilots never update parents or evidence.",
+      "contract": "Calibrate afresh for this observation and the CURRENT frozen ancestor population. Same parameters/result as startCalibrated; pilots never update parents or evidence. Attributes",
+      "example": "receiver.advanceCalibrated(logLikelihood, request, proposal)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
       "name": "close",
       "anchor": "close-94c",
       "signature": "def close(): Unit",
@@ -40107,6 +40152,20 @@
       "summary": "Latest valid posterior; throws before start, after failure, or after close.",
       "contract": "Latest valid posterior; throws before start, after failure, or after close. Attributes",
       "example": "receiver.current",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "lastCalibration",
+      "anchor": "lastCalibration-0",
+      "signature": "def lastCalibration: Option[Advice]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Advice]",
+      "summary": "Completed pilot advice for the last calibrated step, including production collapse. None on manual steps or any callback/numerical failure.",
+      "contract": "Completed pilot advice for the last calibrated step, including production collapse. None on manual steps or any callback/numerical failure. Attributes",
+      "example": "receiver.lastCalibration",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
     },
@@ -40144,6 +40203,319 @@
       "example": "receiver.start(evidence)",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "start",
+      "anchor": "start-fffff156",
+      "signature": "def start(evidence: Evidence[S], proposal: Kernel[S]): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "evidence: Evidence[S]",
+            "proposal: Kernel[S]"
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Start using a frozen observation-informed kernel; evidence is applied exactly once.",
+      "contract": "Start using a frozen observation-informed kernel; evidence is applied exactly once. Attributes",
+      "example": "receiver.start(evidence, proposal)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "startCalibrated",
+      "anchor": "startCalibrated-7db",
+      "signature": "def startCalibrated(logLikelihood: S => Double, request: Request, proposal: Option[Kernel[S]] = ...): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logLikelihood: S => Double",
+            "request: Request",
+            "proposal: Option[Kernel[S]] = ..."
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Calibrate score/work on discarded pilots, then start production under a total work cap.",
+      "contract": "Calibrate score/work on discarded pilots, then start production under a total work cap. Value parameters logLikelihood observation likelihood only, not already proposal-corrected proposal optional frozen observation-informed kernel; None uses the model request total pilot+production budget and score-policy preferences Attributes Returns production posterior; inspect lastCalibration for advice and pilot work",
+      "example": "receiver.startCalibrated(logLikelihood, request, proposal)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.Advice",
+      "name": "config",
+      "anchor": "config-5c4",
+      "signature": "def config(base: Config): Config",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "base: Config"
+          ]
+        }
+      ],
+      "returns": "Config",
+      "summary": "Copy only work settings; retain the filter's RNG and health policy.",
+      "contract": "Copy only work settings; retain the filter's RNG and health policy. Attributes",
+      "example": "receiver.config(base)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleCalibration$$Advice.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.Advice",
+      "name": "maximumTotalCandidates",
+      "anchor": "maximumTotalCandidates-0",
+      "signature": "def maximumTotalCandidates: Int",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Int",
+      "summary": "Pilot + maximum production work; actual work adds pilotCandidates to report.attempts.",
+      "contract": "Pilot + maximum production work; actual work adds pilotCandidates to report.attempts. Attributes",
+      "example": "receiver.maximumTotalCandidates",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleCalibration$$Advice.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.Advice",
+      "name": "score",
+      "anchor": "score-5b2",
+      "signature": "def score(logWeight: Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logWeight: Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Frozen score of the corrected log importance weight. No-scale fallback uses constant one.",
+      "contract": "Frozen score of the corrected log importance weight. No-scale fallback uses constant one. Attributes",
+      "example": "receiver.score(logWeight)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleCalibration$$Advice.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.Advice",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleCalibration$$Advice.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.Advice",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleCalibration$$Advice.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.Request",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleCalibration$$Request.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.Request",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleCalibration$$Request.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration",
+      "name": "run",
+      "anchor": "run-e41",
+      "signature": "def run(request: Request, seed: Long, algorithm: Algorithm = ...)(drawLogWeight: () => Double): Advice",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "request: Request",
+            "seed: Long",
+            "algorithm: Algorithm = ..."
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "drawLogWeight: () => Double"
+          ]
+        }
+      ],
+      "returns": "Advice",
+      "summary": "Run fixed-size, disjoint scale/evaluation pilots in an owned RNG scope.",
+      "contract": "Run fixed-size, disjoint scale/evaluation pilots in an owned RNG scope. Value parameters algorithm Figaro RNG backend drawLogWeight IID corrected log-weight callback; no mutation or production reuse request predeclared total ceiling and score-policy preferences seed pilot seed, distinct from any separately run production stream Attributes Returns frozen Advice; invalid input/callback/interruption throws, never partial advice Example run(Request(),101)(() => logWeightOfNewDraw())",
+      "example": "com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.run(request, seed, algorithm)(drawLogWeight)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleCalibration$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal.Kernel",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleProposal$$Kernel.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal.Kernel",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleProposal$$Kernel.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal.Law",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleProposal$$Law.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal.Law",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleProposal$$Law.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal",
+      "name": "defensive",
+      "anchor": "defensive-f3b",
+      "signature": "def defensive[S](prior: Law[S], guided: Law[S], priorFraction: Double = ...): Law[S]",
+      "type_parameters": [
+        "S"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "prior: Law[S]",
+            "guided: Law[S]",
+            "priorFraction: Double = ..."
+          ]
+        }
+      ],
+      "returns": "Law[S]",
+      "summary": "Support-preserving q = priorFraction*p + (1-priorFraction)*guided.",
+      "contract": "Support-preserving q = priorFraction*p + (1-priorFraction)*guided. Value parameters guided normalized observation-informed law using the same measure prior normalized target prior/transition law with full target support priorFraction finite fraction in (0,1), fixed before the step Attributes Returns mixture sampler AND full mixture density, never the sampled component density Example defensive(gaussian(0,1),gaussianObservation(0,1,2,.2),.1)",
+      "example": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal.defensive[S](prior, guided, priorFraction)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleProposal$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal",
+      "name": "gaussian",
+      "anchor": "gaussian-fffff5ad",
+      "signature": "def gaussian(mean: Double, standardDeviation: Double): Law[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "mean: Double",
+            "standardDeviation: Double"
+          ]
+        }
+      ],
+      "returns": "Law[Double]",
+      "summary": "Adapt the existing Gaussian kernel. Second argument is standard deviation, not variance.",
+      "contract": "Adapt the existing Gaussian kernel. Second argument is standard deviation, not variance. Attributes Returns normalized scalar law; e.g. gaussian(0, 1)",
+      "example": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal.gaussian(mean, standardDeviation)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleProposal$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal",
+      "name": "gaussianObservation",
+      "anchor": "gaussianObservation-55f",
+      "signature": "def gaussianObservation(mean: Double, standardDeviation: Double, observation: Double, noiseStandardDeviation: Double): Law[Double]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "mean: Double",
+            "standardDeviation: Double",
+            "observation: Double",
+            "noiseStandardDeviation: Double"
+          ]
+        }
+      ],
+      "returns": "Law[Double]",
+      "summary": "Gaussian conditional for x~N(mean,sd^2), y|x~N(x,noiseSd^2). Uses scaled precision arithmetic; this is a proposal, not an observation applied twice.",
+      "contract": "Gaussian conditional for x~N(mean,sd^2), y|x~N(x,noiseSd^2). Uses scaled precision arithmetic; this is a proposal, not an observation applied twice. Attributes Returns normalized q(x|y); e.g. gaussianObservation(0,1,2,.2)",
+      "example": "com.cra.figaro.algorithm.filtering.WeightedParticleProposal.gaussianObservation(mean, standardDeviation, observation, noiseStandardDeviation)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedParticleProposal$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.lazyfactored.BoundedProbFactor",

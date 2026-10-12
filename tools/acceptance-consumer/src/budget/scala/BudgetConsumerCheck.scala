@@ -1,6 +1,7 @@
 import com.cra.figaro.algorithm.filtering.{BoundedParticleBudget as A, BoundedParticleFilter as B}
 import com.cra.figaro.util.random
 import com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter as W
+import com.cra.figaro.algorithm.filtering.{WeightedParticleCalibration as C, WeightedParticleProposal as P}
 
 /** Consumer compiled only for the post-7.1 adviser, never for the immutable 7.1 release. */
 object BudgetConsumerCheck {
@@ -28,6 +29,20 @@ object BudgetConsumerCheck {
       require(r.expectation(identity)>=0 && r.expectation(identity)<=1)
     } finally weighted.close()
     println("Weighted bounded filtering API verified from the same artifact")
+    val p=P.gaussian(0,1)
+    def transition(x:Double)=P.gaussian(.8*x,math.sqrt(.3))
+    val calibrated=W(B.Model(p.sample,(x:Double)=>transition(x).sample()),W.Config(seed=204))
+    def q(y:Double)=P.Kernel(p,transition,P.gaussianObservation(0,1,y,math.sqrt(.5)),
+      (x:Double)=>P.defensive(transition(x),P.gaussianObservation(.8*x,math.sqrt(.3),y,math.sqrt(.5))))
+    try {
+      def likelihood(y:Double)(x:Double)=P.gaussian(x,math.sqrt(.5)).logDensity(y)
+      val req=C.Request(maxTotalCandidates=2000)
+      calibrated.startCalibrated(likelihood(.2),req,Some(q(.2)))
+      val r=calibrated.advanceCalibrated(likelihood(-.3),req,Some(q(-.3)))
+      require(calibrated.lastCalibration.get.pilotCandidates+r.report.attempts<=2000)
+      require(r.logEvidence.isFinite && r.expectation(identity).isFinite)
+    } finally calibrated.close()
+    println("Calibrated guided filtering verified from the same artifact")
     println(s"Budget adviser API verified from artifact $hash")
   }
 }

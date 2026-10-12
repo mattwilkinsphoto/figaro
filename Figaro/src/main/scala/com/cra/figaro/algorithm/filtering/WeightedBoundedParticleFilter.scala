@@ -3,7 +3,7 @@ package com.cra.figaro.algorithm.filtering
 import com.cra.figaro.util.{RandomContext, SamplingRandom}
 import scala.collection.mutable.ArrayBuffer
 
-/** Bounded bootstrap filtering with general likelihoods (research reference INF-09).
+/** Bounded filtering with general likelihoods (research references INF-09/INF-10).
   * Independent specialization of Frankenfilter v2 Algorithms 3/4, not a graph retry.
   * Callbacks must be pure except for Figaro's scoped RNG; states must be immutable.
   */
@@ -22,7 +22,8 @@ object WeightedBoundedParticleFilter {
     require(algorithm != null && health != null, "RNG and health policy required")
   }
 
-  /** Fixed evidence policy for one step. score receives the raw log likelihood, not normalized weights.
+  /** Fixed evidence policy for one step. score receives the corrected log importance weight
+    * (raw log likelihood for bootstrap draws), never normalized weights.
     * Neither callback may adapt to this step's previously drawn candidates.
     */
   final case class Evidence[S](logLikelihood: S => Double, score: Double => Double) {
@@ -73,16 +74,21 @@ object WeightedBoundedParticleFilter {
     report: StepReport, logIncrement: Double)
 
   private[figaro] def step[S](config: Config, hasParents: Boolean)(draw: () => (S,Int),
-    evidence: Evidence[S]): Step[S] = {
+    evidence: Evidence[S]): Step[S] = weightedStep(config,hasParents)(() => {
+      val (state,parent) = draw()
+      (state,parent,evidence.logLikelihood(state))
+    },evidence.score)
+
+  private[figaro] def weightedStep[S](config: Config, hasParents: Boolean)(draw: () => (S,Int,Double),
+    scoreOf: Double => Double): Step[S] = {
     val candidates = ArrayBuffer.empty[(S,Int,Double)]
     var score = 0.0
     while (candidates.size < config.minCandidates ||
       (candidates.size < config.maxCandidates && score < config.scoreTarget)) {
       if (Thread.currentThread().isInterrupted) throw new InterruptedException("Weighted filtering interrupted; no completed estimate")
-      val (state,parent) = draw()
-      val logWeight = evidence.logLikelihood(state)
+      val (state,parent,logWeight) = draw()
       require(logWeight.isFinite || logWeight == Double.NegativeInfinity, "Log likelihood must be finite or -Infinity")
-      val s = evidence.score(logWeight)
+      val s = scoreOf(logWeight)
       require(s.isFinite && s >= 0 && s <= 1, "Success score must be in [0,1]")
       score += s
       candidates += ((state,parent,logWeight))
@@ -97,7 +103,7 @@ object WeightedBoundedParticleFilter {
     val rawHealth = ParticleFilterHealth.assess(logs, config.health)
     val health = rawHealth.copy(recommendations = if (rawHealth.issues.isEmpty) Vector.empty else Vector(
       "Inspect weight concentration, evidence consistency and ancestor diversity; a score target is not precision.",
-      "Review the fixed score scale, work cap and bootstrap proposal if repeatedly exhausted.",
+      "Review the frozen score scale, work cap and proposal if repeatedly exhausted.",
       "Retain failed outcomes in evidence calibration; do not retry until success."))
     val report = StepReport(attempts, candidates.size, score, reason, met,
       Option.when(hasParents)(candidates.iterator.filter(_._3.isFinite).map(_._2).toSet.size), health)
@@ -128,7 +134,9 @@ object WeightedBoundedParticleFilter {
   }
 }
 
-/** Sequential owned lifecycle; custom proposals and automatic recovery are not supported. */
+/** Sequential owned lifecycle; optional guided proposals and split-pilot calibration.
+  * No automatic retries, auxiliary ancestor reweighting or arbitrary graph adaptation.
+  */
 final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilter.Model[S],
   val config: WeightedBoundedParticleFilter.Config) {
   import WeightedBoundedParticleFilter.*
@@ -137,6 +145,7 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
   private val rng = SamplingRandom.seeded(config.seed, config.algorithm)
   private var latest: Option[Update[S]] = None
   private var diagnostic: Option[StepReport] = None
+  private var calibration: Option[WeightedParticleCalibration.Advice] = None
   private var terminal = false
   private var running = false
   private def access(): Unit = {
@@ -145,6 +154,10 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
   }
   /** Last completed report, including zero-weight collapse; absent after callback/numerical failure. */
   def lastReport: Option[StepReport] = { access(); diagnostic }
+  /** Completed pilot advice for the last calibrated step, including production collapse.
+    * None on manual steps or any callback/numerical failure.
+    */
+  def lastCalibration: Option[WeightedParticleCalibration.Advice] = { access(); calibration }
   /** Latest valid posterior; throws before start, after failure, or after close. */
   def current: Update[S] = {
     access(); require(!terminal && latest.isDefined, "No current posterior")
@@ -157,10 +170,42 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
   }
   /** Sample independent weighted ancestors, propagate, then apply the next evidence policy. */
   def advance(evidence: Evidence[S]): Update[S] = { current; update(evidence, false) }
-  private def update(evidence: Evidence[S], initial: Boolean): Update[S] = {
+  /** Start using a frozen observation-informed kernel; evidence is applied exactly once. */
+  def start(evidence: Evidence[S], proposal: WeightedParticleProposal.Kernel[S]): Update[S] = {
+    access(); require(!terminal && latest.isEmpty && proposal != null, "Unstarted filter and proposal required")
+    update(evidence,true,Some(proposal))
+  }
+  /** Advance with weighted ancestors and a frozen guided transition kernel. */
+  def advance(evidence: Evidence[S], proposal: WeightedParticleProposal.Kernel[S]): Update[S] = {
+    current; require(proposal != null); update(evidence,false,Some(proposal))
+  }
+  /** Calibrate score/work on discarded pilots, then start production under a total work cap.
+    * @param logLikelihood observation likelihood only, not already proposal-corrected
+    * @param request total pilot+production budget and score-policy preferences
+    * @param proposal optional frozen observation-informed kernel; None uses the model
+    * @return production posterior; inspect lastCalibration for advice and pilot work
+    */
+  def startCalibrated(logLikelihood: S => Double, request: WeightedParticleCalibration.Request,
+    proposal: Option[WeightedParticleProposal.Kernel[S]] = None): Update[S] = {
+    access(); require(!terminal && latest.isEmpty, "Unstarted filter required")
+    require(request != null && proposal != null && proposal.forall(_ != null))
+    update(Evidence(logLikelihood,_ => 1.0),true,proposal,Some(request))
+  }
+  /** Calibrate afresh for this observation and the CURRENT frozen ancestor population.
+    * Same parameters/result as startCalibrated; pilots never update parents or evidence.
+    */
+  def advanceCalibrated(logLikelihood: S => Double, request: WeightedParticleCalibration.Request,
+    proposal: Option[WeightedParticleProposal.Kernel[S]] = None): Update[S] = {
+    current; require(request != null && proposal != null && proposal.forall(_ != null))
+    update(Evidence(logLikelihood,_ => 1.0),false,proposal,Some(request))
+  }
+  private def update(evidence: Evidence[S], initial: Boolean,
+    proposal: Option[WeightedParticleProposal.Kernel[S]] = None,
+    request: Option[WeightedParticleCalibration.Request] = None): Update[S] = {
     require(evidence != null, "Evidence policy required")
     running = true
     diagnostic = None
+    calibration = None
     try RandomContext.withRandom(rng) {
       val old = latest
       // One CDF per step; force its last positive entry to 1, never a trailing zero.
@@ -169,13 +214,27 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
         val last = r.weights.lastIndexWhere(_ > 0)
         cumulative.zipWithIndex.map((x,i) => if (i >= last) 1.0 else math.min(x,1.0))
       }.getOrElse(Vector.empty)
-      val result = step(config, !initial)(() => {
-        if (initial) (model.initial(), -1)
-        else {
-          val i = ancestor(cdf, rng.nextDouble())
-          (model.transition(old.get.particles(i)), i)
+      def draw(): (S,Int,Double) = {
+        val i = if (initial) -1 else ancestor(cdf,rng.nextDouble())
+        val parent = if (initial) None else Some(old.get.particles(i))
+        val (state,correction) = proposal match {
+          case Some(q) => q.draw(parent)
+          case None => (parent.fold(model.initial())(model.transition),0.0)
         }
-      }, evidence)
+        val likelihood = WeightedParticleProposal.checked(evidence.logLikelihood(state))
+        val weight = if (likelihood == Double.NegativeInfinity || correction == Double.NegativeInfinity)
+          Double.NegativeInfinity else {
+            val value = likelihood+correction
+            if (!value.isFinite) throw new ArithmeticException("Corrected log weight overflow")
+            value
+          }
+        (state,i,weight)
+      }
+      // Non-overlapping draws of the owned stream; no resets or pilot candidate recycling.
+      calibration = request.map(r => WeightedParticleCalibration.calibrate(r)(() => draw()._3))
+      val work = calibration.map(_.config(config)).getOrElse(config)
+      val scoreOf: Double => Double = calibration.map(a => (w: Double) => a.score(w)).getOrElse(evidence.score)
+      val result = weightedStep(work, !initial)(() => draw(), scoreOf)
       diagnostic = Some(result.report)
       if (result.weights.isEmpty) throw new NoViableParticles(result.report)
       val logEvidence = old.map(_.logEvidence).getOrElse(0.0) + result.logIncrement
@@ -184,9 +243,9 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
       latest = Some(answer)
       answer
     } catch {
-      case e: InterruptedException => terminal = true; latest = None; diagnostic = None; throw e
+      case e: InterruptedException => terminal = true; latest = None; diagnostic = None; calibration = None; throw e
       case e: NoViableParticles => terminal = true; latest = None; throw e
-      case scala.util.control.NonFatal(e) => terminal = true; latest = None; diagnostic = None; throw e
+      case scala.util.control.NonFatal(e) => terminal = true; latest = None; diagnostic = None; calibration = None; throw e
     } finally running = false
   }
   /** Release retained values. Terminal, idempotent, owner-thread only. */

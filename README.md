@@ -38,7 +38,8 @@ health reports, nested owned observations, proposal tuning and selected numerica
 extensions. See [capability scope](docs/CAPABILITY_EXPANSION.md).
 
 On the development branch, 7.2.0-SNAPSHOT adds [pilot-based budget advice](docs/PARTICLE_BUDGET_ADVISER.md)
-and [likelihood-weighted bounded filtering](docs/WEIGHTED_BOUNDED_FILTER.md).
+and [likelihood-weighted bounded filtering](docs/WEIGHTED_BOUNDED_FILTER.md), including
+opt-in [calibration and observation-informed proposals](docs/CALIBRATED_GUIDED_FILTER.md).
 These APIs are not in the published 7.1.0 dependency.
 
 Figaro 7.0.0 added [stable filtering, owned-chain observations, exact count tables

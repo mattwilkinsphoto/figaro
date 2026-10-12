@@ -28,6 +28,8 @@ incorporated. The selected equations are independently implemented in Scala with
 existing Figaro infrastructure. Section 2 of preprint v2 retains the stopping and
 ancestor correction, now numbered Algorithms 3/4 instead of v1's 3–5.
 
-Out of scope: general graph adaptation, custom importance proposals, automatic score
-calibration, a continuous-score budget adviser, posterior precision guarantees,
-universal speedups and arbitrary-graph thread safety. Release approval is separate.
+The original milestone excluded custom proposals and automatic score/work calibration.
+Those are now a separate approved [development extension](CALIBRATED_GUIDED_STATUS.md);
+the successful CI above validates the original implementation, not that extension.
+General graph adaptation, posterior precision guarantees, universal speedups and
+arbitrary-graph thread safety remain out of scope. Release approval is separate.
