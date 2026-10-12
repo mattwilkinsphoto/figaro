@@ -40,6 +40,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Warm-up-only scalar proposal tuning | [INF-06](#inf-06) |
 | Bounded-work particle recovery assessment | [INF-07](#inf-07) |
 | Independent-pilot indicator budget advice | [INF-08](#inf-08) |
+| General-likelihood bounded bootstrap filtering | [INF-09](#inf-09) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -274,6 +275,20 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 **Validation:** [BoundedParticleBudgetTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/BoundedParticleBudgetTest.scala) has exhaustive small-count coverage and stopping-tree controls, explicit refusals, fixed pilot cost and RNG/error semantics. [BoundedParticleBudgetStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/BoundedParticleBudgetStudy.scala) emits actual numerical output for the independent [80-digit oracle](../tools/budget_reference.py). Execution status is tracked separately, not implied by this bibliography.
 
 **Guide:** [PARTICLE BUDGET ADVISER](PARTICLE_BUDGET_ADVISER.md); [BOUNDED PARTICLE FILTER](BOUNDED_PARTICLE_FILTER.md).
+
+<a id="inf-09"></a>
+
+### INF-09: Weighted bounded bootstrap filtering
+
+**Source:** Sherlock, Golightly and Lee, [Frankenfilter preprint v2](https://arxiv.org/html/2601.23173v2), section 2, Algorithms 3/4 and stopping/ancestor correction inspected 2026-10-12. [Author reference repository](https://github.com/AndyGolightly/Frankenfilter) inspected for reuse feasibility: R/C++ research applications, no declared repository license; no code/assets copied. INF-04 supplies the log-weight numerical context. Gaussian conditioning is an independent analytic validation, not a copied Kalman implementation.
+
+**Role:** Independent development implementation in 7.2.0-SNAPSHOT, not shipped in 7.1.0. Bootstrap prior/transition draws only, immutable states, fixed per-candidate scores restricted to [0,1], explicit work floor/cap and corrected retained population. The paper allows a broader score/proposal surface. Figaro adds thread confinement, owned RNG, failure semantics and numerical refusal. No automatic ESS stopping, proposal adaptation, posterior-precision theorem or paper-to-Figaro speedup transfer.
+
+**Code:** [WeightedBoundedParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.scala).
+
+**Validation:** [WeightedBoundedParticleFilterTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/WeightedBoundedParticleFilterTest.scala), exhaustive weighted two-step trees and lifecycle/numerical controls; [WeightedBoundedParticleStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/WeightedBoundedParticleStudy.scala), predeclared synthetic calibration; [independent rational Gaussian-conditioning oracle](../tools/weighted_filter_reference.py). Actual execution status is recorded separately.
+
+**Guide:** [WEIGHTED BOUNDED FILTER](WEIGHTED_BOUNDED_FILTER.md); [WEIGHTED FILTER STATUS](WEIGHTED_FILTER_STATUS.md).
 
 <a id="dia-01"></a>
 

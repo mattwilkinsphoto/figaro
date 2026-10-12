@@ -4398,3 +4398,723 @@ Invocation template:
 ```scala
 receiver.get[T](reference)
 ```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Config.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Config.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Config.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Config.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Evidence.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Evidence.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Evidence.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Evidence.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.addSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#addSuppressed-4b8)
+
+```scala
+final def addSuppressed(x$0: Throwable): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.addSuppressed(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.fillInStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#fillInStackTrace-26c)
+
+```scala
+def fillInStackTrace(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.fillInStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.getCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#getCause-26c)
+
+```scala
+def getCause(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getCause()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.getLocalizedMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#getLocalizedMessage-665)
+
+```scala
+def getLocalizedMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getLocalizedMessage()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.getMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#getMessage-665)
+
+```scala
+def getMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getMessage()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.getStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#getStackTrace-fffffa6d)
+
+```scala
+def getStackTrace(): Array[StackTraceElement]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[StackTraceElement] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.getSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#getSuppressed-fffff2ce)
+
+```scala
+final def getSuppressed(): Array[Throwable]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[Throwable] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getSuppressed()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.initCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#initCause-fffff080)
+
+```scala
+def initCause(x$0: Throwable): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.initCause(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#printStackTrace-fffff230)
+
+```scala
+def printStackTrace(x$0: PrintWriter): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintWriter ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#printStackTrace-fffff0fd)
+
+```scala
+def printStackTrace(x$0: PrintStream): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintStream ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#printStackTrace-94c)
+
+```scala
+def printStackTrace(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.setStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#setStackTrace-f79)
+
+```scala
+def setStackTrace(x$0: Array[StackTraceElement]): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Array[StackTraceElement] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.setStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles.toString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html#toString-665)
+
+```scala
+def toString(): String
+```
+
+Returns a string representation of the object.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.toString()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.StepReport.warnings ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$StepReport.html#warnings-0)
+
+```scala
+def warnings: Vector[String]
+```
+
+Work and ancestry warnings, not accuracy certificates.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Vector[String] ``.
+
+Source contract/attributes: Work and ancestry warnings, not accuracy certificates. Attributes
+
+Invocation template:
+
+```scala
+receiver.warnings
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.StepReport.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$StepReport.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.StepReport.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$StepReport.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Update.expectation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Update.html#expectation-caa)
+
+```scala
+def expectation(f: S => Double): Double
+```
+
+Weighted finite observable mean; normalized posterior estimates need not be unbiased.
+
+Type parameters: none.
+
+Parameters, list 1: `` f: S => Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Weighted finite observable mean; normalized posterior estimates need not be unbiased. Attributes
+
+Invocation template:
+
+```scala
+receiver.expectation(f)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Update.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Update.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Update.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Update.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$.html#apply-fffffdd9)
+
+```scala
+def apply[S](model: Model[S], config: Config = ...): WeightedBoundedParticleFilter[S]
+```
+
+Create an unstarted, thread-confined filter; model draws directly from prior/transition.
+
+Type parameters: `` S ``.
+
+Parameters, list 1: `` model: Model[S] ``; `` config: Config = ... ``.
+
+Returns: `` WeightedBoundedParticleFilter[S] ``.
+
+Source contract/attributes: Create an unstarted, thread-confined filter; model draws directly from prior/transition. Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.apply[S](model, config)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.cappedLikelihood ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$.html#cappedLikelihood-5d8)
+
+```scala
+def cappedLikelihood(logScale: Double): Double => Double
+```
+
+Return s(logWeight)=min(1, exp(logWeight-logScale)); never changes inference weights. Choose finite logScale independently before sampling, e.g. a known density peak.
+
+Type parameters: none.
+
+Parameters, list 1: `` logScale: Double ``.
+
+Returns: `` Double => Double ``.
+
+Source contract/attributes: Return s(logWeight)=min(1, exp(logWeight-logScale)); never changes inference weights. Choose finite logScale independently before sampling, e.g. a known density peak. Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.cappedLikelihood(logScale)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.advance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#advance-160)
+
+```scala
+def advance(evidence: Evidence[S]): Update[S]
+```
+
+Sample independent weighted ancestors, propagate, then apply the next evidence policy.
+
+Type parameters: none.
+
+Parameters, list 1: `` evidence: Evidence[S] ``.
+
+Returns: `` Update[S] ``.
+
+Source contract/attributes: Sample independent weighted ancestors, propagate, then apply the next evidence policy. Attributes
+
+Invocation template:
+
+```scala
+receiver.advance(evidence)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.close ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#close-94c)
+
+```scala
+def close(): Unit
+```
+
+Release retained values. Terminal, idempotent, owner-thread only.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Release retained values. Terminal, idempotent, owner-thread only. Attributes
+
+Invocation template:
+
+```scala
+receiver.close()
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.current ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#current-0)
+
+```scala
+def current: Update[S]
+```
+
+Latest valid posterior; throws before start, after failure, or after close.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Update[S] ``.
+
+Source contract/attributes: Latest valid posterior; throws before start, after failure, or after close. Attributes
+
+Invocation template:
+
+```scala
+receiver.current
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.lastReport ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#lastReport-0)
+
+```scala
+def lastReport: Option[StepReport]
+```
+
+Last completed report, including zero-weight collapse; absent after callback/numerical failure.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[StepReport] ``.
+
+Source contract/attributes: Last completed report, including zero-weight collapse; absent after callback/numerical failure. Attributes
+
+Invocation template:
+
+```scala
+receiver.lastReport
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.start ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#start-160)
+
+```scala
+def start(evidence: Evidence[S]): Update[S]
+```
+
+Draw the model's initial state and weight it with this first evidence policy. Call once.
+
+Type parameters: none.
+
+Parameters, list 1: `` evidence: Evidence[S] ``.
+
+Returns: `` Update[S] ``.
+
+Source contract/attributes: Draw the model's initial state and weight it with this first evidence policy. Call once. Attributes
+
+Invocation template:
+
+```scala
+receiver.start(evidence)
+```

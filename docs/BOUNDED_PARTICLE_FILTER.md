@@ -219,3 +219,7 @@ not a universal calibration or speed superiority claim. See the
 Related: [inference health](INFERENCE_HEALTH.md), [7.0 migration bridge](INFERENCE_INTEGRATION.md),
 [capability expansion](CAPABILITY_EXPANSION.md), and existing sequential/parallel
 `ParticleFilter` for general likelihood evidence. No new production dependency.
+
+Development follow-up: [weighted bounded bootstrap filtering](WEIGHTED_BOUNDED_FILTER.md)
+supports explicit log likelihoods in 7.2.0-SNAPSHOT. It does not change this released
+Boolean API or automatically convert an existing graph filter.

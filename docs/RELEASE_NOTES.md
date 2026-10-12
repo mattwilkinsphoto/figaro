@@ -4,8 +4,11 @@
 
 The [independent-pilot budget adviser](PARTICLE_BUDGET_ADVISER.md) makes bounded
 indicator-filter configuration easier without silently retuning production.
-This additive API is not in 7.1.0; general likelihood-weighted bounded filtering
-remains a separate design discussion, not an implemented feature.
+The [weighted bounded bootstrap filter](WEIGHTED_BOUNDED_FILTER.md) adds general
+log-likelihood observations, separately declared score policies and weighted
+ancestor selection within hard candidate limits. Both additive APIs are absent
+from 7.1.0. See [weighted-filter acceptance](WEIGHTED_FILTER_STATUS.md) for current
+validation; no automatic recovery, proposal tuning or weighted budget adviser is implied.
 
 ## Current release
 

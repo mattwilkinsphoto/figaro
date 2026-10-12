@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 1003,
+  "pages": 1011,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -39606,6 +39606,544 @@
       "example": "receiver.get[T](reference)",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/State.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Evidence",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Evidence.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Evidence",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Evidence.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "addSuppressed",
+      "anchor": "addSuppressed-4b8",
+      "signature": "final def addSuppressed(x$0: Throwable): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.addSuppressed(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "fillInStackTrace",
+      "anchor": "fillInStackTrace-26c",
+      "signature": "def fillInStackTrace(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.fillInStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "getCause",
+      "anchor": "getCause-26c",
+      "signature": "def getCause(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getCause()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "getLocalizedMessage",
+      "anchor": "getLocalizedMessage-665",
+      "signature": "def getLocalizedMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getLocalizedMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "getMessage",
+      "anchor": "getMessage-665",
+      "signature": "def getMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "getStackTrace",
+      "anchor": "getStackTrace-fffffa6d",
+      "signature": "def getStackTrace(): Array[StackTraceElement]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[StackTraceElement]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "getSuppressed",
+      "anchor": "getSuppressed-fffff2ce",
+      "signature": "final def getSuppressed(): Array[Throwable]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[Throwable]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getSuppressed()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "initCause",
+      "anchor": "initCause-fffff080",
+      "signature": "def initCause(x$0: Throwable): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.initCause(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff230",
+      "signature": "def printStackTrace(x$0: PrintWriter): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintWriter"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff0fd",
+      "signature": "def printStackTrace(x$0: PrintStream): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintStream"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-94c",
+      "signature": "def printStackTrace(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "setStackTrace",
+      "anchor": "setStackTrace-f79",
+      "signature": "def setStackTrace(x$0: Array[StackTraceElement]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Array[StackTraceElement]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.setStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.NoViableParticles",
+      "name": "toString",
+      "anchor": "toString-665",
+      "signature": "def toString(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "Returns a string representation of the object.",
+      "contract": "Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable",
+      "example": "receiver.toString()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.StepReport",
+      "name": "warnings",
+      "anchor": "warnings-0",
+      "signature": "def warnings: Vector[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[String]",
+      "summary": "Work and ancestry warnings, not accuracy certificates.",
+      "contract": "Work and ancestry warnings, not accuracy certificates. Attributes",
+      "example": "receiver.warnings",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$StepReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.StepReport",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$StepReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.StepReport",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$StepReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Update",
+      "name": "expectation",
+      "anchor": "expectation-caa",
+      "signature": "def expectation(f: S => Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "f: S => Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Weighted finite observable mean; normalized posterior estimates need not be unbiased.",
+      "contract": "Weighted finite observable mean; normalized posterior estimates need not be unbiased. Attributes",
+      "example": "receiver.expectation(f)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Update.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Update",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Update.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.Update",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$$Update.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "apply",
+      "anchor": "apply-fffffdd9",
+      "signature": "def apply[S](model: Model[S], config: Config = ...): WeightedBoundedParticleFilter[S]",
+      "type_parameters": [
+        "S"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "model: Model[S]",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "WeightedBoundedParticleFilter[S]",
+      "summary": "Create an unstarted, thread-confined filter; model draws directly from prior/transition.",
+      "contract": "Create an unstarted, thread-confined filter; model draws directly from prior/transition. Attributes",
+      "example": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.apply[S](model, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "cappedLikelihood",
+      "anchor": "cappedLikelihood-5d8",
+      "signature": "def cappedLikelihood(logScale: Double): Double => Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logScale: Double"
+          ]
+        }
+      ],
+      "returns": "Double => Double",
+      "summary": "Return s(logWeight)=min(1, exp(logWeight-logScale)); never changes inference weights. Choose finite logScale independently before sampling, e.g. a known density peak.",
+      "contract": "Return s(logWeight)=min(1, exp(logWeight-logScale)); never changes inference weights. Choose finite logScale independently before sampling, e.g. a known density peak. Attributes",
+      "example": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.cappedLikelihood(logScale)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "advance",
+      "anchor": "advance-160",
+      "signature": "def advance(evidence: Evidence[S]): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "evidence: Evidence[S]"
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Sample independent weighted ancestors, propagate, then apply the next evidence policy.",
+      "contract": "Sample independent weighted ancestors, propagate, then apply the next evidence policy. Attributes",
+      "example": "receiver.advance(evidence)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "close",
+      "anchor": "close-94c",
+      "signature": "def close(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Release retained values. Terminal, idempotent, owner-thread only.",
+      "contract": "Release retained values. Terminal, idempotent, owner-thread only. Attributes",
+      "example": "receiver.close()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "current",
+      "anchor": "current-0",
+      "signature": "def current: Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Update[S]",
+      "summary": "Latest valid posterior; throws before start, after failure, or after close.",
+      "contract": "Latest valid posterior; throws before start, after failure, or after close. Attributes",
+      "example": "receiver.current",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "lastReport",
+      "anchor": "lastReport-0",
+      "signature": "def lastReport: Option[StepReport]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[StepReport]",
+      "summary": "Last completed report, including zero-weight collapse; absent after callback/numerical failure.",
+      "contract": "Last completed report, including zero-weight collapse; absent after callback/numerical failure. Attributes",
+      "example": "receiver.lastReport",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "start",
+      "anchor": "start-160",
+      "signature": "def start(evidence: Evidence[S]): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "evidence: Evidence[S]"
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Draw the model's initial state and weight it with this first evidence policy. Call once.",
+      "contract": "Draw the model's initial state and weight it with this first evidence policy. Call once. Attributes",
+      "example": "receiver.start(evidence)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.lazyfactored.BoundedProbFactor",

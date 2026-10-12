@@ -16,8 +16,8 @@ checks below. A development version or Git tag is not evidence of publication.
   and Central-only consumer verification for 7.1.0.
 - [x] After publication: research, implement and verify an advisory independent-pilot
   budget helper. Do not silently tune production stopping from its own outcomes.
-- [ ] Stop for design discussion before implementing general likelihood-weighted
-  bounded filtering.
+- [x] Stop for design discussion before implementing general likelihood-weighted
+  bounded filtering; subsequent implementation was approved as a separate milestone.
 
 ## Evidence and status
 
@@ -118,5 +118,6 @@ interfaces; a fast test now compares packaging CLI flags with parser declaration
 The corrected packaging sequence was then exercised locally end to end. The
 original failed workflow logs and source revisions are retained as evidence.
 
-General likelihood-weighted bounded filtering remains at the discussion gate.
-No implementation, automatic cutover or arbitrary-graph support is claimed.
+The subsequent discussion approved a separate [weighted bounded bootstrap
+milestone](WEIGHTED_FILTER_STATUS.md) in 7.2.0-SNAPSHOT. This does not change the
+published 7.1.0 scope; no automatic cutover or arbitrary-graph support is claimed.

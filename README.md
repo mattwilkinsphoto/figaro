@@ -37,6 +37,10 @@ Figaro 7.1.0 adds [bounded indicator filtering](docs/BOUNDED_PARTICLE_FILTER.md)
 health reports, nested owned observations, proposal tuning and selected numerical
 extensions. See [capability scope](docs/CAPABILITY_EXPANSION.md).
 
+On the development branch, 7.2.0-SNAPSHOT adds [pilot-based budget advice](docs/PARTICLE_BUDGET_ADVISER.md)
+and [likelihood-weighted bounded filtering](docs/WEIGHTED_BOUNDED_FILTER.md).
+These APIs are not in the published 7.1.0 dependency.
+
 Figaro 7.0.0 added [stable filtering, owned-chain observations, exact count tables
 and support-aware proposals](docs/INFERENCE_INTEGRATION.md). Read the
 [old/new modernization examples](docs/INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage)
