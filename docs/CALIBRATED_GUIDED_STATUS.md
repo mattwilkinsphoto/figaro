@@ -20,8 +20,14 @@ Development milestone in 7.2.0-SNAPSHOT; not shipped in 7.1.0.
   41 documentation tests and 15,235 local link targets passed.
 - [x] MiMa binary compatibility, packaged runtime/source/Scaladoc and four isolated
   hash-verified consumers passed. Existing four Scaladoc warnings remain unchanged.
-- [ ] Reproducibility record with actual outputs and source hashes.
-- [ ] Remote CI for this extension (prior weighted-filter branch CI is not evidence
-  that this new extension passed).
+- [x] Exact-source reproducibility record verified: 24 files with raw successful
+  and failed logs, source, numerical inputs/results, artifact hashes and rerun instructions.
+- [x] All four [remote CI jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/38298238170)
+  passed for implementation commit `b629def1c56ffb38e92ef6053433f14ea6063a4d`:
+  binary/TASTy compatibility, numerical/regression controls, clean byte reproducibility,
+  artifact/legal checks and independently compiled Maven-layout consumers.
+
+This acceptance update changes documentation only. The recorded run validates the
+implementation commit above; any later documentation-only CI run has its own status.
 
 No publication or merge into main is implied by these development checks.
