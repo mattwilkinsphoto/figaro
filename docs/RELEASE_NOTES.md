@@ -2,6 +2,29 @@
 
 ## Current development line
 
+### 7.0.0 release candidate
+
+The candidate adds log-space particle filtering and MH proposal ratios, bounded
+observation support in owned multi-chain MH, exact finite-count tables, opt-in
+support-aware proposals and selectively wider numerical ranges. Read the
+[old/new examples and rationale](INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage)
+through the [documentation bridge](DOCUMENTATION_MIGRATION.md).
+
+**Changed behavior:** all-zero particle likelihoods fail explicitly by default;
+`ZeroWeightPolicy.LegacyUniform` is an explicit compatibility choice, not a recovered
+posterior. Failed filters must be discarded. Custom filtering subclasses must port
+ordinary-weight overrides to the log-weight hooks. Custom MH ratio overrides remain
+bridged, but native log hooks are needed to avoid intermediate ratio overflow.
+These contract changes warrant a major version. Dependencies and Java/Scala baseline
+are unchanged. There is no universal inference, mixing or shared-graph safety promise.
+
+Local integration, regression, documentation and consumer gates passed; remote CI,
+clean release qualification and publication are tracked in the
+[execution record](INFERENCE_INTEGRATION_STATUS.md). The source candidate version is
+7.0.0, not yet a statement that Central publication has succeeded.
+
+### Previously published 6.1.0
+
 The current feature release line is **6.1.0**, beyond the 6.0 modernization baseline.
 It adds exact-coordinate copula conditioning, public bounded scalar-linear GVM-mixture
 fitting and full-mixture linear/angular MI. See [6.1 installation, acceptance and

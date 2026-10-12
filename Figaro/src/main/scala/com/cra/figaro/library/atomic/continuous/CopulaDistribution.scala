@@ -164,7 +164,7 @@ final class ConditionalCopulaDistribution private[continuous](val joint: CopulaD
 }
 
 final class AtomicCopula private[continuous](name: Name[Vector[Double]],val distribution: CopulaDistribution,collection: ElementCollection)
-  extends Element[Vector[Double]](name,collection) with Atomic[Vector[Double]] with Continuous[Vector[Double]] with HasLogDensity[Vector[Double]] {
+  extends Element[Vector[Double]](name,collection) with Atomic[Vector[Double]] with Continuous[Vector[Double]] with HasLogPriorProposal[Vector[Double]] {
   type Randomness=Vector[Double]
   def generateRandomness(): Vector[Double]=distribution.sample(random)
   def generateValue(value: Vector[Double]): Vector[Double]=value

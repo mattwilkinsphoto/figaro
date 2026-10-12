@@ -5,7 +5,7 @@ import com.cra.figaro.language.*
 import org.apache.commons.math3.special.Gamma
 
 private[continuous] object ExtremeNumerics {
-  def shape(x: Double): Unit=require(x.isFinite && math.abs(x)<=2 && (x==0 || math.abs(x)>=1e-8),"shape must be zero or have absolute value in [1e-8,2]")
+  def shape(x: Double): Unit=require(x.isFinite && math.abs(x)<=2 && (x==0 || math.abs(x)>=1e-14),"shape must be zero or have absolute value in [1e-14,2]")
   def endpoint(location: Double,scale: Double,shape: Double): Double = {
     val x=location-scale/shape
     require(x.isFinite && x!=location,"finite distinct support endpoint required; rescale coordinates")
@@ -29,7 +29,7 @@ private[continuous] object ExtremeNumerics {
 }
 
 /** Generalized extreme value for maxima, using xi (the NEGATIVE of SciPy genextreme's c).
-  * @param shape xi: zero or absolute value in [1e-8,2]; zero is the Gumbel limit
+  * @param shape xi: zero or absolute value in [1e-14,2]; zero is the Gumbel limit
   * @param location finite center, absolute value <=1e100
   * @param scale positive scale in [1e-100,1e100], not variance
   */
@@ -75,7 +75,7 @@ final case class GeneralizedExtremeValueDistribution(shape: Double,location: Dou
 }
 
 /** Generalized Pareto excess above location; shape zero is exponential, shape -1 is uniform.
-  * @param shape xi: zero or absolute value in [1e-8,2]
+  * @param shape xi: zero or absolute value in [1e-14,2]
   * @param location threshold, absolute value <=1e100
   * @param scale positive scale in [1e-100,1e100]
   */
@@ -112,7 +112,7 @@ final case class GeneralizedParetoDistribution(shape: Double,location: Double=0,
 }
 
 object GeneralizedExtremeValue {
-  /** @param shape maxima xi, zero or absolute value in [1e-8,2]
+  /** @param shape maxima xi, zero or absolute value in [1e-14,2]
     * @param location center
     * @param scale positive scale
     * @param name contextual name
@@ -124,7 +124,7 @@ object GeneralizedExtremeValue {
     ScalarElement(GeneralizedExtremeValueDistribution(shape,location,scale))
 }
 object GeneralizedPareto {
-  /** @param shape excess-tail xi, zero or absolute value in [1e-8,2]
+  /** @param shape excess-tail xi, zero or absolute value in [1e-14,2]
     * @param location threshold
     * @param scale positive scale
     * @param name contextual name

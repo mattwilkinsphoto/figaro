@@ -1247,6 +1247,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.decision.CachingDecision.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/decision/CachingDecision.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.decision.CachingDecision.nextRandomness ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/decision/CachingDecision.html#nextRandomness-fffff446)
@@ -2751,6 +2775,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.decision.Decision.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/decision/Decision.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.decision.Decision.nextRandomness ``
@@ -5385,6 +5433,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.decision.NonCachingDecision.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/decision/NonCachingDecision.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.decision.NonCachingDecision.nextRandomness ``

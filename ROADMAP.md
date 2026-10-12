@@ -21,6 +21,16 @@ precision or performance for every application model.
 
 ## Active priorities
 
+Approved distribution/inference integration is being completed on the
+`codex/distribution-inference-integration` development branch (`7.0.0-SNAPSHOT`),
+not yet merged or published. Its five stages cover stable filtering/MH ratios,
+owned multi-chain observations, exact finite counts, support-aware proposals and
+selective numerical ranges. See the [user/migration guide](docs/INFERENCE_INTEGRATION.md)
+and [requirements and executed gates](docs/INFERENCE_INTEGRATION_STATUS.md).
+The major development version reflects the approved strict particle-failure
+default and filtering extension-hook migration. Released 6.1.0 remains the
+consumer baseline until a separately approved release passes its gates.
+
 1. **Validate real application models.** Pin the released dependency, establish
    known-answer or simulated-data controls, assess inference health, and measure
    accuracy, latency and resource use. Application models and data belong in their

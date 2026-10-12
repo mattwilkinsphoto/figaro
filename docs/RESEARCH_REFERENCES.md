@@ -35,6 +35,8 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | RNG engines, stream ownership and purpose selection | [RNG-01](#rng-01), [RNG-02](#rng-02), [RNG-03](#rng-03), [RNG-04](#rng-04) |
 | Vector slice sampling and alternative-method screening | [SAM-01](#sam-01), [SAM-02](#sam-02), [SAM-03](#sam-03) |
 | Defensive and mixture proposals | [INF-01](#inf-01), [INF-02](#inf-02), [INF-03](#inf-03) |
+| Log-space particle weights and MH proposal ratios | [INF-04](#inf-04) |
+| Observation integration, finite enumeration, support-aware proposals and range checks | [INF-05](#inf-05) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -183,6 +185,34 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 **Validation:** See the existing pilot protocol and acceptance evidence; no theorem-transfer claim..
 
 **Guide:** [DEFENSIVE IMPORTANCE RESEARCH](DEFENSIVE_IMPORTANCE_RESEARCH.md).
+
+<a id="inf-04"></a>
+
+### INF-04: Stable log weights and proposal ratios
+
+**Source:** Blanchard, D. J. Higham and N. J. Higham, *Accurate Computation of the Log-Sum-Exp and Softmax Functions*, [author-hosted September 2019 manuscript](https://eprints.maths.manchester.ac.uk/2728/1/paper.pdf), section 4 and Algorithm 4.1. Maintained implementation comparison: [particles resampling module](https://github.com/nchopin/particles/blob/master/particles/resampling.py), inspected 2026-10-11. Formula comparison: [Stan manual, Metropolis acceptance](https://mc-stan.org/docs/reference-manual/mcmc.html#metropolis-accept-step).
+
+**Role:** Implemented on the integration development branch, not yet released. Shifted exponentiation and log-sum-exp for particle normalization/evidence; explicit log proposal/model ratios for MH and annealing. The Stan reference is a formula comparison, not an implementation of HMC. No external source code was copied. Zero viable particles require a separate policy and cannot be repaired by numerical normalization; strict failure is the approved default, with opt-in legacy fallback.
+
+**Code:** [ParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/ParticleFilter.scala); [ParParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/ParParticleFilter.scala); [Element.scala](../Figaro/src/main/scala/com/cra/figaro/language/Element.scala); [HasLogPriorProposal.scala](../Figaro/src/main/scala/com/cra/figaro/language/HasLogPriorProposal.scala); [MetropolisHastings.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/MetropolisHastings.scala).
+
+**Validation:** [InferenceIntegrationRegressionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/InferenceIntegrationRegressionTest.scala) includes analytic underflow/overflow controls, sequential/parallel evidence, explicit zero-weight behavior and legacy proposal compatibility. See the execution record for actual run results and remaining gates.
+
+**Guide:** [INFERENCE INTEGRATION](INFERENCE_INTEGRATION.md); [INFERENCE INTEGRATION STATUS](INFERENCE_INTEGRATION_STATUS.md).
+
+<a id="inf-05"></a>
+
+### INF-05: Distribution/inference integration and supported coordinates
+
+**Source:** [Stan constraint transforms](https://mc-stan.org/docs/reference-manual/transforms.html), lower/bounded scalar and covariance/correlation sections; [Stan latent discrete parameters](https://mc-stan.org/docs/stan-users-guide/latent-discrete.html), finite marginalization; Wingate, Stuhlmüller and Goodman (2011), [Lightweight Implementations of Probabilistic Programming Languages via Transformational Compilation](https://proceedings.mlr.press/v15/wingate11a/wingate11a.pdf), sections 2–2.3 and Algorithm 2 inspected, not a full-paper review. Numerical boundary comparisons: official [SciPy GEV](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genextreme.html), [GPD](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.genpareto.html), [Wishart](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wishart.html), and [Commons Math hypergeometric API](https://commons.apache.org/proper/commons-math/javadocs/api-3.6.1/org/apache/commons/math3/distribution/HypergeometricDistribution.html). Inspected 2026-10-11; attempted Commons Math source URLs were unavailable, so no claim of source audit for that backend.
+
+**Role:** Independent implementation on the integration development branch, not yet released. Existing Figaro MH/cache and finite Select/factor backends are reused. The lightweight-PPL paper motivates explicit likelihood and trace accounting; only the bounded observed-atomic/one-child-Chain surface is supported, not arbitrary trace transformations. Fixed transformed-coordinate walks use analytic Jacobians, not Stan's HMC implementation. Mathematical formulas are independently implemented; no external code copied. Numerical range expansion retains explicit machine-representation/work limits. Matrix boundary warnings are counterevidence to unrestricted support claims.
+
+**Code:** [MultiChainMetropolisHastings.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings.scala); [FiniteCountInference.scala](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete/FiniteCountInference.scala); [SupportAwareProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/SupportAwareProposal.scala); [ExtremeValueDistributions.scala](../Figaro/src/main/scala/com/cra/figaro/library/atomic/continuous/ExtremeValueDistributions.scala); [CountDistributions.scala](../Figaro/src/main/scala/com/cra/figaro/library/atomic/discrete/CountDistributions.scala); [Wishart.scala](../Figaro/src/main/scala/com/cra/figaro/library/atomic/continuous/Wishart.scala); [InverseWishart.scala](../Figaro/src/main/scala/com/cra/figaro/library/atomic/continuous/InverseWishart.scala).
+
+**Validation:** [MultiChainObservationTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/MultiChainObservationTest.scala), [FiniteCountInferenceTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/FiniteCountInferenceTest.scala), [SupportAwareProposalTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/SupportAwareProposalTest.scala), [SupportAwareProposalStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/SupportAwareProposalStudy.scala), [NumericalRangeIntegrationTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/NumericalRangeIntegrationTest.scala). Controls include enumerated posteriors, finite-difference Jacobian determinants, exact BigInt combinatorics, small-shape series and matrix scalar reductions. Executed outcomes and remaining gates are recorded separately; a source citation does not validate all regimes.
+
+**Guide:** [INFERENCE INTEGRATION](INFERENCE_INTEGRATION.md); [INFERENCE INTEGRATION STATUS](INFERENCE_INTEGRATION_STATUS.md).
 
 <a id="dia-01"></a>
 

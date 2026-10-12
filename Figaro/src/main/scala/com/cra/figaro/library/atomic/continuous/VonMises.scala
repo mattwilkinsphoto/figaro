@@ -7,7 +7,7 @@ import com.cra.figaro.util.random
 /** Atomic circular element backed by an immutable kernel; create with VonMises.apply. */
 final class AtomicVonMises private[continuous] (
   name: Name[Double], val distribution: VonMisesDistribution, collection: ElementCollection)
-  extends Element[Double](name, collection) with Atomic[Double] with Continuous[Double] with HasLogDensity[Double] {
+  extends Element[Double](name, collection) with Atomic[Double] with Continuous[Double] with HasLogPriorProposal[Double] {
   type Randomness = Double
 
   /** @return a fresh angle from the currently scoped Figaro RNG, in [-Pi, Pi) */

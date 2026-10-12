@@ -94,6 +94,9 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
 
   protected var chainCache: Cache = new MHCache(universe)
 
+  /** Owned likelihood-aware runners may fix supported observations without changing legacy MH semantics. */
+  protected def isFixedObservation(element: Element[?]): Boolean = false
+
   /*
    * We continually update the values of elements while making a proposal. In order to undo it, we must store the old value.
    * We keep track of the improvement in the constraints for the new proposal compared to the original value.
@@ -105,7 +108,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
      * For a compound element we cannot do this because we have to condition the arguments by the
      * probability of generating the correct value.
      */
-    val newValue = if (elem.observation.isEmpty || !elem.isInstanceOf[Atomic[?]]) {
+    val newValue = if (elem.observation.isEmpty || (!elem.isInstanceOf[Atomic[?]] && !isFixedObservation(elem))) {
       chainCache(elem) match {
         case None => elem.generateValue(elem.randomness)
         case Some(result) =>
@@ -151,14 +154,16 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
   private def propose[T](state: State, elem: Element[T]): State = {
     oldPropProb = state.proposalProb
     oldModelProb = state.modelProb
-    if (elem.intervention.isDefined) {
+    if (elem.intervention.isDefined || isFixedObservation(elem)) {
       state
     } else {
       if (debug) println("Proposing " + elem.name.string)
       if (elementsToTrack contains elem) proposalCounts += elem -> (proposalCounts(elem) + 1)
       val oldValue = elem.value
       val oldRandomness = elem.randomness
-      val (randomness, proposalProb, modelProb) = elem.nextRandomness(elem.randomness)
+      val (randomness, proposalProb, modelProb) = elem.nextLogRandomness(elem.randomness)
+      require(!proposalProb.isNaN && !modelProb.isNaN &&
+        !(proposalProb + modelProb).isNaN, "Invalid MH log proposal/model ratio")
       val state1 =
         if (randomness == oldRandomness) {
           state
@@ -167,7 +172,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
             state.oldRandomness.concat(List(elem -> elem.randomness))
           }
           elem.randomness = randomness
-          State(state.oldValues, newOldRandomness, state.proposalProb + log(proposalProb), state.modelProb + log(modelProb), state.dissatisfied, state.reverseVisitOrder)
+          State(state.oldValues, newOldRandomness, state.proposalProb + proposalProb, state.modelProb + modelProb, state.dissatisfied, state.reverseVisitOrder)
         }
       val result = attemptChange(state1, elem)
       if (debug) println("old randomness = " + oldRandomness +
@@ -180,6 +185,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
 
   /*  Switch the randomness of two elements. */
   private def switch[T, U](state: State, elem1: Element[T], elem2: Element[U]): State = {
+    require(!isFixedObservation(elem1) && !isFixedObservation(elem2), "Cannot switch fixed observation randomness")
     if (debug) println("Switching " + elem1.name.string + " and " + elem2.name.string)
     if (elementsToTrack contains elem1) proposalCounts += elem1 -> (proposalCounts(elem1) + 1)
     if (elementsToTrack contains elem2) proposalCounts += elem2 -> (proposalCounts(elem2) + 1)
@@ -221,6 +227,7 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
   private def runStep(state: State, step: ProposalScheme): State =
     step match {
       case GaussianBlockScheme(block) => proposeBlock(state, block)
+      case SupportAwareScheme(move) => proposeSupportAware(state, move)
       case FinalScheme(elem) => propose(state, elem())
       case TypedScheme(first, rest) =>
         val firstElem = first()
@@ -266,6 +273,18 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
       current = attemptChange(current, elem)
     }
     current
+  }
+
+  private def proposeSupportAware(state: State, move: SupportAwareProposal.Move): State = {
+    require(state.oldValues.isEmpty && state.oldRandomness.isEmpty && !constraintsBound,
+      "Support-aware proposals must be standalone or DisjointScheme choices, without constraintsBound")
+    val (next, logQ, logModel) = move.prepare(universe)
+    val elem = move.target
+    if (elementsToTrack contains elem) proposalCounts += elem -> (proposalCounts(elem) + 1)
+    val oldRandomness = state.oldRandomness.concat(List(elem -> elem.randomness))
+    elem.randomness = next.asInstanceOf[elem.Randomness]
+    attemptChange(State(state.oldValues, oldRandomness, state.proposalProb + logQ,
+      state.modelProb + logModel, state.dissatisfied, state.reverseVisitOrder), elem)
   }
 
   protected def runScheme(): State = runStep(newState, proposalScheme)

@@ -1,5 +1,17 @@
 # Migrating to Scala 3 and sbt 2
 
+## 7.0.0 release preparation
+
+The 7.0.0 candidate changes zero-viable-particle filtering to explicit
+failure by default, with `ZeroWeightPolicy.LegacyUniform` as an opt-in compatibility
+mode. Failed filters must be discarded. Subclasses of the filtering implementation
+must migrate ordinary-weight hook overrides to the new log-weight hooks.
+MH adds `nextLogRandomness`, preserving legacy custom proposals through a bridge;
+extreme legacy ratios need a native log implementation. See the complete
+[old-versus-new modernization examples](INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage) and
+[local acceptance/release status](INFERENCE_INTEGRATION_STATUS.md).
+No 7.0 release is published; the 6.1.0 instructions below remain the released baseline.
+
 ## Feature release 6.1.0
 
 Update the dependency version from a modern.* snapshot to `6.1.0` and recompile.

@@ -5,7 +5,7 @@ import com.cra.figaro.util.random
 
 /** Atomic adapter for validated scalar kernels; never shares mutable model state. */
 final class AtomicScalar private[continuous](name: Name[Double],val distribution: ScalarDistribution,collection: ElementCollection)
-  extends Element[Double](name,collection) with Atomic[Double] with Continuous[Double] with HasLogDensity[Double] {
+  extends Element[Double](name,collection) with Atomic[Double] with Continuous[Double] with HasLogPriorProposal[Double] {
   type Randomness = Double
   /** @return independent draw from the currently scoped Figaro RNG */
   def generateRandomness(): Double = distribution.sample(random)

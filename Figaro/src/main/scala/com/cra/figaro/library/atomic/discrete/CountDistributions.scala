@@ -74,15 +74,16 @@ final case class NegativeBinomialDistribution(successes: Double,successProbabili
 }
 
 /** Successes in draws without replacement; includes deterministic finite cases.
-  * @param population population N in [1,100000], bounding cumulative-sum work
+  * @param population population N in [1,1e9]; support width is separately limited to 100000
   * @param successes number of successes K in [0,N]
   * @param draws draw count n in [0,N]
   */
 final case class HypergeometricDistribution(population: Int,successes: Int,draws: Int) extends CountDistribution {
-  require(population >= 1 && population <= 100000,"population must be in [1,100000]")
+  require(population >= 1 && population <= 1000000000,"population must be in [1,1e9]")
   require(successes >= 0 && successes <= population && draws >= 0 && draws <= population,"successes and draws must be in [0,population]")
+  private val lower=math.max(0L,draws.toLong+successes-population).toInt; private val upper=math.min(successes,draws)
+  require(upper.toLong-lower<=100000,"hypergeometric support width exceeds cumulative-work budget 100000")
   private val engine=new Hypergeom(null,population,successes,draws)
-  private val lower=math.max(0,draws+successes-population); private val upper=math.min(successes,draws)
   def logProbability(k: Int): Double = { N.check(); if(k < lower || k > upper) Double.NegativeInfinity else if(lower == upper) 0 else engine.logProbability(k) }
   def cdf(k: Int): Double = { N.check(); if(k < lower) 0 else if(k >= upper) 1 else engine.cumulativeProbability(k) }
   def survival(k: Int): Double = { N.check(); if(k < lower) 1 else if(k >= upper) 0 else engine.upperCumulativeProbability(k+1) }

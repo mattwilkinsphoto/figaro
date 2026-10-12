@@ -16,7 +16,7 @@ package com.cra.figaro.algorithm.filtering
 import com.cra.figaro.language._
 import scala.collection.parallel.ParSeq
 import scala.collection.parallel.CollectionConverters._
-import com.cra.figaro.algorithm.filtering.ParticleFilter.WeightedParticle
+import com.cra.figaro.algorithm.filtering.ParticleFilter.LogWeightedParticle
 import com.cra.figaro.library.cache.PermanentCache
 import com.cra.figaro.library.cache.Cache
 import com.cra.figaro.algorithm.sampling.LikelihoodWeighter
@@ -34,8 +34,11 @@ import com.cra.figaro.algorithm.sampling.LikelihoodWeighter
  * @param numParticles Number of particles to use at each time step
  * @param numThreads The number of threads over which to distribute the work of generating the particles at each step
  */
-class ParOneTimeParticleFilter(static: () => Universe, initial: () => Universe, transition: (Universe, Universe) => Universe, val numParticles: Int, numThreads: Int)
+class ParOneTimeParticleFilter(static: () => Universe, initial: () => Universe, transition: (Universe, Universe) => Universe, val numParticles: Int, numThreads: Int,
+  override val zeroWeightPolicy: ParticleFilter.ZeroWeightPolicy = ParticleFilter.ZeroWeightPolicy.Fail)
   extends ParFiltering(transition) with ParticleFilter {
+  require(numParticles > 0 && numThreads > 0, "Positive particle and thread counts required")
+  require(zeroWeightPolicy != null, "A zero-weight policy is required")
   
   /** sequence of UniverseWindows -- one for each thread */
   private var windows: Seq[UniverseWindow] = scala.compiletime.uninitialized
@@ -59,7 +62,7 @@ class ParOneTimeParticleFilter(static: () => Universe, initial: () => Universe, 
    * @param windows the UniverseWindows to sample from
    * @param weightedParticleCreator a function that generates a WeightedParticle, given a UniverseWindow and an index
    */
-  private def genParticles(windows: Seq[(UniverseWindow, LikelihoodWeighter)], weightedParticleCreator: ((UniverseWindow, LikelihoodWeighter), Int) => WeightedParticle): Seq[WeightedParticle] = {
+  private def genParticles(windows: Seq[(UniverseWindow, LikelihoodWeighter)], weightedParticleCreator: ((UniverseWindow, LikelihoodWeighter), Int) => LogWeightedParticle): Seq[LogWeightedParticle] = {
     val parWindows = windows.par
     val particles = parWindows zip indices flatMap { case(window, (start, end)) =>
       (start to end) map { i => weightedParticleCreator(window, i) }
@@ -68,24 +71,22 @@ class ParOneTimeParticleFilter(static: () => Universe, initial: () => Universe, 
   }
   
   /** compute probability of evidence for the particles, and update the belief state (after re-sampling) */
-  private def doTimeStep(weightedParticles: Seq[WeightedParticle]): Unit = {
-    computeProbEvidence(weightedParticles)
-    updateBeliefState(weightedParticles)
-  }
+  private def doTimeStep(weightedParticles: => Seq[LogWeightedParticle]): Unit = logTimeStep(weightedParticles)
   
-  def run(): Unit = {
+  def run(): Unit = guardedUpdate {
     windows = genInitialWindows()
     val windowWithCaches = windows.map(w => (w, new LikelihoodWeighter(w.current, new PermanentCache(w.current))))
-    val particles = genParticles(windowWithCaches, (w, _) => initialWeightedParticle(w._1.static, w._1.current, w._2))
-    doTimeStep(particles)
+    try doTimeStep(genParticles(windowWithCaches, (w, _) => initialLogWeightedParticle(w._1.static, w._1.current, w._2)))
+    finally windowWithCaches.foreach(_._2.deregisterDependencies())
   }
   
-  def advanceTime(evidence: Seq[NamedEvidence[?]] = List()): Unit = {
+  def advanceTime(evidence: Seq[NamedEvidence[?]] = List()): Unit = guardedUpdate {
     val newWindows = advanceUniverseWindows(windows)
     val newWindowsWithCaches = newWindows.map(w => (w, new LikelihoodWeighter(w.current, new PermanentCache(w.current))))
-    val particles = genParticles(newWindowsWithCaches, (w, i) => addWeightedParticle(evidence, i, w._1, w._2))
-    doTimeStep(particles)
-    windows = newWindows
+    try {
+      doTimeStep(genParticles(newWindowsWithCaches, (w, i) => addLogWeightedParticle(evidence, i, w._1, w._2)))
+      windows = newWindows
+    } finally newWindowsWithCaches.foreach(_._2.deregisterDependencies())
   }
   
   /**
@@ -105,6 +106,16 @@ class ParOneTimeParticleFilter(static: () => Universe, initial: () => Universe, 
  * A parallel implementation of a OneTimeParticleFilter.
  */
 object ParParticleFilter {
+
+  /** Explicit policy for genuinely zero particle weights. */
+  def apply(static: () => Universe, initial: () => Universe, transition: (Universe, Universe) => Universe,
+    numParticles: Int, numThreads: Int, policy: ParticleFilter.ZeroWeightPolicy): ParOneTimeParticleFilter =
+    new ParOneTimeParticleFilter(static, initial, transition, numParticles, numThreads, policy)
+
+  /** Explicit policy with no static model. */
+  def apply(initial: () => Universe, transition: Universe => Universe, numParticles: Int,
+    numThreads: Int, policy: ParticleFilter.ZeroWeightPolicy): ParOneTimeParticleFilter =
+    apply(() => new Universe(), initial, (_, previous) => transition(previous), numParticles, numThreads, policy)
 
   /**
    * A parallel one-time particle filter. Distributes the work of generating particles at each time step over a specified

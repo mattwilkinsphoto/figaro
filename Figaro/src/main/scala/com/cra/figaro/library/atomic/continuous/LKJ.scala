@@ -106,7 +106,7 @@ object LKJInformation {
 
 /** Correlation-matrix element with prior independence MH proposals. */
 final class AtomicLKJ private[continuous](name: Name[Vector[Vector[Double]]],val distribution: LKJDistribution,collection: ElementCollection)
-  extends Element[Vector[Vector[Double]]](name,collection) with Atomic[Vector[Vector[Double]]] with HasLogDensity[Vector[Vector[Double]]] {
+  extends Element[Vector[Vector[Double]]](name,collection) with Atomic[Vector[Vector[Double]]] with HasLogPriorProposal[Vector[Vector[Double]]] {
   type Randomness=Vector[Vector[Double]]
   def generateRandomness(): Randomness=distribution.sample(com.cra.figaro.util.random)
   def generateValue(value: Randomness): Randomness=value

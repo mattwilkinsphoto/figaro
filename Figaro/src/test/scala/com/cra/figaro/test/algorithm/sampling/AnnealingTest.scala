@@ -167,23 +167,34 @@ class AnnealingTest extends AnyWordSpec with Matchers with PrivateMethodTester {
   }
 
   "Annealing a model with an intervention and evidence" should {
-    "produce the intervention value for the intervention variable" in {
+    // Enumerate the semantic four-variable joint, independently of MH scores.
+    // The former expected false values contradicted these model probabilities.
+    def mode(intervenedB: Option[Boolean]): (Boolean, Boolean) = {
+      def mass(value: Boolean, p: Double): Double = if(value) p else 1-p
+      val states=for(a <- Vector(false,true); b <- Vector(false,true); c <- Vector(false,true)
+        if intervenedB.forall(_ == b)) yield {
+        val pb=if(intervenedB.isDefined) 1.0 else mass(b,if(a) .2 else .8)
+        ((b,c),mass(a,.1)*pb*mass(c,if(b) .9 else .1)*(if(c) .4 else .7))
+      }
+      states.maxBy(_._2)._1
+    }
+    "produce the intervention value for the intervention variable" in com.cra.figaro.util.withRandomSeed(4711L) {
       Universe.createNew()
       val a = Flip(0.1)
       val b = If(a, Flip(0.2), Flip(0.8))
       val c = If(b, Flip(0.9), Flip(0.1))
       val d = If(c, Flip(0.4), Flip(0.7))
       d.observe(true)
-      val annealer0 = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0), 100)
-      annealer0.start()
-      annealer0.mostLikelyValue(b) should equal(false)
+      val annealer0 = MetropolisHastingsAnnealer(10000, ProposalScheme.default, Schedule.default(2.0), 100)
+      try { annealer0.start(); annealer0.mostLikelyValue(b) should equal(mode(None)._1) }
+      finally if(annealer0.isActive) annealer0.kill()
       b.intervene(true)
-      val annealer1 = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0), 100)
-      annealer1.start()
-      annealer1.mostLikelyValue(b) should equal(true)
+      val annealer1 = MetropolisHastingsAnnealer(10000, ProposalScheme.default, Schedule.default(2.0), 100)
+      try { annealer1.start(); annealer1.mostLikelyValue(b) should equal(true) }
+      finally if(annealer1.isActive) annealer1.kill()
     }
 
-    "produce the correct value for a variable that is neither intervention nor evidence" in {
+    "produce the correct value for a variable that is neither intervention nor evidence" in com.cra.figaro.util.withRandomSeed(4712L) {
       Universe.createNew()
       val a = Flip(0.1)
       val b = If(a, Flip(0.2), Flip(0.8))
@@ -191,12 +202,12 @@ class AnnealingTest extends AnyWordSpec with Matchers with PrivateMethodTester {
       val d = If(c, Flip(0.4), Flip(0.7))
       b.intervene(true)
       d.observe(true)
-      val annealer1 = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0), 100)
-      annealer1.start()
-      annealer1.mostLikelyValue(c) should equal(false)
+      val annealer1 = MetropolisHastingsAnnealer(10000, ProposalScheme.default, Schedule.default(2.0), 100)
+      try { annealer1.start(); annealer1.mostLikelyValue(c) should equal(mode(Some(true))._2) }
+      finally if(annealer1.isActive) annealer1.kill()
     }
 
-    "given a variable that has both evidence and an intervention created after the evidence, ignore the evidence" in {
+    "given a variable that has both evidence and an intervention created after the evidence, ignore the evidence" in com.cra.figaro.util.withRandomSeed(4713L) {
       Universe.createNew()
       val a = Flip(0.1)
       val b = If(a, Flip(0.2), Flip(0.8))
@@ -204,9 +215,9 @@ class AnnealingTest extends AnyWordSpec with Matchers with PrivateMethodTester {
       val d = If(c, Flip(0.4), Flip(0.7))
       b.observe(false)
       b.intervene(true)
-      val annealer1 = MetropolisHastingsAnnealer(ProposalScheme.default, Schedule.default(2.0), 100)
-      annealer1.start()
-      annealer1.mostLikelyValue(c) should equal(true)
+      val annealer1 = MetropolisHastingsAnnealer(10000, ProposalScheme.default, Schedule.default(2.0), 100)
+      try { annealer1.start(); annealer1.mostLikelyValue(c) should equal(true) }
+      finally if(annealer1.isActive) annealer1.kill()
     }
   }
 

@@ -48,7 +48,7 @@ conjugate-update API or generic thread safety.
 | Kernel | Parameters | Meaning / limits |
 | --- | --- | --- |
 | `LKJDistribution(dimension, shape=1)` | Integer order 2..16; finite eta in [.001,1e6] | Density on independent off-diagonal entries is proportional to determinant^(eta-1). Matrix must be exactly symmetric with exact unit diagonal and numerically resolved positive definiteness. |
-| `InverseWishartDistribution(degreesOfFreedom, scale)` | Real df in [d+1,1e6]; symmetric positive-definite 1..16 matrix Psi, diagonal [1e-100,1e100] | Density contains exp(-trace(Psi*inverse(X))/2). Mathematical domain df>d-1 is broader than this implementation. Psi is neither the mean nor the inverse scale. |
+| `InverseWishartDistribution(degreesOfFreedom, scale)` | Real df in [d,1e6]; symmetric positive-definite 1..16 matrix Psi, diagonal [1e-100,1e100] | Density contains exp(-trace(Psi*inverse(X))/2). Mathematical domain df>d-1 is broader than this implementation. Psi is neither the mean nor the inverse scale. Development range expansion: [inference integration](INFERENCE_INTEGRATION.md). |
 
 Numerical matrix validation uses the existing Gaussian kernel's finite-entry,
 positive-definiteness and correlation-conditioning contract (condition <=1e10).

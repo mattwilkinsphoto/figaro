@@ -4,7 +4,12 @@ import Keys.*
 scalaVersion := "3.9.0"
 name := "figaro-acceptance-consumer"
 publish / skip := true
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "6.1.0"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % sys.env.getOrElse("FIGARO_VERSION", "6.1.0")
+// Keep the immutable 6.1 Central consumer runnable without resolving newer APIs.
+Compile / unmanagedSourceDirectories ++= {
+  if (sys.env.get("FIGARO_VERSION").exists(_.startsWith("7."))) Seq(baseDirectory.value / "src" / "integration" / "scala")
+  else Seq.empty
+}
 // When testing the release bundle, exclude Ivy local so a cached publishLocal
 // cannot hide a broken Maven layout or POM.
 externalResolvers ~= { defaults =>

@@ -46,11 +46,57 @@ trait ParticleFilter {
 
   protected var logProbEvidence: Double = 0.0
 
+  /** Policy for genuinely zero weights, not for small finite log weights. */
+  def zeroWeightPolicy: ParticleFilter.ZeroWeightPolicy = ParticleFilter.ZeroWeightPolicy.Fail
+  private var failedUpdate: Option[Throwable] = None
+  private def checkBelief(): Unit = failedUpdate.foreach { cause =>
+    throw new IllegalStateException("The last particle-filter update failed; no posterior is available", cause)
+  }
+
+  /** Failed filters must be discarded; partial updates are not transactional rollbacks. */
+  protected final def guardedUpdate(body: => Unit): Unit = {
+    checkBelief()
+    try body catch { case scala.util.control.NonFatal(e) => failedUpdate = Some(e); throw e }
+  }
+
+  /** Run a complete log-weight update. Failed updates cannot be queried as posteriors. */
+  protected def logTimeStep(create: => Seq[ParticleFilter.LogWeightedParticle]): Unit = {
+    try {
+      val particles = create
+      require(numParticles > 0 && particles.size == numParticles, "Positive, matching particle count required")
+      require(particles.forall(p => !p.logWeight.isNaN && p.logWeight != Double.PositiveInfinity),
+        "Invalid particle log weight: NaN or positive infinity")
+      val maximum = particles.map(_.logWeight).max
+      if (maximum == Double.NegativeInfinity) {
+        if (zeroWeightPolicy == ParticleFilter.ZeroWeightPolicy.Fail)
+          throw new ParticleFilter.NoViableParticles
+        updateBeliefState(particles.map(p => (0.0, p.state)))
+        logProbEvidence = Double.NegativeInfinity
+      } else {
+        val weights = particles.map(p => math.exp(p.logWeight - maximum))
+        val pivot = weights.indexOf(1.0)
+        val remainder = weights.indices.iterator.filter(_ != pivot).map(weights).sum
+        val increment = maximum + math.log1p(remainder) - math.log(numParticles.toDouble)
+        val nextEvidence = logProbEvidence + increment
+        require(increment.isFinite && (nextEvidence.isFinite || logProbEvidence == Double.NegativeInfinity),
+          "Accumulated log evidence is not representable")
+        updateBeliefState(weights.zip(particles.map(_.state)))
+        logProbEvidence = nextEvidence
+      }
+      failedUpdate = None
+    } catch {
+      case scala.util.control.NonFatal(e) =>
+        failedUpdate = Some(e)
+        throw e
+    }
+  }
+
   /**
    * Returns the expectation of the element referred to by the reference
    * under the given function at the current time point.
    */
   def computeCurrentExpectation[T](reference: Reference[T], function: T => Double): Double = {
+    checkBelief()
     val fValues: Seq[Double] = beliefState.iterator.map(state => function(state.get(reference))).toIndexedSeq
     val total = (fValues).foldRight(0.0)(_ + _)
     total.toDouble / numParticles
@@ -60,6 +106,7 @@ trait ParticleFilter {
    * Returns the distribution over the element referred to by the reference at the current time point.
    */
   def computeCurrentDistribution[T](reference: Reference[T]): LazyList[(Double, T)] = {
+    checkBelief()
     val map = scala.collection.mutable.Map[T, Int]()
     for {
       state <- beliefState
@@ -80,18 +127,23 @@ trait ParticleFilter {
    * TODO: previous state could be replaced by the static universe (or a universe window)
    */
   protected def makeWeightedParticle(previousState: State, currentUniverse: Universe, lw: LikelihoodWeighter): ParticleFilter.WeightedParticle = {
+    val particle = makeLogWeightedParticle(previousState, currentUniverse, lw)
+    (math.exp(particle.logWeight), particle.state)
+  }
 
+  /** Stable extension point used by the built-in sequential and parallel filters. */
+  protected def makeLogWeightedParticle(previousState: State, currentUniverse: Universe, lw: LikelihoodWeighter): ParticleFilter.LogWeightedParticle = {
     val weight = try {
-      math.exp(lw.computeWeight(currentUniverse.activeElements))
+      lw.computeWeight(currentUniverse.activeElements)
     } catch {
-      case Importance.Reject => 0.0
+      case Importance.Reject => Double.NegativeInfinity
     }   
 
     val snapshot = new Snapshot
     snapshot.store(currentUniverse)
     val state = new State(snapshot, previousState.static)
     currentUniverse.clearTemporaries()
-    (weight, state)
+    ParticleFilter.LogWeightedParticle(weight, state)
   }
 
   private[figaro] def updateBeliefState(weightedParticles: Seq[ParticleFilter.WeightedParticle]): Unit = {
@@ -103,7 +155,7 @@ trait ParticleFilter {
         beliefState(i) = weightedParticleArray(i)._2
       }
     } else {
-      val resampler = new MapResampler(weightedParticles)
+      val resampler = new MapResampler(weightedParticles.filter(_._1 > 0.0))
       for { i <- 0 until numParticles } {
         beliefState(i) = resampler.resample()
       }
@@ -134,6 +186,23 @@ trait ParticleFilter {
     makeWeightedParticle(state, current, lw)
   }
 
+  /** Generate a transition particle without exponentiating its likelihood. */
+  protected def addLogWeightedParticle(evidence: Seq[NamedEvidence[?]], index: Int, universes: UniverseWindow, lw: LikelihoodWeighter): ParticleFilter.LogWeightedParticle = {
+    val previousState = beliefState(index)
+    previousState.dynamic.restore(universes.previous)
+    previousState.static.restore(universes.static)
+    universes.current.assertEvidence(evidence)
+    makeLogWeightedParticle(previousState, universes.current, lw)
+  }
+
+  /** Generate an initial particle without exponentiating its likelihood. */
+  protected def initialLogWeightedParticle(static: Universe, current: Universe, lw: LikelihoodWeighter): ParticleFilter.LogWeightedParticle = {
+    Forward(static)
+    val staticSnapshot = new Snapshot
+    staticSnapshot.store(static)
+    makeLogWeightedParticle(new State(new Snapshot, staticSnapshot), current, lw)
+  }
+
   /*
    * Advance the universe one time step.
    * The previous universe becomes a copy of the current universe with all named elements replaced by constants.
@@ -155,6 +224,7 @@ trait ParticleFilter {
    * The computed log probability of evidence.
    */
   def getlogProbEvidence(): Double = {
+    checkBelief()
     logProbEvidence
   }
 
@@ -162,6 +232,7 @@ trait ParticleFilter {
    * The computed probability of evidence.
    */
   def probEvidence(): Double = {
+    checkBelief()
     val probEvidence = scala.math.exp(logProbEvidence)
     probEvidence
   }
@@ -176,46 +247,65 @@ trait ParticleFilter {
  * @param transition The transition model describing how the current state of the system depends on the previous
  * @param numParticles The number of particles to use at each time step
  */
-class OneTimeParticleFilter(static: Universe = new Universe(), initial: Universe, transition: (Universe, Universe) => Universe, val numParticles: Int)
+class OneTimeParticleFilter(static: Universe = new Universe(), initial: Universe, transition: (Universe, Universe) => Universe, val numParticles: Int,
+  override val zeroWeightPolicy: ParticleFilter.ZeroWeightPolicy = ParticleFilter.ZeroWeightPolicy.Fail)
   extends Filtering(static, initial, transition) with ParticleFilter with OneTimeFiltering {
 
   var currentUniverse: Universe = initial
   var previousUniverse: Universe = scala.compiletime.uninitialized
 
-  private def doTimeStep(weightedParticleCreator: Int => ParticleFilter.WeightedParticle): Unit = {
-    val weightedParticles = for { i <- 0 until numParticles } yield weightedParticleCreator(i)
+  require(numParticles > 0, "numParticles must be positive")
+  require(zeroWeightPolicy != null, "A zero-weight policy is required")
 
-    // compute probability of evidence here by taking the average weight of the weighted particles and store it so you can later return it as a query result
-    computeProbEvidence(weightedParticles)
-
-    updateBeliefState(weightedParticles)
-  }
+  private def doTimeStep(weightedParticleCreator: Int => ParticleFilter.LogWeightedParticle): Unit =
+    logTimeStep((0 until numParticles).map(weightedParticleCreator))
 
   /**
    * Begin the particle filter, determining the initial distribution.
    */
-  def run(): Unit = {
+  def run(): Unit = guardedUpdate {
     val lw = new LikelihoodWeighter(currentUniverse, new PermanentCache(currentUniverse))
-    doTimeStep((i: Int) => initialWeightedParticle(static, currentUniverse, lw))
-    lw.deregisterDependencies()
+    try doTimeStep((i: Int) => initialLogWeightedParticle(static, currentUniverse, lw))
+    finally lw.deregisterDependencies()
   }
 
   /**
    * Advance the filtering one time step, conditioning on the given evidence at the new time point.
    */
-  def advanceTime(evidence: Seq[NamedEvidence[?]] = List()): Unit = {
+  def advanceTime(evidence: Seq[NamedEvidence[?]] = List()): Unit = guardedUpdate {
 
     val currentWindow = new UniverseWindow(previousUniverse, currentUniverse, static)
     val newWindow = advanceUniverse(currentWindow, transition)
     val lw = new LikelihoodWeighter(newWindow.current, new PermanentCache(newWindow.current))
-    doTimeStep((i: Int) => addWeightedParticle(evidence, i, newWindow, lw))
-    previousUniverse = newWindow.previous
-    currentUniverse = newWindow.current
-    lw.deregisterDependencies()
+    try {
+      doTimeStep((i: Int) => addLogWeightedParticle(evidence, i, newWindow, lw))
+      previousUniverse = newWindow.previous
+      currentUniverse = newWindow.current
+    } finally lw.deregisterDependencies()
   }
 }
 
 object ParticleFilter {
+
+  /** Fail by default. LegacyUniform retains rejected particles, not a valid posterior. */
+  enum ZeroWeightPolicy { case Fail, LegacyUniform }
+
+  /** No sampled particle has nonzero likelihood; this need not prove impossible evidence. */
+  final class NoViableParticles extends IllegalStateException(
+    "No viable particles: all log weights are -Infinity. Check evidence and particle budget; no posterior is available.")
+
+  /** Log-space counterpart of the retained ordinary-weight compatibility type. */
+  final case class LogWeightedParticle(logWeight: Double, state: State)
+
+  /** Explicit zero-weight policy; use LegacyUniform only for compatibility. */
+  def apply(static: Universe, initial: Universe, transition: (Universe, Universe) => Universe,
+    numParticles: Int, policy: ZeroWeightPolicy): OneTimeParticleFilter =
+    new OneTimeParticleFilter(static, initial, transition, numParticles, policy)
+
+  /** Explicit zero-weight policy with no static model. */
+  def apply(initial: Universe, transition: Universe => Universe, numParticles: Int,
+    policy: ZeroWeightPolicy): OneTimeParticleFilter =
+    apply(new Universe(), initial, (_, previous) => transition(previous), numParticles, policy)
 
   /**
    * A one-time particle filter.

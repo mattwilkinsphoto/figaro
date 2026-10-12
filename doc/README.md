@@ -2,6 +2,10 @@
 
 Use the maintained Scala 3 documentation, not the archived Scala 2 PDFs:
 
+The [7.0 modernization bridge examples](../docs/INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage)
+compare old and new filtering/proposal behavior and explain the consequences for
+evidence, exact counts and owned-chain observations.
+
 | Previous document | Current entry point |
 | --- | --- |
 | Quick Start Guide | [Three-step setup](../README.md#quick-start-three-steps) and [classic tutorials](../docs/TUTORIAL.md) |

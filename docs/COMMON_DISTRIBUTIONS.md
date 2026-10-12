@@ -84,9 +84,11 @@ values; `copy` constructs and revalidates a new law. No inference state is copie
   Scalar location-scale parameters: `[1e-100,1e100]` and strictly positive.
 - Lognormal log mean: `[-500,500]`; log standard deviation: `[0.001,50]`.
 - Negative-binomial success probability: `[1e-6,1]`; p=1 is exactly zero failures.
-- Hypergeometric population: integer `[1,100000]`; successes and draws: `[0,N]`.
+- Hypergeometric population: integer `[1,1e9]`; successes and draws: `[0,N]`.
   Deterministic cases such as zero draws, zero successes or drawing the full population
-  are supported. The population cap also bounds cumulative-sum work.
+  are supported. A separate support-width cap of 100000 bounds cumulative-sum work.
+  These expanded development limits and exact finite-count factories are documented
+  in [inference integration](INFERENCE_INTEGRATION.md).
 
 Eligible parameters do not guarantee every tail quantile or moment fits in a Double
 or Int. Calculations refuse unrepresentable results instead of clipping draws to a
