@@ -807,6 +807,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.AtomicBinomial.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicBinomial.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.AtomicBinomial.observe ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicBinomial.html#observe-fffff71f)
@@ -1919,6 +1943,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicCount.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicCount.html#nextLogRandomness-fffff446)
+
+```scala
+override def nextLogRandomness(old: Randomness): (Randomness, Double, Double)
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` old: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Value parameters old previous randomness with finite log density Attributes Returns prior draw, negative log density difference, positive log density difference Throws java.lang.ArithmeticException if either state or their difference is not representable Definition Classes HasLogPriorProposal -> Element Inherited from: HasLogPriorProposal
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(old)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.AtomicCount.nextRandomness ``
@@ -3083,6 +3131,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.AtomicGeometric.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicGeometric.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.AtomicGeometric.observe ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicGeometric.html#observe-fffff71f)
@@ -4195,6 +4267,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicMultinomial.html#nextLogRandomness-fffff446)
+
+```scala
+override def nextLogRandomness(old: Randomness): (Randomness, Double, Double)
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` old: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Value parameters old previous randomness with finite log density Attributes Returns prior draw, negative log density difference, positive log density difference Throws java.lang.ArithmeticException if either state or their difference is not representable Definition Classes HasLogPriorProposal -> Element Inherited from: HasLogPriorProposal
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(old)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.AtomicMultinomial.nextRandomness ``
@@ -5359,6 +5455,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.AtomicPoisson.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicPoisson.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.AtomicPoisson.observe ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicPoisson.html#observe-fffff71f)
@@ -6447,6 +6567,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicSwitchingFlip.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicSwitchingFlip.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.AtomicSwitchingFlip.nextRandomness ``
@@ -7585,6 +7729,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.AtomicUniform.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/AtomicUniform.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.AtomicUniform.nextRandomness ``
@@ -8827,6 +8995,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.BinomialFixedNumTrials.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/BinomialFixedNumTrials.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.BinomialFixedNumTrials.nextRandomness ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/BinomialFixedNumTrials.html#nextRandomness-fffff446)
@@ -9963,6 +10155,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CompoundAtomic.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CompoundAtomic.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.CompoundAtomic.nextRandomness ``
@@ -11103,6 +11319,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.CompoundBinomial.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CompoundBinomial.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.CompoundBinomial.nextRandomness ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CompoundBinomial.html#nextRandomness-fffff446)
@@ -12241,6 +12481,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.CompoundGeometric.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CompoundGeometric.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.CompoundGeometric.nextRandomness ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CompoundGeometric.html#nextRandomness-fffff446)
@@ -13305,6 +13569,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.CompoundSwitchingFlip.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CompoundSwitchingFlip.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.CompoundSwitchingFlip.nextRandomness ``
@@ -14445,6 +14733,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.CompoundUniform.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CompoundUniform.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.CompoundUniform.nextRandomness ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CompoundUniform.html#nextRandomness-fffff446)
@@ -15169,6 +15481,32 @@ Invocation template:
 com.cra.figaro.library.atomic.discrete.CountElement.apply[D](distribution)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.CountElement.exact ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountElement$.html#exact-fffffc56)
+
+```scala
+def exact(distribution: CountDistribution, budget: Budget = ...)(using name: Name[Int], collection: ElementCollection): AtomicSelect[Int]
+```
+
+Explicit finite-support inference; fails on unbounded support or exhausted budgets.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: CountDistribution ``; `` budget: Budget = ... ``.
+
+Context parameters, list 2: `` name: Name[Int] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicSelect[Int] ``.
+
+Source contract/attributes: Explicit finite-support inference; fails on unbounded support or exhausted budgets. Value parameters budget enumeration state/cell caps, not a whole-graph factor budget collection owning collection distribution immutable finite count law name contextual name Attributes Returns exact-support Select; see FiniteCountInference for numerical limits Example CountElement.exact(HypergeometricDistribution(20,7,5))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.CountElement.exact(distribution, budget)(using name, collection)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.CountMixtureDistribution.cdf ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/CountMixtureDistribution.html#cdf-640)
@@ -15503,6 +15841,106 @@ Invocation template:
 
 ```scala
 com.cra.figaro.library.atomic.discrete.CountMixtureInformation.kl(p, q, tolerance, maxTerms)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.FiniteCountInference.Budget.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FiniteCountInference$$Budget.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.library.atomic.discrete.FiniteCountInference.Budget.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FiniteCountInference$$Budget.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.library.atomic.discrete.FiniteCountInference.count ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FiniteCountInference$.html#count-fffffc56)
+
+```scala
+def count(law: CountDistribution, budget: Budget = ...)(using name: Name[Int], collection: ElementCollection): AtomicSelect[Int]
+```
+
+Enumerate a finite count law (including mixtures of finite laws) before registration.
+
+Type parameters: none.
+
+Parameters, list 1: `` law: CountDistribution ``; `` budget: Budget = ... ``.
+
+Context parameters, list 2: `` name: Name[Int] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicSelect[Int] ``.
+
+Source contract/attributes: Enumerate a finite count law (including mixtures of finite laws) before registration. Value parameters budget explicit state/storage limits collection owning collection law immutable count kernel with a finite upper support bound name contextual name Attributes Returns exact-support Select element suitable for variable elimination; probabilities use Double arithmetic Example FiniteCountInference.count(HypergeometricDistribution(20,7,5))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.FiniteCountInference.count(law, budget)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.FiniteCountInference.multinomial ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FiniteCountInference$.html#multinomial-fffff7c8)
+
+```scala
+def multinomial(law: MultinomialDistribution, budget: Budget = ...)(using name: Name[Vector[Int]], collection: ElementCollection): AtomicSelect[Vector[Int]]
+```
+
+Enumerate the complete joint multinomial support, excluding impossible zero-probability categories.
+
+Type parameters: none.
+
+Parameters, list 1: `` law: MultinomialDistribution ``; `` budget: Budget = ... ``.
+
+Context parameters, list 2: `` name: Name[Vector[Int]] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicSelect[Vector[Int]] ``.
+
+Source contract/attributes: Enumerate the complete joint multinomial support, excluding impossible zero-probability categories. Value parameters budget preflight limits, checked before constructing any state vectors or registering an element collection owning collection law fixed multinomial law name contextual name Attributes Returns exact-support Select on count vectors; not an independent-marginals approximation Example FiniteCountInference.multinomial(MultinomialDistribution(4,Vector(.2,.3,.5)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.FiniteCountInference.multinomial(law, budget)(using name, collection)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.FromRange.apply ``
@@ -16235,6 +16673,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.FromRange.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FromRange.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.FromRange.nextRandomness ``
@@ -17061,6 +17523,32 @@ Invocation template:
 
 ```scala
 com.cra.figaro.library.atomic.discrete.Multinomial.apply(distribution)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.Multinomial.exact ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/Multinomial$.html#exact-fffff7c8)
+
+```scala
+def exact(distribution: MultinomialDistribution, budget: Budget = ...)(using name: Name[Vector[Int]], collection: ElementCollection): AtomicSelect[Vector[Int]]
+```
+
+Explicit exact joint finite support, with preflight combinatorial work limits.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: MultinomialDistribution ``; `` budget: Budget = ... ``.
+
+Context parameters, list 2: `` name: Name[Vector[Int]] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicSelect[Vector[Int]] ``.
+
+Source contract/attributes: Explicit exact joint finite support, with preflight combinatorial work limits. Value parameters budget enumeration state/cell caps, not a whole-graph factor budget collection owning collection distribution fixed multinomial law name contextual name Attributes Returns exact-support Select over joint count vectors Example Multinomial.exact(MultinomialDistribution(4,Vector(.2,.3,.5)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.Multinomial.exact(distribution, budget)(using name, collection)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.covariance ``
@@ -18249,6 +18737,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.OneShifter.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/OneShifter.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.OneShifter.nextRandomness ``
@@ -19533,6 +20045,30 @@ Invocation template:
 receiver.map[U](fn)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.ParameterizedBinomialFixedNumTrials.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ParameterizedBinomialFixedNumTrials.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.ParameterizedBinomialFixedNumTrials.nextRandomness ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/ParameterizedBinomialFixedNumTrials.html#nextRandomness-fffff446)
@@ -20749,6 +21285,30 @@ Invocation template:
 
 ```scala
 receiver.map[U](fn)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.SwitchingFlip.nextLogRandomness ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/SwitchingFlip.html#nextLogRandomness-fffff446)
+
+```scala
+def nextLogRandomness(rand: Randomness): (Randomness, Double, Double)
+```
+
+Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+
+Type parameters: none.
+
+Parameters, list 1: `` rand: Randomness ``.
+
+Returns: `` (Randomness, Double, Double) ``.
+
+Source contract/attributes: Propose in log space. The default delegates to the legacy hook, preserving custom proposals. Value parameters rand current randomness Attributes Returns new randomness, log(reverse/forward proposal), log(new/old model density) Throws IllegalArgumentException for negative or non-finite legacy ratios Inherited from: Element
+
+Invocation template:
+
+```scala
+receiver.nextLogRandomness(rand)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.SwitchingFlip.observe ``

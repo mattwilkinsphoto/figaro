@@ -14653,6 +14653,126 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.StaticGraphImportance.runWithProposal(model, roots, proposal, queries, observations, config)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.bounded ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#bounded-85e)
+
+```scala
+def bounded(element: AtomicScalar, stepSd: Double = ...): ProposalScheme
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` element: AtomicScalar ``; `` stepSd: Double = ... ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Value parameters element permanent AtomicScalar with finite distinct support endpoints stepSd positive finite logit-coordinate increment SD Attributes Returns corrected bounded-value MH scheme; endpoints cannot be states Example SupportAwareProposal.bounded(ScalarElement(KumaraswamyDistribution(2,3)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.SupportAwareProposal.bounded(element, stepSd)
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.circular ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#circular-aa2)
+
+```scala
+def circular(element: AtomicVonMises, stepSd: Double = ...): ProposalScheme
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` element: AtomicVonMises ``; `` stepSd: Double = ... ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Value parameters element permanent circular von Mises element stepSd positive finite angular increment SD, in radians Attributes Returns symmetric wrapped-normal proposal, continuous across the angular seam Example SupportAwareProposal.circular(VonMises(0,2), 0.2)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.SupportAwareProposal.circular(element, stepSd)
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.correlation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#correlation-fffff453)
+
+```scala
+def correlation(element: AtomicLKJ, stepSd: Double = ...): ProposalScheme
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` element: AtomicLKJ ``; `` stepSd: Double = ... ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Value parameters element permanent fixed LKJ adapter stepSd positive finite unconstrained partial-correlation increment SD Attributes Returns correlation-matrix MH scheme including its full Jacobian Example SupportAwareProposal.correlation(LKJ(LKJDistribution(3)), 0.2)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.SupportAwareProposal.correlation(element, stepSd)
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.covariance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#covariance-17e)
+
+```scala
+def covariance(element: Element[Vector[Vector[Double]]], stepSd: Double = ...): ProposalScheme
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` element: Element[Vector[Vector[Double]]] ``; `` stepSd: Double = ... ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Value parameters element permanent Wishart or inverse-Wishart adapter (not an arbitrary matrix graph) stepSd positive finite increment SD in log-diagonal/raw-off-diagonal Cholesky coordinates Attributes Returns covariance proposal including the Cholesky Jacobian Example SupportAwareProposal.covariance(Wishart(law), 0.1)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.SupportAwareProposal.covariance(element, stepSd)
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.positive ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#positive-85e)
+
+```scala
+def positive(element: AtomicScalar, stepSd: Double = ...): ProposalScheme
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` element: AtomicScalar ``; `` stepSd: Double = ... ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Value parameters element permanent fixed-kernel AtomicScalar with support (0,+Infinity) stepSd positive finite log-coordinate increment SD Attributes Returns corrected log-space MH scheme Example SupportAwareProposal.positive(ScalarElement(LogNormalDistribution(0,1)), 0.2)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.SupportAwareProposal.positive(element, stepSd)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.SwitchScheme.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SwitchScheme.html#productElementNames-0)

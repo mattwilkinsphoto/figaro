@@ -39,6 +39,13 @@ for current contracts. Generate the searchable API using
 \texttt{sbt "figaro / Compile / doc"}; the old Scala 2 API archive is obsolete.
 
 \section*{Optional performance and stopping features}
+The 7.0 modernization bridge contains
+\href{https://github.com/mattwilkinsphoto/figaro/blob/main/docs/INFERENCE_INTEGRATION.md}{old-versus-new examples}
+for log-space filtering, explicit zero-particle failure, custom proposal hooks,
+owned-chain observations and exact finite counts. Tiny finite likelihoods are not
+impossible evidence; an unweighted fallback is not a conditioned posterior. Use
+the linked examples and documented limits with the retained filtering chapters.
+
 Parallel importance sampling and multi-chain MCMC use isolated model instances
 and bounded workers. They are explicit choices, not automatic acceleration of
 existing programs or permission to share a mutable universe across threads.

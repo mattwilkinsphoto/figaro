@@ -22,11 +22,11 @@ VERSION = '6.1.0'
 PREFIX = f'maven/io/github/mattwilkinsphoto/figaro_3/{VERSION}/'
 
 
-def check_pom(data):
+def check_pom(data, version=VERSION):
     root = ET.fromstring(data)
     ns = {'p': 'http://maven.apache.org/POM/4.0.0'}
     coordinates = tuple(root.findtext('p:'+key, namespaces=ns) for key in ('groupId', 'artifactId', 'version'))
-    if coordinates != ('io.github.mattwilkinsphoto', 'figaro_3', VERSION):
+    if coordinates != ('io.github.mattwilkinsphoto', 'figaro_3', version):
         raise ValueError('Unexpected POM coordinates')
     dependencies = root.findall('p:dependencies/p:dependency', ns)
     if not dependencies or any('SNAPSHOT' in d.findtext('p:version', default='', namespaces=ns) for d in dependencies):
@@ -52,12 +52,20 @@ def archive_bytes(payload):
 
 
 def main():
+    global VERSION, PREFIX
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('artifacts', type=Path)
     parser.add_argument('output', type=Path)
     parser.add_argument('--candidate', action='store_true')
+    parser.add_argument('--version', default=VERSION)
     parser.add_argument('--acl-script', type=Path)
     args = parser.parse_args()
+    if not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+(?:-SNAPSHOT)?', args.version):
+        raise ValueError('Invalid artifact version')
+    if args.version.endswith('-SNAPSHOT') and not args.candidate:
+        raise ValueError('Snapshot bundles require --candidate')
+    VERSION = args.version
+    PREFIX = f'maven/io/github/mattwilkinsphoto/figaro_3/{VERSION}/'
     root = Path(__file__).resolve().parents[1]
     def git(*arguments):
         return subprocess.check_output(['git', '-c', 'safe.directory='+root.as_posix(), '-C', str(root), *arguments], text=True).strip()
@@ -72,11 +80,11 @@ def main():
         name = f'figaro_3-{VERSION}{suffix}.jar'
         path = args.artifacts / name
         with ZipFile(path) as archive:
-            validate(archive, kind, legal)
+            validate(archive, kind, legal, VERSION)
         payload[('supplemental/' if kind == 'fat' else PREFIX)+name] = path.read_bytes()
     pom_name = f'figaro_3-{VERSION}.pom'
     pom = (args.artifacts / pom_name).read_bytes()
-    check_pom(pom)
+    check_pom(pom, VERSION)
     payload[PREFIX+pom_name] = pom
     for name, data in list(payload.items()):
         if name.startswith(PREFIX):
@@ -111,7 +119,8 @@ Sources and Scaladoc classifiers are alongside the thin JAR in the Maven layout.
 `release.json` identifies the source revision and hashes. A candidate/dirtySource
 bundle is for local testing only. Final releases use an immutable source tag.
 
-Migration and scope: https://github.com/mattwilkinsphoto/figaro/blob/v{VERSION}/docs/RELEASE_6_1.md
+Source documentation: https://github.com/mattwilkinsphoto/figaro/tree/{revision}/docs
+For dirty candidates, consult the bundled source classifier and working-tree documentation.
 '''.encode()
     payload['SHA256SUMS'] = checksums(payload)
     output = args.output.resolve()

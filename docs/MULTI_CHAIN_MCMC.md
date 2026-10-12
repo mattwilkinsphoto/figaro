@@ -10,7 +10,7 @@ This is an opt-in API in the Scala 3 modernization snapshot, not a new default f
 
 Use it when you need **multiple-chain diagnostics and reproducible seed assignment**, with parallel execution as an additional benefit. Keep ordinary MH when its probability-query interface or anytime lifecycle suits your application. Use exact inference for small tractable models. Importance sampling remains useful when weights are well behaved; this API does not replace the [parallel importance sampler](PARALLEL_PERFORMANCE.md).
 
-The initial supported evidence surface is **hard conditions and explicit likelihood constraints**. `observe()` is rejected, including observed dynamic children encountered by the cache. Do not simply remove observations from an existing model: that changes the inference question. See the evidence conversion example below.
+The supported evidence surface includes **hard conditions, explicit likelihood constraints, and bounded observation support**. Permanent atomic likelihoods, conditional `Flip(p)` and one-atomic-child observed Chains are supported in the integration development version. Arbitrary transformed/dynamic observations remain unsupported. See [inference integration](INFERENCE_INTEGRATION.md) for the exact boundary and examples; never simply remove evidence.
 
 ## Quick start: three steps
 
@@ -59,7 +59,7 @@ sbt "examples / Compile / runMain com.cra.figaro.example.MultiChainMcmcExample"
 | Result | Active probability-query algorithm | Immutable per-chain scalar traces, metadata, diagnostics |
 | Diagnostics | No automatic cross-chain diagnostic in the ordinary factory | Rank-normalized/folded split R-hat, bulk/tail/mean ESS, mean MCSE |
 | Cleanup | Caller uses `start`, query, `kill` | Runner owns construction through disposal, including failure |
-| Evidence | Legacy algorithm-specific behavior | Conditions and explicit likelihood constraints; no `observe()` |
+| Evidence | Legacy algorithm-specific behavior | Conditions, explicit likelihood constraints and validated permanent likelihood observations |
 | Sampling loop | Includes query histograms and target update maps | Records scalar columns directly from the existing MH kernel |
 
 Four chains of 10,000 draws retain **40,000 draws**, not 10,000 total. With 1,000 warm-up transitions and `thin=1`, they attempt 44,000 MH transitions altogether. With one worker the four chains run sequentially; with four workers they can overlap. The chain count, warm-up, and retained work do not change when you change only `parallelism`.
@@ -193,7 +193,7 @@ Both retain 40,000 states, but the new default also discards 1,000 warm-up trans
 
 ### 2. Express evidence explicitly and collect several related quantities
 
-A common existing model uses an observed child, such as `Flip(p).observe(true)`. For this runner, integrate that observed Bernoulli child into the parent's likelihood: observing true contributes a factor `p`, observing false contributes `1-p`. This is a mathematical rewrite, not merely an API spelling change. For a continuous measurement, use its density, not an equality condition on a continuous draw:
+A common existing model uses an observed child, such as `Flip(p).observe(true)`. This now works directly within the validated observation surface. Alternatively, integrate that observed Bernoulli child into the parent's likelihood: observing true contributes a factor `p`, observing false contributes `1-p`. Use one form, not both. This is a mathematical rewrite, not merely an API spelling change. For a continuous measurement, use its density, not an equality condition on a continuous draw:
 
 ```scala
 val measurements = run(Config(drawsPerChain = 12000, warmUp = 2000)) { (u, _) =>
@@ -210,7 +210,7 @@ val posteriorMean = measurements.diagnostics("mean")
 val probabilityPositive = measurements.diagnostics("positive")
 ```
 
-The normalizer was omitted only because `knownVariance` is fixed. If variance is inferred, its normalizing term depends on the model and must be included. For multivariate likelihoods, attach a constraint to an `Apply` of all required parents. Check the rewrite against an analytical or exact-inference answer on a small case. Automatic observation conversion is not implemented; keep an existing supported inference algorithm if you cannot establish the equivalent likelihood.
+The normalizer was omitted only because `knownVariance` is fixed. If variance is inferred, its normalizing term depends on the model and must be included. For multivariate likelihoods, attach a constraint to an `Apply` of all required parents. Check the rewrite against an analytical or exact-inference answer on a small case. Validated observations are scored natively, not by a generic automatic graph rewrite. Keep an existing supported inference algorithm when neither the validated surface nor an established equivalent likelihood applies.
 
 ### 3. Use dispersed starts, then tune workers without changing the statistical experiment
 
@@ -280,7 +280,7 @@ These are short illustrative models, not production capacity forecasts. They do 
 - Static dependencies, observable ownership, cache-encountered dynamic children, and custom-proposal targets are checked. This cannot discover every shared external object or police malicious callbacks. Model/projection/constraint callbacks must not mutate evidence, spawn inference work, or call unrelated global caches while chains run.
 - The audited path covers MH transition/proposal bookkeeping, `MHCache`, `ForwardWeighter` initialization, universe-local collections, scoped default universes, and the routed Figaro RNG. Factored-inference `Variable` caches, particle generators, learning, filtering, actors, nested inference, and arbitrary extensions are **not** certified for concurrent use by this milestone.
 - Seed assignment is deterministic and independent of pool size. Each chain uses `java.util.Random`; different derived seeds are practical stream separation, not a mathematical proof of nonoverlap or a cryptographic guarantee. Explicit external RNGs and newly spawned threads are outside the runner's scopes.
-- Evidence must already be attached when the model is returned. `observe()` is unsupported in this API. Zero-probability hard conditions, continuous equality conditions, and impossible/rare initial regions can prevent initialization. Positive-infinite or NaN likelihoods/projections are invalid; negative-infinite log likelihood denotes zero mass and is permitted for rejected proposed states.
+- Evidence must already be attached when the model is returned and cannot change during sampling. Observation support is limited to the [validated likelihood surface](INFERENCE_INTEGRATION.md#observations-in-owned-multi-chain-mh). Zero-probability hard conditions, continuous equality conditions, and impossible/rare initial regions can prevent initialization. Positive-infinite or NaN likelihoods/projections are invalid; negative-infinite log likelihood denotes zero mass and is permitted for rejected proposed states.
 - All chains must target the same distribution and observables. A factory can violate this semantic contract even if names match; validation cannot infer mathematical equivalence.
 - Custom proposals remain your responsibility. The runner does not adapt proposals, validate detailed balance, provide HMC/NUTS, or guarantee movement between modes.
 - The default proposal needs a stochastic element to propose. Use exact evaluation for a fully deterministic model; a constant projection inside a stochastic model is allowed but has undefined mixing diagnostics. Finite-sample R-hat can be slightly below one; closeness to one is not a guarantee either way.
@@ -298,4 +298,4 @@ The 30-test probability/MCMC coverage smoke selection passes instrumentation and
 
 `language` supplies universe/element ownership and constraints; `algorithm.sampling` supplies the existing MH kernel and proposal schemes; `library.cache` supplies chain-local caching; `util` supplies scoped randomness; Commons Math supplies inverse-normal quantiles and FFTs; `FigaroExamples` supplies the runnable example and benchmark. See the [API guide](API_GUIDE.md), [parallel importance guide](PARALLEL_PERFORMANCE.md), and [build guide](BUILDING.md).
 
-Next candidates are profiling real model workloads, reducing transition allocations, memory-bounded trace/diagnostic options, and separately validating observation support. Proposal improvements and multimodal exploration should be assessed using statistical efficiency, not raw thread count. Broad shared-graph thread safety remains separate work; this milestone uses isolated ownership instead.
+Next candidates are profiling real model workloads, memory-bounded trace/diagnostic options, and broader separately validated observation/proposal families. Fixed support-aware proposals are now available in the [integration development work](INFERENCE_INTEGRATION.md). Proposal improvements and multimodal exploration should be assessed using statistical efficiency, not raw thread count. Broad shared-graph thread safety remains separate work; this milestone uses isolated ownership instead.

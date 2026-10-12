@@ -19,6 +19,13 @@ runs it on a fresh runner without restoring dependency caches.
 
 For local producer testing instead:
 
+For the 7.0 integration development branch set `FIGARO_VERSION=7.0.0-SNAPSHOT`.
+This opts into the separate `src/integration/scala` packaged-API check; after the
+ordinary check, run `runMain IntegrationConsumerCheck`. Leaving the variable unset
+continues to target the immutable 6.1.0 Central baseline. The development check
+exercises log filtering, exact counts, observed multi-chain likelihoods and
+support-aware proposals from the verified JAR, not from producer classes.
+
 1. From the Figaro root run `sbt "figaro / publishLocal"`.
 2. Set `FIGARO_EXPECTED_SHA256` to the SHA-256 of the built thin Figaro jar.
 3. From this directory run `sbt "runMain FigaroConsumerCheck"` with the same JDK/local repository settings.

@@ -5,7 +5,7 @@ import com.cra.figaro.util.random
 
 /** Prior-proposal atomic adapter for validated count kernels; not a custom finite-factor implementation. */
 final class AtomicCount private[discrete](name: Name[Int],val distribution: CountDistribution,collection: ElementCollection)
-  extends Element[Int](name,collection) with Atomic[Int] with HasLogDensity[Int] {
+  extends Element[Int](name,collection) with Atomic[Int] with HasLogPriorProposal[Int] {
   type Randomness = Int
   /** @return independent count draw from the scoped Figaro RNG */
   def generateRandomness(): Int = distribution.sample(random)
@@ -21,6 +21,18 @@ final class AtomicCount private[discrete](name: Name[Int],val distribution: Coun
 
 /** Fixed and stochastic-kernel factories for new count families. */
 object CountElement {
+  /** Explicit finite-support inference; fails on unbounded support or exhausted budgets.
+    * @param distribution immutable finite count law
+    * @param budget enumeration state/cell caps, not a whole-graph factor budget
+    * @param name contextual name
+    * @param collection owning collection
+    * @return exact-support Select; see FiniteCountInference for numerical limits
+    * @example `CountElement.exact(HypergeometricDistribution(20,7,5))`
+    */
+  def exact(distribution: CountDistribution, budget: FiniteCountInference.Budget = FiniteCountInference.Budget())
+    (using name: Name[Int], collection: ElementCollection): AtomicSelect[Int] =
+    FiniteCountInference.count(distribution, budget)
+
   /** @param distribution non-null immutable count law
     * @param name contextual name
     * @param collection owning universe/collection

@@ -108,7 +108,7 @@ object VonMisesFisher3Information {
 
 /** Prior-proposal atomic adapter; no Euclidean Continuous proposal is imposed on the sphere. */
 final class AtomicVonMisesFisher3 private[continuous](name: Name[Vector[Double]],val distribution: VonMisesFisher3Distribution,collection: ElementCollection)
-  extends Element[Vector[Double]](name,collection) with Atomic[Vector[Double]] with HasLogDensity[Vector[Double]] {
+  extends Element[Vector[Double]](name,collection) with Atomic[Vector[Double]] with HasLogPriorProposal[Vector[Double]] {
   type Randomness=Vector[Double]
   def generateRandomness(): Vector[Double]=distribution.sample(com.cra.figaro.util.random)
   def generateValue(value: Vector[Double]): Vector[Double]=value

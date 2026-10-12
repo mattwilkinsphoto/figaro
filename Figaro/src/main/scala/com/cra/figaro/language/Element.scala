@@ -123,6 +123,18 @@ abstract class Element[T](val name: Name[T], val collection: ElementCollection) 
    */
   def nextRandomness(rand: Randomness): (Randomness, Double, Double) = (generateRandomness(), 1.0, 1.0)
 
+  /** Propose in log space. The default delegates to the legacy hook, preserving custom proposals.
+    * @param rand current randomness
+    * @return new randomness, log(reverse/forward proposal), log(new/old model density)
+    * @throws IllegalArgumentException for negative or non-finite legacy ratios
+    */
+  def nextLogRandomness(rand: Randomness): (Randomness, Double, Double) = {
+    val (next, proposal, model) = nextRandomness(rand)
+    require(proposal.isFinite && proposal >= 0.0 && model.isFinite && model >= 0.0,
+      "Invalid legacy MH ratio; implement nextLogRandomness for extreme ratios")
+    (next, math.log(proposal), math.log(model))
+  }
+
   /**
    * The current randomness content of the element.
    */

@@ -4,14 +4,14 @@ import com.cra.figaro.language.*
 import com.cra.figaro.library.atomic.{DistributionNumerics as N,InformationMetricResult,InformationMetricStatus as S,MetricCalculation as M}
 
 /** Full-rank inverse-Wishart in independent symmetric-entry coordinates.
-  * @param degreesOfFreedom real df in [dimension+1,1e6], a deliberate numerical subset of df>dimension-1
+  * @param degreesOfFreedom real df in [dimension,1e6], a deliberate numerical subset of df>dimension-1
   * @param scale positive-definite 1..16 matrix Psi, NOT its inverse or the mean; diagonal [1e-100,1e100]
   * Density contains exp(-trace(Psi*inverse(value))/2). No singular measure/jitter.
   */
 final case class InverseWishartDistribution(degreesOfFreedom: Double,scale: Vector[Vector[Double]]) {
   require(scale!=null && scale.nonEmpty && scale.size<=16)
   val dimension: Int=scale.size
-  require(degreesOfFreedom.isFinite && degreesOfFreedom>=dimension+1 && degreesOfFreedom<=1e6)
+  require(degreesOfFreedom.isFinite && degreesOfFreedom>=dimension && degreesOfFreedom<=1e6)
   private[continuous] val gaussian=CovarianceNumerics.matrix(scale,dimension)
   require(scale.indices.forall(i => scale(i)(i)>=1e-100 && scale(i)(i)<=1e100))
   private[continuous] val logPartition=WishartInformation.partition(degreesOfFreedom,dimension,-gaussian.logDeterminant)
@@ -111,7 +111,7 @@ object InverseWishartInformation {
 
 /** Observation-ready covariance element with prior independence MH proposals. */
 final class AtomicInverseWishart private[continuous](name: Name[Vector[Vector[Double]]],val distribution: InverseWishartDistribution,collection: ElementCollection)
-  extends Element[Vector[Vector[Double]]](name,collection) with Atomic[Vector[Vector[Double]]] with HasLogDensity[Vector[Vector[Double]]] {
+  extends Element[Vector[Vector[Double]]](name,collection) with Atomic[Vector[Vector[Double]]] with HasLogPriorProposal[Vector[Vector[Double]]] {
   type Randomness=Vector[Vector[Double]]
   def generateRandomness(): Randomness=distribution.sample(com.cra.figaro.util.random)
   def generateValue(value: Randomness): Randomness=value

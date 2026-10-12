@@ -8,6 +8,12 @@ Use the [current setup](../README.md), [migration changes](MIGRATION.md) and
 [API reference](api/README.md) for executable commands, compatibility and signatures.
 Use the archived tutorials for the deeper explanations, with the corrections below.
 
+For the 7.0 inference changes, read the [old-versus-new examples](INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage):
+log-space particle filtering, explicit zero-particle failure and its compatibility
+option, custom filter/MH hooks, owned-chain observations, exact count tables and
+support-aware proposals. Each explains why the change matters and its retained
+limits. These supplement the original chapters rather than duplicating them.
+
 | Legacy item | Assessment and action | Current entry point |
 | --- | --- | --- |
 | Root `figaro_2.12-5.0.0.0-javadoc.jar` | Removed: generated Scala 2.12/Figaro 5 API, not this Scala 3 library; recoverable from Git history | [API guide](API_GUIDE.md), generated Scala 3 HTML and [method reference](api/README.md) |

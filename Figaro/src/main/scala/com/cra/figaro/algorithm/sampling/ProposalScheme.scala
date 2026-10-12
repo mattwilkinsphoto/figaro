@@ -28,6 +28,7 @@ sealed abstract class ProposalScheme
 
 // Internal representation: construction is restricted to the validated public factory.
 private[sampling] final case class GaussianBlockScheme(block: GaussianBlockProposal.Block) extends ProposalScheme
+private[sampling] final case class SupportAwareScheme(move: SupportAwareProposal.Move) extends ProposalScheme
 
 /**
  * A proposal scheme that proposes a first element and optionally continues with another proposal

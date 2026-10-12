@@ -28,6 +28,9 @@ class ReleaseBundleTests(unittest.TestCase):
     def test_pom_contract(self):
         pom = b'''<project xmlns="http://maven.apache.org/POM/4.0.0"><groupId>io.github.mattwilkinsphoto</groupId><artifactId>figaro_3</artifactId><version>6.1.0</version><dependencies><dependency><version>3.9.0</version></dependency></dependencies></project>'''
         check_pom(pom)
+        check_pom(pom.replace(b'6.1.0', b'7.0.0-SNAPSHOT'), '7.0.0-SNAPSHOT')
+        with self.assertRaises(ValueError):
+            check_pom(pom, '7.0.0-SNAPSHOT')
         for bad in (pom.replace(b'6.1.0', b'6.0.0'), pom.replace(b'3.9.0', b'3.9.0-SNAPSHOT')):
             with self.assertRaises(ValueError):
                 check_pom(bad)

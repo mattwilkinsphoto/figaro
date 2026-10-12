@@ -8,7 +8,7 @@ import com.cra.figaro.util.random
 final class AtomicGaussVonMises private[continuous] (
   name: Name[LinearAngular], val distribution: GaussVonMisesDistribution, collection: ElementCollection)
   extends Element[LinearAngular](name, collection) with Atomic[LinearAngular]
-    with Continuous[LinearAngular] with HasLogDensity[LinearAngular] {
+    with Continuous[LinearAngular] with HasLogPriorProposal[LinearAngular] {
   type Randomness = LinearAngular
   /** @return independent joint draw using the currently scoped Figaro RNG */
   def generateRandomness(): LinearAngular = distribution.sample(random)

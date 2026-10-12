@@ -41,7 +41,7 @@ class DistributionBreadthTest extends AnyWordSpec with Matchers {
       GeneralizedParetoDistribution(.2,1,2).mean.get shouldBe 3.5
       GeneralizedExtremeValueDistribution(1).mean shouldBe None
       GeneralizedParetoDistribution(.5).variance shouldBe Some(Double.PositiveInfinity)
-      intercept[IllegalArgumentException](GeneralizedExtremeValueDistribution(1e-12))
+      intercept[IllegalArgumentException](GeneralizedExtremeValueDistribution(1e-15))
       intercept[IllegalArgumentException](GeneralizedParetoDistribution(-3))
       intercept[IllegalArgumentException](GeneralizedExtremeValueDistribution(.2).cdf(Double.NaN))
       intercept[ArithmeticException](GeneralizedParetoDistribution(-2).quantile(math.nextDown(1.0)))
@@ -117,7 +117,7 @@ class DistributionBreadthTest extends AnyWordSpec with Matchers {
       p.logDensity(Vector(Vector(4.0,1.0),Vector(1.0,3.0))) shouldBe (BreadthFixtures.wishartLogDensity +- 1e-12)
       WishartDistribution(4,Vector(Vector(1.0))).density(Vector(Vector(3.0))) shouldBe (3*math.exp(-1.5)/4 +- 1e-14)
       p.mean(0)(0) shouldBe 10.0; p.covariance(0,0,0,0) shouldBe 40.0
-      intercept[IllegalArgumentException](WishartDistribution(2,p.scale))
+      intercept[IllegalArgumentException](WishartDistribution(1.9,p.scale))
       intercept[IllegalArgumentException](WishartDistribution(5,Vector(Vector(1.0,2.0),Vector(2.0,1.0))))
       intercept[IllegalArgumentException](p.logDensity(Vector(Vector(1.0,0.0),Vector(1.0,1.0))))
       intercept[IllegalArgumentException](p.logDensity(Vector(Vector(1.0,1.0),Vector(1.0,1.0))))

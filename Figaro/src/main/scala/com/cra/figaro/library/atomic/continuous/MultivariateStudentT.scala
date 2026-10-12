@@ -77,7 +77,7 @@ final case class MultivariateStudentTDistribution(degreesOfFreedom: Double,
 /** Fixed-kernel observation-ready element; randomness is the complete vector draw. */
 final class AtomicMultivariateStudentT private[continuous](name: Name[Vector[Double]],
   val distribution: MultivariateStudentTDistribution,collection: ElementCollection)
-  extends Element[Vector[Double]](name,collection) with Atomic[Vector[Double]] with Continuous[Vector[Double]] with HasLogDensity[Vector[Double]] {
+  extends Element[Vector[Double]](name,collection) with Atomic[Vector[Double]] with Continuous[Vector[Double]] with HasLogPriorProposal[Vector[Double]] {
   type Randomness=Vector[Double]
   def generateRandomness(): Vector[Double]=distribution.sample(com.cra.figaro.util.random)
   def generateValue(value: Vector[Double]): Vector[Double]=value

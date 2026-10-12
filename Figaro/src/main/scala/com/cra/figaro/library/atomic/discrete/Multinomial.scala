@@ -113,13 +113,25 @@ object MultinomialInformation {
 }
 
 final class AtomicMultinomial private[discrete](name: Name[Vector[Int]],val distribution: MultinomialDistribution,collection: ElementCollection)
-  extends Element[Vector[Int]](name,collection) with Atomic[Vector[Int]] with HasLogDensity[Vector[Int]] {
+  extends Element[Vector[Int]](name,collection) with Atomic[Vector[Int]] with HasLogPriorProposal[Vector[Int]] {
   type Randomness=Vector[Int]
   def generateRandomness(): Vector[Int]=distribution.sample(com.cra.figaro.util.random)
   def generateValue(value: Vector[Int]): Vector[Int]=value
   def logDensity(value: Vector[Int]): Double=distribution.logProbability(value)
 }
 object Multinomial {
+  /** Explicit exact joint finite support, with preflight combinatorial work limits.
+    * @param distribution fixed multinomial law
+    * @param budget enumeration state/cell caps, not a whole-graph factor budget
+    * @param name contextual name
+    * @param collection owning collection
+    * @return exact-support Select over joint count vectors
+    * @example `Multinomial.exact(MultinomialDistribution(4,Vector(.2,.3,.5)))`
+    */
+  def exact(distribution: MultinomialDistribution, budget: FiniteCountInference.Budget = FiniteCountInference.Budget())
+    (using name: Name[Vector[Int]], collection: ElementCollection): AtomicSelect[Vector[Int]] =
+    FiniteCountInference.multinomial(distribution, budget)
+
   /** @param distribution validated count kernel
     * @param name contextual name
     * @param collection owning collection

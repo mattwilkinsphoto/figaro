@@ -121,7 +121,7 @@ class CovariancePriorsTest extends AnyWordSpec with Matchers {
       intercept[IllegalArgumentException](law.logDensity(Vector(Vector(2.0,0.0),Vector(0.0,1.0))))
       intercept[IllegalArgumentException](law.logDensity(Vector(Vector(1.0,1.0),Vector(1.0,1.0))))
       intercept[IllegalArgumentException](law.toCovariance(eye,Vector(0,1)))
-      intercept[IllegalArgumentException](InverseWishartDistribution(2,eye))
+      intercept[IllegalArgumentException](InverseWishartDistribution(1.9,eye))
       intercept[IllegalArgumentException](WishartDistribution(4,eye).logDensity(Vector(Vector(1.0))))
       val bad=new scala.util.Random(1) { override def nextDouble(): Double=0.0 }
       intercept[ArithmeticException](law.sample(bad))

@@ -99,7 +99,7 @@ object MixedScalarDistribution {
   * likelihood comparison needs a common dominating measure across hypotheses.
   */
 final class AtomicMixedScalar private[continuous](name: Name[Double],val distribution: MixedScalarDistribution,collection: ElementCollection)
-  extends Element[Double](name,collection) with Atomic[Double] with HasLogDensity[Double] {
+  extends Element[Double](name,collection) with Atomic[Double] with HasLogPriorProposal[Double] {
   type Randomness=Double
   def generateRandomness(): Double=distribution.sample(random)
   def generateValue(value: Double): Double=value

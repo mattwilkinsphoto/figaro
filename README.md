@@ -130,6 +130,7 @@ original acceptance evidence.
 
 - [Roadmap](ROADMAP.md) and [capability wishlist](WISHLIST.md): family-first distribution expansion, starting with circular von Mises and joint Gauss-von Mises.
 - [Distribution support inventory](docs/DISTRIBUTION_SUPPORT.md): existing elements, composition opportunities and inference/numerical gaps.
+- [Distribution/inference integration](docs/INFERENCE_INTEGRATION.md): unreleased 7.0 development changes, strict particle failures, observations, finite-count factors, support-aware proposals and migration boundaries.
 - [Classic tutorials in Scala 3](docs/TUTORIAL.md): the original greeting and Burglary models, with executable checks.
 - [Legacy modeling companion](docs/LEGACY_MODELING_GUIDE.md): a bridge to the original advanced modeling, inference and extension material.
 - [Documentation preservation map](docs/DOCUMENTATION_MIGRATION.md): what was superseded, what is archived, and how the LaTeX sources incorporate modernization.

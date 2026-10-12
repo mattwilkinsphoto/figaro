@@ -5,7 +5,7 @@ import com.cra.figaro.util.random
 
 /** Observation-ready full-covariance GMM element. A draw is a Vector, not a component label. */
 final class AtomicGaussianMixture private[continuous](name: Name[Vector[Double]],val distribution: GaussianMixtureDistribution,collection: ElementCollection)
-  extends Element[Vector[Double]](name,collection) with Atomic[Vector[Double]] with Continuous[Vector[Double]] with HasLogDensity[Vector[Double]] {
+  extends Element[Vector[Double]](name,collection) with Atomic[Vector[Double]] with Continuous[Vector[Double]] with HasLogPriorProposal[Vector[Double]] {
   type Randomness = Vector[Double]
   def generateRandomness(): Vector[Double] = distribution.sample(random)
   def generateValue(value: Vector[Double]): Vector[Double] = value

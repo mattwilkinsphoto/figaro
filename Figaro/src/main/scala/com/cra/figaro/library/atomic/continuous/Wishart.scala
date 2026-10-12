@@ -5,14 +5,14 @@ import com.cra.figaro.library.atomic.{DistributionNumerics as N,InformationMetri
 import org.apache.commons.math3.special.Gamma
 
 /** Full-rank Wishart in the independent symmetric-entry Lebesgue measure.
-  * @param degreesOfFreedom real df in [dimension+1,1e6]; deliberately excludes the near-singular df boundary
+  * @param degreesOfFreedom real df in [dimension,1e6]; excludes dimension-1 < df < dimension
   * @param scale symmetric positive-definite 1..16 matrix; diagonal in [1e-100,1e100], correlation condition <=1e10
   * Scale is NOT the mean: E[X]=df*scale. No implicit jitter or symmetrization.
   */
 final case class WishartDistribution(degreesOfFreedom: Double,scale: Vector[Vector[Double]]) {
   require(scale!=null && scale.nonEmpty && scale.size<=16)
   val dimension: Int=scale.size
-  require(degreesOfFreedom.isFinite && degreesOfFreedom>=dimension+1 && degreesOfFreedom<=1e6)
+  require(degreesOfFreedom.isFinite && degreesOfFreedom>=dimension && degreesOfFreedom<=1e6)
   require(scale.forall(r => r!=null && r.size==dimension))
   require(scale.indices.forall(i => scale(i)(i)>=1e-100 && scale(i)(i)<=1e100))
   private[continuous] val gaussian=MultivariateGaussianDistribution(Vector.fill(dimension)(0.0),scale)
@@ -135,7 +135,7 @@ object WishartInformation {
 
 /** Prior-proposal matrix adapter; no arbitrary Euclidean matrix perturbation is supplied. */
 final class AtomicWishart private[continuous](name: Name[Vector[Vector[Double]]],val distribution: WishartDistribution,collection: ElementCollection)
-  extends Element[Vector[Vector[Double]]](name,collection) with Atomic[Vector[Vector[Double]]] with HasLogDensity[Vector[Vector[Double]]] {
+  extends Element[Vector[Vector[Double]]](name,collection) with Atomic[Vector[Vector[Double]]] with HasLogPriorProposal[Vector[Vector[Double]]] {
   type Randomness=Vector[Vector[Double]]
   def generateRandomness(): Vector[Vector[Double]]=distribution.sample(com.cra.figaro.util.random)
   def generateValue(value: Vector[Vector[Double]]): Vector[Vector[Double]]=value

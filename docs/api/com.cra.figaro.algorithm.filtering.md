@@ -2191,6 +2191,54 @@ receiver.stop()
 
 ## `` com.cra.figaro.algorithm.filtering.ParParticleFilter.apply ``
 
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParParticleFilter$.html#apply-fffff8c8)
+
+```scala
+def apply(static: () => Universe, initial: () => Universe, transition: (Universe, Universe) => Universe, numParticles: Int, numThreads: Int, policy: ZeroWeightPolicy): ParOneTimeParticleFilter
+```
+
+Explicit policy for genuinely zero particle weights.
+
+Type parameters: none.
+
+Parameters, list 1: `` static: () => Universe ``; `` initial: () => Universe ``; `` transition: (Universe, Universe) => Universe ``; `` numParticles: Int ``; `` numThreads: Int ``; `` policy: ZeroWeightPolicy ``.
+
+Returns: `` ParOneTimeParticleFilter ``.
+
+Source contract/attributes: Explicit policy for genuinely zero particle weights. Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.ParParticleFilter.apply(static, initial, transition, numParticles, numThreads, policy)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParParticleFilter.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParParticleFilter$.html#apply-fffff237)
+
+```scala
+def apply(initial: () => Universe, transition: Universe => Universe, numParticles: Int, numThreads: Int, policy: ZeroWeightPolicy): ParOneTimeParticleFilter
+```
+
+Explicit policy with no static model.
+
+Type parameters: none.
+
+Parameters, list 1: `` initial: () => Universe ``; `` transition: Universe => Universe ``; `` numParticles: Int ``; `` numThreads: Int ``; `` policy: ZeroWeightPolicy ``.
+
+Returns: `` ParOneTimeParticleFilter ``.
+
+Source contract/attributes: Explicit policy with no static model. Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.ParParticleFilter.apply(initial, transition, numParticles, numThreads, policy)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParParticleFilter.apply ``
+
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParParticleFilter$.html#apply-b8c)
 
 ```scala
@@ -2235,6 +2283,414 @@ Invocation template:
 
 ```scala
 com.cra.figaro.algorithm.filtering.ParParticleFilter.apply(initial, transition, numParticles, numThreads)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.LogWeightedParticle.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$LogWeightedParticle.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.LogWeightedParticle.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$LogWeightedParticle.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.addSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#addSuppressed-4b8)
+
+```scala
+final def addSuppressed(x$0: Throwable): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.addSuppressed(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.fillInStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#fillInStackTrace-26c)
+
+```scala
+def fillInStackTrace(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.fillInStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.getCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#getCause-26c)
+
+```scala
+def getCause(): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getCause()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.getLocalizedMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#getLocalizedMessage-665)
+
+```scala
+def getLocalizedMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getLocalizedMessage()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.getMessage ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#getMessage-665)
+
+```scala
+def getMessage(): String
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getMessage()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.getStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#getStackTrace-fffffa6d)
+
+```scala
+def getStackTrace(): Array[StackTraceElement]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[StackTraceElement] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.getSuppressed ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#getSuppressed-fffff2ce)
+
+```scala
+final def getSuppressed(): Array[Throwable]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Array[Throwable] ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.getSuppressed()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.initCause ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#initCause-fffff080)
+
+```scala
+def initCause(x$0: Throwable): Throwable
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Throwable ``.
+
+Returns: `` Throwable ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.initCause(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#printStackTrace-fffff230)
+
+```scala
+def printStackTrace(x$0: PrintWriter): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintWriter ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#printStackTrace-fffff0fd)
+
+```scala
+def printStackTrace(x$0: PrintStream): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: PrintStream ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.printStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#printStackTrace-94c)
+
+```scala
+def printStackTrace(): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.printStackTrace()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.setStackTrace ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#setStackTrace-f79)
+
+```scala
+def setStackTrace(x$0: Array[StackTraceElement]): Unit
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters, list 1: `` x$0: Array[StackTraceElement] ``.
+
+Returns: `` Unit ``.
+
+Source contract/attributes: Attributes Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.setStackTrace(x$0)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles.toString ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html#toString-665)
+
+```scala
+def toString(): String
+```
+
+Returns a string representation of the object.
+
+Type parameters: none.
+
+Parameters, list 1: none (empty argument list `()`).
+
+Returns: `` String ``.
+
+Source contract/attributes: Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable
+
+Invocation template:
+
+```scala
+receiver.toString()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$.html#apply-4d6)
+
+```scala
+def apply(static: Universe, initial: Universe, transition: (Universe, Universe) => Universe, numParticles: Int, policy: ZeroWeightPolicy): OneTimeParticleFilter
+```
+
+Explicit zero-weight policy; use LegacyUniform only for compatibility.
+
+Type parameters: none.
+
+Parameters, list 1: `` static: Universe ``; `` initial: Universe ``; `` transition: (Universe, Universe) => Universe ``; `` numParticles: Int ``; `` policy: ZeroWeightPolicy ``.
+
+Returns: `` OneTimeParticleFilter ``.
+
+Source contract/attributes: Explicit zero-weight policy; use LegacyUniform only for compatibility. Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.ParticleFilter.apply(static, initial, transition, numParticles, policy)
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.apply ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter$.html#apply-fffff465)
+
+```scala
+def apply(initial: Universe, transition: Universe => Universe, numParticles: Int, policy: ZeroWeightPolicy): OneTimeParticleFilter
+```
+
+Explicit zero-weight policy with no static model.
+
+Type parameters: none.
+
+Parameters, list 1: `` initial: Universe ``; `` transition: Universe => Universe ``; `` numParticles: Int ``; `` policy: ZeroWeightPolicy ``.
+
+Returns: `` OneTimeParticleFilter ``.
+
+Source contract/attributes: Explicit zero-weight policy with no static model. Attributes
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.ParticleFilter.apply(initial, transition, numParticles, policy)
 ```
 
 ## `` com.cra.figaro.algorithm.filtering.ParticleFilter.apply ``
@@ -2403,6 +2859,30 @@ Invocation template:
 
 ```scala
 receiver.probEvidence()
+```
+
+## `` com.cra.figaro.algorithm.filtering.ParticleFilter.zeroWeightPolicy ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/ParticleFilter.html#zeroWeightPolicy-0)
+
+```scala
+def zeroWeightPolicy: ZeroWeightPolicy
+```
+
+Policy for genuinely zero weights, not for small finite log weights.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` ZeroWeightPolicy ``.
+
+Source contract/attributes: Policy for genuinely zero weights, not for small finite log weights. Attributes
+
+Invocation template:
+
+```scala
+receiver.zeroWeightPolicy
 ```
 
 ## `` com.cra.figaro.algorithm.filtering.Snapshot.apply ``

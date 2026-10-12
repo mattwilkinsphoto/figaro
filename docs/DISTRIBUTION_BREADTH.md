@@ -38,12 +38,13 @@ fail during evaluation, rather than silently changing the model.
 | Kernel constructor | Parameters | Support and conventions |
 | --- | --- | --- |
 | `MultinomialDistribution(trials, probabilities)` | Trials 0–1000000; Vector of 1–128 finite nonnegative probabilities summing to one within 1e-12 | Integer count vectors summing to trials; counting measure; only rounding discrepancy is normalized |
-| `GeneralizedExtremeValueDistribution(shape, location=0, scale=1)` | Shape xi zero or abs(xi) in [1e-8,2]; abs(location) ≤1e100; scale in [1e-100,1e100] | Maxima convention, 1+xi*(x-location)/scale >0; xi=0 is Gumbel; **SciPy genextreme uses c=-xi** |
+| `GeneralizedExtremeValueDistribution(shape, location=0, scale=1)` | Shape xi zero or abs(xi) in [1e-14,2]; abs(location) ≤1e100; scale in [1e-100,1e100] | Maxima convention, 1+xi*(x-location)/scale >0; xi=0 is Gumbel; **SciPy genextreme uses c=-xi** |
 | `GeneralizedParetoDistribution(shape, location=0, scale=1)` | Same numerical ranges as GEV | x≥location and 1+xi*(x-location)/scale >0; location is threshold; xi=0 exponential, xi=-1 uniform |
-| `WishartDistribution(degreesOfFreedom, scale)` | Dimension 1–16; real df in [dimension+1,1e6]; exactly symmetric SPD scale, diagonal [1e-100,1e100], correlation condition ≤1e10 | Positive-definite symmetric matrices; density in independent symmetric-entry coordinates; mean is df*scale, not scale |
+| `WishartDistribution(degreesOfFreedom, scale)` | Dimension 1–16; real df in [dimension,1e6]; exactly symmetric SPD scale, diagonal [1e-100,1e100], correlation condition ≤1e10 | Positive-definite symmetric matrices; density in independent symmetric-entry coordinates; mean is df*scale, not scale |
 | `VonMisesFisher3Distribution(direction, concentration)` | Three finite unit coordinates within 1e-12; kappa in [0,1e6] | Unit sphere S2 in R3; **surface-area measure**, not 3D Lebesgue density; kappa=0 uniform |
 
-Nonzero extreme-value shapes closer to zero than 1e-8 are deliberately refused;
+Expanded development limits are validated in [inference integration](INFERENCE_INTEGRATION.md).
+Nonzero extreme-value shapes closer to zero than 1e-14 are deliberately refused;
 use zero when the intended model is the limiting law, not an automatic substitution.
 Finite support endpoints must be representable and distinct from location.
 Wishart's mathematical df range is wider than this implementation: near-singular

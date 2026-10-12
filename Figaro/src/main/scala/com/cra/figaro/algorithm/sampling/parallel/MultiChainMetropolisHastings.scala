@@ -1,7 +1,7 @@
 package com.cra.figaro.algorithm.sampling.parallel
 
 import com.cra.figaro.algorithm.OneTime
-import com.cra.figaro.algorithm.sampling.{ForwardWeighter, MetropolisHastings, ProposalScheme}
+import com.cra.figaro.algorithm.sampling.{FinalScheme, ForwardWeighter, LikelihoodWeighter, MetropolisHastings, ProposalScheme}
 import com.cra.figaro.language.*
 import com.cra.figaro.util.{RandomContext, SamplingRandom, RandomStreams}
 import java.util.concurrent.*
@@ -256,9 +256,22 @@ object MultiChainMetropolisHastings {
       }
     }
   }
-  private def checkObservations(u: Universe): Unit = require(
-    !u.conditionedElements.exists(_.observation.nonEmpty),
-    "This MH runner supports conditions and explicit likelihood constraints, not observe(); see MULTI_CHAIN_MCMC.md")
+  private def checkObservations(u: Universe): Unit = u.conditionedElements.filter(_.observation.nonEmpty).foreach { e =>
+    require(!e.isTemporary && e.intervention.isEmpty,
+      "Observations must be permanent and cannot also be interventions")
+    require(e.isInstanceOf[HasDensity[?]] || e.isInstanceOf[CompoundFlip] || e.isInstanceOf[Chain[?, ?]],
+      "Observed element needs an explicit likelihood; arbitrary deterministic equality observations are unsupported")
+  }
+
+  private def ownedProposal(owner: Owned): ProposalScheme = owner.model.proposal.getOrElse {
+    if (!owner.universe.conditionedElements.exists(_.observation.nonEmpty))
+      ProposalScheme.default(using owner.universe)
+    else FinalScheme(() => {
+      val choices = owner.universe.stochasticElements.filter(e => e.observation.isEmpty && e.intervention.isEmpty)
+      require(choices.nonEmpty, "No unobserved stochastic elements to propose; use exact evaluation")
+      choices(com.cra.figaro.util.random.nextInt(choices.size))
+    })
+  }
 
   private final class Owned(val index: Int, val seed: Long, val universe: Universe, random: java.util.Random,
     val descriptor: RandomStreams.Descriptor) {
@@ -287,20 +300,78 @@ object MultiChainMetropolisHastings {
 
   // Use the existing transition kernel without its outcome histograms or per-draw target maps.
   private final class Kernel(owner: Owned, config: Config)
-    extends MetropolisHastings(owner.universe, owner.model.proposal.getOrElse(ProposalScheme.default(using owner.universe)), 0, 1)
+    extends MetropolisHastings(owner.universe, ownedProposal(owner), 0, 1)
     with OneTime {
+    private val observedRoots = universe.conditionedElements.filter(_.observation.nonEmpty).toVector
+    private val originalObservations: Map[Element[?], Option[Any]] =
+      observedRoots.foldLeft(Map.empty[Element[?], Option[Any]])((m, e) => m.updated(e, e.observation))
+    private val propagated = scala.collection.mutable.Set.empty[Element[?]]
+    private var acceptedObservationScore = 0.0
+    private var proposedObservationScore = 0.0
+    override protected def isFixedObservation(e: Element[?]): Boolean = e.observation.nonEmpty
+
+    private def validateEvidence(): Unit = {
+      checkObservations(universe)
+      require(observedRoots.forall(e => e.active && e.observation == originalObservations(e)),
+        "Observation roots cannot change during sampling")
+      require(universe.conditionedElements.filter(_.observation.nonEmpty).forall(observedRoots.contains),
+        "New observations cannot be attached during sampling")
+      propagated.filterInPlace(_.active)
+    }
+
+    private def scoreObservation(e: Element[?], value: Any): Double = {
+      val score = e match {
+        case c: Chain[?, ?] => scoreObservation(chainCache(c).get, value)
+        case f: CompoundFlip =>
+          val p = f.prob.value
+          require(p.isFinite && p >= 0.0 && p <= 1.0, "Invalid observed Bernoulli probability")
+          if (value.asInstanceOf[Boolean]) math.log(p) else math.log1p(-p)
+        case d: HasLogDensity[?] => d.asInstanceOf[HasLogDensity[Any]].logDensity(value)
+        case d: HasDensity[?] =>
+          val density = d.asInstanceOf[HasDensity[Any]].density(value)
+          require(density.isFinite && density >= 0.0, "Invalid observed density; provide stable logDensity")
+          math.log(density)
+        case _ => throw new IllegalArgumentException("Unsupported observed likelihood")
+      }
+      require(!score.isNaN && score != Double.PositiveInfinity, "Invalid observed log likelihood")
+      score
+    }
+
+    private def observationScore(): Double = {
+      val score = observedRoots.map(e => scoreObservation(e, e.observation.get)).sum
+      require(!score.isNaN && score != Double.PositiveInfinity, "Observed log-likelihood sum overflow")
+      score
+    }
     // Validate elements as the cache encounters them, including dynamic Chain children
     // and custom-proposal targets. No global caches or shared model locks are introduced.
     chainCache.clear()
     chainCache = new com.cra.figaro.library.cache.MHCache(universe) {
       private def validate(element: Element[?]): Unit = {
         require(element.universe eq universe, "Cross-universe model dependency or proposal")
-        require(element.observation.isEmpty, "Use conditions or explicit likelihood constraints, not observe()")
+        require(element.observation.isEmpty || observedRoots.contains(element) || propagated.contains(element),
+          "Unsupported dynamic observation; observe a permanent likelihood root")
         require(element.args.forall(_.universe eq universe), "Cross-universe model dependency")
       }
       override def apply[T](element: Element[T]): Option[Element[T]] = {
         validate(element)
         val result = super.apply(element)
+        if (element.observation.nonEmpty && element.isInstanceOf[Chain[?, ?]]) result.foreach { child =>
+          require((child.universe eq universe) && child.isTemporary && universe.inContext(child, element),
+            "Observed Chain must create its own atomic likelihood child; shared children are unsupported")
+          require(child.isInstanceOf[Atomic[?]] && child.args.isEmpty && child.intervention.isEmpty && child.allConstraints.isEmpty,
+            "Observed Chain must return one fixed-parameter atomic likelihood without extra constraints")
+          require(element.directContextContents.forall(e => (e eq child) || propagated.contains(e)),
+            "Observed Chain must create only its likelihood child; nested or additional latent nodes are unsupported")
+          if (!propagated.contains(child)) {
+            require(child.observation.isEmpty && child.allConditions.isEmpty,
+              "Attach observations to the permanent Chain, not inside its callback")
+            propagated += child
+            // Internal likelihood clamping: public observe() forbids temporary elements
+            // and would regenerate downstream graphs. The permanent root owns evidence.
+            child.observation = element.observation
+          }
+          child.value = element.observation.get
+        }
         result.foreach(validate)
         result
       }
@@ -316,7 +387,7 @@ object MultiChainMetropolisHastings {
     override protected def mhStep(): MetropolisHastings.State = {
       checkInterrupted()
       val state = super.mhStep()
-      checkObservations(universe)
+      validateEvidence()
       state
     }
     override protected def computeScores(): Double = {
@@ -329,7 +400,14 @@ object MultiChainMetropolisHastings {
         }
       }
       require(!score.isNaN && score != Double.PositiveInfinity, "Log-likelihood difference overflow")
-      score
+      proposedObservationScore = observationScore()
+      val combined = score + proposedObservationScore - acceptedObservationScore
+      require(!combined.isNaN && combined != Double.PositiveInfinity, "Total log-likelihood difference overflow")
+      combined
+    }
+    override protected def accept(state: MetropolisHastings.State): Unit = {
+      super.accept(state)
+      acceptedObservationScore = proposedObservationScore
     }
     override protected def decideToAccept(state: MetropolisHastings.State): Boolean = {
       require(!state.modelProb.isNaN && !state.proposalProb.isNaN, "Invalid model or proposal probability ratio")
@@ -337,16 +415,18 @@ object MultiChainMetropolisHastings {
     }
     def run(): Unit = {
       val start = System.nanoTime()
-      val initializer = new ForwardWeighter(universe, chainCache)
+      val initializer = if (observedRoots.isEmpty) new ForwardWeighter(universe, chainCache)
+        else new LikelihoodWeighter(universe, chainCache) { override def rejectionAction(): Unit = () }
       var valid = false
       try {
         while (!valid && attempts < config.maxInitializationAttempts) {
           checkInterrupted()
           attempts += 1
           initializer.computeWeight(universe.activeElements)
-          checkObservations(universe)
+          validateEvidence()
+          acceptedObservationScore = observationScore()
           valid = universe.conditionedElements.forall(_.conditionSatisfied) &&
-            universe.constrainedElements.forall(_.constraintValue.isFinite) && owner.model.initialState()
+            universe.constrainedElements.forall(_.constraintValue.isFinite) && acceptedObservationScore.isFinite && owner.model.initialState()
         }
       } finally initializer.deregisterDependencies()
       require(valid, "No valid initial state within maxInitializationAttempts; check evidence/initial region")

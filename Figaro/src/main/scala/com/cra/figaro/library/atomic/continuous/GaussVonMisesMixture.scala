@@ -71,7 +71,7 @@ final case class GaussVonMisesMixtureDistribution(weights: Vector[Double],compon
 }
 
 final class AtomicGaussVonMisesMixture private[continuous](name: Name[LinearAngular],val distribution: GaussVonMisesMixtureDistribution,collection: ElementCollection)
-  extends Element[LinearAngular](name,collection) with Atomic[LinearAngular] with Continuous[LinearAngular] with HasLogDensity[LinearAngular] {
+  extends Element[LinearAngular](name,collection) with Atomic[LinearAngular] with Continuous[LinearAngular] with HasLogPriorProposal[LinearAngular] {
   type Randomness=LinearAngular
   def generateRandomness(): LinearAngular=distribution.sample(random)
   def generateValue(value: LinearAngular): LinearAngular=value
