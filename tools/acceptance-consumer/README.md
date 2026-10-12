@@ -41,6 +41,13 @@ it cannot pass by silently loading an earlier `publishLocal` artifact.
 
 ## API and common patterns
 
+For the capability-expansion release build, set `FIGARO_VERSION=7.1.0`
+and `FIGARO_CAPABILITY_CHECK=true`, set the hash of that exact new JAR, and additionally
+run `runMain CapabilityConsumerCheck`. This compiles the separate capability source
+directory; leave the flag unset when testing immutable 7.0.0 or 6.1.0 artifacts.
+The new check exercises grouped counts, native log ratios, automatic scalar moves,
+discarded/frozen tuning, tiny-shape density and Cholesky-entry density APIs.
+
 `FigaroConsumerCheck.main(args: Array[String]): Unit` accepts an empty array and requires
 the environment variable above. It prints the loaded jar hash and a completion line;
 missing/incorrect hashes, non-jar resolution or any failed model/lifecycle check throw.

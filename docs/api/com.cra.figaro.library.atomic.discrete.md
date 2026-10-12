@@ -15943,6 +15943,32 @@ Invocation template:
 com.cra.figaro.library.atomic.discrete.FiniteCountInference.multinomial(law, budget)(using name, collection)
 ```
 
+## `` com.cra.figaro.library.atomic.discrete.FiniteCountInference.multinomialAggregated ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FiniteCountInference$.html#multinomialAggregated-135)
+
+```scala
+def multinomialAggregated(law: MultinomialDistribution, groups: Vector[Vector[Int]], budget: Budget = ...)(using name: Name[Vector[Int]], collection: ElementCollection): AtomicSelect[Vector[Int]]
+```
+
+Enumerate an exactly marginalized aggregate rather than the full count vector. Evidence and queries must depend only on these group totals; lost category detail cannot subsequently be conditioned on.
+
+Type parameters: none.
+
+Parameters, list 1: `` law: MultinomialDistribution ``; `` groups: Vector[Vector[Int]] ``; `` budget: Budget = ... ``.
+
+Context parameters, list 2: `` name: Name[Vector[Int]] ``; `` collection: ElementCollection ``.
+
+Returns: `` AtomicSelect[Vector[Int]] ``.
+
+Source contract/attributes: Enumerate an exactly marginalized aggregate rather than the full count vector. Evidence and queries must depend only on these group totals; lost category detail cannot subsequently be conditioned on. Value parameters budget limits on the reduced table, not downstream factor products collection owning collection groups complete disjoint partition of category indices, in output order law original fixed multinomial law name contextual element name Attributes Returns exact-support Select on grouped counts, using the existing factor backend Example multinomialAggregated(law, Vector(Vector(0,1),Vector(2,3)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.library.atomic.discrete.FiniteCountInference.multinomialAggregated(law, groups, budget)(using name, collection)
+```
+
 ## `` com.cra.figaro.library.atomic.discrete.FromRange.apply ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/FromRange$.html#apply-b3c)
@@ -17549,6 +17575,30 @@ Invocation template:
 
 ```scala
 com.cra.figaro.library.atomic.discrete.Multinomial.exact(distribution, budget)(using name, collection)
+```
+
+## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.aggregate ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html#aggregate-fffff48c)
+
+```scala
+def aggregate(groups: Vector[Vector[Int]]): MultinomialDistribution
+```
+
+Exactly merge categories before inference; no count vectors are enumerated.
+
+Type parameters: none.
+
+Parameters, list 1: `` groups: Vector[Vector[Int]] ``.
+
+Returns: `` MultinomialDistribution ``.
+
+Source contract/attributes: Exactly merge categories before inference; no count vectors are enumerated. Value parameters groups nonempty disjoint nonempty index groups partitioning every category Attributes Returns multinomial law for group subtotals, in the requested group order Example law.aggregate(Vector(Vector(0,2), Vector(1)))
+
+Invocation template:
+
+```scala
+receiver.aggregate(groups)
 ```
 
 ## `` com.cra.figaro.library.atomic.discrete.MultinomialDistribution.covariance ``

@@ -10,6 +10,10 @@ Compile / unmanagedSourceDirectories ++= {
   if (sys.env.get("FIGARO_VERSION").exists(_.startsWith("7."))) Seq(baseDirectory.value / "src" / "integration" / "scala")
   else Seq.empty
 }
+Compile / unmanagedSourceDirectories ++= {
+  if (sys.env.get("FIGARO_CAPABILITY_CHECK").contains("true")) Seq(baseDirectory.value / "src" / "capability" / "scala")
+  else Seq.empty
+}
 // When testing the release bundle, exclude Ivy local so a cached publishLocal
 // cannot hide a broken Maven layout or POM.
 externalResolvers ~= { defaults =>

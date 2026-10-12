@@ -31,10 +31,27 @@ private[continuous] object CovarianceNumerics {
     out.map(_.toVector).toVector
   }
   def lower(l: Matrix, d: Int, correlation: Boolean): Unit = {
-    N.check(); require(l != null && l.size == d && l.forall(r => r != null && r.size == d && r.forall(_.isFinite)))
-    require(l.indices.forall(i => l(i)(i)>0 && (i+1 until d).forall(j => l(i)(j)==0)))
+    lowerEntries(l,d)
     if (correlation) require(l.forall(r => math.abs(r.map(v => v*v).sum-1)<1e-12),"Correlation Cholesky rows must have unit norm")
     matrix(gram(l,correlation),d)
+  }
+  def lowerEntries(l: Matrix, d: Int): Unit = {
+    N.check(); require(l != null && l.size == d && l.forall(r => r != null && r.size == d && r.forall(_.isFinite)))
+    require(l.indices.forall(i => l(i)(i)>0 && (i+1 until d).forall(j => l(i)(j)==0)))
+  }
+  // ||A^-1 B||_F^2 by triangular solves, without constructing B B^T.
+  def factorTrace(a: Matrix, b: Matrix): Double = {
+    val d=a.size
+    val solved=Array.ofDim[Double](d,d)
+    var norm=0.0
+    for(j <- 0 until d; i <- j until d) {
+      N.check()
+      solved(i)(j)=(b(i)(j)-(j until i).iterator.map(k => a(i)(k)*solved(k)(j)).sum)/a(i)(i)
+      norm=math.hypot(norm,solved(i)(j))
+    }
+    val trace=norm*norm
+    if(!trace.isFinite) throw new ArithmeticException("Cholesky trace outside numeric range")
+    trace
   }
   def validateDraw(l: Matrix, correlation: Boolean): Matrix = {
     try lower(l,l.size,correlation)

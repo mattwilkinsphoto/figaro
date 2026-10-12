@@ -46,6 +46,20 @@ final case class WishartDistribution(degreesOfFreedom: Double,scale: Vector[Vect
     * @example `law.density(law.mean)`
     */
   def density(value: Vector[Vector[Double]]): Double=math.exp(logDensity(value))
+  /** Evaluate directly on a supplied factor without forming a possibly rounded-singular matrix.
+    * @param lower finite positive-diagonal lower triangular Cholesky factor
+    * @return log density on independent LOWER entries, including its Jacobian
+    * @example `law.logDensityCholesky(Vector(Vector(1.0,0.0),Vector(1.0,1e-20)))`
+    */
+  def logDensityCholesky(lower: Vector[Vector[Double]]): Double = {
+    CovarianceNumerics.lowerEntries(lower,dimension)
+    val logDet=2*lower.indices.map(i => math.log(lower(i)(i))).sum
+    val trace=CovarianceNumerics.factorTrace(gaussian.lower,lower)
+    val jacobian=dimension*math.log(2)+(0 until dimension).map(i => (dimension-i)*math.log(lower(i)(i))).sum
+    val out=.5*(degreesOfFreedom-dimension-1)*logDet-.5*trace-logPartition+jacobian
+    if(!out.isFinite) throw new ArithmeticException("Wishart factor log density outside numeric range")
+    out
+  }
   /** Bartlett decomposition with caller-owned Gaussian/chi-square randomness.
     * @param rng private caller RNG, never retained
     * @return symmetric positive-definite matrix; numeric singularity throws without resampling

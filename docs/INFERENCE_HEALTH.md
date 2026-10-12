@@ -287,6 +287,11 @@ python -B -m unittest discover -s tools -p 'test_inference_health_reference.py'
 
 ## Related and next work
 
+Development follow-up: [particle-filter health and bounded indicator filtering](BOUNDED_PARTICLE_FILTER.md)
+adds pre-resampling reports to fixed-budget filters and an explicit adaptive-budget
+alternative for Boolean evidence. These reports do not reuse IID MCSE/Pareto claims
+for dependent particle populations, and do not silently retry failed filters.
+
 - [Statistical validation](STATISTICAL_VALIDATION.md): why small raw MCSE was misleading.
 - [MCMC reliability](MCMC_RELIABILITY.md), [Gaussian block proposals](BLOCKED_PROPOSALS.md)
   and [pilot calibration](PROPOSAL_CALIBRATION.md): improving effective exploration.

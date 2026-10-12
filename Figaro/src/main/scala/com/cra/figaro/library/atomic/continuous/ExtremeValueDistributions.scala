@@ -5,13 +5,21 @@ import com.cra.figaro.language.*
 import org.apache.commons.math3.special.Gamma
 
 private[continuous] object ExtremeNumerics {
-  def shape(x: Double): Unit=require(x.isFinite && math.abs(x)<=2 && (x==0 || math.abs(x)>=1e-14),"shape must be zero or have absolute value in [1e-14,2]")
+  def shape(x: Double): Unit=require(x.isFinite && math.abs(x)<=2,"shape must be finite in [-2,2]; endpoints must remain representable")
   def endpoint(location: Double,scale: Double,shape: Double): Double = {
     val x=location-scale/shape
     require(x.isFinite && x!=location,"finite distinct support endpoint required; rescale coordinates")
     x
   }
   def ratio(x: Double): Double=if(x==0) 1 else math.expm1(x)/x
+  // Evaluate log(1+shape*z)/shape without first losing shape*z to underflow.
+  def scaledLogBase(x: Double, location: Double, scale: Double, shape: Double): Double = {
+    val z=(x-location)/scale
+    val t=shape*z
+    if(z.isFinite && math.abs(t)<1e-8)
+      z*(1-t/2+t*t/3-t*t*t/4)
+    else logBase(x,location,scale,shape)/shape
+  }
   def logBase(x: Double,location: Double,scale: Double,shape: Double): Double = {
     val t=shape*((x-location)/scale)
     val out=if(t==Double.PositiveInfinity) math.log(math.abs(shape))+N.logAbsDifference(x,location)-math.log(scale)
@@ -29,7 +37,7 @@ private[continuous] object ExtremeNumerics {
 }
 
 /** Generalized extreme value for maxima, using xi (the NEGATIVE of SciPy genextreme's c).
-  * @param shape xi: zero or absolute value in [1e-14,2]; zero is the Gumbel limit
+  * @param shape finite xi in [-2,2]; zero is Gumbel, nonzero support endpoints must remain representable
   * @param location finite center, absolute value <=1e100
   * @param scale positive scale in [1e-100,1e100], not variance
   */
@@ -39,7 +47,7 @@ final case class GeneralizedExtremeValueDistribution(shape: Double,location: Dou
   def support: (Double,Double)=if(shape>0) (end,Double.PositiveInfinity) else if(shape<0) (Double.NegativeInfinity,end) else (Double.NegativeInfinity,Double.PositiveInfinity)
   private def logT(x: Double): Double = {
     val z=(x-location)/scale
-    if(shape==0) -z else -ExtremeNumerics.logBase(x,location,scale,shape)/shape
+    if(shape==0) -z else -ExtremeNumerics.scaledLogBase(x,location,scale,shape)
   }
   def logDensity(x: Double): Double = {
     N.argument(x)
@@ -75,7 +83,7 @@ final case class GeneralizedExtremeValueDistribution(shape: Double,location: Dou
 }
 
 /** Generalized Pareto excess above location; shape zero is exponential, shape -1 is uniform.
-  * @param shape xi: zero or absolute value in [1e-14,2]
+  * @param shape finite xi in [-2,2]; negative-shape upper endpoint must remain representable
   * @param location threshold, absolute value <=1e100
   * @param scale positive scale in [1e-100,1e100]
   */
@@ -85,7 +93,7 @@ final case class GeneralizedParetoDistribution(shape: Double,location: Double=0,
   def support: (Double,Double)=(location,upper)
   private def logSurvival(x: Double): Double = {
     val z=(x-location)/scale
-    if(shape==0) -z else -ExtremeNumerics.logBase(x,location,scale,shape)/shape
+    if(shape==0) -z else -ExtremeNumerics.scaledLogBase(x,location,scale,shape)
   }
   def logDensity(x: Double): Double = {
     N.argument(x)
@@ -112,7 +120,7 @@ final case class GeneralizedParetoDistribution(shape: Double,location: Double=0,
 }
 
 object GeneralizedExtremeValue {
-  /** @param shape maxima xi, zero or absolute value in [1e-14,2]
+  /** @param shape finite maxima xi in [-2,2], with representable distinct nonzero-shape endpoint
     * @param location center
     * @param scale positive scale
     * @param name contextual name
@@ -124,7 +132,7 @@ object GeneralizedExtremeValue {
     ScalarElement(GeneralizedExtremeValueDistribution(shape,location,scale))
 }
 object GeneralizedPareto {
-  /** @param shape excess-tail xi, zero or absolute value in [1e-14,2]
+  /** @param shape finite excess-tail xi in [-2,2], with representable negative-shape endpoint
     * @param location threshold
     * @param scale positive scale
     * @param name contextual name

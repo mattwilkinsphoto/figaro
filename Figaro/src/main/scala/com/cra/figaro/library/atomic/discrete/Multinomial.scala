@@ -15,6 +15,19 @@ final case class MultinomialDistribution(trials: Int,probabilities: Vector[Doubl
   require(math.abs(total-1)<=1e-12,"probabilities must sum to one within 1e-12")
   val normalizedProbabilities: Vector[Double]=probabilities.map(_/total)
   val dimension: Int=probabilities.size
+  /** Exactly merge categories before inference; no count vectors are enumerated.
+    * @param groups nonempty disjoint nonempty index groups partitioning every category
+    * @return multinomial law for group subtotals, in the requested group order
+    * @example `law.aggregate(Vector(Vector(0,2), Vector(1)))`
+    */
+  def aggregate(groups: Vector[Vector[Int]]): MultinomialDistribution = {
+    N.check()
+    require(groups != null && groups.nonEmpty && groups.forall(g => g != null && g.nonEmpty),
+      "Nonempty category groups required")
+    require(groups.flatten.sorted == normalizedProbabilities.indices.toVector,
+      "Category groups must partition all indices exactly once")
+    MultinomialDistribution(trials, groups.map(g => g.map(normalizedProbabilities).sum))
+  }
   /** @param counts matching count vector
     * @return log probability; negative counts, wrong total or impossible categories give -Infinity
     * @example `MultinomialDistribution(4,Vector(.2,.3,.5)).logProbability(Vector(1,1,2))`

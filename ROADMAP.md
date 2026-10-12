@@ -24,6 +24,20 @@ precision or performance for every application model.
 
 ## Active priorities
 
+A subsequent **capability-expansion milestone is now authorized and in development**:
+[scope and execution checklist](docs/CAPABILITY_EXPANSION_STATUS.md),
+[development API guide](docs/CAPABILITY_EXPANSION.md). It addresses the remaining
+observation, count, proposal, numerical and particle-recovery limits. Published
+7.0.0 remains the adoption baseline; development claims are not release claims.
+The approved recovery workflow now has an opt-in
+[bounded-adaptive indicator filter](docs/BOUNDED_PARTICLE_FILTER.md), plus
+fixed-budget health reports and recommendations. Automatic general-likelihood
+recovery and arbitrary graph support are not part of this bounded contract.
+
+The approved sequence is now [7.1.0 readiness and release](docs/RELEASE_7_1_STATUS.md),
+then an independently piloted budget-selection adviser. General likelihood-weighted
+bounded filtering remains a design discussion, not an approved implementation step.
+
 Approved distribution/inference integration is complete and released in **7.0.0**.
 Its five stages cover stable filtering/MH ratios,
 owned multi-chain observations, exact finite counts, support-aware proposals and

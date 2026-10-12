@@ -14,6 +14,12 @@ option, custom filter/MH hooks, owned-chain observations, exact count tables and
 support-aware proposals. Each explains why the change matters and its retained
 limits. These supplement the original chapters rather than duplicating them.
 
+The 7.1 additions have a separate [capability guide](CAPABILITY_EXPANSION.md) and
+[fixed-budget versus bounded-work filtering examples](BOUNDED_PARTICLE_FILTER.md).
+Existing calls do not automatically switch algorithms. A small surviving population
+can be uninformative, and zero survivors do not prove impossible evidence. The new
+workflow makes that distinction explicit without retaining only successful retries.
+
 | Legacy item | Assessment and action | Current entry point |
 | --- | --- | --- |
 | Root `figaro_2.12-5.0.0.0-javadoc.jar` | Removed: generated Scala 2.12/Figaro 5 API, not this Scala 3 library; recoverable from Git history | [API guide](API_GUIDE.md), generated Scala 3 HTML and [method reference](api/README.md) |

@@ -46,6 +46,11 @@ trait ParticleFilter {
 
   protected var logProbEvidence: Double = 0.0
 
+  /** Override to configure diagnostic thresholds; never changes sampling or retries. */
+  def healthConfig: ParticleFilterHealth.Config = ParticleFilterHealth.Config()
+  /** Last completed candidate assessment, readable even after a zero-weight failure. */
+  def lastHealth: Option[ParticleFilterHealth.Report] = ParticleFilter.healthFor(beliefState)
+
   /** Policy for genuinely zero weights, not for small finite log weights. */
   def zeroWeightPolicy: ParticleFilter.ZeroWeightPolicy = ParticleFilter.ZeroWeightPolicy.Fail
   private var failedUpdate: Option[Throwable] = None
@@ -62,14 +67,17 @@ trait ParticleFilter {
   /** Run a complete log-weight update. Failed updates cannot be queried as posteriors. */
   protected def logTimeStep(create: => Seq[ParticleFilter.LogWeightedParticle]): Unit = {
     try {
+      ParticleFilter.recordHealth(beliefState, None)
       val particles = create
       require(numParticles > 0 && particles.size == numParticles, "Positive, matching particle count required")
       require(particles.forall(p => !p.logWeight.isNaN && p.logWeight != Double.PositiveInfinity),
         "Invalid particle log weight: NaN or positive infinity")
+      val healthReport = Some(ParticleFilterHealth.assess(particles.map(_.logWeight), healthConfig))
+      ParticleFilter.recordHealth(beliefState, healthReport)
       val maximum = particles.map(_.logWeight).max
       if (maximum == Double.NegativeInfinity) {
         if (zeroWeightPolicy == ParticleFilter.ZeroWeightPolicy.Fail)
-          throw new ParticleFilter.NoViableParticles
+          throw new ParticleFilter.NoViableParticles(healthReport)
         updateBeliefState(particles.map(p => (0.0, p.state)))
         logProbEvidence = Double.NegativeInfinity
       } else {
@@ -287,12 +295,33 @@ class OneTimeParticleFilter(static: Universe = new Universe(), initial: Universe
 
 object ParticleFilter {
 
+  // Do not add fields to the public trait: old compiled implementers cannot supply
+  // their synthetic accessors. Arrays use identity equality; weak keys do not retain
+  // discarded filters. Reports contain numbers/messages, never the key or graph.
+  // Synchronization protects this registry, not arbitrary filter graph operations.
+  private val healthReports = new java.util.WeakHashMap[BeliefState, ParticleFilterHealth.Report]()
+  private def healthFor(state: BeliefState): Option[ParticleFilterHealth.Report] =
+    healthReports.synchronized { Option(healthReports.get(state)) }
+  private def recordHealth(state: BeliefState, report: Option[ParticleFilterHealth.Report]): Unit =
+    healthReports.synchronized {
+      report match {
+        case Some(value) => healthReports.put(state, value)
+        case None => healthReports.remove(state)
+      }
+      ()
+    }
+
   /** Fail by default. LegacyUniform retains rejected particles, not a valid posterior. */
   enum ZeroWeightPolicy { case Fail, LegacyUniform }
 
   /** No sampled particle has nonzero likelihood; this need not prove impossible evidence. */
-  final class NoViableParticles extends IllegalStateException(
-    "No viable particles: all log weights are -Infinity. Check evidence and particle budget; no posterior is available.")
+  final class NoViableParticles(val diagnostics: Option[ParticleFilterHealth.Report]) extends IllegalStateException(
+    "No viable particles: all log weights are -Infinity. No posterior is available; this does not prove impossible evidence. " +
+    "Check evidence and proposal support. For explicit Boolean indicator models, consider BoundedParticleFilter with a maximum candidate budget; " +
+    "ordinary likelihood observations require a different contract. Do not retain only successful retries.") {
+    /** Preserve the legacy no-argument constructor. */
+    def this() = this(None)
+  }
 
   /** Log-space counterpart of the retained ordinary-weight compatibility type. */
   final case class LogWeightedParticle(logWeight: Double, state: State)

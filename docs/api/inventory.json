@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 972,
+  "pages": 996,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -36054,6 +36054,547 @@
       "page": "com/cra/figaro/algorithm/factored/gibbs/WalkSAT$.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Model",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$Model.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Model",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$Model.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "addSuppressed",
+      "anchor": "addSuppressed-4b8",
+      "signature": "final def addSuppressed(x$0: Throwable): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.addSuppressed(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "fillInStackTrace",
+      "anchor": "fillInStackTrace-26c",
+      "signature": "def fillInStackTrace(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.fillInStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "getCause",
+      "anchor": "getCause-26c",
+      "signature": "def getCause(): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getCause()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "getLocalizedMessage",
+      "anchor": "getLocalizedMessage-665",
+      "signature": "def getLocalizedMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getLocalizedMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "getMessage",
+      "anchor": "getMessage-665",
+      "signature": "def getMessage(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getMessage()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "getStackTrace",
+      "anchor": "getStackTrace-fffffa6d",
+      "signature": "def getStackTrace(): Array[StackTraceElement]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[StackTraceElement]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "getSuppressed",
+      "anchor": "getSuppressed-fffff2ce",
+      "signature": "final def getSuppressed(): Array[Throwable]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Array[Throwable]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.getSuppressed()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "initCause",
+      "anchor": "initCause-fffff080",
+      "signature": "def initCause(x$0: Throwable): Throwable",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Throwable"
+          ]
+        }
+      ],
+      "returns": "Throwable",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.initCause(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff230",
+      "signature": "def printStackTrace(x$0: PrintWriter): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintWriter"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-fffff0fd",
+      "signature": "def printStackTrace(x$0: PrintStream): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: PrintStream"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "printStackTrace",
+      "anchor": "printStackTrace-94c",
+      "signature": "def printStackTrace(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.printStackTrace()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "setStackTrace",
+      "anchor": "setStackTrace-f79",
+      "signature": "def setStackTrace(x$0: Array[StackTraceElement]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "x$0: Array[StackTraceElement]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Throwable",
+      "example": "receiver.setStackTrace(x$0)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.NoViableParticles",
+      "name": "toString",
+      "anchor": "toString-665",
+      "signature": "def toString(): String",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "String",
+      "summary": "Returns a string representation of the object.",
+      "contract": "Returns a string representation of the object. The default representation is platform dependent. Attributes Returns a string representation of the object. Inherited from: Throwable",
+      "example": "receiver.toString()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$NoViableParticles.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.StepReport",
+      "name": "warnings",
+      "anchor": "warnings-0",
+      "signature": "def warnings: Vector[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[String]",
+      "summary": "Additional effort/ancestry warnings; no automatic retry or precision claim.",
+      "contract": "Additional effort/ancestry warnings; no automatic retry or precision claim. Attributes",
+      "example": "receiver.warnings",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$StepReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.StepReport",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$StepReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.StepReport",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$StepReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Update",
+      "name": "expectation",
+      "anchor": "expectation-caa",
+      "signature": "def expectation(f: S => Double): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "f: S => Double"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Mean of an observable under the retained equal-weight population, not a precision certificate.",
+      "contract": "Mean of an observable under the retained equal-weight population, not a precision certificate. Attributes",
+      "example": "receiver.expectation(f)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$Update.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Update",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$Update.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.Update",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$$Update.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter",
+      "name": "apply",
+      "anchor": "apply-787",
+      "signature": "def apply[S](model: Model[S], config: Config = ...): BoundedParticleFilter[S]",
+      "type_parameters": [
+        "S"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "model: Model[S]",
+            "config: Config = ..."
+          ]
+        }
+      ],
+      "returns": "BoundedParticleFilter[S]",
+      "summary": "Create an unstarted thread-confined filter. Example: val f = BoundedParticleFilter(model, Config()).",
+      "contract": "Create an unstarted thread-confined filter. Example: val f = BoundedParticleFilter(model, Config()). Attributes",
+      "example": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.apply[S](model, config)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter",
+      "name": "elementModel",
+      "anchor": "elementModel-540",
+      "signature": "def elementModel[S](initial: Universe => Element[S], transition: (S, Universe) => Element[S]): Model[S]",
+      "type_parameters": [
+        "S"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "initial: Universe => Element[S]",
+            "transition: (S, Universe) => Element[S]"
+          ]
+        }
+      ],
+      "returns": "Model[S]",
+      "summary": "Adapt fixed, evidence-free Figaro DAGs to detached state draws. Each callback receives a fresh universe and must return an owned Element[S]. Use immutable S (e.g. tuples), not Element/Universe or mutable collections. Observations, conditions, constraints, interventions, external parents and dynamically created elements are rejected. Apply is supported; dynamic Chains are not. Example: elementModel(u => Flip(.5)(using \"x\", u), (x,u) => Flip(if(x) .8 else .2)(using \"x\",u)).",
+      "contract": "Adapt fixed, evidence-free Figaro DAGs to detached state draws. Each callback receives a fresh universe and must return an owned Element[S]. Use immutable S (e.g. tuples), not Element/Universe or mutable collections. Observations, conditions, constraints, interventions, external parents and dynamically created elements are rejected. Apply is supported; dynamic Chains are not. Example: elementModel(u => Flip(.5)(using \"x\", u), (x,u) => Flip(if(x) .8 else .2)(using \"x\",u)). Attributes",
+      "example": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter.elementModel[S](initial, transition)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter",
+      "name": "advance",
+      "anchor": "advance-fffffdd1",
+      "signature": "def advance(evidence: S => Boolean): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "evidence: S => Boolean"
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Advance one step, choosing ancestors uniformly from the corrected survivor population.",
+      "contract": "Advance one step, choosing ancestors uniformly from the corrected survivor population. Attributes",
+      "example": "receiver.advance(evidence)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter",
+      "name": "close",
+      "anchor": "close-94c",
+      "signature": "def close(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Release retained values; an idempotent terminal operation on the owning thread.",
+      "contract": "Release retained values; an idempotent terminal operation on the owning thread. Attributes",
+      "example": "receiver.close()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter",
+      "name": "current",
+      "anchor": "current-0",
+      "signature": "def current: Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Update[S]",
+      "summary": "Current valid posterior; throws before start, after failure, or after close.",
+      "contract": "Current valid posterior; throws before start, after failure, or after close. Attributes",
+      "example": "receiver.current",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter",
+      "name": "lastReport",
+      "anchor": "lastReport-0",
+      "signature": "def lastReport: Option[StepReport]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[StepReport]",
+      "summary": "Last completed assessment remains readable after collapse; absent after callback failure.",
+      "contract": "Last completed assessment remains readable after collapse; absent after callback failure. Attributes",
+      "example": "receiver.lastReport",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.BoundedParticleFilter",
+      "name": "start",
+      "anchor": "start-fffffdd1",
+      "signature": "def start(evidence: S => Boolean): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "evidence: S => Boolean"
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Draw the initial state population under an explicit Boolean indicator. Call once.",
+      "contract": "Draw the initial state population under an explicit Boolean indicator. Call once. Attributes",
+      "example": "receiver.start(evidence)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/BoundedParticleFilter.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.filtering.FactoredFrontier",
       "name": "apply",
       "anchor": "apply-754",
@@ -37186,6 +37727,20 @@
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.OneTimeParticleFilter",
+      "name": "healthConfig",
+      "anchor": "healthConfig-0",
+      "signature": "def healthConfig: Config",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Config",
+      "summary": "Override to configure diagnostic thresholds; never changes sampling or retries.",
+      "contract": "Override to configure diagnostic thresholds; never changes sampling or retries. Attributes Inherited from: ParticleFilter",
+      "example": "receiver.healthConfig",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/OneTimeParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.OneTimeParticleFilter",
       "name": "initialize",
       "anchor": "initialize-94c",
       "signature": "def initialize(): Unit",
@@ -37233,6 +37788,20 @@
       "summary": "Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.",
       "contract": "Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm",
       "example": "receiver.kill()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/OneTimeParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.OneTimeParticleFilter",
+      "name": "lastHealth",
+      "anchor": "lastHealth-0",
+      "signature": "def lastHealth: Option[Report]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Report]",
+      "summary": "Last completed candidate assessment, readable even after a zero-weight failure.",
+      "contract": "Last completed candidate assessment, readable even after a zero-weight failure. Attributes Inherited from: ParticleFilter",
+      "example": "receiver.lastHealth",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/OneTimeParticleFilter.html"
     },
@@ -37797,6 +38366,20 @@
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.ParOneTimeParticleFilter",
+      "name": "healthConfig",
+      "anchor": "healthConfig-0",
+      "signature": "def healthConfig: Config",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Config",
+      "summary": "Override to configure diagnostic thresholds; never changes sampling or retries.",
+      "contract": "Override to configure diagnostic thresholds; never changes sampling or retries. Attributes Inherited from: ParticleFilter",
+      "example": "receiver.healthConfig",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParOneTimeParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParOneTimeParticleFilter",
       "name": "initialize",
       "anchor": "initialize-94c",
       "signature": "def initialize(): Unit",
@@ -37844,6 +38427,20 @@
       "summary": "Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active.",
       "contract": "Kill the algorithm so that it is inactive. It will no longer be able to provide answers.Throws AlgorithmInactiveException if the algorithm is not active. Attributes Inherited from: Algorithm",
       "example": "receiver.kill()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParOneTimeParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParOneTimeParticleFilter",
+      "name": "lastHealth",
+      "anchor": "lastHealth-0",
+      "signature": "def lastHealth: Option[Report]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Report]",
+      "summary": "Last completed candidate assessment, readable even after a zero-weight failure.",
+      "contract": "Last completed candidate assessment, readable even after a zero-weight failure. Attributes Inherited from: ParticleFilter",
+      "example": "receiver.lastHealth",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/ParOneTimeParticleFilter.html"
     },
@@ -38050,6 +38647,25 @@
       "example": "receiver.productIterator",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/ParticleFilter$$LogWeightedParticle.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles",
+      "name": "this",
+      "anchor": "<init>-fffff089",
+      "signature": "def this()",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles",
+      "summary": "Preserve the legacy no-argument constructor.",
+      "contract": "Preserve the legacy no-argument constructor. Attributes",
+      "example": "new com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles()",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilter$$NoViableParticles.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.ParticleFilter.NoViableParticles",
@@ -38486,6 +39102,34 @@
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.ParticleFilter",
+      "name": "healthConfig",
+      "anchor": "healthConfig-0",
+      "signature": "def healthConfig: Config",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Config",
+      "summary": "Override to configure diagnostic thresholds; never changes sampling or retries.",
+      "contract": "Override to configure diagnostic thresholds; never changes sampling or retries. Attributes",
+      "example": "receiver.healthConfig",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilter",
+      "name": "lastHealth",
+      "anchor": "lastHealth-0",
+      "signature": "def lastHealth: Option[Report]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[Report]",
+      "summary": "Last completed candidate assessment, readable even after a zero-weight failure.",
+      "contract": "Last completed candidate assessment, readable even after a zero-weight failure. Attributes",
+      "example": "receiver.lastHealth",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilter",
       "name": "probEvidence",
       "anchor": "probEvidence-999",
       "signature": "def probEvidence(): Double",
@@ -38516,6 +39160,113 @@
       "example": "receiver.zeroWeightPolicy",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/ParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilterHealth.Config",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilterHealth$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilterHealth.Config",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilterHealth$$Config.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilterHealth.Issue",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilterHealth$$Issue.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilterHealth.Issue",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilterHealth$$Issue.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilterHealth.Report",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilterHealth$$Report.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilterHealth.Report",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilterHealth$$Report.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.ParticleFilterHealth",
+      "name": "assess",
+      "anchor": "assess-fffff082",
+      "signature": "def assess(logWeights: Seq[Double], config: Config = ..., eligibility: Eligibility = ...): Report",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logWeights: Seq[Double]",
+            "config: Config = ...",
+            "eligibility: Eligibility = ..."
+          ]
+        }
+      ],
+      "returns": "Report",
+      "summary": "Assess raw log weights BEFORE resampling. Finite tiny weights are not genuine zeros.",
+      "contract": "Assess raw log weights BEFORE resampling. Finite tiny weights are not genuine zeros. Value parameters config configurable warning thresholds eligibility declared model contract, never inferred from realized weights logWeights finite values or negative infinity; nonempty Attributes Returns detached report; assess(Vector(0.0, Double.NegativeInfinity))",
+      "example": "com.cra.figaro.algorithm.filtering.ParticleFilterHealth.assess(logWeights, config, eligibility)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/filtering/ParticleFilterHealth$.html"
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.Snapshot",
@@ -54517,6 +55268,112 @@
       "page": "com/cra/figaro/algorithm/sampling/StaticGraphImportance$.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.ScalarCoordinates.Bounded",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$$ScalarCoordinates$$Bounded.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.ScalarCoordinates.Bounded",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$$ScalarCoordinates$$Bounded.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.TuningConfig",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$$TuningConfig.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.TuningConfig",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$$TuningConfig.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.TuningReport",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$$TuningReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.TuningReport",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$$TuningReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal",
+      "name": "automatic",
+      "anchor": "automatic-17e",
+      "signature": "def automatic(element: Element[Double], stepSd: Double = ...): ProposalScheme",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "element: Element[Double]",
+            "stepSd: Double = ..."
+          ]
+        }
+      ],
+      "returns": "ProposalScheme",
+      "summary": "Select known scalar support coordinates, not the statistically optimal sampler.",
+      "contract": "Select known scalar support coordinates, not the statistically optimal sampler. Value parameters element fixed AtomicScalar, ordinary AtomicNormal/Gamma/Beta, or AtomicVonMises stepSd positive coordinate SD; explicit prior proposals remain available Attributes Returns local MH scheme with the correct legacy value/randomness mapping Example automatic(Gamma(2.0, 3.0), .3)",
+      "example": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.automatic(element, stepSd)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal",
       "name": "bounded",
       "anchor": "bounded-85e",
@@ -54606,6 +55463,35 @@
     },
     {
       "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal",
+      "name": "customScalar",
+      "anchor": "customScalar-d96",
+      "signature": "def customScalar(element: Element[Double] & HasLogDensity[Double], coordinates: ScalarCoordinates, stepSd: Double)(toRandomness: Double => element.Randomness): ProposalScheme",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "element: Element[Double] & HasLogDensity[Double]",
+            "coordinates: ScalarCoordinates",
+            "stepSd: Double"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "toRandomness: Double => element.Randomness"
+          ]
+        }
+      ],
+      "returns": "ProposalScheme",
+      "summary": "Explicit adapter for a fixed custom scalar kernel; the inverse randomness map must be one-to-one and agree with generateValue. Non-injective randomness needs its own native log proposal, not this value-space adapter.",
+      "contract": "Explicit adapter for a fixed custom scalar kernel; the inverse randomness map must be one-to-one and agree with generateValue. Non-injective randomness needs its own native log proposal, not this value-space adapter. Value parameters coordinates declared support coordinates element permanent fixed scalar element with a stable log density stepSd positive finite coordinate increment SD toRandomness inverse of generateValue, including any scale/shift Attributes Returns corrected MH scheme; no default proposal is replaced Example customScalar(x, ScalarCoordinates.Positive, .2)(v => v / scale)",
+      "example": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.customScalar(element, coordinates, stepSd)(toRandomness)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal",
       "name": "positive",
       "anchor": "positive-85e",
       "signature": "def positive(element: AtomicScalar, stepSd: Double = ...): ProposalScheme",
@@ -54623,6 +55509,28 @@
       "summary": "",
       "contract": "Value parameters element permanent fixed-kernel AtomicScalar with support (0,+Infinity) stepSd positive finite log-coordinate increment SD Attributes Returns corrected log-space MH scheme Example SupportAwareProposal.positive(ScalarElement(LogNormalDistribution(0,1)), 0.2)",
       "example": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.positive(element, stepSd)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.SupportAwareProposal",
+      "name": "tune",
+      "anchor": "tune-ead",
+      "signature": "def tune(element: Element[Double], config: TuningConfig = ...): Tuning",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "element: Element[Double]",
+            "config: TuningConfig = ..."
+          ]
+        }
+      ],
+      "returns": "Tuning",
+      "summary": "Select scalar coordinates and tune only during the owned runner's warm-up. The initial implementation requires one latent stochastic element; this avoids accidentally freezing other parameters. Create a fresh tuner in each model factory.",
+      "contract": "Select scalar coordinates and tune only during the owned runner's warm-up. The initial implementation requires one latent stochastic element; this avoids accidentally freezing other parameters. Create a fresh tuner in each model factory. Value parameters config adaptation settings, not an inference precision policy element known fixed scalar kernel accepted by automatic Attributes Returns chain-owned tuner for MH.TunedModel(model, tuner), used with runTuned Example tune(Gamma(2.0,3.0), TuningConfig(initialStep=.2))",
+      "example": "com.cra.figaro.algorithm.sampling.SupportAwareProposal.tune(element, config)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html"
     },
@@ -57333,6 +58241,62 @@
       "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$StoppedResult.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.TunedModel",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$TunedModel.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.TunedModel",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$TunedModel.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.TunedResult",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$TunedResult.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.TunedResult",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$TunedResult.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings",
       "name": "run",
       "anchor": "run-fffff617",
@@ -57356,6 +58320,33 @@
       "summary": "Construct models serially, run chains on a private bounded pool, and return detached results.",
       "contract": "Construct models serially, run chains on a private bounded pool, and return detached results. Value parameters build creates equivalent independent models in the supplied universe; index allows dispersed initial regions config work, scheduling, seed, and storage configuration Attributes Returns complete traces and diagnostics; no partial success result is returned Throws ChainFailure for a model/worker failure; other workers are interrupted InterruptedException when the calling thread is interrupted; its interrupt flag is restored java.lang.IllegalStateException if callbacks prevent worker shutdown within 30 seconds Example MultiChainMetropolisHastings.run(Config()) { (u, i) => Model(Vector(Observable(\"coin\", Flip(0.3)(using \"\", u))(b => if (b) 1.0 else 0.0))) }",
       "example": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.run(config)(build)",
+      "object": true,
+      "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings",
+      "name": "runTuned",
+      "anchor": "runTuned-fffff0ef",
+      "signature": "def runTuned(config: Config)(build: (Universe, Int) => TunedModel): TunedResult",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "config: Config"
+          ]
+        },
+        {
+          "contextual": false,
+          "parameters": [
+            "build: (Universe, Int) => TunedModel"
+          ]
+        }
+      ],
+      "returns": "TunedResult",
+      "summary": "Run with discarded scalar warm-up tuning, followed by frozen production moves.",
+      "contract": "Run with discarded scalar warm-up tuning, followed by frozen production moves. Value parameters build returns a fresh ordinary model and tuner in each supplied universe config fixed warm-up/production budgets; warmUp must be positive Attributes Returns posterior traces/diagnostics plus frozen scale reports Example runTuned(config) { (u,i) => TunedModel(model, SupportAwareProposal.tune(x)) }",
+      "example": "com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runTuned(config)(build)",
       "object": true,
       "page": "com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html"
     },
@@ -128294,6 +129285,958 @@
       "page": "com/cra/figaro/language/HasLogPriorProposal.html"
     },
     {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "logProposalDensity",
+      "anchor": "logProposalDensity-fffffdbf",
+      "signature": "def logProposalDensity(from: Randomness, to: Randomness): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "from: Randomness",
+            "to: Randomness"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Log transition density q(to | from), in the same randomness coordinates.",
+      "contract": "Log transition density q(to | from), in the same randomness coordinates. Attributes",
+      "example": "receiver.logProposalDensity(from, to)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "logRandomnessDensity",
+      "anchor": "logRandomnessDensity-fffffeac",
+      "signature": "def logRandomnessDensity(value: Randomness): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Randomness"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Log model density in randomness coordinates, including any required Jacobian.",
+      "contract": "Log model density in randomness coordinates, including any required Jacobian. Attributes",
+      "example": "receiver.logRandomnessDensity(value)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "proposeRandomness",
+      "anchor": "proposeRandomness-d26",
+      "signature": "def proposeRandomness(old: Randomness): Randomness",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "old: Randomness"
+          ]
+        }
+      ],
+      "returns": "Randomness",
+      "summary": "Draw the proposed randomness conditional on old randomness.",
+      "contract": "Draw the proposed randomness conditional on old randomness. Attributes",
+      "example": "receiver.proposeRandomness(old)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "nextLogRandomness",
+      "anchor": "nextLogRandomness-fffff446",
+      "signature": "override def nextLogRandomness(old: Randomness): (Randomness, Double, Double)",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "old: Randomness"
+          ]
+        }
+      ],
+      "returns": "(Randomness, Double, Double)",
+      "summary": "",
+      "contract": "Value parameters old current randomness with finite model log density Attributes Returns proposed randomness, log reverse/forward ratio, log new/old model ratio Example Override the three primitive methods instead of exponentiating ratios. Definition Classes Element",
+      "example": "receiver.nextLogRandomness(old)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "!==",
+      "anchor": "!==-894",
+      "signature": "def !==(that: Element[Value])(implicit universe: Universe): Neq[T]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Element[Value]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Neq[T]",
+      "summary": "The element that tests inequality of this element with another element.",
+      "contract": "The element that tests inequality of this element with another element. Attributes Inherited from: Element",
+      "example": "receiver.!==(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "===",
+      "anchor": "===-f71",
+      "signature": "def ===(that: Value)(implicit universe: Universe): Apply1[T, Boolean]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Value"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Apply1[T, Boolean]",
+      "summary": "The element that tests whether the value of this element is equal to a particular value.",
+      "contract": "The element that tests whether the value of this element is equal to a particular value. Attributes Inherited from: Element",
+      "example": "receiver.===(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "===",
+      "anchor": "===-672",
+      "signature": "def ===(that: Element[Value])(implicit universe: Universe): Eq[T]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "that: Element[Value]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "universe: Universe"
+          ]
+        }
+      ],
+      "returns": "Eq[T]",
+      "summary": "The element that tests equality of this element with another element.",
+      "contract": "The element that tests equality of this element with another element. Attributes Inherited from: Element",
+      "example": "receiver.===(that)(using universe)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "activate",
+      "anchor": "activate-94c",
+      "signature": "def activate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Activate the element in its universe.",
+      "contract": "Activate the element in its universe. Attributes Inherited from: Element",
+      "example": "receiver.activate()",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "addCondition",
+      "anchor": "addCondition-fffff9ad",
+      "signature": "def addCondition(condition: Condition, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "condition: Condition",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add the given condition to the existing conditions of the element. By default, the contingency is empty.",
+      "contract": "Add the given condition to the existing conditions of the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addCondition(condition, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "addConstraint",
+      "anchor": "addConstraint-fffff9ad",
+      "signature": "def addConstraint(constraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "constraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a contingent constraint to the element. By default, the contingency is empty.",
+      "contract": "Add a contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addConstraint(constraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "addLogConstraint",
+      "anchor": "addLogConstraint-fffff9ad",
+      "signature": "def addLogConstraint(constraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "constraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a log contingent constraint to the element. By default, the contingency is empty.",
+      "contract": "Add a log contingent constraint to the element. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.addLogConstraint(constraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "addPragma",
+      "anchor": "addPragma-b53",
+      "signature": "def addPragma(pragma: Pragma[Value]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pragma: Pragma[Value]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Add a pragma to the element.",
+      "contract": "Add a pragma to the element. Attributes Inherited from: Element",
+      "example": "receiver.addPragma(pragma)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "allConditions",
+      "anchor": "allConditions-0",
+      "signature": "def allConditions: List[(Condition, Contingency)]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[(Condition, Contingency)]",
+      "summary": "All the conditions defined on this element.",
+      "contract": "All the conditions defined on this element. Attributes Inherited from: Element",
+      "example": "receiver.allConditions",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "allConstraints",
+      "anchor": "allConstraints-0",
+      "signature": "def allConstraints: List[(Constraint, Contingency)]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[(Constraint, Contingency)]",
+      "summary": "The current soft constraints on the element.",
+      "contract": "The current soft constraints on the element. Attributes Inherited from: Element",
+      "example": "receiver.allConstraints",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "clearContext",
+      "anchor": "clearContext-94c",
+      "signature": "def clearContext(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Clears all the temporary elements associated with this element (all elements created in it's context).",
+      "contract": "Clears all the temporary elements associated with this element (all elements created in it's context). Attributes Inherited from: Element",
+      "example": "receiver.clearContext()",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "condition",
+      "anchor": "condition-4ad",
+      "signature": "def condition(value: Any): Boolean",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Any"
+          ]
+        }
+      ],
+      "returns": "Boolean",
+      "summary": "Tests whether all the element's contingent conditions are satisfied for the given value.",
+      "contract": "Tests whether all the element's contingent conditions are satisfied for the given value. Attributes Inherited from: Element",
+      "example": "receiver.condition(value)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "conditionSatisfied",
+      "anchor": "conditionSatisfied-0",
+      "signature": "def conditionSatisfied: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Determines whether the condition on the element is satisfied by the current value.",
+      "contract": "Determines whether the condition on the element is satisfied by the current value. Attributes Inherited from: Element",
+      "example": "receiver.conditionSatisfied",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "constraint",
+      "anchor": "constraint-fffffeac",
+      "signature": "def constraint(value: Any): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "value: Any"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Gets the result of all the element's contingent constraints for the given value.",
+      "contract": "Gets the result of all the element's contingent constraints for the given value. Attributes Inherited from: Element",
+      "example": "receiver.constraint(value)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "constraintValue",
+      "anchor": "constraintValue-0",
+      "signature": "def constraintValue: Double",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Double",
+      "summary": "Determines the value of the constraint on the element applied to the current value.",
+      "contract": "Determines the value of the constraint on the element applied to the current value. Attributes Inherited from: Element",
+      "example": "receiver.constraintValue",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "context",
+      "anchor": "context-0",
+      "signature": "def context: List[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Element[_]]",
+      "summary": "The elements on which the existence of this element depends.",
+      "contract": "The elements on which the existence of this element depends. Attributes Inherited from: Element",
+      "example": "receiver.context",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "deactivate",
+      "anchor": "deactivate-94c",
+      "signature": "def deactivate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Deactivate the element in its universe.",
+      "contract": "Deactivate the element in its universe. Attributes Inherited from: Element",
+      "example": "receiver.deactivate()",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "directContextContents",
+      "anchor": "directContextContents-0",
+      "signature": "def directContextContents: Set[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Set[Element[_]]",
+      "summary": "Returns the set of elements directly created in the context of this element.",
+      "contract": "Returns the set of elements directly created in the context of this element. Attributes Inherited from: Element",
+      "example": "receiver.directContextContents",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "elementsIAmContingentOn",
+      "anchor": "elementsIAmContingentOn-0",
+      "signature": "def elementsIAmContingentOn: Set[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Set[Element[_]]",
+      "summary": "Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value.",
+      "contract": "Returns the elements that this element is contingent on. These are elements that are required to have a certain value for a condition or constraint to be relevant to this element. The contingency is required because conditions and constraints can be applied to references that are uncertain. Every possible element that could be pointed to by a reference must be given the condition or constraint, but the condition or constraint only applies if the elements earlier in the reference have the required value. Figaro takes care of handling all this under the hood. However, some algorithms may need to know which elements an element is contingent on. For example, sampling algorithms may need to sample those other elements first. This method is supplied to support this use case. Attributes Inherited from: Element",
+      "example": "receiver.elementsIAmContingentOn",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "flatMap",
+      "anchor": "flatMap-db8",
+      "signature": "def flatMap[U](fn: Value => Element[U])(implicit name: Name[U], collection: ElementCollection): Element[U]",
+      "type_parameters": [
+        "U"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "fn: Value => Element[U]"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[U]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[U]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.flatMap[U](fn)(using name, collection)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "generate",
+      "anchor": "generate-94c",
+      "signature": "final def generate(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "First generate the randomness, then generate the value given the randomness. Store the results in randomness and value.",
+      "contract": "First generate the randomness, then generate the value given the randomness. Store the results in randomness and value. Attributes Inherited from: Element",
+      "example": "receiver.generate()",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "intervene",
+      "anchor": "intervene-fffff71f",
+      "signature": "def intervene(v: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "v: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.intervene(v)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "isCachable",
+      "anchor": "isCachable-0",
+      "signature": "def isCachable: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable.",
+      "contract": "The cacheability of the element. Chains create caches of their parent values, and it is useful to know when these values can be effectively cached and reused. In general, continuous distributions are not cacheable. Attributes Inherited from: Element",
+      "example": "receiver.isCachable",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "isTemporary",
+      "anchor": "isTemporary-0",
+      "signature": "def isTemporary: Boolean",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Boolean",
+      "summary": "Returns true if this element is temporary, that is, was created in the context of another element.",
+      "contract": "Returns true if this element is temporary, that is, was created in the context of another element. Attributes Inherited from: Element",
+      "example": "receiver.isTemporary",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "map",
+      "anchor": "map-db8",
+      "signature": "def map[U](fn: Value => U)(implicit name: Name[U], collection: ElementCollection): Element[U]",
+      "type_parameters": [
+        "U"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "fn: Value => U"
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[U]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "Element[U]",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.map[U](fn)(using name, collection)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "nextRandomness",
+      "anchor": "nextRandomness-fffff446",
+      "signature": "def nextRandomness(rand: Randomness): (Randomness, Double, Double)",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rand: Randomness"
+          ]
+        }
+      ],
+      "returns": "(Randomness, Double, Double)",
+      "summary": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is:",
+      "contract": "Generate the next randomness given the current randomness. Returns three values: The next randomness, the Metropolis-Hastings proposal probability ratio, which is: P(new -> old) / P(old -> new) and the model probability ratio, which is: P(new) / P(old) The default implementation is to use generateRandomness and returns ones for the proposal and model probability ratios. Attributes Inherited from: Element",
+      "example": "receiver.nextRandomness(rand)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "observe",
+      "anchor": "observe-fffff71f",
+      "signature": "def observe(observation: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "observation: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated.",
+      "contract": "Condition the element by observing a particular value. Propagates the effect to dependent elements and ensures that no other value for the element can be generated. Attributes Inherited from: Element",
+      "example": "receiver.observe(observation)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "pragmas",
+      "anchor": "pragmas-0",
+      "signature": "def pragmas: List[Pragma[Value]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Pragma[Value]]",
+      "summary": "The pragmas attached to the element.",
+      "contract": "The pragmas attached to the element. Attributes Inherited from: Element",
+      "example": "receiver.pragmas",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "removeConditions",
+      "anchor": "removeConditions-71e",
+      "signature": "def removeConditions(contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove all conditions associated with the given contingency. By default, the contingency is empty.",
+      "contract": "Remove all conditions associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.removeConditions(contingency)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "removeConstraints",
+      "anchor": "removeConstraints-71e",
+      "signature": "def removeConstraints(contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove all constraints associated with the given contingency. By default, the contingency is empty.",
+      "contract": "Remove all constraints associated with the given contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.removeConstraints(contingency)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "removePragma",
+      "anchor": "removePragma-b53",
+      "signature": "def removePragma(pragma: Pragma[Value]): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "pragma: Pragma[Value]"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Remove a pragma from the element.",
+      "contract": "Remove a pragma from the element. Attributes Inherited from: Element",
+      "example": "receiver.removePragma(pragma)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "score",
+      "anchor": "score-fffffdbf",
+      "signature": "def score(oldValue: Value, newValue: Value): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "oldValue: Value",
+            "newValue: Value"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Compute the constraints on the new value divided by the constraints on the old value.",
+      "contract": "Compute the constraints on the new value divided by the constraints on the old value. Attributes Inherited from: Element",
+      "example": "receiver.score(oldValue, newValue)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "set",
+      "anchor": "set-fffff71f",
+      "signature": "def set(newValue: Value): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newValue: Value"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called.",
+      "contract": "Set the value of this element and propagate the effects to elements that depend on it without changing their randomness. Also disallows the value of the element to change until unobserve or unset is called. Attributes Inherited from: Element",
+      "example": "receiver.set(newValue)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "setCondition",
+      "anchor": "setCondition-fffff9ad",
+      "signature": "def setCondition(newCondition: Condition, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newCondition: Condition",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the condition associated with the contingency. Removes previous conditions associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setCondition(newCondition, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "setConstraint",
+      "anchor": "setConstraint-fffff9ad",
+      "signature": "def setConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newConstraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setConstraint(newConstraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "setLogConstraint",
+      "anchor": "setLogConstraint-fffff9ad",
+      "signature": "def setLogConstraint(newConstraint: Constraint, contingency: Contingency = ...): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newConstraint: Constraint",
+            "contingency: Contingency = ..."
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty.",
+      "contract": "Set the log constraint associated with the contingency. Removes previous constraints associated with the contingency. By default, the contingency is empty. Attributes Inherited from: Element",
+      "example": "receiver.setLogConstraint(newConstraint, contingency)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "setRandomness",
+      "anchor": "setRandomness-fffff71f",
+      "signature": "def setRandomness(newRandomness: Randomness): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "newRandomness: Randomness"
+          ]
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Set the randomness of this element.",
+      "contract": "Set the randomness of this element. Will generate its value using the new randomness and propagate the effects to elements that depend on it without changing their randomness. Attributes Inherited from: Element",
+      "example": "receiver.setRandomness(newRandomness)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "toNameString",
+      "anchor": "toNameString-0",
+      "signature": "def toNameString: String",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "String",
+      "summary": "A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString.",
+      "contract": "A string that is the element's name, if it has a non-empty one, otherwise the result of the element's toString. Attributes Inherited from: Element",
+      "example": "receiver.toNameString",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "unintervene",
+      "anchor": "unintervene-94c",
+      "signature": "def unintervene(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "",
+      "contract": "Attributes Inherited from: Element",
+      "example": "receiver.unintervene()",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "unobserve",
+      "anchor": "unobserve-94c",
+      "signature": "def unobserve(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Removes conditions on the element and allows different values of the element to be generated.",
+      "contract": "Removes conditions on the element and allows different values of the element to be generated. Attributes Inherited from: Element",
+      "example": "receiver.unobserve()",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "unset",
+      "anchor": "unset-94c",
+      "signature": "def unset(): Unit",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Unit",
+      "summary": "Allows different values of the element to be generated.",
+      "contract": "Allows different values of the element to be generated. Attributes Inherited from: Element",
+      "example": "receiver.unset()",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "args",
+      "anchor": "args-0",
+      "signature": "def args: List[Element[_]]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "List[Element[_]]",
+      "summary": "The arguments on which the element depends.",
+      "contract": "The arguments on which the element depends. Attributes Inherited from: Element",
+      "example": "receiver.args",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "generateRandomness",
+      "anchor": "generateRandomness-993",
+      "signature": "def generateRandomness(): Randomness",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": []
+        }
+      ],
+      "returns": "Randomness",
+      "summary": "Generate the randomness content.",
+      "contract": "Generate the randomness content. Attributes Inherited from: Element",
+      "example": "receiver.generateRandomness()",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.HasLogRandomnessProposal",
+      "name": "generateValue",
+      "anchor": "generateValue-d26",
+      "signature": "def generateValue(rand: Randomness): Value",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "rand: Randomness"
+          ]
+        }
+      ],
+      "returns": "Value",
+      "summary": "Generate the value of the element deterministically given its randomness and the values of its arguments.",
+      "contract": "Generate the value of the element deterministically given its randomness and the values of its arguments. Attributes Inherited from: Element",
+      "example": "receiver.generateValue(rand)",
+      "object": false,
+      "page": "com/cra/figaro/language/HasLogRandomnessProposal.html"
+    },
+    {
       "owner": "com.cra.figaro.language.IfArgsCacheable",
       "name": "isCachable",
       "anchor": "isCachable-0",
@@ -130466,6 +132409,33 @@
       "example": "receiver.productIterator",
       "object": false,
       "page": "com/cra/figaro/language/LogConstraint.html"
+    },
+    {
+      "owner": "com.cra.figaro.language.LogProposalRatios",
+      "name": "transition",
+      "anchor": "transition-85b",
+      "signature": "def transition[R](next: R, oldLogModel: Double, newLogModel: Double, logForward: Double, logReverse: Double): (R, Double, Double)",
+      "type_parameters": [
+        "R"
+      ],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "next: R",
+            "oldLogModel: Double",
+            "newLogModel: Double",
+            "logForward: Double",
+            "logReverse: Double"
+          ]
+        }
+      ],
+      "returns": "(R, Double, Double)",
+      "summary": "",
+      "contract": "Value parameters logForward finite log q(next | old); a generated proposal cannot have zero density logReverse finite or -Infinity log q(old | next) newLogModel finite or -Infinity model log density at the proposed state next proposed randomness, not necessarily the element's value oldLogModel finite model log density at the current state Attributes Returns separate log proposal and model ratios; -Infinity means rejection Example transition(next, -1000.0, -1.0, -2.0, -3.0)",
+      "example": "com.cra.figaro.language.LogProposalRatios.transition[R](next, oldLogModel, newLogModel, logForward, logReverse)",
+      "object": true,
+      "page": "com/cra/figaro/language/LogProposalRatios$.html"
     },
     {
       "owner": "com.cra.figaro.language.MultiValuedReferenceElement",
@@ -174898,7 +176868,7 @@
       ],
       "returns": "AtomicScalar",
       "summary": "",
-      "contract": "Value parameters collection owning collection location center name contextual name scale positive scale shape maxima xi, zero or absolute value in [1e-14,2] Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedExtremeValue(.2,0,1)",
+      "contract": "Value parameters collection owning collection location center name contextual name scale positive scale shape finite maxima xi in [-2,2], with representable distinct nonzero-shape endpoint Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedExtremeValue(.2,0,1)",
       "example": "com.cra.figaro.library.atomic.continuous.GeneralizedExtremeValue.apply(shape, location, scale)(using name, collection)",
       "object": true,
       "page": "com/cra/figaro/library/atomic/continuous/GeneralizedExtremeValue$.html"
@@ -175124,7 +177094,7 @@
       ],
       "returns": "AtomicScalar",
       "summary": "",
-      "contract": "Value parameters collection owning collection location threshold name contextual name scale positive scale shape excess-tail xi, zero or absolute value in [1e-14,2] Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedPareto(.2,0,1)",
+      "contract": "Value parameters collection owning collection location threshold name contextual name scale positive scale shape finite excess-tail xi in [-2,2], with representable negative-shape endpoint Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedPareto(.2,0,1)",
       "example": "com.cra.figaro.library.atomic.continuous.GeneralizedPareto.apply(shape, location, scale)(using name, collection)",
       "object": true,
       "page": "com/cra/figaro/library/atomic/continuous/GeneralizedPareto$.html"
@@ -188670,6 +190640,27 @@
     },
     {
       "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
+      "name": "logDensityCholesky",
+      "anchor": "logDensityCholesky-f10",
+      "signature": "def logDensityCholesky(lower: Vector[Vector[Double]]): Double",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "lower: Vector[Vector[Double]]"
+          ]
+        }
+      ],
+      "returns": "Double",
+      "summary": "Evaluate directly on a supplied factor without forming a possibly rounded-singular matrix.",
+      "contract": "Evaluate directly on a supplied factor without forming a possibly rounded-singular matrix. Value parameters lower finite positive-diagonal lower triangular Cholesky factor Attributes Returns log density on independent LOWER entries, including its Jacobian Example law.logDensityCholesky(Vector(Vector(1.0,0.0),Vector(1.0,1e-20)))",
+      "example": "receiver.logDensityCholesky(lower)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/continuous/WishartDistribution.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.continuous.WishartDistribution",
       "name": "mean",
       "anchor": "mean-0",
       "signature": "def mean: Vector[Vector[Double]]",
@@ -202018,6 +204009,36 @@
       "page": "com/cra/figaro/library/atomic/discrete/FiniteCountInference$.html"
     },
     {
+      "owner": "com.cra.figaro.library.atomic.discrete.FiniteCountInference",
+      "name": "multinomialAggregated",
+      "anchor": "multinomialAggregated-135",
+      "signature": "def multinomialAggregated(law: MultinomialDistribution, groups: Vector[Vector[Int]], budget: Budget = ...)(using name: Name[Vector[Int]], collection: ElementCollection): AtomicSelect[Vector[Int]]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "law: MultinomialDistribution",
+            "groups: Vector[Vector[Int]]",
+            "budget: Budget = ..."
+          ]
+        },
+        {
+          "contextual": true,
+          "parameters": [
+            "name: Name[Vector[Int]]",
+            "collection: ElementCollection"
+          ]
+        }
+      ],
+      "returns": "AtomicSelect[Vector[Int]]",
+      "summary": "Enumerate an exactly marginalized aggregate rather than the full count vector. Evidence and queries must depend only on these group totals; lost category detail cannot subsequently be conditioned on.",
+      "contract": "Enumerate an exactly marginalized aggregate rather than the full count vector. Evidence and queries must depend only on these group totals; lost category detail cannot subsequently be conditioned on. Value parameters budget limits on the reduced table, not downstream factor products collection owning collection groups complete disjoint partition of category indices, in output order law original fixed multinomial law name contextual element name Attributes Returns exact-support Select on grouped counts, using the existing factor backend Example multinomialAggregated(law, Vector(Vector(0,1),Vector(2,3)))",
+      "example": "com.cra.figaro.library.atomic.discrete.FiniteCountInference.multinomialAggregated(law, groups, budget)(using name, collection)",
+      "object": true,
+      "page": "com/cra/figaro/library/atomic/discrete/FiniteCountInference$.html"
+    },
+    {
       "owner": "com.cra.figaro.library.atomic.discrete.FromRange",
       "name": "apply",
       "anchor": "apply-b3c",
@@ -203356,6 +205377,27 @@
       "example": "com.cra.figaro.library.atomic.discrete.Multinomial.exact(distribution, budget)(using name, collection)",
       "object": true,
       "page": "com/cra/figaro/library/atomic/discrete/Multinomial$.html"
+    },
+    {
+      "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",
+      "name": "aggregate",
+      "anchor": "aggregate-fffff48c",
+      "signature": "def aggregate(groups: Vector[Vector[Int]]): MultinomialDistribution",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "groups: Vector[Vector[Int]]"
+          ]
+        }
+      ],
+      "returns": "MultinomialDistribution",
+      "summary": "Exactly merge categories before inference; no count vectors are enumerated.",
+      "contract": "Exactly merge categories before inference; no count vectors are enumerated. Value parameters groups nonempty disjoint nonempty index groups partitioning every category Attributes Returns multinomial law for group subtotals, in the requested group order Example law.aggregate(Vector(Vector(0,2), Vector(1)))",
+      "example": "receiver.aggregate(groups)",
+      "object": false,
+      "page": "com/cra/figaro/library/atomic/discrete/MultinomialDistribution.html"
     },
     {
       "owner": "com.cra.figaro.library.atomic.discrete.MultinomialDistribution",

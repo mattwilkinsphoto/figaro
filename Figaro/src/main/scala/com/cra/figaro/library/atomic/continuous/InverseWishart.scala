@@ -41,9 +41,13 @@ final case class InverseWishartDistribution(degreesOfFreedom: Double,scale: Vect
     * @return log density on independent lower entries, INCLUDING the covariance Jacobian
     * @example `law.logDensityCholesky(law.sampleCholesky(rng))` */
   def logDensityCholesky(lower: Vector[Vector[Double]]): Double = {
-    CovarianceNumerics.lower(lower,dimension,false)
-    logDensity(CovarianceNumerics.gram(lower))+dimension*math.log(2)+
-      (0 until dimension).map(i => (dimension-i)*math.log(lower(i)(i))).sum
+    CovarianceNumerics.lowerEntries(lower,dimension)
+    val logDet=2*lower.indices.map(i => math.log(lower(i)(i))).sum
+    val trace=CovarianceNumerics.factorTrace(lower,gaussian.lower)
+    val jacobian=dimension*math.log(2)+(0 until dimension).map(i => (dimension-i)*math.log(lower(i)(i))).sum
+    val out= -.5*(degreesOfFreedom+dimension+1)*logDet-.5*trace-logPartition+jacobian
+    if(!out.isFinite) throw new ArithmeticException("Inverse-Wishart factor log density outside numeric range")
+    out
   }
   /** Direct triangular sampler from Axen (2023), Theorem 3.2 / Algorithm 4.
     * @param rng caller-owned RNG, never retained

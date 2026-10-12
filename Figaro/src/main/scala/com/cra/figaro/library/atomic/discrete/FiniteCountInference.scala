@@ -7,6 +7,22 @@ import com.cra.figaro.library.atomic.DistributionNumerics as N
   * No tail truncation and no silent switch to sampled ranges on budget exhaustion.
   */
 object FiniteCountInference {
+  /** Enumerate an exactly marginalized aggregate rather than the full count vector.
+    * Evidence and queries must depend only on these group totals; lost category
+    * detail cannot subsequently be conditioned on.
+    * @param law original fixed multinomial law
+    * @param groups complete disjoint partition of category indices, in output order
+    * @param budget limits on the reduced table, not downstream factor products
+    * @param name contextual element name
+    * @param collection owning collection
+    * @return exact-support Select on grouped counts, using the existing factor backend
+    * @example `multinomialAggregated(law, Vector(Vector(0,1),Vector(2,3)))`
+    */
+  def multinomialAggregated(law: MultinomialDistribution, groups: Vector[Vector[Int]],
+    budget: Budget = Budget())(using name: Name[Vector[Int]], collection: ElementCollection): AtomicSelect[Vector[Int]] = {
+    require(law != null)
+    multinomial(law.aggregate(groups), budget)
+  }
   /** Enumeration budget, not a bound on all intermediate factors in a larger graph.
     * @param maxStates maximum enumerated states, 1..100000
     * @param maxCells maximum scalar entries in the enumerated states, 1..10000000

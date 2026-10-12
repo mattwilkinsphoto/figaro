@@ -1,7 +1,7 @@
 package com.cra.figaro.algorithm.sampling.parallel
 
 import com.cra.figaro.algorithm.OneTime
-import com.cra.figaro.algorithm.sampling.{FinalScheme, ForwardWeighter, LikelihoodWeighter, MetropolisHastings, ProposalScheme}
+import com.cra.figaro.algorithm.sampling.{FinalScheme, ForwardWeighter, LikelihoodWeighter, MetropolisHastings, ProposalScheme, SupportAwareProposal}
 import com.cra.figaro.language.*
 import com.cra.figaro.util.{RandomContext, SamplingRandom, RandomStreams}
 import java.util.concurrent.*
@@ -62,6 +62,29 @@ object MultiChainMetropolisHastings {
   final case class Model(observables: Vector[Observable], proposal: Option[ProposalScheme] = None,
     initialState: () => Boolean = () => true)
 
+  /** Opt-in adaptation wrapper; preserves the existing Model constructor contract. */
+  final case class TunedModel(model: Model, tuning: SupportAwareProposal.Tuning)
+  /** Detached ordinary result and one frozen scale report per chain, in chain order. */
+  final case class TunedResult(result: Result, tuning: Vector[SupportAwareProposal.TuningReport])
+
+  /** Run with discarded scalar warm-up tuning, followed by frozen production moves.
+    * @param config fixed warm-up/production budgets; warmUp must be positive
+    * @param build returns a fresh ordinary model and tuner in each supplied universe
+    * @return posterior traces/diagnostics plus frozen scale reports
+    * @example `runTuned(config) { (u,i) => TunedModel(model, SupportAwareProposal.tune(x)) }`
+    */
+  def runTuned(config: Config)(build: (Universe,Int) => TunedModel): TunedResult = {
+    require(build != null)
+    val tuners=scala.collection.mutable.LinkedHashMap.empty[Universe,SupportAwareProposal.Tuning]
+    val result=execute(config,None,u => tuners.get(u)) { (u,i) =>
+      val built=build(u,i)
+      require(built != null && built.tuning != null && built.model != null)
+      tuners.update(u,built.tuning)
+      built.model
+    }.result
+    TunedResult(result,tuners.valuesIterator.map(_.report).toVector)
+  }
+
   /** Immutable output of one chain, independent of disposed model objects.
     * @param index zero-based chain index
     * @param seed historical seed label, independent of worker count; use randomStream for partitioned replay
@@ -117,7 +140,8 @@ object MultiChainMetropolisHastings {
     */
   def run(config: Config)(build: (Universe, Int) => Model): Result = execute(config, None)(build).result
 
-  private def execute(config: Config, precision: Option[McmcPrecision.Config])(build: (Universe, Int) => Model): StoppedResult = {
+  private def execute(config: Config, precision: Option[McmcPrecision.Config],
+    tunerFor: Universe => Option[SupportAwareProposal.Tuning] = _ => None)(build: (Universe, Int) => Model): StoppedResult = {
     require(config != null && build != null, "Config and model factory are required")
     val started = System.nanoTime()
     val streams = RandomStreams.allocate(config.seed, config.chains, config.randomAlgorithm, config.randomStreams)
@@ -140,6 +164,14 @@ object MultiChainMetropolisHastings {
           val model = build(entry.universe, index)
           require(model != null && model.observables != null && model.observables.nonEmpty, "Observables required")
           require(model.initialState != null && model.proposal != null && !model.proposal.contains(null), "Invalid model callbacks")
+          entry.tuning=tunerFor(entry.universe)
+          entry.tuning.foreach { tuner =>
+            require(model.proposal.isEmpty && config.warmUp > 0,
+              "Automatic tuning requires positive discarded warm-up and no competing custom proposal")
+            val latent=entry.universe.stochasticElements.filter(e => e.observation.isEmpty && e.intervention.isEmpty)
+            require(latent.size == 1 && (latent.head eq tuner.target),
+              "Automatic scalar tuning requires exactly one latent stochastic element; other parameters would be frozen")
+          }
           require(model.observables.forall(o => o != null && (o.element.universe eq entry.universe)), "Observable from another universe")
           require(model.observables.forall(_.element.active), "Observable target is inactive")
           val keys = model.observables.map(_.name)
@@ -263,7 +295,7 @@ object MultiChainMetropolisHastings {
       "Observed element needs an explicit likelihood; arbitrary deterministic equality observations are unsupported")
   }
 
-  private def ownedProposal(owner: Owned): ProposalScheme = owner.model.proposal.getOrElse {
+  private def ownedProposal(owner: Owned): ProposalScheme = owner.tuning.map(_.scheme).orElse(owner.model.proposal).getOrElse {
     if (!owner.universe.conditionedElements.exists(_.observation.nonEmpty))
       ProposalScheme.default(using owner.universe)
     else FinalScheme(() => {
@@ -276,6 +308,7 @@ object MultiChainMetropolisHastings {
   private final class Owned(val index: Int, val seed: Long, val universe: Universe, random: java.util.Random,
     val descriptor: RandomStreams.Descriptor) {
     var model: Model = null
+    var tuning: Option[SupportAwareProposal.Tuning] = None
     var kernel: Kernel = null
     // 0 = constructed, 1 = running, 2 = disposed, 3 = idle between batches.
     // CAS transitions prevent queued tasks and a late-returning worker racing failure cleanup.
@@ -317,6 +350,11 @@ object MultiChainMetropolisHastings {
       require(universe.conditionedElements.filter(_.observation.nonEmpty).forall(observedRoots.contains),
         "New observations cannot be attached during sampling")
       propagated.filterInPlace(_.active)
+      owner.tuning.foreach { tuner =>
+        val latent=universe.stochasticElements.filter(e => e.observation.isEmpty && e.intervention.isEmpty)
+        require(latent.size == 1 && (latent.head eq tuner.target),
+          "Automatic scalar tuning cannot freeze newly generated latent elements")
+      }
     }
 
     private def scoreObservation(e: Element[?], value: Any): Double = {
@@ -358,10 +396,14 @@ object MultiChainMetropolisHastings {
         if (element.observation.nonEmpty && element.isInstanceOf[Chain[?, ?]]) result.foreach { child =>
           require((child.universe eq universe) && child.isTemporary && universe.inContext(child, element),
             "Observed Chain must create its own atomic likelihood child; shared children are unsupported")
-          require(child.isInstanceOf[Atomic[?]] && child.args.isEmpty && child.intervention.isEmpty && child.allConstraints.isEmpty,
-            "Observed Chain must return one fixed-parameter atomic likelihood without extra constraints")
+          val nested = child.isInstanceOf[Chain[?, ?]]
+          require(((child.isInstanceOf[Atomic[?]] && child.args.isEmpty) ||
+            (nested && child.args.forall(e => !e.isTemporary))) &&
+            child.intervention.isEmpty && child.allConstraints.isEmpty,
+            "Observed Chain must return an atomic likelihood or owned nested Chain with permanent parents")
+          require(child.context.size <= 32, "Observed likelihood nesting exceeds depth budget 32")
           require(element.directContextContents.forall(e => (e eq child) || propagated.contains(e)),
-            "Observed Chain must create only its likelihood child; nested or additional latent nodes are unsupported")
+            "Observed Chain must create only its likelihood child; additional latent nodes are unsupported")
           if (!propagated.contains(child)) {
             require(child.observation.isEmpty && child.allConditions.isEmpty,
               "Attach observations to the permanent Chain, not inside its callback")
@@ -432,8 +474,15 @@ object MultiChainMetropolisHastings {
       require(valid, "No valid initial state within maxInitializationAttempts; check evidence/initial region")
       initConstrainedValues()
       dissatisfied = Set.empty[Element[?]]
+      owner.tuning.foreach(_.begin(universe))
       var i = 0
-      while (i < config.warmUp) { mhStep(); i += 1 }
+      while (i < config.warmUp) {
+        val before=accepts
+        mhStep()
+        owner.tuning.foreach(_.update(accepts > before))
+        i += 1
+      }
+      owner.tuning.foreach(_.freeze())
       accepts = 0
       rejects = 0
       samplingNanos += System.nanoTime() - start

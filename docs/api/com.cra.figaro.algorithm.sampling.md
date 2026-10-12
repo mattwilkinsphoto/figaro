@@ -14653,6 +14653,174 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.StaticGraphImportance.runWithProposal(model, roots, proposal, queries, observations, config)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.ScalarCoordinates.Bounded.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$$ScalarCoordinates$$Bounded.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.ScalarCoordinates.Bounded.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$$ScalarCoordinates$$Bounded.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.TuningConfig.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$$TuningConfig.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.TuningConfig.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$$TuningConfig.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.TuningReport.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$$TuningReport.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.TuningReport.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$$TuningReport.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.automatic ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#automatic-17e)
+
+```scala
+def automatic(element: Element[Double], stepSd: Double = ...): ProposalScheme
+```
+
+Select known scalar support coordinates, not the statistically optimal sampler.
+
+Type parameters: none.
+
+Parameters, list 1: `` element: Element[Double] ``; `` stepSd: Double = ... ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Select known scalar support coordinates, not the statistically optimal sampler. Value parameters element fixed AtomicScalar, ordinary AtomicNormal/Gamma/Beta, or AtomicVonMises stepSd positive coordinate SD; explicit prior proposals remain available Attributes Returns local MH scheme with the correct legacy value/randomness mapping Example automatic(Gamma(2.0, 3.0), .3)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.SupportAwareProposal.automatic(element, stepSd)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.bounded ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#bounded-85e)
@@ -14749,6 +14917,32 @@ Invocation template:
 com.cra.figaro.algorithm.sampling.SupportAwareProposal.covariance(element, stepSd)
 ```
 
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.customScalar ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#customScalar-d96)
+
+```scala
+def customScalar(element: Element[Double] & HasLogDensity[Double], coordinates: ScalarCoordinates, stepSd: Double)(toRandomness: Double => element.Randomness): ProposalScheme
+```
+
+Explicit adapter for a fixed custom scalar kernel; the inverse randomness map must be one-to-one and agree with generateValue. Non-injective randomness needs its own native log proposal, not this value-space adapter.
+
+Type parameters: none.
+
+Parameters, list 1: `` element: Element[Double] & HasLogDensity[Double] ``; `` coordinates: ScalarCoordinates ``; `` stepSd: Double ``.
+
+Parameters, list 2: `` toRandomness: Double => element.Randomness ``.
+
+Returns: `` ProposalScheme ``.
+
+Source contract/attributes: Explicit adapter for a fixed custom scalar kernel; the inverse randomness map must be one-to-one and agree with generateValue. Non-injective randomness needs its own native log proposal, not this value-space adapter. Value parameters coordinates declared support coordinates element permanent fixed scalar element with a stable log density stepSd positive finite coordinate increment SD toRandomness inverse of generateValue, including any scale/shift Attributes Returns corrected MH scheme; no default proposal is replaced Example customScalar(x, ScalarCoordinates.Positive, .2)(v => v / scale)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.SupportAwareProposal.customScalar(element, coordinates, stepSd)(toRandomness)
+```
+
 ## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.positive ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#positive-85e)
@@ -14771,6 +14965,30 @@ Invocation template:
 
 ```scala
 com.cra.figaro.algorithm.sampling.SupportAwareProposal.positive(element, stepSd)
+```
+
+## `` com.cra.figaro.algorithm.sampling.SupportAwareProposal.tune ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/SupportAwareProposal$.html#tune-ead)
+
+```scala
+def tune(element: Element[Double], config: TuningConfig = ...): Tuning
+```
+
+Select scalar coordinates and tune only during the owned runner's warm-up. The initial implementation requires one latent stochastic element; this avoids accidentally freezing other parameters. Create a fresh tuner in each model factory.
+
+Type parameters: none.
+
+Parameters, list 1: `` element: Element[Double] ``; `` config: TuningConfig = ... ``.
+
+Returns: `` Tuning ``.
+
+Source contract/attributes: Select scalar coordinates and tune only during the owned runner's warm-up. The initial implementation requires one latent stochastic element; this avoids accidentally freezing other parameters. Create a fresh tuner in each model factory. Value parameters config adaptation settings, not an inference precision policy element known fixed scalar kernel accepted by automatic Attributes Returns chain-owned tuner for MH.TunedModel(model, tuner), used with runTuned Example tune(Gamma(2.0,3.0), TuningConfig(initialStep=.2))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.SupportAwareProposal.tune(element, config)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.SwitchScheme.productElementNames ``

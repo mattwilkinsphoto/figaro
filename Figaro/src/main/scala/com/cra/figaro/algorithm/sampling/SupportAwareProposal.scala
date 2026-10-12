@@ -4,11 +4,126 @@ import com.cra.figaro.language.*
 import com.cra.figaro.library.atomic.continuous.*
 import com.cra.figaro.util.random
 
-/** Fixed-scale, opt-in random walks in unconstrained coordinates. No adaptation or
-  * default-kernel replacement. See docs/INFERENCE_INTEGRATION.md and INF-05.
+/** Opt-in coordinate random walks, with separate discarded scalar warm-up tuning.
+  * Existing factories stay fixed-scale; no default-kernel replacement.
+  * See docs/CAPABILITY_EXPANSION.md and INF-05/INF-06.
   * Use as a complete scheme or a DisjointScheme choice, never a sequential continuation.
   */
 object SupportAwareProposal {
+  /** Scalar coordinate contract; custom adapters must describe their actual support. */
+  enum ScalarCoordinates {
+    case Real, Positive, Circular
+    case Bounded(lower: Double, upper: Double)
+  }
+  private def scalarCoordinates(kind: ScalarCoordinates): Coordinates[Double] = kind match {
+    case ScalarCoordinates.Real => new Coordinates[Double] {
+      def encode(x: Double) = { require(x.isFinite); Vector(x) }
+      def decode(y: Vector[Double]) = { require(y.head.isFinite); y.head }
+      def logJacobian(y: Vector[Double]) = 0.0
+    }
+    case ScalarCoordinates.Positive => positiveCoordinates
+    case ScalarCoordinates.Circular => circularCoordinates
+    case ScalarCoordinates.Bounded(a,b) => boundedCoordinates(a,b)
+  }
+
+  /** Explicit adapter for a fixed custom scalar kernel; the inverse randomness map
+    * must be one-to-one and agree with generateValue. Non-injective randomness needs
+    * its own native log proposal, not this value-space adapter.
+    * @param element permanent fixed scalar element with a stable log density
+    * @param coordinates declared support coordinates
+    * @param stepSd positive finite coordinate increment SD
+    * @param toRandomness inverse of generateValue, including any scale/shift
+    * @return corrected MH scheme; no default proposal is replaced
+    * @example `customScalar(x, ScalarCoordinates.Positive, .2)(v => v / scale)`
+    */
+  def customScalar(element: Element[Double] & HasLogDensity[Double], coordinates: ScalarCoordinates,
+    stepSd: Double)(toRandomness: Double => element.Randomness): ProposalScheme = {
+    require(coordinates != null && toRandomness != null)
+    buildAtScale(element, scalarCoordinates(coordinates), () => stepSd, toRandomness)
+  }
+
+  private def scalarAdapter(element: Element[Double]): (Coordinates[Double], Double => Any) = element match {
+    case e: AtomicScalar =>
+      val (a,b)=e.distribution.support
+      val coordinates = if(a == 0 && b == Double.PositiveInfinity) positiveCoordinates
+        else if(a.isFinite && b.isFinite) boundedCoordinates(a,b)
+        else if(a == Double.NegativeInfinity && b == Double.PositiveInfinity) scalarCoordinates(ScalarCoordinates.Real)
+        else throw new IllegalArgumentException("No automatic coordinates for this support; supply a custom adapter")
+      (coordinates, (x: Double) => x)
+    case e: AtomicNormal if e.getClass == classOf[AtomicNormal] =>
+      (scalarCoordinates(ScalarCoordinates.Real), (x: Double) => (x-e.mean)/e.standardDeviation)
+    case e: AtomicGamma if e.getClass == classOf[AtomicGamma] =>
+      (positiveCoordinates, (x: Double) => x/e.thetaValue)
+    case e: AtomicBeta if e.getClass == classOf[AtomicBeta] =>
+      (boundedCoordinates(0,1), (x: Double) => x)
+    case e: AtomicVonMises => (circularCoordinates, (x: Double) => x)
+    case _ => throw new IllegalArgumentException("Unknown scalar randomness mapping; supply a custom adapter")
+  }
+
+  /** Select known scalar support coordinates, not the statistically optimal sampler.
+    * @param element fixed AtomicScalar, ordinary AtomicNormal/Gamma/Beta, or AtomicVonMises
+    * @param stepSd positive coordinate SD; explicit prior proposals remain available
+    * @return local MH scheme with the correct legacy value/randomness mapping
+    * @example `automatic(Gamma(2.0, 3.0), .3)`
+    */
+  def automatic(element: Element[Double], stepSd: Double = .5): ProposalScheme = {
+    val (coordinates, inverse)=scalarAdapter(element)
+    buildAtScale(element.asInstanceOf[Element[Double] & HasLogDensity[Double]], coordinates, () => stepSd, inverse)
+  }
+
+  /** Warm-up adaptation settings; not a convergence or optimal-efficiency guarantee.
+    * @param initialStep positive initial coordinate SD
+    * @param targetAcceptance acceptance target strictly between zero and one
+    * @param minStep positive lower scale bound
+    * @param maxStep finite upper scale bound
+    */
+  final case class TuningConfig(initialStep: Double = .5, targetAcceptance: Double = .44,
+    minStep: Double = 1e-6, maxStep: Double = 3.0) {
+    require(Vector(initialStep,targetAcceptance,minStep,maxStep).forall(_.isFinite))
+    require(minStep > 0 && maxStep >= minStep && initialStep >= minStep && initialStep <= maxStep)
+    require(targetAcceptance > 0 && targetAcceptance < 1)
+  }
+  /** Detached report; reaching a scale bound is reported, not treated as successful calibration. */
+  final case class TuningReport(stepSd: Double, warmUpAttempts: Int, atScaleBound: Boolean)
+
+  /** A one-use, chain-owned scalar tuner. Only the owned multi-chain runner may adapt it. */
+  final class Tuning private[SupportAwareProposal](private[sampling] val target: Element[Double], config: TuningConfig) {
+    private var logStep=math.log(config.initialStep)
+    private var iterations=0
+    private var frozen=false
+    private var started=false
+    private val (coordinates,inverse)=scalarAdapter(target)
+    private[sampling] val scheme: ProposalScheme=buildAtScale(
+      target.asInstanceOf[Element[Double] & HasLogDensity[Double]],coordinates,() => math.exp(logStep),inverse)
+    private[sampling] def begin(owner: Universe): Unit = {
+      require(!started && (target.universe eq owner), "Tuning is one-use and chain-owned")
+      started=true
+    }
+    private[sampling] def update(accepted: Boolean): Unit = {
+      require(started && !frozen, "Tuning is only permitted during discarded warm-up")
+      iterations+=1
+      val gain=math.pow(iterations+10.0,-.6)
+      logStep=math.max(math.log(config.minStep),math.min(math.log(config.maxStep),
+        logStep+gain*((if(accepted) 1.0 else 0.0)-config.targetAcceptance)))
+    }
+    private[sampling] def freeze(): Unit = { require(started); frozen=true }
+    private[sampling] def report: TuningReport = {
+      require(frozen, "Tuning report is available only after freezing")
+      TuningReport(math.exp(logStep),iterations,
+        logStep <= math.log(config.minStep) || logStep >= math.log(config.maxStep))
+    }
+  }
+  /** Select scalar coordinates and tune only during the owned runner's warm-up.
+    * The initial implementation requires one latent stochastic element; this avoids
+    * accidentally freezing other parameters. Create a fresh tuner in each model factory.
+    * @param element known fixed scalar kernel accepted by automatic
+    * @param config adaptation settings, not an inference precision policy
+    * @return chain-owned tuner for MH.TunedModel(model, tuner), used with runTuned
+    * @example `tune(Gamma(2.0,3.0), TuningConfig(initialStep=.2))`
+    */
+  def tune(element: Element[Double], config: TuningConfig = TuningConfig()): Tuning = {
+    require(element != null && config != null); new Tuning(element,config)
+  }
   private[figaro] trait Coordinates[T] {
     def encode(x: T): Vector[Double]
     def decode(y: Vector[Double]): T
@@ -126,8 +241,14 @@ object SupportAwareProposal {
     require(element != null); build(element,matrixCoordinates(element.distribution.dimension,true),stepSd)
   }
   private def build[T](e: Element[T] & HasLogDensity[T], c: Coordinates[T], sd: Double): ProposalScheme = {
-    require(e != null && sd.isFinite && sd>0)
+    buildAtScale(e,c,() => sd,(x: T) => x)
+  }
+  private def buildAtScale[T](e: Element[T] & HasLogDensity[T], c: Coordinates[T], scale: () => Double,
+    toRandomness: T => Any): ProposalScheme = {
+    require(e != null && scale().isFinite && scale()>0)
     val move=new Move(e, () => {
+      val sd=scale()
+      require(sd.isFinite && sd>0)
       val y=c.encode(e.value); val next=y.map(_+sd*random.nextGaussian())
       require(next.forall(_.isFinite),"Proposal outside numeric range")
       val x=c.decode(next)
@@ -135,7 +256,7 @@ object SupportAwareProposal {
       val q=c.logJacobian(next)-c.logJacobian(y)
       require(before.isFinite && after.isFinite && q.isFinite && (after-before).isFinite,
         "Support-aware proposal density outside numeric range")
-      (x,q,after-before)
+      (toRandomness(x),q,after-before)
     })
     move.validate(e.universe); SupportAwareScheme(move)
   }

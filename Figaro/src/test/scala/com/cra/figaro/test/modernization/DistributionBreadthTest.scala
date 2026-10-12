@@ -41,7 +41,9 @@ class DistributionBreadthTest extends AnyWordSpec with Matchers {
       GeneralizedParetoDistribution(.2,1,2).mean.get shouldBe 3.5
       GeneralizedExtremeValueDistribution(1).mean shouldBe None
       GeneralizedParetoDistribution(.5).variance shouldBe Some(Double.PositiveInfinity)
-      intercept[IllegalArgumentException](GeneralizedExtremeValueDistribution(1e-15))
+      // Tiny nonzero shapes are now evaluated stably; unresolved endpoints still fail.
+      GeneralizedExtremeValueDistribution(1e-15).logDensity(1) shouldBe (-1-math.exp(-1) +- 1e-14)
+      intercept[IllegalArgumentException](GeneralizedExtremeValueDistribution(java.lang.Double.MIN_VALUE))
       intercept[IllegalArgumentException](GeneralizedParetoDistribution(-3))
       intercept[IllegalArgumentException](GeneralizedExtremeValueDistribution(.2).cdf(Double.NaN))
       intercept[ArithmeticException](GeneralizedParetoDistribution(-2).quantile(math.nextDown(1.0)))

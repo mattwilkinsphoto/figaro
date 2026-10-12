@@ -123,6 +123,10 @@ Finally, formerly refused values such as extreme-value shape `1e-12` or 2D Wisha
 df `2.0` now have validated implementations. The range table below lists retained
 limits; this is not permission to extrapolate to singular matrices or every tail.
 
+The [post-7.0 capability-expansion guide](CAPABILITY_EXPANSION.md) describes additional
+development-only contracts. The released behavior and old/new migration examples
+in this guide remain the 7.0.0 baseline.
+
 ## Stable particle filtering details
 
 The sequential and parallel particle-filter factories retain likelihood weights
@@ -344,3 +348,7 @@ general exact continuous factor inference retain their documented limitations.
 
 Related: [distribution support](DISTRIBUTION_SUPPORT.md),
 [multi-chain MH](MULTI_CHAIN_MCMC.md), [inference health](INFERENCE_HEALTH.md).
+
+Development follow-up (not 7.0.0): [bounded particle filtering](BOUNDED_PARTICLE_FILTER.md)
+contrasts fixed-budget diagnostics with the new opt-in indicator-evidence workflow,
+including old/new examples and explicit budget-exhaustion handling.

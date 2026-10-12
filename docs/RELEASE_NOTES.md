@@ -2,6 +2,29 @@
 
 ## Current release
 
+### 7.1.0 — release preparation
+
+Publication is pending the [readiness gates](RELEASE_7_1_STATUS.md). The immutable
+7.0.0 release remains available until publication is verified.
+
+- Opt-in bounded-work **indicator** particle filtering, with corrected stopping
+  estimates, retained ancestry, explicit work caps and actionable health reports.
+  Existing general-likelihood filters gain diagnostics, not automatic retries.
+- Nested owned observation spines and ordinary compound Normal observations in
+  multi-chain MH; arbitrary shared/dynamic graphs remain unsupported.
+- Exact multinomial category aggregation before finite enumeration.
+- Automatic support-coordinate selection and scalar warm-up-only proposal scale
+  tuning; frozen production scales and explicit legacy/custom adapters.
+- Native log-ratio helpers for custom MH proposals.
+- Independently checked tiny-shape extreme-value limits and direct covariance
+  factor densities, with singular/unrepresentable cases still refused.
+
+See [capability APIs and limits](CAPABILITY_EXPANSION.md) and the
+[standard-versus-bounded filtering examples](BOUNDED_PARTICLE_FILTER.md).
+There is no automatic budget adviser or general-likelihood bounded filtering in
+this release. Existing defaults and public constructors are retained. The release
+review added MiMa and TASTy checks against 7.0.0, plus long-sequence filtering tests.
+
 ### 7.0.0
 
 The release adds log-space particle filtering and MH proposal ratios, bounded

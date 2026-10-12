@@ -41159,7 +41159,7 @@ Context parameters, list 2: `` name: Name[Double] ``; `` collection: ElementColl
 
 Returns: `` AtomicScalar ``.
 
-Source contract/attributes: Value parameters collection owning collection location center name contextual name scale positive scale shape maxima xi, zero or absolute value in [1e-14,2] Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedExtremeValue(.2,0,1)
+Source contract/attributes: Value parameters collection owning collection location center name contextual name scale positive scale shape finite maxima xi in [-2,2], with representable distinct nonzero-shape endpoint Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedExtremeValue(.2,0,1)
 
 Invocation template:
 
@@ -41449,7 +41449,7 @@ Context parameters, list 2: `` name: Name[Double] ``; `` collection: ElementColl
 
 Returns: `` AtomicScalar ``.
 
-Source contract/attributes: Value parameters collection owning collection location threshold name contextual name scale positive scale shape excess-tail xi, zero or absolute value in [1e-14,2] Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedPareto(.2,0,1)
+Source contract/attributes: Value parameters collection owning collection location threshold name contextual name scale positive scale shape finite excess-tail xi in [-2,2], with representable negative-shape endpoint Attributes Returns observation-ready scalar; stochastic parameters use ScalarElement Example GeneralizedPareto(.2,0,1)
 
 Invocation template:
 
@@ -58087,6 +58087,30 @@ Invocation template:
 
 ```scala
 receiver.logDensity(value)
+```
+
+## `` com.cra.figaro.library.atomic.continuous.WishartDistribution.logDensityCholesky ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/library/atomic/continuous/WishartDistribution.html#logDensityCholesky-f10)
+
+```scala
+def logDensityCholesky(lower: Vector[Vector[Double]]): Double
+```
+
+Evaluate directly on a supplied factor without forming a possibly rounded-singular matrix.
+
+Type parameters: none.
+
+Parameters, list 1: `` lower: Vector[Vector[Double]] ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Evaluate directly on a supplied factor without forming a possibly rounded-singular matrix. Value parameters lower finite positive-diagonal lower triangular Cholesky factor Attributes Returns log density on independent LOWER entries, including its Jacobian Example law.logDensityCholesky(Vector(Vector(1.0,0.0),Vector(1.0,1e-20)))
+
+Invocation template:
+
+```scala
+receiver.logDensityCholesky(lower)
 ```
 
 ## `` com.cra.figaro.library.atomic.continuous.WishartDistribution.mean ``

@@ -14,7 +14,8 @@ permissions:
   contents: read
 
 env:
-  FIGARO_VERSION: 7.0.0
+  FIGARO_VERSION: 7.1.0
+  FIGARO_CAPABILITY_CHECK: 'true'
 
 jobs:
   research-reference-integrity:
@@ -52,13 +53,13 @@ jobs:
         run: |
           git status --porcelain --untracked-files=all
           python3 -B tools/test_build_release_bundle.py
-          python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/release70-preflight --version "$FIGARO_VERSION"
+          python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/capability-preflight --version "$FIGARO_VERSION"
       - name: Consume the release layout without Ivy local
         working-directory: tools/acceptance-consumer
         run: |
-          export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/release70-preflight/maven"
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0.jar | cut -d' ' -f1)"
-          sbt --server --batch "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck"
+          export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/capability-preflight/maven"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0.jar | cut -d' ' -f1)"
+          sbt --server --batch "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck"
 
   gvm-bhattacharyya-research:
     runs-on: ubuntu-latest
@@ -138,6 +139,15 @@ jobs:
 
       - name: Compile all source sets
         run: sbt --server --batch -v "clean; compile; Test / compile"
+
+      - name: Check binary compatibility with 7.0.0
+        # Separate tasks keep a failed compatibility gate from being masked.
+        run: sbt --server --batch "figaro / mimaReportBinaryIssues"
+
+      - name: Check Scala 3 TASTy compatibility with 7.0.0
+        run: |
+          sbt --server --batch "figaro / packageBin"
+          sbt --server --batch "compatibility / runMain CompatibilityCheck target/out/jvm/scala-3.9.0/figaro/figaro_3-$FIGARO_VERSION.jar"
 
       - name: Run documented quick start and common patterns
         run: >-
@@ -316,6 +326,14 @@ jobs:
           com.cra.figaro.test.modernization.SupportAwareProposalTest
           com.cra.figaro.test.modernization.NumericalRangeIntegrationTest"
 
+      - name: Verify capability expansion and independent numerical controls
+        run: |
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.CapabilityExpansionTest com.cra.figaro.test.modernization.BoundedParticleFilterTest"
+          sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.BoundedParticleFilterStudy" | tee "$RUNNER_TEMP/bounded-filter-study.log"
+          sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.CapabilityNumericalStudy" > "$RUNNER_TEMP/capability-numerical.log"
+          python3 -m pip install --disable-pip-version-check mpmath==1.3.0
+          python3 -B tools/capability_reference.py "$RUNNER_TEMP/capability-numerical.log" > "$RUNNER_TEMP/capability-reference.json"
+
       - name: Verify continuous-vector sampler contracts and documented patterns
         run: |
           sbt --server --batch "examples / Compile / runMain com.cra.figaro.example.ResourceScalingStudy check"
@@ -450,8 +468,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -474,23 +492,23 @@ jobs:
       - name: Verify independently published consumer
         working-directory: tools/acceptance-consumer
         run: |
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0.jar | cut -d' ' -f1)"
-          sbt --server --batch "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0.jar | cut -d' ' -f1)"
+          sbt --server --batch "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck"
 
       - name: Build Maven-layout release bundle
-        run: python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/release70-bundle --version "$FIGARO_VERSION"
+        run: python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/capability-bundle --version "$FIGARO_VERSION"
 
       - name: Verify release-bundle consumer without Ivy local
         working-directory: tools/acceptance-consumer
         run: |
-          export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/release70-bundle/maven"
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0.jar | cut -d' ' -f1)"
-          sbt --server --batch "clean; runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck"
+          export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/capability-bundle/maven"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0.jar | cut -d' ' -f1)"
+          sbt --server --batch "clean; runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -501,11 +519,11 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0-javadoc.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.0.0.pom
-            target/release70-bundle/figaro-7.0.0-maven.zip
-            target/release70-bundle/figaro-7.0.0-maven.zip.sha256
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.1.0.pom
+            target/capability-bundle/figaro-7.1.0-maven.zip
+            target/capability-bundle/figaro-7.1.0-maven.zip.sha256
           if-no-files-found: error

@@ -37,6 +37,8 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Defensive and mixture proposals | [INF-01](#inf-01), [INF-02](#inf-02), [INF-03](#inf-03) |
 | Log-space particle weights and MH proposal ratios | [INF-04](#inf-04) |
 | Observation integration, finite enumeration, support-aware proposals and range checks | [INF-05](#inf-05) |
+| Warm-up-only scalar proposal tuning | [INF-06](#inf-06) |
+| Bounded-work particle recovery assessment | [INF-07](#inf-07) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -198,7 +200,12 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 
 **Validation:** [InferenceIntegrationRegressionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/InferenceIntegrationRegressionTest.scala) includes analytic underflow/overflow controls, sequential/parallel evidence, explicit zero-weight behavior and legacy proposal compatibility. See the execution record for local/remote results and completed release gates.
 
-**Guide:** [INFERENCE INTEGRATION](INFERENCE_INTEGRATION.md); [INFERENCE INTEGRATION STATUS](INFERENCE_INTEGRATION_STATUS.md).
+**Guide:** [INFERENCE INTEGRATION](INFERENCE_INTEGRATION.md); [INFERENCE INTEGRATION STATUS](INFERENCE_INTEGRATION_STATUS.md); [CAPABILITY EXPANSION](CAPABILITY_EXPANSION.md).
+
+Development follow-up: [HasLogRandomnessProposal.scala](../Figaro/src/main/scala/com/cra/figaro/language/HasLogRandomnessProposal.scala)
+adds an explicit randomness-measure custom hook and ratio constructor. No third-party
+proposal is automatically reinterpreted. [CapabilityExpansionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/CapabilityExpansionTest.scala)
+checks asymmetric extreme ratios and invalid inputs; this is not in published 7.0.0.
 
 <a id="inf-05"></a>
 
@@ -212,7 +219,46 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 
 **Validation:** [MultiChainObservationTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/MultiChainObservationTest.scala), [FiniteCountInferenceTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/FiniteCountInferenceTest.scala), [SupportAwareProposalTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/SupportAwareProposalTest.scala), [SupportAwareProposalStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/SupportAwareProposalStudy.scala), [NumericalRangeIntegrationTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/NumericalRangeIntegrationTest.scala). Controls include enumerated posteriors, finite-difference Jacobian determinants, exact BigInt combinatorics, small-shape series and matrix scalar reductions. Executed outcomes and remaining gates are recorded separately; a source citation does not validate all regimes.
 
-**Guide:** [INFERENCE INTEGRATION](INFERENCE_INTEGRATION.md); [INFERENCE INTEGRATION STATUS](INFERENCE_INTEGRATION_STATUS.md).
+**Guide:** [INFERENCE INTEGRATION](INFERENCE_INTEGRATION.md); [INFERENCE INTEGRATION STATUS](INFERENCE_INTEGRATION_STATUS.md); [CAPABILITY EXPANSION](CAPABILITY_EXPANSION.md); [CAPABILITY EXPANSION STATUS](CAPABILITY_EXPANSION_STATUS.md).
+
+Development follow-up: nested owned likelihood spines, explicit scalar randomness
+adapters, tiny-shape stable ratios and direct Cholesky-entry densities reuse the
+listed code. Multinomial aggregation uses the probability-generating-function
+category reduction; [University of Washington STAT 512 notes](https://faculty.washington.edu/yenchic/20A_stat512/Lec7_Multinomial.html)
+are an inspected teaching/formula reference, not a copied implementation.
+[CapabilityExpansionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/CapabilityExpansionTest.scala)
+provides small exhaustive controls; [CapabilityNumericalStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/CapabilityNumericalStudy.scala)
+and [independent high-precision comparison](../tools/capability_reference.py) compare
+actual library output, including rounded-singular Gram cases. Expanded support is
+development-only and does not change the published 7.0.0 contract.
+
+<a id="inf-06"></a>
+
+### INF-06: Discarded warm-up scalar scaling
+
+**Source:** Garthwaite, Fan and Sisson, *Adaptive Optimal Scaling of Metropolis-Hastings Algorithms Using the Robbins-Monro Process*, [2010 preprint](https://arxiv.org/pdf/1006.3690), section 2 inspected. [Stan warm-up and fixed sampling](https://mc-stan.org/docs/cmdstan-guide/mcmc-intro.html) is a maintained implementation-policy comparison, not the source of random-walk formulas. Inspected 2026-10-12; publisher full-text retrieval failed, so no claim of reading the final journal version.
+
+**Role:** Independent development adaptation, not the paper's optimal-steplength algorithm or Stan HMC. Bounded log-scale update uses `(iteration+10)^(-0.6)` times acceptance deviation, then freezes. Acceptance targeting is not a precision or efficiency guarantee. Only one latent scalar is supported initially; existing public constructor contracts remain intact.
+
+**Code:** [SupportAwareProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/SupportAwareProposal.scala), `tune` and `Tuning`; [MultiChainMetropolisHastings.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings.scala), `runTuned`.
+
+**Validation:** [CapabilityExpansionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/CapabilityExpansionTest.scala): conjugate posterior, frozen report, worker replay, explicit rejection of extra latents, legacy/custom coordinate maps. No universal mixing result or benchmark superiority claimed.
+
+**Guide:** [CAPABILITY EXPANSION](CAPABILITY_EXPANSION.md); [CAPABILITY EXPANSION STATUS](CAPABILITY_EXPANSION_STATUS.md).
+
+<a id="inf-07"></a>
+
+### INF-07: Bounded-work indicator filtering and diagnostics
+
+**Source:** Jasra, Lee, Yau and Zhang, [The Alive Particle Filter](https://arxiv.org/abs/1304.0151) (preprint; historical background, detailed review pending). Sherlock, Golightly and Lee, [Robust, partially alive particle Metropolis-Hastings via The Frankenfilter](https://arxiv.org/html/2601.23173v1) (2026 preprint v1), sections 1–2, Algorithms 2–5 and Appendix A's exchangeability/induction argument inspected 2026-10-12. Doucet and Johansen, [A Tutorial on Particle Filtering and Smoothing](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF.pdf) (2008 revision), pre-resampling ESS and distinction between weighting and resampling.
+
+**Role:** Independent development implementation of the binary-weight specialization, not shipped in 7.0.0. Retains the corrected variable-size success population and samples ancestors directly; no generic mutable-snapshot retry or general-weight success rule. Figaro adds owned RNG, immutable-state callback contracts, fresh fixed-graph adapters, explicit terminal failure and engineering diagnostics. ESS thresholds are warnings, not precision guarantees. The source theorem depends on valid callbacks and model assumptions; finite local controls do not certify arbitrary programs. No paper performance figure is a Figaro measurement and no external code was copied.
+
+**Code:** [BoundedParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/BoundedParticleFilter.scala); [ParticleFilterHealth.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/ParticleFilterHealth.scala); [ParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/ParticleFilter.scala). Existing strict failure and opt-in legacy policy are unchanged.
+
+**Validation:** [BoundedParticleFilterTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/BoundedParticleFilterTest.scala): exhaustive one/two-step finite controls, exact-cap stopping, zero evidence, work bounds, RNG/lifecycle/ownership and unsupported evidence refusal. [BoundedParticleFilterStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/BoundedParticleFilterStudy.scala): separate-pilot, near-matched-work synthetic HMM comparison with all zero outcomes retained. Execution status is recorded separately; no universal accuracy or performance guarantee.
+
+**Guide:** [BOUNDED PARTICLE FILTER](BOUNDED_PARTICLE_FILTER.md); [CAPABILITY EXPANSION](CAPABILITY_EXPANSION.md); [CAPABILITY EXPANSION STATUS](CAPABILITY_EXPANSION_STATUS.md).
 
 <a id="dia-01"></a>
 

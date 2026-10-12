@@ -799,6 +799,102 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.TunedModel.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$TunedModel.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.TunedModel.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$TunedModel.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.TunedResult.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$TunedResult.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.TunedResult.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$$TunedResult.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.run ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html#run-fffff617)
@@ -823,6 +919,32 @@ Invocation template:
 
 ```scala
 com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.run(config)(build)
+```
+
+## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runTuned ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings$.html#runTuned-fffff0ef)
+
+```scala
+def runTuned(config: Config)(build: (Universe, Int) => TunedModel): TunedResult
+```
+
+Run with discarded scalar warm-up tuning, followed by frozen production moves.
+
+Type parameters: none.
+
+Parameters, list 1: `` config: Config ``.
+
+Parameters, list 2: `` build: (Universe, Int) => TunedModel ``.
+
+Returns: `` TunedResult ``.
+
+Source contract/attributes: Run with discarded scalar warm-up tuning, followed by frozen production moves. Value parameters build returns a fresh ordinary model and tuner in each supplied universe config fixed warm-up/production budgets; warmUp must be positive Attributes Returns posterior traces/diagnostics plus frozen scale reports Example runTuned(config) { (u,i) => TunedModel(model, SupportAwareProposal.tune(x)) }
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runTuned(config)(build)
 ```
 
 ## `` com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings.runUntilPrecise ``
