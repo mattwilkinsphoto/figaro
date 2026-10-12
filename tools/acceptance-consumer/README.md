@@ -19,7 +19,8 @@ runs it on a fresh runner without restoring dependency caches.
 
 For local producer testing instead:
 
-For the 7.0 integration development branch set `FIGARO_VERSION=7.0.0-SNAPSHOT`.
+For the 7.0 release candidate set `FIGARO_VERSION=7.0.0` (or the exact snapshot
+coordinate when checking a development build).
 This opts into the separate `src/integration/scala` packaged-API check; after the
 ordinary check, run `runMain IntegrationConsumerCheck`. Leaving the variable unset
 continues to target the immutable 6.1.0 Central baseline. The development check

@@ -8,6 +8,14 @@ import com.cra.figaro.algorithm.sampling.parallel.MultiChainMetropolisHastings a
 
 /** Packaged API/linkage checks, not a performance benchmark or convergence certificate. */
 object IntegrationConsumerCheck {
+  // Compile the old/new extension-body examples against the packaged public types.
+  private def ordinaryParticle(logLikelihood: Double,
+      state: com.cra.figaro.algorithm.filtering.State): ParticleFilter.WeightedParticle =
+    (math.exp(logLikelihood), state)
+  private def logParticle(logLikelihood: Double,
+      state: com.cra.figaro.algorithm.filtering.State): ParticleFilter.LogWeightedParticle =
+    ParticleFilter.LogWeightedParticle(logLikelihood, state)
+
   def main(args: Array[String]): Unit = {
     require(args.isEmpty)
     val artifact=java.nio.file.Path.of(classOf[Universe].getProtectionDomain.getCodeSource.getLocation.toURI)

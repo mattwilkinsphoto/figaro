@@ -47,14 +47,14 @@ catching the exception and querying stale state. This applies to both filter fac
 For a filter subclass, port an override of `makeWeightedParticle` to
 `makeLogWeightedParticle` (same arguments, `LogWeightedParticle` return type).
 Likewise port `initialWeightedParticle` / `addWeightedParticle` to their `Log`
-counterparts. The following shows the tuple expression inside such an override;
+counterparts. The following shows the return expression inside such an override;
 `state` is the generated particle state and `logLikelihood` its directly computed score:
 
 ```scala
 // Old ordinary-weight hook body:
 (math.exp(logLikelihood), state)
 // New log-weight hook body:
-(logLikelihood, state)
+ParticleFilter.LogWeightedParticle(logLikelihood, state)
 ```
 
 Do not exponentiate and then take a logarithm: that reintroduces the underflow.

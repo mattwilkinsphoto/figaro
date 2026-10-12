@@ -1,6 +1,6 @@
 # Distribution and inference integration: execution record
 
-Status: locally implemented and verified; not merged or released. Baseline: main `269f9086`, published
+Status: implemented, merged, and undergoing release qualification; not yet published. Baseline: main `269f9086`, published
 6.1.0. All five stages below were approved on 2026-10-11. No release publication
 was authorized by the original implementation plan. The maintainer subsequently
 authorized documentation-bridge examples, commit/push, remote CI, a clean release
@@ -28,6 +28,10 @@ are still pending. Before freezing the bundle, its installation README was clari
 bundle creation is not a publication action; Central availability must be verified
 separately. The previously published baseline is 6.1.0; consumer impact warrants
 the approved 7.0.0 major release once its remaining gates pass.
+The final source also corrects the bridge's log-particle return expression to the
+case-class constructor and includes both old/new expressions in the standalone
+consumer compile check. That check compiled and ran against the verified local
+candidate; the final-source remote/packaged checks must still pass.
 
 - [x] Stage 1: reproduce particle-weight underflow and MH ratio overflow; implement
   stable log-domain paths with compatibility controls. Verify finite/extreme weights,

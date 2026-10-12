@@ -7,13 +7,13 @@ from zipfile import ZipFile
 import central_release as central
 from build_release_bundle import archive_bytes
 
-POM = b'''<project xmlns="http://maven.apache.org/POM/4.0.0">
-<groupId>io.github.mattwilkinsphoto</groupId><artifactId>figaro_3</artifactId><version>6.1.0</version>
+POM = f'''<project xmlns="http://maven.apache.org/POM/4.0.0">
+<groupId>io.github.mattwilkinsphoto</groupId><artifactId>figaro_3</artifactId><version>{central.VERSION}</version>
 <name>Figaro</name><description>Probabilistic programming</description><url>https://github.com/mattwilkinsphoto/figaro</url>
 <licenses><license><name>Figaro License</name><url>https://github.com/mattwilkinsphoto/figaro/blob/main/LICENSE</url></license></licenses>
 <developers><developer><name>Figaro contributors</name></developer></developers>
 <scm><url>https://github.com/mattwilkinsphoto/figaro</url><connection>scm:git:https://github.com/mattwilkinsphoto/figaro.git</connection></scm>
-</project>'''
+</project>'''.encode()
 ID = '12345678-abcd-1234-abcd-123456789abc'
 
 
@@ -51,14 +51,14 @@ class CentralTests(unittest.TestCase):
                     central.approved_payload(packed)
 
     def test_payload_hash_checked(self):
-        packed = fixture(artifactSha256={'maven/'+central.PREFIX+'figaro_3-6.1.0.jar': '0'*64})
+        packed = fixture(artifactSha256={'maven/'+central.PREFIX+f'figaro_3-{central.VERSION}.jar': '0'*64})
         with patch.object(central, 'RELEASE_SHA', central.digest(packed)):
             with self.assertRaises(ValueError):
                 central.approved_payload(packed)
 
     def test_required_pom_fields(self):
         central.check_metadata(POM)
-        for bad in (POM.replace(b'6.1.0', b'6.0.0'), POM.replace(b'<name>Figaro</name>', b''),
+        for bad in (POM.replace(central.VERSION.encode(), b'0.0.0'), POM.replace(b'<name>Figaro</name>', b''),
                     POM.replace(b'<name>Figaro contributors</name>', b'')):
             with self.assertRaises(ValueError):
                 central.check_metadata(bad)
