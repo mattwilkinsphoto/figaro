@@ -9,9 +9,9 @@ checks below. A development version or Git tag is not evidence of publication.
   consumer-facing breaks rather than silently excluding them.
 - [x] Longer synthetic filtering sequences, abrupt observation changes, repeated
   budget exhaustion and persistent ancestry collapse; retain strict work bounds.
-- [ ] Final remote regression, independent numerical, documentation and packaged-consumer gates.
-- [ ] Clean-build reproducibility and branch/main remote CI.
-- [ ] Release notes, scoped commit and merge; preserve unrelated local work.
+- [x] Final remote regression, independent numerical, documentation and packaged-consumer gates.
+- [x] Clean-build reproducibility and branch/main remote CI.
+- [x] Release notes, scoped commit and merge; preserve unrelated local work.
 - [ ] Immutable GitHub release, validated signed Central deployment, publication
   and Central-only consumer verification for 7.1.0.
 - [ ] After publication: research, implement and verify an advisory independent-pilot
@@ -61,3 +61,14 @@ reproducibility and packaged consumers. The 7.0.0-compiled custom filter extensi
 also executed with the new JAR. Main CI and public publication remain pending.
 The main gate additionally selects bash explicitly so `tee` cannot hide a failing
 study. No regression or compatibility exclusions were added.
+
+All four [main CI jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/38272596410)
+passed for release source `ad22068d9d47dfca2be9e35ff44696c7be9faeef`. The downloaded
+non-candidate, clean-source bundle and all five contained artifact hashes were
+verified. Approved bundle SHA-256:
+`7028044a441594d94a8c7d28b206edc71830d823ee28a10c41aee70fcf128a4d`.
+Approved release thin JAR SHA-256:
+`324f6a640e6b0c0e802aa1ab39821b46135f21ef23c2c1dc38da29f6605c3f35`.
+These are the CI release bytes, not the earlier local Windows build. Reproducibility
+was checked between independent clean builds in the same CI environment; no
+cross-platform byte-identity claim is made. Central publication remains pending.
