@@ -1,6 +1,6 @@
 # Observation-informed ancestor selection
 
-Development API in **7.2.0-SNAPSHOT**, not published in 7.1.0.
+Published in **7.2.0**, not in 7.1.0. See [installation](MAVEN_CENTRAL.md).
 [Research provenance](RESEARCH_REFERENCES.md#inf-11).
 
 ## Overview: choose better parents as well as better children
@@ -273,8 +273,8 @@ exposed frequent numerical refusals, including in the standard growth model,
 and modal depletion under work calibration. The log-domain/tree repair subsequently
 completed all 7,680 unchanged-protocol runs with all 450 statistical checks passing.
 Mode depletion remains possible, particularly with smaller calibrated populations;
-robust ancestor selection adds cost. **7.2.0 publication remains on hold** pending
-review and release integration/CI/consumer gates.
+robust ancestor selection adds cost. Final-source CI, packaged consumers and
+[7.2.0 Central publication](RELEASE_7_2_STATUS.md) subsequently passed.
 The earlier finite/Gaussian checks remain valid within their scope; they do not
 establish broader readiness. High-dimensional and real-model validation remain
 separate. No blanket default switch or speedup is promised.

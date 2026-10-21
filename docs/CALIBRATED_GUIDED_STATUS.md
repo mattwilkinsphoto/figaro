@@ -1,6 +1,6 @@
 # Calibrated guided-filter acceptance
 
-Development milestone in 7.2.0-SNAPSHOT; not shipped in 7.1.0.
+Implemented during 7.2.0-SNAPSHOT development; now [published in 7.2.0](RELEASE_7_2_STATUS.md), not shipped in 7.1.0.
 [Research provenance](RESEARCH_REFERENCES.md#inf-10).
 
 - [x] Inspect Frankenfilter v2 sections 2/3, maintained `particles` GuidedPF source,

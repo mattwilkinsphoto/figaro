@@ -1,15 +1,15 @@
 # Auxiliary particle filter milestone
 
-Development work on 7.2.0-SNAPSHOT; not a published release.
+Implemented during 7.2.0-SNAPSHOT development; now [published in 7.2.0](RELEASE_7_2_STATUS.md).
 [Research provenance](RESEARCH_REFERENCES.md#inf-11).
 
 **Subsequent release gate:** the [broader continuous benchmark](CONTINUOUS_FILTER_BENCHMARKS.md)
 initially exposed numerical refusals in standard nonlinear models. The subsequent
 log-domain/tree repair completed all 7,680 identical-protocol runs and passed all
-450 checks. Finite-population mode depletion remains; the repair is local and
-7.2.0 publication stays on hold for review and release integration/CI/consumer gates.
+450 checks. Finite-population mode depletion remains. Final-source CI, release
+integration, signed Central publication and all four Central-only consumers passed.
 The checked milestones below describe the earlier bounded implementation acceptance,
-not completion of those remaining release gates.
+not replacements for the separate final release evidence linked above.
 
 ## Requirements and acceptance checklist
 

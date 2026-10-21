@@ -1,6 +1,6 @@
 # Likelihood-weighted bounded filtering
 
-Development API in **7.2.0-SNAPSHOT**, not in published 7.1.0.
+Published in **7.2.0**, not in 7.1.0. See [installation](MAVEN_CENTRAL.md).
 [Research provenance](RESEARCH_REFERENCES.md#inf-09).
 
 ## Overview

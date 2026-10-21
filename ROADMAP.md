@@ -5,9 +5,9 @@ contains optional candidates; [roadmap history](docs/ROADMAP_HISTORY.md) preserv
 the completed milestones and their original evidence. Historical priorities are
 not an active queue.
 
-## Current baseline: use 7.1.0
+## Current baseline: use 7.2.0
 
-**Figaro 7.1.0 is the adoption baseline and is published on Maven Central.**
+**Figaro 7.2.0 is the adoption baseline and is published on Maven Central.**
 The Java 17 / Scala 3 / sbt 2 modernization and approved core performance,
 distribution and modeling milestones are integrated. See the
 [release scope](docs/INFERENCE_INTEGRATION.md), [installation and publication](docs/MAVEN_CENTRAL.md),
@@ -40,11 +40,11 @@ passed its local and remote gates separately in 7.2.0-SNAPSHOT, as did
 with its [acceptance gates](docs/WEIGHTED_FILTER_STATUS.md). The approved
 [split-pilot score/work calibration and observation-informed proposal extension](docs/CALIBRATED_GUIDED_FILTER.md)
 also passed its [local and remote gates](docs/CALIBRATED_GUIDED_STATUS.md). These are
-validated development work for an unpublished 7.2 release. None is in the published
+now published in 7.2.0. None is in the immutable
 7.1.0 artifacts. The approved [auxiliary ancestor selection and Gaussian guidance
 milestone](docs/AUXILIARY_PARTICLE_FILTER.md) is implemented in 7.2.0-SNAPSHOT;
-its [acceptance record](docs/AUXILIARY_FILTER_STATUS.md) distinguishes completed local
-checks from remaining integration gates. Arbitrary-graph adaptation, automatic
+its [acceptance record](docs/AUXILIARY_FILTER_STATUS.md) preserves the implementation
+history. All [7.2 release gates](docs/RELEASE_7_2_STATUS.md) passed. Arbitrary-graph adaptation, automatic
 nonlinear proposal fitting and posterior-precision selection remain deferred.
 
 Before publishing 7.2.0, the approved [continuous nonlinear and multimodal
@@ -54,9 +54,10 @@ publication readiness depends on the recorded results, not just passing unit tes
 That gate exposed systematic numerical refusals and calibration-related modal
 depletion. The local log-domain/tree repair now completes all 7,680 unchanged
 benchmark runs and passes all 450 statistical checks. Finite-population mode loss
-remains, especially under reduced-work calibration. **7.2.0 publication stays on
-hold** pending review and release integration/CI/consumer gates; neither numerical
-success nor a score target establishes universal posterior precision.
+remains, especially under reduced-work calibration. Final-source CI, reproducible
+packaging, signed publication and all four Central-only consumers subsequently
+passed. **7.2.0 is published**; neither numerical success nor a score target
+establishes universal posterior precision.
 
 Approved distribution/inference integration is complete and released in **7.0.0**.
 Its five stages cover stable filtering/MH ratios,

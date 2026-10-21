@@ -1,6 +1,6 @@
 # Calibrated and observation-informed weighted filtering
 
-Development API in **7.2.0-SNAPSHOT**, not published in 7.1.0.
+Published in **7.2.0**, not in 7.1.0. See [installation](MAVEN_CENTRAL.md).
 [Research provenance](RESEARCH_REFERENCES.md#inf-10).
 
 ## Overview: two different problems, two opt-in tools

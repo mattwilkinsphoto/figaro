@@ -1,6 +1,6 @@
 # Weighted bounded-filter acceptance
 
-Development milestone in 7.2.0-SNAPSHOT, separate from the immutable 7.1.0 release.
+Implemented during 7.2.0-SNAPSHOT development; now [published in 7.2.0](RELEASE_7_2_STATUS.md), separate from the immutable 7.1.0 release.
 [Research provenance](RESEARCH_REFERENCES.md#inf-09).
 
 - [x] Inspect primary method and existing reference implementation availability.

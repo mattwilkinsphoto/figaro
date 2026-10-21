@@ -1,6 +1,7 @@
 # Continuous nonlinear and multimodal filtering validation
 
-Pre-publication gate for **7.2.0**. The preserved baseline uses `bf6a2cd7`;
+Completed pre-publication gate for **7.2.0**, now [published](RELEASE_7_2_STATUS.md).
+The preserved baseline uses `bf6a2cd7`;
 the subsequent numerical repair is compared with identical fixtures and protocol.
 [Benchmark provenance](RESEARCH_REFERENCES.md#inf-12);
 [numerical repair provenance](RESEARCH_REFERENCES.md#inf-13).
@@ -131,7 +132,9 @@ it is not needed for these fixed-grid references and no package was installed.
 
 ## Preserved baseline execution
 
-**Executed: broader readiness BLOCKED. Do not publish 7.2.0 yet.**
+**Initial execution: broader readiness BLOCKED; publication was held.** The
+subsequent repair and final release results below supersede that readiness state,
+without removing the original failure evidence.
 
 The frozen 7,680-run matrix completed on the unchanged `bf6a2cd7` runtime:
 153,600 step records, 2,537 complete trajectories and 5,143 numerical refusals.
@@ -289,9 +292,10 @@ numerical usability and support handling, not a speed claim.
 The observations resolve the two numerical refusal mechanisms for this benchmark.
 They do **not** eliminate finite-population mode loss, establish a precision rule,
 or validate arbitrary tails/dimensions/data. A fixed larger budget or better
-proposal can help, but no automatic recovery was added. **7.2.0 remains on hold**
-for review and subsequent release integration/CI/consumer gates; no version was
-published by this repair task.
+proposal can help, but no automatic recovery was added. Publication remained on
+hold at the end of this repair task. Subsequent final-source CI, integration and
+Central consumer gates passed; [7.2.0 was published](RELEASE_7_2_STATUS.md) on
+2026-10-21. The original numerical evidence and its limitations are unchanged.
 
 ### Reproduce
 

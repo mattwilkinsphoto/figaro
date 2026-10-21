@@ -1,13 +1,17 @@
 # Modernization release notes
 
-## Release preparation: 7.2.0
+## Current release: 7.2.0 — published
+
+Published and verified on Maven Central. Final-source CI, byte-reproducibility,
+four public artifact byte comparisons and all four Central-only consumers passed.
+See the [readiness and publication record](RELEASE_7_2_STATUS.md).
 
 The [broader continuous-filter benchmark](CONTINUOUS_FILTER_BENCHMARKS.md)
 exposed numerical-range and auxiliary ancestor-CDF refusals in standard nonlinear
 models, plus modal depletion under work calibration. The log-domain/tree repair
 now completes all 7,680 unchanged-protocol runs with all 450 checks passing. Finite
 population mode loss remains a documented limitation. Integrated snapshot CI and
-all four packaged consumers passed; final-version publication gates are tracked in
+all four packaged consumers passed; completed final-version publication gates are tracked in
 the [7.2.0 readiness record](RELEASE_7_2_STATUS.md). No released 7.1.0 artifact
 has been changed. The repair retains tiny log weights through ancestor selection
 and full auxiliary corrections and adds `currentLogWeights`; ordinary output weights
@@ -28,7 +32,7 @@ and scalar predictive/multivariate linear-Gaussian helpers. See its
 [acceptance record](AUXILIARY_FILTER_STATUS.md). None implies automatic recovery
 or precision guarantees; existing ordinary filter defaults remain unchanged.
 
-## Current release
+## Previous releases
 
 ### 7.1.0 — published
 
@@ -86,7 +90,7 @@ comparison limits](RELEASE_6_1.md). All modern.* entries below describe historic
 Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The current published version is
-`7.1.0`, available directly from Maven Central. A locally distributed
+`7.2.0`, available directly from Maven Central. A locally distributed
 `6.0.0-modern.10-rc.1` integration bundle
 was built from `9e939349`; it is not a Maven Central release or Git tag. This documentation
 cleanup and attribution update do not alter that immutable bundle.

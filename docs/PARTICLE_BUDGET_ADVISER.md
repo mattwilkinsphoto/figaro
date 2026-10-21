@@ -1,6 +1,6 @@
 # Choosing a bounded indicator-filter budget
 
-Development API for **7.2.0-SNAPSHOT**, not in the published 7.1.0 library.
+Published in **7.2.0**, not in the 7.1.0 library. See [installation](MAVEN_CENTRAL.md).
 [Research provenance](RESEARCH_REFERENCES.md#inf-08).
 
 ## Overview
