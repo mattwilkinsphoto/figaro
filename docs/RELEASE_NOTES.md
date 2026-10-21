@@ -1,13 +1,14 @@
 # Modernization release notes
 
-## In development: 7.2.0-SNAPSHOT
+## Release preparation: 7.2.0
 
-**Publication hold:** the [broader continuous-filter benchmark](CONTINUOUS_FILTER_BENCHMARKS.md)
+The [broader continuous-filter benchmark](CONTINUOUS_FILTER_BENCHMARKS.md)
 exposed numerical-range and auxiliary ancestor-CDF refusals in standard nonlinear
-models, plus modal depletion under work calibration. A local log-domain/tree repair
+models, plus modal depletion under work calibration. The log-domain/tree repair
 now completes all 7,680 unchanged-protocol runs with all 450 checks passing. Finite
-population mode loss remains a documented limitation. Review and subsequent release
-integration/CI/consumer gates remain before publication; no released 7.1.0 artifact
+population mode loss remains a documented limitation. Integrated snapshot CI and
+all four packaged consumers passed; final-version publication gates are tracked in
+the [7.2.0 readiness record](RELEASE_7_2_STATUS.md). No released 7.1.0 artifact
 has been changed. The repair retains tiny log weights through ancestor selection
 and full auxiliary corrections and adds `currentLogWeights`; ordinary output weights
 may still round to zero. Same-seed trajectories change with the new sampler.

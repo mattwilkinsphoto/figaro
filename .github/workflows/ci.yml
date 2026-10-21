@@ -19,7 +19,7 @@ defaults:
     shell: bash
 
 env:
-  FIGARO_VERSION: 7.2.0-SNAPSHOT
+  FIGARO_VERSION: 7.2.0
   FIGARO_CAPABILITY_CHECK: 'true'
   FIGARO_BUDGET_CHECK: 'true'
 
@@ -59,14 +59,14 @@ jobs:
         run: |
           git status --porcelain --untracked-files=all
           python3 -B tools/test_build_release_bundle.py
-          python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/capability-preflight --version "$FIGARO_VERSION" --candidate
+          python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/capability-preflight --version "$FIGARO_VERSION"
       - name: Verify local publication in preflight
         run: sbt --server --batch "figaro / publishLocal"
       - name: Consume the release layout without Ivy local
         working-directory: tools/acceptance-consumer
         run: |
           export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/capability-preflight/maven"
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT.jar | cut -d' ' -f1)"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0.jar | cut -d' ' -f1)"
           sbt --server --batch "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck"
 
   gvm-bhattacharyya-research:
@@ -484,8 +484,8 @@ jobs:
       - name: Record artifact checksums
         run: |
           sha256sum \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT.jar \
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT-fat.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0.jar \
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-fat.jar \
             > "$RUNNER_TEMP/figaro-artifacts.sha256"
 
       - name: Verify clean rebuild is byte-for-byte reproducible
@@ -508,23 +508,23 @@ jobs:
       - name: Verify independently published consumer
         working-directory: tools/acceptance-consumer
         run: |
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT.jar | cut -d' ' -f1)"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0.jar | cut -d' ' -f1)"
           sbt --server --batch "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck"
 
       - name: Build Maven-layout release bundle
-        run: python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/capability-bundle --version "$FIGARO_VERSION" --candidate
+        run: python3 -B tools/build_release_bundle.py target/out/jvm/scala-3.9.0/figaro target/capability-bundle --version "$FIGARO_VERSION"
 
       - name: Verify release-bundle consumer without Ivy local
         working-directory: tools/acceptance-consumer
         run: |
           export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/capability-bundle/maven"
-          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT.jar | cut -d' ' -f1)"
+          export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0.jar | cut -d' ' -f1)"
           sbt --server --batch "clean; runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0
         with:
-          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT-fat.jar
+          file: target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-fat.jar
           format: cyclonedx-json
           output-file: Figaro.cdx.json
           artifact-name: figaro-cyclonedx-sbom
@@ -535,11 +535,11 @@ jobs:
         with:
           name: figaro-java17-scala3-sbt2
           path: |
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT-fat.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT-sources.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT-javadoc.jar
-            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-SNAPSHOT.pom
-            target/capability-bundle/figaro-7.2.0-SNAPSHOT-maven.zip
-            target/capability-bundle/figaro-7.2.0-SNAPSHOT-maven.zip.sha256
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-fat.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-sources.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0-javadoc.jar
+            target/out/jvm/scala-3.9.0/figaro/figaro_3-7.2.0.pom
+            target/capability-bundle/figaro-7.2.0-maven.zip
+            target/capability-bundle/figaro-7.2.0-maven.zip.sha256
           if-no-files-found: error
