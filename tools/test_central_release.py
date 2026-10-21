@@ -1,6 +1,7 @@
 """In-memory release guard tests: never access a key, token, or network."""
 import io
 import json
+from pathlib import Path
 import unittest
 from unittest.mock import patch
 from zipfile import ZipFile
@@ -30,6 +31,14 @@ def fixture(**changes):
 
 
 class CentralTests(unittest.TestCase):
+    def test_current_release_runs_all_four_central_only_consumers(self):
+        workflow = (Path(__file__).resolve().parents[1] / '.github/workflows/maven-central.yml').read_text()
+        self.assertIn('FIGARO_VERSION: ' + central.VERSION, workflow)
+        for flag in ('FIGARO_CENTRAL_ONLY', 'FIGARO_CAPABILITY_CHECK', 'FIGARO_BUDGET_CHECK'):
+            self.assertIn(flag + ": 'true'", workflow)
+        for main in ('FigaroConsumerCheck', 'IntegrationConsumerCheck', 'CapabilityConsumerCheck', 'BudgetConsumerCheck'):
+            self.assertIn('runMain ' + main, workflow)
+
     def test_approved_bundle(self):
         packed = fixture()
         with patch.object(central, 'RELEASE_SHA', central.digest(packed)):
