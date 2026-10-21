@@ -101,7 +101,9 @@ calibration. Ancestors retain ordinary multinomial selection from previous weigh
 For exact scalar Gaussian conditioning, the initial corrected weights are constant;
 later weights can still differ between parents. This does not cure loss of important
 ancestral histories. It is a guided filter, **not** an auxiliary particle filter with
-observation-dependent ancestor weights.
+observation-dependent ancestor weights. To change that separate decision, use the
+opt-in [auxiliary advance methods](AUXILIARY_PARTICLE_FILTER.md), which also correct
+ancestor probabilities and report parent-scoring work separately.
 
 ### 3. Guard a rough proposal with a prior mixture
 
@@ -257,8 +259,10 @@ The exact parameters, all twelve rows and machine-readable comparison are emitte
 by the study and checked by `tools/guided_filter_reference.py`.
 
 See the [execution checklist](CALIBRATED_GUIDED_STATUS.md) for checks actually run.
-Real application acceptance, matched wall-time efficiency, nonlinear/high-dimensional
-proposal fitting and auxiliary ancestor proposals remain follow-up work.
+Real application acceptance and nonlinear/high-dimensional proposal fitting remain
+follow-up work. [Auxiliary ancestor proposals](AUXILIARY_PARTICLE_FILTER.md) have a
+separate implementation and validation record; their new study records elapsed
+time, without establishing a universal or application-level efficiency gain.
 
 ## Related
 

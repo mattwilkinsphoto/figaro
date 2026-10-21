@@ -2,6 +2,8 @@ import com.cra.figaro.algorithm.filtering.{BoundedParticleBudget as A, BoundedPa
 import com.cra.figaro.util.random
 import com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter as W
 import com.cra.figaro.algorithm.filtering.{WeightedParticleCalibration as C, WeightedParticleProposal as P}
+import com.cra.figaro.algorithm.filtering.AuxiliaryParticleProposal as AP
+import com.cra.figaro.library.atomic.continuous.MultivariateGaussianDistribution
 
 /** Consumer compiled only for the post-7.1 adviser, never for the immutable 7.1 release. */
 object BudgetConsumerCheck {
@@ -41,8 +43,20 @@ object BudgetConsumerCheck {
       val r=calibrated.advanceCalibrated(likelihood(-.3),req,Some(q(-.3)))
       require(calibrated.lastCalibration.get.pilotCandidates+r.report.attempts<=2000)
       require(r.logEvidence.isFinite && r.expectation(identity).isFinite)
+      val look=AP.LookAhead[Double](x=>P.gaussianPredictiveLogLikelihood(.8*x,math.sqrt(.3),.7,math.sqrt(.5)))
+      val auxiliary=calibrated.advanceAuxiliaryCalibrated(likelihood(.7),req,look,Some(q(.7)))
+      require(calibrated.lastAuxiliary.get.evaluations==r.particles.size)
+      require(auxiliary.logEvidence.isFinite && auxiliary.weights.sum > .999999999)
+      calibrated.advanceAuxiliary(W.Evidence(likelihood(.4),W.cappedLikelihood(0)),
+        AP.LookAhead[Double](x=> -x*x),Some(q(.4)))
     } finally calibrated.close()
     println("Calibrated guided filtering verified from the same artifact")
+    val priorVector=MultivariateGaussianDistribution(Vector(0.0,0.0),Vector(Vector(1.0,0.0),Vector(0.0,1.0)))
+    val conditioned=P.linearGaussianObservation(priorVector,Vector(1.0),Vector(Vector(1.0,0.0)),Vector(Vector(1.0)))
+    require(math.abs(conditioned.posterior.mean.head-.5)<1e-12)
+    require(conditioned.proposal.logDensity(Vector(.5,0.0)).isFinite)
+    require(P.multivariateGaussian(priorVector).logDensity(Vector(0.0,0.0)).isFinite)
+    println("Auxiliary ancestor and vector Gaussian guidance verified from the same artifact")
     println(s"Budget adviser API verified from artifact $hash")
   }
 }

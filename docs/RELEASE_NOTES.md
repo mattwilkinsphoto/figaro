@@ -11,7 +11,11 @@ from 7.1.0. See [weighted-filter acceptance](WEIGHTED_FILTER_STATUS.md) for curr
 validation. A subsequent [calibrated guided-filter extension](CALIBRATED_GUIDED_FILTER.md)
 adds split-pilot score/work selection, explicit observation-informed proposals and
 defensive mixtures; see its [separate acceptance record](CALIBRATED_GUIDED_STATUS.md).
-Neither API implies automatic recovery, auxiliary ancestor reweighting or precision guarantees.
+The [auxiliary-filter extension](AUXILIARY_PARTICLE_FILTER.md) adds opt-in
+observation-informed ancestor selection, defensive support, full weight corrections,
+and scalar predictive/multivariate linear-Gaussian helpers. See its
+[acceptance record](AUXILIARY_FILTER_STATUS.md). None implies automatic recovery
+or precision guarantees; existing ordinary filter defaults remain unchanged.
 
 ## Current release
 

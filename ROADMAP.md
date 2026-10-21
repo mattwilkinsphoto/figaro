@@ -40,9 +40,12 @@ passed its local and remote gates separately in 7.2.0-SNAPSHOT, as did
 with its [acceptance gates](docs/WEIGHTED_FILTER_STATUS.md). The approved
 [split-pilot score/work calibration and observation-informed proposal extension](docs/CALIBRATED_GUIDED_FILTER.md)
 also passed its [local and remote gates](docs/CALIBRATED_GUIDED_STATUS.md). These are
-validated development branches, not a merged or published 7.2 release. None is in the published
-7.1.0 artifacts. Auxiliary ancestor proposals, arbitrary-graph adaptation and
-automatic posterior-precision selection remain deferred.
+validated development work for an unpublished 7.2 release. None is in the published
+7.1.0 artifacts. The approved [auxiliary ancestor selection and Gaussian guidance
+milestone](docs/AUXILIARY_PARTICLE_FILTER.md) is implemented in 7.2.0-SNAPSHOT;
+its [acceptance record](docs/AUXILIARY_FILTER_STATUS.md) distinguishes completed local
+checks from remaining integration gates. Arbitrary-graph adaptation, automatic
+nonlinear proposal fitting and posterior-precision selection remain deferred.
 
 Approved distribution/inference integration is complete and released in **7.0.0**.
 Its five stages cover stable filtering/MH ratios,

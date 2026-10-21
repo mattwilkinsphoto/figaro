@@ -5,6 +5,102 @@
 
 Examples are call templates: supply the named arguments with the declared types. Context parameters are shown explicitly with `using`; defaults may be omitted in real calls. `receiver` denotes an existing instance of the listed owner. Type parameters must be in scope. Abstract members require a concrete implementation. The signature, not a template, is authoritative.
 
+## `` com.cra.figaro.algorithm.filtering.AuxiliaryParticleProposal.LookAhead.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal$$LookAhead.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.AuxiliaryParticleProposal.LookAhead.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal$$LookAhead.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
+## `` com.cra.figaro.algorithm.filtering.AuxiliaryParticleProposal.Report.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal$$Report.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.AuxiliaryParticleProposal.Report.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal$$Report.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.filtering.BoundedParticleBudget.Advice.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/BoundedParticleBudget$$Advice.html#productElementNames-0)
@@ -5047,6 +5143,54 @@ Invocation template:
 receiver.advance(evidence, proposal)
 ```
 
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.advanceAuxiliary ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#advanceAuxiliary-217)
+
+```scala
+def advanceAuxiliary(evidence: Evidence[S], lookAhead: LookAhead[S], proposal: Option[Kernel[S]] = ...): Update[S]
+```
+
+Advance with frozen look-ahead ancestor probabilities and full importance correction.
+
+Type parameters: none.
+
+Parameters, list 1: `` evidence: Evidence[S] ``; `` lookAhead: LookAhead[S] ``; `` proposal: Option[Kernel[S]] = ... ``.
+
+Returns: `` Update[S] ``.
+
+Source contract/attributes: Advance with frozen look-ahead ancestor probabilities and full importance correction. Value parameters evidence likelihood and score of the FULL corrected log weight lookAhead pure per-parent log multiplier and defensive fraction proposal optional normalized guided transition; None uses the model transition Attributes Returns weighted posterior and evidence; inspect lastAuxiliary for preparation cost Example filter.advanceAuxiliary(evidence, LookAhead[Double](x => -x*x))
+
+Invocation template:
+
+```scala
+receiver.advanceAuxiliary(evidence, lookAhead, proposal)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.advanceAuxiliaryCalibrated ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#advanceAuxiliaryCalibrated-99)
+
+```scala
+def advanceAuxiliaryCalibrated(logLikelihood: S => Double, request: Request, lookAhead: LookAhead[S], proposal: Option[Kernel[S]] = ...): Update[S]
+```
+
+Prepare ancestors once, then calibrate on discarded pilots and run bounded production.
+
+Type parameters: none.
+
+Parameters, list 1: `` logLikelihood: S => Double ``; `` request: Request ``; `` lookAhead: LookAhead[S] ``; `` proposal: Option[Kernel[S]] = ... ``.
+
+Returns: `` Update[S] ``.
+
+Source contract/attributes: Prepare ancestors once, then calibrate on discarded pilots and run bounded production. Value parameters logLikelihood observation likelihood only lookAhead frozen deterministic parent scoring policy proposal optional frozen guided transition request cap covering pilot plus production candidates (NOT look-ahead calls) Attributes Returns production posterior; lastAuxiliary and lastCalibration report additional work Example filter.advanceAuxiliaryCalibrated(logLikelihood, request, lookAhead)
+
+Invocation template:
+
+```scala
+receiver.advanceAuxiliaryCalibrated(logLikelihood, request, lookAhead, proposal)
+```
+
 ## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.advanceCalibrated ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#advanceCalibrated-7db)
@@ -5117,6 +5261,30 @@ Invocation template:
 
 ```scala
 receiver.current
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.lastAuxiliary ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#lastAuxiliary-0)
+
+```scala
+def lastAuxiliary: Option[Report]
+```
+
+Last completed auxiliary preparation; retained on genuine production collapse. None on ordinary steps or callback/numerical failure. Includes look-ahead work, separately from lastCalibration.pilotCandidates and lastReport.attempts.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[Report] ``.
+
+Source contract/attributes: Last completed auxiliary preparation; retained on genuine production collapse. None on ordinary steps or callback/numerical failure. Includes look-ahead work, separately from lastCalibration.pilotCandidates and lastReport.attempts. Attributes
+
+Invocation template:
+
+```scala
+receiver.lastAuxiliary
 ```
 
 ## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.lastCalibration ``
@@ -5433,6 +5601,78 @@ Invocation template:
 com.cra.figaro.algorithm.filtering.WeightedParticleCalibration.run(request, seed, algorithm)(drawLogWeight)
 ```
 
+## `` com.cra.figaro.algorithm.filtering.WeightedParticleProposal.GaussianObservation.proposal ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedParticleProposal$$GaussianObservation.html#proposal-0)
+
+```scala
+def proposal: Law[Vector[Double]]
+```
+
+No behavioral summary was supplied in the source Scaladoc; inspect the full entry and implementation before using this low-level API.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Law[Vector[Double]] ``.
+
+Source contract/attributes: Attributes Returns proposal using the filter RNG; e.g. guide.proposal
+
+Invocation template:
+
+```scala
+receiver.proposal
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedParticleProposal.GaussianObservation.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedParticleProposal$$GaussianObservation.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedParticleProposal.GaussianObservation.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedParticleProposal$$GaussianObservation.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.filtering.WeightedParticleProposal.Kernel.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedParticleProposal$$Kernel.html#productElementNames-0)
@@ -5599,4 +5839,76 @@ Invocation template:
 
 ```scala
 com.cra.figaro.algorithm.filtering.WeightedParticleProposal.gaussianObservation(mean, standardDeviation, observation, noiseStandardDeviation)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedParticleProposal.gaussianPredictiveLogLikelihood ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedParticleProposal$.html#gaussianPredictiveLogLikelihood-fffff8fd)
+
+```scala
+def gaussianPredictiveLogLikelihood(mean: Double, standardDeviation: Double, observation: Double, noiseStandardDeviation: Double): Double
+```
+
+Exact log p(y) for x~N(mean,sd^2), y|x~N(x,noiseSd^2).
+
+Type parameters: none.
+
+Parameters, list 1: `` mean: Double ``; `` standardDeviation: Double ``; `` observation: Double ``; `` noiseStandardDeviation: Double ``.
+
+Returns: `` Double ``.
+
+Source contract/attributes: Exact log p(y) for x~N(mean,sd^2), y|x~N(x,noiseSd^2). Value parameters mean prior/transition mean noiseStandardDeviation positive observation standard deviation observation observed finite scalar standardDeviation prior/transition standard deviation, not variance Attributes Returns finite predictive log density for auxiliary look-ahead; extremes fail explicitly Example gaussianPredictiveLogLikelihood(.8*parent, .5, y, .2)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.WeightedParticleProposal.gaussianPredictiveLogLikelihood(mean, standardDeviation, observation, noiseStandardDeviation)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedParticleProposal.linearGaussianObservation ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedParticleProposal$.html#linearGaussianObservation-c9a)
+
+```scala
+def linearGaussianObservation(prior: MultivariateGaussianDistribution, observation: Vector[Double], observationMatrix: Vector[Vector[Double]], noiseCovariance: Vector[Vector[Double]], offset: Vector[Double] = ...): GaussianObservation
+```
+
+Condition x~N(m,P) on y=H*x+offset+noise, noise~N(0,R), independent of x. Cholesky solves on scaled innovation covariance; Joseph covariance update. No matrix inverse, fitted model, jitter or deterministic/zero-noise conditioning.
+
+Type parameters: none.
+
+Parameters, list 1: `` prior: MultivariateGaussianDistribution ``; `` observation: Vector[Double] ``; `` observationMatrix: Vector[Vector[Double]] ``; `` noiseCovariance: Vector[Vector[Double]] ``; `` offset: Vector[Double] = ... ``.
+
+Returns: `` GaussianObservation ``.
+
+Source contract/attributes: Condition x~N(m,P) on y=H*x+offset+noise, noise~N(0,R), independent of x. Cholesky solves on scaled innovation covariance; Joseph covariance update. No matrix inverse, fitted model, jitter or deterministic/zero-noise conditioning. Value parameters noiseCovariance R, full-rank observation covariance (NOT standard deviations) observation finite observed vector of size 1..128 observationMatrix H with observation.size rows and prior.dimension columns offset optional finite observation offset; empty means zeros prior immutable full-rank prior or conditional transition Gaussian Attributes Returns conditional proposal and predictive log likelihood for the SAME model Example linearGaussianObservation(prior, Vector(y), Vector(Vector(1.0,0.0)), Vector(Vector(.2)))
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.WeightedParticleProposal.linearGaussianObservation(prior, observation, observationMatrix, noiseCovariance, offset)
+```
+
+## `` com.cra.figaro.algorithm.filtering.WeightedParticleProposal.multivariateGaussian ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedParticleProposal$.html#multivariateGaussian-fffff34b)
+
+```scala
+def multivariateGaussian(distribution: MultivariateGaussianDistribution): Law[Vector[Double]]
+```
+
+Adapt an immutable full-rank Gaussian to the filter's owned RNG.
+
+Type parameters: none.
+
+Parameters, list 1: `` distribution: MultivariateGaussianDistribution ``.
+
+Returns: `` Law[Vector[Double]] ``.
+
+Source contract/attributes: Adapt an immutable full-rank Gaussian to the filter's owned RNG. Value parameters distribution existing validated vector Gaussian Attributes Returns normalized vector law with the original covariance contract Example multivariateGaussian(distribution)
+
+Invocation template:
+
+```scala
+com.cra.figaro.algorithm.filtering.WeightedParticleProposal.multivariateGaussian(distribution)
 ```
