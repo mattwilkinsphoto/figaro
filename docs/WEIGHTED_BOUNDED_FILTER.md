@@ -109,6 +109,7 @@ successful retries when estimating evidence.
 | `close` | No arguments; terminal, idempotent owner-thread cleanup |
 | `Update[S]` | `particles`, normalized `weights` in matching order, cumulative `logEvidence`, `report`; may include zero-weight candidates |
 | `Update.expectation` | `f: S => Double`; finite weighted mean; `result.expectation(x => x*x)` |
+| `currentLogWeights` | No arguments; immutable normalized log weights aligned with `current.particles`; `filter.currentLogWeights.count(_.isFinite)`; throws when there is no valid current posterior |
 | `StepReport` | `attempts` includes all draws, `retainedCandidates` is estimator denominator, `totalScore` includes stopping draw, `reason`, `targetMet`, `distinctParents`, `health` |
 | `StepReport.warnings` | No arguments; cap and one-parent warnings; not whole-history diversity or precision certification |
 | `StopReason` | `InitialBatch`, `ScoreTarget`, `BudgetExhausted` |
@@ -136,10 +137,10 @@ correctness for arbitrary callbacks. No particle-MCMC driver is provided.
   count. The score policy must not adapt to this step's previous draws. Optional
   stopping on observed ESS is not a supported substitute.
 - Raw log likelihoods may be finite (including positive density logs) or `-Infinity`.
-  NaN and positive infinity fail explicitly. If a finite positive weight becomes
-  zero during normalization, the filter refuses that dynamic range instead of
-  calling it impossible evidence. Representable categorical probabilities still
-  have ordinary floating-point and finite-RNG resolution limits.
+  NaN and positive infinity fail explicitly. Normalized log weights are retained:
+  ordinary `Update.weights` may round a tiny positive value to zero without deleting
+  its ancestor. `currentLogWeights` distinguishes this from actual `-Infinity`.
+  Overflow of the log range, corrected log weight or evidence still fails explicitly.
 - A score can numerically underflow to zero without changing the inference weight.
   That affects work allocation and may force the cap. Near-threshold floating-point
   sums are not exact real arithmetic.
@@ -156,6 +157,41 @@ correctness for arbitrary callbacks. No particle-MCMC driver is provided.
   scores; the Boolean adviser cannot be reinterpreted as that extension.
 
 ## Validation and related modules
+
+### Numerical representation and reproducibility
+
+The numerical repair uses an independent log-mass binary-tree draw for each
+ancestor, rather than cumulative ordinary probabilities. Full auxiliary-mixture
+corrections also use retained log weights. The tree costs O(N) to prepare and
+O(log N) per draw; each decision tests the smaller subtree using a log-uniform
+with a random binary exponent and independent mantissa. This avoids both collapsed
+CDF intervals and the fixed small-probability cutoff of a single `nextDouble()`.
+It is not exact-real arithmetic or an unlimited-support guarantee for a finite PRNG.
+See [research provenance and adaptation limits](RESEARCH_REFERENCES.md#inf-13).
+
+No weight floor, selective retry or change to the score/stopping rule is introduced.
+A finite tiny log weight can become important under later auxiliary guidance;
+it therefore must not be replaced internally by the rounded ordinary output.
+For example:
+
+```scala
+val result = filter.current
+val roundedAway = filter.currentLogWeights.zip(result.weights)
+  .count { case (logWeight, weight) => logWeight.isFinite && weight == 0.0 }
+// roundedAway > 0 is a representation diagnostic, not impossible evidence.
+```
+
+`Update.expectation` and ordinary-weight ESS summaries remain finite-precision
+summaries of the rounded weights. They do not offer log-domain rare-event moment
+accuracy: an observable that amplifies a vanishing weight can require a separate
+log-domain calculation. Inspect the log weights rather than interpreting ordinary
+zeros as support exclusions. There is no certified global floating-point error
+bound; analytic controls and the unchanged continuous benchmark provide numerical
+evidence within their stated scope. Statistical mode depletion remains possible.
+
+The new sampler consumes different RNG draws. Same-version/configuration/seed
+replay is tested; trajectories need not match the pre-repair implementation.
+Published 7.1.0's separate indicator/legacy filters are not changed by this repair.
 
 The tests exhaustively enumerate small two-step weighted models, including exact-cap
 and fixed-floor boundaries, and check lifecycle, weighted ancestry and numerical

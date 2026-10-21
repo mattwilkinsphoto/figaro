@@ -27,20 +27,28 @@ object AuxiliaryParticleProposal {
     usedPriorFallback: Boolean, priorFraction: Double)
 
   private[figaro] final case class Prepared(probabilities: Vector[Double],
-    logCorrections: Vector[Double], report: Report)
+    logCorrections: Vector[Double], report: Report, logProbabilities: Vector[Double])
 
   private[figaro] def prepare[S](particles: Vector[S], weights: Vector[Double],
     policy: LookAhead[S]): Prepared = {
     require(policy != null && particles.nonEmpty && particles.size == weights.size)
     require(weights.forall(w => w.isFinite && w >= 0) && math.abs(weights.sum-1) <= 1e-10,
       "Normalized nonnegative ancestor weights required")
-    val active = weights.indices.filter(weights(_) > 0).toVector
+    prepareLogs(particles,weights.map(math.log),policy)
+  }
+
+  private[figaro] def prepareLogs[S](particles: Vector[S], logs: Vector[Double],
+    policy: LookAhead[S]): Prepared = {
+    require(policy != null && particles.nonEmpty && particles.size == logs.size)
+    require(logs.forall(l => l.isFinite || l == Double.NegativeInfinity) &&
+      math.abs(logs.map(math.exp).sum-1) <= 1e-10, "Normalized log ancestor weights required")
+    val active = logs.indices.filter(i => logs(i).isFinite).toVector
     require(active.nonEmpty)
     // A fraction of one is an explicit no-look-ahead policy, without callback cost.
-    val scores = if (policy.priorFraction == 1) Vector.fill(weights.size)(0.0) else
-      weights.indices.map { i =>
+    val scores = if (policy.priorFraction == 1) Vector.fill(logs.size)(0.0) else
+      logs.indices.map { i =>
         if (Thread.currentThread().isInterrupted) throw new InterruptedException("Auxiliary preparation interrupted")
-        if (weights(i) == 0) Double.NegativeInfinity
+        if (!logs(i).isFinite) Double.NegativeInfinity
         else WeightedParticleProposal.checked(policy.logMultiplier(particles(i)))
       }.toVector
     if (policy.priorFraction == 0)
@@ -48,39 +56,30 @@ object AuxiliaryParticleProposal {
         "Undefended look-ahead must be positive on every positive-weight parent")
     val peak = active.map(scores).max
     val fallback = peak == Double.NegativeInfinity
-    val probabilities = if (fallback || policy.priorFraction == 1) weights else {
-      // Common log-score shifts cancel before adding small log weights.
-      val logs = weights.indices.map(i => if (weights(i) == 0) Double.NegativeInfinity
-        else math.log(weights(i)) + (scores(i)-peak)).toVector
-      val logPeak = logs.max
-      val terms = logs.map(l => math.exp(l-logPeak))
-      val sum = terms.sum
-      val mixed = weights.indices.map(i => policy.priorFraction*weights(i) +
-        (1-policy.priorFraction)*(terms(i)/sum)).toVector
-      val total = mixed.sum
-      mixed.map(_/total)
+    val selectedLogs = if (fallback || policy.priorFraction == 1) logs else {
+      val tilted = logs.indices.map { i =>
+        if (!logs(i).isFinite || !scores(i).isFinite) Double.NegativeInfinity
+        else {
+          val value = logs(i)+(scores(i)-peak)
+          if (!value.isFinite) throw new ArithmeticException("Auxiliary log weight overflow")
+          value
+        }
+      }.toVector
+      val normalized = LogParticleWeights.normalize(tilted).logs
+      val logPrior = math.log(policy.priorFraction)
+      val logTilt = math.log1p(-policy.priorFraction)
+      val mixed = logs.indices.map(i => LogParticleWeights.add(
+        logPrior+logs(i),logTilt+normalized(i))).toVector
+      LogParticleWeights.normalize(mixed).logs
     }
-    if (active.exists(i => probabilities(i) == 0))
-      throw new ArithmeticException("Positive auxiliary ancestor probability underflow")
     // Correct using the entire mixture law, never the selected mixture component.
-    val corrections = weights.indices.map(i => if (weights(i) == 0) 0.0
-      else math.log(weights(i))-math.log(probabilities(i))).toVector
+    val corrections = logs.indices.map(i => if (!logs(i).isFinite) 0.0
+      else logs(i)-selectedLogs(i)).toVector
     if (!corrections.forall(_.isFinite)) throw new ArithmeticException("Ancestor correction overflow")
+    val probabilities = selectedLogs.map(math.exp)
     Prepared(probabilities, corrections, Report(
       if (policy.priorFraction == 1) 0 else active.size,
-      1/weights.map(w => w*w).sum, 1/probabilities.map(w => w*w).sum, fallback, policy.priorFraction))
-  }
-
-  /** Refuse a positive interval lost to cumulative floating-point rounding. */
-  private[figaro] def cdf(probabilities: Vector[Double]): Vector[Double] = {
-    var cumulative = 0.0
-    val last = probabilities.lastIndexWhere(_ > 0)
-    probabilities.zipWithIndex.map { (p,i) =>
-      val next = if (i >= last) 1.0 else math.min(1.0,cumulative+p)
-      if (p > 0 && next <= cumulative)
-        throw new ArithmeticException("Auxiliary CDF lost a positive ancestor interval")
-      cumulative = next
-      next
-    }
+      1/logs.map(l => math.exp(2*l)).sum, 1/probabilities.map(w => w*w).sum,
+      fallback, policy.priorFraction), selectedLogs)
   }
 }

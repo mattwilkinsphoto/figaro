@@ -52,6 +52,9 @@ For post-7.1 development builds, additionally set `FIGARO_BUDGET_CHECK=true`
 and run `runMain BudgetConsumerCheck`. This checks the indicator budget adviser,
 weighted bounded filtering and [calibrated observation-informed proposals](../../docs/CALIBRATED_GUIDED_FILTER.md)
 from the same hash-verified JAR. Leave this flag unset for immutable 7.1.0 artifacts.
+It also checks `currentLogWeights` and auxiliary reuse of ancestors whose ordinary
+weights rounded to zero, with analytically cancelling observation weights. This
+guards the packaged numerical-repair API rather than relying on producer classes.
 
 `FigaroConsumerCheck.main(args: Array[String]): Unit` accepts an empty array and requires
 the environment variable above. It prints the loaded jar hash and a completion line;

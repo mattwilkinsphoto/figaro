@@ -31,15 +31,16 @@ class WeightedBoundedParticleFilterTest extends AnyWordSpec with Matchers {
       r.logIncrement shouldBe (math.log(1.5) +- 1e-14)
       r.report.warnings should not be empty
     }
-    "preserve absolute tiny and large likelihoods and refuse lost positive weights" in {
+    "preserve absolute tiny and large likelihoods and retain tiny positive log weights" in {
       for(offset <- Vector(-10000.0,10000.0)) {
         val r=scripted(Vector(offset,offset+math.log(3)),Vector(1,1),W.Config(2,2,1))
         r.weights(1) shouldBe (.75 +- 1e-12)
         r.logIncrement shouldBe (offset+math.log(2) +- 2e-12)
       }
-      intercept[ArithmeticException] {
-        scripted(Vector(0,-1000),Vector(1,1),W.Config(2,2,1))
-      }
+      val tiny=scripted(Vector(0,-1000),Vector(1,1),W.Config(2,2,1))
+      tiny.weights shouldBe Vector(1.0,0.0)
+      tiny.logWeights shouldBe Vector(0.0,-1000.0)
+      tiny.logIncrement shouldBe (-math.log(2) +- 1e-14)
     }
     "validate likelihoods scores and work boundaries without accepting invalid results" in {
       intercept[IllegalArgumentException](W.Config(1,4,1))

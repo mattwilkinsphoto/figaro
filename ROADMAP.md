@@ -47,6 +47,17 @@ its [acceptance record](docs/AUXILIARY_FILTER_STATUS.md) distinguishes completed
 checks from remaining integration gates. Arbitrary-graph adaptation, automatic
 nonlinear proposal fitting and posterior-precision selection remain deferred.
 
+Before publishing 7.2.0, the approved [continuous nonlinear and multimodal
+benchmark gate](docs/CONTINUOUS_FILTER_BENCHMARKS.md) extends the earlier finite
+controls. It compares all outcomes against independent deterministic references;
+publication readiness depends on the recorded results, not just passing unit tests.
+That gate exposed systematic numerical refusals and calibration-related modal
+depletion. The local log-domain/tree repair now completes all 7,680 unchanged
+benchmark runs and passes all 450 statistical checks. Finite-population mode loss
+remains, especially under reduced-work calibration. **7.2.0 publication stays on
+hold** pending review and release integration/CI/consumer gates; neither numerical
+success nor a score target establishes universal posterior precision.
+
 Approved distribution/inference integration is complete and released in **7.0.0**.
 Its five stages cover stable filtering/MH ratios,
 owned multi-chain observations, exact finite counts, support-aware proposals and

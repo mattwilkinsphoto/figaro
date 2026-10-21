@@ -71,7 +71,7 @@ object WeightedBoundedParticleFilter {
     new WeightedBoundedParticleFilter(model, config)
 
   private[figaro] final case class Step[S](values: Vector[S], weights: Vector[Double],
-    report: StepReport, logIncrement: Double)
+    report: StepReport, logIncrement: Double, logWeights: Vector[Double] = Vector.empty)
 
   private[figaro] def step[S](config: Config, hasParents: Boolean)(draw: () => (S,Int),
     evidence: Evidence[S]): Step[S] = weightedStep(config,hasParents)(() => {
@@ -111,14 +111,10 @@ object WeightedBoundedParticleFilter {
     if (peak == Double.NegativeInfinity)
       Step(candidates.iterator.map(_._1).toVector, Vector.empty, report, Double.NegativeInfinity)
     else {
-      val shifted = logs.map(w => math.exp(w-peak))
-      val sum = shifted.sum
-      val weights = shifted.map(_/sum)
-      if (logs.zip(weights).exists((l,w) => l.isFinite && w == 0.0))
-        throw new ArithmeticException("Positive normalized weight underflow; unsupported dynamic range")
-      val increment = peak + (math.log(sum)-math.log(candidates.size.toDouble))
+      val normalized = LogParticleWeights.normalize(logs)
+      val increment = peak + (normalized.logSum-math.log(candidates.size.toDouble))
       if (!increment.isFinite) throw new ArithmeticException("Evidence increment not representable")
-      Step(candidates.iterator.map(_._1).toVector, weights, report, increment)
+      Step(candidates.iterator.map(_._1).toVector, normalized.weights, report, increment, normalized.logs)
     }
   }
 
@@ -144,6 +140,7 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
   private val owner = Thread.currentThread()
   private val rng = SamplingRandom.seeded(config.seed, config.algorithm)
   private var latest: Option[Update[S]] = None
+  private var retainedLogs = Vector.empty[Double]
   private var diagnostic: Option[StepReport] = None
   private var calibration: Option[WeightedParticleCalibration.Advice] = None
   private var auxiliary: Option[AuxiliaryParticleProposal.Report] = None
@@ -169,6 +166,12 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
     access(); require(!terminal && latest.isDefined, "No current posterior")
     latest.get
   }
+  /** Normalized log weights of current.particles, in the same order. Finite entries
+    * remain available to ancestor selection even if current.weights rounds to zero.
+    * -Infinity denotes actual zero weight. Throws whenever current is unavailable.
+    * @return immutable log-weight vector; e.g. `filter.currentLogWeights.count(_.isFinite)`
+    */
+  def currentLogWeights: Vector[Double] = { current; retainedLogs }
   /** Draw the model's initial state and weight it with this first evidence policy. Call once. */
   def start(evidence: Evidence[S]): Update[S] = {
     access(); require(!terminal && latest.isEmpty, "Filter already started, closed or failed")
@@ -242,16 +245,12 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
     auxiliary = None
     try RandomContext.withRandom(rng) {
       val old = latest
-      val prepared = lookAhead.map(p => AuxiliaryParticleProposal.prepare(old.get.particles,old.get.weights,p))
+      val prepared = lookAhead.map(p => AuxiliaryParticleProposal.prepareLogs(old.get.particles,retainedLogs,p))
       auxiliary = prepared.map(_.report)
-      // One CDF per step; force its last positive entry to 1, never a trailing zero.
-      val cdf = prepared.map(p => AuxiliaryParticleProposal.cdf(p.probabilities)).getOrElse(old.map { r =>
-        val cumulative = r.weights.scanLeft(0.0)(_+_).tail
-        val last = r.weights.lastIndexWhere(_ > 0)
-        cumulative.zipWithIndex.map((x,i) => if (i >= last) 1.0 else math.min(x,1.0))
-      }.getOrElse(Vector.empty))
+      val ancestors = if (initial) None else Some(new LogParticleWeights.Tree(
+        prepared.map(_.logProbabilities).getOrElse(retainedLogs)))
       def draw(): (S,Int,Double) = {
-        val i = if (initial) -1 else ancestor(cdf,rng.nextDouble())
+        val i = if (initial) -1 else ancestors.get.draw(LogParticleWeights.logUniform(rng))
         val parent = if (initial) None else Some(old.get.particles(i))
         val (state,correction) = proposal match {
           case Some(q) => q.draw(parent)
@@ -277,13 +276,14 @@ final class WeightedBoundedParticleFilter[S] private (model: BoundedParticleFilt
       if (!logEvidence.isFinite) throw new ArithmeticException("Accumulated log evidence not representable")
       val answer = Update(result.values, result.weights, logEvidence, result.report)
       latest = Some(answer)
+      retainedLogs = result.logWeights
       answer
     } catch {
       case e: InterruptedException => terminal = true; latest = None; diagnostic = None; calibration = None; auxiliary = None; throw e
       case e: NoViableParticles => terminal = true; latest = None; throw e
       case scala.util.control.NonFatal(e) => terminal = true; latest = None; diagnostic = None; calibration = None; auxiliary = None; throw e
-    } finally running = false
+    } finally { if (terminal) retainedLogs = Vector.empty; running = false }
   }
   /** Release retained values. Terminal, idempotent, owner-thread only. */
-  def close(): Unit = { access(); latest = None; terminal = true }
+  def close(): Unit = { access(); latest = None; retainedLogs = Vector.empty; terminal = true }
 }

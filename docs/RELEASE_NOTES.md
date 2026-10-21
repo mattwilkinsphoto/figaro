@@ -2,6 +2,16 @@
 
 ## In development: 7.2.0-SNAPSHOT
 
+**Publication hold:** the [broader continuous-filter benchmark](CONTINUOUS_FILTER_BENCHMARKS.md)
+exposed numerical-range and auxiliary ancestor-CDF refusals in standard nonlinear
+models, plus modal depletion under work calibration. A local log-domain/tree repair
+now completes all 7,680 unchanged-protocol runs with all 450 checks passing. Finite
+population mode loss remains a documented limitation. Review and subsequent release
+integration/CI/consumer gates remain before publication; no released 7.1.0 artifact
+has been changed. The repair retains tiny log weights through ancestor selection
+and full auxiliary corrections and adds `currentLogWeights`; ordinary output weights
+may still round to zero. Same-seed trajectories change with the new sampler.
+
 The [independent-pilot budget adviser](PARTICLE_BUDGET_ADVISER.md) makes bounded
 indicator-filter configuration easier without silently retuning production.
 The [weighted bounded bootstrap filter](WEIGHTED_BOUNDED_FILTER.md) adds general

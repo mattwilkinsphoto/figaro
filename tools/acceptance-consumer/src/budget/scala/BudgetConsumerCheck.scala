@@ -31,6 +31,22 @@ object BudgetConsumerCheck {
       require(r.expectation(identity)>=0 && r.expectation(identity)<=1)
     } finally weighted.close()
     println("Weighted bounded filtering API verified from the same artifact")
+    // A rounded ordinary zero must not delete a finite-log ancestor. The next
+    // observation and look-ahead cancel the first observation's -1000 log weight.
+    var nextState=0
+    val tiny=W(B.Model[Int](() => {nextState+=1; nextState%2},identity),
+      W.Config(128,128,1,seed=205))
+    try {
+      val first=tiny.start(W.Evidence[Int](i => -1000.0*i,_ => 1.0))
+      require(first.weights.count(_==0.0)==64)
+      require(tiny.currentLogWeights.size==128 && tiny.currentLogWeights.forall(_.isFinite))
+      val second=tiny.advanceAuxiliary(W.Evidence[Int](i => 1000.0*i,_ => 1.0),
+        AP.LookAhead[Int](i => 1000.0*i,priorFraction=0))
+      require(tiny.lastAuxiliary.get.evaluations==128)
+      require(math.abs(second.logEvidence)<1e-10)
+      require(second.weights.forall(w => math.abs(w-1.0/128)<1e-12))
+    } finally tiny.close()
+    println("Retained log weights and underflowed-ancestor recovery verified from the same artifact")
     val p=P.gaussian(0,1)
     def transition(x:Double)=P.gaussian(.8*x,math.sqrt(.3))
     val calibrated=W(B.Model(p.sample,(x:Double)=>transition(x).sample()),W.Config(seed=204))

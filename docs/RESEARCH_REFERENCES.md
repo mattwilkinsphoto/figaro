@@ -35,7 +35,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | RNG engines, stream ownership and purpose selection | [RNG-01](#rng-01), [RNG-02](#rng-02), [RNG-03](#rng-03), [RNG-04](#rng-04) |
 | Vector slice sampling and alternative-method screening | [SAM-01](#sam-01), [SAM-02](#sam-02), [SAM-03](#sam-03) |
 | Defensive and mixture proposals | [INF-01](#inf-01), [INF-02](#inf-02), [INF-03](#inf-03) |
-| Log-space particle weights and MH proposal ratios | [INF-04](#inf-04) |
+| Log-space particle weights, tree ancestors and MH proposal ratios | [INF-04](#inf-04), [INF-13](#inf-13) |
 | Observation integration, finite enumeration, support-aware proposals and range checks | [INF-05](#inf-05) |
 | Warm-up-only scalar proposal tuning | [INF-06](#inf-06) |
 | Bounded-work particle recovery assessment | [INF-07](#inf-07) |
@@ -43,6 +43,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | General-likelihood bounded bootstrap filtering | [INF-09](#inf-09) |
 | Split-pilot calibration and observation-informed filtering proposals | [INF-10](#inf-10) |
 | Auxiliary ancestor selection and linear-Gaussian proposal helpers | [INF-11](#inf-11) |
+| Continuous nonlinear/multimodal filtering validation | [INF-12](#inf-12) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -319,6 +320,34 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 **Validation:** [AuxiliaryParticleFilterTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/AuxiliaryParticleFilterTest.scala), exhaustive two-step stopping controls, Gaussian identities, support/numerical/lifecycle checks; [AuxiliaryParticleFilterStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/AuxiliaryParticleFilterStudy.scala), all-seed five-mode Gaussian/nonlinear-finite comparisons; [independent oracle](../tools/auxiliary_filter_reference.py), rational joint conditioning and full finite-path summation. Execution status, costs and limitations are recorded in the guide/checklist; synthetic benchmarks are not application acceptance.
 
 **Guide:** [AUXILIARY PARTICLE FILTER](AUXILIARY_PARTICLE_FILTER.md); [AUXILIARY FILTER STATUS](AUXILIARY_FILTER_STATUS.md).
+
+<a id="inf-12"></a>
+
+### INF-12: Continuous nonlinear and multimodal filtering benchmarks
+
+**Source:** Gordon, Salmond and Smith, *Novel approach to nonlinear/non-Gaussian Bayesian state estimation* (1993), [accessible paper](https://people.bordeaux.inria.fr/pierre.delmoral/gordon-salmond-smith-1993.pdf), section 4.1/equations 9-10 and discussion of modal posteriors inspected. Maintained implementation comparison: [particles Gordon_etal](https://github.com/nchopin/particles/blob/master/particles/state_space_models.py), initial law and transition-time convention; [MIT license](https://github.com/nchopin/particles/blob/master/LICENSE). Branchini and Elvira, [Optimized auxiliary particle filters](https://proceedings.mlr.press/v161/branchini21a/branchini21a.pdf) (2021), Figure 1/section 5 benchmark discussion; their optimized solver and experiments are not implemented. Johansen-Doucet's tail/variance caution is mapped in INF-11. [SciPy composite Simpson documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.simpson.html) is a numerical-rule reference, not a runtime dependency. Inspected 2026-10-21; the initial Notre Dame mirror failed, then the Inria copy was read. No claim of full-paper proof review.
+
+**Role:** Benchmark-only validation for 7.2.0, not a new inference API. Literature-derived scalar growth dynamics with explicit initial/data conventions, a sharper-observation variant and an independently constructed symmetric persistent-mode stress model. Frozen benchmark-local two-root guidance exercises the existing public proposal/auxiliary APIs. Independent deterministic grid recursion uses NumPy, not Figaro samples. Reference convergence is empirical numerical evidence, not a rigorous quadrature bound or application acceptance. No external source code or dataset copied; no automatic nonlinear fitting or optimized APF is claimed.
+
+**Code:** [ContinuousFilterBenchmark.scala](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmark.scala); baseline runtime algorithms mapped in INF-09/INF-10/INF-11; subsequent numerical repair mapped in INF-13. The benchmark harness remains unchanged for the repair comparison.
+
+**Validation:** [ContinuousFilterBenchmarkTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmarkTest.scala), normalized guidance, symmetric modes and RNG replay; [independent reference and all-outcome analysis](../tools/continuous_filter_reference.py), domain/resolution convergence, Gaussian recursion and mixture controls. The guide records the frozen protocol, failed reference revision and actual execution status. Numerical refusals are not zero-evidence outcomes or excluded seeds.
+
+**Guide:** [CONTINUOUS FILTER BENCHMARKS](CONTINUOUS_FILTER_BENCHMARKS.md).
+
+<a id="inf-13"></a>
+
+### INF-13: Retained log weights and tree-based multinomial ancestors
+
+**Source:** Lee and Whiteley, [Forest resampling for distributed sequential Monte Carlo](https://arxiv.org/html/1406.6010), 2014 preprint v1, section 4.4 Algorithm 4 and Proposition 6 inspected 2026-10-21: recursive categorical sampling by subtree mass. INF-04 supplies shifted normalization/log-sum-exp. Maintained comparisons: [particles resampling](https://github.com/nchopin/particles/blob/master/particles/resampling.py) retains log weights but resamples ordinary weights; [Commons RNG GuideTableDiscreteSampler](https://commons.apache.org/proper/commons-rng/commons-rng-sampling/jacoco/org.apache.commons.rng.sampling.distribution/GuideTableDiscreteSampler.java.html) accepts ordinary probabilities and builds cumulative tables. Neither directly supplies the required log-input ancestor contract. No external code copied or additional dependency introduced.
+
+**Role:** Independent development repair, not an implementation of distributed/adaptive forest resampling. One balanced binary tree preserves independent multinomial draws required by the bounded-work construction. Figaro adapts subtree aggregation and smaller-child decisions to logs and retains log weights through defensive-mixture correction. The log-uniform construction is an elementary independent derivation: P(K=k)=2^-k, U=2^-K(1+V), with independent uniform mantissa V; leading-zero words extend K. Floating-point log arithmetic and PRNG limitations remain; no exact-arithmetic theorem, certified error bound, missing-mode guarantee or likelihood clipping is claimed. Ordinary output weights/expectations can still lose tiny contributions; the retained-log accessor exposes their distinction from actual zero support.
+
+**Code:** [LogParticleWeights.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/LogParticleWeights.scala); [WeightedBoundedParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.scala); [AuxiliaryParticleProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal.scala).
+
+**Validation:** [LogParticleWeightsTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/LogParticleWeightsTest.scala), forced rare branches below ordinary underflow, scripted exponent extension, categorical frequency checks, log-mixture recovery and real filter lifecycle; existing exhaustive finite/Gaussian tests remain. [ContinuousFilterBenchmarkTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmarkTest.scala) replaces archived refusal reproductions with explicit retention/selection assertions. INF-12's identical benchmark protocol, fixtures, seeds and acceptance checks assess the repair; execution results are recorded separately, not implied by these citations.
+
+**Guide:** [WEIGHTED BOUNDED FILTER](WEIGHTED_BOUNDED_FILTER.md); [AUXILIARY PARTICLE FILTER](AUXILIARY_PARTICLE_FILTER.md); [CONTINUOUS FILTER BENCHMARKS](CONTINUOUS_FILTER_BENCHMARKS.md).
 
 <a id="dia-01"></a>
 

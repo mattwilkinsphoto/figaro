@@ -201,9 +201,13 @@ child mixtures, update/close and calibrated-work APIs retain their
 - `priorFraction=1` skips scoring entirely and preserves ordinary selection.
   A rough look-ahead cannot remove a parent permanently through a zero score,
   but any finite resampling population can still lose histories by chance.
-- A zero-weight previous parent is neither scored nor selected. Positive
-  probabilities lost to normalization or CDF rounding cause explicit failure.
-  Extremely unequal weights remain unsupported; there is no silent clipping.
+- A genuinely zero-weight (`-Infinity` log-weight) parent is neither scored nor
+  selected. Finite log weights remain active even if their ordinary output is zero.
+  Log-domain mixture corrections and binary-tree ancestor sampling replace the
+  former underflow/CDF refusals; there is no clipping or probability floor. Log
+  arithmetic overflow still fails. Inspect `filter.currentLogWeights`; see the
+  [numerical contract](WEIGHTED_BOUNDED_FILTER.md#numerical-representation-and-reproducibility)
+  and [research provenance](RESEARCH_REFERENCES.md#inf-13).
 - A defensive ancestor mixture protects parent support, **not child support**.
   Use an appropriate child proposal, optionally `P.defensive`, as well.
 - The score is not the observation likelihood at the parent's current state.
@@ -264,8 +268,16 @@ selection, not a blanket replacement. Full per-seed outputs and work/timing
 summaries are retained with the independent oracle.
 
 See the [acceptance record](AUXILIARY_FILTER_STATUS.md) for checks actually executed.
-Broader nonlinear/high-dimensional performance and real-model validation remain
-separate from this milestone. No blanket default switch or speedup is promised.
+The subsequent [continuous nonlinear/multimodal benchmark](CONTINUOUS_FILTER_BENCHMARKS.md)
+exposed frequent numerical refusals, including in the standard growth model,
+and modal depletion under work calibration. The log-domain/tree repair subsequently
+completed all 7,680 unchanged-protocol runs with all 450 statistical checks passing.
+Mode depletion remains possible, particularly with smaller calibrated populations;
+robust ancestor selection adds cost. **7.2.0 publication remains on hold** pending
+review and release integration/CI/consumer gates.
+The earlier finite/Gaussian checks remain valid within their scope; they do not
+establish broader readiness. High-dimensional and real-model validation remain
+separate. No blanket default switch or speedup is promised.
 
 ## Related
 

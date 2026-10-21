@@ -40260,6 +40260,20 @@
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
+      "name": "currentLogWeights",
+      "anchor": "currentLogWeights-0",
+      "signature": "def currentLogWeights: Vector[Double]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Vector[Double]",
+      "summary": "Normalized log weights of current.particles, in the same order. Finite entries remain available to ancestor selection even if current.weights rounds to zero. -Infinity denotes actual zero weight. Throws whenever current is unavailable.",
+      "contract": "Normalized log weights of current.particles, in the same order. Finite entries remain available to ancestor selection even if current.weights rounds to zero. -Infinity denotes actual zero weight. Throws whenever current is unavailable. Attributes Returns immutable log-weight vector; e.g. filter.currentLogWeights.count(_.isFinite)",
+      "example": "receiver.currentLogWeights",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter",
       "name": "lastAuxiliary",
       "anchor": "lastAuxiliary-0",
       "signature": "def lastAuxiliary: Option[Report]",

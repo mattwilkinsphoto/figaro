@@ -5263,6 +5263,30 @@ Invocation template:
 receiver.current
 ```
 
+## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.currentLogWeights ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#currentLogWeights-0)
+
+```scala
+def currentLogWeights: Vector[Double]
+```
+
+Normalized log weights of current.particles, in the same order. Finite entries remain available to ancestor selection even if current.weights rounds to zero. -Infinity denotes actual zero weight. Throws whenever current is unavailable.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Vector[Double] ``.
+
+Source contract/attributes: Normalized log weights of current.particles, in the same order. Finite entries remain available to ancestor selection even if current.weights rounds to zero. -Infinity denotes actual zero weight. Throws whenever current is unavailable. Attributes Returns immutable log-weight vector; e.g. filter.currentLogWeights.count(_.isFinite)
+
+Invocation template:
+
+```scala
+receiver.currentLogWeights
+```
+
 ## `` com.cra.figaro.algorithm.filtering.WeightedBoundedParticleFilter.lastAuxiliary ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.html#lastAuxiliary-0)

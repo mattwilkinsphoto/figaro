@@ -3,6 +3,14 @@
 Development work on 7.2.0-SNAPSHOT; not a published release.
 [Research provenance](RESEARCH_REFERENCES.md#inf-11).
 
+**Subsequent release gate:** the [broader continuous benchmark](CONTINUOUS_FILTER_BENCHMARKS.md)
+initially exposed numerical refusals in standard nonlinear models. The subsequent
+log-domain/tree repair completed all 7,680 identical-protocol runs and passed all
+450 checks. Finite-population mode depletion remains; the repair is local and
+7.2.0 publication stays on hold for review and release integration/CI/consumer gates.
+The checked milestones below describe the earlier bounded implementation acceptance,
+not completion of those remaining release gates.
+
 ## Requirements and acceptance checklist
 
 Baseline: `dec2562e`; preserve unrelated local building/performance documentation.

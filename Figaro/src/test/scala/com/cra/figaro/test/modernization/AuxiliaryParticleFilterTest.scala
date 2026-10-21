@@ -40,8 +40,9 @@ class AuxiliaryParticleFilterTest extends AnyWordSpec with Matchers {
       for(bad <- Vector(Double.NaN,Double.PositiveInfinity))
         intercept[IllegalArgumentException](A.prepare(Vector(0),Vector(1.0),A.LookAhead[Int](_ => bad)))
       intercept[IllegalArgumentException](A.LookAhead[Int](_ => 0,-.1))
-      intercept[ArithmeticException](A.prepare(Vector(0,1),Vector(.5,.5),A.LookAhead[Int](i => -1000.0*i,0)))
-      intercept[ArithmeticException](A.cdf(Vector(1.0,1e-30)))
+      val tiny=A.prepare(Vector(0,1),Vector(.5,.5),A.LookAhead[Int](i => -1000.0*i,0))
+      tiny.logProbabilities(1) shouldBe (-1000.0 +- 1e-12)
+      tiny.logCorrections(1) shouldBe (1000.0-math.log(2) +- 1e-12)
     }
     "give constant corrected weights under exact Gaussian adaptation without losing evidence normalization" in {
       val f=W(model,W.Config(128,128,1,seed=42))
