@@ -21,6 +21,8 @@ is bounded adaptive work with corrected evidence estimation and ancestor selecti
 Use it when observation difficulty varies and a fixed candidate count is inconvenient.
 Keep standard fixed-budget filtering when predictable candidate counts matter more,
 or when the bootstrap prior/transition proposal is already adequate.
+The separate development [explicit-policy fixed-budget API](FIXED_BUDGET_FILTER.md)
+adds carried-weight scheduling without changing this estimator or its defaults.
 
 ## Quick start: three steps
 

@@ -312,7 +312,7 @@ follow-up is recorded below as PF-DIVERSITY-02; it does not overwrite this resul
 
 ## Resampling schedules: research passed, integration proposed
 
-**PF-DIVERSITY-02 — bounded schedule experiment passed; integration proposed.**
+**PF-DIVERSITY-02 — bounded schedule experiment passed; opt-in integration in development.**
 The [frozen follow-up](docs/RESAMPLING_SCHEDULE_PROTOCOL.md) and
 [held-out result](docs/RESAMPLING_SCHEDULE_STATUS.md) support reviewing one-selection
 and retained-weight fixed-budget filtering. The selected ESS75/N256 combination
@@ -320,6 +320,10 @@ passed the predeclared accuracy, depletion and measured-resource gates, includin
 one unseen finite-state fixture. No runtime API/default or stopping-estimator change.
 Production review must address finite-resolution resampling limits, lifecycle,
 numerical and packaged-consumer contracts; .75 is not a universal recommendation.
+The [separate fixed-budget API](docs/FIXED_BUDGET_FILTER.md) and
+[integration validation](docs/FIXED_BUDGET_STATUS.md) preserve stopping behavior.
+Strict stratified CDF refusal is frequent on tested continuous fixtures; wider
+numerical support remains a separate research/design item, not a hidden fallback.
 
 ## Promotion record template
 

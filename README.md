@@ -45,6 +45,10 @@ It also retains log weights through ancestor selection and full corrections,
 including weights below ordinary floating-point range. These APIs are absent
 from 7.1.0. Mode depletion and documented numerical limits remain.
 
+Development beyond 7.2.0 includes a separate [explicit-policy fixed-budget filter](docs/FIXED_BUDGET_FILTER.md).
+It is not yet published; inspect its [validation and stratified numerical limits](docs/FIXED_BUDGET_STATUS.md)
+before adoption. Released stopping behavior is unchanged; no ESS threshold is a default.
+
 Figaro 7.0.0 added [stable filtering, owned-chain observations, exact count tables
 and support-aware proposals](docs/INFERENCE_INTEGRATION.md). Read the
 [old/new modernization examples](docs/INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage)
