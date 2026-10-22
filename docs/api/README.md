@@ -3,7 +3,7 @@
 
 [User guide](../USER_GUIDE.md) · [Practical API guide](../API_GUIDE.md) · [Build instructions](../BUILDING.md)
 
-Compiler-derived inventory: **13141 public method entries** from **1022 Scala 3 API pages**. Excluded 752 protected/private method entries. Overloads have separate entries.
+Compiler-derived inventory: **13182 public method entries** from **1033 Scala 3 API pages**. Excluded 752 protected/private method entries. Overloads have separate entries.
 
 Scope: every public `def` exposed on the generated `com.cra.figaro` API pages, including abstract methods and compiler-generated methods shown by Scaladoc. Inherited members are included wherever Scaladoc renders them. Fields, type aliases, primary constructor signatures, inheritance diagrams, and members hidden by Scaladoc remain available in the linked full API site; this handbook does not reclassify them as functions.
 
@@ -24,7 +24,7 @@ Generate the linked searchable HTML with `sbt "figaro / Compile / doc"`. Its rel
 - [com.cra.figaro.algorithm.factored.factors](com.cra.figaro.algorithm.factored.factors.md) — 482 methods
 - [com.cra.figaro.algorithm.factored.factors.factory](com.cra.figaro.algorithm.factored.factors.factory.md) — 43 methods
 - [com.cra.figaro.algorithm.factored.gibbs](com.cra.figaro.algorithm.factored.gibbs.md) — 140 methods
-- [com.cra.figaro.algorithm.filtering](com.cra.figaro.algorithm.filtering.md) — 247 methods
+- [com.cra.figaro.algorithm.filtering](com.cra.figaro.algorithm.filtering.md) — 288 methods
 - [com.cra.figaro.algorithm.lazyfactored](com.cra.figaro.algorithm.lazyfactored.md) — 53 methods
 - [com.cra.figaro.algorithm.lazyfactored.factory](com.cra.figaro.algorithm.lazyfactored.factory.md) — 37 methods
 - [com.cra.figaro.algorithm.learning](com.cra.figaro.algorithm.learning.md) — 94 methods

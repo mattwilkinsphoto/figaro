@@ -18,7 +18,11 @@ estimator and previous benchmark/protocol sources remain unchanged.
   It did not resolve Figaro project classes or Ivy local as the library.
 - Four analysis-method tests, 41 documentation tests, reference checks and 15,395
   local link targets passed. Source/API documentation artifacts were generated.
-- Remote CI is pending at this commit; consult the branch run for its actual state.
+- Initial remote CI identified a stale generated API handbook. The same freshness
+  failure was reproduced locally, the three generated files were regenerated, and
+  the full remote documentation-step checks then passed locally. No runtime code,
+  frozen protocol or acceptance threshold changed. The failed log is retained.
+  Fresh remote CI is pending at this correction; consult the branch run for its state.
 
 No merge or publication is included in this milestone. The compatible new API is
 a minor-release candidate when accepted, not a reason to overwrite 7.2.0. The
