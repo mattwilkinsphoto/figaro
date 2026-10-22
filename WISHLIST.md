@@ -310,20 +310,23 @@ the selected option failed accuracy/diversity gates. Released estimators/default
 are unchanged; no consumer release is warranted. The separate single-selection
 follow-up is recorded below as PF-DIVERSITY-02; it does not overwrite this result.
 
-## Resampling schedules: research passed, integration proposed
+## Resampling schedules: integration accepted for 7.3.0
 
-**PF-DIVERSITY-02 — bounded schedule experiment passed; opt-in integration in development.**
+**PF-DIVERSITY-02 — bounded schedule experiment and production integration gates passed.**
 The [frozen follow-up](docs/RESAMPLING_SCHEDULE_PROTOCOL.md) and
 [held-out result](docs/RESAMPLING_SCHEDULE_STATUS.md) support reviewing one-selection
 and retained-weight fixed-budget filtering. The selected ESS75/N256 combination
 passed the predeclared accuracy, depletion and measured-resource gates, including
-one unseen finite-state fixture. No runtime API/default or stopping-estimator change.
-Production review must address finite-resolution resampling limits, lifecycle,
+one unseen finite-state fixture. That research alone changed no runtime API/default.
+The subsequent production review addressed finite-resolution selection, lifecycle,
 numerical and packaged-consumer contracts; .75 is not a universal recommendation.
 The [separate fixed-budget API](docs/FIXED_BUDGET_FILTER.md) and
 [integration validation](docs/FIXED_BUDGET_STATUS.md) preserve stopping behavior.
-Strict stratified CDF refusal is frequent on tested continuous fixtures; wider
-numerical support remains a separate research/design item, not a hidden fallback.
+The [decision-focused repair](docs/STRATIFIED_INTEGRATION.md) passed all local and
+remote gates, completing this bounded integration milestone. Historical frequent
+CDF refusals remain recorded separately. Numerical/resource limits still apply,
+especially ambiguous nonuniform populations above 4096. See [7.3.0 readiness](docs/RELEASE_7_3_STATUS.md);
+no hidden fallback, default threshold or stopping-estimator change was introduced.
 
 ## Promotion record template
 

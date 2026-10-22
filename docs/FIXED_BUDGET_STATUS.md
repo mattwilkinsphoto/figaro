@@ -7,9 +7,13 @@ Development target 7.3.0-SNAPSHOT, not a published release. Released stopping
 estimator and previous benchmark/protocol sources remain unchanged.
 
 **Current follow-up:** the [decision-focused repair](STRATIFIED_INTEGRATION.md) is
-integrated on the development branch, with local gates passed and remote CI pending. The records
+accepted for main integration, with all local and remote gates passed. See the
+[7.3.0 readiness record](RELEASE_7_3_STATUS.md). The records
 below describe the preserved pre-repair implementation and its original refusals;
-they are not new measurements of the repaired selector. Merge/release remain held.
+they are not new measurements of the repaired selector. The integration hold is
+resolved; publication still requires separate approval and final-version gates.
+
+## Historical pre-repair milestone (superseded delivery status)
 
 - Stage 1: six accounting/API tests passed, including exhaustive two-state outcomes.
 - Stage 2: ten additional numerical/lifecycle tests passed (16 combined).

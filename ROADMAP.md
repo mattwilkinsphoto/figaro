@@ -37,13 +37,15 @@ modal depletion remains a limitation, not a newly repaired numerical defect.
 [single-selection/ESS schedule experiment](docs/RESAMPLING_SCHEDULE_STATUS.md)
 supports reviewing a bounded opt-in fixed-budget facility. It does not reverse
 the earlier experiment's result, alter the released stopping estimator, establish
-a universal ESS threshold, or ship a new runtime API. Production integration is
-a separately approved milestone, not an adoption prerequisite. The
+a universal ESS threshold, or itself ship a new runtime API. The separately approved
+production integration has now passed all acceptance gates. The
 [fixed-budget development API](docs/FIXED_BUDGET_FILTER.md) now implements explicit
 policy/method selection without changing random stopping. See
-[integration status](docs/FIXED_BUDGET_STATUS.md): strict stratified numerical refusals
-limit applicability; wider CDF support requires a separate design review. No default
-threshold, automatic cutover or publication is implied.
+[decision-focused repair and final validation](docs/STRATIFIED_INTEGRATION.md):
+the former excessive CDF refusals are resolved on the frozen controls, with explicit
+domain, precision and refinement-population limits retained. The next delivery step
+is the [7.3.0 minor release](docs/RELEASE_7_3_STATUS.md), subject to publication approval
+and final-version gates. No default threshold or automatic cutover is introduced.
 
 A subsequent **capability-expansion milestone is released in 7.1.0**:
 [scope and execution checklist](docs/CAPABILITY_EXPANSION_STATUS.md),

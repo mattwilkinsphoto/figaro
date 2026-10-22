@@ -1,7 +1,8 @@
 # Decision-focused stratification: prototype validation
 
 Historical prototype milestone. See [production integration](STRATIFIED_INTEGRATION.md)
-for the separately approved follow-up; the original results below are preserved.
+for the separately approved follow-up, which has now passed all integration gates.
+The original results and then-applicable holds below are preserved as history.
 
 [Research provenance](RESEARCH_REFERENCES.md#inf-15).
 [Frozen protocol](STRATIFIED_DECISION_PROTOCOL.md).

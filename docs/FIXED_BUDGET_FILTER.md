@@ -22,12 +22,13 @@ explicit domain, precision and refinement-population limits, explained below.
 No hidden truncation, clipping or fallback is performed. Neither method promises
 recovery of missing modes or exact continuous-uniform sampling.
 
-**Delivery hold:** the [numerical investigation](STRATIFIED_NUMERICAL_INVESTIGATION.md)
+**Delivery status:** the [numerical investigation](STRATIFIED_NUMERICAL_INVESTIGATION.md)
 identified excessive refusals in the former CDF implementation. Its replacement is
-undergoing [production integration validation](STRATIFIED_INTEGRATION.md).
-This combined API is not approved for merge/release;
-documentation examples are development examples, not a recommendation to adopt the
-stratified option. Released 7.2.0 and its stopping estimator remain unchanged.
+accepted after [production integration validation](STRATIFIED_INTEGRATION.md),
+including all local and remote gates. The [7.3.0 readiness record](RELEASE_7_3_STATUS.md)
+separates main integration from publication. Examples require the development build
+until 7.3.0 is published. Choose stratification only within its documented limits;
+released 7.2.0 and its stopping estimator remain unchanged.
 
 ## Quick start: three steps
 

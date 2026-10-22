@@ -3,8 +3,8 @@
 [Research provenance](RESEARCH_REFERENCES.md#inf-15).
 [User guide](FIXED_BUDGET_FILTER.md). [Preserved prototype](STRATIFIED_DECISION_STATUS.md).
 
-Status: integrated on the development branch; local gates passed, remote CI pending. Not merged
-or released. The released stopping estimator, log-tree selector and policy defaults
+Status: accepted for main integration; all local and remote integration gates passed.
+The API targets 7.3.0 and is not yet published. The released stopping estimator, log-tree selector and policy defaults
 are unchanged. This document distinguishes numerical review from executed tests.
 
 ## Numerical review
@@ -113,5 +113,17 @@ test-only prototype sources remain preserved separately.
   FixedBudgetParticleFilter edit; DecisionStratified is the new internal file.
   Released stopping-filter sources, previous frozen protocols and controls are unchanged.
 
-These results establish local integration evidence, not remote CI completion or a
-publication decision. Remote CI remains a gate; no merge or release has occurred.
+## Final integration decision
+
+Remote [CI run 39841735591](https://github.com/mattwilkinsphoto/figaro/actions/runs/39841735591)
+passed all four jobs on integration commit `6c2071074efc3287920f2a7906e2553b820e924f`:
+build, release-packaging preflight, research-reference integrity and GVM research.
+The build includes clean byte-reproducibility, artifact/legal checks and isolated
+packaged consumers. These complement, not replace, the local independent numerical
+evidence above. All integration gates passed and the maintainer approved merging.
+
+The former integration hold is resolved within the explicit limits above. The
+historical failed CDF implementation and no-promotion diversity experiment remain
+preserved; neither is evidence of a current failure or of universal robustness.
+See the [7.3.0 readiness record](RELEASE_7_3_STATUS.md) for the main delivery status
+and the distinct final-version publication gates. Nothing here publishes 7.3.0.
