@@ -6,11 +6,11 @@ object CompatibilityCheck {
   def main(args: Array[String]): Unit = {
     require(args.length == 1, "Pass the new Figaro thin JAR")
     val previous=Path.of(classOf[com.cra.figaro.language.Universe].getProtectionDomain.getCodeSource.getLocation.toURI)
-    require(previous.getFileName.toString == "figaro_3-7.1.0.jar")
+    require(previous.getFileName.toString == "figaro_3-7.2.0.jar")
     val baselineHash=java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256")
       .digest(java.nio.file.Files.readAllBytes(previous)))
-    require(baselineHash=="324f6a640e6b0c0e802aa1ab39821b46135f21ef23c2c1dc38da29f6605c3f35",
-      "Compatibility baseline must be the verified published 7.1.0 artifact")
+    require(baselineHash=="3532720d1b17c8580146b7b9c605ef2fbf46142af5b56a32e563f18e1444cf18",
+      "Compatibility baseline must be the verified published 7.2.0 artifact")
     println(s"Verified published compatibility baseline: $baselineHash")
     val current=Path.of(args(0)).toAbsolutePath.normalize()
     require(java.nio.file.Files.isRegularFile(current))
@@ -22,8 +22,8 @@ object CompatibilityCheck {
     val problems=new tastymima.TastyMiMa(new tastymima.intf.Config()).analyze(oldCp.asJava,previous,newCp.asJava,current).asScala
     problems.foreach(p=>println(p.getDescription()))
     require(problems.isEmpty, s"TASTy compatibility: ${problems.size} issues")
-    println("TASTy compatibility with 7.1.0 passed (no exclusions).")
-    // Load the client compiled against 7.1.0 with only the new Figaro JAR at runtime.
+    println("TASTy compatibility with 7.2.0 passed (no exclusions).")
+    // Load the client compiled against 7.2.0 with only the new Figaro JAR at runtime.
     val loader=new java.net.URLClassLoader(newCp.filterNot(_==boot).map(_.toUri.toURL).toArray,
       ClassLoader.getPlatformClassLoader())
     try loader.loadClass("OldFilterClient").getMethod("main",classOf[Array[String]])
@@ -32,7 +32,7 @@ object CompatibilityCheck {
   }
 }
 
-/** This fixture is deliberately compiled against the published 7.1.0 API. */
+/** This fixture is deliberately compiled against the published 7.2.0 API. */
 object OldFilterClient {
   import com.cra.figaro.algorithm.filtering.{ParticleFilter, State, Snapshot}
   final class Extension(val numParticles:Int) extends ParticleFilter {
@@ -46,6 +46,6 @@ object OldFilterClient {
     try {f.update(Double.NegativeInfinity);sys.error("Expected strict failure")}
     catch {case _:ParticleFilter.NoViableParticles=>()}
     new ParticleFilter.NoViableParticles()
-    println("7.1.0-compiled filter extension ran against the replacement JAR.")
+    println("7.2.0-compiled filter extension ran against the replacement JAR.")
   }
 }

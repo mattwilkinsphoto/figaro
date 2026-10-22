@@ -45,7 +45,7 @@ lazy val legalSettings = Seq(
 lazy val figaroSettings = Seq(
   organization := "io.github.mattwilkinsphoto",
   description := "Figaro: a language for probabilistic programming",
-  version := "7.3.0-SNAPSHOT",
+  version := "7.3.0",
   scalaVersion := "3.9.0",
   crossScalaVersions := Seq("3.9.0"),
   crossPaths := true,
@@ -95,7 +95,8 @@ lazy val figaro = project
     // Isolate baseline resolution without removing publishLocal's library resolver.
     mimaDependencyResolution := (compatibility / dependencyResolution).value,
     mimaPreviousArtifacts := Set("io.github.mattwilkinsphoto" %% "figaro" % "7.0.0",
-      "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0"),
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0",
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.2.0"),
     Test / fork := true,
     Test / javaOptions += "-Xmx6G",
     Compile / run / fork := true,
@@ -145,7 +146,7 @@ lazy val compatibility = project.in(file("tools/compatibility"))
     scalaVersion := "3.9.0",
     publish / skip := true,
     libraryDependencies ++= Seq(
-      "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0",
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.2.0",
       ("ch.epfl.scala" %% "tasty-mima" % "1.4.1").exclude("ch.epfl.scala", "tasty-query_3"),
       "ch.epfl.scala" %% "tasty-query" % "1.9.0"
     ),

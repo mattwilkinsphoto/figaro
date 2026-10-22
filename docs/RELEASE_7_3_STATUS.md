@@ -1,6 +1,6 @@
 # Figaro 7.3.0 release readiness
 
-Published baseline: **7.2.0**, tag `v7.2.0`. Development version: **7.3.0-SNAPSHOT**.
+Published baseline: **7.2.0**, tag `v7.2.0`. Final artifact target: **7.3.0**.
 All fixed-budget integration gates passed; the maintainer approved main integration.
 **7.3.0 is release-eligible and ready for final release preparation, not yet published.**
 The final documentation and implementation are delivered together on main.
@@ -48,7 +48,7 @@ No guaranteed missing-mode detection, universal precision or performance claim i
 
 ## Final publication checklist (not integration blockers)
 
-- [ ] Obtain explicit approval to publish 7.3.0.
+- [x] Obtain explicit approval to publish 7.3.0, conditional on all required gates.
 - [ ] Set the final version, build immutable 7.3.0 artifacts and pass final-source CI.
 - [ ] Verify reproducible packaging, legal contents and isolated consumers against
   those exact final-version artifacts, not the snapshot coordinates.
@@ -57,3 +57,8 @@ No guaranteed missing-mode detection, universal precision or performance claim i
   Central-only packaged consumers. Record the final tag, commit and results here.
 
 No release tag is created and no published artifact is replaced by main integration.
+
+Final preparation advances the binary compatibility controls to include 7.2.0
+alongside 7.0.0/7.1.0, and the TASTy/compiled-client control to the hash-verified
+published 7.2.0 JAR. Final-version CI and publication results will be recorded here
+after execution; setting the version is not evidence of publication.
