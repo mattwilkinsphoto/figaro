@@ -376,7 +376,7 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 
 **Validation:** [Schedule tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ResamplingScheduleExperimentTest.scala), [independent finite/reference and analysis code](../tools/resampling_schedule_reference.py), and [reference tests](../tools/test_resampling_schedule_reference.py). Four initial Scala tests pass; calibration and fresh-seed confirmation remain pending. Original 450-check controls are preserved.
 
-**Guide:** [RESAMPLING SCHEDULE PROTOCOL](RESAMPLING_SCHEDULE_PROTOCOL.md).
+**Guide:** [RESAMPLING SCHEDULE PROTOCOL](RESAMPLING_SCHEDULE_PROTOCOL.md); [RESAMPLING SCHEDULE STATUS](RESAMPLING_SCHEDULE_STATUS.md).
 
 <a id="dia-01"></a>
 
