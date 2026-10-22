@@ -362,7 +362,7 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 
 **Validation:** No new numerical validation executed. Historical evidence: [ContinuousFilterBenchmark.scala](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmark.scala) and [independent reference tool](../tools/continuous_filter_reference.py), mapped in INF-12. Proposed gates in the guide require exact finite invariance/evidence controls, independent Gaussian/nonlinear references, held-out mode-mass error, total-cost comparisons and lifecycle tests before any runtime promotion.
 
-**Guide:** [PARTICLE DIVERSITY RESEARCH](PARTICLE_DIVERSITY_RESEARCH.md); [PARTICLE DIVERSITY PROTOCOL](PARTICLE_DIVERSITY_PROTOCOL.md).
+**Guide:** [PARTICLE DIVERSITY RESEARCH](PARTICLE_DIVERSITY_RESEARCH.md); [PARTICLE DIVERSITY PROTOCOL](PARTICLE_DIVERSITY_PROTOCOL.md); [PARTICLE DIVERSITY STATUS](PARTICLE_DIVERSITY_STATUS.md).
 
 <a id="dia-01"></a>
 

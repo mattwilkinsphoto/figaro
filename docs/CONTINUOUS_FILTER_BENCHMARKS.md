@@ -276,10 +276,15 @@ declared before the baseline, and is not an added pass/fail gate.
 
 Auxiliary guidance improves this mode-mass error at the same candidate ceiling,
 but costs more; it is not a universal speedup. Calibration used approximately
-2,395 production candidates plus 960 pilots per 20-step run at budget 256, versus
+2,395 total candidates, including 960 pilots, per 20-step run at budget 256, versus
 5,120 production candidates in each fixed mode. At budget 1024 it used about
-6,658 plus 960 pilots, versus 20,480 fixed-mode candidates. Lower work came with
+6,658 total candidates including 960 pilots, versus 20,480 fixed-mode candidates. Lower work came with
 higher mode error. Bad look-ahead remained harmful despite full support protection.
+
+Cost-report correction during the [diversity assessment](PARTICLE_DIVERSITY_STATUS.md):
+the original `candidates` counter includes pilot draws. Earlier prose incorrectly
+added the separately reported pilots again. Raw logs, timing measurements, posterior
+results and acceptance checks are unchanged; only that prose double count is corrected.
 
 The robust tree is also more expensive than the old CDF: the fully completed
 persistent-mode bootstrap baseline averaged 1.451/6.080 ms at budgets 256/1024,
