@@ -55,6 +55,12 @@ unreported warm-up runs per configuration. Repetitions reuse seeds to assess
 timing; they are NOT 768 independent statistical replicates. Rotate method order
 by seed. Record every outcome, including failures. Expected source RNG: Figaro LXM.
 
+Pre-outcome clarification: confirmation also repeats all four declared baseline
+budgets in each JVM to measure a timing/accuracy frontier; the primary comparison
+still uses the baseline selected solely on calibration. Timing promotion uses a
+conservative measured Pareto comparison: candidate RMSE must be at least 20% lower
+than every measured baseline no slower than it. No timing extrapolation is used.
+
 ## Mathematical and numerical gates
 
 For frozen previous population mu_N and fixed invariant kernel K_N,

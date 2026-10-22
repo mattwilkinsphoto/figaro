@@ -123,12 +123,145 @@ def diagnostics(out,log,reference):
     out.json('diagnostics.json',dict(runs=4608,rows=len(rows),summary=summary,input_sha256=sha(log)))
     print(json.dumps(summary),flush=True)
 
+SCENARIOS=('growth','growth-sharp','persistent-modes','late','gaussian')
+CANDIDATES=('none','multi','strat','local1','local4','local8','global1','global4','global8')
+FIELDS='scenario method n seed t status logZ mean second positive ess parents work targets likelihoods proposals draws moves accepted nanos error'.split()
+
+def read_experiment(path,configs,seeds):
+    lines=[l.split('DIVERSITY_ROW ',1)[1] for l in Path(path).read_text(encoding='utf-8-sig').splitlines() if 'DIVERSITY_ROW ' in l]
+    assert all(len(l.split('\t'))==len(FIELDS) for l in lines)
+    rows=[]
+    for line in lines:
+        r=dict(zip(FIELDS,line.split('\t')))
+        for k in ('n','seed','t','parents','work','targets','likelihoods','proposals','draws','moves','accepted','nanos'):r[k]=int(r[k])
+        for k in ('logZ','mean','second','positive','ess'):r[k]=float(r[k])
+        rows.append(r)
+    expected={(s,m,n,k,t) for s in SCENARIOS for m,n in configs for k in seeds for t in range(40 if s=='late' else 20)}
+    keys=[(r['scenario'],r['method'],r['n'],r['seed'],r['t']) for r in rows]
+    assert len(keys)==len(set(keys)) and set(keys)==expected,'Missing/duplicate/unexpected experiment records'
+    return rows,lines
+
+def select(out,log,reference):
+    configs=[(m,64) for m in CANDIDATES]+[('baseline',n) for n in (64,256,1024,4096)]
+    rows,lines=read_experiment(log,configs,range(2001,2017))
+    out.write('calibration.tsv','\t'.join(FIELDS)+'\n'+'\n'.join(lines)+'\n')
+    failures=[r for r in rows if r['status']!='ok']
+    if failures:
+        out.json('selection.json',dict(passed=False,failure_count=len(failures)))
+        raise ValueError('Calibration contains failed outcomes; no selection')
+    refs=json.loads(Path(reference).read_text())['references']
+    summaries=[]
+    for m,n in configs:
+        parts=[]
+        for s in SCENARIOS:
+            group=[r for r in rows if (r['method'],r['n'],r['scenario'],r['t'])==(m,n,s,len(refs[s])-1)]
+            parts.append(dict(scenario=s,mse=float(np.mean([(r['positive']-refs[s][-1]['positive'])**2 for r in group])),
+                              work=float(np.mean([r['work'] for r in group])),nanos=float(np.mean([r['nanos'] for r in group]))))
+        designated=[p for p in parts if p['scenario'] in ('persistent-modes','late')]
+        summaries.append(dict(method=m,n=n,parts=parts,score=sum(p['mse'] for p in designated)*sum(p['work'] for p in designated)))
+    chosen=min((r for r in summaries if r['method'] not in ('none','baseline')),key=lambda r:(r['score'],r['method']))
+    candidates=[p for p in chosen['parts'] if p['scenario'] in ('persistent-modes','late')]
+    eligible=[]
+    for r in summaries:
+        if r['method']=='baseline':
+            parts=[p for p in r['parts'] if p['scenario'] in ('persistent-modes','late')]
+            if all(p['work']<=c['work'] for p,c in zip(parts,candidates)):
+                eligible.append((sum(p['mse'] for p in parts),r['n']))
+    assert eligible,'No matched-cost baseline; promotion unavailable'
+    baseline=min(eligible)[1]
+    result=dict(passed=True,method=chosen['method'],baseline_n=baseline,calibration=summaries,
+                input_sha256=sha(log),reference_sha256=sha(reference),seeds=[2001,2016])
+    out.json('selection.json',result)
+    out.write('selection.txt',f"{chosen['method']} {baseline}\n")
+    print(json.dumps(dict(method=chosen['method'],baseline_n=baseline,ranking=sorted(
+        [dict(method=r['method'],n=r['n'],score=r['score']) for r in summaries],key=lambda r:r['score']))),flush=True)
+
+def binomial_upper(k,n,alpha=.05):
+    if k==n:return 1.
+    lo,hi=0.,1.
+    for _ in range(70):
+        p=(lo+hi)/2
+        cdf=sum(math.comb(n,j)*p**j*(1-p)**(n-j) for j in range(k+1))
+        if cdf>alpha:lo=p
+        else:hi=p
+    return (lo+hi)/2
+
+def confirm(out,logs,reference,selection):
+    chosen=json.loads(Path(selection).read_text());m=chosen['method'];n=chosen['baseline_n']
+    configs=list(dict.fromkeys([(m,64),('none',64)]+[('baseline',b) for b in (64,256,1024,4096)]))
+    runs=[]
+    for index,path in enumerate(logs):
+        rows,lines=read_experiment(path,configs,range(10001,10257));runs.append(rows)
+        out.write(f'confirmation-{index+1}.tsv','\t'.join(FIELDS)+'\n'+'\n'.join(lines)+'\n')
+    assert len(runs)==3
+    failures=sum(r['status']!='ok' for rows in runs for r in rows)
+    if failures:
+        out.json('decision.json',dict(promote=False,failed_outcomes=failures))
+        raise ValueError('Confirmation has failures; preserve all outcomes, promotion fails')
+    scientific=lambda rows:[[r[k] for k in FIELDS if k not in ('nanos',)] for r in rows]
+    assert scientific(runs[0])==scientific(runs[1])==scientific(runs[2]),'Fresh-JVM scientific replay mismatch'
+    refs=json.loads(Path(reference).read_text())['references'];rows=runs[0];comparisons=[];regressions=[];controls=[];summary=[]
+    for s in SCENARIOS:
+        for method,budget in configs:
+            group=[r for r in rows if (r['scenario'],r['method'],r['n'])==(s,method,budget)]
+            final=sorted([r for r in group if r['t']==len(refs[s])-1],key=lambda r:r['seed'])
+            errors={metric:float(np.sqrt(np.mean([(r[metric]-refs[s][-1][metric])**2 for r in final]))) for metric in ('mean','second','positive')}
+            summary.append(dict(scenario=s,method=method,n=budget,rmse=errors,work=float(np.mean([r['work'] for r in final])),
+                nanos=[float(np.mean([r['nanos'] for r in rep if (r['scenario'],r['method'],r['n'],r['t'])==(s,method,budget,len(refs[s])-1)])) for rep in runs]))
+            for t in (0,len(refs[s])//2,len(refs[s])-1):
+                step=[r for r in group if r['t']==t];truth=refs[s][t]
+                for metric in ('evidence','mean','second','positive'):
+                    values=np.array([math.exp(r['logZ']-truth['logZ'])*(1 if metric=='evidence' else r[metric]) for r in step])
+                    expected=1 if metric=='evidence' else truth[metric]
+                    se=float(values.std(ddof=1)/16);avg=float(values.mean())
+                    controls.append(dict(scenario=s,method=method,n=budget,t=t,metric=metric,mean=avg,se=se,expected=expected,
+                        passed=abs(avg-expected)<=6*se+1e-4*max(1,abs(expected))))
+        candidate=next(r for r in summary if (r['scenario'],r['method'],r['n'])==(s,m,64))
+        baseline=next(r for r in summary if (r['scenario'],r['method'],r['n'])==(s,'baseline',n))
+        if s in ('persistent-modes','late'):
+            final=lambda method,budget:sorted([r for r in rows if (r['scenario'],r['method'],r['n'],r['t'])==(s,method,budget,len(refs[s])-1)],key=lambda r:r['seed'])
+            c=final(m,64);b=final('baseline',n);truth=refs[s][-1]['positive']
+            ce=np.array([(r['positive']-truth)**2 for r in c]);be=np.array([(r['positive']-truth)**2 for r in b])
+            rng=np.random.Generator(np.random.PCG64(91317));indices=rng.integers(256,size=(10000,256))
+            denominators=be[indices].mean(axis=1)
+            available=bool(be.mean()>0 and np.all(denominators>0))
+            ratio=float(np.sqrt(ce.mean()/be.mean())) if available else None
+            upper=float(np.quantile(np.sqrt(ce[indices].mean(axis=1)/denominators),.975)) if available else None
+            interval=np.quantile(np.sqrt(ce[indices].mean(axis=1)/denominators),[.025,.975]).tolist() if available else None
+            def depleted(method,budget):
+                return len({r['seed'] for r in rows if (r['scenario'],r['method'],r['n'])==(s,method,budget)
+                     and .1<=refs[s][r['t']]['positive']<=.9 and not .01<=r['positive']<=.99})
+            dc,db=depleted(m,64),depleted('baseline',n)
+            # Conservative measured Pareto test: no extrapolation or invented timing interpolation.
+            timings=[]
+            for j in range(3):
+                eligible=[r for r in summary if r['scenario']==s and r['method']=='baseline' and r['nanos'][j]<=candidate['nanos'][j]]
+                timings.append(bool(eligible) and candidate['rmse']['positive']<=.8*min(r['rmse']['positive'] for r in eligible))
+            cost=candidate['work']>=baseline['work']
+            comparisons.append(dict(scenario=s,rmse_ratio=ratio,interval95=interval,upper_familywise=upper,
+                candidate_depleted=dc,baseline_depleted=db,candidate_depletion_upper=binomial_upper(dc,256),
+                baseline_depletion_upper=binomial_upper(db,256),matched_evaluation_cost=cost,timing_gates=timings,
+                passed=available and ratio<=.8 and upper<1 and dc<=db and cost and all(timings)))
+        if s in ('gaussian','growth'):
+            for metric in ('mean','second','positive'):
+                tolerance=1.25*baseline['rmse'][metric]+.01*max(1,abs(refs[s][-1][metric]))
+                regressions.append(dict(scenario=s,metric=metric,rmse=candidate['rmse'][metric],limit=tolerance,
+                                        passed=candidate['rmse'][metric]<=tolerance))
+    result=dict(promote=all(c['passed'] for c in comparisons+regressions+controls),comparisons=comparisons,
+                regressions=regressions,controls=controls,summary=summary,independent_seeds=256,jvm_repetitions=3,
+                failed_outcomes=failures,input_sha256=[sha(p) for p in logs],selection_sha256=sha(selection),reference_sha256=sha(reference))
+    out.json('decision.json',result)
+    print(json.dumps({k:result[k] for k in ('promote','comparisons','regressions','failed_outcomes')}),flush=True)
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','diagnostics'])
+    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','diagnostics','select','confirm'])
     p.add_argument('--output',required=True);p.add_argument('--base');p.add_argument('--log');p.add_argument('--reference');p.add_argument('--acl-script')
+    p.add_argument('--selection');p.add_argument('--logs',nargs='+')
     a=p.parse_args();out=Output(a.output,a.acl_script)
     print('START_UTC',time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),flush=True)
     if a.command=='prepare':prepare(out,a.base)
-    else:diagnostics(out,a.log,a.reference)
+    elif a.command=='diagnostics':diagnostics(out,a.log,a.reference)
+    elif a.command=='select':select(out,a.log,a.reference)
+    else:confirm(out,a.logs,a.reference,a.selection)
     print('COMPLETE_UTC',time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),flush=True)
 if __name__=='__main__':main()
