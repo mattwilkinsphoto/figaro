@@ -45,6 +45,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Auxiliary ancestor selection and linear-Gaussian proposal helpers | [INF-11](#inf-11) |
 | Continuous nonlinear/multimodal filtering validation | [INF-12](#inf-12) |
 | Particle-diversity robustness and proposed resample-move experiment | [INF-14](#inf-14) |
+| Bounded single-selection and ESS-triggered resampling schedules | [INF-15](#inf-15) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
