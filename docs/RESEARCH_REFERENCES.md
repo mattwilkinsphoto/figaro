@@ -372,9 +372,9 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 
 **Role:** Approved test-only schedule experiment. Previous-population ESS decides whether to retain weights and propagate once or select ancestors once; independent finite expectations validate the branch accounting. No theorem transfer to random stopping, guaranteed missing-mode detection or imported code.
 
-**Code:** Protocol only at freeze; no new runtime code. Released WeightedBoundedParticleFilter and previous research harness remain unchanged. Implementation mappings will be added with test-only code.
+**Code:** Test-only [schedule experiment](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ResamplingScheduleExperiment.scala). No new runtime code. Released WeightedBoundedParticleFilter and previous research harness remain unchanged.
 
-**Validation:** New frozen seeds, exact finite controls, original continuous reference controls, a confirmation-only finite-state model and matched-cost/time gates are planned, not yet executed.
+**Validation:** [Schedule tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ResamplingScheduleExperimentTest.scala), [independent finite/reference and analysis code](../tools/resampling_schedule_reference.py), and [reference tests](../tools/test_resampling_schedule_reference.py). Four initial Scala tests pass; calibration and fresh-seed confirmation remain pending. Original 450-check controls are preserved.
 
 **Guide:** [RESAMPLING SCHEDULE PROTOCOL](RESAMPLING_SCHEDULE_PROTOCOL.md).
 
