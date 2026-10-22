@@ -11,12 +11,12 @@ object FixedBudgetParticleFilter {
     case Always
     case WhenEssBelow(fraction: Double)
   }
-  /** Stratified uses a finite-resolution CDF; LogTreeMultinomial retains log masses. */
+  /** Stratified refines bounded comparisons for finite-bit draws; log-tree retains log masses. */
   enum Method { case LogTreeMultinomial, Stratified }
   enum Decision { case Initial, Resampled, CarriedWeights }
 
   /** Exactly particles state draws on each successful step, not a wall-clock bound.
-    * @param particles fixed population size, 2 through 1,000,000
+    * @param particles fixed population size, 2 through 1,000,000; stratified decimal refinement limited to 4096
     * @param policy explicit Always or WhenEssBelow with finite fraction in (0,1]
     * @param method explicit ancestor sampling method
     * @param seed owned stream seed
@@ -38,9 +38,15 @@ object FixedBudgetParticleFilter {
     * contributingParents counts immediate parents of positive-log-weight offspring,
     * not unique states or distinct complete histories. Work counts completed callbacks.
     */
+  /** Stratified work on a successful selection; zero for initialization, carry or log-tree.
+    * Refinement uses the same draw, never a retry. Example: result.report.selection.maxPrecision.
+    */
+  final case class SelectionReport(refinedDecisions: Long = 0L, decimalTables: Int = 0,
+    maxPrecision: Int = 0, exactTies: Long = 0L)
+
   final case class StepReport(stateDraws: Int, likelihoodCalls: Int, ancestorSelections: Int,
     decision: Decision, previousRelativeEss: Option[Double], contributingParents: Option[Int],
-    health: ParticleFilterHealth.Report)
+    health: ParticleFilterHealth.Report, selection: SelectionReport = SelectionReport())
 
   /** Immutable weighted result. logEvidence is cumulative, not an unbiased log estimate. */
   final case class Update[S](particles: Vector[S], weights: Vector[Double], logWeights: Vector[Double],
@@ -61,9 +67,12 @@ object FixedBudgetParticleFilter {
     "No viable fixed-budget particles. Review evidence and proposal support or predeclare a larger new run; retain failed outcomes.") {
     val logEvidence: Double = Double.NegativeInfinity
   }
-  /** Detected loss of a positive interval, not a proof that all other rounding is harmless. */
-  final class StratifiedPrecisionLoss extends ArithmeticException(
-    "Positive ancestor interval is not representable in the stratified CDF. Explicitly choose LogTreeMultinomial for a new run; no automatic fallback occurred.")
+  /** Terminal unresolved decision or explicit resource/domain limit, not genuine zero support.
+    * @param reason numerical or resource limit reached; inspect rather than retrying until success
+    */
+  final class StratifiedPrecisionLoss(val reason: String = "Legacy CDF interval loss") extends ArithmeticException(
+    "Stratified selection refused: " + reason +
+    ". Review the numerical domain or explicitly choose LogTreeMultinomial for a new declared run; no fallback or redraw occurred.")
 
   /** Create an unstarted owner-thread filter. No score policy or stopping target. */
   def apply[S](model: BoundedParticleFilter.Model[S], config: Config): FixedBudgetParticleFilter[S] =
@@ -90,6 +99,7 @@ object FixedBudgetParticleFilter {
       }
     }
   }
+  // Historical diagnostic control only. Never used for runtime ancestor selection.
   private[figaro] def stratifiedCdf(logs: Vector[Double]): Vector[Double] = {
     val weights = LogParticleWeights.normalize(logs).weights
     val last = logs.lastIndexWhere(_.isFinite)
@@ -102,24 +112,26 @@ object FixedBudgetParticleFilter {
       sum
     }.toVector
   }
-  private[figaro] def ancestors(logs: Vector[Double], method: Method, rng: java.util.Random): Vector[Int] = {
+  private[figaro] def ancestors(logs: Vector[Double], method: Method, rng: java.util.Random): Vector[Int] =
+    select(logs,method,rng)._1
+
+  private def select(logs: Vector[Double], method: Method, rng: java.util.Random): (Vector[Int], SelectionReport) = {
     val n = logs.size
     method match {
       case Method.LogTreeMultinomial =>
         val tree = new LogParticleWeights.Tree(logs)
-        Vector.tabulate(n) { _ =>
+        val indices = Vector.tabulate(n) { _ =>
           interrupted()
           tree.draw(LogParticleWeights.logUniform(rng))
         }
+        (indices, SelectionReport())
       case Method.Stratified =>
-        val cdf = stratifiedCdf(logs)
-        var parent = 0
-        Vector.tabulate(n) { i =>
-          interrupted()
-          // Addition can round the final point to one; never select a trailing zero.
-          val u = math.min(math.nextDown(1.0), (i.toDouble + rng.nextDouble()) / n)
-          while (parent < n-1 && u >= cdf(parent)) parent += 1
-          parent
+        try {
+          val table = new DecisionStratified.Table(logs)
+          val indices = table.draw(rng)
+          (indices, SelectionReport(table.refinedDecisions,table.tablesBuilt,table.maxPrecision,table.exactTies))
+        } catch {
+          case e: DecisionStratified.Unresolved => throw new StratifiedPrecisionLoss(e.reason)
         }
     }
   }
@@ -163,7 +175,8 @@ final class FixedBudgetParticleFilter[S] private (model: BoundedParticleFilter.M
       val previousEss = old.map(x => relativeEss(x.logWeights))
       val resample = previousEss.exists(shouldResample(config.policy, _))
       val n = config.particles
-      val indices = if (resample) ancestors(old.get.logWeights, config.method, rng) else Vector.range(0,n)
+      val (indices,selection) = if (resample) select(old.get.logWeights, config.method, rng)
+        else (Vector.range(0,n),SelectionReport())
       val base = if (old.isEmpty || resample) Vector.fill(n)(-math.log(n)) else old.get.logWeights
       val values = Vector.tabulate(n) { i =>
         interrupted()
@@ -178,7 +191,7 @@ final class FixedBudgetParticleFilter[S] private (model: BoundedParticleFilter.M
         "Predeclare a larger new run or review model/proposal support. Resampling cannot recover extinct histories; do not retain only successful retries."))
       val report = StepReport(n,n,if (resample) n else 0,
         if (old.isEmpty) Decision.Initial else if (resample) Decision.Resampled else Decision.CarriedWeights,
-        previousEss, old.map(_ => raw.indices.filter(i => raw(i).isFinite).map(indices).distinct.size), health)
+        previousEss, old.map(_ => raw.indices.filter(i => raw(i).isFinite).map(indices).distinct.size), health, selection)
       if (!raw.exists(_.isFinite)) { diagnostic = Some(report); throw new NoViableParticles(report) }
       val normalized = LogParticleWeights.normalize(raw)
       val increment = normalized.peak + normalized.logSum

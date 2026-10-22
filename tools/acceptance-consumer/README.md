@@ -4,6 +4,16 @@ This standalone build tests the published dependency boundary, not a source-proj
 dependency. It exists to catch stale snapshots, missing runtime dependencies and example/
 test classpath leakage that an in-repository example could miss.
 
+When comparing different local bundles with the same SNAPSHOT coordinate, use a
+fresh consumer output directory and a fresh sbt action cache (for example
+`-Dsbt.global.localcache=<new-task-specific-directory>`). Inspect
+`show Compile / dependencyClasspath` and retain the expected-JAR hash assertion.
+A previous resolution result can point at an older bundle even when the new JAR
+contains the requested API. This was observed during stratified-selector acceptance;
+the failed compilation and the cold rerun are recorded separately. Never fix such
+a failure by disabling the hash check or adding producer classes to the classpath.
+See [sbt's cache model](https://www.scala-sbt.org/2.x/docs/en/concepts/caching.html).
+
 ## Quick start
 
 The current check includes [distribution constructions and GMMs](../../docs/DISTRIBUTION_CONSTRUCTIONS.md),

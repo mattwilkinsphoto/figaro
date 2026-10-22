@@ -16,12 +16,18 @@ target, discarded stopping candidate or adaptive candidate budget. Unlike ordina
 graph `ParticleFilter`, it takes detached states and callbacks, not arbitrary Universes.
 The existing filters and their defaults remain unchanged. There is no automatic cutover.
 
-**Numerical limitation:** stratified sampling can refuse even ordinary continuous
-models when a tiny positive probability has no representable cumulative interval.
-It is not a broadly interchangeable replacement for log-tree multinomial sampling.
-No hidden truncation, clipping or fallback is performed. Select `LogTreeMultinomial`
-explicitly when that support limitation is unacceptable. Neither method promises
-recovery of missing modes or exact real arithmetic.
+**Numerical contract:** decision-focused stratification avoids the former requirement
+for every positive mass to have its own representable CDF interval. It still has
+explicit domain, precision and refinement-population limits, explained below.
+No hidden truncation, clipping or fallback is performed. Neither method promises
+recovery of missing modes or exact continuous-uniform sampling.
+
+**Delivery hold:** the [numerical investigation](STRATIFIED_NUMERICAL_INVESTIGATION.md)
+identified excessive refusals in the former CDF implementation. Its replacement is
+undergoing [production integration validation](STRATIFIED_INTEGRATION.md).
+This combined API is not approved for merge/release;
+documentation examples are development examples, not a recommendation to adopt the
+stratified option. Released 7.2.0 and its stopping estimator remain unchanged.
 
 ## Quick start: three steps
 
@@ -90,7 +96,10 @@ try {
 
 Stratified offspring are dependent; that is allowed by this fixed-N construction,
 not permission to insert them into the released random-stopping estimator.
-Detected CDF interval loss throws `StratifiedPrecisionLoss` and invalidates the
+The development repair compares each draw against bounded raw prefix masses and
+refines ambiguous decisions without drawing again. Tiny positive mass no longer
+requires a distinct binary64 CDF interval. Unresolved decisions or explicit
+numerical/resource limits throw `StratifiedPrecisionLoss` and invalidate the
 filter. Do not retry until success or keep only surviving runs for evidence or
 method comparisons. A newly configured run is a different experiment.
 
@@ -113,10 +122,11 @@ All names below belong to `FixedBudgetParticleFilter` (`F`).
 | `close` | No arguments; idempotent terminal owner-thread cleanup; detached prior results remain readable |
 | `Update` | Aligned immutable `particles`, ordinary `weights`, retained `logWeights`, cumulative `logEvidence`, `report`; ordinary weights can round tiny positives to zero |
 | `Update.expectation` | Finite observable `S => Double`; weighted mean; `result.expectation(x => x*x)`; rejects nonfinite values/results |
-| `StepReport` | `stateDraws`, `likelihoodCalls`, `ancestorSelections`, `decision`, `previousRelativeEss`, `contributingParents`, new-population `health`; `result.report.decision` |
+| `StepReport` | `stateDraws`, `likelihoodCalls`, `ancestorSelections`, `decision`, `previousRelativeEss`, `contributingParents`, new-population `health`, `selection`; `result.report.decision` |
+| `SelectionReport` | `refinedDecisions`, `decimalTables`, `maxPrecision`, `exactTies`; zero on initialization/carry/log-tree; `result.report.selection.maxPrecision`; exactTies counts multi-group symbolic ties, not the equal-support shortcut |
 | `Decision` | `Initial`, `Resampled`, `CarriedWeights`; initialization has no previous ESS or parent count |
 | `NoViableParticles` | Terminal exception carrying completed `report` and `logEvidence=-Infinity`; no posterior, not proof of impossible evidence |
-| `StratifiedPrecisionLoss` | Terminal numerical refusal with actionable message; no completed step/report and no automatic method substitution |
+| `StratifiedPrecisionLoss` | Terminal numerical/resource refusal with `reason`; no completed step/report, redraw or automatic method substitution |
 
 ## Gotchas and limits
 
@@ -125,9 +135,13 @@ All names below belong to `FixedBudgetParticleFilter` (`F`).
 - Likelihoods accept finite logs (including positive density logs) and `-Infinity`,
   not NaN/+Infinity. Normalizing constants matter for evidence. Log evidence and
   normalized means are not asserted unbiased. Unrepresentable log arithmetic fails.
-- Stratification uses stable input order and finite-resolution random numbers/CDFs.
-  Positive interval collapse is checked, but passing is not an exactness certificate.
-  The final sampled coordinate is kept below one to avoid trailing zero intervals.
+- Stratification uses stable input order and finite-bit random coordinates. Decisions
+  are relative to those exact coordinates, not ideal continuous uniforms. The exact
+  positive-log span must be <=1,000,000. Decimal refinement is limited to N<=4096
+  and 40/80/160 digits. Larger populations retain fast bounded and equal-support
+  selection, but ambiguous nonuniform decisions refuse explicitly. Configuration
+  acceptance up to one million is not a guarantee of completion on arbitrary weights.
+  See the [numerical review and capacity contract](STRATIFIED_INTEGRATION.md).
 - ESS scheduling is separate from health-warning thresholds. New-population health
   is measured before any future resampling. Equal weights after selection do not
   imply independent histories, accuracy or recovered diversity.

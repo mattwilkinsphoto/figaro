@@ -6,6 +6,11 @@
 Development target 7.3.0-SNAPSHOT, not a published release. Released stopping
 estimator and previous benchmark/protocol sources remain unchanged.
 
+**Current follow-up:** the [decision-focused repair](STRATIFIED_INTEGRATION.md) is
+integrated on the development branch, with local gates passed and remote CI pending. The records
+below describe the preserved pre-repair implementation and its original refusals;
+they are not new measurements of the repaired selector. Merge/release remain held.
+
 - Stage 1: six accounting/API tests passed, including exhaustive two-state outcomes.
 - Stage 2: ten additional numerical/lifecycle tests passed (16 combined).
 - Stage 3: all frozen integration screens passed: 300 unnormalized statistical
@@ -27,6 +32,16 @@ estimator and previous benchmark/protocol sources remain unchanged.
 No merge or publication is included in this milestone. The compatible new API is
 a minor-release candidate when accepted, not a reason to overwrite 7.2.0. The
 development build is 7.3.0-SNAPSHOT; publication requires separate approval.
+
+Follow-up: corrected branch CI run 39799469278 passed all four jobs, including
+reproducible builds and packaged consumers. That establishes the recorded build
+gates, not stratified usability. The subsequent [numerical investigation](STRATIFIED_NUMERICAL_INVESTIGATION.md)
+reproduced every original stratified row and attributed the refusals. Merge and
+release remain explicitly on hold pending a defensible repair and validation.
+The subsequent [decision-focused prototype](STRATIFIED_DECISION_STATUS.md) passes
+its frozen independent and fresh-seed checks. Subsequent production integration is
+tracked separately in the current follow-up above; prototype results alone do not
+satisfy integration/consumer/CI gates.
 
 ## Completion is not universal stratified applicability
 

@@ -70,7 +70,7 @@ jobs:
         run: |
           export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/capability-preflight/maven"
           export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.3.0-SNAPSHOT.jar | cut -d' ' -f1)"
-          sbt --server --batch "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck; runMain FixedBudgetConsumerCheck"
+          sbt --server --batch -Dsbt.global.localcache="$RUNNER_TEMP/figaro-consumer-local-actions" "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck; runMain FixedBudgetConsumerCheck"
 
   gvm-bhattacharyya-research:
     runs-on: ubuntu-latest
@@ -117,6 +117,7 @@ jobs:
           python3 -B -m unittest discover -s tools -p 'test_particle_diversity_reference.py' -v
           python3 -B -m unittest discover -s tools -p 'test_resampling_schedule_reference.py' -v
           python3 -B -m unittest discover -s tools -p 'test_fixed_budget_validation.py' -v
+          python3 -B -m unittest discover -s tools -p 'test_*stratified*.py' -v
       - name: Verify complete matched-accuracy timing evidence
         run: |
           python3 -B -m unittest discover -s tools -p 'test_gvm_bhattacharyya_performance.py' -v
@@ -343,7 +344,7 @@ jobs:
       - name: Verify capability expansion and independent numerical controls
         run: |
           python3 -m pip install --disable-pip-version-check mpmath==1.3.0
-          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.CapabilityExpansionTest com.cra.figaro.test.modernization.BoundedParticleFilterTest com.cra.figaro.test.modernization.BoundedParticleBudgetTest com.cra.figaro.test.modernization.WeightedBoundedParticleFilterTest com.cra.figaro.test.modernization.CalibratedGuidedFilterTest com.cra.figaro.test.modernization.AuxiliaryParticleFilterTest com.cra.figaro.test.modernization.LogParticleWeightsTest com.cra.figaro.test.modernization.ContinuousFilterBenchmarkTest com.cra.figaro.test.modernization.ParticleDiversityDiagnosticsTest com.cra.figaro.test.modernization.ParticleDiversityExperimentTest com.cra.figaro.test.modernization.ResamplingScheduleExperimentTest com.cra.figaro.test.modernization.FixedBudgetParticleFilterTest com.cra.figaro.test.modernization.FixedBudgetNumericalTest"
+          sbt --server --batch "figaro / Test / testOnly com.cra.figaro.test.modernization.CapabilityExpansionTest com.cra.figaro.test.modernization.BoundedParticleFilterTest com.cra.figaro.test.modernization.BoundedParticleBudgetTest com.cra.figaro.test.modernization.WeightedBoundedParticleFilterTest com.cra.figaro.test.modernization.CalibratedGuidedFilterTest com.cra.figaro.test.modernization.AuxiliaryParticleFilterTest com.cra.figaro.test.modernization.LogParticleWeightsTest com.cra.figaro.test.modernization.ContinuousFilterBenchmarkTest com.cra.figaro.test.modernization.ParticleDiversityDiagnosticsTest com.cra.figaro.test.modernization.ParticleDiversityExperimentTest com.cra.figaro.test.modernization.ResamplingScheduleExperimentTest com.cra.figaro.test.modernization.FixedBudgetParticleFilterTest com.cra.figaro.test.modernization.FixedBudgetNumericalTest com.cra.figaro.test.modernization.DecisionStratifiedProductionTest"
           sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.AuxiliaryParticleFilterStudy" | tee "$RUNNER_TEMP/auxiliary-filter-study.log"
           python3 -B tools/auxiliary_filter_reference.py "$RUNNER_TEMP/auxiliary-filter-study.log"
           sbt --server --batch "figaro / Test / runMain com.cra.figaro.test.modernization.CalibratedGuidedFilterStudy" | tee "$RUNNER_TEMP/guided-filter-study.log"
@@ -515,7 +516,7 @@ jobs:
         working-directory: tools/acceptance-consumer
         run: |
           export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.3.0-SNAPSHOT.jar | cut -d' ' -f1)"
-          sbt --server --batch "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck; runMain FixedBudgetConsumerCheck"
+          sbt --server --batch -Dsbt.global.localcache="$RUNNER_TEMP/figaro-consumer-local-actions" "runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck; runMain FixedBudgetConsumerCheck"
 
       - name: Build Maven-layout release bundle
         run: |
@@ -528,7 +529,7 @@ jobs:
         run: |
           export FIGARO_RELEASE_MAVEN_ROOT="$GITHUB_WORKSPACE/target/capability-bundle/maven"
           export FIGARO_EXPECTED_SHA256="$(sha256sum ../../target/out/jvm/scala-3.9.0/figaro/figaro_3-7.3.0-SNAPSHOT.jar | cut -d' ' -f1)"
-          sbt --server --batch "clean; runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck; runMain FixedBudgetConsumerCheck"
+          sbt --server --batch -Dsbt.global.localcache="$RUNNER_TEMP/figaro-consumer-bundle-actions" "clean; runMain FigaroConsumerCheck; runMain IntegrationConsumerCheck; runMain CapabilityConsumerCheck; runMain BudgetConsumerCheck; runMain FixedBudgetConsumerCheck"
 
       - name: Generate CycloneDX SBOM from the assembled runtime
         uses: anchore/sbom-action@v0.24.0

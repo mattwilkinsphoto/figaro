@@ -11,8 +11,8 @@ object FixedBudgetConsumerCheck {
     require(hash.equalsIgnoreCase(sys.env("FIGARO_EXPECTED_SHA256")))
     val model=B.Model(()=>random.nextGaussian(),(x:Double)=>.8*x+math.sqrt(.3)*random.nextGaussian())
     def likelihood(y:Double):Double=>Double=x=> -.5*(math.log(2*math.Pi*.5)+(y-x)*(y-x)/.5)
-    for(policy<-Vector(F.Policy.Always,F.Policy.WhenEssBelow(.5))) {
-      val f=F(model,F.Config(256,policy,F.Method.LogTreeMultinomial,42))
+    for(policy<-Vector(F.Policy.Always,F.Policy.WhenEssBelow(.5));method<-F.Method.values) {
+      val f=F(model,F.Config(256,policy,method,42))
       try {
         f.start(likelihood(.2));val r=f.advance(likelihood(-.3))
         require(r.particles.size==256 && r.logEvidence.isFinite && r.expectation(identity).isFinite)
@@ -34,6 +34,24 @@ object FixedBudgetConsumerCheck {
       val r=carried.advance(x=>if(x==0)-1000.0 else 0.0)
       require(r.report.decision==F.Decision.CarriedWeights && r.weights.forall(w=>math.abs(w-.5)<1e-14))
     }finally carried.close()
+    var next = -1
+    val tiny=F(B.Model(()=>{next+=1;next},(x:Int)=>x),F.Config(2,F.Policy.Always,F.Method.Stratified))
+    try {
+      tiny.start(x=>if(x==0)0.0 else -1000.0)
+      val r=tiny.advance(_=>0.0)
+      require(r.particles==Vector(0,0) && r.report.selection.decimalTables==0)
+    }finally tiny.close()
+    next = -1
+    val refused=F(B.Model(()=>{next+=1;next},(x:Int)=>x),F.Config(2,F.Policy.Always,F.Method.Stratified))
+    try {
+      refused.start(x=>if(x==0)0.0 else -1000001.0)
+      var failed=false
+      try refused.advance(_=>0.0) catch {case e:F.StratifiedPrecisionLoss=>failed=e.reason.contains("span")}
+      require(failed && refused.lastReport.isEmpty)
+      var invalid=false
+      try refused.current catch {case _:IllegalArgumentException=>invalid=true}
+      require(invalid)
+    }finally refused.close()
     println("Fixed-budget public API verified from expected packaged artifact: "+hash)
   }
 }

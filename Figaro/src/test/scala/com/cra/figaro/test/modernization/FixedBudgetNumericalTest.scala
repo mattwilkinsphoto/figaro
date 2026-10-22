@@ -20,12 +20,20 @@ class FixedBudgetNumericalTest extends AnyWordSpec with Matchers {
         f.advance(_=>0.0).particles.size shouldBe 2
       } finally f.close()
     }
-    "refuse detected CDF loss and not silently fall back" in {
+    "retain the historical CDF diagnosis but resolve actual draws without a fallback" in {
       for(logs<-Vector(Vector(0.0,-1000.0),Vector(0.0,-40.0),Vector(-1000.0,0.0)))
         intercept[F.StratifiedPrecisionLoss](F.stratifiedCdf(logs))
       val f=filter(F.Method.Stratified)
       f.start(i=>if(i==0)0.0 else -1000.0)
-      intercept[F.StratifiedPrecisionLoss](f.advance(_=>0.0))
+      val r=f.advance(_=>0.0)
+      r.particles shouldBe Vector(0,0)
+      r.report.selection.decimalTables shouldBe 0
+      f.close()
+    }
+    "invalidate the public filter on an explicit stratified domain refusal" in {
+      val f=filter(F.Method.Stratified)
+      f.start(i=>if(i==0)0.0 else -1000001.0)
+      intercept[F.StratifiedPrecisionLoss](f.advance(_=>0.0)).reason should include ("span")
       intercept[IllegalArgumentException](f.current)
       f.lastReport shouldBe None
       f.close()
