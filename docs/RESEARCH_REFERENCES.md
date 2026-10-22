@@ -44,6 +44,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Split-pilot calibration and observation-informed filtering proposals | [INF-10](#inf-10) |
 | Auxiliary ancestor selection and linear-Gaussian proposal helpers | [INF-11](#inf-11) |
 | Continuous nonlinear/multimodal filtering validation | [INF-12](#inf-12) |
+| Particle-diversity robustness and proposed resample-move experiment | [INF-14](#inf-14) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -348,6 +349,20 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 **Validation:** [LogParticleWeightsTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/LogParticleWeightsTest.scala), forced rare branches below ordinary underflow, scripted exponent extension, categorical frequency checks, log-mixture recovery and real filter lifecycle; existing exhaustive finite/Gaussian tests remain. [ContinuousFilterBenchmarkTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmarkTest.scala) replaces archived refusal reproductions with explicit retention/selection assertions. INF-12's identical benchmark protocol, fixtures, seeds and acceptance checks assess the repair; execution results are recorded separately, not implied by these citations.
 
 **Guide:** [WEIGHTED BOUNDED FILTER](WEIGHTED_BOUNDED_FILTER.md); [AUXILIARY PARTICLE FILTER](AUXILIARY_PARTICLE_FILTER.md); [CONTINUOUS FILTER BENCHMARKS](CONTINUOUS_FILTER_BENCHMARKS.md); [7.2 RELEASE STATUS](RELEASE_7_2_STATUS.md).
+
+<a id="inf-14"></a>
+
+### INF-14: Particle-diversity robustness assessment
+
+**Source:** Doucet and Johansen, [particle-filtering tutorial](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF.pdf), version 1.1 December 2008, sections 4.4-4.5; Gerber, Chopin and Whiteley, [resampling convergence](https://arxiv.org/pdf/1707.01845v3), sections 3.2-3.4; Klaas, de Freitas and Doucet, [marginal particle filter](https://www.cs.ubc.ca/~arnaud/klass_defreitas_doucet_marginalparticlefilterUAI2005.pdf), section 3; Dau and Chopin, [waste-free SMC](https://arxiv.org/pdf/2011.02328), sections 2.3-2.5; Le Fay, Chopin and Vihola, [2026 complexity assessment v2](https://arxiv.org/html/2604.03352v2), section 6 and end-user discussion. Corenflos and Finke, [Particle-MALA/mGRAD v1](https://arxiv.org/html/2401.14868v1), abstract and section 2.1 only. INF-09/11 retain the Frankenfilter stopping provenance. Maintained comparison: [particles smc_samplers.py](https://github.com/nchopin/particles/blob/3388c4bd30ab9acc5a27c970089230f93610b627/particles/smc_samplers.py) and its MIT license, inspected at that revision. Inspected 2026-10-21; guide records exact access depth and failed retrievals, including unavailable Gilks-Berzuini originating full text. No claim of full-proof review.
+
+**Role:** Research-only assessment and proposed bounded implementation plan; no sampler implemented or tested. Recommends diagnostic/cost attribution followed by a fixed-budget scalar resample-move experiment, with larger floors and stratified fixed-budget resampling as controls. The empirical predictive-mixture MCMC target is a proposed Figaro experiment, not an implementation of the marginal-filter paper. No new defaults, imported stopping theorem, guaranteed missing-mode detection, path recovery or waste-free sampler. No external code/data copied or dependency installed.
+
+**Code:** No candidate runtime code. Inspected baseline: [WeightedBoundedParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedBoundedParticleFilter.scala), with frozen proposals and independent log-tree ancestors; existing numerical repair remains INF-13.
+
+**Validation:** No new numerical validation executed. Historical evidence: [ContinuousFilterBenchmark.scala](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmark.scala) and [independent reference tool](../tools/continuous_filter_reference.py), mapped in INF-12. Proposed gates in the guide require exact finite invariance/evidence controls, independent Gaussian/nonlinear references, held-out mode-mass error, total-cost comparisons and lifecycle tests before any runtime promotion.
+
+**Guide:** [PARTICLE DIVERSITY RESEARCH](PARTICLE_DIVERSITY_RESEARCH.md); [PARTICLE DIVERSITY PROTOCOL](PARTICLE_DIVERSITY_PROTOCOL.md).
 
 <a id="dia-01"></a>
 

@@ -24,6 +24,15 @@ precision or performance for every application model.
 
 ## Active priorities
 
+**Next assessed milestone: particle-diversity robustness.** The approved
+[literature assessment and bounded implementation proposal](docs/PARTICLE_DIVERSITY_RESEARCH.md)
+is complete; the bounded three-stage experiment is approved and in progress. The measured trigger is
+finite-population modal depletion, not the numerical refusals already repaired
+for 7.2.0. Start with diagnostic/cost attribution and a fixed-budget resample-move
+experiment, comparing against increased particle floors. Only promote a runtime
+API after correctness and matched-cost utility gates. This does not reopen
+arbitrary-graph inference, change released defaults or commit to a new release.
+
 A subsequent **capability-expansion milestone is released in 7.1.0**:
 [scope and execution checklist](docs/CAPABILITY_EXPANSION_STATUS.md),
 [API guide](docs/CAPABILITY_EXPANSION.md). It expands bounded observation, count,
@@ -109,6 +118,7 @@ proposals do not establish universal coverage or discover every missing mode.
 
 | Candidate | Trigger / unresolved scope |
 | --- | --- |
+| Particle-diversity robustness (assessment complete) | [PF-DIVERSITY-01 plan](docs/PARTICLE_DIVERSITY_RESEARCH.md): implementation approval, estimator derivation, finite controls and matched-cost mode-retention evidence; no universal missing-mode detection |
 | Higher-dimensional GVM-mixture fitting and component selection | A concrete fitting workload beyond the current scalar-linear contract; independent held-out validation, explicit fit failures and total training cost |
 | Broader dependence models and information measures | A model requiring mixed/count copulas, conditional interval integration, additional partitions or currently unsupported measures |
 | Broader inference-health calibration | New posterior geometries, rare-event queries or dependence structures that existing validation does not cover |

@@ -9,11 +9,11 @@ and joint linear-angular Gauss-von Mises**, as requested on 2026-09-07.
 ## How to read and extend this list
 
 This is an **optional capability backlog**, not a queue of adoption blockers.
-The [current roadmap](ROADMAP.md) puts 6.1.0 in application-driven maintenance.
+The [current roadmap](ROADMAP.md) puts 7.2.0 in application-driven maintenance.
 Promote an item only for a demonstrated model requirement or measured bottleneck;
 historical P0/P1 family labels below do not schedule another modernization stage.
 
-Figaro 6.1 adds exact-coordinate copula conditioning/partial evidence, public
+Historically, Figaro 6.1 added exact-coordinate copula conditioning/partial evidence, public
 scalar-linear GVM-mixture fitting and full-mixture linear/angular MI. See the
 [release record](docs/RELEASE_6_1.md) for bounded contracts and validation.
 Higher-dimensional fitting, automatic component selection and mixed/count copulas
@@ -26,7 +26,8 @@ a mathematical construction is available but may lack a tested density/evidence 
 or numerical edge case is validated. Family rows below describe expansion work, not
 blanket support for all family members. Circular von Mises is now implemented and
 validated on main; joint GVM and its documented diagnostics/information APIs ship in
-the [6.1.0 Central release](docs/MAVEN_CENTRAL.md).
+the [6.1.0 release](docs/RELEASE_6_1.md) and remain available in the
+[current Central release](docs/MAVEN_CENTRAL.md).
 The nine D3 common-family representatives are also integrated; specialized variants
 and other directional families remain future work.
 
@@ -296,6 +297,18 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
 
 These additions retain the domain-independent scope and do not authorize a report-fusion,
 tracking or propagation implementation. They follow the KL/residual milestone.
+
+## Particle-diversity robustness: assessed, implementation proposed
+
+**PF-DIVERSITY-01 — researched.** The [literature assessment and bounded plan](docs/PARTICLE_DIVERSITY_RESEARCH.md)
+addresses the finite-population mode depletion recorded during 7.2 validation.
+Recommended sequence: diversity/cost instrumentation, a fixed-budget resample-move
+experiment on explicit density-evaluable states, then conditional production review.
+Compare against larger particle floors and a fixed-budget stratified-resampling
+control. Keep the released bounded-work estimator and defaults unchanged.
+No prototype, general mode-recovery guarantee or release is implied. Implementation
+is approved under the [frozen experiment protocol](docs/PARTICLE_DIVERSITY_PROTOCOL.md);
+the assessment itself is complete and runtime promotion remains conditional.
 
 ## Promotion record template
 
