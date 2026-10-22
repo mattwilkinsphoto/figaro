@@ -307,8 +307,19 @@ fixed-budget experiment on explicit density-evaluable states, and a no-promotion
 review. See the [executed results](docs/PARTICLE_DIVERSITY_STATUS.md) and unchanged
 [protocol](docs/PARTICLE_DIVERSITY_PROTOCOL.md). Correctness screens passed, but
 the selected option failed accuracy/diversity gates. Released estimators/defaults
-are unchanged; no consumer release is warranted. A single-selection resampling
-schedule is an untested follow-up candidate, not an approved implementation queue.
+are unchanged; no consumer release is warranted. The separate single-selection
+follow-up is recorded below as PF-DIVERSITY-02; it does not overwrite this result.
+
+## Resampling schedules: research passed, integration proposed
+
+**PF-DIVERSITY-02 — bounded schedule experiment passed; integration proposed.**
+The [frozen follow-up](docs/RESAMPLING_SCHEDULE_PROTOCOL.md) and
+[held-out result](docs/RESAMPLING_SCHEDULE_STATUS.md) support reviewing one-selection
+and retained-weight fixed-budget filtering. The selected ESS75/N256 combination
+passed the predeclared accuracy, depletion and measured-resource gates, including
+one unseen finite-state fixture. No runtime API/default or stopping-estimator change.
+Production review must address finite-resolution resampling limits, lifecycle,
+numerical and packaged-consumer contracts; .75 is not a universal recommendation.
 
 ## Promotion record template
 

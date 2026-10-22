@@ -375,7 +375,7 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 
 **Code:** Test-only [schedule experiment](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ResamplingScheduleExperiment.scala). No new runtime code. Released WeightedBoundedParticleFilter and previous research harness remain unchanged.
 
-**Validation:** [Schedule tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ResamplingScheduleExperimentTest.scala), [independent finite/reference and analysis code](../tools/resampling_schedule_reference.py), and [reference tests](../tools/test_resampling_schedule_reference.py). Four initial Scala tests pass; calibration and fresh-seed confirmation remain pending. Original 450-check controls are preserved.
+**Validation:** [Schedule tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ResamplingScheduleExperimentTest.scala), [independent finite/reference and frozen analysis](../tools/resampling_schedule_reference.py), [reference tests](../tools/test_resampling_schedule_reference.py), and [descriptive report](../tools/resampling_schedule_report.py). Three Python and 63 focused Scala tests pass. Fresh-seed confirmation passes all 864 statistical screens, six normalized regression gates and primary accuracy/depletion/cost/time gates on three designated fixtures. The unchanged 450-check benchmark also passes. This supports fixed-budget integration review, not a shipped API or a universal ESS threshold; the status guide records limitations and delivery state.
 
 **Guide:** [RESAMPLING SCHEDULE PROTOCOL](RESAMPLING_SCHEDULE_PROTOCOL.md); [RESAMPLING SCHEDULE STATUS](RESAMPLING_SCHEDULE_STATUS.md).
 

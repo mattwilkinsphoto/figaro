@@ -33,6 +33,13 @@ Larger floors and existing validated proposals remain model-dependent options;
 further resample-move scheduling research needs a separate protocol. Finite-population
 modal depletion remains a limitation, not a newly repaired numerical defect.
 
+**Resampling-schedule follow-up: research gates passed.** The separately frozen
+[single-selection/ESS schedule experiment](docs/RESAMPLING_SCHEDULE_STATUS.md)
+supports reviewing a bounded opt-in fixed-budget facility. It does not reverse
+the earlier experiment's result, alter the released stopping estimator, establish
+a universal ESS threshold, or ship a new runtime API. Production integration is
+a proposed next milestone requiring approval, not an adoption prerequisite.
+
 A subsequent **capability-expansion milestone is released in 7.1.0**:
 [scope and execution checklist](docs/CAPABILITY_EXPANSION_STATUS.md),
 [API guide](docs/CAPABILITY_EXPANSION.md). It expands bounded observation, count,
