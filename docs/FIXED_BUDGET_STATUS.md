@@ -3,15 +3,15 @@
 [Research provenance](RESEARCH_REFERENCES.md#inf-15).
 [API guide](FIXED_BUDGET_FILTER.md). [Frozen protocol](FIXED_BUDGET_PROTOCOL.md).
 
-Development target 7.3.0-SNAPSHOT, not a published release. Released stopping
+Published and verified in 7.3.0. Released stopping
 estimator and previous benchmark/protocol sources remain unchanged.
 
 **Current follow-up:** the [decision-focused repair](STRATIFIED_INTEGRATION.md) is
-accepted for main integration, with all local and remote gates passed. See the
+integrated and published, with all local, remote and Central consumer gates passed. See the
 [7.3.0 readiness record](RELEASE_7_3_STATUS.md). The records
 below describe the preserved pre-repair implementation and its original refusals;
 they are not new measurements of the repaired selector. The integration hold is
-resolved; publication still requires separate approval and final-version gates.
+resolved, and the final-version publication gates are complete.
 
 ## Historical pre-repair milestone (superseded delivery status)
 

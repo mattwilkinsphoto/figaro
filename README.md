@@ -45,8 +45,8 @@ It also retains log weights through ancestor selection and full corrections,
 including weights below ordinary floating-point range. These APIs are absent
 from 7.1.0. Mode depletion and documented numerical limits remain.
 
-Development beyond 7.2.0 includes a separate [explicit-policy fixed-budget filter](docs/FIXED_BUDGET_FILTER.md).
-It is not yet published; inspect its [validation and stratified numerical limits](docs/FIXED_BUDGET_STATUS.md)
+Published 7.3.0 adds a separate [explicit-policy fixed-budget filter](docs/FIXED_BUDGET_FILTER.md).
+Inspect its [validation and stratified numerical limits](docs/FIXED_BUDGET_STATUS.md)
 before adoption. Released stopping behavior is unchanged; no ESS threshold is a default.
 
 Figaro 7.0.0 added [stable filtering, owned-chain observations, exact count tables
@@ -59,7 +59,7 @@ The preceding 6.1 release added [partial/conditional copula workflows](docs/COPU
 MI](docs/GVM_MIXTURE_MI.md). See [installation and release gates](docs/RELEASE_6_1.md).
 
 The compiled library is available from Maven Central; no Figaro checkout or
-local publication is required. The supplemental [7.2.0 release assets](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.2.0)
+local publication is required. The supplemental [7.3.0 release assets](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.3.0)
 remain available with sources, API documentation, POM and checksums.
 See [Maven Central publication](docs/MAVEN_CENTRAL.md) for the release workflow and evidence.
 
@@ -72,7 +72,7 @@ In your Scala application's `build.sbt`:
 
 ```scala
 scalaVersion := "3.9.0"
-libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.2.0"
+libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.3.0"
 ```
 
 The build resolves Figaro and its runtime dependencies from Central. Use `publishLocal` only for testing your own source changes, with an appropriately distinct development version. See [installation and integration](docs/USER_GUIDE.md#installation-and-integration), including Java and fat-JAR usage.

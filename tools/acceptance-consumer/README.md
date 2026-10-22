@@ -22,10 +22,13 @@ Figaro 6.1 additionally checks exact-coordinate conditional copulas, bounded GVM
 mixture fitting and full-mixture linear/angular mutual information.
 
 To test Maven Central in a fresh environment, set `FIGARO_CENTRAL_ONLY=true`,
-`FIGARO_VERSION=7.0.0`, and
-`FIGARO_EXPECTED_SHA256=3d6806de0c895b432c1fc699cf3226df9ec0f8c8ad021479005e5838538a4eb4`,
-then run `sbt "runMain FigaroConsumerCheck"` and
-`sbt "runMain IntegrationConsumerCheck"` here. This mode excludes Ivy local and
+`FIGARO_VERSION=7.3.0`, and
+`FIGARO_EXPECTED_SHA256=6b82a0efc92ea4119a51cdfe42e38090b3680d129625d16b653e37cc821cee1f`.
+Also set `FIGARO_CAPABILITY_CHECK=true`, `FIGARO_BUDGET_CHECK=true` and
+`FIGARO_FIXED_BUDGET_CHECK=true`, then run each of `FigaroConsumerCheck`,
+`IntegrationConsumerCheck`, `CapabilityConsumerCheck`, `BudgetConsumerCheck` and
+`FixedBudgetConsumerCheck` with `sbt "runMain <name>"` here. All five passed against
+published 7.3.0. This mode excludes Ivy local and
 the downloaded file repository. The [Central workflow](../../docs/MAVEN_CENTRAL.md)
 runs it on a fresh runner without restoring dependency caches.
 
@@ -50,6 +53,11 @@ This mode excludes Ivy local and uses the bundle plus Maven Central for dependen
 it cannot pass by silently loading an earlier `publishLocal` artifact.
 
 ## API and common patterns
+
+For 7.3.0 and later, `FIGARO_FIXED_BUDGET_CHECK=true` enables the separate fixed-budget
+source directory. Its check covers both methods and explicit policies, retained
+tiny weights, selection diagnostics and invalidation after numerical refusal.
+Leave this flag unset when checking earlier immutable releases without the API.
 
 For the capability-expansion release build, set `FIGARO_VERSION=7.1.0`
 and `FIGARO_CAPABILITY_CHECK=true`, set the hash of that exact new JAR, and additionally

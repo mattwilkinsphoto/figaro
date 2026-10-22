@@ -1,6 +1,6 @@
 # Explicit-policy fixed-budget particle filtering
 
-Development API for **7.3.0-SNAPSHOT**, not included in released 7.2.0.
+Published API in **7.3.0**, not included in released 7.2.0.
 [Research provenance](RESEARCH_REFERENCES.md#inf-15).
 [Validation protocol](FIXED_BUDGET_PROTOCOL.md).
 
@@ -26,8 +26,8 @@ recovery of missing modes or exact continuous-uniform sampling.
 identified excessive refusals in the former CDF implementation. Its replacement is
 accepted after [production integration validation](STRATIFIED_INTEGRATION.md),
 including all local and remote gates. The [7.3.0 readiness record](RELEASE_7_3_STATUS.md)
-separates main integration from publication. Examples require the development build
-until 7.3.0 is published. Choose stratification only within its documented limits;
+records completed publication and all five Central-only consumer checks. Examples
+require 7.3.0 or later. Choose stratification only within its documented limits;
 released 7.2.0 and its stopping estimator remain unchanged.
 
 ## Quick start: three steps

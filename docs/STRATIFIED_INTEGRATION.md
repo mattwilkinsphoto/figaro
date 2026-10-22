@@ -3,8 +3,8 @@
 [Research provenance](RESEARCH_REFERENCES.md#inf-15).
 [User guide](FIXED_BUDGET_FILTER.md). [Preserved prototype](STRATIFIED_DECISION_STATUS.md).
 
-Status: accepted for main integration; all local and remote integration gates passed.
-The API targets 7.3.0 and is not yet published. The released stopping estimator, log-tree selector and policy defaults
+Status: integrated, published and verified in 7.3.0; all integration and publication gates passed.
+The released stopping estimator, log-tree selector and policy defaults
 are unchanged. This document distinguishes numerical review from executed tests.
 
 ## Numerical review
@@ -126,4 +126,5 @@ The former integration hold is resolved within the explicit limits above. The
 historical failed CDF implementation and no-promotion diversity experiment remain
 preserved; neither is evidence of a current failure or of universal robustness.
 See the [7.3.0 readiness record](RELEASE_7_3_STATUS.md) for the main delivery status
-and the distinct final-version publication gates. Nothing here publishes 7.3.0.
+and completed final-version publication gates, including Central byte comparisons
+and all five packaged consumers. Publication does not expand the numerical contract.

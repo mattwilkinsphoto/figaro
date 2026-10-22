@@ -5,9 +5,9 @@ contains optional candidates; [roadmap history](docs/ROADMAP_HISTORY.md) preserv
 the completed milestones and their original evidence. Historical priorities are
 not an active queue.
 
-## Current baseline: use 7.2.0
+## Current baseline: use 7.3.0
 
-**Figaro 7.2.0 is the adoption baseline and is published on Maven Central.**
+**Figaro 7.3.0 is the adoption baseline and is published on Maven Central.**
 The Java 17 / Scala 3 / sbt 2 modernization and approved core performance,
 distribution and modeling milestones are integrated. See the
 [release scope](docs/INFERENCE_INTEGRATION.md), [installation and publication](docs/MAVEN_CENTRAL.md),
@@ -43,9 +43,9 @@ production integration has now passed all acceptance gates. The
 policy/method selection without changing random stopping. See
 [decision-focused repair and final validation](docs/STRATIFIED_INTEGRATION.md):
 the former excessive CDF refusals are resolved on the frozen controls, with explicit
-domain, precision and refinement-population limits retained. The next delivery step
-is the [7.3.0 minor release](docs/RELEASE_7_3_STATUS.md), subject to publication approval
-and final-version gates. No default threshold or automatic cutover is introduced.
+domain, precision and refinement-population limits retained. The
+[7.3.0 minor release](docs/RELEASE_7_3_STATUS.md) is published and verified, including
+all five Central-only consumers. No default threshold or automatic cutover is introduced.
 
 A subsequent **capability-expansion milestone is released in 7.1.0**:
 [scope and execution checklist](docs/CAPABILITY_EXPANSION_STATUS.md),

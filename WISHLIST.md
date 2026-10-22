@@ -310,9 +310,9 @@ the selected option failed accuracy/diversity gates. Released estimators/default
 are unchanged; no consumer release is warranted. The separate single-selection
 follow-up is recorded below as PF-DIVERSITY-02; it does not overwrite this result.
 
-## Resampling schedules: integration accepted for 7.3.0
+## Resampling schedules: shipped in 7.3.0
 
-**PF-DIVERSITY-02 — bounded schedule experiment and production integration gates passed.**
+**PF-DIVERSITY-02 — bounded integration shipped and verified in 7.3.0.**
 The [frozen follow-up](docs/RESAMPLING_SCHEDULE_PROTOCOL.md) and
 [held-out result](docs/RESAMPLING_SCHEDULE_STATUS.md) support reviewing one-selection
 and retained-weight fixed-budget filtering. The selected ESS75/N256 combination

@@ -1,6 +1,6 @@
 # Modernization release notes
 
-## Next release: 7.3.0 — integrated candidate, not published
+## Current release: 7.3.0 — published
 
 Adds the opt-in `FixedBudgetParticleFilter` for detached immutable-state bootstrap
 models, with explicit resampling policy and method, retained log weights and bounded
@@ -8,9 +8,11 @@ decision-focused stratification. All integration gates passed, including indepen
 numerical controls, frozen public-API benchmarks and packaged consumers. The released
 stopping estimator and defaults are unchanged. No universal ESS threshold, missing-mode
 guarantee or automatic fallback is introduced. See the [readiness record](RELEASE_7_3_STATUS.md)
-for numerical limits, consumer impact and the remaining final-version publication gates.
+for numerical limits, consumer impact and completed final-version publication gates.
+All four public Central artifacts match the approved bytes and all five Central-only
+consumers passed. Compatibility with 7.2.0 and clean reproducibility passed before publication.
 
-## Current release: 7.2.0 — published
+## Previous release: 7.2.0 — published
 
 Published and verified on Maven Central. Final-source CI, byte-reproducibility,
 four public artifact byte comparisons and all four Central-only consumers passed.
