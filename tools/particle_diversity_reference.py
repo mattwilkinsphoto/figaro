@@ -254,6 +254,45 @@ def confirm(out,logs,reference,selection):
     out.json('decision.json',result)
     print(json.dumps({k:result[k] for k in ('promote','comparisons','regressions','failed_outcomes')}),flush=True)
 
+def estimation_errors(rows, truth):
+    """Descriptive errors only; never used to select or promote a candidate."""
+    variance=truth['second']-truth['mean']**2
+    errors={key:[] for key in ('mean','variance','positive','relative_evidence','log_evidence')}
+    negative_variances=0
+    for r in rows:
+        v=r['second']-r['mean']**2
+        negative_variances+=int(v<0)
+        errors['mean'].append(r['mean']-truth['mean'])
+        errors['variance'].append(v-variance)
+        errors['positive'].append(r['positive']-truth['positive'])
+        delta=r['logZ']-truth['logZ']
+        errors['relative_evidence'].append(math.expm1(delta))
+        errors['log_evidence'].append(delta)
+    result={key:dict(bias=float(np.mean(values)),rmse=float(np.sqrt(np.mean(np.square(values)))))
+            for key,values in errors.items()}
+    assert all(math.isfinite(v) for metrics in result.values() for v in metrics.values())
+    return dict(errors=result,negative_variance_estimates=negative_variances)
+
+def supplement(out,log,reference,selection):
+    chosen=json.loads(Path(selection).read_text())
+    configs=list(dict.fromkeys([(chosen['method'],64),('none',64)]+[('baseline',b) for b in (64,256,1024,4096)]))
+    rows,_=read_experiment(log,configs,range(10001,10257))
+    assert all(r['status']=='ok' for r in rows),'Preserve failures; supplemental estimates unavailable'
+    refs=json.loads(Path(reference).read_text())['references'];records=[]
+    for s in SCENARIOS:
+        for method,n in configs:
+            for t in (0,len(refs[s])//2,len(refs[s])-1):
+                group=[r for r in rows if (r['scenario'],r['method'],r['n'],r['t'])==(s,method,n,t)]
+                assert len(group)==256
+                record=dict(scenario=s,method=method,n=n,t=t,independent_seeds=len(group),
+                            **estimation_errors(group,refs[s][t]))
+                record['mean_cumulative_counts']={key:float(np.mean([r[key] for r in group]))
+                    for key in ('work','targets','likelihoods','proposals','draws','moves','accepted')}
+                records.append(record)
+    out.json('estimation-errors.json',dict(descriptive_only=True,changes_acceptance_gates=False,
+        log_sha256=sha(log),reference_sha256=sha(reference),selection_sha256=sha(selection),records=records))
+    print(json.dumps(dict(records=len(records),negative_variance_estimates=sum(r['negative_variance_estimates'] for r in records))),flush=True)
+
 def report(out,path):
     result=json.loads(Path(path).read_text())
     config=out.root/'matplotlib-config';config.mkdir();out.grant(config)
@@ -281,7 +320,7 @@ def report(out,path):
     out.write('summary.md','\n'.join(lines)+'\n')
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','diagnostics','select','confirm','report'])
+    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','diagnostics','select','confirm','supplement','report'])
     p.add_argument('--output',required=True);p.add_argument('--base');p.add_argument('--log');p.add_argument('--reference');p.add_argument('--acl-script')
     p.add_argument('--selection');p.add_argument('--logs',nargs='+');p.add_argument('--decision')
     a=p.parse_args();out=Output(a.output,a.acl_script)
@@ -290,6 +329,7 @@ def main():
     elif a.command=='diagnostics':diagnostics(out,a.log,a.reference)
     elif a.command=='select':select(out,a.log,a.reference)
     elif a.command=='confirm':confirm(out,a.logs,a.reference,a.selection)
+    elif a.command=='supplement':supplement(out,a.log,a.reference,a.selection)
     else:report(out,a.decision)
     print('COMPLETE_UTC',time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),flush=True)
 if __name__=='__main__':main()

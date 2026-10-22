@@ -96,14 +96,37 @@ would require a new protocol and held-out seeds, not retuning this result.
 
 The unchanged 7.2 continuous harness completed 7,680 trajectories / 153,600 steps;
 all **450 original checks passed**, with none blocked. All **59 focused Scala
-tests** passed, including the new diagnostics and experimental suites. The four
-independent Python oracle/integrity tests also passed. Failed initial compile
+tests** passed, including the new diagnostics and experimental suites. The five
+independent Python oracle/reporting tests also passed. Failed initial compile
 logs remain part of the evidence, alongside the successful reruns.
 
 Production filtering source, stopping estimator, original benchmark, defaults and
 library version remain unchanged. This milestone adds test-only research code,
 controls, CI coverage and documentation; it does **not** add a public rejuvenation
 API or warrant a consumer release. Figaro 7.2.0 remains the adoption baseline.
+
+The reporting audit added descriptive posterior-variance, relative-evidence and
+log-evidence errors from the preserved records, without changing any gates.
+For persistent modes at the final step, candidate/baseline RMSE was 11.7394/10.7551
+for variance, .71955/.61384 for relative evidence, and .73573/.66967 for log evidence.
+Relative evidence error is `exp(logZhat - logZreference) - 1`; it must not be
+confused with `logZhat - logZreference`. Variance reconstructed as second moment
+minus squared mean can suffer cancellation: 24 of the 23,040 selected-step
+estimates were slightly negative. They remain recorded, not silently clamped.
+This supplemental reporting is descriptive, not an additional promotion test.
+
+The resource-only repeat completed successfully. Maximum observed peak working
+sets were 754,429,952 bytes for the forked experiment and 954,249,216 bytes for its
+sbt launcher (sampled every two seconds). These are process-level observations,
+not per-method memory measurements or certified final peaks. Setup inside each
+step is timed; JVM startup, warm-up, output logging and offline calibration are
+not amortized into the accuracy/time curves. Calibration and warm-up commands and
+complete process elapsed times are retained separately. No resource limit was hit.
+
+Calibration and confirmation use disjoint seeds on the same predeclared fixtures,
+not a second set of unseen model families. The result cannot establish cross-family
+generalization. This limits any positive claim; it does not rescue the failed
+promotion gates or justify expanding the approved experiment after seeing results.
 
 Retain the validated existing proposal/auxiliary capabilities and assess higher
 particle floors against model-specific accuracy and work. Neither a high weight

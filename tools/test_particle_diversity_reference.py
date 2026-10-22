@@ -1,6 +1,7 @@
 import unittest
 from fractions import Fraction as F
-from particle_diversity_reference import finite_control, mh_matrix, evolve, binomial_upper, read_experiment
+from particle_diversity_reference import finite_control, mh_matrix, evolve, binomial_upper, read_experiment, estimation_errors
+import math
 
 class ParticleDiversityReferenceTest(unittest.TestCase):
     def test_exact_two_step_unnormalized_moments(self):
@@ -24,5 +25,14 @@ class ParticleDiversityReferenceTest(unittest.TestCase):
         # This source contains no experiment records; no temporary files required.
         with self.assertRaises(AssertionError):
             read_experiment(__file__,[('none',64)],range(10001,10002))
+
+    def test_descriptive_evidence_and_log_errors_are_distinct(self):
+        truth=dict(mean=1.0,second=3.0,positive=.5,logZ=0.0)
+        row=dict(mean=2.0,second=5.0,positive=.75,logZ=math.log(2))
+        result=estimation_errors([row],truth)
+        self.assertEqual(result['errors']['variance']['bias'],-1.0)
+        self.assertEqual(result['errors']['relative_evidence']['rmse'],1.0)
+        self.assertAlmostEqual(result['errors']['log_evidence']['rmse'],math.log(2))
+        self.assertEqual(result['negative_variance_estimates'],0)
 
 if __name__=='__main__':unittest.main()
