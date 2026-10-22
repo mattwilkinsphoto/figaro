@@ -35,11 +35,21 @@ The comparison exposed a historical prose double count of calibration pilots;
 [the benchmark guide](CONTINUOUS_FILTER_BENCHMARKS.md) now correctly describes its
 candidate count as pilot-inclusive. Raw evidence and existing gates are unchanged.
 
-## Stage 2 — next
+## Stage 2 — calibration complete; confirmation in progress
 
-Implement and test the fixed-budget scalar candidate, then calibrate/select using
-only the frozen calibration seeds. Confirmation and timing repetitions follow the
-protocol without modifying the released stopping estimator.
+Test-only implementation committed at `07f21637`; six Scala tests and four Python
+tests passed. An initial compile caught invalid numeric-literal syntax; that failed
+log is retained. No runtime source changed. Calibration completed 1,040 trajectories
+across five fixtures, 13 configurations and 16 seeds, without failed outcomes.
+
+The predeclared cost-weighted error score selects **stratified resampling only at
+N=64**, with **ordinary bootstrap N=64** as its primary baseline. No MCMC candidate
+wins this selection; the no-extra-resampling baseline scores better than all
+experimental candidates. This is a negative calibration result, not an invitation
+to retune against the held-out seeds. Confirmation repeats the selected option,
+the N=64 no-extra-resampling control and bootstrap N=64/256/1024/4096 in three fresh
+JVMs, using the frozen 256 held-out seeds. Replications measure timing/replay, not
+additional independent statistical samples.
 
 ## Stage 3 — pending evidence
 
