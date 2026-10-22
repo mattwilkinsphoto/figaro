@@ -364,6 +364,20 @@ released in 7.1.0 without changing the immutable 7.0.0 artifacts.
 
 **Guide:** [PARTICLE DIVERSITY RESEARCH](PARTICLE_DIVERSITY_RESEARCH.md); [PARTICLE DIVERSITY PROTOCOL](PARTICLE_DIVERSITY_PROTOCOL.md); [PARTICLE DIVERSITY STATUS](PARTICLE_DIVERSITY_STATUS.md).
 
+<a id="inf-15"></a>
+
+### INF-15: Bounded resampling-schedule experiment
+
+**Source:** Whiteley, Lee and Heine, *On the role of interaction in sequential Monte Carlo algorithms*, Bernoulli 22 (2016), [v3](https://arxiv.org/html/1309.2918v3), sections 2.1-2.2 and ESS rule (13); maintained [particles core](https://github.com/nchopin/particles/blob/master/particles/core.py), resampling/weight carry-forward/normalizer routines and [official tutorial](https://particles-sequential-monte-carlo-in-python.readthedocs.io/en/latest/notebooks/advanced_tutorial_ssm.html), inspected 2026-10-21. Moving source, not a pinned numerical comparator; prior pinned core retrieval failed. INF-14 supplies stratified-resampling provenance.
+
+**Role:** Approved test-only schedule experiment. Previous-population ESS decides whether to retain weights and propagate once or select ancestors once; independent finite expectations validate the branch accounting. No theorem transfer to random stopping, guaranteed missing-mode detection or imported code.
+
+**Code:** Protocol only at freeze; no new runtime code. Released WeightedBoundedParticleFilter and previous research harness remain unchanged. Implementation mappings will be added with test-only code.
+
+**Validation:** New frozen seeds, exact finite controls, original continuous reference controls, a confirmation-only finite-state model and matched-cost/time gates are planned, not yet executed.
+
+**Guide:** [RESAMPLING SCHEDULE PROTOCOL](RESAMPLING_SCHEDULE_PROTOCOL.md).
+
 <a id="dia-01"></a>
 
 ### DIA-01: Multi-chain convergence and ESS
