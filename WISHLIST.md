@@ -298,17 +298,17 @@ discrete support. Dirac delta/comb notation is not an ordinary continuous densit
 These additions retain the domain-independent scope and do not authorize a report-fusion,
 tracking or propagation implementation. They follow the KL/residual milestone.
 
-## Particle-diversity robustness: assessed, implementation proposed
+## Particle-diversity robustness: bounded experiment complete
 
-**PF-DIVERSITY-01 — researched.** The [literature assessment and bounded plan](docs/PARTICLE_DIVERSITY_RESEARCH.md)
+**PF-DIVERSITY-01 — tested; not promoted.** The [literature assessment and bounded plan](docs/PARTICLE_DIVERSITY_RESEARCH.md)
 addresses the finite-population mode depletion recorded during 7.2 validation.
-Recommended sequence: diversity/cost instrumentation, a fixed-budget resample-move
-experiment on explicit density-evaluable states, then conditional production review.
-Compare against larger particle floors and a fixed-budget stratified-resampling
-control. Keep the released bounded-work estimator and defaults unchanged.
-No prototype, general mode-recovery guarantee or release is implied. Implementation
-is approved under the [frozen experiment protocol](docs/PARTICLE_DIVERSITY_PROTOCOL.md);
-the assessment itself is complete and runtime promotion remains conditional.
+All three stages are complete: diagnostic/cost instrumentation, a test-only
+fixed-budget experiment on explicit density-evaluable states, and a no-promotion
+review. See the [executed results](docs/PARTICLE_DIVERSITY_STATUS.md) and unchanged
+[protocol](docs/PARTICLE_DIVERSITY_PROTOCOL.md). Correctness screens passed, but
+the selected option failed accuracy/diversity gates. Released estimators/defaults
+are unchanged; no consumer release is warranted. A single-selection resampling
+schedule is an untested follow-up candidate, not an approved implementation queue.
 
 ## Promotion record template
 

@@ -1,8 +1,10 @@
 # Particle-diversity robustness: assessment and bounded plan
 
-Status: **assessment complete; three-stage experiment approved and in progress**.
+Status: **assessment and three-stage experiment complete; no runtime promotion**.
 Assessed 2026-10-21 against the published 7.2.0 baseline. No new sampler,
-runtime default, scientific test result or release is introduced here.
+runtime default or release is introduced. This document preserves the original
+research recommendation; the [executed results and decision](PARTICLE_DIVERSITY_STATUS.md)
+record the negative utility result without relaxing the frozen gates.
 [Research provenance](RESEARCH_REFERENCES.md#inf-14).
 
 ## Recommendation

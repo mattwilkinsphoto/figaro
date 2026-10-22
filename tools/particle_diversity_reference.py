@@ -5,6 +5,7 @@ import hashlib
 import itertools
 import json
 import math
+import os
 from pathlib import Path
 import sys
 import time
@@ -253,15 +254,42 @@ def confirm(out,logs,reference,selection):
     out.json('decision.json',result)
     print(json.dumps({k:result[k] for k in ('promote','comparisons','regressions','failed_outcomes')}),flush=True)
 
+def report(out,path):
+    result=json.loads(Path(path).read_text())
+    config=out.root/'matplotlib-config';config.mkdir();out.grant(config)
+    os.environ['MPLCONFIGDIR']=str(config)
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    fig,axes=plt.subplots(1,2,figsize=(10,4))
+    for ax,s in zip(axes,('persistent-modes','late')):
+        base=sorted([r for r in result['summary'] if r['scenario']==s and r['method']=='baseline'],key=lambda r:r['n'])
+        ax.plot([np.mean(r['nanos'])/1e6 for r in base],[r['rmse']['positive'] for r in base],'o-',label='Bootstrap, N=64..4096')
+        for r in result['summary']:
+            if r['scenario']==s and r['method'] not in ('baseline','none'):
+                ax.scatter(np.mean(r['nanos'])/1e6,r['rmse']['positive'],marker='*',s=130,label=r['method']+', N=64')
+        ax.set_xscale('log');ax.set_xlabel('Mean elapsed ms / trajectory (3 JVMs)');ax.set_ylabel('Final sign-mass RMSE')
+        ax.set_title(s);ax.legend(fontsize=8)
+    fig.suptitle('Held-out point estimates; 256 independent seeds, not 768')
+    fig.tight_layout();target=out.write('accuracy-cost.png','');fig.savefig(target,dpi=150);plt.close(fig)
+    lines=['# Held-out diversity decision','',f"Promote: **{result['promote']}**",'',
+           '| Fixture | RMSE ratio | Family-wise upper ratio | Candidate / baseline depleted | Timing gates |',
+           '| --- | ---: | ---: | --- | --- |']
+    for c in result['comparisons']:
+        lines.append(f"| {c['scenario']} | {c['rmse_ratio']} | {c['upper_familywise']} | {c['candidate_depleted']} / {c['baseline_depleted']} | {c['timing_gates']} |")
+    lines+=['','Repeated JVMs assess timing/replay only. Full gates and all outcomes are in decision.json and TSV files.']
+    out.write('summary.md','\n'.join(lines)+'\n')
+
 def main():
-    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','diagnostics','select','confirm'])
+    p=argparse.ArgumentParser();p.add_argument('command',choices=['prepare','diagnostics','select','confirm','report'])
     p.add_argument('--output',required=True);p.add_argument('--base');p.add_argument('--log');p.add_argument('--reference');p.add_argument('--acl-script')
-    p.add_argument('--selection');p.add_argument('--logs',nargs='+')
+    p.add_argument('--selection');p.add_argument('--logs',nargs='+');p.add_argument('--decision')
     a=p.parse_args();out=Output(a.output,a.acl_script)
     print('START_UTC',time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),flush=True)
     if a.command=='prepare':prepare(out,a.base)
     elif a.command=='diagnostics':diagnostics(out,a.log,a.reference)
     elif a.command=='select':select(out,a.log,a.reference)
-    else:confirm(out,a.logs,a.reference,a.selection)
+    elif a.command=='confirm':confirm(out,a.logs,a.reference,a.selection)
+    else:report(out,a.decision)
     print('COMPLETE_UTC',time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),flush=True)
 if __name__=='__main__':main()

@@ -35,7 +35,7 @@ The comparison exposed a historical prose double count of calibration pilots;
 [the benchmark guide](CONTINUOUS_FILTER_BENCHMARKS.md) now correctly describes its
 candidate count as pilot-inclusive. Raw evidence and existing gates are unchanged.
 
-## Stage 2 — calibration complete; confirmation in progress
+## Stage 2 — complete
 
 Test-only implementation committed at `07f21637`; six Scala tests and four Python
 tests passed. An initial compile caught invalid numeric-literal syntax; that failed
@@ -51,7 +51,74 @@ the N=64 no-extra-resampling control and bootstrap N=64/256/1024/4096 in three f
 JVMs, using the frozen 256 held-out seeds. Replications measure timing/replay, not
 additional independent statistical samples.
 
-## Stage 3 — pending evidence
+Held-out confirmation completed 7,680 trajectories per JVM, 23,040 in total,
+with 552,960 step records and no failed outcomes. Scientific outputs were identical
+across the three JVMs. All 360 unnormalized control checks and all six normalized
+Gaussian/growth regression checks passed. These are the frozen statistical screens,
+not proofs that every normalized estimator is unbiased.
 
-No production integration or new release recommendation yet. Correctness, utility,
-resource and regression gates must be evaluated before a promote/no-promote decision.
+## Stage 3 — complete: do not promote
+
+The selected stratified-only option **fails the predeclared utility gates** against
+ordinary bootstrap at the same N=64 and counted callback work:
+
+| Held-out fixture | Final sign-mass RMSE ratio (candidate/baseline) | Trajectories depleted at any eligible step | Decision |
+| --- | --- | --- | --- |
+| Persistent modes | 1.06094; paired 95% interval [0.99639, 1.12804] | 105/256 versus 79/256 | Fails accuracy, depletion and all three timing comparisons |
+| Late disambiguation | 4.68e-9; boundary-sensitive metric, see below | 114/256 versus 96/256 | Fails depletion despite tiny final sign-mass error |
+
+The family-adjusted one-sided upper RMSE ratio for persistent modes is 1.12804,
+not below one; the required point ratio was at most .8. Exact binomial upper
+depletion bounds also worsen: .46326 versus .35953 for persistent modes, and
+.49864 versus .42762 for late disambiguation. Stage 1's depletion counts describe
+the final step; these Stage 2 counts use the frozen worst-eligible-step definition.
+They are not interchangeable statistics.
+
+The tiny late-disambiguation ratio is **not evidence of general mode recovery**.
+Its final reference sign probability is near one. An equal-weight resampled
+population can give exactly one while a weighted population retains a tiny
+negative-region weight. This boundary-sensitive final metric does not measure
+earlier mode retention, which was worse, or recovery of discarded histories.
+
+No MCMC candidate was selected in calibration: the full predictive-mixture target
+requires quadratic density work, which did not earn its cost in this experiment.
+The held-out comparison therefore evaluates the selected resampling-only option,
+not a confirmatory test of every MCMC candidate. This is a bounded negative result,
+not a claim that resample-move methods generally fail.
+
+In particular, the tested schedule adds output resampling and still selects
+ancestors at the next propagation step. Even equal-weight outputs undergo that
+next selection. Its extra sampling noise is a material limitation; a schedule
+that propagates each resampled parent once was **not tested**. Investigating that
+would require a new protocol and held-out seeds, not retuning this result.
+
+### Regression and delivery
+
+The unchanged 7.2 continuous harness completed 7,680 trajectories / 153,600 steps;
+all **450 original checks passed**, with none blocked. All **59 focused Scala
+tests** passed, including the new diagnostics and experimental suites. The four
+independent Python oracle/integrity tests also passed. Failed initial compile
+logs remain part of the evidence, alongside the successful reruns.
+
+Production filtering source, stopping estimator, original benchmark, defaults and
+library version remain unchanged. This milestone adds test-only research code,
+controls, CI coverage and documentation; it does **not** add a public rejuvenation
+API or warrant a consumer release. Figaro 7.2.0 remains the adoption baseline.
+
+Retain the validated existing proposal/auxiliary capabilities and assess higher
+particle floors against model-specific accuracy and work. Neither a high weight
+ESS nor many distinct current states proves adequate mode or path coverage.
+Further rejuvenation work is optional follow-up, not an adoption prerequisite.
+
+### Reproduction
+
+Protocol: `f0544116`; Stage 1 implementation: `31427545`; experiment and analysis
+gates: `07f21637`; calibration choice recorded before held-out work: `ecd17d5f`.
+The plotting-only addition does not change selection or acceptance rules.
+The experiment uses the five synthetic fixtures and seeds in the
+[protocol](PARTICLE_DIVERSITY_PROTOCOL.md). Commands, versions, source/input hashes,
+actual logs (including errors), per-step TSVs, reference/decision JSON and plots
+are retained in the accompanying private reproducibility archive. A fourth run
+is resource-only and is excluded from statistical replication and timing gates.
+CI completion is recorded separately in the delivery handoff and evidence archive;
+local success is not a substitute for remote CI.
