@@ -686,8 +686,37 @@ the guide. No test acceptance or repair changed. At that pilot revision, the
 original repair and standard CI remained unchanged. The [worker source](https://github.com/sbt/sbt/blob/v2.0.8/worker/src/main/java/sbt/internal/worker1/ForkTestMain.java)
 was inspected to exercise the actual notification serialization and framework-error
 path, rather than substituting an ordinary assertion failure. Fresh source
-inspection found the 2.0.11 and 2.0.8 ForkTests sources identical; no 2.0.11 binary
-validation or upstream acceptance is claimed.
+inspection found the 2.0.11 and 2.0.8 ForkTests sources identical. That historical
+comparison omitted a relevant change elsewhere: official
+[sbt 2.0.11](https://github.com/sbt/sbt/releases/tag/v2.0.11) includes
+[PR #9860](https://github.com/sbt/sbt/pull/9860), closing
+[issue #9859](https://github.com/sbt/sbt/issues/9859). Its
+[WorkerExchange response-draining fix](https://github.com/sbt/sbt/blob/v2.0.11/main-actions/src/main/scala/sbt/internal/WorkerExchange.scala)
+and [slow-listener regression](https://github.com/sbt/sbt/tree/v2.0.11/sbt-app/src/sbt-test/tests/fork-slow-listener)
+are the primary basis for the new [stock assessment](../tools/sbt-worker-repair/stock_assessment.py)
+and its [audit controls](../tools/test_stock_assessment.py). See the
+[revised report](../tools/sbt-worker-repair/UPSTREAM_REPORT.md) for results and limits.
+The original source-only inference against upgrading is withdrawn; upstream
+acceptance of the separate five-site local patch is not claimed.
+
+The 2026-10-23 stock assessment ran both original control matrices on each official
+2.0.8/2.0.11 binary (300 cases and 60 forced exceptions per binary), the four real
+forked fixtures, and the upstream slow-listener fixture. Stock 2.0.11 preserved all
+40 slow-listener identities and the final failure, and completed two fresh Figaro
+passes of 131 named tests in 11 suites. The old false-green outcome did not occur
+on 2.0.8, leaving that reproduction check explicitly failed. These are Windows
+direct-launcher results, not a demonstrated residual 2.0.11 lifecycle failure or
+Linux/server-mode adoption. No production toolchain change or upstream submission
+is authorized by this evidence; see the revised report for the remaining gates.
+
+An additive [Linux/server harness](../tools/sbt-worker-repair/stock_linux.py),
+[negative controls](../tools/test_stock_linux.py) and branch-only workflow now
+implement the next bounded assessment; remote results are pending. Its mode
+distinction follows the official [component guide](https://www.scala-sbt.org/2.x/docs/en/guide/sbt-components.html)
+and [2.0.11 runner source](https://github.com/sbt/sbt/blob/v2.0.11/sbt): foreground
+`--server` is not persistent `--client`. Same-PID failure/recovery checks supplement
+the original fixtures; instrumented tests, reproducible packaging and six consumers
+are separate gates. This is validation tooling, not toolchain/workaround adoption.
 
 Subsequent approval adopts the frozen 11-suite non-instrumented inventory as a
 dedicated [development CI job](../.github/workflows/ci.yml), using the shared

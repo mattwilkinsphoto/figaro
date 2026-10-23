@@ -4,6 +4,12 @@ This is an isolated diagnostic repair, not a replacement sbt release or an autom
 installation. Read the [scope and local evidence](../../docs/CI_VALIDATION.md) and
 [upstream report draft](UPSTREAM_REPORT.md) first. No upstream issue has been filed.
 
+**Current review:** official sbt 2.0.11 includes a response-draining fix outside
+`React`. The [revised report](UPSTREAM_REPORT.md#current-upstream-disposition)
+supersedes the earlier source-only inference against an upgrade. Keep the existing
+2.0.8 repair evidence separate from the stock-version assessment below. Neither
+this document nor that assessment changes the production toolchain automatically.
+
 Prerequisites: Python 3.11+, JDK 17, an already populated official sbt 2.0.8 boot
 directory, and the official sbt launcher. Choose new output directories whose
 parents already exist. Shell variables below denote paths supplied by the caller:
@@ -99,3 +105,94 @@ directory for the sbt runner rather than changing the worker protocol.
 Rollback is selecting the original boot. No global sbt defaults, released estimator,
 library dependency or publication workflow is changed. An upstream release should
 replace this workaround only after checking its actual source and validation.
+
+## Stock 2.0.11 assessment
+
+[stock_assessment.py](stock_assessment.py) is a bounded diagnostic runner, not a
+production installer or replacement for upstream's entire scripted-test suite.
+It invokes the existing Java controls and fixtures unchanged, and runs the exact
+upstream slow-listener build/test sources through a direct launcher. The upstream
+`-> test` scripted expectation is represented by requiring a nonzero build exit;
+the candidate additionally must report all 40 identities and the final failure.
+
+Prepare a fresh evidence root before invocation. Required inputs are:
+
+- `inputs.json`: the frozen Figaro Git commit (`head`) and protected repository
+  path-to-SHA-256 mapping (`protected`); retain platform and upstream provenance.
+- For each version `2.0.8` and `2.0.11`: its official `sbt-launch-VERSION.jar`,
+  isolated populated `boot/`, and `boot-hashes.json` mapping every boot JAR's
+  relative path to SHA-256. Verify Maven checksums before execution.
+- `upstream/slow-build.sbt` and `upstream/slow-ManyTests.scala`, copied byte-for-byte
+  from the tagged upstream regression. Retain the upstream license, scripted
+  expectation, source/API responses and hashes alongside them. Provide a fresh
+  `ipc/` runtime directory. Windows requires the explicit access handling described
+  above; access failures must not be ignored.
+
+Then, from the Figaro repository root:
+
+```sh
+python -B tools/sbt-worker-repair/stock_assessment.py --output "$ASSESSMENT_ROOT" --phase controls
+python -B tools/sbt-worker-repair/stock_assessment.py --output "$ASSESSMENT_ROOT" --phase figaro
+python -B tools/test_stock_assessment.py
+```
+
+Each phase writes its protocol before execution and refuses to overwrite an
+existing phase directory. Inspect a failed controls phase before continuing the
+independent Figaro phase; do not conceal its nonzero exit. Two fresh source/boot/
+cache Figaro passes require the original 131 named tests in 11 suites, fresh
+compilation, complete JUnit identities, and verified loaded stock binary identity.
+The launcher, caches and checkouts remain isolated; no shared defaults change.
+
+The controlled stock exceptions are expected diagnostic findings, not fixed-defect
+claims. The frozen 2.0.8 slow-listener baseline expects the historical false-green
+outcome; failure to reproduce it remains a failed reproduction check even if the
+candidate passes. There are no retries or empirically selected thresholds. See
+the report for the actual outcomes, Windows scope and remaining adoption gates.
+
+[Research provenance](../../docs/RESEARCH_REFERENCES.md#eng-01).
+
+## Branch-only Linux and server assessment
+
+[stock_linux.py](stock_linux.py) and its
+[workflow](../../.github/workflows/sbt-stock-linux.yml) run only on
+`codex/stock-sbt-2-0-11-validation`, with read-only repository permissions and no
+publication/signing secrets. They do not replace the adopted repair or change the
+production sbt selector. The frozen library baseline is `2f8e6c54`; only isolated
+checkout selectors change to 2.0.11. Tooling and result provenance are recorded
+separately from that baseline.
+
+Three predeclared jobs cover direct Java, the official `--server --batch` runner,
+and packaging. The first two retain both stock control matrices, all real fixtures
+and two fresh 131-test passes. The existing baseline false-green expectation stays
+unchanged: if it fails to reproduce, that stage and its workflow job remain red,
+even if independent candidate checks pass. Every attempted stage is retained;
+there are no reruns or fallback runners to obtain a green result.
+
+The official [runner source](https://github.com/sbt/sbt/blob/v2.0.11/sbt) distinguishes
+foreground `--server` from persistent `--client`. An additional native-client
+sequence requires the **same server PID** for passing tests, an assertion failure,
+a worker exit-17 failure and a subsequent passing `testFull` execution. It then
+checks shutdown of that owned server. It does not use global `shutdownall`.
+Framework-error and slow-listener checks remain separate foreground fixtures.
+
+The packaging job instruments the same 131-test inventory, checks coverage output,
+turns instrumentation off, requires two fresh byte-identical thin/fat rebuilds,
+checks classifiers/legal notices, MiMa/TASTy compatibility, and runs the six
+existing Maven-layout consumers against the expected candidate JAR hash with Ivy
+local excluded. `--candidate` is deliberate: no artifact is published. The existing
+bundle README still names 2.0.8; its template must be reconciled before any future
+production toolchain adoption, not silently treated as accurate for this candidate.
+
+On a Linux JDK 17/Python 3.12+ runner, choose a new output root:
+
+```sh
+python -B tools/sbt-worker-repair/stock_linux.py --mode direct --output "$NEW_DIRECT_ROOT"
+python -B tools/sbt-worker-repair/stock_linux.py --mode server --output "$NEW_SERVER_ROOT"
+python -B tools/sbt-worker-repair/stock_linux.py --mode packaging --output "$NEW_PACKAGING_ROOT"
+```
+
+Each job freezes its protocol before execution and preserves bounded evidence in
+`evidence/`, including failures. Review raw logs and exact identities, not just
+workflow status. These checks are bounded adoption evidence, not an exhaustive
+worker-protocol proof, timing benchmark, complete standard-CI run or approval to
+submit the separate hardening patch upstream.

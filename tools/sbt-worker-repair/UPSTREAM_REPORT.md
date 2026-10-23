@@ -1,7 +1,91 @@
-# Draft for review: duplicate Promise completion in forked-test React
+# Draft for review: sbt worker completion after the 2.0.11 lifecycle fix
 
-**Not submitted.** Proposed issue title: `sbt 2: React response/worker-exit race
-throws IllegalStateException: Promise already completed`.
+**Not submitted. Hold for review.** The original issue proposal below is now
+historical evidence, not a ready-to-file report against current sbt.
+
+## Current upstream disposition
+
+sbt [2.0.11 release notes](https://github.com/sbt/sbt/releases/tag/v2.0.11) include
+[PR #9860](https://github.com/sbt/sbt/pull/9860), which closes
+[issue #9859](https://github.com/sbt/sbt/issues/9859). The repair is in
+[WorkerExchange](https://github.com/sbt/sbt/blob/v2.0.11/main-actions/src/main/scala/sbt/internal/WorkerExchange.scala):
+the exit watcher waits for response reading to finish, bounded by ten seconds,
+before notifying listeners of process exit. Its regression uses 40 forked munit
+tests, a 50 ms/event listener, and a deliberately failing final test. This addresses
+lost notifications and false-success outcomes, not just a thrown Promise exception.
+
+**Correction to the earlier assessment:** identical `ForkTests.scala` files do
+not establish that upgrading cannot help. The earlier source comparison omitted
+this relevant lifecycle change. The five-site local patch does not implement
+response draining and is not a substitute for the upstream fix.
+
+The new [stock assessment](stock_assessment.py) retains the original controls and
+adds the unmodified upstream fixture. No production toolchain or CI adoption
+follows automatically from this assessment.
+
+## Stock-version assessment: 2026-10-23
+
+Execution environment: Windows 11, Temurin 17.0.4, Python 3.14.6; direct launchers
+with server autostart disabled and isolated homes, caches and boot directories.
+Official launcher/actions checksums were verified and stock boot JARs were
+unchanged after the controls. The stock 2.0.11 actions JAR SHA-256 is
+`688505c9b1c30f505275826d5fb8dd14f274bef0e284942e392c75f5dcfc63be`.
+
+| Check | Stock 2.0.8 | Stock 2.0.11 | Interpretation |
+| --- | --- | --- | --- |
+| Original eight orderings, 20 trials each | 40 forced exceptions; asserted outcomes retained | Same | `React` still uses non-atomic check-then-complete |
+| Seven notification orderings, 20 trials each | 20 forced exceptions; asserted outcomes retained | Same | Error-first behavior retained; success-before-late-error still wins |
+| Real passing fixture | 100 successes; build exit 0 | Same | Complete passing-event control |
+| Real assertion-failure fixture | 100 successes, one failure; exit 1 | Same | Intentional assertion failure surfaced |
+| Real worker exit 17 | Reported; build exit 1 | Same | Abnormal worker termination surfaced |
+| Real framework error | Deserialized `ForkError`; exit 1 | Same | Error outside per-test assertion handling surfaced |
+| Upstream slow-listener fixture | 39 successes, final failure; exit 1 | Same; all 40 exact identities verified | Candidate passes; historical false-green baseline **not reproduced** |
+| Fresh Figaro regression passes | Not repeated in this assessment | Two passes, each 131/131 tests in 11 suites | Exact inventory, fresh compilation and loaded stock JAR verified |
+
+The Figaro passes used separate Git-archive checkouts at
+`2f8e6c54d78c9c5906edb4b94bab67f0db6d8bb6`, changing only each isolated checkout's
+sbt version selector. Each pass used fresh boot/home/cache/target directories.
+Every frozen JUnit test identity occurred exactly once per pass; no test was
+failed, aborted, canceled, ignored or pending. No duplicate-Promise/worker exception
+occurred in these two runs. This is the named 11-suite control inventory, not the
+entire Figaro test suite or a packaged-consumer acceptance run.
+
+The baseline protocol expected exit 0 for its false-green reproduction. Actual
+exit 1 therefore leaves that check and the aggregate controls status **failed**.
+It was not retried or relabeled a successful reproduction. This prevents a local
+before/after claim about the causal benefit of the upstream patch. Scheduling or
+environment differences could explain the discrepancy with upstream's reproduction,
+but this run does not identify the cause. It does not negate the upstream report
+and fix. Source fixtures and acceptance criteria remained unchanged.
+
+The 600 total forced cases exercise `React` directly with controlled fake
+processes. They bypass the changed `WorkerProxy` response-draining path. Their
+remaining exceptions neither estimate a natural failure rate nor demonstrate
+that the upstream lifecycle fix is ineffective. The real fixtures emitted no
+duplicate-completion exception; their small number cannot prove its absence in
+all valid process/listener schedules.
+
+### What remains before any upstream submission
+
+1. Prefer evaluating the official response-draining fix to extending the local
+   2.0.8 workaround. A production upgrade needs Linux/direct-launcher and actual
+   server-mode CI validation, including the relevant coverage/packaging gates;
+   this Windows assessment does not replace them.
+2. A new defect claim against 2.0.11 needs a minimal reproducer through its real
+   `WorkerProxy` lifecycle, or a concrete source-level path showing that a harmful
+   ordering remains reachable. The ten-second drain bound is a scope boundary,
+   not a failure demonstrated by the 50 ms/event regression. We have not tested
+   drain-timeout, arbitrary listener failures or every transport.
+3. If such a residual case is established, reference #9859/#9860 and distinguish
+   it from the already fixed lost-event issue. Otherwise, any proposed five-site
+   change should be framed as defensive hardening for maintainer discussion, not
+   proof that the official fix failed. Its first-winner limitation still applies.
+
+**Disposition:** hold the original bug report and proposed repair for review.
+Do not file a duplicate of #9859, claim a reproduced 2.0.11 lifecycle failure, or
+submit a patch merely because the forced controls still throw. Production sbt/CI,
+published artifacts, filtering defaults and the stopping estimator are unchanged.
+Historical exposure is useful context, not evidence of a current regression.
 
 ## Environment and observation
 
@@ -11,6 +95,15 @@ The worker-exit stack included `sbt.React.notifyExit(ForkTests.scala:204)` and
 and no aborted suite; the exception therefore did not make this particular CI job
 fail. We do not infer that all tests/workers are safe from that observation.
 
+Historical exposure predates the initial Figaro 6.0 modernization build:
+[commit b281f016](https://github.com/mattwilkinsphoto/figaro/commit/b281f0160da5967b7c5db962e773c148f869a735)
+already selects sbt 2.0.8 and forked tests while identifying the build as
+`5.0.0-modern.2-SNAPSHOT`.
+[Commit bfc7e447](https://github.com/mattwilkinsphoto/figaro/commit/bfc7e447fa00662e09faa849d154b254a5aaaf03)
+then selects `6.0.0-modern.1-SNAPSHOT` with the same sbt/fork settings. This establishes
+toolchain exposure, not that a particular historical run lost results, that every
+earlier release was affected, or which upstream version first introduced the defect.
+
 Relevant source:
 
 - [React in sbt 2.0.8](https://github.com/sbt/sbt/blob/v2.0.8/main-actions/src/main/scala/sbt/ForkTests.scala)
@@ -19,8 +112,9 @@ Relevant source:
 
 The inspected 2.0.8 and 2.0.11 ForkTests source files were byte-identical (SHA-256
 `c75f1219c0d2918022f3ecd3cc5b2d0636af9cc82fdfefb8c0c6bd1cecc7599f`).
-Binary reproduction and repair validation below used **2.0.8 only**. We have not
-tested every later sbt version or established whether maintainers already have a fix.
+The original binary reproduction and repair validation in the historical sections
+below used **2.0.8 only**. The new stock assessment is separate; upstream has already
+fixed the response-draining issue described above.
 
 ## Cause and deterministic reproduction
 
@@ -55,7 +149,7 @@ retains first-completion behavior; it is not a policy for reconciling contradict
 late messages. Maintainer review should decide whether those cases warrant a
 separate protocol/lifecycle change. This patch does not claim to solve them.
 
-## Windows validation
+## Historical Windows repair validation (sbt 2.0.8)
 
 On Windows / JDK 17, using the original sbt binary and a separately prepared boot:
 
@@ -85,7 +179,7 @@ also passed all 102 tests with the repaired JAR's loaded code source confirmed.
 Only `React.class` and `React.tasty` differ inside the copied actions JAR; the stock
 boot remains untouched. This is not an official sbt binary distribution.
 
-## Independent Linux execution
+## Historical independent Linux execution (sbt 2.0.8)
 
 The same frozen checks passed in
 [GitHub Actions run 39899930618](https://github.com/mattwilkinsphoto/figaro/actions/runs/39899930618)

@@ -7,6 +7,21 @@ and verified; its required packaging/consumer gates and unresolved advisory timi
 result are recorded separately below. Upstream submission remains on hold.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
 
+## Stock 2.0.11 Linux/server follow-up
+
+Status: branch-only validation implemented; remote results pending review. The
+[bounded protocol](../tools/sbt-worker-repair/README.md#branch-only-linux-and-server-assessment)
+retains the existing repair and standard CI while testing stock 2.0.11 in isolated
+Linux direct-launcher, foreground `--server --batch`, persistent `--client`, and
+coverage/packaging contexts. The official
+[runner documentation](https://www.scala-sbt.org/2.x/docs/en/guide/sbt-components.html)
+and [tagged source](https://github.com/sbt/sbt/blob/v2.0.11/sbt) distinguish these
+invocations; `--server --batch` alone is not evidence of persistent-session reuse.
+The native-client control requires unchanged server PID and successful recovery
+after intentional failures. The original baseline reproduction check remains
+unchanged and can leave its job red independently of candidate correctness.
+No production adoption, merge, release or upstream submission is implied.
+
 ## Why the enumeration test changed
 
 The old enumeration assertion divided `(t4000 - t3000)` by `(t2000 - t1000)` and
@@ -179,14 +194,29 @@ shared listener list outside the synchronization used for response dispatch and
 listener registration. These are pre-existing protocol concerns, not demonstrated
 new failures caused by this repair; neither has been validated away.
 
-The [latest official release inspected](https://github.com/sbt/sbt/releases/tag/v2.0.11)
-was 2.0.11. Fresh retrieval of its `ForkTests.scala` and the 2.0.8 source produced
-the same pinned SHA-256 recorded in the [report](../tools/sbt-worker-repair/UPSTREAM_REPORT.md).
-That is source evidence, not a binary test of 2.0.11, an exhaustive search of upstream
-work, or proof that no other lifecycle changes exist. An upgrade is not presently
-an evidence-backed substitute for this repair. Keep the stock runner as the
-comparison baseline; do not serialize tests further, disable forking, filter error
-output or weaken assertions to hide the exception.
+**Subsequent correction:** the original review compared only `ForkTests.scala`
+and inferred too much from identical sources. Official
+[sbt 2.0.11](https://github.com/sbt/sbt/releases/tag/v2.0.11) includes
+[PR #9860](https://github.com/sbt/sbt/pull/9860), closing
+[issue #9859](https://github.com/sbt/sbt/issues/9859), with a response-draining fix in
+`WorkerExchange.scala`. This is a relevant upstream improvement that the local
+five-site Promise patch does not supply. The
+[revised report](../tools/sbt-worker-repair/UPSTREAM_REPORT.md) distinguishes
+stock-version validation from the earlier repair evidence and any future adoption.
+Keep the stock runner as the comparison baseline; do not serialize tests further,
+disable forking, filter error output or weaken assertions to hide the exception.
+
+The 2026-10-23 Windows/direct-launcher assessment completed two fresh stock
+2.0.11 Figaro passes, each with all 131 exact test identities in 11 suites, plus
+the real success/assertion/exit-17/framework-error controls. The unmodified upstream
+slow-listener fixture reported all 40 tests and its final intentional failure.
+The 2.0.8 baseline also surfaced that failure: its predeclared false-green
+reproduction check therefore remains failed, not retried or relabeled. Both
+binaries retain the same 60 forced exceptions across 300 direct `React` cases
+per binary. Those controls bypass the new draining path and do not establish a
+remaining real 2.0.11 lifecycle defect. Linux, persistent-server, coverage and
+packaging adoption checks remain outstanding. No production sbt/CI setting or
+library default changed, and the report is still held for review, not submitted.
 
 | Review area | Evidence and disposition |
 | --- | --- |
