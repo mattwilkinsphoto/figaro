@@ -91,6 +91,13 @@ including summaries. Time starts before preparation. Counts are not heap or
 wall-clock bounds. Experiment ceiling12 serial hours,6GiB heap,5GiB evidence;
 exhaustion is incomplete, not permission to silently drop work.
 
+Instrumentation clarification before development execution: Gaussian constructions
+inside the unchanged fitter are derived from its returned status and completed
+sweeps, not counted by modifying runtime code. Arithmetic failure reports an unknown
+construction count and blocks correctness, rather than inventing a count. Scalar
+storage is a conservative prepared-object/workspace slot bound, not measured heap.
+All allocations and refused fitting work remain included in end-to-end time.
+
 ## Frozen acceptance rules
 
 Every expected fixture/method/seed/step row is required; duplicates, nonfinite
