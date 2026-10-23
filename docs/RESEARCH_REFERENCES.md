@@ -677,12 +677,25 @@ recommends only a separate branch canary after explicit notification-error contr
 the additive [notification controls](../tools/sbt-worker-repair/ForkErrorCheck.java)
 and [branch pilot](../tools/sbt-worker-repair/branch_pilot.py) are now implemented.
 Local notification/framework-error checks passed after a rejected discovery-only
-fixture attempt; remote pilot validation is pending. The original repair and
-standard CI remain unchanged. The [worker source](https://github.com/sbt/sbt/blob/v2.0.8/worker/src/main/java/sbt/internal/worker1/ForkTestMain.java)
+fixture attempt. The [corrected Linux pilot](https://github.com/mattwilkinsphoto/figaro/actions/runs/39904806939)
+passed all 600 original/additive controlled cases, four real fixture outcomes and
+two fresh 131-test passes; downloaded evidence was independently audited. The
+preceding remote attempt failed before test execution on one local-CRLF source
+pin; correction to committed LF bytes and the failed attempt are documented in
+the guide. No test acceptance or repair changed. At that pilot revision, the
+original repair and standard CI remained unchanged. The [worker source](https://github.com/sbt/sbt/blob/v2.0.8/worker/src/main/java/sbt/internal/worker1/ForkTestMain.java)
 was inspected to exercise the actual notification serialization and framework-error
 path, rather than substituting an ordinary assertion failure. Fresh source
 inspection found the 2.0.11 and 2.0.8 ForkTests sources identical; no 2.0.11 binary
-validation or upstream acceptance is claimed. Standard runner/defaults stay unchanged.
+validation or upstream acceptance is claimed.
+
+Subsequent approval adopts the frozen 11-suite non-instrumented inventory as a
+dedicated [development CI job](../.github/workflows/ci.yml), using the shared
+[direct-launcher harness](../tools/sbt-worker-repair/branch_pilot.py) with its entire
+two-pass/failure-control protocol. See the [scope and rollback contract](CI_VALIDATION.md#approved-named-direct-launcher-ci-gates).
+Remote validation of this integration is pending. All other invocations, including
+instrumented coverage, packaging and consumers, remain stock; library estimators
+and defaults are unchanged. No server-mode, merge, release or upstream promotion.
 
 ## Keeping this index useful
 

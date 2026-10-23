@@ -1,4 +1,4 @@
-"""Two frozen fresh Linux passes; branch-only evidence, never replaces stock CI."""
+"""Two frozen fresh Linux passes for the branch pilot or named CI test gates."""
 import argparse
 from collections import Counter
 import json
@@ -56,10 +56,18 @@ def collect(out):
         target=evidence/p.relative_to(out);target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(p,target)
     write(evidence/'evidence-manifest.json',{str(p.relative_to(evidence)):sha(p) for p in evidence.rglob('*') if p.is_file()})
 
-def execute(out):
+def check_mode(branch,ci_gate,environ):
+    if ci_gate:
+        if environ.get('GITHUB_ACTIONS')!='true' or environ.get('GITHUB_WORKFLOW')!='Java 17, Scala 3, and sbt 2 modernization':
+            raise ValueError('Named CI gate requires the approved GitHub Actions workflow')
+        return 'named direct-launcher CI gates; other invocations remain stock; no merge or release'
+    if branch!='codex/guided-fixed-budget':raise ValueError('Pilot allowed only on approved branch')
+    return 'branch-only; stock CI retained; no promotion'
+
+def execute(out,ci_gate=False):
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     branch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip()
-    if branch!='codex/guided-fixed-budget':raise ValueError('Pilot allowed only on approved branch')
+    scope=check_mode(branch,ci_gate,os.environ)
     inventory=json.loads((SCRIPTS/'pilot-inventory.json').read_text())
     assert len(inventory['suites'])==11 and sum(len(s['tests']) for s in inventory['suites'])==131
     for s in inventory['suites']:
@@ -70,7 +78,7 @@ def execute(out):
       runnerImage=os.environ.get('ImageOS'),imageVersion=os.environ.get('ImageVersion'),
       sourceHashes={str(p.relative_to(source)):sha(p) for p in source.rglob('*') if p.is_file()},
       passes=2,inventory=inventory,controls='original 320 cases + original 3 fixtures; additive 280 cases + framework error',
-      acceptance='all gates required; no retries or fallback; no standard runner or release promotion'))
+      acceptance='all gates required; no retries or fallback; no server-mode or release promotion',scope=scope))
     run(['java','-version'],out,'java-version',timeout=30)
     run(['javac','-version'],out,'javac-version',timeout=30)
     launcher=out/'sbt-launch-2.0.8.jar';download(LAUNCHER_URL,launcher,LAUNCHER_SHA)
@@ -124,15 +132,16 @@ def execute(out):
     if stock_hashes!={str(p.relative_to(stock)):sha(p) for p in stock.rglob('*.jar')}:raise ValueError('Stock boot changed')
     run(['git','diff','--exit-code'],out,'source-integrity',cwd=ROOT,timeout=30)
     write(out/'result.json',dict(status='all pilot gates passed',commit=commit,passes=results,
-      stockUnchanged=True,scope='branch-only; stock CI retained; no promotion',
+      stockUnchanged=True,scope=scope,
       limitation='First success still wins; no exhaustive protocol or server-mode validation'))
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--ci-gate',action='store_true',help='Adopt only the frozen named test gates in the approved workflow')
     a=p.parse_args()
     if platform.system()!='Linux':raise RuntimeError('Linux pilot only')
     out=directory(a.output.resolve())
-    try:execute(out)
+    try:execute(out,ci_gate=a.ci_gate)
     finally:collect(out)
 
 if __name__=='__main__':main()

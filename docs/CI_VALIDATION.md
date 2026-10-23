@@ -1,8 +1,9 @@
 # Collection benchmarks and sbt worker validation
 
-Status: local and isolated Linux repair validation completed; maintainer review
-and any standard-runner activation remain separate gates. No merge, release or
-upstream submission is implied.
+Status: local and isolated Linux repair validation completed; narrow adoption for
+the named direct-launcher CI test gates is approved and implemented on the branch,
+pending remote validation of this integration. Other invocations remain stock.
+No merge, release or upstream submission is authorized.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
 
 ## Why the enumeration test changed
@@ -68,8 +69,8 @@ and [reproduction instructions](../tools/sbt-worker-repair/README.md).
 The preparation tool refuses unreviewed source/JAR hashes, copies the stock boot
 tree to a new, disjoint directory, compiles only `React`, and verifies that only
 `sbt/React.class` and `sbt/React.tasty` change. The stock cache is not modified.
-The repaired boot is explicitly selected for diagnostic runs; it is **not**
-automatically installed into developer environments or the standard CI runner.
+The repaired boot is explicitly selected for diagnostic runs and the named CI gate
+below; it is **not** installed into developer environments or the stock sbt runner.
 
 First completion still wins. The patch is not a redesign of sbt's worker/event
 protocol and does not guarantee that a later contradictory error overrides an
@@ -176,7 +177,7 @@ output or weaken assertions to hide the exception.
 | Outcome completeness | Focused run verified 102 tests, not every standard job. A green exit alone is insufficient, as the stock companion run demonstrates. |
 | Isolation and rollback | Disjoint boot supported by [launcher configuration](https://www.scala-sbt.org/1.x/docs/Launcher-Configuration.html) and verified on Linux. Keep both stock boot and stock CI unchanged; discard candidate job state to roll back. |
 
-### Bounded implementation proposal (approval required)
+### Bounded implementation proposal (historical review)
 
 1. **Close the changed-site gap without broadening the patch.** Retain the original
    eight-case matrix and add separately identified `forkError` controls using actual
@@ -254,8 +255,8 @@ Local notification controls passed and the corrected framework fixture verified
 the actual `ForkError` failure. The first fixture attempt failed discovery rather
 than exercising the notification; validation rejected it, and that attempt was
 retained. Its nested fingerprint base was replaced with a top-level base. No
-acceptance criterion or repair changed. Remote pilot results are pending; this
-implementation is not promotion or proof of a complete worker-protocol repair.
+acceptance criterion or repair changed. This implementation is not promotion or
+proof of a complete worker-protocol repair; the completed pilot results follow.
 
 The first remote pilot at `88ed9db1` stopped at source hashing, before bootstrapping
 sbt or running tests: one inventory entry used a local CRLF file instead of its
@@ -271,3 +272,75 @@ identities and explicit successful outcomes. Missing, duplicate, skipped, failed
 cached-only or wrong-runner results fail closed. Evidence is retained on failure;
 neither pass is a retry of the other. The remaining first-success/late-error
 limitation is an asserted observation, not labeled safe failure handling.
+
+The corrected [Linux pilot 39904806939](https://github.com/mattwilkinsphoto/figaro/actions/runs/39904806939)
+passed at `268801c1`, on Ubuntu 24 image `20261012.334.1`, Temurin 17.0.20.1 and
+Python 3.12.15. Downloaded evidence was independently audited:
+
+- The original 320 and additive 280 controlled cases all met their expected
+  outcomes: 60 forced duplicate exceptions on stock and zero on repaired sbt.
+  These repetitions do not estimate a natural race frequency.
+- Passing, assertion-failing, exit-17 and framework-error fixtures returned build
+  exits 0, 1, 1 and 1, with the required event/error markers. Every fixture JVM
+  verified its loaded repaired JAR path and hash.
+- Both independent passes completed all 131 named tests in 11 suites. Exact JUnit
+  identities, fresh test compilation, runner identities and source/log hashes
+  matched. Reviewed compiler-input hashes matched, and the downloaded actions JAR
+  comparison again found only `React.class` and `React.tasty` changed.
+
+The first-success/late-error limitation was observed in both binaries as expected;
+it was not repaired or relabeled as reliable failure handling. The evidence closes
+the explicit notification-control and fresh direct-launcher pilot gates. It does
+not validate persistent server mode, exhaustive event-draining orderings or a
+CI-wide runner replacement. Any adoption of named test gates still requires review.
+
+Unchanged stock CI passed all four jobs for both the
+[initial pilot commit](https://github.com/mattwilkinsphoto/figaro/actions/runs/39904520767)
+and the [corrected commit](https://github.com/mattwilkinsphoto/figaro/actions/runs/39904807046),
+including reproducible rebuilds and packaged consumers. Raw-log review found all
+20 advisory tests passed in each, with no duplicate-Promise exception or failed-test
+marker. These two clean stock runs do not negate the earlier observed race or
+replace controlled repaired-runner validation. No merge, release, upstream report
+submission or standard-runner adoption followed these results at that revision.
+
+## Approved named direct-launcher CI gates
+
+The subsequent approval adopts only the frozen
+[11-suite inventory](../tools/sbt-worker-repair/pilot-inventory.json) as the
+`named-direct-launcher-tests` job in [development CI](../.github/workflows/ci.yml).
+The shared harness runs with `--ci-gate`; the separate branch pilot remains available
+and retains its branch restriction. The new job has no advisory/fallback status.
+Repository branch-protection settings are not changed by this workflow edit.
+
+| Named non-instrumented suites | Execution |
+| --- | --- |
+| `SelectableSetTest`, `GaussianBlockProposalRegressionTest` | Repaired direct launcher |
+| `GuidedFixedBudgetTest`, `FixedBudgetParticleFilterTest`, `FixedBudgetNumericalTest`, `DecisionStratifiedProductionTest` | Repaired direct launcher |
+| `WeightedBoundedParticleFilterTest`, `CalibratedGuidedFilterTest`, `AuxiliaryParticleFilterTest` | Repaired direct launcher |
+| `VectorSliceSamplerRegressionTest`, `MultiChainVectorSliceSamplerRegressionTest` | Repaired direct launcher |
+| All other suites, studies, examples and compatibility checks | Stock sbt |
+| Instrumented coverage, advisory Performance-tag collection tests, packaging, reproducibility and consumers | Stock sbt, including duplicate coverage of some named suites |
+
+Only those ordinary test invocations move out of the existing mixed stock steps;
+their neighboring tests and studies remain. The repair is **not** put on PATH,
+installed in a shared cache, added to a library artifact or used in publication.
+The stopping estimator, runtime defaults, sbt version and Figaro version are unchanged.
+
+The adopted job deliberately reuses the pilot's entire acceptance protocol: reviewed
+compiler/source/launcher pins, original and additive controls (600 cases), four
+fixture outcomes, two fresh 131-test passes, same-JVM code identity, exact JUnit
+test identities, fresh compilation and unchanged stock bytes. Two passes are
+predeclared checks, not retries. Evidence uploads even after a failure. Source or
+toolchain drift fails closed and requires explicit review of the frozen inventory
+or pins; do not regenerate them merely to make a red job pass.
+
+The original four stock jobs remain, with the named ordinary test invocations
+relocated as above. Coverage and advisory runs can still encounter the stock race;
+this narrowly adopted repair does not fix their server-mode lifecycle. Keep reviewing
+raw logs, not just the workflow conclusion. First-success/late-error and exhaustive
+notification-draining limitations also remain. Rollback restores the relocated
+test invocations to stock and removes the new job; no shared-cache restoration is
+necessary. A CI-tooling change alone does not warrant a Figaro release.
+
+Remote integration validation is pending. No pilot result is substituted for that
+new run, and merging, releasing and upstream submission remain on hold.

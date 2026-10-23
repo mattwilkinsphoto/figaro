@@ -23,6 +23,32 @@ from pilot_support import check_failure,check_identity
 from failure_controls import check_matrix,MODES
 
 class PilotTests(unittest.TestCase):
+    def test_gate_scope_does_not_enable_unreviewed_runner_modes(self):
+        self.assertIn('branch-only',pilot.check_mode('codex/guided-fixed-budget',False,{}))
+        env={'GITHUB_ACTIONS':'true','GITHUB_WORKFLOW':'Java 17, Scala 3, and sbt 2 modernization'}
+        self.assertIn('other invocations remain stock',pilot.check_mode('',True,env))
+        for branch,gate,environment in [('main',False,env),('',True,{}),
+              ('main',True,dict(env,GITHUB_WORKFLOW='publication'))]:
+            with self.assertRaises(ValueError):pilot.check_mode(branch,gate,environment)
+
+    def test_workflow_keeps_stock_coverage_and_publication_separate(self):
+        root=Path(__file__).resolve().parents[1]
+        workflow=(root/'.github/workflows/ci.yml').read_text()
+        job=workflow.split('  named-direct-launcher-tests:',1)[1].split('  research-reference-integrity:',1)[0]
+        self.assertEqual(job.count('--ci-gate'),1)
+        for forbidden in ['continue-on-error','cache: sbt','secrets.','sbt --server']:
+            self.assertNotIn(forbidden,job)
+        self.assertIn('if: always()',job)
+        self.assertIn('persist-credentials: false',job)
+        stock=workflow.split('  research-reference-integrity:',1)[1]
+        self.assertNotIn('--ci-gate',stock)
+        coverage=next(line for line in stock.splitlines() if 'clean; coverage;' in line)
+        for name in ['GaussianBlockProposalRegressionTest','VectorSliceSamplerRegressionTest','MultiChainVectorSliceSamplerRegressionTest']:
+            self.assertIn(name,coverage)
+        self.assertIn('sbt --server --batch',coverage)
+        self.assertIn('GuidedFixedBudgetConsumerCheck',stock)
+        self.assertIn('com.cra.figaro.test.util.SelectableSetTest',stock) # advisory Performance tag only
+
     def test_frozen_inventory_uses_committed_source_bytes(self):
         root=Path(__file__).resolve().parents[1]
         inventory=json.loads((root/'tools/sbt-worker-repair/pilot-inventory.json').read_text())

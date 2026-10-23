@@ -121,10 +121,43 @@ run; an overall successful workflow does not establish an exception-free worker 
 Please review whether atomic first completion is appropriate at all five sites,
 particularly `forkError` notifications. There is no claim that a late error must
 override an earlier success, or that all notification-drain/lifecycle races have
-been excluded. These tests do verify ordinary assertion-failure events and an
-abnormal exit; they do not separately force a `forkError`-notification race and
-are not an exhaustive protocol proof.
+been excluded. The original tests verified ordinary assertion-failure events and
+an abnormal exit but did not separately force `forkError`; the additive validation
+below now covers that specific gap. Neither stage is an exhaustive protocol proof.
 
-Upstream maintainer review and any standard-runner activation remain outstanding.
+## Additive notification controls and branch-only pilot
+
+[Pilot run 39904806939](https://github.com/mattwilkinsphoto/figaro/actions/runs/39904806939)
+at `268801c1` passed with the same five-site repair. The additional
+[notification reproducer](ForkErrorCheck.java) uses sbt's own serialized error types
+and verifies logger trace processing plus the winning Promise outcome. Seven
+orderings, each repeated 20 times for each binary, cover error before success/exit,
+error during exit, duplicate error, success before late error and wrong outer/inner
+request IDs. The error-during-exit control adds 20 forced stock exceptions and zero
+repaired exceptions. Together with the unchanged original matrix, all 600 cases
+met their expected outcomes (60 stock exceptions, zero repaired).
+
+A separate framework throws in worker `runner.tasks`, outside ordinary per-test
+assertion handling. Its deserialized `ForkError` caused build exit 1. The original
+passing, assertion-failing and exit-17 fixtures retained their expected outcomes.
+Both fresh direct-launcher Linux passes completed 131 named tests in 11 suites;
+all fixture/pilot JVMs checked the loaded repaired JAR path/hash. Compiler pins,
+source/log hashes, complete JUnit identities and two-entry JAR difference were
+independently checked after download. No standard runner was replaced.
+
+The rejected first local fixture had no discovered tests; the rejected first remote
+pilot had one local-CRLF source pin inconsistent with committed LF bytes and stopped
+before executing tests. Both attempts were retained; corrections affected only
+fixture discovery and source provenance, not repair or outcome criteria.
+
+Success followed by a late error still yields success in both binaries, explicitly
+recorded as a limitation. This evidence does not settle notification draining,
+other lifecycle races, first-winner policy or persistent server mode.
+
+Narrow adoption for the named non-instrumented direct-launcher CI suites has since
+been approved; integration validation is pending. Its acceptance protocol is the
+same as the pilot. Other invocations, including stock server-mode coverage and
+packaging, remain unchanged. This is not upstream or CI-wide runner acceptance.
+Upstream maintainer review remains outstanding.
 The report is held locally for approval; do not present it as an upstream-confirmed
 diagnosis or accepted fix.
