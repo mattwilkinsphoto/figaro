@@ -196,13 +196,14 @@ child mixtures, update/close and calibrated-work APIs retain their
 
 ### Recommended next assessment, not a shipped helper
 
-The [nonlinear proposal assessment](NONLINEAR_PROPOSAL_RESEARCH.md) is complete;
-implementation and independent validation remain future work
+The [nonlinear proposal assessment](NONLINEAR_PROPOSAL_RESEARCH.md) and subsequent
+[test-only experiment](NONLINEAR_PROPOSAL_STATUS.md) are complete, with **no promotion**
 ([INF-17](RESEARCH_REFERENCES.md#inf-17), [bounded roadmap](../ROADMAP.md#recommended-next-capability-assessment)).
 The existing `linearGaussianObservation` does not linearize nonlinear functions
-or fit their possibly multimodal conditional distributions. The review recommends
-test-only cubature Gaussian and explicit-Jacobian guides first, with bounded
-mixtures as a follow-on if single-Gaussian limits dominate. True likelihood/transition corrections, explicit support
+or fit their possibly multimodal conditional distributions. Cubature Gaussian and
+explicit-Jacobian guides passed correctness checks but failed accuracy/cost gates;
+they remain test-only. A bounded multi-component assessment is recommended next,
+not implemented. True likelihood/transition corrections, explicit support
 and preparation costs remain required. No performance improvement, automatic
 policy, precision guarantee or recovery of lost histories is established.
 

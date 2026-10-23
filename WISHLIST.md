@@ -56,13 +56,13 @@ and special cases attached to their family instead of creating duplicate impleme
 
 ## Recommended next inference candidate
 
-**PF-PROPOSAL-01 — assessment complete; not implemented.** Reusable nonlinear
+**PF-PROPOSAL-01 — test-only experiment complete; no runtime promotion.** Reusable nonlinear
 observation-informed proposal construction would extend the linear-Gaussian
 helpers behind the released 7.4.0 fixed-budget APIs. The [roadmap](ROADMAP.md#recommended-next-capability-assessment)
-sets the proposed bounded sequence; the [assessment](docs/NONLINEAR_PROPOSAL_RESEARCH.md)
-recommends test-only cubature/Jacobian comparison with independent validation.
+records the next recommendation; the [completed experiment](docs/NONLINEAR_PROPOSAL_STATUS.md)
+passed correctness but failed accuracy/cost gates, retaining cubature/Jacobian helpers only in tests.
 [INF-17](docs/RESEARCH_REFERENCES.md#inf-17) records sources and inspection limits.
-Bounded mixtures remain a follow-on; learned proposals are deferred. No winning algorithm, speedup,
+Bounded multi-component proposal assessment remains a follow-on; learned proposals are deferred. No winning algorithm, speedup,
 automatic policy or publication is claimed. Preserve all earlier negative
 particle-diversity results and released stopping/defaults.
 

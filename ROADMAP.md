@@ -33,26 +33,22 @@ No further sbt repair or Figaro release is scheduled from that work.
 
 **PF-PROPOSAL-01: reusable nonlinear observation-informed proposals.** The
 [literature-led assessment and bounded plan](docs/NONLINEAR_PROPOSAL_RESEARCH.md)
-are complete; implementation and independent numerical validation have not started.
-Recommend a training-free cubature Gaussian guide with an explicit-Jacobian
-comparator, explicit defensive support and a scalar/low-dimensional contract.
-This is a first experiment, not a winning algorithm or a promised release.
+are complete, followed by the approved [three-stage test-only experiment](docs/NONLINEAR_PROPOSAL_STATUS.md).
+**The experiment is complete with no promotion:** 984 independent correctness
+checks passed with identical scientific replay across three JVMs, but all candidates
+failed the accuracy/cost gates; the Jacobian guide also failed an asymmetric-mode
+depletion margin. Keep the cubature/Jacobian builders test-only. No new API or
+release follows from this work.
 The 7.4.0 APIs already correct caller-supplied guides, but built-in observation
 conditioning remains linear-Gaussian. See [research provenance](docs/RESEARCH_REFERENCES.md#inf-17).
 
-1. On approval, freeze the narrow model contract, independent references and
-   experimental protocol before candidate runs. The assessment compares Jacobian,
-   sigma-point, bounded-mixture and learned alternatives; its proposed gates are
-   not yet a runnable frozen protocol.
-2. Build isolated test-only cubature/Jacobian helpers using existing normalized
-   laws and true-model corrections. Preserve support, explicit refusal and total
-   construction-cost accounting. No runtime API change at this stage.
-3. Require independent exact/grid references, fresh held-out seeds and cost-matched
-   bootstrap/manual-guide comparisons, including weak-data and multimodal cases.
-   Review promotion only after correctness and useful accuracy/cost gates pass;
-   otherwise retain the negative result. A bounded mixture is a follow-on if
-   single-Gaussian limits dominate, not an automatic expansion of this experiment.
-   Released stopping, defaults and automatic-cutover behavior remain unchanged.
+The next recommendation is a separately bounded scalar multi-component proposal
+assessment, using the existing manual two-root guide and cost-matched bootstrap
+as controls. Compare explicit local branches with discarded-pilot mixture fitting,
+including fitting cost and missed modes. It is not an approved solver/learning
+implementation or automatic extension of the completed experiment. Released
+stopping, defaults and automatic-cutover behavior remain unchanged. The frozen
+single-Gaussian protocol and all unfavorable results remain available for comparison.
 
 The next candidates after that assessment are higher-dimensional GVM-mixture
 fitting (with GMM controls) and broader multi-latent warm-up/proposal support.

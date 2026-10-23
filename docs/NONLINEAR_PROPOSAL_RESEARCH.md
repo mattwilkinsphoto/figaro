@@ -10,6 +10,10 @@ and [frozen protocol](NONLINEAR_PROPOSAL_PROTOCOL.md). The assessment below is
 the preserved rationale; its proposed numerical gates are superseded by the
 separately frozen protocol, not changed in response to candidate outcomes.
 
+**Execution outcome:** the approved experiment is now complete with no promotion.
+Correctness screens passed, but accuracy/cost utility gates failed. See the status
+for measurements and retained counterevidence; no automatic nonlinear helper ships.
+
 ## Recommendation
 
 Start with a **training-free, derivative-free cubature Gaussian proposal**, with

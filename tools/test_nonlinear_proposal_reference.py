@@ -16,5 +16,7 @@ class NonlinearReferenceTest(unittest.TestCase):
     def test_declared_inventory(self):
         self.assertEqual(sum(len(spec(n)['observations']) for n in NAMES),38)
         self.assertEqual(len(NAMES),8)
+        self.assertEqual(spec('curved')['initialCovariance'],[[1.,.3],[.3,1.]])
+        self.assertEqual(spec('curved')['sd'],1.)
 
 if __name__=='__main__':unittest.main()

@@ -15,7 +15,9 @@ YS = [.4,1.2,-.3,.7,1.5,.2]
 def spec(name):
     assert name in NAMES
     square = name in ('symmetric','asymmetric')
-    return dict(name=name, mean=.8 if name=='asymmetric' else 0., sd=1.1,
+    return dict(name=name, mean=.8 if name=='asymmetric' else 0., sd=1. if name=='curved' else 1.1,
+                dimension=2 if name=='curved' else 1,
+                initialCovariance=[[1.,.3],[.3,1.]] if name=='curved' else [[1.21]],
                 noise=.15 if name=='sharp' else 4. if name=='weak' else .5,
                 observations=[1.] if name=='curved' else [6.] if name=='tail' else
                 [1.,1.2,.8,1.4,1.,.7] if square else YS,
