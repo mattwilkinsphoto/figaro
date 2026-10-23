@@ -15,7 +15,7 @@ merge or publication implied. Released stopping estimator and defaults unchanged
 - [x] Stage 3: independent finite oracle and fresh-seed comparative validation.
 - [x] Three-JVM replay, all-outcome correctness and utility decision: 720 screens pass, no incomplete groups.
 - [x] Released-filter regressions, documentation checks, packaged consumer.
-- [ ] Reproducibility archive and final audit.
+- [x] Reproducibility archive and final local audit: 707 entries reopened and hash-verified.
 - [ ] Remote CI and explicit promotion decision before merge/release.
 
 ## Independent confirmation results
@@ -98,3 +98,11 @@ permission review initially refused it. Publication workflow, immutable artifact
 pins and tags remain unchanged. Remote CI and promotion remain pending; no push,
 merge or release is claimed. This is a compatible minor-release candidate in scope,
 not a declaration that 7.4.0 is ready to publish.
+
+Implementation/validation commit: `2c7c20c7` on `codex/guided-fixed-budget`.
+The private reproducibility archive is 142,961,413 bytes with SHA-256
+`c9542ea79289e8cdabc028f6912eb20a5df102abc889b984c1243277651e3642`.
+It includes input/source hashes, exact scripts, captured failures and successful
+logs, all outcome rows, machine-readable analysis, plots and rerun instructions.
+Its source snapshot and checklist are the pre-sealing implementation commit;
+this post-sealing receipt does not rewrite that archive or its evidence.
