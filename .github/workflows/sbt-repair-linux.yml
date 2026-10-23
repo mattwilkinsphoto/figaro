@@ -1,0 +1,58 @@
+name: Isolated sbt repair Linux validation
+
+on:
+  push:
+    branches:
+      - codex/guided-fixed-budget
+    paths:
+      - .github/workflows/sbt-repair-linux.yml
+      - tools/sbt-worker-repair/**
+      - tools/validation_support.py
+      - tools/test_ci_repair.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  isolated-sbt-repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check validation tooling and reference mappings
+        run: |
+          python -B tools/test_ci_repair.py
+          python -B tools/docs/check_research_references.py
+      - name: Validate stock and isolated repaired sbt on Linux
+        run: python -B tools/sbt-worker-repair/linux_validation.py --output "$RUNNER_TEMP/isolated-sbt-linux"
+      - name: Retain complete bounded validation evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: isolated-sbt-linux-evidence
+          if-no-files-found: error
+          path: |
+            ${{ runner.temp }}/isolated-sbt-linux/*.json
+            ${{ runner.temp }}/isolated-sbt-linux/*.log
+            ${{ runner.temp }}/isolated-sbt-linux/*.jar
+            ${{ runner.temp }}/isolated-sbt-linux/sources/
+            ${{ runner.temp }}/isolated-sbt-linux/prepared/*.*
+            ${{ runner.temp }}/isolated-sbt-linux/prepared/classes/
+            ${{ runner.temp }}/isolated-sbt-linux/matrix/*.json
+            ${{ runner.temp }}/isolated-sbt-linux/matrix/*.log
+            ${{ runner.temp }}/isolated-sbt-linux/integration/*.json
+            ${{ runner.temp }}/isolated-sbt-linux/integration/*.log

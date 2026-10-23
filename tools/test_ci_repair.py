@@ -13,6 +13,26 @@ def load(name,path):
 
 repair=load('repair','sbt-worker-repair/prepare.py')
 benchmark=load('benchmark','collection-benchmark/run.py')
+linux=load('linux_validation','sbt-worker-repair/linux_validation.py')
+
+class LinuxValidationTests(unittest.TestCase):
+    def log(self,jar):
+        return '\n'.join(['ans: java.net.URL = '+jar.resolve().as_uri(),
+          'Total number of tests run: 102', 'Suites: completed 9, aborted 0',
+          'Tests: succeeded 102, failed 0, canceled 0, ignored 0, pending 0',
+          'All tests passed.'])
+
+    def test_complete_loaded_repair(self):
+        jar=Path('isolated/actions.jar').resolve()
+        linux.check_figaro_log(self.log(jar),jar)
+
+    def test_reject_wrong_binary_and_incomplete_outcomes(self):
+        jar=Path('isolated/actions.jar').resolve()
+        cases=[self.log(Path('stock/actions.jar')),self.log(jar).replace('run: 102','run: 101'),
+               self.log(jar).replace('failed 0','failed 1'),self.log(jar)+'\nPromise already completed',
+               self.log(jar)+'\nans: java.net.URL = '+jar.as_uri()]
+        for text in cases:
+            with self.assertRaises(ValueError):linux.check_figaro_log(text,jar)
 
 class RepairTests(unittest.TestCase):
     def test_reject_unreviewed_source(self):

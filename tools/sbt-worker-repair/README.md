@@ -22,6 +22,23 @@ other entries in the actions JAR must remain byte-identical. The generated sourc
 retains sbt's copyright header; the upstream Apache-2.0 license accompanies this
 tool in [sbt-LICENSE.txt](sbt-LICENSE.txt).
 
+### Bounded Linux validation
+
+The separate [Linux workflow](../../.github/workflows/sbt-repair-linux.yml) runs
+`python -B tools/sbt-worker-repair/linux_validation.py --output NEW_DIRECTORY` on
+a Linux JDK 17 host. It bootstraps a SHA-pinned sbt launcher into a fresh stock
+boot, then invokes the same preparation, 320-case matrix and real forked fixtures
+used locally. Finally it runs the same nine Figaro suites (102 tests), asserting
+the loaded repaired JAR location and unchanged stock JAR hashes. Its protocol is
+written before execution. Logs, source hashes, patch and both actions JARs are
+retained even on failure; ordinary dependency caches are not uploaded.
+
+This workflow is independent of standard CI. It does not install the repaired
+runner globally or change inference defaults. The two intentionally failing fixture
+builds must fail with their specified markers; they are not ignored CI failures.
+Linux results must be inspected before any promotion decision. The existing
+first-completion and unforced `forkError`-race limitations still apply.
+
 `verify.py` uses reflection on the actual stock and repaired classes with a
 controllable fake Process. Stock exceptions are expected positive controls; a
 failure to reproduce them fails validation. Repaired duplicate completion must

@@ -665,7 +665,7 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Code:** [JMH harness](../tools/collection-benchmark/EnumerationBenchmark.java); [benchmark runner](../tools/collection-benchmark/run.py); [repair preparation](../tools/sbt-worker-repair/prepare.py).
 
-**Validation:** [deterministic collection test](../Figaro/src/test/scala/com/cra/figaro/test/util/SelectableSetTest.scala); [tooling negative controls](../tools/test_ci_repair.py); [actual-binary interleavings](../tools/sbt-worker-repair/WorkerCompletionCheck.java); [forked integration checks](../tools/sbt-worker-repair/integration.py). Local 24-fork benchmark, 320 controlled worker cases, real passing/failing/exit-17 fixtures and 102 focused Figaro tests completed. Remote validation of these changes is pending.
+**Validation:** [deterministic collection test](../Figaro/src/test/scala/com/cra/figaro/test/util/SelectableSetTest.scala); [tooling negative controls](../tools/test_ci_repair.py); [actual-binary interleavings](../tools/sbt-worker-repair/WorkerCompletionCheck.java); [forked integration checks](../tools/sbt-worker-repair/integration.py); [bounded Linux harness](../tools/sbt-worker-repair/linux_validation.py). Local 24-fork benchmark, 320 controlled worker cases, real passing/failing/exit-17 fixtures and 102 focused Figaro tests completed. Stock-runner branch CI passed; repaired-boot Linux validation is separate and not implied by that result.
 
 **Guide:** [CI validation](CI_VALIDATION.md).
 

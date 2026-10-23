@@ -1,7 +1,8 @@
 # Collection benchmarks and sbt worker validation
 
-Status: locally validated development tooling, pending remote validation and
-maintainer review. No merge, release or upstream submission is implied.
+Status: local repair validation and stock-runner branch CI completed; isolated
+Linux repair validation and maintainer review are separate gates. No merge,
+release or upstream submission is implied.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
 
 ## Why the enumeration test changed
@@ -93,10 +94,18 @@ Local validation on JDK 17 / sbt 2.0.8 / Scala 3.9.0 established:
   substantially across forks and sizes; these results establish harness execution,
   not a performance improvement, regression, or calibrated speed gate.
 
-The local evidence archive retains inputs, hashes, commands and unfiltered logs.
-These are bounded local results, not remote Linux validation or upstream acceptance.
-Before promotion: review the patch/report and benchmark interpretation, authorize
-and run branch CI, then validate any proposed CI-wide repaired-runner activation
-separately (including its loaded JAR location). Existing guided-filter independent
+Stock-runner [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/39896801206)
+passed all four jobs, the four-fork benchmark smoke check and the advisory step
+(20 tests, zero failures); no duplicate-Promise exception appeared in its logs.
+This did not exercise the repaired boot. The separate
+[Linux validation workflow](../.github/workflows/sbt-repair-linux.yml) freezes the
+same repair matrix, forked failure fixtures and 102 focused Figaro tests, verifies
+actual repaired-class loading, and preserves the original stock JAR hashes.
+Its results must be reviewed; merely adding the workflow is not a validation pass.
+
+The evidence archives retain inputs, hashes, commands and unfiltered logs.
+These are bounded results, not upstream acceptance. Before promotion: review the
+patch/report and Linux results, then validate any proposed CI-wide repaired-runner
+activation separately. Existing guided-filter independent
 validation remains applicable but does not waive these tooling gates. The released
 stopping estimator, inference defaults and publication workflow remain unchanged.
