@@ -24,7 +24,7 @@ tool in [sbt-LICENSE.txt](sbt-LICENSE.txt).
 
 ### Bounded Linux validation
 
-The separate [Linux workflow](../../.github/workflows/sbt-repair-linux.yml) runs
+The original Linux entry point runs
 `python -B tools/sbt-worker-repair/linux_validation.py --output NEW_DIRECTORY` on
 a Linux JDK 17 host. It bootstraps a SHA-pinned sbt launcher into a fresh stock
 boot, then invokes the same preparation, 320-case matrix and real forked fixtures
@@ -36,8 +36,38 @@ retained even on failure; ordinary dependency caches are not uploaded.
 This workflow is independent of standard CI. It does not install the repaired
 runner globally or change inference defaults. The two intentionally failing fixture
 builds must fail with their specified markers; they are not ignored CI failures.
-Linux results must be inspected before any promotion decision. The existing
-first-completion and unforced `forkError`-race limitations still apply.
+Linux results must be inspected before any promotion decision. The original run
+did not separately force the `forkError` race; see the additive pilot below.
+
+### Branch-only adoption pilot
+
+The separate [Linux workflow](../../.github/workflows/sbt-repair-linux.yml) now runs
+[branch_pilot.py](branch_pilot.py), exclusively on `codex/guided-fixed-budget`.
+It retains stock CI and the unchanged five-site repair. No repaired server mode,
+publication change or default installation is enabled.
+
+The pilot retains the original matrix and three real fixtures, then runs
+[ForkErrorCheck.java](ForkErrorCheck.java): seven additional orderings x20 for each
+binary (280 cases). Real sbt payload types and a tracing logger verify notification
+deserialization/processing; cases assert Promise outcomes, including the explicit
+limitation that success preceding a late error remains success. An isolated
+[framework fixture](framework-fixture/build.sbt) throws in worker `runner.tasks`,
+outside ordinary assertion handling. The build must fail with the deserialized
+`ForkError` and sentinel message, not merely an arbitrary nonzero exit.
+
+Two predeclared Figaro passes each use a fresh direct-launcher JVM, boot copy, Git
+archive checkout, home and caches. [The frozen inventory](pilot-inventory.json)
+contains all 131 test names across 11 suites and their source hashes. Full JUnit
+identities, fresh test compilation, loaded React path/hash and complete outcomes
+are required. [Compiler input hashes](compiler-inputs.json) are taken from the
+reviewed Linux run, not learned from the new candidate at execution time.
+
+The original fixture runner accepts optional `--verify-identity` to check the
+loaded JAR in each fixture JVM without changing the original expected outcomes.
+The pilot enforces subprocess/job timeouts and preserves failed evidence. An
+overall green stock workflow is not a substitute for these gates. Results require
+review before any required test gate adopts the repaired runner; the first-winner
+policy and broader event-draining/protocol limitations are unchanged.
 
 `verify.py` uses reflection on the actual stock and repaired classes with a
 controllable fake Process. Stock exceptions are expected positive controls; a

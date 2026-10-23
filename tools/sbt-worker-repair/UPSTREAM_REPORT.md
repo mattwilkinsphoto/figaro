@@ -55,7 +55,7 @@ retains first-completion behavior; it is not a policy for reconciling contradict
 late messages. Maintainer review should decide whether those cases warrant a
 separate protocol/lifecycle change. This patch does not claim to solve them.
 
-## Validation performed locally
+## Windows validation
 
 On Windows / JDK 17, using the original sbt binary and a separately prepared boot:
 
@@ -85,6 +85,37 @@ also passed all 102 tests with the repaired JAR's loaded code source confirmed.
 Only `React.class` and `React.tasty` differ inside the copied actions JAR; the stock
 boot remains untouched. This is not an official sbt binary distribution.
 
+## Independent Linux execution
+
+The same frozen checks passed in
+[GitHub Actions run 39899930618](https://github.com/mattwilkinsphoto/figaro/actions/runs/39899930618)
+at Figaro commit `0d151029afed80e9ba67b5a0fbb0657d377aa1c5`, using the Ubuntu 24
+runner image `20261012.334.1`, Temurin 17.0.20.1 and Python 3.12.15.
+
+The matrix above was repeated unchanged: 40 forced duplicate-completion exceptions
+on stock sbt, zero on the repaired class, and all expected Promise outcomes retained.
+All three real forked fixtures produced their required statuses (0, 1, 1), and
+the same nine Figaro suites passed all 102 tests. The loaded React code source was
+explicitly verified against the repaired boot. Stock boot JAR hashes were unchanged.
+
+Downloaded source snapshots, command logs and both actions JARs were independently
+checked after the run. Only `sbt/React.class` and `sbt/React.tasty` differ. The Linux
+repaired actions JAR SHA-256 is
+`b657e36db95b23f30a41297892fbd2c6ed6e917865f682838d6c44023d7fb4bf`.
+The workflow retains the source, patch, compiler-input hashes and actual raw outputs,
+including the intentionally failing fixtures. No criteria were relaxed for Linux.
+The orchestrator is [linux_validation.py](linux_validation.py).
+
+These are controlled reproduction results, not empirical estimates of the race's
+frequency. The standard Figaro CI runner was not switched to the repair.
+
+The same-commit [companion stock-runner run](https://github.com/mattwilkinsphoto/figaro/actions/runs/39899930482)
+finished successfully but logged another `Promise already completed` exception at
+`React.notifyExit` (`ForkTests.scala:204`, through `WorkerProxy` at
+`WorkerExchange.scala:197`). The surrounding continuous-vector check reported all
+18 tests passed. This unforced observation is retained separately from the repaired
+run; an overall successful workflow does not establish an exception-free worker log.
+
 ## Remaining review / evidence boundaries
 
 Please review whether atomic first completion is appropriate at all five sites,
@@ -94,6 +125,6 @@ been excluded. These tests do verify ordinary assertion-failure events and an
 abnormal exit; they do not separately force a `forkError`-notification race and
 are not an exhaustive protocol proof.
 
-Remote Linux validation of this repair and upstream maintainer review remain
-outstanding. The report is held locally for approval; do not present it as an
-upstream-confirmed diagnosis or accepted fix.
+Upstream maintainer review and any standard-runner activation remain outstanding.
+The report is held locally for approval; do not present it as an upstream-confirmed
+diagnosis or accepted fix.

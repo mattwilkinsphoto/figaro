@@ -1,8 +1,8 @@
 # Collection benchmarks and sbt worker validation
 
-Status: local repair validation and stock-runner branch CI completed; isolated
-Linux repair validation and maintainer review are separate gates. No merge,
-release or upstream submission is implied.
+Status: local and isolated Linux repair validation completed; maintainer review
+and any standard-runner activation remain separate gates. No merge, release or
+upstream submission is implied.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
 
 ## Why the enumeration test changed
@@ -101,7 +101,27 @@ This did not exercise the repaired boot. The separate
 [Linux validation workflow](../.github/workflows/sbt-repair-linux.yml) freezes the
 same repair matrix, forked failure fixtures and 102 focused Figaro tests, verifies
 actual repaired-class loading, and preserves the original stock JAR hashes.
-Its results must be reviewed; merely adding the workflow is not a validation pass.
+[Linux run 39899930618](https://github.com/mattwilkinsphoto/figaro/actions/runs/39899930618)
+passed at commit `0d151029` on the Ubuntu 24 image, Temurin 17.0.20.1 and Python
+3.12.15. Downloaded evidence was independently checked: the same 40 forced stock
+exceptions and zero repaired exceptions across 160 cases per binary; the expected
+passing/assertion-failing/exit-17 fixture outcomes; and 102 passing Figaro tests
+with the repaired JAR actually loaded. All stock boot JAR hashes remained unchanged.
+The downloaded stock/repaired actions JARs differ only in `React.class` and
+`React.tasty`; source snapshots and command-log hashes were also verified.
+
+These forced case counts are not estimates of a naturally occurring race rate.
+The Linux check does not add a separately forced `forkError` race or change
+first-completion semantics. A clean stock-runner CI run alone would not establish
+this result; this dedicated run exercised the repaired binary explicitly.
+
+The companion [stock-runner CI run 39899930482](https://github.com/mattwilkinsphoto/figaro/actions/runs/39899930482)
+completed all four jobs successfully, including reproducibility and packaged-consumer
+checks; all 20 remaining advisory timing tests passed. Its raw log nevertheless
+contains one `Promise already completed` exception at `React.notifyExit`
+(`ForkTests.scala:204`) during the continuous-vector checks, whose 18 tests passed.
+This is another observation of the stock-runner symptom, not a failure of the
+isolated repaired run or proof that green CI means the worker log is clean.
 
 The evidence archives retain inputs, hashes, commands and unfiltered logs.
 These are bounded results, not upstream acceptance. Before promotion: review the
@@ -109,3 +129,137 @@ patch/report and Linux results, then validate any proposed CI-wide repaired-runn
 activation separately. Existing guided-filter independent
 validation remains applicable but does not waive these tooling gates. The released
 stopping estimator, inference defaults and publication workflow remain unchanged.
+
+## Review: narrowly scoped CI adoption
+
+**Decision: suitable for a branch-only, non-authoritative canary after the gates
+below; not ready to replace the standard CI runner.** This is a review recommendation,
+not activation. No workflow, repair code, runtime default or release setting was
+changed by the review. Existing Linux results remain the evidence baseline; the
+additional controls below had not been executed at that review. See the pilot
+implementation status below for subsequent work.
+
+### Findings and alternatives
+
+The five-site patch uses the documented [Promise completion API](https://www.scala-lang.org/api/current/scala/concurrent/Promise.html).
+The response success/error and exit success/error sites retain their first winner;
+the `forkError` site likewise cannot replace an already completed Promise. A
+duplicate `trySuccess`/`tryFailure` returns false instead of throwing. This does not
+make competing success/error outcomes deterministic or establish which should win.
+In stock `React.apply`, the existing `NonFatal` handler already discards exceptions
+from duplicate response/notification completion. The patch removes the uncaught
+exit-thread exception; it is not a new policy for preserving late errors.
+
+The strongest favorable evidence is the unchanged controlled matrix plus real
+assertion-failure and abnormal-exit controls on Windows and Linux. The strongest
+limitation is that `forkError` is a changed site without its own explicit ordering
+control, and successful process completion does not prove all test notifications
+have been drained. Source inspection also shows exit notification iterating the
+shared listener list outside the synchronization used for response dispatch and
+listener registration. These are pre-existing protocol concerns, not demonstrated
+new failures caused by this repair; neither has been validated away.
+
+The [latest official release inspected](https://github.com/sbt/sbt/releases/tag/v2.0.11)
+was 2.0.11. Fresh retrieval of its `ForkTests.scala` and the 2.0.8 source produced
+the same pinned SHA-256 recorded in the [report](../tools/sbt-worker-repair/UPSTREAM_REPORT.md).
+That is source evidence, not a binary test of 2.0.11, an exhaustive search of upstream
+work, or proof that no other lifecycle changes exist. An upgrade is not presently
+an evidence-backed substitute for this repair. Keep the stock runner as the
+comparison baseline; do not serialize tests further, disable forking, filter error
+output or weaken assertions to hide the exception.
+
+| Review area | Evidence and disposition |
+| --- | --- |
+| Patch containment | Exact upstream source/actions-JAR pins; only `React.class` and `React.tasty` differ. Acceptable for an isolated canary, not an official sbt distribution. |
+| Failure handling | Ordinary assertions, protocol error responses and abnormal exits tested. Add explicit `forkError` orderings before using the repaired result as a CI gate. |
+| Runner identity | Linux verified a direct launcher with fresh boot and server autostart disabled. Standard CI uses `sbt --server --batch`; that mode is not covered by the repaired Linux run. |
+| Outcome completeness | Focused run verified 102 tests, not every standard job. A green exit alone is insufficient, as the stock companion run demonstrates. |
+| Isolation and rollback | Disjoint boot supported by [launcher configuration](https://www.scala-sbt.org/1.x/docs/Launcher-Configuration.html) and verified on Linux. Keep both stock boot and stock CI unchanged; discard candidate job state to roll back. |
+
+### Bounded implementation proposal (approval required)
+
+1. **Close the changed-site gap without broadening the patch.** Retain the original
+   eight-case matrix and add separately identified `forkError` controls using actual
+   sbt classes and valid protocol payloads: error before success/exit, error during
+   exit handling, duplicate error, success before late error, and wrong request ID.
+   Verify the winning outcome as well as exception behavior. A first error must
+   remain a failure; success before a contradictory late error must be recorded as
+   the existing limitation, not renamed a safe outcome. Add a real worker/framework
+   error fixture that proves notification processing and a nonzero build exit.
+   Retain the passing, assertion-failing and exit-17 fixtures unchanged. If the new
+   evidence reveals lost failures, stop and review the protocol; do not patch more
+   sites or redefine acceptance automatically.
+
+2. **Run a separate branch canary, retaining stock CI.** Use one explicit direct-Java
+   entry point, not a PATH replacement, global environment override or persistent
+   sbt server. Limit scope to the existing nine suites plus
+   `VectorSliceSamplerRegressionTest` and `MultiChainVectorSliceSamplerRegressionTest`,
+   covering the latest observed stock exception. Freeze expected suite/test identity
+   before running. Execute two predeclared passes in fresh JVMs with distinct boot,
+   home, target/output and action-cache roots; no restored test-result/action cache.
+   This is a bounded repeatability check, not a reliability-rate estimate. Require
+   the matrix and negative controls first, then full suite outcomes on both passes.
+   A canary failure remains red and retained; do not retry until green. It cannot
+   substitute for a failed standard gate or authorize a merge/release.
+
+3. **Review the canary before adopting any required gate.** If approved after those
+   results, select only the named test invocations for a repaired direct-launcher
+   gate. Keep packaging, compatibility, publication, developer commands and all other
+   jobs on stock sbt. No initial migration to repaired server mode. Expanding to that
+   mode would need a separate same-process/repeated-command test of boot identity,
+   negative controls and lifecycle behavior. A full standard-runner replacement is
+   outside this proposal.
+
+### Required containment and acceptance contract
+
+- Fail closed on launcher/source/actions-JAR/version mismatch, unexpected compiled
+  entries, missing evidence, wrong loaded code source or incomplete outcomes. Never
+  silently fall back to stock and label the run repaired. Compare relative
+  compiler-input hashes with the reviewed Linux manifest; any drift requires review.
+- Use a disposable runner, read-only repository token, no publishing/signing secrets,
+  no privileged pull-request trigger, and no upload of repaired files into normal
+  dependency caches or release artifacts. Retain upstream license and notices.
+- Resolve launcher and boot explicitly; verify `React` location and JAR hash inside
+  **each** invocation, not just a separate preflight JVM. Preserve resource options
+  deliberately; direct Java does not automatically interpret the sbt shell runner's
+  `JAVA_OPTS`, `--server` or `--batch` options. Keep socket paths short and isolated.
+- Capture raw stdout/stderr, exit status, commands, hashes and complete per-suite
+  outcomes even on failure. Reject unexpected worker exceptions, aborts, cancellations,
+  missing/duplicate suites and empty or cached-only executions. Keep intentional
+  failing-fixture results distinct from ordinary Figaro test success. Retain the
+  stock comparison even when it contains a green-exit worker exception.
+- Enforce job and subprocess timeouts. If required evidence cannot be produced,
+  report an incomplete gate rather than promotion. Do not add exception swallowing
+  or change test counts/thresholds to make the gate pass.
+- Rollback disables the canary or removes only explicitly adopted test invocations;
+  stock CI and caches need no repair. Retain failed evidence. Reassess on any sbt,
+  Scala boot compiler, JDK, runner-image or patch change. Retire the workaround only
+  after an official replacement passes the same reproduction and failure controls.
+
+This work is repository CI tooling, not a Figaro runtime capability or a reason by
+itself to publish a new library version. Merge, release, upstream submission and
+activation remain separate approval decisions.
+
+### Pilot implementation status
+
+The approved branch-only pilot is implemented in
+[branch_pilot.py](../tools/sbt-worker-repair/branch_pilot.py), with the standard
+workflow and the five-site repair unchanged. It adds seven separately identified
+notification orderings (280 cases across both binaries), a real framework-error
+fixture, and two fresh 131-test/11-suite passes. The original 320-case matrix and
+passing/assertion-failing/exit-17 controls remain mandatory. The dedicated workflow
+is branch-restricted and uses Ubuntu 24.04, JDK 17 and read-only permissions.
+
+Local notification controls passed and the corrected framework fixture verified
+the actual `ForkError` failure. The first fixture attempt failed discovery rather
+than exercising the notification; validation rejected it, and that attempt was
+retained. Its nested fingerprint base was replaced with a top-level base. No
+acceptance criterion or repair changed. Remote pilot results are pending; this
+implementation is not promotion or proof of a complete worker-protocol repair.
+
+The inventory and compiler pins are frozen before execution. Each pilot pass
+requires a fresh checkout/cache, in-process runner location/hash, complete JUnit
+identities and explicit successful outcomes. Missing, duplicate, skipped, failed,
+cached-only or wrong-runner results fail closed. Evidence is retained on failure;
+neither pass is a retry of the other. The remaining first-success/late-error
+limitation is an asserted observation, not labeled safe failure handling.

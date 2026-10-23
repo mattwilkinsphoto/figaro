@@ -665,9 +665,24 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Code:** [JMH harness](../tools/collection-benchmark/EnumerationBenchmark.java); [benchmark runner](../tools/collection-benchmark/run.py); [repair preparation](../tools/sbt-worker-repair/prepare.py).
 
-**Validation:** [deterministic collection test](../Figaro/src/test/scala/com/cra/figaro/test/util/SelectableSetTest.scala); [tooling negative controls](../tools/test_ci_repair.py); [actual-binary interleavings](../tools/sbt-worker-repair/WorkerCompletionCheck.java); [forked integration checks](../tools/sbt-worker-repair/integration.py); [bounded Linux harness](../tools/sbt-worker-repair/linux_validation.py). Local 24-fork benchmark, 320 controlled worker cases, real passing/failing/exit-17 fixtures and 102 focused Figaro tests completed. Stock-runner branch CI passed; repaired-boot Linux validation is separate and not implied by that result.
+**Validation:** [deterministic collection test](../Figaro/src/test/scala/com/cra/figaro/test/util/SelectableSetTest.scala); [tooling negative controls](../tools/test_ci_repair.py); [actual-binary interleavings](../tools/sbt-worker-repair/WorkerCompletionCheck.java); [forked integration checks](../tools/sbt-worker-repair/integration.py); [bounded Linux harness](../tools/sbt-worker-repair/linux_validation.py). Local 24-fork benchmark, 320 controlled worker cases, real passing/failing/exit-17 fixtures and 102 focused Figaro tests completed. Stock-runner branch CI passed. Separate [Linux repaired-boot validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/39899930618) repeated the 320 controlled cases, failure fixtures and 102 Figaro tests successfully; downloaded evidence and actual JAR loading verified. This does not promote the repair or prove all worker-protocol orderings safe.
 
 **Guide:** [CI validation](CI_VALIDATION.md).
+
+Same-commit companion stock CI completed successfully, but its raw log retained a
+`React.notifyExit` duplicate-completion exception. The guide distinguishes that
+unforced stock observation from the successful isolated repaired-boot validation.
+The [CI adoption review](CI_VALIDATION.md#review-narrowly-scoped-ci-adoption)
+recommends only a separate branch canary after explicit notification-error controls;
+the additive [notification controls](../tools/sbt-worker-repair/ForkErrorCheck.java)
+and [branch pilot](../tools/sbt-worker-repair/branch_pilot.py) are now implemented.
+Local notification/framework-error checks passed after a rejected discovery-only
+fixture attempt; remote pilot validation is pending. The original repair and
+standard CI remain unchanged. The [worker source](https://github.com/sbt/sbt/blob/v2.0.8/worker/src/main/java/sbt/internal/worker1/ForkTestMain.java)
+was inspected to exercise the actual notification serialization and framework-error
+path, rather than substituting an ordinary assertion failure. Fresh source
+inspection found the 2.0.11 and 2.0.8 ForkTests sources identical; no 2.0.11 binary
+validation or upstream acceptance is claimed. Standard runner/defaults stay unchanged.
 
 ## Keeping this index useful
 

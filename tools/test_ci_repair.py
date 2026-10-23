@@ -3,6 +3,8 @@ import copy
 import hashlib
 import importlib.util
 import json
+import sys
+import xml.etree.ElementTree as ET
 from pathlib import Path
 import unittest
 from unittest.mock import patch
@@ -14,6 +16,55 @@ def load(name,path):
 repair=load('repair','sbt-worker-repair/prepare.py')
 benchmark=load('benchmark','collection-benchmark/run.py')
 linux=load('linux_validation','sbt-worker-repair/linux_validation.py')
+sys.path.insert(0,str(Path(__file__).parent/'sbt-worker-repair'))
+pilot=load('branch_pilot','sbt-worker-repair/branch_pilot.py')
+from pilot_support import check_failure,check_identity
+from failure_controls import check_matrix,MODES
+
+class PilotTests(unittest.TestCase):
+    def test_compiler_drift_rejected(self):
+        pilot.check_pins({'a':'hash'},{'a':'hash'})
+        for actual in [{},{'a':'wrong'},{'a':'hash','b':'extra'}]:
+            with self.assertRaises(ValueError):pilot.check_pins(actual,{'a':'hash'})
+
+    def test_framework_failure_requires_notification_not_just_exit(self):
+        check_failure('ForkTestMain$ForkError SENTINEL_FRAMEWORK_FORK_ERROR')
+        for log in ['No tests match','SENTINEL_FRAMEWORK_FORK_ERROR',
+                    'ForkTestMain$ForkError SENTINEL_FRAMEWORK_FORK_ERROR All tests passed']:
+            with self.assertRaises(ValueError):check_failure(log)
+
+    def test_complete_reports_and_reject_drift(self):
+        inventory={'suites':[{'suite':'S','tests':['a','b']}]}
+        text='<testsuite name="S" tests="2"><testcase name="a"/><testcase name="b"/></testsuite>'
+        pilot.check_reports([ET.fromstring(text)],inventory)
+        for reports in [[],[ET.fromstring(text)]*2,[ET.fromstring(text.replace('name="b"','name="a"'))],
+          [ET.fromstring(text.replace('name="b"','name="c"'))],
+          [ET.fromstring(text.replace('<testcase name="b"/>','<testcase name="b"><skipped/></testcase>'))]]:
+            with self.assertRaises(ValueError):pilot.check_reports(reports,inventory)
+
+    def test_in_process_identity_and_full_execution(self):
+        jar=Path('isolated/actions.jar').resolve()
+        text='\n'.join(['FIGARO_REACT_PATH='+str(jar),'FIGARO_REACT_SHA256='+'a'*64,
+          'compiling 120 Scala sources to /fresh/figaro/test-classes ...',
+          'Total number of tests run: 131','Suites: completed 11, aborted 0',
+          'Tests: succeeded 131, failed 0, canceled 0, ignored 0, pending 0','All tests passed.'])
+        with patch('pilot_support.sha',return_value='a'*64):
+            pilot.check_log(text,jar)
+            for bad in [text.replace('131','130'),text.replace('compiling','cached'),text+'\nException in thread',
+                        text.replace('a'*64,'b'*64),text+'\nAll tests passed.',text.replace(str(jar),'/wrong.jar')]:
+                with self.assertRaises(ValueError):pilot.check_log(bad,jar)
+
+    def test_notification_matrix_requires_winners(self):
+        boot=Path('stock').resolve()
+        rows=[dict(mode=n,trials=20,duplicateExceptions=20 if n=='fork-during-exit' else 0,
+          firstErrorPreserved=not n.startswith('wrong-') and n!='success-before-fork',
+          lateErrorLimitation=n=='success-before-fork') for n in MODES]
+        prefix='BINARY '+(boot/pilot.REL).as_uri()+'\n'
+        log=prefix+'\n'.join(map(json.dumps,rows))
+        check_matrix(log,'stock',boot)
+        for bad in [prefix+'\n'.join(map(json.dumps,rows[:-1])),log.replace('"trials": 20','"trials": 19'),
+                    log.replace('"firstErrorPreserved": true','"firstErrorPreserved": false')]:
+            with self.assertRaises(ValueError):check_matrix(bad,'stock',boot)
 
 class LinuxValidationTests(unittest.TestCase):
     def log(self,jar):

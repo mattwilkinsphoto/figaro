@@ -20,8 +20,9 @@ defaults:
 
 jobs:
   isolated-sbt-repair:
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
+    if: github.ref == 'refs/heads/codex/guided-fixed-budget'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v6
         with:
@@ -37,22 +38,12 @@ jobs:
         run: |
           python -B tools/test_ci_repair.py
           python -B tools/docs/check_research_references.py
-      - name: Validate stock and isolated repaired sbt on Linux
-        run: python -B tools/sbt-worker-repair/linux_validation.py --output "$RUNNER_TEMP/isolated-sbt-linux"
+      - name: Run isolated two-pass branch pilot and failure controls
+        run: python -B tools/sbt-worker-repair/branch_pilot.py --output "$RUNNER_TEMP/sbt-ci-pilot"
       - name: Retain complete bounded validation evidence
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: isolated-sbt-linux-evidence
+          name: isolated-sbt-pilot-evidence
           if-no-files-found: error
-          path: |
-            ${{ runner.temp }}/isolated-sbt-linux/*.json
-            ${{ runner.temp }}/isolated-sbt-linux/*.log
-            ${{ runner.temp }}/isolated-sbt-linux/*.jar
-            ${{ runner.temp }}/isolated-sbt-linux/sources/
-            ${{ runner.temp }}/isolated-sbt-linux/prepared/*.*
-            ${{ runner.temp }}/isolated-sbt-linux/prepared/classes/
-            ${{ runner.temp }}/isolated-sbt-linux/matrix/*.json
-            ${{ runner.temp }}/isolated-sbt-linux/matrix/*.log
-            ${{ runner.temp }}/isolated-sbt-linux/integration/*.json
-            ${{ runner.temp }}/isolated-sbt-linux/integration/*.log
+          path: ${{ runner.temp }}/sbt-ci-pilot/evidence/

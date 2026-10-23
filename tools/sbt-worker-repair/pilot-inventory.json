@@ -1,0 +1,224 @@
+{
+  "protocol": "Two fresh isolated runs; expected identities frozen before pilot execution; no test changes",
+  "suites": [
+    {
+      "suite": "com.cra.figaro.test.util.SelectableSetTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "A SelectableSet should contain an element after insertion",
+        "A SelectableSet should not contain an element after removal",
+        "A SelectableSet should convert to a list containing the elements it contains",
+        "A SelectableSet should return an element uniformly at random when selecting",
+        "A SelectableSet should create a separate copy of itself when cloning",
+        "A SelectableSet should enumerate complete contents across capacity transitions"
+      ],
+      "sourceSha256": "909216fd244f6ac0a3b200917b487d5ee0cde3b8a16d7f1f274ff70dbb95831f",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/util/SelectableSetTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.GaussianBlockProposalRegressionTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "Gaussian block proposals should reject invalid dimensions, duplicates, nonfinite, asymmetric and non-positive-definite covariance",
+        "Gaussian block proposals should reject foreign, observed, intervened, inactive, invalid and subclassed targets",
+        "Gaussian block proposals should match an independent value-space Cholesky and log-density-ratio oracle with unequal prior scales",
+        "Gaussian block proposals should restore both randomness and values after early target-condition rejection",
+        "Gaussian block proposals should restore block targets and descendants after joint evidence rejection",
+        "Gaussian block proposals should recover conjugate moments without incorrectly cancelling the prior",
+        "Gaussian block proposals should recover correlated moments and reach precision",
+        "Gaussian block proposals should preserve exact worker-count and fixed/adaptive prefixes on a deterministic initialization fixture",
+        "Gaussian block proposals should allow state-independent mixtures so variables outside the block are not frozen",
+        "Gaussian block proposals should reject unsafe execution and clean up workers on callback failure",
+        "Gaussian block proposals should reject sequential continuation instead of silently changing joint-proposal semantics"
+      ],
+      "sourceSha256": "ba6a40ee79a51a29377036a430159c7a72ff9316605e3bebbfd08103e8ea686a",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/GaussianBlockProposalRegressionTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.GuidedFixedBudgetTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "Guided fixed-budget accounting should correct initialization and carry using the full proposal law",
+        "Guided fixed-budget accounting should correct ordinary and auxiliary selection including its normalizer for both methods",
+        "Guided fixed-budget accounting should skip look-ahead on carry and leave guided results unchanged",
+        "Guided fixed-budget accounting should preserve bootstrap replay with no guidance or neutral auxiliary sampling",
+        "Guided fixed-budget accounting should allow an auxiliary bootstrap step without child densities",
+        "Guided fixed-budget accounting should retain tiny parent log weights and restore them on carry",
+        "Guided fixed-budget accounting should produce constant corrected scalar Gaussian weights",
+        "Guided fixed-budget accounting should produce constant corrected multivariate Gaussian weights",
+        "Guided fixed-budget accounting should retain collapse diagnostics but invalidate failed density callbacks",
+        "Guided fixed-budget accounting should fail terminally for unsupported auxiliary scores and allow defended fallback",
+        "Guided fixed-budget accounting should reject density overflow, reentrancy and interruption without a partial posterior",
+        "Guided fixed-budget accounting should enforce owner access and lifecycle on the new methods"
+      ],
+      "sourceSha256": "179a540e7992979140209da01e63a3e78221e9d273e0de19004a4e30fb917e26",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.FixedBudgetParticleFilterTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "Fixed-budget bootstrap filtering should require an explicit valid population policy and method",
+        "Fixed-budget bootstrap filtering should use strict previous-population thresholds without equating fraction one with Always",
+        "Fixed-budget bootstrap filtering should carry normalized weights and use weighted evidence rather than an unweighted mean",
+        "Fixed-budget bootstrap filtering should match independent exact two-state expectations over every initial ancestor and transition outcome",
+        "Fixed-budget bootstrap filtering should select stratified ancestors using exact interval boundaries and never select zero mass",
+        "Fixed-budget bootstrap filtering should replay both methods and account for only one ancestor selection per step"
+      ],
+      "sourceSha256": "90ed6f6e62e6caf409b402b315401318aed19a6a27c454333ffc9fb08b62943c",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/FixedBudgetParticleFilterTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.FixedBudgetNumericalTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "Fixed-budget numerical and lifecycle contracts should retain tiny positive logs without declaring genuine collapse",
+        "Fixed-budget numerical and lifecycle contracts should retain the historical CDF diagnosis but resolve actual draws without a fallback",
+        "Fixed-budget numerical and lifecycle contracts should invalidate the public filter on an explicit stratified domain refusal",
+        "Fixed-budget numerical and lifecycle contracts should preserve tiny log weights when resampling is skipped",
+        "Fixed-budget numerical and lifecycle contracts should fail with a completed collapse report and forbid stale posterior or restart",
+        "Fixed-budget numerical and lifecycle contracts should handle absolute tiny or large likelihoods without ordinary-space overflow",
+        "Fixed-budget numerical and lifecycle contracts should reject invalid likelihoods, carried arithmetic overflow and cumulative overflow",
+        "Fixed-budget numerical and lifecycle contracts should invalidate on callback failure and reentrancy without publishing a partial step",
+        "Fixed-budget numerical and lifecycle contracts should honor interruption before and during a callback and leave the interrupt flag set",
+        "Fixed-budget numerical and lifecycle contracts should confine lifecycle access to the owner without damaging the owner's valid state",
+        "Fixed-budget numerical and lifecycle contracts should validate observable queries without changing the filter"
+      ],
+      "sourceSha256": "2364b543fd3ce4217a2956ed92a54e1e93680d976898dd2a57ca1cf88c19614f",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/FixedBudgetNumericalTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.DecisionStratifiedProductionTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "Decision-focused stratification should preserve capacity without allocating unbounded decimal tables",
+        "Decision-focused stratification should select an entire maximum-size uniform population without redraws",
+        "Decision-focused stratification should resolve large sparse equal-support and nonuniform unambiguous decisions",
+        "Decision-focused stratification should check the log-span limit exactly rather than with rounded subtraction",
+        "Decision-focused stratification should resolve equal weights and exact ties on an exhaustive midpoint grid",
+        "Decision-focused stratification should exclude true zeros and preserve a zero coordinate",
+        "Decision-focused stratification should resolve dominant-weight and underflow populations without global CDF intervals",
+        "Decision-focused stratification should refine boundary-adjacent decisions and report exhausted budgets",
+        "Decision-focused stratification should keep exact equal-log symbolic ties distinct from approximate equality",
+        "Decision-focused stratification should refuse a genuinely unresolved comparison at the full precision limit",
+        "Decision-focused stratification should preserve offset invariance and finite-grid conditional offspring counts",
+        "Decision-focused stratification should consume exactly one random coordinate per stratum despite refinement",
+        "Decision-focused stratification should validate domain and interrupt without clearing the flag"
+      ],
+      "sourceSha256": "cc03433b6917ba22fc3a7a820aa94ff528fea5bd4462b99eca0f5ba0396f4da1",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/DecisionStratifiedProductionTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.WeightedBoundedParticleFilterTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "Weighted bounded filtering should retain the entire initial batch and discard only an adaptive stopping candidate",
+        "Weighted bounded filtering should keep partial weighted populations when the hard cap is exhausted",
+        "Weighted bounded filtering should preserve absolute tiny and large likelihoods and retain tiny positive log weights",
+        "Weighted bounded filtering should validate likelihoods scores and work boundaries without accepting invalid results",
+        "Weighted bounded filtering should select weighted ancestors with strict boundaries and never a zero interval",
+        "Weighted bounded filtering should match exact two-step finite evidence and unnormalized state moments",
+        "Weighted bounded filtering should terminate on genuine zero weights and retain diagnostics without retry",
+        "Weighted bounded filtering should propagate callback failure interruption and reentrancy without partial estimates",
+        "Weighted bounded filtering should replay owned streams and reject access from another thread",
+        "Weighted bounded filtering should restore the ambient RNG even after a sampling callback fails",
+        "Weighted bounded filtering should exclude the stopping candidate from actual next-step ancestry",
+        "Weighted bounded filtering should warn about concentration even when every likelihood is positive",
+        "Weighted bounded filtering should preserve constant-weight evidence on long sequences",
+        "Weighted bounded filtering should match Kalman evidence and unnormalized moments across all predeclared seeds"
+      ],
+      "sourceSha256": "1cd0a6b0a8e8ec39a03fabe94ca3395937cf46a025bfda12275b4f4e97a6b098",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/WeightedBoundedParticleFilterTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.CalibratedGuidedFilterTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "Calibrated guided filtering should validate total work and probability preferences",
+        "Calibrated guided filtering should use disjoint fixed pilots and a frozen scale without changing weights",
+        "Calibrated guided filtering should choose the smallest conservative cap above the floor and include pilot cost",
+        "Calibrated guided filtering should retain production even when no scale or adequate adaptive cap is found",
+        "Calibrated guided filtering should keep pilot work diagnostics on genuine production collapse without retries",
+        "Calibrated guided filtering should restore ambient randomness and replay calibration plus production",
+        "Calibrated guided filtering should fail closed on pilot callbacks interruption and reentrant use",
+        "Calibrated guided filtering should reject invalid proposal densities and correction overflow",
+        "Calibrated guided filtering should apply initial and parent-conditional density corrections exactly once",
+        "Calibrated guided filtering should use the full defensive mixture density including both branches",
+        "Calibrated guided filtering should match Gaussian conditioning and preserve its constant corrected initial weight",
+        "Calibrated guided filtering should match exact finite guided stopping trees for evidence and state mass",
+        "Calibrated guided filtering should apply corrected scores and retain zero target mass without treating it as density failure",
+        "Calibrated guided filtering should clear calibration on manual steps and reject foreign-thread calibration",
+        "Calibrated guided filtering should bound Bernoulli score misses conservatively against exact enumeration",
+        "Calibrated guided filtering should cover bounded-score pilot means by exact binomial summation",
+        "Calibrated guided filtering should match Gaussian evidence and unnormalized moments with work-inclusive calibration"
+      ],
+      "sourceSha256": "ee57aa8fa24082780d9a218bb6a585544a5f5c2bc66b7b59751cbe824ac6855c",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/CalibratedGuidedFilterTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.AuxiliaryParticleFilterTest",
+      "basis": "Existing local JUnit identities, checked against frozen source hash",
+      "tests": [
+        "Auxiliary filtering should normalize full defensive ancestor probabilities and correct their complete law",
+        "Auxiliary filtering should preserve support for zero look-ahead scores and disclose an all-zero fallback",
+        "Auxiliary filtering should give constant corrected weights under exact Gaussian adaptation without losing evidence normalization",
+        "Auxiliary filtering should replay ordinary filtering exactly with a unit defensive share and no look-ahead calls",
+        "Auxiliary filtering should prepare once before calibration and account separately for pilots production and look-ahead",
+        "Auxiliary filtering should replay calibrated auxiliary steps and restore ambient randomness",
+        "Auxiliary filtering should invalidate after callback failure and preserve diagnostics only for genuine collapse",
+        "Auxiliary filtering should reject use before start foreign threads reentrancy and interrupted preparation",
+        "Auxiliary filtering should match exhaustive two-step evidence and unnormalized mass including bounded stopping",
+        "Gaussian observation helpers should handle multiple correlated observation coordinates and disparate physical scales",
+        "Gaussian observation helpers should match a rational rectangular-observation control and the joint density identity",
+        "Gaussian observation helpers should reduce to scalar conditioning and reject malformed singular or zero-noise inputs"
+      ],
+      "sourceSha256": "cd098d44cb4e4af5426fec7d141712310c96a5b0c85e9de558d3f744f28a323a",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/AuxiliaryParticleFilterTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.VectorSliceSamplerRegressionTest",
+      "basis": "Source-declared AnyWordSpec names (one top-level should scope)",
+      "tests": [
+        "The explicit vector sampler should validate inputs and storage before calling the model",
+        "The explicit vector sampler should reject invalid densities and zero-support starts without masking callbacks",
+        "The explicit vector sampler should produce detached reproducible complete traces and discard exact warm-up counts",
+        "The explicit vector sampler should charge every callback and keep incomplete transitions out of capped traces",
+        "The explicit vector sampler should fail closed on search exhaustion and floating-point boundary collapse",
+        "The explicit vector sampler should preserve caller interruption before, during and after a callback",
+        "The explicit vector sampler should isolate simultaneous and nested runs without global RNG or worker ownership",
+        "The explicit vector sampler should allow another thread to cancel a cooperatively blocked density callback",
+        "The explicit vector sampler should match an independent planar angular implementation on nonradial targets",
+        "The explicit vector sampler should match independent inverse-CDF draws when the quantile target equals its reference",
+        "The explicit vector sampler should preserve independent Gaussian and constrained exponential target moments in 8 and 32 dimensions"
+      ],
+      "sourceSha256": "402e520e8d30a3af2d1a3523063b77ad5eb36280b7732e73a1a61b1e5fb456a8",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/VectorSliceSamplerRegressionTest.scala"
+    },
+    {
+      "suite": "com.cra.figaro.test.modernization.MultiChainVectorSliceSamplerRegressionTest",
+      "basis": "Source-declared AnyWordSpec names (one top-level should scope)",
+      "tests": [
+        "Multi-chain vector sampling should preserve exact coordinate summaries for odd, tied, constant and extreme traces across bounds",
+        "Multi-chain vector sampling should bound diagnostic scratch owners, restore coordinate order and join every worker",
+        "Multi-chain vector sampling should propagate diagnostic failure promptly and cancel and join siblings without partial output",
+        "Multi-chain vector sampling should cancel diagnostic workers on caller interruption and preserve its interrupt flag",
+        "Multi-chain vector sampling should honor pre-interruption for scalar diagnostics and serial coordinate dispatch",
+        "Multi-chain vector sampling should retain the primary diagnostic error when a sibling exceeds its shutdown budget",
+        "Multi-chain vector sampling should partition benchmark time without changing public output or seeded work",
+        "Multi-chain vector sampling should match individual kernels exactly across worker counts and assign seeds in index order",
+        "Multi-chain vector sampling should construct models serially and bound workers while retaining all chains",
+        "Multi-chain vector sampling should validate aggregate limits and all models before any density evaluation",
+        "Multi-chain vector sampling should retain capped chains and explicitly align diagnostics without discarding excess draws",
+        "Multi-chain vector sampling should detect a later chain failure promptly and join cooperatively cancelled siblings",
+        "Multi-chain vector sampling should preserve factory exceptions and factory or caller interruption",
+        "Multi-chain vector sampling should cancel a running pool on caller interruption and restore its flag after joining",
+        "Multi-chain vector sampling should report an uncooperative callback as a bounded shutdown failure without hiding the primary error",
+        "Multi-chain vector sampling should finish shutdown despite repeated caller interrupts without touching callback-owned resources",
+        "Multi-chain vector sampling should isolate nested runs and aggregate diagnostics without changing outer streams",
+        "Multi-chain vector sampling should propagate kernel search failures instead of fabricating constant-chain success"
+      ],
+      "sourceSha256": "5f711b019a0aed86d8f0a30fa8c39c06895f05a33b08d88cd7d7e27138d55a68",
+      "source": "Figaro/src/test/scala/com/cra/figaro/test/modernization/MultiChainVectorSliceSamplerRegressionTest.scala"
+    }
+  ]
+}
