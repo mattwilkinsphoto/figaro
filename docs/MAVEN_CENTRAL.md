@@ -2,6 +2,29 @@
 
 ## Overview and current status
 
+**Figaro 7.4.0 is published and verified on Maven Central.** All four artifacts
+match the approved release bytes, and all six Central-only consumers passed,
+including guided and auxiliary fixed-budget filtering. Stopping and defaults are unchanged.
+
+- [Immutable release](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.4.0)
+- [All five final-source main CI jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/39975157515)
+- [Signed staging and validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/39980905388)
+- [PUBLISHED, byte checks and six consumers](https://github.com/mattwilkinsphoto/figaro/actions/runs/39981195050)
+- [7.4.0 artifact directory](https://repo.maven.apache.org/maven2/io/github/mattwilkinsphoto/figaro_3/7.4.0/)
+
+Source: `86f48a06334da78a9315292d2e7fd87fd7e7ef88`.
+Bundle SHA-256: `d64b4aecdd1b87301c428fd22653e36961626b0898554fe9da0eba58019e337e`.
+Thin JAR SHA-256: `0abfdadfeb007af1eee39a04b0591e49686d4cab74181402ccf8d9948abe4dbf`.
+
+Verification completed on 2026-10-23 UTC using deployment
+`3fdcd5e9-13b3-4d80-86a9-d630adfe7c93`, without a repeat upload or publication request.
+Independent public downloads also matched all four approved hashes. The
+[complete 7.4.0 record](RELEASE_7_4_STATUS.md) distinguishes passed required gates
+from one unresolved, pre-existing advisory timing failure. Released bundle bytes
+retain their original pre-publication metadata and have not been rewritten.
+
+### Historical 7.3.0 publication
+
 **Figaro 7.3.0 is published and verified on Maven Central.** All four artifacts
 match the approved release bytes, and all five Central-only consumers passed,
 including explicit-policy fixed-budget filtering and its numerical contracts.
@@ -129,7 +152,7 @@ belong in the next version rather than silently changing released bytes.
 
    ```scala
    scalaVersion := "3.9.0"
-   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.3.0"
+   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.4.0"
    ```
 
 3. Compile and run the application normally. No `publishLocal`, local Figaro
@@ -161,7 +184,7 @@ they do not stage or publish anything. Actions are pinned to commit hashes.
    exercises the integration checks. Choose **verify** to repeat these read-only
    availability and consumer checks later.
 
-The current release approval is deliberately pinned to 7.3.0 in
+The current release approval is deliberately pinned to 7.4.0 in
 `tools/central_release.py`. A new version requires reviewing and updating the
 version, source revision, bundle checksum and expected consumer hash together;
 an arbitrary tag or user-supplied download URL is not accepted.

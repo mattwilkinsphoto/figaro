@@ -395,11 +395,11 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Source:** Doucet and Johansen, [particle filtering tutorial](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf), version 1.1 with March 2012 corrections, sections 4.1/4.2. Pitt and Shephard, [1997 working paper](https://www.nuff.ox.ac.uk/economics/papers/1997/w13/sir.pdf), section 3.1. Johansen and Doucet, [2008 author manuscript](https://wrap.warwick.ac.uk/id/eprint/37283/1/WRAP_Johansen_JD08.pdf), sections 2.2/2.3. Relevant sections inspected 2026-10-22, not a full-proof review. Maintained implementation comparison: particles [core](https://github.com/nchopin/particles/blob/master/particles/core.py), [GuidedPF/APF](https://github.com/nchopin/particles/blob/master/particles/state_space_models.py), [MIT license](https://github.com/nchopin/particles/blob/master/LICENSE); no external code copied. INF-10/11 supply existing proposal helper provenance; INF-15 supplies scheduling and numerical selection.
 
-**Role:** Independently validated fixed-N extension, integrated for 7.4.0 final preparation; not part of published 7.3.0. Full augmented parent/child importance correction, retaining previous weights on carry steps. Unlike particles, the trigger remains previous posterior ESS, not auxiliary ESS. No random-stopping theorem transfer, automatic tuning, default change or universal efficiency claim.
+**Role:** Independently validated fixed-N extension, published and verified in 7.4.0; not part of published 7.3.0. Full augmented parent/child importance correction, retaining previous weights on carry steps. Unlike particles, the trigger remains previous posterior ESS, not auxiliary ESS. No random-stopping theorem transfer, automatic tuning, default change or universal efficiency claim.
 
 **Code:** Development extension of [FixedBudgetParticleFilter](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala), reusing [WeightedParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala) and [AuxiliaryParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal.scala). No change to the released stopping implementation.
 
-**Validation:** [Accounting/lifecycle tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetTest.scala), [public API comparison](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetStudy.scala), [independent exact oracle and analysis](../tools/guided_fixed_reference.py), [oracle tests](../tools/test_guided_fixed_reference.py). Frozen before outcomes; exact finite enumeration, independent Gaussian/reference controls and fresh-seed nonlinear/multimodal comparison completed. Final review reproduced the original result object from preserved logs exactly, with no new trajectories or tuning. [Post-merge main CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/39968790021) passed all five jobs. Actual results, counterevidence and remaining limits are recorded in the status guide. Final 7.4.0 preparation and publication are conditionally authorized; the separate release guide records packaging and Central acceptance gates.
+**Validation:** [Accounting/lifecycle tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetTest.scala), [public API comparison](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetStudy.scala), [independent exact oracle and analysis](../tools/guided_fixed_reference.py), [oracle tests](../tools/test_guided_fixed_reference.py). Frozen before outcomes; exact finite enumeration, independent Gaussian/reference controls and fresh-seed nonlinear/multimodal comparison completed. Final review reproduced the original result object from preserved logs exactly, with no new trajectories or tuning. [Post-merge main CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/39968790021) passed all five jobs. Actual results, counterevidence and remaining limits are recorded in the status guide. Final 7.4.0 packaging, compatibility, signed Central publication, all four artifact byte checks and all six Central-only consumers passed; the release guide records exact provenance and the separately retained advisory timing failure.
 
 **Guide:** [GUIDED FIXED BUDGET PROTOCOL](GUIDED_FIXED_BUDGET_PROTOCOL.md); [GUIDED FIXED BUDGET STATUS](GUIDED_FIXED_BUDGET_STATUS.md); [GUIDED FIXED BUDGET FILTER](GUIDED_FIXED_BUDGET_FILTER.md); [RELEASE 7.4 STATUS](RELEASE_7_4_STATUS.md).
 
@@ -702,8 +702,18 @@ All other invocations, including instrumented coverage, packaging and consumers,
 remain stock; library estimators and defaults are unchanged. Conditional main
 integration is approved, not server-mode or CI-wide replacement. First-success/
 late-error and notification-draining limitations remain; release and upstream
-submission remain separate decisions: conditional 7.4.0 publication is now approved,
-while upstream submission remains on hold.
+submission remain separate decisions: 7.4.0 publication and Central-only consumer
+verification are complete, while upstream submission remains on hold.
+
+The final 7.4.0 source run passed all required gates but retained one failed
+advisory selection-timing assertion (19 passed, one failed). The
+[release record](RELEASE_7_4_STATUS.md) records the unchanged bound and exact-byte
+comparison of all 99 utility class/TASTy entries with published 7.3.0. No timing
+rerun or cause attribution was made. Additional primary-source inspection of
+OpenJDK's [forking](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_12_Forking.java)
+and [loop](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_11_Loops.java)
+examples informs the bounded follow-up described in the CI guide, not a claim
+that this result is explained or that enumeration measurements validate selection.
 
 ## Keeping this index useful
 

@@ -1,6 +1,6 @@
 # Guided and auxiliary fixed-budget filtering
 
-**Available in the 7.4.0 source; final publication is tracked in the [release record](RELEASE_7_4_STATUS.md). Not in 7.3.0.**
+**Published and verified in 7.4.0; see the [release record](RELEASE_7_4_STATUS.md). Not in 7.3.0.**
 [Research provenance](RESEARCH_REFERENCES.md#inf-16).
 [Validation and promotion status](GUIDED_FIXED_BUDGET_STATUS.md).
 

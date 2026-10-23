@@ -5,9 +5,9 @@ contains optional candidates; [roadmap history](docs/ROADMAP_HISTORY.md) preserv
 the completed milestones and their original evidence. Historical priorities are
 not an active queue.
 
-## Current baseline: use 7.3.0
+## Current baseline: use 7.4.0
 
-**Figaro 7.3.0 is the adoption baseline and is published on Maven Central.**
+**Figaro 7.4.0 is the adoption baseline and is published on Maven Central.**
 The Java 17 / Scala 3 / sbt 2 modernization and approved core performance,
 distribution and modeling milestones are integrated. See the
 [release scope](docs/INFERENCE_INTEGRATION.md), [installation and publication](docs/MAVEN_CENTRAL.md),
@@ -24,16 +24,18 @@ precision or performance for every application model.
 
 ## Active priorities
 
-**Guided/auxiliary fixed-budget extension: integrated; 7.4.0 release preparation.** The
+**Guided/auxiliary fixed-budget extension: published and verified in 7.4.0.** The
 [three-stage milestone](docs/GUIDED_FIXED_BUDGET_STATUS.md) combines explicit
 resampling schedules with existing proposal interfaces under a
 [new frozen protocol](docs/GUIDED_FIXED_BUDGET_PROTOCOL.md). It preserves released
 stopping/defaults. Independent correctness, total-cost utility, packaged consumers
 and remote integration CI passed; closeout and post-merge main CI passed at `a31fca1a`.
-This additive capability makes 7.4.0 eligible as a normal-priority minor release,
-and publication is now authorized after the [final release gates](docs/RELEASE_7_4_STATUS.md).
-Source preparation targets 7.4.0; the published adoption baseline
-remains 7.3.0. Poor proposals can still hurt accuracy and cost efficiency.
+The [final release gates](docs/RELEASE_7_4_STATUS.md) passed: final-source packaging,
+compatibility through 7.3.0, signed publication, four artifact byte comparisons
+and all six Central-only consumers. The record retains one unresolved, pre-existing
+advisory timing failure; it is not reported as passed. Poor proposals can still
+hurt accuracy and cost efficiency. No further release is needed solely for
+post-publication documentation housekeeping.
 
 **Particle-diversity milestone complete: no runtime promotion.** The
 [literature-led three-stage experiment](docs/PARTICLE_DIVERSITY_STATUS.md) preserved

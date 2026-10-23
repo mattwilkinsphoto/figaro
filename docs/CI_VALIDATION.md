@@ -2,8 +2,9 @@
 
 Status: local, isolated Linux and remote integration validation completed. Narrow
 adoption for the named direct-launcher CI test gates is approved; other invocations
-remain stock. Main integration and post-merge CI passed. Figaro 7.4.0 publication
-is authorized after its separate final packaging gates; upstream submission remains on hold.
+remain stock. Main integration and post-merge CI passed. Figaro 7.4.0 is published
+and verified; its required packaging/consumer gates and unresolved advisory timing
+result are recorded separately below. Upstream submission remains on hold.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
 
 ## Why the enumeration test changed
@@ -28,6 +29,24 @@ The replacement separates two different questions:
 The other legacy collection timing assertions remain advisory and unchanged.
 This replacement does not claim to repair them. Do not interpret a green workflow
 as proof that a `continue-on-error` timing step passed.
+
+### 7.4.0 final-source advisory result
+
+[Final-source run 39975157515](https://github.com/mattwilkinsphoto/figaro/actions/runs/39975157515)
+passed all five jobs and required packaging/consumer gates, but its legacy
+selection-timing assertion failed: 19 advisory tests passed and one failed;
+ratio 2.91156 exceeded the unchanged bound 2.42. All 99 utility class/TASTy
+entries are byte-identical to published 7.3.0. The test aggregates timings in
+one JVM and does not retain individual trials, hash-table layouts or GC/JIT
+profiles. The cause cannot be determined from that result. No rerun or acceptance
+threshold change was used to obtain release approval under the existing advisory policy.
+
+OpenJDK's [JMH forking example](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_12_Forking.java)
+and [loop example](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_11_Loops.java)
+explain relevant measurement risks; they do not diagnose this particular failure.
+A future selection-performance investigation should retain fixture/layout details
+and use independently calibrated, forked measurements. The enumeration benchmark
+below does not validate selection timing, and no selection speedup is claimed.
 
 ## Running the benchmark
 

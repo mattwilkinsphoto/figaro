@@ -3,10 +3,11 @@
 [Research provenance](RESEARCH_REFERENCES.md#inf-16).
 [Frozen protocol](GUIDED_FIXED_BUDGET_PROTOCOL.md).
 
-Baseline: verified published Figaro 7.3.0. Final review and main integration
-completed at `a31fca1a`, with all five main CI jobs passing. Final preparation and
-conditional publication of 7.4.0 are authorized; the [release record](RELEASE_7_4_STATUS.md)
-tracks those separate gates. Released stopping estimator and defaults unchanged.
+Research baseline: verified published Figaro 7.3.0. Final review and main integration
+completed at `a31fca1a`, with all five main CI jobs passing. The extension is now
+published and verified in **7.4.0**; the [release record](RELEASE_7_4_STATUS.md)
+records final packaging, Central byte checks and all six consumers, separately
+from the retained advisory timing failure. Released stopping estimator and defaults unchanged.
 
 ## Requirements and acceptance checklist
 
@@ -20,7 +21,7 @@ tracks those separate gates. Released stopping estimator and defaults unchanged.
 - [x] Reproducibility archive and final local audit: 707 entries reopened and hash-verified.
 - [x] Remote integration CI and final promotion review at `0275d6a1`.
 - [x] Main integration after passing closeout CI; post-merge main CI also passed.
-- [ ] Separate final-version release preparation, publication approval and published-consumer verification.
+- [x] Separate final-version release preparation, publication approval and published-consumer verification.
 
 ## Independent confirmation results
 
@@ -132,11 +133,11 @@ It includes the original scientific and CI archives, reanalysis, captured check
 logs and a retained UTF-8 log-reading correction; that correction changed neither
 the numerical analysis nor its acceptance criteria.
 
-**Release eligibility:** the additive consumer APIs warrant a **7.4.0 minor
-release at normal priority** under the consumer-impact policy. Published 7.3.0
-remains the published adoption baseline during final preparation. Final-version
-packaging, publication and published-library acceptance are now conditionally
-authorized and tracked in the release record. Upstream report submission remains on hold.
+**Release decision completed:** the additive consumer APIs warranted a **7.4.0 minor
+release at normal priority** under the consumer-impact policy. Final-version
+packaging, signed publication and all six published-library consumers passed;
+7.4.0 is now the adoption baseline. The release record retains exact provenance
+and the unresolved advisory timing result. Upstream report submission remains on hold.
 
 Implementation/validation commit: `2c7c20c7` on `codex/guided-fixed-budget`.
 The private reproducibility archive is 142,961,413 bytes with SHA-256

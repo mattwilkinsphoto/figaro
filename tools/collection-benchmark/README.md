@@ -6,7 +6,7 @@ uses JMH instead of hand-written JVM timing. It does not add a Figaro dependency
 From the repository root, with Python 3.11+ and JDK 17 on PATH:
 
 ```text
-python -B tools/collection-benchmark/run.py --candidate target/out/jvm/scala-3.9.0/figaro/figaro_3-7.4.0-SNAPSHOT.jar --output .cache/enumeration --profile full
+python -B tools/collection-benchmark/run.py --candidate target/out/jvm/scala-3.9.0/figaro/figaro_3-7.4.0.jar --output .cache/enumeration --profile full
 ```
 
 The output must not exist; its parent must exist. `--java` and `--javac` can select

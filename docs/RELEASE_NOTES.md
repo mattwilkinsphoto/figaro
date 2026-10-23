@@ -1,6 +1,6 @@
 # Modernization release notes
 
-## 7.4.0 — final release preparation
+## Current release: 7.4.0 — published
 
 Adds opt-in guided `start`/`advance`, `advanceAuxiliary` and separate proposal-work
 diagnostics to `FixedBudgetParticleFilter`. Existing bootstrap calls, explicit
@@ -9,11 +9,13 @@ Guidance uses full target/proposal correction; auxiliary steps add parent-select
 correction only when the configured policy resamples. No universal speedup,
 automatic threshold, missing-mode detection or precision guarantee is implied.
 
-Independent validation and snapshot main CI passed. Final-version packaging and
-Central publication are separate gates in the [7.4.0 release record](RELEASE_7_4_STATUS.md).
+Independent validation, final-source packaging and compatibility passed. Signed
+Central publication, all four artifact byte comparisons and all six Central-only
+consumers passed. The [7.4.0 release record](RELEASE_7_4_STATUS.md) retains exact
+hashes, runs and one unresolved pre-existing advisory selection-timing failure.
 See [usage, comparisons and limitations](GUIDED_FIXED_BUDGET_FILTER.md) before adoption.
 
-## Current release: 7.3.0 — published
+## Previous release: 7.3.0 — published
 
 Adds the opt-in `FixedBudgetParticleFilter` for detached immutable-state bootstrap
 models, with explicit resampling policy and method, retained log weights and bounded

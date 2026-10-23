@@ -22,13 +22,14 @@ Figaro 6.1 additionally checks exact-coordinate conditional copulas, bounded GVM
 mixture fitting and full-mixture linear/angular mutual information.
 
 To test Maven Central in a fresh environment, set `FIGARO_CENTRAL_ONLY=true`,
-`FIGARO_VERSION=7.3.0`, and
-`FIGARO_EXPECTED_SHA256=6b82a0efc92ea4119a51cdfe42e38090b3680d129625d16b653e37cc821cee1f`.
+`FIGARO_VERSION=7.4.0`, and
+`FIGARO_EXPECTED_SHA256=0abfdadfeb007af1eee39a04b0591e49686d4cab74181402ccf8d9948abe4dbf`.
 Also set `FIGARO_CAPABILITY_CHECK=true`, `FIGARO_BUDGET_CHECK=true` and
-`FIGARO_FIXED_BUDGET_CHECK=true`, then run each of `FigaroConsumerCheck`,
-`IntegrationConsumerCheck`, `CapabilityConsumerCheck`, `BudgetConsumerCheck` and
-`FixedBudgetConsumerCheck` with `sbt "runMain <name>"` here. All five passed against
-published 7.3.0. This mode excludes Ivy local and
+`FIGARO_FIXED_BUDGET_CHECK=true` and `FIGARO_GUIDED_FIXED_CHECK=true`, then run each of
+`FigaroConsumerCheck`, `IntegrationConsumerCheck`, `CapabilityConsumerCheck`,
+`BudgetConsumerCheck`, `FixedBudgetConsumerCheck` and `GuidedFixedBudgetConsumerCheck`
+with `sbt "runMain <name>"` here. All six passed against
+published 7.4.0. This mode excludes Ivy local and
 the downloaded file repository. The [Central workflow](../../docs/MAVEN_CENTRAL.md)
 runs it on a fresh runner without restoring dependency caches.
 
@@ -54,9 +55,9 @@ it cannot pass by silently loading an earlier `publishLocal` artifact.
 
 ## API and common patterns
 
-For 7.4.0 final-version testing, also set `FIGARO_GUIDED_FIXED_CHECK=true` and
+For 7.4.0 and later, set `FIGARO_GUIDED_FIXED_CHECK=true` and
 run `runMain GuidedFixedBudgetConsumerCheck` with the other five consumers.
-Use the hash of the exact candidate/published JAR, not the 7.3.0 hash above.
+Use the hash of the exact candidate/published JAR; the quick start pins published 7.4.0.
 This separately compiled check exercises guided initialization/propagation,
 auxiliary resampling, carry steps and proposal diagnostics under both methods.
 Leave the flag unset for releases before 7.4.0. Central availability is tracked

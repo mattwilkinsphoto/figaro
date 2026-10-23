@@ -31,14 +31,14 @@ You need JDK 17 and an sbt runner. The repository pins its sbt/compiler/plugin v
 
    ```scala
    scalaVersion := "3.9.0"
-   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.3.0"
+   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.4.0"
    ```
 
 3. Compile your application on JDK 17 and use the imports below.
 
-`%%` selects the Scala binary suffix `_3`. Version 7.3.0 is available from Maven Central, with its runtime dependencies declared in the POM. No custom Figaro resolver or `publishLocal` is needed. If resolution fails, check network/proxy settings and whether your build overrides Central. See [publication and validation](MAVEN_CENTRAL.md). For local development, publish a distinct development version and ensure producer and consumer use the same local repository; do not replace a released version with modified bytes.
+`%%` selects the Scala binary suffix `_3`. Version 7.4.0 is available from Maven Central, with its runtime dependencies declared in the POM. No custom Figaro resolver or `publishLocal` is needed. If resolution fails, check network/proxy settings and whether your build overrides Central. See [publication and validation](MAVEN_CENTRAL.md). For local development, publish a distinct development version and ensure producer and consumer use the same local repository; do not replace a released version with modified bytes.
 
-Java/Maven consumers use `io.github.mattwilkinsphoto:figaro_3:7.3.0` and the POM dependencies. The API is Scala-shaped (functions, contexts, collections); a small Scala facade can provide a simpler Java boundary. A dedicated Java compatibility test has not been performed.
+Java/Maven consumers use `io.github.mattwilkinsphoto:figaro_3:7.4.0` and the POM dependencies. The API is Scala-shaped (functions, contexts, collections); a small Scala facade can provide a simpler Java boundary. A dedicated Java compatibility test has not been performed.
 
 Prefer the normal library JAR. The `-fat.jar` bundles non-Scala runtime libraries but deliberately **omits the Scala runtime**, and is not a standalone executable application. Do not put both the thin JAR with its dependencies and the fat JAR on one classpath.
 
