@@ -31,26 +31,28 @@ No further sbt repair or Figaro release is scheduled from that work.
 
 ### Recommended next capability assessment
 
-**PF-PROPOSAL-01: reusable nonlinear observation-informed proposals.** This is the
-selected next recommendation for a bounded design/validation plan, not approval
-to implement or a promised release. The 7.4.0 APIs already correct caller-supplied
-guides, but built-in observation conditioning is linear-Gaussian; nonlinear and
-multimodal proposal construction remains caller work. See [research basis and
-inspection limits](docs/RESEARCH_REFERENCES.md#inf-17).
+**PF-PROPOSAL-01: reusable nonlinear observation-informed proposals.** The
+[literature-led assessment and bounded plan](docs/NONLINEAR_PROPOSAL_RESEARCH.md)
+are complete; implementation and independent numerical validation have not started.
+Recommend a training-free cubature Gaussian guide with an explicit-Jacobian
+comparator, explicit defensive support and a scalar/low-dimensional contract.
+This is a first experiment, not a winning algorithm or a promised release.
+The 7.4.0 APIs already correct caller-supplied guides, but built-in observation
+conditioning remains linear-Gaussian. See [research provenance](docs/RESEARCH_REFERENCES.md#inf-17).
 
-1. Compare explicit-Jacobian local Gaussian, derivative-free sigma-point and
-   small bounded-mixture approaches against the existing bootstrap/manual-guide
-   baselines. Screen maintained implementations and newer literature before
-   choosing an algorithm. A Gaussian approximation must not erase a multimodal
-   truth from the validation problem.
-2. Freeze a narrow scalar/low-dimensional, density-evaluable model contract and
-   protocol before a test-only prototype. Keep the true model and likelihood in
-   all importance corrections, preparation frozen within each step, and support,
-   refusal and construction-cost accounting explicit.
-3. Require independent exact/grid references, fresh held-out seeds and matched
-   total-cost comparisons, including weak-data and poor-guide cases. Promote only
-   after correctness and useful accuracy/cost gates pass; otherwise retain the
-   negative result. No change to released stopping, defaults or automatic cutover.
+1. On approval, freeze the narrow model contract, independent references and
+   experimental protocol before candidate runs. The assessment compares Jacobian,
+   sigma-point, bounded-mixture and learned alternatives; its proposed gates are
+   not yet a runnable frozen protocol.
+2. Build isolated test-only cubature/Jacobian helpers using existing normalized
+   laws and true-model corrections. Preserve support, explicit refusal and total
+   construction-cost accounting. No runtime API change at this stage.
+3. Require independent exact/grid references, fresh held-out seeds and cost-matched
+   bootstrap/manual-guide comparisons, including weak-data and multimodal cases.
+   Review promotion only after correctness and useful accuracy/cost gates pass;
+   otherwise retain the negative result. A bounded mixture is a follow-on if
+   single-Gaussian limits dominate, not an automatic expansion of this experiment.
+   Released stopping, defaults and automatic-cutover behavior remain unchanged.
 
 The next candidates after that assessment are higher-dimensional GVM-mixture
 fitting (with GMM controls) and broader multi-latent warm-up/proposal support.
