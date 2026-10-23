@@ -54,6 +54,16 @@ Record a source, concrete use case, representative first member, dependencies, n
 and inference tests, and acceptance evidence when promoting a candidate. Keep aliases
 and special cases attached to their family instead of creating duplicate implementations.
 
+## Recommended next inference candidate
+
+**PF-PROPOSAL-01 — assessment recommended; not implemented.** Reusable nonlinear
+observation-informed proposal construction would extend the linear-Gaussian
+helpers behind the released 7.4.0 fixed-budget APIs. The [roadmap](ROADMAP.md#recommended-next-capability-assessment)
+sets the proposed bounded sequence; [INF-17](docs/RESEARCH_REFERENCES.md#inf-17)
+records inspected sources and incomplete review. No winning algorithm, speedup,
+automatic policy or publication is claimed. Preserve all earlier negative
+particle-diversity results and released stopping/defaults.
+
 ## Broad families first
 
 | ID / priority | Family and current expansion status | First useful capability | Later flavors / shared work |

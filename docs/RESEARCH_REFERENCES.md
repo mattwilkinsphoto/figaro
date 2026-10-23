@@ -47,6 +47,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Particle-diversity robustness and proposed resample-move experiment | [INF-14](#inf-14) |
 | Bounded single-selection and ESS-triggered resampling schedules | [INF-15](#inf-15) |
 | Guided and auxiliary fixed-budget extension | [INF-16](#inf-16) |
+| Nonlinear proposal construction: next candidate assessment | [INF-17](#inf-17) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -402,6 +403,20 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 **Validation:** [Accounting/lifecycle tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetTest.scala), [public API comparison](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetStudy.scala), [independent exact oracle and analysis](../tools/guided_fixed_reference.py), [oracle tests](../tools/test_guided_fixed_reference.py). Frozen before outcomes; exact finite enumeration, independent Gaussian/reference controls and fresh-seed nonlinear/multimodal comparison completed. Final review reproduced the original result object from preserved logs exactly, with no new trajectories or tuning. [Post-merge main CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/39968790021) passed all five jobs. Actual results, counterevidence and remaining limits are recorded in the status guide. Final 7.4.0 packaging, compatibility, signed Central publication, all four artifact byte checks and all six Central-only consumers passed; the release guide records exact provenance and the separately retained advisory timing failure.
 
 **Guide:** [GUIDED FIXED BUDGET PROTOCOL](GUIDED_FIXED_BUDGET_PROTOCOL.md); [GUIDED FIXED BUDGET STATUS](GUIDED_FIXED_BUDGET_STATUS.md); [GUIDED FIXED BUDGET FILTER](GUIDED_FIXED_BUDGET_FILTER.md); [RELEASE 7.4 STATUS](RELEASE_7_4_STATUS.md).
+
+<a id="inf-17"></a>
+
+### INF-17: Nonlinear observation-informed proposal construction
+
+**Source:** van der Merwe, Doucet, de Freitas and Wan, [The Unscented Particle Filter](https://proceedings.neurips.cc/paper/1818-the-unscented-particle-filter.pdf) (2000), introduction, model specification and opening particle-filter discussion inspected for the observation-informed Gaussian-proposal rationale; no full algorithm/proof review. Doucet and Johansen, [particle-filtering tutorial, corrected 2012 text](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf), sections 4.2-4.3: predictive uncertainty, importance corrections and limits even with optimal child proposals. Maintained implementation comparison: [particles guided-filter tutorial](https://particles-sequential-monte-carlo-in-python.readthedocs.io/en/latest/notebooks/advanced_tutorial_ssm.html), user-supplied normalized proposals; documentation inspection, not execution or a pinned numerical comparison. Additional candidates screened at abstract level only: Branchini and Elvira, [optimized APF](https://proceedings.mlr.press/v161/branchini21a.html) (2021), and Cox et al., [learned Gaussian-mixture proposals](https://www.research.ed.ac.uk/en/publications/end-to-end-learning-of-gaussian-mixture-proposals-using-different/) (2024). Inspected 2026-10-23. No full-text or implementation validation claim for those two screened candidates.
+
+**Role:** Recommended next bounded assessment, not an implemented method or a selected winning algorithm. Compare explicit-Jacobian Gaussian, derivative-free sigma-point and bounded mixture proposals before choosing a prototype. A normalized approximate guide can be importance-corrected against the true model; it does not make the posterior Gaussian, restore lost histories or establish precision. Broader method/reuse/license review and a frozen protocol precede coding. No external code, data or dependency incorporated.
+
+**Code:** No new runtime implementation. Existing integration surfaces are [WeightedParticleProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala) and [FixedBudgetParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala). Existing linear-Gaussian helpers and arbitrary supplied laws are not automatic nonlinear construction.
+
+**Validation:** None executed for the candidate. Existing [ContinuousFilterBenchmark.scala](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmark.scala) supplies potential comparison fixtures, not acceptance of this candidate. Proposed gates require independent exact/grid references, new held-out seeds, all-outcome accuracy/mode-retention checks and total construction plus sampling cost against larger bootstrap budgets. Published speedups are not Figaro measurements.
+
+**Guide:** [AUXILIARY PARTICLE FILTER](AUXILIARY_PARTICLE_FILTER.md).
 
 <a id="dia-01"></a>
 
@@ -776,10 +791,16 @@ all six consumers in each packaged-consumption path and byte identity with the
 published thin JAR. No unexpected worker exception appeared in ordinary logs.
 The final branch commit `38674a64` passed [run 40010016173](https://github.com/mattwilkinsphoto/figaro/actions/runs/40010016173)
 with the same independently audited controls and packaged-consumer paths. Adoption
-is integrated into `main` after explicit approval; post-merge CI remains a distinct,
-commit-specific gate. These bounded results do not negate the forced React findings
+is integrated into `main` after explicit approval. Separate [post-merge CI 40016685283](https://github.com/mattwilkinsphoto/figaro/actions/runs/40016685283)
+passed all five jobs and every step at `0e5ef99c`, including all six consumers in
+three consumption paths; independent auditing verified exact inventories, artifact
+hashes and no unexpected ordinary worker exception. These bounded results do not negate the forced React findings
 or prove universal race freedom; [scope and integration status](CI_VALIDATION.md#stock-sbt-2011-adoption).
-No estimator, inference default, library release or upstream submission changes.
+The sbt investigation is closed. A [validation confirmation](https://github.com/sbt/sbt/issues/9859#issuecomment-6374384171)
+was posted on the existing resolved issue; the original bug report and five-site
+repair were not submitted. Historical evidence remains available. No estimator,
+inference default or library release changed; reopen only on concrete residual
+real-lifecycle evidence, not the forced cases alone.
 
 ## Keeping this index useful
 

@@ -4,7 +4,10 @@ Status: stock sbt 2.0.11 is integrated into `main` after full CI and
 packaged-consumer acceptance at implementation commit `c04ff1b8` and final branch
 commit `38674a64`. The local repair is retired from active workflows. Figaro 7.4.0
 remains the published release; its historical validation and advisory timing
-results are preserved below. Publication and upstream submission remain on hold.
+results are preserved below. The sbt investigation is closed: the
+[downstream validation confirmation](https://github.com/sbt/sbt/issues/9859#issuecomment-6374384171)
+was posted on the existing resolved issue. No new bug report, repair PR or release
+is planned from this work. A reproduced real-workflow defect would reopen review.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
 
 ## Stock sbt 2.0.11 adoption
@@ -29,7 +32,8 @@ is outside `.github/workflows`; `branch_pilot.py --ci-gate` now refuses executio
 Historical repair tools remain for evidence replay, not automatic installation.
 All other full CI gates remain in place, including instrumentation, compatibility,
 reproducible packaging and all six packaged consumers. The publication workflow
-is unchanged by this adoption and is not run. Upstream submission remains on hold.
+is unchanged by this adoption and is not run. The historical patch is retained
+for replay, not offered as a replacement for upstream's response-draining fix.
 
 Acceptance: [full run 40006071239](https://github.com/mattwilkinsphoto/figaro/actions/runs/40006071239)
 passed all five jobs and every step at `c04ff1b8`, including the unchanged advisory
@@ -47,10 +51,17 @@ correctly records the source selector as 2.0.11. Local checks passed 84 tests pl
 reference/navigation validation. The final documentation-only branch commit
 `38674a64` also passed [full run 40010016173](https://github.com/mattwilkinsphoto/figaro/actions/runs/40010016173),
 with the same independently audited controls, consumer paths and artifact hashes.
-Main integration was explicitly approved after those results. Post-merge CI is a
-separate gate: the branch results above must not be reported as a run of the merge
-commit. See the [main workflow history](https://github.com/mattwilkinsphoto/figaro/actions/workflows/ci.yml?query=branch%3Amain)
-for its commit-specific result.
+Main integration was explicitly approved after those results. Separate
+[post-merge run 40016685283](https://github.com/mattwilkinsphoto/figaro/actions/runs/40016685283)
+passed all five jobs and every step at `0e5ef99c`, including advisory timing.
+Independent auditing verified the named-gate manifests and exact inventories,
+all six consumers in all three consumption paths, reproducible rebuilds and
+byte identity of the thin library with published 7.4.0. All 73 ordinary sbt starts
+used 2.0.11, with no unexpected worker-completion exception in those logs.
+These bounded observations do not certify every timeout, transport or listener
+ordering. Forced direct-React cases bypass the repaired lifecycle and are not
+evidence of a remaining real-workflow defect. Historical failed experiments below
+remain failed; this closeout does not reinterpret them.
 
 Release assessment against published `v7.4.0`: cumulative changes are documentation,
 release-verification tooling and development CI/build-tool maintenance. Runtime

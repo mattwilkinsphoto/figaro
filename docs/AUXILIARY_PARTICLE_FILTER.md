@@ -194,6 +194,19 @@ child mixtures, update/close and calibrated-work APIs retain their
 
 ## Gotchas and numerical limits
 
+### Recommended next assessment, not a shipped helper
+
+Reusable nonlinear proposal construction is the next recommended capability
+assessment ([INF-17](RESEARCH_REFERENCES.md#inf-17), [bounded roadmap](../ROADMAP.md#recommended-next-capability-assessment)).
+The existing `linearGaussianObservation` does not linearize nonlinear functions
+or fit their possibly multimodal conditional distributions. The proposed review
+compares explicit-Jacobian, sigma-point and bounded-mixture approaches before any
+implementation choice. True likelihood/transition corrections, explicit support
+and preparation costs remain required. No performance improvement, automatic
+policy, precision guarantee or recovery of lost histories is established.
+
+### Current limits
+
 - `priorFraction=0` requires finite look-ahead scores on **every** positive-weight
   parent; Figaro refuses zero scores even if a caller believes that branch is
   impossible. Default `.1` permits zero scores while retaining support. If all

@@ -137,7 +137,10 @@ the numerical analysis nor its acceptance criteria.
 release at normal priority** under the consumer-impact policy. Final-version
 packaging, signed publication and all six published-library consumers passed;
 7.4.0 is now the adoption baseline. The release record retains exact provenance
-and the unresolved advisory timing result. Upstream report submission remains on hold.
+and the unresolved advisory timing result from that release run. The later
+[stock sbt closeout](CI_VALIDATION.md#stock-sbt-2011-adoption) records successful
+2.0.11 adoption and a validation confirmation on the resolved upstream issue;
+the original repair proposal was not submitted.
 
 Implementation/validation commit: `2c7c20c7` on `codex/guided-fixed-budget`.
 The private reproducibility archive is 142,961,413 bytes with SHA-256

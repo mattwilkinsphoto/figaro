@@ -7,7 +7,10 @@ on Linux, only within the named workflow. It checks pinned stock binaries, all
 candidate failure controls and two fresh 131-test inventories at the current commit.
 It does not modify sbt binaries. Full adoption CI and packaged acceptance passed
 at `c04ff1b8` and final branch commit `38674a64`; the change is integrated into
-`main`. See [results and integration status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
+`main`. Post-merge validation passed at `0e5ef99c`; the investigation is closed.
+A [validation confirmation](https://github.com/sbt/sbt/issues/9859#issuecomment-6374384171)
+was posted on the existing resolved upstream issue; no new bug report or repair PR
+was submitted. See [results and integration status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
 The retired `branch_pilot.py --ci-gate` entry point fails explicitly.
 
 The instructions below preserve historical experiments. For repair reproduction,
@@ -17,9 +20,9 @@ The former Actions workflow is preserved as a non-executable
 
 This is an isolated diagnostic repair, not a replacement sbt release or an automatic
 installation. Read the [scope and local evidence](../../docs/CI_VALIDATION.md) and
-[upstream report draft](UPSTREAM_REPORT.md) first. No upstream issue has been filed.
+[closed report and historical proposal](UPSTREAM_REPORT.md) first. No new upstream issue has been filed.
 
-**Current review:** official sbt 2.0.11 includes a response-draining fix outside
+**Closeout basis:** official sbt 2.0.11 includes a response-draining fix outside
 `React`. The [revised report](UPSTREAM_REPORT.md#current-upstream-disposition)
 supersedes the earlier source-only inference against an upgrade. Keep the existing
 2.0.8 repair evidence separate from the stock-version assessment below. Neither

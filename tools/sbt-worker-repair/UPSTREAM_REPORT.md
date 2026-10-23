@@ -1,14 +1,22 @@
-# Draft for review: sbt worker completion after the 2.0.11 lifecycle fix
+# Closed investigation: sbt worker completion after the 2.0.11 lifecycle fix
 
-**Not submitted. Hold for review.** The original issue proposal below is now
-historical evidence, not a ready-to-file report against current sbt.
+**Closed after stock adoption and validation.** A brief
+[downstream confirmation](https://github.com/sbt/sbt/issues/9859#issuecomment-6374384171)
+was posted on the existing resolved issue. The original bug report and five-site
+patch below were not submitted and are retained as historical evidence, not an
+outstanding submission task. No new issue was opened and no repair PR was filed.
 
 Repository follow-up: stock 2.0.11 adoption is integrated into `main` following
 explicit merge approval. Full CI and all six packaged consumers passed at
 `c04ff1b8` and final branch commit `38674a64`, with no unexpected worker exception
 in the ordinary logs. The local repair
 is retired from active workflows, not proposed as a replacement for upstream's
-response-draining fix. Upstream submission remains on hold. See the
+response-draining fix. Separate [main CI 40016685283](https://github.com/mattwilkinsphoto/figaro/actions/runs/40016685283)
+passed all five jobs and packaged consumers at `0e5ef99c`; its logs and artifacts
+were independently audited. Reopen only for a minimal real-lifecycle reproduction
+or a concrete reachable harmful ordering not addressed by the upstream fix.
+The ten-second drain bound and untested listener/transport cases are limitations,
+not demonstrated defects. See the
 [current adoption status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
 
 ## Current upstream disposition
@@ -30,6 +38,9 @@ response draining and is not a substitute for the upstream fix.
 The new [stock assessment](stock_assessment.py) retains the original controls and
 adds the unmodified upstream fixture. No production toolchain or CI adoption
 follows automatically from this assessment.
+
+The assessment and original proposal sections below are dated historical snapshots.
+Their then-pending adoption/submission statements do not override the closeout above.
 
 ## Stock-version assessment: 2026-10-23
 

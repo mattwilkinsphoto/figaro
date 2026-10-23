@@ -24,6 +24,43 @@ precision or performance for every application model.
 
 ## Active priorities
 
+**Build-tool maintenance closed:** stock sbt 2.0.11 is adopted; post-merge CI and
+packaged consumers passed. The local workaround is retired and a brief upstream
+validation confirmation was posted. See the [closeout](docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
+No further sbt repair or Figaro release is scheduled from that work.
+
+### Recommended next capability assessment
+
+**PF-PROPOSAL-01: reusable nonlinear observation-informed proposals.** This is the
+selected next recommendation for a bounded design/validation plan, not approval
+to implement or a promised release. The 7.4.0 APIs already correct caller-supplied
+guides, but built-in observation conditioning is linear-Gaussian; nonlinear and
+multimodal proposal construction remains caller work. See [research basis and
+inspection limits](docs/RESEARCH_REFERENCES.md#inf-17).
+
+1. Compare explicit-Jacobian local Gaussian, derivative-free sigma-point and
+   small bounded-mixture approaches against the existing bootstrap/manual-guide
+   baselines. Screen maintained implementations and newer literature before
+   choosing an algorithm. A Gaussian approximation must not erase a multimodal
+   truth from the validation problem.
+2. Freeze a narrow scalar/low-dimensional, density-evaluable model contract and
+   protocol before a test-only prototype. Keep the true model and likelihood in
+   all importance corrections, preparation frozen within each step, and support,
+   refusal and construction-cost accounting explicit.
+3. Require independent exact/grid references, fresh held-out seeds and matched
+   total-cost comparisons, including weak-data and poor-guide cases. Promote only
+   after correctness and useful accuracy/cost gates pass; otherwise retain the
+   negative result. No change to released stopping, defaults or automatic cutover.
+
+The next candidates after that assessment are higher-dimensional GVM-mixture
+fitting (with GMM controls) and broader multi-latent warm-up/proposal support.
+These are recommendations, not an automatic implementation queue. Higher-dimensional
+GVM fitting remains density representation work, excluding application fusion.
+Finite-population mode loss, arbitrary-graph ownership and unsupported numerical
+ranges remain separate limitations; proposal helpers do not solve them universally.
+
+### Released and completed milestones
+
 **Guided/auxiliary fixed-budget extension: published and verified in 7.4.0.** The
 [three-stage milestone](docs/GUIDED_FIXED_BUDGET_STATUS.md) combines explicit
 resampling schedules with existing proposal interfaces under a
