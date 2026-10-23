@@ -46,6 +46,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Continuous nonlinear/multimodal filtering validation | [INF-12](#inf-12) |
 | Particle-diversity robustness and proposed resample-move experiment | [INF-14](#inf-14) |
 | Bounded single-selection and ESS-triggered resampling schedules | [INF-15](#inf-15) |
+| Guided and auxiliary fixed-budget extension | [INF-16](#inf-16) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -386,6 +387,20 @@ Decision-focused prototype (test-only): [Java 17 Math.exp accuracy contract](htt
 Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/DecisionStratified.scala) adapts the preserved prototype only for the fixed-budget API. [Production tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/DecisionStratifiedProductionTest.scala), [production oracle emitter](../Figaro/src/test/scala/com/cra/figaro/test/modernization/DecisionStratifiedProductionOracle.scala) and [public-API study](../Figaro/src/test/scala/com/cra/figaro/test/modernization/DecisionStratifiedProductionStudy.scala) repeat independent controls. The integration guide records the reviewed enclosure derivation, exact-domain correction and separate population/refinement budgets. All local and remote integration gates passed on `6c207107`; [CI run 39841735591](https://github.com/mattwilkinsphoto/figaro/actions/runs/39841735591) passed all four jobs. Final-source CI, immutable packaging and all five Central-only consumers subsequently passed for published 7.3.0; the release guide records exact source, hashes and runs. The earlier diagnostic/prototype holds above are historical and superseded by this bounded production acceptance, not erased. No new theorem, threshold default or stopping-estimator change follows.
 
 **Guide:** [STRATIFIED INTEGRATION](STRATIFIED_INTEGRATION.md); [RELEASE 7.3 STATUS](RELEASE_7_3_STATUS.md); [RESAMPLING SCHEDULE PROTOCOL](RESAMPLING_SCHEDULE_PROTOCOL.md); [RESAMPLING SCHEDULE STATUS](RESAMPLING_SCHEDULE_STATUS.md); [FIXED BUDGET FILTER](FIXED_BUDGET_FILTER.md); [FIXED BUDGET PROTOCOL](FIXED_BUDGET_PROTOCOL.md); [FIXED BUDGET STATUS](FIXED_BUDGET_STATUS.md); [STRATIFIED NUMERICAL INVESTIGATION](STRATIFIED_NUMERICAL_INVESTIGATION.md); [STRATIFIED DECISION PROTOCOL](STRATIFIED_DECISION_PROTOCOL.md); [STRATIFIED DECISION STATUS](STRATIFIED_DECISION_STATUS.md).
+
+<a id="inf-16"></a>
+
+### INF-16: Guided and auxiliary fixed-budget filtering
+
+**Source:** Doucet and Johansen, [particle filtering tutorial](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf), version 1.1 with March 2012 corrections, sections 4.1/4.2. Pitt and Shephard, [1997 working paper](https://www.nuff.ox.ac.uk/economics/papers/1997/w13/sir.pdf), section 3.1. Johansen and Doucet, [2008 author manuscript](https://wrap.warwick.ac.uk/id/eprint/37283/1/WRAP_Johansen_JD08.pdf), sections 2.2/2.3. Relevant sections inspected 2026-10-22, not a full-proof review. Maintained implementation comparison: particles [core](https://github.com/nchopin/particles/blob/master/particles/core.py), [GuidedPF/APF](https://github.com/nchopin/particles/blob/master/particles/state_space_models.py), [MIT license](https://github.com/nchopin/particles/blob/master/LICENSE); no external code copied. INF-10/11 supply existing proposal helper provenance; INF-15 supplies scheduling and numerical selection.
+
+**Role:** Proposed independent fixed-N extension, not yet promoted or published. Full augmented parent/child importance correction, retaining previous weights on carry steps. Unlike particles, the trigger remains previous posterior ESS, not auxiliary ESS. No random-stopping theorem transfer, automatic tuning, default change or universal efficiency claim.
+
+**Code:** Planned extension of [FixedBudgetParticleFilter](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala), reusing [WeightedParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala) and [AuxiliaryParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal.scala). No implementation or validation yet at protocol freeze.
+
+**Validation:** Frozen before outcomes; exact finite enumeration, independent Gaussian/reference controls and fresh-seed nonlinear/multimodal comparison required. Actual results and acceptance state are recorded separately in the status guide.
+
+**Guide:** [GUIDED FIXED BUDGET PROTOCOL](GUIDED_FIXED_BUDGET_PROTOCOL.md); [GUIDED FIXED BUDGET STATUS](GUIDED_FIXED_BUDGET_STATUS.md).
 
 <a id="dia-01"></a>
 
