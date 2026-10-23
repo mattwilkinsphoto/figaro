@@ -22,6 +22,13 @@ VERSION = '6.1.0'
 PREFIX = f'maven/io/github/mattwilkinsphoto/figaro_3/{VERSION}/'
 
 
+def sbt_version(properties):
+    matches = re.findall(r'^\s*sbt\.version\s*=\s*([^\r\n]*)', properties, re.MULTILINE)
+    if len(matches) != 1 or not re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+', matches[0].strip()):
+        raise ValueError('Expected one pinned stable sbt version')
+    return matches[0].strip()
+
+
 def check_pom(data, version=VERSION):
     root = ET.fromstring(data)
     ns = {'p': 'http://maven.apache.org/POM/4.0.0'}
@@ -67,6 +74,7 @@ def main():
     VERSION = args.version
     PREFIX = f'maven/io/github/mattwilkinsphoto/figaro_3/{VERSION}/'
     root = Path(__file__).resolve().parents[1]
+    toolchain = sbt_version((root / 'project/build.properties').read_text())
     def git(*arguments):
         return subprocess.check_output(['git', '-c', 'safe.directory='+root.as_posix(), '-C', str(root), *arguments], text=True).strip()
     revision = git('rev-parse', 'HEAD')
@@ -93,14 +101,14 @@ def main():
         payload[name] = (root / name).read_bytes()
     payload['release.json'] = (json.dumps({'version': VERSION, 'sourceRevision': revision,
         'candidate': args.candidate, 'dirtySource': dirty, 'javaMinimum': 17, 'scalaVersion': '3.9.0',
-        'sbtVersion': '2.0.8', 'mavenCentralPublication': False,
+        'sbtVersion': toolchain, 'mavenCentralPublication': False,
         'artifactSha256': {name: hashlib.sha256(data).hexdigest() for name, data in sorted(payload.items()) if name.endswith(('.jar', '.pom'))}}, indent=2, sort_keys=True)+'\n').encode()
     payload['README.md'] = f'''# Figaro {VERSION} compiled library
 
 Verify the downloaded ZIP against its external `.sha256` file, then extract it.
 `SHA256SUMS` inside covers every payload file except itself.
 
-1. Use Java 17+ and Scala 3.9.0. The library was built with sbt 2.0.8.
+1. Use Java 17+ and Scala 3.9.0. The source build pins sbt {toolchain}.
 2. Point your build at the extracted `maven` directory (replace the example path):
 
 ```scala

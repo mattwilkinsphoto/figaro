@@ -1,4 +1,18 @@
-# Opt-in sbt 2.0.8 worker-completion repair
+# Stock sbt validation and historical worker-completion repair
+
+Current source builds use stock sbt 2.0.11. The local 2.0.8 repair is retired from
+active workflows; its sources and results remain for historical replay. The named
+development CI job runs `stock_linux.py --mode direct --ci-gate --output NEW_DIRECTORY`
+on Linux, only within the named workflow. It checks pinned stock binaries, all
+candidate failure controls and two fresh 131-test inventories at the current commit.
+It does not modify sbt binaries. Full adoption CI and packaged acceptance remain
+pending; [current status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
+The retired `branch_pilot.py --ci-gate` entry point fails explicitly.
+
+The instructions below preserve historical experiments. For repair reproduction,
+use the commits recorded with each result, not the current production selectors.
+The former Actions workflow is preserved as a non-executable
+[snapshot](legacy-linux-workflow.yml.example). No upstream issue has been filed.
 
 This is an isolated diagnostic repair, not a replacement sbt release or an automatic
 installation. Read the [scope and local evidence](../../docs/CI_VALIDATION.md) and
@@ -47,7 +61,7 @@ did not separately force the `forkError` race; see the additive pilot below.
 
 ### Branch-only adoption pilot
 
-The separate [Linux workflow](../../.github/workflows/sbt-repair-linux.yml) now runs
+The historical [Linux workflow](legacy-linux-workflow.yml.example) ran
 [branch_pilot.py](branch_pilot.py), exclusively on `codex/guided-fixed-budget`.
 It retains stock CI and the unchanged five-site repair. No repaired server mode,
 publication change or default installation is enabled.
@@ -73,8 +87,8 @@ loaded JAR in each fixture JVM without changing the original expected outcomes.
 The pilot enforces subprocess/job timeouts and preserves failed evidence. An
 overall green stock workflow is not a substitute for these gates. Pilot review and
 the subsequent [named-gate integration validation](../../docs/CI_VALIDATION.md#approved-named-direct-launcher-ci-gates)
-are complete. Only that frozen inventory adopts the repaired direct launcher;
-all other invocations remain stock. The first-winner policy and broader
+are complete. At that revision only the frozen inventory adopted the repaired direct launcher;
+all other invocations remained stock. The first-winner policy and broader
 event-draining/protocol limitations are unchanged. No upstream submission or
 CI-wide runner replacement is implied.
 

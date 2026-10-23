@@ -3,6 +3,12 @@
 **Not submitted. Hold for review.** The original issue proposal below is now
 historical evidence, not a ready-to-file report against current sbt.
 
+Repository follow-up: stock 2.0.11 adoption is now approved and implemented on a
+review branch, with full CI and packaged-consumer gates pending. The local repair
+is retired from active workflows, not proposed as a replacement for upstream's
+response-draining fix. Merge and upstream submission remain on hold. See the
+[current adoption status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
+
 ## Current upstream disposition
 
 sbt [2.0.11 release notes](https://github.com/sbt/sbt/releases/tag/v2.0.11) include
@@ -118,12 +124,48 @@ failed. The experimental workflow now requires explicit dispatch and offers a
 client-only scope, avoiding repeated unchanged baseline experiments; production
 CI is untouched. No upstream or application code is patched by these corrections.
 
+[Focused client run 39996678945](https://github.com/mattwilkinsphoto/figaro/actions/runs/39996678945)
+at `4ac1715b` passed. Downloaded manifests, logs, loaded stock actions hash and
+JUnit identities were independently audited. The same server PID handled all
+four calls: 100 passing events (exit 0), 100 events plus the intentional assertion
+failure (exit 1), worker exit 17 (build exit 1), then 100 passing events again
+through uncached `testFull` (exit 0). Owned-server shutdown passed. No fallback
+client or duplicate-completion exception was observed. Persistent framework-error,
+slow-listener, long-duration stress and timeout coverage are not claimed; the
+first two have separate foreground controls.
+
+The two local syntax-preflight attempts parsed the corrected task but failed on
+a Windows Unix-domain socket path-length error before fixture execution; neither
+is counted as a pass. The successful Linux client run is the relevant evidence.
+All failed attempts and the variable baseline reproduction remain in the record.
+There is **no single all-green aggregate run**: acceptance of the stock candidate
+must be reviewed across the separately identified gates above, not inferred from
+the final workflow color.
+
+**Recommendation for review:** the bounded stock-2.0.11 candidate checks now
+support a controlled adoption branch. Update production/consumer selectors and
+toolchain descriptions together, replace only the named repaired-launcher gate
+with its stock equivalent while retaining fresh-test/failure controls, and run
+full integration CI plus packaging/consumer acceptance on that adoption change.
+Keep the old repair and its evidence as historical material rather than extending
+it. The first unchanged companion CI also
+[passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/39992354545), but it
+still uses the existing 2.0.8 setup and is not a 2.0.11 adoption run. No production
+switch, merge, release or upstream submission has occurred in this assessment.
+
+The [second unchanged companion run](https://github.com/mattwilkinsphoto/figaro/actions/runs/39994305544)
+also completed green, but its advisory `SelectableSetTest` searching-time assertion
+failed: ratio 2.42082170161744 was not below 2.4 (19/20 advisory tests passed).
+That failure remains unresolved and is not attributed to the 2.0.11 candidate.
+The latest tooling commit's additional standard-CI run is still in progress at
+this review snapshot; it is not an adoption run or a completed gate claimed here.
+
 ### What remains before any upstream submission
 
-1. Prefer evaluating the official response-draining fix to extending the local
-   2.0.8 workaround. A production upgrade needs Linux/direct-launcher and actual
-   server-mode CI validation, including the relevant coverage/packaging gates;
-   this Windows assessment does not replace them.
+1. Review the completed bounded Linux/direct-launcher, foreground-server,
+   persistent-client and coverage/packaging evidence above, including retained
+   failures and limits. Production adoption still needs an explicitly reviewed
+   toolchain change and integration run; this assessment does not make that switch.
 2. A new defect claim against 2.0.11 needs a minimal reproducer through its real
    `WorkerProxy` lifecycle, or a concrete source-level path showing that a harmful
    ordering remains reachable. The ten-second drain bound is a scope boundary,

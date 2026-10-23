@@ -4,9 +4,19 @@ import sys
 import unittest
 import xml.etree.ElementTree as ET
 sys.path.insert(0,str(Path(__file__).resolve().parent/'sbt-worker-repair'))
-from stock_linux import check_pid,check_slow,client_command,client_output,persistent_steps,IDENTITY,PID
+from stock_linux import check_ci_scope,check_pid,check_slow,client_command,client_output,persistent_steps,IDENTITY,PID
 
 class ServerEvidenceTest(unittest.TestCase):
+    def test_named_stock_gate_scope(self):
+        env={'GITHUB_ACTIONS':'true','GITHUB_WORKFLOW':'Java 17, Scala 3, and sbt 2 modernization'}
+        check_ci_scope(True,'direct','',env,'sbt.version=2.0.11\n')
+        for mode,environment,selector in [('server',env,'sbt.version=2.0.11'),
+          ('direct',{},'sbt.version=2.0.11'),('direct',dict(env,GITHUB_WORKFLOW='publication'),'sbt.version=2.0.11'),
+          ('direct',env,'sbt.version=2.0.8'),('direct',env,'sbt.version=2.0.11\nsbt.version=2.0.8')]:
+            with self.assertRaises(ValueError):check_ci_scope(True,mode,'main',environment,selector)
+    def test_historical_experiment_remains_branch_only(self):
+        check_ci_scope(False,'direct','codex/stock-sbt-2-0-11-validation',{},'sbt.version=2.0.8')
+        with self.assertRaises(ValueError):check_ci_scope(False,'direct','main',{},'sbt.version=2.0.11')
     def test_full_tests_use_setting_not_inline_args(self):
         for _,task,code,_ in persistent_steps():
             if code==0:

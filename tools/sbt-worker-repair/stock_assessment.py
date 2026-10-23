@@ -66,7 +66,9 @@ def main():
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--phase',choices=['controls','figaro'],required=True)
     parser.add_argument('--runner',type=Path,help='Official Linux runner: use --server --batch instead of direct Java')
+    parser.add_argument('--candidate-only',action='store_true',help='Active stock CI: omit the historical 2.0.8 defect reproduction, retaining all 2.0.11 controls')
     args=parser.parse_args();out=args.output.resolve();inputs=json.loads((out/'inputs.json').read_text())
+    versions=['2.0.11'] if args.candidate_only else ['2.0.8','2.0.11']
     if args.runner and (sys.platform!='linux' or not args.runner.is_file()):
         raise ValueError('Foreground runner assessment requires an existing official Linux runner')
     inventory=json.loads((SCRIPTS/'pilot-inventory.json').read_text())
@@ -84,7 +86,7 @@ def main():
         data=subprocess.check_output(['git','show',inputs['head']+':'+s['source']],cwd=ROOT)
         if hashlib.sha256(data).hexdigest()!=s['sourceSha256']:raise ValueError('Frozen suite source changed')
     write(evidence/'protocol.json',{'phase':args.phase,'source':inputs['head'],
-        'versions':['2.0.8','2.0.11'],'platform':sys.platform,'inventory':inventory,
+        'versions':versions,'candidateOnly':args.candidate_only,'platform':sys.platform,'inventory':inventory,
         'invocation':'official --server --batch' if args.runner else 'direct Java launcher',
         'sources':{str(p.relative_to(snapshot)):sha(p) for p in snapshot.rglob('*') if p.is_file()},
         'controls':'Original 8x20 + 7x20 per stock binary; forced duplicates remain findings, not fixes',
@@ -122,7 +124,7 @@ def main():
         write(evidence/(name+'-result.json'),results[-1])
 
     if args.phase=='controls':
-        for version in ['2.0.8','2.0.11']:
+        for version in versions:
             base=out/version;boot=base/'boot'
             jars=list(boot.rglob('actions_3-'+version+'.jar'))
             if len(jars)!=1:raise ValueError('Ambiguous stock actions binary')
@@ -190,7 +192,7 @@ def main():
                 check_reports([ET.parse(p).getroot() for p in reports],inventory)
                 return {'tests':131,'suites':11,'reports':{p.name:sha(p) for p in reports},'jarSha256':sha(jar)}
             case_run('figaro-pass-'+str(number),figaro)
-    for version in ['2.0.8','2.0.11']:
+    for version in versions:
         base=out/version
         if json.loads((base/'boot-hashes.json').read_text())!={str(p.relative_to(base/'boot')):sha(p) for p in (base/'boot').rglob('*.jar')}:
             raise ValueError('Stock boot modified')

@@ -26,7 +26,7 @@ class PilotTests(unittest.TestCase):
     def test_gate_scope_does_not_enable_unreviewed_runner_modes(self):
         self.assertIn('branch-only',pilot.check_mode('codex/guided-fixed-budget',False,{}))
         env={'GITHUB_ACTIONS':'true','GITHUB_WORKFLOW':'Java 17, Scala 3, and sbt 2 modernization'}
-        self.assertIn('other invocations remain stock',pilot.check_mode('',True,env))
+        with self.assertRaisesRegex(ValueError,'retired'):pilot.check_mode('',True,env)
         for branch,gate,environment in [('main',False,env),('',True,{}),
               ('main',True,dict(env,GITHUB_WORKFLOW='publication'))]:
             with self.assertRaises(ValueError):pilot.check_mode(branch,gate,environment)
@@ -36,7 +36,13 @@ class PilotTests(unittest.TestCase):
         workflow=(root/'.github/workflows/ci.yml').read_text()
         job=workflow.split('  named-direct-launcher-tests:',1)[1].split('  research-reference-integrity:',1)[0]
         self.assertEqual(job.count('--ci-gate'),1)
-        for forbidden in ['continue-on-error','cache: sbt','secrets.','sbt --server']:
+        self.assertIn('stock_linux.py --mode direct --ci-gate',job)
+        self.assertIn('include-hidden-files: true',job)
+        self.assertFalse((root/'.github/workflows/sbt-repair-linux.yml').exists())
+        self.assertTrue((root/'tools/sbt-worker-repair/legacy-linux-workflow.yml.example').is_file())
+        for selector in ['project/build.properties','tools/acceptance-consumer/project/build.properties']:
+            self.assertEqual((root/selector).read_text().strip(),'sbt.version=2.0.11')
+        for forbidden in ['continue-on-error','cache: sbt','secrets.','sbt --server','branch_pilot.py','prepare.py']:
             self.assertNotIn(forbidden,job)
         self.assertIn('if: always()',job)
         self.assertIn('persist-credentials: false',job)

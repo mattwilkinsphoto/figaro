@@ -1,5 +1,15 @@
 # Modernization release notes
 
+## Unreleased repository tooling
+
+Source and acceptance-consumer builds select stock sbt 2.0.11. The named CI gate
+now validates stock binaries, real failure paths and the unchanged two-pass test
+inventory; the local repair is retired from executable workflows. Generated
+bundle metadata reads the pinned source-build version instead of hard-coding it.
+Full adoption CI and packaged-consumer validation are required before merge; see
+the [status](CI_VALIDATION.md#stock-sbt-2011-adoption). No runtime/default change,
+new publication or modification of published 7.4.0 artifacts is included.
+
 ## Current release: 7.4.0 — published
 
 Adds opt-in guided `start`/`advance`, `advanceAuxiliary` and separate proposal-work
@@ -114,7 +124,7 @@ It added exact-coordinate copula conditioning, public bounded scalar-linear GVM-
 fitting and full-mixture linear/angular MI. See [6.1 installation, acceptance and
 comparison limits](RELEASE_6_1.md). All modern.* entries below describe historical milestones.
 
-Figaro's modernized main uses Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
+Figaro's original modernization baseline used Java 17, Scala 3.9.0 and sbt 2.0.8. It retains the
 `com.cra.figaro` modeling packages but publishes a different Scala binary artifact:
 `io.github.mattwilkinsphoto:figaro_3`. The current published version is
 `7.2.0`, available directly from Maven Central. A locally distributed

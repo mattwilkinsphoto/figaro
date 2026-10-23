@@ -1,4 +1,4 @@
-"""Branch-only stock sbt assessment: no adoption, publication or upstream submission."""
+"""Stock sbt CI gate and isolated historical assessment; no publication or submission."""
 import argparse
 from collections import Counter
 import hashlib
@@ -87,34 +87,44 @@ def check_slow(reports):
         raise ValueError('Incorrect upstream outcome counts')
 
 
-def execute(out,mode):
+def check_ci_scope(ci_gate,mode,branch,environ,selector):
+    if ci_gate:
+        if mode!='direct' or environ.get('GITHUB_ACTIONS')!='true' or environ.get('GITHUB_WORKFLOW')!='Java 17, Scala 3, and sbt 2 modernization':
+            raise ValueError('Stock CI gate requires the named direct-launcher workflow')
+        if selector.strip()!='sbt.version=2.0.11':raise ValueError('Stock CI selector drift')
+    elif branch!='codex/stock-sbt-2-0-11-validation':raise ValueError('Branch-only validation')
+
+
+def execute(out,mode,ci_gate=False):
     branch=subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip()
-    if branch!='codex/stock-sbt-2-0-11-validation':raise ValueError('Branch-only validation')
+    check_ci_scope(ci_gate,mode,branch,os.environ,(ROOT/'project/build.properties').read_text())
+    baseline=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip() if ci_gate else BASELINE
+    versions=['2.0.11'] if ci_gate else list(LAUNCHERS)
     protected={p:sha(ROOT/p) for p in ['build.sbt','project/build.properties','.github/workflows/ci.yml',
-      '.github/workflows/sbt-repair-linux.yml','tools/sbt-worker-repair/prepare.py']}
+      'tools/sbt-worker-repair/legacy-linux-workflow.yml.example','tools/sbt-worker-repair/prepare.py']}
     inventory=json.loads((SCRIPTS/'pilot-inventory.json').read_text())
     for s in inventory['suites']:
-        raw=subprocess.check_output(['git','show',BASELINE+':'+s['source']],cwd=ROOT)
+        raw=subprocess.check_output(['git','show',baseline+':'+s['source']],cwd=ROOT)
         if hashlib.sha256(raw).hexdigest()!=s['sourceSha256']:raise ValueError('Frozen source changed')
-    write(out/'protocol.json',{'mode':mode,'baseline':BASELINE,'harnessCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+    write(out/'protocol.json',{'mode':mode,'baseline':baseline,'ciGate':ci_gate,'versions':versions,'harnessCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
       'platform':platform.platform(),'python':sys.version,'image':os.environ.get('ImageVersion'),
       'protected':protected,'inventory':inventory,'launcherPins':LAUNCHERS,'actionsPins':ACTIONS,'distributionPin':DIST_SHA,
-      'stages':('Persistent-client-only follow-up; previous direct/server/packaging results remain separate and are not rerun or relabeled' if mode=='client' else 'original stock controls + two fresh 131-test passes per direct/foreground mode; server adds persistent same-PID controls; packaging separately instruments 131 tests and checks reproducibility and six consumers'),
-      'acceptance':'No retries; original baseline reproduction failure remains failed and makes its job non-green. Continue independent predeclared stages, retain candidate findings separately.',
-      'scope':'No production/workaround/default change, release, merge, upstream submission or publish task',
+      'stages':('Stock 2.0.11 original controls, five real fixtures including upstream regression, two fresh 131-test passes at current commit' if ci_gate else ('Persistent-client-only follow-up; previous direct/server/packaging results remain separate and are not rerun or relabeled' if mode=='client' else 'original stock controls + two fresh 131-test passes per direct/foreground mode; server adds persistent same-PID controls; packaging separately instruments 131 tests and checks reproducibility and six consumers')),
+      'acceptance':('No retries; all stock candidate controls and both exact fresh test inventories must pass.' if ci_gate else 'No retries; original baseline reproduction failure remains failed and makes its job non-green. Continue independent predeclared stages, retain candidate findings separately.'),
+      'scope':'Stock named CI gate; no repaired binaries, runtime/default changes, release, merge, upstream submission or publish task' if ci_gate else 'Isolated historical assessment; no production/default changes',
       'semantics':'--server is foreground; --client is persistent; same PID required for successive client commands'})
     sources=directory(out/'sources')
     shutil.copytree(SCRIPTS,sources/'sbt-worker-repair',ignore=shutil.ignore_patterns('__pycache__'))
     copy_file(ROOT/'tools/validation_support.py',sources/'validation_support.py')
-    for name in ['tools/test_stock_linux.py','tools/test_stock_assessment.py','.github/workflows/sbt-stock-linux.yml']:
+    for name in ['tools/test_stock_linux.py','tools/test_stock_assessment.py','.github/workflows/sbt-stock-linux.yml','.github/workflows/ci.yml']:
         copy_file(ROOT/name,sources/name)
     write(out/'source-hashes.json',{str(p.relative_to(sources)):sha(p) for p in sources.rglob('*') if p.is_file()})
     run(['java','-version'],out,'java-version',timeout=30);run(['javac','-version'],out,'javac-version',timeout=30)
     upstream=directory(out/'upstream')
     for name,(path,pin) in UPSTREAM.items():download('https://raw.githubusercontent.com/sbt/sbt/v2.0.11/'+path,upstream/name,pin)
-    write(out/'inputs.json',{'head':BASELINE,'protected':protected,'upstreamFiles':{p.name:sha(p) for p in upstream.iterdir()}})
+    write(out/'inputs.json',{'head':baseline,'protected':protected,'upstreamFiles':{p.name:sha(p) for p in upstream.iterdir()}})
     ipc=directory(out/'ipc');os.environ['XDG_RUNTIME_DIR']=str(ipc)
-    for version in LAUNCHERS:
+    for version in versions:
         base=directory(out/version)
         for n in ['boot','home','tmp','global','actions','coursier','ivy','bootstrap']:directory(base/n)
         directory(base/'bootstrap/project');write(base/'bootstrap/project/build.properties','sbt.version='+version+'\n')
@@ -152,6 +162,7 @@ def execute(out,mode):
         for phase in ['controls','figaro']:
             def assess(phase=phase):
                 command=[sys.executable,'-B',SCRIPTS/'stock_assessment.py','--output',out,'--phase',phase]
+                if ci_gate:command+=['--candidate-only']
                 if runner:command+=['--runner',runner]
                 try:run(command,out,phase+'-execution',cwd=ROOT,timeout=1700)
                 finally:
@@ -258,13 +269,13 @@ def execute(out,mode):
               'candidateOnly':True,'caveat':'Existing bundle README names sbt 2.0.8; this isolated candidate was built with 2.0.11. Not a release.'}
         stage('packaging',packaging)
 
-    for version in LAUNCHERS:
+    for version in versions:
         base=out/version
         if json.loads((base/'boot-hashes.json').read_text())!={str(p.relative_to(base/'boot')):sha(p) for p in (base/'boot').rglob('*.jar')}:
             raise ValueError('Stock boot changed')
     if protected!={p:sha(ROOT/p) for p in protected}:raise ValueError('Production input changed')
     write(out/'results.json',{'mode':mode,'stages':results,'allPredeclaredChecksMet':all(r['passed'] for r in results),
-      'protectedUnchanged':True,'stockBootsUnchanged':True,'scope':'Validation only; no workaround replacement or upstream submission'})
+      'protectedUnchanged':True,'stockBootsUnchanged':True,'scope':'Stock CI validation; no binary patching or upstream submission' if ci_gate else 'Historical assessment only; no upstream submission'})
     if not all(r['passed'] for r in results):raise RuntimeError('Some predeclared checks failed; retain results for review')
 
 
@@ -289,10 +300,11 @@ def collect(out):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True)
+    p.add_argument('--ci-gate',action='store_true',help='Run stock 2.0.11 controls and fresh named tests at current CI commit, without historical baseline experiments')
     p.add_argument('--mode',choices=['direct','server','packaging','client'],required=True);a=p.parse_args()
     if platform.system()!='Linux':raise RuntimeError('Linux execution only; local unit checks do not claim Linux validation')
     out=directory(a.output.resolve())
-    try:execute(out,a.mode)
+    try:execute(out,a.mode,ci_gate=a.ci_gate)
     finally:collect(out)
 
 if __name__=='__main__':main()

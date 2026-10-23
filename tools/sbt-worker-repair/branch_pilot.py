@@ -58,9 +58,7 @@ def collect(out):
 
 def check_mode(branch,ci_gate,environ):
     if ci_gate:
-        if environ.get('GITHUB_ACTIONS')!='true' or environ.get('GITHUB_WORKFLOW')!='Java 17, Scala 3, and sbt 2 modernization':
-            raise ValueError('Named CI gate requires the approved GitHub Actions workflow')
-        return 'named direct-launcher CI gates; other invocations remain stock; no merge or release'
+        raise ValueError('Repaired CI gate retired; use stock_linux.py --mode direct --ci-gate')
     if branch!='codex/guided-fixed-budget':raise ValueError('Pilot allowed only on approved branch')
     return 'branch-only; stock CI retained; no promotion'
 

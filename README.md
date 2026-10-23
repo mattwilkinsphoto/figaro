@@ -2,7 +2,7 @@
 
 Figaro lets you describe uncertain quantities, their relationships, and observed evidence as Scala objects. Its inference algorithms answer questions such as “given this observation, how likely is that explanation?” You supply a model without implementing an inference engine yourself.
 
-This modernized line uses **Scala 3.9.0 LTS, sbt 2.0.8, and JDK 17**. It keeps the `com.cra.figaro` packages but is a new Scala 3 artifact, not a binary-compatible replacement for `figaro_2.13`. The [7.4 release record](docs/RELEASE_7_4_STATUS.md) describes the consumable library and its validated scope.
+The source checkout uses **Scala 3.9.0 LTS, stock sbt 2.0.11, and JDK 17**. It keeps the `com.cra.figaro` packages but is a new Scala 3 artifact, not a binary-compatible replacement for `figaro_2.13`. The published library remains 7.4.0; its original toolchain and validated scope are preserved in the [7.4 release record](docs/RELEASE_7_4_STATUS.md). See the [source-build tooling update](docs/MIGRATION.md#stock-sbt-2011-source-build-update).
 
 ## Quick start: three steps
 

@@ -1,15 +1,43 @@
 # Collection benchmarks and sbt worker validation
 
-Status: local, isolated Linux and remote integration validation completed. Narrow
-adoption for the named direct-launcher CI test gates is approved; other invocations
-remain stock. Main integration and post-merge CI passed. Figaro 7.4.0 is published
-and verified; its required packaging/consumer gates and unresolved advisory timing
-result are recorded separately below. Upstream submission remains on hold.
+Status: stock sbt 2.0.11 adoption is implemented on a review branch; full adoption
+CI and packaged-consumer acceptance are pending. The local repair is retired
+from active workflows. Figaro 7.4.0 remains the published release; its historical
+validation and advisory timing results are preserved below. No merge, new release
+or upstream submission is authorized by this tooling change.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
+
+## Stock sbt 2.0.11 adoption
+
+Both source-build selectors now use 2.0.11. The existing named direct-launcher job
+runs [the stock harness](../tools/sbt-worker-repair/stock_linux.py) with
+`--mode direct --ci-gate`, checksum-verifying official launcher/actions binaries.
+It retains all 300 forced React cases, five real fixtures (pass, assertion failure,
+exit 17, framework error, upstream slow listener), and two fresh complete 131-test
+passes at the current CI commit. The forced cases still expect the documented
+60 duplicate exceptions: they bypass response draining and are not a natural race
+rate. Real builds must surface failures and may not emit those exceptions.
+
+Only the unstable historical 2.0.8 false-green reproduction is excluded from the
+active candidate-only gate; its original protocol and failed observations remain
+unchanged below. No test identity, statistical threshold or failure expectation
+has been relaxed. Fresh compilation, exact JUnit identities, loaded-binary hashes,
+unchanged stock boot checks and failure evidence remain mandatory.
+
+The retired [workflow snapshot](../tools/sbt-worker-repair/legacy-linux-workflow.yml.example)
+is outside `.github/workflows`; `branch_pilot.py --ci-gate` now refuses execution.
+Historical repair tools remain for evidence replay, not automatic installation.
+All other full CI gates remain in place, including instrumentation, compatibility,
+reproducible packaging and all six packaged consumers. The publication workflow
+is unchanged and is not run. Merge and upstream submission remain on hold.
+
+Acceptance status: local checks and a new full remote adoption run are pending.
+The prior isolated assessment below supports the change but is not a substitute
+for those gates. This tooling-only change does not itself warrant a library release.
 
 ## Stock 2.0.11 Linux/server follow-up
 
-Status: two remote attempts retained; focused client-harness validation pending. The
+Historical pre-adoption assessment: bounded stock candidate checks completed. The
 [bounded protocol](../tools/sbt-worker-repair/README.md#branch-only-linux-and-server-assessment)
 retains the existing repair and standard CI while testing stock 2.0.11 in isolated
 Linux direct-launcher, foreground `--server --batch`, persistent `--client`, and
@@ -40,6 +68,22 @@ to `testFull` before testing. The focused follow-up uses the documented
 `testOptions` setting and resets filters before negative controls. Explicit
 client-only dispatch avoids rerunning the unchanged baseline; prior failed runs
 are retained. See the [report](../tools/sbt-worker-repair/UPSTREAM_REPORT.md#linux-and-server-assessment-2026-10-23).
+
+[Focused client run 39996678945](https://github.com/mattwilkinsphoto/figaro/actions/runs/39996678945)
+passed with one verified server PID across pass/assertion/exit-17/recovery, exact
+JUnit identities and successful owned-server shutdown. Complete manifests and raw
+outputs were audited. Two local syntax preflights failed on a Windows socket-path
+limit and are not counted as passes. The completed candidate gates support review
+of a controlled stock upgrade, not a claim that all prior workflow runs passed.
+At that assessment revision, production selectors and the adopted repair remained
+unchanged. The separately approved adoption above requires its own full CI and
+packaging/consumer acceptance; upstream submission remains on hold.
+
+The [second companion run](https://github.com/mattwilkinsphoto/figaro/actions/runs/39994305544)
+was green with one failed advisory search-timing assertion (19/20 passed;
+`SelectableSetTest.scala:120`, 2.42082170161744 versus the 2.4 threshold). This used
+the unchanged 2.0.8 setup, not the candidate. It is retained as an unresolved
+advisory result, not silently counted as passed.
 
 ## Why the enumeration test changed
 
@@ -113,6 +157,10 @@ it is not a TLS-verification bypass. Record the cache provenance with the result
 
 ## Narrow sbt repair
 
+Historical sections below describe the 2.0.8 repair, its original approval and
+results. They are not current activation instructions; stock adoption above
+supersedes the repaired named gate. Use the recorded historical commits for replay.
+
 The observed sbt 2.0.8 exception arose when worker response handling and process
 exit raced between `isCompleted` and a throwing Promise completion. The proposed
 repair changes only five calls in `React`: `success` to `trySuccess` and `failure`
@@ -152,7 +200,7 @@ Stock-runner [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs
 passed all four jobs, the four-fork benchmark smoke check and the advisory step
 (20 tests, zero failures); no duplicate-Promise exception appeared in its logs.
 This did not exercise the repaired boot. The separate
-[Linux validation workflow](../.github/workflows/sbt-repair-linux.yml) freezes the
+[historical Linux validation workflow](../tools/sbt-worker-repair/legacy-linux-workflow.yml.example) freezes the
 same repair matrix, forked failure fixtures and 102 focused Figaro tests, verifies
 actual repaired-class loading, and preserves the original stock JAR hashes.
 [Linux run 39899930618](https://github.com/mattwilkinsphoto/figaro/actions/runs/39899930618)
