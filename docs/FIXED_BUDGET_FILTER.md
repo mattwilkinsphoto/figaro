@@ -4,6 +4,9 @@ Published API in **7.3.0**, not included in released 7.2.0.
 [Research provenance](RESEARCH_REFERENCES.md#inf-15).
 [Validation protocol](FIXED_BUDGET_PROTOCOL.md).
 
+The opt-in [guided/auxiliary extension](GUIDED_FIXED_BUDGET_FILTER.md) is separate
+development work in 7.4.0-SNAPSHOT, not part of the 7.3.0 contract described here.
+
 ## Overview: when to use it
 
 `FixedBudgetParticleFilter` gives an immutable-state bootstrap model exactly N

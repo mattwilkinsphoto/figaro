@@ -396,11 +396,11 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Role:** Proposed independent fixed-N extension, not yet promoted or published. Full augmented parent/child importance correction, retaining previous weights on carry steps. Unlike particles, the trigger remains previous posterior ESS, not auxiliary ESS. No random-stopping theorem transfer, automatic tuning, default change or universal efficiency claim.
 
-**Code:** Planned extension of [FixedBudgetParticleFilter](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala), reusing [WeightedParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala) and [AuxiliaryParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal.scala). No implementation or validation yet at protocol freeze.
+**Code:** Development extension of [FixedBudgetParticleFilter](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala), reusing [WeightedParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala) and [AuxiliaryParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal.scala). No change to the released stopping implementation.
 
-**Validation:** Frozen before outcomes; exact finite enumeration, independent Gaussian/reference controls and fresh-seed nonlinear/multimodal comparison required. Actual results and acceptance state are recorded separately in the status guide.
+**Validation:** [Accounting/lifecycle tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetTest.scala), [public API comparison](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetStudy.scala), [independent exact oracle and analysis](../tools/guided_fixed_reference.py), [oracle tests](../tools/test_guided_fixed_reference.py). Frozen before outcomes; exact finite enumeration, independent Gaussian/reference controls and fresh-seed nonlinear/multimodal comparison required. Actual results and acceptance state are recorded separately in the status guide.
 
-**Guide:** [GUIDED FIXED BUDGET PROTOCOL](GUIDED_FIXED_BUDGET_PROTOCOL.md); [GUIDED FIXED BUDGET STATUS](GUIDED_FIXED_BUDGET_STATUS.md).
+**Guide:** [GUIDED FIXED BUDGET PROTOCOL](GUIDED_FIXED_BUDGET_PROTOCOL.md); [GUIDED FIXED BUDGET STATUS](GUIDED_FIXED_BUDGET_STATUS.md); [GUIDED FIXED BUDGET FILTER](GUIDED_FIXED_BUDGET_FILTER.md).
 
 <a id="dia-01"></a>
 

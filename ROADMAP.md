@@ -24,6 +24,13 @@ precision or performance for every application model.
 
 ## Active priorities
 
+**Guided/auxiliary fixed-budget extension: development, not promoted.** The
+[three-stage milestone](docs/GUIDED_FIXED_BUDGET_STATUS.md) combines explicit
+resampling schedules with existing proposal interfaces under a
+[new frozen protocol](docs/GUIDED_FIXED_BUDGET_PROTOCOL.md). It preserves released
+stopping/defaults and requires independent correctness and total-cost utility
+validation before promotion. The published adoption baseline remains 7.3.0.
+
 **Particle-diversity milestone complete: no runtime promotion.** The
 [literature-led three-stage experiment](docs/PARTICLE_DIVERSITY_STATUS.md) preserved
 the released stopping estimator and passed correctness/regression screens, but
@@ -39,7 +46,7 @@ supports reviewing a bounded opt-in fixed-budget facility. It does not reverse
 the earlier experiment's result, alter the released stopping estimator, establish
 a universal ESS threshold, or itself ship a new runtime API. The separately approved
 production integration has now passed all acceptance gates. The
-[fixed-budget development API](docs/FIXED_BUDGET_FILTER.md) now implements explicit
+[published fixed-budget API](docs/FIXED_BUDGET_FILTER.md) now implements explicit
 policy/method selection without changing random stopping. See
 [decision-focused repair and final validation](docs/STRATIFIED_INTEGRATION.md):
 the former excessive CDF refusals are resolved on the frozen controls, with explicit

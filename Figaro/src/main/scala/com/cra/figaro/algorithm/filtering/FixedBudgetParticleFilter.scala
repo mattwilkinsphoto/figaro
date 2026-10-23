@@ -2,7 +2,7 @@ package com.cra.figaro.algorithm.filtering
 
 import com.cra.figaro.util.{RandomContext, SamplingRandom}
 
-/** Fixed-N bootstrap filtering (INF-15). Independent of the bounded stopping estimator.
+/** Fixed-N filtering (INF-15/16). Independent of the bounded stopping estimator.
   * States must be detached and immutable; callbacks use the scoped Figaro RNG.
   */
 object FixedBudgetParticleFilter {
@@ -47,6 +47,17 @@ object FixedBudgetParticleFilter {
   final case class StepReport(stateDraws: Int, likelihoodCalls: Int, ancestorSelections: Int,
     decision: Decision, previousRelativeEss: Option[Double], contributingParents: Option[Int],
     health: ParticleFilterHealth.Report, selection: SelectionReport = SelectionReport())
+
+  /** Successful-step proposal work; also retained on genuine zero-weight collapse.
+    * Counts top-level density callbacks, not their internal mixture/component work.
+    * @param targetDensityCalls N with guidance, otherwise zero
+    * @param proposalDensityCalls N with guidance, otherwise zero
+    * @param auxiliaryRequested whether advanceAuxiliary was called
+    * @param auxiliary prepared selection diagnostics; None when no resampling occurred
+    * @example `filter.lastProposalReport.map(_.targetDensityCalls)`
+    */
+  final case class ProposalReport(targetDensityCalls: Int, proposalDensityCalls: Int,
+    auxiliaryRequested: Boolean, auxiliary: Option[AuxiliaryParticleProposal.Report])
 
   /** Immutable weighted result. logEvidence is cumulative, not an unbiased log estimate. */
   final case class Update[S](particles: Vector[S], weights: Vector[Double], logWeights: Vector[Double],
@@ -139,7 +150,7 @@ object FixedBudgetParticleFilter {
     if (Thread.currentThread().isInterrupted) throw new InterruptedException("Fixed-budget filtering interrupted")
 }
 
-/** Sequential, thread-confined bootstrap filter. No guided/APF or mutable graph hooks. */
+/** Sequential, thread-confined filter with explicit opt-in guidance. No mutable graph hooks. */
 final class FixedBudgetParticleFilter[S] private (model: BoundedParticleFilter.Model[S],
   val config: FixedBudgetParticleFilter.Config) {
   import FixedBudgetParticleFilter.*
@@ -148,6 +159,7 @@ final class FixedBudgetParticleFilter[S] private (model: BoundedParticleFilter.M
   private val rng = SamplingRandom.seeded(config.seed, config.algorithm)
   private var latest: Option[Update[S]] = None
   private var diagnostic: Option[StepReport] = None
+  private var proposalDiagnostic: Option[ProposalReport] = None
   private var terminal = false
   private var running = false
   private def access(): Unit = {
@@ -158,6 +170,10 @@ final class FixedBudgetParticleFilter[S] private (model: BoundedParticleFilter.M
   def current: Update[S] = { access(); require(!terminal && latest.isDefined, "No current posterior"); latest.get }
   /** Last completed report, including collapse; absent after callback/numerical failure. */
   def lastReport: Option[StepReport] = { access(); diagnostic }
+  /** Proposal work for the last completed step, including collapse; None after other failure.
+    * No arguments. Example: filter.lastProposalReport.flatMap(_.auxiliary).
+    */
+  def lastProposalReport: Option[ProposalReport] = { access(); proposalDiagnostic }
   /** Draw N initial states and apply one log likelihood per state. Call once. */
   def start(logLikelihood: S => Double): Update[S] = {
     access(); require(!terminal && latest.isEmpty, "Filter already started, closed or failed")
@@ -165,26 +181,76 @@ final class FixedBudgetParticleFilter[S] private (model: BoundedParticleFilter.M
   }
   /** Select ancestors once or carry weights, propagate N times, and apply new evidence. */
   def advance(logLikelihood: S => Double): Update[S] = { current; update(logLikelihood) }
-  private def update(logLikelihood: S => Double): Update[S] = {
+
+  /** Initialize from a normalized proposal with full p/q correction.
+    * @param logLikelihood finite or -Infinity log likelihood, including its normalizer
+    * @param proposal frozen normalized target/proposal laws with matching support and measure
+    * @return initial weighted Update; model callbacks are not called
+    * @example `filter.start(likelihood, kernel)`
+    */
+  def start(logLikelihood: S => Double, proposal: WeightedParticleProposal.Kernel[S]): Update[S] = {
+    access(); require(!terminal && latest.isEmpty, "Filter already started, closed or failed")
+    require(proposal != null, "Proposal required")
+    update(logLikelihood, Some(proposal))
+  }
+  /** Propagate with p/q correction; preserve the explicit resampling policy.
+    * @param logLikelihood new normalized log likelihood
+    * @param proposal frozen target/proposal laws for this observation
+    * @return weighted Update; carry steps retain previous weights
+    * @example `filter.advance(likelihood, kernel)`
+    */
+  def advance(logLikelihood: S => Double, proposal: WeightedParticleProposal.Kernel[S]): Update[S] = {
+    current; require(proposal != null, "Proposal required")
+    update(logLikelihood, Some(proposal))
+  }
+  /** Observation-informed ancestor selection ONLY when the explicit policy resamples.
+    * On carry steps the look-ahead is not evaluated and no ancestor correction is applied.
+    * @param logLikelihood new normalized log likelihood
+    * @param lookAhead frozen log multipliers and defensive ancestor fraction
+    * @param proposal optional child guidance; None uses the model's true transition draw
+    * @return weighted Update with full W_i/r_i and optional p/q correction
+    * @example `filter.advanceAuxiliary(likelihood, lookAhead, Some(kernel))`
+    */
+  def advanceAuxiliary(logLikelihood: S => Double, lookAhead: AuxiliaryParticleProposal.LookAhead[S],
+    proposal: Option[WeightedParticleProposal.Kernel[S]] = None): Update[S] = {
+    current
+    require(lookAhead != null && proposal != null && proposal.forall(_ != null), "Valid look-ahead/proposal required")
+    update(logLikelihood, proposal, Some(lookAhead))
+  }
+  private def update(logLikelihood: S => Double, proposal: Option[WeightedParticleProposal.Kernel[S]] = None,
+    lookAhead: Option[AuxiliaryParticleProposal.LookAhead[S]] = None): Update[S] = {
     require(logLikelihood != null, "Log likelihood required")
     running = true
     diagnostic = None
+    proposalDiagnostic = None
     try RandomContext.withRandom(rng) {
       interrupted()
       val old = latest
       val previousEss = old.map(x => relativeEss(x.logWeights))
       val resample = previousEss.exists(shouldResample(config.policy, _))
       val n = config.particles
-      val (indices,selection) = if (resample) select(old.get.logWeights, config.method, rng)
+      val auxiliary = if (resample) lookAhead.map(p =>
+        AuxiliaryParticleProposal.prepareLogs(old.get.particles,old.get.logWeights,p)) else None
+      val (indices,selection) = if (resample)
+        select(auxiliary.fold(old.get.logWeights)(_.logProbabilities), config.method, rng)
         else (Vector.range(0,n),SelectionReport())
       val base = if (old.isEmpty || resample) Vector.fill(n)(-math.log(n)) else old.get.logWeights
+      val parentBase = auxiliary.fold(base)(a => reweight(base,indices.map(a.logCorrections)))
+      val corrections = Array.fill(n)(0.0)
       val values = Vector.tabulate(n) { i =>
         interrupted()
-        old.fold(model.initial())(p => model.transition(p.particles(indices(i))))
+        proposal match {
+          case None => old.fold(model.initial())(p => model.transition(p.particles(indices(i))))
+          case Some(q) =>
+            val (value,correction) = q.draw(old.map(_.particles(indices(i))))
+            corrections(i) = correction
+            value
+        }
       }
       val likelihoods = values.map { x => interrupted(); logLikelihood(x) }
       interrupted()
-      val raw = reweight(base, likelihoods)
+      val correctedBase = if (proposal.isDefined) reweight(parentBase,corrections.toVector) else parentBase
+      val raw = reweight(correctedBase, likelihoods)
       val rawHealth = ParticleFilterHealth.assess(raw, config.health)
       val health = rawHealth.copy(recommendations = if (rawHealth.issues.isEmpty) Vector.empty else Vector(
         "Inspect likelihood consistency, weight concentration and contributing parents; ESS is not precision or mode coverage.",
@@ -192,6 +258,8 @@ final class FixedBudgetParticleFilter[S] private (model: BoundedParticleFilter.M
       val report = StepReport(n,n,if (resample) n else 0,
         if (old.isEmpty) Decision.Initial else if (resample) Decision.Resampled else Decision.CarriedWeights,
         previousEss, old.map(_ => raw.indices.filter(i => raw(i).isFinite).map(indices).distinct.size), health, selection)
+      proposalDiagnostic = Some(ProposalReport(if (proposal.isDefined) n else 0,
+        if (proposal.isDefined) n else 0,lookAhead.isDefined,auxiliary.map(_.report)))
       if (!raw.exists(_.isFinite)) { diagnostic = Some(report); throw new NoViableParticles(report) }
       val normalized = LogParticleWeights.normalize(raw)
       val increment = normalized.peak + normalized.logSum
@@ -204,8 +272,8 @@ final class FixedBudgetParticleFilter[S] private (model: BoundedParticleFilter.M
       result
     } catch {
       case e: NoViableParticles => terminal = true; latest = None; throw e
-      case e: InterruptedException => terminal = true; latest = None; diagnostic = None; throw e
-      case scala.util.control.NonFatal(e) => terminal = true; latest = None; diagnostic = None; throw e
+      case e: InterruptedException => terminal = true; latest = None; diagnostic = None; proposalDiagnostic = None; throw e
+      case scala.util.control.NonFatal(e) => terminal = true; latest = None; diagnostic = None; proposalDiagnostic = None; throw e
     } finally { running = false }
   }
   /** Idempotent terminal cleanup; owner thread only. Existing detached snapshots remain valid. */

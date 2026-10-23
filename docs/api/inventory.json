@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "pages": 1034,
+  "pages": 1035,
   "excluded_nonpublic": 752,
   "methods": [
     {
@@ -37840,6 +37840,34 @@
       "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter$$Policy$$WhenEssBelow.html"
     },
     {
+      "owner": "com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.ProposalReport",
+      "name": "productElementNames",
+      "anchor": "productElementNames-0",
+      "signature": "def productElementNames: Iterator[String]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[String]",
+      "summary": "An iterator over the names of all the elements of this product.",
+      "contract": "An iterator over the names of all the elements of this product. Attributes Inherited from: Product",
+      "example": "receiver.productElementNames",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter$$ProposalReport.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.ProposalReport",
+      "name": "productIterator",
+      "anchor": "productIterator-0",
+      "signature": "def productIterator: Iterator[Any]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Iterator[Any]",
+      "summary": "An iterator over all the elements of this product.",
+      "contract": "An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product",
+      "example": "receiver.productIterator",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter$$ProposalReport.html"
+    },
+    {
       "owner": "com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.SelectionReport",
       "name": "productElementNames",
       "anchor": "productElementNames-0",
@@ -38248,6 +38276,51 @@
     },
     {
       "owner": "com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter",
+      "name": "advance",
+      "anchor": "advance-80f",
+      "signature": "def advance(logLikelihood: S => Double, proposal: Kernel[S]): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logLikelihood: S => Double",
+            "proposal: Kernel[S]"
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Propagate with p/q correction; preserve the explicit resampling policy.",
+      "contract": "Propagate with p/q correction; preserve the explicit resampling policy. Value parameters logLikelihood new normalized log likelihood proposal frozen target/proposal laws for this observation Attributes Returns weighted Update; carry steps retain previous weights Example filter.advance(likelihood, kernel)",
+      "example": "receiver.advance(logLikelihood, proposal)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter",
+      "name": "advanceAuxiliary",
+      "anchor": "advanceAuxiliary-fffff550",
+      "signature": "def advanceAuxiliary(logLikelihood: S => Double, lookAhead: LookAhead[S], proposal: Option[Kernel[S]] = ...): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logLikelihood: S => Double",
+            "lookAhead: LookAhead[S]",
+            "proposal: Option[Kernel[S]] = ..."
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Observation-informed ancestor selection ONLY when the explicit policy resamples. On carry steps the look-ahead is not evaluated and no ancestor correction is applied.",
+      "contract": "Observation-informed ancestor selection ONLY when the explicit policy resamples. On carry steps the look-ahead is not evaluated and no ancestor correction is applied. Value parameters logLikelihood new normalized log likelihood lookAhead frozen log multipliers and defensive ancestor fraction proposal optional child guidance; None uses the model's true transition draw Attributes Returns weighted Update with full W_i/r_i and optional p/q correction Example filter.advanceAuxiliary(likelihood, lookAhead, Some(kernel))",
+      "example": "receiver.advanceAuxiliary(logLikelihood, lookAhead, proposal)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter",
       "name": "close",
       "anchor": "close-94c",
       "signature": "def close(): Unit",
@@ -38276,6 +38349,20 @@
       "summary": "Last valid posterior; unavailable before start, after failure or close.",
       "contract": "Last valid posterior; unavailable before start, after failure or close. Attributes",
       "example": "receiver.current",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter",
+      "name": "lastProposalReport",
+      "anchor": "lastProposalReport-0",
+      "signature": "def lastProposalReport: Option[ProposalReport]",
+      "type_parameters": [],
+      "parameter_lists": [],
+      "returns": "Option[ProposalReport]",
+      "summary": "Proposal work for the last completed step, including collapse; None after other failure. No arguments. Example: filter.lastProposalReport.flatMap(_.auxiliary).",
+      "contract": "Proposal work for the last completed step, including collapse; None after other failure. No arguments. Example: filter.lastProposalReport.flatMap(_.auxiliary). Attributes",
+      "example": "receiver.lastProposalReport",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html"
     },
@@ -38311,6 +38398,28 @@
       "summary": "Draw N initial states and apply one log likelihood per state. Call once.",
       "contract": "Draw N initial states and apply one log likelihood per state. Call once. Attributes",
       "example": "receiver.start(logLikelihood)",
+      "object": false,
+      "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html"
+    },
+    {
+      "owner": "com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter",
+      "name": "start",
+      "anchor": "start-80f",
+      "signature": "def start(logLikelihood: S => Double, proposal: Kernel[S]): Update[S]",
+      "type_parameters": [],
+      "parameter_lists": [
+        {
+          "contextual": false,
+          "parameters": [
+            "logLikelihood: S => Double",
+            "proposal: Kernel[S]"
+          ]
+        }
+      ],
+      "returns": "Update[S]",
+      "summary": "Initialize from a normalized proposal with full p/q correction.",
+      "contract": "Initialize from a normalized proposal with full p/q correction. Value parameters logLikelihood finite or -Infinity log likelihood, including its normalizer proposal frozen normalized target/proposal laws with matching support and measure Attributes Returns initial weighted Update; model callbacks are not called Example filter.start(likelihood, kernel)",
+      "example": "receiver.start(logLikelihood, proposal)",
       "object": false,
       "page": "com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html"
     },

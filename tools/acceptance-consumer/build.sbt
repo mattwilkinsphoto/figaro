@@ -23,6 +23,11 @@ Compile / unmanagedSourceDirectories ++= {
   if (sys.env.get("FIGARO_FIXED_BUDGET_CHECK").contains("true")) Seq(baseDirectory.value / "src" / "fixed" / "scala")
   else Seq.empty
 }
+// New guided API remains isolated from checks against older published artifacts.
+Compile / unmanagedSourceDirectories ++= {
+  if (sys.env.get("FIGARO_GUIDED_FIXED_CHECK").contains("true")) Seq(baseDirectory.value / "src" / "guided" / "scala")
+  else Seq.empty
+}
 // When testing the release bundle, exclude Ivy local so a cached publishLocal
 // cannot hide a broken Maven layout or POM.
 externalResolvers ~= { defaults =>

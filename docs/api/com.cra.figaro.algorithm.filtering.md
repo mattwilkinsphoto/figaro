@@ -2311,6 +2311,54 @@ Invocation template:
 receiver.productIterator
 ```
 
+## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.ProposalReport.productElementNames ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter$$ProposalReport.html#productElementNames-0)
+
+```scala
+def productElementNames: Iterator[String]
+```
+
+An iterator over the names of all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[String] ``.
+
+Source contract/attributes: An iterator over the names of all the elements of this product. Attributes Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productElementNames
+```
+
+## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.ProposalReport.productIterator ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter$$ProposalReport.html#productIterator-0)
+
+```scala
+def productIterator: Iterator[Any]
+```
+
+An iterator over all the elements of this product.
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Iterator[Any] ``.
+
+Source contract/attributes: An iterator over all the elements of this product. Attributes Returns in the default implementation, an Iterator[Any] Inherited from: Product
+
+Invocation template:
+
+```scala
+receiver.productIterator
+```
+
 ## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.SelectionReport.productElementNames ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter$$SelectionReport.html#productElementNames-0)
@@ -2839,6 +2887,54 @@ Invocation template:
 receiver.advance(logLikelihood)
 ```
 
+## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.advance ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html#advance-80f)
+
+```scala
+def advance(logLikelihood: S => Double, proposal: Kernel[S]): Update[S]
+```
+
+Propagate with p/q correction; preserve the explicit resampling policy.
+
+Type parameters: none.
+
+Parameters, list 1: `` logLikelihood: S => Double ``; `` proposal: Kernel[S] ``.
+
+Returns: `` Update[S] ``.
+
+Source contract/attributes: Propagate with p/q correction; preserve the explicit resampling policy. Value parameters logLikelihood new normalized log likelihood proposal frozen target/proposal laws for this observation Attributes Returns weighted Update; carry steps retain previous weights Example filter.advance(likelihood, kernel)
+
+Invocation template:
+
+```scala
+receiver.advance(logLikelihood, proposal)
+```
+
+## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.advanceAuxiliary ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html#advanceAuxiliary-fffff550)
+
+```scala
+def advanceAuxiliary(logLikelihood: S => Double, lookAhead: LookAhead[S], proposal: Option[Kernel[S]] = ...): Update[S]
+```
+
+Observation-informed ancestor selection ONLY when the explicit policy resamples. On carry steps the look-ahead is not evaluated and no ancestor correction is applied.
+
+Type parameters: none.
+
+Parameters, list 1: `` logLikelihood: S => Double ``; `` lookAhead: LookAhead[S] ``; `` proposal: Option[Kernel[S]] = ... ``.
+
+Returns: `` Update[S] ``.
+
+Source contract/attributes: Observation-informed ancestor selection ONLY when the explicit policy resamples. On carry steps the look-ahead is not evaluated and no ancestor correction is applied. Value parameters logLikelihood new normalized log likelihood lookAhead frozen log multipliers and defensive ancestor fraction proposal optional child guidance; None uses the model's true transition draw Attributes Returns weighted Update with full W_i/r_i and optional p/q correction Example filter.advanceAuxiliary(likelihood, lookAhead, Some(kernel))
+
+Invocation template:
+
+```scala
+receiver.advanceAuxiliary(logLikelihood, lookAhead, proposal)
+```
+
 ## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.close ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html#close-94c)
@@ -2887,6 +2983,30 @@ Invocation template:
 receiver.current
 ```
 
+## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.lastProposalReport ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html#lastProposalReport-0)
+
+```scala
+def lastProposalReport: Option[ProposalReport]
+```
+
+Proposal work for the last completed step, including collapse; None after other failure. No arguments. Example: filter.lastProposalReport.flatMap(_.auxiliary).
+
+Type parameters: none.
+
+Parameters: none (parameterless member; do not append `()`).
+
+Returns: `` Option[ProposalReport] ``.
+
+Source contract/attributes: Proposal work for the last completed step, including collapse; None after other failure. No arguments. Example: filter.lastProposalReport.flatMap(_.auxiliary). Attributes
+
+Invocation template:
+
+```scala
+receiver.lastProposalReport
+```
+
 ## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.lastReport ``
 
 [Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html#lastReport-0)
@@ -2933,6 +3053,30 @@ Invocation template:
 
 ```scala
 receiver.start(logLikelihood)
+```
+
+## `` com.cra.figaro.algorithm.filtering.FixedBudgetParticleFilter.start ``
+
+[Full Scaladoc entry](../../target/out/jvm/scala-3.9.0/figaro/api/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.html#start-80f)
+
+```scala
+def start(logLikelihood: S => Double, proposal: Kernel[S]): Update[S]
+```
+
+Initialize from a normalized proposal with full p/q correction.
+
+Type parameters: none.
+
+Parameters, list 1: `` logLikelihood: S => Double ``; `` proposal: Kernel[S] ``.
+
+Returns: `` Update[S] ``.
+
+Source contract/attributes: Initialize from a normalized proposal with full p/q correction. Value parameters logLikelihood finite or -Infinity log likelihood, including its normalizer proposal frozen normalized target/proposal laws with matching support and measure Attributes Returns initial weighted Update; model callbacks are not called Example filter.start(likelihood, kernel)
+
+Invocation template:
+
+```scala
+receiver.start(logLikelihood, proposal)
 ```
 
 ## `` com.cra.figaro.algorithm.filtering.OneTimeFiltering.currentDistribution ``

@@ -45,7 +45,7 @@ lazy val legalSettings = Seq(
 lazy val figaroSettings = Seq(
   organization := "io.github.mattwilkinsphoto",
   description := "Figaro: a language for probabilistic programming",
-  version := "7.3.0",
+  version := "7.4.0-SNAPSHOT",
   scalaVersion := "3.9.0",
   crossScalaVersions := Seq("3.9.0"),
   crossPaths := true,
@@ -96,7 +96,8 @@ lazy val figaro = project
     mimaDependencyResolution := (compatibility / dependencyResolution).value,
     mimaPreviousArtifacts := Set("io.github.mattwilkinsphoto" %% "figaro" % "7.0.0",
       "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0",
-      "io.github.mattwilkinsphoto" %% "figaro" % "7.2.0"),
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.2.0",
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.3.0"),
     Test / fork := true,
     Test / javaOptions += "-Xmx6G",
     Compile / run / fork := true,

@@ -9,7 +9,7 @@ and joint linear-angular Gauss-von Mises**, as requested on 2026-09-07.
 ## How to read and extend this list
 
 This is an **optional capability backlog**, not a queue of adoption blockers.
-The [current roadmap](ROADMAP.md) puts 7.2.0 in application-driven maintenance.
+The [current roadmap](ROADMAP.md) puts the released 7.3.0 baseline in application-driven maintenance.
 Promote an item only for a demonstrated model requirement or measured bottleneck;
 historical P0/P1 family labels below do not schedule another modernization stage.
 
