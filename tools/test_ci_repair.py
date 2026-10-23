@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import sys
+import subprocess
 import xml.etree.ElementTree as ET
 from pathlib import Path
 import unittest
@@ -22,6 +23,15 @@ from pilot_support import check_failure,check_identity
 from failure_controls import check_matrix,MODES
 
 class PilotTests(unittest.TestCase):
+    def test_frozen_inventory_uses_committed_source_bytes(self):
+        root=Path(__file__).resolve().parents[1]
+        inventory=json.loads((root/'tools/sbt-worker-repair/pilot-inventory.json').read_text())
+        self.assertEqual(len(inventory['suites']),11)
+        self.assertEqual(sum(len(s['tests']) for s in inventory['suites']),131)
+        for suite in inventory['suites']:
+            committed=subprocess.check_output(['git','show','HEAD:'+suite['source']],cwd=root)
+            self.assertEqual(hashlib.sha256(committed).hexdigest(),suite['sourceSha256'],suite['source'])
+
     def test_compiler_drift_rejected(self):
         pilot.check_pins({'a':'hash'},{'a':'hash'})
         for actual in [{},{'a':'wrong'},{'a':'hash','b':'extra'}]:

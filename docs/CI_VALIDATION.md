@@ -257,6 +257,14 @@ retained. Its nested fingerprint base was replaced with a top-level base. No
 acceptance criterion or repair changed. Remote pilot results are pending; this
 implementation is not promotion or proof of a complete worker-protocol repair.
 
+The first remote pilot at `88ed9db1` stopped at source hashing, before bootstrapping
+sbt or running tests: one inventory entry used a local CRLF file instead of its
+committed LF bytes. The failed [run](https://github.com/mattwilkinsphoto/figaro/actions/runs/39904520602)
+is retained. Byte comparison confirmed only line-ending differences; the pin was
+corrected to committed bytes and a Git-source regression check added. Test names,
+counts, repair and outcome criteria did not change. This is a corrected harness
+revision, not a discarded statistical failure or a retry of an unchanged candidate.
+
 The inventory and compiler pins are frozen before execution. Each pilot pass
 requires a fresh checkout/cache, in-process runner location/hash, complete JUnit
 identities and explicit successful outcomes. Missing, duplicate, skipped, failed,

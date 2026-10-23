@@ -12,7 +12,7 @@
         "A SelectableSet should create a separate copy of itself when cloning",
         "A SelectableSet should enumerate complete contents across capacity transitions"
       ],
-      "sourceSha256": "909216fd244f6ac0a3b200917b487d5ee0cde3b8a16d7f1f274ff70dbb95831f",
+      "sourceSha256": "1ea752091b6c47eb3e4461204fab8cdb778668718f48440c4302595f6f5ed529",
       "source": "Figaro/src/test/scala/com/cra/figaro/test/util/SelectableSetTest.scala"
     },
     {

@@ -63,7 +63,7 @@ def execute(out):
     inventory=json.loads((SCRIPTS/'pilot-inventory.json').read_text())
     assert len(inventory['suites'])==11 and sum(len(s['tests']) for s in inventory['suites'])==131
     for s in inventory['suites']:
-        if sha(ROOT/s['source'])!=s['sourceSha256']:raise ValueError('Unreviewed test source drift')
+        if sha(ROOT/s['source'])!=s['sourceSha256']:raise ValueError('Unreviewed test source drift: '+s['source'])
     source=directory(out/'sources');shutil.copytree(SCRIPTS,source/'sbt-worker-repair')
     shutil.copyfile(ROOT/'tools/validation_support.py',source/'validation_support.py')
     write(out/'protocol.json',dict(commit=commit,branch=branch,platform=platform.platform(),python=sys.version,
