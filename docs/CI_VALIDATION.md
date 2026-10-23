@@ -9,7 +9,7 @@ result are recorded separately below. Upstream submission remains on hold.
 
 ## Stock 2.0.11 Linux/server follow-up
 
-Status: branch-only validation implemented; remote results pending review. The
+Status: first remote attempt retained; corrected client-harness validation pending. The
 [bounded protocol](../tools/sbt-worker-repair/README.md#branch-only-linux-and-server-assessment)
 retains the existing repair and standard CI while testing stock 2.0.11 in isolated
 Linux direct-launcher, foreground `--server --batch`, persistent `--client`, and
@@ -21,6 +21,16 @@ The native-client control requires unchanged server PID and successful recovery
 after intentional failures. The original baseline reproduction check remains
 unchanged and can leave its job red independently of candidate correctness.
 No production adoption, merge, release or upstream submission is implied.
+
+[First run 39992354718](https://github.com/mattwilkinsphoto/figaro/actions/runs/39992354718)
+passed direct-launcher and foreground-server controls, both fresh 131-test passes
+in each mode, and the packaging job. The persistent-client stage failed before
+fixture execution: sbtn joined the separate arguments into one invalid `eval`
+expression. The correction sends one explicit semicolon-delimited command sequence,
+with the test last, following the [command syntax](https://www.scala-sbt.org/2.x/docs/en/reference/sbt.html).
+It does not change any fixture or expected outcome. The first upload also omitted
+the workflow snapshot under `.github`; hidden files are now included only inside
+the curated evidence tree. Neither failure is erased or classified as an sbt defect.
 
 ## Why the enumeration test changed
 

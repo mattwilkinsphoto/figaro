@@ -53,3 +53,5 @@ jobs:
           name: sbt-stock-${{ matrix.mode }}-evidence
           path: ${{ runner.temp }}/stock-${{ matrix.mode }}/evidence/
           if-no-files-found: error
+          # Only the curated evidence tree; never homes, credentials or caches.
+          include-hidden-files: true

@@ -43,6 +43,17 @@ CONSUMERS={'FigaroConsumerCheck':'Consumer acceptance passed:',
  'GuidedFixedBudgetConsumerCheck':'Guided fixed-budget API verified from expected packaged artifact:'}
 
 
+def client_command(task):
+    # sbtn joins argument tokens as one command. Use sbt's explicit command
+    # sequence, with the test last so a later successful command cannot mask it.
+    return ';'+IDENTITY+';'+PID+';'+task
+
+
+def client_output(text):
+    # Preserve raw logs; normalize terminal control sequences only for auditing.
+    return re.sub(r'\x1b\[[0-9;]*[A-Za-z]','',text)
+
+
 def check_pid(text,previous=None):
     values=re.findall(r'^FIGARO_SERVER_PID=(\d+)$',text,re.M)
     if len(values)!=1 or int(values[0])<=1:raise ValueError('Missing/ambiguous server PID')
@@ -161,7 +172,7 @@ def execute(out,mode):
             pid=None;records=[]
             try:
                 for name,task,code,marker in steps:
-                    text=run([runner,'--client','--batch','-v',IDENTITY,PID,task],case,name,cwd=repo,expected=code,timeout=600)
+                    text=client_output(run([runner,'--client','--batch','-v',client_command(task)],case,name,cwd=repo,expected=code,timeout=600))
                     check_identity(text,jar);pid=check_pid(text,pid)
                     if marker not in text or 'Promise already completed' in text or 'running jvm client' in text or 'running native client' not in text:
                         raise ValueError('Incorrect persistent outcome or client fallback')

@@ -4,9 +4,13 @@ import sys
 import unittest
 import xml.etree.ElementTree as ET
 sys.path.insert(0,str(Path(__file__).resolve().parent/'sbt-worker-repair'))
-from stock_linux import check_pid,check_slow
+from stock_linux import check_pid,check_slow,client_command,client_output,IDENTITY,PID
 
 class ServerEvidenceTest(unittest.TestCase):
+    def test_client_sequence_keeps_test_last(self):
+        self.assertEqual(client_command('testOnly WorkerEvents'),';'+IDENTITY+';'+PID+';testOnly WorkerEvents')
+    def test_client_terminal_normalization(self):
+        self.assertEqual(check_pid(client_output('\x1b[0JFIGARO_SERVER_PID=123\n')),123)
     def fixture(self):
         r=ET.Element('testsuite',name='ManyTests',tests='40',failures='1',errors='0',skipped='0')
         for i in range(1,41):
