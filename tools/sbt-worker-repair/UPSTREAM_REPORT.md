@@ -65,6 +65,59 @@ that the upstream lifecycle fix is ineffective. The real fixtures emitted no
 duplicate-completion exception; their small number cannot prove its absence in
 all valid process/listener schedules.
 
+## Linux and server assessment: 2026-10-23
+
+The additive [Linux harness](stock_linux.py) distinguishes the production-style
+foreground `--server --batch` invocation from native `--client` reuse of a
+persistent JVM. Official [component documentation](https://www.scala-sbt.org/2.x/docs/en/guide/sbt-components.html)
+and [runner source](https://github.com/sbt/sbt/blob/v2.0.11/sbt) are the basis for
+that distinction. The library/test baseline remains `2f8e6c54`; stock binaries,
+source hashes, exact test identities and isolated cache paths are recorded.
+
+[First run 39992354718](https://github.com/mattwilkinsphoto/figaro/actions/runs/39992354718)
+at `0c050efb` used Ubuntu 24.04 image `20261012.334.1`, Temurin 17.0.20.1 and
+Python 3.12.15. It produced these audited results:
+
+| Gate | Result |
+| --- | --- |
+| Direct Java and foreground-server real fixtures | Both modes met the passing, assertion-failure, exit-17 and framework-error expectations |
+| Upstream slow-listener before/after | In both modes, 2.0.8 returned exit 0 despite the failing final test; 2.0.11 returned exit 1 with all 40 identities and the final failure |
+| Fresh Figaro passes | Two per mode, each 131/131 tests in 11 suites; no unexpected worker exception |
+| Instrumented inventory | 131/131 tests, actual coverage XML generated; this is not whole-suite coverage |
+| Clean packaging | Two fresh byte-identical thin/fat builds; classifiers, notices, MiMa, both TASTy compatibility consumers passed |
+| Packaged consumers | All six passed against the expected isolated Maven-layout candidate hash; no publication |
+| Persistent client | Failed before fixture execution due to validation-harness command composition; not accepted |
+
+The first native-client call supplied three arguments that sbtn joined into one
+invalid `eval` expression. The corrected harness uses one explicit command
+sequence, following [sbt command syntax](https://www.scala-sbt.org/2.x/docs/en/reference/sbt.html),
+with the test last so a later success cannot hide its failure. Raw logs remain
+unchanged; terminal escape codes are removed only for identity/PID auditing.
+No fixture, binary, threshold or expected outcome changed. The first artifact
+upload omitted its `.github` workflow snapshot and a generated `.bsp` configuration.
+The former was independently matched to its recorded hash using the committed Git
+blob; the latter remains unavailable. Corrected uploads include hidden files only
+within the curated evidence tree. The first overall run remains failed.
+
+[Second run 39994305620](https://github.com/mattwilkinsphoto/figaro/actions/runs/39994305620)
+at `367bbbf8` has complete downloaded manifests and passed direct and packaging
+jobs. All candidate foreground fixtures and fresh Figaro passes passed. The old
+2.0.8 foreground baseline returned exit 1 rather than expected exit 0: that
+non-reproduction remains a failed check. Direct mode again reproduced the old
+false-green result. These few runs establish variable baseline behavior, not its
+frequency or a platform-specific cause. The Windows non-reproduction also remains.
+
+The second persistent call reached the correct loaded stock JAR and a server PID,
+then failed before tests: `testFull` is not an input task and rejects inline filter
+arguments. Official [testing documentation](https://www.scala-sbt.org/2.x/docs/en/reference/sbt-test.html)
+specifies `Tests.Argument` in `testOptions`, and identifies `testFull` as uncached.
+The follow-up uses that setting and explicitly resets the filter before each
+negative control. It retains the same 100 passing events, assertion sentinel,
+exit-17 sentinel and uncached recovery expectations. Both prior failures remain
+failed. The experimental workflow now requires explicit dispatch and offers a
+client-only scope, avoiding repeated unchanged baseline experiments; production
+CI is untouched. No upstream or application code is patched by these corrections.
+
 ### What remains before any upstream submission
 
 1. Prefer evaluating the official response-draining fix to extending the local

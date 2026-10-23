@@ -4,9 +4,20 @@ import sys
 import unittest
 import xml.etree.ElementTree as ET
 sys.path.insert(0,str(Path(__file__).resolve().parent/'sbt-worker-repair'))
-from stock_linux import check_pid,check_slow,client_command,client_output,IDENTITY,PID
+from stock_linux import check_pid,check_slow,client_command,client_output,persistent_steps,IDENTITY,PID
 
 class ServerEvidenceTest(unittest.TestCase):
+    def test_full_tests_use_setting_not_inline_args(self):
+        for _,task,code,_ in persistent_steps():
+            if code==0:
+                self.assertTrue(task.endswith(';testFull'))
+                self.assertIn('Tests.Argument("-oD", "-z", "event-")',task)
+                self.assertNotIn('testFull --',task)
+    def test_negative_controls_reset_filter(self):
+        for _,task,code,_ in persistent_steps():
+            if code==1:
+                self.assertTrue(task.startswith('set Test / testOptions := Seq(Tests.Argument("-oD"));'))
+                self.assertNotIn('event-',task)
     def test_client_sequence_keeps_test_last(self):
         self.assertEqual(client_command('testOnly WorkerEvents'),';'+IDENTITY+';'+PID+';testOnly WorkerEvents')
     def test_client_terminal_normalization(self):

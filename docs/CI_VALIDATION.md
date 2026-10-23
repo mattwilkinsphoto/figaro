@@ -9,7 +9,7 @@ result are recorded separately below. Upstream submission remains on hold.
 
 ## Stock 2.0.11 Linux/server follow-up
 
-Status: first remote attempt retained; corrected client-harness validation pending. The
+Status: two remote attempts retained; focused client-harness validation pending. The
 [bounded protocol](../tools/sbt-worker-repair/README.md#branch-only-linux-and-server-assessment)
 retains the existing repair and standard CI while testing stock 2.0.11 in isolated
 Linux direct-launcher, foreground `--server --batch`, persistent `--client`, and
@@ -31,6 +31,15 @@ with the test last, following the [command syntax](https://www.scala-sbt.org/2.x
 It does not change any fixture or expected outcome. The first upload also omitted
 the workflow snapshot under `.github`; hidden files are now included only inside
 the curated evidence tree. Neither failure is erased or classified as an sbt defect.
+
+[Second run 39994305620](https://github.com/mattwilkinsphoto/figaro/actions/runs/39994305620)
+again passed direct and packaging jobs, and all candidate foreground checks.
+The old 2.0.8 foreground false-green outcome did not recur, leaving that baseline
+check failed. The persistent client verified JAR/PID but rejected inline arguments
+to `testFull` before testing. The focused follow-up uses the documented
+`testOptions` setting and resets filters before negative controls. Explicit
+client-only dispatch avoids rerunning the unchanged baseline; prior failed runs
+are retained. See the [report](../tools/sbt-worker-repair/UPSTREAM_REPORT.md#linux-and-server-assessment-2026-10-23).
 
 ## Why the enumeration test changed
 

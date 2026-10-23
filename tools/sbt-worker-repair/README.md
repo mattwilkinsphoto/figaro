@@ -166,7 +166,16 @@ and packaging. The first two retain both stock control matrices, all real fixtur
 and two fresh 131-test passes. The existing baseline false-green expectation stays
 unchanged: if it fails to reproduce, that stage and its workflow job remain red,
 even if independent candidate checks pass. Every attempted stage is retained;
-there are no reruns or fallback runners to obtain a green result.
+there are no unchanged retries or fallback runners to obtain a green result.
+A demonstrated harness defect may be corrected in a separately identified commit
+and run, retaining the failed attempt and unchanged empirical acceptance criteria.
+The [report](UPSTREAM_REPORT.md#linux-and-server-assessment-2026-10-23) records the
+first client-invocation failure and the narrowly corrected follow-up.
+
+The experiment is now manually dispatched with `scope=all` or `scope=client`;
+ordinary production CI is unchanged. `client` runs only the remaining persistent
+gate and must be read alongside prior direct/foreground/packaging evidence. It
+does not relabel the second run's failed historical baseline reproduction.
 
 The official [runner source](https://github.com/sbt/sbt/blob/v2.0.11/sbt) distinguishes
 foreground `--server` from persistent `--client`. An additional native-client
@@ -174,6 +183,9 @@ sequence requires the **same server PID** for passing tests, an assertion failur
 a worker exit-17 failure and a subsequent passing `testFull` execution. It then
 checks shutdown of that owned server. It does not use global `shutdownall`.
 Framework-error and slow-listener checks remain separate foreground fixtures.
+`testFull` receives framework arguments through `testOptions`, as documented in
+the [testing reference](https://www.scala-sbt.org/2.x/docs/en/reference/sbt-test.html),
+not inline arguments. Negative controls explicitly remove the passing-event filter.
 
 The packaging job instruments the same 131-test inventory, checks coverage output,
 turns instrumentation off, requires two fresh byte-identical thin/fat rebuilds,

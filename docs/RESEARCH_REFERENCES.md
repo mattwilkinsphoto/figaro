@@ -711,7 +711,19 @@ is authorized by this evidence; see the revised report for the remaining gates.
 
 An additive [Linux/server harness](../tools/sbt-worker-repair/stock_linux.py),
 [negative controls](../tools/test_stock_linux.py) and branch-only workflow now
-implement the next bounded assessment; remote results are pending. Its mode
+implement the next bounded assessment. The
+[first Linux run](https://github.com/mattwilkinsphoto/figaro/actions/runs/39992354718)
+reproduced the old false-green outcome in direct and foreground modes, while
+2.0.11 retained all 40 upstream events and returned failure correctly. Both modes'
+fresh 131-test passes and the separate coverage/packaging/six-consumer job passed.
+The persistent-client stage failed before fixture execution due to command
+composition in the harness; the second run exposed an unsupported inline filter
+on `testFull` and a non-reproduced old foreground baseline. The focused client-only
+follow-up uses [documented testOptions](https://www.scala-sbt.org/2.x/docs/en/reference/sbt-test.html)
+with filters reset before negative controls. Prior failures are retained, not
+retried unchanged or relabeled. The report
+preserves this failure, the earlier Windows non-reproduction and first-upload
+source/configuration omissions. Its mode
 distinction follows the official [component guide](https://www.scala-sbt.org/2.x/docs/en/guide/sbt-components.html)
 and [2.0.11 runner source](https://github.com/sbt/sbt/blob/v2.0.11/sbt): foreground
 `--server` is not persistent `--client`. Same-PID failure/recovery checks supplement

@@ -1,14 +1,13 @@
 name: Stock sbt 2.0.11 Linux assessment
 
 on:
-  push:
-    branches: [codex/stock-sbt-2-0-11-validation]
-    paths:
-      - .github/workflows/sbt-stock-linux.yml
-      - tools/sbt-worker-repair/**
-      - tools/test_stock_assessment.py
-      - tools/test_stock_linux.py
   workflow_dispatch:
+    inputs:
+      scope:
+        description: 'Explicit experiment scope; preserve previous runs and do not retry unchanged baseline failures'
+        type: choice
+        options: [all, client]
+        default: all
 
 permissions:
   contents: read
@@ -23,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mode: [direct, server, packaging]
+        mode: ${{ fromJSON(inputs.scope == 'client' && '["client"]' || '["direct", "server", "packaging"]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:

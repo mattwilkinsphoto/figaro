@@ -54,6 +54,18 @@ def client_output(text):
     return re.sub(r'\x1b\[[0-9;]*[A-Za-z]','',text)
 
 
+def persistent_steps():
+    # testFull is a task, not an input task: framework arguments belong in
+    # testOptions. Reset options before each negative control so filtering
+    # cannot hide either sentinel. Keep testFull for uncached recovery.
+    passing='set Test / testOptions := Seq(Tests.Argument("-oD", "-z", "event-"));testFull'
+    unfiltered='set Test / testOptions := Seq(Tests.Argument("-oD"));'
+    return [('cold-pass',passing,0,'Tests: succeeded 100, failed 0'),
+      ('assertion',unfiltered+'testOnly WorkerEvents',1,'SENTINEL_ASSERTION_FAILURE'),
+      ('worker-exit',unfiltered+'testOnly WorkerExit',1,'Forked test process exited with code 17'),
+      ('recovery',passing,0,'Tests: succeeded 100, failed 0')]
+
+
 def check_pid(text,previous=None):
     values=re.findall(r'^FIGARO_SERVER_PID=(\d+)$',text,re.M)
     if len(values)!=1 or int(values[0])<=1:raise ValueError('Missing/ambiguous server PID')
@@ -87,7 +99,7 @@ def execute(out,mode):
     write(out/'protocol.json',{'mode':mode,'baseline':BASELINE,'harnessCommit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
       'platform':platform.platform(),'python':sys.version,'image':os.environ.get('ImageVersion'),
       'protected':protected,'inventory':inventory,'launcherPins':LAUNCHERS,'actionsPins':ACTIONS,'distributionPin':DIST_SHA,
-      'stages':'original stock controls + two fresh 131-test passes per direct/foreground mode; server adds persistent same-PID controls; packaging separately instruments 131 tests and checks reproducibility and six consumers',
+      'stages':('Persistent-client-only follow-up; previous direct/server/packaging results remain separate and are not rerun or relabeled' if mode=='client' else 'original stock controls + two fresh 131-test passes per direct/foreground mode; server adds persistent same-PID controls; packaging separately instruments 131 tests and checks reproducibility and six consumers'),
       'acceptance':'No retries; original baseline reproduction failure remains failed and makes its job non-green. Continue independent predeclared stages, retain candidate findings separately.',
       'scope':'No production/workaround/default change, release, merge, upstream submission or publish task',
       'semantics':'--server is foreground; --client is persistent; same PID required for successive client commands'})
@@ -161,14 +173,11 @@ def execute(out,mode):
         os.environ['JAVA_OPTS']=' '.join(options)
         return next(boot.rglob('actions_3-2.0.11.jar'))
 
-    if mode=='server':
+    if mode in ['server','client']:
         def persistent():
             case=directory(out/'persistent');repo=case/'repo';copy_fixture(SCRIPTS/'fixtures',repo,'2.0.11')
             boot=case/'boot';shutil.copytree(out/'2.0.11/boot',boot);jar=configure(case,boot)
-            steps=[('cold-pass','testFull -- -z event-',0,'Tests: succeeded 100, failed 0'),
-              ('assertion','testOnly WorkerEvents',1,'SENTINEL_ASSERTION_FAILURE'),
-              ('worker-exit','testOnly WorkerExit',1,'Forked test process exited with code 17'),
-              ('recovery','testFull -- -z event-',0,'Tests: succeeded 100, failed 0')]
+            steps=persistent_steps()
             pid=None;records=[]
             try:
                 for name,task,code,marker in steps:
@@ -280,7 +289,7 @@ def collect(out):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output',type=Path,required=True)
-    p.add_argument('--mode',choices=['direct','server','packaging'],required=True);a=p.parse_args()
+    p.add_argument('--mode',choices=['direct','server','packaging','client'],required=True);a=p.parse_args()
     if platform.system()!='Linux':raise RuntimeError('Linux execution only; local unit checks do not claim Linux validation')
     out=directory(a.output.resolve())
     try:execute(out,a.mode)
