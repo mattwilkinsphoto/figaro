@@ -31,12 +31,12 @@ def fixture(**changes):
 
 
 class CentralTests(unittest.TestCase):
-    def test_current_release_runs_all_five_central_only_consumers(self):
+    def test_current_release_runs_all_six_central_only_consumers(self):
         workflow = (Path(__file__).resolve().parents[1] / '.github/workflows/maven-central.yml').read_text()
         self.assertIn('FIGARO_VERSION: ' + central.VERSION, workflow)
-        for flag in ('FIGARO_CENTRAL_ONLY', 'FIGARO_CAPABILITY_CHECK', 'FIGARO_BUDGET_CHECK', 'FIGARO_FIXED_BUDGET_CHECK'):
+        for flag in ('FIGARO_CENTRAL_ONLY', 'FIGARO_CAPABILITY_CHECK', 'FIGARO_BUDGET_CHECK', 'FIGARO_FIXED_BUDGET_CHECK', 'FIGARO_GUIDED_FIXED_CHECK'):
             self.assertIn(flag + ": 'true'", workflow)
-        for main in ('FigaroConsumerCheck', 'IntegrationConsumerCheck', 'CapabilityConsumerCheck', 'BudgetConsumerCheck', 'FixedBudgetConsumerCheck'):
+        for main in ('FigaroConsumerCheck', 'IntegrationConsumerCheck', 'CapabilityConsumerCheck', 'BudgetConsumerCheck', 'FixedBudgetConsumerCheck', 'GuidedFixedBudgetConsumerCheck'):
             self.assertIn('runMain ' + main, workflow)
 
     def test_approved_bundle(self):

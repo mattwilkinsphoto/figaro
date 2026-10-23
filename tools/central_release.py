@@ -25,9 +25,9 @@ from zipfile import ZipFile
 from build_release_bundle import archive_bytes
 
 REPO = 'mattwilkinsphoto/figaro'
-VERSION = '7.3.0'
-REVISION = 'abf5eec75b62f26c0b812859322dc76181bf8139'
-RELEASE_SHA = '798cb09713cf60cfdbac22df1427d92b5239438f7c11ebf25031f37cb82d7c21'
+VERSION = '7.4.0'
+REVISION = '86f48a06334da78a9315292d2e7fd87fd7e7ef88'
+RELEASE_SHA = 'd64b4aecdd1b87301c428fd22653e36961626b0898554fe9da0eba58019e337e'
 PREFIX = f'io/github/mattwilkinsphoto/figaro_3/{VERSION}/'
 PURL = f'pkg:maven/io.github.mattwilkinsphoto/figaro_3@{VERSION}'
 DEPLOYMENT_NAME = f'Figaro-{VERSION}-{RELEASE_SHA[:16]}'

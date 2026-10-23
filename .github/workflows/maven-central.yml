@@ -80,11 +80,12 @@ jobs:
         working-directory: tools/acceptance-consumer
         env:
           FIGARO_CENTRAL_ONLY: 'true'
-          FIGARO_VERSION: 7.3.0
+          FIGARO_VERSION: 7.4.0
           FIGARO_CAPABILITY_CHECK: 'true'
           FIGARO_BUDGET_CHECK: 'true'
           FIGARO_FIXED_BUDGET_CHECK: 'true'
-          FIGARO_EXPECTED_SHA256: 6b82a0efc92ea4119a51cdfe42e38090b3680d129625d16b653e37cc821cee1f
+          FIGARO_GUIDED_FIXED_CHECK: 'true'
+          FIGARO_EXPECTED_SHA256: 0abfdadfeb007af1eee39a04b0591e49686d4cab74181402ccf8d9948abe4dbf
           JAVA_OPTS: -Xms256M -Xmx2G -Xss6M
         run: |
           sbt --server --batch "runMain FigaroConsumerCheck"
@@ -92,3 +93,4 @@ jobs:
           sbt --server --batch "runMain CapabilityConsumerCheck"
           sbt --server --batch "runMain BudgetConsumerCheck"
           sbt --server --batch "runMain FixedBudgetConsumerCheck"
+          sbt --server --batch "runMain GuidedFixedBudgetConsumerCheck"
