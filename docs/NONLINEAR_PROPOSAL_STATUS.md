@@ -8,7 +8,7 @@ Approved scope: complete the three stages as documentation and test-only work.
 No runtime promotion, merge, release, default or stopping-estimator change.
 
 - [x] Stage 1: contract/protocol frozen; independent references accepted.
-- [ ] Stage 2: builders and deterministic/regression validation.
+- [x] Stage 2: builders and deterministic/regression validation.
 - [ ] Stage 3: development calibration and fresh held-out validation.
 - [ ] Independent results, archived evidence and promotion recommendation.
 - [ ] Documentation/reference checks, commit/push and remote CI status.
@@ -24,3 +24,16 @@ evidence; the protocol documents the pre-candidate resolution amendment.
 No candidate trajectories have been sampled at this checkpoint. Grid convergence
 is not a rigorous global error bound. No candidate correctness, performance,
 promotion eligibility or publication is established by reference acceptance.
+
+## Stage 2 and development checkpoint
+
+13 new prototype tests and 56 unchanged guided, stratified, weighted-bounded and
+stopping regression tests passed (69 across five suites). The first compile failed
+because uppercase tuple bindings were parsed as identifiers; the test-only syntax
+was corrected. No algorithm, threshold or runtime change followed that failure.
+Four oracle self-tests, two analysis inventory tests and three unchanged exact
+finite-accounting tests also passed. The exact controls enumerate 48 combinations.
+
+Development-only seeds completed; the protocol now records frozen larger-bootstrap
+budgets. No held-out confirmation results have been examined at this checkpoint.
+Both candidates remain in the comparison; no favorable configuration was selected.

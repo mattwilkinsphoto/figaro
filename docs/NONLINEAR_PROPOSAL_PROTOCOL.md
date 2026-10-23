@@ -112,6 +112,17 @@ from before prior/guide construction until weighted summaries, including setup.
 Record every attempted row, exact failure and all subsequent unavailable steps.
 No unexplained failure or supported-domain refusal may be dropped from comparison.
 
+### Development calibration frozen before confirmation
+
+The 16 development seeds completed without failed rows. Applying the rule above
+produced these larger-bootstrap budgets (none reached the 4096 cap): affine 307,
+mono 337, sharp 400, weak 337, symmetric 416, asymmetric 407, tail 64, curved 64.
+All candidate configurations remain N=64. These are machine-specific timing-derived
+comparison budgets, not recommended user settings. Raw timing medians, scientific
+row digest and the exact TSV manifest are retained in the evidence archive.
+The tail/curved one-step initial guide is constructed once, unlike the per-parent
+reconstructions on later steps; do not extrapolate those costs to long sequences.
+
 Correctness screens at each time: sample means of unnormalized evidence, first
 moment, second moment and positive mass against reference within 6 empirical SE
 + 1e-4*max(1,abs(reference)). This is a conservative multiple-check regression
