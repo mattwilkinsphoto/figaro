@@ -10,7 +10,7 @@ explanations are credited to Avi Pfeffer and the Charles River Analytics contrib
 see [attributions](../FigaroAttributions.txt) and the [preservation audit](DOCUMENTATION_MIGRATION.md).
 
 Use this after the [three-step setup](../README.md#quick-start-three-steps). You need JDK 17;
-the repository pins Scala 3.9.0 and sbt 2.0.8. Do not install FigaroWork, add a JAR to the
+the repository pins Scala 3.9.0 and stock sbt 2.0.11. Do not install FigaroWork, add a JAR to the
 system PATH, or copy the old `_2.12` dependency coordinates. For application integration,
 consume the compiled library using [the dependency contract](../CONSUMER_BOUNDARY.md).
 

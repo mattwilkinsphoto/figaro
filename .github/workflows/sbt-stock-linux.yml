@@ -1,0 +1,56 @@
+name: Stock sbt 2.0.11 Linux assessment
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: 'Explicit experiment scope; preserve previous runs and do not retry unchanged baseline failures'
+        type: choice
+        options: [all, client]
+        default: all
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  assessment:
+    if: github.ref == 'refs/heads/codex/stock-sbt-2-0-11-validation'
+    strategy:
+      fail-fast: false
+      matrix:
+        mode: ${{ fromJSON(inputs.scope == 'client' && '["client"]' || '["direct", "server", "packaging"]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check bounded validation tooling
+        run: |
+          python -B tools/test_stock_assessment.py
+          python -B tools/test_stock_linux.py
+          python -B tools/test_ci_repair.py
+          python -B tools/docs/check_research_references.py
+      - name: Execute frozen stock-toolchain protocol
+        run: python -B tools/sbt-worker-repair/stock_linux.py --mode '${{ matrix.mode }}' --output "$RUNNER_TEMP/stock-${{ matrix.mode }}"
+      - name: Preserve actual commands and complete outcomes, including failures
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: sbt-stock-${{ matrix.mode }}-evidence
+          path: ${{ runner.temp }}/stock-${{ matrix.mode }}/evidence/
+          if-no-files-found: error
+          # Only the curated evidence tree; never homes, credentials or caches.
+          include-hidden-files: true

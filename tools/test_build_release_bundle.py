@@ -3,10 +3,16 @@ import hashlib
 import io
 import unittest
 from zipfile import ZipFile
-from build_release_bundle import archive_bytes, check_pom, checksums
+from build_release_bundle import archive_bytes, check_pom, checksums, sbt_version
 
 
 class ReleaseBundleTests(unittest.TestCase):
+    def test_toolchain_metadata_uses_unique_stable_selector(self):
+        self.assertEqual(sbt_version('sbt.version=2.0.11\n'),'2.0.11')
+        self.assertEqual(sbt_version('# historical fixture\nsbt.version=2.0.8\n'),'2.0.8')
+        for text in ['', 'sbt.version=2.0.11-SNAPSHOT', 'sbt.version=2.0.11\nsbt.version=bad',
+                     'sbt.version=2.0.11\nsbt.version=2.0.11']:
+            with self.assertRaises(ValueError):sbt_version(text)
     def test_deterministic_archive_and_content(self):
         payload = {'b/data': b'content', 'a': b'first'}
         packed = archive_bytes(payload)

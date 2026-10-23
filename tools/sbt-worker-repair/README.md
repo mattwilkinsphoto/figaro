@@ -1,8 +1,29 @@
-# Opt-in sbt 2.0.8 worker-completion repair
+# Stock sbt validation and historical worker-completion repair
+
+Current source builds use stock sbt 2.0.11. The local 2.0.8 repair is retired from
+active workflows; its sources and results remain for historical replay. The named
+development CI job runs `stock_linux.py --mode direct --ci-gate --output NEW_DIRECTORY`
+on Linux, only within the named workflow. It checks pinned stock binaries, all
+candidate failure controls and two fresh 131-test inventories at the current commit.
+It does not modify sbt binaries. Full adoption CI and packaged acceptance passed
+at `c04ff1b8` and final branch commit `38674a64`; the change is integrated into
+`main`. See [results and integration status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
+The retired `branch_pilot.py --ci-gate` entry point fails explicitly.
+
+The instructions below preserve historical experiments. For repair reproduction,
+use the commits recorded with each result, not the current production selectors.
+The former Actions workflow is preserved as a non-executable
+[snapshot](legacy-linux-workflow.yml.example). No upstream issue has been filed.
 
 This is an isolated diagnostic repair, not a replacement sbt release or an automatic
 installation. Read the [scope and local evidence](../../docs/CI_VALIDATION.md) and
 [upstream report draft](UPSTREAM_REPORT.md) first. No upstream issue has been filed.
+
+**Current review:** official sbt 2.0.11 includes a response-draining fix outside
+`React`. The [revised report](UPSTREAM_REPORT.md#current-upstream-disposition)
+supersedes the earlier source-only inference against an upgrade. Keep the existing
+2.0.8 repair evidence separate from the stock-version assessment below. Neither
+this document nor that assessment changes the production toolchain automatically.
 
 Prerequisites: Python 3.11+, JDK 17, an already populated official sbt 2.0.8 boot
 directory, and the official sbt launcher. Choose new output directories whose
@@ -41,7 +62,7 @@ did not separately force the `forkError` race; see the additive pilot below.
 
 ### Branch-only adoption pilot
 
-The separate [Linux workflow](../../.github/workflows/sbt-repair-linux.yml) now runs
+The historical [Linux workflow](legacy-linux-workflow.yml.example) ran
 [branch_pilot.py](branch_pilot.py), exclusively on `codex/guided-fixed-budget`.
 It retains stock CI and the unchanged five-site repair. No repaired server mode,
 publication change or default installation is enabled.
@@ -67,8 +88,8 @@ loaded JAR in each fixture JVM without changing the original expected outcomes.
 The pilot enforces subprocess/job timeouts and preserves failed evidence. An
 overall green stock workflow is not a substitute for these gates. Pilot review and
 the subsequent [named-gate integration validation](../../docs/CI_VALIDATION.md#approved-named-direct-launcher-ci-gates)
-are complete. Only that frozen inventory adopts the repaired direct launcher;
-all other invocations remain stock. The first-winner policy and broader
+are complete. At that revision only the frozen inventory adopted the repaired direct launcher;
+all other invocations remained stock. The first-winner policy and broader
 event-draining/protocol limitations are unchanged. No upstream submission or
 CI-wide runner replacement is implied.
 
@@ -99,3 +120,106 @@ directory for the sbt runner rather than changing the worker protocol.
 Rollback is selecting the original boot. No global sbt defaults, released estimator,
 library dependency or publication workflow is changed. An upstream release should
 replace this workaround only after checking its actual source and validation.
+
+## Stock 2.0.11 assessment
+
+[stock_assessment.py](stock_assessment.py) is a bounded diagnostic runner, not a
+production installer or replacement for upstream's entire scripted-test suite.
+It invokes the existing Java controls and fixtures unchanged, and runs the exact
+upstream slow-listener build/test sources through a direct launcher. The upstream
+`-> test` scripted expectation is represented by requiring a nonzero build exit;
+the candidate additionally must report all 40 identities and the final failure.
+
+Prepare a fresh evidence root before invocation. Required inputs are:
+
+- `inputs.json`: the frozen Figaro Git commit (`head`) and protected repository
+  path-to-SHA-256 mapping (`protected`); retain platform and upstream provenance.
+- For each version `2.0.8` and `2.0.11`: its official `sbt-launch-VERSION.jar`,
+  isolated populated `boot/`, and `boot-hashes.json` mapping every boot JAR's
+  relative path to SHA-256. Verify Maven checksums before execution.
+- `upstream/slow-build.sbt` and `upstream/slow-ManyTests.scala`, copied byte-for-byte
+  from the tagged upstream regression. Retain the upstream license, scripted
+  expectation, source/API responses and hashes alongside them. Provide a fresh
+  `ipc/` runtime directory. Windows requires the explicit access handling described
+  above; access failures must not be ignored.
+
+Then, from the Figaro repository root:
+
+```sh
+python -B tools/sbt-worker-repair/stock_assessment.py --output "$ASSESSMENT_ROOT" --phase controls
+python -B tools/sbt-worker-repair/stock_assessment.py --output "$ASSESSMENT_ROOT" --phase figaro
+python -B tools/test_stock_assessment.py
+```
+
+Each phase writes its protocol before execution and refuses to overwrite an
+existing phase directory. Inspect a failed controls phase before continuing the
+independent Figaro phase; do not conceal its nonzero exit. Two fresh source/boot/
+cache Figaro passes require the original 131 named tests in 11 suites, fresh
+compilation, complete JUnit identities, and verified loaded stock binary identity.
+The launcher, caches and checkouts remain isolated; no shared defaults change.
+
+The controlled stock exceptions are expected diagnostic findings, not fixed-defect
+claims. The frozen 2.0.8 slow-listener baseline expects the historical false-green
+outcome; failure to reproduce it remains a failed reproduction check even if the
+candidate passes. There are no retries or empirically selected thresholds. See
+the report for the actual outcomes, Windows scope and remaining adoption gates.
+
+[Research provenance](../../docs/RESEARCH_REFERENCES.md#eng-01).
+
+## Branch-only Linux and server assessment
+
+[stock_linux.py](stock_linux.py) and its
+[workflow](../../.github/workflows/sbt-stock-linux.yml) run only on
+`codex/stock-sbt-2-0-11-validation`, with read-only repository permissions and no
+publication/signing secrets. They do not replace the adopted repair or change the
+production sbt selector. The frozen library baseline is `2f8e6c54`; only isolated
+checkout selectors change to 2.0.11. Tooling and result provenance are recorded
+separately from that baseline.
+
+Three predeclared jobs cover direct Java, the official `--server --batch` runner,
+and packaging. The first two retain both stock control matrices, all real fixtures
+and two fresh 131-test passes. The existing baseline false-green expectation stays
+unchanged: if it fails to reproduce, that stage and its workflow job remain red,
+even if independent candidate checks pass. Every attempted stage is retained;
+there are no unchanged retries or fallback runners to obtain a green result.
+A demonstrated harness defect may be corrected in a separately identified commit
+and run, retaining the failed attempt and unchanged empirical acceptance criteria.
+The [report](UPSTREAM_REPORT.md#linux-and-server-assessment-2026-10-23) records the
+first client-invocation failure and the narrowly corrected follow-up.
+
+The experiment is now manually dispatched with `scope=all` or `scope=client`;
+ordinary production CI is unchanged. `client` runs only the remaining persistent
+gate and must be read alongside prior direct/foreground/packaging evidence. It
+does not relabel the second run's failed historical baseline reproduction.
+
+The official [runner source](https://github.com/sbt/sbt/blob/v2.0.11/sbt) distinguishes
+foreground `--server` from persistent `--client`. An additional native-client
+sequence requires the **same server PID** for passing tests, an assertion failure,
+a worker exit-17 failure and a subsequent passing `testFull` execution. It then
+checks shutdown of that owned server. It does not use global `shutdownall`.
+Framework-error and slow-listener checks remain separate foreground fixtures.
+`testFull` receives framework arguments through `testOptions`, as documented in
+the [testing reference](https://www.scala-sbt.org/2.x/docs/en/reference/sbt-test.html),
+not inline arguments. Negative controls explicitly remove the passing-event filter.
+
+The packaging job instruments the same 131-test inventory, checks coverage output,
+turns instrumentation off, requires two fresh byte-identical thin/fat rebuilds,
+checks classifiers/legal notices, MiMa/TASTy compatibility, and runs the six
+existing Maven-layout consumers against the expected candidate JAR hash with Ivy
+local excluded. `--candidate` is deliberate: no artifact is published. The existing
+bundle README still names 2.0.8; its template must be reconciled before any future
+production toolchain adoption, not silently treated as accurate for this candidate.
+
+On a Linux JDK 17/Python 3.12+ runner, choose a new output root:
+
+```sh
+python -B tools/sbt-worker-repair/stock_linux.py --mode direct --output "$NEW_DIRECT_ROOT"
+python -B tools/sbt-worker-repair/stock_linux.py --mode server --output "$NEW_SERVER_ROOT"
+python -B tools/sbt-worker-repair/stock_linux.py --mode packaging --output "$NEW_PACKAGING_ROOT"
+```
+
+Each job freezes its protocol before execution and preserves bounded evidence in
+`evidence/`, including failures. Review raw logs and exact identities, not just
+workflow status. These checks are bounded adoption evidence, not an exhaustive
+worker-protocol proof, timing benchmark, complete standard-CI run or approval to
+submit the separate hardening patch upstream.

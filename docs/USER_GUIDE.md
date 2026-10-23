@@ -6,7 +6,7 @@ Figaro is an embedded probabilistic programming library. A normal Scala value sa
 
 Use it to diagnose hidden causes, estimate risks, reason about evolving state, or choose actions under uncertainty. It is not a dataframe library, a neural-network trainer, or a service that learns a model from arbitrary data. You supply the model and select an inference method.
 
-This guide targets Scala 3.9.0 / sbt 2.0.8 / JDK 17. For a first run in three steps, use the [root quick start](../README.md#quick-start-three-steps).
+This guide targets Scala 3.9.0 / stock sbt 2.0.11 / JDK 17 for source builds. Published 7.4.0 artifacts are unchanged. For a first run in three steps, use the [root quick start](../README.md#quick-start-three-steps).
 
 ## The mental model
 

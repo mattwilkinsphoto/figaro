@@ -1,5 +1,26 @@
 # Migrating to Scala 3 and sbt 2
 
+## Stock sbt 2.0.11 source-build update
+
+The source checkout and packaged-consumer example now pin stock sbt 2.0.11.
+Previously, the checkout selected 2.0.8 and a narrowly scoped CI job used an
+isolated local worker-completion repair. Now all active CI uses stock sbt; the
+repair workflow is archived outside Actions and its sources remain historical
+evidence. No developer cache needs manual patching or restoration.
+
+For a source build, use JDK 17 and run the same `sbt --server --batch compile`
+command: `project/build.properties` selects the new version automatically. A
+consumer that only depends on `"io.github.mattwilkinsphoto" %% "figaro" % "7.4.0"`
+does not need to change that dependency or its own build tool for this repository
+maintenance change. The Scala version, library API, stopping estimator and
+inference defaults are unchanged; no new library release is implied.
+
+Upstream's fix drains worker responses before exit notification, addressing more
+than the local repair's duplicate-Promise exception. This is bounded validation,
+not a guarantee against every possible worker schedule. See the
+[adoption gates and historical results](CI_VALIDATION.md#stock-sbt-2011-adoption).
+Historical version tables below describe their original checkpoints.
+
 ## 7.0.0 release
 
 The 7.0.0 release changes zero-viable-particle filtering to explicit

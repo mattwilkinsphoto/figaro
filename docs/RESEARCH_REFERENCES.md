@@ -663,7 +663,7 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Role:** Official software/source references, not statistical theory. Repository-only JMH measurement replaces an unstable ratio-of-differences enumeration assertion; no performance threshold or speedup is established. An opt-in, source/hash-pinned sbt 2.0.8 repair adapts five Promise completion calls in an isolated boot copy. First-completion semantics remain unchanged; no claim of exhaustive worker-protocol correctness or upstream acceptance.
 
-**Code:** [JMH harness](../tools/collection-benchmark/EnumerationBenchmark.java); [benchmark runner](../tools/collection-benchmark/run.py); [repair preparation](../tools/sbt-worker-repair/prepare.py).
+**Code:** [JMH harness](../tools/collection-benchmark/EnumerationBenchmark.java); [benchmark runner](../tools/collection-benchmark/run.py); active [stock sbt gate](../tools/sbt-worker-repair/stock_linux.py); historical [repair preparation](../tools/sbt-worker-repair/prepare.py).
 
 **Validation:** [deterministic collection test](../Figaro/src/test/scala/com/cra/figaro/test/util/SelectableSetTest.scala); [tooling negative controls](../tools/test_ci_repair.py); [actual-binary interleavings](../tools/sbt-worker-repair/WorkerCompletionCheck.java); [forked integration checks](../tools/sbt-worker-repair/integration.py); [bounded Linux harness](../tools/sbt-worker-repair/linux_validation.py). Local 24-fork benchmark, 320 controlled worker cases, real passing/failing/exit-17 fixtures and 102 focused Figaro tests completed. Stock-runner branch CI passed. Separate [Linux repaired-boot validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/39899930618) repeated the 320 controlled cases, failure fixtures and 102 Figaro tests successfully; downloaded evidence and actual JAR loading verified. This does not promote the repair or prove all worker-protocol orderings safe.
 
@@ -686,10 +686,57 @@ the guide. No test acceptance or repair changed. At that pilot revision, the
 original repair and standard CI remained unchanged. The [worker source](https://github.com/sbt/sbt/blob/v2.0.8/worker/src/main/java/sbt/internal/worker1/ForkTestMain.java)
 was inspected to exercise the actual notification serialization and framework-error
 path, rather than substituting an ordinary assertion failure. Fresh source
-inspection found the 2.0.11 and 2.0.8 ForkTests sources identical; no 2.0.11 binary
-validation or upstream acceptance is claimed.
+inspection found the 2.0.11 and 2.0.8 ForkTests sources identical. That historical
+comparison omitted a relevant change elsewhere: official
+[sbt 2.0.11](https://github.com/sbt/sbt/releases/tag/v2.0.11) includes
+[PR #9860](https://github.com/sbt/sbt/pull/9860), closing
+[issue #9859](https://github.com/sbt/sbt/issues/9859). Its
+[WorkerExchange response-draining fix](https://github.com/sbt/sbt/blob/v2.0.11/main-actions/src/main/scala/sbt/internal/WorkerExchange.scala)
+and [slow-listener regression](https://github.com/sbt/sbt/tree/v2.0.11/sbt-app/src/sbt-test/tests/fork-slow-listener)
+are the primary basis for the new [stock assessment](../tools/sbt-worker-repair/stock_assessment.py)
+and its [audit controls](../tools/test_stock_assessment.py). See the
+[revised report](../tools/sbt-worker-repair/UPSTREAM_REPORT.md) for results and limits.
+The original source-only inference against upgrading is withdrawn; upstream
+acceptance of the separate five-site local patch is not claimed.
 
-Subsequent approval adopts the frozen 11-suite non-instrumented inventory as a
+The 2026-10-23 stock assessment ran both original control matrices on each official
+2.0.8/2.0.11 binary (300 cases and 60 forced exceptions per binary), the four real
+forked fixtures, and the upstream slow-listener fixture. Stock 2.0.11 preserved all
+40 slow-listener identities and the final failure, and completed two fresh Figaro
+passes of 131 named tests in 11 suites. The old false-green outcome did not occur
+on 2.0.8, leaving that reproduction check explicitly failed. These are Windows
+direct-launcher results, not a demonstrated residual 2.0.11 lifecycle failure or
+Linux/server-mode adoption. No production toolchain change or upstream submission
+is authorized by this evidence; see the revised report for the remaining gates.
+
+An additive [Linux/server harness](../tools/sbt-worker-repair/stock_linux.py),
+[negative controls](../tools/test_stock_linux.py) and branch-only workflow now
+implement the next bounded assessment. The
+[first Linux run](https://github.com/mattwilkinsphoto/figaro/actions/runs/39992354718)
+reproduced the old false-green outcome in direct and foreground modes, while
+2.0.11 retained all 40 upstream events and returned failure correctly. Both modes'
+fresh 131-test passes and the separate coverage/packaging/six-consumer job passed.
+The persistent-client stage failed before fixture execution due to command
+composition in the harness; the second run exposed an unsupported inline filter
+on `testFull` and a non-reproduced old foreground baseline. The focused client-only
+follow-up uses [documented testOptions](https://www.scala-sbt.org/2.x/docs/en/reference/sbt-test.html)
+with filters reset before negative controls. Prior failures are retained, not
+retried unchanged or relabeled. The report
+preserves this failure, the earlier Windows non-reproduction and first-upload
+source/configuration omissions. Its mode
+distinction follows the official [component guide](https://www.scala-sbt.org/2.x/docs/en/guide/sbt-components.html)
+and [2.0.11 runner source](https://github.com/sbt/sbt/blob/v2.0.11/sbt): foreground
+`--server` is not persistent `--client`. Same-PID failure/recovery checks supplement
+the original fixtures; instrumented tests, reproducible packaging and six consumers
+are separate gates. This is validation tooling, not toolchain/workaround adoption.
+The [focused client run](https://github.com/mattwilkinsphoto/figaro/actions/runs/39996678945)
+passed all four same-PID calls and shutdown; independent auditing confirmed exact
+100/101/100 event identities for pass/assertion/recovery. Earlier failures remain
+failed, including variable baseline reproduction and local socket-path limits.
+Bounded candidate validation now supports an adoption review; no universal
+race-freedom, long-duration stress coverage or actual production switch is claimed.
+
+Historical 2.0.8 approval adopted the frozen 11-suite non-instrumented inventory as a
 dedicated [development CI job](../.github/workflows/ci.yml), using the shared
 [direct-launcher harness](../tools/sbt-worker-repair/branch_pilot.py) with its entire
 two-pass/failure-control protocol. See the [scope and rollback contract](CI_VALIDATION.md#approved-named-direct-launcher-ci-gates).
@@ -714,6 +761,25 @@ OpenJDK's [forking](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/m
 and [loop](https://github.com/openjdk/jmh/blob/master/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_11_Loops.java)
 examples informs the bounded follow-up described in the CI guide, not a claim
 that this result is explained or that enumeration measurements validate selection.
+
+Current adoption follow-up: source selectors use stock 2.0.11, and the named CI
+job now invokes the stock harness's candidate-only mode. All five real fixtures,
+300 forced React cases and both fresh 131-test inventories remain required;
+historical 2.0.8 reproduction results are retained separately. Negative controls in
+[test_stock_linux.py](../tools/test_stock_linux.py),
+[test_ci_repair.py](../tools/test_ci_repair.py) and
+[test_build_release_bundle.py](../tools/test_build_release_bundle.py) enforce scope,
+repair retirement and source-toolchain metadata. [Adoption CI 40006071239](https://github.com/mattwilkinsphoto/figaro/actions/runs/40006071239)
+passed all five jobs at `c04ff1b8`. Independent auditing verified the complete
+named-gate manifest, five real fixture outcomes, both exact 131-test passes,
+all six consumers in each packaged-consumption path and byte identity with the
+published thin JAR. No unexpected worker exception appeared in ordinary logs.
+The final branch commit `38674a64` passed [run 40010016173](https://github.com/mattwilkinsphoto/figaro/actions/runs/40010016173)
+with the same independently audited controls and packaged-consumer paths. Adoption
+is integrated into `main` after explicit approval; post-merge CI remains a distinct,
+commit-specific gate. These bounded results do not negate the forced React findings
+or prove universal race freedom; [scope and integration status](CI_VALIDATION.md#stock-sbt-2011-adoption).
+No estimator, inference default, library release or upstream submission changes.
 
 ## Keeping this index useful
 

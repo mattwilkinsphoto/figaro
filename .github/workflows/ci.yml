@@ -27,8 +27,8 @@ env:
 
 jobs:
   named-direct-launcher-tests:
-    # Only the frozen 11 non-instrumented suites use the isolated repair.
-    # No server, stock cache replacement, publishing secrets or fallback.
+    # Stock 2.0.11, pinned binaries and the unchanged frozen 11-suite inventory.
+    # Fresh isolated caches, real failure controls; no repaired JAR or fallback.
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
@@ -42,8 +42,8 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
-      - name: Validate isolated repair and execute named gates twice from fresh inputs
-        run: python -B tools/sbt-worker-repair/branch_pilot.py --ci-gate --output "$RUNNER_TEMP/sbt-named-gates"
+      - name: Validate stock sbt and execute named gates twice from fresh inputs
+        run: python -B tools/sbt-worker-repair/stock_linux.py --mode direct --ci-gate --output "$RUNNER_TEMP/sbt-named-gates"
       - name: Retain named gate commands, identities, controls and complete reports
         if: always()
         uses: actions/upload-artifact@v7
@@ -51,6 +51,7 @@ jobs:
           name: named-direct-launcher-evidence
           if-no-files-found: error
           path: ${{ runner.temp }}/sbt-named-gates/evidence/
+          include-hidden-files: true
 
   research-reference-integrity:
     # Fail provenance/navigation checks early, independently of the Scala build.
@@ -63,6 +64,8 @@ jobs:
           python3 -B tools/docs/check_research_references.py
           python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
           python3 -B tools/test_ci_repair.py
+          python3 -B tools/test_stock_assessment.py
+          python3 -B tools/test_stock_linux.py
 
   release-packaging-preflight:
     # Catch publication/layout failures independently of the longer inference gate.
