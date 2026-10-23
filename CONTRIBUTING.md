@@ -80,6 +80,7 @@ From the repository root:
 ```text
 python -B tools/docs/check_research_references.py
 python -B -m unittest discover -s tools/docs -p "test_*.py"
+python -B tools/test_ci_repair.py
 ```
 
 Also run `python -B tools/docs/check_links.py` after generating the Scala API
@@ -96,6 +97,10 @@ Whether this job is required for merge depends on repository branch protection;
 adding the job does not itself configure that protection.
 
 ## Change summary / pull request
+
+For JVM timing and sbt worker diagnostics, follow [CI validation](docs/CI_VALIDATION.md).
+Keep correctness gates separate from timing reports. An advisory timing failure is
+not a passed check, and a locally repaired build tool is not an upstream release.
 
 List affected reference IDs, the role or assumptions changed, and the tests actually
 run. If no reference update is needed, give a specific reason. Confirm that claims

@@ -36,6 +36,7 @@ jobs:
         run: |
           python3 -B tools/docs/check_research_references.py
           python3 -B -m unittest discover -s tools/docs -p 'test_*.py'
+          python3 -B tools/test_ci_repair.py
 
   release-packaging-preflight:
     # Catch publication/layout failures independently of the longer inference gate.
@@ -461,7 +462,21 @@ jobs:
           com.cra.figaro.test.algorithm.factored.FactorTest
           -- -l com.cra.figaro.test.Performance"
 
-      - name: Observe legacy collection timing checks (advisory)
+      - name: Verify enumeration benchmark execution (not a speed gate)
+        run: |
+          python3 -B tools/collection-benchmark/run.py --candidate "target/out/jvm/scala-3.9.0/figaro/figaro_3-${FIGARO_VERSION}.jar" --output "$RUNNER_TEMP/collection-benchmark" --profile smoke
+
+      - name: Upload enumeration benchmark measurements
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: collection-benchmark-execution
+          path: |
+            ${{ runner.temp }}/collection-benchmark/*.json
+            ${{ runner.temp }}/collection-benchmark/*.log
+          if-no-files-found: warn
+
+      - name: Observe remaining legacy collection timing checks (advisory)
         continue-on-error: true
         run: >-
           sbt --server --batch

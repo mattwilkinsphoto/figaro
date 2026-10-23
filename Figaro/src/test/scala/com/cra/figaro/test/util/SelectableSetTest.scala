@@ -136,28 +136,20 @@ class SelectableSetTest extends AnyWordSpec with PrivateMethodTester with Matche
       time2 / time1 should be < (large.toDouble / small * log(large) / log(small) * slack)
     }
 
-    "take roughly linear time for enumeration" taggedAs (Performance) in {
-      def enumerate(s: SelectableSet[Double])= () => s.toList
-      val size1 = 1000
-      val size2 = 2000
-      val size3 = 3000
-      val size4 = 4000
-      val s1 = new HashSelectableSet[Double]
-      for { j <- 1 to size1 } s1.add(random.nextDouble())
-      val s2 = new HashSelectableSet[Double]
-      for { j <- 1 to size2 } s2.add(random.nextDouble())
-      val s3 = new HashSelectableSet[Double]
-      for { j <- 1 to size3 } s3.add(random.nextDouble())
-      val s4 = new HashSelectableSet[Double]
-      for { j <- 1 to size4 } s4.add(random.nextDouble())
-      val time1 = measureTime(enumerate(s1), 20, 100)
-      val time2 = measureTime(enumerate(s2), 20, 100)
-      val time3 = measureTime(enumerate(s3), 20, 100)
-      val time4 = measureTime(enumerate(s4), 20, 100)
-      // For a linear function, the difference should be the same if the differences in sizes is the same;
-      // we allow some slack
-      val slack = 1.1
-      (time4 - time3) / (time2 - time1) should be < ((size4 - size3).toDouble / (size2 - size1) * slack)
+    "enumerate complete contents across capacity transitions" in {
+      // Timing moved to tools/collection-benchmark (ENG-01). Differences between
+      // four short timings are not a correctness or asymptotic-complexity test.
+      for (size <- List(1000, 2000, 3000, 4000)) {
+        val s = new HashSelectableSet[Int]
+        (0 until size).foreach(s.add)
+        val before = s.toList
+        before.size should be(size)
+        before.toSet should be((0 until size).toSet)
+        (0 until size by 3).foreach(s.remove)
+        val after = s.toList
+        after.toSet should be((0 until size).filter(_ % 3 != 0).toSet)
+        after.distinct.size should be(after.size)
+      }
     }
   }
 }

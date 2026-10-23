@@ -53,6 +53,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Cross-family information measures and mixture MI | [MET-01](#met-01), [MET-02](#met-02) |
 | Common families, matrix/correlation priors | [DIST-01](#dist-01), [DIST-02](#dist-02), [DIST-03](#dist-03) |
 | Conditional copulas and observation semantics | [MOD-01](#mod-01), [MOD-02](#mod-02) |
+| JVM collection benchmarking and forked-worker completion validation | [ENG-01](#eng-01) |
 
 ## Reference-to-code mappings
 
@@ -653,6 +654,20 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 **Validation:** [ObservationModelTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ObservationModelTest.scala).
 
 **Guide:** [OBSERVATION MODELS](OBSERVATION_MODELS.md); [MIXED MEASURES](MIXED_MEASURES.md).
+
+<a id="eng-01"></a>
+
+### ENG-01: JVM benchmark and worker-completion methodology
+
+**Source:** OpenJDK [JMH](https://github.com/openjdk/jmh) 1.37; official samples [dead-code elimination](https://github.com/openjdk/jmh/blob/1.37/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_08_DeadCode.java), [forking](https://github.com/openjdk/jmh/blob/1.37/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_12_Forking.java), and [profilers](https://github.com/openjdk/jmh/blob/1.37/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_35_Profilers.java). Scala [Promise API](https://www.scala-lang.org/api/current/scala/concurrent/Promise.html); sbt [ForkTests 2.0.8](https://github.com/sbt/sbt/blob/v2.0.8/main-actions/src/main/scala/sbt/ForkTests.scala), [WorkerExchange 2.0.8](https://github.com/sbt/sbt/blob/v2.0.8/main-actions/src/main/scala/sbt/internal/WorkerExchange.scala), and [launcher configuration](https://www.scala-sbt.org/1.x/docs/Launcher-Configuration.html).
+
+**Role:** Official software/source references, not statistical theory. Repository-only JMH measurement replaces an unstable ratio-of-differences enumeration assertion; no performance threshold or speedup is established. An opt-in, source/hash-pinned sbt 2.0.8 repair adapts five Promise completion calls in an isolated boot copy. First-completion semantics remain unchanged; no claim of exhaustive worker-protocol correctness or upstream acceptance.
+
+**Code:** [JMH harness](../tools/collection-benchmark/EnumerationBenchmark.java); [benchmark runner](../tools/collection-benchmark/run.py); [repair preparation](../tools/sbt-worker-repair/prepare.py).
+
+**Validation:** [deterministic collection test](../Figaro/src/test/scala/com/cra/figaro/test/util/SelectableSetTest.scala); [tooling negative controls](../tools/test_ci_repair.py); [actual-binary interleavings](../tools/sbt-worker-repair/WorkerCompletionCheck.java); [forked integration checks](../tools/sbt-worker-repair/integration.py). Local 24-fork benchmark, 320 controlled worker cases, real passing/failing/exit-17 fixtures and 102 focused Figaro tests completed. Remote validation of these changes is pending.
+
+**Guide:** [CI validation](CI_VALIDATION.md).
 
 ## Keeping this index useful
 
