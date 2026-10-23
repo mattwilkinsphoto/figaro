@@ -24,12 +24,16 @@ precision or performance for every application model.
 
 ## Active priorities
 
-**Guided/auxiliary fixed-budget extension: development, not promoted.** The
+**Guided/auxiliary fixed-budget extension: validated, opt-in integration approved.** The
 [three-stage milestone](docs/GUIDED_FIXED_BUDGET_STATUS.md) combines explicit
 resampling schedules with existing proposal interfaces under a
 [new frozen protocol](docs/GUIDED_FIXED_BUDGET_PROTOCOL.md). It preserves released
-stopping/defaults and requires independent correctness and total-cost utility
-validation before promotion. The published adoption baseline remains 7.3.0.
+stopping/defaults. Independent correctness, total-cost utility, packaged consumers
+and remote integration CI passed; final review approved merging after closeout CI.
+This additive capability makes 7.4.0 eligible as a normal-priority minor release,
+but publication remains on hold pending separate final release preparation and
+approval. Development remains 7.4.0-SNAPSHOT; the published adoption baseline
+remains 7.3.0. Poor proposals can still hurt accuracy and cost efficiency.
 
 **Particle-diversity milestone complete: no runtime promotion.** The
 [literature-led three-stage experiment](docs/PARTICLE_DIVERSITY_STATUS.md) preserved

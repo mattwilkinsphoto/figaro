@@ -155,7 +155,8 @@ recorded as a limitation. This evidence does not settle notification draining,
 other lifecycle races, first-winner policy or persistent server mode.
 
 Narrow adoption for the named non-instrumented direct-launcher CI suites has since
-been approved; integration validation is pending. Its acceptance protocol is the
+been approved and [remote integration validation passed](https://github.com/mattwilkinsphoto/figaro/actions/runs/39908126561)
+at `0275d6a1`. Its acceptance protocol is the
 same as the pilot. Other invocations, including stock server-mode coverage and
 packaging, remain unchanged. This is not upstream or CI-wide runner acceptance.
 Upstream maintainer review remains outstanding.

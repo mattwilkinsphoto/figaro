@@ -395,11 +395,11 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Source:** Doucet and Johansen, [particle filtering tutorial](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf), version 1.1 with March 2012 corrections, sections 4.1/4.2. Pitt and Shephard, [1997 working paper](https://www.nuff.ox.ac.uk/economics/papers/1997/w13/sir.pdf), section 3.1. Johansen and Doucet, [2008 author manuscript](https://wrap.warwick.ac.uk/id/eprint/37283/1/WRAP_Johansen_JD08.pdf), sections 2.2/2.3. Relevant sections inspected 2026-10-22, not a full-proof review. Maintained implementation comparison: particles [core](https://github.com/nchopin/particles/blob/master/particles/core.py), [GuidedPF/APF](https://github.com/nchopin/particles/blob/master/particles/state_space_models.py), [MIT license](https://github.com/nchopin/particles/blob/master/LICENSE); no external code copied. INF-10/11 supply existing proposal helper provenance; INF-15 supplies scheduling and numerical selection.
 
-**Role:** Proposed independent fixed-N extension, not yet promoted or published. Full augmented parent/child importance correction, retaining previous weights on carry steps. Unlike particles, the trigger remains previous posterior ESS, not auxiliary ESS. No random-stopping theorem transfer, automatic tuning, default change or universal efficiency claim.
+**Role:** Independently validated fixed-N extension, approved for opt-in integration in unreleased 7.4.0-SNAPSHOT; not part of published 7.3.0. Full augmented parent/child importance correction, retaining previous weights on carry steps. Unlike particles, the trigger remains previous posterior ESS, not auxiliary ESS. No random-stopping theorem transfer, automatic tuning, default change or universal efficiency claim.
 
 **Code:** Development extension of [FixedBudgetParticleFilter](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala), reusing [WeightedParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala) and [AuxiliaryParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/AuxiliaryParticleProposal.scala). No change to the released stopping implementation.
 
-**Validation:** [Accounting/lifecycle tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetTest.scala), [public API comparison](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetStudy.scala), [independent exact oracle and analysis](../tools/guided_fixed_reference.py), [oracle tests](../tools/test_guided_fixed_reference.py). Frozen before outcomes; exact finite enumeration, independent Gaussian/reference controls and fresh-seed nonlinear/multimodal comparison required. Actual results and acceptance state are recorded separately in the status guide.
+**Validation:** [Accounting/lifecycle tests](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetTest.scala), [public API comparison](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GuidedFixedBudgetStudy.scala), [independent exact oracle and analysis](../tools/guided_fixed_reference.py), [oracle tests](../tools/test_guided_fixed_reference.py). Frozen before outcomes; exact finite enumeration, independent Gaussian/reference controls and fresh-seed nonlinear/multimodal comparison completed. Final review reproduced the original result object from preserved logs exactly, with no new trajectories or tuning. [Remote integration CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/39908126561) passed all five jobs. Actual results, counterevidence, remaining limits and conditional merge approval are recorded in the status guide; publication is not approved.
 
 **Guide:** [GUIDED FIXED BUDGET PROTOCOL](GUIDED_FIXED_BUDGET_PROTOCOL.md); [GUIDED FIXED BUDGET STATUS](GUIDED_FIXED_BUDGET_STATUS.md); [GUIDED FIXED BUDGET FILTER](GUIDED_FIXED_BUDGET_FILTER.md).
 
@@ -693,9 +693,16 @@ Subsequent approval adopts the frozen 11-suite non-instrumented inventory as a
 dedicated [development CI job](../.github/workflows/ci.yml), using the shared
 [direct-launcher harness](../tools/sbt-worker-repair/branch_pilot.py) with its entire
 two-pass/failure-control protocol. See the [scope and rollback contract](CI_VALIDATION.md#approved-named-direct-launcher-ci-gates).
-Remote validation of this integration is pending. All other invocations, including
-instrumented coverage, packaging and consumers, remain stock; library estimators
-and defaults are unchanged. No server-mode, merge, release or upstream promotion.
+[Remote integration validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/39908126561)
+passed all five jobs at `0275d6a1`; the [companion pilot](https://github.com/mattwilkinsphoto/figaro/actions/runs/39908126558)
+also passed. Independently audited evidence confirms all 600 controls, four
+fixture outcomes and both fresh 131-test passes with source/runner identity checks.
+Stock raw logs had no duplicate-Promise exception; all 20 advisory tests passed.
+All other invocations, including instrumented coverage, packaging and consumers,
+remain stock; library estimators and defaults are unchanged. Conditional main
+integration is approved, not server-mode or CI-wide replacement. First-success/
+late-error and notification-draining limitations remain; release and upstream
+submission are still on hold.
 
 ## Keeping this index useful
 

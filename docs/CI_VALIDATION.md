@@ -1,9 +1,9 @@
 # Collection benchmarks and sbt worker validation
 
-Status: local and isolated Linux repair validation completed; narrow adoption for
-the named direct-launcher CI test gates is approved and implemented on the branch,
-pending remote validation of this integration. Other invocations remain stock.
-No merge, release or upstream submission is authorized.
+Status: local, isolated Linux and remote integration validation completed. Narrow
+adoption for the named direct-launcher CI test gates is approved; other invocations
+remain stock. Main integration is approved conditional on passing closeout CI.
+Release and upstream submission remain on hold.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
 
 ## Why the enumeration test changed
@@ -342,5 +342,23 @@ notification-draining limitations also remain. Rollback restores the relocated
 test invocations to stock and removes the new job; no shared-cache restoration is
 necessary. A CI-tooling change alone does not warrant a Figaro release.
 
-Remote integration validation is pending. No pilot result is substituted for that
-new run, and merging, releasing and upstream submission remain on hold.
+Remote integration validation passed at `0275d6a1` in
+[development CI 39908126561](https://github.com/mattwilkinsphoto/figaro/actions/runs/39908126561).
+All five jobs passed, including the adopted gate and retained stock jobs. The
+[companion pilot 39908126558](https://github.com/mattwilkinsphoto/figaro/actions/runs/39908126558)
+also passed. Independently audited downloaded evidence confirms all 600 controls
+(60 expected duplicate exceptions on stock, zero on repaired), four fixture exits
+0/1/1/1 and both fresh 131-test passes, with exact identities and unchanged stock
+bytes. Only `React.class` and `React.tasty` differ in the repaired JAR.
+
+Stock raw logs contained no duplicate-Promise exception or failed-test marker;
+all 20 advisory timing tests passed. Stock instrumented coverage, reproducible
+rebuilds, artifact checks and all six packaged consumers also passed. These are
+observed outcomes for this commit, not removal of the stock race or the protocol
+limitations above. The CI evidence archive is 9,764,153 bytes with SHA-256
+`89809986b2444d9b23bc25a723fd3fe576cf47b37b73ea84ecd45acdc23626dd`.
+
+The [final guided-filter review](GUIDED_FIXED_BUDGET_STATUS.md#final-promotion-review-and-integration-decision)
+accepts this narrowly scoped tooling gate. Main integration is approved after
+fresh closeout CI; no release or upstream submission is authorized. The draft
+report remains unsubmitted and no CI-wide or persistent-server repair is claimed.

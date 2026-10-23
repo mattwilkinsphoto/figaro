@@ -3,8 +3,9 @@
 [Research provenance](RESEARCH_REFERENCES.md#inf-16).
 [Frozen protocol](GUIDED_FIXED_BUDGET_PROTOCOL.md).
 
-Baseline: verified published Figaro 7.3.0. Development branch only; no promotion,
-merge or publication implied. Released stopping estimator and defaults unchanged.
+Baseline: verified published Figaro 7.3.0. Final review completed; opt-in integration
+approved for 7.4.0-SNAPSHOT, conditional on passing CI for the status closeout.
+This is not a published release. Released stopping estimator and defaults unchanged.
 
 ## Requirements and acceptance checklist
 
@@ -16,7 +17,9 @@ merge or publication implied. Released stopping estimator and defaults unchanged
 - [x] Three-JVM replay, all-outcome correctness and utility decision: 720 screens pass, no incomplete groups.
 - [x] Released-filter regressions, documentation checks, packaged consumer.
 - [x] Reproducibility archive and final local audit: 707 entries reopened and hash-verified.
-- [ ] Remote CI and explicit promotion decision before merge/release.
+- [x] Remote integration CI and final promotion review at `0275d6a1`.
+- [x] Maintainer approval for opt-in integration, with fresh CI required before merge.
+- [ ] Separate final-version release preparation, publication approval and published-consumer verification.
 
 ## Independent confirmation results
 
@@ -67,8 +70,8 @@ it is not rounded into a pass. Depletion on sharp growth fell from 146/256 to
 - Vector-Gaussian identities are tested; the comparative utility fixtures are
   scalar/finite state. No broad high-dimensional, real-data or long-history claim.
 
-**Recommendation:** proceed to opt-in integration review after packaging and CI
-gates; prefer evaluating guided-only first, then pay for auxiliary look-ahead when
+**Decision:** approved for opt-in integration following independent validation,
+packaging, remote CI and final review. Prefer evaluating guided-only first, then pay for auxiliary look-ahead when
 predictive parent information justifies it. No new default, threshold tuning,
 automatic promotion, precision guarantee or lost-history recovery follows.
 
@@ -95,9 +98,43 @@ automatic promotion, precision guarantee or lost-history recovery follows.
 Development CI now targets 7.4.0-SNAPSHOT and includes the new tests and sixth
 consumer. The maintainer explicitly approved that alignment after an automated
 permission review initially refused it. Publication workflow, immutable artifact
-pins and tags remain unchanged. Remote CI and promotion remain pending; no push,
-merge or release is claimed. This is a compatible minor-release candidate in scope,
-not a declaration that 7.4.0 is ready to publish.
+pins and tags remain unchanged. The completed remote validation and integration
+decision are recorded below; this is not a declaration that 7.4.0 is ready to publish.
+
+## Final promotion review and integration decision
+
+[Development CI 39908126561](https://github.com/mattwilkinsphoto/figaro/actions/runs/39908126561)
+passed all five jobs at `0275d6a1`, including the named repaired direct-launcher
+gate, stock coverage, reproducible packaging and all six isolated consumers.
+The [companion pilot](https://github.com/mattwilkinsphoto/figaro/actions/runs/39908126558)
+also passed. Raw-log review found no duplicate-Promise exception or failed-test
+marker; all 20 advisory timing tests passed. This does not establish universal
+timing stability or repair the stock runner. See [CI scope and limitations](CI_VALIDATION.md#approved-named-direct-launcher-ci-gates).
+
+The final review reopened and hash-verified the scientific and CI evidence
+archives. Reanalysis of the preserved scientific logs reproduced the complete
+original result object exactly; no fresh trajectories, retuned thresholds or
+replacement seeds were used. The reviewed runtime and comparative-study sources
+remain unchanged from `2c7c20c7`. Three oracle tests, 41 documentation tests,
+18 CI-tooling tests, reference integrity and local-link checks passed.
+
+The review found no remaining promotion blocker within the frozen scope.
+Opt-in integration is approved, with the documentation commit required to pass
+CI before merging. Guidance remains a workload-specific choice; all limitations
+and negative results above remain applicable. No automatic proposal choice,
+resampling threshold, particle budget or stopping behavior changes.
+
+The final-review evidence archive is 153,106,102 bytes, SHA-256
+`3f3ee911f4aecb9d5af1b9a08783f50de82949e9b7fd58798f7135a6eed08536`.
+It includes the original scientific and CI archives, reanalysis, captured check
+logs and a retained UTF-8 log-reading correction; that correction changed neither
+the numerical analysis nor its acceptance criteria.
+
+**Release eligibility:** the additive consumer APIs warrant a **7.4.0 minor
+release at normal priority** under the consumer-impact policy. Published 7.3.0
+remains the adoption baseline. Development stays at 7.4.0-SNAPSHOT; final-version
+packaging, publication and published-library acceptance are separate gates.
+Release and upstream report submission remain explicitly on hold.
 
 Implementation/validation commit: `2c7c20c7` on `codex/guided-fixed-budget`.
 The private reproducibility archive is 142,961,413 bytes with SHA-256

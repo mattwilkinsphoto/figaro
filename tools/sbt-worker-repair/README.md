@@ -65,9 +65,12 @@ reviewed Linux run, not learned from the new candidate at execution time.
 The original fixture runner accepts optional `--verify-identity` to check the
 loaded JAR in each fixture JVM without changing the original expected outcomes.
 The pilot enforces subprocess/job timeouts and preserves failed evidence. An
-overall green stock workflow is not a substitute for these gates. Results require
-review before any required test gate adopts the repaired runner; the first-winner
-policy and broader event-draining/protocol limitations are unchanged.
+overall green stock workflow is not a substitute for these gates. Pilot review and
+the subsequent [named-gate integration validation](../../docs/CI_VALIDATION.md#approved-named-direct-launcher-ci-gates)
+are complete. Only that frozen inventory adopts the repaired direct launcher;
+all other invocations remain stock. The first-winner policy and broader
+event-draining/protocol limitations are unchanged. No upstream submission or
+CI-wide runner replacement is implied.
 
 `verify.py` uses reflection on the actual stock and repaired classes with a
 controllable fake Process. Stock exceptions are expected positive controls; a
