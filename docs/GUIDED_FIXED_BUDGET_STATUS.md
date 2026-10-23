@@ -3,9 +3,10 @@
 [Research provenance](RESEARCH_REFERENCES.md#inf-16).
 [Frozen protocol](GUIDED_FIXED_BUDGET_PROTOCOL.md).
 
-Baseline: verified published Figaro 7.3.0. Final review completed; opt-in integration
-approved for 7.4.0-SNAPSHOT, conditional on passing CI for the status closeout.
-This is not a published release. Released stopping estimator and defaults unchanged.
+Baseline: verified published Figaro 7.3.0. Final review and main integration
+completed at `a31fca1a`, with all five main CI jobs passing. Final preparation and
+conditional publication of 7.4.0 are authorized; the [release record](RELEASE_7_4_STATUS.md)
+tracks those separate gates. Released stopping estimator and defaults unchanged.
 
 ## Requirements and acceptance checklist
 
@@ -18,7 +19,7 @@ This is not a published release. Released stopping estimator and defaults unchan
 - [x] Released-filter regressions, documentation checks, packaged consumer.
 - [x] Reproducibility archive and final local audit: 707 entries reopened and hash-verified.
 - [x] Remote integration CI and final promotion review at `0275d6a1`.
-- [x] Maintainer approval for opt-in integration, with fresh CI required before merge.
+- [x] Main integration after passing closeout CI; post-merge main CI also passed.
 - [ ] Separate final-version release preparation, publication approval and published-consumer verification.
 
 ## Independent confirmation results
@@ -95,7 +96,7 @@ automatic promotion, precision guarantee or lost-history recovery follows.
   and 15,513 local links pass. Reference group INF-16 maps the new work;
   INF-10/11/15 retain the existing helpers and historical provenance.
 
-Development CI now targets 7.4.0-SNAPSHOT and includes the new tests and sixth
+Development CI initially targeted 7.4.0-SNAPSHOT and included the new tests and sixth
 consumer. The maintainer explicitly approved that alignment after an automated
 permission review initially refused it. Publication workflow, immutable artifact
 pins and tags remain unchanged. The completed remote validation and integration
@@ -119,8 +120,9 @@ remain unchanged from `2c7c20c7`. Three oracle tests, 41 documentation tests,
 18 CI-tooling tests, reference integrity and local-link checks passed.
 
 The review found no remaining promotion blocker within the frozen scope.
-Opt-in integration is approved, with the documentation commit required to pass
-CI before merging. Guidance remains a workload-specific choice; all limitations
+Opt-in integration completed after [closeout CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/39964999116)
+passed; [post-merge main CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/39968790021)
+also passed. Guidance remains a workload-specific choice; all limitations
 and negative results above remain applicable. No automatic proposal choice,
 resampling threshold, particle budget or stopping behavior changes.
 
@@ -132,9 +134,9 @@ the numerical analysis nor its acceptance criteria.
 
 **Release eligibility:** the additive consumer APIs warrant a **7.4.0 minor
 release at normal priority** under the consumer-impact policy. Published 7.3.0
-remains the adoption baseline. Development stays at 7.4.0-SNAPSHOT; final-version
-packaging, publication and published-library acceptance are separate gates.
-Release and upstream report submission remain explicitly on hold.
+remains the published adoption baseline during final preparation. Final-version
+packaging, publication and published-library acceptance are now conditionally
+authorized and tracked in the release record. Upstream report submission remains on hold.
 
 Implementation/validation commit: `2c7c20c7` on `codex/guided-fixed-budget`.
 The private reproducibility archive is 142,961,413 bytes with SHA-256

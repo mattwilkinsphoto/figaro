@@ -49,6 +49,12 @@ Published 7.3.0 adds a separate [explicit-policy fixed-budget filter](docs/FIXED
 Inspect its [validation and stratified numerical limits](docs/FIXED_BUDGET_STATUS.md)
 before adoption. Released stopping behavior is unchanged; no ESS threshold is a default.
 
+The integrated [7.4.0 release preparation](docs/RELEASE_7_4_STATUS.md) adds
+[guided and auxiliary fixed-budget filtering](docs/GUIDED_FIXED_BUDGET_FILTER.md).
+It retains explicit policies and full importance corrections; the stopping
+estimator and defaults are unchanged. Use the release record to distinguish
+final-source validation from Maven Central availability.
+
 Figaro 7.0.0 added [stable filtering, owned-chain observations, exact count tables
 and support-aware proposals](docs/INFERENCE_INTEGRATION.md). Read the
 [old/new modernization examples](docs/INFERENCE_INTEGRATION.md#modernization-bridge-old-and-new-usage)

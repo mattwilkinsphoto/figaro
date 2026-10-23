@@ -2,8 +2,8 @@
 
 Status: local, isolated Linux and remote integration validation completed. Narrow
 adoption for the named direct-launcher CI test gates is approved; other invocations
-remain stock. Main integration is approved conditional on passing closeout CI.
-Release and upstream submission remain on hold.
+remain stock. Main integration and post-merge CI passed. Figaro 7.4.0 publication
+is authorized after its separate final packaging gates; upstream submission remains on hold.
 [Research provenance](RESEARCH_REFERENCES.md#eng-01).
 
 ## Why the enumeration test changed
@@ -35,7 +35,7 @@ Use Python 3.11+ and a JDK 17 with `java` and `javac` on PATH. Build the candida
 JAR first. Run from the repository root, choosing a new output directory:
 
 ```text
-python -B tools/collection-benchmark/run.py --candidate target/out/jvm/scala-3.9.0/figaro/figaro_3-7.4.0-SNAPSHOT.jar --output .cache/collection-full --profile full
+python -B tools/collection-benchmark/run.py --candidate target/out/jvm/scala-3.9.0/figaro/figaro_3-7.4.0.jar --output .cache/collection-full --profile full
 ```
 
 The immutable reference is the SHA-256-pinned Maven Central 7.3.0 JAR. JMH 1.37
@@ -359,6 +359,7 @@ limitations above. The CI evidence archive is 9,764,153 bytes with SHA-256
 `89809986b2444d9b23bc25a723fd3fe576cf47b37b73ea84ecd45acdc23626dd`.
 
 The [final guided-filter review](GUIDED_FIXED_BUDGET_STATUS.md#final-promotion-review-and-integration-decision)
-accepts this narrowly scoped tooling gate. Main integration is approved after
-fresh closeout CI; no release or upstream submission is authorized. The draft
+accepts this narrowly scoped tooling gate. Main integration and
+[post-merge CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/39968790021)
+passed. The separate [7.4.0 release gates](RELEASE_7_4_STATUS.md) now govern publication. The draft
 report remains unsubmitted and no CI-wide or persistent-server repair is claimed.

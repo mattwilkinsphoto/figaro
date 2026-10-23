@@ -54,6 +54,14 @@ it cannot pass by silently loading an earlier `publishLocal` artifact.
 
 ## API and common patterns
 
+For 7.4.0 final-version testing, also set `FIGARO_GUIDED_FIXED_CHECK=true` and
+run `runMain GuidedFixedBudgetConsumerCheck` with the other five consumers.
+Use the hash of the exact candidate/published JAR, not the 7.3.0 hash above.
+This separately compiled check exercises guided initialization/propagation,
+auxiliary resampling, carry steps and proposal diagnostics under both methods.
+Leave the flag unset for releases before 7.4.0. Central availability is tracked
+in the [release record](../../docs/RELEASE_7_4_STATUS.md).
+
 For 7.3.0 and later, `FIGARO_FIXED_BUDGET_CHECK=true` enables the separate fixed-budget
 source directory. Its check covers both methods and explicit policies, retained
 tiny weights, selection diagnostics and invalidation after numerical refusal.

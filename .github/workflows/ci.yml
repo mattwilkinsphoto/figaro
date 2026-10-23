@@ -19,7 +19,7 @@ defaults:
     shell: bash
 
 env:
-  FIGARO_VERSION: 7.4.0-SNAPSHOT
+  FIGARO_VERSION: 7.4.0
   FIGARO_CAPABILITY_CHECK: 'true'
   FIGARO_BUDGET_CHECK: 'true'
   FIGARO_FIXED_BUDGET_CHECK: 'true'
@@ -184,7 +184,7 @@ jobs:
       - name: Compile all source sets
         run: sbt --server --batch -v "clean; compile; Test / compile"
 
-      - name: Check binary compatibility with 7.2.0
+      - name: Check binary compatibility with 7.0.0 through 7.3.0
         # Separate tasks keep a failed compatibility gate from being masked.
         run: sbt --server --batch "figaro / mimaReportBinaryIssues"
 
@@ -192,6 +192,9 @@ jobs:
         run: |
           sbt --server --batch "figaro / packageBin"
           sbt --server --batch "compatibility / runMain CompatibilityCheck target/out/jvm/scala-3.9.0/figaro/figaro_3-$FIGARO_VERSION.jar"
+
+      - name: Check Scala 3 TASTy and fixed-budget client compatibility with 7.3.0
+        run: sbt --server --batch "compatibility73 / runMain CompatibilityCheck target/out/jvm/scala-3.9.0/figaro/figaro_3-$FIGARO_VERSION.jar 7.3.0"
 
       - name: Run documented quick start and common patterns
         run: >-

@@ -45,7 +45,7 @@ lazy val legalSettings = Seq(
 lazy val figaroSettings = Seq(
   organization := "io.github.mattwilkinsphoto",
   description := "Figaro: a language for probabilistic programming",
-  version := "7.4.0-SNAPSHOT",
+  version := "7.4.0",
   scalaVersion := "3.9.0",
   crossScalaVersions := Seq("3.9.0"),
   crossPaths := true,
@@ -151,6 +151,24 @@ lazy val compatibility = project.in(file("tools/compatibility"))
       ("ch.epfl.scala" %% "tasty-mima" % "1.4.1").exclude("ch.epfl.scala", "tasty-query_3"),
       "ch.epfl.scala" %% "tasty-query" % "1.9.0"
     ),
+    Compile / run / fork := true,
+    Compile / run / javaOptions += "-Xmx3G"
+  )
+
+// Add the immediate released baseline without dropping the existing 7.2 gate.
+lazy val compatibility73 = project.in(file("tools/compatibility73"))
+  .settings(
+    externalResolvers := Seq(Resolver.mavenCentral),
+    scalaVersion := "3.9.0",
+    publish / skip := true,
+    libraryDependencies ++= Seq(
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.3.0",
+      ("ch.epfl.scala" %% "tasty-mima" % "1.4.1").exclude("ch.epfl.scala", "tasty-query_3"),
+      "ch.epfl.scala" %% "tasty-query" % "1.9.0"
+    ),
+    Compile / unmanagedSources := Seq(
+      file("tools/compatibility/src/main/scala/CompatibilityCheck.scala"),
+      baseDirectory.value / "OldFixedBudgetClient.scala"),
     Compile / run / fork := true,
     Compile / run / javaOptions += "-Xmx3G"
   )

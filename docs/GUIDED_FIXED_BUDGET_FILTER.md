@@ -1,6 +1,6 @@
 # Guided and auxiliary fixed-budget filtering
 
-**Validated opt-in extension in unreleased 7.4.0-SNAPSHOT; not in published 7.3.0.**
+**Available in the 7.4.0 source; final publication is tracked in the [release record](RELEASE_7_4_STATUS.md). Not in 7.3.0.**
 [Research provenance](RESEARCH_REFERENCES.md#inf-16).
 [Validation and promotion status](GUIDED_FIXED_BUDGET_STATUS.md).
 
