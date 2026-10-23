@@ -5,8 +5,8 @@ active workflows; its sources and results remain for historical replay. The name
 development CI job runs `stock_linux.py --mode direct --ci-gate --output NEW_DIRECTORY`
 on Linux, only within the named workflow. It checks pinned stock binaries, all
 candidate failure controls and two fresh 131-test inventories at the current commit.
-It does not modify sbt binaries. Full adoption CI and packaged acceptance remain
-pending; [current status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
+It does not modify sbt binaries. Full adoption CI and packaged acceptance passed
+at `c04ff1b8`; [results and held merge status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
 The retired `branch_pilot.py --ci-gate` entry point fails explicitly.
 
 The instructions below preserve historical experiments. For repair reproduction,

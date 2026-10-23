@@ -4,7 +4,8 @@
 historical evidence, not a ready-to-file report against current sbt.
 
 Repository follow-up: stock 2.0.11 adoption is now approved and implemented on a
-review branch, with full CI and packaged-consumer gates pending. The local repair
+review branch. Full CI and all six packaged consumers passed at `c04ff1b8`, with
+no unexpected worker exception in the ordinary logs. The local repair
 is retired from active workflows, not proposed as a replacement for upstream's
 response-draining fix. Merge and upstream submission remain on hold. See the
 [current adoption status](../../docs/CI_VALIDATION.md#stock-sbt-2011-adoption).

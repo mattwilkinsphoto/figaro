@@ -1,7 +1,7 @@
 # Collection benchmarks and sbt worker validation
 
-Status: stock sbt 2.0.11 adoption is implemented on a review branch; full adoption
-CI and packaged-consumer acceptance are pending. The local repair is retired
+Status: stock sbt 2.0.11 adoption passed full CI and packaged-consumer acceptance
+at implementation commit `c04ff1b8`; it remains on a review branch. The local repair is retired
 from active workflows. Figaro 7.4.0 remains the published release; its historical
 validation and advisory timing results are preserved below. No merge, new release
 or upstream submission is authorized by this tooling change.
@@ -31,9 +31,22 @@ All other full CI gates remain in place, including instrumentation, compatibilit
 reproducible packaging and all six packaged consumers. The publication workflow
 is unchanged and is not run. Merge and upstream submission remain on hold.
 
-Acceptance status: local checks and a new full remote adoption run are pending.
-The prior isolated assessment below supports the change but is not a substitute
-for those gates. This tooling-only change does not itself warrant a library release.
+Acceptance: [full run 40006071239](https://github.com/mattwilkinsphoto/figaro/actions/runs/40006071239)
+passed all five jobs and every step at `c04ff1b8`, including the unchanged advisory
+timing checks. Independent auditing verified all 504 named-gate payload files,
+16 captured command logs, official binary hashes, five expected fixture exits and
+both fresh exact 131-test inventories. All 73 logged ordinary sbt starts used 2.0.11;
+no unexpected worker-completion exception appeared. All six consumers passed in
+preflight, local-publication and Maven-layout-without-Ivy-local paths, each checking
+the expected artifact hash. Both fresh builds produced identical thin/fat JARs.
+
+The rebuilt thin JAR is byte-identical to published 7.4.0 (SHA-256
+`0abfdadfeb007af1eee39a04b0591e49686d4cab74181402ccf8d9948abe4dbf`);
+source/Scaladoc/POM hashes also match the release record. Bundle metadata now
+correctly records the source selector as 2.0.11. Local checks passed 84 tests plus
+reference/navigation validation. These results support merge review, not automatic
+merge or upstream submission. This tooling-only change does not warrant a new
+library release; published artifacts and tags remain untouched.
 
 ## Stock 2.0.11 Linux/server follow-up
 

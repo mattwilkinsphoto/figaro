@@ -769,8 +769,13 @@ historical 2.0.8 reproduction results are retained separately. Negative controls
 [test_stock_linux.py](../tools/test_stock_linux.py),
 [test_ci_repair.py](../tools/test_ci_repair.py) and
 [test_build_release_bundle.py](../tools/test_build_release_bundle.py) enforce scope,
-repair retirement and source-toolchain metadata. Full adoption CI and packaged
-acceptance remain pending; [status](CI_VALIDATION.md#stock-sbt-2011-adoption).
+repair retirement and source-toolchain metadata. [Adoption CI 40006071239](https://github.com/mattwilkinsphoto/figaro/actions/runs/40006071239)
+passed all five jobs at `c04ff1b8`. Independent auditing verified the complete
+named-gate manifest, five real fixture outcomes, both exact 131-test passes,
+all six consumers in each packaged-consumption path and byte identity with the
+published thin JAR. No unexpected worker exception appeared in ordinary logs.
+These bounded results do not negate the forced React findings or prove universal
+race freedom; [scope and held merge status](CI_VALIDATION.md#stock-sbt-2011-adoption).
 No estimator, inference default, library release or upstream submission changes.
 
 ## Keeping this index useful
