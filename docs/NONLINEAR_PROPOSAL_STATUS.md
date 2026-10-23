@@ -98,6 +98,10 @@ Factorization reuse can be studied later, but should not substitute for resolvin
 proposal-shape inadequacy. No universal rejection of cubature/UKF or mixtures follows
 from these eight bounded fixtures.
 
+The subsequent [multi-component assessment](MULTICOMPONENT_GUIDE_RESEARCH.md) is
+complete and proposes a separate three-stage experiment. It does not alter this
+protocol, its negative results or the no-promotion decision.
+
 ## Additional verification and evidence
 
 The unchanged continuous benchmark completed 7,680 runs / 153,600 rows and passed

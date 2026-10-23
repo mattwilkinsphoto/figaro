@@ -62,9 +62,15 @@ helpers behind the released 7.4.0 fixed-budget APIs. The [roadmap](ROADMAP.md#re
 records the next recommendation; the [completed experiment](docs/NONLINEAR_PROPOSAL_STATUS.md)
 passed correctness but failed accuracy/cost gates, retaining cubature/Jacobian helpers only in tests.
 [INF-17](docs/RESEARCH_REFERENCES.md#inf-17) records sources and inspection limits.
-Bounded multi-component proposal assessment remains a follow-on; learned proposals are deferred. No winning algorithm, speedup,
-automatic policy or publication is claimed. Preserve all earlier negative
-particle-diversity results and released stopping/defaults.
+
+**PF-PROPOSAL-02 — assessment complete, test-only implementation proposed.** The
+[multi-component guide plan](docs/MULTICOMPONENT_GUIDE_RESEARCH.md) compares explicit
+scalar branches with a shared weighted-pilot fit, retaining cost-matched bootstrap
+and manual-guide controls. [INF-18](docs/RESEARCH_REFERENCES.md#inf-18) records the
+literature and reuse assessment. Independent validation is required before any
+promotion; learned proposals, unknown-mode discovery and vector expansion remain
+deferred. No winning algorithm, speedup, automatic policy or publication is claimed.
+Preserve all earlier negative results and released stopping/defaults.
 
 ## Broad families first
 

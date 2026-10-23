@@ -48,6 +48,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Bounded single-selection and ESS-triggered resampling schedules | [INF-15](#inf-15) |
 | Guided and auxiliary fixed-budget extension | [INF-16](#inf-16) |
 | Nonlinear proposal construction: test-only, no-promotion result | [INF-17](#inf-17) |
+| Multi-component filtering guides: assessment and proposed experiment | [INF-18](#inf-18) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -417,6 +418,26 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 **Validation:** [Prototype controls](../Figaro/src/test/scala/com/cra/figaro/test/modernization/NonlinearProposalTest.scala), [independent density-grid reference](../tools/nonlinear_proposal_reference.py), [reference self-tests](../tools/test_nonlinear_proposal_reference.py), [all-outcome analysis](../tools/nonlinear_proposal_analysis.py) and [analysis tests](../tools/test_nonlinear_proposal_analysis.py). 69 Scala tests, 334 reference checks, 984 held-out correctness screens and unchanged 450-check continuous benchmark passed. All 31,488 rows per JVM completed and replayed across three JVMs; 128 independent seeds, not 384. All three candidate utility gates failed; Jacobian also failed asymmetric mode depletion. The status guide preserves those negative results and reference/compile corrections. Existing [ContinuousFilterBenchmark](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmark.scala) supplies the retained manual recipe. No runtime promotion or published speedup claim.
 
 **Guide:** [NONLINEAR PROPOSAL RESEARCH](NONLINEAR_PROPOSAL_RESEARCH.md); [NONLINEAR PROPOSAL PROTOCOL](NONLINEAR_PROPOSAL_PROTOCOL.md); [NONLINEAR PROPOSAL STATUS](NONLINEAR_PROPOSAL_STATUS.md); [AUXILIARY PARTICLE FILTER](AUXILIARY_PARTICLE_FILTER.md).
+
+<a id="inf-18"></a>
+
+### INF-18: Bounded multi-component filtering guide assessment
+
+**Source:** Cappé et al., [Adaptive Importance Sampling in General Mixture Classes](https://arxiv.org/html/0710.4242) (2008), sections 2 and 3.1–3.2, reusing INF-02; Zhang et al., [Pathfinder v4](https://arxiv.org/html/2108.03782v4) (2022), sections II.2/II.4/II.7 and III.3; Tawn et al., [Annealed leap-point sampler](https://doi.org/10.1007/s11222-026-10988-5) (17 October 2026), introduction and section 3 overview. Li et al., [SeMIS](https://www.sciencedirect.com/science/article/pii/S088832702501489X) (2026), publisher abstract/introduction screening only; direct full-text retrieval returned 403. Inspected 2026-10-23. Official pypmc, scikit-learn and Stan documentation and pinned pypmc responsibility/preparation code were inspected for reuse; exact scope, licenses and access limitations are in the guide. INF-01/10/13/16/17 retain defensive, correction, log-selection and prior nonlinear-study provenance.
+
+**Role:** Literature-led assessment only. Proposed scalar local-affine surrogate mixture and separately frozen shared-pilot comparator, not implementations of M-PMC, Pathfinder, ALPS or SeMIS. The local-affine mixture identities and shared-guide integration are proposed Figaro specializations. No new runtime, test prototype, dependency, optimizer, training system, mode-discovery guarantee or numerical result. Released stopping and defaults unchanged.
+
+**Code:** No new implementation. Reuse candidates: [GaussianMixtureProposal.fitWeighted](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/GaussianMixtureProposal.scala), [VectorImportance mixture density](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/VectorImportance.scala), [WeightedParticleProposal](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala), [LogParticleWeights](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/LogParticleWeights.scala) and [FixedBudgetParticleFilter](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala). Existing ordinary-CDF mixture sampling is not silently changed; the proposed test adapter must independently validate log-tree component selection.
+
+**Validation:** No multi-component filtering experiment executed. The proposed three-stage plan requires analytic/independent grid controls, sampler-density and pilot-stream accounting, bounded resources, all-outcome fresh-seed confirmation and cost-matched bootstrap comparisons before promotion review. INF-17's negative outcome is motivation, not validation of this candidate. Existing [GaussianMixtureProposalTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/GaussianMixtureProposalTest.scala) and [ContinuousFilterBenchmark](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmark.scala) are reuse/regression leads, not newly executed acceptance evidence.
+
+Stage 1: the approved [frozen protocol](MULTICOMPONENT_GUIDE_PROTOCOL.md) has
+independent [true-model grid references](../tools/multicomponent_reference.py) and
+[reference self-tests](../tools/test_multicomponent_reference.py). All 1,023
+reference checks and five self-tests passed before candidate implementation.
+This does not establish candidate correctness, utility or promotion eligibility.
+
+**Guide:** [MULTICOMPONENT GUIDE RESEARCH](MULTICOMPONENT_GUIDE_RESEARCH.md); [MULTICOMPONENT GUIDE PROTOCOL](MULTICOMPONENT_GUIDE_PROTOCOL.md).
 
 <a id="dia-01"></a>
 
