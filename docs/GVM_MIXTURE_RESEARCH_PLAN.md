@@ -2,6 +2,12 @@
 
 Research provenance: [GVM-04](RESEARCH_REFERENCES.md#gvm-04).
 
+Current follow-up: [higher-dimensional fitting assessment and bounded plan](GVM_HIGH_DIMENSIONAL_FITTING_RESEARCH.md)
+proposes independent controls, a test-only fitter, and a frozen comparison for
+two or three linear coordinates plus one angle. It is not implemented. The
+historical studies below remain unchanged; stronger wrapped controls must optimize
+the wrapped likelihood rather than only wrap a chart-fit Gaussian at evaluation.
+
 Status: modern.23 delivers the [fixed mixture kernel](GVM_MIXTURES.md), a focused
 literature baseline and an [initial controlled GMM comparison](MODELING_CAPABILITIES_ACCEPTANCE.md).
 The 6.1 follow-on adds [public bounded scalar-linear fitting](GVM_MIXTURE_FITTING.md),

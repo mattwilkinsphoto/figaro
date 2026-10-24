@@ -104,6 +104,10 @@ concentration. A decreasing full-data update is refused. Every restart is record
 [Fixed GVM mixtures](GVM_MIXTURES.md), [partition MI](GVM_MIXTURE_MI.md),
 [6.1 acceptance](RELEASE_6_1.md), and [independent GMM comparison](GVM_MIXTURE_RESEARCH_PLAN.md).
 
+The [higher-dimensional fitting plan](GVM_HIGH_DIMENSIONAL_FITTING_RESEARCH.md)
+is research only. This public fitter still accepts exactly one linear coordinate
+plus one angle; no parameter limits or defaults changed with that assessment.
+
 [Horwood and Poore (2014)](https://epubs.siam.org/doi/10.1137/130917296) supplies the
 underlying joint GVM law. [Model-based clustering using a new mixture of circular
 regressions (2026)](https://arxiv.org/abs/2601.05345) is relevant recent EM/circular-

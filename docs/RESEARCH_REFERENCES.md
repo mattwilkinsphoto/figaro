@@ -52,7 +52,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Expensive-likelihood branch qualification and precomputation | [INF-19](#inf-19) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
-| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
+| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05) |
 | Cross-family information measures and mixture MI | [MET-01](#met-01), [MET-02](#met-02) |
 | Common families, matrix/correlation priors | [DIST-01](#dist-01), [DIST-02](#dist-02), [DIST-03](#dist-03) |
 | Conditional copulas and observation semantics | [MOD-01](#mod-01), [MOD-02](#mod-02) |
@@ -622,6 +622,20 @@ and repaired by a separate unchanged replay, not by relaxing scientific checks.
 **Validation:** [Release61ModelingTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/Release61ModelingTest.scala); [Release61RepresentationStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/Release61RepresentationStudy.scala).
 
 **Guide:** [GVM MIXTURE FITTING](GVM_MIXTURE_FITTING.md); [GVM MIXTURE RESEARCH PLAN](GVM_MIXTURE_RESEARCH_PLAN.md).
+
+<a id="gvm-05"></a>
+
+### GVM-05: Higher-dimensional GVM fitting and wrapped Gaussian controls
+
+**Source:** Circular-regression context in GVM-04; Rocci, Gattone and Di Mari, [A data driven equivariant approach to constrained Gaussian mixture modeling](https://arxiv.org/pdf/1609.03317), v4 (2016), introduction and §§3–6; Greco, Saraceno and Agostinelli, [Robust Fitting of a Wrapped Normal Model to Multivariate Circular Data and Outlier Detection](https://giovsaraceno.github.io/papers/stats-04-00028-v2.pdf) (2021), introduction and §2; Powell, [BOBYQA](https://optimization-online.org/wp-content/uploads/2010/05/2616.pdf) (2009), abstract/introduction and the [Commons Math API](https://commons.apache.org/proper/commons-math/javadocs/api-3.6.1/org/apache/commons/math3/optim/nonlinear/scalar/noderiv/BOBYQAOptimizer.html). Official [scikit-learn GMM documentation](https://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html) and [libDirectional source](https://github.com/libDirectional/libDirectional/tree/8a5c791743ddce5463fe192182f98c576b847ace) provide implementation comparisons, not reproduced results. Inspected 2026-10-23; exact scope and access limitations are in the guide.
+
+**Role:** Test-only research candidate for two or three linear coordinates plus one angle: full-covariance/quadratic-phase fitting, fixed-frame phase coordinates, bounded local optimization and independent soft-winding GMM controls. Published constrained-Gaussian and circular-regression guarantees do not automatically transfer. No external source/data copied; libDirectional GPL-3.0 is reference-only. SciPy supplies the independent optimization control; scikit-learn was considered but not installed. Commons Math is an existing Apache-2.0 dependency. Shared pilot remains parked; stopping/defaults unchanged.
+
+**Code:** Test-only [Commons Math GVM fitter](../tools/GvmDimensionalFit.java), [independent Python references and soft-winding Gaussian fitter](../tools/gvm_dimension_controls.py), and [frozen-study runner](../tools/gvm_dimension_study.py). Existing [joint kernel](../Figaro/src/main/scala/com/cra/figaro/library/atomic/continuous/GaussVonMisesDistribution.scala), [scalar-only fitter](../Figaro/src/main/scala/com/cra/figaro/library/atomic/continuous/GaussVonMisesMixtureFit.scala) and [Gaussian fitter](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/GaussianMixtureProposal.scala) remain unchanged.
+
+**Validation:** [Independent reference tests](../tools/test_gvm_dimension_controls.py), [cross-language qualification/development controls](../tools/gvm_dimension_qualification.py), and [unchanged-kernel consumer check](../tools/GvmKernelCompatibility.scala). Historical [Release61RepresentationStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/Release61RepresentationStudy.scala) remains a scalar baseline whose wrapped control wraps a chart-fit Gaussian at evaluation. Initial numerical qualification passed; confirmation is governed by the frozen protocol, not documentation checks. No promotion claimed.
+
+**Guide:** [Higher-dimensional GVM fitting assessment and bounded plan](GVM_HIGH_DIMENSIONAL_FITTING_RESEARCH.md); [three-stage experiment protocol](GVM_HIGH_DIMENSIONAL_PROTOCOL.md).
 
 <a id="met-01"></a>
 

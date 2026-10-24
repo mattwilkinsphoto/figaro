@@ -70,9 +70,17 @@ measured. Do not start a guide utility trial for this frozen model or retune it
 to pass. Keep the shared pilot parked and previous no-promotion results unchanged.
 No runtime integration, promotion, release, stopping or default change follows.
 
-The recommended next assessment is higher-dimensional GVM-mixture
-fitting (with GMM controls); broader multi-latent warm-up/proposal support is
-another candidate.
+**DIST-02: higher-dimensional GVM fitting experiment in progress.**
+The [literature-led assessment and bounded plan](docs/GVM_HIGH_DIMENSIONAL_FITTING_RESEARCH.md)
+recommend two or three linear coordinates plus one angle, full covariance and
+quadratic cross terms. Approved order: independently qualify numerical references
+and genuinely wrapped-likelihood GMM controls; build a bounded test-only fitter;
+then run a [frozen held-out accuracy/cost comparison](docs/GVM_HIGH_DIMENSIONAL_PROTOCOL.md).
+Initial numerical qualification passed; no confirmation result or promotion yet.
+Scalar fitting, stopping and
+defaults remain unchanged. No public integration or superiority claim precedes
+independent validation. See [GVM-05](docs/RESEARCH_REFERENCES.md#gvm-05).
+Broader multi-latent warm-up/proposal support remains another candidate.
 These are recommendations, not an automatic implementation queue. Higher-dimensional
 GVM fitting remains density representation work, excluding application fusion.
 Finite-population mode loss, arbitrary-graph ownership and unsupported numerical

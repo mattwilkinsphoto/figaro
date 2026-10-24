@@ -1,0 +1,99 @@
+{
+  "protocol": "gvm-dimensional-v1",
+  "dimensions": [
+    2,
+    3
+  ],
+  "families": [
+    "curved",
+    "seam",
+    "local",
+    "wrapped"
+  ],
+  "methods": [
+    "gvm",
+    "chart",
+    "wrapped"
+  ],
+  "confirmationSeeds": [
+    830001,
+    830002,
+    830003,
+    830004,
+    830005,
+    830006,
+    830007,
+    830008,
+    830009,
+    830010,
+    830011,
+    830012,
+    830013,
+    830014,
+    830015,
+    830016
+  ],
+  "developmentSeedRange": [
+    150000,
+    179999
+  ],
+  "train": 2000,
+  "validation": 2000,
+  "test": 20000,
+  "predictive": 20000,
+  "budgets": {
+    "2": [
+      12,
+      39
+    ],
+    "3": [
+      20,
+      62
+    ]
+  },
+  "components": {
+    "gvm": [
+      1,
+      3
+    ],
+    "chart": [
+      1,
+      4
+    ],
+    "wrapped": [
+      1,
+      4
+    ]
+  },
+  "starts": 3,
+  "maxIterations": 50,
+  "maxAngularEvaluations": 400,
+  "maxPhasePoints": 20000000,
+  "maxFitSeconds": 120,
+  "maxTotalFitAttempts": 1024,
+  "maxTotalSerialSeconds": 28800,
+  "previousDevelopmentAndControlFitsUpperBound": 128,
+  "practicalGainNats": 0.05,
+  "gaussianNoninferiorityNats": 0.02,
+  "qualifiedRate": 0.95,
+  "confidenceFamilyAlpha": 0.05,
+  "plannedComparisons": 32,
+  "statusRequired": "Converged",
+  "sourceSha256": {
+    "tools/GvmDimensionalFit.java": "f603156e6e7b8337e1933325bb6c0ce57b8c66c07c52a2ef510cecde74d8afd5",
+    "tools/GvmKernelCompatibility.scala": "912058037f1271ebc924b2c513291f8b8e57aed4b8b0e772ddf59a9e20a392f2",
+    "tools/gvm_dimension_controls.py": "ea4cccad6c1abb6aca8a6563ef53a382fb0512711bfe6e50218cfa8e58939962",
+    "tools/test_gvm_dimension_controls.py": "17902fa4b09ac9e705b8f6036c144793018aa7cb5bcc58c8e563d107edafd9db",
+    "tools/gvm_dimension_qualification.py": "f0445e0a4b3fcf232da0cfb156e18d91e1f65c7cd9313512eb9307dc490efb74",
+    "tools/gvm_dimension_study.py": "6170d5fd308cfa73fafc5b6ef132b0cddd1e7f70db40b51088f21a48398dc651",
+    "tools/gvm_study_io.py": "44fb77a6e17025d133b1ae5acc3a1b69c94596422eec0588c0521738ca246ad3",
+    "docs/GVM_HIGH_DIMENSIONAL_PROTOCOL.md": "54c18879821ed419360b04343d469db0f8fbe4dd37b7a115f2e12dff1755a272"
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.5.1",
+    "scipy": "1.18.1",
+    "psutil": "7.2.2"
+  },
+  "frozenUnix": 1792816842.9483614
+}
