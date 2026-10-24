@@ -1,7 +1,8 @@
 # Higher-dimensional GVM-mixture fitting: assessment and bounded plan
 
-Status: literature/code assessment complete; the three test-only stages are now
-approved and in progress under the [experiment protocol](GVM_HIGH_DIMENSIONAL_PROTOCOL.md).
+Status: all three test-only stages are complete with **no promotion**. See the
+[results and limitations](GVM_HIGH_DIMENSIONAL_STATUS.md) and unchanged
+[experiment protocol](GVM_HIGH_DIMENSIONAL_PROTOCOL.md).
 The assessment below was recorded against `9771d4e5` on 2026-10-23.
 Research provenance: [GVM-05](RESEARCH_REFERENCES.md#gvm-05), with the existing
 joint law and scalar fitter in [GVM-02](RESEARCH_REFERENCES.md#gvm-02) and

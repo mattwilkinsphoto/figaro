@@ -2,9 +2,10 @@
 
 Research provenance: [GVM-04](RESEARCH_REFERENCES.md#gvm-04).
 
-Current follow-up: [higher-dimensional fitting assessment and bounded plan](GVM_HIGH_DIMENSIONAL_FITTING_RESEARCH.md)
-proposes independent controls, a test-only fitter, and a frozen comparison for
-two or three linear coordinates plus one angle. It is not implemented. The
+Current follow-up: the [higher-dimensional study](GVM_HIGH_DIMENSIONAL_STATUS.md)
+completed independent controls, a test-only fitter, and a frozen comparison for
+two or three linear coordinates plus one angle. Numerical checks and retained-fit
+accuracy margins passed, but completion gates failed; no public promotion. The
 historical studies below remain unchanged; stronger wrapped controls must optimize
 the wrapped likelihood rather than only wrap a chart-fit Gaussian at evaluation.
 

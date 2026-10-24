@@ -1,0 +1,1329 @@
+{
+  "protocolSha256": "a5c309a6af4bf6687e04a70b98a5a0b9b1b8a5dc143a562e365859d6750b7ddb",
+  "resultsSha256": "7353e25fc074d9c3ebbab3112b42e8b0ae7a41f63c4ae46004b011adcb50eabf",
+  "completeGrid": true,
+  "fits": 768,
+  "decision": "no-promotion",
+  "reliabilityGate": false,
+  "utilityGate": true,
+  "statusCounts": {
+    "gvm": {
+      "Converged": 128,
+      "PhaseBudgetExhausted": 128
+    },
+    "chart": {
+      "Converged": 146,
+      "IterationLimit": 105,
+      "InsufficientComponent": 5
+    },
+    "wrapped": {
+      "Converged": 137,
+      "IterationLimit": 119
+    }
+  },
+  "elapsedSeconds": 601.5243339538574,
+  "cells": [
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 0,
+      "method": "gvm",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.2524719367619923,
+      "meanForwardKl": 0.003328362007414132,
+      "maxAbsoluteRegionError": 0.021650000000000058,
+      "medianFitSeconds": 0.0980173,
+      "medianEndToEndSeconds": 0.20934769999803393,
+      "medianEvaluationSeconds": 0.002606699998068507,
+      "medianSamplingSeconds": 0.0023877000021457206
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 0,
+      "method": "chart",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.8236520900961146,
+      "meanForwardKl": 0.5745085153415357,
+      "maxAbsoluteRegionError": 0.0237,
+      "medianFitSeconds": 0.0036583000000973698,
+      "medianEndToEndSeconds": 0.00453899999956775,
+      "medianEvaluationSeconds": 0.008587100001022918,
+      "medianSamplingSeconds": 0.0009808500017243205
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 0,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.8169265546095485,
+      "meanForwardKl": 0.56778297985497,
+      "maxAbsoluteRegionError": 0.029600000000000015,
+      "medianFitSeconds": 0.02091995000046154,
+      "medianEndToEndSeconds": 0.021853999996892526,
+      "medianEvaluationSeconds": 0.007579299999633804,
+      "medianSamplingSeconds": 0.0010164000013901386
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 1,
+      "method": "gvm",
+      "statuses": {
+        "PhaseBudgetExhausted": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.259576786287446,
+      "meanForwardKl": 0.01043321153286719,
+      "maxAbsoluteRegionError": 0.02849999999999997,
+      "medianFitSeconds": 0.5638365000000001,
+      "medianEndToEndSeconds": 0.734584800000448,
+      "medianEvaluationSeconds": 0.004901849999441765,
+      "medianSamplingSeconds": 0.002875099999073427
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 1,
+      "method": "chart",
+      "statuses": {
+        "IterationLimit": 13,
+        "InsufficientComponent": 2,
+        "Converged": 1
+      },
+      "qualifiedRate": 0.0625,
+      "finiteModels": 16,
+      "meanLogScore": -3.363016582858153,
+      "meanForwardKl": 0.1138730081035745,
+      "maxAbsoluteRegionError": 0.04099999999999998,
+      "medianFitSeconds": 0.2616525500015996,
+      "medianEndToEndSeconds": 0.26259625000238884,
+      "medianEvaluationSeconds": 0.02929289999883622,
+      "medianSamplingSeconds": 0.001441500000510132
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 1,
+      "method": "wrapped",
+      "statuses": {
+        "IterationLimit": 14,
+        "Converged": 2
+      },
+      "qualifiedRate": 0.125,
+      "finiteModels": 16,
+      "meanLogScore": -3.3367386006716804,
+      "meanForwardKl": 0.08759502591710244,
+      "maxAbsoluteRegionError": 0.031850000000000045,
+      "medianFitSeconds": 0.9463161000003311,
+      "medianEndToEndSeconds": 0.9470787500013103,
+      "medianEvaluationSeconds": 0.028663949999099714,
+      "medianSamplingSeconds": 0.0013914000010117888
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 0,
+      "method": "gvm",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.6256755839433046,
+      "meanForwardKl": 0.570363943971639,
+      "maxAbsoluteRegionError": 0.14685000000000004,
+      "medianFitSeconds": 0.1009225,
+      "medianEndToEndSeconds": 0.2117026000014448,
+      "medianEvaluationSeconds": 0.002630949997183052,
+      "medianSamplingSeconds": 0.002467949998390395
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 0,
+      "method": "chart",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.7237980963238098,
+      "meanForwardKl": 0.6684864563521441,
+      "maxAbsoluteRegionError": 0.17105000000000004,
+      "medianFitSeconds": 0.004035199999634642,
+      "medianEndToEndSeconds": 0.004848050000873627,
+      "medianEvaluationSeconds": 0.007831150000129128,
+      "medianSamplingSeconds": 0.0010573000017757295
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 0,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.7169376052707235,
+      "meanForwardKl": 0.6616259652990581,
+      "maxAbsoluteRegionError": 0.18520000000000003,
+      "medianFitSeconds": 0.01882579999983136,
+      "medianEndToEndSeconds": 0.01953210000101535,
+      "medianEvaluationSeconds": 0.007465549999324139,
+      "medianSamplingSeconds": 0.001040199998897151
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 1,
+      "method": "gvm",
+      "statuses": {
+        "PhaseBudgetExhausted": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.0654857532991016,
+      "meanForwardKl": 0.01017411332743603,
+      "maxAbsoluteRegionError": 0.020299999999999985,
+      "medianFitSeconds": 0.5448175,
+      "medianEndToEndSeconds": 0.7206402499996329,
+      "medianEvaluationSeconds": 0.005113600002005114,
+      "medianSamplingSeconds": 0.0026914999998552958
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 1,
+      "method": "chart",
+      "statuses": {
+        "IterationLimit": 8,
+        "Converged": 5,
+        "InsufficientComponent": 3
+      },
+      "qualifiedRate": 0.3125,
+      "finiteModels": 16,
+      "meanLogScore": -3.2415996627611583,
+      "meanForwardKl": 0.18628802278949275,
+      "maxAbsoluteRegionError": 0.08574999999999999,
+      "medianFitSeconds": 0.2627548000000388,
+      "medianEndToEndSeconds": 0.2635873499984882,
+      "medianEvaluationSeconds": 0.034251299997777096,
+      "medianSamplingSeconds": 0.0015094000009412412
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 1,
+      "method": "wrapped",
+      "statuses": {
+        "IterationLimit": 14,
+        "Converged": 2
+      },
+      "qualifiedRate": 0.125,
+      "finiteModels": 16,
+      "meanLogScore": -3.21229573189761,
+      "meanForwardKl": 0.1569840919259445,
+      "maxAbsoluteRegionError": 0.05989999999999995,
+      "medianFitSeconds": 0.9638372499975958,
+      "medianEndToEndSeconds": 0.9644902000000002,
+      "medianEvaluationSeconds": 0.02989854999941599,
+      "medianSamplingSeconds": 0.0016041500002756948
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 0,
+      "method": "gvm",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -2.8703617185973243,
+      "meanForwardKl": 0.003968119518169853,
+      "maxAbsoluteRegionError": 0.021299999999999986,
+      "medianFitSeconds": 0.095567,
+      "medianEndToEndSeconds": 0.2097995500007528,
+      "medianEvaluationSeconds": 0.002412249999906635,
+      "medianSamplingSeconds": 0.0025428499993722653
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 0,
+      "method": "chart",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -2.8692548556201714,
+      "meanForwardKl": 0.0028612565410166806,
+      "maxAbsoluteRegionError": 0.017699999999999994,
+      "medianFitSeconds": 0.003776300000026822,
+      "medianEndToEndSeconds": 0.00473730000157957,
+      "medianEvaluationSeconds": 0.0036512499991658842,
+      "medianSamplingSeconds": 0.0010573499985184753
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 0,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -2.8692548556201714,
+      "meanForwardKl": 0.0028612565410166624,
+      "maxAbsoluteRegionError": 0.021050000000000013,
+      "medianFitSeconds": 0.005183549999856041,
+      "medianEndToEndSeconds": 0.006268600000112201,
+      "medianEvaluationSeconds": 0.00323979999848234,
+      "medianSamplingSeconds": 0.001025600000502891
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 1,
+      "method": "gvm",
+      "statuses": {
+        "PhaseBudgetExhausted": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -2.878242269681601,
+      "meanForwardKl": 0.011848670602445856,
+      "maxAbsoluteRegionError": 0.028700000000000003,
+      "medianFitSeconds": 0.5544703,
+      "medianEndToEndSeconds": 0.7452830500023992,
+      "medianEvaluationSeconds": 0.005064850000053411,
+      "medianSamplingSeconds": 0.002569150001363596
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 1,
+      "method": "chart",
+      "statuses": {
+        "IterationLimit": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -2.8790374764590485,
+      "meanForwardKl": 0.012643877379893644,
+      "maxAbsoluteRegionError": 0.023350000000000037,
+      "medianFitSeconds": 0.27152250000108324,
+      "medianEndToEndSeconds": 0.27257614999871294,
+      "medianEvaluationSeconds": 0.011108800001238706,
+      "medianSamplingSeconds": 0.001329700000496814
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 1,
+      "method": "wrapped",
+      "statuses": {
+        "IterationLimit": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -2.8790374764590485,
+      "meanForwardKl": 0.012643877379893595,
+      "maxAbsoluteRegionError": 0.030999999999999972,
+      "medianFitSeconds": 0.4314022499984276,
+      "medianEndToEndSeconds": 0.43242730000019947,
+      "medianEvaluationSeconds": 0.01100159999805328,
+      "medianSamplingSeconds": 0.0013732500010519288
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 0,
+      "method": "gvm",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.813279469543963,
+      "meanForwardKl": 0.0710454188495371,
+      "maxAbsoluteRegionError": 0.029700000000000004,
+      "medianFitSeconds": 0.0995353,
+      "medianEndToEndSeconds": 0.21563889999924868,
+      "medianEvaluationSeconds": 0.002903050000895746,
+      "medianSamplingSeconds": 0.002718650001042988
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 0,
+      "method": "chart",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.806392343867782,
+      "meanForwardKl": 0.06415829317335633,
+      "maxAbsoluteRegionError": 0.028099999999999986,
+      "medianFitSeconds": 0.004374699999971199,
+      "medianEndToEndSeconds": 0.005385150001529837,
+      "medianEvaluationSeconds": 0.008789150000666268,
+      "medianSamplingSeconds": 0.0011191499997948995
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 0,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.8063831017338545,
+      "meanForwardKl": 0.06414905103942822,
+      "maxAbsoluteRegionError": 0.03109999999999999,
+      "medianFitSeconds": 0.010873049999645445,
+      "medianEndToEndSeconds": 0.011781199998949887,
+      "medianEvaluationSeconds": 0.007571099999040598,
+      "medianSamplingSeconds": 0.0010788999989017611
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 1,
+      "method": "gvm",
+      "statuses": {
+        "PhaseBudgetExhausted": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -3.755520146701462,
+      "meanForwardKl": 0.013286096007035873,
+      "maxAbsoluteRegionError": 0.022749999999999937,
+      "medianFitSeconds": 0.5658109499999999,
+      "medianEndToEndSeconds": 0.7405739500009076,
+      "medianEvaluationSeconds": 0.00527824999880977,
+      "medianSamplingSeconds": 0.0027085499987151707
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 1,
+      "method": "chart",
+      "statuses": {
+        "IterationLimit": 15,
+        "Converged": 1
+      },
+      "qualifiedRate": 0.0625,
+      "finiteModels": 16,
+      "meanLogScore": -3.752455359704001,
+      "meanForwardKl": 0.010221309009575042,
+      "maxAbsoluteRegionError": 0.02254999999999996,
+      "medianFitSeconds": 0.2823371499998757,
+      "medianEndToEndSeconds": 0.2831564000007347,
+      "medianEvaluationSeconds": 0.031164799998805393,
+      "medianSamplingSeconds": 0.001484149999669171
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 1,
+      "method": "wrapped",
+      "statuses": {
+        "IterationLimit": 15,
+        "Converged": 1
+      },
+      "qualifiedRate": 0.0625,
+      "finiteModels": 16,
+      "meanLogScore": -3.752244025606224,
+      "meanForwardKl": 0.010009974911797972,
+      "maxAbsoluteRegionError": 0.024499999999999966,
+      "medianFitSeconds": 0.9772940999991988,
+      "medianEndToEndSeconds": 0.978164400001333,
+      "medianEvaluationSeconds": 0.02859329999955662,
+      "medianSamplingSeconds": 0.0015652500005671754
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 0,
+      "method": "gvm",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.666488962251214,
+      "meanForwardKl": 0.005222668596160786,
+      "maxAbsoluteRegionError": 0.02184999999999998,
+      "medianFitSeconds": 0.18184165000000002,
+      "medianEndToEndSeconds": 0.30316414999833796,
+      "medianEvaluationSeconds": 0.002672899998287903,
+      "medianSamplingSeconds": 0.0025543499996274477
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 0,
+      "method": "chart",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.502249808239277,
+      "meanForwardKl": 0.8409835145842238,
+      "maxAbsoluteRegionError": 0.023350000000000037,
+      "medianFitSeconds": 0.004318200000852812,
+      "medianEndToEndSeconds": 0.0056160499989346135,
+      "medianEvaluationSeconds": 0.00837475000116683,
+      "medianSamplingSeconds": 0.0012581000009959098
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 0,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.495784598661473,
+      "meanForwardKl": 0.8345183050064198,
+      "maxAbsoluteRegionError": 0.020950000000000024,
+      "medianFitSeconds": 0.02936729999964882,
+      "medianEndToEndSeconds": 0.030521149998094188,
+      "medianEvaluationSeconds": 0.00818605000313255,
+      "medianSamplingSeconds": 0.001282649998756824
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 1,
+      "method": "gvm",
+      "statuses": {
+        "PhaseBudgetExhausted": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.679041857307262,
+      "meanForwardKl": 0.017775563652209635,
+      "maxAbsoluteRegionError": 0.017400000000000027,
+      "medianFitSeconds": 0.8900977,
+      "medianEndToEndSeconds": 1.0163766500008933,
+      "medianEvaluationSeconds": 0.0055049999991751974,
+      "medianSamplingSeconds": 0.0030534500001522247
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 1,
+      "method": "chart",
+      "statuses": {
+        "IterationLimit": 15,
+        "Converged": 1
+      },
+      "qualifiedRate": 0.0625,
+      "finiteModels": 16,
+      "meanLogScore": -5.081539989214498,
+      "meanForwardKl": 0.4202736955594445,
+      "maxAbsoluteRegionError": 0.018699999999999994,
+      "medianFitSeconds": 0.2837445999994088,
+      "medianEndToEndSeconds": 0.2852184000021225,
+      "medianEvaluationSeconds": 0.031153249999988475,
+      "medianSamplingSeconds": 0.0015456000000995118
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 1,
+      "method": "wrapped",
+      "statuses": {
+        "IterationLimit": 14,
+        "Converged": 2
+      },
+      "qualifiedRate": 0.125,
+      "finiteModels": 16,
+      "meanLogScore": -5.062097222961351,
+      "meanForwardKl": 0.40083092930629804,
+      "maxAbsoluteRegionError": 0.02194999999999997,
+      "medianFitSeconds": 0.98505164999915,
+      "medianEndToEndSeconds": 0.986193299999286,
+      "medianEvaluationSeconds": 0.030258749999120482,
+      "medianSamplingSeconds": 0.0016319500009558396
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 0,
+      "method": "gvm",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.297671396526528,
+      "meanForwardKl": 0.7964000633723982,
+      "maxAbsoluteRegionError": 0.11095,
+      "medianFitSeconds": 0.19318235,
+      "medianEndToEndSeconds": 0.3093525000003865,
+      "medianEvaluationSeconds": 0.0029908500000601634,
+      "medianSamplingSeconds": 0.0026698999990912853
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 0,
+      "method": "chart",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.4208987769451165,
+      "meanForwardKl": 0.919627443790986,
+      "maxAbsoluteRegionError": 0.1109,
+      "medianFitSeconds": 0.004244699999617296,
+      "medianEndToEndSeconds": 0.005582349998803693,
+      "medianEvaluationSeconds": 0.008418049999818322,
+      "medianSamplingSeconds": 0.0014880000017001294
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 0,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.393445852381515,
+      "meanForwardKl": 0.8921745192273848,
+      "maxAbsoluteRegionError": 0.13129999999999997,
+      "medianFitSeconds": 0.026625500000591273,
+      "medianEndToEndSeconds": 0.028057599998646765,
+      "medianEvaluationSeconds": 0.008186650000425288,
+      "medianSamplingSeconds": 0.0014252000000851694
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 1,
+      "method": "gvm",
+      "statuses": {
+        "PhaseBudgetExhausted": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.51691325178182,
+      "meanForwardKl": 0.015641918627689863,
+      "maxAbsoluteRegionError": 0.029900000000000038,
+      "medianFitSeconds": 0.8689586,
+      "medianEndToEndSeconds": 1.1606923999970604,
+      "medianEvaluationSeconds": 0.0067178499994042795,
+      "medianSamplingSeconds": 0.002995599999849219
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 1,
+      "method": "chart",
+      "statuses": {
+        "Converged": 9,
+        "IterationLimit": 7
+      },
+      "qualifiedRate": 0.5625,
+      "finiteModels": 16,
+      "meanLogScore": -5.063005148972449,
+      "meanForwardKl": 0.5617338158183184,
+      "maxAbsoluteRegionError": 0.03649999999999998,
+      "medianFitSeconds": 0.282874049999009,
+      "medianEndToEndSeconds": 0.2843604499994399,
+      "medianEvaluationSeconds": 0.03468015000180458,
+      "medianSamplingSeconds": 0.0015892999999778112
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 1,
+      "method": "wrapped",
+      "statuses": {
+        "IterationLimit": 15,
+        "Converged": 1
+      },
+      "qualifiedRate": 0.0625,
+      "finiteModels": 16,
+      "meanLogScore": -5.05123546011257,
+      "meanForwardKl": 0.5499641269584401,
+      "maxAbsoluteRegionError": 0.07505,
+      "medianFitSeconds": 1.0065641500004858,
+      "medianEndToEndSeconds": 1.0079536000012013,
+      "medianEvaluationSeconds": 0.03111365000040678,
+      "medianSamplingSeconds": 0.0016591000003245426
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 0,
+      "method": "gvm",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.303612026744508,
+      "meanForwardKl": 0.004718301183393107,
+      "maxAbsoluteRegionError": 0.02034999999999998,
+      "medianFitSeconds": 0.1641727,
+      "medianEndToEndSeconds": 0.30254435000097146,
+      "medianEvaluationSeconds": 0.002501000000847853,
+      "medianSamplingSeconds": 0.0023361000003205845
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 0,
+      "method": "chart",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.3018481678183935,
+      "meanForwardKl": 0.002954442257279188,
+      "maxAbsoluteRegionError": 0.020100000000000007,
+      "medianFitSeconds": 0.0033977999992202967,
+      "medianEndToEndSeconds": 0.004655349999666214,
+      "medianEvaluationSeconds": 0.0031612000020686537,
+      "medianSamplingSeconds": 0.0012400499999785097
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 0,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.3018481678183935,
+      "meanForwardKl": 0.0029544422572791496,
+      "maxAbsoluteRegionError": 0.019600000000000006,
+      "medianFitSeconds": 0.004425649998665904,
+      "medianEndToEndSeconds": 0.005676050001056865,
+      "medianEvaluationSeconds": 0.002966099998957361,
+      "medianSamplingSeconds": 0.0012055499992129626
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 1,
+      "method": "gvm",
+      "statuses": {
+        "PhaseBudgetExhausted": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.314571044321495,
+      "meanForwardKl": 0.0156773187603811,
+      "maxAbsoluteRegionError": 0.021599999999999953,
+      "medianFitSeconds": 0.7933523,
+      "medianEndToEndSeconds": 0.9390410500000144,
+      "medianEvaluationSeconds": 0.005272399997920729,
+      "medianSamplingSeconds": 0.002413049998722272
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 1,
+      "method": "chart",
+      "statuses": {
+        "IterationLimit": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.315641721690196,
+      "meanForwardKl": 0.016747996129081268,
+      "maxAbsoluteRegionError": 0.02200000000000002,
+      "medianFitSeconds": 0.2531594499996572,
+      "medianEndToEndSeconds": 0.2543815500011988,
+      "medianEvaluationSeconds": 0.010528550001254189,
+      "medianSamplingSeconds": 0.0014977999999246094
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 1,
+      "method": "wrapped",
+      "statuses": {
+        "IterationLimit": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -4.315641721690196,
+      "meanForwardKl": 0.01674799612908137,
+      "maxAbsoluteRegionError": 0.02074999999999999,
+      "medianFitSeconds": 0.44324819999928877,
+      "medianEndToEndSeconds": 0.44455500000003667,
+      "medianEvaluationSeconds": 0.010606050000205869,
+      "medianSamplingSeconds": 0.0014898500012350269
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 0,
+      "method": "gvm",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.2421832633064405,
+      "meanForwardKl": 0.07503362158664115,
+      "maxAbsoluteRegionError": 0.028200000000000003,
+      "medianFitSeconds": 0.17048780000000002,
+      "medianEndToEndSeconds": 0.2983815499992488,
+      "medianEvaluationSeconds": 0.002802999999403255,
+      "medianSamplingSeconds": 0.0024834499999997206
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 0,
+      "method": "chart",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.234588214607561,
+      "meanForwardKl": 0.06743857288776205,
+      "maxAbsoluteRegionError": 0.026499999999999996,
+      "medianFitSeconds": 0.0030378499996004393,
+      "medianEndToEndSeconds": 0.004063449998284341,
+      "medianEvaluationSeconds": 0.007213300001239986,
+      "medianSamplingSeconds": 0.0013088499999867054
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 0,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 16
+      },
+      "qualifiedRate": 1.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.2346037099342215,
+      "meanForwardKl": 0.06745406821442283,
+      "maxAbsoluteRegionError": 0.022650000000000003,
+      "medianFitSeconds": 0.0077228000009199604,
+      "medianEndToEndSeconds": 0.008665900000778493,
+      "medianEvaluationSeconds": 0.007461999999577529,
+      "medianSamplingSeconds": 0.0013061999998171814
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 1,
+      "method": "gvm",
+      "statuses": {
+        "PhaseBudgetExhausted": 16
+      },
+      "qualifiedRate": 0.0,
+      "finiteModels": 16,
+      "meanLogScore": -5.192239149674443,
+      "meanForwardKl": 0.025089507954643594,
+      "maxAbsoluteRegionError": 0.02895000000000003,
+      "medianFitSeconds": 0.8478003999999999,
+      "medianEndToEndSeconds": 0.9962541500026418,
+      "medianEvaluationSeconds": 0.005395649999627494,
+      "medianSamplingSeconds": 0.0025009499986481387
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 1,
+      "method": "chart",
+      "statuses": {
+        "Converged": 1,
+        "IterationLimit": 15
+      },
+      "qualifiedRate": 0.0625,
+      "finiteModels": 16,
+      "meanLogScore": -5.185322404881058,
+      "meanForwardKl": 0.018172763161258848,
+      "maxAbsoluteRegionError": 0.025300000000000045,
+      "medianFitSeconds": 0.22774270000081742,
+      "medianEndToEndSeconds": 0.2286184000022331,
+      "medianEvaluationSeconds": 0.02809594999962428,
+      "medianSamplingSeconds": 0.0016437499998573912
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 1,
+      "method": "wrapped",
+      "statuses": {
+        "Converged": 1,
+        "IterationLimit": 15
+      },
+      "qualifiedRate": 0.0625,
+      "finiteModels": 16,
+      "meanLogScore": -5.185268075472176,
+      "meanForwardKl": 0.01811843375237679,
+      "maxAbsoluteRegionError": 0.022850000000000037,
+      "medianFitSeconds": 0.8133131000013236,
+      "medianEndToEndSeconds": 0.8142020999985107,
+      "medianEvaluationSeconds": 0.028887400001622154,
+      "medianSamplingSeconds": 0.0016263499983324436
+    }
+  ],
+  "comparisons": [
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 0,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.5711801533341216,
+      "simultaneousLower": 0.5618059581855988,
+      "simultaneousUpper": 0.5805543484826445,
+      "gate": "descriptive",
+      "passed": null,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 0,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.5644546178475558,
+      "simultaneousLower": 0.5571549856799681,
+      "simultaneousUpper": 0.5717542500151435,
+      "gate": "descriptive",
+      "passed": null,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 1,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.10343979657070745,
+      "simultaneousLower": 0.09158201899714956,
+      "simultaneousUpper": 0.11529757414426535,
+      "gate": "curved-gain",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "budget": 1,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.07716181438423514,
+      "simultaneousLower": 0.0725308538417133,
+      "simultaneousUpper": 0.08179277492675698,
+      "gate": "curved-gain",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 0,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.09812251238050546,
+      "simultaneousLower": 0.09216160392411923,
+      "simultaneousUpper": 0.10408342083689168,
+      "gate": "descriptive",
+      "passed": null,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 0,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.09126202132741937,
+      "simultaneousLower": 0.08616229900708386,
+      "simultaneousUpper": 0.09636174364775488,
+      "gate": "descriptive",
+      "passed": null,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 1,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.17611390946205666,
+      "simultaneousLower": 0.16439917394445036,
+      "simultaneousUpper": 0.18782864497966295,
+      "gate": "curved-gain",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "budget": 1,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.14680997859850836,
+      "simultaneousLower": 0.1414732644065368,
+      "simultaneousUpper": 0.15214669279047993,
+      "gate": "curved-gain",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 0,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0011068629771531502,
+      "simultaneousLower": -0.0018498615224314817,
+      "simultaneousUpper": -0.00036386443187481866,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 0,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0011068629771531502,
+      "simultaneousLower": -0.0018498615224314284,
+      "simultaneousUpper": -0.000363864431874872,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 1,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.0007952067774477656,
+      "simultaneousLower": -0.0006657613380051772,
+      "simultaneousUpper": 0.0022561748929007083,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "budget": 1,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.0007952067774476268,
+      "simultaneousLower": -0.000665761338005445,
+      "simultaneousUpper": 0.0022561748929006984,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 0,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0068871256761808275,
+      "simultaneousLower": -0.007851025100530049,
+      "simultaneousUpper": -0.005923226251831606,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 0,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0068963678101088,
+      "simultaneousLower": -0.00782238864063284,
+      "simultaneousUpper": -0.00597034697958476,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 1,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0030647869974607944,
+      "simultaneousLower": -0.005219523499445893,
+      "simultaneousUpper": -0.000910050495475696,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "budget": 1,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0032761210952379216,
+      "simultaneousLower": -0.005140486962781383,
+      "simultaneousUpper": -0.0014117552276944603,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 0,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.8357608459880632,
+      "simultaneousLower": 0.8295330458228036,
+      "simultaneousUpper": 0.8419886461533228,
+      "gate": "descriptive",
+      "passed": null,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 0,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.829295636410259,
+      "simultaneousLower": 0.8225609907187308,
+      "simultaneousUpper": 0.8360302821017873,
+      "gate": "descriptive",
+      "passed": null,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 1,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.4024981319072348,
+      "simultaneousLower": 0.39166898841772396,
+      "simultaneousUpper": 0.4133272753967457,
+      "gate": "curved-gain",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "budget": 1,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.3830553656540882,
+      "simultaneousLower": 0.3763420913775972,
+      "simultaneousUpper": 0.3897686399305792,
+      "gate": "curved-gain",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 0,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.123227380418588,
+      "simultaneousLower": 0.10869565706712354,
+      "simultaneousUpper": 0.13775910377005243,
+      "gate": "descriptive",
+      "passed": null,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 0,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.09577445585498684,
+      "simultaneousLower": 0.08701394256142382,
+      "simultaneousUpper": 0.10453496914854986,
+      "gate": "descriptive",
+      "passed": null,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 1,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.5460918971906286,
+      "simultaneousLower": 0.5395059781026557,
+      "simultaneousUpper": 0.5526778162786015,
+      "gate": "curved-gain",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "budget": 1,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.5343222083307503,
+      "simultaneousLower": 0.5158744000601342,
+      "simultaneousUpper": 0.5527700166013664,
+      "gate": "curved-gain",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 0,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0017638589261139148,
+      "simultaneousLower": -0.0026632073063159144,
+      "simultaneousUpper": -0.0008645105459119154,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 0,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0017638589261139703,
+      "simultaneousLower": -0.0026632073063161013,
+      "simultaneousUpper": -0.0008645105459118393,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 1,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.0010706773687002014,
+      "simultaneousLower": -0.0015988154148414576,
+      "simultaneousUpper": 0.0037401701522418603,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "budget": 1,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": 0.0010706773687004234,
+      "simultaneousLower": -0.0015988154148411592,
+      "simultaneousUpper": 0.003740170152242006,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 0,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.007595048698879392,
+      "simultaneousLower": -0.008693064617794675,
+      "simultaneousUpper": -0.006497032779964109,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 0,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0075795533722187725,
+      "simultaneousLower": -0.008657656740393033,
+      "simultaneousUpper": -0.006501450004044512,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 1,
+      "control": "chart",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0069167447933849435,
+      "simultaneousLower": -0.01198489216376179,
+      "simultaneousUpper": -0.0018485974230080977,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "budget": 1,
+      "control": "wrapped",
+      "finitePairs": 16,
+      "meanGvmMinusControl": -0.0069710742022668915,
+      "simultaneousLower": -0.01203726539667644,
+      "simultaneousUpper": -0.0019048830078573437,
+      "gate": "gaussian-noninferiority",
+      "passed": true,
+      "interpretation": "finite-model descriptive comparison; unqualified fits do not become qualified"
+    }
+  ],
+  "limitations": [
+    "Synthetic bounded controls only",
+    "Local optimization; no global optimum or mode completeness guarantee",
+    "Cost is backend/implementation dependent",
+    "Conditional numerical metrics include finite budget-limited models; statuses remain failures"
+  ]
+}

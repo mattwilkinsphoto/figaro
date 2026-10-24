@@ -70,13 +70,18 @@ measured. Do not start a guide utility trial for this frozen model or retune it
 to pass. Keep the shared pilot parked and previous no-promotion results unchanged.
 No runtime integration, promotion, release, stopping or default change follows.
 
-**DIST-02: higher-dimensional GVM fitting experiment in progress.**
+**DIST-02: higher-dimensional GVM fitting experiment complete; no promotion.**
 The [literature-led assessment and bounded plan](docs/GVM_HIGH_DIMENSIONAL_FITTING_RESEARCH.md)
 recommend two or three linear coordinates plus one angle, full covariance and
-quadratic cross terms. Approved order: independently qualify numerical references
-and genuinely wrapped-likelihood GMM controls; build a bounded test-only fitter;
-then run a [frozen held-out accuracy/cost comparison](docs/GVM_HIGH_DIMENSIONAL_PROTOCOL.md).
-Initial numerical qualification passed; no confirmation result or promotion yet.
+quadratic cross terms. The completed sequence qualified numerical references
+and genuinely wrapped-likelihood GMM controls, built a bounded test-only fitter,
+and ran a [frozen held-out accuracy/cost comparison](docs/GVM_HIGH_DIMENSIONAL_PROTOCOL.md).
+The [complete 768-fit study](docs/GVM_HIGH_DIMENSIONAL_STATUS.md) passed independent
+numerical checks and retained-model accuracy margins, but failed fit-completion
+gates: all three-component GVM fits exhausted their phase-work cap, and Gaussian
+controls also frequently hit iteration limits. Keep all implementations test-only.
+An analytic-gradient/convergence-work follow-up is a candidate for separate review,
+not an automatic extension or permission to relax the frozen criteria.
 Scalar fitting, stopping and
 defaults remain unchanged. No public integration or superiority claim precedes
 independent validation. See [GVM-05](docs/RESEARCH_REFERENCES.md#gvm-05).

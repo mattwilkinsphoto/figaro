@@ -46,8 +46,10 @@ now includes the 6.1 bounded scalar-linear fitter and stronger representation co
 Higher-dimensional fitting, optimized wrapped-model controls and automatic component
 selection remain open; application tracking/fusion is outside this library milestone.
 The [higher-dimensional fitting assessment](docs/GVM_HIGH_DIMENSIONAL_FITTING_RESEARCH.md)
-now has an approved bounded `d=2,3` test-only experiment with independently qualified
-wrapped-GMM controls. It is not a public fitter; automatic component selection
+now has a [completed bounded `d=2,3` test-only experiment](docs/GVM_HIGH_DIMENSIONAL_STATUS.md)
+with independently checked wrapped-GMM numerical controls. Finite-budget representation
+gains passed the score margins, but completion gates failed; no promotion.
+It is not a public fitter; automatic component selection
 and multiple angles remain outside that proposal. Scalar fitting and released
 stopping/defaults are unchanged.
 
