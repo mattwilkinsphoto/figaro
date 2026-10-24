@@ -23,10 +23,25 @@ The first compilation used the nonexistent selector name `Multinomial`; it was
 corrected to the existing `LogTreeMultinomial`. The failed source and actual log
 are retained with the evidence. No runtime repair or acceptance relaxation occurred.
 
+## Frozen development calibration
+
+Development produced all 5,104 required rows. The branch candidate completed all
+16 runs on every fixture. The pilot had 110 terminal refusals: 61 iteration limits,
+33 insufficient-component fits and 16 insufficient-pilot fits. It completed every
+development run only on flat and omitted-branch fixtures. These are retained
+negative outcomes, not permission to increase fitting limits or select successful
+seeds. The failed matches use the protocol's N4096 descriptive controls.
+
+The [machine-readable calibration](../tools/multicomponent_budgets_v1.json) and
+[execution budgets](../tools/multicomponent_budgets_v1.tsv) are frozen before
+confirmation. Branch timing-matched populations range from 95 to 708 particles;
+model-evaluation matches range from 65 to 67. These different matches expose
+conditioning cost versus calls to the model. The prior-fraction, component counts,
+pilot limits and statistical acceptance rules are unchanged.
+
 ## Remaining validation
 
-Development-only calibration must freeze timing- and evaluation-matched bootstrap
-budgets before confirmation. Confirmation uses 256 fresh seeds and three separate
+Confirmation uses 256 fresh seeds and three separate
 JVM replays. Pilot refusals and unavailable downstream steps remain in every
 inventory; a failed development fit makes its cost match unavailable, not favorable.
 Independent all-outcome analysis and the unchanged continuous benchmark precede

@@ -436,6 +436,10 @@ independent [true-model grid references](../tools/multicomponent_reference.py) a
 [reference self-tests](../tools/test_multicomponent_reference.py). All 1,023
 reference checks and five self-tests passed before candidate implementation.
 This does not establish candidate correctness, utility or promotion eligibility.
+Stage 2 adapter/regression controls passed. Development calibration is frozen in
+[budget metadata](../tools/multicomponent_budgets_v1.json) and
+[execution input](../tools/multicomponent_budgets_v1.tsv). Pilot fitting refusals
+remain explicit; held-out results are pending in the status guide.
 
 **Guide:** [MULTICOMPONENT GUIDE RESEARCH](MULTICOMPONENT_GUIDE_RESEARCH.md); [MULTICOMPONENT GUIDE PROTOCOL](MULTICOMPONENT_GUIDE_PROTOCOL.md); [MULTICOMPONENT GUIDE STATUS](MULTICOMPONENT_GUIDE_STATUS.md).
 
