@@ -81,9 +81,11 @@ numerical checks and retained-model accuracy margins, but failed fit-completion
 gates: all three-component GVM fits exhausted their phase-work cap, and Gaussian
 controls also frequently hit iteration limits. Keep all implementations test-only.
 The approved [bounded analytic-gradient follow-up](docs/GVM_GRADIENT_STUDY.md)
-has passed initial independent controls and development checks; its new protocol
-is frozen before fresh held-out execution. It is not permission to relax the
-previous criteria or promote a fitter without independent qualification.
+is [complete with no promotion](docs/GVM_GRADIENT_STATUS.md): 512 fits and independent
+numerical checks show much less phase work and better completion, but per-cell
+reliability still fails. Final-responsibility checks distinguish likelihood
+stabilization from whole-fit stationarity. A separately reviewed convergence/model
+complexity study is next, not relaxed thresholds or automatic public integration.
 Scalar fitting, stopping and
 defaults remain unchanged. No public integration or superiority claim precedes
 independent validation. See [GVM-05](docs/RESEARCH_REFERENCES.md#gvm-05).

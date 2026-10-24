@@ -1,0 +1,920 @@
+{
+  "resultsSha256": "8e959d177b69446fbe76c594e9dee46ed018ea84b3cf90fa1e54a7a96878e617",
+  "auditSha256": "34365a8b0badf7240e24cbf8aa573d4978c07de7af064812e4de3334c6370dcd",
+  "groups": [
+    {
+      "section": "diagnostic",
+      "k": 3,
+      "cap": 2000000,
+      "iterations": 50,
+      "method": "analytic",
+      "fits": 8,
+      "status": {
+        "PhaseBudgetExhausted": 8
+      },
+      "medianSeconds": 0.07893885000157752,
+      "medianPhasePoints": 2000000.0,
+      "medianDensityPoints": 234000.0
+    },
+    {
+      "section": "diagnostic",
+      "k": 3,
+      "cap": 2000000,
+      "iterations": 50,
+      "method": "bobyqa",
+      "fits": 8,
+      "status": {
+        "PhaseBudgetExhausted": 8
+      },
+      "medianSeconds": 0.1825156495,
+      "medianPhasePoints": 2000000.0,
+      "medianDensityPoints": 30000.0
+    },
+    {
+      "section": "diagnostic",
+      "k": 3,
+      "cap": 8000000,
+      "iterations": 50,
+      "method": "analytic",
+      "fits": 8,
+      "status": {
+        "PhaseBudgetExhausted": 8
+      },
+      "medianSeconds": 0.33525920000465703,
+      "medianPhasePoints": 8000000.0,
+      "medianDensityPoints": 1095000.0
+    },
+    {
+      "section": "diagnostic",
+      "k": 3,
+      "cap": 8000000,
+      "iterations": 50,
+      "method": "bobyqa",
+      "fits": 8,
+      "status": {
+        "PhaseBudgetExhausted": 8
+      },
+      "medianSeconds": 0.3961060495,
+      "medianPhasePoints": 8000000.0,
+      "medianDensityPoints": 126000.0
+    },
+    {
+      "section": "diagnostic",
+      "k": 3,
+      "cap": 20000000,
+      "iterations": 200,
+      "method": "analytic",
+      "fits": 8,
+      "status": {
+        "Converged": 4,
+        "PhaseBudgetExhausted": 4
+      },
+      "medianSeconds": 0.8139265999998315,
+      "medianPhasePoints": 19362000.0,
+      "medianDensityPoints": 2631000.0
+    },
+    {
+      "section": "diagnostic",
+      "k": 3,
+      "cap": 20000000,
+      "iterations": 200,
+      "method": "bobyqa",
+      "fits": 8,
+      "status": {
+        "PhaseBudgetExhausted": 8
+      },
+      "medianSeconds": 0.6930412495,
+      "medianPhasePoints": 20000000.0,
+      "medianDensityPoints": 339000.0
+    },
+    {
+      "section": "diagnostic",
+      "k": 4,
+      "cap": 0,
+      "iterations": 200,
+      "method": "wrapped",
+      "fits": 16,
+      "status": {
+        "Converged": 12,
+        "IterationLimit": 4
+      },
+      "medianSeconds": 1.388209699998697,
+      "medianPhasePoints": 0.0,
+      "medianDensityPoints": 8358000.0
+    },
+    {
+      "section": "gaussian",
+      "k": 4,
+      "cap": 0,
+      "iterations": 50,
+      "method": "wrapped",
+      "fits": 64,
+      "status": {
+        "Converged": 6,
+        "IterationLimit": 58
+      },
+      "medianSeconds": 0.7905961500036938,
+      "medianPhasePoints": 0.0,
+      "medianDensityPoints": 4804000.0
+    },
+    {
+      "section": "primary",
+      "k": 1,
+      "cap": 20000000,
+      "iterations": 50,
+      "method": "analytic",
+      "fits": 64,
+      "status": {
+        "Converged": 64
+      },
+      "medianSeconds": 0.008428799999819603,
+      "medianPhasePoints": 96000.0,
+      "medianDensityPoints": 30000.0
+    },
+    {
+      "section": "primary",
+      "k": 1,
+      "cap": 20000000,
+      "iterations": 50,
+      "method": "bobyqa",
+      "fits": 64,
+      "status": {
+        "Converged": 64
+      },
+      "medianSeconds": 0.13484174999999998,
+      "medianPhasePoints": 867000.0,
+      "medianDensityPoints": 30000.0
+    },
+    {
+      "section": "primary",
+      "k": 2,
+      "cap": 20000000,
+      "iterations": 50,
+      "method": "analytic",
+      "fits": 64,
+      "status": {
+        "Converged": 41,
+        "IterationLimit": 23
+      },
+      "medianSeconds": 0.26250285000060103,
+      "medianPhasePoints": 5670000.0,
+      "medianDensityPoints": 852000.0
+    },
+    {
+      "section": "primary",
+      "k": 2,
+      "cap": 20000000,
+      "iterations": 50,
+      "method": "bobyqa",
+      "fits": 64,
+      "status": {
+        "PhaseBudgetExhausted": 64
+      },
+      "medianSeconds": 0.6907888,
+      "medianPhasePoints": 20000000.0,
+      "medianDensityPoints": 394000.0
+    },
+    {
+      "section": "primary",
+      "k": 3,
+      "cap": 20000000,
+      "iterations": 50,
+      "method": "analytic",
+      "fits": 64,
+      "status": {
+        "IterationLimit": 60,
+        "Converged": 4
+      },
+      "medianSeconds": 0.5390384999991511,
+      "medianPhasePoints": 12295000.0,
+      "medianDensityPoints": 1818000.0
+    },
+    {
+      "section": "primary",
+      "k": 3,
+      "cap": 20000000,
+      "iterations": 50,
+      "method": "bobyqa",
+      "fits": 64,
+      "status": {
+        "PhaseBudgetExhausted": 64
+      },
+      "medianSeconds": 0.68997485,
+      "medianPhasePoints": 20000000.0,
+      "medianDensityPoints": 324000.0
+    }
+  ],
+  "pairedDiagnosticChanges": [
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940001,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "Converged",
+      "status": "Converged",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0016275063679422885
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.01390617927024218
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.0016246650175903987
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.0008113292424751783
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940002,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": 0.00023737627600040057
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0020385284634700795
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.012574953450094295
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.0016201115001348576
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.0024399707724338526
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940001,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.0011505745377116128
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "Converged",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.00031853192260644647
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.015569246878267329
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "Converged",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0024995544394474933
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "Converged",
+      "status": "Converged",
+      "logScoreChange": 0.0014250419587389374
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940002,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.007008113874768629
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0033066151101905916
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.02736611058757399
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0027662671995192234
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0008101025859184041
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.00018944718870805843
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "seed": 940001,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "IterationLimit",
+      "logScoreChange": -0.0010702432396385575
+    },
+    {
+      "d": 2,
+      "family": "local",
+      "seed": 940002,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -9.482121381543251e-05
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "seed": 940001,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.0017792750074994146
+    },
+    {
+      "d": 2,
+      "family": "wrapped",
+      "seed": 940002,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "IterationLimit",
+      "logScoreChange": -0.004350542558226422
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940001,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": 0.0008557860710780574
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.007314319989898621
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.02619069118447026
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0007552920592974743
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.002412043757441751
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.0005307972380395043
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940002,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": 0.007407616989604904
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.007204726330587441
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.023932400581185398
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0010464380981769494
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.0013649135586399908
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.0028746139723061503
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940001,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "Converged",
+      "status": "Converged",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.003001375298777198
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.09298815207188404
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -1.8417560009531542e-05
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.004508657436492314
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940001,
+      "method": "analytic",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -3.6637914172743535e-05
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940001,
+      "method": "bobyqa",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940002,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.0017642171610363633
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.002819866618263056
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 2000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.1045260058441615
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "IterationLimit",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.000927249284203846
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 8000000,
+      "iterations": 50,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": -0.0017286370206859303
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940002,
+      "method": "analytic",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.0026578705034543404
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 940002,
+      "method": "bobyqa",
+      "cap": 20000000,
+      "iterations": 200,
+      "baselineStatus": "PhaseBudgetExhausted",
+      "status": "PhaseBudgetExhausted",
+      "logScoreChange": 0.0
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "seed": 940001,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.0042600279413624875
+    },
+    {
+      "d": 3,
+      "family": "local",
+      "seed": 940002,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "IterationLimit",
+      "logScoreChange": -0.004096879248195684
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "seed": 940001,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "IterationLimit",
+      "logScoreChange": -0.007272270642505241
+    },
+    {
+      "d": 3,
+      "family": "wrapped",
+      "seed": 940002,
+      "method": "wrapped",
+      "cap": 0,
+      "iterations": 200,
+      "baselineStatus": "IterationLimit",
+      "status": "Converged",
+      "logScoreChange": -0.005816697377943214
+    }
+  ],
+  "primaryConvergedFinalResponsibilityGradient": {
+    "count": 109,
+    "median": 7.643662506672672e-08,
+    "maximum": 0.001366620417927001,
+    "above1eMinus6": 45
+  },
+  "scope": "descriptive predeclared diagnostics; no substitution into primary gates"
+}

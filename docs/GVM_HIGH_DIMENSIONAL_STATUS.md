@@ -131,7 +131,9 @@ a new frozen protocol. Include smaller component counts and converged Gaussian
 controls where budgets permit. Record work-versus-quality curves and all refusals;
 do not simply increase defaults or relabel exhausted fits as converged.
 
-This is a recommendation for separate approval. Shared-pilot work remains parked.
+The subsequently approved [analytic-gradient follow-up](GVM_GRADIENT_STATUS.md)
+is now complete with a separate frozen protocol and no promotion. The original
+results above remain unchanged. Shared-pilot work remains parked.
 Stopping/defaults, public scalar fitting, production source, build settings and
 the release version are unchanged. No release is warranted for this research-only
 change, and no merge or promotion is implied.

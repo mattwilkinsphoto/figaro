@@ -49,6 +49,9 @@ The [higher-dimensional fitting assessment](docs/GVM_HIGH_DIMENSIONAL_FITTING_RE
 now has a [completed bounded `d=2,3` test-only experiment](docs/GVM_HIGH_DIMENSIONAL_STATUS.md)
 with independently checked wrapped-GMM numerical controls. Finite-budget representation
 gains passed the score margins, but completion gates failed; no promotion.
+The [completed analytic-gradient follow-up](docs/GVM_GRADIENT_STATUS.md) reduces
+phase work but still fails per-cell reliability; outer convergence and model
+complexity need separate qualification. No public multivariate fitter is promoted.
 It is not a public fitter; automatic component selection
 and multiple angles remain outside that proposal. Scalar fitting and released
 stopping/defaults are unchanged.
