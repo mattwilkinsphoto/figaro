@@ -1,0 +1,1173 @@
+{
+  "scope": "descriptive only; frozen gates unchanged",
+  "resultsSha256": "8b016bd31ae8f59a11d33c4ea7931a0d918a93f41d8725e709d9057654002027",
+  "summarySha256": "1bb71917e0a1b948dd7b0e9af56f2d95e896889ebcd831662173b71180019942",
+  "groups": [
+    {
+      "family": "all",
+      "k": 1,
+      "method": "em",
+      "count": 80,
+      "statuses": {
+        "Stationary": 80
+      },
+      "retainedGradientWithinTolerance": 80,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 129000.0,
+      "medianSeconds": 0.009413199997652555,
+      "medianMaps": 3.0,
+      "medianGradient": 6.014852112212754e-08,
+      "dominantBlocks": {
+        "coeff": 80
+      },
+      "workByCategory": {
+        "phase": 7782000,
+        "score": 1440000,
+        "moments": 960000,
+        "gradient": 960000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "all",
+      "k": 1,
+      "method": "squarem",
+      "count": 80,
+      "statuses": {
+        "Stationary": 80
+      },
+      "retainedGradientWithinTolerance": 80,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 129000.0,
+      "medianSeconds": 0.009468399999605026,
+      "medianMaps": 3.0,
+      "medianGradient": 6.014852112212754e-08,
+      "dominantBlocks": {
+        "coeff": 80
+      },
+      "workByCategory": {
+        "phase": 7782000,
+        "score": 1440000,
+        "moments": 960000,
+        "gradient": 960000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "all",
+      "k": 2,
+      "method": "em",
+      "count": 80,
+      "statuses": {
+        "WorkBudgetExhausted": 44,
+        "Stationary": 36
+      },
+      "retainedGradientWithinTolerance": 51,
+      "workLimitWithSmallRetainedGradient": 15,
+      "medianWork": 19998000.0,
+      "medianSeconds": 0.9266872000007425,
+      "medianMaps": 271.0,
+      "medianGradient": 9.833225290248252e-05,
+      "dominantBlocks": {
+        "weight": 36,
+        "alpha": 18,
+        "coeff": 6,
+        "mean": 7,
+        "cov": 13
+      },
+      "workByCategory": {
+        "phase": 865958000,
+        "score": 144072000,
+        "moments": 72502000,
+        "gradient": 72372000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "all",
+      "k": 2,
+      "method": "squarem",
+      "count": 80,
+      "statuses": {
+        "WorkBudgetExhausted": 24,
+        "Stationary": 56
+      },
+      "retainedGradientWithinTolerance": 64,
+      "workLimitWithSmallRetainedGradient": 8,
+      "medianWork": 9096000.0,
+      "medianSeconds": 0.4734878499984916,
+      "medianMaps": 148.0,
+      "medianGradient": 8.96083205010334e-05,
+      "dominantBlocks": {
+        "weight": 42,
+        "alpha": 9,
+        "mean": 5,
+        "coeff": 10,
+        "cov": 14
+      },
+      "workByCategory": {
+        "phase": 648250000,
+        "score": 128444000,
+        "moments": 55576000,
+        "gradient": 73736000
+      },
+      "extrapolationSteps": 4558,
+      "stepCapHits": 3193,
+      "accepted": 4421,
+      "rejected": 125
+    },
+    {
+      "family": "all",
+      "k": 3,
+      "method": "em",
+      "count": 80,
+      "statuses": {
+        "WorkBudgetExhausted": 67,
+        "Stationary": 13
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 3,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.8836520000004384,
+      "medianMaps": 173.5,
+      "medianGradient": 0.0008450005433226818,
+      "dominantBlocks": {
+        "weight": 51,
+        "alpha": 5,
+        "cov": 16,
+        "coeff": 6,
+        "mean": 2
+      },
+      "workByCategory": {
+        "phase": 1145156000,
+        "score": 156012000,
+        "moments": 78452000,
+        "gradient": 78204000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "all",
+      "k": 3,
+      "method": "squarem",
+      "count": 80,
+      "statuses": {
+        "WorkBudgetExhausted": 65,
+        "Stationary": 15
+      },
+      "retainedGradientWithinTolerance": 36,
+      "workLimitWithSmallRetainedGradient": 21,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.9338504500010458,
+      "medianMaps": 178.0,
+      "medianGradient": 0.00014084533180733216,
+      "dominantBlocks": {
+        "weight": 59,
+        "alpha": 2,
+        "cov": 17,
+        "coeff": 2
+      },
+      "workByCategory": {
+        "phase": 1066054000,
+        "score": 175362000,
+        "moments": 75712000,
+        "gradient": 100398000
+      },
+      "extrapolationSteps": 4156,
+      "stepCapHits": 3245,
+      "accepted": 4024,
+      "rejected": 111
+    },
+    {
+      "family": "curved",
+      "k": 1,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 138000.0,
+      "medianSeconds": 0.009246499997971114,
+      "medianMaps": 3.0,
+      "medianGradient": 7.663947181046904e-08,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 1512000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "curved",
+      "k": 1,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 138000.0,
+      "medianSeconds": 0.009595599996828241,
+      "medianMaps": 3.0,
+      "medianGradient": 7.663947181046904e-08,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 1512000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "curved",
+      "k": 2,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 1,
+      "workLimitWithSmallRetainedGradient": 1,
+      "medianWork": 20000000.0,
+      "medianSeconds": 1.0335611500013329,
+      "medianMaps": 340.0,
+      "medianGradient": 0.0007623198425900136,
+      "dominantBlocks": {
+        "weight": 9,
+        "alpha": 5,
+        "coeff": 2
+      },
+      "workByCategory": {
+        "phase": 232120000,
+        "score": 43872000,
+        "moments": 22022000,
+        "gradient": 21976000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "curved",
+      "k": 2,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 1,
+      "workLimitWithSmallRetainedGradient": 1,
+      "medianWork": 20000000.0,
+      "medianSeconds": 1.0912987500014424,
+      "medianMaps": 339.5,
+      "medianGradient": 0.000558462873032961,
+      "dominantBlocks": {
+        "weight": 14,
+        "alpha": 2
+      },
+      "workByCategory": {
+        "phase": 218424000,
+        "score": 50724000,
+        "moments": 21852000,
+        "gradient": 28992000
+      },
+      "extrapolationSteps": 1797,
+      "stepCapHits": 1723,
+      "accepted": 1789,
+      "rejected": 1
+    },
+    {
+      "family": "curved",
+      "k": 3,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 0,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.879157250001299,
+      "medianMaps": 189.5,
+      "medianGradient": 0.0012292451267431974,
+      "dominantBlocks": {
+        "weight": 12,
+        "alpha": 3,
+        "coeff": 1
+      },
+      "workByCategory": {
+        "phase": 247258000,
+        "score": 36318000,
+        "moments": 18240000,
+        "gradient": 18180000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "curved",
+      "k": 3,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 1,
+      "workLimitWithSmallRetainedGradient": 1,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.9815159500030859,
+      "medianMaps": 190.5,
+      "medianGradient": 0.0007059637003692539,
+      "dominantBlocks": {
+        "weight": 14,
+        "alpha": 1,
+        "coeff": 1
+      },
+      "workByCategory": {
+        "phase": 236070000,
+        "score": 41916000,
+        "moments": 18058000,
+        "gradient": 23952000
+      },
+      "extrapolationSteps": 991,
+      "stepCapHits": 914,
+      "accepted": 980,
+      "rejected": 6
+    },
+    {
+      "family": "seam",
+      "k": 1,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 141000.0,
+      "medianSeconds": 0.010011099999246653,
+      "medianMaps": 3.0,
+      "medianGradient": 6.531715128488269e-08,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 1578000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "seam",
+      "k": 1,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 141000.0,
+      "medianSeconds": 0.009300999998231418,
+      "medianMaps": 3.0,
+      "medianGradient": 6.531715128488269e-08,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 1578000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "seam",
+      "k": 2,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 6003000.0,
+      "medianSeconds": 0.299305850003293,
+      "medianMaps": 77.5,
+      "medianGradient": 7.621773585566577e-05,
+      "dominantBlocks": {
+        "mean": 6,
+        "weight": 1,
+        "alpha": 9
+      },
+      "workByCategory": {
+        "phase": 76110000,
+        "score": 10496000,
+        "moments": 5344000,
+        "gradient": 5344000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "seam",
+      "k": 2,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 3978000.0,
+      "medianSeconds": 0.20831054999871412,
+      "medianMaps": 46.5,
+      "medianGradient": 1.9049318557206438e-05,
+      "dominantBlocks": {
+        "mean": 3,
+        "alpha": 5,
+        "coeff": 6,
+        "cov": 2
+      },
+      "workByCategory": {
+        "phase": 47700000,
+        "score": 7436000,
+        "moments": 3280000,
+        "gradient": 4348000
+      },
+      "extrapolationSteps": 267,
+      "stepCapHits": 30,
+      "accepted": 208,
+      "rejected": 59
+    },
+    {
+      "family": "seam",
+      "k": 3,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 0,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.9194473499992455,
+      "medianMaps": 173.0,
+      "medianGradient": 0.0007366925869692204,
+      "dominantBlocks": {
+        "weight": 14,
+        "alpha": 1,
+        "mean": 1
+      },
+      "workByCategory": {
+        "phase": 253150000,
+        "score": 33384000,
+        "moments": 16762000,
+        "gradient": 16698000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "seam",
+      "k": 3,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 8,
+      "workLimitWithSmallRetainedGradient": 8,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.9734261500016146,
+      "medianMaps": 174.0,
+      "medianGradient": 0.0001033019039900912,
+      "dominantBlocks": {
+        "weight": 16
+      },
+      "workByCategory": {
+        "phase": 243250000,
+        "score": 38304000,
+        "moments": 16504000,
+        "gradient": 21936000
+      },
+      "extrapolationSteps": 916,
+      "stepCapHits": 647,
+      "accepted": 869,
+      "rejected": 40
+    },
+    {
+      "family": "three-separated",
+      "k": 1,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 174000.0,
+      "medianSeconds": 0.010571200000413228,
+      "medianMaps": 3.0,
+      "medianGradient": 5.266326096042828e-08,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 2118000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-separated",
+      "k": 1,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 174000.0,
+      "medianSeconds": 0.010749050001322757,
+      "medianMaps": 3.0,
+      "medianGradient": 5.266326096042828e-08,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 2118000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-separated",
+      "k": 2,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 6968000.0,
+      "medianSeconds": 0.30749965000359225,
+      "medianMaps": 76.5,
+      "medianGradient": 6.123086707370603e-05,
+      "dominantBlocks": {
+        "cov": 12,
+        "coeff": 3,
+        "alpha": 1
+      },
+      "workByCategory": {
+        "phase": 91226000,
+        "score": 10552000,
+        "moments": 5372000,
+        "gradient": 5372000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-separated",
+      "k": 2,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 4770000.0,
+      "medianSeconds": 0.23611135000101058,
+      "medianMaps": 52.0,
+      "medianGradient": 5.6306932712549786e-05,
+      "dominantBlocks": {
+        "cov": 12,
+        "coeff": 4
+      },
+      "workByCategory": {
+        "phase": 60456000,
+        "score": 8076000,
+        "moments": 3560000,
+        "gradient": 4708000
+      },
+      "extrapolationSteps": 287,
+      "stepCapHits": 46,
+      "accepted": 237,
+      "rejected": 50
+    },
+    {
+      "family": "three-separated",
+      "k": 3,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "Stationary": 13,
+        "WorkBudgetExhausted": 3
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 3,
+      "medianWork": 8804000.0,
+      "medianSeconds": 0.3720683999999892,
+      "medianMaps": 68.0,
+      "medianGradient": 6.029544862790728e-05,
+      "dominantBlocks": {
+        "cov": 16
+      },
+      "workByCategory": {
+        "phase": 144354000,
+        "score": 16608000,
+        "moments": 8446000,
+        "gradient": 8436000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-separated",
+      "k": 3,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 15,
+        "WorkBudgetExhausted": 1
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 1,
+      "medianWork": 6564000.0,
+      "medianSeconds": 0.304811250003695,
+      "medianMaps": 47.0,
+      "medianGradient": 1.5237622607994081e-05,
+      "dominantBlocks": {
+        "cov": 15,
+        "coeff": 1
+      },
+      "workByCategory": {
+        "phase": 108922000,
+        "score": 14172000,
+        "moments": 6232000,
+        "gradient": 8226000
+      },
+      "extrapolationSteps": 333,
+      "stepCapHits": 106,
+      "accepted": 288,
+      "rejected": 45
+    },
+    {
+      "family": "three-overlap",
+      "k": 1,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 120000.0,
+      "medianSeconds": 0.009080649997486034,
+      "medianMaps": 3.0,
+      "medianGradient": 4.602986713314605e-08,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 1278000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-overlap",
+      "k": 1,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 120000.0,
+      "medianSeconds": 0.008895299997675465,
+      "medianMaps": 3.0,
+      "medianGradient": 4.602986713314605e-08,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 1278000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-overlap",
+      "k": 2,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 12,
+        "Stationary": 4
+      },
+      "retainedGradientWithinTolerance": 12,
+      "workLimitWithSmallRetainedGradient": 8,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.9729115500012995,
+      "medianMaps": 337.5,
+      "medianGradient": 9.921030374598905e-05,
+      "dominantBlocks": {
+        "weight": 14,
+        "mean": 1,
+        "coeff": 1
+      },
+      "workByCategory": {
+        "phase": 220836000,
+        "score": 42052000,
+        "moments": 21122000,
+        "gradient": 21088000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-overlap",
+      "k": 2,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 9776000.0,
+      "medianSeconds": 0.5090558999982022,
+      "medianMaps": 153.5,
+      "medianGradient": 9.357911556659437e-05,
+      "dominantBlocks": {
+        "mean": 2,
+        "weight": 14
+      },
+      "workByCategory": {
+        "phase": 114524000,
+        "score": 25596000,
+        "moments": 11080000,
+        "gradient": 14708000
+      },
+      "extrapolationSteps": 907,
+      "stepCapHits": 594,
+      "accepted": 897,
+      "rejected": 10
+    },
+    {
+      "family": "three-overlap",
+      "k": 3,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 0,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.8978711000017938,
+      "medianMaps": 202.5,
+      "medianGradient": 0.0017241785290720082,
+      "dominantBlocks": {
+        "weight": 11,
+        "coeff": 5
+      },
+      "workByCategory": {
+        "phase": 242970000,
+        "score": 38448000,
+        "moments": 19316000,
+        "gradient": 19260000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-overlap",
+      "k": 3,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 7,
+      "workLimitWithSmallRetainedGradient": 7,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.9361969500023406,
+      "medianMaps": 200.5,
+      "medianGradient": 0.00014084533180733216,
+      "dominantBlocks": {
+        "weight": 16
+      },
+      "workByCategory": {
+        "phase": 229954000,
+        "score": 44946000,
+        "moments": 19384000,
+        "gradient": 25704000
+      },
+      "extrapolationSteps": 1063,
+      "stepCapHits": 885,
+      "accepted": 1044,
+      "rejected": 14
+    },
+    {
+      "family": "three-wrapped",
+      "k": 1,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 123000.0,
+      "medianSeconds": 0.009318950000306359,
+      "medianMaps": 3.0,
+      "medianGradient": 1.0264541109011177e-07,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 1296000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-wrapped",
+      "k": 1,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "Stationary": 16
+      },
+      "retainedGradientWithinTolerance": 16,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 123000.0,
+      "medianSeconds": 0.009080550000362564,
+      "medianMaps": 3.0,
+      "medianGradient": 1.0264541109011177e-07,
+      "dominantBlocks": {
+        "coeff": 16
+      },
+      "workByCategory": {
+        "phase": 1296000,
+        "score": 288000,
+        "moments": 192000,
+        "gradient": 192000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-wrapped",
+      "k": 2,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 6,
+      "workLimitWithSmallRetainedGradient": 6,
+      "medianWork": 20000000.0,
+      "medianSeconds": 1.0287495999982639,
+      "medianMaps": 290.0,
+      "medianGradient": 0.0001141706633655537,
+      "dominantBlocks": {
+        "weight": 12,
+        "alpha": 3,
+        "cov": 1
+      },
+      "workByCategory": {
+        "phase": 245666000,
+        "score": 37100000,
+        "moments": 18642000,
+        "gradient": 18592000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-wrapped",
+      "k": 2,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 8,
+        "Stationary": 8
+      },
+      "retainedGradientWithinTolerance": 15,
+      "workLimitWithSmallRetainedGradient": 7,
+      "medianWork": 19991000.0,
+      "medianSeconds": 1.0675756000018737,
+      "medianMaps": 253.0,
+      "medianGradient": 9.339657340173835e-05,
+      "dominantBlocks": {
+        "weight": 14,
+        "alpha": 2
+      },
+      "workByCategory": {
+        "phase": 207146000,
+        "score": 36612000,
+        "moments": 15804000,
+        "gradient": 20980000
+      },
+      "extrapolationSteps": 1300,
+      "stepCapHits": 800,
+      "accepted": 1290,
+      "rejected": 5
+    },
+    {
+      "family": "three-wrapped",
+      "k": 3,
+      "method": "em",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 0,
+      "workLimitWithSmallRetainedGradient": 0,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.9206122000032337,
+      "medianMaps": 164.0,
+      "medianGradient": 0.0010170008852116996,
+      "dominantBlocks": {
+        "weight": 14,
+        "alpha": 1,
+        "mean": 1
+      },
+      "workByCategory": {
+        "phase": 257424000,
+        "score": 31254000,
+        "moments": 15688000,
+        "gradient": 15630000
+      },
+      "extrapolationSteps": 0,
+      "stepCapHits": 0,
+      "accepted": 0,
+      "rejected": 0
+    },
+    {
+      "family": "three-wrapped",
+      "k": 3,
+      "method": "squarem",
+      "count": 16,
+      "statuses": {
+        "WorkBudgetExhausted": 16
+      },
+      "retainedGradientWithinTolerance": 4,
+      "workLimitWithSmallRetainedGradient": 4,
+      "medianWork": 20000000.0,
+      "medianSeconds": 0.9504336000027251,
+      "medianMaps": 165.0,
+      "medianGradient": 0.00044849682855781486,
+      "dominantBlocks": {
+        "weight": 13,
+        "alpha": 1,
+        "cov": 2
+      },
+      "workByCategory": {
+        "phase": 247858000,
+        "score": 36024000,
+        "moments": 15534000,
+        "gradient": 20580000
+      },
+      "extrapolationSteps": 853,
+      "stepCapHits": 693,
+      "accepted": 843,
+      "rejected": 6
+    }
+  ],
+  "selection": [
+    {
+      "family": "all",
+      "method": "em",
+      "counts": {
+        "1": 44,
+        "2": 23,
+        "3": 13
+      },
+      "medianTotalWork": 40114000.0
+    },
+    {
+      "family": "all",
+      "method": "squarem",
+      "counts": {
+        "1": 24,
+        "2": 41,
+        "3": 15
+      },
+      "medianTotalWork": 29222000.0
+    },
+    {
+      "family": "curved",
+      "method": "em",
+      "counts": {
+        "1": 16
+      },
+      "medianTotalWork": 40137000.0
+    },
+    {
+      "family": "curved",
+      "method": "squarem",
+      "counts": {
+        "1": 16
+      },
+      "medianTotalWork": 40137000.0
+    },
+    {
+      "family": "seam",
+      "method": "em",
+      "counts": {
+        "2": 16
+      },
+      "medianTotalWork": 26147000.0
+    },
+    {
+      "family": "seam",
+      "method": "squarem",
+      "counts": {
+        "2": 16
+      },
+      "medianTotalWork": 24113000.0
+    },
+    {
+      "family": "three-separated",
+      "method": "em",
+      "counts": {
+        "3": 13,
+        "2": 3
+      },
+      "medianTotalWork": 15759000.0
+    },
+    {
+      "family": "three-separated",
+      "method": "squarem",
+      "counts": {
+        "3": 15,
+        "2": 1
+      },
+      "medianTotalWork": 11678000.0
+    },
+    {
+      "family": "three-overlap",
+      "method": "em",
+      "counts": {
+        "1": 12,
+        "2": 4
+      },
+      "medianTotalWork": 40119000.0
+    },
+    {
+      "family": "three-overlap",
+      "method": "squarem",
+      "counts": {
+        "2": 16
+      },
+      "medianTotalWork": 29898000.0
+    },
+    {
+      "family": "three-wrapped",
+      "method": "em",
+      "counts": {
+        "1": 16
+      },
+      "medianTotalWork": 40122000.0
+    },
+    {
+      "family": "three-wrapped",
+      "method": "squarem",
+      "counts": {
+        "1": 8,
+        "2": 8
+      },
+      "medianTotalWork": 40113000.0
+    }
+  ]
+}

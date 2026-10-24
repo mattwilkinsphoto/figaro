@@ -661,9 +661,9 @@ and repaired by a separate unchanged replay, not by relaxing scientific checks.
 
 **Code:** [Whole-fit derivatives/projections](../tools/gvm_wholefit_math.py), [safeguarded fitter and unaccelerated control](../tools/gvm_wholefit_fit.py), [fresh complexity-grid runner](../tools/gvm_wholefit_study.py). Existing runtime implementations and frozen GVM-05/06 sources remain unchanged.
 
-**Validation:** [All-block finite differences, boundary/algebra and failure controls](../tools/test_gvm_wholefit.py); [independent density, objective-difference, inventory and result audit](../tools/gvm_wholefit_audit.py). Confirmation outcomes are reported separately from implementation correctness; no public promotion is authorized.
+**Validation:** [All-block finite differences, boundary/algebra and failure controls](../tools/test_gvm_wholefit.py); [independent density, objective-difference, inventory and result audit](../tools/gvm_wholefit_audit.py). The [560-fit summary](../tools/gvm_wholefit_summary_v1.json) passes numerical and score-noninferiority gates but fails per-cell reliability and the required completion gain; no promotion. [Descriptive breakdowns](../tools/gvm_wholefit_diagnostics_v1.json) distinguish retained stationarity, restart-budget exhaustion and validation-only complexity selection. Confirmation outcomes are separate from implementation correctness.
 
-**Guide:** [Whole-fit convergence and complexity protocol](GVM_WHOLEFIT_STUDY.md).
+**Guide:** [Whole-fit convergence and complexity protocol](GVM_WHOLEFIT_STUDY.md); [completed results and limits](GVM_WHOLEFIT_STATUS.md).
 
 <a id="met-01"></a>
 

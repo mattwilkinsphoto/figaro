@@ -148,7 +148,9 @@ The next useful assessment is whole-fit convergence and model complexity:
    three-component GVMs are inherently difficult. Fresh held-out seeds and qualified
    Gaussian controls are still required before public integration.
 
-This is a recommendation, not an additional implementation authorization.
+The subsequently approved [whole-fit and complexity follow-up](GVM_WHOLEFIT_STATUS.md)
+is now complete with no promotion. Its new whole-fit criterion and total-work
+accounting do not retrospectively change this study's protocol or results.
 Production code, existing tests, stopping/defaults, shared pilot, build/workflows
 and release version remain unchanged. No merge, release or upstream submission.
 

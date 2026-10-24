@@ -1,0 +1,2443 @@
+{
+  "protocolSha256": "0d88f0ec8059756276e3d6128e656cc8e8cece78d7006c6cd919225fea6c6a3f",
+  "resultsSha256": "8b016bd31ae8f59a11d33c4ea7931a0d918a93f41d8725e709d9057654002027",
+  "fits": 560,
+  "audit": {
+    "status": "passed",
+    "inputHashes": 80,
+    "highPrecisionPoints": 1280,
+    "maximumDensityError": 5.329070518200751e-15,
+    "gradientModels": 60,
+    "maximumGradientDifference": 3.5414984278494955e-09,
+    "maximumScoreDifference": 3.637978807091713e-12,
+    "missingModels": 0,
+    "negativeInventoryControls": 2
+  },
+  "cells": [
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 126000.0,
+        "medianSeconds": 0.00884914999915054,
+        "medianGradient": 5.4622504769286095e-08
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 126000.0,
+        "medianSeconds": 0.007855549996747868,
+        "medianGradient": 5.4622504769286095e-08
+      }
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0235400499987009,
+        "medianGradient": 0.0005986721584412879
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0912987500014424,
+        "medianGradient": 0.0005246411389814853
+      }
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.8587499500026752,
+        "medianGradient": 0.0010043254201591856
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9791504000022542,
+        "medianGradient": 0.00035724297912098635
+      }
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 123000.0,
+        "medianSeconds": 0.009699250000267057,
+        "medianGradient": 4.5760427683227967e-08
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 123000.0,
+        "medianSeconds": 0.008074450001004152,
+        "medianGradient": 4.5760427683227967e-08
+      }
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 6464000.0,
+        "medianSeconds": 0.3256206000005477,
+        "medianGradient": 8.29013609102328e-05
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 3759000.0,
+        "medianSeconds": 0.20195505000083358,
+        "medianGradient": 2.2217917642564035e-05
+      }
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.8963180999962788,
+        "medianGradient": 0.0011189277330500846
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.988250499998685,
+        "medianGradient": 0.00011275925215932514
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 180000.0,
+        "medianSeconds": 0.011212150002393173,
+        "medianGradient": 4.779476225902357e-08
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 180000.0,
+        "medianSeconds": 0.010749050001322757,
+        "medianGradient": 4.779476225902357e-08
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 6809000.0,
+        "medianSeconds": 0.3045851000024413,
+        "medianGradient": 6.123086707370603e-05
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 4423000.0,
+        "medianSeconds": 0.22743215000082273,
+        "medianGradient": 6.225309140724412e-05
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 6679000.0,
+        "medianSeconds": 0.3171584000047005,
+        "medianGradient": 5.976018406313579e-05
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 5002000.0,
+        "medianSeconds": 0.24914595000154804,
+        "medianGradient": 1.6538184317867308e-05
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 120000.0,
+        "medianSeconds": 0.008803500000794884,
+        "medianGradient": 6.520915581814668e-09
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 120000.0,
+        "medianSeconds": 0.008733999999094522,
+        "medianGradient": 6.520915581814668e-09
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "Stationary": 4,
+          "WorkBudgetExhausted": 4
+        },
+        "qualified": 4,
+        "medianWork": 19288000.0,
+        "medianSeconds": 0.9615378500020597,
+        "medianGradient": 9.930634214000422e-05
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 7790000.0,
+        "medianSeconds": 0.4315821500022139,
+        "medianGradient": 9.14508959674043e-05
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9085140999995929,
+        "medianGradient": 0.00207716225534222
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9353268000013486,
+        "medianGradient": 0.0002277473779995487
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 120000.0,
+        "medianSeconds": 0.009194200003548758,
+        "medianGradient": 5.7262977049346575e-08
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 120000.0,
+        "medianSeconds": 0.009783199999219505,
+        "medianGradient": 5.7262977049346575e-08
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.06164815000011,
+        "medianGradient": 0.00011786630116489283
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 4,
+          "WorkBudgetExhausted": 4
+        },
+        "qualified": 4,
+        "medianWork": 19034000.0,
+        "medianSeconds": 1.0724881999994977,
+        "medianGradient": 9.339657340173835e-05
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9663068000008934,
+        "medianGradient": 0.0007231634516143559
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.966521800000919,
+        "medianGradient": 0.0003160025314403181
+      }
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 144000.0,
+        "medianSeconds": 0.010818149999977322,
+        "medianGradient": 2.644292683706695e-07
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 144000.0,
+        "medianSeconds": 0.010475699997186894,
+        "medianGradient": 2.644292683706695e-07
+      }
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0852772500002175,
+        "medianGradient": 0.0008412501858148281
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.074152100001811,
+        "medianGradient": 0.0006371457626239696
+      }
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.8951211500025238,
+        "medianGradient": 0.0020581634351328343
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9815159500030859,
+        "medianGradient": 0.0011311152843472838
+      }
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 156000.0,
+        "medianSeconds": 0.010205250000581145,
+        "medianGradient": 7.237114454938798e-08
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 156000.0,
+        "medianSeconds": 0.010289349997037789,
+        "medianGradient": 7.237114454938798e-08
+      }
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 5597000.0,
+        "medianSeconds": 0.2601124000029813,
+        "medianGradient": 5.9255599675826345e-05
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 4070000.0,
+        "medianSeconds": 0.20831054999871412,
+        "medianGradient": 1.5498016242235333e-05
+      }
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.928881799998635,
+        "medianGradient": 0.0007366925869692204
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9190885499992874,
+        "medianGradient": 0.0001033019039900912
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 174000.0,
+        "medianSeconds": 0.01026609999826178,
+        "medianGradient": 5.266326096042828e-08
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 174000.0,
+        "medianSeconds": 0.010600249999697553,
+        "medianGradient": 5.266326096042828e-08
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 7098000.0,
+        "medianSeconds": 0.3097928500028502,
+        "medianGradient": 6.766471925606142e-05
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 5185000.0,
+        "medianSeconds": 0.25484480000523035,
+        "medianGradient": 5.6306932712549786e-05
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "Stationary": 5,
+          "WorkBudgetExhausted": 3
+        },
+        "qualified": 5,
+        "medianWork": 14298000.0,
+        "medianSeconds": 0.5997845000019879,
+        "medianGradient": 6.183955198286484e-05
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "qualified": 7,
+        "medianWork": 10518000.0,
+        "medianSeconds": 0.4484952000020712,
+        "medianGradient": 1.5237622607994081e-05
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 120000.0,
+        "medianSeconds": 0.009263399995688815,
+        "medianGradient": 7.400476926405775e-08
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 120000.0,
+        "medianSeconds": 0.009360499996546423,
+        "medianGradient": 7.400476926405775e-08
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0416773500001,
+        "medianGradient": 9.921030374598905e-05
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 10228000.0,
+        "medianSeconds": 0.5531690000025264,
+        "medianGradient": 9.388637224327923e-05
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.8816732000013872,
+        "medianGradient": 0.0014948553176750978
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9483362000028137,
+        "medianGradient": 9.929476530923242e-05
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 1,
+      "em": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 126000.0,
+        "medianSeconds": 0.009733899998536799,
+        "medianGradient": 1.198461214556995e-07
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 8
+        },
+        "qualified": 8,
+        "medianWork": 126000.0,
+        "medianSeconds": 0.008636800001113443,
+        "medianGradient": 1.198461214556995e-07
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 2,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9867400000039197,
+        "medianGradient": 0.00010853334402144421
+      },
+      "squarem": {
+        "statuses": {
+          "Stationary": 4,
+          "WorkBudgetExhausted": 4
+        },
+        "qualified": 4,
+        "medianWork": 19991000.0,
+        "medianSeconds": 1.0675756000018737,
+        "medianGradient": 9.308524942125418e-05
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 3,
+      "em": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9052318499998364,
+        "medianGradient": 0.0017464648397305105
+      },
+      "squarem": {
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "qualified": 0,
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9300023499999952,
+        "medianGradient": 0.0006396187727614226
+      }
+    }
+  ],
+  "noninferiority": [
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 2,
+      "pairs": 8,
+      "mean": -0.00046587806462128345,
+      "lower": -0.00107588823060572,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 3,
+      "pairs": 8,
+      "mean": -0.0006959572065991515,
+      "lower": -0.0025360624226633873,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 2,
+      "pairs": 8,
+      "mean": -3.253921751766864e-06,
+      "lower": -9.461789153823553e-06,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 3,
+      "pairs": 8,
+      "mean": -0.0003839695288323508,
+      "lower": -0.0017241922882363632,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 2,
+      "pairs": 8,
+      "mean": -3.8679399925745095e-06,
+      "lower": -2.7904941339689218e-05,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 3,
+      "pairs": 8,
+      "mean": -5.64052364926404e-07,
+      "lower": -6.94396040831165e-06,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 2,
+      "pairs": 8,
+      "mean": -1.00743129823333e-05,
+      "lower": -5.431713313076173e-05,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 3,
+      "pairs": 8,
+      "mean": -0.0021443040755176335,
+      "lower": -0.007356279267724172,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 2,
+      "pairs": 8,
+      "mean": -1.969466088336258e-05,
+      "lower": -0.0001713722578415777,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 3,
+      "pairs": 8,
+      "mean": -2.2272588810656746e-05,
+      "lower": -0.0008208753146175505,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 2,
+      "pairs": 8,
+      "mean": -0.0007183951323160853,
+      "lower": -0.0033672587998566997,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 3,
+      "pairs": 8,
+      "mean": -0.0028206685947969046,
+      "lower": -0.006543018786576073,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 2,
+      "pairs": 8,
+      "mean": 7.539147781621125e-07,
+      "lower": -5.127238573610788e-06,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 3,
+      "pairs": 8,
+      "mean": 0.00012507084431467863,
+      "lower": -0.0005054441624546491,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 2,
+      "pairs": 8,
+      "mean": -2.48649826384284e-06,
+      "lower": -1.2974386426653178e-05,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 3,
+      "pairs": 8,
+      "mean": 1.7823692968210736e-06,
+      "lower": -5.618073687993532e-06,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 2,
+      "pairs": 8,
+      "mean": 8.3979562304215e-08,
+      "lower": -1.5475196955039158e-05,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 3,
+      "pairs": 8,
+      "mean": -0.0009432208217700078,
+      "lower": -0.003928411098410899,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 1,
+      "pairs": 8,
+      "mean": 0.0,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 2,
+      "pairs": 8,
+      "mean": -0.0008381284992031723,
+      "lower": -0.002671192041374095,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 3,
+      "pairs": 8,
+      "mean": -0.0014874036802814405,
+      "lower": -0.003923435298580499,
+      "passed": true
+    }
+  ],
+  "selection": [
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050001,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.2220488718063733,
+      "totalWork": 40132000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.2220488718063733,
+      "totalWork": 40132000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050002,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.2794611412956067,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.2794611412956067,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050003,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.2256721014466487,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.2256721014466487,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050004,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.2325405463236896,
+      "totalWork": 40124000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.2325405463236896,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050005,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.30671962866402,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.30671962866402,
+      "totalWork": 40118000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050006,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.2532929758223044,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.2532929758223044,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050007,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.24713032481184,
+      "totalWork": 40130000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.24713032481184,
+      "totalWork": 40128000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050008,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.2514898278521893,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.2514898278521893,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050001,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.0623752228432655,
+      "totalWork": 26252000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.062381862821201,
+      "totalWork": 23540000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050002,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.0744324688797824,
+      "totalWork": 25688000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.0744357972389356,
+      "totalWork": 23752000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050003,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.0524359108671844,
+      "totalWork": 27884000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.052440449430103,
+      "totalWork": 24462000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050004,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.060344647324668,
+      "totalWork": 26400000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.060343993399201,
+      "totalWork": 23718000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050005,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.1133554470320224,
+      "totalWork": 26766000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.1133604797081396,
+      "totalWork": 24006000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050006,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.079300759401023,
+      "totalWork": 27254000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.0793104171783834,
+      "totalWork": 24288000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050007,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.0341128672620243,
+      "totalWork": 25634000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.0341110971538923,
+      "totalWork": 23458000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050008,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.1013532674061843,
+      "totalWork": 27788000
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.101352525460312,
+      "totalWork": 24630000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050001,
+      "method": "em",
+      "k": 3,
+      "testScore": -3.4881529444654706,
+      "totalWork": 11870000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -3.488153758885248,
+      "totalWork": 8648000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050002,
+      "method": "em",
+      "k": 3,
+      "testScore": -3.5038045712547903,
+      "totalWork": 14478000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -3.5038045263576465,
+      "totalWork": 10700000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050003,
+      "method": "em",
+      "k": 3,
+      "testScore": -3.5150796745059107,
+      "totalWork": 13212000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -3.515073739538424,
+      "totalWork": 9348000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050004,
+      "method": "em",
+      "k": 3,
+      "testScore": -3.4948686956328383,
+      "totalWork": 16214000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -3.4948644555158577,
+      "totalWork": 11164000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050005,
+      "method": "em",
+      "k": 3,
+      "testScore": -3.501353468662774,
+      "totalWork": 13336000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -3.5013563905816265,
+      "totalWork": 9358000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050006,
+      "method": "em",
+      "k": 3,
+      "testScore": -3.5120299291216033,
+      "totalWork": 25198000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -3.512031417928872,
+      "totalWork": 14294000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050007,
+      "method": "em",
+      "k": 3,
+      "testScore": -3.471938394179281,
+      "totalWork": 14646000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -3.471945687151415,
+      "totalWork": 10164000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050008,
+      "method": "em",
+      "k": 3,
+      "testScore": -3.4544771445294566,
+      "totalWork": 11424000
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -3.4544793588119544,
+      "totalWork": 8366000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050001,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.6292792612453204,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.6052042751590414,
+      "totalWork": 28718000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050002,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.6333646977582363,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.603646864717218,
+      "totalWork": 32774000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050003,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.5778929782635576,
+      "totalWork": 37126000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.5778950141369963,
+      "totalWork": 26912000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050004,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.558563338398935,
+      "totalWork": 38696000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.5585614380731445,
+      "totalWork": 27096000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050005,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.6236183888800215,
+      "totalWork": 34442000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.623624124449231,
+      "totalWork": 25612000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050006,
+      "method": "em",
+      "k": 2,
+      "testScore": -3.563036510164276,
+      "totalWork": 35324000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.563036760306636,
+      "totalWork": 26224000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050007,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.6140344839767553,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.586893501040731,
+      "totalWork": 37274000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050008,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.6021788757766933,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.572037384845322,
+      "totalWork": 37206000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050001,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.543802217304459,
+      "totalWork": 40114000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.543802217304459,
+      "totalWork": 40114000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050002,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.6355124496099553,
+      "totalWork": 40132000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.614418804686736,
+      "totalWork": 28404000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050003,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.597476909615353,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.597476909615353,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050004,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.5919268789345384,
+      "totalWork": 40126000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.5711569524008926,
+      "totalWork": 38196000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050005,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.606788630270851,
+      "totalWork": 40114000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.606788630270851,
+      "totalWork": 40112000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050006,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.6131357522818406,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.5924661059351224,
+      "totalWork": 32586000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050007,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.604761276170025,
+      "totalWork": 40120000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -3.5840938115330916,
+      "totalWork": 30338000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050008,
+      "method": "em",
+      "k": 1,
+      "testScore": -3.6058116785924894,
+      "totalWork": 40114000
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -3.6058116785924894,
+      "totalWork": 40114000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050001,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.739591798181207,
+      "totalWork": 40144000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.739591798181207,
+      "totalWork": 40144000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050002,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.643889363757256,
+      "totalWork": 40142000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.643889363757256,
+      "totalWork": 40142000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050003,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.597851438632205,
+      "totalWork": 40156000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.597851438632205,
+      "totalWork": 40156000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050004,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.673614694763529,
+      "totalWork": 40144000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.673614694763529,
+      "totalWork": 40142000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050005,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.729134070454709,
+      "totalWork": 40144000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.729134070454709,
+      "totalWork": 40142000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050006,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.689150911792777,
+      "totalWork": 40144000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.689150911792777,
+      "totalWork": 40144000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050007,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.648500340605691,
+      "totalWork": 40150000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.648500340605691,
+      "totalWork": 40150000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050008,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.6973266360354025,
+      "totalWork": 40142000
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.6973266360354025,
+      "totalWork": 40144000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050001,
+      "method": "em",
+      "k": 2,
+      "testScore": -4.498538878440293,
+      "totalWork": 25836000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.498543365394847,
+      "totalWork": 24328000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050002,
+      "method": "em",
+      "k": 2,
+      "testScore": -4.509246503121025,
+      "totalWork": 26548000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.509245708201073,
+      "totalWork": 24582000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050003,
+      "method": "em",
+      "k": 2,
+      "testScore": -4.59257959977135,
+      "totalWork": 25326000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.592578926187181,
+      "totalWork": 23922000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050004,
+      "method": "em",
+      "k": 2,
+      "testScore": -4.470146133843213,
+      "totalWork": 25664000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.470148061360376,
+      "totalWork": 24220000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050005,
+      "method": "em",
+      "k": 2,
+      "testScore": -4.513721066480197,
+      "totalWork": 24494000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.513717653083603,
+      "totalWork": 23514000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050006,
+      "method": "em",
+      "k": 2,
+      "testScore": -4.51417572681564,
+      "totalWork": 26042000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.514169623525797,
+      "totalWork": 24226000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050007,
+      "method": "em",
+      "k": 2,
+      "testScore": -4.53439427084271,
+      "totalWork": 26428000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.5343975254206725,
+      "totalWork": 24372000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050008,
+      "method": "em",
+      "k": 2,
+      "testScore": -4.5269408402473,
+      "totalWork": 25534000
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.526936125069953,
+      "totalWork": 23990000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050001,
+      "method": "em",
+      "k": 2,
+      "testScore": -5.137059939985005,
+      "totalWork": 26414000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -4.899027082734197,
+      "totalWork": 15356000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050002,
+      "method": "em",
+      "k": 3,
+      "testScore": -4.939407478534993,
+      "totalWork": 14882000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -4.9394010190492725,
+      "totalWork": 12192000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050003,
+      "method": "em",
+      "k": 3,
+      "testScore": -4.883890673925568,
+      "totalWork": 20938000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -4.883886742867526,
+      "totalWork": 15352000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050004,
+      "method": "em",
+      "k": 2,
+      "testScore": -5.171607562604306,
+      "totalWork": 27850000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -4.928846559070709,
+      "totalWork": 23668000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050005,
+      "method": "em",
+      "k": 2,
+      "testScore": -5.1407822470384374,
+      "totalWork": 27426000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -5.1407822340258065,
+      "totalWork": 25276000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050006,
+      "method": "em",
+      "k": 3,
+      "testScore": -4.888765617641985,
+      "totalWork": 23204000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -4.888770719602214,
+      "totalWork": 18974000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050007,
+      "method": "em",
+      "k": 3,
+      "testScore": -4.91901280365485,
+      "totalWork": 16760000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -4.919010050325879,
+      "totalWork": 13148000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050008,
+      "method": "em",
+      "k": 3,
+      "testScore": -4.934761237982026,
+      "totalWork": 15304000
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 3,
+      "testScore": -4.93475347303137,
+      "totalWork": 11134000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050001,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.989246983368903,
+      "totalWork": 40124000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.947317419147275,
+      "totalWork": 32088000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050002,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.073811247992321,
+      "totalWork": 40124000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -5.034001532601724,
+      "totalWork": 30124000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050003,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.0090384246840305,
+      "totalWork": 40118000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.968186744419156,
+      "totalWork": 29672000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050004,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.065469022394032,
+      "totalWork": 40118000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -5.0219256945832225,
+      "totalWork": 30592000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050005,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.978860865684599,
+      "totalWork": 40114000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.945324185202615,
+      "totalWork": 35502000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050006,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.048239746329722,
+      "totalWork": 40132000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -5.0134920756209205,
+      "totalWork": 28772000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050007,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.032433718980659,
+      "totalWork": 40118000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -5.000030789530242,
+      "totalWork": 30576000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050008,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.020452535095692,
+      "totalWork": 40120000
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.975962583180258,
+      "totalWork": 28704000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050001,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.988323077081896,
+      "totalWork": 40124000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050001,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.988323077081896,
+      "totalWork": 40126000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050002,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.999732503495603,
+      "totalWork": 40124000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050002,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -4.999732503495603,
+      "totalWork": 40126000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050003,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.0061098404504305,
+      "totalWork": 40126000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050003,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -5.0061098404504305,
+      "totalWork": 40126000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050004,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.04299668771298,
+      "totalWork": 40132000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050004,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -5.0314950589593606,
+      "totalWork": 40116000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050005,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.029685260431393,
+      "totalWork": 40132000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050005,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -5.010552479108024,
+      "totalWork": 38774000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050006,
+      "method": "em",
+      "k": 1,
+      "testScore": -4.99156117574221,
+      "totalWork": 40132000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050006,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -4.980429923051024,
+      "totalWork": 39070000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050007,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.018452616133068,
+      "totalWork": 40114000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050007,
+      "method": "squarem",
+      "k": 2,
+      "testScore": -5.002121695750003,
+      "totalWork": 34066000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050008,
+      "method": "em",
+      "k": 1,
+      "testScore": -5.0226791155089625,
+      "totalWork": 40120000
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "seed": 1050008,
+      "method": "squarem",
+      "k": 1,
+      "testScore": -5.0226791155089625,
+      "totalWork": 40118000
+    }
+  ],
+  "multicomponentQualifiedRates": {
+    "em": 0.30625,
+    "squarem": 0.44375
+  },
+  "gates": {
+    "numerical": true,
+    "perCellReliability": false,
+    "completionGain": false,
+    "scoreNoninferiority": true
+  },
+  "decision": "no-promotion",
+  "elapsedSeconds": 621.7577629089355,
+  "gaussianStatuses": {
+    "Converged": 65,
+    "IterationLimit": 15
+  }
+}

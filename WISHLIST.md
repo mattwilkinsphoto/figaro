@@ -50,10 +50,13 @@ now has a [completed bounded `d=2,3` test-only experiment](docs/GVM_HIGH_DIMENSI
 with independently checked wrapped-GMM numerical controls. Finite-budget representation
 gains passed the score margins, but completion gates failed; no promotion.
 The [completed analytic-gradient follow-up](docs/GVM_GRADIENT_STATUS.md) reduces
-phase work but still fails per-cell reliability; outer convergence and model
-complexity need separate qualification. No public multivariate fitter is promoted.
-It is not a public fitter; automatic component selection
-and multiple angles remain outside that proposal. Scalar fitting and released
+phase work but still fails per-cell reliability. The [whole-fit/complexity follow-up](docs/GVM_WHOLEFIT_STATUS.md)
+is complete with no promotion: independent numerical and retained-score checks
+pass, but reliable completion remains unresolved. Its validation-only K selection
+is research evidence, not a public selector or true-component recovery guarantee.
+Mixture-weight optimization and bounded restart allocation need further assessment.
+No public multivariate fitter is promoted; multiple angles remain outside the
+bounded proposal. Scalar fitting and released
 stopping/defaults are unchanged.
 
 Use stable `DIST-xx` IDs when moving work into the roadmap. Historical family ordering

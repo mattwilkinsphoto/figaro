@@ -84,8 +84,14 @@ The approved [bounded analytic-gradient follow-up](docs/GVM_GRADIENT_STUDY.md)
 is [complete with no promotion](docs/GVM_GRADIENT_STATUS.md): 512 fits and independent
 numerical checks show much less phase work and better completion, but per-cell
 reliability still fails. Final-responsibility checks distinguish likelihood
-stabilization from whole-fit stationarity. A separately reviewed convergence/model
-complexity study is next, not relaxed thresholds or automatic public integration.
+stabilization from whole-fit stationarity. The approved [whole-fit convergence and
+complexity study](docs/GVM_WHOLEFIT_STATUS.md) is also complete with no promotion:
+560 fits and independent numerical checks pass score margins, but reliability and
+the required completion gain fail. Acceleration helps K=2; separated true K=3 is
+much more tractable than overlapping or overfitted cases. Retained stationarity
+and completion of the restart search differ materially. Weight optimization and
+restart-budget allocation are the next research questions, not relaxed thresholds
+or automatic public integration; a new bounded plan and validation are required.
 Scalar fitting, stopping and
 defaults remain unchanged. No public integration or superiority claim precedes
 independent validation. See [GVM-05](docs/RESEARCH_REFERENCES.md#gvm-05).
