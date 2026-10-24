@@ -1,0 +1,61 @@
+{
+  "protocol": "gvm-gradient-v1",
+  "seeds": [
+    940001,
+    940002,
+    940003,
+    940004,
+    940005,
+    940006,
+    940007,
+    940008
+  ],
+  "dimensions": [
+    2,
+    3
+  ],
+  "families": [
+    "curved",
+    "seam",
+    "local",
+    "wrapped"
+  ],
+  "components": [
+    1,
+    2,
+    3
+  ],
+  "train": 2000,
+  "test": 20000,
+  "starts": 3,
+  "phasePoints": 20000000,
+  "iterations": 50,
+  "angularCalls": 400,
+  "maxSeconds": 120,
+  "maxStudySeconds": 10800,
+  "maxFits": 640,
+  "expectedConfirmationFits": 512,
+  "qualifiedRate": 0.95,
+  "completionGain": 0.2,
+  "noninferiority": 0.02,
+  "alpha": 0.05,
+  "comparisons": 24,
+  "sourceSha256": {
+    "tools/gvm_gradient_fit.py": "007e4cbac4666f032c6441dea19e4e5435f1b58f0efa6c055852f318ca0ae4a6",
+    "tools/gvm_gradient_study.py": "96bb14e7914c4f6a18a49dc6ed7995f6724ecb840c5424e58306ffba3ed40560",
+    "tools/test_gvm_gradient_fit.py": "75022939099e19af5da4fc771981d758853f907ec92c2cb36404b334b5585763",
+    "tools/GvmGradientKeys.java": "966de0c60d41e5cb66ce811204eee1da55501afd85cb2d0b59d478084fff4fbc",
+    "tools/GvmDimensionalFit.java": "f603156e6e7b8337e1933325bb6c0ce57b8c66c07c52a2ef510cecde74d8afd5",
+    "tools/gvm_dimension_controls.py": "ea4cccad6c1abb6aca8a6563ef53a382fb0512711bfe6e50218cfa8e58939962",
+    "tools/gvm_dimension_qualification.py": "f0445e0a4b3fcf232da0cfb156e18d91e1f65c7cd9313512eb9307dc490efb74",
+    "tools/gvm_dimension_audit.py": "ae12fc48bc1abfa7408229c685201c5253dd14ae1716a31a697c08f02b65701d",
+    "tools/gvm_study_io.py": "44fb77a6e17025d133b1ae5acc3a1b69c94596422eec0588c0521738ca246ad3",
+    "docs/GVM_GRADIENT_STUDY.md": "d23b62ced4559715ad67aedbdc580b29d2141b982d71c035c638a213b5a7ad3f"
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.5.1",
+    "scipy": "1.18.1"
+  },
+  "frozenUnix": 1792819097.900246
+}

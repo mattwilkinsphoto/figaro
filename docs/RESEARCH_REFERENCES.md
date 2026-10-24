@@ -52,7 +52,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Expensive-likelihood branch qualification and precomputation | [INF-19](#inf-19) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
-| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05) |
+| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05), [GVM-06](#gvm-06) |
 | Cross-family information measures and mixture MI | [MET-01](#met-01), [MET-02](#met-02) |
 | Common families, matrix/correlation priors | [DIST-01](#dist-01), [DIST-02](#dist-02), [DIST-03](#dist-03) |
 | Conditional copulas and observation semantics | [MOD-01](#mod-01), [MOD-02](#mod-02) |
@@ -636,6 +636,20 @@ and repaired by a separate unchanged replay, not by relaxing scientific checks.
 **Validation:** [Independent reference tests](../tools/test_gvm_dimension_controls.py), [cross-language qualification/development controls](../tools/gvm_dimension_qualification.py), [unchanged-kernel consumer check](../tools/GvmKernelCompatibility.scala), and [independent all-model high-precision audit](../tools/gvm_dimension_audit.py). The [768-fit frozen summary](../tools/gvm_dimension_summary_v1.json) passes numerical checks and retained-fit score margins but fails completion gates; no promotion. Historical [Release61RepresentationStudy](../Figaro/src/test/scala/com/cra/figaro/test/modernization/Release61RepresentationStudy.scala) remains a scalar baseline whose wrapped control wraps a chart-fit Gaussian at evaluation. All budget/iteration failures remain outcomes, not discarded trials.
 
 **Guide:** [Higher-dimensional GVM fitting assessment and bounded plan](GVM_HIGH_DIMENSIONAL_FITTING_RESEARCH.md); [three-stage experiment protocol](GVM_HIGH_DIMENSIONAL_PROTOCOL.md); [completed results and no-promotion decision](GVM_HIGH_DIMENSIONAL_STATUS.md).
+
+<a id="gvm-06"></a>
+
+### GVM-06: Bounded analytic-gradient GVM optimization
+
+**Source:** Byrd, Lu, Nocedal and Zhu, [A Limited Memory Algorithm for Bound Constrained Optimization](https://users.iems.northwestern.edu/~nocedal/PDFfiles/limited.pdf) (1995), abstract, introduction and algorithm outline; authors' [L-BFGS-B software and licensing page](https://users.iems.northwestern.edu/~nocedal/lbfgsb.html); official [SciPy L-BFGS-B options](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html). Inspected 2026-10-24. GVM-05 supplies the unchanged model constraints and derivative-free control.
+
+**Role:** Test-only adaptation using maintained SciPy L-BFGS-B with an independently derived weighted-resultant gradient. Inner projected-gradient qualification is separate from outer mixture-likelihood stabilization. No global optimum, theorem transfer or automatic promotion. SciPy remains an isolated research dependency, not a new Figaro runtime dependency. Stopping/defaults and the shared pilot are unchanged.
+
+**Code:** [Bounded analytic-gradient fitter](../tools/gvm_gradient_fit.py), [paired study runner](../tools/gvm_gradient_study.py), [initialization bridge](../tools/GvmGradientKeys.java). The [BOBYQA baseline](../tools/GvmDimensionalFit.java) and all GVM-05 frozen sources remain unchanged.
+
+**Validation:** [Independent gradient, solver and failure controls](../tools/test_gvm_gradient_fit.py) use high-precision complex-resultant differentiation, central differences and finite-difference SLSQP. Finite-difference L-BFGS-B is an ablation, not an independent backend. The [high-precision density reference](../tools/gvm_dimension_audit.py) uses full inverse/determinant evaluation. Development and held-out outcomes are distinguished in the study record.
+
+**Guide:** [Bounded analytic-gradient study protocol](GVM_GRADIENT_STUDY.md).
 
 <a id="met-01"></a>
 

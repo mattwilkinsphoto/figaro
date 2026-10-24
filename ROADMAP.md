@@ -80,8 +80,10 @@ The [complete 768-fit study](docs/GVM_HIGH_DIMENSIONAL_STATUS.md) passed indepen
 numerical checks and retained-model accuracy margins, but failed fit-completion
 gates: all three-component GVM fits exhausted their phase-work cap, and Gaussian
 controls also frequently hit iteration limits. Keep all implementations test-only.
-An analytic-gradient/convergence-work follow-up is a candidate for separate review,
-not an automatic extension or permission to relax the frozen criteria.
+The approved [bounded analytic-gradient follow-up](docs/GVM_GRADIENT_STUDY.md)
+has passed initial independent controls and development checks; its new protocol
+is frozen before fresh held-out execution. It is not permission to relax the
+previous criteria or promote a fitter without independent qualification.
 Scalar fitting, stopping and
 defaults remain unchanged. No public integration or superiority claim precedes
 independent validation. See [GVM-05](docs/RESEARCH_REFERENCES.md#gvm-05).
