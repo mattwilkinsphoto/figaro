@@ -120,6 +120,15 @@ the high refusal rate argues against automatically expanding pilot integration.
 Either needs a new reviewed protocol and fresh seeds, not posthoc relaxation of
 this experiment. This is not a general negative result about Gaussian mixtures.
 
+Subsequently approved [expensive-likelihood relevance screening](EXPENSIVE_LIKELIHOOD_RESEARCH.md)
+identifies a plausible synthetic scalar ODE response, not a demonstrated filtering
+gain. Its numerical revision and costs are preserved separately. Independent
+posterior/branch qualification and a fair precomputation baseline are now
+[complete](BRANCH_QUALIFICATION_STATUS.md): the fixed workload fails branch
+relevance, while selected spline tables pass independent numerical checks.
+No new filtering utility trial follows. The shared pilot stays parked and this
+experiment's no-promotion decision is unchanged.
+
 The unchanged continuous-filter regression passed all 450 checks across 7,680
 runs and 153,600 rows. Another 39 stopping/weighted-pilot regression tests passed,
 in addition to the 68 Scala controls above. The reference index, 41 documentation

@@ -49,6 +49,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Guided and auxiliary fixed-budget extension | [INF-16](#inf-16) |
 | Nonlinear proposal construction: test-only, no-promotion result | [INF-17](#inf-17) |
 | Multi-component filtering guides: assessment and proposed experiment | [INF-18](#inf-18) |
+| Expensive-likelihood branch qualification and precomputation | [INF-19](#inf-19) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -444,6 +445,29 @@ The unchanged continuous benchmark passed 450 checks; 39 additional
 stopping/weighted-pilot regressions also passed. No runtime source changed.
 
 **Guide:** [MULTICOMPONENT GUIDE RESEARCH](MULTICOMPONENT_GUIDE_RESEARCH.md); [MULTICOMPONENT GUIDE PROTOCOL](MULTICOMPONENT_GUIDE_PROTOCOL.md); [MULTICOMPONENT GUIDE STATUS](MULTICOMPONENT_GUIDE_STATUS.md).
+
+<a id="inf-19"></a>
+
+### INF-19: Expensive likelihood branch-guide relevance
+
+**Source:** Kersting et al., [Differentiable Likelihoods for Fast Inversion of Likelihood-Free Dynamical Systems](https://proceedings.mlr.press/v119/kersting20a/kersting20a.pdf) (2020), introduction and section 2; Galioto and Gorodetsky, [Bayesian system ID](https://ngalioto.github.io/files/galioto2020bayesian.pdf) (2020), section 6.4/equation 51; Branchini and Elvira, [optimized APF](https://proceedings.mlr.press/v161/branchini21a/branchini21a.pdf) (2021), section 3.4. Stuart and Teckentrup, [Posterior Consistency for Gaussian Process Approximations of Bayesian Posterior Distributions](https://arxiv.org/html/1603.02004v2), preprint v2, introduction/section 2: posterior-error motivation, not a theorem for this spline. Relevant sections inspected 2026-10-23, not full-proof review or reproduction. Alternate/publisher PDF access for the last paper failed; HTML preprint was inspected. Official Commons Math DP853/GBS/natural spline and SciPy solve_ivp/LSODA/CubicSpline documentation are implementation references linked in the guides.
+
+**Role:** Completed model-only screen and independent posterior/precomputation qualification; no promoted filtering method. Independently specified damped reset-response oscillator with uncertain scalar launch velocity; not the papers' experiments or probabilistic ODE solver. Existing Commons Math and isolated BSD-licensed SciPy implementations reused; no external implementation source or dataset copied into Figaro. Shared pilot parked; stopping/defaults unchanged. Frozen workload fails posterior branch relevance, so no guide-utility trial follows; selected lookup tables pass numerical checks but are not a shipping API or uniform accuracy guarantee.
+
+**Code:** [Forward-model screen](../tools/ExpensiveLikelihoodRelevance.java); [precomputation comparison](../tools/BranchPrecomputation.java); [independent LSODA posterior and spline analysis](../tools/branch_qualification.py). The branch-guide adapter remains unchanged and was not invoked; INF-18 retains its no-promotion result.
+
+**Validation:** [Strict analysis](../tools/expensive_likelihood_relevance.py), [four analysis controls](../tools/test_expensive_likelihood_relevance.py), [summary](../tools/expensive_likelihood_summary_v1.json). Initial endpoint calibration failed 15 checks; its source/log are preserved. One recorded revision passes 7,704 deterministic checks in each of three fresh JVMs without relaxing acceptance or changing inputs. Same-library ODE agreement is not an independent posterior reference. Timing is descriptive; no filter accuracy or speedup claim.
+
+Follow-up [seven analytic/failure controls](../tools/test_branch_qualification.py) and
+[qualification summary](../tools/branch_qualification_summary_v1.json): 1,926 solver
+comparisons, analytic Kalman control, resolution/domain refinement and a path-exit
+screen passed. Three JVMs replay identical table/query results. All eight candidates
+retained; two coarse T=6 tables fail pointwise log-likelihood limits. Selected tables
+pass held-out and posterior checks. Central branch mass is 98.2–99.8%, with no step
+passing the frozen relevance gate. A recorder filename collision is preserved
+and repaired by a separate unchanged replay, not by relaxing scientific checks.
+
+**Guide:** [EXPENSIVE LIKELIHOOD RESEARCH](EXPENSIVE_LIKELIHOOD_RESEARCH.md); [EXPENSIVE LIKELIHOOD PROTOCOL](EXPENSIVE_LIKELIHOOD_PROTOCOL.md); [EXPENSIVE LIKELIHOOD NUMERICAL REVISION](EXPENSIVE_LIKELIHOOD_NUMERICAL_REVISION.md); [BRANCH QUALIFICATION PROTOCOL](BRANCH_QUALIFICATION_PROTOCOL.md); [BRANCH QUALIFICATION STATUS](BRANCH_QUALIFICATION_STATUS.md).
 
 <a id="dia-01"></a>
 

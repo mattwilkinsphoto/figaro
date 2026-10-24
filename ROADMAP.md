@@ -59,12 +59,20 @@ reuse limits and counterevidence. Released stopping, defaults and automatic-cuto
 behavior remain unchanged. The frozen single-Gaussian protocol and all unfavorable
 results remain available for comparison; independent validation precedes promotion.
 
-Any further proposal work needs a new bounded decision: expensive-likelihood
-models may value the observed equal-evaluation gains, while pilot reliability
-needs separate design. Neither is automatically scheduled by these results.
+**PF-PROPOSAL-03: posterior qualification and precomputation complete; stop this workload.**
+The [initial assessment](docs/EXPENSIVE_LIKELIHOOD_RESEARCH.md) identified costly
+scalar ODE responses and inverse branches. The independently validated
+[follow-up](docs/BRANCH_QUALIFICATION_STATUS.md) finds no step satisfying the
+frozen substantial-branch criterion, while selected spline tables pass held-out
+and posterior checks. Reuse amortizes construction after roughly 4,600–10,400
+queries; cold short runs still favor direct evaluation. No filter speedup was
+measured. Do not start a guide utility trial for this frozen model or retune it
+to pass. Keep the shared pilot parked and previous no-promotion results unchanged.
+No runtime integration, promotion, release, stopping or default change follows.
 
-Other next candidates are higher-dimensional GVM-mixture
-fitting (with GMM controls) and broader multi-latent warm-up/proposal support.
+The recommended next assessment is higher-dimensional GVM-mixture
+fitting (with GMM controls); broader multi-latent warm-up/proposal support is
+another candidate.
 These are recommendations, not an automatic implementation queue. Higher-dimensional
 GVM fitting remains density representation work, excluding application fusion.
 Finite-population mode loss, arbitrary-graph ownership and unsupported numerical

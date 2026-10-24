@@ -74,6 +74,15 @@ unknown-mode discovery and vector expansion remain
 deferred. No winning algorithm, speedup, automatic policy or publication is claimed.
 Preserve all earlier negative results and released stopping/defaults.
 
+**PF-PROPOSAL-03 — qualification complete; no utility trial for this workload.**
+The [model-only screen](docs/EXPENSIVE_LIKELIHOOD_RESEARCH.md) led to an
+[independent posterior and precomputation comparison](docs/BRANCH_QUALIFICATION_STATUS.md).
+No observation step met the frozen substantial-branch criterion. Validated spline
+tables reduced repeated-query cost after construction was amortized; cold short
+runs still favored direct evaluation. No filtering speedup or promotion is
+established. Shared-pilot work stays parked; a different justified workload needs
+separate qualification, not posthoc parameter tuning.
+
 ## Broad families first
 
 | ID / priority | Family and current expansion status | First useful capability | Later flavors / shared work |

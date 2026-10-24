@@ -1,0 +1,244 @@
+{
+  "scope": "model-only relevance, not filter utility",
+  "checksPerJvm": 7704,
+  "independentReplications": 0,
+  "scientificReplay": true,
+  "inputHashes": {
+    "profile-v2-1.log": "ef1d6e90795bd6d068a0e9b4928cd41bedd481c83ca92be0a10cb34ee6ffb3eb",
+    "profile-v2-2.log": "ba2bba34f3ede90d8911947b8b94d22c7dd3089f5f54b6ca3f8d534bd238cda9",
+    "profile-v2-3.log": "7fd103e71b0bc5920affc062d5025f7e5fcec6bdc93f6e22e4c1efcc6e37c755"
+  },
+  "horizons": {
+    "2": {
+      "rootBrackets": {
+        "-0.5": [
+          [
+            -0.5999999999999996,
+            -0.5499999999999998
+          ]
+        ],
+        "0.0": [
+          [
+            0.05000000000000071,
+            0.09999999999999964
+          ]
+        ],
+        "0.5": [
+          [
+            0.6500000000000004,
+            0.7000000000000011
+          ]
+        ]
+      },
+      "turningBrackets": [],
+      "timing": {
+        "dp853-endpoint": [
+          {
+            "medianMicrosecondsPerCall": 8.719003115264798,
+            "minBatchMicrosecondsPerCall": 8.606227414330219,
+            "maxBatchMicrosecondsPerCall": 10.1202492211838
+          },
+          {
+            "medianMicrosecondsPerCall": 8.883489096573209,
+            "minBatchMicrosecondsPerCall": 8.790342679127725,
+            "maxBatchMicrosecondsPerCall": 9.361059190031153
+          },
+          {
+            "medianMicrosecondsPerCall": 8.905295950155763,
+            "minBatchMicrosecondsPerCall": 8.87757320872274,
+            "maxBatchMicrosecondsPerCall": 9.591897196261682
+          }
+        ],
+        "dp853-tangent": [
+          {
+            "medianMicrosecondsPerCall": 13.006230529595015,
+            "minBatchMicrosecondsPerCall": 12.880685358255452,
+            "maxBatchMicrosecondsPerCall": 14.617757009345794
+          },
+          {
+            "medianMicrosecondsPerCall": 13.709657320872275,
+            "minBatchMicrosecondsPerCall": 13.313395638629283,
+            "maxBatchMicrosecondsPerCall": 14.822115264797509
+          },
+          {
+            "medianMicrosecondsPerCall": 13.233644859813085,
+            "minBatchMicrosecondsPerCall": 13.114018691588784,
+            "maxBatchMicrosecondsPerCall": 14.124922118380061
+          }
+        ],
+        "gbs-endpoint": [
+          {
+            "medianMicrosecondsPerCall": 26.76386292834891,
+            "minBatchMicrosecondsPerCall": 15.49626168224299,
+            "maxBatchMicrosecondsPerCall": 29.253274143302182
+          },
+          {
+            "medianMicrosecondsPerCall": 27.241744548286604,
+            "minBatchMicrosecondsPerCall": 16.358566978193146,
+            "maxBatchMicrosecondsPerCall": 31.51463862928349
+          },
+          {
+            "medianMicrosecondsPerCall": 15.58816199376947,
+            "minBatchMicrosecondsPerCall": 15.39158878504673,
+            "maxBatchMicrosecondsPerCall": 27.69283489096573
+          }
+        ],
+        "gbs-tangent": [
+          {
+            "medianMicrosecondsPerCall": 36.301557632398755,
+            "minBatchMicrosecondsPerCall": 19.884423676012464,
+            "maxBatchMicrosecondsPerCall": 42.19190031152648
+          },
+          {
+            "medianMicrosecondsPerCall": 38.486604361370716,
+            "minBatchMicrosecondsPerCall": 20.905607476635513,
+            "maxBatchMicrosecondsPerCall": 43.43364174454829
+          },
+          {
+            "medianMicrosecondsPerCall": 19.911214953271028,
+            "minBatchMicrosecondsPerCall": 19.76043613707165,
+            "maxBatchMicrosecondsPerCall": 38.403426791277255
+          }
+        ]
+      },
+      "maxEndpointComparisonError": 8.30532975726328e-10,
+      "maxDerivativeComparisonError": 3.3280864730755866e-09,
+      "rhsRange": [
+        92,
+        350
+      ]
+    },
+    "6": {
+      "rootBrackets": {
+        "-0.5": [
+          [
+            -2.3,
+            -2.25
+          ],
+          [
+            1.200000000000001,
+            1.25
+          ],
+          [
+            2.1500000000000004,
+            2.200000000000001
+          ]
+        ],
+        "0.0": [
+          [
+            -2.3,
+            -2.25
+          ],
+          [
+            0.45000000000000107,
+            0.5
+          ],
+          [
+            2.200000000000001,
+            2.25
+          ]
+        ],
+        "0.5": [
+          [
+            -2.25,
+            -2.1999999999999993
+          ],
+          [
+            -1.0999999999999996,
+            -1.0499999999999998
+          ],
+          [
+            2.200000000000001,
+            2.25
+          ]
+        ]
+      },
+      "turningBrackets": [
+        [
+          -2.05,
+          -2.0
+        ],
+        [
+          2.0,
+          2.0500000000000007
+        ]
+      ],
+      "timing": {
+        "dp853-endpoint": [
+          {
+            "medianMicrosecondsPerCall": 22.25576323987539,
+            "minBatchMicrosecondsPerCall": 22.005919003115263,
+            "maxBatchMicrosecondsPerCall": 23.294392523364486
+          },
+          {
+            "medianMicrosecondsPerCall": 23.07352336448598,
+            "minBatchMicrosecondsPerCall": 22.66759813084112,
+            "maxBatchMicrosecondsPerCall": 23.620872274143302
+          },
+          {
+            "medianMicrosecondsPerCall": 22.710903426791276,
+            "minBatchMicrosecondsPerCall": 22.41526479750779,
+            "maxBatchMicrosecondsPerCall": 23.247978193146416
+          }
+        ],
+        "dp853-tangent": [
+          {
+            "medianMicrosecondsPerCall": 35.461682242990655,
+            "minBatchMicrosecondsPerCall": 35.299691588785045,
+            "maxBatchMicrosecondsPerCall": 37.35109034267913
+          },
+          {
+            "medianMicrosecondsPerCall": 38.00872274143302,
+            "minBatchMicrosecondsPerCall": 37.79033956386293,
+            "maxBatchMicrosecondsPerCall": 38.905299065420564
+          },
+          {
+            "medianMicrosecondsPerCall": 36.76323987538941,
+            "minBatchMicrosecondsPerCall": 36.37507788161994,
+            "maxBatchMicrosecondsPerCall": 39.476635514018696
+          }
+        ],
+        "gbs-endpoint": [
+          {
+            "medianMicrosecondsPerCall": 62.17040498442367,
+            "minBatchMicrosecondsPerCall": 37.200308411214955,
+            "maxBatchMicrosecondsPerCall": 73.56168224299066
+          },
+          {
+            "medianMicrosecondsPerCall": 63.555137071651096,
+            "minBatchMicrosecondsPerCall": 38.981308411214954,
+            "maxBatchMicrosecondsPerCall": 72.67507788161993
+          },
+          {
+            "medianMicrosecondsPerCall": 37.38442367601246,
+            "minBatchMicrosecondsPerCall": 37.234271028037384,
+            "maxBatchMicrosecondsPerCall": 43.598439252336455
+          }
+        ],
+        "gbs-tangent": [
+          {
+            "medianMicrosecondsPerCall": 90.88909968847352,
+            "minBatchMicrosecondsPerCall": 55.2803738317757,
+            "maxBatchMicrosecondsPerCall": 115.17040498442367
+          },
+          {
+            "medianMicrosecondsPerCall": 93.48723052959502,
+            "minBatchMicrosecondsPerCall": 57.95451713395639,
+            "maxBatchMicrosecondsPerCall": 104.48535514018693
+          },
+          {
+            "medianMicrosecondsPerCall": 56.63676012461059,
+            "minBatchMicrosecondsPerCall": 54.76199376947041,
+            "maxBatchMicrosecondsPerCall": 67.004984423676
+          }
+        ]
+      },
+      "maxEndpointComparisonError": 1.1014797962616285e-08,
+      "maxDerivativeComparisonError": 3.926974087420376e-05,
+      "rhsRange": [
+        242,
+        914
+      ]
+    }
+  }
+}
