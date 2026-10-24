@@ -1,9 +1,11 @@
 # Multi-component guides assessment and bounded plan
 
-**PF-PROPOSAL-02: assessment complete; three-stage test-only experiment approved.**
+**PF-PROPOSAL-02: assessment and three-stage test-only experiment complete; no promotion.**
 Reviewed 2026-10-23. [Research provenance](RESEARCH_REFERENCES.md#inf-18).
 Execution follows the separately [frozen protocol](MULTICOMPONENT_GUIDE_PROTOCOL.md);
 the proposed gates below are preserved rationale, superseded by that protocol.
+The [result](MULTICOMPONENT_GUIDE_STATUS.md) preserves branch-guide equal-N gains,
+failed cost-matched utility and shared-pilot refusals; neither candidate ships.
 The released stopping estimator, inference defaults and 7.4.0 adoption baseline
 remain unchanged.
 
@@ -179,7 +181,7 @@ dropping, hidden jitter or successful-run filtering. Preparation failure leaves
 the filter untouched; in-step failure retains the released terminal behavior.
 Failure reports distinguish numerical refusal, pilot insufficiency and work limits.
 
-## Three stages after approval
+## Approved three stage design
 
 ### Stage 1 freeze the specification and independent references
 
@@ -288,7 +290,7 @@ or numerical performance measurements were generated for this assessment.
 
 ## Decision and remaining limits
 
-Approve the three test-only stages above if the explicit-anchor contract is useful.
+The approved three test-only stages above evaluate the explicit-anchor contract.
 It reduces manual proposal algebra without pretending to infer unknown branches.
 The shared-pilot comparator tests whether less model-specific input is worth its
 exploration cost. If neither beats larger bootstrap, retain that negative result

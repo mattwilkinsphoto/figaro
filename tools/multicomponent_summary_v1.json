@@ -1,0 +1,327 @@
+{
+  "rowsPerJvm": 140032,
+  "replay": true,
+  "digest": "57ba49bf337973633fd7e0f707178ff3cc8847ea59b8557895315d232ae93a2a",
+  "checks": 4000,
+  "failedChecks": 0,
+  "refusalRuns": 1788,
+  "unavailableRows": 6567,
+  "refusals": {
+    "InsufficientComponent": 521,
+    "InsufficientPilot": 256,
+    "IterationLimit": 1011
+  },
+  "pilotCompletions": [
+    {
+      "name": "affine",
+      "completed": 0,
+      "refusals": {
+        "IterationLimit": 256
+      }
+    },
+    {
+      "name": "weak",
+      "completed": 0,
+      "refusals": {
+        "IterationLimit": 256
+      }
+    },
+    {
+      "name": "mono",
+      "completed": 0,
+      "refusals": {
+        "IterationLimit": 256
+      }
+    },
+    {
+      "name": "tail",
+      "completed": 0,
+      "refusals": {
+        "InsufficientPilot": 256
+      }
+    },
+    {
+      "name": "symmetric",
+      "completed": 205,
+      "refusals": {
+        "IterationLimit": 51
+      }
+    },
+    {
+      "name": "asymmetric",
+      "completed": 0,
+      "refusals": {
+        "InsufficientComponent": 256
+      }
+    },
+    {
+      "name": "three",
+      "completed": 0,
+      "refusals": {
+        "InsufficientComponent": 256
+      }
+    },
+    {
+      "name": "merging",
+      "completed": 74,
+      "refusals": {
+        "IterationLimit": 182
+      }
+    },
+    {
+      "name": "flat",
+      "completed": 256,
+      "refusals": {}
+    },
+    {
+      "name": "omitted",
+      "completed": 256,
+      "refusals": {}
+    },
+    {
+      "name": "narrow",
+      "completed": 237,
+      "refusals": {
+        "InsufficientComponent": 9,
+        "IterationLimit": 10
+      }
+    }
+  ],
+  "primary": [
+    {
+      "name": "asymmetric",
+      "methods": [
+        {
+          "mode": "bootstrap",
+          "n": 64,
+          "rootLoss": 0.4934541501506703,
+          "medianMs": [
+            0.487,
+            0.4778,
+            0.49195
+          ],
+          "depleted": 0
+        },
+        {
+          "mode": "branch",
+          "n": 64,
+          "rootLoss": 0.15448004856989808,
+          "medianMs": [
+            3.44745,
+            3.2305,
+            3.184
+          ],
+          "depleted": 0
+        },
+        {
+          "mode": "big-branch",
+          "n": 538,
+          "rootLoss": 0.16235467915336016,
+          "medianMs": [
+            3.89405,
+            3.8374,
+            3.989
+          ],
+          "depleted": 0
+        },
+        {
+          "mode": "eval-branch",
+          "n": 66,
+          "rootLoss": 0.5071859291180456,
+          "medianMs": [
+            0.5035,
+            0.4961,
+            0.5095
+          ],
+          "depleted": 0
+        },
+        {
+          "mode": "cubature",
+          "n": 64,
+          "rootLoss": 0.5583060609090954,
+          "medianMs": [
+            2.38125,
+            2.347,
+            2.3074
+          ],
+          "depleted": 0
+        },
+        {
+          "mode": "ekf",
+          "n": 64,
+          "rootLoss": 0.5804023490406599,
+          "medianMs": [
+            2.0905,
+            2.02695,
+            1.98725
+          ],
+          "depleted": 0
+        },
+        {
+          "mode": "manual",
+          "n": 64,
+          "rootLoss": 0.29631587373650625,
+          "medianMs": [
+            0.8231,
+            0.8152,
+            0.8056
+          ],
+          "depleted": 0
+        }
+      ],
+      "branchVsEqualN": 0.31305856587228914,
+      "branchVsTimeMatched": 0.951497359826484,
+      "branchVsEvaluationMatched": 0.3045826780694135
+    },
+    {
+      "name": "three",
+      "methods": [
+        {
+          "mode": "bootstrap",
+          "n": 64,
+          "rootLoss": 0.4002763495102951,
+          "medianMs": [
+            0.4895,
+            0.4828,
+            0.49455
+          ],
+          "depleted": 77
+        },
+        {
+          "mode": "branch",
+          "n": 64,
+          "rootLoss": 0.19724385305891065,
+          "medianMs": [
+            4.65815,
+            4.3933,
+            4.32085
+          ],
+          "depleted": 0
+        },
+        {
+          "mode": "big-branch",
+          "n": 683,
+          "rootLoss": 0.12098449416174806,
+          "medianMs": [
+            4.96775,
+            4.9342,
+            5.08085
+          ],
+          "depleted": 0
+        },
+        {
+          "mode": "eval-branch",
+          "n": 67,
+          "rootLoss": 0.4018169139696614,
+          "medianMs": [
+            0.5157,
+            0.50735,
+            0.5188
+          ],
+          "depleted": 75
+        },
+        {
+          "mode": "cubature",
+          "n": 64,
+          "rootLoss": 0.7397438233018703,
+          "medianMs": [
+            2.3704,
+            2.3328,
+            2.3063
+          ],
+          "depleted": 243
+        },
+        {
+          "mode": "ekf",
+          "n": 64,
+          "rootLoss": 0.7270100019411404,
+          "medianMs": [
+            2.07195,
+            2.0145,
+            1.9864
+          ],
+          "depleted": 243
+        }
+      ],
+      "branchVsEqualN": 0.4927691913354914,
+      "branchVsTimeMatched": 1.6303234098347266,
+      "branchVsEvaluationMatched": 0.49087991620433197
+    }
+  ],
+  "branchNonregressions": [
+    {
+      "name": "omitted",
+      "available": true,
+      "passed": false,
+      "metrics": {
+        "tail": {
+          "mse": 0.000824991467470889,
+          "limit": 0.001158436025806488,
+          "passed": true
+        },
+        "r0": {
+          "mse": 0.10953142873878008,
+          "limit": 0.026132419045018077,
+          "passed": false
+        },
+        "r1": {
+          "mse": 0.10953142873878007,
+          "limit": 0.026132419045018066,
+          "passed": false
+        },
+        "r2": {
+          "mse": 0.0,
+          "limit": 0.0001,
+          "passed": true
+        }
+      },
+      "aggregatePassed": true
+    }
+  ],
+  "branchDepletion": [
+    {
+      "name": "symmetric",
+      "available": true,
+      "passed": true,
+      "excessRuns": 0,
+      "rateDifference": 0.0,
+      "approximate95Interval": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "asymmetric",
+      "available": true,
+      "passed": true,
+      "excessRuns": 0,
+      "rateDifference": 0.0,
+      "approximate95Interval": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "three",
+      "available": true,
+      "passed": true,
+      "excessRuns": -77,
+      "rateDifference": -0.30078125,
+      "approximate95Interval": [
+        -0.3570695190830552,
+        -0.24449298091694485
+      ]
+    },
+    {
+      "name": "narrow",
+      "available": true,
+      "passed": true,
+      "excessRuns": 0,
+      "rateDifference": 0.0,
+      "approximate95Interval": [
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

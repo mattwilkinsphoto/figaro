@@ -42,21 +42,28 @@ release follows from this work.
 The 7.4.0 APIs already correct caller-supplied guides, but built-in observation
 conditioning remains linear-Gaussian. See [research provenance](docs/RESEARCH_REFERENCES.md#inf-17).
 
-**PF-PROPOSAL-02: approved multi-component experiment in progress.** The
+**PF-PROPOSAL-02: multi-component experiment complete; no promotion.** The
 [literature-led assessment and bounded plan](docs/MULTICOMPONENT_GUIDE_RESEARCH.md)
 recommend caller-supplied scalar linearization branches versus one shared,
 discarded-pilot mixture fit per observation. The approved three stages freeze
 independent references first, build test-only adapters second, and require fresh
 held-out accuracy/mode-retention gains over cost-matched bootstrap third.
-Independent references and test-only safety controls pass; held-out utility
-validation is pending. See the [status](docs/MULTICOMPONENT_GUIDE_STATUS.md).
+Independent references, adapter controls and branch-guide correctness passed.
+The branch guide improved equal-N accuracy/mode retention, but failed both primary
+cost-matched utility gates and an omitted-branch probability-error gate. The shared
+pilot had 1,788 refusals in 2,816 held-out runs. See the
+[complete status](docs/MULTICOMPONENT_GUIDE_STATUS.md); both remain test-only.
 No optimizer, learned guide or automatic mode discovery is implied.
 [INF-18](docs/RESEARCH_REFERENCES.md#inf-18) records sources,
 reuse limits and counterevidence. Released stopping, defaults and automatic-cutover
 behavior remain unchanged. The frozen single-Gaussian protocol and all unfavorable
 results remain available for comparison; independent validation precedes promotion.
 
-The next candidates after that assessment are higher-dimensional GVM-mixture
+Any further proposal work needs a new bounded decision: expensive-likelihood
+models may value the observed equal-evaluation gains, while pilot reliability
+needs separate design. Neither is automatically scheduled by these results.
+
+Other next candidates are higher-dimensional GVM-mixture
 fitting (with GMM controls) and broader multi-latent warm-up/proposal support.
 These are recommendations, not an automatic implementation queue. Higher-dimensional
 GVM fitting remains density representation work, excluding application fusion.

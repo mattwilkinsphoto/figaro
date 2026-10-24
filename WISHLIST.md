@@ -63,13 +63,14 @@ records the next recommendation; the [completed experiment](docs/NONLINEAR_PROPO
 passed correctness but failed accuracy/cost gates, retaining cubature/Jacobian helpers only in tests.
 [INF-17](docs/RESEARCH_REFERENCES.md#inf-17) records sources and inspection limits.
 
-**PF-PROPOSAL-02 — approved test-only experiment in progress.** The
+**PF-PROPOSAL-02 — test-only experiment complete; no promotion.** The
 [multi-component guide plan](docs/MULTICOMPONENT_GUIDE_RESEARCH.md) compares explicit
 scalar branches with a shared weighted-pilot fit, retaining cost-matched bootstrap
 and manual-guide controls. [INF-18](docs/RESEARCH_REFERENCES.md#inf-18) records the
 literature and reuse assessment; the [status](docs/MULTICOMPONENT_GUIDE_STATUS.md)
-tracks completed reference and adapter controls. Held-out validation is required before any
-promotion; learned proposals, unknown-mode discovery and vector expansion remain
+records independent correctness, equal-N gains, failed cost-matched utility and
+shared-pilot refusals. Neither candidate qualifies for promotion. Learned proposals,
+unknown-mode discovery and vector expansion remain
 deferred. No winning algorithm, speedup, automatic policy or publication is claimed.
 Preserve all earlier negative results and released stopping/defaults.
 
