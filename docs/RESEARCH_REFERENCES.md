@@ -52,7 +52,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Expensive-likelihood branch qualification and precomputation | [INF-19](#inf-19) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
-| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05), [GVM-06](#gvm-06) |
+| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05), [GVM-06](#gvm-06), [GVM-07](#gvm-07) |
 | Cross-family information measures and mixture MI | [MET-01](#met-01), [MET-02](#met-02) |
 | Common families, matrix/correlation priors | [DIST-01](#dist-01), [DIST-02](#dist-02), [DIST-03](#dist-03) |
 | Conditional copulas and observation semantics | [MOD-01](#mod-01), [MOD-02](#mod-02) |
@@ -650,6 +650,20 @@ and repaired by a separate unchanged replay, not by relaxing scientific checks.
 **Validation:** [Independent gradient, solver and failure controls](../tools/test_gvm_gradient_fit.py) use high-precision complex-resultant differentiation, central differences and finite-difference SLSQP. Finite-difference L-BFGS-B is an ablation, not an independent backend. The [all-model audit](../tools/gvm_gradient_audit.py) uses the separate [high-precision density reference](../tools/gvm_dimension_audit.py). The [512-fit summary](../tools/gvm_gradient_summary_v1.json) passes numerical and score-noninferiority checks but fails per-cell reliability; no promotion. [Diagnostics](../tools/gvm_gradient_diagnostics_v1.json) retain the separate work/iteration curves and final-responsibility gradients. Declared likelihood stabilization is not a whole-fit stationarity certificate.
 
 **Guide:** [Bounded analytic-gradient study protocol](GVM_GRADIENT_STUDY.md); [completed results and limits](GVM_GRADIENT_STATUS.md).
+
+<a id="gvm-07"></a>
+
+### GVM-07: Whole-fit stationarity, safeguarded acceleration and complexity
+
+**Source:** Du and Varadhan, [SQUAREM: An R Package for Off-the-Shelf Acceleration of EM, MM and Other EM-Like Monotone Algorithms](https://doi.org/10.18637/jss.v092.i07) (2020), introduction, Algorithm 1 and controls discussion, inspected through a public full-text mirror after publisher timeouts; official [CRAN SQUAREM package](https://CRAN.R-project.org/package=SQUAREM) and [vignette](https://cran.r-project.org/web/packages/SQUAREM/vignettes/SQUAREM.pdf), implementation context only. Drton and Plummer, [A Bayesian information criterion for singular models](https://arxiv.org/pdf/1309.0911), v3 (2016), abstract/introduction, supplies the overfitted-mixture/BIC caution. Inspected 2026-10-24. GVM-05/06 retain the model and inner optimization provenance.
+
+**Role:** Independently written, test-only squared-extrapolation adaptation with circular differences, bounded projections, strict likelihood guards and total-work accounting. All-parameter marginal-likelihood gradients provide a coordinate-dependent stationarity diagnostic, not an inference stopping rule or global-optimum guarantee. The CRAN package is GPL >= 2, reference-only: no external implementation code or dataset copied. SciPy remains research-only; no theorem transfer or promotion based solely on numerical agreement. Validation-data model selection is descriptive predictive selection, not true-component recovery.
+
+**Code:** [Whole-fit derivatives/projections](../tools/gvm_wholefit_math.py), [safeguarded fitter and unaccelerated control](../tools/gvm_wholefit_fit.py), [fresh complexity-grid runner](../tools/gvm_wholefit_study.py). Existing runtime implementations and frozen GVM-05/06 sources remain unchanged.
+
+**Validation:** [All-block finite differences, boundary/algebra and failure controls](../tools/test_gvm_wholefit.py); [independent density, objective-difference, inventory and result audit](../tools/gvm_wholefit_audit.py). Confirmation outcomes are reported separately from implementation correctness; no public promotion is authorized.
+
+**Guide:** [Whole-fit convergence and complexity protocol](GVM_WHOLEFIT_STUDY.md).
 
 <a id="met-01"></a>
 

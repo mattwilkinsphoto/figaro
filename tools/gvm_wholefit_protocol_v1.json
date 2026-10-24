@@ -1,0 +1,64 @@
+{
+  "protocol": "gvm-wholefit-v1",
+  "seeds": [
+    1050001,
+    1050002,
+    1050003,
+    1050004,
+    1050005,
+    1050006,
+    1050007,
+    1050008
+  ],
+  "dimensions": [
+    2,
+    3
+  ],
+  "families": [
+    "curved",
+    "seam",
+    "three-separated",
+    "three-overlap",
+    "three-wrapped"
+  ],
+  "components": [
+    1,
+    2,
+    3
+  ],
+  "train": 2000,
+  "validation": 2000,
+  "test": 20000,
+  "starts": 3,
+  "maxWork": 20000000,
+  "maxMapsPerStart": 200,
+  "maxSeconds": 120,
+  "stationarity": 0.0001,
+  "gaussianIterations": 200,
+  "maxStudySeconds": 10800,
+  "maxFitsIncludingDevelopment": 640,
+  "expectedConfirmationFits": 560,
+  "qualifiedRate": 0.95,
+  "completionGain": 0.2,
+  "noninferiority": 0.02,
+  "alpha": 0.05,
+  "comparisons": 30,
+  "sourceSha256": {
+    "tools/gvm_wholefit_math.py": "d4d86ede8190fecc8421398e7e70cf683f4f341c5b945c22fff0b4265553b56d",
+    "tools/gvm_wholefit_fit.py": "52ec4874a2b9f13643d6df25dfac28e2e92b4805bf1993bf963c9d9ad0826010",
+    "tools/gvm_wholefit_study.py": "8d4cd8e45618f0e61e57973762742c2369b6f793a2d220fb75c3d3310926718a",
+    "tools/test_gvm_wholefit.py": "984587fa65a5cf03311c7c6ce61f779645aa4f0f05deead4ba38ec68ec21e85b",
+    "tools/gvm_wholefit_audit.py": "e7a17cd6eb904dd7565aab47a2fbeadc6de5dc470d0ca7f5f3854a74589ca766",
+    "tools/gvm_gradient_fit.py": "007e4cbac4666f032c6441dea19e4e5435f1b58f0efa6c055852f318ca0ae4a6",
+    "tools/gvm_dimension_controls.py": "ea4cccad6c1abb6aca8a6563ef53a382fb0512711bfe6e50218cfa8e58939962",
+    "tools/gvm_dimension_audit.py": "ae12fc48bc1abfa7408229c685201c5253dd14ae1716a31a697c08f02b65701d",
+    "tools/gvm_study_io.py": "44fb77a6e17025d133b1ae5acc3a1b69c94596422eec0588c0521738ca246ad3",
+    "docs/GVM_WHOLEFIT_STUDY.md": "31f8e0732da04c2c19b161eb8f31d7dacee588d58e8ca54611430e8599053855"
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.5.1",
+    "scipy": "1.18.1"
+  },
+  "frozenUnix": 1792835258.7889838
+}
