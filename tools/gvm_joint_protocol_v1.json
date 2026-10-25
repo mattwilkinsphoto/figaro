@@ -1,0 +1,83 @@
+{
+  "protocol": "gvm-joint-feasibility-v1",
+  "developmentOnly": true,
+  "seed": 1150001,
+  "dimensions": [
+    2,
+    3
+  ],
+  "families": [
+    "curved",
+    "seam",
+    "three-separated",
+    "three-overlap",
+    "three-wrapped"
+  ],
+  "components": [
+    2,
+    3
+  ],
+  "arms": [
+    "baseline",
+    "joint"
+  ],
+  "expectedFits": 40,
+  "maxWork": 20000000,
+  "maxSeconds": 120,
+  "starts": 3,
+  "prefixMaps": 10,
+  "baselineMaps": 200,
+  "jointIterations": 200,
+  "jointCalls": 2000,
+  "maxStudySeconds": 7200,
+  "stationarity": 0.0001,
+  "minimumCompletionGain": 4,
+  "maximumLostCompletions": 0,
+  "scoreMargin": 0.02,
+  "sourceSha256": {
+    "docs/GVM_JOINT_PROTOCOL.md": "24c460641762d4b22f3c17265dc387270db079d45acea70fe72369200b1ed332",
+    "docs/GVM_WEIGHT_PROTOCOL.md": "f10e45c5008f3bd157ffdad8002b4f5b8e984e402964630a51c297b202cbaae7",
+    "docs/GVM_WHOLEFIT_STUDY.md": "31f8e0732da04c2c19b161eb8f31d7dacee588d58e8ca54611430e8599053855",
+    "tools/gvm_dimension_audit.py": "ae12fc48bc1abfa7408229c685201c5253dd14ae1716a31a697c08f02b65701d",
+    "tools/gvm_dimension_controls.py": "ea4cccad6c1abb6aca8a6563ef53a382fb0512711bfe6e50218cfa8e58939962",
+    "tools/gvm_gradient_fit.py": "007e4cbac4666f032c6441dea19e4e5435f1b58f0efa6c055852f318ca0ae4a6",
+    "tools/gvm_joint_audit.py": "489fb50c0d6204ecf4c7cc68cc8b188479f7495f234194647cb37c85cd70bc96",
+    "tools/gvm_joint_fit.py": "89606f863302c9ea503dd33c7e520ba0cdd761108e38b3dd8173a268828da69a",
+    "tools/gvm_joint_geometry.py": "a7a1974e42c46c34ae072b3d774cc262ef3dc8bc573a45737e12e734138cbee9",
+    "tools/gvm_joint_study.py": "77231abdddf510a78c05b826f18b05a47e0fdba904b3d4f68ac721c4b5ef1e30",
+    "tools/gvm_study_io.py": "44fb77a6e17025d133b1ae5acc3a1b69c94596422eec0588c0521738ca246ad3",
+    "tools/gvm_weight_audit.py": "a494083ddb39e626b0498a7da89ca3ab6425e6e7e802f9ca4923f860760be929",
+    "tools/gvm_weight_fit.py": "10382780cb54f06b0cd2a4ebeb453e38ebd52ce83dd392053f188b2693902560",
+    "tools/gvm_weight_qualification.py": "6f89a363b10503ee38583bcdc6692cbdf9a5c0f7f3b37011e2e6f1c573b2adfc",
+    "tools/gvm_weight_reference.py": "ce125bda9ba4b46bcdfcec1677b577b21b481fa9db0aaa463a45d5ece4bd999c",
+    "tools/gvm_weight_solver.py": "c399b056a18de1a3a3cf2cb6d9302034c74166d9f93dda842aa4e30e1a8f0fad",
+    "tools/gvm_weight_study.py": "28609fac756c7a6d070f9e49203f6fc56efac7989e661f0e9775a8bae80a7175",
+    "tools/gvm_wholefit_audit.py": "e7a17cd6eb904dd7565aab47a2fbeadc6de5dc470d0ca7f5f3854a74589ca766",
+    "tools/gvm_wholefit_fit.py": "52ec4874a2b9f13643d6df25dfac28e2e92b4805bf1993bf963c9d9ad0826010",
+    "tools/gvm_wholefit_math.py": "d4d86ede8190fecc8421398e7e70cf683f4f341c5b945c22fff0b4265553b56d",
+    "tools/gvm_wholefit_study.py": "8d4cd8e45618f0e61e57973762742c2369b6f793a2d220fb75c3d3310926718a",
+    "tools/test_gvm_joint.py": "af343ef29c7c9efcbc3526839d5cd4bcf4b712a4754c0d67195c622a8395df92",
+    "tools/test_gvm_weight_audit.py": "87846b5c4a8885560ea378c5f287f307145fd29da70e8f1eca31bd6331a020d2",
+    "tools/test_gvm_weight_fit.py": "16610a22e7b761f28802cb330afc6875691862f6ad920e6a77e8902ad3ae7f65",
+    "tools/test_gvm_weight_solver.py": "8fa80e983d7142bf0981e1af5cff059a2a5917c18c7af60b671bb723f079deed",
+    "tools/test_gvm_wholefit.py": "984587fa65a5cf03311c7c6ce61f779645aa4f0f05deead4ba38ec68ec21e85b"
+  },
+  "inputSha256": {
+    "d2-curved-1150001.npz": "652302af0b2359ff96b03ba7e7a2bd191455ef07639fee21ec50847885aef6e1",
+    "d2-seam-1150001.npz": "c438546346da9ddc68eba5ed469c7734d4508145714a8b7230a3133a8f44cf8e",
+    "d2-three-separated-1150001.npz": "78da0dd70f9da9dade8e568e77db8bd8fe1e9f228f951815408c716e645af3fe",
+    "d2-three-overlap-1150001.npz": "02948291357d8dcee6afc106ac4b0ffa97700d4ef2dcb52c10098fa80d1d8da5",
+    "d2-three-wrapped-1150001.npz": "17f3f4d1ab4bfcda6893678f51875da07d11b94f471ca411bd68f994f5f02abd",
+    "d3-curved-1150001.npz": "1e6b40f24f0beed9e0eb9492e2d2bb69bbad39c5d53de8412c558d6ada4b513f",
+    "d3-seam-1150001.npz": "7c55259fc72d5721d63fa0a7754f0f5598972fa08587d90a711c198a0f46a6c6",
+    "d3-three-separated-1150001.npz": "d9f9d1eda81c84c7943dbe52a755c75196750babe666d96f4db7aaac3a8ca31b",
+    "d3-three-overlap-1150001.npz": "65616e2d83f02fca008b6abd572eb8cea7c0f75fa53ec101f63228ff37b0c2f1",
+    "d3-three-wrapped-1150001.npz": "f07ad01c8cb4922c2dbad871adfb789e674a59155c6b3a91ccc631389a480e82"
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.5.1",
+    "scipy": "1.18.1"
+  },
+  "frozenUnix": 1792894320.7466261
+}

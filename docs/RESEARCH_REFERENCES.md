@@ -52,7 +52,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Expensive-likelihood branch qualification and precomputation | [INF-19](#inf-19) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
-| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05), [GVM-06](#gvm-06), [GVM-07](#gvm-07), [GVM-08](#gvm-08) |
+| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05), [GVM-06](#gvm-06), [GVM-07](#gvm-07), [GVM-08](#gvm-08), [GVM-09](#gvm-09) |
 | Cross-family information measures and mixture MI | [MET-01](#met-01), [MET-02](#met-02) |
 | Common families, matrix/correlation priors | [DIST-01](#dist-01), [DIST-02](#dist-02), [DIST-03](#dist-03) |
 | Conditional copulas and observation semantics | [MOD-01](#mod-01), [MOD-02](#mod-02) |
@@ -678,6 +678,20 @@ and repaired by a separate unchanged replay, not by relaxing scientific checks.
 **Validation:** [Independent 60-digit weight reference](../tools/gvm_weight_reference.py), [weight controls](../tools/test_gvm_weight_solver.py), [scheduler/equivalence/failure controls](../tools/test_gvm_weight_fit.py), [independent audit](../tools/gvm_weight_audit.py), [negative audit controls](../tools/test_gvm_weight_audit.py), [corruption controls](../tools/test_gvm_weight_validation.py) and [reporting controls](../tools/test_gvm_weight_reporting.py). The [40-case relevance screen](../tools/gvm_weight_qualification_v1.json), 40 development-fit audits and [1,040-fit confirmation numerical/score checks](../tools/gvm_weight_summary_v1.json) pass. Reliability and completion-improvement gates fail: no promotion. [Descriptive breakdowns](../tools/gvm_weight_diagnostics_v1.json) retain the distinction between solution and search completion. Earlier [whole-fit diagnostics](../tools/gvm_wholefit_diagnostics_v1.json) and [frozen gates](GVM_WHOLEFIT_STUDY.md) remain unchanged.
 
 **Guide:** [Mixture-weight and restart-budget assessment](GVM_WEIGHT_RESTART_RESEARCH.md); [frozen execution protocol](GVM_WEIGHT_PROTOCOL.md); [completed result and limitations](GVM_WEIGHT_STATUS.md); [preceding completed study](GVM_WHOLEFIT_STATUS.md).
+
+<a id="gvm-09"></a>
+
+### GVM-09: Joint optimization feasibility
+
+**Source:** Sembach, Burgard and Schulz, [A Riemannian Newton Trust-Region Method for Fitting Gaussian Mixture Models](https://arxiv.org/html/2104.14957v2) (2022), sections 3.2 and 4; Hosseini and Sra, [An alternative to EM for Gaussian mixture models](https://portal.fis.tum.de/de/publications/an-alternative-to-em-for-gaussian-mixture-models-batch-and-stocha/) (2020), publication abstract only; official [SciPy SLSQP documentation](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-slsqp.html), inspected 2026-10-24. GVM-05 through GVM-08 provide the unchanged model, derivatives and baseline.
+
+**Role:** Test-only constrained quasi-Newton adaptation, not a port of a Riemannian Newton method. Logged Cholesky coordinates preserve positive definiteness; explicit spectral constraints preserve the original eigenvalue bounds. Published penalized-GMM convergence results and timings do not transfer. SciPy remains an isolated BSD research dependency; no external code/data copied. Stopping, defaults and prior no-promotion results are unchanged.
+
+**Code:** [Joint adapter](../tools/gvm_joint_fit.py), [bounded paired runner](../tools/gvm_joint_study.py), [development geometry diagnostics](../tools/gvm_joint_geometry.py). No public higher-dimensional fitter is added.
+
+**Validation:** [Coordinate/constraint/gradient and failure controls](../tools/test_gvm_joint.py), [independent density and physical-gradient audit](../tools/gvm_joint_audit.py). Nine controls pass; the [20-model geometry screen](../tools/gvm_joint_geometry_v1.json) is descriptive. Paired feasibility fits and independent audit remain pending; development evidence cannot authorize promotion.
+
+**Guide:** [Bounded joint optimization protocol](GVM_JOINT_PROTOCOL.md).
 
 <a id="met-01"></a>
 
