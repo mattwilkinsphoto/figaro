@@ -2,6 +2,10 @@
 
 Research provenance: [GVM-09](RESEARCH_REFERENCES.md#gvm-09).
 
+Follow-up: the [fresh confirmation](GVM_JOINT_CONFIRMATION_STATUS.md) is complete
+with no promotion. The historical feasibility results below are unchanged;
+fresh evidence fails per-cell reliability and total-cost gates.
+
 **The bounded feasibility screen passes and merits a fresh-confirmation plan.**
 The hybrid joint optimizer completes 18/20 development cases versus 10/20 for the
 unchanged accelerated baseline, losing no baseline-complete case. Independent
@@ -113,9 +117,10 @@ controls, 18 tooling tests, reference integrity, local links and protected-scope
 
 ## Next decision and reproducibility
 
-The [fresh-seed confirmation protocol](GVM_JOINT_CONFIRMATION_PROTOCOL.md) now
-freezes this exact candidate, repeated total-cost measurements and both unresolved
-curved cells. Do not increase iteration caps or replace the selection rule using
+The [fresh-seed confirmation](GVM_JOINT_CONFIRMATION_STATUS.md) tested this exact
+candidate with repeated total-cost measurements and both unresolved curved cells;
+its no-promotion decision supersedes the recommendation to run confirmation.
+Do not increase iteration caps or replace the selection rule using
 these outcomes. Broader per-cell reliability, Gaussian-mixture cost controls and
 representative consumer workloads remain unestablished. Any production integration
 requires independent confirmation and a separate promotion review.

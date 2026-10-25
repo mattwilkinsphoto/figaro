@@ -63,9 +63,10 @@ and balancing does not improve it. No hard early pruning or relaxed threshold.
 The [joint-optimization feasibility screen](docs/GVM_JOINT_STATUS.md) passes:
 18/20 candidate completions versus 10/20 baseline with independent numerical
 checks and no lost successes. It remains test-only: two cases are unqualified,
-runtime speedup is unestablished. The [fresh confirmation](docs/GVM_JOINT_CONFIRMATION_PROTOCOL.md)
-retains curved cases, eight fresh seeds and total-cost measurements; promotion
-remains a separate decision after independent validation.
+runtime speedup is unestablished. The [completed fresh confirmation](docs/GVM_JOINT_CONFIRMATION_STATUS.md)
+retains curved cases and all costs: 149/160 completions versus 71/160, independent
+numerics and score margins pass, but three K=3 cells fail reliability and elapsed
+cost increases about 12%. No promotion; keep the candidate as research evidence.
 No public multivariate fitter is promoted; multiple angles remain outside the
 bounded proposal. Scalar fitting and released
 stopping/defaults are unchanged.
