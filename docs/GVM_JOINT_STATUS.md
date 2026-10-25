@@ -113,9 +113,9 @@ controls, 18 tooling tests, reference integrity, local links and protected-scope
 
 ## Next decision and reproducibility
 
-Recommend a separate, frozen fresh-seed confirmation plan for this exact candidate,
-including repeated cost measurements and explicit treatment of both unresolved
-curved cases. Do not increase iteration caps or replace the selection rule using
+The [fresh-seed confirmation protocol](GVM_JOINT_CONFIRMATION_PROTOCOL.md) now
+freezes this exact candidate, repeated total-cost measurements and both unresolved
+curved cells. Do not increase iteration caps or replace the selection rule using
 these outcomes. Broader per-cell reliability, Gaussian-mixture cost controls and
 representative consumer workloads remain unestablished. Any production integration
 requires independent confirmation and a separate promotion review.

@@ -681,17 +681,19 @@ and repaired by a separate unchanged replay, not by relaxing scientific checks.
 
 <a id="gvm-09"></a>
 
-### GVM-09: Joint optimization feasibility
+### GVM-09: Joint optimization feasibility and confirmation
 
 **Source:** Sembach, Burgard and Schulz, [A Riemannian Newton Trust-Region Method for Fitting Gaussian Mixture Models](https://arxiv.org/html/2104.14957v2) (2022), sections 3.2 and 4; Hosseini and Sra, [An alternative to EM for Gaussian mixture models](https://portal.fis.tum.de/de/publications/an-alternative-to-em-for-gaussian-mixture-models-batch-and-stocha/) (2020), publication abstract only; official [SciPy SLSQP documentation](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-slsqp.html), inspected 2026-10-24. GVM-05 through GVM-08 provide the unchanged model, derivatives and baseline.
 
 **Role:** Test-only constrained quasi-Newton adaptation, not a port of a Riemannian Newton method. Logged Cholesky coordinates preserve positive definiteness; explicit spectral constraints preserve the original eigenvalue bounds. Published penalized-GMM convergence results and timings do not transfer. SciPy remains an isolated BSD research dependency; no external code/data copied. Stopping, defaults and prior no-promotion results are unchanged.
 
-**Code:** [Joint adapter](../tools/gvm_joint_fit.py), [bounded paired runner](../tools/gvm_joint_study.py), [development geometry diagnostics](../tools/gvm_joint_geometry.py). No public higher-dimensional fitter is added.
+**Code:** [Joint adapter](../tools/gvm_joint_fit.py), [bounded paired runner](../tools/gvm_joint_study.py), [development geometry diagnostics](../tools/gvm_joint_geometry.py), [fresh confirmation runner](../tools/gvm_joint_confirm_study.py) and [seed-paired reporting](../tools/gvm_joint_confirm_stats.py). No public higher-dimensional fitter is added.
 
 **Validation:** [Coordinate/constraint/gradient and failure controls](../tools/test_gvm_joint.py), [independent density and physical-gradient audit](../tools/gvm_joint_audit.py). Nine controls and the [40-fit independent audit](../tools/gvm_joint_summary_v1.json) pass: 18/20 candidate completions versus 10/20 baseline, no lost baseline successes and all descriptive score margins pass. The [20-model geometry screen](../tools/gvm_joint_geometry_v1.json) is descriptive. Two curved cases remain unqualified; total measured candidate time exceeds baseline despite fewer recorded data passes. Development evidence supports a fresh-confirmation plan, not promotion.
 
-**Guide:** [Bounded joint optimization protocol](GVM_JOINT_PROTOCOL.md); [completed feasibility result and limitations](GVM_JOINT_STATUS.md).
+Confirmation uses the official [Google Benchmark guide](https://google.github.io/benchmark/user_guide.html) for warmup/interleaving/repetition practice and [Python clock documentation](https://docs.python.org/3.14/library/time.html) for elapsed/process-CPU semantics, inspected 2026-10-24. These are measurement references, not imported code or speedup guarantees. The [frozen confirmation controls](../tools/test_gvm_joint_confirm.py) and [independent audit](../tools/gvm_joint_confirm_audit.py) preserve all failed costs, validate all-model densities/gradients and separately check paired reporting and critical values. Eight seed pairs, not timing repetitions, determine uncertainty.
+
+**Guide:** [Bounded joint optimization protocol](GVM_JOINT_PROTOCOL.md); [completed feasibility result and limitations](GVM_JOINT_STATUS.md); [fresh confirmation protocol](GVM_JOINT_CONFIRMATION_PROTOCOL.md).
 
 <a id="met-01"></a>
 

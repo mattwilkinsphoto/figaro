@@ -102,8 +102,11 @@ The [completed joint-optimization feasibility screen](docs/GVM_JOINT_STATUS.md)
 passes its development gates: 18/20 completions versus 10/20 baseline, no lost
 baseline successes and independently checked score/numerical margins. Two curved
 cases remain unqualified, and fewer data passes do not establish a runtime speedup.
-Recommend a separately frozen fresh-confirmation plan, not public integration or
-relaxation of earlier gates.
+The [fresh-seed confirmation protocol](docs/GVM_JOINT_CONFIRMATION_PROTOCOL.md)
+retains all 20 cells, including the unresolved curved cases, and measures total
+cost across three repetitions. Eight fresh seeds and independent numerical and
+reporting audits must pass before any separate promotion review. No public
+integration or relaxation of earlier gates.
 Scalar fitting, stopping and
 defaults remain unchanged. No public integration or superiority claim precedes
 independent validation. See [GVM-05](docs/RESEARCH_REFERENCES.md#gvm-05).

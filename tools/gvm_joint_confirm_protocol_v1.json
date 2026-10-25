@@ -1,0 +1,103 @@
+{
+  "protocol": "gvm-joint-confirmation-v1",
+  "seeds": [
+    1250001,
+    1250002,
+    1250003,
+    1250004,
+    1250005,
+    1250006,
+    1250007,
+    1250008
+  ],
+  "dimensions": [
+    2,
+    3
+  ],
+  "families": [
+    "curved",
+    "seam",
+    "three-separated",
+    "three-overlap",
+    "three-wrapped"
+  ],
+  "components": [
+    2,
+    3
+  ],
+  "arms": [
+    "baseline",
+    "joint"
+  ],
+  "repetitions": 3,
+  "train": 2000,
+  "validation": 2000,
+  "test": 20000,
+  "expectedDatasets": 80,
+  "expectedPairs": 160,
+  "expectedFits": 960,
+  "warmupSeed": 1150001,
+  "maxStudySeconds": 10800,
+  "maxWork": 20000000,
+  "maxSeconds": 120,
+  "starts": 3,
+  "prefixMaps": 10,
+  "baselineMaps": 200,
+  "jointIterations": 200,
+  "jointCalls": 2000,
+  "stationarity": 0.0001,
+  "qualifiedRate": 0.95,
+  "completionGain": 0.2,
+  "maximumLostCompletions": 0,
+  "scoreMargin": 0.02,
+  "alpha": 0.05,
+  "comparisons": 21,
+  "maximumCostRatio": 1.0,
+  "sourceSha256": {
+    "docs/GVM_JOINT_CONFIRMATION_PROTOCOL.md": "9e9e7c631aec52ebda8fe02c9b9a6e3951f900c2fb0a27ece82341eb7afb7c84",
+    "docs/GVM_JOINT_PROTOCOL.md": "24c460641762d4b22f3c17265dc387270db079d45acea70fe72369200b1ed332",
+    "docs/GVM_WEIGHT_PROTOCOL.md": "f10e45c5008f3bd157ffdad8002b4f5b8e984e402964630a51c297b202cbaae7",
+    "docs/GVM_WHOLEFIT_STUDY.md": "31f8e0732da04c2c19b161eb8f31d7dacee588d58e8ca54611430e8599053855",
+    "tools/gvm_dimension_audit.py": "ae12fc48bc1abfa7408229c685201c5253dd14ae1716a31a697c08f02b65701d",
+    "tools/gvm_dimension_controls.py": "ea4cccad6c1abb6aca8a6563ef53a382fb0512711bfe6e50218cfa8e58939962",
+    "tools/gvm_gradient_fit.py": "007e4cbac4666f032c6441dea19e4e5435f1b58f0efa6c055852f318ca0ae4a6",
+    "tools/gvm_joint_audit.py": "489fb50c0d6204ecf4c7cc68cc8b188479f7495f234194647cb37c85cd70bc96",
+    "tools/gvm_joint_confirm_audit.py": "10b20ccad01bf6848d92374b36ce41ba80b5e8c34b742e787b7d2d372aa079a6",
+    "tools/gvm_joint_confirm_evidence.py": "e79da4c2aa47664119daeec8e6fdc5b85d2a430ea93f488ea58bf974ee39deb6",
+    "tools/gvm_joint_confirm_stats.py": "842e28bdee7b2a83d7797cee0787b7ec12031fafa6ce06312925879eb54c1392",
+    "tools/gvm_joint_confirm_study.py": "b5a3b619d043264c45a3148a5bd9646431bdf87a6d9dd809be6d4853e0992931",
+    "tools/gvm_joint_fit.py": "89606f863302c9ea503dd33c7e520ba0cdd761108e38b3dd8173a268828da69a",
+    "tools/gvm_joint_geometry.py": "a7a1974e42c46c34ae072b3d774cc262ef3dc8bc573a45737e12e734138cbee9",
+    "tools/gvm_joint_study.py": "77231abdddf510a78c05b826f18b05a47e0fdba904b3d4f68ac721c4b5ef1e30",
+    "tools/gvm_study_io.py": "44fb77a6e17025d133b1ae5acc3a1b69c94596422eec0588c0521738ca246ad3",
+    "tools/gvm_weight_audit.py": "a494083ddb39e626b0498a7da89ca3ab6425e6e7e802f9ca4923f860760be929",
+    "tools/gvm_weight_fit.py": "10382780cb54f06b0cd2a4ebeb453e38ebd52ce83dd392053f188b2693902560",
+    "tools/gvm_weight_qualification.py": "6f89a363b10503ee38583bcdc6692cbdf9a5c0f7f3b37011e2e6f1c573b2adfc",
+    "tools/gvm_weight_reference.py": "ce125bda9ba4b46bcdfcec1677b577b21b481fa9db0aaa463a45d5ece4bd999c",
+    "tools/gvm_weight_solver.py": "c399b056a18de1a3a3cf2cb6d9302034c74166d9f93dda842aa4e30e1a8f0fad",
+    "tools/gvm_weight_study.py": "28609fac756c7a6d070f9e49203f6fc56efac7989e661f0e9775a8bae80a7175",
+    "tools/gvm_wholefit_audit.py": "e7a17cd6eb904dd7565aab47a2fbeadc6de5dc470d0ca7f5f3854a74589ca766",
+    "tools/gvm_wholefit_fit.py": "52ec4874a2b9f13643d6df25dfac28e2e92b4805bf1993bf963c9d9ad0826010",
+    "tools/gvm_wholefit_math.py": "d4d86ede8190fecc8421398e7e70cf683f4f341c5b945c22fff0b4265553b56d",
+    "tools/gvm_wholefit_study.py": "8d4cd8e45618f0e61e57973762742c2369b6f793a2d220fb75c3d3310926718a",
+    "tools/test_gvm_joint.py": "af343ef29c7c9efcbc3526839d5cd4bcf4b712a4754c0d67195c622a8395df92",
+    "tools/test_gvm_joint_confirm.py": "11c7237d3d44906330a7dbe8b02d31437ea47aecb2fbbb02867936e3e1ed9a73",
+    "tools/test_gvm_weight_audit.py": "87846b5c4a8885560ea378c5f287f307145fd29da70e8f1eca31bd6331a020d2",
+    "tools/test_gvm_weight_fit.py": "16610a22e7b761f28802cb330afc6875691862f6ad920e6a77e8902ad3ae7f65",
+    "tools/test_gvm_weight_solver.py": "8fa80e983d7142bf0981e1af5cff059a2a5917c18c7af60b671bb723f079deed",
+    "tools/test_gvm_wholefit.py": "984587fa65a5cf03311c7c6ce61f779645aa4f0f05deead4ba38ec68ec21e85b"
+  },
+  "priorProtocolSha256": {
+    "tools/gvm_dimension_protocol_v1.json": "a5c309a6af4bf6687e04a70b98a5a0b9b1b8a5dc143a562e365859d6750b7ddb",
+    "tools/gvm_gradient_protocol_v1.json": "e34785fc3c440847cdaf9812604d2b735db132a714e8677cbcda5ec6876fbc93",
+    "tools/gvm_joint_protocol_v1.json": "c7d795ccf340636ca2647d8d784b2d1f0c2975979a6fa521e60ca7abc11beafd",
+    "tools/gvm_weight_protocol_v1.json": "6b361274d62a76b64ccaae697eb348db980768de502ad38f772e6e47e2bf9cf6",
+    "tools/gvm_wholefit_protocol_v1.json": "0d88f0ec8059756276e3d6128e656cc8e8cece78d7006c6cd919225fea6c6a3f"
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.5.1",
+    "scipy": "1.18.1"
+  },
+  "frozenUnix": 1792896143.1227338
+}
