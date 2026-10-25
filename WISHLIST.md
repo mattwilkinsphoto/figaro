@@ -60,9 +60,10 @@ resumable scheduler, and fresh factorial confirmation. The approved
 [test-only study is complete with no promotion](docs/GVM_WEIGHT_STATUS.md): 1,040
 fits pass independent numerical and score checks, but polishing reduces completion
 and balancing does not improve it. No hard early pruning or relaxed threshold.
-A [bounded joint-optimization feasibility screen](docs/GVM_JOINT_PROTOCOL.md) is
-approved and test-only; independent numerical controls precede 20 paired
-development cases. Fresh confirmation and promotion remain separate decisions.
+The [joint-optimization feasibility screen](docs/GVM_JOINT_STATUS.md) passes:
+18/20 candidate completions versus 10/20 baseline with independent numerical
+checks and no lost successes. It remains test-only: two cases are unqualified,
+runtime speedup is unestablished, and fresh confirmation/promotion are separate.
 No public multivariate fitter is promoted; multiple angles remain outside the
 bounded proposal. Scalar fitting and released
 stopping/defaults are unchanged.

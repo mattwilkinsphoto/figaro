@@ -689,9 +689,9 @@ and repaired by a separate unchanged replay, not by relaxing scientific checks.
 
 **Code:** [Joint adapter](../tools/gvm_joint_fit.py), [bounded paired runner](../tools/gvm_joint_study.py), [development geometry diagnostics](../tools/gvm_joint_geometry.py). No public higher-dimensional fitter is added.
 
-**Validation:** [Coordinate/constraint/gradient and failure controls](../tools/test_gvm_joint.py), [independent density and physical-gradient audit](../tools/gvm_joint_audit.py). Nine controls pass; the [20-model geometry screen](../tools/gvm_joint_geometry_v1.json) is descriptive. Paired feasibility fits and independent audit remain pending; development evidence cannot authorize promotion.
+**Validation:** [Coordinate/constraint/gradient and failure controls](../tools/test_gvm_joint.py), [independent density and physical-gradient audit](../tools/gvm_joint_audit.py). Nine controls and the [40-fit independent audit](../tools/gvm_joint_summary_v1.json) pass: 18/20 candidate completions versus 10/20 baseline, no lost baseline successes and all descriptive score margins pass. The [20-model geometry screen](../tools/gvm_joint_geometry_v1.json) is descriptive. Two curved cases remain unqualified; total measured candidate time exceeds baseline despite fewer recorded data passes. Development evidence supports a fresh-confirmation plan, not promotion.
 
-**Guide:** [Bounded joint optimization protocol](GVM_JOINT_PROTOCOL.md).
+**Guide:** [Bounded joint optimization protocol](GVM_JOINT_PROTOCOL.md); [completed feasibility result and limitations](GVM_JOINT_STATUS.md).
 
 <a id="met-01"></a>
 

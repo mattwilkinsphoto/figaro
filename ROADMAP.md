@@ -98,10 +98,12 @@ multicomponent completion falls to 62/160 versus 70/160 baseline. Balancing alon
 does not improve completion; weight polishing shifts rather than resolves the
 full-fit bottleneck. Hard restart elimination is deferred. Earlier gates/results remain
 intact. See [GVM-08](docs/RESEARCH_REFERENCES.md#gvm-08).
-The approved [bounded joint-optimization feasibility screen](docs/GVM_JOINT_PROTOCOL.md)
-tests one constrained hybrid on 20 paired development cases before considering
-fresh confirmation. Numerical controls pass; paired results remain pending.
-This does not reopen public integration or relax any earlier gate.
+The [completed joint-optimization feasibility screen](docs/GVM_JOINT_STATUS.md)
+passes its development gates: 18/20 completions versus 10/20 baseline, no lost
+baseline successes and independently checked score/numerical margins. Two curved
+cases remain unqualified, and fewer data passes do not establish a runtime speedup.
+Recommend a separately frozen fresh-confirmation plan, not public integration or
+relaxation of earlier gates.
 Scalar fitting, stopping and
 defaults remain unchanged. No public integration or superiority claim precedes
 independent validation. See [GVM-05](docs/RESEARCH_REFERENCES.md#gvm-05).
