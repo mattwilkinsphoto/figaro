@@ -1,0 +1,1529 @@
+{
+  "fits": 1040,
+  "development": false,
+  "resultsSha256": "c4c60df3a14c432c28379f4ce63a94ccbc3a5c314af25395037ec1f8d27b65ab",
+  "audit": {
+    "status": "passed",
+    "inputHashes": 80,
+    "highPrecisionPoints": 2080,
+    "gradientModels": 120,
+    "maximumDensityError": 7.105427357601002e-15,
+    "maximumGradientDifference": 7.770930821049404e-08,
+    "maximumWeightGradientError": 4.440892098500626e-16,
+    "maximumGapError": 3.038121454938239e-16,
+    "maximumScoreError": 1.7763568394002505e-15,
+    "missingModels": 0,
+    "negativeInventoryControls": 2
+  },
+  "elapsedSeconds": 1046.3718602657318,
+  "protocolSha256": "6b361274d62a76b64ccaae697eb348db980768de502ad38f772e6e47e2bf9cf6",
+  "cells": [
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.009886449995974544
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.007878000003984198
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.00884405000397237
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.00851785000122618
+      }
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 2,
+      "baseline": {
+        "qualified": 1,
+        "retainedStationary": 2,
+        "statuses": {
+          "MapLimit": 1,
+          "Stationary": 1,
+          "WorkBudgetExhausted": 6
+        },
+        "medianWork": 19999000.0,
+        "medianSeconds": 1.0647889000028954
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 2,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19999000.0,
+        "medianSeconds": 1.2582875000080094
+      },
+      "balanced": {
+        "qualified": 1,
+        "retainedStationary": 2,
+        "statuses": {
+          "MapLimit": 1,
+          "Stationary": 1,
+          "WorkBudgetExhausted": 6
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0312851999988197
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19998000.0,
+        "medianSeconds": 1.1847275500040269
+      }
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 3,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 1,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.8825126999945496
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19998000.0,
+        "medianSeconds": 0.9160293500026455
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9973000999962096
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.8610408000022289
+      }
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.010617300002195407
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.008746249994146638
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.009106149998842739
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.008467900006507989
+      }
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 2,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 3598000.0,
+        "medianSeconds": 0.18127419999655103
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 6416000.0,
+        "medianSeconds": 0.3797788999945624
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 3598000.0,
+        "medianSeconds": 0.18569869999191724
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 6416000.0,
+        "medianSeconds": 0.38179425000271294
+      }
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 3,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 2,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9738995500010788
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 1,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19999000.0,
+        "medianSeconds": 0.9324043500018888
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 1,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9408732000083546
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9233064000000013
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 177000.0,
+        "medianSeconds": 0.011291150003671646
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 177000.0,
+        "medianSeconds": 0.00933554999937769
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 177000.0,
+        "medianSeconds": 0.011431900005845819
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 177000.0,
+        "medianSeconds": 0.010738800003309734
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 2,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 3988000.0,
+        "medianSeconds": 0.2006182000041008
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 7250000.0,
+        "medianSeconds": 0.4609088500001235
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 3988000.0,
+        "medianSeconds": 0.18780680000782013
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 7250000.0,
+        "medianSeconds": 0.4456349499960197
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 3,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 4759000.0,
+        "medianSeconds": 0.22429515000112588
+      },
+      "weights": {
+        "qualified": 7,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "medianWork": 9028000.0,
+        "medianSeconds": 0.41018540000368375
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 4759000.0,
+        "medianSeconds": 0.237612849996367
+      },
+      "combined": {
+        "qualified": 7,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "medianWork": 9028000.0,
+        "medianSeconds": 0.4005030500047724
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 120000.0,
+        "medianSeconds": 0.007476349994249176
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 120000.0,
+        "medianSeconds": 0.007365450001088902
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 120000.0,
+        "medianSeconds": 0.008748849992116448
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 120000.0,
+        "medianSeconds": 0.008258600006229244
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 2,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 12044000.0,
+        "medianSeconds": 0.6254629500035662
+      },
+      "weights": {
+        "qualified": 7,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "medianWork": 15447000.0,
+        "medianSeconds": 0.9426148499987903
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 12044000.0,
+        "medianSeconds": 0.632249000002048
+      },
+      "combined": {
+        "qualified": 7,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "medianWork": 15447000.0,
+        "medianSeconds": 0.9324567000003299
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 3,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 2,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9773240500071552
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 3,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19999000.0,
+        "medianSeconds": 0.9764550500040059
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9954860500074574
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.8908219500081032
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.00920784999470925
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.010349500007578172
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.009265200002118945
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.009540400002151728
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 2,
+      "baseline": {
+        "qualified": 5,
+        "retainedStationary": 7,
+        "statuses": {
+          "Stationary": 5,
+          "WorkBudgetExhausted": 3
+        },
+        "medianWork": 16465000.0,
+        "medianSeconds": 0.8356415499947616
+      },
+      "weights": {
+        "qualified": 2,
+        "retainedStationary": 7,
+        "statuses": {
+          "Stationary": 2,
+          "WorkBudgetExhausted": 6
+        },
+        "medianWork": 19998000.0,
+        "medianSeconds": 1.2208959499985212
+      },
+      "balanced": {
+        "qualified": 5,
+        "retainedStationary": 7,
+        "statuses": {
+          "Stationary": 5,
+          "WorkBudgetExhausted": 3
+        },
+        "medianWork": 16465000.0,
+        "medianSeconds": 0.9052130499912892
+      },
+      "combined": {
+        "qualified": 2,
+        "retainedStationary": 5,
+        "statuses": {
+          "Stationary": 2,
+          "WorkBudgetExhausted": 6
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.2439989000049536
+      }
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 3,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 3,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.041786100002355
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.892903350002598
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0156580999973812
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19996000.0,
+        "medianSeconds": 0.9125084499974037
+      }
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 144000.0,
+        "medianSeconds": 0.009822750012972392
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 144000.0,
+        "medianSeconds": 0.009624300000723451
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 144000.0,
+        "medianSeconds": 0.010717350000049919
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 144000.0,
+        "medianSeconds": 0.008764700003666803
+      }
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 2,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 3,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.001713400008157
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 5,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.223627800005488
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0880419999957667
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19998000.0,
+        "medianSeconds": 1.223588649998419
+      }
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 3,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9301628500033985
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9164328999977442
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9684169500033022
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9029074999998556
+      }
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 162000.0,
+        "medianSeconds": 0.010102300002472475
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 162000.0,
+        "medianSeconds": 0.011522699991473928
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 162000.0,
+        "medianSeconds": 0.012200500001199543
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 162000.0,
+        "medianSeconds": 0.010842100004083477
+      }
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 2,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 4083000.0,
+        "medianSeconds": 0.20928989999811165
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 6756000.0,
+        "medianSeconds": 0.41686974999902304
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 4083000.0,
+        "medianSeconds": 0.21305084999767132
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 6756000.0,
+        "medianSeconds": 0.4297684500052128
+      }
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 3,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 4,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0329649000050267
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9922563500003889
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9827851000009105
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19999000.0,
+        "medianSeconds": 0.9622526499952073
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 162000.0,
+        "medianSeconds": 0.010515400004805997
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 162000.0,
+        "medianSeconds": 0.011226700000406709
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 162000.0,
+        "medianSeconds": 0.011163549999764655
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 162000.0,
+        "medianSeconds": 0.012339000000793021
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 2,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 4996000.0,
+        "medianSeconds": 0.24464009999792324
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 7797000.0,
+        "medianSeconds": 0.45136284999898635
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 4996000.0,
+        "medianSeconds": 0.25376320000214037
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 7797000.0,
+        "medianSeconds": 0.4345892999917851
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 3,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 7460000.0,
+        "medianSeconds": 0.33026930000050925
+      },
+      "weights": {
+        "qualified": 7,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "medianWork": 12860000.0,
+        "medianSeconds": 0.5893920000016806
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 7460000.0,
+        "medianSeconds": 0.3445367000022088
+      },
+      "combined": {
+        "qualified": 7,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "medianWork": 12860000.0,
+        "medianSeconds": 0.5873337500015623
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 120000.0,
+        "medianSeconds": 0.008889649994671345
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 120000.0,
+        "medianSeconds": 0.0092585000093095
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 120000.0,
+        "medianSeconds": 0.009551750001264736
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 120000.0,
+        "medianSeconds": 0.010035649997007567
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 2,
+      "baseline": {
+        "qualified": 7,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "medianWork": 10818000.0,
+        "medianSeconds": 0.6348097000009147
+      },
+      "weights": {
+        "qualified": 6,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 6,
+          "WorkBudgetExhausted": 2
+        },
+        "medianWork": 14436000.0,
+        "medianSeconds": 0.967741450003814
+      },
+      "balanced": {
+        "qualified": 7,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 7,
+          "WorkBudgetExhausted": 1
+        },
+        "medianWork": 10818000.0,
+        "medianSeconds": 0.5956461499954457
+      },
+      "combined": {
+        "qualified": 6,
+        "retainedStationary": 7,
+        "statuses": {
+          "Stationary": 6,
+          "WorkBudgetExhausted": 2
+        },
+        "medianWork": 14436000.0,
+        "medianSeconds": 0.9541089999984251
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 3,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 3,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0091584999972838
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.967401299996709
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0114649000024656
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9399298999924213
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 1,
+      "baseline": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.008969099995738361
+      },
+      "weights": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.010284700001648162
+      },
+      "balanced": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.008895500002836343
+      },
+      "combined": {
+        "qualified": 8,
+        "retainedStationary": 8,
+        "statuses": {
+          "Stationary": 8
+        },
+        "medianWork": 126000.0,
+        "medianSeconds": 0.011448600002040621
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 2,
+      "baseline": {
+        "qualified": 1,
+        "retainedStationary": 7,
+        "statuses": {
+          "Stationary": 1,
+          "WorkBudgetExhausted": 7
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0421846000026562
+      },
+      "weights": {
+        "qualified": 1,
+        "retainedStationary": 7,
+        "statuses": {
+          "Stationary": 1,
+          "WorkBudgetExhausted": 7
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.1937072500004433
+      },
+      "balanced": {
+        "qualified": 1,
+        "retainedStationary": 4,
+        "statuses": {
+          "Stationary": 1,
+          "WorkBudgetExhausted": 7
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.0468584999980521
+      },
+      "combined": {
+        "qualified": 1,
+        "retainedStationary": 2,
+        "statuses": {
+          "Stationary": 1,
+          "WorkBudgetExhausted": 7
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 1.2284491000027629
+      }
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 3,
+      "baseline": {
+        "qualified": 0,
+        "retainedStationary": 2,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9820230500045
+      },
+      "weights": {
+        "qualified": 0,
+        "retainedStationary": 2,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9524668000012753
+      },
+      "balanced": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 20000000.0,
+        "medianSeconds": 0.9507099499969627
+      },
+      "combined": {
+        "qualified": 0,
+        "retainedStationary": 0,
+        "statuses": {
+          "WorkBudgetExhausted": 8
+        },
+        "medianWork": 19999000.0,
+        "medianSeconds": 0.9462579999963054
+      }
+    }
+  ],
+  "noninferiority": [
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 2,
+      "pairs": 8,
+      "lower": -0.0014086057364375594,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "curved",
+      "k": 3,
+      "pairs": 8,
+      "lower": -0.0016900252943153225,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 2,
+      "pairs": 8,
+      "lower": -6.863557056890367e-06,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "seam",
+      "k": 3,
+      "pairs": 8,
+      "lower": -0.0027966999670168305,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 2,
+      "pairs": 8,
+      "lower": -3.7795233673465425e-06,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-separated",
+      "k": 3,
+      "pairs": 8,
+      "lower": -1.870525791695886e-06,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 2,
+      "pairs": 8,
+      "lower": -3.707804322831935e-05,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-overlap",
+      "k": 3,
+      "pairs": 8,
+      "lower": -0.0029590669781521138,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 2,
+      "pairs": 8,
+      "lower": -9.121760335195079e-05,
+      "passed": true
+    },
+    {
+      "d": 2,
+      "family": "three-wrapped",
+      "k": 3,
+      "pairs": 8,
+      "lower": -0.003172697157426592,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 2,
+      "pairs": 8,
+      "lower": -0.0014266741296784517,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "curved",
+      "k": 3,
+      "pairs": 8,
+      "lower": -0.005262593439420679,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 2,
+      "pairs": 8,
+      "lower": -2.8383128103501288e-06,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "seam",
+      "k": 3,
+      "pairs": 8,
+      "lower": -0.005833282538400561,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 2,
+      "pairs": 8,
+      "lower": -3.6098639268518523e-06,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-separated",
+      "k": 3,
+      "pairs": 8,
+      "lower": -4.723050005578879e-06,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 2,
+      "pairs": 8,
+      "lower": -5.844930495623897e-05,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-overlap",
+      "k": 3,
+      "pairs": 8,
+      "lower": -0.0050992740976205184,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 1,
+      "pairs": 8,
+      "lower": 0.0,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 2,
+      "pairs": 8,
+      "lower": -0.001914386049120174,
+      "passed": true
+    },
+    {
+      "d": 3,
+      "family": "three-wrapped",
+      "k": 3,
+      "pairs": 8,
+      "lower": -0.00467764475221251,
+      "passed": true
+    }
+  ],
+  "multicomponentQualified": {
+    "baseline": 70,
+    "weights": 62,
+    "balanced": 70,
+    "combined": 62
+  },
+  "gates": {
+    "numerical": true,
+    "perCellReliability": false,
+    "completionGain": false,
+    "scoreNoninferiority": true
+  },
+  "decision": "no-promotion"
+}

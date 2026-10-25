@@ -92,9 +92,11 @@ much more tractable than overlapping or overfitted cases. Retained stationarity
 and completion of the restart search differ materially. The
 [weight/restart literature assessment and bounded plan](docs/GVM_WEIGHT_RESTART_RESEARCH.md)
 is complete: conditional convex weight optimization, resumable work-balanced starts,
-then a fresh factorial comparison. The approved [test-only implementation](docs/GVM_WEIGHT_PROTOCOL.md)
-passes weight, restart and development numerical checks; fresh confirmation remains
-pending. Hard restart elimination is deferred. Original gates and no-promotion results remain
+then a fresh factorial comparison. The [completed 1,040-fit study](docs/GVM_WEIGHT_STATUS.md)
+has no promotion: independent numerics and all score margins pass, but combined
+multicomponent completion falls to 62/160 versus 70/160 baseline. Balancing alone
+does not improve completion; weight polishing shifts rather than resolves the
+full-fit bottleneck. Hard restart elimination is deferred. Earlier gates/results remain
 intact. See [GVM-08](docs/RESEARCH_REFERENCES.md#gvm-08).
 Scalar fitting, stopping and
 defaults remain unchanged. No public integration or superiority claim precedes

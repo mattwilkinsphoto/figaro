@@ -57,8 +57,9 @@ is research evidence, not a public selector or true-component recovery guarantee
 The [mixture-weight/restart assessment](docs/GVM_WEIGHT_RESTART_RESEARCH.md) now
 recommends independent conditional-weight qualification, a test-only polish and
 resumable scheduler, and fresh factorial confirmation. The approved
-[test-only study](docs/GVM_WEIGHT_PROTOCOL.md) passes development numerical checks;
-confirmation remains pending. No hard early pruning or relaxed completion threshold.
+[test-only study is complete with no promotion](docs/GVM_WEIGHT_STATUS.md): 1,040
+fits pass independent numerical and score checks, but polishing reduces completion
+and balancing does not improve it. No hard early pruning or relaxed threshold.
 No public multivariate fitter is promoted; multiple angles remain outside the
 bounded proposal. Scalar fitting and released
 stopping/defaults are unchanged.

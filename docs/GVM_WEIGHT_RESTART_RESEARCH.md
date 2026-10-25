@@ -8,7 +8,9 @@ Test a **conditional mixture-weight solve**, followed by **resumable allocation 
 work across the existing three starts**. Evaluate them separately before combining
 them. The three-stage study is now approved, with independently checked test-only
 implementation and a separate [execution protocol](GVM_WEIGHT_PROTOCOL.md).
-Confirmation and promotion decisions are separate from implementation correctness.
+The [completed result](GVM_WEIGHT_STATUS.md) is **no promotion**: numerical and
+score checks pass, but completion/reliability gates fail. The plan below is retained
+as the research basis; no further implementation is implicitly authorized.
 The released stopping estimator,
 defaults, scalar fitter, runtime dependencies and version remain unchanged. The
 shared pilot remains parked. Independent numerical and comparative validation,
