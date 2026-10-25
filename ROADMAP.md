@@ -89,9 +89,13 @@ complexity study](docs/GVM_WHOLEFIT_STATUS.md) is also complete with no promotio
 560 fits and independent numerical checks pass score margins, but reliability and
 the required completion gain fail. Acceleration helps K=2; separated true K=3 is
 much more tractable than overlapping or overfitted cases. Retained stationarity
-and completion of the restart search differ materially. Weight optimization and
-restart-budget allocation are the next research questions, not relaxed thresholds
-or automatic public integration; a new bounded plan and validation are required.
+and completion of the restart search differ materially. The
+[weight/restart literature assessment and bounded plan](docs/GVM_WEIGHT_RESTART_RESEARCH.md)
+is complete: conditional convex weight optimization, resumable work-balanced starts,
+then a fresh factorial comparison. The approved [test-only implementation](docs/GVM_WEIGHT_PROTOCOL.md)
+passes weight, restart and development numerical checks; fresh confirmation remains
+pending. Hard restart elimination is deferred. Original gates and no-promotion results remain
+intact. See [GVM-08](docs/RESEARCH_REFERENCES.md#gvm-08).
 Scalar fitting, stopping and
 defaults remain unchanged. No public integration or superiority claim precedes
 independent validation. See [GVM-05](docs/RESEARCH_REFERENCES.md#gvm-05).

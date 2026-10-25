@@ -173,6 +173,13 @@ and utility validation. Larger caps, weaker thresholds and automatic public
 integration are not approved remedies. Multiple angles, automatic true-component
 recovery, application fusion and generic inference guarantees remain out of scope.
 
+The subsequent [weight/restart assessment](GVM_WEIGHT_RESTART_RESEARCH.md) now
+provides that proposed bounded design, with provenance in
+[GVM-08](RESEARCH_REFERENCES.md#gvm-08). It does not change this study's frozen
+protocol, numerical outcomes or no-promotion decision. The subsequent
+[test-only execution](GVM_WEIGHT_PROTOCOL.md) is separately approved; its
+confirmation and promotion decisions do not replace this study's results.
+
 ## Reproduction and completion audit
 
 Use the [runner](../tools/gvm_wholefit_study.py),

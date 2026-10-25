@@ -1,0 +1,89 @@
+{
+  "protocol": "gvm-weight-restart-v1",
+  "seeds": [
+    1150001,
+    1150002,
+    1150003,
+    1150004,
+    1150005,
+    1150006,
+    1150007,
+    1150008
+  ],
+  "dimensions": [
+    2,
+    3
+  ],
+  "families": [
+    "curved",
+    "seam",
+    "three-separated",
+    "three-overlap",
+    "three-wrapped"
+  ],
+  "components": [
+    1,
+    2,
+    3
+  ],
+  "train": 2000,
+  "validation": 2000,
+  "test": 20000,
+  "starts": 3,
+  "maxWork": 20000000,
+  "maxMapsPerStart": 200,
+  "maxSeconds": 120,
+  "stationarity": 0.0001,
+  "gaussianIterations": 200,
+  "maxStudySeconds": 10800,
+  "maxFitsIncludingDevelopment": 1200,
+  "expectedConfirmationFits": 1040,
+  "qualifiedRate": 0.95,
+  "completionGain": 0.2,
+  "noninferiority": 0.02,
+  "alpha": 0.05,
+  "comparisons": 30,
+  "sourceSha256": {
+    "docs/GVM_WEIGHT_PROTOCOL.md": "f10e45c5008f3bd157ffdad8002b4f5b8e984e402964630a51c297b202cbaae7",
+    "docs/GVM_WHOLEFIT_STUDY.md": "31f8e0732da04c2c19b161eb8f31d7dacee588d58e8ca54611430e8599053855",
+    "tools/gvm_dimension_audit.py": "ae12fc48bc1abfa7408229c685201c5253dd14ae1716a31a697c08f02b65701d",
+    "tools/gvm_dimension_controls.py": "ea4cccad6c1abb6aca8a6563ef53a382fb0512711bfe6e50218cfa8e58939962",
+    "tools/gvm_gradient_fit.py": "007e4cbac4666f032c6441dea19e4e5435f1b58f0efa6c055852f318ca0ae4a6",
+    "tools/gvm_study_io.py": "44fb77a6e17025d133b1ae5acc3a1b69c94596422eec0588c0521738ca246ad3",
+    "tools/gvm_weight_audit.py": "a494083ddb39e626b0498a7da89ca3ab6425e6e7e802f9ca4923f860760be929",
+    "tools/gvm_weight_fit.py": "10382780cb54f06b0cd2a4ebeb453e38ebd52ce83dd392053f188b2693902560",
+    "tools/gvm_weight_qualification.py": "6f89a363b10503ee38583bcdc6692cbdf9a5c0f7f3b37011e2e6f1c573b2adfc",
+    "tools/gvm_weight_reference.py": "ce125bda9ba4b46bcdfcec1677b577b21b481fa9db0aaa463a45d5ece4bd999c",
+    "tools/gvm_weight_solver.py": "c399b056a18de1a3a3cf2cb6d9302034c74166d9f93dda842aa4e30e1a8f0fad",
+    "tools/gvm_weight_study.py": "28609fac756c7a6d070f9e49203f6fc56efac7989e661f0e9775a8bae80a7175",
+    "tools/gvm_wholefit_audit.py": "e7a17cd6eb904dd7565aab47a2fbeadc6de5dc470d0ca7f5f3854a74589ca766",
+    "tools/gvm_wholefit_fit.py": "52ec4874a2b9f13643d6df25dfac28e2e92b4805bf1993bf963c9d9ad0826010",
+    "tools/gvm_wholefit_math.py": "d4d86ede8190fecc8421398e7e70cf683f4f341c5b945c22fff0b4265553b56d",
+    "tools/gvm_wholefit_study.py": "8d4cd8e45618f0e61e57973762742c2369b6f793a2d220fb75c3d3310926718a",
+    "tools/test_gvm_weight_audit.py": "87846b5c4a8885560ea378c5f287f307145fd29da70e8f1eca31bd6331a020d2",
+    "tools/test_gvm_weight_fit.py": "16610a22e7b761f28802cb330afc6875691862f6ad920e6a77e8902ad3ae7f65",
+    "tools/test_gvm_weight_solver.py": "8fa80e983d7142bf0981e1af5cff059a2a5917c18c7af60b671bb723f079deed",
+    "tools/test_gvm_wholefit.py": "984587fa65a5cf03311c7c6ce61f779645aa4f0f05deead4ba38ec68ec21e85b"
+  },
+  "versions": {
+    "python": "3.14.6",
+    "numpy": "2.5.1",
+    "scipy": "1.18.1"
+  },
+  "frozenUnix": 1792889396.4275758,
+  "arms": [
+    "baseline",
+    "weights",
+    "balanced",
+    "combined"
+  ],
+  "developmentSeed": 450101,
+  "developmentFits": 40,
+  "weightGap": 1e-08,
+  "weightFloor": 1e-08,
+  "weightLocalWork": 1000000,
+  "weightCalls": 200,
+  "weightIterations": 100,
+  "developmentElapsedSeconds": 49.99268698692322,
+  "developmentResultsSha256": "2ea28dc7843fb7c0522e647105f2d484d219b0cff59d7f2e75b0dd9b23657d9a"
+}

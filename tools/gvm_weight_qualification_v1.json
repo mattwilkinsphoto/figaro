@@ -1,0 +1,13 @@
+{
+  "stage": "development relevance only",
+  "previousResultsSha256": "8b016bd31ae8f59a11d33c4ea7931a0d918a93f41d8725e709d9057654002027",
+  "cases": 40,
+  "qualified": 31,
+  "supportValid": 40,
+  "relevant": 13,
+  "maximumObjectiveError": 8.881784197001252e-16,
+  "maximumGradientError": 2.220446049250313e-16,
+  "elapsedSeconds": 21.404447555541992,
+  "proceed": true,
+  "resultsSha256": "cec087b2d7458f8b89aa63bd8a8f891d126586bd7f7a4ba11c343bf9b0354ef1"
+}

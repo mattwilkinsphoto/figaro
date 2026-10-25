@@ -52,7 +52,7 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Expensive-likelihood branch qualification and precomputation | [INF-19](#inf-19) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
-| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05), [GVM-06](#gvm-06), [GVM-07](#gvm-07) |
+| Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04), [GVM-05](#gvm-05), [GVM-06](#gvm-06), [GVM-07](#gvm-07), [GVM-08](#gvm-08) |
 | Cross-family information measures and mixture MI | [MET-01](#met-01), [MET-02](#met-02) |
 | Common families, matrix/correlation priors | [DIST-01](#dist-01), [DIST-02](#dist-02), [DIST-03](#dist-03) |
 | Conditional copulas and observation semantics | [MOD-01](#mod-01), [MOD-02](#mod-02) |
@@ -664,6 +664,20 @@ and repaired by a separate unchanged replay, not by relaxing scientific checks.
 **Validation:** [All-block finite differences, boundary/algebra and failure controls](../tools/test_gvm_wholefit.py); [independent density, objective-difference, inventory and result audit](../tools/gvm_wholefit_audit.py). The [560-fit summary](../tools/gvm_wholefit_summary_v1.json) passes numerical and score-noninferiority gates but fails per-cell reliability and the required completion gain; no promotion. [Descriptive breakdowns](../tools/gvm_wholefit_diagnostics_v1.json) distinguish retained stationarity, restart-budget exhaustion and validation-only complexity selection. Confirmation outcomes are separate from implementation correctness.
 
 **Guide:** [Whole-fit convergence and complexity protocol](GVM_WHOLEFIT_STUDY.md); [completed results and limits](GVM_WHOLEFIT_STATUS.md).
+
+<a id="gvm-08"></a>
+
+### GVM-08: Conditional weight optimization and restart allocation
+
+**Source:** Kim, Carbonetto, Stephens and Anitescu, [mixture-proportion SQP paper](https://arxiv.org/pdf/1806.01412), v5 (2020), abstract/introduction and sections 3.1–3.3; official [mixsqp implementation and license declaration](https://stephenslab.github.io/mixsqp/), [API](https://stephenslab.github.io/mixsqp/reference/mixsqp.html) and [SciPy SLSQP contract](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-slsqp.html). Jaggi, [Revisiting Frank-Wolfe](https://proceedings.mlr.press/v28/jaggi13.pdf) (2013), section 2. Jamieson and Talwalkar, [Non-stochastic Best Arm Identification](https://proceedings.mlr.press/v51/jamieson16.pdf) (2016), introduction, section 2 and algorithm; Li et al., [Hyperband](https://jmlr.org/papers/volume18/16-558/16-558.pdf) (2018), introduction/section 3.1. Initialization alternatives: You, Li and Du, [MRIPEM](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0284114) (2023), abstract/method/overlap discussion, and official [GaussianMixture API](https://scikit-learn.org/stable/modules/generated/sklearn.mixture.GaussianMixture.html). Liu and Rubin, [ECME](https://doi.org/10.1093/biomet/81.4.633) (1994), publisher abstract only. Inspected 2026-10-24; scope/access limits are recorded in the guide.
+
+**Role:** Test-only research adaptation: fixed-shape convex weight polishing using SciPy SLSQP, independently derived floored-simplex gap, and conservative resumable work allocation. Successive Halving/Hyperband and new initializations remain alternatives, not implemented methods or transferred guarantees. SciPy BSD remains an isolated research dependency; mixsqp's declared MIT implementation is reference-only. No external code/data copied or new runtime dependency. Only selected primary-paper sections were reviewed; ECME is abstract-only context. Existing stopping/defaults and prior no-promotion decisions remain unchanged.
+
+**Code:** [Conditional solver](../tools/gvm_weight_solver.py), [composite-map/restart adapter](../tools/gvm_weight_fit.py), and [factorial runner](../tools/gvm_weight_study.py). The unchanged [GVM-07 fitter](../tools/gvm_wholefit_fit.py) remains the primary baseline. A conditional gap does not certify the nonconvex full fit or the best restart.
+
+**Validation:** [Independent 60-digit weight reference](../tools/gvm_weight_reference.py), [weight controls](../tools/test_gvm_weight_solver.py), [scheduler/equivalence/failure controls](../tools/test_gvm_weight_fit.py), [independent audit](../tools/gvm_weight_audit.py) and [negative audit controls](../tools/test_gvm_weight_audit.py). The [40-case relevance screen](../tools/gvm_weight_qualification_v1.json) passes, as do 40 development-fit numerical checks. Fresh confirmation is still required; mathematical correctness is not promotion evidence. Earlier [whole-fit diagnostics](../tools/gvm_wholefit_diagnostics_v1.json) and [frozen gates](GVM_WHOLEFIT_STUDY.md) remain unchanged.
+
+**Guide:** [Mixture-weight and restart-budget assessment](GVM_WEIGHT_RESTART_RESEARCH.md); [execution protocol](GVM_WEIGHT_PROTOCOL.md); [preceding completed study](GVM_WHOLEFIT_STATUS.md).
 
 <a id="met-01"></a>
 

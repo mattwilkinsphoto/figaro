@@ -54,7 +54,11 @@ phase work but still fails per-cell reliability. The [whole-fit/complexity follo
 is complete with no promotion: independent numerical and retained-score checks
 pass, but reliable completion remains unresolved. Its validation-only K selection
 is research evidence, not a public selector or true-component recovery guarantee.
-Mixture-weight optimization and bounded restart allocation need further assessment.
+The [mixture-weight/restart assessment](docs/GVM_WEIGHT_RESTART_RESEARCH.md) now
+recommends independent conditional-weight qualification, a test-only polish and
+resumable scheduler, and fresh factorial confirmation. The approved
+[test-only study](docs/GVM_WEIGHT_PROTOCOL.md) passes development numerical checks;
+confirmation remains pending. No hard early pruning or relaxed completion threshold.
 No public multivariate fitter is promoted; multiple angles remain outside the
 bounded proposal. Scalar fitting and released
 stopping/defaults are unchanged.
