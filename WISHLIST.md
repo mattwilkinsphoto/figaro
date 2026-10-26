@@ -9,7 +9,7 @@ and joint linear-angular Gauss-von Mises**, as requested on 2026-09-07.
 ## How to read and extend this list
 
 This is an **optional capability backlog**, not a queue of adoption blockers.
-The [current roadmap](ROADMAP.md) puts the released 7.4.0 baseline in application-driven maintenance.
+The [current roadmap](ROADMAP.md) puts the released 7.4.1 baseline in application-driven maintenance.
 Promote an item only for a demonstrated model requirement or measured bottleneck;
 historical P0/P1 family labels below do not schedule another modernization stage.
 
@@ -26,9 +26,9 @@ outside this library program.
 The [experiment retrospective](docs/LITERATURE_EXPERIMENTS_REPORT.md) records the
 completed nonlinear-guide, higher-dimensional GVM-fitting and MCMC-adaptation
 campaigns. None of those failed promotion gates is reopened by this wishlist.
-The [roadmap](ROADMAP.md) prioritizes the isolated tail-ESS correctness repair and
-7.4.1 preparation, then a bounded review of caller-specified transformed blocks.
-That review is not approval to ship the failed automatic pilot or a new public API.
+The isolated tail-ESS correction is published in 7.4.1. The [roadmap](ROADMAP.md)
+now schedules the approved bounded caller-specified transformed-block plan.
+That approval does not ship the failed automatic pilot or promote a new public API.
 Preserve stopping/defaults and strict calibration; require a separately approved
 contract and independent evidence before any future promotion.
 

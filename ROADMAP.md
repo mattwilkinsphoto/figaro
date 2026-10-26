@@ -5,9 +5,9 @@ contains optional candidates; [roadmap history](docs/ROADMAP_HISTORY.md) preserv
 the completed milestones and their original evidence. Historical priorities are
 not an active queue.
 
-## Current baseline: use 7.4.0
+## Current baseline: use 7.4.1
 
-**Figaro 7.4.0 is the adoption baseline and is published on Maven Central.**
+**Figaro 7.4.1 is the adoption baseline and is published on Maven Central.**
 The Java 17 / Scala 3 / sbt 2 modernization and approved core performance,
 distribution and modeling milestones are integrated. See the
 [release scope](docs/INFERENCE_INTEGRATION.md), [installation and publication](docs/MAVEN_CENTRAL.md),
@@ -29,15 +29,14 @@ packaged consumers passed. The local workaround is retired and a brief upstream
 validation confirmation was posted. See the [closeout](docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
 No further sbt repair or Figaro release is scheduled from that work.
 
-### Diagnostic correctness and 7.4.1 preparation
+### Diagnostic correctness: published in 7.4.1
 
 The isolated [tied-quantile repair](docs/TIED_QUANTILE_REPAIR.md) corrects a
 floating-point cutoff error affecting tail ESS for repeated MCMC states. Its
 independent replay, integration/post-merge CI and final-version CI passed. The
 prepared Linux bundle passed all seven packaged consumers on Linux and Windows.
-Publication requires separate approval; the [7.4.1 preparation record](docs/RELEASE_7_4_1_STATUS.md)
-pins the exact tested source and artifact hashes. Source preparation uses final
-version 7.4.1; 7.4.0 remains the published dependency. This does not publish it.
+The [7.4.1 release record](docs/RELEASE_7_4_1_STATUS.md) pins the final-main source,
+artifact hashes, signed publication and all seven successful Central-only consumers.
 Stopping, defaults and strict-calibration thresholds are unchanged. A tail-ESS
 warning or a caller's near-threshold decision may nevertheless change.
 
@@ -54,17 +53,17 @@ full-outcome results, original thresholds and no-promotion decisions.
 | Multi-root coordinate warm-up and budget scaling | Not promoted. More retained work repaired product-target failures, but original-fixture requalification still failed on dependence. No automatic dimension-to-budget law follows. |
 | Learned transformed-block pilot | Closed after reliability and total-cost failures. Correct adapter/Jacobian controls do not qualify the learned workflow. Its original audit and no-promotion outcome remain unchanged by the separate diagnostic repair. |
 
-### Joint-block review complete; implementation requires approval
+### Joint-block bounded implementation approved; independent gates required
 
 The bounded review of **caller-specified transformed joint-block proposals** is
-complete. Its recommended next milestone covers owned constant-parameter
+complete and its bounded three-stage plan is approved. The milestone covers owned constant-parameter
 Normal/Gamma/Beta roots, with caller-supplied fixed geometry, not automatic learning.
 Existing [Normal-only fixed-covariance blocks](docs/BLOCKED_PROPOSALS.md) remain
 the supported starting point. The proposal specifies support/Jacobian/rollback
 and ownership contracts and requires independent validation before public promotion.
 The [bounded API review](docs/TRANSFORMED_JOINT_BLOCK_API_REVIEW.md) recommends a
 complete fixed-budget scheme with explicit coordinate covariance and a staged
-independent-validation plan. It is a design recommendation, not shipped code.
+independent-validation plan. Implementation and validation are next, not shipped code.
 No automatic covariance learning, calibration relaxation, hidden fallback,
 universal performance claim or arbitrary-graph support is approved by this review.
 Finite-population mode loss and unsupported numerical ranges remain separate limits.

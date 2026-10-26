@@ -476,7 +476,12 @@ The [packaged diagnostic consumer](../tools/acceptance-consumer/src/main/scala/D
 adds a deterministic public-API plateau control and an explicit published-7.4.0
 negative-control mode; source tests and retained-trace replay remain separate evidence.
 
-**Guide:** [MULTI CHAIN MCMC](MULTI_CHAIN_MCMC.md); [MCMC RELIABILITY](MCMC_RELIABILITY.md); [TIED QUANTILE REPAIR](TIED_QUANTILE_REPAIR.md); [7.4.1 preparation](RELEASE_7_4_1_STATUS.md); [cross-campaign experiment retrospective](LITERATURE_EXPERIMENTS_REPORT.md).
+The correction is published and verified in 7.4.1. All four Central payloads
+match the approved main-tested artifacts; all seven Central-only packaged
+consumers passed. The release record retains exact source, hashes, staging and
+publication runs. This delivery status does not promote the failed learned pilot.
+
+**Guide:** [MULTI CHAIN MCMC](MULTI_CHAIN_MCMC.md); [MCMC RELIABILITY](MCMC_RELIABILITY.md); [TIED QUANTILE REPAIR](TIED_QUANTILE_REPAIR.md); [7.4.1 release](RELEASE_7_4_1_STATUS.md); [cross-campaign experiment retrospective](LITERATURE_EXPERIMENTS_REPORT.md).
 
 <a id="dia-02"></a>
 

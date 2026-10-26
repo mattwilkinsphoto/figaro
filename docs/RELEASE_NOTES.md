@@ -1,6 +1,6 @@
 # Modernization release notes
 
-## 7.4.1 preparation — not yet published
+## Current release: 7.4.1 — published and verified
 
 Corrects tail-ESS quantile cutoffs when neighboring order statistics are identical.
 The earlier weighted interpolation could round one representable value below a
@@ -13,10 +13,10 @@ guarantee that a new near-threshold caller will make the same decision. Sampling
 transitions, mean-precision stopping, defaults and calibration thresholds are
 unchanged. The failed learned-pilot workflow is not included or promoted.
 See the [repair and consumer implications](TIED_QUANTILE_REPAIR.md) and
-[preparation gates](RELEASE_7_4_1_STATUS.md). Continue using published 7.4.0 until
-7.4.1 publication and Central consumer verification are explicitly recorded.
+[release gates](RELEASE_7_4_1_STATUS.md). All four Central artifacts match the
+approved payloads and all seven Central-only packaged consumers passed.
 
-## Unreleased repository tooling
+## Source-build tooling adopted before 7.4.1
 
 Source and acceptance-consumer builds select stock sbt 2.0.11. The named CI gate
 now validates stock binaries, real failure paths and the unchanged two-pass test
@@ -24,10 +24,10 @@ inventory; the local repair is retired from executable workflows. Generated
 bundle metadata reads the pinned source-build version instead of hard-coding it.
 Full adoption CI and packaged-consumer validation passed on the branch before
 approved integration into `main`; see the [status and separate post-merge gate](CI_VALIDATION.md#stock-sbt-2011-adoption).
-No runtime/default change,
-new publication or modification of published 7.4.0 artifacts is included.
+The tooling change itself did not change runtime/defaults or modify 7.4.0 artifacts;
+the separately validated 7.4.1 diagnostic patch uses this stock toolchain.
 
-## Current release: 7.4.0 — published
+## Previous release: 7.4.0 — published
 
 Adds opt-in guided `start`/`advance`, `advanceAuxiliary` and separate proposal-work
 diagnostics to `FixedBudgetParticleFilter`. Existing bootstrap calls, explicit

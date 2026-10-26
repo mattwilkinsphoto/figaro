@@ -2,6 +2,26 @@
 
 ## Overview and current status
 
+**Figaro 7.4.1 is published and verified on Maven Central.** This compatible patch
+corrects tied-quantile tail-ESS diagnostics; stopping and defaults are unchanged.
+All four public payloads match the approved bundle and all seven Central-only
+packaged consumers passed, including the new diagnostic regression.
+
+- [Immutable 7.4.1 release](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.4.1)
+- [Final-main CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/40399023532)
+- [Signed staging](https://github.com/mattwilkinsphoto/figaro/actions/runs/40405201840)
+- [PUBLISHED, byte checks and seven consumers](https://github.com/mattwilkinsphoto/figaro/actions/runs/40405442432)
+- [Full provenance and retained preparation history](RELEASE_7_4_1_STATUS.md)
+
+Source: `2dd65ba20dfa96a165f3e93eb17126948484b3a6`.
+Bundle SHA-256: `6c2d84a3fa8f3f404e0618aee0a4c06b0a65b5964b48e451b85289ea965cea41`.
+Thin JAR SHA-256: `cdf9a7fdaa9c3beb1f3fcb1feb6ead3b525c28e5920246cd5b3bbf4d5c963adb`.
+Deployment `94b3e5bc-9a15-42a8-813a-5aa406a12dd9` completed on 2026-10-26 UTC,
+without repeat upload/publication. Independent public downloads also matched all
+four payloads. Released bundle metadata remains unchanged.
+
+### Historical 7.4.0 publication
+
 **Figaro 7.4.0 is published and verified on Maven Central.** All four artifacts
 match the approved release bytes, and all six Central-only consumers passed,
 including guided and auxiliary fixed-budget filtering. Stopping and defaults are unchanged.
@@ -152,7 +172,7 @@ belong in the next version rather than silently changing released bytes.
 
    ```scala
    scalaVersion := "3.9.0"
-   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.4.0"
+   libraryDependencies += "io.github.mattwilkinsphoto" %% "figaro" % "7.4.1"
    ```
 
 3. Compile and run the application normally. No `publishLocal`, local Figaro

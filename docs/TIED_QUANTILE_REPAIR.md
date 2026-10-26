@@ -104,8 +104,8 @@ adapter/pilot/support/observation regression set also passed; these runs overlap
 and are not 143 distinct tests. Six independent audit controls passed, including
 wrong-tail, non-tail-drift, duplicate-record and threshold-boundary failures.
 
-This is a locally validated correctness fix with consumer impact, not a published
-release. Remote CI, merge and any release decision remain separate gates. The
+At that historical checkpoint this was a locally validated correctness fix, not a
+published release. Remote CI, merge and publication were still separate gates. The
 original learned-pilot audit remains failed and its no-promotion result unchanged.
 The correction is isolated from that research on a branch based on `main`;
 `7.4.1-SNAPSHOT` labels the unpublished development artifacts. CI explicitly runs
@@ -114,18 +114,19 @@ The standalone main-based checkout also passed the 63-test targeted Scala set,
 six independent audit controls, research-reference validation, 41 documentation
 tests, 18 CI-tooling tests and local-link validation after generating Scaladoc.
 
-## Current integration checkpoint
+## Integration and publication checkpoints
 
 The original isolated [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/40366213712)
 passed all five jobs at `43ce624e`. Integration with the subsequently published
-retrospective and 7.4.1 preparation are now approved; see the
-[current preparation gates](RELEASE_7_4_1_STATUS.md). This supersedes the earlier
+retrospective and 7.4.1 preparation were subsequently approved; see the
+[release gates](RELEASE_7_4_1_STATUS.md). This supersedes the earlier
 future-CI wording above without rewriting the historical evidence. Publication
-is a separate approval. No experimental adapter or learned pilot is included.
+required separate approval. No experimental adapter or learned pilot is included.
 
 Preparation subsequently completed: integration/post-merge CI and final-version
 CI passed, with compatibility through 7.4.0 and all seven packaged consumers.
-The [7.4.1 preparation record](RELEASE_7_4_1_STATUS.md) pins the independently
+The [7.4.1 release record](RELEASE_7_4_1_STATUS.md) pins the independently
 downloaded Linux bundle and records the extra Windows consumer checks, warnings
-and resolved environment failures. The patch remains unpublished until explicitly
-approved; this does not promote the original experimental pilot.
+and resolved environment failures. After explicit approval, 7.4.1 was published
+and verified: all four Central payloads match and all seven Central-only consumers
+passed. This does not promote the original experimental pilot.

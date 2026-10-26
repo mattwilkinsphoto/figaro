@@ -1,9 +1,9 @@
-# Figaro 7.4.1 preparation
+# Figaro 7.4.1 release and verification
 
-**Release candidate prepared and validated; publication approved, not yet performed.** Published
-baseline: [7.4.0](RELEASE_7_4_STATUS.md). Snapshot integration CI passed; the separate
-preparation source now uses final version 7.4.1. This page records gates, not a promise
-that an unexecuted check passed or that the version exists on Maven Central.
+**7.4.1 is published and verified on Maven Central.** Previous published
+baseline: [7.4.0](RELEASE_7_4_STATUS.md). All four public artifacts match the
+approved bytes and all seven Central-only consumers passed. Historical preparation
+checkpoints below are preserved separately from the final publication source.
 
 ## Scope and consumer impact
 
@@ -43,7 +43,7 @@ MiMa through 7.4.0; 7.4.0 TASTy and compiled-client replacement checks; 44 docum
 tests; 18 CI-tool tests; and the reference/link checks. A separately compiled public
 diagnostic consumer passes against the repaired snapshot JAR and reproduces the
 expected missing-tail-ESS defect against the hash-verified published 7.4.0 JAR.
-These are local results, not substitutes for the pending final-version gates.
+These are local results, not substitutes for the final-version gates recorded below.
 
 The report-only [post-merge main run passed all five jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/40383127831).
 
@@ -64,9 +64,10 @@ with matching runtime JAR hashes, classifiers/legal/POM checks, compatibility
 through 7.4.0 and all seven consumers on the final Maven layout. The downloaded
 Linux bundle passed all seven consumers again on Windows after a clean resolution.
 
-The prepared publication candidate is the **Linux bundle from that exact run**,
-not a later rebuild or the separate local bundle. No tag or GitHub release exists
-for 7.4.1. Later documentation-only closeout commits do not change this source pin.
+At preparation closeout, the candidate was the **Linux bundle from that exact run**;
+no tag or release had yet been created. Its immutable record is retained here.
+The authorized final-main publication checkpoint below supersedes this bundle pin
+and proves byte identity of every payload; no released artifact was overwritten.
 
 | Prepared artifact | SHA-256 |
 | --- | --- |
@@ -115,7 +116,21 @@ bundle is the authorized publication input. All seven packaged consumers passed
 in the final-main run. Publication tooling now pins this exact source/bundle and
 requires all seven Central-only consumers, including the diagnostic regression.
 
-Staging, deployment review, publication and Central verification remain pending.
+## Completed publication and acceptance
+
+- [Immutable release](https://github.com/mattwilkinsphoto/figaro/releases/tag/v7.4.1)
+- [Signed staging and validation](https://github.com/mattwilkinsphoto/figaro/actions/runs/40405201840)
+- [Publication, byte comparisons and seven Central-only consumers](https://github.com/mattwilkinsphoto/figaro/actions/runs/40405442432)
+
+Deployment `94b3e5bc-9a15-42a8-813a-5aa406a12dd9` reached VALIDATED, was reviewed
+against the exact source/bundle pins, four signatures and 16 checksums, then reached
+PUBLISHED on 2026-10-26 UTC. One staging upload and one publication request were used.
+All four Central artifacts matched; all seven consumers passed on a fresh runner
+with Central-only resolution and the expected loaded-JAR hash. Independent public
+downloads separately matched the thin JAR, sources, Scaladoc and POM.
+The signed bundle hash is
+`910ab5971cf8e3ad5d61dfaf2ccf7d0bf3b3a010be02f9d0f4704b8803031b53`.
+The published bundle retains its pre-publication metadata unchanged.
 
 ## Separate publication gates
 
