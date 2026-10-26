@@ -29,35 +29,41 @@ packaged consumers passed. The local workaround is retired and a brief upstream
 validation confirmation was posted. See the [closeout](docs/CI_VALIDATION.md#stock-sbt-2011-adoption).
 No further sbt repair or Figaro release is scheduled from that work.
 
-### Recommended next capability assessment
+### Diagnostic correctness and 7.4.1 preparation
 
-**PF-PROPOSAL-01: reusable nonlinear observation-informed proposals.** This is the
-selected next recommendation for a bounded design/validation plan, not approval
-to implement or a promised release. The 7.4.0 APIs already correct caller-supplied
-guides, but built-in observation conditioning is linear-Gaussian; nonlinear and
-multimodal proposal construction remains caller work. See [research basis and
-inspection limits](docs/RESEARCH_REFERENCES.md#inf-17).
+The isolated [tied-quantile repair](docs/TIED_QUANTILE_REPAIR.md) corrects a
+floating-point cutoff error affecting tail ESS for repeated MCMC states. Its
+independent replay and original five-job branch CI passed. Integration with the
+current main branch and release preparation are approved; publication requires
+separate approval. Track executed gates in the [7.4.1 preparation record](docs/RELEASE_7_4_1_STATUS.md).
+The development version is 7.4.1-SNAPSHOT; 7.4.0 remains the published dependency.
+Stopping, defaults and strict-calibration thresholds are unchanged. A tail-ESS
+warning or a caller's near-threshold decision may nevertheless change.
 
-1. Compare explicit-Jacobian local Gaussian, derivative-free sigma-point and
-   small bounded-mixture approaches against the existing bootstrap/manual-guide
-   baselines. Screen maintained implementations and newer literature before
-   choosing an algorithm. A Gaussian approximation must not erase a multimodal
-   truth from the validation problem.
-2. Freeze a narrow scalar/low-dimensional, density-evaluable model contract and
-   protocol before a test-only prototype. Keep the true model and likelihood in
-   all importance corrections, preparation frozen within each step, and support,
-   refusal and construction-cost accounting explicit.
-3. Require independent exact/grid references, fresh held-out seeds and matched
-   total-cost comparisons, including weak-data and poor-guide cases. Promote only
-   after correctness and useful accuracy/cost gates pass; otherwise retain the
-   negative result. No change to released stopping, defaults or automatic cutover.
+### Research closeout: completed assessments are not an active queue
 
-The next candidates after that assessment are higher-dimensional GVM-mixture
-fitting (with GMM controls) and broader multi-latent warm-up/proposal support.
-These are recommendations, not an automatic implementation queue. Higher-dimensional
-GVM fitting remains density representation work, excluding application fusion.
-Finite-population mode loss, arbitrary-graph ownership and unsupported numerical
-ranges remain separate limitations; proposal helpers do not solve them universally.
+The [standalone retrospective](docs/LITERATURE_EXPERIMENTS_REPORT.md) and its
+[dated source records](docs/reports/EXPERIMENT_RECORDS.md) preserve motivations,
+full-outcome results, original thresholds and no-promotion decisions.
+
+| Completed line | Disposition / condition for reconsideration |
+| --- | --- |
+| PF-PROPOSAL-01 nonlinear and multi-component guides | No promotion. Equal-particle gains did not establish total-cost utility; the expensive-likelihood relevance screen stopped before an unjustified utility trial. Reopen only for a qualified posterior/workload and a new frozen comparison. |
+| Higher-dimensional GVM fitting, joint optimization and predictive selection | Parked after reliability, cost or incremental-benefit gates failed. Stronger completion and useful retained densities remain favorable evidence, not permission to alter failed gates. Existing scalar-linear fitting remains supported. |
+| Multi-root coordinate warm-up and budget scaling | Not promoted. More retained work repaired product-target failures, but original-fixture requalification still failed on dependence. No automatic dimension-to-budget law follows. |
+| Learned transformed-block pilot | Closed after reliability and total-cost failures. Correct adapter/Jacobian controls do not qualify the learned workflow. Its original audit and no-promotion outcome remain unchanged by the separate diagnostic repair. |
+
+### Next bounded review, not a new implementation milestone
+
+After diagnostic integration and release preparation, review **caller-specified
+transformed joint-block proposals** for owned constant-parameter Normal/Gamma/Beta
+roots. Existing [Normal-only fixed-covariance blocks](docs/BLOCKED_PROPOSALS.md)
+remain the supported starting point. The review must separate supplied geometry
+from failed automatic learning, specify support/Jacobian/rollback and ownership
+contracts, and require independent validation before any public promotion.
+No automatic covariance learning, calibration relaxation, hidden fallback,
+universal performance claim or arbitrary-graph support is approved by this review.
+Finite-population mode loss and unsupported numerical ranges remain separate limits.
 
 ### Released and completed milestones
 
@@ -183,7 +189,7 @@ proposals do not establish universal coverage or discover every missing mode.
 | Candidate | Trigger / unresolved scope |
 | --- | --- |
 | Particle-diversity robustness (bounded experiment complete; no promotion) | [PF-DIVERSITY-01 outcome](docs/PARTICLE_DIVERSITY_STATUS.md): preserve diagnostics and controls; any alternative resampling schedule needs a new protocol and held-out evidence; no universal missing-mode detection |
-| Higher-dimensional GVM-mixture fitting and component selection | A concrete fitting workload beyond the current scalar-linear contract; independent held-out validation, explicit fit failures and total training cost |
+| Higher-dimensional GVM-mixture fitting and component selection (parked) | A concrete new workload/contract justifying reopening the closed experiments; independent held-out validation, explicit incomplete comparisons and total training cost |
 | Broader dependence models and information measures | A model requiring mixed/count copulas, conditional interval integration, additional partitions or currently unsupported measures |
 | Broader inference-health calibration | New posterior geometries, rare-event queries or dependence structures that existing validation does not cover |
 | Additional distributions and constructions | A representative model requiring a missing family/flavor; see the inventory before implementing a duplicate |

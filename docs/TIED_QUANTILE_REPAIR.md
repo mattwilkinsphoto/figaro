@@ -113,3 +113,12 @@ the tied-quantile regression suite in the multi-chain diagnostic gate.
 The standalone main-based checkout also passed the 63-test targeted Scala set,
 six independent audit controls, research-reference validation, 41 documentation
 tests, 18 CI-tooling tests and local-link validation after generating Scaladoc.
+
+## Current integration checkpoint
+
+The original isolated [branch CI](https://github.com/mattwilkinsphoto/figaro/actions/runs/40366213712)
+passed all five jobs at `43ce624e`. Integration with the subsequently published
+retrospective and 7.4.1 preparation are now approved; see the
+[current preparation gates](RELEASE_7_4_1_STATUS.md). This supersedes the earlier
+future-CI wording above without rewriting the historical evidence. Publication
+is a separate approval. No experimental adapter or learned pilot is included.

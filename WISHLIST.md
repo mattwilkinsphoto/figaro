@@ -16,8 +16,21 @@ historical P0/P1 family labels below do not schedule another modernization stage
 Historically, Figaro 6.1 added exact-coordinate copula conditioning/partial evidence, public
 scalar-linear GVM-mixture fitting and full-mixture linear/angular MI. See the
 [release record](docs/RELEASE_6_1.md) for bounded contracts and validation.
-Higher-dimensional fitting, automatic component selection and mixed/count copulas
-remain candidates. Temporal grammar work is outside this library program.
+Higher-dimensional fitting and automatic component selection remain unshipped,
+but their bounded experiments are now closed/parked rather than an untouched next
+task. Mixed/count copulas remain optional candidates. Temporal grammar work is
+outside this library program.
+
+### Current research disposition
+
+The [experiment retrospective](docs/LITERATURE_EXPERIMENTS_REPORT.md) records the
+completed nonlinear-guide, higher-dimensional GVM-fitting and MCMC-adaptation
+campaigns. None of those failed promotion gates is reopened by this wishlist.
+The [roadmap](ROADMAP.md) prioritizes the isolated tail-ESS correctness repair and
+7.4.1 preparation, then a bounded review of caller-specified transformed blocks.
+That review is not approval to ship the failed automatic pilot or a new public API.
+Preserve stopping/defaults and strict calibration; require a separately approved
+contract and independent evidence before any future promotion.
 
 Status meanings: **native** = a current named Figaro element exists; **composable** =
 a mathematical construction is available but may lack a tested density/evidence API;

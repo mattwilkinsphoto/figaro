@@ -109,3 +109,15 @@ must agree. The explicit Maven-layout mode does not use Ivy local.
 
 Related: [acceptance protocol and evidence](../../docs/CORE_PERFORMANCE_ACCEPTANCE.md),
 [JVM consumer contract](../../CONSUMER_BOUNDARY.md), and [building](../../docs/BUILDING.md).
+
+## 7.4.1 diagnostic preparation control
+
+`DiagnosticConsumerCheck` exercises `McmcDiagnostics.summarize` from the exact
+hash-verified packaged JAR using repeated-state traces with nonconstant tails.
+The normal invocation requires the corrected tail ESS and preserves undefined
+constant-tail behavior. `--expect-legacy-tie-defect` is a separate negative control
+restricted to the immutable 7.4.0 JAR; it must reproduce the old missing-tail result.
+It is never an alternative success mode for the 7.4.1 candidate. Development CI
+runs all six existing consumers plus this seventh check, including the Maven-layout
+path without Ivy local. The existing Central publication workflow remains pinned
+to 7.4.0 until publication of a new version is separately approved.

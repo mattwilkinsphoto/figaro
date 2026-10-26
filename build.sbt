@@ -97,7 +97,8 @@ lazy val figaro = project
     mimaPreviousArtifacts := Set("io.github.mattwilkinsphoto" %% "figaro" % "7.0.0",
       "io.github.mattwilkinsphoto" %% "figaro" % "7.1.0",
       "io.github.mattwilkinsphoto" %% "figaro" % "7.2.0",
-      "io.github.mattwilkinsphoto" %% "figaro" % "7.3.0"),
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.3.0",
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.4.0"),
     Test / fork := true,
     Test / javaOptions += "-Xmx6G",
     Compile / run / fork := true,
@@ -169,6 +170,24 @@ lazy val compatibility73 = project.in(file("tools/compatibility73"))
     Compile / unmanagedSources := Seq(
       file("tools/compatibility/src/main/scala/CompatibilityCheck.scala"),
       baseDirectory.value / "OldFixedBudgetClient.scala"),
+    Compile / run / fork := true,
+    Compile / run / javaOptions += "-Xmx3G"
+  )
+
+// Preserve older gates and compile a guided-filter client against published 7.4.0.
+lazy val compatibility74 = project.in(file("tools/compatibility74"))
+  .settings(
+    externalResolvers := Seq(Resolver.mavenCentral),
+    scalaVersion := "3.9.0",
+    publish / skip := true,
+    libraryDependencies ++= Seq(
+      "io.github.mattwilkinsphoto" %% "figaro" % "7.4.0",
+      ("ch.epfl.scala" %% "tasty-mima" % "1.4.1").exclude("ch.epfl.scala", "tasty-query_3"),
+      "ch.epfl.scala" %% "tasty-query" % "1.9.0"
+    ),
+    Compile / unmanagedSources := Seq(
+      file("tools/compatibility/src/main/scala/CompatibilityCheck.scala"),
+      baseDirectory.value / "OldGuidedClient.scala"),
     Compile / run / fork := true,
     Compile / run / javaOptions += "-Xmx3G"
   )

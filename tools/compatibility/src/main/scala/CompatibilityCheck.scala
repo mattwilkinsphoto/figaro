@@ -8,7 +8,8 @@ object CompatibilityCheck {
     val version = if (args.length == 2) args(1) else "7.2.0"
     val hashes = Map(
       "7.2.0" -> "3532720d1b17c8580146b7b9c605ef2fbf46142af5b56a32e563f18e1444cf18",
-      "7.3.0" -> "6b82a0efc92ea4119a51cdfe42e38090b3680d129625d16b653e37cc821cee1f")
+      "7.3.0" -> "6b82a0efc92ea4119a51cdfe42e38090b3680d129625d16b653e37cc821cee1f",
+      "7.4.0" -> "0abfdadfeb007af1eee39a04b0591e49686d4cab74181402ccf8d9948abe4dbf")
     require(hashes.contains(version), "Unreviewed compatibility baseline")
     val previous=Path.of(classOf[com.cra.figaro.language.Universe].getProtectionDomain.getCodeSource.getLocation.toURI)
     require(previous.getFileName.toString == s"figaro_3-$version.jar")
@@ -35,6 +36,8 @@ object CompatibilityCheck {
       loader.loadClass("OldFilterClient").getMethod("main",classOf[Array[String]])
         .invoke(null,Array.empty[String].asInstanceOf[Object])
       if (version == "7.3.0") loader.loadClass("OldFixedBudgetClient").getMethod("main",classOf[Array[String]])
+        .invoke(null,Array.empty[String].asInstanceOf[Object])
+      if (version == "7.4.0") loader.loadClass("OldGuidedClient").getMethod("main",classOf[Array[String]])
         .invoke(null,Array.empty[String].asInstanceOf[Object])
     }
     finally loader.close()

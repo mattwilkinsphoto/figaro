@@ -1,5 +1,21 @@
 # Modernization release notes
 
+## 7.4.1 preparation — not yet published
+
+Corrects tail-ESS quantile cutoffs when neighboring order statistics are identical.
+The earlier weighted interpolation could round one representable value below a
+repeated state, changing tail-indicator membership. The repair preserves equal
+endpoints exactly and retains the previous unequal-endpoint arithmetic.
+
+The independent retained-trace replay agreed on all 5,798 summaries; 45 tail-ESS
+values changed, with no retained qualification decision changes. This is not a
+guarantee that a new near-threshold caller will make the same decision. Sampling
+transitions, mean-precision stopping, defaults and calibration thresholds are
+unchanged. The failed learned-pilot workflow is not included or promoted.
+See the [repair and consumer implications](TIED_QUANTILE_REPAIR.md) and
+[preparation gates](RELEASE_7_4_1_STATUS.md). Continue using published 7.4.0 until
+7.4.1 publication and Central consumer verification are explicitly recorded.
+
 ## Unreleased repository tooling
 
 Source and acceptance-consumer builds select stock sbt 2.0.11. The named CI gate

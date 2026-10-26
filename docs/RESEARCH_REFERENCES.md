@@ -420,7 +420,14 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Code:** No new runtime implementation. Existing integration surfaces are [WeightedParticleProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala) and [FixedBudgetParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala). Existing linear-Gaussian helpers and arbitrary supplied laws are not automatic nonlinear construction.
 
-**Validation:** None executed for the candidate. Existing [ContinuousFilterBenchmark.scala](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmark.scala) supplies potential comparison fixtures, not acceptance of this candidate. Proposed gates require independent exact/grid references, new held-out seeds, all-outcome accuracy/mode-retention checks and total construction plus sampling cost against larger bootstrap budgets. Published speedups are not Figaro measurements.
+**Validation:** The original assessment had no executed candidate. The later
+[retrospective, section 3](LITERATURE_EXPERIMENTS_REPORT.md#3-can-observation-informed-proposals-become-more-automatic)
+records the completed test-only nonlinear and multi-component studies and their
+immutable source citations: accounting controls passed but cost-adjusted utility
+or delivery gates failed. The expensive-likelihood follow-up stopped at relevance
+and precomputation checks. No candidate was promoted; these are not still-pending
+implementation tasks. Existing [ContinuousFilterBenchmark.scala](../Figaro/src/test/scala/com/cra/figaro/test/modernization/ContinuousFilterBenchmark.scala)
+remains a comparison resource. Published speedups are not Figaro measurements.
 
 **Guide:** [AUXILIARY PARTICLE FILTER](AUXILIARY_PARTICLE_FILTER.md).
 
@@ -450,7 +457,11 @@ Stopping/defaults and calibration thresholds remain unchanged. Tail-based caller
 near a threshold can change behavior; the original experimental pilot remains
 unpromoted and is not included in this correction branch.
 
-**Guide:** [MULTI CHAIN MCMC](MULTI_CHAIN_MCMC.md); [MCMC RELIABILITY](MCMC_RELIABILITY.md); [TIED QUANTILE REPAIR](TIED_QUANTILE_REPAIR.md); [cross-campaign experiment retrospective](LITERATURE_EXPERIMENTS_REPORT.md).
+The [packaged diagnostic consumer](../tools/acceptance-consumer/src/main/scala/DiagnosticConsumerCheck.scala)
+adds a deterministic public-API plateau control and an explicit published-7.4.0
+negative-control mode; source tests and retained-trace replay remain separate evidence.
+
+**Guide:** [MULTI CHAIN MCMC](MULTI_CHAIN_MCMC.md); [MCMC RELIABILITY](MCMC_RELIABILITY.md); [TIED QUANTILE REPAIR](TIED_QUANTILE_REPAIR.md); [7.4.1 preparation](RELEASE_7_4_1_STATUS.md); [cross-campaign experiment retrospective](LITERATURE_EXPERIMENTS_REPORT.md).
 
 <a id="dia-02"></a>
 
