@@ -1,6 +1,7 @@
 # Caller-specified transformed joint blocks: bounded API review
 
-**Design recommendation, not a shipped API or implementation approval.** This
+**Design recommendation, not a shipped API.** Subsequent approval authorizes the
+[bounded protocol](TRANSFORMED_JOINT_BLOCK_PROTOCOL.md), not automatic promotion. This
 review follows the separate diagnostic repair. It does not reopen the closed
 learned-pilot campaign or include that prototype in 7.4.1. Stopping, defaults and
 strict calibration remain unchanged.

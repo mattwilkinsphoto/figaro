@@ -438,13 +438,13 @@ remains a comparison resource. Published speedups are not Figaro measurements.
 
 **Source:** Parno and Marzouk, [Transport map accelerated MCMC, v4 (2017)](https://arxiv.org/html/1412.5492v4), section 3.1/equations 20-22; [Stan 2.40 transforms](https://mc-stan.org/docs/reference-manual/transforms.html), scalar transforms and finite-precision caveat; [TensorFlow Probability transformed kernel](https://www.tensorflow.org/probability/api_docs/python/tfp/mcmc/TransformedTransitionKernel), mathematical contract; [Geyer metrop manual](https://www.stat.umn.edu/geyer/mcmc/library/mcmc/html/metrop.html), matrix increments. Inspected 2026-10-26, not a full adaptive-proof review. TFP source/license retrieval failed; documentation only, no source reuse or execution.
 
-**Role:** Bounded API design recommendation, not implemented or promoted. Explicit fixed coordinate covariance avoids the failed automatic-learning workflow but does not guarantee efficient exploration or convergence. No external code or dependency added.
+**Role:** Approved bounded candidate plan, not shipped or promoted. Explicit fixed coordinate covariance avoids the failed automatic-learning workflow but does not guarantee efficient exploration or convergence. The fixed-map acceptance and scalar-transform sources were re-inspected before implementation; no adaptive-proof or outside code-reuse claim. No external dependency added.
 
 **Code:** Existing [GaussianBlockProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/GaussianBlockProposal.scala), [SupportAwareProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/SupportAwareProposal.scala), [ProposalScheme.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/ProposalScheme.scala), [MetropolisHastings.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/MetropolisHastings.scala) and [owned runner](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings.scala) are integration references, not the proposed API. The unpromoted research adapter is not included in 7.4.1.
 
 **Validation:** Source/contract review only; no new candidate executed. Historical adapter and no-promotion evidence is preserved in the [retrospective](LITERATURE_EXPERIMENTS_REPORT.md) and [dated records](reports/EXPERIMENT_RECORDS.md). The guide requires new independent graph/Jacobian controls, fresh cost-inclusive confirmation, packaged consumers and separate promotion review. Precision-checkpoint thread migration is explicitly outside the first proposed contract.
 
-**Guide:** [TRANSFORMED JOINT BLOCK API REVIEW](TRANSFORMED_JOINT_BLOCK_API_REVIEW.md).
+**Guide:** [TRANSFORMED JOINT BLOCK API REVIEW](TRANSFORMED_JOINT_BLOCK_API_REVIEW.md); [TRANSFORMED JOINT BLOCK PROTOCOL](TRANSFORMED_JOINT_BLOCK_PROTOCOL.md).
 
 <a id="dia-01"></a>
 
