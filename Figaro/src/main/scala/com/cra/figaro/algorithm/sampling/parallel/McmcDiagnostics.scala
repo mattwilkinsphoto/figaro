@@ -112,12 +112,18 @@ object McmcDiagnostics {
   }
   private def split(chains: Array[Array[Double]]): Array[Array[Double]] =
     chains.flatMap(x => Array(x.take(x.length / 2), x.takeRight(x.length / 2)))
-  private def quantile(sorted: Array[Double], p: Double): Double = {
+  // Internal sorted-finite-input helper, visible only for exact regression checks.
+  private[figaro] def quantile(sorted: Array[Double], p: Double): Double = {
     val position = p * (sorted.length - 1)
     val lo = position.toInt
     val weight = position - lo
+    val lower = sorted(lo)
+    val upper = sorted(math.min(lo + 1, sorted.length - 1))
+    // A rounded convex combination of identical values can fall below the tie,
+    // spuriously excluding repeated MH states from the quantile indicator.
+    if (lower == upper) return lower
     // Convex combination avoids overflow in subtracting opposite-sign extreme values.
-    sorted(lo) * (1 - weight) + sorted(math.min(lo + 1, sorted.length - 1)) * weight
+    lower * (1 - weight) + upper * weight
   }
   // Internal finite-value helpers, package-visible only for exact regression checks.
   private[figaro] def sortedValues(values: Array[Double]): Array[Double] = {

@@ -155,6 +155,13 @@ val checkedAgain = McmcDiagnostics.summarize(result.chains.map(_.draws("mean")))
 
 `None` means unavailable, not zero and not success. All-constant traces have undefined diagnostics. Chains stuck at different constants yield infinite R-hat. Binary/discrete observables can have undefined tail ESS because a percentile indicator is constant. Four or five draws per chain permit R-hat but are too short for this ESS estimator. Odd-length chains omit their middle draw only for split diagnostics; pooled mean and SD still use every draw.
 
+Repeated states after MH rejection count as exact ties at a tail-quantile cutoff.
+The [tied-quantile correction](TIED_QUANTILE_REPAIR.md) preserves equal neighboring
+order statistics exactly; older interpolation could round below them and exclude
+tied draws. This can change tail ESS and a warning or calibration decision near
+its existing threshold, without changing draws or mean-precision stopping.
+No threshold is relaxed, and undefined discrete tails remain undefined.
+
 ## Three common patterns
 
 ### 1. Replace a single-chain estimate with inspected multiple chains

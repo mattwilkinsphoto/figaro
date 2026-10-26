@@ -430,7 +430,21 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Validation:** [McmcDiagnosticsRegressionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/McmcDiagnosticsRegressionTest.scala); [McmcReliabilityRegressionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/McmcReliabilityRegressionTest.scala).
 
-**Guide:** [MULTI CHAIN MCMC](MULTI_CHAIN_MCMC.md); [MCMC RELIABILITY](MCMC_RELIABILITY.md).
+The separate [tied-quantile repair](TIED_QUANTILE_REPAIR.md) preserves identical
+order statistics exactly, consistent with [R type-7 quantiles](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/quantile.html)
+and the inspected [R implementation](https://raw.githubusercontent.com/wch/r-source/trunk/src/library/stats/R/quantile.R)
+(2026-10-26; implementation reference, no source copied). [Posterior tail ESS](https://mc-stan.org/posterior/reference/ess_tail.html)
+and [NumPy linear quantiles](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html)
+supply diagnostic/definition references, not convergence guarantees.
+[TiedQuantileRegressionTest](../Figaro/src/test/scala/com/cra/figaro/test/modernization/TiedQuantileRegressionTest.scala)
+and the [independent replay audit](../tools/tied_quantile_audit.py) validate the
+correction. All 5,798 retained summaries agree within unchanged tolerances;
+45 tail ESS values change, with no retained qualification decision changes.
+Stopping/defaults and calibration thresholds remain unchanged. Tail-based callers
+near a threshold can change behavior; the original experimental pilot remains
+unpromoted and is not included in this correction branch.
+
+**Guide:** [MULTI CHAIN MCMC](MULTI_CHAIN_MCMC.md); [MCMC RELIABILITY](MCMC_RELIABILITY.md); [TIED QUANTILE REPAIR](TIED_QUANTILE_REPAIR.md).
 
 <a id="dia-02"></a>
 

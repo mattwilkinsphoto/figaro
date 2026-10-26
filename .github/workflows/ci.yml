@@ -19,7 +19,7 @@ defaults:
     shell: bash
 
 env:
-  FIGARO_VERSION: 7.4.0
+  FIGARO_VERSION: 7.4.1-SNAPSHOT
   FIGARO_CAPABILITY_CHECK: 'true'
   FIGARO_BUDGET_CHECK: 'true'
   FIGARO_FIXED_BUDGET_CHECK: 'true'
@@ -275,7 +275,8 @@ jobs:
           sbt --server --batch
           "figaro / Test / testOnly
           com.cra.figaro.test.modernization.MultiChainMcmcRegressionTest
-          com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest;
+          com.cra.figaro.test.modernization.McmcDiagnosticsRegressionTest
+          com.cra.figaro.test.modernization.TiedQuantileRegressionTest;
           examples / Compile / runMain com.cra.figaro.example.MultiChainMcmcExample;
           examples / Compile / runMain com.cra.figaro.example.MultiChainMcmcBenchmark normal 200 1 1,2 2"
 
