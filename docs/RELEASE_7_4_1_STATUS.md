@@ -1,8 +1,8 @@
 # Figaro 7.4.1 preparation
 
 **Preparation approved; publication not authorized or performed.** Published
-baseline: [7.4.0](RELEASE_7_4_STATUS.md). The isolated development artifacts use
-7.4.1-SNAPSHOT until integration CI passes. This page records gates, not a promise
+baseline: [7.4.0](RELEASE_7_4_STATUS.md). Snapshot integration CI passed; the separate
+preparation source now uses final version 7.4.1. This page records gates, not a promise
 that an unexecuted check passed or that the version exists on Maven Central.
 
 ## Scope and consumer impact
@@ -32,7 +32,7 @@ The existing retrospective/PDF remains a dated historical record.
 - [x] Current-main integration, preserved source/evidence and roadmap reconciliation.
 - [x] Targeted arithmetic, diagnostic, calibration and stopping regressions; independent audit controls.
 - [x] Binary compatibility through the immediate 7.4.0 baseline and prior retained baselines; TASTy/compiled-client checks.
-- [ ] Fresh branch/PR CI, reviewed merge and post-merge status.
+- [x] Fresh integration branch CI and reviewed fast-forward into main; post-merge CI is a separate checkpoint below.
 - [ ] Final-version 7.4.1 source, clean reproducible artifacts, POM/legal inspection and offline Maven-layout bundle.
 - [ ] All existing packaged consumers plus a public diagnostic regression; verify the loaded artifact hash and a published-7.4.0 negative control.
 - [ ] Record exact source/artifact hashes and executed validation; retain original failures and timing advisories.
@@ -46,6 +46,18 @@ expected missing-tail-ESS defect against the hash-verified published 7.4.0 JAR.
 These are local results, not substitutes for the pending final-version gates.
 
 The report-only [post-merge main run passed all five jobs](https://github.com/mattwilkinsphoto/figaro/actions/runs/40383127831).
+
+## Final-version checkpoint
+
+The [integration run](https://github.com/mattwilkinsphoto/figaro/actions/runs/40388490501)
+passed all five jobs with no failed steps at `bd90247ac43ce78cb0a3ec2a430d6494fa460aa2`.
+That commit was fast-forwarded into main after success. It includes compatibility
+through 7.4.0, byte-reproducible snapshot builds, all seven packaged consumers and
+the immutable 7.4.0 negative control. Final-version 7.4.1 packaging and the main
+run are not inferred from that snapshot result; they must pass separately.
+
+The [caller-specified joint-block API review](TRANSFORMED_JOINT_BLOCK_API_REVIEW.md)
+is documentation only. No adapter or automatic pilot is included in 7.4.1.
 
 ## Separate publication gates — not authorized here
 

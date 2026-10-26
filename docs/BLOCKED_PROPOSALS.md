@@ -22,7 +22,9 @@ Measure effective samples per second **and** accuracy and uncertainty checks. Ra
 
 ## Quick start in three steps
 
-Install the Scala 3 snapshot as described in [Building](BUILDING.md). The current reliability branch uses `6.0.0-modern.8-SNAPSHOT`; the original blocked-proposals checkpoint was `6.0.0-modern.6-SNAPSHOT`.
+Install the published Scala 3 library as described in [Building](BUILDING.md).
+This API is included in the published 7.4.0 baseline; the old modernization
+snapshot numbers are historical checkpoints, not current installation instructions.
 
 1. Import the APIs:
 

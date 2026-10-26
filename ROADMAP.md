@@ -36,7 +36,8 @@ floating-point cutoff error affecting tail ESS for repeated MCMC states. Its
 independent replay and original five-job branch CI passed. Integration with the
 current main branch and release preparation are approved; publication requires
 separate approval. Track executed gates in the [7.4.1 preparation record](docs/RELEASE_7_4_1_STATUS.md).
-The development version is 7.4.1-SNAPSHOT; 7.4.0 remains the published dependency.
+The preparation branch uses final version 7.4.1 after passing snapshot integration
+CI; 7.4.0 remains the published dependency. This version change does not publish it.
 Stopping, defaults and strict-calibration thresholds are unchanged. A tail-ESS
 warning or a caller's near-threshold decision may nevertheless change.
 
@@ -61,6 +62,9 @@ roots. Existing [Normal-only fixed-covariance blocks](docs/BLOCKED_PROPOSALS.md)
 remain the supported starting point. The review must separate supplied geometry
 from failed automatic learning, specify support/Jacobian/rollback and ownership
 contracts, and require independent validation before any public promotion.
+The [bounded API review](docs/TRANSFORMED_JOINT_BLOCK_API_REVIEW.md) recommends a
+complete fixed-budget scheme with explicit coordinate covariance and a staged
+independent-validation plan. It is a design recommendation, not shipped code.
 No automatic covariance learning, calibration relaxation, hidden fallback,
 universal performance claim or arbitrary-graph support is approved by this review.
 Finite-population mode loss and unsupported numerical ranges remain separate limits.

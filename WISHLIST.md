@@ -67,15 +67,17 @@ Record a source, concrete use case, representative first member, dependencies, n
 and inference tests, and acceptance evidence when promoting a candidate. Keep aliases
 and special cases attached to their family instead of creating duplicate implementations.
 
-## Recommended next inference candidate
+## Inference research disposition
 
-**PF-PROPOSAL-01 — assessment recommended; not implemented.** Reusable nonlinear
-observation-informed proposal construction would extend the linear-Gaussian
-helpers behind the released 7.4.0 fixed-budget APIs. The [roadmap](ROADMAP.md#recommended-next-capability-assessment)
-sets the proposed bounded sequence; [INF-17](docs/RESEARCH_REFERENCES.md#inf-17)
-records inspected sources and incomplete review. No winning algorithm, speedup,
-automatic policy or publication is claimed. Preserve all earlier negative
-particle-diversity results and released stopping/defaults.
+**PF-PROPOSAL-01 — completed test-only assessments; no promotion.** Nonlinear and
+multi-component construction did not meet the frozen delivery/total-cost gates.
+The expensive-likelihood follow-up stopped at relevance and precomputation checks.
+See the [retrospective](docs/LITERATURE_EXPERIMENTS_REPORT.md#3-can-observation-informed-proposals-become-more-automatic)
+and [INF-17](docs/RESEARCH_REFERENCES.md#inf-17). The current
+[next bounded review](ROADMAP.md#next-bounded-review-not-a-new-implementation-milestone)
+concerns caller-specified transformed joint blocks, not automatic filtering guides
+or a revival of learned pilot calibration. Preserve all earlier negative results
+and released stopping/defaults.
 
 ## Broad families first
 

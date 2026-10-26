@@ -19,7 +19,7 @@ defaults:
     shell: bash
 
 env:
-  FIGARO_VERSION: 7.4.1-SNAPSHOT
+  FIGARO_VERSION: 7.4.1
   FIGARO_CAPABILITY_CHECK: 'true'
   FIGARO_BUDGET_CHECK: 'true'
   FIGARO_FIXED_BUDGET_CHECK: 'true'

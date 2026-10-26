@@ -53,7 +53,8 @@ the [current roadmap](../ROADMAP.md) and [release scope](RELEASE_6_1.md) for del
 | Particle-diversity robustness and proposed resample-move experiment | [INF-14](#inf-14) |
 | Bounded single-selection and ESS-triggered resampling schedules | [INF-15](#inf-15) |
 | Guided and auxiliary fixed-budget extension | [INF-16](#inf-16) |
-| Nonlinear proposal construction: next candidate assessment | [INF-17](#inf-17) |
+| Nonlinear proposal construction: completed test-only assessment, no promotion | [INF-17](#inf-17) |
+| Caller-specified transformed joint-block API review | [INF-22](#inf-22) |
 | Multi-chain diagnostics and inference health | [DIA-01](#dia-01), [DIA-02](#dia-02) |
 | Sequential tests and precision stopping | [STP-01](#stp-01), [STP-02](#stp-02), [STP-03](#stp-03), [STP-04](#stp-04), [STP-05](#stp-05) |
 | Circular/joint GVM, numerical overlap and mixture fitting | [GVM-01](#gvm-01), [GVM-02](#gvm-02), [GVM-03](#gvm-03), [GVM-04](#gvm-04) |
@@ -416,7 +417,7 @@ Production follow-up: [DecisionStratified](../Figaro/src/main/scala/com/cra/figa
 
 **Source:** van der Merwe, Doucet, de Freitas and Wan, [The Unscented Particle Filter](https://proceedings.neurips.cc/paper/1818-the-unscented-particle-filter.pdf) (2000), introduction, model specification and opening particle-filter discussion inspected for the observation-informed Gaussian-proposal rationale; no full algorithm/proof review. Doucet and Johansen, [particle-filtering tutorial, corrected 2012 text](https://www.stats.ox.ac.uk/~doucet/doucet_johansen_tutorialPF2011.pdf), sections 4.2-4.3: predictive uncertainty, importance corrections and limits even with optimal child proposals. Maintained implementation comparison: [particles guided-filter tutorial](https://particles-sequential-monte-carlo-in-python.readthedocs.io/en/latest/notebooks/advanced_tutorial_ssm.html), user-supplied normalized proposals; documentation inspection, not execution or a pinned numerical comparison. Additional candidates screened at abstract level only: Branchini and Elvira, [optimized APF](https://proceedings.mlr.press/v161/branchini21a.html) (2021), and Cox et al., [learned Gaussian-mixture proposals](https://www.research.ed.ac.uk/en/publications/end-to-end-learning-of-gaussian-mixture-proposals-using-different/) (2024). Inspected 2026-10-23. No full-text or implementation validation claim for those two screened candidates.
 
-**Role:** Recommended next bounded assessment, not an implemented method or a selected winning algorithm. Compare explicit-Jacobian Gaussian, derivative-free sigma-point and bounded mixture proposals before choosing a prototype. A normalized approximate guide can be importance-corrected against the true model; it does not make the posterior Gaussian, restore lost histories or establish precision. Broader method/reuse/license review and a frozen protocol precede coding. No external code, data or dependency incorporated.
+**Role:** Completed test-only assessment and follow-up experiments, not a promoted method or a current implementation queue. The original assessment compared explicit-Jacobian Gaussian, derivative-free sigma-point and bounded mixture proposals. A normalized approximate guide can be importance-corrected against the true model; it does not make the posterior Gaussian, restore lost histories or establish precision. The later no-promotion results are mapped below. No external code, data or dependency incorporated.
 
 **Code:** No new runtime implementation. Existing integration surfaces are [WeightedParticleProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/WeightedParticleProposal.scala) and [FixedBudgetParticleFilter.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/filtering/FixedBudgetParticleFilter.scala). Existing linear-Gaussian helpers and arbitrary supplied laws are not automatic nonlinear construction.
 
@@ -430,6 +431,20 @@ implementation tasks. Existing [ContinuousFilterBenchmark.scala](../Figaro/src/t
 remains a comparison resource. Published speedups are not Figaro measurements.
 
 **Guide:** [AUXILIARY PARTICLE FILTER](AUXILIARY_PARTICLE_FILTER.md).
+
+<a id="inf-22"></a>
+
+### INF-22: Caller-specified transformed joint blocks
+
+**Source:** Parno and Marzouk, [Transport map accelerated MCMC, v4 (2017)](https://arxiv.org/html/1412.5492v4), section 3.1/equations 20-22; [Stan 2.40 transforms](https://mc-stan.org/docs/reference-manual/transforms.html), scalar transforms and finite-precision caveat; [TensorFlow Probability transformed kernel](https://www.tensorflow.org/probability/api_docs/python/tfp/mcmc/TransformedTransitionKernel), mathematical contract; [Geyer metrop manual](https://www.stat.umn.edu/geyer/mcmc/library/mcmc/html/metrop.html), matrix increments. Inspected 2026-10-26, not a full adaptive-proof review. TFP source/license retrieval failed; documentation only, no source reuse or execution.
+
+**Role:** Bounded API design recommendation, not implemented or promoted. Explicit fixed coordinate covariance avoids the failed automatic-learning workflow but does not guarantee efficient exploration or convergence. No external code or dependency added.
+
+**Code:** Existing [GaussianBlockProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/GaussianBlockProposal.scala), [SupportAwareProposal.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/SupportAwareProposal.scala), [ProposalScheme.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/ProposalScheme.scala), [MetropolisHastings.scala](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/MetropolisHastings.scala) and [owned runner](../Figaro/src/main/scala/com/cra/figaro/algorithm/sampling/parallel/MultiChainMetropolisHastings.scala) are integration references, not the proposed API. The unpromoted research adapter is not included in 7.4.1.
+
+**Validation:** Source/contract review only; no new candidate executed. Historical adapter and no-promotion evidence is preserved in the [retrospective](LITERATURE_EXPERIMENTS_REPORT.md) and [dated records](reports/EXPERIMENT_RECORDS.md). The guide requires new independent graph/Jacobian controls, fresh cost-inclusive confirmation, packaged consumers and separate promotion review. Precision-checkpoint thread migration is explicitly outside the first proposed contract.
+
+**Guide:** [TRANSFORMED JOINT BLOCK API REVIEW](TRANSFORMED_JOINT_BLOCK_API_REVIEW.md).
 
 <a id="dia-01"></a>
 
