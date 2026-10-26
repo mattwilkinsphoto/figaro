@@ -54,14 +54,14 @@ full-outcome results, original thresholds and no-promotion decisions.
 | Multi-root coordinate warm-up and budget scaling | Not promoted. More retained work repaired product-target failures, but original-fixture requalification still failed on dependence. No automatic dimension-to-budget law follows. |
 | Learned transformed-block pilot | Closed after reliability and total-cost failures. Correct adapter/Jacobian controls do not qualify the learned workflow. Its original audit and no-promotion outcome remain unchanged by the separate diagnostic repair. |
 
-### Next bounded review, not a new implementation milestone
+### Joint-block review complete; implementation requires approval
 
-After diagnostic integration and release preparation, review **caller-specified
-transformed joint-block proposals** for owned constant-parameter Normal/Gamma/Beta
-roots. Existing [Normal-only fixed-covariance blocks](docs/BLOCKED_PROPOSALS.md)
-remain the supported starting point. The review must separate supplied geometry
-from failed automatic learning, specify support/Jacobian/rollback and ownership
-contracts, and require independent validation before any public promotion.
+The bounded review of **caller-specified transformed joint-block proposals** is
+complete. Its recommended next milestone covers owned constant-parameter
+Normal/Gamma/Beta roots, with caller-supplied fixed geometry, not automatic learning.
+Existing [Normal-only fixed-covariance blocks](docs/BLOCKED_PROPOSALS.md) remain
+the supported starting point. The proposal specifies support/Jacobian/rollback
+and ownership contracts and requires independent validation before public promotion.
 The [bounded API review](docs/TRANSFORMED_JOINT_BLOCK_API_REVIEW.md) recommends a
 complete fixed-budget scheme with explicit coordinate covariance and a staged
 independent-validation plan. It is a design recommendation, not shipped code.

@@ -137,15 +137,18 @@ support, custom distributions or changed failure semantics require another revie
 
 Use six fixtures: factorized mixed support at 2D and 8D, correlated Normal 2D,
 coupled Gamma/Beta 2D, curved mixed support, and separated modes. Preserve adverse
-cases even when the method is expected to struggle. Compare three arms: released
-default, explicitly fixed scalar moves and the new fixed joint move. No pilot,
+cases even when the method is expected to struggle. Compare four arms: released
+default, the existing joint-prior proposal (`ProposalScheme(roots*)`), explicitly
+fixed scalar moves and the new fixed joint move. Joint-prior resampling already
+moves multiple roots together and is an important inexpensive control; scalar
+proposals alone would not isolate the benefit of transformed covariance. No pilot,
 matrix fitting, parameter search or adaptive retries in this study. Independent
 analytic/quadrature truth and query tolerances must precede stochastic execution.
 
 Proposed cap: eight fresh development seeds, four chains, 12,000 transitions per
-chain including 4,000 discarded warm-up; 144 development attempts. These are study
+chain including 4,000 discarded warm-up; 192 development attempts. These are study
 budgets, not library defaults. Reserve 32 new confirmation seeds before running;
-do not consume any old closed campaign's seeds. At most 576 confirmation attempts
+do not consume any old closed campaign's seeds. At most 768 confirmation attempts
 if development passes. Each phase has a four-hour/12-GiB/4-GiB output cap. A cap hit
 is incomplete and stops the phase; no budget extension to secure a pass.
 

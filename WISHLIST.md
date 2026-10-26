@@ -74,8 +74,8 @@ multi-component construction did not meet the frozen delivery/total-cost gates.
 The expensive-likelihood follow-up stopped at relevance and precomputation checks.
 See the [retrospective](docs/LITERATURE_EXPERIMENTS_REPORT.md#3-can-observation-informed-proposals-become-more-automatic)
 and [INF-17](docs/RESEARCH_REFERENCES.md#inf-17). The current
-[next bounded review](ROADMAP.md#next-bounded-review-not-a-new-implementation-milestone)
-concerns caller-specified transformed joint blocks, not automatic filtering guides
+[completed review and proposed next milestone](ROADMAP.md#joint-block-review-complete-implementation-requires-approval)
+concern caller-specified transformed joint blocks, not automatic filtering guides
 or a revival of learned pilot calibration. Preserve all earlier negative results
 and released stopping/defaults.
 
