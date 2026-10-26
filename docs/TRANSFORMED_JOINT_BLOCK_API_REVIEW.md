@@ -1,5 +1,10 @@
 # Caller-specified transformed joint blocks: bounded API review
 
+**Subsequent execution:** the [frozen development study](TRANSFORMED_JOINT_BLOCK_RESULTS.md)
+completed with independent arithmetic/diagnostic checks but failed ordinary
+accuracy and utility gates. No confirmation or promotion; this review remains
+historical design rationale, not a scheduled implementation or shipped API.
+
 **Design recommendation, not a shipped API.** Subsequent approval authorizes the
 [bounded protocol](TRANSFORMED_JOINT_BLOCK_PROTOCOL.md), not automatic promotion. This
 review follows the separate diagnostic repair. It does not reopen the closed

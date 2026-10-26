@@ -53,20 +53,20 @@ full-outcome results, original thresholds and no-promotion decisions.
 | Multi-root coordinate warm-up and budget scaling | Not promoted. More retained work repaired product-target failures, but original-fixture requalification still failed on dependence. No automatic dimension-to-budget law follows. |
 | Learned transformed-block pilot | Closed after reliability and total-cost failures. Correct adapter/Jacobian controls do not qualify the learned workflow. Its original audit and no-promotion outcome remain unchanged by the separate diagnostic repair. |
 
-### Joint-block bounded implementation approved; independent gates required
+### Joint-block bounded study complete; no promotion
 
-The bounded review of **caller-specified transformed joint-block proposals** is
-complete and its bounded three-stage plan is approved. The milestone covers owned constant-parameter
-Normal/Gamma/Beta roots, with caller-supplied fixed geometry, not automatic learning.
-Existing [Normal-only fixed-covariance blocks](docs/BLOCKED_PROPOSALS.md) remain
-the supported starting point. The proposal specifies support/Jacobian/rollback
-and ownership contracts and requires independent validation before public promotion.
-The [bounded API review](docs/TRANSFORMED_JOINT_BLOCK_API_REVIEW.md) recommends a
-complete fixed-budget scheme with explicit coordinate covariance and a staged
-independent-validation plan. Implementation and validation are next, not shipped code.
-No automatic covariance learning, calibration relaxation, hidden fallback,
-universal performance claim or arbitrary-graph support is approved by this review.
-Finite-population mode loss and unsupported numerical ranges remain separate limits.
+The [192-attempt development study](docs/TRANSFORMED_JOINT_BLOCK_RESULTS.md) of
+caller-specified Normal/Gamma/Beta joint blocks passed independent numerical and
+diagnostic checks. Both correlated fixtures passed development accuracy/utility;
+both product fixtures failed utility, and 8D accuracy was 5/8 versus required 8/8.
+The firm exit gate therefore stopped confirmation and public promotion. Candidate
+runtime remains isolated on its branch, not merged into the released library.
+Existing [Normal-only fixed-covariance blocks](docs/BLOCKED_PROPOSALS.md) and scalar
+support-aware proposals remain supported. Reconsider only for a demonstrated
+dependent mixed-support workload under a separately approved frozen plan, without
+erasing the failed controls. No follow-on optimization campaign is scheduled.
+The [API review](docs/TRANSFORMED_JOINT_BLOCK_API_REVIEW.md) retains the contract;
+stopping/defaults and strict calibration are unchanged.
 
 ### Released and completed milestones
 

@@ -27,8 +27,9 @@ The [experiment retrospective](docs/LITERATURE_EXPERIMENTS_REPORT.md) records th
 completed nonlinear-guide, higher-dimensional GVM-fitting and MCMC-adaptation
 campaigns. None of those failed promotion gates is reopened by this wishlist.
 The isolated tail-ESS correction is published in 7.4.1. The [roadmap](ROADMAP.md)
-now schedules the approved bounded caller-specified transformed-block plan.
-That approval does not ship the failed automatic pilot or promote a new public API.
+records the [completed fixed-block study](docs/TRANSFORMED_JOINT_BLOCK_RESULTS.md):
+correlated-case gains, but failed ordinary accuracy/utility gates and no promotion.
+Neither the failed automatic pilot nor the fixed candidate is shipped.
 Preserve stopping/defaults and strict calibration; require a separately approved
 contract and independent evidence before any future promotion.
 
@@ -74,8 +75,8 @@ multi-component construction did not meet the frozen delivery/total-cost gates.
 The expensive-likelihood follow-up stopped at relevance and precomputation checks.
 See the [retrospective](docs/LITERATURE_EXPERIMENTS_REPORT.md#3-can-observation-informed-proposals-become-more-automatic)
 and [INF-17](docs/RESEARCH_REFERENCES.md#inf-17). The current
-[completed review and proposed next milestone](ROADMAP.md#joint-block-review-complete-implementation-requires-approval)
-concern caller-specified transformed joint blocks, not automatic filtering guides
+[completed fixed-block assessment](ROADMAP.md#joint-block-bounded-study-complete-no-promotion)
+concerns caller-specified transformed joint blocks, not automatic filtering guides
 or a revival of learned pilot calibration. Preserve all earlier negative results
 and released stopping/defaults.
 
