@@ -194,16 +194,18 @@ child mixtures, update/close and calibrated-work APIs retain their
 
 ## Gotchas and numerical limits
 
-### Recommended next assessment, not a shipped helper
+### Nonlinear-helper assessment completed without promotion
 
-Reusable nonlinear proposal construction is the next recommended capability
-assessment ([INF-17](RESEARCH_REFERENCES.md#inf-17), [bounded roadmap](../ROADMAP.md#recommended-next-capability-assessment)).
+Reusable nonlinear proposal construction was assessed in bounded test-only studies
+([INF-17](RESEARCH_REFERENCES.md#inf-17), [retrospective](LITERATURE_EXPERIMENTS_REPORT.md#3-can-observation-informed-proposals-become-more-automatic)).
 The existing `linearGaussianObservation` does not linearize nonlinear functions
-or fit their possibly multimodal conditional distributions. The proposed review
-compares explicit-Jacobian, sigma-point and bounded-mixture approaches before any
-implementation choice. True likelihood/transition corrections, explicit support
-and preparation costs remain required. No performance improvement, automatic
-policy, precision guarantee or recovery of lost histories is established.
+or fit their possibly multimodal conditional distributions. The nonlinear and
+multi-component candidates were not promoted because delivery or total-cost gates
+failed; the expensive-likelihood follow-up stopped at relevance and precomputation
+checks. Supplied proposals remain supported, with true likelihood/transition
+corrections, explicit support and preparation costs. No automatic policy, precision
+guarantee or recovery of lost histories follows. The [current roadmap](../ROADMAP.md)
+separates this closed research from the proposed joint-block API milestone.
 
 ### Current limits
 
