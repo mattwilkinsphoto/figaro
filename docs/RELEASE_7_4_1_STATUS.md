@@ -1,6 +1,6 @@
 # Figaro 7.4.1 preparation
 
-**Release candidate prepared and validated; publication not authorized or performed.** Published
+**Release candidate prepared and validated; publication approved, not yet performed.** Published
 baseline: [7.4.0](RELEASE_7_4_STATUS.md). Snapshot integration CI passed; the separate
 preparation source now uses final version 7.4.1. This page records gates, not a promise
 that an unexecuted check passed or that the version exists on Maven Central.
@@ -99,13 +99,31 @@ and reported 7.4.0 as latest. No certificate verification was disabled.
 The [caller-specified joint-block API review](TRANSFORMED_JOINT_BLOCK_API_REVIEW.md)
 is documentation only. No adapter or automatic pilot is included in 7.4.1.
 
-## Separate publication gates — not authorized here
+## Authorized publication checkpoint
 
-No release tag, GitHub release, signing/upload or Central deployment is created by
-preparation. A later explicit approval must pin the reviewed final source/bundle
+The subsequent publication approval retains the exact-main-CI safeguard. The
+earlier candidate source passed branch CI; the final-main source
+`2dd65ba20dfa96a165f3e93eb17126948484b3a6` passed
+[all five jobs, with no failed steps](https://github.com/mattwilkinsphoto/figaro/actions/runs/40399023532).
+Its bundle SHA-256 is
+`6c2d84a3fa8f3f404e0618aee0a4c06b0a65b5964b48e451b85289ea965cea41`.
+All four Maven payloads and the supplemental JAR were independently compared
+byte-for-byte with the earlier preparation bundle and are identical. The bundle's
+provenance record identifies the later, documentation-only source revision.
+The earlier hashes above remain the historical preparation record; this final-main
+bundle is the authorized publication input. All seven packaged consumers passed
+in the final-main run. Publication tooling now pins this exact source/bundle and
+requires all seven Central-only consumers, including the diagnostic regression.
+
+Staging, deployment review, publication and Central verification remain pending.
+
+## Separate publication gates
+
+No release tag, GitHub release, signing/upload or Central deployment was created by
+preparation. Publication must pin the reviewed final source/bundle
 and consumer checks, stage and review the signed payloads, publish once, then
 compare all four Central artifacts and execute the complete Central-only consumer
-set. Never overwrite 7.4.0 or an earlier release. Keep publication tooling's current
-7.4.0 pins unchanged until a separately reviewed publication configuration update.
+set. Never overwrite 7.4.0 or an earlier release. The authorized configuration
+update changes only release pins and the complete consumer inventory, not safeguards.
 
 [Research provenance](RESEARCH_REFERENCES.md#dia-01).
