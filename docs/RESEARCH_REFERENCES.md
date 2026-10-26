@@ -5,6 +5,12 @@ Figaro's modernization and capability-expansion work. It connects the source,
 its actual role, the relevant implementation, validation and explanatory guide.
 It supplements the [API reference](api/README.md), not a replacement for it.
 
+Read the [standalone experiment retrospective](LITERATURE_EXPERIMENTS_REPORT.md)
+or its [PDF edition](reports/FIGARO_LITERATURE_EXPERIMENTS.pdf) for the motivations,
+tests, takeaways and limits across the research campaigns. Its
+[supporting records](reports/EXPERIMENT_RECORDS.md) preserve otherwise unpublished
+source-note snapshots and reference groups without promoting their implementations.
+
 ## Scope and evidence labels
 
 The index was assembled from the checked-in research notes and current source
@@ -444,7 +450,7 @@ Stopping/defaults and calibration thresholds remain unchanged. Tail-based caller
 near a threshold can change behavior; the original experimental pilot remains
 unpromoted and is not included in this correction branch.
 
-**Guide:** [MULTI CHAIN MCMC](MULTI_CHAIN_MCMC.md); [MCMC RELIABILITY](MCMC_RELIABILITY.md); [TIED QUANTILE REPAIR](TIED_QUANTILE_REPAIR.md).
+**Guide:** [MULTI CHAIN MCMC](MULTI_CHAIN_MCMC.md); [MCMC RELIABILITY](MCMC_RELIABILITY.md); [TIED QUANTILE REPAIR](TIED_QUANTILE_REPAIR.md); [cross-campaign experiment retrospective](LITERATURE_EXPERIMENTS_REPORT.md).
 
 <a id="dia-02"></a>
 

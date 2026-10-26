@@ -86,6 +86,7 @@ The build resolves Figaro and its runtime dependencies from Central. Use `publis
 ## Documentation
 
 - [Research references and code map](docs/RESEARCH_REFERENCES.md): consolidated scientific sources, their implementation or research-only role, code links, validation and topic guides.
+- [Lessons from literature-led experiments](docs/LITERATURE_EXPERIMENTS_REPORT.md) ([PDF](docs/reports/FIGARO_LITERATURE_EXPERIMENTS.pdf)): a standalone retrospective of 25 experiment discussions, with motivations, results, successful integrations and no-promotion decisions. Supporting research snapshots do not promote experimental code.
 
 Figaro is in application-driven maintenance. The [current roadmap](ROADMAP.md)
 separates routine maintenance and optional future capabilities from the completed

@@ -4,3 +4,8 @@
 
 # Preserve archival document bytes across Windows and Linux checkouts.
 *.pdf binary
+
+# Keep the research-report source fingerprints stable across checkouts.
+docs/LITERATURE_EXPERIMENTS_REPORT.md text eol=lf
+tools/docs/build_experiment_report.py text eol=lf
+tools/docs/report_tokens.cjs text eol=lf

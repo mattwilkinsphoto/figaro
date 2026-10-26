@@ -22,6 +22,42 @@ Run from the repository root:
 
 ## CLI reference
 
+### Standalone experiment report PDF
+
+The checked-in [PDF](../../docs/reports/FIGARO_LITERATURE_EXPERIMENTS.pdf) is generated
+from the [maintained Markdown report](../../docs/LITERATURE_EXPERIMENTS_REPORT.md).
+It is repository documentation, included in GitHub source downloads; it is not a
+new Maven classifier or a replacement of previously published artifact bytes.
+
+The optional generator uses ReportLab 4.4.9 and Node's `marked` 17.0.5 parser. Install these
+only in an isolated documentation environment; they are not runtime dependencies.
+Make `marked` available on Node's module search path (including `NODE_PATH` when
+installed outside the checkout), then run:
+
+```text
+python -B tools/docs/build_experiment_report.py --output report-review.pdf
+pdftoppm -r 90 -png report-review.pdf report-review
+```
+
+The output and its `.json` manifest must not exist: preserve the old PDF while reviewing a regenerated
+candidate. Optional `--source` selects a Markdown input; the default is the report
+above. The companion `report_tokens.cjs` delegates Markdown parsing to `marked`.
+On managed Windows workspaces, `FIGARO_ACCESS_HELPER` may identify the trusted
+PowerShell grant hook, invoked immediately for generated paths. The renderer
+supports the report's headings, paragraphs, emphasis, links, lists and three-column
+summary table; it fails on unsupported token types rather than silently dropping
+content. PDF links target public GitHub documents, not workstation paths.
+
+When the report changes, regenerate its PDF in the same change, compare extracted
+text against every source block, inspect all rendered pages, and verify links,
+bookmarks, tables, page numbers and source-note status labels. `pypdf` and Poppler
+are optional review tools. The ordinary documentation tests do not install these
+packages or regenerate PDFs. Historical numerical experiments are not rerun merely
+to change formatting. The original source-note hashes remain in the companion
+[records](../../docs/reports/EXPERIMENT_RECORDS.md).
+
+### Scala API documentation tools
+
 | Command / argument | Input | Output / failure behavior | Example |
 | --- | --- | --- | --- |
 | `build_reference.py` | Generated Scala 3 HTML | Writes generated Markdown plus `inventory.json`; nonzero on parse errors, missing API, or unsafe overwrite | `python -B tools/docs/build_reference.py` |

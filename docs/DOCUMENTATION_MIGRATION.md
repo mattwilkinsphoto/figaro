@@ -64,6 +64,15 @@ the full chapters. It also preserves the learning paths for kernel density and c
 operations mentioned in the historical release notes. The original source remains the
 place to read their longer derivations and implementation discussions.
 
+## Research lessons from modernization
+
+The [literature-led experiment report](LITERATURE_EXPERIMENTS_REPORT.md) is a
+standalone companion to this bridge, also available as a
+[downloadable PDF](reports/FIGARO_LITERATURE_EXPERIMENTS.pdf). It explains why the
+sampling, filtering, GVM-fitting and MCMC-adaptation experiments were attempted,
+what they achieved and why some did not qualify for promotion. Its dated findings
+do not change the published API, inference defaults or stopping estimator.
+
 ## What is actually refreshed and checked
 
 - `ClassicTutorials` ports Constant/Importance, Select/elimination and the original

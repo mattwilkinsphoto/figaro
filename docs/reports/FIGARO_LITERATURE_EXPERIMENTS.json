@@ -1,0 +1,10 @@
+{
+  "sourceFilename": "LITERATURE_EXPERIMENTS_REPORT.md",
+  "sourceSha256": "4965afb526aadeda558694255ba5800f6048b0976777257cd3e1f2c10aa653ed",
+  "pdfFilename": "FIGARO_LITERATURE_EXPERIMENTS.pdf",
+  "pdfSha256": "3e4141f9086e67c405980a2c2511ac505e63ad5c7d67d48154881c42c9949c11",
+  "reportlab": "4.4.9",
+  "marked": "17.0.5",
+  "generatorSha256": "2a3d66773bc95ca1086a26f78c79e4fdad6881830419a5b71bbf136061a797d6",
+  "tokenizerSha256": "a8da954d75d3cebe676a8b67d3b0b5323f7122a0b1a82b926c3f62fa2f9641c5"
+}
