@@ -33,11 +33,11 @@ No further sbt repair or Figaro release is scheduled from that work.
 
 The isolated [tied-quantile repair](docs/TIED_QUANTILE_REPAIR.md) corrects a
 floating-point cutoff error affecting tail ESS for repeated MCMC states. Its
-independent replay and original five-job branch CI passed. Integration with the
-current main branch and release preparation are approved; publication requires
-separate approval. Track executed gates in the [7.4.1 preparation record](docs/RELEASE_7_4_1_STATUS.md).
-The preparation branch uses final version 7.4.1 after passing snapshot integration
-CI; 7.4.0 remains the published dependency. This version change does not publish it.
+independent replay, integration/post-merge CI and final-version CI passed. The
+prepared Linux bundle passed all seven packaged consumers on Linux and Windows.
+Publication requires separate approval; the [7.4.1 preparation record](docs/RELEASE_7_4_1_STATUS.md)
+pins the exact tested source and artifact hashes. Source preparation uses final
+version 7.4.1; 7.4.0 remains the published dependency. This does not publish it.
 Stopping, defaults and strict-calibration thresholds are unchanged. A tail-ESS
 warning or a caller's near-threshold decision may nevertheless change.
 

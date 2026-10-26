@@ -122,3 +122,10 @@ retrospective and 7.4.1 preparation are now approved; see the
 [current preparation gates](RELEASE_7_4_1_STATUS.md). This supersedes the earlier
 future-CI wording above without rewriting the historical evidence. Publication
 is a separate approval. No experimental adapter or learned pilot is included.
+
+Preparation subsequently completed: integration/post-merge CI and final-version
+CI passed, with compatibility through 7.4.0 and all seven packaged consumers.
+The [7.4.1 preparation record](RELEASE_7_4_1_STATUS.md) pins the independently
+downloaded Linux bundle and records the extra Windows consumer checks, warnings
+and resolved environment failures. The patch remains unpublished until explicitly
+approved; this does not promote the original experimental pilot.

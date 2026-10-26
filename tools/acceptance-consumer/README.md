@@ -112,6 +112,12 @@ Related: [acceptance protocol and evidence](../../docs/CORE_PERFORMANCE_ACCEPTAN
 
 ## 7.4.1 diagnostic preparation control
 
+When switching `FIGARO_RELEASE_MAVEN_ROOT` between local bundles with the same
+coordinates, start with `clean; update` before the consumer commands, even when
+using a fresh action-cache directory. A retained dependency-resolution report can
+otherwise still point at the earlier bundle. Keep the expected loaded-JAR hash
+assertion: it detects this mistake instead of silently testing the wrong bytes.
+
 `DiagnosticConsumerCheck` exercises `McmcDiagnostics.summarize` from the exact
 hash-verified packaged JAR using repeated-state traces with nonconstant tails.
 The normal invocation requires the corrected tail ESS and preserves undefined
