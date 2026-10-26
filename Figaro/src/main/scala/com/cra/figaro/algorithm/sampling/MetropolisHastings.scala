@@ -226,6 +226,12 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
 
   private def runStep(state: State, step: ProposalScheme): State =
     step match {
+      case TransformedJointScheme(block) =>
+        if (!(proposalScheme eq step)) {
+          undo(state)
+          throw new IllegalArgumentException("Transformed joint blocks must be the complete scheme")
+        }
+        proposeTransformedJoint(state, block)
       case GaussianBlockScheme(block) => proposeBlock(state, block)
       case SupportAwareScheme(move) => proposeSupportAware(state, move)
       case FinalScheme(elem) => propose(state, elem())
@@ -250,6 +256,24 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
   private def proposeChainCheck(elem: Element[?]): Element[?] = {
     val e = chainCache(elem)
     if (e.isEmpty) elem else e.get.asInstanceOf[Element[?]]
+  }
+
+  private def proposeTransformedJoint(state: State, block: TransformedJointBlock.Block): State = {
+    require(state.oldValues.isEmpty && state.oldRandomness.isEmpty && !constraintsBound,
+      "Transformed joint blocks cannot use sequential proposals or bounded early scoring")
+    block.bind(this, universe)
+    val prepared=block.prepare(universe)
+    var current=State(state.oldValues,state.oldRandomness,prepared.logProposal,prepared.logPrior,
+      state.dissatisfied,state.reverseVisitOrder)
+    for (i <- block.targets.indices) {
+      TransformedJointBlock.checkInterrupt()
+      val elem=block.targets(i)
+      val old=current.oldRandomness.concat(List(elem -> elem.randomness))
+      elem.randomness=prepared.randomness(i).asInstanceOf[elem.Randomness]
+      current=State(current.oldValues,old,current.proposalProb,current.modelProb,current.dissatisfied,current.reverseVisitOrder)
+      current=attemptChange(current,elem)
+    }
+    current
   }
 
   private def proposeBlock(state: State, block: GaussianBlockProposal.Block): State = {
@@ -450,7 +474,39 @@ abstract class MetropolisHastings(universe: Universe, proposalScheme: ProposalSc
    * by proposeAndUpdate, we must decide to accept or reject it. In the case of accept, the new state becomes the current state.
    * In the case of reject, the RejectState object is thrown and the new state is undone to its original form.
    */
-  protected def mhStep(): State = {
+  protected def mhStep(): State = proposalScheme match {
+    case TransformedJointScheme(block) =>
+      require(!constraintsBound, "Transformed joint block does not support bounded early scoring")
+      val graph=block.bind(this,universe)
+      val values=graph.map(e => (e,e.value))
+      val randomness=graph.map(e => (e,e.randomness))
+      val scores=currentConstraintValues.toMap
+      val oldDissatisfied=dissatisfied
+      val oldAccepts=accepts; val oldRejects=rejects; val counts=proposalCounts.toMap
+      val savedAcceptProbability=acceptProbability
+      val savedConstraintsSum=constraintsSum; val savedOldPropProb=oldPropProb; val savedOldModelProb=oldModelProb
+      try {
+        val result=legacyMhStep()
+        require(!(result.proposalProb+result.modelProb).isNaN &&
+          result.proposalProb+result.modelProb != Double.PositiveInfinity, "Invalid joint posterior ratio")
+        TransformedJointBlock.checkInterrupt()
+        block.bind(this,universe)
+        result
+      } catch {
+        case error: Throwable =>
+          randomness.foreach(setRandomness); values.foreach(setValue)
+          currentConstraintValues.clear(); currentConstraintValues ++= scores
+          dissatisfied=oldDissatisfied; accepts=oldAccepts; rejects=oldRejects
+          proposalCounts.clear(); proposalCounts ++= counts
+          acceptProbability=savedAcceptProbability; constraintsSum=savedConstraintsSum
+          oldPropProb=savedOldPropProb; oldModelProb=savedOldModelProb
+          proposedElementsSortedUpdates.clear(); elementsUsedBy.clear()
+          throw error
+      }
+    case _ => legacyMhStep()
+  }
+
+  private def legacyMhStep(): State = {
     try {
       val newStateUnconstrained = proposeAndUpdate()
       val newState = State(newStateUnconstrained.oldValues, newStateUnconstrained.oldRandomness,

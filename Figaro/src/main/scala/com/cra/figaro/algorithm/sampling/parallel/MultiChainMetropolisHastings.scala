@@ -1,7 +1,7 @@
 package com.cra.figaro.algorithm.sampling.parallel
 
 import com.cra.figaro.algorithm.OneTime
-import com.cra.figaro.algorithm.sampling.{FinalScheme, ForwardWeighter, LikelihoodWeighter, MetropolisHastings, ProposalScheme, SupportAwareProposal}
+import com.cra.figaro.algorithm.sampling.{FinalScheme, ForwardWeighter, LikelihoodWeighter, MetropolisHastings, ProposalScheme, SupportAwareProposal, TransformedJointScheme}
 import com.cra.figaro.language.*
 import com.cra.figaro.util.{RandomContext, SamplingRandom, RandomStreams}
 import java.util.concurrent.*
@@ -164,6 +164,8 @@ object MultiChainMetropolisHastings {
           val model = build(entry.universe, index)
           require(model != null && model.observables != null && model.observables.nonEmpty, "Observables required")
           require(model.initialState != null && model.proposal != null && !model.proposal.contains(null), "Invalid model callbacks")
+          require(precision.isEmpty || !model.proposal.exists(_.isInstanceOf[TransformedJointScheme]),
+            "Transformed joint blocks require fixed-budget run, not precision checkpoints")
           entry.tuning=tunerFor(entry.universe)
           entry.tuning.foreach { tuner =>
             require(model.proposal.isEmpty && config.warmUp > 0,
